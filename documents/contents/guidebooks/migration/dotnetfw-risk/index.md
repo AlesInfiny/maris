@@ -1,1 +1,1 @@
-# .NET Framework にとどまることのリスク # { #top }
+# .NET Framework にとどまることのリスク
