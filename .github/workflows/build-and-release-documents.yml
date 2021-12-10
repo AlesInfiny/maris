@@ -95,17 +95,17 @@ jobs:
           data: '{"messageType": 0,"branchName": "${{ github.ref }}","actor": "${{ github.actor }}","sha": "${{ github.sha }}","eventName": "${{ github.event_name }}"}'
           timeout: 30000
 
-#  swap:
-#    name: 本番環境への反映承認
-#    needs: release
-#    if: ${{ !github.event.release.prerelease && github.event.action == 'published' }}
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: 本番環境への反映承認
-#        uses: fjogeleit/http-request-action@v1.8.1
-#        with:
-#          url: ${{ secrets.APPROVE_REQUEST_TO_TEAMS_URL  }}
-#          method: POST
-#          contentType: application/json
-#          data: '{"branchName": "${{ github.ref }}","actor": "${{ github.actor }}","sha": "${{ github.sha }}","eventName": "${{ github.event_name }}"}'
-#          preventFailureOnNoResponse: true
+  swap:
+    name: 本番環境への反映承認
+    needs: release
+    if: ${{ !github.event.release.prerelease && github.event.action == 'published' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 本番環境への反映承認
+        uses: fjogeleit/http-request-action@v1.8.1
+        with:
+          url: ${{ secrets.APPROVE_REQUEST_TO_TEAMS_URL  }}
+          method: POST
+          contentType: application/json
+          data: '{"branchName": "${{ github.ref }}","actor": "${{ github.actor }}","sha": "${{ github.sha }}","eventName": "${{ github.event_name }}"}'
+          preventFailureOnNoResponse: true
