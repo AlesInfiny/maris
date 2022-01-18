@@ -19,8 +19,8 @@ import HelloWorld from '@/components/HelloWorld.vue'
   <router-view />
 </template>
 
-<style>
-@import '@/assets/base.css';
+<style lang="scss">
+@import '@/assets/base';
 
 #app {
   max-width: 1280px;
