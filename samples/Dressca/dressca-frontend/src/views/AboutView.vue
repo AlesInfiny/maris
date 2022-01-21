@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="postcss">
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;

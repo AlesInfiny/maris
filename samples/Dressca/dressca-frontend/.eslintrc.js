@@ -14,4 +14,5 @@ module.exports = {
     'prettier',
     'prettier/vue',
   ],
+  "ignorePatterns": ["postcss.config.js"],
 };

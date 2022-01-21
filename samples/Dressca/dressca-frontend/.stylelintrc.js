@@ -1,13 +1,16 @@
 module.exports = {
+  plugins: ['stylelint-prettier'],
   extends: [
+    'stylelint-config-standard',
     'stylelint-config-recommended-vue',
-    'stylelint-config-recommended-scss',
+    'stylelint-prettier/recommended',
   ],
+  rules: {
+    'prettier/prettier': true,
+    'at-rule-no-unknown': [true, { ignoreAtRules: ['define-mixin'] }],
+  },
+  ignoreFiles: ['dist/**/*'],
   overrides: [
-    {
-      files: ['**/*.scss'],
-      customSyntax: 'postcss-scss',
-    },
     {
       files: ['**/*.vue'],
       customSyntax: 'postcss-html',
