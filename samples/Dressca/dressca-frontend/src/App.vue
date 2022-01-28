@@ -27,8 +27,6 @@ import HelloWorld from '@/components/HelloWorld.vue';
 </template>
 
 <style lang="postcss">
-@import '@/assets/base';
-
 #app {
   max-width: 1280px;
   margin: 0 auto;
