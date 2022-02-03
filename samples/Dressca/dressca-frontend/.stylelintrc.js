@@ -7,7 +7,10 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': true,
-    'at-rule-no-unknown': [true, { ignoreAtRules: ['define-mixin'] }],
+    'at-rule-no-unknown': [
+      true,
+      { ignoreAtRules: ['tailwind', 'define-mixin'] },
+    ],
   },
   ignoreFiles: ['dist/**/*'],
   overrides: [
