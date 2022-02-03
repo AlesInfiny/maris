@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<style scoped lang="postcss">
+<style lang="postcss" scoped>
 .item {
   margin-top: 2rem;
   display: flex;
