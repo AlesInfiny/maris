@@ -12,7 +12,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./samples/Dressca/dressca-frontend/
+    working-directory: samples/Dressca/dressca-frontend
 
 jobs:
   build:
