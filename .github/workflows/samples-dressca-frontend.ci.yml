@@ -7,7 +7,11 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - 'samples/Dressca/dressca-frontend/**'   
+      - 'samples/Dressca/dressca-frontend/**'
+
+defaults:
+  run:
+    working-directory: ./samples/Dressca/dressca-frontend/
 
 jobs:
   build:
@@ -26,4 +30,3 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm run test:unit
-    - working-directory: ./samples/Dressca/dressca-frontend/
