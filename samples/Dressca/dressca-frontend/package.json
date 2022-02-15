@@ -9,7 +9,8 @@
     "test:e2e": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress open'",
     "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress run'",
     "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
+    "mock": "vite --mode mock"
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.5",
@@ -37,7 +38,6 @@
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-vue": "^8.2.0",
     "jsdom": "^19.0.0",
-    "miragejs": "^0.1.43",
     "postcss": "^8.4.6",
     "postcss-nesting": "^10.1.2",
     "prettier": "^2.5.1",
