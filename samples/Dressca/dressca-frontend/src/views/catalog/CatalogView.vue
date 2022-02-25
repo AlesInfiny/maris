@@ -1,32 +1,48 @@
 <script setup lang="ts">
-import { reactive, toRefs, onMounted } from 'vue';
+import { reactive, toRefs, onMounted, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSpecialContentStore } from '@/stores/special-content/special-content';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { VirtualCarousel } from 'vue-virtual-carousel';
+import { useRouter } from 'vue-router';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
 const { getSpecialContents } = storeToRefs(specialContentStore);
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
+const router = useRouter();
+
 const state = reactive({
   selectedCategory: 0,
   selectedBrand: 0,
 });
+
 const { selectedCategory, selectedBrand } = toRefs(state);
+
 const toPriceString = (price: number) => {
   return `\\${price.toLocaleString()}`;
 };
+
 const getBrandName = (catalogBrandId: number) => {
   return getBrands.value.find((brand) => brand.id === catalogBrandId)?.name;
 };
+
 const getImageUrl = (imageId: string) => {
   return `${import.meta.env.VITE_ASSET_URL}${imageId}`;
+};
+
+const addBasket = (productCode: string) => {
+  // FIXME: add basket
+  router.push('/basket');
 };
 
 onMounted(() => {
   catalogStore.fetchCategories();
   catalogStore.fetchBrands();
+  catalogStore.fetchItems(selectedCategory.value, selectedBrand.value);
+});
+
+watch([selectedCategory, selectedBrand], () => {
   catalogStore.fetchItems(selectedCategory.value, selectedBrand.value);
 });
 </script>
@@ -80,6 +96,7 @@ onMounted(() => {
             <div class="mt-4 flex items-center justify-center">
               <button
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                @click="addBasket(item.productCode)"
               >
                 買い物かごに入れる
               </button>

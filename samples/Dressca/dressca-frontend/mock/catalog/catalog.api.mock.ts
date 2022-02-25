@@ -1,3 +1,4 @@
+import * as url from 'url';
 import { Category, Brand, Item } from '../../src/stores/catalog/catalog.model';
 
 const categories: Category[] = [
@@ -155,7 +156,24 @@ export const catalogApiMock = (middlewares) => {
   });
   middlewares.use('/items', (_, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.write(JSON.stringify(items));
+    const query = url.parse(_.url, true).query;
+    let filterdItems = items;
+
+    if (!!query && !!query.categoryId) {
+      filterdItems = filterdItems.filter(
+        // 文字列で比較
+        (item) => item.catalogCategoryId == query.categoryId,
+      );
+    }
+
+    if (!!query && !!query.brandId) {
+      filterdItems = filterdItems.filter(
+        // 文字列で比較
+        (item) => item.catalogBrandId == query.brandId,
+      );
+    }
+
+    res.write(JSON.stringify(filterdItems));
     res.end();
   });
 };

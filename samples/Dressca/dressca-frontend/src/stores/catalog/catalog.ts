@@ -19,7 +19,17 @@ export const useCatalogStore = defineStore({
       this.brands = response.data;
     },
     async fetchItems(categoryId: number, brandId: number) {
-      const response = await axios.get('/items');
+      const params = {};
+
+      if (categoryId !== 0) {
+        params.categoryId = categoryId;
+      }
+
+      if (brandId !== 0) {
+        params.brandId = brandId;
+      }
+
+      const response = await axios.get('/items', { params: params });
       this.items = response.data;
     },
   },
