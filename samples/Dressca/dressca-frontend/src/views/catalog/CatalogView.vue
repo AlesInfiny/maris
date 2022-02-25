@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { reactive, toRefs, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import { useSpecialContentStore } from '@/stores/special-content/special-content';
 import { useCatalogStore } from '@/stores/catalog/catalog';
+import { VirtualCarousel } from 'vue-virtual-carousel';
 
+const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
+const { getSpecialContents } = storeToRefs(specialContentStore);
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
 const state = reactive({
   selectedCategory: 0,
@@ -16,6 +20,9 @@ const toPriceString = (price: number) => {
 const getBrandName = (catalogBrandId: number) => {
   return getBrands.value.find((brand) => brand.id === catalogBrandId)?.name;
 };
+const getImageUrl = (imageId: string) => {
+  return `${import.meta.env.VITE_ASSET_URL}${imageId}`;
+};
 
 onMounted(() => {
   catalogStore.fetchCategories();
@@ -26,6 +33,13 @@ onMounted(() => {
 
 <template>
   <div class="container mx-auto">
+    <div class="flex justify-center m-4">
+      <VirtualCarousel :items="getSpecialContents" class="item">
+        <template #default="{ item }">
+          <img :src="getImageUrl(item.imageId)" class="image" />
+        </template>
+      </VirtualCarousel>
+    </div>
     <div class="flex justify-center m-4 text-lg">
       <div>
         <label class="mr-2 font-bold">カテゴリ</label>
@@ -51,7 +65,11 @@ onMounted(() => {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
       <div v-for="item in getItems" :key="item.productCode">
         <div class="justify-center border-2 p-2 h-80 w-240 mx-auto">
-          <img class="h-180" alt="Sunset in the mountains" />
+          <img
+            class="h-180"
+            :src="getImageUrl(item.imageIds[0])"
+            alt="Sunset in the mountains"
+          />
           <div class="w-full">
             <p class="text-md mb-2 w-full">
               {{ getBrandName(item.catalogBrandId) }}
@@ -72,3 +90,16 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style>
+.item {
+  height: 350px;
+  width: 100%;
+}
+
+.image {
+  height: 100%;
+  margin: auto;
+  pointer-events: none;
+}
+</style>
