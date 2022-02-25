@@ -15,4 +15,5 @@ export interface Item {
   name: string;
   price: number;
   productCode: string;
+  imageIds: string[];
 }

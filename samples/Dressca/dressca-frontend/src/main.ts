@@ -8,6 +8,8 @@ import '@/assets/base.css';
 
 import '@/config/yup.config';
 
+import 'vue-virtual-carousel/dist/style.css';
+
 const app = createApp(App);
 
 app.use(createPinia());
