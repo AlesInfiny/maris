@@ -50,9 +50,12 @@ watch([selectedCategory, selectedBrand], () => {
 <template>
   <div class="container mx-auto">
     <div class="flex justify-center m-4">
-      <VirtualCarousel :items="getSpecialContents" class="item">
+      <VirtualCarousel :items="getSpecialContents" class="h-[350px] w-full">
         <template #default="{ item }">
-          <img :src="getImageUrl(item.imageId)" class="image" />
+          <img
+            :src="getImageUrl(item.imageId)"
+            class="h-full m-auto pointer-events-none"
+          />
         </template>
       </VirtualCarousel>
     </div>
@@ -107,16 +110,3 @@ watch([selectedCategory, selectedBrand], () => {
     </div>
   </div>
 </template>
-
-<style>
-.item {
-  height: 350px;
-  width: 100%;
-}
-
-.image {
-  height: 100%;
-  margin: auto;
-  pointer-events: none;
-}
-</style>
