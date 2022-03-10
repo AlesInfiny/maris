@@ -1,3 +1,4 @@
+const base = 'api';
 import * as url from 'url';
 import { Category, Brand, Item } from '../../src/stores/catalog/catalog.model';
 
@@ -144,17 +145,17 @@ const items: Item[] = [
 ];
 
 export const catalogApiMock = (middlewares) => {
-  middlewares.use('/categories', (_, res) => {
+  middlewares.use(`/${base}/categories`, (_, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(categories));
     res.end();
   });
-  middlewares.use('/brands', (_, res) => {
+  middlewares.use(`/${base}/brands`, (_, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(brands));
     res.end();
   });
-  middlewares.use('/items', (_, res) => {
+  middlewares.use(`/${base}/items`, (_, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     const query = url.parse(_.url, true).query;
     let filterdItems = items;

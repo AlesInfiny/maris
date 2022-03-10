@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import axios from 'axios';
 import type { Basket } from '@/stores/basket/basket.model';
 
 export const useBasketStore = defineStore({
@@ -7,33 +8,32 @@ export const useBasketStore = defineStore({
     items: [] as Basket[],
   }),
   actions: {
-    add(productCode: string) {
-      const target = this.items.filter(
-        (item) => item.productCode === productCode,
+    async add(productCode: string) {
+      const params = { productCode: productCode };
+      await axios.put(
+        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
+        params,
       );
-
-      if (target.length === 0) {
-        this.items.push({ productCode: productCode, quantity: 1 });
-        return;
-      }
-
-      target[0].quantity += 1;
     },
-    update(productCode: string, quantity: number) {
-      const target = this.items.filter(
-        (item) => item.productCode === productCode,
+    async update(productCode: string, quantity: number) {
+      const params = { productCode: productCode, quantity: quantity };
+      await axios.patch(
+        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
+        params,
       );
-
-      if (target.length === 0) {
-        return;
-      }
-
-      target[0].quantity = quantity;
     },
-    remove(productCode: string) {
-      this.items = this.items.filter(
-        (item) => item.productCode !== productCode,
+    async remove(productCode: string) {
+      const params = { productCode: productCode };
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
+        { data: params },
       );
+    },
+    async fetch() {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
+      );
+      this.items = response.data;
     },
   },
   getters: {
