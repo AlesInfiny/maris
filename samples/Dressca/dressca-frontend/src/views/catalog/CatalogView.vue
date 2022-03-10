@@ -32,8 +32,7 @@ const getImageUrl = (imageId: string) => {
 };
 
 const addBasket = (productCode: string) => {
-  // FIXME: add basket
-  router.push('/basket');
+  router.push({ name: 'basket', params: { productCode: productCode } });
 };
 
 onMounted(() => {
@@ -85,7 +84,7 @@ watch([selectedCategory, selectedBrand], () => {
       <div v-for="item in getItems" :key="item.productCode">
         <div class="justify-center border-2 p-2 h-80 w-240 mx-auto">
           <img
-            class="h-180"
+            class="h-[180px]"
             :src="getImageUrl(item.imageIds[0])"
             alt="Sunset in the mountains"
           />
