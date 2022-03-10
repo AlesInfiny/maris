@@ -11,11 +11,15 @@ export const useCatalogStore = defineStore({
   }),
   actions: {
     async fetchCategories() {
-      const response = await axios.get('/categories');
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}categories`,
+      );
       this.categories = response.data;
     },
     async fetchBrands() {
-      const response = await axios.get('/brands');
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}brands`,
+      );
       this.brands = response.data;
     },
     async fetchItems(categoryId: number, brandId: number) {
@@ -29,7 +33,10 @@ export const useCatalogStore = defineStore({
         params.brandId = brandId;
       }
 
-      const response = await axios.get('/items', { params: params });
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}items`,
+        { params: params },
+      );
       this.items = response.data;
     },
   },
