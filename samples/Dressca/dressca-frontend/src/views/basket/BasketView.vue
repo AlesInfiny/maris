@@ -69,8 +69,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="container mx-auto max-w-4xl mb-8 ml-2">
-    <div v-if="props.productCode && !!added" class="mt-4">
+  <div class="container mx-auto my-4 max-w-4xl">
+    <div v-if="props.productCode && !!added" class="mx-2">
       <span class="text-lg font-medium text-green-500"
         >以下の商品が追加されました。</span
       >
@@ -85,10 +85,10 @@ onMounted(async () => {
         }}</span>
       </div>
     </div>
-    <div v-if="isEmpty()" class="mt-4">
+    <div v-if="isEmpty()" class="mt-4 mx-2">
       <span class="text-2xl font-medium">買い物かごに商品がありません。</span>
     </div>
-    <div v-if="!isEmpty()" class="mt-8">
+    <div v-if="!isEmpty()" class="mt-8 mx-2">
       <span class="text-2xl font-medium">現在のカートの中身</span>
       <div
         class="hidden lg:grid grid-cols-1 lg:grid-cols-5 mt-4 flex items-center"
