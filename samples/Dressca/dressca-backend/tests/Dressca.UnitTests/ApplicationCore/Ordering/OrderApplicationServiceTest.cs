@@ -27,7 +27,7 @@ public class OrderApplicationServiceTest
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
         {
-            new CatalogItem(100L, 110L, "description", "name", 1000m, "productCode") { Id = 10L},
+            new CatalogItem(100L, 110L, "description", "name", 1000m, "productCode") { Id = 10L },
         };
         var basketRepositoryMock = new Mock<IBasketRepository>();
         basketRepositoryMock
