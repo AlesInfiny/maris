@@ -1,0 +1,65 @@
+﻿using Dressca.ApplicationCore.Baskets;
+using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.Ordering;
+using Dressca.EfInfrastructure.Resources;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Dressca.EfInfrastructure;
+
+/// <summary>
+///  <see cref="IServiceCollection" /> の拡張メソッドを提供します。
+///  このプロジェクトの各機能を利用するためのスタートアップ処理が含まれています。
+/// </summary>
+public static class EfInfrastructureServicesExtension
+{
+    private const string ConnectionStringName = nameof(DresscaDbContext);
+
+    /// <summary>
+    ///  Dressca.EfInfrastructure の各機能を利用するために必要な一連のスタートアップ処理を実行します。
+    /// </summary>
+    /// <param name="services">サービスコレクション。</param>
+    /// <param name="configuration">構成設定。</param>
+    /// <returns>構築済みのサービスコレクション。</returns>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="services"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="configuration"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
+    /// <exception cref="ArgumentException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="configuration"/>　に接続文字列が定義されていません。</item>
+    ///  </list>
+    /// </exception>
+    public static IServiceCollection AddDresscaEfInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
+
+        // Connection Strings
+        var connectionString = configuration.GetConnectionString(ConnectionStringName);
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new ArgumentException(
+                message: string.Format(EfInfrastructureMessages.NotFoundConnectionString, ConnectionStringName),
+                paramName: nameof(configuration));
+        }
+
+        // DbContext
+        services.AddDbContext<DresscaDbContext>(option =>
+        {
+            option.UseSqlServer(connectionString);
+        });
+
+        // Repositories
+        services.AddTransient<IBasketRepository, EfBasketRepository>();
+        services.AddTransient<ICatalogBrandRepository, EfCatalogBrandRepository>();
+        services.AddTransient<ICatalogCategoryRepository, EfCatalogCategoryRepository>();
+        services.AddTransient<ICatalogRepository, EfCatalogRepository>();
+        services.AddTransient<IOrderRepository, EfOrderRepository>();
+
+        return services;
+    }
+}
