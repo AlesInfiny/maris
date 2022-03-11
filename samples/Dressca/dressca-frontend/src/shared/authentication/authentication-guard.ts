@@ -11,7 +11,7 @@ export const authenticationGuard = (router: Router) => {
       return true;
     }
 
-    if (['account/login', 'catalog'].includes(to.name)) {
+    if (['account/login', 'catalog', 'basket'].includes(to.name)) {
       return true;
     }
 
