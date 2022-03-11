@@ -59,7 +59,7 @@ watch([selectedCategory, selectedBrand], () => {
       </VirtualCarousel>
     </div>
     <div class="flex justify-center">
-      <div class="grid lg:gap-24 grid-cols-1 lg:grid-cols-2 m-4 text-lg">
+      <div class="grid lg:gap-24 grid-cols-1 lg:grid-cols-2 my-4 text-lg">
         <div>
           <label class="mr-2 font-bold">カテゴリ</label>
           <select v-model="selectedCategory" class="w-48 border-2">
