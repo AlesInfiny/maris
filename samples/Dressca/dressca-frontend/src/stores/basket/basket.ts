@@ -21,12 +21,20 @@ export const useBasketStore = defineStore({
         `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
         params,
       );
+      const target = this.items.find(
+        (item) => item.productCode === productCode,
+      );
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      target!.quantity = quantity;
     },
     async remove(productCode: string) {
       const params = { productCode: productCode };
       await axios.delete(
         `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
         { data: params },
+      );
+      this.items = this.items.filter(
+        (item) => item.productCode !== productCode,
       );
     },
     async fetch() {
