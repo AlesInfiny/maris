@@ -61,6 +61,15 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   null または空のリストを設定できません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ArgumentIsNullOrEmptyList {
+            get {
+                return ResourceManager.GetString("ArgumentIsNullOrEmptyList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   null または空の文字列を設定できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ArgumentIsNullOrWhiteSpace {

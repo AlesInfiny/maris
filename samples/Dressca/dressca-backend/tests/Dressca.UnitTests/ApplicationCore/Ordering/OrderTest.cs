@@ -4,6 +4,12 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
 public class OrderTest
 {
+    public static TheoryData<List<OrderItem>> EmptyOrderItems => new()
+    {
+        null!,
+        new List<OrderItem>(),
+    };
+
     [Fact]
     public void 正しくインスタンス化できる()
     {
@@ -11,9 +17,10 @@ public class OrderTest
         const string buyerId = "taro.kokkai @example.com";
 
         var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
 
         // Act
-        var order = new Order(buyerId, shipTo, new List<OrderItem>());
+        var order = new Order(buyerId, shipTo, items);
 
         // Assert
         Assert.NotNull(order);
@@ -27,9 +34,10 @@ public class OrderTest
     {
         // Arrange
         var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
 
         // Act
-        var action = () => new Order(buyerId!, shipTo, new List<OrderItem>());
+        var action = () => new Order(buyerId!, shipTo, items);
 
         // Assert
         Assert.Throws<ArgumentException>(action);
@@ -40,49 +48,38 @@ public class OrderTest
     {
         // Arrange
         const string buyerId = "taro.kokkai @example.com";
+        var items = CreateDefaultOrderItems();
 
         // Act
-        var action = () => new Order(buyerId, null!, new List<OrderItem>());
+        var action = () => new Order(buyerId, null!, items);
 
         // Assert
         Assert.Throws<ArgumentNullException>(action);
     }
 
-    [Fact]
-    public void 注文アイテムは必須()
+    [Theory]
+    [MemberData(nameof(EmptyOrderItems))]
+    public void 注文アイテムは必須(List<OrderItem>? orderItems)
     {
         // Arrange
         const string buyerId = "taro.kokkai @example.com";
-
         var shipTo = CreateDefaultShipTo();
 
         // Act
-        var action = () => new Order(buyerId, shipTo, null!);
+        var action = () => new Order(buyerId, shipTo, orderItems!);
 
         // Assert
-        Assert.Throws<ArgumentNullException>(action);
+        var ex = Assert.Throws<ArgumentException>("orderItems", action);
+        Assert.StartsWith("null または空のリストを設定できません。", ex.Message);
     }
 
     [Fact]
     public void 合計金額が正しく計算できる()
     {
         // Arrange
-        const string productName1 = "ダミー商品1";
-        const string productCode1 = "C000000001";
-
-        const string productName2 = "ダミー商品2";
-        const string productCode2 = "C000000002";
-
-        var items = new List<OrderItem>()
-        {
-            new OrderItem(new CatalogItemOrdered(1L, productName1, productCode1), 1000m, 1),
-            new OrderItem(new CatalogItemOrdered(2L, productName2, productCode2), 2000m, 2),
-        };
-
         const string buyerId = "taro.kokkai @example.com";
-
         var shipTo = CreateDefaultShipTo();
-
+        var items = CreateDefaultOrderItems();
         var order = new Order(buyerId, shipTo, items);
 
         // Act
@@ -90,23 +87,6 @@ public class OrderTest
 
         // Assert
         Assert.Equal(5000m, totalPrice);
-    }
-
-    [Fact]
-    public void 注文アイテムが0件なら合計金額は0()
-    {
-        // Arrange
-        const string buyerId = "taro.kokkai @example.com";
-
-        var shipTo = CreateDefaultShipTo();
-
-        var order = new Order(buyerId, shipTo, new List<OrderItem>());
-
-        // Act
-        var totalPrice = order.Total();
-
-        // Assert
-        Assert.Equal(0m, totalPrice);
     }
 
     private static Address CreateDefaultAddress()
@@ -124,5 +104,23 @@ public class OrderTest
         const string defaultFullName = "国会　太郎";
         var address = CreateDefaultAddress();
         return new ShipTo(defaultFullName, address);
+    }
+
+    private static List<OrderItem> CreateDefaultOrderItems()
+    {
+        // Arrange
+        const string productName1 = "ダミー商品1";
+        const string productCode1 = "C000000001";
+
+        const string productName2 = "ダミー商品2";
+        const string productCode2 = "C000000002";
+
+        var items = new List<OrderItem>()
+        {
+            new OrderItem(new CatalogItemOrdered(1, productName1, productCode1), 1000m, 1),
+            new OrderItem(new CatalogItemOrdered(2, productName2, productCode2), 2000m, 2),
+        };
+
+        return items;
     }
 }

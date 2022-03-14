@@ -18,19 +18,26 @@ public class Order
     /// <param name="shipToAddress">配送先住所。</param>
     /// <param name="orderItems">注文アイテムのリスト。</param>
     /// <exception cref="ArgumentException">
-    ///  <paramref name="buyerId"/> が <see langword="null"/> または空の文字列です。
+    ///  <list type="bullet">
+    ///   <item><paramref name="buyerId"/> が <see langword="null"/> または空の文字列です。</item>
+    ///   <item><paramref name="orderItems"/> が <see langword="null"/> または空のリストです。</item>
+    ///  </list>
     /// </exception>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="shipToAddress"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="orderItems"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     public Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems)
     {
+        if (orderItems is null || !orderItems.Any())
+        {
+            throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrEmptyList, nameof(orderItems));
+        }
+
         this.BuyerId = buyerId;
         this.ShipToAddress = shipToAddress;
-        this.orderItems = orderItems ?? throw new ArgumentNullException(nameof(orderItems));
+        this.orderItems = orderItems;
     }
 
     private Order()
