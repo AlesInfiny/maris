@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Dressca.ApplicationCore.Baskets;
+﻿using Dressca.ApplicationCore.Baskets;
 using Dressca.TestLibrary.Xunit.Logging;
 using Xunit.Abstractions;
 
