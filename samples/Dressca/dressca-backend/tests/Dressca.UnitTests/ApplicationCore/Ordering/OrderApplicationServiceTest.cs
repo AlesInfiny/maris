@@ -27,7 +27,7 @@ public class OrderApplicationServiceTest
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
         {
-            new CatalogItem(100L, 110L, "description", "name", 1000m, "productCode") { Id = 10L },
+            new CatalogItem(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
         };
         var basketRepositoryMock = new Mock<IBasketRepository>();
         basketRepositoryMock
@@ -40,7 +40,7 @@ public class OrderApplicationServiceTest
         var orderRepositoryMock = new Mock<IOrderRepository>();
         orderRepositoryMock
             .Setup(r => r.AddAsync(It.IsAny<Order>(), AnyToken))
-            .ReturnsAsync(new Order(buyerId, shipTo, new List<OrderItem>()));
+            .ReturnsAsync(new Order(buyerId, shipTo, CreateDefaultOrderItems()));
         var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepositoryMock.Object, catalogRepositoryMock.Object, logger);
 
@@ -113,5 +113,19 @@ public class OrderApplicationServiceTest
         const string defaultFullName = "国会　太郎";
         var address = CreateDefaultAddress();
         return new ShipTo(defaultFullName, address);
+    }
+
+    private static List<OrderItem> CreateDefaultOrderItems()
+    {
+        // Arrange
+        const string productName = "ダミー商品1";
+        const string productCode = "C000000001";
+
+        var items = new List<OrderItem>()
+        {
+            new OrderItem(new CatalogItemOrdered(1, productName, productCode), 1000m, 1),
+        };
+
+        return items;
     }
 }
