@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Baskets;
+﻿using System.Linq;
+using Dressca.ApplicationCore.Baskets;
 using Dressca.TestLibrary.Xunit.Logging;
 using Xunit.Abstractions;
 
@@ -330,6 +331,57 @@ public class BasketApplicationServiceTest
             Times.Once);
     }
 
+    [Fact]
+    public async Task 買い物かごに存在しない商品を指定しても買い物かごには追加されない()
+    {
+        // Arrange
+        const long basketId = 1L;
+        const string buyerId = "user1";
+        var repoMock = new Mock<IBasketRepository>();
+        repoMock
+            .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
+            .ReturnsAsync(new Basket(buyerId));
+        var logger = this.loggerFactory.CreateLogger<BasketApplicationService>();
+        var service = new BasketApplicationService(repoMock.Object, logger);
+
+        var quantities = new Dictionary<long, int> { { 1L, 5 } };
+
+        // Act
+        await service.SetQuantities(basketId, quantities);
+
+        // Assert
+        repoMock.Verify(
+            r => r.UpdateAsync(It.Is<Basket>(b => b.Items.Count == 0), AnyToken),
+            Times.Once);
+    }
+
+    [Fact]
+    public async Task 買い物かごに存在する商品を指定すると買い物かごの商品数が更新される()
+    {
+        // Arrange
+        const long basketId = 1L;
+        const string buyerId = "user1";
+        const int newQuantity = 5;
+        var basket = new Basket(buyerId);
+        basket.AddItem(100L, 1000m);
+        var repoMock = new Mock<IBasketRepository>();
+        repoMock
+            .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
+            .ReturnsAsync(basket);
+        var logger = this.loggerFactory.CreateLogger<BasketApplicationService>();
+        var service = new BasketApplicationService(repoMock.Object, logger);
+
+        var quantities = new Dictionary<long, int> { { 100L, newQuantity } };
+
+        // Act
+        await service.SetQuantities(basketId, quantities);
+
+        // Assert
+        repoMock.Verify(
+            r => r.UpdateAsync(It.Is<Basket>(b => b.Items.First().Quantity == newQuantity), AnyToken),
+            Times.Once);
+    }
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]
@@ -554,6 +606,44 @@ public class BasketApplicationServiceTest
         // Assert
         repoMock.Verify(
             r => r.RemoveAsync(It.Is<Basket>(b => b.BuyerId == anonymousId), AnyToken),
+            Times.Once);
+    }
+
+    [Fact]
+    public async Task 匿名ユーザーの買い物かごの情報が別のユーザーの買い物かごに統合される()
+    {
+        // Arrange
+        const string anonymousId = "anonymous1";
+        const string userId = "user1";
+        const long catalogItemId = 10L;
+        const decimal price = 1000m;
+        const int anonymous_quantity = 5;
+        var anonymousBasket = new Basket(anonymousId);
+        anonymousBasket.AddItem(catalogItemId, price, anonymous_quantity);
+        const int user_quantity = 2;
+        var userBasket = new Basket(userId);
+        userBasket.AddItem(catalogItemId, price, user_quantity);
+        var repoMock = new Mock<IBasketRepository>();
+        repoMock
+            .Setup(r => r.GetWithBasketItemsAsync(anonymousId, AnyToken))
+            .ReturnsAsync(anonymousBasket);
+        repoMock
+            .Setup(r => r.GetWithBasketItemsAsync(userId, AnyToken))
+            .ReturnsAsync(userBasket);
+        var logger = this.loggerFactory.CreateLogger<BasketApplicationService>();
+        var service = new BasketApplicationService(repoMock.Object, logger);
+
+        // Act
+        await service.TransferBasket(anonymousId, userId);
+
+        // Assert
+        repoMock.Verify(
+            r => r.UpdateAsync(
+                It.Is<Basket>(b =>
+                    b.Items.First().CatalogItemId == catalogItemId &&
+                    b.Items.First().UnitPrice == price &&
+                    b.Items.First().Quantity == anonymous_quantity + user_quantity),
+                AnyToken),
             Times.Once);
     }
 }
