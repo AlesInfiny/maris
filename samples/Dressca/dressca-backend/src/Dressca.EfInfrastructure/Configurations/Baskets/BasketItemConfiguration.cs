@@ -24,7 +24,7 @@ internal class BasketItemConfiguration : IEntityTypeConfiguration<BasketItem>
         builder.HasOne(basketItem => basketItem.Basket)
             .WithMany(basket => basket.Items)
             .HasForeignKey(basketItem => basketItem.BasketId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
+            .OnDelete(DeleteBehavior.Cascade)
             .HasConstraintName("FK_BasketItems_Baskets");
     }
 }

@@ -4,6 +4,7 @@ using Dressca.EfInfrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dressca.EfInfrastructure.Migrations
 {
     [DbContext(typeof(DresscaDbContext))]
-    partial class DresscaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220314141905_BasketItemFKChangeToCascade")]
+    partial class BasketItemFKChangeToCascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,14 +355,12 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.HasOne("Dressca.ApplicationCore.Catalog.CatalogBrand", "CatalogBrand")
                         .WithMany("Items")
                         .HasForeignKey("CatalogBrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_CatalogItems_CatalogBrands");
 
                     b.HasOne("Dressca.ApplicationCore.Catalog.CatalogCategory", "CatalogCategory")
                         .WithMany("Items")
                         .HasForeignKey("CatalogCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_CatalogItems_CatalogCategories");
 
@@ -439,7 +439,6 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.HasOne("Dressca.ApplicationCore.Ordering.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_OrderItems_Orders");
 
