@@ -36,10 +36,14 @@ public class CatalogDomainServiceTest
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
-        var result = await domainService.ExistsAllAsync(new[] { 1L, 2L });
+        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L, 2L });
 
         // Assert
-        Assert.True(result);
+        Assert.True(existsAll);
+        Assert.Collection(
+            items,
+            item => Assert.Equal(1L, item.Id),
+            item => Assert.Equal(2L, item.Id));
     }
 
     [Fact]
@@ -59,10 +63,13 @@ public class CatalogDomainServiceTest
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
-        var result = await domainService.ExistsAllAsync(new[] { 1L, 2L });
+        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L, 2L });
 
         // Assert
-        Assert.False(result);
+        Assert.False(existsAll);
+        Assert.Collection(
+            items,
+            item => Assert.Equal(2L, item.Id));
     }
 
     [Fact]
@@ -79,10 +86,11 @@ public class CatalogDomainServiceTest
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
-        var result = await domainService.ExistsAllAsync(new[] { 1L });
+        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L });
 
         // Assert
-        Assert.False(result);
+        Assert.False(existsAll);
+        Assert.Empty(items);
     }
 
     private static CatalogItem CreateCatalogItem(long id)
