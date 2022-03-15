@@ -77,4 +77,12 @@ public class Basket
     ///  <paramref name="buyerId"/> が <see langword="null"/> です.
     /// </exception>
     public void SetNewBuyerId(string buyerId) => this.BuyerId = buyerId;
+
+    /// <summary>
+    ///  この買い物かご内に指定したカタログアイテム Id の商品が含まれているかどうか示す値を取得します。
+    /// </summary>
+    /// <param name="catalogItemId">検査するカタログアイテム Id 。</param>
+    /// <returns>含まれている場合は <see langword="true"/> 、そうでない場合は <see langword="false"/> 。</returns>
+    public bool IsInCatalogItem(long catalogItemId)
+        => this.items.Any(item => item.CatalogItemId == catalogItemId);
 }
