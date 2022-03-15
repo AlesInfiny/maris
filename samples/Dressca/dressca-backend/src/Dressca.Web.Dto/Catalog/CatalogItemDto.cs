@@ -5,19 +5,8 @@ namespace Dressca.Web.Dto.Catalog;
 /// <summary>
 ///  カタログアイテムの DTO です。
 /// </summary>
-public class CatalogItemDto
+public class CatalogItemDto : CatalogItemSummaryDto
 {
-    /// <summary>
-    ///  カタログアイテム Id を取得または設定します。
-    /// </summary>
-    public long Id { get; set; }
-
-    /// <summary>
-    ///  商品名を取得または設定します。
-    /// </summary>
-    [Required]
-    public string Name { get; set; } = string.Empty;
-
     /// <summary>
     ///  説明を取得または設定します。
     /// </summary>
@@ -28,12 +17,6 @@ public class CatalogItemDto
     ///  単価を取得または設定します。
     /// </summary>
     public decimal Price { get; set; }
-
-    /// <summary>
-    ///  商品コードを取得または設定します。
-    /// </summary>
-    [Required]
-    public string ProductCode { get; set; } = string.Empty;
 
     /// <summary>
     ///  カタログカテゴリ Id を取得または設定します。
