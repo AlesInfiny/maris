@@ -219,6 +219,30 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
+    public async Task 買い物かごへの商品追加処理後に数量が0となる場合買い物かごアイテムは削除される()
+    {
+        // Arrange
+        const long basketId = 1;
+        const long catalogItemId = 10L;
+        var basket = new Basket("dummy");
+        basket.AddItem(catalogItemId, 1000m, 1);
+        var repoMock = new Mock<IBasketRepository>();
+        repoMock
+            .Setup(r => r.GetAsync(basketId, AnyToken))
+            .ReturnsAsync(basket);
+        var logger = this.loggerFactory.CreateLogger<BasketApplicationService>();
+        var service = new BasketApplicationService(repoMock.Object, logger);
+
+        // Act
+        await service.AddItemToBasket(basketId, catalogItemId, 1000, -1);
+
+        // Assert
+        repoMock.Verify(
+            r => r.UpdateAsync(It.Is<Basket>(b => !b.Items.Any()), AnyToken),
+            Times.Once);
+    }
+
+    [Fact]
     public async Task 買い物かごの削除処理はリポジトリのGetWithBasketItemsを1度だけ呼出す()
     {
         // Arrange

@@ -1,0 +1,107 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+using Dressca.ApplicationCore.Catalog;
+using Dressca.TestLibrary.Xunit.Logging;
+using Xunit.Abstractions;
+
+namespace Dressca.UnitTests.ApplicationCore.Catalog;
+public class CatalogDomainServiceTest
+{
+    private readonly XunitLoggerFactory loggerFactory;
+
+    public CatalogDomainServiceTest(ITestOutputHelper testOutputHelper)
+        => this.loggerFactory = XunitLoggerFactory.Create(testOutputHelper);
+
+    private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
+
+    [Fact]
+    public async Task カタログアイテムIdがすべて存在する場合()
+    {
+        // Arrange
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var catalogItems = new List<CatalogItem>
+        {
+            CreateCatalogItem(1L),
+            CreateCatalogItem(2L),
+        };
+        catalogRepositoryMock
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
+            .ReturnsAsync(catalogItems);
+
+        var logger = this.loggerFactory.CreateLogger<CatalogDomainService>();
+        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
+
+        // Act
+        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L, 2L });
+
+        // Assert
+        Assert.True(existsAll);
+        Assert.Collection(
+            items,
+            item => Assert.Equal(1L, item.Id),
+            item => Assert.Equal(2L, item.Id));
+    }
+
+    [Fact]
+    public async Task カタログアイテムIdが一部だけ存在する場合()
+    {
+        // Arrange
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var catalogItems = new List<CatalogItem>
+        {
+            CreateCatalogItem(2L),
+        };
+        catalogRepositoryMock
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
+            .ReturnsAsync(catalogItems);
+
+        var logger = this.loggerFactory.CreateLogger<CatalogDomainService>();
+        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
+
+        // Act
+        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L, 2L });
+
+        // Assert
+        Assert.False(existsAll);
+        Assert.Collection(
+            items,
+            item => Assert.Equal(2L, item.Id));
+    }
+
+    [Fact]
+    public async Task カタログアイテムIdが1件も存在しない場合()
+    {
+        // Arrange
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var catalogItems = new List<CatalogItem>();
+        catalogRepositoryMock
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
+            .ReturnsAsync(catalogItems);
+
+        var logger = this.loggerFactory.CreateLogger<CatalogDomainService>();
+        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
+
+        // Act
+        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L });
+
+        // Assert
+        Assert.False(existsAll);
+        Assert.Empty(items);
+    }
+
+    private static CatalogItem CreateCatalogItem(long id)
+    {
+        var random = new Random();
+        long defaultCatalogCategoryId = random.NextInt64(1000L);
+        long defaultCatalogBrandId = random.NextInt64(1000L);
+        const string defaultDescription = "Description.";
+        const string defaultName = "Name";
+        const decimal defaultPrice = 100m;
+        const string defaultProductCode = "C000000001";
+        return new CatalogItem(defaultCatalogCategoryId, defaultCatalogBrandId, defaultDescription, defaultName, defaultPrice, defaultProductCode) { Id = id };
+    }
+}

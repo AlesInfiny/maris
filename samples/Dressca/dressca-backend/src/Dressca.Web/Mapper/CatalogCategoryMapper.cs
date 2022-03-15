@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Catalog;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Dto.Catalog;
 
@@ -10,6 +11,7 @@ namespace Dressca.Web.Mapper;
 public class CatalogCategoryMapper : IObjectMapper<CatalogCategory, CatalogCategoryDto>
 {
     /// <inheritdoc/>
+    [return: NotNullIfNotNull("value")]
     public CatalogCategory? Convert(CatalogCategoryDto? value)
     {
         if (value is null)
@@ -21,6 +23,7 @@ public class CatalogCategoryMapper : IObjectMapper<CatalogCategory, CatalogCateg
     }
 
     /// <inheritdoc/>
+    [return: NotNullIfNotNull("value")]
     public CatalogCategoryDto? Convert(CatalogCategory? value)
     {
         if (value is null)

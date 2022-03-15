@@ -36,7 +36,7 @@ internal class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
         builder.HasOne(orderItem => orderItem.Order)
             .WithMany(order => order.OrderItems)
             .HasForeignKey(orderItem => orderItem.OrderId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
+            .OnDelete(DeleteBehavior.Cascade)
             .HasConstraintName("FK_OrderItems_Orders");
     }
 }

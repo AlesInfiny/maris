@@ -331,4 +331,32 @@ public class BasketTest
         // Assert
         Assert.Throws<ArgumentNullException>("value", action);
     }
+
+    [Fact]
+    public void 買い物かご内に存在するカタログアイテムIdを渡す()
+    {
+        // Arrange
+        var basket = new Basket(Guid.NewGuid().ToString());
+        basket.AddItem(1L, 1000m);
+
+        // Act
+        var result = basket.IsInCatalogItem(1L);
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void 買い物かご内に存在しないカタログアイテムIdを渡す()
+    {
+        // Arrange
+        var basket = new Basket(Guid.NewGuid().ToString());
+        basket.AddItem(1L, 1000m);
+
+        // Act
+        var result = basket.IsInCatalogItem(2L);
+
+        // Assert
+        Assert.False(result);
+    }
 }

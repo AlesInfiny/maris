@@ -28,12 +28,12 @@ internal class CatalogItemConfiguration : IEntityTypeConfiguration<CatalogItem>
         builder.HasOne(catalogItem => catalogItem.CatalogCategory)
             .WithMany(catalogCategory => catalogCategory.Items)
             .HasForeignKey(catalogItem => catalogItem.CatalogCategoryId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
+            .OnDelete(DeleteBehavior.Cascade)
             .HasConstraintName("FK_CatalogItems_CatalogCategories");
         builder.HasOne(catalogItem => catalogItem.CatalogBrand)
             .WithMany(catalogBrand => catalogBrand.Items)
             .HasForeignKey(catalogItem => catalogItem.CatalogBrandId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
+            .OnDelete(DeleteBehavior.Cascade)
             .HasConstraintName("FK_CatalogItems_CatalogBrands");
 
         builder.HasIndex(catalogItem => catalogItem.ProductCode);

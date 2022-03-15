@@ -44,6 +44,7 @@ public class BasketApplicationService
         }
 
         basket.AddItem(catalogItemId, price, quantity);
+        basket.RemoveEmptyItems();
         await this.basketRepository.UpdateAsync(basket);
         this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_AddItemToBasketEnd, basketId, catalogItemId, quantity);
     }
