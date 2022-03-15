@@ -1,5 +1,7 @@
-﻿using Dressca.ApplicationCore.Catalog;
+﻿using Dressca.ApplicationCore.Baskets;
+using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
+using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Catalog;
 
 namespace Dressca.Web.Mapper;
@@ -24,6 +26,7 @@ public static class DtoMapperServicesExtension
         services.AddSingleton<IObjectMapper<CatalogCategory, CatalogCategoryDto>, CatalogCategoryMapper>();
         services.AddSingleton<IObjectMapper<CatalogBrand, CatalogBrandDto>, CatalogBrandMapper>();
         services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemDto>, CatalogItemMapper>();
+        services.AddSingleton<IObjectMapper<BasketItem, BasketItemDto>, BasketItemMapper>();
         return services;
     }
 }
