@@ -1,5 +1,6 @@
 ﻿using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
+using Dressca.Web.Controllers;
 using Dressca.Web.Mapper;
 using Microsoft.AspNetCore.HttpLogging;
 
@@ -40,6 +41,11 @@ if (app.Environment.IsDevelopment())
     app.UseOpenApi();
     app.UseSwaggerUi3();
     app.UseHttpLogging();
+    app.UseExceptionHandler(ErrorController.DevelopmentErrorRoute);
+}
+else
+{
+    app.UseExceptionHandler(ErrorController.ErrorRoute);
 }
 
 app.UseHttpsRedirection();
