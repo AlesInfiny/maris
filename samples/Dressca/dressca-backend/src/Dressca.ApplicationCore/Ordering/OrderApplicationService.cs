@@ -83,23 +83,23 @@ public class OrderApplicationService
     }
 
     /// <summary>
-    ///  指定した Id 、購入者 Id の注文情報を取得します。
+    ///  指定した注文 Id 、購入者 Id の注文情報を取得します。
     /// </summary>
-    /// <param name="id">注文 Id 。</param>
+    /// <param name="orderId">注文 Id 。</param>
     /// <param name="buyerId">購入者 Id 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>注文情報。</returns>
     /// <exception cref="OrderNotFoundException">注文情報が見つからない場合。</exception>
-    public async Task<Order> GetOrderAsync(long id, string buyerId, CancellationToken cancellationToken = default)
+    public async Task<Order> GetOrderAsync(long orderId, string buyerId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_GetOrderAsyncStart, id);
-        var order = await this.orderRepository.FindAsync(id, cancellationToken);
+        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_GetOrderAsyncStart, orderId);
+        var order = await this.orderRepository.FindAsync(orderId, cancellationToken);
         if (order is null || order.BuyerId != buyerId)
         {
-            throw new OrderNotFoundException(id, buyerId);
+            throw new OrderNotFoundException(orderId, buyerId);
         }
 
-        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_GetOrderAsyncEnd, id);
+        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_GetOrderAsyncEnd, orderId);
         return order;
     }
 }
