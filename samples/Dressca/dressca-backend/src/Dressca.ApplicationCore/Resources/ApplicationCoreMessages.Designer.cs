@@ -286,6 +286,33 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   注文 ID: {0} の注文情報を取得しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string OrderApplicationService_GetOrderAsyncEnd {
+            get {
+                return ResourceManager.GetString("OrderApplicationService_GetOrderAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   注文 ID: {0} の注文情報を取得します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string OrderApplicationService_GetOrderAsyncStart {
+            get {
+                return ResourceManager.GetString("OrderApplicationService_GetOrderAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   ID: {0} 、購入者 ID: {1} の注文が見つかりませんでした。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string OrderNotFound {
+            get {
+                return ResourceManager.GetString("OrderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   単価は負の値に設定できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string PriceMustBeZeroOrHigher {

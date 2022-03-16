@@ -1,0 +1,52 @@
+﻿using System.Runtime.Serialization;
+using Dressca.ApplicationCore.Resources;
+
+namespace Dressca.ApplicationCore.Ordering;
+
+/// <summary>
+///  注文情報が存在しないことを表す例外クラスです。
+/// </summary>
+public class OrderNotFoundException : Exception
+{
+    /// <summary>
+    ///  見つからなかった注文 Id と購入者 Id を指定して
+    ///  <see cref="OrderNotFoundException"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="orderId">見つからなかった注文 Id 。</param>
+    /// <param name="buyerId">見つからなかった購入者 Id 。</param>
+    public OrderNotFoundException(long orderId, string buyerId)
+        : base(string.Format(ApplicationCoreMessages.OrderNotFound, orderId, buyerId))
+    {
+    }
+
+    /// <summary>
+    ///  メッセージを指定して
+    ///  <see cref="OrderNotFoundException"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="message">メッセージ。</param>
+    public OrderNotFoundException(string message)
+        : base(message)
+    {
+    }
+
+    /// <summary>
+    ///  メッセージと内部例外を指定して
+    ///  <see cref="OrderNotFoundException"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="message">メッセージ。</param>
+    /// <param name="innerException">内部例外。</param>
+    public OrderNotFoundException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
+
+    /// <summary>
+    ///  <see cref="OrderNotFoundException"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="info">オブジェクトをシリアライズまたはデシリアライズするために必要なすべてのデータを格納するオブジェクト。</param>
+    /// <param name="context">ストリーミングコンテキスト。</param>
+    protected OrderNotFoundException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
+    {
+    }
+}
