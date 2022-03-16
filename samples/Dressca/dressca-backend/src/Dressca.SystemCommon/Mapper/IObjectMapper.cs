@@ -3,27 +3,18 @@
 namespace Dressca.SystemCommon.Mapper;
 
 /// <summary>
-///  クラス間のマッピングを行うインターフェースです。
+///  <typeparamref name="TFrom"/> から <typeparamref name="TTo"/> へのマッピングを行うインターフェースです。
 /// </summary>
-/// <typeparam name="T1">マッピングを行う型 1 。</typeparam>
-/// <typeparam name="T2">マッピングを行う型 2 。</typeparam>
-public interface IObjectMapper<T1, T2>
+/// <typeparam name="TFrom">元の型。</typeparam>
+/// <typeparam name="TTo">マッピング先の型。</typeparam>
+public interface IObjectMapper<TFrom, TTo>
 {
     /// <summary>
-    ///  <typeparamref name="T2"/> のオブジェクトを
-    ///  <typeparamref name="T1"/> のオブジェクトに変換します。
+    ///  <typeparamref name="TFrom"/> のオブジェクトを
+    ///  <typeparamref name="TTo"/> のオブジェクトに変換します。
     /// </summary>
     /// <param name="value">変換するオブジェクト。</param>
     /// <returns>変換後のオブジェクト。</returns>
     [return: NotNullIfNotNull("value")]
-    T1? Convert(T2? value);
-
-    /// <summary>
-    ///  <typeparamref name="T1"/> のオブジェクトを
-    ///  <typeparamref name="T2"/> のオブジェクトに変換します。
-    /// </summary>
-    /// <param name="value">変換するオブジェクト。</param>
-    /// <returns>変換後のオブジェクト。</returns>
-    [return: NotNullIfNotNull("value")]
-    T2? Convert(T1? value);
+    TTo? Convert(TFrom? value);
 }

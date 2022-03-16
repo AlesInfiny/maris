@@ -12,18 +12,6 @@ public class CatalogCategoryMapper : IObjectMapper<CatalogCategory, CatalogCateg
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull("value")]
-    public CatalogCategory? Convert(CatalogCategoryDto? value)
-    {
-        if (value is null)
-        {
-            return null;
-        }
-
-        return new(value.Name) { Id = value.Id };
-    }
-
-    /// <inheritdoc/>
-    [return: NotNullIfNotNull("value")]
     public CatalogCategoryDto? Convert(CatalogCategory? value)
     {
         if (value is null)
