@@ -47,13 +47,14 @@ public class OrderApplicationService
     /// </summary>
     /// <param name="basketId">買い物かご Id 。</param>
     /// <param name="shipToAddress">お届け先。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>作成した注文情報を返す非同期処理を表すタスク。</returns>
     /// <exception cref="BasketNotFoundException"><paramref name="basketId"/> に該当する買い物かごが存在しない場合。</exception>
     /// <exception cref="EmptyBasketOnCheckoutException"><paramref name="basketId"/> に該当する買い物かごが空の場合。</exception>
-    public async Task<Order> CreateOrderAsync(long basketId, ShipTo shipToAddress)
+    public async Task<Order> CreateOrderAsync(long basketId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_CreateOrderAsyncStart, basketId);
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId);
+        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
         if (basket is null)
         {
             throw new BasketNotFoundException(basketId);
@@ -65,7 +66,8 @@ public class OrderApplicationService
         }
 
         var catalogItemIds = basket.Items.Select(item => item.CatalogItemId).ToArray();
-        var catalogItems = await this.catalogRepository.FindAsync(item => catalogItemIds.Contains(item.Id));
+        var catalogItems =
+            await this.catalogRepository.FindAsync(item => catalogItemIds.Contains(item.Id), cancellationToken);
         var orderItems = basket.Items.Select(
             basketItem =>
             {
@@ -75,8 +77,29 @@ public class OrderApplicationService
                 return orderItem;
             }).ToList();
         var order = new Order(basket.BuyerId, shipToAddress, orderItems);
-        var ordered = await this.orderRepository.AddAsync(order);
+        var ordered = await this.orderRepository.AddAsync(order, cancellationToken);
         this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_CreateOrderAsyncEnd, basketId, ordered.Id);
         return ordered;
+    }
+
+    /// <summary>
+    ///  指定した Id 、購入者 Id の注文情報を取得します。
+    /// </summary>
+    /// <param name="id">注文 Id 。</param>
+    /// <param name="buyerId">購入者 Id 。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
+    /// <returns>注文情報。</returns>
+    /// <exception cref="OrderNotFoundException">注文情報が見つからない場合。</exception>
+    public async Task<Order> GetOrderAsync(long id, string buyerId, CancellationToken cancellationToken = default)
+    {
+        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_GetOrderAsyncStart, id);
+        var order = await this.orderRepository.FindAsync(id, cancellationToken);
+        if (order is null || order.BuyerId != buyerId)
+        {
+            throw new OrderNotFoundException(id, buyerId);
+        }
+
+        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_GetOrderAsyncEnd, id);
+        return order;
     }
 }
