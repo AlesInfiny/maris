@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using Dressca.ApplicationCore.Accounting;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Ordering;
 
@@ -8,6 +9,7 @@ namespace Dressca.ApplicationCore.Ordering;
 public class Order
 {
     private readonly List<OrderItem> orderItems = new();
+    private readonly Account? account;
     private string? buyerId;
     private ShipTo? shipToAddress;
 
@@ -38,6 +40,12 @@ public class Order
         this.BuyerId = buyerId;
         this.ShipToAddress = shipToAddress;
         this.orderItems = orderItems;
+        this.account = new Account(orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
+        this.ConsumptionTaxRate = Account.ConsumptionTaxRate;
+        this.TotalItemsPrice = this.account.GetItemsTotalPrice();
+        this.DeliveryCharge = this.account.GetDeliveryCharge();
+        this.ConsumptionTax = this.account.GetConsumptionTax();
+        this.TotalPrice = this.account.GetTotalPrice();
     }
 
     private Order()
@@ -87,23 +95,32 @@ public class Order
     }
 
     /// <summary>
+    ///  消費税率を取得します。
+    /// </summary>
+    public decimal ConsumptionTaxRate { get; private set; }
+
+    /// <summary>
+    ///  注文アイテムの税抜き合計金額を取得します。
+    /// </summary>
+    public decimal TotalItemsPrice { get; private set; }
+
+    /// <summary>
+    ///  送料を取得します。
+    /// </summary>
+    public decimal DeliveryCharge { get; private set; }
+
+    /// <summary>
+    ///  消費税額を取得します。
+    /// </summary>
+    public decimal ConsumptionTax { get; private set; }
+
+    /// <summary>
+    ///  送料、税込みの合計金額を取得します。
+    /// </summary>
+    public decimal TotalPrice { get; private set; }
+
+    /// <summary>
     ///  注文アイテムのリストを取得します。
     /// </summary>
     public IReadOnlyCollection<OrderItem> OrderItems => this.orderItems.AsReadOnly();
-
-    /// <summary>
-    ///  合計注文金額を計算します。
-    ///  これは、注文アイテムの単価×数量の総計であり、配送料やポイント適用による割引を考慮しません。
-    /// </summary>
-    /// <returns>合計注文金額。</returns>
-    public decimal Total()
-    {
-        var total = 0m;
-        foreach (var item in this.orderItems)
-        {
-            total += item.UnitPrice * item.Quantity;
-        }
-
-        return total;
-    }
 }
