@@ -3,6 +3,7 @@ using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
+using Dressca.Web.BuyerIdExtensions;
 using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Catalog;
 using Dressca.Web.Resources;
@@ -70,7 +71,7 @@ public class BasketItemsController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<BasketItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> List()
     {
-        var buyerId = this.GetBuyerIdFromCookie();
+        var buyerId = this.HttpContext.GetBuyerId();
         var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
         var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
         var catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id));
@@ -80,7 +81,6 @@ public class BasketItemsController : ControllerBase
             basketItemDto.CatalogItem = this.GetCatalogItemSummary(basketItem.CatalogItemId, catalogItems);
             return basketItemDto;
         });
-        this.SetBuyerIdToCookie(buyerId);
         return this.Ok(returnValue);
     }
 
@@ -122,7 +122,7 @@ public class BasketItemsController : ControllerBase
             });
 
         // 買い物かごに入っていないカタログアイテムが指定されていないか確認
-        var buyerId = this.GetBuyerIdFromCookie();
+        var buyerId = this.HttpContext.GetBuyerId();
         var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
         var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
         if (notExistsInBasketCatalogIds.Any())
@@ -139,7 +139,6 @@ public class BasketItemsController : ControllerBase
         }
 
         await this.basketApplicationService.SetQuantities(basket.Id, quantities);
-        this.SetBuyerIdToCookie(buyerId);
         return this.NoContent();
     }
 
@@ -171,7 +170,7 @@ public class BasketItemsController : ControllerBase
         postBasketItem.CatalogItemId.ThrowIfNull();
         postBasketItem.AddedQuantity.ThrowIfNull();
 
-        var buyerId = this.GetBuyerIdFromCookie();
+        var buyerId = this.HttpContext.GetBuyerId();
         var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
 
         // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
@@ -183,7 +182,6 @@ public class BasketItemsController : ControllerBase
 
         var catalogItem = catalogItems[0];
         await this.basketApplicationService.AddItemToBasket(basket.Id, postBasketItem.CatalogItemId.Value, catalogItem.Price, postBasketItem.AddedQuantity.Value);
-        this.SetBuyerIdToCookie(buyerId);
         return this.CreatedAtAction(nameof(this.List), null);
     }
 
@@ -210,7 +208,7 @@ public class BasketItemsController : ControllerBase
     public async Task<IActionResult> DeleteBasketItem([Range(1L, long.MaxValue)] long catalogItemId)
     {
         // 買い物かごに入っていないカタログアイテムが指定されていないか確認
-        var buyerId = this.GetBuyerIdFromCookie();
+        var buyerId = this.HttpContext.GetBuyerId();
         var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
         if (!basket.IsInCatalogItem(catalogItemId))
         {
@@ -219,7 +217,6 @@ public class BasketItemsController : ControllerBase
         }
 
         await this.basketApplicationService.SetQuantities(basket.Id, new() { { catalogItemId, 0 } });
-        this.SetBuyerIdToCookie(buyerId);
         return this.NoContent();
     }
 
@@ -227,34 +224,5 @@ public class BasketItemsController : ControllerBase
     {
         var catalogItem = catalogItems.FirstOrDefault(catalogItem => catalogItem.Id == catalogItemId);
         return this.catalogItemMapper.Convert(catalogItem);
-    }
-
-    private string GetBuyerIdFromCookie()
-    {
-        // TODO: 本来は GUID の重複確認が必要だが、本アプリケーションでは省略
-        if (this.Request.Cookies.TryGetValue(BuyerIdCookieName, out string? buyerId))
-        {
-            if (!string.IsNullOrEmpty(buyerId))
-            {
-                Guid.Parse(buyerId);
-                return buyerId;
-            }
-        }
-
-        return Guid.NewGuid().ToString("D");
-    }
-
-    private void SetBuyerIdToCookie(string buyerId)
-    {
-        this.Response.Cookies.Append(
-            BuyerIdCookieName,
-            buyerId,
-            new CookieOptions()
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Secure = true,
-                Expires = DateTimeOffset.Now.AddDays(7),
-            });
     }
 }

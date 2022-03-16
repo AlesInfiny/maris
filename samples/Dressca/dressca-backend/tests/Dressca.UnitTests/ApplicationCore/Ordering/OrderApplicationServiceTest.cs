@@ -99,6 +99,78 @@ public class OrderApplicationServiceTest
         Assert.ThrowsAsync<EmptyBasketOnCheckoutException>(action);
     }
 
+    [Fact]
+    public async Task 注文リポジトリから取得した情報と指定した購入者IDが合致する場合注文情報を取得できる()
+    {
+        // Arrange
+        var orderId = 10L;
+        var buyerId = "user1";
+        var shipToAddress = CreateDefaultShipTo();
+        var orderItems = CreateDefaultOrderItems();
+        var order = new Order(buyerId, shipToAddress, orderItems);
+        var orderRepositoryMock = new Mock<IOrderRepository>();
+        orderRepositoryMock
+            .Setup(r => r.FindAsync(orderId, AnyToken))
+            .ReturnsAsync(order);
+        var basketRepository = Mock.Of<IBasketRepository>();
+        var catalogRepository = Mock.Of<ICatalogRepository>();
+        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
+
+        // Act
+        var actual = await service.GetOrderAsync(orderId, buyerId);
+
+        // Assert
+        Assert.Same(order, actual);
+    }
+
+    [Fact]
+    public void 注文リポジトリから取得した情報と指定した購入者IDが異なる場合例外になる()
+    {
+        // Arrange
+        var orderId = 10L;
+        var buyerId = "user1";
+        var shipToAddress = CreateDefaultShipTo();
+        var orderItems = CreateDefaultOrderItems();
+        var order = new Order(buyerId, shipToAddress, orderItems);
+        var orderRepositoryMock = new Mock<IOrderRepository>();
+        orderRepositoryMock
+            .Setup(r => r.FindAsync(orderId, AnyToken))
+            .ReturnsAsync(order);
+        var basketRepository = Mock.Of<IBasketRepository>();
+        var catalogRepository = Mock.Of<ICatalogRepository>();
+        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
+
+        // Act
+        var action = () => service.GetOrderAsync(orderId, "dummy");
+
+        // Assert
+        Assert.ThrowsAsync<OrderNotFoundException>(action);
+    }
+
+    [Fact]
+    public void 注文リポジトリから注文情報を取得できない場合例外になる()
+    {
+        // Arrange
+        var orderId = 10L;
+        var buyerId = "user1";
+        var orderRepositoryMock = new Mock<IOrderRepository>();
+        orderRepositoryMock
+            .Setup(r => r.FindAsync(orderId, AnyToken))
+            .ReturnsAsync((Order?)null);
+        var basketRepository = Mock.Of<IBasketRepository>();
+        var catalogRepository = Mock.Of<ICatalogRepository>();
+        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
+
+        // Act
+        var action = () => service.GetOrderAsync(orderId, buyerId);
+
+        // Assert
+        Assert.ThrowsAsync<OrderNotFoundException>(action);
+    }
+
     private static Address CreateDefaultAddress()
     {
         const string defaultPostalCode = "100-8924";

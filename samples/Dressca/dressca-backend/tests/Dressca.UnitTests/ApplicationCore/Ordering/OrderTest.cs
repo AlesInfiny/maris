@@ -74,7 +74,7 @@ public class OrderTest
     }
 
     [Fact]
-    public void 合計金額が正しく計算できる()
+    public void 商品の税抜き合計金額が正しく計算できる()
     {
         // Arrange
         const string buyerId = "taro.kokkai @example.com";
@@ -83,10 +83,58 @@ public class OrderTest
         var order = new Order(buyerId, shipTo, items);
 
         // Act
-        var totalPrice = order.Total();
+        var totalPrice = order.TotalItemsPrice;
 
         // Assert
-        Assert.Equal(5000m, totalPrice);
+        Assert.Equal(4000m, totalPrice);
+    }
+
+    [Fact]
+    public void 商品の送料が正しく計算できる()
+    {
+        // Arrange
+        const string buyerId = "taro.kokkai @example.com";
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var order = new Order(buyerId, shipTo, items);
+
+        // Act
+        var deliveryCharge = order.DeliveryCharge;
+
+        // Assert
+        Assert.Equal(500m, deliveryCharge);
+    }
+
+    [Fact]
+    public void 商品の消費税額が正しく計算できる()
+    {
+        // Arrange
+        const string buyerId = "taro.kokkai @example.com";
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var order = new Order(buyerId, shipTo, items);
+
+        // Act
+        var tax = order.ConsumptionTax;
+
+        // Assert
+        Assert.Equal(450m, tax);
+    }
+
+    [Fact]
+    public void 商品の税込み合計金額が正しく計算できる()
+    {
+        // Arrange
+        const string buyerId = "taro.kokkai @example.com";
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var order = new Order(buyerId, shipTo, items);
+
+        // Act
+        var totalPrice = order.TotalPrice;
+
+        // Assert
+        Assert.Equal(4950m, totalPrice);
     }
 
     private static Address CreateDefaultAddress()
@@ -118,7 +166,7 @@ public class OrderTest
         var items = new List<OrderItem>()
         {
             new OrderItem(new CatalogItemOrdered(1, productName1, productCode1), 1000m, 1),
-            new OrderItem(new CatalogItemOrdered(2, productName2, productCode2), 2000m, 2),
+            new OrderItem(new CatalogItemOrdered(2, productName2, productCode2), 1500m, 2),
         };
 
         return items;

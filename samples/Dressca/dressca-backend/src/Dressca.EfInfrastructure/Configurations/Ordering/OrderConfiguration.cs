@@ -48,5 +48,20 @@ internal class OrderConfiguration : IEntityTypeConfiguration<Order>
                     .HasMaxLength(128)
                     .IsRequired()
                     .HasColumnName("ShipToAzanaAndOthers");
+        builder.Property(order => order.TotalItemsPrice)
+            .IsRequired()
+            .HasColumnType("decimal(18,6)");
+        builder.Property(order => order.DeliveryCharge)
+            .IsRequired()
+            .HasColumnType("decimal(18,6)");
+        builder.Property(order => order.ConsumptionTax)
+            .IsRequired()
+            .HasColumnType("decimal(18,6)");
+        builder.Property(order => order.ConsumptionTaxRate)
+            .IsRequired()
+            .HasColumnType("decimal(18,6)");
+        builder.Property(order => order.TotalPrice)
+            .IsRequired()
+            .HasColumnType("decimal(18,6)");
     }
 }
