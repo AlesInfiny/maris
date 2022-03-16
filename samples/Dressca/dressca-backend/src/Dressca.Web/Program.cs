@@ -1,12 +1,13 @@
 ﻿using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
+using Dressca.Web.BuyerIdExtensions;
 using Dressca.Web.Controllers;
 using Dressca.Web.Mapper;
 using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add(new BuyerIdFilterAttribute()));
 
 builder.Services.AddSwaggerDocument(config =>
 {

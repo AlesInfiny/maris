@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Moq" Version="4.17.2" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.406">
@@ -36,6 +37,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dressca.ApplicationCore\Dressca.ApplicationCore.csproj" />
+    <ProjectReference Include="..\..\src\Dressca.Web\Dressca.Web.csproj" />
     <ProjectReference Include="..\Dressca.TestLibrary\Dressca.TestLibrary.csproj" />
   </ItemGroup>
 
