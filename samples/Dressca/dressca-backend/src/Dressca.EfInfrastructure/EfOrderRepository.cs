@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Ordering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dressca.EfInfrastructure;
 
@@ -26,5 +27,14 @@ internal class EfOrderRepository : IOrderRepository
         this.dbContext.Orders.Add(entity);
         _ = await this.dbContext.SaveChangesAsync(cancellationToken);
         return entity;
+    }
+
+    /// <inheritdoc/>
+    public Task<Order?> FindAsync(long id, CancellationToken cancellationToken = default)
+    {
+        return this.dbContext.Orders
+            .Where(order => order.Id == id)
+            .Include(order => order.OrderItems)
+            .FirstOrDefaultAsync(cancellationToken);
     }
 }
