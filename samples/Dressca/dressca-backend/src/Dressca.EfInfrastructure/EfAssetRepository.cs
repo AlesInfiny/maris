@@ -21,7 +21,7 @@ internal class EfAssetRepository : IAssetRepository
         => this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
     /// <inheritdoc/>
-    public Asset? Find(string? assetCode, CancellationToken cancellationToken = default)
+    public Asset? Find(string? assetCode)
     {
         return this.dbContext.Assets
             .Where(asset => asset.AssetCode == assetCode)

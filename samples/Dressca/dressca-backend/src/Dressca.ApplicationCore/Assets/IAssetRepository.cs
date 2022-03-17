@@ -10,7 +10,6 @@ public interface IAssetRepository
     ///  存在しない場合は <see langword="null"/> を返します。
     /// </summary>
     /// <param name="assetCode">アセットコード。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>アセット情報。</returns>
-    Asset? Find(string? assetCode, CancellationToken cancellationToken = default);
+    Asset? Find(string? assetCode);
 }
