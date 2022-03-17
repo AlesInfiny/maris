@@ -1,6 +1,8 @@
-﻿using Dressca.ApplicationCore.Baskets;
+﻿using Dressca.ApplicationCore.Assets;
+using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
+using Dressca.EfInfrastructure.Configurations.Assets;
 using Dressca.EfInfrastructure.Configurations.Baskets;
 using Dressca.EfInfrastructure.Configurations.Catalog;
 using Dressca.EfInfrastructure.Configurations.Ordering;
@@ -41,9 +43,14 @@ internal class DresscaDbContext : DbContext
     public DbSet<BasketItem> BasketItems => this.Set<BasketItem>();
 
     /// <summary>
-    ///  カタログを取得します。
+    ///  カタログアイテムを取得します。
     /// </summary>
     public DbSet<CatalogItem> CatalogItems => this.Set<CatalogItem>();
+
+    /// <summary>
+    ///  カタログアイテムアセットを取得します。
+    /// </summary>
+    public DbSet<CatalogItemAsset> CatalogItemAssets => this.Set<CatalogItemAsset>();
 
     /// <summary>
     ///  商品ブランドを取得します。
@@ -65,6 +72,11 @@ internal class DresscaDbContext : DbContext
     /// </summary>
     public DbSet<OrderItem> OrderItems => this.Set<OrderItem>();
 
+    /// <summary>
+    ///  アセットを取得します。
+    /// </summary>
+    public DbSet<Asset> Assets => this.Set<Asset>();
+
     /// <inheritdoc/>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -80,12 +92,22 @@ internal class DresscaDbContext : DbContext
     {
         ArgumentNullException.ThrowIfNull(modelBuilder);
         base.OnModelCreating(modelBuilder);
+
+        // 買い物かご
         modelBuilder.ApplyConfiguration(new BasketConfiguration());
         modelBuilder.ApplyConfiguration(new BasketItemConfiguration());
+
+        // カタログ
         modelBuilder.ApplyConfiguration(new CatalogBrandConfiguration());
         modelBuilder.ApplyConfiguration(new CatalogCategoryConfiguration());
         modelBuilder.ApplyConfiguration(new CatalogItemConfiguration());
+        modelBuilder.ApplyConfiguration(new CatalogItemAssetConfiguration());
+
+        // 注文
         modelBuilder.ApplyConfiguration(new OrderConfiguration());
         modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+
+        // アセット
+        modelBuilder.ApplyConfiguration(new AssetConfiguration());
     }
 }
