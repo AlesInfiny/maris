@@ -268,6 +268,15 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   アセットタイプ: {0} はサポートされていません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string InvalidAssetType {
+            get {
+                return ResourceManager.GetString("InvalidAssetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   買い物かご ID: {0} の情報をもとに注文 ID: {1} を作成しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string OrderApplicationService_CreateOrderAsyncEnd {

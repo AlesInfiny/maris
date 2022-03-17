@@ -186,6 +186,9 @@
   <data name="CreateNewBasket_UserBasketNotFound" xml:space="preserve">
     <value>ユーザー ID: {0} の買い物かご情報が見つからなかったため新たに作成します。</value>
   </data>
+  <data name="InvalidAssetType" xml:space="preserve">
+    <value>アセットタイプ: {0} はサポートされていません。</value>
+  </data>
   <data name="OrderApplicationService_CreateOrderAsyncEnd" xml:space="preserve">
     <value>買い物かご ID: {0} の情報をもとに注文 ID: {1} を作成しました。</value>
   </data>
