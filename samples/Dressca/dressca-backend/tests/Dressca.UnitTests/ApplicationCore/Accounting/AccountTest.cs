@@ -50,6 +50,19 @@ public class AccountTest
     }
 
     [Fact]
+    public void 会計アイテムがないとき送料は0円()
+    {
+        // Arrange
+        var account = new Account(Array.Empty<AccountItem>());
+
+        // Act
+        var deliveryCharge = account.GetDeliveryCharge();
+
+        // Assert
+        Assert.Equal(0m, deliveryCharge);
+    }
+
+    [Fact]
     public void 会計アイムの合計金額が5000円未満の場合は送料が500円になる()
     {
         // Arrange

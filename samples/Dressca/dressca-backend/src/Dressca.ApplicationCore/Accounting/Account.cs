@@ -35,10 +35,20 @@ public record Account
     ///  税抜きの送料を取得します。
     ///  送料は会計アイテムの合計金額が 5,000 円以上で無料になります。
     ///  それ以外の場合 500 円です。
+    ///  ただし、会計アイテムが登録されていない場合は 0 円を返します。
     /// </summary>
     /// <returns>送料。</returns>
     public decimal GetDeliveryCharge()
-        => this.GetItemsTotalPrice() >= 5000m ? 0m : 500m;
+    {
+        if (this.accountItems.Any())
+        {
+            return this.GetItemsTotalPrice() >= 5000m ? 0m : 500m;
+        }
+        else
+        {
+            return 0m;
+        }
+    }
 
     /// <summary>
     ///  消費税額の合計を取得します。
