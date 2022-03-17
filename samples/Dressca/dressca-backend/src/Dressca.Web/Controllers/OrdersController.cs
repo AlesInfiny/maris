@@ -100,6 +100,6 @@ public class OrdersController : ControllerBase
 
         // 買い物かごを削除
         await this.basketApplicationService.DeleteBasket(basket.Id);
-        return this.CreatedAtAction(nameof(this.Get), new { id = order.Id }, null);
+        return this.CreatedAtAction(nameof(this.Get), new { orderId = order.Id }, null);
     }
 }
