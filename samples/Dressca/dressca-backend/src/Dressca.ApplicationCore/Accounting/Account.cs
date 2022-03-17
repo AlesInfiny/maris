@@ -29,7 +29,7 @@ public record Account
     /// </summary>
     /// <returns>会計アイテムの合計金額。</returns>
     public decimal GetItemsTotalPrice()
-        => this.accountItems.Sum(item => item.Quantity * item.UnitPrice);
+        => this.accountItems.Sum(item => item.GetSubTotal());
 
     /// <summary>
     ///  税抜きの送料を取得します。

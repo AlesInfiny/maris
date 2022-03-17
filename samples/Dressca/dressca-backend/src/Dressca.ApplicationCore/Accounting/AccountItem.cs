@@ -25,4 +25,10 @@ public record AccountItem
     ///  単価を取得します。
     /// </summary>
     public decimal UnitPrice { get; init; }
+
+    /// <summary>
+    ///  会計アイテムの小計を計算して金額を返却します。
+    /// </summary>
+    /// <returns>会計アイテムの小計額。</returns>
+    public decimal GetSubTotal() => this.Quantity * this.UnitPrice;
 }
