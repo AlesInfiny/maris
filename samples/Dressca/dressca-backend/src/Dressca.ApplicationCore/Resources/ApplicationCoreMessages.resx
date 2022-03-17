@@ -123,6 +123,15 @@
   <data name="ArgumentIsNullOrWhiteSpace" xml:space="preserve">
     <value>null または空の文字列を設定できません。</value>
   </data>
+  <data name="AssetApplicationService_GetAssetStreamInfoEnd" xml:space="preserve">
+    <value>アセットコード:{0} のアセット情報を取得しました。</value>
+  </data>
+  <data name="AssetApplicationService_GetAssetStreamInfoStart" xml:space="preserve">
+    <value>アセットコード:{0} のアセット情報を取得します。</value>
+  </data>
+  <data name="AssetNotFound" xml:space="preserve">
+    <value>アセットコード: {0} のアセットが見つかりませんでした。</value>
+  </data>
   <data name="BasketApplicationService_AddItemToBasketEnd" xml:space="preserve">
     <value>ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加しました。</value>
   </data>
