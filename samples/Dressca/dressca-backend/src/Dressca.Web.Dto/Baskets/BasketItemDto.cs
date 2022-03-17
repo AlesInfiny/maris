@@ -8,11 +8,6 @@ namespace Dressca.Web.Dto.Baskets;
 public class BasketItemDto
 {
     /// <summary>
-    ///  買い物かごアイテム Id を取得または設定します。
-    /// </summary>
-    public long Id { get; set; }
-
-    /// <summary>
     ///  カタログアイテム Id を取得または設定します。
     /// </summary>
     public long CatalogItemId { get; set; }
@@ -30,7 +25,7 @@ public class BasketItemDto
     /// <summary>
     ///  小計額を取得します。
     /// </summary>
-    public decimal SubTotal => this.UnitPrice * this.Quantity;
+    public decimal SubTotal { get; set; }
 
     /// <summary>
     ///  カタログアイテムを取得または設定します。

@@ -21,10 +21,10 @@ public class BasketItemMapper : IObjectMapper<BasketItem, BasketItemDto>
 
         return new BasketItemDto
         {
-            Id = value.Id,
             CatalogItemId = value.CatalogItemId,
             Quantity = value.Quantity,
             UnitPrice = value.UnitPrice,
+            SubTotal = value.GetSubTotal(),
         };
     }
 }
