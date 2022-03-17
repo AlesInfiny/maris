@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Accounting;
 
 namespace Dressca.ApplicationCore.Baskets;
 
@@ -85,4 +86,15 @@ public class Basket
     /// <returns>含まれている場合は <see langword="true"/> 、そうでない場合は <see langword="false"/> 。</returns>
     public bool IsInCatalogItem(long catalogItemId)
         => this.items.Any(item => item.CatalogItemId == catalogItemId);
+
+    /// <summary>
+    ///  この買い物かごの情報をもとにした会計情報を取得します。
+    /// </summary>
+    /// <returns>会計情報。</returns>
+    public Account GetAccount()
+    {
+        var accountItems = this.items
+            .Select(basketItem => new AccountItem(basketItem.Quantity, basketItem.UnitPrice));
+        return new Account(accountItems);
+    }
 }

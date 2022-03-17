@@ -359,4 +359,19 @@ public class BasketTest
         // Assert
         Assert.False(result);
     }
+
+    [Fact]
+    public void 買い物かごアイテムの情報をもとにした会計情報を取得できる()
+    {
+        // Arrange
+        var basket = new Basket(Guid.NewGuid().ToString());
+        basket.AddItem(1L, 1000m, 1);
+        basket.AddItem(2L, 1500m, 2);
+
+        // Act
+        var account = basket.GetAccount();
+
+        // Assert
+        Assert.Equal(4000m, account.GetItemsTotalPrice());
+    }
 }
