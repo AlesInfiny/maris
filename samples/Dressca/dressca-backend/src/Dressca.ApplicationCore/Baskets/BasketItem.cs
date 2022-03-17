@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using Dressca.ApplicationCore.Accounting;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Baskets;
 
@@ -85,4 +86,11 @@ public class BasketItem
     /// <param name="quantity">数量。</param>
     /// <exception cref="ArgumentException"><paramref name="quantity"/> が 0 未満の場合。</exception>
     public void SetQuantity(int quantity) => this.Quantity = quantity;
+
+    /// <summary>
+    ///  買い物かごアイテムの小計を計算して金額を返却します。
+    /// </summary>
+    /// <returns>買い物かごアイテムの小計額。</returns>
+    public decimal GetSubTotal()
+        => new AccountItem(this.Quantity, this.UnitPrice).GetSubTotal();
 }
