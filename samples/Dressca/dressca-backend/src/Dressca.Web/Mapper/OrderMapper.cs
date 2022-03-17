@@ -30,11 +30,14 @@ public class OrderMapper : IObjectMapper<Order, OrderDto>
             Todofuken = value.ShipToAddress.Address.Todofuken,
             Shikuchoson = value.ShipToAddress.Address.Shikuchoson,
             AzanaAndOthers = value.ShipToAddress.Address.AzanaAndOthers,
-            ConsumptionTaxRate = value.ConsumptionTaxRate,
-            TotalItemsPrice = value.TotalItemsPrice,
-            DeliveryCharge = value.DeliveryCharge,
-            ConsumptionTax = value.ConsumptionTax,
-            TotalPrice = value.TotalPrice,
+            Account = new()
+            {
+                ConsumptionTaxRate = value.ConsumptionTaxRate,
+                TotalItemsPrice = value.TotalItemsPrice,
+                DeliveryCharge = value.DeliveryCharge,
+                ConsumptionTax = value.ConsumptionTax,
+                TotalPrice = value.TotalPrice,
+            },
             OrderItems = value.OrderItems.Select(item => ConvertToOrderItemDto(item)).ToList(),
         };
 
