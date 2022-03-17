@@ -14,5 +14,5 @@ public interface IAssetStore
     /// <exception cref="ArgumentNullException">
     ///  <paramref name="asset"/> が <see langword="null"/> です。
     /// </exception>
-    Stream? GetStreamAsync(Asset asset);
+    Stream? GetStream(Asset asset);
 }
