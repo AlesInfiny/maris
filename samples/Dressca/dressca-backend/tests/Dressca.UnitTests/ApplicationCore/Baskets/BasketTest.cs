@@ -295,38 +295,10 @@ public class BasketTest
     }
 
     [Fact]
-    public void 購入者Idを後から変更できる()
-    {
-        // Arrange
-        var buyerId1 = Guid.NewGuid().ToString();
-        var buyerId2 = Guid.NewGuid().ToString();
-        var basket = new Basket(buyerId1);
-
-        // Act
-        basket.SetNewBuyerId(buyerId2);
-
-        // Assert
-        Assert.Equal(buyerId2, basket.BuyerId);
-    }
-
-    [Fact]
     public void 買い物かごの購入者Idはnullにできない()
     {
         // Arrange & Act
         var action = () => new Basket(null!);
-
-        // Assert
-        Assert.Throws<ArgumentNullException>("value", action);
-    }
-
-    [Fact]
-    public void 購入者Idはnullにできない()
-    {
-        // Arrange
-        var basket = new Basket(Guid.NewGuid().ToString());
-
-        // Act
-        var action = () => basket.SetNewBuyerId(null!);
 
         // Assert
         Assert.Throws<ArgumentNullException>("value", action);

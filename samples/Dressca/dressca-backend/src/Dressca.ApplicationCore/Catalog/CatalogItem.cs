@@ -201,49 +201,4 @@ public class CatalogItem
         get => this.catalogBrand ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.CatalogBrand)));
         private set => this.catalogBrand = value;
     }
-
-    /// <summary>
-    ///  カタログの詳細情報を更新します。
-    /// </summary>
-    /// <param name="name">商品名。</param>
-    /// <param name="description">説明。</param>
-    /// <param name="price">単価。</param>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="price"/> は負の値に設定できません。</item>
-    ///  </list>
-    /// </exception>
-    /// <exception cref="ArgumentException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="description"/> が <see langword="null"/> または空の文字列です。</item>
-    ///   <item><paramref name="name"/> が <see langword="null"/> または空の文字列です。</item>
-    ///  </list>
-    /// </exception>
-    public void UpdateDetails(string name, string description, decimal price)
-    {
-        this.Name = name;
-        this.Description = description;
-        this.Price = price;
-    }
-
-    /// <summary>
-    ///  カタログブランドを更新します。
-    /// </summary>
-    /// <param name="catalogBrandId">カタログブランド Id 。</param>
-    /// <exception cref="ArgumentOutOfRangeException">カタログブランド ID は 0 以下に設定できません。</exception>
-    public void UpdateBrand(long catalogBrandId) => this.CatalogBrandId = catalogBrandId;
-
-    /// <summary>
-    ///  カタログカテゴリを更新します。
-    /// </summary>
-    /// <param name="catalogCategoryId">カタログカテゴリ Id 。</param>
-    /// <exception cref="ArgumentOutOfRangeException">カタログカテゴリ ID は 0 以下に設定できません。</exception>
-    public void UpdateCategory(long catalogCategoryId) => this.CatalogCategoryId = catalogCategoryId;
-
-    /// <summary>
-    ///  商品コードを更新します。
-    /// </summary>
-    /// <param name="productCode">商品コード。</param>
-    /// <exception cref="ArgumentException">商品コードが <see langword="null"/> または空の文字列です。</exception>
-    public void UpdateProductCode(string productCode) => this.ProductCode = productCode;
 }

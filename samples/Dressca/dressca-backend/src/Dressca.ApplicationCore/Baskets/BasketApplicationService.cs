@@ -102,51 +102,6 @@ public class BasketApplicationService
     }
 
     /// <summary>
-    ///  Anonymous ユーザーが登録した買い物かご情報を指定されたユーザーの買い物かご情報に追加登録します。
-    /// </summary>
-    /// <param name="anonymousId">Anonymous ユーザーのユーザー Id 。</param>
-    /// <param name="userId">ログイン後のユーザー Id 。</param>
-    /// <returns>非同期処理を表すタスク。</returns>
-    /// <remarks>
-    ///  <para>
-    ///   未ログイン状態で買い物かごを操作した後、ログインした際に呼び出されることを想定しています。
-    ///   Anonymous ユーザーの買い物かごが見つからない場合、処理をスキップします。
-    ///   ログイン後ユーザーの買い物かごが見つからない場合、買い物かごを新しく作成します。
-    ///  </para>
-    /// </remarks>
-    /// <exception cref="ArgumentException"><paramref name="anonymousId"/> または <paramref name="userId"/> が <see langword="null"/> または空白の場合。</exception>
-    public async Task TransferBasket(string anonymousId, string userId)
-    {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_TransferBasketStart, anonymousId, userId);
-        if (string.IsNullOrWhiteSpace(anonymousId))
-        {
-            throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(anonymousId));
-        }
-
-        if (string.IsNullOrWhiteSpace(userId))
-        {
-            throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(userId));
-        }
-
-        var anonymousBasket = await this.basketRepository.GetWithBasketItemsAsync(anonymousId);
-        if (anonymousBasket is null)
-        {
-            this.logger.LogDebug(ApplicationCoreMessages.UserBasketNotFound, anonymousId);
-            return;
-        }
-
-        var userBasket = await this.GetOrCreateBasketForUser(userId);
-        foreach (var item in anonymousBasket.Items)
-        {
-            userBasket.AddItem(item.CatalogItemId, item.UnitPrice, item.Quantity);
-        }
-
-        await this.basketRepository.UpdateAsync(userBasket);
-        await this.basketRepository.RemoveAsync(anonymousBasket);
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_TransferBasketEnd, anonymousId, userId);
-    }
-
-    /// <summary>
     ///  <paramref name="userId"/> に対応する買い物かご情報を取得します。
     ///  対応する買い物かご情報がない場合は、作成します。
     /// </summary>
