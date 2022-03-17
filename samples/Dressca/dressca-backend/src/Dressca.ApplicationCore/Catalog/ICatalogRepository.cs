@@ -8,14 +8,6 @@ namespace Dressca.ApplicationCore.Catalog;
 public interface ICatalogRepository
 {
     /// <summary>
-    ///  指定した識別子のエンティティを取得します。
-    /// </summary>
-    /// <param name="id">ID 。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>カタログアイテムを返す非同期処理を表すタスク。</returns>
-    Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default);
-
-    /// <summary>
     ///  仕様を満たすエンティティのリストを取得します。
     /// </summary>
     /// <param name="specification">検索対象のエンティティが満たすべき仕様。</param>
@@ -48,12 +40,4 @@ public interface ICatalogRepository
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>条件を満たすカタログアイテム数を返す非同期処理を表すタスク。</returns>
     Task<int> CountAsync(Expression<Func<CatalogItem, bool>> specification, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    ///  複数のエンティティを追加します。
-    /// </summary>
-    /// <param name="entities">複数のエンティティ。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>カタログアイテムを返す非同期処理を表すタスク。</returns>
-    Task<IReadOnlyList<CatalogItem>> AddRangeAsync(IEnumerable<CatalogItem> entities, CancellationToken cancellationToken = default);
 }

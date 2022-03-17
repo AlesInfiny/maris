@@ -6,7 +6,7 @@ namespace Dressca.ApplicationCore.Ordering;
 /// <summary>
 ///  商品のお届け先を表現する値オブジェクトです。
 /// </summary>
-public record ShipTo // ValueObject
+public record ShipTo
 {
     private string? fullName;
     private Address? address;

@@ -71,15 +71,6 @@ public class Basket
     public void RemoveEmptyItems() => _ = this.items.RemoveAll(i => i.Quantity == 0);
 
     /// <summary>
-    ///  この買い物かごの購入者 Id を変更します。
-    /// </summary>
-    /// <param name="buyerId">購入者 Id 。</param>
-    /// <exception cref="ArgumentNullException">
-    ///  <paramref name="buyerId"/> が <see langword="null"/> です.
-    /// </exception>
-    public void SetNewBuyerId(string buyerId) => this.BuyerId = buyerId;
-
-    /// <summary>
     ///  この買い物かご内に指定したカタログアイテム Id の商品が含まれているかどうか示す値を取得します。
     /// </summary>
     /// <param name="catalogItemId">検査するカタログアイテム Id 。</param>

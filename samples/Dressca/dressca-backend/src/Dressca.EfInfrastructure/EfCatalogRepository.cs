@@ -23,14 +23,6 @@ internal class EfCatalogRepository : ICatalogRepository
         => this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
     /// <inheritdoc/>
-    public async Task<IReadOnlyList<CatalogItem>> AddRangeAsync(IEnumerable<CatalogItem> entities, CancellationToken cancellationToken = default)
-    {
-        this.dbContext.CatalogItems.AddRange(entities);
-        _ = await this.dbContext.SaveChangesAsync(cancellationToken);
-        return entities.ToList();
-    }
-
-    /// <inheritdoc/>
     public Task<int> CountAsync(Expression<Func<CatalogItem, bool>> specification, CancellationToken cancellationToken = default)
         => this.dbContext.CatalogItems.CountAsync(specification, cancellationToken);
 
@@ -49,12 +41,5 @@ internal class EfCatalogRepository : ICatalogRepository
         query = take > 0 ? query.Take(take) : query;
 
         return await query.ToListAsync(cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default)
-    {
-        var keys = new object[] { id };
-        return this.dbContext.CatalogItems.FindAsync(keys, cancellationToken).AsTask();
     }
 }
