@@ -5,6 +5,7 @@ import router from './router';
 
 import '@/assets/base.css';
 import '@/config/yup.config';
+import '@/config/axios.config';
 import 'vue-virtual-carousel/dist/style.css';
 
 import { authenticationGuard } from '@/shared/authentication/authentication-guard';

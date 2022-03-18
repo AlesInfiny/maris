@@ -1,5 +1,5 @@
 const base = 'api';
-import { Basket } from '../../src/stores/basket/basket.model';
+import type { Basket } from '../../src/stores/basket/basket.model';
 
 let items: Basket[] = [];
 
