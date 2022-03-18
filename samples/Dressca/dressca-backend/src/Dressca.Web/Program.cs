@@ -1,6 +1,6 @@
 ﻿using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
-using Dressca.StaticFileInfrastructure;
+using Dressca.Store.Assets.StaticFiles;
 using Dressca.Web.BuyerIdExtensions;
 using Dressca.Web.Controllers;
 using Dressca.Web.Mapper;
@@ -22,7 +22,7 @@ builder.Services.AddSwaggerDocument(config =>
 
 builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
 
-builder.Services.AddDresscaStaticFileInfrastructure();
+builder.Services.AddStaticFileAssetStore();
 
 builder.Services.AddDresscaApplicationCore();
 

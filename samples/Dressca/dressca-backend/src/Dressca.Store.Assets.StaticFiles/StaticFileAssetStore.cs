@@ -1,8 +1,8 @@
 ﻿using Dressca.ApplicationCore.Assets;
-using Dressca.StaticFileInfrastructure.Resources;
+using Dressca.Store.Assets.StaticFiles.Resources;
 using Microsoft.Extensions.Logging;
 
-namespace Dressca.StaticFileInfrastructure;
+namespace Dressca.Store.Assets.StaticFiles;
 
 /// <summary>
 ///  静的ファイルを取り扱うアセットのストアの実装です。
@@ -32,16 +32,16 @@ internal class StaticFileAssetStore : IAssetStore
     public Stream? GetStream(Asset asset)
     {
         ArgumentNullException.ThrowIfNull(asset);
-        this.logger.LogDebug(StaticFileInfrastructureMessages.StaticFileAssetStore_GetStreamStart, asset.AssetCode);
+        this.logger.LogDebug(StoreAssetsStaticFilesMessages.StaticFileAssetStore_GetStreamStart, asset.AssetCode);
         var filePath = this.GetFilePath(asset);
         if (File.Exists(filePath))
         {
-            this.logger.LogDebug(StaticFileInfrastructureMessages.StaticFileAssetStore_GetStreamEnd, asset.AssetCode, filePath);
+            this.logger.LogDebug(StoreAssetsStaticFilesMessages.StaticFileAssetStore_GetStreamEnd, asset.AssetCode, filePath);
             return new FileStream(filePath, FileMode.Open);
         }
         else
         {
-            this.logger.LogInformation(StaticFileInfrastructureMessages.FileNotFound, asset.AssetCode, filePath);
+            this.logger.LogInformation(StoreAssetsStaticFilesMessages.FileNotFound, asset.AssetCode, filePath);
             return null;
         }
     }

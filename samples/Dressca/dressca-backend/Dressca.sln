@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web", "src\Dressca.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web.Dto", "src\Dressca.Web.Dto\Dressca.Web.Dto.csproj", "{CAAA0815-902E-421D-A721-50DCCA839A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dressca.StaticFileInfrastructure", "src\Dressca.StaticFileInfrastructure\Dressca.StaticFileInfrastructure.csproj", "{4778DD28-BDD2-40A4-890B-3F8046269054}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Store.Assets.StaticFiles", "src\Dressca.Store.Assets.StaticFiles\Dressca.Store.Assets.StaticFiles.csproj", "{6E6D331E-4F04-4B1B-8BDD-96B9A40FDFD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,10 @@ Global
 		{CAAA0815-902E-421D-A721-50DCCA839A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAAA0815-902E-421D-A721-50DCCA839A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAAA0815-902E-421D-A721-50DCCA839A62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4778DD28-BDD2-40A4-890B-3F8046269054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4778DD28-BDD2-40A4-890B-3F8046269054}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4778DD28-BDD2-40A4-890B-3F8046269054}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4778DD28-BDD2-40A4-890B-3F8046269054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E6D331E-4F04-4B1B-8BDD-96B9A40FDFD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6D331E-4F04-4B1B-8BDD-96B9A40FDFD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6D331E-4F04-4B1B-8BDD-96B9A40FDFD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6D331E-4F04-4B1B-8BDD-96B9A40FDFD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,7 +79,7 @@ Global
 		{CB2E7000-1392-43EE-8AEC-0A76A28DBB8B} = {00E7327F-10DF-4937-AC61-FE2FCDCCA88B}
 		{795D8320-6227-418A-B970-D2E851EA9AB6} = {16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}
 		{CAAA0815-902E-421D-A721-50DCCA839A62} = {16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}
-		{4778DD28-BDD2-40A4-890B-3F8046269054} = {16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}
+		{6E6D331E-4F04-4B1B-8BDD-96B9A40FDFD4} = {16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FD66EC1-E1D1-4664-9ACE-8026659FD708}

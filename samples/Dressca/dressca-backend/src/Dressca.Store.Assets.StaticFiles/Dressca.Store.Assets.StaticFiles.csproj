@@ -29,17 +29,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\StaticFileInfrastructureMessages.Designer.cs">
+    <Compile Update="Resources\StoreAssetsStaticFilesMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>StaticFileInfrastructureMessages.resx</DependentUpon>
+      <DependentUpon>StoreAssetsStaticFilesMessages.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\StaticFileInfrastructureMessages.resx">
+    <EmbeddedResource Update="Resources\StoreAssetsStaticFilesMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>StaticFileInfrastructureMessages.Designer.cs</LastGenOutput>
+      <LastGenOutput>StoreAssetsStaticFilesMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 </Project>
