@@ -1,7 +1,7 @@
 ﻿using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
-using Dressca.Web.BuyerIdExtensions;
+using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
 using Dressca.Web.Mapper;
 using Microsoft.AspNetCore.HttpLogging;

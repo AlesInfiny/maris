@@ -3,7 +3,7 @@ using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
-using Dressca.Web.BuyerIdExtensions;
+using Dressca.Web.Baskets;
 using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Catalog;
 using Dressca.Web.Resources;

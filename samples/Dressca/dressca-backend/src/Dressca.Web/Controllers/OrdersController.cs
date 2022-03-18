@@ -1,7 +1,7 @@
 ﻿using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
-using Dressca.Web.BuyerIdExtensions;
+using Dressca.Web.Baskets;
 using Dressca.Web.Dto.Ordering;
 using Microsoft.AspNetCore.Mvc;
 

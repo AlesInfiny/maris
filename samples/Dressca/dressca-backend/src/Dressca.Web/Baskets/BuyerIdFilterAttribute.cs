@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Dressca.Web.BuyerIdExtensions;
+namespace Dressca.Web.Baskets;
 
 /// <summary>
 ///  購入者 Id の発行と保存を行う <see cref="ActionFilterAttribute"/> です。
