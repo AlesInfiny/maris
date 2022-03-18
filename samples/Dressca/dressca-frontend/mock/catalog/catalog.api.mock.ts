@@ -1,6 +1,10 @@
 const base = 'api';
 import * as url from 'url';
-import { Category, Brand, Item } from '../../src/stores/catalog/catalog.model';
+import type {
+  Category,
+  Brand,
+  Item,
+} from '../../src/stores/catalog/catalog.model';
 
 const categories: Category[] = [
   {

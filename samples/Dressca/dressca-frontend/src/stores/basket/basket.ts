@@ -10,17 +10,11 @@ export const useBasketStore = defineStore({
   actions: {
     async add(productCode: string) {
       const params = { productCode: productCode };
-      await axios.put(
-        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
-        params,
-      );
+      await axios.put('basket', params);
     },
     async update(productCode: string, quantity: number) {
       const params = { productCode: productCode, quantity: quantity };
-      await axios.patch(
-        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
-        params,
-      );
+      await axios.patch('basket', params);
       const target = this.items.find(
         (item) => item.productCode === productCode,
       );
@@ -29,18 +23,13 @@ export const useBasketStore = defineStore({
     },
     async remove(productCode: string) {
       const params = { productCode: productCode };
-      await axios.delete(
-        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
-        { data: params },
-      );
+      await axios.delete('basket', { data: params });
       this.items = this.items.filter(
         (item) => item.productCode !== productCode,
       );
     },
     async fetch() {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}basket`,
-      );
+      const response = await axios.get('basket');
       this.items = response.data;
     },
   },
