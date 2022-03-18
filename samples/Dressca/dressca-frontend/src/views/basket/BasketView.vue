@@ -46,7 +46,7 @@ const remove = async (productCode: string) => {
 };
 
 const order = () => {
-  router.push({ name: 'checkout' });
+  router.push({ name: 'ordering/checkout' });
 };
 
 const basketStore = useBasketStore();

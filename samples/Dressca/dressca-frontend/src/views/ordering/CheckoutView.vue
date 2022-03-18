@@ -3,7 +3,8 @@ import { onMounted, reactive, toRefs } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
 import type { Basket } from '@/stores/basket/basket.model';
 import { useAccountStore } from '@/stores/account/account';
-import type { Address } from '@/stores/account/account.model';
+import type { Item } from '@/stores/ordering/ordering.model';
+import { useOrderingStore } from '@/stores/ordering/ordering';
 import { useRouter } from 'vue-router';
 
 const accountStore = useAccountStore();
@@ -26,8 +27,15 @@ const toLocaleString = (price: number) => {
   return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
 };
 
-const checkout = () => {
-  router.push({ name: 'catalog' });
+const orderingStore = useOrderingStore();
+
+const checkout = async () => {
+  const items = state.items.map<Item>((item) => ({
+    productCode: item.productCode,
+    quantity: item.quantity,
+  }));
+  await orderingStore.order(items);
+  router.push({ name: 'ordering/done' });
 };
 
 const basketStore = useBasketStore();
@@ -79,7 +87,7 @@ onMounted(async () => {
             <td class="pl-2">{{ address.name }}</td>
           </tr>
           <tr>
-            <td class="pl-2">{{ address.zipCode }}</td>
+            <td class="pl-2">{{ `〒${address.zipCode}` }}</td>
           </tr>
           <tr>
             <td class="pl-2">{{ address.address }}</td>
