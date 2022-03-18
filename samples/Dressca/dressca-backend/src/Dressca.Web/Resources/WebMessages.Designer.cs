@@ -61,6 +61,15 @@ namespace Dressca.Web.Resources {
         }
         
         /// <summary>
+        ///   アセットタイプ: {0} を Content-Type に変換できません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CannotConvertAssetTypeToContentType {
+            get {
+                return ResourceManager.GetString("CannotConvertAssetTypeToContentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   リクエストに指定されたカタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogItemIdDoesNotExistInBasket {
