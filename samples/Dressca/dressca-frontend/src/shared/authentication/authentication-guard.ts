@@ -6,12 +6,19 @@ export const authenticationGuard = (router: Router) => {
   const authenticationStore = useAuthenticationStore();
   const routingStore = useRoutingStore();
 
-  router.beforeEach((to) => {
-    if (authenticationStore.isAuthenticated) {
+  router.beforeEach((to, from) => {
+    if (['account/login', 'catalog', 'basket'].includes(to.name)) {
       return true;
     }
 
-    if (['account/login', 'catalog', 'basket'].includes(to.name)) {
+    if (
+      ['ordering/checkout', 'ordering/done'].includes(to.name) &&
+      !from.name
+    ) {
+      return { name: 'catalog' };
+    }
+
+    if (authenticationStore.isAuthenticated) {
       return true;
     }
 
