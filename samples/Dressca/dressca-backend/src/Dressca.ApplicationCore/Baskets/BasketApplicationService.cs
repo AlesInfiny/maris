@@ -105,30 +105,30 @@ public class BasketApplicationService
     }
 
     /// <summary>
-    ///  <paramref name="userId"/> に対応する買い物かご情報を取得します。
+    ///  <paramref name="buyerId"/> に対応する買い物かご情報を取得します。
     ///  対応する買い物かご情報がない場合は、作成します。
     /// </summary>
-    /// <param name="userId">ユーザー Id 。</param>
+    /// <param name="buyerId">購入者 Id 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
-    /// <exception cref="ArgumentException"><paramref name="userId"/> が <see langword="null"/> または空白の場合.</exception>
-    public async Task<Basket> GetOrCreateBasketForUserAsync(string userId, CancellationToken cancellationToken = default)
+    /// <exception cref="ArgumentException"><paramref name="buyerId"/> が <see langword="null"/> または空白の場合.</exception>
+    public async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserAsyncStart, userId);
-        if (string.IsNullOrWhiteSpace(userId))
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserAsyncStart, buyerId);
+        if (string.IsNullOrWhiteSpace(buyerId))
         {
-            throw new ArgumentException(null, nameof(userId));
+            throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(buyerId));
         }
 
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(userId, cancellationToken);
+        var basket = await this.basketRepository.GetWithBasketItemsAsync(buyerId, cancellationToken);
         if (basket is null)
         {
-            this.logger.LogDebug(ApplicationCoreMessages.CreateNewBasket_UserBasketNotFound, userId);
-            basket = new Basket(userId);
+            this.logger.LogDebug(ApplicationCoreMessages.CreateNewBasket_UserBasketNotFound, buyerId);
+            basket = new Basket(buyerId);
             return await this.basketRepository.AddAsync(basket, cancellationToken);
         }
 
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserAsyncEnd, userId);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserAsyncEnd, buyerId);
         return basket;
     }
 }

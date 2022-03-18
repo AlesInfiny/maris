@@ -145,10 +145,10 @@
     <value>ID: {0} の買い物かごを削除します。</value>
   </data>
   <data name="BasketApplicationService_GetOrCreateBasketForUserAsyncEnd" xml:space="preserve">
-    <value>ユーザー ID: {0} の買い物かご情報を取得または作成しました。</value>
+    <value>購入者 ID: {0} の買い物かご情報を取得または作成しました。</value>
   </data>
   <data name="BasketApplicationService_GetOrCreateBasketForUserAsyncStart" xml:space="preserve">
-    <value>ユーザー ID: {0} の買い物かご情報を取得または作成します。</value>
+    <value>購入者 ID: {0} の買い物かご情報を取得または作成します。</value>
   </data>
   <data name="BasketApplicationService_SetQuantitiesAsyncEnd" xml:space="preserve">
     <value>ID: {0} の買い物かごの数量を一括で設定しました。</value>
@@ -187,7 +187,7 @@
     <value>カタログアイテム ID は 0 以下にできません。</value>
   </data>
   <data name="CreateNewBasket_UserBasketNotFound" xml:space="preserve">
-    <value>ユーザー ID: {0} の買い物かご情報が見つからなかったため新たに作成します。</value>
+    <value>購入者 ID: {0} の買い物かご情報が見つからなかったため新たに作成します。</value>
   </data>
   <data name="InvalidAssetType" xml:space="preserve">
     <value>アセットタイプ: {0} はサポートされていません。</value>

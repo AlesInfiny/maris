@@ -142,7 +142,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ユーザー ID: {0} の買い物かご情報を取得または作成しました。 に類似しているローカライズされた文字列を検索します。
+        ///   購入者 ID: {0} の買い物かご情報を取得または作成しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string BasketApplicationService_GetOrCreateBasketForUserAsyncEnd {
             get {
@@ -151,7 +151,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ユーザー ID: {0} の買い物かご情報を取得または作成します。 に類似しているローカライズされた文字列を検索します。
+        ///   購入者 ID: {0} の買い物かご情報を取得または作成します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string BasketApplicationService_GetOrCreateBasketForUserAsyncStart {
             get {
@@ -268,7 +268,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ユーザー ID: {0} の買い物かご情報が見つからなかったため新たに作成します。 に類似しているローカライズされた文字列を検索します。
+        ///   購入者 ID: {0} の買い物かご情報が見つからなかったため新たに作成します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CreateNewBasket_UserBasketNotFound {
             get {
