@@ -42,7 +42,7 @@ public class CatalogCategoriesController : ControllerBase
     /// <response code="200">成功。</response>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<CatalogCategoryDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> List()
+    public async Task<IActionResult> GetCatalogCategoriesAsync()
     {
         var categories = await this.service.GetCategoriesAsync();
         var returnValues = categories

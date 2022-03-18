@@ -74,10 +74,10 @@ public class BasketItemsController : ControllerBase
     /// <response code="200">成功。</response>
     [HttpGet]
     [ProducesResponseType(typeof(BasketDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> List()
+    public async Task<IActionResult> GetBasketItemsAsync()
     {
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
+        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
         var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
         var catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id));
         var basketDto = this.basketMapper.Convert(basket);
@@ -107,7 +107,7 @@ public class BasketItemsController : ControllerBase
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> PutBasketItems(IEnumerable<PutBasketItemsInputDto> putBasketItems)
+    public async Task<IActionResult> PutBasketItemsAsync(IEnumerable<PutBasketItemsInputDto> putBasketItems)
     {
         if (!putBasketItems.Any())
         {
@@ -128,7 +128,7 @@ public class BasketItemsController : ControllerBase
 
         // 買い物かごに入っていないカタログアイテムが指定されていないか確認
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
+        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
         var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
         if (notExistsInBasketCatalogIds.Any())
         {
@@ -143,7 +143,7 @@ public class BasketItemsController : ControllerBase
             return this.BadRequest();
         }
 
-        await this.basketApplicationService.SetQuantities(basket.Id, quantities);
+        await this.basketApplicationService.SetQuantitiesAsync(basket.Id, quantities);
         return this.NoContent();
     }
 
@@ -170,13 +170,13 @@ public class BasketItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-    public async Task<IActionResult> PostBasketItem(PostBasketItemsInputDto postBasketItem)
+    public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsInputDto postBasketItem)
     {
         postBasketItem.CatalogItemId.ThrowIfNull();
         postBasketItem.AddedQuantity.ThrowIfNull();
 
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
+        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
 
         // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
         var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync(new[] { postBasketItem.CatalogItemId.Value });
@@ -186,8 +186,9 @@ public class BasketItemsController : ControllerBase
         }
 
         var catalogItem = catalogItems[0];
-        await this.basketApplicationService.AddItemToBasket(basket.Id, postBasketItem.CatalogItemId.Value, catalogItem.Price, postBasketItem.AddedQuantity.Value);
-        return this.CreatedAtAction(nameof(this.List), null);
+        await this.basketApplicationService.AddItemToBasketAsync(basket.Id, postBasketItem.CatalogItemId.Value, catalogItem.Price, postBasketItem.AddedQuantity.Value);
+        var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetBasketItemsAsync));
+        return this.CreatedAtAction(actionName, null);
     }
 
     /// <summary>
@@ -210,18 +211,18 @@ public class BasketItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> DeleteBasketItem([Range(1L, long.MaxValue)] long catalogItemId)
+    public async Task<IActionResult> DeleteBasketItemAsync([Range(1L, long.MaxValue)] long catalogItemId)
     {
         // 買い物かごに入っていないカタログアイテムが指定されていないか確認
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
+        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
         if (!basket.IsInCatalogItem(catalogItemId))
         {
             this.logger.LogWarning(WebMessages.CatalogItemIdDoesNotExistInBasket, catalogItemId);
             return this.NotFound();
         }
 
-        await this.basketApplicationService.SetQuantities(basket.Id, new() { { catalogItemId, 0 } });
+        await this.basketApplicationService.SetQuantitiesAsync(basket.Id, new() { { catalogItemId, 0 } });
         return this.NoContent();
     }
 

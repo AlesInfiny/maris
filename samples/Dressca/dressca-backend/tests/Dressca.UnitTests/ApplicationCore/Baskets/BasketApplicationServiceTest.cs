@@ -28,7 +28,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repo, logger);
 
         // Act
-        var action = () => service.GetOrCreateBasketForUser(userId!);
+        var action = () => service.GetOrCreateBasketForUserAsync(userId!);
 
         // Assert
         await Assert.ThrowsAsync<ArgumentException>(action);
@@ -47,7 +47,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        var basket = await service.GetOrCreateBasketForUser(dummyId);
+        var basket = await service.GetOrCreateBasketForUserAsync(dummyId);
 
         // Assert
         repoMock.Verify(r => r.GetWithBasketItemsAsync(dummyId, AnyToken), Times.Once);
@@ -66,7 +66,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        var basket = await service.GetOrCreateBasketForUser(userId);
+        var basket = await service.GetOrCreateBasketForUserAsync(userId);
 
         // Assert
         repoMock.Verify(
@@ -93,7 +93,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        var actual = await service.GetOrCreateBasketForUser(userId);
+        var actual = await service.GetOrCreateBasketForUserAsync(userId);
 
         // Assert
         Assert.Same(newBasket, actual);
@@ -109,7 +109,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        var basket = await service.GetOrCreateBasketForUser(userId);
+        var basket = await service.GetOrCreateBasketForUserAsync(userId);
 
         // Assert
         repoMock.Verify(r => r.GetWithBasketItemsAsync(userId, AnyToken), Times.Once);
@@ -129,7 +129,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        _ = await service.GetOrCreateBasketForUser(userId);
+        _ = await service.GetOrCreateBasketForUserAsync(userId);
 
         // Assert
         repoMock.Verify(r => r.AddAsync(It.IsAny<Basket>(), AnyToken), Times.Never);
@@ -151,7 +151,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        var actual = await service.GetOrCreateBasketForUser(userId);
+        var actual = await service.GetOrCreateBasketForUserAsync(userId);
 
         // Assert
         Assert.Equal(userId, actual.BuyerId);
@@ -175,7 +175,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        await service.AddItemToBasket(basketId, 1, 1000, 1);
+        await service.AddItemToBasketAsync(basketId, 1, 1000, 1);
 
         // Assert
         repoMock.Verify(r => r.GetAsync(basketId, AnyToken), Times.Once);
@@ -195,7 +195,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        await service.AddItemToBasket(basketId, 1, 1000, 1);
+        await service.AddItemToBasketAsync(basketId, 1, 1000, 1);
 
         // Assert
         repoMock.Verify(
@@ -212,7 +212,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repo, logger);
 
         // Act
-        var action = () => service.AddItemToBasket(1, 1, 1000, 1);
+        var action = () => service.AddItemToBasketAsync(1, 1, 1000, 1);
 
         // Assert
         await Assert.ThrowsAsync<BasketNotFoundException>(action);
@@ -234,7 +234,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        await service.AddItemToBasket(basketId, catalogItemId, 1000, -1);
+        await service.AddItemToBasketAsync(basketId, catalogItemId, 1000, -1);
 
         // Assert
         repoMock.Verify(
@@ -255,7 +255,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        await service.DeleteBasket(basketId);
+        await service.DeleteBasketAsync(basketId);
 
         // Assert
         repoMock.Verify(r => r.GetWithBasketItemsAsync(basketId, AnyToken), Times.Once);
@@ -275,7 +275,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
-        await service.DeleteBasket(basketId);
+        await service.DeleteBasketAsync(basketId);
 
         // Assert
         repoMock.Verify(
@@ -292,7 +292,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repo, logger);
 
         // Act
-        var action = () => service.DeleteBasket(1);
+        var action = () => service.DeleteBasketAsync(1);
 
         // Assert
         await Assert.ThrowsAsync<BasketNotFoundException>(action);
@@ -307,7 +307,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repo, logger);
 
         // Act
-        var action = () => service.SetQuantities(1, null!);
+        var action = () => service.SetQuantitiesAsync(1, null!);
 
         // Assert
         await Assert.ThrowsAsync<ArgumentNullException>("quantities", action);
@@ -324,7 +324,7 @@ public class BasketApplicationServiceTest
         var quantities = new Dictionary<long, int> { { 1L, 1 }, { 2L, 1 }, { 3L, 1 } };
 
         // Act
-        var action = () => service.SetQuantities(1, quantities);
+        var action = () => service.SetQuantitiesAsync(1, quantities);
 
         // Assert
         await Assert.ThrowsAsync<BasketNotFoundException>(action);
@@ -346,7 +346,7 @@ public class BasketApplicationServiceTest
         var quantities = new Dictionary<long, int> { { 1L, 5 } };
 
         // Act
-        await service.SetQuantities(basketId, quantities);
+        await service.SetQuantitiesAsync(basketId, quantities);
 
         // Assert
         repoMock.Verify(
@@ -370,7 +370,7 @@ public class BasketApplicationServiceTest
         var quantities = new Dictionary<long, int> { { 1L, 5 } };
 
         // Act
-        await service.SetQuantities(basketId, quantities);
+        await service.SetQuantitiesAsync(basketId, quantities);
 
         // Assert
         repoMock.Verify(
@@ -397,7 +397,7 @@ public class BasketApplicationServiceTest
         var quantities = new Dictionary<long, int> { { 100L, newQuantity } };
 
         // Act
-        await service.SetQuantities(basketId, quantities);
+        await service.SetQuantitiesAsync(basketId, quantities);
 
         // Assert
         repoMock.Verify(

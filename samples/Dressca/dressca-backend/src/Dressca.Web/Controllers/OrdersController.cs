@@ -57,7 +57,7 @@ public class OrdersController : ControllerBase
     [HttpGet("{orderId:long}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Get(long orderId)
+    public async Task<IActionResult> GetByIdAsync(long orderId)
     {
         var buyerId = this.HttpContext.GetBuyerId();
         try
@@ -85,10 +85,10 @@ public class OrdersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-    public async Task<IActionResult> PostOrder(PostOrderInputDto postOrderInput)
+    public async Task<IActionResult> PostOrderAsync(PostOrderInputDto postOrderInput)
     {
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUser(buyerId);
+        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
 
         var address = new Address(
             postalCode: postOrderInput.PostalCode,
@@ -99,7 +99,8 @@ public class OrdersController : ControllerBase
         var order = await this.orderApplicationService.CreateOrderAsync(basket.Id, shipToAddress);
 
         // 買い物かごを削除
-        await this.basketApplicationService.DeleteBasket(basket.Id);
-        return this.CreatedAtAction(nameof(this.Get), new { orderId = order.Id }, null);
+        await this.basketApplicationService.DeleteBasketAsync(basket.Id);
+        var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetByIdAsync));
+        return this.CreatedAtAction(actionName, new { orderId = order.Id }, null);
     }
 }

@@ -32,12 +32,13 @@ public class BasketApplicationService
     /// <param name="catalogItemId">カタログアイテム Id 。</param>
     /// <param name="price">単価。</param>
     /// <param name="quantity">数量。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>非同期処理を表すタスク。</returns>
     /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
-    public async Task AddItemToBasket(long basketId, long catalogItemId, decimal price, int quantity = 1)
+    public async Task AddItemToBasketAsync(long basketId, long catalogItemId, decimal price, int quantity = 1, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_AddItemToBasketStart, basketId, catalogItemId, quantity);
-        var basket = await this.basketRepository.GetAsync(basketId);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_AddItemToBasketAsyncStart, basketId, catalogItemId, quantity);
+        var basket = await this.basketRepository.GetAsync(basketId, cancellationToken);
         if (basket is null)
         {
             throw new BasketNotFoundException(basketId);
@@ -45,27 +46,28 @@ public class BasketApplicationService
 
         basket.AddItem(catalogItemId, price, quantity);
         basket.RemoveEmptyItems();
-        await this.basketRepository.UpdateAsync(basket);
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_AddItemToBasketEnd, basketId, catalogItemId, quantity);
+        await this.basketRepository.UpdateAsync(basket, cancellationToken);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_AddItemToBasketAsyncEnd, basketId, catalogItemId, quantity);
     }
 
     /// <summary>
     ///  買い物かごを削除します。
     /// </summary>
     /// <param name="basketId">買い物かご Id 。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>非同期処理を表すタスク。</returns>
     /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
-    public async Task DeleteBasket(long basketId)
+    public async Task DeleteBasketAsync(long basketId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_DeleteBasketStart, basketId);
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_DeleteBasketAsyncStart, basketId);
+        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
         if (basket is null)
         {
             throw new BasketNotFoundException(basketId);
         }
 
-        await this.basketRepository.RemoveAsync(basket);
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_DeleteBasketEnd, basketId);
+        await this.basketRepository.RemoveAsync(basket, cancellationToken);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_DeleteBasketAsyncEnd, basketId);
     }
 
     /// <summary>
@@ -73,15 +75,16 @@ public class BasketApplicationService
     /// </summary>
     /// <param name="basketId">買い物かご Id 。</param>
     /// <param name="quantities">カタログアイテム Id ごとの数量。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>非同期処理を表すタスク。</returns>
     /// <exception cref="ArgumentNullException"><paramref name="quantities"/> が <see langword="null"/> です。</exception>
     /// <exception cref="InvalidOperationException">買い物かご内のいずれかのアイテムの数量が 0 未満になる場合。</exception>
     /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
-    public async Task SetQuantities(long basketId, Dictionary<long, int> quantities)
+    public async Task SetQuantitiesAsync(long basketId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantitiesStart, basketId);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantitiesAsyncStart, basketId);
         ArgumentNullException.ThrowIfNull(quantities);
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId);
+        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
         if (basket is null)
         {
             throw new BasketNotFoundException(basketId);
@@ -91,14 +94,14 @@ public class BasketApplicationService
         {
             if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
             {
-                this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantities, item.CatalogItemId, quantity);
+                this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantity, item.CatalogItemId, quantity);
                 item.SetQuantity(quantity);
             }
         }
 
         basket.RemoveEmptyItems();
-        await this.basketRepository.UpdateAsync(basket);
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantitiesEnd, basketId);
+        await this.basketRepository.UpdateAsync(basket, cancellationToken);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantitiesAsyncEnd, basketId);
     }
 
     /// <summary>
@@ -106,25 +109,26 @@ public class BasketApplicationService
     ///  対応する買い物かご情報がない場合は、作成します。
     /// </summary>
     /// <param name="userId">ユーザー Id 。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
     /// <exception cref="ArgumentException"><paramref name="userId"/> が <see langword="null"/> または空白の場合.</exception>
-    public async Task<Basket> GetOrCreateBasketForUser(string userId)
+    public async Task<Basket> GetOrCreateBasketForUserAsync(string userId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserStart, userId);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserAsyncStart, userId);
         if (string.IsNullOrWhiteSpace(userId))
         {
             throw new ArgumentException(null, nameof(userId));
         }
 
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(userId);
+        var basket = await this.basketRepository.GetWithBasketItemsAsync(userId, cancellationToken);
         if (basket is null)
         {
             this.logger.LogDebug(ApplicationCoreMessages.CreateNewBasket_UserBasketNotFound, userId);
             basket = new Basket(userId);
-            return await this.basketRepository.AddAsync(basket);
+            return await this.basketRepository.AddAsync(basket, cancellationToken);
         }
 
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserEnd, userId);
+        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserAsyncEnd, userId);
         return basket;
     }
 }

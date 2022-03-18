@@ -47,10 +47,10 @@ public class CatalogItemsController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(PagedList<CatalogItemDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Find([FromQuery] FindCatalogItemsQuery query)
+    public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
         var (catalogItems, totalCount) =
-            await this.service.GetCatalogAsync(
+            await this.service.GetCatalogItemsAsync(
                 skip: query.GetSkipCount(),
                 take: query.PageSize,
                 brandId: query.BrandId,
