@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dressca.Web.Resources {
+namespace Dressca.Store.Assets.StaticFiles.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Dressca.Web.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class WebMessages {
+    internal class StoreAssetsStaticFilesMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal WebMessages() {
+        internal StoreAssetsStaticFilesMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Dressca.Web.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Web.Resources.WebMessages", typeof(WebMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Store.Assets.StaticFiles.Resources.StoreAssetsStaticFilesMessages", typeof(StoreAssetsStaticFilesMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace Dressca.Web.Resources {
         }
         
         /// <summary>
-        ///   アセットタイプ: {0} を Content-Type に変換できません。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{0} のファイルストリームが見つかりません。ファイルパスは {1} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CannotConvertAssetTypeToContentType {
+        internal static string FileNotFound {
             get {
-                return ResourceManager.GetString("CannotConvertAssetTypeToContentType", resourceCulture);
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   リクエストに指定されたカタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{0} のファイルストリームを取得しました。ファイルパスは {1} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogItemIdDoesNotExistInBasket {
+        internal static string StaticFileAssetStore_GetStreamEnd {
             get {
-                return ResourceManager.GetString("CatalogItemIdDoesNotExistInBasket", resourceCulture);
+                return ResourceManager.GetString("StaticFileAssetStore_GetStreamEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   アセットコード:{0} のストリームを取得します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StaticFileAssetStore_GetStreamStart {
+            get {
+                return ResourceManager.GetString("StaticFileAssetStore_GetStreamStart", resourceCulture);
             }
         }
     }

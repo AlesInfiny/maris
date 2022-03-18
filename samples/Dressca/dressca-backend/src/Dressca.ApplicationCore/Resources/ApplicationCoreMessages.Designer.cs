@@ -79,6 +79,33 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   アセットコード:{0} のアセット情報を取得しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AssetApplicationService_GetAssetStreamInfoEnd {
+            get {
+                return ResourceManager.GetString("AssetApplicationService_GetAssetStreamInfoEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   アセットコード:{0} のアセット情報を取得します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AssetApplicationService_GetAssetStreamInfoStart {
+            get {
+                return ResourceManager.GetString("AssetApplicationService_GetAssetStreamInfoStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   アセットコード: {0} のアセットが見つかりませんでした。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AssetNotFound {
+            get {
+                return ResourceManager.GetString("AssetNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string BasketApplicationService_AddItemToBasketEnd {
@@ -264,6 +291,15 @@ namespace Dressca.ApplicationCore.Resources {
         internal static string CreateNewBasket_UserBasketNotFound {
             get {
                 return ResourceManager.GetString("CreateNewBasket_UserBasketNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   アセットタイプ: {0} はサポートされていません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string InvalidAssetType {
+            get {
+                return ResourceManager.GetString("InvalidAssetType", resourceCulture);
             }
         }
         

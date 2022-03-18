@@ -8,6 +8,7 @@ namespace Dressca.ApplicationCore.Catalog;
 /// </summary>
 public class CatalogItem
 {
+    private readonly List<CatalogItemAsset> assets = new();
     private CatalogCategory? catalogCategory;
     private CatalogBrand? catalogBrand;
     private string name;
@@ -201,4 +202,9 @@ public class CatalogItem
         get => this.catalogBrand ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.CatalogBrand)));
         private set => this.catalogBrand = value;
     }
+
+    /// <summary>
+    ///  カタログアイテムのリストを取得します。
+    /// </summary>
+    public IReadOnlyCollection<CatalogItemAsset> Assets => this.assets.AsReadOnly();
 }

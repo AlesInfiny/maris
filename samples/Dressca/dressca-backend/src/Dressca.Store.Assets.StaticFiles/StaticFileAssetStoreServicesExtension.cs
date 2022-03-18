@@ -1,19 +1,16 @@
 ﻿using Dressca.ApplicationCore.Assets;
-using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.Catalog;
-using Dressca.ApplicationCore.Ordering;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dressca.ApplicationCore;
+namespace Dressca.Store.Assets.StaticFiles;
 
 /// <summary>
 ///  <see cref="IServiceCollection" /> の拡張メソッドを提供します。
 ///  このプロジェクトの各機能を利用するためのスタートアップ処理が含まれています。
 /// </summary>
-public static class ApplicationCoreServicesExtensions
+public static class StaticFileAssetStoreServicesExtension
 {
     /// <summary>
-    ///  Dressca.ApplicationCore の各機能を利用するために必要な一連のスタートアップ処理を実行します。
+    ///  Dressca.Store.Assets.StaticFiles の各機能を利用するために必要な一連のスタートアップ処理を実行します。
     /// </summary>
     /// <param name="services">サービスコレクション。</param>
     /// <returns>構築済みのサービスコレクション。</returns>
@@ -22,18 +19,12 @@ public static class ApplicationCoreServicesExtensions
     ///   <item><paramref name="services"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    public static IServiceCollection AddDresscaApplicationCore(this IServiceCollection services)
+    public static IServiceCollection AddStaticFileAssetStore(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        // Domain Services
-        services.AddTransient<CatalogDomainService>();
-
-        // Application Services
-        services.AddTransient<BasketApplicationService>();
-        services.AddTransient<CatalogApplicationService>();
-        services.AddTransient<OrderApplicationService>();
-        services.AddTransient<AssetApplicationService>();
+        // Stores
+        services.AddTransient<IAssetStore, StaticFileAssetStore>();
 
         return services;
     }

@@ -28,6 +28,7 @@ public class CatalogItemMapper : IObjectMapper<CatalogItem, CatalogItemDto>
             Name = value.Name,
             Price = value.Price,
             ProductCode = value.ProductCode,
+            AssetCodes = value.Assets.Select(asset => asset.AssetCode).ToList(),
         };
     }
 }

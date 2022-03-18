@@ -35,6 +35,7 @@ internal class EfCatalogRepository : ICatalogRepository
     {
         IQueryable<CatalogItem> query = this.dbContext.CatalogItems
             .Where(specification)
+            .Include(catalogItem => catalogItem.Assets)
             .OrderBy(item => item.Id);
 
         query = skip > 0 ? query.Skip(skip) : query;

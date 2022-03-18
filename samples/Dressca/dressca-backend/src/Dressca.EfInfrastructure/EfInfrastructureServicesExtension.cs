@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Baskets;
+﻿using Dressca.ApplicationCore.Assets;
+using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.EfInfrastructure.Resources;
@@ -59,6 +60,7 @@ public static class EfInfrastructureServicesExtension
         services.AddTransient<ICatalogCategoryRepository, EfCatalogCategoryRepository>();
         services.AddTransient<ICatalogRepository, EfCatalogRepository>();
         services.AddTransient<IOrderRepository, EfOrderRepository>();
+        services.AddTransient<IAssetRepository, EfAssetRepository>();
 
         return services;
     }

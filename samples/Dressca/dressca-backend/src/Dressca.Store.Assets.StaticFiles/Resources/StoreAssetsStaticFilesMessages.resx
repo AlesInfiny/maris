@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CannotConvertAssetTypeToContentType" xml:space="preserve">
-    <value>アセットタイプ: {0} を Content-Type に変換できません。</value>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>アセットコード:{0} のファイルストリームが見つかりません。ファイルパスは {1} です。</value>
   </data>
-  <data name="CatalogItemIdDoesNotExistInBasket" xml:space="preserve">
-    <value>リクエストに指定されたカタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。</value>
+  <data name="StaticFileAssetStore_GetStreamEnd" xml:space="preserve">
+    <value>アセットコード:{0} のファイルストリームを取得しました。ファイルパスは {1} です。</value>
+  </data>
+  <data name="StaticFileAssetStore_GetStreamStart" xml:space="preserve">
+    <value>アセットコード:{0} のストリームを取得します。</value>
   </data>
 </root>
