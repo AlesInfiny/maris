@@ -19,27 +19,6 @@ public class BasketNotFoundException : Exception
     }
 
     /// <summary>
-    ///  メッセージを指定して
-    ///  <see cref="BasketNotFoundException"/> クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    /// <param name="message">メッセージ。</param>
-    public BasketNotFoundException(string message)
-        : base(message)
-    {
-    }
-
-    /// <summary>
-    ///  メッセージと内部例外を指定して
-    ///  <see cref="BasketNotFoundException"/> クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    /// <param name="message">メッセージ。</param>
-    /// <param name="innerException">内部例外。</param>
-    public BasketNotFoundException(string message, Exception innerException)
-        : base(message, innerException)
-    {
-    }
-
-    /// <summary>
     ///  <see cref="BasketNotFoundException"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="info">オブジェクトをシリアライズまたはデシリアライズするために必要なすべてのデータを格納するオブジェクト。</param>

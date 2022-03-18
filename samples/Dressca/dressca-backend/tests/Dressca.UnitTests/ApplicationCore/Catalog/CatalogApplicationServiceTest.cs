@@ -30,7 +30,7 @@ public class CatalogApplicationServiceTest
         const int take = 10;
 
         // Act
-        _ = await service.GetCatalogAsync(skip, take, 1, 1);
+        _ = await service.GetCatalogItemsAsync(skip, take, 1, 1);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -49,7 +49,7 @@ public class CatalogApplicationServiceTest
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, logger);
 
         // Act
-        _ = await service.GetCatalogAsync(0, 10, 1, 1);
+        _ = await service.GetCatalogItemsAsync(0, 10, 1, 1);
 
         // Assert
         catalogRepositoryMock.Verify(

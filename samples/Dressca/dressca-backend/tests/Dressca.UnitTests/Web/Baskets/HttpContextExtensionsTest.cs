@@ -1,7 +1,7 @@
-﻿using Dressca.Web.BuyerIdExtensions;
+﻿using Dressca.Web.Baskets;
 using Microsoft.AspNetCore.Http;
 
-namespace Dressca.UnitTests.Web.BuyerIdExtensions;
+namespace Dressca.UnitTests.Web.Baskets;
 
 public class HttpContextExtensionsTest
 {

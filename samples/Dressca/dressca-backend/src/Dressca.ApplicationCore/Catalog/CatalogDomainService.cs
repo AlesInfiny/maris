@@ -27,7 +27,7 @@ public class CatalogDomainService
         ILogger<CatalogDomainService> logger)
     {
         this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(CatalogDomainService.logger));
+        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     /// <summary>

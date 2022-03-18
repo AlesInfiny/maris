@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace Dressca.SystemCommon;
 
@@ -11,15 +12,18 @@ public static class ObjectExtensions
     ///  指定した値が <see langword="null"/> であるか検証し、
     ///  <see langword="null"/> である場合は例外をスローします。
     /// </summary>
-    /// <param name="obj"><see langword="null"/> か検査するオブジェクト。</param>
+    /// <param name="argument"><see langword="null"/> か検査するオブジェクト。</param>
+    /// <param name="paramName">パラメーターの名前。</param>
     /// <exception cref="ArgumentNullException">
-    ///  <paramref name="obj"/> が <see langword="null"/> です。
+    ///  <paramref name="argument"/> が <see langword="null"/> です。
     /// </exception>
-    public static void ThrowIfNull([NotNull] this object? obj)
+    public static void ThrowIfNull(
+        [NotNull] this object? argument,
+        [CallerArgumentExpression("argument")] string? paramName = null)
     {
-        if (obj is null)
+        if (argument is null)
         {
-            throw new ArgumentNullException(nameof(obj));
+            throw new ArgumentNullException(paramName);
         }
     }
 }

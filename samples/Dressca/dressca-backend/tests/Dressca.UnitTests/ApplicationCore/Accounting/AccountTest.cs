@@ -5,6 +5,19 @@ namespace Dressca.UnitTests.ApplicationCore.Accounting;
 public class AccountTest
 {
     [Fact]
+    public void 会計アイテムがnullの場合例外()
+    {
+        // Arrange
+        IEnumerable<AccountItem>? accountItems = null;
+
+        // Act
+        var action = () => new Account(accountItems!);
+
+        // Assert
+        Assert.Throws<ArgumentNullException>("accountItems", action);
+    }
+
+    [Fact]
     public void 会計アイテムがないとき会計アイムの合計金額は0円()
     {
         // Arrange

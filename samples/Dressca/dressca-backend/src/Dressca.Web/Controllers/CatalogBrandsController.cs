@@ -42,12 +42,11 @@ public class CatalogBrandsController : ControllerBase
     /// <response code="200">成功。</response>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<CatalogBrandDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> List()
+    public async Task<IActionResult> GetCatalogBrandsAsync()
     {
         var brands = await this.service.GetBrandsAsync();
-        var returnValues = this.Ok(brands
+        return this.Ok(brands
             .Select(brand => this.mapper.Convert(brand))
             .ToArray());
-        return this.Ok(returnValues);
     }
 }

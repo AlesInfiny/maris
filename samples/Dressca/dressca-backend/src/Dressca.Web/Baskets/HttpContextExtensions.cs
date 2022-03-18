@@ -1,4 +1,4 @@
-﻿namespace Dressca.Web.BuyerIdExtensions;
+﻿namespace Dressca.Web.Baskets;
 
 /// <summary>
 ///  BuyerId の値を入出力できる <see cref="HttpContext"/> の拡張機能を提供します。

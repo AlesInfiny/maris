@@ -6,7 +6,7 @@ namespace Dressca.Web.Assets;
 /// <summary>
 ///  <see cref="Asset"/> の拡張メソッドを提供します。
 /// </summary>
-internal static class AssetExtensions
+public static class AssetExtensions
 {
     /// <summary>
     ///  アセットタイプから Content-Type に変換します。
@@ -19,7 +19,7 @@ internal static class AssetExtensions
     /// <exception cref="NotSupportedException">
     ///  指定したアセットのアセットタイプは Content-Type に変換できません。
     /// </exception>
-    internal static string GetContentType(this Asset asset)
+    public static string GetContentType(this Asset asset)
     {
         ArgumentNullException.ThrowIfNull(asset);
         return asset.AssetType switch
