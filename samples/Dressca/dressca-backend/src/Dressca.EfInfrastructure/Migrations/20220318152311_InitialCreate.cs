@@ -10,6 +10,20 @@ namespace Dressca.EfInfrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Assets",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AssetCode = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    AssetType = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Assets", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Baskets",
                 columns: table => new
                 {
@@ -60,7 +74,12 @@ namespace Dressca.EfInfrastructure.Migrations
                     ShipToPostalCode = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
                     ShipToTodofuken = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
                     ShipToShikuchoson = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
-                    ShipToAzanaAndOthers = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
+                    ShipToAzanaAndOthers = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ConsumptionTaxRate = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
+                    TotalItemsPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
+                    DeliveryCharge = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
+                    ConsumptionTax = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +104,8 @@ namespace Dressca.EfInfrastructure.Migrations
                         name: "FK_BasketItems_Baskets",
                         column: x => x.BasketId,
                         principalTable: "Baskets",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,12 +128,14 @@ namespace Dressca.EfInfrastructure.Migrations
                         name: "FK_CatalogItems_CatalogBrands",
                         column: x => x.CatalogBrandId,
                         principalTable: "CatalogBrands",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CatalogItems_CatalogCategories",
                         column: x => x.CatalogCategoryId,
                         principalTable: "CatalogCategories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -136,7 +158,49 @@ namespace Dressca.EfInfrastructure.Migrations
                         name: "FK_OrderItems_Orders",
                         column: x => x.OrderId,
                         principalTable: "Orders",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CatalogItemAssets",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AssetCode = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    CatalogItemId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CatalogItemAssets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CatalogItemAssets_CatalogItems",
+                        column: x => x.CatalogItemId,
+                        principalTable: "CatalogItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Assets",
+                columns: new[] { "Id", "AssetCode", "AssetType" },
+                values: new object[,]
+                {
+                    { 1L, "b52dc7f712d94ca5812dd995bf926c04", "png" },
+                    { 2L, "80bc8e167ccb4543b2f9d51913073492", "png" },
+                    { 3L, "05d38fad5693422c8a27dd5b14070ec8", "png" },
+                    { 4L, "45c22ba3da064391baac91341067ffe9", "png" },
+                    { 5L, "4aed07c4ed5d45a5b97f11acedfbb601", "png" },
+                    { 6L, "082b37439ecc44919626ba00fc60ee85", "png" },
+                    { 7L, "f5f89954281747fa878129c29e1e0f83", "png" },
+                    { 8L, "a8291ef2e8e14869a7048e272915f33c", "png" },
+                    { 9L, "66237018c769478a90037bd877f5fba1", "png" },
+                    { 10L, "d136d4c81b86478990984dcafbf08244", "png" },
+                    { 11L, "47183f32f6584d7fb661f9216e11318b", "png" },
+                    { 12L, "cf151206efd344e1b86854f4aa49fdef", "png" },
+                    { 13L, "ab2e78eb7fe3408aadbf1e17a9945a8c", "png" },
+                    { 14L, "0e557e96bc054f10bc91c27405a83e85", "png" }
                 });
 
             migrationBuilder.InsertData(
@@ -164,23 +228,51 @@ namespace Dressca.EfInfrastructure.Migrations
                 columns: new[] { "Id", "CatalogBrandId", "CatalogCategoryId", "Description", "Name", "Price", "ProductCode" },
                 values: new object[,]
                 {
-                    { 1L, 3L, 1L, "定番の無地ロングTシャツです。", "クルーネック Tシャツ - グレー", 1980m, "C000000001" },
-                    { 2L, 2L, 1L, "裏起毛で温かいパーカーです。", "無地 パーカー", 5800m, "C000000002" },
-                    { 3L, 1L, 1L, "ウール生地のテーラードジャケットです。セットアップだけでなく単体でも使いやすい商品となっています。", "テーラードジャケット", 49800m, "C000000003" },
-                    { 4L, 2L, 1L, "ファー襟付きのデニムジャケットです。", "デニムジャケット", 19800m, "C000000004" },
-                    { 5L, 3L, 2L, "シンプルなデザインのトートバッグです。", "トートバッグ", 18800m, "B000000001" },
-                    { 6L, 2L, 2L, "軽くしなやかなレザーを使用しています。", "ショルダーバッグ", 38000m, "B000000002" },
-                    { 7L, 3L, 2L, "外側は高級感のある牛革、内側に丈夫で傷つきにくい豚革を採用した細身で持ち運びやすいビジネスバッグです。", "ビジネスバッグ", 24800m, "B000000003" },
-                    { 8L, 1L, 2L, "丁寧に編み込まれた馬革ハンドバッグです。落ち着いた色調で、オールシーズン使いやすくなっています。", "編み込みトートバッグ", 58800m, "B000000004" },
-                    { 9L, 1L, 2L, "卓越した素材と緻密な縫製作業によって、デザインが完璧に表現されています。", "ハンドバッグ", 258000m, "B000000005" },
-                    { 10L, 2L, 3L, "定番のハイカットスニーカーです。", "ハイカットスニーカー - ブラック", 12800m, "S000000001" },
+                    { 1L, 3L, 1L, "定番の無地ロングTシャツです。", "クルーネック Tシャツ - ブラック", 1980m, "C000000001" },
+                    { 2L, 2L, 1L, "暖かいのに着膨れしない起毛デニムです。", "裏起毛 スキニーデニム", 4800m, "C000000002" },
+                    { 3L, 1L, 1L, "あたたかく肌ざわりも良いウール100%のロングコートです。", "ウールコート", 49800m, "C000000003" },
+                    { 4L, 2L, 1L, "コットン100%の柔らかい着心地で、春先から夏、秋口まで万能に使いやすいです。", "無地 ボタンダウンシャツ", 2800m, "C000000004" },
+                    { 5L, 3L, 2L, "コンパクトサイズのバッグですが収納力は抜群です", "レザーハンドバッグ", 18800m, "B000000001" },
+                    { 6L, 2L, 2L, "エイジング加工したレザーを使用しています。", "ショルダーバッグ", 38000m, "B000000002" },
+                    { 7L, 3L, 2L, "春の季節にぴったりのトートバッグです。インナーポーチまたは単体でも使用可能なポーチ付。", "トートバッグ ポーチ付き", 24800m, "B000000003" },
+                    { 8L, 1L, 2L, "さらりと気軽に纏える、キュートなミニサイズショルダー。", "ショルダーバッグ", 2800m, "B000000004" },
+                    { 9L, 1L, 2L, "エレガントな雰囲気を放つキルティングデザインです。", "レザー チェーンショルダーバッグ", 258000m, "B000000005" },
+                    { 10L, 2L, 3L, "柔らかいソールは快適な履き心地で、ランニングに最適です。", "ランニングシューズ - ブルー", 12800m, "S000000001" },
                     { 11L, 1L, 3L, "イタリアの職人が丁寧に手作業で作り上げた一品です。", "メダリオン ストレートチップ ドレスシューズ", 23800m, "S000000002" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "CatalogItemAssets",
+                columns: new[] { "Id", "AssetCode", "CatalogItemId" },
+                values: new object[,]
+                {
+                    { 1L, "45c22ba3da064391baac91341067ffe9", 1L },
+                    { 2L, "4aed07c4ed5d45a5b97f11acedfbb601", 2L },
+                    { 3L, "082b37439ecc44919626ba00fc60ee85", 3L },
+                    { 4L, "f5f89954281747fa878129c29e1e0f83", 4L },
+                    { 5L, "a8291ef2e8e14869a7048e272915f33c", 5L },
+                    { 6L, "66237018c769478a90037bd877f5fba1", 6L },
+                    { 7L, "d136d4c81b86478990984dcafbf08244", 7L },
+                    { 8L, "47183f32f6584d7fb661f9216e11318b", 8L },
+                    { 9L, "cf151206efd344e1b86854f4aa49fdef", 9L },
+                    { 10L, "ab2e78eb7fe3408aadbf1e17a9945a8c", 10L },
+                    { 11L, "0e557e96bc054f10bc91c27405a83e85", 11L }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Assets_AssetCode",
+                table: "Assets",
+                column: "AssetCode");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BasketItems_BasketId",
                 table: "BasketItems",
                 column: "BasketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CatalogItemAssets_CatalogItemId",
+                table: "CatalogItemAssets",
+                column: "CatalogItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CatalogItems_CatalogBrandId",
@@ -206,10 +298,13 @@ namespace Dressca.EfInfrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Assets");
+
+            migrationBuilder.DropTable(
                 name: "BasketItems");
 
             migrationBuilder.DropTable(
-                name: "CatalogItems");
+                name: "CatalogItemAssets");
 
             migrationBuilder.DropTable(
                 name: "OrderItems");
@@ -218,13 +313,16 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "Baskets");
 
             migrationBuilder.DropTable(
+                name: "CatalogItems");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "CatalogBrands");
 
             migrationBuilder.DropTable(
                 name: "CatalogCategories");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
         }
     }
 }
