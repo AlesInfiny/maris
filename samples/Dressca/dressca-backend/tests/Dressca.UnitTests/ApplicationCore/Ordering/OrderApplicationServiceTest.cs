@@ -21,7 +21,7 @@ public class OrderApplicationServiceTest
     {
         // Arrange
         const long basketId = 1L;
-        const string buyerId = "user1";
+        var buyerId = Guid.NewGuid().ToString("D");
         var basket = new Basket(buyerId);
         basket.AddItem(10L, 1000m);
         var shipTo = CreateDefaultShipTo();
@@ -80,7 +80,7 @@ public class OrderApplicationServiceTest
     {
         // Arrange
         const long basketId = 3L;
-        const string buyerId = "user1";
+        string buyerId = Guid.NewGuid().ToString("D");
         var basket = new Basket(buyerId);
         var basketRepositoryMock = new Mock<IBasketRepository>();
         basketRepositoryMock
@@ -104,7 +104,7 @@ public class OrderApplicationServiceTest
     {
         // Arrange
         var orderId = 10L;
-        var buyerId = "user1";
+        var buyerId = Guid.NewGuid().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
         var order = new Order(buyerId, shipToAddress, orderItems);
@@ -129,7 +129,7 @@ public class OrderApplicationServiceTest
     {
         // Arrange
         var orderId = 10L;
-        var buyerId = "user1";
+        var buyerId = Guid.NewGuid().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
         var order = new Order(buyerId, shipToAddress, orderItems);
@@ -154,7 +154,7 @@ public class OrderApplicationServiceTest
     {
         // Arrange
         var orderId = 10L;
-        var buyerId = "user1";
+        var buyerId = Guid.NewGuid().ToString("D");
         var orderRepositoryMock = new Mock<IOrderRepository>();
         orderRepositoryMock
             .Setup(r => r.FindAsync(orderId, AnyToken))

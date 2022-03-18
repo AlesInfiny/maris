@@ -14,7 +14,7 @@ public class OrderTest
     public void 正しくインスタンス化できる()
     {
         // Arrange
-        const string buyerId = "0d06a95982f24e7b96438aa4c6329c31";
+        var buyerId = Guid.NewGuid().ToString("D");
 
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
@@ -47,7 +47,7 @@ public class OrderTest
     public void 住所は必須()
     {
         // Arrange
-        const string buyerId = "0d06a95982f24e7b96438aa4c6329c31";
+        var buyerId = Guid.NewGuid().ToString("D");
         var items = CreateDefaultOrderItems();
 
         // Act
@@ -62,7 +62,7 @@ public class OrderTest
     public void 注文アイテムは必須(List<OrderItem>? orderItems)
     {
         // Arrange
-        const string buyerId = "0d06a95982f24e7b96438aa4c6329c31";
+        var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
 
         // Act
@@ -77,7 +77,7 @@ public class OrderTest
     public void 商品の税抜き合計金額が正しく計算できる()
     {
         // Arrange
-        const string buyerId = "0d06a95982f24e7b96438aa4c6329c31";
+        var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(buyerId, shipTo, items);
@@ -93,7 +93,7 @@ public class OrderTest
     public void 商品の送料が正しく計算できる()
     {
         // Arrange
-        const string buyerId = "0d06a95982f24e7b96438aa4c6329c31";
+        var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(buyerId, shipTo, items);
@@ -109,7 +109,7 @@ public class OrderTest
     public void 商品の消費税額が正しく計算できる()
     {
         // Arrange
-        const string buyerId = "0d06a95982f24e7b96438aa4c6329c31";
+        var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(buyerId, shipTo, items);
@@ -125,7 +125,7 @@ public class OrderTest
     public void 商品の税込み合計金額が正しく計算できる()
     {
         // Arrange
-        const string buyerId = "0d06a95982f24e7b96438aa4c6329c31";
+        var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(buyerId, shipTo, items);
