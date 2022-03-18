@@ -57,3 +57,8 @@ npm run test:e2e # or `npm run test:e2e:ci` for headless testing
 ```sh
 npm run lint
 ```
+
+## Credits
+
+- favicon: <https://sozai.cman.jp/>
+- content: <https://www.canva.com/>
