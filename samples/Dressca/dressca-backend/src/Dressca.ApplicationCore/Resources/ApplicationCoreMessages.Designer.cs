@@ -250,7 +250,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   指定されたカタログアイテム ID :[{0}] のカタログアイテムがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
+        ///   指定されたカタログアイテム ID: [{0}] のカタログアイテムがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogItemIdDoesNotExistInRepository {
             get {

@@ -181,7 +181,7 @@
     <value>カタログカテゴリ ID は 0 以下にできません。</value>
   </data>
   <data name="CatalogItemIdDoesNotExistInRepository" xml:space="preserve">
-    <value>指定されたカタログアイテム ID :[{0}] のカタログアイテムがリポジトリに存在しません。</value>
+    <value>指定されたカタログアイテム ID: [{0}] のカタログアイテムがリポジトリに存在しません。</value>
   </data>
   <data name="CatalogItemIdMustBePositive" xml:space="preserve">
     <value>カタログアイテム ID は 0 以下にできません。</value>
