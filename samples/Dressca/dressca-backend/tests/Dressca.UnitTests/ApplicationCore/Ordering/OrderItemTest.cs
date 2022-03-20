@@ -35,4 +35,45 @@ public class OrderItemTest
         var ex = Assert.Throws<InvalidOperationException>(action);
         Assert.Equal("Order プロパティが初期化されていません。", ex.Message);
     }
+
+    [Fact]
+    public void 注文アイテムアセットにnullを追加しようとすると例外()
+    {
+        // Arrange
+        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
+        decimal unitPrice = 1000m;
+        int quantity = 1;
+        var orderItem = new OrderItem(itemOrdered!, unitPrice, quantity);
+        IEnumerable<OrderItemAsset>? orderItemAssets = null;
+
+        // Act
+        var action = () => orderItem.AddAssets(orderItemAssets!);
+
+        // Assert
+        Assert.Throws<ArgumentNullException>("orderItemAssets", action);
+    }
+
+    [Fact]
+    public void 注文アイテムアセットに追加した情報が取得できる()
+    {
+        // Arrange
+        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
+        decimal unitPrice = 1000m;
+        int quantity = 1;
+        var orderItem = new OrderItem(itemOrdered!, unitPrice, quantity);
+        var orderItemAssets = new List<OrderItemAsset>
+        {
+            new("asset-code-1", orderItem.Id),
+            new("asset-code-2", orderItem.Id),
+        };
+
+        // Act
+        orderItem.AddAssets(orderItemAssets);
+
+        // Assert
+        Assert.Collection(
+            orderItem.Assets,
+            itemAsset => Assert.Equal("asset-code-1", itemAsset.AssetCode),
+            itemAsset => Assert.Equal("asset-code-2", itemAsset.AssetCode));
+    }
 }
