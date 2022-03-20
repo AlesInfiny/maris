@@ -35,6 +35,7 @@ internal class EfOrderRepository : IOrderRepository
         return this.dbContext.Orders
             .Where(order => order.Id == id)
             .Include(order => order.OrderItems)
+                .ThenInclude(orderItem => orderItem.Assets)
             .FirstOrDefaultAsync(cancellationToken);
     }
 }

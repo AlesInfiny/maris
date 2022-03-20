@@ -53,6 +53,7 @@ public class OrderMapper : IObjectMapper<Order, OrderDto>
                     Id = orderItem.ItemOrdered.CatalogItemId,
                     Name = orderItem.ItemOrdered.ProductName,
                     ProductCode = orderItem.ItemOrdered.ProductCode,
+                    AssetCodes = orderItem.Assets.Select(asset => asset.AssetCode).ToList(),
                 },
             };
         }
