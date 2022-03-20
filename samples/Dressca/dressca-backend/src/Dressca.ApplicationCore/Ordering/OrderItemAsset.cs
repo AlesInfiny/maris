@@ -1,37 +1,37 @@
 ﻿using Dressca.ApplicationCore.Resources;
 
-namespace Dressca.ApplicationCore.Catalog;
+namespace Dressca.ApplicationCore.Ordering;
 
 /// <summary>
-///  カタログアイテムアセットのエンティティです。
+///  注文アイテムアセットのエンティティです。
 /// </summary>
-public class CatalogItemAsset
+public class OrderItemAsset
 {
-    private CatalogItem? catalogItem;
+    private OrderItem? orderItem;
     private string? assetCode;
 
     /// <summary>
-    ///  <see cref="CatalogItemAsset"/> クラスの新しいインスタンスを初期化します。
+    ///  <see cref="OrderItemAsset"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="assetCode">アセットコード。</param>
-    /// <param name="catalogItemId">カタログアイテム Id 。</param>
+    /// <param name="orderItemId">注文アイテム Id 。</param>
     /// <exception cref="ArgumentException">
     ///  <list type="bullet">
     ///   <item><paramref name="assetCode"/> が <see langword="null"/> または空の文字列です。</item>
     ///  </list>
     /// </exception>
-    public CatalogItemAsset(string assetCode, long catalogItemId)
+    public OrderItemAsset(string assetCode, long orderItemId)
     {
         this.AssetCode = assetCode;
-        this.CatalogItemId = catalogItemId;
+        this.OrderItemId = orderItemId;
     }
 
-    private CatalogItemAsset()
+    private OrderItemAsset()
     {
     }
 
     /// <summary>
-    ///  カタログアイテムアセット Id を取得します。
+    ///  注文アイテムアセット Id を取得します。
     /// </summary>
     public long Id { get; init; }
 
@@ -55,17 +55,17 @@ public class CatalogItemAsset
     }
 
     /// <summary>
-    ///  カタログアイテム Id を取得します。
+    ///  注文アイテム Id を取得します。
     /// </summary>
-    public long CatalogItemId { get; private set; }
+    public long OrderItemId { get; private set; }
 
     /// <summary>
-    ///  カタログアイテムを取得します。
+    ///  注文アイテムを取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="CatalogItem"/> が設定されていません。</exception>
-    public CatalogItem CatalogItem
+    /// <exception cref="InvalidOperationException"><see cref="OrderItem"/> が設定されていません。</exception>
+    public OrderItem OrderItem
     {
-        get => this.catalogItem ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.CatalogItem)));
-        private set => this.catalogItem = value;
+        get => this.orderItem ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.OrderItem)));
+        private set => this.orderItem = value;
     }
 }

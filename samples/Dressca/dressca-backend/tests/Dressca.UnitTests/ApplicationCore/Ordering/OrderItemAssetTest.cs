@@ -1,8 +1,8 @@
-﻿using Dressca.ApplicationCore.Catalog;
+﻿using Dressca.ApplicationCore.Ordering;
 
-namespace Dressca.UnitTests.ApplicationCore.Catalog;
+namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
-public class CatalogItemAssetTest
+public class OrderItemAssetTest
 {
     [Theory]
     [InlineData(null)]
@@ -11,10 +11,10 @@ public class CatalogItemAssetTest
     public void アセットコードがnullまたは空の文字列の場合例外(string? assetCode)
     {
         // Arrange
-        var catalogItemId = 1L;
+        var orderItemId = 1L;
 
         // Act
-        var action = () => new CatalogItemAsset(assetCode!, catalogItemId);
+        var action = () => new OrderItemAsset(assetCode!, orderItemId);
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("value", action);
@@ -22,18 +22,18 @@ public class CatalogItemAssetTest
     }
 
     [Fact]
-    public void カタログアイテムが初期化されていない場合例外()
+    public void 注文アイテムが初期化されていない場合例外()
     {
         // Arrange
         string assetCode = "Asset Code";
-        var catalogItemId = 1L;
-        var itemAsset = new CatalogItemAsset(assetCode!, catalogItemId);
+        var orderItemId = 1L;
+        var itemAsset = new OrderItemAsset(assetCode!, orderItemId);
 
         // Act
-        var action = () => _ = itemAsset.CatalogItem;
+        var action = () => _ = itemAsset.OrderItem;
 
         // Assert
         var ex = Assert.Throws<InvalidOperationException>(action);
-        Assert.StartsWith("CatalogItem プロパティが初期化されていません。", ex.Message);
+        Assert.StartsWith("OrderItem プロパティが初期化されていません。", ex.Message);
     }
 }

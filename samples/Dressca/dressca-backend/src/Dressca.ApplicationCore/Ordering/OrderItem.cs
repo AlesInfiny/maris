@@ -9,6 +9,7 @@ namespace Dressca.ApplicationCore.Ordering;
 /// </summary>
 public class OrderItem
 {
+    private readonly List<OrderItemAsset> assets = new();
     private CatalogItemOrdered? itemOrdered;
     private Order? order;
 
@@ -70,6 +71,11 @@ public class OrderItem
     public long OrderId { get; private set; }
 
     /// <summary>
+    ///  注文アイテムのアセットリストを取得します。
+    /// </summary>
+    public IReadOnlyCollection<OrderItemAsset> Assets => this.assets.AsReadOnly();
+
+    /// <summary>
     ///  注文（ナビゲーションプロパティ）を取得します。
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="Order"/> が設定されていません。</exception>
@@ -78,5 +84,18 @@ public class OrderItem
     {
         get => this.order ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.Order)));
         private set => this.order = value ?? throw new ArgumentNullException(nameof(value));
+    }
+
+    /// <summary>
+    ///  注文アイテムのアセットリストを追加します。
+    /// </summary>
+    /// <param name="orderItemAssets">注文アイテムのアセットリスト。</param>
+    /// <exception cref="ArgumentNullException">
+    ///  <paramref name="orderItemAssets"/> が <see langword="null"/> です。
+    /// </exception>
+    public void AddAssets(IEnumerable<OrderItemAsset> orderItemAssets)
+    {
+        ArgumentNullException.ThrowIfNull(orderItemAssets);
+        this.assets.AddRange(orderItemAssets);
     }
 }

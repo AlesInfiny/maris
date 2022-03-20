@@ -204,7 +204,7 @@ public class CatalogItem
     }
 
     /// <summary>
-    ///  カタログアイテムのリストを取得します。
+    ///  カタログアイテムのアセットリストを取得します。
     /// </summary>
     public IReadOnlyCollection<CatalogItemAsset> Assets => this.assets.AsReadOnly();
 }
