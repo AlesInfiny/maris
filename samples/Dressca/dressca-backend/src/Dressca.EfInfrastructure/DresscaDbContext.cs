@@ -73,6 +73,11 @@ internal class DresscaDbContext : DbContext
     public DbSet<OrderItem> OrderItems => this.Set<OrderItem>();
 
     /// <summary>
+    ///  注文アイテムアセットを取得します。
+    /// </summary>
+    public DbSet<OrderItemAsset> OrderItemAssets => this.Set<OrderItemAsset>();
+
+    /// <summary>
     ///  アセットを取得します。
     /// </summary>
     public DbSet<Asset> Assets => this.Set<Asset>();
@@ -106,6 +111,7 @@ internal class DresscaDbContext : DbContext
         // 注文
         modelBuilder.ApplyConfiguration(new OrderConfiguration());
         modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+        modelBuilder.ApplyConfiguration(new OrderItemAssetConfiguration());
 
         // アセット
         modelBuilder.ApplyConfiguration(new AssetConfiguration());
