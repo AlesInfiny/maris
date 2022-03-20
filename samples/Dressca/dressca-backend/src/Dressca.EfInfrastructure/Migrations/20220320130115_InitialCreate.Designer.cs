@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dressca.EfInfrastructure.Migrations
 {
     [DbContext(typeof(DresscaDbContext))]
-    [Migration("20220318152311_InitialCreate")]
+    [Migration("20220320130115_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -555,6 +555,29 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.ToTable("OrderItems", (string)null);
                 });
 
+            modelBuilder.Entity("Dressca.ApplicationCore.Ordering.OrderItemAsset", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<string>("AssetCode")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
+
+                    b.Property<long>("OrderItemId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderItemId");
+
+                    b.ToTable("OrderItemAssets", (string)null);
+                });
+
             modelBuilder.Entity("Dressca.ApplicationCore.Baskets.BasketItem", b =>
                 {
                     b.HasOne("Dressca.ApplicationCore.Baskets.Basket", "Basket")
@@ -709,6 +732,18 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("Dressca.ApplicationCore.Ordering.OrderItemAsset", b =>
+                {
+                    b.HasOne("Dressca.ApplicationCore.Ordering.OrderItem", "OrderItem")
+                        .WithMany("Assets")
+                        .HasForeignKey("OrderItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_OrderItemAssets_OrderItems");
+
+                    b.Navigation("OrderItem");
+                });
+
             modelBuilder.Entity("Dressca.ApplicationCore.Baskets.Basket", b =>
                 {
                     b.Navigation("Items");
@@ -732,6 +767,11 @@ namespace Dressca.EfInfrastructure.Migrations
             modelBuilder.Entity("Dressca.ApplicationCore.Ordering.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("Dressca.ApplicationCore.Ordering.OrderItem", b =>
+                {
+                    b.Navigation("Assets");
                 });
 #pragma warning restore 612, 618
         }

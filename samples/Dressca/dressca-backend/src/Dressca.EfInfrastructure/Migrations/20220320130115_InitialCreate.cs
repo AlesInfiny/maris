@@ -182,6 +182,26 @@ namespace Dressca.EfInfrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrderItemAssets",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AssetCode = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    OrderItemId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItemAssets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderItemAssets_OrderItems",
+                        column: x => x.OrderItemId,
+                        principalTable: "OrderItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Assets",
                 columns: new[] { "Id", "AssetCode", "AssetType" },
@@ -290,6 +310,11 @@ namespace Dressca.EfInfrastructure.Migrations
                 column: "ProductCode");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrderItemAssets_OrderItemId",
+                table: "OrderItemAssets",
+                column: "OrderItemId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
                 table: "OrderItems",
                 column: "OrderId");
@@ -307,7 +332,7 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "CatalogItemAssets");
 
             migrationBuilder.DropTable(
-                name: "OrderItems");
+                name: "OrderItemAssets");
 
             migrationBuilder.DropTable(
                 name: "Baskets");
@@ -316,13 +341,16 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "CatalogItems");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "CatalogBrands");
 
             migrationBuilder.DropTable(
                 name: "CatalogCategories");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
         }
     }
 }
