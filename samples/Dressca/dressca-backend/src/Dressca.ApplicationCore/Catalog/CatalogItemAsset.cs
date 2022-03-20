@@ -8,7 +8,6 @@ namespace Dressca.ApplicationCore.Catalog;
 public class CatalogItemAsset
 {
     private CatalogItem? catalogItem;
-    private long catalogItemId;
     private string? assetCode;
 
     /// <summary>
@@ -19,11 +18,6 @@ public class CatalogItemAsset
     /// <exception cref="ArgumentException">
     ///  <list type="bullet">
     ///   <item><paramref name="assetCode"/> が <see langword="null"/> または空の文字列です。</item>
-    ///  </list>
-    /// </exception>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="catalogItemId"/> は 0 以下に設定できません。</item>
     ///  </list>
     /// </exception>
     public CatalogItemAsset(string assetCode, long catalogItemId)
@@ -63,23 +57,7 @@ public class CatalogItemAsset
     /// <summary>
     ///  カタログアイテム Id を取得します。
     /// </summary>
-    /// <exception cref="ArgumentOutOfRangeException">カタログアイテム Id は 0 以下に設定できません。</exception>
-    public long CatalogItemId
-    {
-        get => this.catalogItemId;
-        private set
-        {
-            if (value <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(value),
-                    actualValue: value,
-                    message: ApplicationCoreMessages.CatalogItemIdMustBePositive);
-            }
-
-            this.catalogItemId = value;
-        }
-    }
+    public long CatalogItemId { get; private set; }
 
     /// <summary>
     ///  カタログアイテムを取得します。

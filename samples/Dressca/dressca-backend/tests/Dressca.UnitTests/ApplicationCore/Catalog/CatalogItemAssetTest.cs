@@ -22,22 +22,6 @@ public class CatalogItemAssetTest
     }
 
     [Fact]
-    public void カタログアイテムIdが0以下の場合例外()
-    {
-        // Arrange
-        string assetCode = "Asset Code";
-        var catalogItemId = 0L;
-
-        // Act
-        var action = () => new CatalogItemAsset(assetCode!, catalogItemId);
-
-        // Assert
-        var ex = Assert.Throws<ArgumentOutOfRangeException>("value", action);
-        Assert.StartsWith("カタログアイテム ID は 0 以下にできません。", ex.Message);
-        Assert.Equal(catalogItemId, ex.ActualValue);
-    }
-
-    [Fact]
     public void カタログアイテムが初期化されていない場合例外()
     {
         // Arrange
