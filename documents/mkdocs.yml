@@ -2,7 +2,7 @@
 site_name: Maris OSS版
 site_url: https://example.com/
 docs_dir: contents
-copyright: !ENV [COPYRIGHT, 'Test Version Copyright &copy; 2021 Nihon Unisys, Ltd. All rights reserved.']
+copyright: !ENV [COPYRIGHT, 'Test Version Copyright &copy; 2022 BIPROGY Inc. All rights reserved.']
 site_author: '生産技術イノベーション部'
 site_description: 'Maris OSS版のポータルサイトです。'
 site_dir: build-artifacts

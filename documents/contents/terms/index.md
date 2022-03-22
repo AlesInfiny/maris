@@ -15,7 +15,7 @@ Maris OSS 版（以下、本サイト）は、以下を提供します。
 いずれも Apache License, Version 2.0 にて、個人、商用とも無料でご利用いただけます。
 
 !!! quote ""
-    Copyright © 2021 Nihon Unisys, Ltd. All rights reserved.
+    Copyright © 2022 BIPROGY Inc. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ Maris OSS 版（以下、本サイト）は、以下を提供します。
 
 本サイトに記載の商品名、製品名、社名などは、各社が商標として使用している場合があります。
 
-- 「Maris」は、日本ユニシス株式会社の登録商標です。
+- 「Maris」は、BIPROGY株式会社の登録商標です。
 - 「Microsoft」「Windows」「Visual Studio」「Visual Studio Code」「VS Code」「Azure」は米国Microsoft Corporationの米国およびその他の国における登録商標または商標です。
 - Git and the Git logo are either registered trademarks or trademarks of Software Freedom Conservancy, Inc., corporate home of the Git Project, in the United States and/or other countries.
 - Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
