@@ -1,3 +1,4 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = import.meta.env.VITE_BACKEND_ENDPOINT_PATH;
+axios.defaults.baseURL = `${import.meta.env.VITE_BACKEND_ENDPOINT_ORIGIN}
+  ${import.meta.env.VITE_BACKEND_ENDPOINT_PATH}`;
