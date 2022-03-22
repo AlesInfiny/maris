@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Copyright>Copyright © 2022 BIPROGY Inc. All rights reserved.</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
