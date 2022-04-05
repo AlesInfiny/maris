@@ -33,7 +33,9 @@
       "excludedTypeNames": [],
       "serviceHost": "localhost:5001",
       "serviceBasePath": null,
-      "serviceSchemes": [],
+      "serviceSchemes": [
+        "https"
+      ],
       "infoTitle": "Dressca Web API",
       "infoDescription": "Dressca の Web API 仕様",
       "infoVersion": "1.0.0",
