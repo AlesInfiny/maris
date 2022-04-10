@@ -34,7 +34,7 @@ export const useBasketStore = defineStore({
     },
   },
   getters: {
-    getBasket(state) {
+    getBasket(state): Basket[] {
       return state.items;
     },
   },
