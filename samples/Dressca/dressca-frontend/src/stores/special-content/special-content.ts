@@ -7,15 +7,15 @@ export const useSpecialContentStore = defineStore({
     contents: [
       {
         campaignCode: 'LTOX48Q',
-        imageId: '1_g0FlA6lGEHHJtluqftq',
+        assetCode: 'b52dc7f712d94ca5812dd995bf926c04',
       },
       {
         campaignCode: 'EKHQGBB',
-        imageId: 'b8uiRXt1UyJ3rji5BoRGB',
+        assetCode: '05d38fad5693422c8a27dd5b14070ec8',
       },
       {
-        productCode: 'S000000002',
-        imageId: 'AFyMr6XPZ-w_qIrXtbzgp',
+        productCode: 14,
+        assetCode: '80bc8e167ccb4543b2f9d51913073492',
       },
     ] as SpecialContent[],
   }),

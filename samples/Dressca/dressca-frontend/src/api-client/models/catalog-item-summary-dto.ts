@@ -25,7 +25,7 @@ export interface CatalogItemSummaryDto {
      * @type {number}
      * @memberof CatalogItemSummaryDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * 商品名を取得または設定します。             
      * @type {string}

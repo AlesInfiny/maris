@@ -1,40 +1,60 @@
 <script setup lang="ts">
 import { onMounted, reactive, toRefs } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
-import type { Basket } from '@/stores/basket/basket.model';
 import { useAccountStore } from '@/stores/account/account';
-import type { Item } from '@/stores/ordering/ordering.model';
+import type { BasketDto } from '@/api-client/models/basket-dto';
+import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
+
 import { useOrderingStore } from '@/stores/ordering/ordering';
 import { useRouter } from 'vue-router';
 
 const accountStore = useAccountStore();
 
 const state = reactive({
-  items: [] as Basket[],
-  deliveryCharge: 500,
-  total: 0,
+  basket: {} as BasketDto,
   address: accountStore.getAddress,
 });
 
-const { items, deliveryCharge, total, address } = toRefs(state);
+const { basket, address } = toRefs(state);
 const router = useRouter();
 
-const getImageUrl = (imageId: string) => {
-  return `${import.meta.env.VITE_ASSET_URL}${imageId}`;
+const getFirstImageUrl = (assetCodes: string[] | undefined) => {
+  if (
+    typeof assetCodes === 'undefined' ||
+    assetCodes == null ||
+    assetCodes.length === 0
+  ) {
+    // TODO: Now printingな画像にしたい。
+    return '＃';
+  }
+  return getImageUrl(assetCodes[0]);
 };
 
-const toLocaleString = (price: number) => {
+const getImageUrl = (assetCode: string) => {
+  if (assetCode === '') {
+    // TODO: Now printingな画像にしたい。
+    return '＃';
+  }
+  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
+};
+
+const toLocaleString = (price: number | undefined) => {
+  if (typeof price === 'undefined') {
+    return '-';
+  }
   return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
 };
 
 const orderingStore = useOrderingStore();
 
 const checkout = async () => {
-  const items = state.items.map<Item>((item) => ({
-    productCode: item.productCode,
-    quantity: item.quantity,
-  }));
-  await orderingStore.order(items);
+  await orderingStore.order(
+    address.value.fullName,
+    address.value.postalCode,
+    address.value.todofuken,
+    address.value.shikuchoson,
+    address.value.azanaAndOthers,
+  );
   router.push({ name: 'ordering/done' });
 };
 
@@ -42,12 +62,21 @@ const basketStore = useBasketStore();
 
 onMounted(async () => {
   await basketStore.fetch();
-  state.items = basketStore.getBasket;
-  state.total = state.items.reduce((p, c) => p + c.price * c.quantity, 0);
+  const basket = basketStore.getBasket;
+  if (basket.basketItems?.length === 0) {
+    router.push('/');
+    return;
+  }
+  state.basket = basket;
 });
 </script>
 
 <template>
+  <div class="container mx-auto my-4 max-w-4xl">
+    <span class="text-lg font-medium text-green-500">
+      注文内容を確認して「注文を確定する」ボタンを押してください。
+    </span>
+  </div>
   <div class="container mx-auto my-4 max-w-4xl">
     <div
       class="mx-2 grid grid-cols-1 lg:grid-cols-3 lg:gap-x-12 flex items-center"
@@ -63,17 +92,27 @@ onMounted(async () => {
       >
         <tbody>
           <tr>
-            <td>商品合計</td>
-            <td class="text-right">{{ toLocaleString(total) }}</td>
+            <td>税抜き合計</td>
+            <td class="text-right">
+              {{ toLocaleString(basket.account?.totalItemsPrice) }}
+            </td>
           </tr>
           <tr>
             <td>送料</td>
-            <td class="text-right">{{ toLocaleString(deliveryCharge) }}</td>
+            <td class="text-right">
+              {{ toLocaleString(basket.account?.deliveryCharge) }}
+            </td>
           </tr>
           <tr>
-            <td>合計金額</td>
+            <td>消費税</td>
+            <td class="text-right">
+              {{ toLocaleString(basket.account?.consumptionTax) }}
+            </td>
+          </tr>
+          <tr>
+            <td>合計</td>
             <td class="text-right text-xl font-bold text-red-500">
-              {{ toLocaleString(total + deliveryCharge) }}
+              {{ toLocaleString(basket.account?.totalPrice) }}
             </td>
           </tr>
         </tbody>
@@ -83,36 +122,44 @@ onMounted(async () => {
       >
         <tbody>
           <tr>
-            <td rowspan="3" class="w-24 pl-2 border-r">お届け先</td>
-            <td class="pl-2">{{ address.name }}</td>
+            <td rowspan="5" class="w-24 pl-2 border-r">お届け先</td>
+            <td class="pl-2">{{ address.fullName }}</td>
           </tr>
           <tr>
-            <td class="pl-2">{{ `〒${address.zipCode}` }}</td>
+            <td class="pl-2">{{ `〒${address.postalCode}` }}</td>
           </tr>
           <tr>
-            <td class="pl-2">{{ address.address }}</td>
+            <td class="pl-2">{{ address.todofuken }}</td>
+          </tr>
+          <tr>
+            <td class="pl-2">{{ address.shikuchoson }}</td>
+          </tr>
+          <tr>
+            <td class="pl-2">{{ address.azanaAndOthers }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="mt-8 mx-2">
       <div
-        v-for="item in items"
-        :key="item.productCode"
+        v-for="item in basket.basketItems"
+        :key="item.catalogItemId"
         class="grid grid-cols-5 lg:grid-cols-8 mt-4 flex items-center"
       >
         <div class="col-span-4 lg:col-span-5">
           <div class="grid grid-cols-2">
             <img
-              :src="getImageUrl(item.imageId)"
+              :src="getFirstImageUrl(item.catalogItem?.assetCodes)"
               class="h-[150px] pointer-events-none"
             />
             <div class="ml-2">
-              <p>{{ item.name }}</p>
-              <p class="mt-4">{{ `価格: ${toLocaleString(item.price)}` }}</p>
+              <p>{{ item.catalogItem?.name }}</p>
+              <p class="mt-4">
+                {{ `価格: ${toLocaleString(item.unitPrice)}` }}
+              </p>
               <p class="mt-4">{{ `数量: ${item.quantity}` }}</p>
               <p class="mt-4">
-                {{ toLocaleString(item.price * item.quantity) }}
+                {{ toLocaleString(item.subTotal) }}
               </p>
             </div>
           </div>

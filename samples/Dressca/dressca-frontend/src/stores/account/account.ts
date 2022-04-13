@@ -5,9 +5,11 @@ export const useAccountStore = defineStore({
   id: 'account',
   state: () => ({
     address: {
-      name: '豊洲　太郎',
-      zipCode: '1358560',
-      address: '東京都江東区豊洲1-1-1',
+      fullName: '国会　太郎',
+      postalCode: '100-8924',
+      todofuken: '東京都',
+      shikuchoson: '千代田区',
+      azanaAndOthers: '永田町1-10-1',
     } as Address,
   }),
   getters: {

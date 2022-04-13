@@ -1,41 +1,44 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import type { Basket } from '@/stores/basket/basket.model';
+// import type { Basket } from '@/stores/basket/basket.model';
+import type { BasketDto } from '@/api-client/models/basket-dto';
+import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
+import type { PutBasketItemsInputDto } from '@/api-client/models/put-basket-items-input-dto';
+import type { PostBasketItemsInputDto } from '@/api-client/models/post-basket-items-input-dto';
 
 export const useBasketStore = defineStore({
   id: 'bascet',
   state: () => ({
-    items: [] as Basket[],
+    basket: {} as BasketDto,
   }),
   actions: {
-    async add(productCode: string) {
-      const params = { productCode: productCode };
-      await axios.put('basket', params);
+    async add(catalogItemId: number) {
+      const params: PostBasketItemsInputDto = {
+        catalogItemId: catalogItemId,
+        addedQuantity: 1,
+      };
+      await axios.post('basket-items', params);
     },
-    async update(productCode: string, quantity: number) {
-      const params = { productCode: productCode, quantity: quantity };
-      await axios.patch('basket', params);
-      const target = this.items.find(
-        (item) => item.productCode === productCode,
-      );
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      target!.quantity = quantity;
+    async update(catalogItemId: number, newQuantity: number) {
+      const params: PutBasketItemsInputDto[] = [
+        {
+          catalogItemId: catalogItemId,
+          quantity: newQuantity,
+        },
+      ];
+      await axios.put('basket-items', params);
     },
-    async remove(productCode: string) {
-      const params = { productCode: productCode };
-      await axios.delete('basket', { data: params });
-      this.items = this.items.filter(
-        (item) => item.productCode !== productCode,
-      );
+    async remove(catalogItemId: number) {
+      await axios.delete(`/basket-items/${catalogItemId}`);
     },
     async fetch() {
-      const response = await axios.get('basket');
-      this.items = response.data;
+      const response = await axios.get('basket-items');
+      this.basket = response.data;
     },
   },
   getters: {
     getBasket(state) {
-      return state.items;
+      return state.basket;
     },
   },
 });

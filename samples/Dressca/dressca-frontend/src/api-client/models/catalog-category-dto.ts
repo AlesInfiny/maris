@@ -25,7 +25,7 @@ export interface CatalogCategoryDto {
      * @type {number}
      * @memberof CatalogCategoryDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * カテゴリ名を取得または設定します。             
      * @type {string}
