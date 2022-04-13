@@ -48,6 +48,7 @@ public class OrderMapper : IObjectMapper<Order, OrderDto>
                 Id = orderItem.Id,
                 Quantity = orderItem.Quantity,
                 UnitPrice = orderItem.UnitPrice,
+                SubTotal = orderItem.GetSubTotal(),
                 ItemOrdered = new CatalogItemSummaryDto
                 {
                     Id = orderItem.ItemOrdered.CatalogItemId,
