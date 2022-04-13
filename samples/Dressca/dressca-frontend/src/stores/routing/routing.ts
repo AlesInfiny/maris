@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia';
+import { useRouter } from 'vue-router';
 
 export const useRoutingStore = defineStore({
   id: 'routing',
   state: () => ({
     redirectFrom: null as null | string,
+    router: useRouter(),
   }),
   actions: {
     setRedirectFrom(from: string) {
