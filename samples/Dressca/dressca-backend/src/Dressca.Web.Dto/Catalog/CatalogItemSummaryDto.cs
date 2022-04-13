@@ -10,6 +10,7 @@ public class CatalogItemSummaryDto
     /// <summary>
     ///  カタログアイテム Id を取得または設定します。
     /// </summary>
+    [Required]
     public long Id { get; set; }
 
     /// <summary>

@@ -11,6 +11,7 @@ public class CatalogBrandDto
     /// <summary>
     ///  カタログブランド Id を取得または設定します。
     /// </summary>
+    [Required]
     public long Id { get; set; }
 
     /// <summary>
