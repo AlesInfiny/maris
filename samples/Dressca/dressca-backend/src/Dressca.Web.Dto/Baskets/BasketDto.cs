@@ -1,4 +1,5 @@
-﻿using Dressca.Web.Dto.Accounting;
+﻿using System.ComponentModel.DataAnnotations;
+using Dressca.Web.Dto.Accounting;
 
 namespace Dressca.Web.Dto.Baskets;
 
@@ -10,6 +11,7 @@ public class BasketDto
     /// <summary>
     ///  購入者 Id を取得または設定します。
     /// </summary>
+    [Required]
     public string BuyerId { get; set; } = string.Empty;
 
     /// <summary>
