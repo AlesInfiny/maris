@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import type { OrderDto } from '@/api-client/models/order-dto';
-import type { OrderItemDto } from '@/api-client/models/order-item-dto';
 import type { PostOrderInputDto } from '@/api-client/models/post-order-input-dto';
 
 export const useOrderingStore = defineStore({
