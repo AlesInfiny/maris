@@ -3,7 +3,6 @@ import { onMounted, reactive, toRefs } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
 import { useAccountStore } from '@/stores/account/account';
 import type { BasketDto } from '@/api-client/models/basket-dto';
-import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 
 import { useOrderingStore } from '@/stores/ordering/ordering';
 import { useRouter } from 'vue-router';
@@ -79,14 +78,8 @@ onMounted(async () => {
   </div>
   <div class="container mx-auto my-4 max-w-4xl">
     <div
-      class="mx-2 grid grid-cols-1 lg:grid-cols-3 lg:gap-x-12 flex items-center"
+      class="mx-2 grid grid-cols-2 lg:grid-cols-3 lg:gap-x-12 flex items-center"
     >
-      <button
-        class="lg:col-end-3 mx-auto w-36 bg-orange-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
-        @click="checkout()"
-      >
-        注文を確定する
-      </button>
       <table
         class="lg:row-start-1 lg:col-span-1 table-fixed mt-2 lg:mt-0 border-t border-b lg:border"
       >
@@ -117,6 +110,12 @@ onMounted(async () => {
           </tr>
         </tbody>
       </table>
+      <button
+        class="lg:col-end-3 mx-auto w-36 bg-orange-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
+        @click="checkout()"
+      >
+        注文を確定する
+      </button>
       <table
         class="lg:col-span-3 table-fixed mt-2 lg:mt-4 border-t border-b lg:border"
       >
