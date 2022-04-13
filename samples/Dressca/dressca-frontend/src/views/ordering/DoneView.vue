@@ -94,7 +94,7 @@ onMounted(() => {
         </tbody>
       </table>
       <table
-        class="lg:col-span-3 table-fixed mt-2 lg:mt-4 border-t border-b lg:border"
+        class="lg:col-span-2 table-fixed mt-2 lg:mt-4 border-t border-b lg:border"
       >
         <tbody>
           <tr>
