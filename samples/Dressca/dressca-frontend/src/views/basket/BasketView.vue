@@ -127,11 +127,32 @@ onMounted(async () => {
         <div class="text-lg font-medium text-right lg:col-span-1">数量</div>
       </div>
       <div
-        v-for="(item, index) in basket.basketItems"
+        v-for="item in basket.basketItems"
         :key="item.catalogItemId"
         class="grid grid-cols-5 lg:grid-cols-8 mt-4 flex items-center"
       >
         <BasketItem :item="item" @update="update" @remove="remove"></BasketItem>
+      </div>
+      <hr class="mt-4" />
+      <div class="mt-4 mr-2 text-right">
+        <table class="inline-block border-separate">
+          <tr>
+            <th>税抜き合計</th>
+            <td>{{ toLocaleString(basket.account?.totalItemsPrice) }}</td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td>{{ toLocaleString(basket.account?.deliveryCharge) }}</td>
+          </tr>
+          <tr>
+            <th>消費税</th>
+            <td>{{ toLocaleString(basket.account?.consumptionTax) }}</td>
+          </tr>
+          <tr>
+            <th>合計</th>
+            <td class="">{{ toLocaleString(basket.account?.totalPrice) }}</td>
+          </tr>
+        </table>
       </div>
     </div>
     <div class="flex justify-between">
