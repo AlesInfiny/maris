@@ -25,30 +25,30 @@ export interface AccountDto {
      * @type {number}
      * @memberof AccountDto
      */
-    'consumptionTaxRate'?: number;
+    'consumptionTaxRate': number;
     /**
      * 注文アイテムの税抜き合計金額を取得または設定します。             
      * @type {number}
      * @memberof AccountDto
      */
-    'totalItemsPrice'?: number;
+    'totalItemsPrice': number;
     /**
      * 送料を取得または設定します。             
      * @type {number}
      * @memberof AccountDto
      */
-    'deliveryCharge'?: number;
+    'deliveryCharge': number;
     /**
      * 消費税額を取得または設定します。             
      * @type {number}
      * @memberof AccountDto
      */
-    'consumptionTax'?: number;
+    'consumptionTax': number;
     /**
      * 送料、税込みの合計金額を取得または設定します。             
      * @type {number}
      * @memberof AccountDto
      */
-    'totalPrice'?: number;
+    'totalPrice': number;
 }
 

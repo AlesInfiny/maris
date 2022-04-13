@@ -26,7 +26,7 @@ export interface OrderItemDto {
      * @type {number}
      * @memberof OrderItemDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * 注文された商品（カタログアイテム）を取得または設定します。             
      * @type {CatalogItemSummaryDto}
@@ -38,12 +38,18 @@ export interface OrderItemDto {
      * @type {number}
      * @memberof OrderItemDto
      */
-    'unitPrice'?: number;
+    'unitPrice': number;
     /**
      * 数量を取得または設定します。             
      * @type {number}
      * @memberof OrderItemDto
      */
-    'quantity'?: number;
+    'quantity': number;
+    /**
+     * 小計額を取得します。             
+     * @type {number}
+     * @memberof OrderItemDto
+     */
+    'subTotal': number;
 }
 

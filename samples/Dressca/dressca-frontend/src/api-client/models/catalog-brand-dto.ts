@@ -25,7 +25,7 @@ export interface CatalogBrandDto {
      * @type {number}
      * @memberof CatalogBrandDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * ブランド名を取得または設定します。             
      * @type {string}

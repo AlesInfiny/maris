@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
           target: env.VITE_BACKEND_ENDPOINT_ORIGIN,
           changeOrigin: true,
           secure: false,
-        }
+        },
       },
     },
   };

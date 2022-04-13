@@ -1,46 +1,73 @@
 <script setup lang="ts">
 import { onMounted, reactive, toRefs } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
-import type { Basket } from '@/stores/basket/basket.model';
+import type { BasketDto } from '@/api-client/models/basket-dto';
+import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import { useRouter } from 'vue-router';
 import BasketItem from '@/components/basket/BasketItem.vue';
 
 const props = defineProps<{
-  productCode?: string;
+  catalogItemId?: number;
 }>();
 
 const state = reactive({
-  items: [] as Basket[],
-  added: null as Basket | null,
+  basket: {} as BasketDto,
+  added: null as BasketItemDto | null,
 });
 
-const { items, added } = toRefs(state);
+const { basket, added } = toRefs(state);
 const router = useRouter();
 
-const getImageUrl = (imageId: string) => {
-  return `${import.meta.env.VITE_ASSET_URL}${imageId}`;
+const getFirstImageUrl = (assetCodes: string[] | undefined) => {
+  if (
+    typeof assetCodes === 'undefined' ||
+    assetCodes == null ||
+    assetCodes.length === 0
+  ) {
+    // TODO: Now printingな画像にしたい。
+    return '＃';
+  }
+  return getImageUrl(assetCodes[0]);
 };
 
-const toLocaleString = (price: number) => {
+const getImageUrl = (assetCode: string) => {
+  if (assetCode === '') {
+    // TODO: Now printingな画像にしたい。
+    return '＃';
+  }
+  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
+};
+
+const toLocaleString = (price: number | undefined) => {
+  if (typeof price === 'undefined') {
+    return '-';
+  }
   return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
 };
 
 const isEmpty = () => {
-  return state.items.length === 0;
+  return (
+    typeof state.basket.basketItems === 'undefined' ||
+    state.basket.basketItems.length === 0
+  );
 };
 
 const goCatalog = () => {
   router.push({ name: 'catalog' });
 };
 
-const update = async (productCode: string, quantity: number) => {
-  await basketStore.update(productCode, quantity);
-  state.items = basketStore.getBasket;
+const update = async (catalogItemId: number, newQuantity: number) => {
+  state.added = null;
+  await basketStore.update(catalogItemId, newQuantity);
+  await basketStore.fetch();
+  state.basket = basketStore.getBasket;
 };
 
-const remove = async (productCode: string) => {
-  await basketStore.remove(productCode);
-  state.items = basketStore.getBasket;
+const remove = async (catalogItemId: number) => {
+  state.added = null;
+  await basketStore.remove(catalogItemId);
+  await basketStore.fetch();
+  state.basket = basketStore.getBasket;
 };
 
 const order = () => {
@@ -50,17 +77,20 @@ const order = () => {
 const basketStore = useBasketStore();
 
 onMounted(async () => {
-  if (props.productCode) {
-    basketStore.add(props.productCode);
+  if (props.catalogItemId) {
+    await basketStore.add(props.catalogItemId);
   }
 
   await basketStore.fetch();
-  state.items = JSON.parse(JSON.stringify(basketStore.getBasket));
+  state.basket = JSON.parse(JSON.stringify(basketStore.getBasket));
 
-  if (props.productCode) {
+  if (
+    props.catalogItemId &&
+    typeof basketStore.getBasket.basketItems !== 'undefined'
+  ) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    state.added = state.items.find(
-      (item) => item.productCode === props.productCode,
+    state.added = basketStore.getBasket.basketItems.find(
+      (item) => item.catalogItemId === props.catalogItemId,
     )!;
   }
 });
@@ -68,18 +98,20 @@ onMounted(async () => {
 
 <template>
   <div class="container mx-auto my-4 max-w-4xl">
-    <div v-if="props.productCode && !!added" class="mx-2">
+    <div v-if="props.catalogItemId && !!added" class="mx-2">
       <span class="text-lg font-medium text-green-500"
         >以下の商品が追加されました。</span
       >
       <div class="grid grid-cols-1 lg:grid-cols-3 mt-4 flex items-center">
         <img
-          :src="getImageUrl(added.imageId)"
+          :src="getFirstImageUrl(added.catalogItem?.assetCodes)"
           class="h-[150px] m-auto pointer-events-none"
         />
-        <span class="text-center lg:text-left">{{ added.name }}</span>
         <span class="text-center lg:text-left">{{
-          toLocaleString(added.price)
+          added.catalogItem?.name
+        }}</span>
+        <span class="text-center lg:text-left">{{
+          toLocaleString(added.unitPrice)
         }}</span>
       </div>
     </div>
@@ -95,8 +127,8 @@ onMounted(async () => {
         <div class="text-lg font-medium text-right lg:col-span-1">数量</div>
       </div>
       <div
-        v-for="item in items"
-        :key="item.productCode"
+        v-for="(item, index) in basket.basketItems"
+        :key="item.catalogItemId"
         class="grid grid-cols-5 lg:grid-cols-8 mt-4 flex items-center"
       >
         <BasketItem :item="item" @update="update" @remove="remove"></BasketItem>

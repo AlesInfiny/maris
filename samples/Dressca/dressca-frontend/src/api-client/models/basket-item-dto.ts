@@ -26,25 +26,25 @@ export interface BasketItemDto {
      * @type {number}
      * @memberof BasketItemDto
      */
-    'catalogItemId'?: number;
+    'catalogItemId': number;
     /**
      * 単価を取得または設定します。             
      * @type {number}
      * @memberof BasketItemDto
      */
-    'unitPrice'?: number;
+    'unitPrice': number;
     /**
      * 数量を取得または設定します。             
      * @type {number}
      * @memberof BasketItemDto
      */
-    'quantity'?: number;
+    'quantity': number;
     /**
      * 小計額を取得します。             
      * @type {number}
      * @memberof BasketItemDto
      */
-    'subTotal'?: number;
+    'subTotal': number;
     /**
      * カタログアイテムを取得または設定します。             
      * @type {CatalogItemSummaryDto}

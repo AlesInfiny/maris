@@ -27,49 +27,49 @@ export interface OrderDto {
      * @type {number}
      * @memberof OrderDto
      */
-    'id'?: number;
+    'id': number;
     /**
      * 購入者 Id を取得または設定します。             
      * @type {string}
      * @memberof OrderDto
      */
-    'buyerId'?: string;
+    'buyerId': string;
     /**
      * 注文日を取得または設定します。             
      * @type {string}
      * @memberof OrderDto
      */
-    'orderDate'?: string;
+    'orderDate': string;
     /**
      * お届け先氏名を取得または設定します。             
      * @type {string}
      * @memberof OrderDto
      */
-    'fullName'?: string;
+    'fullName': string;
     /**
      * お届け先郵便番号を取得または設定します。             
      * @type {string}
      * @memberof OrderDto
      */
-    'postalCode'?: string;
+    'postalCode': string;
     /**
      * お届け先都道府県を取得または設定します。             
      * @type {string}
      * @memberof OrderDto
      */
-    'todofuken'?: string;
+    'todofuken': string;
     /**
      * お届け先市区町村を取得または設定します。             
      * @type {string}
      * @memberof OrderDto
      */
-    'shikuchoson'?: string;
+    'shikuchoson': string;
     /**
      * お届け先字／番地／建物名／部屋番号を取得または設定します。             
      * @type {string}
      * @memberof OrderDto
      */
-    'azanaAndOthers'?: string;
+    'azanaAndOthers': string;
     /**
      * 会計情報を取得または設定します。             
      * @type {AccountDto}

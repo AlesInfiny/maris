@@ -27,12 +27,28 @@ const getBrandName = (catalogBrandId: number) => {
   return getBrands.value.find((brand) => brand.id === catalogBrandId)?.name;
 };
 
-const getImageUrl = (imageId: string) => {
-  return `${import.meta.env.VITE_ASSET_URL}${imageId}`;
+const getFirstImageUrl = (assetCodes: string[] | undefined) => {
+  if (
+    typeof assetCodes === 'undefined' ||
+    assetCodes == null ||
+    assetCodes.length === 0
+  ) {
+    // TODO: Now printingな画像にしたい。
+    return '＃';
+  }
+  return getImageUrl(assetCodes[0]);
 };
 
-const addBasket = (productCode: string) => {
-  router.push({ name: 'basket', params: { productCode: productCode } });
+const getImageUrl = (assetCode: string) => {
+  if (assetCode === '') {
+    // TODO: Now printingな画像にしたい。
+    return '＃';
+  }
+  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
+};
+
+const addBasket = (catalogItemId: number) => {
+  router.push({ name: 'basket', params: { catalogItemId: catalogItemId } });
 };
 
 onMounted(() => {
@@ -52,7 +68,7 @@ watch([selectedCategory, selectedBrand], () => {
       <VirtualCarousel :items="getSpecialContents" class="h-[350px] w-full">
         <template #default="{ item }">
           <img
-            :src="getImageUrl(item.imageId)"
+            :src="getImageUrl(item.assetCode)"
             class="h-full m-auto pointer-events-none"
           />
         </template>
@@ -90,13 +106,13 @@ watch([selectedCategory, selectedBrand], () => {
       <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-6 lg:gap-6 mb-4"
       >
-        <div v-for="item in getItems" :key="item.productCode">
+        <div v-for="item in getItems" :key="item.id">
           <div
             class="justify-center md:border-2 lg:border-2 p-2 h-80 w-240 mx-auto"
           >
             <img
               class="h-[180px]"
-              :src="getImageUrl(item.imageIds[0])"
+              :src="getFirstImageUrl(item.assetCodes)"
               alt="Sunset in the mountains"
             />
             <div class="w-full">
@@ -109,7 +125,7 @@ watch([selectedCategory, selectedBrand], () => {
               <div class="mt-4 flex items-center justify-center">
                 <button
                   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  @click="addBasket(item.productCode)"
+                  @click="addBasket(item.id)"
                 >
                   買い物かごに入れる
                 </button>

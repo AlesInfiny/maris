@@ -31,18 +31,18 @@ export interface CatalogItemDtoAllOf {
      * @type {number}
      * @memberof CatalogItemDtoAllOf
      */
-    'price'?: number;
+    'price': number;
     /**
      * カタログカテゴリ Id を取得または設定します。             
      * @type {number}
      * @memberof CatalogItemDtoAllOf
      */
-    'catalogCategoryId'?: number;
+    'catalogCategoryId': number;
     /**
      * カタログブランド Id を取得または設定します。             
      * @type {number}
      * @memberof CatalogItemDtoAllOf
      */
-    'catalogBrandId'?: number;
+    'catalogBrandId': number;
 }
 

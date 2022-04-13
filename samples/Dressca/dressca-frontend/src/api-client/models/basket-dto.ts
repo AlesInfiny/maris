@@ -27,7 +27,7 @@ export interface BasketDto {
      * @type {string}
      * @memberof BasketDto
      */
-    'buyerId'?: string;
+    'buyerId': string;
     /**
      * 会計情報を取得または設定します。             
      * @type {AccountDto}

@@ -1,5 +1,7 @@
 export interface Address {
-  name: string;
-  zipCode: string;
-  address: string;
+  fullName: string;
+  postalCode: string;
+  todofuken: string;
+  shikuchoson: string;
+  azanaAndOthers: string;
 }
