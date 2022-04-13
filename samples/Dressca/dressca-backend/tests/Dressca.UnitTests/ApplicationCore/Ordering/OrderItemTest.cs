@@ -26,7 +26,7 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered!, unitPrice, quantity);
+        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
 
         // Act
         var action = () => _ = orderItem.Order;
@@ -43,7 +43,7 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered!, unitPrice, quantity);
+        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
         IEnumerable<OrderItemAsset>? orderItemAssets = null;
 
         // Act
@@ -60,7 +60,7 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered!, unitPrice, quantity);
+        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
         var orderItemAssets = new List<OrderItemAsset>
         {
             new("asset-code-1", orderItem.Id),
@@ -75,5 +75,21 @@ public class OrderItemTest
             orderItem.Assets,
             itemAsset => Assert.Equal("asset-code-1", itemAsset.AssetCode),
             itemAsset => Assert.Equal("asset-code-2", itemAsset.AssetCode));
+    }
+
+    [Fact]
+    public void 注文アイテムの小計を取得できる()
+    {
+        // Arrange
+        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
+        decimal unitPrice = 1000m;
+        int quantity = 2;
+        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+
+        // Act
+        var subTotal = orderItem.GetSubTotal();
+
+        // Assert
+        Assert.Equal(2000m, subTotal);
     }
 }
