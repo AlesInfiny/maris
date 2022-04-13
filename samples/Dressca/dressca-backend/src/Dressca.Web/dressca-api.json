@@ -467,10 +467,14 @@
         "type": "object",
         "description": "買い物かごを表す DTO です。\n            ",
         "additionalProperties": false,
+        "required": [
+          "buyerId"
+        ],
         "properties": {
           "buyerId": {
             "type": "string",
-            "description": "購入者 Id を取得または設定します。\n            "
+            "description": "購入者 Id を取得または設定します。\n            ",
+            "minLength": 1
           },
           "account": {
             "description": "会計情報を取得または設定します。\n            ",
@@ -494,6 +498,13 @@
         "type": "object",
         "description": "会計情報を表す DTO です。\n            ",
         "additionalProperties": false,
+        "required": [
+          "consumptionTaxRate",
+          "totalItemsPrice",
+          "deliveryCharge",
+          "consumptionTax",
+          "totalPrice"
+        ],
         "properties": {
           "consumptionTaxRate": {
             "type": "number",
@@ -526,6 +537,12 @@
         "type": "object",
         "description": "買い物かごのアイテムを表す DTO です。\n            ",
         "additionalProperties": false,
+        "required": [
+          "catalogItemId",
+          "unitPrice",
+          "quantity",
+          "subTotal"
+        ],
         "properties": {
           "catalogItemId": {
             "type": "integer",
@@ -563,6 +580,7 @@
         "description": "カタログアイテムの概要を表す DTO です。\n            ",
         "additionalProperties": false,
         "required": [
+          "id",
           "name",
           "productCode"
         ],
@@ -644,6 +662,7 @@
         "description": "カタログブランドの DTO です。\nカタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
         "additionalProperties": false,
         "required": [
+          "id",
           "name"
         ],
         "properties": {
@@ -664,6 +683,7 @@
         "description": "カタログカテゴリの DTO です。\n            ",
         "additionalProperties": false,
         "required": [
+          "id",
           "name"
         ],
         "properties": {
@@ -731,7 +751,10 @@
             "description": "カタログアイテムの DTO です。\n            ",
             "additionalProperties": false,
             "required": [
-              "description"
+              "description",
+              "price",
+              "catalogCategoryId",
+              "catalogBrandId"
             ],
             "properties": {
               "description": {
@@ -762,6 +785,16 @@
         "type": "object",
         "description": "注文情報の DTO です。\n            ",
         "additionalProperties": false,
+        "required": [
+          "id",
+          "buyerId",
+          "orderDate",
+          "fullName",
+          "postalCode",
+          "todofuken",
+          "shikuchoson",
+          "azanaAndOthers"
+        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -770,32 +803,39 @@
           },
           "buyerId": {
             "type": "string",
-            "description": "購入者 Id を取得または設定します。\n            "
+            "description": "購入者 Id を取得または設定します。\n            ",
+            "minLength": 1
           },
           "orderDate": {
             "type": "string",
             "description": "注文日を取得または設定します。\n            ",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 1
           },
           "fullName": {
             "type": "string",
-            "description": "お届け先氏名を取得または設定します。\n            "
+            "description": "お届け先氏名を取得または設定します。\n            ",
+            "minLength": 1
           },
           "postalCode": {
             "type": "string",
-            "description": "お届け先郵便番号を取得または設定します。\n            "
+            "description": "お届け先郵便番号を取得または設定します。\n            ",
+            "minLength": 1
           },
           "todofuken": {
             "type": "string",
-            "description": "お届け先都道府県を取得または設定します。\n            "
+            "description": "お届け先都道府県を取得または設定します。\n            ",
+            "minLength": 1
           },
           "shikuchoson": {
             "type": "string",
-            "description": "お届け先市区町村を取得または設定します。\n            "
+            "description": "お届け先市区町村を取得または設定します。\n            ",
+            "minLength": 1
           },
           "azanaAndOthers": {
             "type": "string",
-            "description": "お届け先字／番地／建物名／部屋番号を取得または設定します。\n            "
+            "description": "お届け先字／番地／建物名／部屋番号を取得または設定します。\n            ",
+            "minLength": 1
           },
           "account": {
             "description": "会計情報を取得または設定します。\n            ",
@@ -819,6 +859,12 @@
         "type": "object",
         "description": "注文アイテムの DTO です。\n            ",
         "additionalProperties": false,
+        "required": [
+          "id",
+          "unitPrice",
+          "quantity",
+          "subTotal"
+        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -843,6 +889,11 @@
             "type": "integer",
             "description": "数量を取得または設定します。\n            ",
             "format": "int32"
+          },
+          "subTotal": {
+            "type": "number",
+            "description": "小計額を取得します。\n            ",
+            "format": "decimal"
           }
         }
       },

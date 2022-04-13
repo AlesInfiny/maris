@@ -10,6 +10,7 @@ public class CatalogCategoryDto
     /// <summary>
     ///  カタログカテゴリ Id を取得または設定します。
     /// </summary>
+    [Required]
     public long Id { get; set; }
 
     /// <summary>

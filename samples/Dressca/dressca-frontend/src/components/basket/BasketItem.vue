@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { Basket } from '@/stores/basket/basket.model';
+import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import { TrashIcon } from '@heroicons/vue/outline';
 import * as yup from 'yup';
 import { useField, useForm } from 'vee-validate';
 
 const props = defineProps<{
-  item: Basket;
+  item: BasketItemDto;
 }>();
 
 const emit = defineEmits<{
-  (e: 'update', productCode: string, quantity: number): void;
-  (e: 'remove', productCode: string): void;
+  (e: 'update', catalogItemId: number, quantity: number): void;
+  (e: 'remove', catalogItemId: number): void;
 }>();
 
 // フォーム固有のバリデーション定義
@@ -29,22 +29,41 @@ const isUpdateDisabled = computed(
   () => !(meta.value.valid && meta.value.dirty),
 );
 
-const getImageUrl = (imageId: string) => {
-  return `${import.meta.env.VITE_ASSET_URL}${imageId}`;
+const getFirstImageUrl = (assetCodes: string[] | undefined) => {
+  if (
+    typeof assetCodes === 'undefined' ||
+    assetCodes == null ||
+    assetCodes.length === 0
+  ) {
+    // TODO: Now printingな画像にしたい。
+    return '＃';
+  }
+  return getImageUrl(assetCodes[0]);
 };
 
-const toLocaleString = (price: number) => {
+const getImageUrl = (assetCode: string) => {
+  if (assetCode === '') {
+    // TODO: Now printingな画像にしたい。
+    return '＃';
+  }
+  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
+};
+
+const toLocaleString = (price: number | undefined) => {
+  if (typeof price === 'undefined') {
+    return '-';
+  }
   return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
 };
 
 const update = () => {
   console.log('update: ');
-  emit('update', props.item.productCode, quantity.value);
+  emit('update', props.item.catalogItemId, quantity.value);
 };
 
 const remove = () => {
   resetForm({ values: { quantity: props.item.quantity } });
-  emit('remove', props.item.productCode);
+  emit('remove', props.item.catalogItemId);
 };
 </script>
 
@@ -52,12 +71,12 @@ const remove = () => {
   <div class="col-span-4 lg:col-span-5">
     <div class="grid grid-cols-2">
       <img
-        :src="getImageUrl(item.imageId)"
+        :src="getFirstImageUrl(item.catalogItem?.assetCodes)"
         class="h-[150px] pointer-events-none"
       />
       <div class="ml-2">
-        <p>{{ item.name }}</p>
-        <p class="mt-4">{{ toLocaleString(item.price) }}</p>
+        <p>{{ item.catalogItem?.name }}</p>
+        <p class="mt-4">{{ toLocaleString(item.unitPrice) }}</p>
       </div>
     </div>
   </div>
@@ -92,6 +111,9 @@ const remove = () => {
           @click="remove()"
         />
       </div>
+    </div>
+    <div class="text-right mt-4 mr-3">
+      小計： <span>{{ toLocaleString(item.subTotal) }}</span>
     </div>
   </div>
 </template>

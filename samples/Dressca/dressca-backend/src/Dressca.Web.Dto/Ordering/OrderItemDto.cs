@@ -1,4 +1,5 @@
-﻿using Dressca.Web.Dto.Catalog;
+﻿using System.ComponentModel.DataAnnotations;
+using Dressca.Web.Dto.Catalog;
 
 namespace Dressca.Web.Dto.Ordering;
 
@@ -10,6 +11,7 @@ public class OrderItemDto
     /// <summary>
     ///  注文アイテム Id を取得します。
     /// </summary>
+    [Required]
     public long Id { get; init; }
 
     /// <summary>
@@ -20,10 +22,18 @@ public class OrderItemDto
     /// <summary>
     ///  単価を取得または設定します。
     /// </summary>
+    [Required]
     public decimal UnitPrice { get; set; }
 
     /// <summary>
     ///  数量を取得または設定します。
     /// </summary>
+    [Required]
     public int Quantity { get; set; }
+
+    /// <summary>
+    ///  小計額を取得します。
+    /// </summary>
+    [Required]
+    public decimal SubTotal { get; set; }
 }

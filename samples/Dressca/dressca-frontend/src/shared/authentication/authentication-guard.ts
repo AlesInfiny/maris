@@ -1,4 +1,4 @@
-import type { Router } from 'vue-router';
+import type { Router, RouteRecordName } from 'vue-router';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 import { useRoutingStore } from '@/stores/routing/routing';
 
@@ -7,14 +7,20 @@ export const authenticationGuard = (router: Router) => {
   const routingStore = useRoutingStore();
 
   router.beforeEach((to, from) => {
-    if (['account/login', 'catalog', 'basket'].includes(to.name)) {
+    const ignoreAuthPaths: (RouteRecordName | null | undefined)[] = [
+      'account/login',
+      'catalog',
+      'basket',
+    ];
+    if (ignoreAuthPaths.includes(to.name)) {
       return true;
     }
 
-    if (
-      ['ordering/checkout', 'ordering/done'].includes(to.name) &&
-      !from.name
-    ) {
+    const orderingPaths: (RouteRecordName | null | undefined)[] = [
+      'ordering/checkout',
+      'ordering/done',
+    ];
+    if (orderingPaths.includes(to.name) && !from.name) {
       return { name: 'catalog' };
     }
 
@@ -22,7 +28,8 @@ export const authenticationGuard = (router: Router) => {
       return true;
     }
 
-    routingStore.setRedirectFrom(to.name);
+    const redirectFromPath: string = to.name?.toString() ?? '';
+    routingStore.setRedirectFrom(redirectFromPath);
     return { name: 'account/login' };
   });
 };
