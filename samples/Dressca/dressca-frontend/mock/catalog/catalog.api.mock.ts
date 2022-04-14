@@ -50,7 +50,7 @@ const catalogItemPage: PagedListOfCatalogItemDto = {
       name: 'クルーネック Tシャツ - ブラック',
       price: 1980,
       productCode: 'C000000001',
-      assetCodes: ['45c22ba3da064391baac91341067ffe9'],
+      assetCodes: [],
     },
     {
       id: 2,

@@ -25,7 +25,7 @@ const mockBasketItems: BasketItemDto[] = [
       id: 1,
       name: 'クルーネック Tシャツ - ブラック',
       productCode: 'C000000001',
-      assetCodes: ['45c22ba3da064391baac91341067ffe9'],
+      assetCodes: [],
     },
     subTotal: 0,
   },
