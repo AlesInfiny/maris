@@ -1,5 +1,4 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { number } from 'yup';
 
 export const basketRoutes: RouteRecordRaw[] = [
   {

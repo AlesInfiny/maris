@@ -1,12 +1,11 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import type { BasketDto } from '@/api-client/models/basket-dto';
-import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import type { PutBasketItemsInputDto } from '@/api-client/models/put-basket-items-input-dto';
 import type { PostBasketItemsInputDto } from '@/api-client/models/post-basket-items-input-dto';
 
 export const useBasketStore = defineStore({
-  id: 'bascet',
+  id: 'basket',
   state: () => ({
     basket: {} as BasketDto,
   }),
