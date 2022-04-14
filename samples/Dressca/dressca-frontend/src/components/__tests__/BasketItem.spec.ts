@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
 import { mount } from '@vue/test-utils';
-import BasketItem from '../Basket/BasketItem.vue';
+import BasketItem from '@/components/basket/BasketItem.vue';
 import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 
 describe('HelloWorld', () => {
