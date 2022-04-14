@@ -21,5 +21,6 @@
   "stylelint.validate": ["postcss", "vue"],
 
   "editor.guides.bracketPairs": true,
-  "editor.bracketPairColorization.enabled": true
+  "editor.bracketPairColorization.enabled": true,
+  "cSpell.words": ["dressca", "vite"]
 }
