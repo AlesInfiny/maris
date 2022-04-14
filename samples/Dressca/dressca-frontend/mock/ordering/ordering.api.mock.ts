@@ -32,7 +32,7 @@ const order: OrderDto = {
         id: 4,
         name: '無地 ボタンダウンシャツ',
         productCode: 'C000000004',
-        assetCodes: ['f5f89954281747fa878129c29e1e0f83'],
+        assetCodes: [],
       },
     },
   ],

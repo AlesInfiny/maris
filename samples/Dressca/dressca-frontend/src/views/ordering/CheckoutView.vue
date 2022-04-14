@@ -23,16 +23,14 @@ const getFirstImageUrl = (assetCodes: string[] | undefined) => {
     assetCodes == null ||
     assetCodes.length === 0
   ) {
-    // TODO: Now printingな画像にしたい。
-    return '＃';
+    return `${import.meta.env.VITE_NO_ASSET_URL}`;
   }
   return getImageUrl(assetCodes[0]);
 };
 
 const getImageUrl = (assetCode: string) => {
   if (assetCode === '') {
-    // TODO: Now printingな画像にしたい。
-    return '＃';
+    return `${import.meta.env.VITE_NO_ASSET_URL}`;
   }
   return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
 };

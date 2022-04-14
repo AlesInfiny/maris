@@ -39,6 +39,7 @@ internal class AssetConfiguration : IEntityTypeConfiguration<Asset>
             new("cf151206efd344e1b86854f4aa49fdef", AssetTypes.Png) { Id = 12L },
             new("ab2e78eb7fe3408aadbf1e17a9945a8c", AssetTypes.Png) { Id = 13L },
             new("0e557e96bc054f10bc91c27405a83e85", AssetTypes.Png) { Id = 14L },
+            new("e622b0098808492cb883831c05486b58", AssetTypes.Png) { Id = 15L }, // now printing
         });
     }
 }

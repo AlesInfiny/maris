@@ -65,4 +65,12 @@ export const assetMock = (middlewares) => {
     res.writeHead(200, { 'Content-Type': 'image/png' });
     readFile(`0e557e96bc054f10bc91c27405a83e85`, res);
   });
+  middlewares.use(`/${base}/e622b0098808492cb883831c05486b58`, (_, res) => {
+    res.writeHead(200, { 'Content-Type': 'image/png' });
+    readFile(`e622b0098808492cb883831c05486b58`, res);
+  });
+  middlewares.use(`/${base}`, (_, res) => {
+    res.writeHead(404, { 'Content-Type': 'image/png' });
+    res.end();
+  });
 };
