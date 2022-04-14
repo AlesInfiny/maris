@@ -22,5 +22,5 @@
 
   "editor.guides.bracketPairs": true,
   "editor.bracketPairColorization.enabled": true,
-  "cSpell.words": ["vite"]
+  "cSpell.words": ["dressca", "vite"]
 }
