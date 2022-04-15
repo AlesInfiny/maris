@@ -5,7 +5,7 @@ import { useSpecialContentStore } from '@/stores/special-content/special-content
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { VirtualCarousel } from 'vue-virtual-carousel';
 import { useRouter } from 'vue-router';
-import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 
 const specialContentStore = useSpecialContentStore();
@@ -20,7 +20,7 @@ const state = reactive({
 });
 
 const { selectedCategory, selectedBrand } = toRefs(state);
-const { toCurrencyJPY } = CurrencyHelper();
+const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl, getAssetUrl } = assetHelper();
 
 const getBrandName = (catalogBrandId: number) => {

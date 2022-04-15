@@ -4,7 +4,7 @@ import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import { TrashIcon } from '@heroicons/vue/outline';
 import * as yup from 'yup';
 import { useField, useForm } from 'vee-validate';
-import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 
 const props = defineProps<{
@@ -26,7 +26,7 @@ const { meta, resetForm } = useForm({
   initialValues: { quantity: props.item.quantity },
 });
 const { value: quantity } = useField<number>('quantity');
-const { toCurrencyJPY } = CurrencyHelper();
+const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
 const isUpdateDisabled = computed(

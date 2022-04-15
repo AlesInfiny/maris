@@ -5,7 +5,7 @@ import type { BasketDto } from '@/api-client/models/basket-dto';
 import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import { useRouter } from 'vue-router';
 import BasketItem from '@/components/basket/BasketItem.vue';
-import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 
 const props = defineProps<{
@@ -19,7 +19,7 @@ const state = reactive({
 
 const { basket, added } = toRefs(state);
 const router = useRouter();
-const { toCurrencyJPY } = CurrencyHelper();
+const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
 const isEmpty = () => {

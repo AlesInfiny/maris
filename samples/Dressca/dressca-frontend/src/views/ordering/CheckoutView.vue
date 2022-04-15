@@ -6,7 +6,7 @@ import type { BasketDto } from '@/api-client/models/basket-dto';
 
 import { useOrderingStore } from '@/stores/ordering/ordering';
 import { useRouter } from 'vue-router';
-import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 
 const accountStore = useAccountStore();
@@ -18,7 +18,7 @@ const state = reactive({
 
 const { basket, address } = toRefs(state);
 const router = useRouter();
-const { toCurrencyJPY } = CurrencyHelper();
+const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
 const orderingStore = useOrderingStore();

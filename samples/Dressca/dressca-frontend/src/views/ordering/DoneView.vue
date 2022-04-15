@@ -3,7 +3,7 @@ import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useOrderingStore } from '@/stores/ordering/ordering';
 import type { OrderDto } from '@/api-client/models/order-dto';
-import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 
 const orderingStore = useOrderingStore();
@@ -11,7 +11,7 @@ const router = useRouter();
 const state = reactive({
   lastOrdered: null as OrderDto | null,
 });
-const { toCurrencyJPY } = CurrencyHelper();
+const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
 const goCatalog = () => {
