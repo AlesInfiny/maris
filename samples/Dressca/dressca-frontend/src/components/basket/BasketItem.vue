@@ -4,7 +4,8 @@ import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import { TrashIcon } from '@heroicons/vue/outline';
 import * as yup from 'yup';
 import { useField, useForm } from 'vee-validate';
-import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import currencyHelper from '@/shared/helpers/currencyHelper';
+import assetHelper from '@/shared/helpers/assetHelper';
 
 const props = defineProps<{
   item: BasketItemDto;
@@ -25,29 +26,12 @@ const { meta, resetForm } = useForm({
   initialValues: { quantity: props.item.quantity },
 });
 const { value: quantity } = useField<number>('quantity');
-const { toCurrencyJPY } = CurrencyHelper();
+const { toCurrencyJPY } = currencyHelper();
+const { getFirstAssetUrl } = assetHelper();
 
 const isUpdateDisabled = computed(
   () => !(meta.value.valid && meta.value.dirty),
 );
-
-const getFirstImageUrl = (assetCodes: string[] | undefined) => {
-  if (
-    typeof assetCodes === 'undefined' ||
-    assetCodes == null ||
-    assetCodes.length === 0
-  ) {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return getImageUrl(assetCodes[0]);
-};
-
-const getImageUrl = (assetCode: string) => {
-  if (assetCode === '') {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
-};
 
 const update = () => {
   console.log('update: ');
@@ -64,7 +48,7 @@ const remove = () => {
   <div class="col-span-4 lg:col-span-5">
     <div class="grid grid-cols-2">
       <img
-        :src="getFirstImageUrl(item.catalogItem?.assetCodes)"
+        :src="getFirstAssetUrl(item.catalogItem?.assetCodes)"
         class="h-[150px] pointer-events-none"
       />
       <div class="ml-2">

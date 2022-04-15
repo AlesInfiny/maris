@@ -3,35 +3,19 @@ import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useOrderingStore } from '@/stores/ordering/ordering';
 import type { OrderDto } from '@/api-client/models/order-dto';
-import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import currencyHelper from '@/shared/helpers/currencyHelper';
+import assetHelper from '@/shared/helpers/assetHelper';
 
 const orderingStore = useOrderingStore();
 const router = useRouter();
 const state = reactive({
   lastOrdered: null as OrderDto | null,
 });
-const { toCurrencyJPY } = CurrencyHelper();
+const { toCurrencyJPY } = currencyHelper();
+const { getFirstAssetUrl } = assetHelper();
 
 const goCatalog = () => {
   router.push({ name: 'catalog' });
-};
-
-const getFirstImageUrl = (assetCodes: string[] | undefined) => {
-  if (
-    typeof assetCodes === 'undefined' ||
-    assetCodes == null ||
-    assetCodes.length === 0
-  ) {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return getImageUrl(assetCodes[0]);
-};
-
-const getImageUrl = (assetCode: string) => {
-  if (assetCode === '') {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
 };
 
 onMounted(() => {
@@ -117,7 +101,7 @@ onMounted(() => {
         <div class="col-span-4 lg:col-span-5">
           <div class="grid grid-cols-2">
             <img
-              :src="getFirstImageUrl(item.itemOrdered?.assetCodes)"
+              :src="getFirstAssetUrl(item.itemOrdered?.assetCodes)"
               class="h-[150px] pointer-events-none"
             />
             <div class="ml-2">
