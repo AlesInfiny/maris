@@ -5,6 +5,7 @@ import { useSpecialContentStore } from '@/stores/special-content/special-content
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { VirtualCarousel } from 'vue-virtual-carousel';
 import { useRouter } from 'vue-router';
+import CurrencyHelper from '@/shared/helpers/currencyHelper';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
@@ -18,10 +19,7 @@ const state = reactive({
 });
 
 const { selectedCategory, selectedBrand } = toRefs(state);
-
-const toPriceString = (price: number) => {
-  return `\\${price.toLocaleString()}`;
-};
+const { toCurrencyJPY } = CurrencyHelper();
 
 const getBrandName = (catalogBrandId: number) => {
   return getBrands.value.find((brand) => brand.id === catalogBrandId)?.name;
@@ -118,7 +116,7 @@ watch([selectedCategory, selectedBrand], () => {
                 {{ getBrandName(item.catalogBrandId) }}
               </p>
               <p class="font-bold text-lg">
-                {{ toPriceString(item.price) }}
+                {{ toCurrencyJPY(item.price) }}
               </p>
               <div class="mt-4 flex items-center justify-center">
                 <button
