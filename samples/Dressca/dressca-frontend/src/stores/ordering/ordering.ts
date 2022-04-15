@@ -25,10 +25,8 @@ export const useOrderingStore = defineStore({
       };
       const orderResponse = await axios.post('orders', postOrderInput);
       const url = new URL(orderResponse.headers.location);
-      const paths = url.pathname.split('/');
-      const orderId = paths[paths.length - 1];
-      console.log(orderId);
-      const orderResultResponse = await axios.get(`orders/${orderId}`);
+      const getPath = url.pathname.substring('/api'.length);
+      const orderResultResponse = await axios.get(getPath);
       this.lastOrder = orderResultResponse.data;
     },
     clearLastOrder() {
