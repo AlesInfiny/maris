@@ -9,8 +9,10 @@ import '@/config/axios.config';
 import 'vue-virtual-carousel/dist/style.css';
 
 import { authenticationGuard } from '@/shared/authentication/authentication-guard';
+import { globalFilters } from '@/shared/filters/globalFilters';
 
 const app = createApp(App);
+app.config.globalProperties.$filters = globalFilters;
 const pinia = createPinia();
 
 pinia.use(({ store }) => {
