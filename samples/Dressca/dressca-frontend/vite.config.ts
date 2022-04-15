@@ -22,7 +22,10 @@ export default defineConfig(({ mode }) => {
         '/api': {
           target: env.VITE_BACKEND_ENDPOINT_ORIGIN,
           changeOrigin: true,
-          secure: false,
+          configure: (proxy, options) => {
+            options.autoRewrite = true;
+            options.secure = false;
+          },
         },
         '/swagger': {
           target: env.VITE_BACKEND_ENDPOINT_ORIGIN,
