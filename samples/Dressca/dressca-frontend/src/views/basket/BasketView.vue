@@ -6,6 +6,7 @@ import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import { useRouter } from 'vue-router';
 import BasketItem from '@/components/basket/BasketItem.vue';
 import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import assetHelper from '@/shared/helpers/assetHelper';
 
 const props = defineProps<{
   catalogItemId?: number;
@@ -19,24 +20,7 @@ const state = reactive({
 const { basket, added } = toRefs(state);
 const router = useRouter();
 const { toCurrencyJPY } = CurrencyHelper();
-
-const getFirstImageUrl = (assetCodes: string[] | undefined) => {
-  if (
-    typeof assetCodes === 'undefined' ||
-    assetCodes == null ||
-    assetCodes.length === 0
-  ) {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return getImageUrl(assetCodes[0]);
-};
-
-const getImageUrl = (assetCode: string) => {
-  if (assetCode === '') {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
-};
+const { getFirstAssetUrl } = assetHelper();
 
 const isEmpty = () => {
   return (
@@ -97,7 +81,7 @@ onMounted(async () => {
       >
       <div class="grid grid-cols-1 lg:grid-cols-3 mt-4 flex items-center">
         <img
-          :src="getFirstImageUrl(added.catalogItem?.assetCodes)"
+          :src="getFirstAssetUrl(added.catalogItem?.assetCodes)"
           class="h-[150px] m-auto pointer-events-none"
         />
         <span class="text-center lg:text-left">{{

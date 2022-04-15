@@ -7,6 +7,7 @@ import type { BasketDto } from '@/api-client/models/basket-dto';
 import { useOrderingStore } from '@/stores/ordering/ordering';
 import { useRouter } from 'vue-router';
 import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import assetHelper from '@/shared/helpers/assetHelper';
 
 const accountStore = useAccountStore();
 
@@ -18,24 +19,7 @@ const state = reactive({
 const { basket, address } = toRefs(state);
 const router = useRouter();
 const { toCurrencyJPY } = CurrencyHelper();
-
-const getFirstImageUrl = (assetCodes: string[] | undefined) => {
-  if (
-    typeof assetCodes === 'undefined' ||
-    assetCodes == null ||
-    assetCodes.length === 0
-  ) {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return getImageUrl(assetCodes[0]);
-};
-
-const getImageUrl = (assetCode: string) => {
-  if (assetCode === '') {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
-};
+const { getFirstAssetUrl } = assetHelper();
 
 const orderingStore = useOrderingStore();
 
@@ -141,7 +125,7 @@ onMounted(async () => {
         <div class="col-span-4 lg:col-span-5">
           <div class="grid grid-cols-2">
             <img
-              :src="getFirstImageUrl(item.catalogItem?.assetCodes)"
+              :src="getFirstAssetUrl(item.catalogItem?.assetCodes)"
               class="h-[150px] pointer-events-none"
             />
             <div class="ml-2">

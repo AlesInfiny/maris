@@ -6,6 +6,7 @@ import { useCatalogStore } from '@/stores/catalog/catalog';
 import { VirtualCarousel } from 'vue-virtual-carousel';
 import { useRouter } from 'vue-router';
 import CurrencyHelper from '@/shared/helpers/currencyHelper';
+import assetHelper from '@/shared/helpers/assetHelper';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
@@ -20,27 +21,10 @@ const state = reactive({
 
 const { selectedCategory, selectedBrand } = toRefs(state);
 const { toCurrencyJPY } = CurrencyHelper();
+const { getFirstAssetUrl, getAssetUrl } = assetHelper();
 
 const getBrandName = (catalogBrandId: number) => {
   return getBrands.value.find((brand) => brand.id === catalogBrandId)?.name;
-};
-
-const getFirstImageUrl = (assetCodes: string[] | undefined) => {
-  if (
-    typeof assetCodes === 'undefined' ||
-    assetCodes == null ||
-    assetCodes.length === 0
-  ) {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return getImageUrl(assetCodes[0]);
-};
-
-const getImageUrl = (assetCode: string) => {
-  if (assetCode === '') {
-    return `${import.meta.env.VITE_NO_ASSET_URL}`;
-  }
-  return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
 };
 
 const addBasket = (catalogItemId: number) => {
@@ -64,7 +48,7 @@ watch([selectedCategory, selectedBrand], () => {
       <VirtualCarousel :items="getSpecialContents" class="h-[350px] w-full">
         <template #default="{ item }">
           <img
-            :src="getImageUrl(item.assetCode)"
+            :src="getAssetUrl(item.assetCode)"
             class="h-full m-auto pointer-events-none"
           />
         </template>
@@ -108,7 +92,7 @@ watch([selectedCategory, selectedBrand], () => {
           >
             <img
               class="h-[180px]"
-              :src="getFirstImageUrl(item.assetCodes)"
+              :src="getFirstAssetUrl(item.assetCodes)"
               alt="Sunset in the mountains"
             />
             <div class="w-full">
