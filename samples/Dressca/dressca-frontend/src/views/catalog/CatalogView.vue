@@ -19,6 +19,10 @@ const state = reactive({
 
 const { selectedCategory, selectedBrand } = toRefs(state);
 
+const toPriceString = (price: number) => {
+  return `\\${price.toLocaleString()}`;
+};
+
 const getBrandName = (catalogBrandId: number) => {
   return getBrands.value.find((brand) => brand.id === catalogBrandId)?.name;
 };
@@ -114,7 +118,7 @@ watch([selectedCategory, selectedBrand], () => {
                 {{ getBrandName(item.catalogBrandId) }}
               </p>
               <p class="font-bold text-lg">
-                {{ $filters.toCurrencyJPY(item.price) }}
+                {{ toPriceString(item.price) }}
               </p>
               <div class="mt-4 flex items-center justify-center">
                 <button

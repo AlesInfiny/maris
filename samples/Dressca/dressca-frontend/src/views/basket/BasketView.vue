@@ -36,6 +36,13 @@ const getImageUrl = (assetCode: string) => {
   return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
 };
 
+const toLocaleString = (price: number | undefined) => {
+  if (typeof price === 'undefined') {
+    return '-';
+  }
+  return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
+};
+
 const isEmpty = () => {
   return (
     typeof state.basket.basketItems === 'undefined' ||
@@ -102,7 +109,7 @@ onMounted(async () => {
           added.catalogItem?.name
         }}</span>
         <span class="text-center lg:text-left">{{
-          $filters.toCurrencyJPY(added.unitPrice)
+          toLocaleString(added.unitPrice)
         }}</span>
       </div>
     </div>
@@ -129,27 +136,19 @@ onMounted(async () => {
         <table class="inline-block border-separate">
           <tr>
             <th>税抜き合計</th>
-            <td>
-              {{ $filters.toCurrencyJPY(basket.account?.totalItemsPrice) }}
-            </td>
+            <td>{{ toLocaleString(basket.account?.totalItemsPrice) }}</td>
           </tr>
           <tr>
             <th>送料</th>
-            <td>
-              {{ $filters.toCurrencyJPY(basket.account?.deliveryCharge) }}
-            </td>
+            <td>{{ toLocaleString(basket.account?.deliveryCharge) }}</td>
           </tr>
           <tr>
             <th>消費税</th>
-            <td>
-              {{ $filters.toCurrencyJPY(basket.account?.consumptionTax) }}
-            </td>
+            <td>{{ toLocaleString(basket.account?.consumptionTax) }}</td>
           </tr>
           <tr>
             <th>合計</th>
-            <td class="">
-              {{ $filters.toCurrencyJPY(basket.account?.totalPrice) }}
-            </td>
+            <td class="">{{ toLocaleString(basket.account?.totalPrice) }}</td>
           </tr>
         </table>
       </div>

@@ -35,6 +35,13 @@ const getImageUrl = (assetCode: string) => {
   return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
 };
 
+const toLocaleString = (price: number | undefined) => {
+  if (typeof price === 'undefined') {
+    return '-';
+  }
+  return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
+};
+
 const orderingStore = useOrderingStore();
 
 const checkout = async () => {
@@ -78,25 +85,25 @@ onMounted(async () => {
           <tr>
             <td>税抜き合計</td>
             <td class="text-right">
-              {{ $filters.toCurrencyJPY(basket.account?.totalItemsPrice) }}
+              {{ toLocaleString(basket.account?.totalItemsPrice) }}
             </td>
           </tr>
           <tr>
             <td>送料</td>
             <td class="text-right">
-              {{ $filters.toCurrencyJPY(basket.account?.deliveryCharge) }}
+              {{ toLocaleString(basket.account?.deliveryCharge) }}
             </td>
           </tr>
           <tr>
             <td>消費税</td>
             <td class="text-right">
-              {{ $filters.toCurrencyJPY(basket.account?.consumptionTax) }}
+              {{ toLocaleString(basket.account?.consumptionTax) }}
             </td>
           </tr>
           <tr>
             <td>合計</td>
             <td class="text-right text-xl font-bold text-red-500">
-              {{ $filters.toCurrencyJPY(basket.account?.totalPrice) }}
+              {{ toLocaleString(basket.account?.totalPrice) }}
             </td>
           </tr>
         </tbody>
@@ -145,11 +152,11 @@ onMounted(async () => {
             <div class="ml-2">
               <p>{{ item.catalogItem?.name }}</p>
               <p class="mt-4">
-                {{ `価格: ${$filters.toCurrencyJPY(item.unitPrice)}` }}
+                {{ `価格: ${toLocaleString(item.unitPrice)}` }}
               </p>
               <p class="mt-4">{{ `数量: ${item.quantity}` }}</p>
               <p class="mt-4">
-                {{ $filters.toCurrencyJPY(item.subTotal) }}
+                {{ toLocaleString(item.subTotal) }}
               </p>
             </div>
           </div>
