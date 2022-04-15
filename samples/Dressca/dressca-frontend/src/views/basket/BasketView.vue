@@ -5,6 +5,7 @@ import type { BasketDto } from '@/api-client/models/basket-dto';
 import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import { useRouter } from 'vue-router';
 import BasketItem from '@/components/basket/BasketItem.vue';
+import CurrencyHelper from '@/shared/helpers/currencyHelper';
 
 const props = defineProps<{
   catalogItemId?: number;
@@ -17,6 +18,7 @@ const state = reactive({
 
 const { basket, added } = toRefs(state);
 const router = useRouter();
+const { toCurrencyJPY } = CurrencyHelper();
 
 const getFirstImageUrl = (assetCodes: string[] | undefined) => {
   if (
@@ -34,13 +36,6 @@ const getImageUrl = (assetCode: string) => {
     return `${import.meta.env.VITE_NO_ASSET_URL}`;
   }
   return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
-};
-
-const toLocaleString = (price: number | undefined) => {
-  if (typeof price === 'undefined') {
-    return '-';
-  }
-  return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
 };
 
 const isEmpty = () => {
@@ -109,7 +104,7 @@ onMounted(async () => {
           added.catalogItem?.name
         }}</span>
         <span class="text-center lg:text-left">{{
-          toLocaleString(added.unitPrice)
+          toCurrencyJPY(added.unitPrice)
         }}</span>
       </div>
     </div>
@@ -136,19 +131,19 @@ onMounted(async () => {
         <table class="inline-block border-separate">
           <tr>
             <th>税抜き合計</th>
-            <td>{{ toLocaleString(basket.account?.totalItemsPrice) }}</td>
+            <td>{{ toCurrencyJPY(basket.account?.totalItemsPrice) }}</td>
           </tr>
           <tr>
             <th>送料</th>
-            <td>{{ toLocaleString(basket.account?.deliveryCharge) }}</td>
+            <td>{{ toCurrencyJPY(basket.account?.deliveryCharge) }}</td>
           </tr>
           <tr>
             <th>消費税</th>
-            <td>{{ toLocaleString(basket.account?.consumptionTax) }}</td>
+            <td>{{ toCurrencyJPY(basket.account?.consumptionTax) }}</td>
           </tr>
           <tr>
             <th>合計</th>
-            <td class="">{{ toLocaleString(basket.account?.totalPrice) }}</td>
+            <td class="">{{ toCurrencyJPY(basket.account?.totalPrice) }}</td>
           </tr>
         </table>
       </div>

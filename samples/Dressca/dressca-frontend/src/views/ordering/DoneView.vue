@@ -3,12 +3,14 @@ import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useOrderingStore } from '@/stores/ordering/ordering';
 import type { OrderDto } from '@/api-client/models/order-dto';
+import CurrencyHelper from '@/shared/helpers/currencyHelper';
 
 const orderingStore = useOrderingStore();
 const router = useRouter();
 const state = reactive({
   lastOrdered: null as OrderDto | null,
 });
+const { toCurrencyJPY } = CurrencyHelper();
 
 const goCatalog = () => {
   router.push({ name: 'catalog' });
@@ -30,13 +32,6 @@ const getImageUrl = (assetCode: string) => {
     return `${import.meta.env.VITE_NO_ASSET_URL}`;
   }
   return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
-};
-
-const toLocaleString = (price: number | undefined) => {
-  if (typeof price === 'undefined') {
-    return '-';
-  }
-  return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
 };
 
 onMounted(() => {
@@ -67,25 +62,25 @@ onMounted(() => {
           <tr>
             <td>税抜き合計</td>
             <td class="text-right">
-              {{ toLocaleString(state.lastOrdered?.account?.totalItemsPrice) }}
+              {{ toCurrencyJPY(state.lastOrdered?.account?.totalItemsPrice) }}
             </td>
           </tr>
           <tr>
             <td>送料</td>
             <td class="text-right">
-              {{ toLocaleString(state.lastOrdered?.account?.deliveryCharge) }}
+              {{ toCurrencyJPY(state.lastOrdered?.account?.deliveryCharge) }}
             </td>
           </tr>
           <tr>
             <td>消費税</td>
             <td class="text-right">
-              {{ toLocaleString(state.lastOrdered?.account?.consumptionTax) }}
+              {{ toCurrencyJPY(state.lastOrdered?.account?.consumptionTax) }}
             </td>
           </tr>
           <tr>
             <td>合計</td>
             <td class="text-right text-xl font-bold text-red-500">
-              {{ toLocaleString(state.lastOrdered?.account?.totalPrice) }}
+              {{ toCurrencyJPY(state.lastOrdered?.account?.totalPrice) }}
             </td>
           </tr>
         </tbody>
@@ -128,11 +123,11 @@ onMounted(() => {
             <div class="ml-2">
               <p>{{ item.itemOrdered?.name }}</p>
               <p class="mt-4">
-                {{ `価格: ${toLocaleString(item.unitPrice)}` }}
+                {{ `価格: ${toCurrencyJPY(item.unitPrice)}` }}
               </p>
               <p class="mt-4">{{ `数量: ${item.quantity}` }}</p>
               <p class="mt-4">
-                {{ toLocaleString(item.subTotal) }}
+                {{ toCurrencyJPY(item.subTotal) }}
               </p>
             </div>
           </div>

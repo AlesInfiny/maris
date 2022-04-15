@@ -4,6 +4,7 @@ import type { BasketItemDto } from '@/api-client/models/basket-item-dto';
 import { TrashIcon } from '@heroicons/vue/outline';
 import * as yup from 'yup';
 import { useField, useForm } from 'vee-validate';
+import CurrencyHelper from '@/shared/helpers/currencyHelper';
 
 const props = defineProps<{
   item: BasketItemDto;
@@ -24,6 +25,7 @@ const { meta, resetForm } = useForm({
   initialValues: { quantity: props.item.quantity },
 });
 const { value: quantity } = useField<number>('quantity');
+const { toCurrencyJPY } = CurrencyHelper();
 
 const isUpdateDisabled = computed(
   () => !(meta.value.valid && meta.value.dirty),
@@ -47,13 +49,6 @@ const getImageUrl = (assetCode: string) => {
   return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
 };
 
-const toLocaleString = (price: number | undefined) => {
-  if (typeof price === 'undefined') {
-    return '-';
-  }
-  return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
-};
-
 const update = () => {
   console.log('update: ');
   emit('update', props.item.catalogItemId, quantity.value);
@@ -74,7 +69,7 @@ const remove = () => {
       />
       <div class="ml-2">
         <p>{{ item.catalogItem?.name }}</p>
-        <p class="mt-4">{{ toLocaleString(item.unitPrice) }}</p>
+        <p class="mt-4">{{ toCurrencyJPY(item.unitPrice) }}</p>
       </div>
     </div>
   </div>
@@ -111,7 +106,7 @@ const remove = () => {
       </div>
     </div>
     <div class="text-right mt-4 mr-3">
-      小計： <span>{{ toLocaleString(item.subTotal) }}</span>
+      小計： <span>{{ toCurrencyJPY(item.subTotal) }}</span>
     </div>
   </div>
 </template>
