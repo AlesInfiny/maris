@@ -47,13 +47,6 @@ const getImageUrl = (assetCode: string) => {
   return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
 };
 
-const toLocaleString = (price: number | undefined) => {
-  if (typeof price === 'undefined') {
-    return '-';
-  }
-  return price.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' });
-};
-
 const update = () => {
   console.log('update: ');
   emit('update', props.item.catalogItemId, quantity.value);
@@ -74,7 +67,7 @@ const remove = () => {
       />
       <div class="ml-2">
         <p>{{ item.catalogItem?.name }}</p>
-        <p class="mt-4">{{ toLocaleString(item.unitPrice) }}</p>
+        <p class="mt-4">{{ $filters.toCurrencyJPY(item.unitPrice) }}</p>
       </div>
     </div>
   </div>
@@ -111,7 +104,7 @@ const remove = () => {
       </div>
     </div>
     <div class="text-right mt-4 mr-3">
-      小計： <span>{{ toLocaleString(item.subTotal) }}</span>
+      小計： <span>{{ $filters.toCurrencyJPY(item.subTotal) }}</span>
     </div>
   </div>
 </template>
