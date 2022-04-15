@@ -47,7 +47,6 @@ onMounted(() => {
   }
   state.lastOrdered = lastOrder;
   orderingStore.clearLastOrder();
-  console.log(state.lastOrdered);
 });
 </script>
 
