@@ -19,7 +19,6 @@ namespace Dressca.Web.Controllers;
 [Produces("application/json")]
 public class BasketItemsController : ControllerBase
 {
-    private const string BuyerIdCookieName = "Dressca-Bid";
     private readonly BasketApplicationService basketApplicationService;
     private readonly CatalogDomainService catalogDomainService;
     private readonly ICatalogRepository catalogRepository;
