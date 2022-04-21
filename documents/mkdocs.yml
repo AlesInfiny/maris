@@ -7,7 +7,7 @@ site_author: '生産技術イノベーション部'
 site_description: 'Maris OSS版のポータルサイトです。'
 site_dir: build-artifacts
 
-nav:
+  nav:
   - Maris OSS版にようこそ:
       - index.md
   - アプリケーションアーキテクチャ:
