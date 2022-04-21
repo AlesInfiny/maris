@@ -4,7 +4,9 @@
 			"path": "."
 		}
 	],
-	"settings": {},
+	"settings": {
+		"tableformatter.common.centerAlignedHeader": false
+	},
 	"extensions": {
         "recommendations": [
             "hediet.vscode-drawio",

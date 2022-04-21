@@ -8,43 +8,51 @@
 
 documents ディレクトリ配下のディレクトリ、ファイルの配置は以下の通りです。
 
-|             |                |                     |                  |                                            |
-|-------------|----------------|---------------------|------------------|--------------------------------------------|
-|contents     |                |                     |                  |ドキュメント本体                            |
-|             |app-architecture|                     |                  |アプリケーションアーキテクチャ              |
-|             |                |client-side-rendering|                  |CSR編                                       |
-|             |                |console-app          |                  |コンソールアプリケーション編（※）          |
-|             |                |overview             |                  |概要編                                      |
-|             |assets          |                     |                  |共通資材（ロゴなど）                        |
-|             |                |images               |                  |                                            |
-|             |guidebooks      |                     |                  |ガイドライン系ドキュメント                  |
-|             |                |app-testing          |                  |アプリケーションテスト（※）                |
-|             |                |how-to-develop       |                  |アプリケーション開発手順                    |
-|             |                |                     |dotnet            |.NET 編                                     |
-|             |                |                     |local-environment |ローカル開発環境の構築                      |
-|             |                |                     |vue-js            |Vue.js 編                                   |
-|             |                |migration            |                  |マイグレーション                            |
-|             |                |                     |dotnetfw-risk     |.NET Frameworkにとどまることのリスク        |
-|             |                |                     |from-dotnetfw     |.NET Frameworkからの移行（※）              |
-|             |                |modern-dev-process   |                  |開発プロセスのモダナイズ（※）              |
-|             |images          |                     |                  |ページ固有の画像ファイル置き場              |
-|             |                |app-architecture     |                  |mdファイルの配置ディレクトリと構造をそろえる|
-|             |                |guidebooks           |                  |                                            |
-|             |                |                     |app-testing       |                                            |
-|             |                |                     |how-to-develop    |                                            |
-|             |                |                     |migration         |                                            |
-|             |                |                     |modern-dev-process|                                            |
-|             |                |samples              |                  |                                            |
-|             |                |terms                |                  |                                            |
-|             |samples         |                     |                  |サンプルアプリケーション解説                |
-|             |stylesheets     |                     |                  |既定のスタイルシートの上書き設定            |
-|             |terms           |                     |                  |利用規約                                    |
-|includes     |                |                     |                  |Snippets の置き場                           |
-|             |abbreviations.md|                     |                  |略語用語集                                  |
-|readme-images|                |                     |                  |README.md 内の画像ファイル置き場            |
-|.gitignore   |                |                     |                  |mkdocs 用の gitignore                       |
-|mkdocs.yml   |                |                     |                  |mkdocs の設定ファイル                       |
-|README.md    |                |                     |                  |このドキュメント                            |
+|               |                  |                       |                    |                                              |
+| ------------- | ---------------- | --------------------- | ------------------ | -------------------------------------------- |
+| _materials    |                  |                       |                    | ドキュメント内で利用する素材                 |
+|               | images           |                       |                    | 画像素材（画像を作るための元ファイル）       |
+|               |                  | app-architecture      |                    | contents/imagesディレクトリと構造をそろえる  |
+|               |                  |                       | hoge.drawio        | ファイル名は生成後の画像ファイルと同じにする |
+| contents      |                  |                       |                    | ドキュメント本体                             |
+|               | app-architecture |                       |                    | アプリケーションアーキテクチャ               |
+|               |                  | client-side-rendering |                    | CSR編                                        |
+|               |                  | console-app           |                    | コンソールアプリケーション編（\*）           |
+|               |                  | overview              |                    | 概要編                                       |
+|               | assets           |                       |                    | 共通資材（ロゴなど）                         |
+|               |                  | images                |                    |                                              |
+|               | guidebooks       |                       |                    | ガイドライン系ドキュメント                   |
+|               |                  | app-testing           |                    | アプリケーションテスト（*）                  |
+|               |                  | how-to-develop        |                    | アプリケーション開発手順                     |
+|               |                  |                       | dotnet             | .NET 編                                      |
+|               |                  |                       | local-environment  | ローカル開発環境の構築                       |
+|               |                  |                       | vue-js             | Vue.js 編                                    |
+|               |                  | migration             |                    | マイグレーション                             |
+|               |                  |                       | dotnetfw-risk      | .NET Frameworkにとどまることのリスク         |
+|               |                  |                       | from-dotnetfw      | .NET Frameworkからの移行（\*）               |
+|               |                  | modern-dev-process    |                    | 開発プロセスのモダナイズ（\*）               |
+|               | images           |                       |                    | ページ固有の画像ファイル置き場               |
+|               |                  | app-architecture      |                    | mdファイルの配置ディレクトリと構造をそろえる |
+|               |                  |                       | hoge.png           | 画像ファイルはsvgかpngにする                 |
+|               |                  |                       | animation.gif      | gifアニメも利用可                            |
+|               |                  | guidebooks            |                    |                                              |
+|               |                  |                       | app-testing        |                                              |
+|               |                  |                       | how-to-develop     |                                              |
+|               |                  |                       | migration          |                                              |
+|               |                  |                       | modern-dev-process |                                              |
+|               |                  | samples               |                    |                                              |
+|               |                  | terms                 |                    |                                              |
+|               | samples          |                       |                    | サンプルアプリケーション解説                 |
+|               | stylesheets      |                       |                    | 既定のスタイルシートの上書き設定             |
+|               | terms            |                       |                    | 利用規約                                     |
+| includes      |                  |                       |                    | Snippets の置き場                            |
+|               | abbreviations.md |                       |                    | 略語用語集                                   |
+| readme-images |                  |                       |                    | README.md 内の画像ファイル置き場             |
+| .gitignore    |                  |                       |                    | mkdocs 用の gitignore                        |
+| mkdocs.yml    |                  |                       |                    | mkdocs の設定ファイル                        |
+| README.md     |                  |                       |                    | このドキュメント                             |
+
+\*：v0.1では対象外
 
 ## ドキュメントの作成方法（わかっている人向けの大雑把な手順）
 
@@ -177,14 +185,33 @@ TODO: 記載の修正が必要
 >
 > プルリクエストをマージすると、継続的デプロイメントが走り、自動的に Web サイトが更新されます。
 >
-> ### 最終確認
->
-> Web サイトの更新が完了したら、以下にアクセスして問題なく修正が反映されていることを確認します。
->
-> <https://TODO>
->
-> 問題がある場合は、再度 Feature ブランチを作成するところから再実施してください。
-> 修正に時間がかかる場合は、以前のリリース物を再リリースし、切り戻すようにしてください。
+### 最終確認
+
+Web サイトの更新が完了したら、以下にアクセスして問題なく修正が反映されていることを確認します。
+
+<https://app-oss-maris-staging.azurewebsites.net/>
+
+問題がある場合は、再度 Feature ブランチを作成するところから再実施してください。
+修正に時間がかかる場合は、以前のリリース物を再リリースし、切り戻すようにしてください。
+
+## 画像の作成方法
+
+図を作成する場合は \*.drawio で作成してください。
+\*.drawio ファイルは、 _materials/images ディレクトリの配下に作成してください。
+画像ファイルは svg 形式または png 形式で出力し、出力した画像ファイルを contents/images ディレクトリの配下に配置してください。
+
+スクリーンショットなど、元となる \*.drawio ファイルが存在しない場合は、 _materials/images ディレクトリの配下にファイルを配置する必要ありません。
+
+_materials/images ディレクトリ、 contents/images ディレクトリの配下は、画像を配置するマークダウンの置き場所にあわせてディレクトリを掘り、その中に各ファイルを配置してください。
+
+画像ファイル作成にあたり、以下のルールを守って作成してください。
+
+| 項目               | 設定値/選択する値                                    |
+| ------------------ | ---------------------------------------------------- |
+| フォントサイズ     | 18pt                                                 |
+| フォントファミリー | [カスタム] > [Google Fonts] > 「Noto Sans JP」を設定 |
+
+![フォントファミリーの設定例](readme-images/drawio-font-family.png)
 
 ## ドキュメント執筆環境の構築方法
 
