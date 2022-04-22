@@ -54,6 +54,8 @@ jobs:
 
       - name: ドキュメントのビルド
         run: |
+          # リリースタグを打ったときだけ github.event.release.name が設定される。
+          # 設定されているときは、著作権表記の前にバージョン番号を付与する。
           if [ -n "${{ github.event.release.name }}" ]; then
             export COPYRIGHT="${{ github.event.release.name }} Copyright &copy; 2022 BIPROGY Inc. All rights reserved."
           fi
