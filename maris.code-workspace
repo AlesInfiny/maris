@@ -9,9 +9,10 @@
 	},
 	"extensions": {
         "recommendations": [
-            "hediet.vscode-drawio",
+			"hediet.vscode-drawio",
 			"yzhang.markdown-all-in-one",
-			"davidanson.vscode-markdownlint"			
-        ]
+			"davidanson.vscode-markdownlint",
+			"shuworks.vscode-table-formatter"
+		]
     }
 }
