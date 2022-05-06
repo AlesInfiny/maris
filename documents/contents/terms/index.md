@@ -38,8 +38,8 @@ Maris OSS 版（以下、本サイト）は、以下を提供します。
 
 本サイトに記載の商品名、製品名、社名などは、各社が商標として使用している場合があります。
 
-- 「Maris」は、BIPROGY株式会社の登録商標です。
-- 「Microsoft」「Windows」「Visual Studio」「Visual Studio Code」「VS Code」「Azure」は米国Microsoft Corporationの米国およびその他の国における登録商標または商標です。
+- 「Maris」は、 BIPROGY 株式会社の登録商標です。
+- 「Microsoft」「Windows」「Visual Studio」「Visual Studio Code」「VS Code」「Azure」は米国 Microsoft Corporation の米国およびその他の国における登録商標または商標です。
 - Git and the Git logo are either registered trademarks or trademarks of Software Freedom Conservancy, Inc., corporate home of the Git Project, in the United States and/or other countries.
 - Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
 - その他記載されている会社名・商品名などは、各社の商標および登録商標です。

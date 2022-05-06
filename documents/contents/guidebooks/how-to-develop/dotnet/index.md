@@ -11,3 +11,5 @@
 ### bbb-1
 
 ### bbb-2
+
+--8<-- "includes/abbreviations.md"

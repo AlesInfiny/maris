@@ -3,11 +3,11 @@ hide:
   - navigation
 ---
 
-# Maris OSS版にようこそ
+# Maris OSS 版にようこそ
 
-## Maris OSS版とは ## { #what-is-maris-oss-version }
+## Maris OSS 版とは ## { #what-is-maris-oss-version }
 
-Maris OSS版は、.NETアプリケーションの基本アーキテクチャを実装したサンプルアプリケーションと、その開発ガイドで構成されています。
+Maris OSS 版は、 .NET アプリケーションの基本アーキテクチャを実装したサンプルアプリケーションと、その開発ガイドで構成されています。
 エンタープライズシステムに求められるアプリケーション構造を誰でも無償で手に入れることができます。
 Maris OSS 版の提供物は以下の通りです。
 
@@ -19,3 +19,5 @@ Maris OSS 版の提供物は以下の通りです。
 Maris OSS 版は、商用のエンタープライズシステム開発から個人開発の小規模なシステムまで、 Apache License, Version 2.0 にて無償で利用可能です。
 
 ## クイックスタート ## { #quick-start }
+
+--8<-- "includes/abbreviations.md"
