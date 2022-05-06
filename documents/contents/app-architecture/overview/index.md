@@ -73,7 +73,6 @@ Maris OSS 版では、 1 システム 1 ソリューションを基本として�
     - レイヤードアーキテクチャ
     - クリーンアーキテクチャ
 
-
     各アーキテクチャの詳細は、以下を参照してください。
 
     [一般的な Web アプリケーション アーキテクチャ](https://docs.microsoft.com/ja-jp/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)
