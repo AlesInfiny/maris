@@ -7,7 +7,7 @@ Maris OSS版を利用することで構築できるアプリケーションの�
 - Webアプリケーション（クライアントサイドレンダリング）  
   HTMLをクライアント側JavaScriptでレンダリングする方式のWebアプリケーションです。
   画面初期表示時にはコンパイル済みの静的ファイルをダウンロードして、JavaScriptで動的に画面をレンダリングします。業務データの取得、更新などの処理を行う際は、Web API経由でサーバー側の業務ロジックを呼び出します。
-![image](../../images/app-architecture/overview/CSR.png)
+![image](../../images/app-architecture/overview/client-side-rendering.png)
 
 - Webアプリケーション（サーバーサイドサイドレンダリング）  
   サーバーサイドで構築したHTMLを表示する方式のWebアプリケーションです。（今後追加予定）
