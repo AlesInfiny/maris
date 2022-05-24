@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 public class ShipToTest
 {
     [Fact]
-    public void 宛名がnullの場合例外()
+    public void Constructor_宛名がnullの場合例外()
     {
         // Arrange
         string? fullName = null;
@@ -19,7 +19,7 @@ public class ShipToTest
     }
 
     [Fact]
-    public void 住所がnullの場合例外()
+    public void Constructor_住所がnullの場合例外()
     {
         // Arrange
         string fullName = "国会　太郎";

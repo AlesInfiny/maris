@@ -6,7 +6,7 @@ namespace Dressca.UnitTests.Web.Baskets;
 public class HttpContextExtensionsTest
 {
     [Fact]
-    public void 購入者IdがHttpContextに存在しない場合新たにGuid形式の購入者Idが発行される()
+    public void GetBuyerId_購入者IdがHttpContextに存在しない場合新たにGuid形式の購入者Idが発行される()
     {
         // Arrange
         var items = new Dictionary<object, object?>();
@@ -21,7 +21,7 @@ public class HttpContextExtensionsTest
     }
 
     [Fact]
-    public void 購入者Idが文字列型ではない場合新たにGuid形式の購入者Idが発行される()
+    public void GetBuyerId_購入者Idが文字列型ではない場合新たにGuid形式の購入者Idが発行される()
     {
         // Arrange
         var items = new Dictionary<object, object?>
@@ -42,7 +42,7 @@ public class HttpContextExtensionsTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("not-guid-value")]
-    public void 購入者IdがGuidの文字列ではない場合新たにGuid形式の購入者Idが発行される(string? itemValue)
+    public void GetBuyerId_購入者IdがGuidの文字列ではない場合新たにGuid形式の購入者Idが発行される(string? itemValue)
     {
         // Arrange
         var items = new Dictionary<object, object?>
@@ -60,7 +60,7 @@ public class HttpContextExtensionsTest
     }
 
     [Fact]
-    public void 購入者IdがGuidの文字列の場合設定されている値を取得できる()
+    public void GetBuyerId_購入者IdがGuidの文字列の場合設定されている値を取得できる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString();
@@ -79,7 +79,7 @@ public class HttpContextExtensionsTest
     }
 
     [Fact]
-    public void 購入者Idを新たに追加できる()
+    public void SetBuyerId_購入者Idを新たに追加できる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString();
@@ -101,7 +101,7 @@ public class HttpContextExtensionsTest
     }
 
     [Fact]
-    public void 購入者Idを上書きできる()
+    public void SetBuyerId_購入者Idを上書きできる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString();

@@ -12,7 +12,7 @@ public class AssetApplicationServiceTest
         => this.loggerFactory = XunitLoggerFactory.Create(testOutputHelper);
 
     [Fact]
-    public void リポジトリに指定したアセットコードの情報が見つからない場合は例外()
+    public void GetAssetStreamInfo_リポジトリに指定したアセットコードの情報が見つからない場合は例外()
     {
         // Arrange
         var assetCode = "dummy";
@@ -33,7 +33,7 @@ public class AssetApplicationServiceTest
     }
 
     [Fact]
-    public void ストアに指定したアセットコードのストリームが見つからない場合は例外()
+    public void GetAssetStreamInfo_ストアに指定したアセットコードのストリームが見つからない場合は例外()
     {
         // Arrange
         var assetCode = "dummy";
@@ -58,7 +58,7 @@ public class AssetApplicationServiceTest
     }
 
     [Fact]
-    public void リポジトリから取得したアセット情報とストアから取得したストリームを取得できる()
+    public void GetAssetStreamInfo_リポジトリから取得したアセット情報とストアから取得したストリームを取得できる()
     {
         // Arrange
         var assetCode = "assetCode";

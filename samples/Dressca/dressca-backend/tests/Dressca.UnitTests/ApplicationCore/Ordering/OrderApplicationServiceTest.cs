@@ -17,7 +17,7 @@ public class OrderApplicationServiceTest
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Fact]
-    public async Task 注文作成処理は注文リポジトリのAddを1回呼出す()
+    public async Task CreateOrderAsync_注文作成処理は注文リポジトリのAddを1回呼出す()
     {
         // Arrange
         const long basketId = 1L;
@@ -54,7 +54,7 @@ public class OrderApplicationServiceTest
     }
 
     [Fact]
-    public void 注文作成処理で指定した買い物かごが存在しない場合は業務例外が発生する()
+    public void CreateOrderAsync_注文作成処理で指定した買い物かごが存在しない場合は業務例外が発生する()
     {
         // Arrange
         const long basketId = 999L;
@@ -76,7 +76,7 @@ public class OrderApplicationServiceTest
     }
 
     [Fact]
-    public void 注文作成処理で指定した買い物かごが空の場合は業務例外が発生する()
+    public void CreateOrderAsync_注文作成処理で指定した買い物かごが空の場合は業務例外が発生する()
     {
         // Arrange
         const long basketId = 3L;
@@ -100,7 +100,7 @@ public class OrderApplicationServiceTest
     }
 
     [Fact]
-    public async Task 注文リポジトリから取得した情報と指定した購入者IDが合致する場合注文情報を取得できる()
+    public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが合致する場合注文情報を取得できる()
     {
         // Arrange
         var orderId = 10L;
@@ -125,7 +125,7 @@ public class OrderApplicationServiceTest
     }
 
     [Fact]
-    public void 注文リポジトリから取得した情報と指定した購入者IDが異なる場合例外になる()
+    public void GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが異なる場合例外になる()
     {
         // Arrange
         var orderId = 10L;
@@ -150,7 +150,7 @@ public class OrderApplicationServiceTest
     }
 
     [Fact]
-    public void 注文リポジトリから注文情報を取得できない場合例外になる()
+    public void GetOrderAsync_注文リポジトリから注文情報を取得できない場合例外になる()
     {
         // Arrange
         var orderId = 10L;

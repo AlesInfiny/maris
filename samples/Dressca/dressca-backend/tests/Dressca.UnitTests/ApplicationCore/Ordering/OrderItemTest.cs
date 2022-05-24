@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 public class OrderItemTest
 {
     [Fact]
-    public void 注文されたカタログアイテムがnullの場合例外()
+    public void Constructor_注文されたカタログアイテムがnullの場合例外()
     {
         // Arrange
         CatalogItemOrdered? itemOrdered = null;
@@ -20,7 +20,7 @@ public class OrderItemTest
     }
 
     [Fact]
-    public void 注文情報が初期化されていない場合例外()
+    public void Order_注文情報が初期化されていない場合例外()
     {
         // Arrange
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
@@ -37,7 +37,7 @@ public class OrderItemTest
     }
 
     [Fact]
-    public void 注文アイテムアセットにnullを追加しようとすると例外()
+    public void AddAssets_注文アイテムアセットにnullを追加しようとすると例外()
     {
         // Arrange
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
@@ -54,7 +54,7 @@ public class OrderItemTest
     }
 
     [Fact]
-    public void 注文アイテムアセットに追加した情報が取得できる()
+    public void AddAssets_注文アイテムアセットに追加した情報が取得できる()
     {
         // Arrange
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
@@ -78,7 +78,7 @@ public class OrderItemTest
     }
 
     [Fact]
-    public void 注文アイテムの小計を取得できる()
+    public void GetSubTotal_注文アイテムの小計を取得できる()
     {
         // Arrange
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");

@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Baskets;
 public class BasketTest
 {
     [Fact]
-    public void 正しくインスタンス化できる()
+    public void Constructor_正しくインスタンス化できる()
     {
         // Arrange & Act
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -18,7 +18,7 @@ public class BasketTest
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(10)]
-    public void 商品を1つ追加できる(int quantity)
+    public void AddItem_商品を1つ追加できる(int quantity)
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -31,7 +31,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 複数の商品を追加できる()
+    public void AddItem_複数の商品を追加できる()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -56,7 +56,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かご内の商品の数量を加算しても買い物かご内の商品の種類が変わらない()
+    public void AddItem_買い物かご内の商品の数量を加算しても買い物かご内の商品の種類が変わらない()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -75,7 +75,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かご内の商品の数量を加算できる()
+    public void AddItem_買い物かご内の商品の数量を加算できる()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -97,7 +97,7 @@ public class BasketTest
     [Theory]
     [InlineData(10, -1)]
     [InlineData(10, -10)]
-    public void 買い物かご内の商品の数量を減算しても商品が買い物かご内に残る(int firstQuantity, int additionalQuantity)
+    public void AddItem_買い物かご内の商品の数量を減算しても商品が買い物かご内に残る(int firstQuantity, int additionalQuantity)
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -113,7 +113,7 @@ public class BasketTest
     [Theory]
     [InlineData(10, -1)]
     [InlineData(10, -10)]
-    public void 買い物かご内の商品の数量を減算できる(int firstQuantity, int additionalQuantity)
+    public void AddItem_買い物かご内の商品の数量を減算できる(int firstQuantity, int additionalQuantity)
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -132,7 +132,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かごにアイテムが1件も存在しないとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごにアイテムが1件も存在しないとき数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -145,7 +145,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かごに数量1のアイテムが1件存在するとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量1のアイテムが1件存在するとき数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -165,7 +165,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かごに数量0のアイテムが1件存在するとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件存在するとき数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -179,7 +179,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かごに数量0のアイテムが2件存在するとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量0のアイテムが2件存在するとき数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -194,7 +194,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かごに数量0のアイテムが1件_数量1のアイテムが1件存在するとき_数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件_数量1のアイテムが1件存在するとき_数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -215,7 +215,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かごに数量1のアイテムが2件存在するとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量1のアイテムが2件存在するとき数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -241,7 +241,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 数量0の商品を買い物かごから削除しても数量0でない商品は残る()
+    public void RemoveEmptyItems_数量0の商品を買い物かごから削除しても数量0でない商品は残る()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -264,7 +264,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 数量は0未満にできない()
+    public void AddItem_数量は0未満にできない()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -280,7 +280,7 @@ public class BasketTest
     [Theory]
     [InlineData(10, -11)]
     [InlineData(10, 2147483647)]
-    public void 商品の数量を加減算して0未満にはできない(int firstQuantity, int additionalQuantity)
+    public void AddItem_商品の数量を加減算して0未満にはできない(int firstQuantity, int additionalQuantity)
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -295,7 +295,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かごの購入者Idはnullにできない()
+    public void Constructor_買い物かごの購入者Idはnullにできない()
     {
         // Arrange & Act
         var action = () => new Basket(null!);
@@ -305,7 +305,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かご内に存在するカタログアイテムIdを渡す()
+    public void IsInCatalogItem_買い物かご内に存在するカタログアイテムIdを渡す()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -319,7 +319,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かご内に存在しないカタログアイテムIdを渡す()
+    public void IsInCatalogItem_買い物かご内に存在しないカタログアイテムIdを渡す()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -333,7 +333,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void 買い物かごアイテムの情報をもとにした会計情報を取得できる()
+    public void GetAccount_買い物かごアイテムの情報をもとにした会計情報を取得できる()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());

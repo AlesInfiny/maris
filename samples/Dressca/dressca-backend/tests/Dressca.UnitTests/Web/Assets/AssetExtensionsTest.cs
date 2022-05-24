@@ -6,7 +6,7 @@ namespace Dressca.UnitTests.Web.Assets;
 public class AssetExtensionsTest
 {
     [Fact]
-    public void アセットがnullの場合例外()
+    public void GetContentType_アセットがnullの場合例外()
     {
         // Arrange
         Asset? asset = null;
@@ -19,7 +19,7 @@ public class AssetExtensionsTest
     }
 
     [Fact]
-    public void アセットタイプがPNGの場合()
+    public void GetContentType_アセットタイプがPNGの場合()
     {
         // Arrange
         Asset asset = new Asset("asset-code", AssetTypes.Png);
