@@ -11,7 +11,7 @@ public class OrderTest
     };
 
     [Fact]
-    public void 正しくインスタンス化できる()
+    public void Constructor_正しくインスタンス化できる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -30,7 +30,7 @@ public class OrderTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void 購入者Idは必須(string? buyerId)
+    public void Constructor_購入者Idは必須(string? buyerId)
     {
         // Arrange
         var shipTo = CreateDefaultShipTo();
@@ -44,7 +44,7 @@ public class OrderTest
     }
 
     [Fact]
-    public void 住所は必須()
+    public void Constructor_住所は必須()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -59,7 +59,7 @@ public class OrderTest
 
     [Theory]
     [MemberData(nameof(EmptyOrderItems))]
-    public void 注文アイテムは必須(List<OrderItem>? orderItems)
+    public void Constructor_注文アイテムは必須(List<OrderItem>? orderItems)
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -74,7 +74,7 @@ public class OrderTest
     }
 
     [Fact]
-    public void 商品の税抜き合計金額が正しく計算できる()
+    public void TotalItemsPrice_商品の税抜き合計金額が正しく計算できる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -90,7 +90,7 @@ public class OrderTest
     }
 
     [Fact]
-    public void 商品の送料が正しく計算できる()
+    public void DeliveryCharge_商品の送料が正しく計算できる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -106,7 +106,7 @@ public class OrderTest
     }
 
     [Fact]
-    public void 商品の消費税額が正しく計算できる()
+    public void ConsumptionTax_商品の消費税額が正しく計算できる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -122,7 +122,7 @@ public class OrderTest
     }
 
     [Fact]
-    public void 商品の税込み合計金額が正しく計算できる()
+    public void TotalPrice_商品の税込み合計金額が正しく計算できる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");

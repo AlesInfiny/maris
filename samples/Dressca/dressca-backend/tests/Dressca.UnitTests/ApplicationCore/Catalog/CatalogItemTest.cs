@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Catalog;
 public class CatalogItemTest
 {
     [Fact]
-    public void 正しくインスタンス化できる()
+    public void Constructor_正しくインスタンス化できる()
     {
         // Arrange
         // Nothing to do.

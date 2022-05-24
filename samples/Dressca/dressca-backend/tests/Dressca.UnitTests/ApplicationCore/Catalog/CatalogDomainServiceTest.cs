@@ -14,7 +14,7 @@ public class CatalogDomainServiceTest
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Fact]
-    public async Task カタログアイテムIdがすべて存在する場合()
+    public async Task ExistsAllAsync_カタログアイテムIdがすべて存在する場合()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -42,7 +42,7 @@ public class CatalogDomainServiceTest
     }
 
     [Fact]
-    public async Task カタログアイテムIdが一部だけ存在する場合()
+    public async Task ExistsAllAsync_カタログアイテムIdが一部だけ存在する場合()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -68,7 +68,7 @@ public class CatalogDomainServiceTest
     }
 
     [Fact]
-    public async Task カタログアイテムIdが1件も存在しない場合()
+    public async Task ExistsAllAsync_カタログアイテムIdが1件も存在しない場合()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();

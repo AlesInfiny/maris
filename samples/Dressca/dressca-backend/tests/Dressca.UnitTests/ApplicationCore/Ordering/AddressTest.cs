@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 public class AddressTest
 {
     [Fact]
-    public void 郵便番号がnullの場合例外()
+    public void Constructor_郵便番号がnullの場合例外()
     {
         // Arrange
         string? postalCode = null;
@@ -21,7 +21,7 @@ public class AddressTest
     }
 
     [Fact]
-    public void 都道府県がnullの場合例外()
+    public void Constructor_都道府県がnullの場合例外()
     {
         // Arrange
         string postalCode = "100-8924";
@@ -37,7 +37,7 @@ public class AddressTest
     }
 
     [Fact]
-    public void 市区町村がnullの場合例外()
+    public void Constructor_市区町村がnullの場合例外()
     {
         // Arrange
         string postalCode = "100-8924";
@@ -53,7 +53,7 @@ public class AddressTest
     }
 
     [Fact]
-    public void 字がnullの場合例外()
+    public void Constructor_字がnullの場合例外()
     {
         // Arrange
         string postalCode = "100-8924";

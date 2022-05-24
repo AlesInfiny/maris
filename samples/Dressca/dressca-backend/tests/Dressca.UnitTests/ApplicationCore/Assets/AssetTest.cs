@@ -8,7 +8,7 @@ public class AssetTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public void アセットコードがnullまたは空の文字列の場合例外(string assetCode)
+    public void Constructor_アセットコードがnullまたは空の文字列の場合例外(string assetCode)
     {
         // Arrange
         var assetType = AssetTypes.Png;
@@ -22,7 +22,7 @@ public class AssetTest
     }
 
     [Fact]
-    public void アセットタイプが未知の場合例外()
+    public void Constructor_アセットタイプが未知の場合例外()
     {
         // Arrange
         var assetCode = "assetCode";

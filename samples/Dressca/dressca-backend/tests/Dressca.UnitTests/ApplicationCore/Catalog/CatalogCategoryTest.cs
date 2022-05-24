@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Catalog;
 public class CatalogCategoryTest
 {
     [Fact]
-    public void 正しくインスタンス化できる()
+    public void Constructor_正しくインスタンス化できる()
     {
         // Arrange
         const string brandName = "dressca";
@@ -21,7 +21,7 @@ public class CatalogCategoryTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void カテゴリ名は必須(string? categoryName)
+    public void Constructor_カテゴリ名は必須(string? categoryName)
     {
         // Arrange & Act
         var action = () => new CatalogCategory(categoryName!);

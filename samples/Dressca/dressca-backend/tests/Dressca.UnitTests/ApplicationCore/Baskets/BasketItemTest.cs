@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Baskets;
 public class BasketItemTest
 {
     [Fact]
-    public void 買い物かごアイテムの小計額は単価と数量の積になる()
+    public void GetSubTotal_買い物かごアイテムの小計額は単価と数量の積になる()
     {
         // Arrange
         long catalogItemId = 1L;
@@ -21,7 +21,7 @@ public class BasketItemTest
     }
 
     [Fact]
-    public void 買い物かごのナビゲーションプロパティが初期化されていない場合例外()
+    public void Basket_買い物かごのナビゲーションプロパティが初期化されていない場合例外()
     {
         // Arrange
         long catalogItemId = 1L;

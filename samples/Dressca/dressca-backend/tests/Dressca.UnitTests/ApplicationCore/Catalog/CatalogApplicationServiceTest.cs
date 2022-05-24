@@ -18,7 +18,7 @@ public class CatalogApplicationServiceTest
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Fact]
-    public async Task カタログ取得処理はリポジトリのFindを1回呼出す()
+    public async Task GetCatalogItemsAsync_カタログ取得処理はリポジトリのFindを1回呼出す()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -39,7 +39,7 @@ public class CatalogApplicationServiceTest
     }
 
     [Fact]
-    public async Task カタログ取得処理はリポジトリのCountを1回呼出す()
+    public async Task GetCatalogItemsAsync_カタログ取得処理はリポジトリのCountを1回呼出す()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -58,7 +58,7 @@ public class CatalogApplicationServiceTest
     }
 
     [Fact]
-    public async Task ブランド取得処理はブランドリポジトリのGetAllを1回呼出す()
+    public async Task GetBrandsAsync_ブランド取得処理はブランドリポジトリのGetAllを1回呼出す()
     {
         // Arrange
         var catalogRepository = Mock.Of<ICatalogRepository>();
@@ -75,7 +75,7 @@ public class CatalogApplicationServiceTest
     }
 
     [Fact]
-    public async Task カテゴリ取得処理はカテゴリリポジトリのGetAllを1回呼出す()
+    public async Task GetCategoriesAsync_カテゴリ取得処理はカテゴリリポジトリのGetAllを1回呼出す()
     {
         // Arrange
         var catalogRepository = Mock.Of<ICatalogRepository>();
