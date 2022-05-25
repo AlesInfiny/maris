@@ -69,4 +69,27 @@ public class BusinessErrorCollectionTest
                     message => Assert.Equal(errorMessage2, message));
             });
     }
+
+    [Fact]
+    public void ToString_業務エラーのエラーコードとエラーメッセージがすべてJSON形式に変換される()
+    {
+        // Arrange
+        var errors = new BusinessErrorCollection();
+        string errorCode1 = "ERR_CODE1";
+        string errorMessage1_1 = "ERROR_MESSAGE1-1";
+        string errorMessage1_2 = "ERROR_MESSAGE1-2";
+        BusinessError businessError1 = new BusinessError(errorCode1, errorMessage1_1, errorMessage1_2);
+        errors.AddOrMerge(businessError1);
+        string errorCode2 = "ERR_CODE2";
+        string errorMessage2_1 = "ERROR_MESSAGE2-1";
+        string errorMessage2_2 = "ERROR_MESSAGE2-2";
+        BusinessError businessError2 = new BusinessError(errorCode2, errorMessage2_1, errorMessage2_2);
+        errors.AddOrMerge(businessError2);
+
+        // Act
+        var str = errors.ToString();
+
+        // Assert
+        Assert.Equal("[{\"ERR_CODE1\":[\"ERROR_MESSAGE1-1\",\"ERROR_MESSAGE1-2\"]},{\"ERR_CODE2\":[\"ERROR_MESSAGE2-1\",\"ERROR_MESSAGE2-2\"]}]", str);
+    }
 }

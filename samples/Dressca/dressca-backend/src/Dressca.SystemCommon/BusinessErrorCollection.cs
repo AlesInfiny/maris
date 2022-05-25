@@ -36,7 +36,7 @@ public class BusinessErrorCollection : IEnumerable<BusinessError>
         ArgumentNullException.ThrowIfNull(newBusinessError);
         if (this.businessErrors.TryGetValue(newBusinessError.ErrorCode, out var businessError))
         {
-            businessError.AddErrorMessages(newBusinessError.ErrorMessages);
+            businessError.AddErrorMessages(newBusinessError.ErrorMessages.ToArray());
         }
         else
         {
@@ -49,4 +49,7 @@ public class BusinessErrorCollection : IEnumerable<BusinessError>
 
     /// <inheritdoc/>
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+
+    /// <inheritdoc/>
+    public override string ToString() => $"[{string.Join(',', this.businessErrors.Values)}]";
 }

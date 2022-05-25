@@ -1,4 +1,6 @@
-﻿namespace Dressca.SystemCommon;
+﻿using System.Text.Json;
+
+namespace Dressca.SystemCommon;
 
 /// <summary>
 ///  業務エラーを表します。
@@ -54,6 +56,16 @@ public class BusinessError
     ///  エラーメッセージのリストを追加します。
     /// </summary>
     /// <param name="errorMessages">エラーメッセージのリスト。</param>
-    public void AddErrorMessages(IEnumerable<string> errorMessages)
+    public void AddErrorMessages(params string[] errorMessages)
         => this.errorMessages.AddRange(errorMessages);
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        Dictionary<string, string[]> data = new Dictionary<string, string[]>
+        {
+            { this.ErrorCode, this.errorMessages.ToArray() },
+        };
+        return JsonSerializer.Serialize(data);
+    }
 }

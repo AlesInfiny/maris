@@ -87,4 +87,30 @@ public class BusinessErrorTest
             errorMessage => Assert.Equal("ERR_MESSAGE1", errorMessage),
             errorMessage => Assert.Equal("ERR_MESSAGE2", errorMessage));
     }
+
+    [Fact]
+    public void ToString_エラーコードが未設定の場合キーが空文字のJSON形式に変換される()
+    {
+        // Arrange
+        var error = new BusinessError();
+
+        // Act
+        var str = error.ToString();
+
+        // Assert
+        Assert.Equal("{\"\":[]}", str);
+    }
+
+    [Fact]
+    public void ToString_エラーコードがキーでエラーメッセージのリストが値のJSON形式に変換される()
+    {
+        // Arrange
+        var error = new BusinessError("ERR_CODE", "ERR_MESSAGE1", "ERR_MESSAGE2");
+
+        // Act
+        var str = error.ToString();
+
+        // Assert
+        Assert.Equal("{\"ERR_CODE\":[\"ERR_MESSAGE1\",\"ERR_MESSAGE2\"]}", str);
+    }
 }
