@@ -5,13 +5,13 @@
 /// </summary>
 public class BusinessError
 {
-    private readonly List<string> errorMessages = new List<string>();
+    private readonly List<string> errorMessages = new();
 
     /// <summary>
     ///  <see cref="BusinessError"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     public BusinessError()
-        : this(string.Empty, null)
+        : this(string.Empty)
     {
     }
 
@@ -24,7 +24,7 @@ public class BusinessError
     ///  <see langword="null"/> を指定した場合は空の文字列 ("") として取り扱います。
     /// </param>
     /// <param name="errorMessages">エラーメッセージのリスト。</param>
-    public BusinessError(string? errorCode, IEnumerable<string>? errorMessages)
+    public BusinessError(string? errorCode, params string[] errorMessages)
     {
         this.ErrorCode = errorCode ?? string.Empty;
         if (errorMessages is not null)
@@ -49,4 +49,11 @@ public class BusinessError
     /// <param name="errorMessage">エラーメッセージ。</param>
     public void AddErrorMessage(string? errorMessage)
         => this.errorMessages.Add(errorMessage ?? string.Empty);
+
+    /// <summary>
+    ///  エラーメッセージのリストを追加します。
+    /// </summary>
+    /// <param name="errorMessages">エラーメッセージのリスト。</param>
+    public void AddErrorMessages(IEnumerable<string> errorMessages)
+        => this.errorMessages.AddRange(errorMessages);
 }
