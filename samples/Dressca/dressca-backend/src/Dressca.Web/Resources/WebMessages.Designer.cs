@@ -61,6 +61,15 @@ namespace Dressca.Web.Resources {
         }
         
         /// <summary>
+        ///   業務エラーが発生しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string BusinessExceptionHandled {
+            get {
+                return ResourceManager.GetString("BusinessExceptionHandled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   アセットタイプ: {0} を Content-Type に変換できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CannotConvertAssetTypeToContentType {
