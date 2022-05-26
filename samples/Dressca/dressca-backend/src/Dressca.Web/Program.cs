@@ -6,12 +6,24 @@ using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
 using Dressca.Web.Mapper;
 using Dressca.Web.Resources;
+using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddControllers(options => options.Filters.Add(new BuyerIdFilterAttribute()))
+    .AddControllers(options =>
+    {
+        options.Filters.Add<BuyerIdFilterAttribute>();
+        if (builder.Environment.IsDevelopment())
+        {
+            options.Filters.Add<BusinessExceptionDevelopmentFilter>();
+        }
+        else
+        {
+            options.Filters.Add<BusinessExceptionFilter>();
+        }
+    })
     .ConfigureApiBehaviorOptions(options =>
     {
         // Bad Request となった場合の処理。
