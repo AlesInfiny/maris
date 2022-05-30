@@ -39,7 +39,7 @@ Maris OSS 版で構築した Web アプリケーションのサンプルを手�
 1. フロントエンドのアプリケーションを実行するためのモジュールを取得します。
    コマンドプロンプトを開き、「dressca\\dressca-frontend」に移動して以下のコマンドを実行します。
 
-    ```winbatch
+    ```winbatch title="フロントエンドアプリケーションの実行に必要なパッケージのインストール"
     npm install
     ```
 
@@ -52,7 +52,7 @@ Maris OSS 版で構築した Web アプリケーションのサンプルを手�
 1. データベースの構築を行います。
    コマンドプロンプトを開き、「dressca\\dressca-backend\\src\\Dressca.EfInfrastructure」に移動して以下のコマンドを実行します。
 
-    ```winbatch
+    ```winbatch title="SQL Server のデータベース構築"
     dotnet ef database update
     ```
 
