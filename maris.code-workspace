@@ -5,7 +5,16 @@
 		}
 	],
 	"settings": {
-		"tableformatter.common.centerAlignedHeader": false
+		"tableformatter.common.centerAlignedHeader": false,
+		"cSpell.words": [
+			"BIPROGY",
+			"drawio",
+			"dressca",
+			"mkdocs",
+			"Noto",
+			"Pymarkdown",
+			"winbatch"
+		]
 	},
 	"extensions": {
         "recommendations": [
