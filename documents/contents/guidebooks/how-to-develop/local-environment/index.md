@@ -104,7 +104,7 @@ Maris OSS 版の各ドキュメントは、本節に記載されている環境�
     npm --version
     ```
 
-### Entity Framework Core Tool のインストール ### {: #install-efcore-tool }
+### Entity Framework Core Tool のインストール ### {: #install-ef-core-tool }
 
 1. 以下のコマンドを実行します。
 
