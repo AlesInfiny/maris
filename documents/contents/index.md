@@ -64,4 +64,6 @@ Maris OSS 版で構築した Web アプリケーションのサンプルを手�
 1. Visual Studio で ++ctrl+f5++ を押下し、アプリケーションを実行します。
    いくつかプロンプト画面が立ち上がった後、ブラウザーが起動し、アプリケーションの実行が開始します。
 
+    [![Dressca トップページ](images/dressca-top.png){ width="600" loading=lazy }](images/dressca-top.png)
+
 --8<-- "includes/abbreviations.md"
