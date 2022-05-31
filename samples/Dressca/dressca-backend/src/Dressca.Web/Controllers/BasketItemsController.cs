@@ -169,7 +169,7 @@ public class BasketItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-    public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsInputDto postBasketItem)
+    public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsRequest postBasketItem)
     {
         postBasketItem.CatalogItemId.ThrowIfNull();
         postBasketItem.AddedQuantity.ThrowIfNull();
