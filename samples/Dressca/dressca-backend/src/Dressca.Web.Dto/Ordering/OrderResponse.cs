@@ -4,9 +4,9 @@ using Dressca.Web.Dto.Accounting;
 namespace Dressca.Web.Dto.Ordering;
 
 /// <summary>
-///  注文情報の DTO です。
+///  注文情報のレスポンスデータを表します。
 /// </summary>
-public class OrderDto
+public class OrderResponse
 {
     /// <summary>
     ///  注文 Id を取得または設定します。

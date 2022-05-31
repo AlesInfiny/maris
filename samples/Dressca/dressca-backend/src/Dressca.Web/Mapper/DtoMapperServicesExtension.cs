@@ -30,7 +30,7 @@ public static class DtoMapperServicesExtension
         services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemResponse>, CatalogItemMapper>();
         services.AddSingleton<IObjectMapper<BasketItem, BasketItemResponse>, BasketItemMapper>();
         services.AddSingleton<IObjectMapper<Basket, BasketResponse>, BasketMapper>();
-        services.AddSingleton<IObjectMapper<Order, OrderDto>, OrderMapper>();
+        services.AddSingleton<IObjectMapper<Order, OrderResponse>, OrderMapper>();
         return services;
     }
 }

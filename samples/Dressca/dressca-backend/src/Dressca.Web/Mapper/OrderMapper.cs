@@ -7,20 +7,20 @@ using Dressca.Web.Dto.Ordering;
 namespace Dressca.Web.Mapper;
 
 /// <summary>
-///  <see cref="Order"/> と <see cref="OrderDto"/> のマッパーです。
+///  <see cref="Order"/> と <see cref="OrderResponse"/> のマッパーです。
 /// </summary>
-public class OrderMapper : IObjectMapper<Order, OrderDto>
+public class OrderMapper : IObjectMapper<Order, OrderResponse>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull("value")]
-    public OrderDto? Convert(Order? value)
+    public OrderResponse? Convert(Order? value)
     {
         if (value is null)
         {
             return null;
         }
 
-        return new OrderDto
+        return new()
         {
             Id = value.Id,
             BuyerId = value.BuyerId,
