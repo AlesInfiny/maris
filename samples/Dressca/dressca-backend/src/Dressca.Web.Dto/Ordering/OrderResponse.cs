@@ -59,7 +59,7 @@ public class OrderResponse
     /// <summary>
     ///  会計情報を取得または設定します。
     /// </summary>
-    public AccountDto? Account { get; set; }
+    public AccountResponse? Account { get; set; }
 
     /// <summary>
     ///  注文アイテムのリストを取得または設定します。

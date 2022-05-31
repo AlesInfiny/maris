@@ -17,7 +17,7 @@ public class BasketResponse
     /// <summary>
     ///  会計情報を取得または設定します。
     /// </summary>
-    public AccountDto? Account { get; set; }
+    public AccountResponse? Account { get; set; }
 
     /// <summary>
     ///  買い物かごアイテムのリストを取得または設定します。
