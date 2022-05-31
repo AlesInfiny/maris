@@ -32,7 +32,7 @@ builder.Services
         {
             // エラーの原因をログに出力。
             var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation(WebMessages.RecieveHttpBadRequest, JsonSerializer.Serialize(context.ModelState));
+            logger.LogInformation(Messages.RecieveHttpBadRequest, JsonSerializer.Serialize(context.ModelState));
 
             // ASP.NET Core の既定の実装を使ってレスポンスを返却。
             return builtInFactory(context);

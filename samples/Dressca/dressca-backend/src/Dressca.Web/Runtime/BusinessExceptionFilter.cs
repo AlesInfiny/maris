@@ -41,6 +41,6 @@ public class BusinessExceptionFilter : BusinessExceptionFilterBase
                 context.HttpContext,
                 context.ModelState,
                 statusCode: (int)HttpStatusCode.BadRequest,
-                title: WebMessages.BusinessExceptionHandled);
+                title: Messages.BusinessExceptionHandled);
     }
 }
