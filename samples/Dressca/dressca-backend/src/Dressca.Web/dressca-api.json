@@ -62,7 +62,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BasketDto"
+                  "$ref": "#/components/schemas/BasketResponse"
                 }
               }
             }
@@ -463,9 +463,9 @@
           }
         }
       },
-      "BasketDto": {
+      "BasketResponse": {
         "type": "object",
-        "description": "買い物かごを表す DTO です。\n            ",
+        "description": "買い物かごのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "buyerId"
