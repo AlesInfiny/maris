@@ -21,7 +21,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { CatalogBrandDto } from '../models';
+import { CatalogBrandResponse } from '../models';
 /**
  * CatalogBrandsApi - axios parameter creator
  * @export
@@ -74,7 +74,7 @@ export const CatalogBrandsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async catalogBrandsGetCatalogBrands(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogBrandDto>>> {
+        async catalogBrandsGetCatalogBrands(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogBrandResponse>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.catalogBrandsGetCatalogBrands(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -94,7 +94,7 @@ export const CatalogBrandsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogBrandsGetCatalogBrands(options?: any): AxiosPromise<Array<CatalogBrandDto>> {
+        catalogBrandsGetCatalogBrands(options?: any): AxiosPromise<Array<CatalogBrandResponse>> {
             return localVarFp.catalogBrandsGetCatalogBrands(options).then((request) => request(axios, basePath));
         },
     };

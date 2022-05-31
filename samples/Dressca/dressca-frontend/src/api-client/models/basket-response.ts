@@ -13,32 +13,32 @@
  */
 
 
-import { AccountDto } from './account-dto';
-import { BasketItemDto } from './basket-item-dto';
+import { AccountResponse } from './account-response';
+import { BasketItemResponse } from './basket-item-response';
 
 /**
- * 買い物かごを表す DTO です。             
+ * 買い物かごのレスポンスデータを表します。             
  * @export
- * @interface BasketDto
+ * @interface BasketResponse
  */
-export interface BasketDto {
+export interface BasketResponse {
     /**
      * 購入者 Id を取得または設定します。             
      * @type {string}
-     * @memberof BasketDto
+     * @memberof BasketResponse
      */
     'buyerId': string;
     /**
      * 会計情報を取得または設定します。             
-     * @type {AccountDto}
-     * @memberof BasketDto
+     * @type {AccountResponse}
+     * @memberof BasketResponse
      */
-    'account'?: AccountDto | null;
+    'account'?: AccountResponse | null;
     /**
      * 買い物かごアイテムのリストを取得または設定します。             
-     * @type {Array<BasketItemDto>}
-     * @memberof BasketDto
+     * @type {Array<BasketItemResponse>}
+     * @memberof BasketResponse
      */
-    'basketItems'?: Array<BasketItemDto>;
+    'basketItems'?: Array<BasketItemResponse>;
 }
 

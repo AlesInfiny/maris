@@ -121,7 +121,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PostBasketItemsInputDto"
+                "$ref": "#/components/schemas/PostBasketItemsRequest"
               }
             }
           },
@@ -220,7 +220,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogBrandDto"
+                    "$ref": "#/components/schemas/CatalogBrandResponse"
                   }
                 }
               }
@@ -244,7 +244,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogCategoryDto"
+                    "$ref": "#/components/schemas/CatalogCategoryResponse"
                   }
                 }
               }
@@ -318,7 +318,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedListOfCatalogItemDto"
+                  "$ref": "#/components/schemas/PagedListOfCatalogItemResponse"
                 }
               }
             }
@@ -362,7 +362,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrderDto"
+                  "$ref": "#/components/schemas/OrderResponse"
                 }
               }
             }
@@ -393,7 +393,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PostOrderInputDto"
+                "$ref": "#/components/schemas/PostOrderRequest"
               }
             }
           },
@@ -481,7 +481,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/AccountDto"
+                "$ref": "#/components/schemas/AccountResponse"
               }
             ]
           },
@@ -489,14 +489,14 @@
             "type": "array",
             "description": "買い物かごアイテムのリストを取得または設定します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/BasketItemDto"
+              "$ref": "#/components/schemas/BasketItemResponse"
             }
           }
         }
       },
-      "AccountDto": {
+      "AccountResponse": {
         "type": "object",
-        "description": "会計情報を表す DTO です。\n            ",
+        "description": "会計情報のレスポンスデータを表します。。\n            ",
         "additionalProperties": false,
         "required": [
           "consumptionTaxRate",
@@ -533,9 +533,9 @@
           }
         }
       },
-      "BasketItemDto": {
+      "BasketItemResponse": {
         "type": "object",
-        "description": "買い物かごのアイテムを表す DTO です。\n            ",
+        "description": "買い物かごのアイテムのレスポンスデータを表します\n            ",
         "additionalProperties": false,
         "required": [
           "catalogItemId",
@@ -569,15 +569,15 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/CatalogItemSummaryDto"
+                "$ref": "#/components/schemas/CatalogItemSummaryResponse"
               }
             ]
           }
         }
       },
-      "CatalogItemSummaryDto": {
+      "CatalogItemSummaryResponse": {
         "type": "object",
-        "description": "カタログアイテムの概要を表す DTO です。\n            ",
+        "description": "カタログアイテムの概要のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "id",
@@ -634,9 +634,9 @@
           }
         }
       },
-      "PostBasketItemsInputDto": {
+      "PostBasketItemsRequest": {
         "type": "object",
-        "description": "買い物かごにカタログアイテムを追加する処理の入力情報を表す DTO です。\n            ",
+        "description": "買い物かごにカタログアイテムを追加する処理のリクエストデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "catalogItemId"
@@ -657,9 +657,9 @@
           }
         }
       },
-      "CatalogBrandDto": {
+      "CatalogBrandResponse": {
         "type": "object",
-        "description": "カタログブランドの DTO です。\nカタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
+        "description": "カタログブランドのレスポンスデータを表します。\nカタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
         "additionalProperties": false,
         "required": [
           "id",
@@ -678,9 +678,9 @@
           }
         }
       },
-      "CatalogCategoryDto": {
+      "CatalogCategoryResponse": {
         "type": "object",
-        "description": "カタログカテゴリの DTO です。\n            ",
+        "description": "カタログカテゴリのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "id",
@@ -699,7 +699,7 @@
           }
         }
       },
-      "PagedListOfCatalogItemDto": {
+      "PagedListOfCatalogItemResponse": {
         "type": "object",
         "description": "ページネーションした結果のリストを管理します。\n            ",
         "additionalProperties": false,
@@ -736,19 +736,19 @@
             "type": "array",
             "description": "検索結果のリストを取得します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/CatalogItemDto"
+              "$ref": "#/components/schemas/CatalogItemResponse"
             }
           }
         }
       },
-      "CatalogItemDto": {
+      "CatalogItemResponse": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/CatalogItemSummaryDto"
+            "$ref": "#/components/schemas/CatalogItemSummaryResponse"
           },
           {
             "type": "object",
-            "description": "カタログアイテムの DTO です。\n            ",
+            "description": "カタログアイテムのレスポンスデータを表します。\n            ",
             "additionalProperties": false,
             "required": [
               "description",
@@ -781,9 +781,9 @@
           }
         ]
       },
-      "OrderDto": {
+      "OrderResponse": {
         "type": "object",
-        "description": "注文情報の DTO です。\n            ",
+        "description": "注文情報のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "id",
@@ -842,7 +842,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/AccountDto"
+                "$ref": "#/components/schemas/AccountResponse"
               }
             ]
           },
@@ -850,14 +850,14 @@
             "type": "array",
             "description": "注文アイテムのリストを取得または設定します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/OrderItemDto"
+              "$ref": "#/components/schemas/OrderItemResponse"
             }
           }
         }
       },
-      "OrderItemDto": {
+      "OrderItemResponse": {
         "type": "object",
-        "description": "注文アイテムの DTO です。\n            ",
+        "description": "注文アイテムのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "id",
@@ -876,7 +876,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/CatalogItemSummaryDto"
+                "$ref": "#/components/schemas/CatalogItemSummaryResponse"
               }
             ]
           },
@@ -897,9 +897,9 @@
           }
         }
       },
-      "PostOrderInputDto": {
+      "PostOrderRequest": {
         "type": "object",
-        "description": "注文を行う処理の入力情報を表す DTO です。\n            ",
+        "description": "注文を行う処理のリクエストデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "fullName",

@@ -15,21 +15,21 @@
 
 
 /**
- * カタログカテゴリの DTO です。             
+ * カタログカテゴリのレスポンスデータを表します。             
  * @export
- * @interface CatalogCategoryDto
+ * @interface CatalogCategoryResponse
  */
-export interface CatalogCategoryDto {
+export interface CatalogCategoryResponse {
     /**
      * カタログカテゴリ Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogCategoryDto
+     * @memberof CatalogCategoryResponse
      */
     'id': number;
     /**
      * カテゴリ名を取得または設定します。             
      * @type {string}
-     * @memberof CatalogCategoryDto
+     * @memberof CatalogCategoryResponse
      */
     'name': string;
 }

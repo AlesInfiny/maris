@@ -15,21 +15,21 @@
 
 
 /**
- * カタログブランドの DTO です。 カタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。             
+ * カタログブランドのレスポンスデータを表します。 カタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。             
  * @export
- * @interface CatalogBrandDto
+ * @interface CatalogBrandResponse
  */
-export interface CatalogBrandDto {
+export interface CatalogBrandResponse {
     /**
      * カタログブランド Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogBrandDto
+     * @memberof CatalogBrandResponse
      */
     'id': number;
     /**
      * ブランド名を取得または設定します。             
      * @type {string}
-     * @memberof CatalogBrandDto
+     * @memberof CatalogBrandResponse
      */
     'name': string;
 }

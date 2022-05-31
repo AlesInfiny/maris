@@ -13,42 +13,42 @@
  */
 
 
-import { CatalogItemSummaryDto } from './catalog-item-summary-dto';
+import { CatalogItemSummaryResponse } from './catalog-item-summary-response';
 
 /**
- * 注文アイテムの DTO です。             
+ * 注文アイテムのレスポンスデータを表します。             
  * @export
- * @interface OrderItemDto
+ * @interface OrderItemResponse
  */
-export interface OrderItemDto {
+export interface OrderItemResponse {
     /**
      * 注文アイテム Id を取得します。             
      * @type {number}
-     * @memberof OrderItemDto
+     * @memberof OrderItemResponse
      */
     'id': number;
     /**
      * 注文された商品（カタログアイテム）を取得または設定します。             
-     * @type {CatalogItemSummaryDto}
-     * @memberof OrderItemDto
+     * @type {CatalogItemSummaryResponse}
+     * @memberof OrderItemResponse
      */
-    'itemOrdered'?: CatalogItemSummaryDto | null;
+    'itemOrdered'?: CatalogItemSummaryResponse | null;
     /**
      * 単価を取得または設定します。             
      * @type {number}
-     * @memberof OrderItemDto
+     * @memberof OrderItemResponse
      */
     'unitPrice': number;
     /**
      * 数量を取得または設定します。             
      * @type {number}
-     * @memberof OrderItemDto
+     * @memberof OrderItemResponse
      */
     'quantity': number;
     /**
      * 小計額を取得します。             
      * @type {number}
-     * @memberof OrderItemDto
+     * @memberof OrderItemResponse
      */
     'subTotal': number;
 }

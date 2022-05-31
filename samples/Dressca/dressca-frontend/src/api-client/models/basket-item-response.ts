@@ -13,43 +13,43 @@
  */
 
 
-import { CatalogItemSummaryDto } from './catalog-item-summary-dto';
+import { CatalogItemSummaryResponse } from './catalog-item-summary-response';
 
 /**
- * 買い物かごのアイテムを表す DTO です。             
+ * 買い物かごのアイテムのレスポンスデータを表します             
  * @export
- * @interface BasketItemDto
+ * @interface BasketItemResponse
  */
-export interface BasketItemDto {
+export interface BasketItemResponse {
     /**
      * カタログアイテム Id を取得または設定します。             
      * @type {number}
-     * @memberof BasketItemDto
+     * @memberof BasketItemResponse
      */
     'catalogItemId': number;
     /**
      * 単価を取得または設定します。             
      * @type {number}
-     * @memberof BasketItemDto
+     * @memberof BasketItemResponse
      */
     'unitPrice': number;
     /**
      * 数量を取得または設定します。             
      * @type {number}
-     * @memberof BasketItemDto
+     * @memberof BasketItemResponse
      */
     'quantity': number;
     /**
      * 小計額を取得します。             
      * @type {number}
-     * @memberof BasketItemDto
+     * @memberof BasketItemResponse
      */
     'subTotal': number;
     /**
      * カタログアイテムを取得または設定します。             
-     * @type {CatalogItemSummaryDto}
-     * @memberof BasketItemDto
+     * @type {CatalogItemSummaryResponse}
+     * @memberof BasketItemResponse
      */
-    'catalogItem'?: CatalogItemSummaryDto | null;
+    'catalogItem'?: CatalogItemSummaryResponse | null;
 }
 
