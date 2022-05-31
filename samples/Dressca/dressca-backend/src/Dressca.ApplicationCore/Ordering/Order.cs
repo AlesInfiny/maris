@@ -34,7 +34,7 @@ public class Order
     {
         if (orderItems is null || !orderItems.Any())
         {
-            throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrEmptyList, nameof(orderItems));
+            throw new ArgumentException(Messages.ArgumentIsNullOrEmptyList, nameof(orderItems));
         }
 
         this.BuyerId = buyerId;
@@ -65,12 +65,12 @@ public class Order
     /// <exception cref="ArgumentException"><see langword="null"/> または空の文字列を設定できません。</exception>
     public string BuyerId
     {
-        get => this.buyerId ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.BuyerId)));
+        get => this.buyerId ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.BuyerId)));
         private set
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
             }
 
             this.buyerId = value;
@@ -90,7 +90,7 @@ public class Order
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
     public ShipTo ShipToAddress
     {
-        get => this.shipToAddress ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.shipToAddress)));
+        get => this.shipToAddress ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.shipToAddress)));
         private set => this.shipToAddress = value ?? throw new ArgumentNullException(nameof(value));
     }
 

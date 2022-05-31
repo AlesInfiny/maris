@@ -40,7 +40,7 @@ public record ShipTo
     /// <exception cref="ArgumentNullException"><see langword="null"/> は設定できません。</exception>
     public string FullName
     {
-        get => this.fullName ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.FullName)));
+        get => this.fullName ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.FullName)));
 
         [MemberNotNull(nameof(fullName))]
         init => this.fullName = value ?? throw new ArgumentNullException(nameof(value));
@@ -53,7 +53,7 @@ public record ShipTo
     /// <exception cref="ArgumentNullException"><see langword="null"/> は設定できません。</exception>
     public Address Address
     {
-        get => this.address ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.Address)));
+        get => this.address ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Address)));
 
         [MemberNotNull(nameof(address))]
         init => this.address = value ?? throw new ArgumentNullException(nameof(value));

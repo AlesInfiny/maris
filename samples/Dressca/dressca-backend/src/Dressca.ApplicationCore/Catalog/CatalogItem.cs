@@ -69,7 +69,7 @@ public class CatalogItem
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
             }
 
             this.name = value;
@@ -89,7 +89,7 @@ public class CatalogItem
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
             }
 
             this.description = value;
@@ -110,7 +110,7 @@ public class CatalogItem
                 throw new ArgumentOutOfRangeException(
                     paramName: nameof(value),
                     actualValue: value,
-                    message: ApplicationCoreMessages.PriceMustBeZeroOrHigher);
+                    message: Messages.PriceMustBeZeroOrHigher);
             }
 
             this.price = value;
@@ -134,7 +134,7 @@ public class CatalogItem
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
             }
 
             this.productCode = value;
@@ -155,7 +155,7 @@ public class CatalogItem
                 throw new ArgumentOutOfRangeException(
                     paramName: nameof(value),
                     actualValue: value,
-                    message: ApplicationCoreMessages.CatalogCategoryIdMustBePositive);
+                    message: Messages.CatalogCategoryIdMustBePositive);
             }
 
             this.catalogCategoryId = value;
@@ -168,7 +168,7 @@ public class CatalogItem
     /// <exception cref="InvalidOperationException"><see cref="CatalogCategory"/> が設定されていません。</exception>
     public CatalogCategory CatalogCategory
     {
-        get => this.catalogCategory ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.CatalogCategory)));
+        get => this.catalogCategory ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.CatalogCategory)));
         private set => this.catalogCategory = value;
     }
 
@@ -186,7 +186,7 @@ public class CatalogItem
                 throw new ArgumentOutOfRangeException(
                     paramName: nameof(value),
                     actualValue: value,
-                    message: ApplicationCoreMessages.CatalogBrandIdMustBePositive);
+                    message: Messages.CatalogBrandIdMustBePositive);
             }
 
             this.catalogBrandId = value;
@@ -199,7 +199,7 @@ public class CatalogItem
     /// <exception cref="InvalidOperationException"><see cref="CatalogBrand"/> が設定されていません。</exception>
     public CatalogBrand CatalogBrand
     {
-        get => this.catalogBrand ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.CatalogBrand)));
+        get => this.catalogBrand ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.CatalogBrand)));
         private set => this.catalogBrand = value;
     }
 
