@@ -14,13 +14,13 @@ namespace Dressca.Web.Controllers;
 public class CatalogBrandsController : ControllerBase
 {
     private readonly CatalogApplicationService service;
-    private readonly IObjectMapper<CatalogBrand, CatalogBrandDto> mapper;
+    private readonly IObjectMapper<CatalogBrand, CatalogBrandResponse> mapper;
 
     /// <summary>
     ///  <see cref="CatalogBrandsController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="service">カタログアプリケーションサービス。</param>
-    /// <param name="mapper"><see cref="CatalogBrand"/> と <see cref="CatalogBrandDto"/> のマッパー。</param>
+    /// <param name="mapper"><see cref="CatalogBrand"/> と <see cref="CatalogBrandResponse"/> のマッパー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
@@ -29,7 +29,7 @@ public class CatalogBrandsController : ControllerBase
     /// </exception>
     public CatalogBrandsController(
         CatalogApplicationService service,
-        IObjectMapper<CatalogBrand, CatalogBrandDto> mapper)
+        IObjectMapper<CatalogBrand, CatalogBrandResponse> mapper)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -41,7 +41,7 @@ public class CatalogBrandsController : ControllerBase
     /// <returns>カタログブランドの一覧。</returns>
     /// <response code="200">成功。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<CatalogBrandDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<CatalogBrandResponse>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCatalogBrandsAsync()
     {
         var brands = await this.service.GetBrandsAsync();

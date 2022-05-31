@@ -26,7 +26,7 @@ public static class DtoMapperServicesExtension
     {
         ArgumentNullException.ThrowIfNull(services);
         services.AddSingleton<IObjectMapper<CatalogCategory, CatalogCategoryDto>, CatalogCategoryMapper>();
-        services.AddSingleton<IObjectMapper<CatalogBrand, CatalogBrandDto>, CatalogBrandMapper>();
+        services.AddSingleton<IObjectMapper<CatalogBrand, CatalogBrandResponse>, CatalogBrandMapper>();
         services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemDto>, CatalogItemMapper>();
         services.AddSingleton<IObjectMapper<BasketItem, BasketItemResponse>, BasketItemMapper>();
         services.AddSingleton<IObjectMapper<Basket, BasketResponse>, BasketMapper>();
