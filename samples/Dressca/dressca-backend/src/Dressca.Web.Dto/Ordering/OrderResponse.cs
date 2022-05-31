@@ -64,5 +64,5 @@ public class OrderResponse
     /// <summary>
     ///  注文アイテムのリストを取得または設定します。
     /// </summary>
-    public IList<OrderItemDto> OrderItems { get; set; } = new List<OrderItemDto>();
+    public IList<OrderItemResponse> OrderItems { get; set; } = new List<OrderItemResponse>();
 }

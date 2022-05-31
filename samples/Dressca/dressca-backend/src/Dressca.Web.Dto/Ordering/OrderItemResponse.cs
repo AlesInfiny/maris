@@ -4,9 +4,9 @@ using Dressca.Web.Dto.Catalog;
 namespace Dressca.Web.Dto.Ordering;
 
 /// <summary>
-///  注文アイテムの DTO です。
+///  注文アイテムのレスポンスデータを表します。
 /// </summary>
-public class OrderItemDto
+public class OrderItemResponse
 {
     /// <summary>
     ///  注文アイテム Id を取得します。

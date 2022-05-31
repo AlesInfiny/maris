@@ -41,9 +41,9 @@ public class OrderMapper : IObjectMapper<Order, OrderResponse>
             OrderItems = value.OrderItems.Select(item => ConvertToOrderItemDto(item)).ToList(),
         };
 
-        static OrderItemDto ConvertToOrderItemDto(OrderItem orderItem)
+        static OrderItemResponse ConvertToOrderItemDto(OrderItem orderItem)
         {
-            return new OrderItemDto
+            return new OrderItemResponse
             {
                 Id = orderItem.Id,
                 Quantity = orderItem.Quantity,
