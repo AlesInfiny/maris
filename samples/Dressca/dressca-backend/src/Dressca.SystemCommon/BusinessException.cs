@@ -13,7 +13,7 @@ public class BusinessException : Exception
     ///  <see cref="BusinessException"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     public BusinessException()
-        : base(SystemCommonMessages.BusinessError)
+        : base(Messages.BusinessError)
     {
     }
 
@@ -34,7 +34,7 @@ public class BusinessException : Exception
     /// <param name="innerException">内部例外。</param>
     /// <param name="businessErrors">業務エラーのリスト。</param>
     public BusinessException(Exception? innerException, params BusinessError[] businessErrors)
-        : base(SystemCommonMessages.BusinessError, innerException)
+        : base(Messages.BusinessError, innerException)
     {
         if (businessErrors is not null)
         {

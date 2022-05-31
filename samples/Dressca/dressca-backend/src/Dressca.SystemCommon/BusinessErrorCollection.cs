@@ -7,7 +7,7 @@ namespace Dressca.SystemCommon;
 /// </summary>
 public class BusinessErrorCollection : IEnumerable<BusinessError>
 {
-    private readonly Dictionary<string, BusinessError> businessErrors = new Dictionary<string, BusinessError>();
+    private readonly Dictionary<string, BusinessError> businessErrors = new();
 
     /// <summary>
     ///  <see cref="BusinessErrorCollection"/> クラスの新しいインスタンスを初期化します。
