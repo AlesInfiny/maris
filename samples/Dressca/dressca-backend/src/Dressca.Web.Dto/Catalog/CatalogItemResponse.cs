@@ -3,9 +3,9 @@
 namespace Dressca.Web.Dto.Catalog;
 
 /// <summary>
-///  カタログアイテムの DTO です。
+///  カタログアイテムのレスポンスデータを表します。
 /// </summary>
-public class CatalogItemDto : CatalogItemSummaryDto
+public class CatalogItemResponse : CatalogItemSummaryDto
 {
     /// <summary>
     ///  説明を取得または設定します。

@@ -24,7 +24,7 @@ public class BasketItemsController : ControllerBase
     private readonly ICatalogRepository catalogRepository;
     private readonly IObjectMapper<Basket, BasketResponse> basketMapper;
     private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
-    private readonly IObjectMapper<CatalogItem, CatalogItemDto> catalogItemMapper;
+    private readonly IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper;
     private readonly ILogger<BasketItemsController> logger;
 
     /// <summary>
@@ -35,7 +35,7 @@ public class BasketItemsController : ControllerBase
     /// <param name="catalogRepository">カタログアリポジトリ。</param>
     /// <param name="basketMapper"><see cref="Basket"/> と <see cref="BasketResponse"/> のマッパー。</param>
     /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemResponse"/> のマッパー。</param>
-    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemDto"/> のマッパー。</param>
+    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -54,7 +54,7 @@ public class BasketItemsController : ControllerBase
         ICatalogRepository catalogRepository,
         IObjectMapper<Basket, BasketResponse> basketMapper,
         IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper,
-        IObjectMapper<CatalogItem, CatalogItemDto> catalogItemMapper,
+        IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper,
         ILogger<BasketItemsController> logger)
     {
         this.basketApplicationService = basketApplicationService ?? throw new ArgumentNullException(nameof(basketApplicationService));
