@@ -85,7 +85,7 @@ public class OrdersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-    public async Task<IActionResult> PostOrderAsync(PostOrderInputDto postOrderInput)
+    public async Task<IActionResult> PostOrderAsync(PostOrderRequest postOrderInput)
     {
         var buyerId = this.HttpContext.GetBuyerId();
         var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
