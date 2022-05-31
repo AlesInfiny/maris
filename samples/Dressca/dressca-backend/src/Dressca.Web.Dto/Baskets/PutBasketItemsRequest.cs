@@ -3,9 +3,9 @@
 namespace Dressca.Web.Dto.Baskets;
 
 /// <summary>
-///  買い物かごのカタログアイテム数量を変更する処理の入力情報を表す DTO です。
+///  買い物かごのカタログアイテム数量を変更する処理のリクエストデータを表します。
 /// </summary>
-public class PutBasketItemsInputDto
+public class PutBasketItemsRequest
 {
     /// <summary>
     ///  カタログアイテム Id を取得または設定します。

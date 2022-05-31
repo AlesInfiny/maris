@@ -84,7 +84,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/PutBasketItemsInputDto"
+                  "$ref": "#/components/schemas/PutBasketItemsRequest"
                 }
               }
             }
@@ -609,9 +609,9 @@
           }
         }
       },
-      "PutBasketItemsInputDto": {
+      "PutBasketItemsRequest": {
         "type": "object",
-        "description": "買い物かごのカタログアイテム数量を変更する処理の入力情報を表す DTO です。\n            ",
+        "description": "買い物かごのカタログアイテム数量を変更する処理のリクエストデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "catalogItemId",

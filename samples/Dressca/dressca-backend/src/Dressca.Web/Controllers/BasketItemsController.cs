@@ -106,7 +106,7 @@ public class BasketItemsController : ControllerBase
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> PutBasketItemsAsync(IEnumerable<PutBasketItemsInputDto> putBasketItems)
+    public async Task<IActionResult> PutBasketItemsAsync(IEnumerable<PutBasketItemsRequest> putBasketItems)
     {
         if (!putBasketItems.Any())
         {
