@@ -17,7 +17,7 @@ public class OrderItemResponse
     /// <summary>
     ///  注文された商品（カタログアイテム）を取得または設定します。
     /// </summary>
-    public CatalogItemSummaryDto? ItemOrdered { get; set; }
+    public CatalogItemSummaryResponse? ItemOrdered { get; set; }
 
     /// <summary>
     ///  単価を取得または設定します。

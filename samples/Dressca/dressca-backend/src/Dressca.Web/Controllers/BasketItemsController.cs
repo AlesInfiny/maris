@@ -225,7 +225,7 @@ public class BasketItemsController : ControllerBase
         return this.NoContent();
     }
 
-    private CatalogItemSummaryDto? GetCatalogItemSummary(long catalogItemId, IEnumerable<CatalogItem> catalogItems)
+    private CatalogItemSummaryResponse? GetCatalogItemSummary(long catalogItemId, IEnumerable<CatalogItem> catalogItems)
     {
         var catalogItem = catalogItems.FirstOrDefault(catalogItem => catalogItem.Id == catalogItemId);
         return this.catalogItemMapper.Convert(catalogItem);

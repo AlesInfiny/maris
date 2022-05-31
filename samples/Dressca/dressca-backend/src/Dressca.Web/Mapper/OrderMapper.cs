@@ -49,7 +49,7 @@ public class OrderMapper : IObjectMapper<Order, OrderResponse>
                 Quantity = orderItem.Quantity,
                 UnitPrice = orderItem.UnitPrice,
                 SubTotal = orderItem.GetSubTotal(),
-                ItemOrdered = new CatalogItemSummaryDto
+                ItemOrdered = new CatalogItemSummaryResponse
                 {
                     Id = orderItem.ItemOrdered.CatalogItemId,
                     Name = orderItem.ItemOrdered.ProductName,

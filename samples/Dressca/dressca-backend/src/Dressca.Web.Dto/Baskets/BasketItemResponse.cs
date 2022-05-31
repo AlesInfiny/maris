@@ -35,5 +35,5 @@ public class BasketItemResponse
     /// <summary>
     ///  カタログアイテムを取得または設定します。
     /// </summary>
-    public CatalogItemSummaryDto? CatalogItem { get; set; }
+    public CatalogItemSummaryResponse? CatalogItem { get; set; }
 }
