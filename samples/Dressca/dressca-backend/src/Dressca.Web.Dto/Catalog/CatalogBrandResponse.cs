@@ -3,7 +3,7 @@
 namespace Dressca.Web.Dto.Catalog;
 
 /// <summary>
-///  カタログブランドの DTO です。
+///  カタログブランドのレスポンスデータを表します。
 ///  カタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。
 /// </summary>
 public class CatalogBrandResponse

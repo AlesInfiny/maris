@@ -3,7 +3,7 @@
 namespace Dressca.Web.Dto.Baskets;
 
 /// <summary>
-///  買い物かごにカタログアイテムを追加する処理の入力情報を表す DTO です。
+///  買い物かごにカタログアイテムを追加する処理のリクエストデータを表します。
 /// </summary>
 public class PostBasketItemsRequest
 {
