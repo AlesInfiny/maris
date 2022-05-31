@@ -3,9 +3,9 @@
 namespace Dressca.Web.Dto.Ordering;
 
 /// <summary>
-///  注文を行う処理の入力情報を表す DTO です。
+///  注文を行う処理のリクエストデータを表します。
 /// </summary>
-public class PostOrderInputDto
+public class PostOrderRequest
 {
     /// <summary>
     ///  注文者の氏名を取得または設定します。

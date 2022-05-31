@@ -3,9 +3,9 @@
 namespace Dressca.Web.Dto.Accounting;
 
 /// <summary>
-///  会計情報を表す DTO です。
+///  会計情報のレスポンスデータを表します。。
 /// </summary>
-public class AccountDto
+public class AccountResponse
 {
     /// <summary>
     ///  消費税率を取得または設定します。

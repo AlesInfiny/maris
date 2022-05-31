@@ -15,33 +15,33 @@
 
 
 /**
- * カタログアイテムの DTO です。             
+ * カタログアイテムのレスポンスデータを表します。             
  * @export
- * @interface CatalogItemDtoAllOf
+ * @interface CatalogItemResponseAllOf
  */
-export interface CatalogItemDtoAllOf {
+export interface CatalogItemResponseAllOf {
     /**
      * 説明を取得または設定します。             
      * @type {string}
-     * @memberof CatalogItemDtoAllOf
+     * @memberof CatalogItemResponseAllOf
      */
     'description': string;
     /**
      * 単価を取得または設定します。             
      * @type {number}
-     * @memberof CatalogItemDtoAllOf
+     * @memberof CatalogItemResponseAllOf
      */
     'price': number;
     /**
      * カタログカテゴリ Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogItemDtoAllOf
+     * @memberof CatalogItemResponseAllOf
      */
     'catalogCategoryId': number;
     /**
      * カタログブランド Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogItemDtoAllOf
+     * @memberof CatalogItemResponseAllOf
      */
     'catalogBrandId': number;
 }

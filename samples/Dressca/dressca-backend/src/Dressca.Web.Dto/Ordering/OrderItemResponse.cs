@@ -1,18 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Dressca.Web.Dto.Catalog;
 
-namespace Dressca.Web.Dto.Baskets;
+namespace Dressca.Web.Dto.Ordering;
 
 /// <summary>
-///  買い物かごのアイテムを表す DTO です。
+///  注文アイテムのレスポンスデータを表します。
 /// </summary>
-public class BasketItemDto
+public class OrderItemResponse
 {
     /// <summary>
-    ///  カタログアイテム Id を取得または設定します。
+    ///  注文アイテム Id を取得します。
     /// </summary>
     [Required]
-    public long CatalogItemId { get; set; }
+    public long Id { get; init; }
+
+    /// <summary>
+    ///  注文された商品（カタログアイテム）を取得または設定します。
+    /// </summary>
+    public CatalogItemSummaryResponse? ItemOrdered { get; set; }
 
     /// <summary>
     ///  単価を取得または設定します。
@@ -31,9 +36,4 @@ public class BasketItemDto
     /// </summary>
     [Required]
     public decimal SubTotal { get; set; }
-
-    /// <summary>
-    ///  カタログアイテムを取得または設定します。
-    /// </summary>
-    public CatalogItemSummaryDto? CatalogItem { get; set; }
 }

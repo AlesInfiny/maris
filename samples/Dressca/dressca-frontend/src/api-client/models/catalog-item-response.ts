@@ -13,13 +13,13 @@
  */
 
 
-import { CatalogItemDtoAllOf } from './catalog-item-dto-all-of';
-import { CatalogItemSummaryDto } from './catalog-item-summary-dto';
+import { CatalogItemResponseAllOf } from './catalog-item-response-all-of';
+import { CatalogItemSummaryResponse } from './catalog-item-summary-response';
 
 /**
- * @type CatalogItemDto
+ * @type CatalogItemResponse
  * @export
  */
-export type CatalogItemDto = CatalogItemDtoAllOf & CatalogItemSummaryDto;
+export type CatalogItemResponse = CatalogItemResponseAllOf & CatalogItemSummaryResponse;
 
 

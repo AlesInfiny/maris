@@ -21,7 +21,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { PagedListOfCatalogItemDto } from '../models';
+import { PagedListOfCatalogItemResponse } from '../models';
 // @ts-ignore
 import { ProblemDetails } from '../models';
 /**
@@ -108,7 +108,7 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async catalogItemsGetByQuery(brandId: number, categoryId: number, page: number, pageSize: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PagedListOfCatalogItemDto>> {
+        async catalogItemsGetByQuery(brandId: number, categoryId: number, page: number, pageSize: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PagedListOfCatalogItemResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.catalogItemsGetByQuery(brandId, categoryId, page, pageSize, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -132,7 +132,7 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogItemsGetByQuery(brandId: number, categoryId: number, page: number, pageSize: number, options?: any): AxiosPromise<PagedListOfCatalogItemDto> {
+        catalogItemsGetByQuery(brandId: number, categoryId: number, page: number, pageSize: number, options?: any): AxiosPromise<PagedListOfCatalogItemResponse> {
             return localVarFp.catalogItemsGetByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(axios, basePath));
         },
     };

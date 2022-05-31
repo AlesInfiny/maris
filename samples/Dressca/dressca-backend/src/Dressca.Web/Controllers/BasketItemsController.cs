@@ -22,9 +22,9 @@ public class BasketItemsController : ControllerBase
     private readonly BasketApplicationService basketApplicationService;
     private readonly CatalogDomainService catalogDomainService;
     private readonly ICatalogRepository catalogRepository;
-    private readonly IObjectMapper<Basket, BasketDto> basketMapper;
-    private readonly IObjectMapper<BasketItem, BasketItemDto> basketItemMapper;
-    private readonly IObjectMapper<CatalogItem, CatalogItemDto> catalogItemMapper;
+    private readonly IObjectMapper<Basket, BasketResponse> basketMapper;
+    private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
+    private readonly IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper;
     private readonly ILogger<BasketItemsController> logger;
 
     /// <summary>
@@ -33,9 +33,9 @@ public class BasketItemsController : ControllerBase
     /// <param name="basketApplicationService">買い物かごアプリケーションサービス。</param>
     /// <param name="catalogDomainService">カタログドメインサービス。</param>
     /// <param name="catalogRepository">カタログアリポジトリ。</param>
-    /// <param name="basketMapper"><see cref="Basket"/> と <see cref="BasketDto"/> のマッパー。</param>
-    /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemDto"/> のマッパー。</param>
-    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemDto"/> のマッパー。</param>
+    /// <param name="basketMapper"><see cref="Basket"/> と <see cref="BasketResponse"/> のマッパー。</param>
+    /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemResponse"/> のマッパー。</param>
+    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -52,9 +52,9 @@ public class BasketItemsController : ControllerBase
         BasketApplicationService basketApplicationService,
         CatalogDomainService catalogDomainService,
         ICatalogRepository catalogRepository,
-        IObjectMapper<Basket, BasketDto> basketMapper,
-        IObjectMapper<BasketItem, BasketItemDto> basketItemMapper,
-        IObjectMapper<CatalogItem, CatalogItemDto> catalogItemMapper,
+        IObjectMapper<Basket, BasketResponse> basketMapper,
+        IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper,
+        IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper,
         ILogger<BasketItemsController> logger)
     {
         this.basketApplicationService = basketApplicationService ?? throw new ArgumentNullException(nameof(basketApplicationService));
@@ -72,20 +72,20 @@ public class BasketItemsController : ControllerBase
     /// <returns>買い物かごアイテムの一覧。</returns>
     /// <response code="200">成功。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(BasketDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(BasketResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetBasketItemsAsync()
     {
         var buyerId = this.HttpContext.GetBuyerId();
         var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
         var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
         var catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id));
-        var basketDto = this.basketMapper.Convert(basket);
-        foreach (var a in basketDto.BasketItems)
+        var basketResponse = this.basketMapper.Convert(basket);
+        foreach (var basketItem in basketResponse.BasketItems)
         {
-            a.CatalogItem = this.GetCatalogItemSummary(a.CatalogItemId, catalogItems);
+            basketItem.CatalogItem = this.GetCatalogItemSummary(basketItem.CatalogItemId, catalogItems);
         }
 
-        return this.Ok(basketDto);
+        return this.Ok(basketResponse);
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public class BasketItemsController : ControllerBase
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> PutBasketItemsAsync(IEnumerable<PutBasketItemsInputDto> putBasketItems)
+    public async Task<IActionResult> PutBasketItemsAsync(IEnumerable<PutBasketItemsRequest> putBasketItems)
     {
         if (!putBasketItems.Any())
         {
@@ -169,7 +169,7 @@ public class BasketItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-    public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsInputDto postBasketItem)
+    public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsRequest postBasketItem)
     {
         postBasketItem.CatalogItemId.ThrowIfNull();
         postBasketItem.AddedQuantity.ThrowIfNull();
@@ -225,7 +225,7 @@ public class BasketItemsController : ControllerBase
         return this.NoContent();
     }
 
-    private CatalogItemSummaryDto? GetCatalogItemSummary(long catalogItemId, IEnumerable<CatalogItem> catalogItems)
+    private CatalogItemSummaryResponse? GetCatalogItemSummary(long catalogItemId, IEnumerable<CatalogItem> catalogItems)
     {
         var catalogItem = catalogItems.FirstOrDefault(catalogItem => catalogItem.Id == catalogItemId);
         return this.catalogItemMapper.Convert(catalogItem);

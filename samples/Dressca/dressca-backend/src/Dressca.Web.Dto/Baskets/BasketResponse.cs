@@ -4,9 +4,9 @@ using Dressca.Web.Dto.Accounting;
 namespace Dressca.Web.Dto.Baskets;
 
 /// <summary>
-///  買い物かごを表す DTO です。
+///  買い物かごのレスポンスデータを表します。
 /// </summary>
-public class BasketDto
+public class BasketResponse
 {
     /// <summary>
     ///  購入者 Id を取得または設定します。
@@ -17,10 +17,10 @@ public class BasketDto
     /// <summary>
     ///  会計情報を取得または設定します。
     /// </summary>
-    public AccountDto? Account { get; set; }
+    public AccountResponse? Account { get; set; }
 
     /// <summary>
     ///  買い物かごアイテムのリストを取得または設定します。
     /// </summary>
-    public IList<BasketItemDto> BasketItems { get; set; } = new List<BasketItemDto>();
+    public IList<BasketItemResponse> BasketItems { get; set; } = new List<BasketItemResponse>();
 }

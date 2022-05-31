@@ -15,22 +15,22 @@
 
 
 /**
- * 買い物かごのカタログアイテム数量を変更する処理の入力情報を表す DTO です。             
+ * 買い物かごにカタログアイテムを追加する処理のリクエストデータを表します。             
  * @export
- * @interface PutBasketItemsInputDto
+ * @interface PostBasketItemsRequest
  */
-export interface PutBasketItemsInputDto {
+export interface PostBasketItemsRequest {
     /**
      * カタログアイテム Id を取得または設定します。 1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。             
      * @type {number}
-     * @memberof PutBasketItemsInputDto
+     * @memberof PostBasketItemsRequest
      */
     'catalogItemId': number;
     /**
-     * 数量を取得または設定します。 0 以上の値を設定してください。             
+     * 数量を取得または設定します。 カタログアイテム Id に指定した商品が買い物かごに含まれている場合、負の値を指定すると買い物かごから指定した数だけ取り出します。 未指定の場合は 1 です。             
      * @type {number}
-     * @memberof PutBasketItemsInputDto
+     * @memberof PostBasketItemsRequest
      */
-    'quantity': number;
+    'addedQuantity'?: number | null;
 }
 

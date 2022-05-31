@@ -13,55 +13,55 @@
  */
 
 
-import { CatalogItemDto } from './catalog-item-dto';
+import { CatalogItemResponse } from './catalog-item-response';
 
 /**
  * ページネーションした結果のリストを管理します。             
  * @export
- * @interface PagedListOfCatalogItemDto
+ * @interface PagedListOfCatalogItemResponse
  */
-export interface PagedListOfCatalogItemDto {
+export interface PagedListOfCatalogItemResponse {
     /**
      * 現在のページ番号を取得します。 最初のページは 1 です。             
      * @type {number}
-     * @memberof PagedListOfCatalogItemDto
+     * @memberof PagedListOfCatalogItemResponse
      */
     'page'?: number;
     /**
      * ページの総数を取得します。             
      * @type {number}
-     * @memberof PagedListOfCatalogItemDto
+     * @memberof PagedListOfCatalogItemResponse
      */
     'totalPages'?: number;
     /**
      * 1 ページあたりの件数を取得します。             
      * @type {number}
-     * @memberof PagedListOfCatalogItemDto
+     * @memberof PagedListOfCatalogItemResponse
      */
     'pageSize'?: number;
     /**
      * アイテムの総数を取得します。             
      * @type {number}
-     * @memberof PagedListOfCatalogItemDto
+     * @memberof PagedListOfCatalogItemResponse
      */
     'totalCount'?: number;
     /**
      * 前のページが存在するかどうか示す値を取得します。             
      * @type {boolean}
-     * @memberof PagedListOfCatalogItemDto
+     * @memberof PagedListOfCatalogItemResponse
      */
     'hasPrevious'?: boolean;
     /**
      * 次のページが存在するかどうか示す値を取得します。             
      * @type {boolean}
-     * @memberof PagedListOfCatalogItemDto
+     * @memberof PagedListOfCatalogItemResponse
      */
     'hasNext'?: boolean;
     /**
      * 検索結果のリストを取得します。             
-     * @type {Array<CatalogItemDto>}
-     * @memberof PagedListOfCatalogItemDto
+     * @type {Array<CatalogItemResponse>}
+     * @memberof PagedListOfCatalogItemResponse
      */
-    'items'?: Array<CatalogItemDto>;
+    'items'?: Array<CatalogItemResponse>;
 }
 

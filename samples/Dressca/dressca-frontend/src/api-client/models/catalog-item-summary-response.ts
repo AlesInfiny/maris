@@ -15,33 +15,33 @@
 
 
 /**
- * カタログアイテムの概要を表す DTO です。             
+ * カタログアイテムの概要のレスポンスデータを表します。             
  * @export
- * @interface CatalogItemSummaryDto
+ * @interface CatalogItemSummaryResponse
  */
-export interface CatalogItemSummaryDto {
+export interface CatalogItemSummaryResponse {
     /**
      * カタログアイテム Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogItemSummaryDto
+     * @memberof CatalogItemSummaryResponse
      */
     'id': number;
     /**
      * 商品名を取得または設定します。             
      * @type {string}
-     * @memberof CatalogItemSummaryDto
+     * @memberof CatalogItemSummaryResponse
      */
     'name': string;
     /**
      * 商品コードを取得または設定します。             
      * @type {string}
-     * @memberof CatalogItemSummaryDto
+     * @memberof CatalogItemSummaryResponse
      */
     'productCode': string;
     /**
      * アセットコードの一覧を取得または設定します。             
      * @type {Array<string>}
-     * @memberof CatalogItemSummaryDto
+     * @memberof CatalogItemSummaryResponse
      */
     'assetCodes'?: Array<string>;
 }

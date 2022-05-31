@@ -3,9 +3,9 @@
 namespace Dressca.Web.Dto.Catalog;
 
 /// <summary>
-///  カタログカテゴリの DTO です。
+///  カタログカテゴリのレスポンスデータを表します。
 /// </summary>
-public class CatalogCategoryDto
+public class CatalogCategoryResponse
 {
     /// <summary>
     ///  カタログカテゴリ Id を取得または設定します。

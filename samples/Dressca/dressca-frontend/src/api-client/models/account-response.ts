@@ -15,39 +15,39 @@
 
 
 /**
- * 会計情報を表す DTO です。             
+ * 会計情報のレスポンスデータを表します。。             
  * @export
- * @interface AccountDto
+ * @interface AccountResponse
  */
-export interface AccountDto {
+export interface AccountResponse {
     /**
      * 消費税率を取得または設定します。             
      * @type {number}
-     * @memberof AccountDto
+     * @memberof AccountResponse
      */
     'consumptionTaxRate': number;
     /**
      * 注文アイテムの税抜き合計金額を取得または設定します。             
      * @type {number}
-     * @memberof AccountDto
+     * @memberof AccountResponse
      */
     'totalItemsPrice': number;
     /**
      * 送料を取得または設定します。             
      * @type {number}
-     * @memberof AccountDto
+     * @memberof AccountResponse
      */
     'deliveryCharge': number;
     /**
      * 消費税額を取得または設定します。             
      * @type {number}
-     * @memberof AccountDto
+     * @memberof AccountResponse
      */
     'consumptionTax': number;
     /**
      * 送料、税込みの合計金額を取得または設定します。             
      * @type {number}
-     * @memberof AccountDto
+     * @memberof AccountResponse
      */
     'totalPrice': number;
 }
