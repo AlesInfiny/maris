@@ -29,17 +29,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\EfInfrastructureMessages.Designer.cs">
+    <Compile Update="Resources\Messages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>EfInfrastructureMessages.resx</DependentUpon>
+      <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\EfInfrastructureMessages.resx">
+    <EmbeddedResource Update="Resources\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EfInfrastructureMessages.Designer.cs</LastGenOutput>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

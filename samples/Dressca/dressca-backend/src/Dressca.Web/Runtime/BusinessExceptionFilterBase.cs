@@ -30,7 +30,7 @@ public abstract class BusinessExceptionFilterBase : IExceptionFilter
     {
         if (context.Exception is BusinessException businessEx)
         {
-            this.logger.LogInformation(businessEx, WebMessages.BusinessExceptionHandled);
+            this.logger.LogInformation(businessEx, Messages.BusinessExceptionHandled);
             var errors = businessEx.GetErrors();
             foreach (var (errorCode, errorMessage) in errors)
             {

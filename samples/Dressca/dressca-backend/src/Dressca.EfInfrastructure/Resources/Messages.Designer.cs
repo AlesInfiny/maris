@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dressca.Store.Assets.StaticFiles.Resources {
+namespace Dressca.EfInfrastructure.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Dressca.Store.Assets.StaticFiles.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class StoreAssetsStaticFilesMessages {
+    internal class Messages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal StoreAssetsStaticFilesMessages() {
+        internal Messages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Dressca.Store.Assets.StaticFiles.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Store.Assets.StaticFiles.Resources.StoreAssetsStaticFilesMessages", typeof(StoreAssetsStaticFilesMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.EfInfrastructure.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace Dressca.Store.Assets.StaticFiles.Resources {
         }
         
         /// <summary>
-        ///   アセットコード:{0} のファイルストリームが見つかりません。ファイルパスは {1} です。 に類似しているローカライズされた文字列を検索します。
+        ///   {0} 接続文字列を構成から取得できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string FileNotFound {
+        internal static string NotFoundConnectionString {
             get {
-                return ResourceManager.GetString("FileNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   アセットコード:{0} のファイルストリームを取得しました。ファイルパスは {1} です。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string StaticFileAssetStore_GetStreamEnd {
-            get {
-                return ResourceManager.GetString("StaticFileAssetStore_GetStreamEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   アセットコード:{0} のストリームを取得します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string StaticFileAssetStore_GetStreamStart {
-            get {
-                return ResourceManager.GetString("StaticFileAssetStore_GetStreamStart", resourceCulture);
+                return ResourceManager.GetString("NotFoundConnectionString", resourceCulture);
             }
         }
     }

@@ -42,12 +42,12 @@ public class OrderItemAsset
     /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
     public string AssetCode
     {
-        get => this.assetCode ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.AssetCode)));
+        get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));
         private set
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
             }
 
             this.assetCode = value;
@@ -65,7 +65,7 @@ public class OrderItemAsset
     /// <exception cref="InvalidOperationException"><see cref="OrderItem"/> が設定されていません。</exception>
     public OrderItem OrderItem
     {
-        get => this.orderItem ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.OrderItem)));
+        get => this.orderItem ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.OrderItem)));
         private set => this.orderItem = value;
     }
 }

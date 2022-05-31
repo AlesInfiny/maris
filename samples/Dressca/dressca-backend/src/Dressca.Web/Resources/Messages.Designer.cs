@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dressca.EfInfrastructure.Resources {
+namespace Dressca.Web.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Dressca.EfInfrastructure.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class EfInfrastructureMessages {
+    internal class Messages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EfInfrastructureMessages() {
+        internal Messages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Dressca.EfInfrastructure.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.EfInfrastructure.Resources.EfInfrastructureMessages", typeof(EfInfrastructureMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Web.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,38 @@ namespace Dressca.EfInfrastructure.Resources {
         }
         
         /// <summary>
-        ///   {0} 接続文字列を構成から取得できません。 に類似しているローカライズされた文字列を検索します。
+        ///   業務エラーが発生しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string NotFoundConnectionString {
+        internal static string BusinessExceptionHandled {
             get {
-                return ResourceManager.GetString("NotFoundConnectionString", resourceCulture);
+                return ResourceManager.GetString("BusinessExceptionHandled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   アセットタイプ: {0} を Content-Type に変換できません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CannotConvertAssetTypeToContentType {
+            get {
+                return ResourceManager.GetString("CannotConvertAssetTypeToContentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   リクエストに指定されたカタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogItemIdDoesNotExistInBasket {
+            get {
+                return ResourceManager.GetString("CatalogItemIdDoesNotExistInBasket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   HTTP 要求に誤りがあります。詳細情報: {0} 。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string RecieveHttpBadRequest {
+            get {
+                return ResourceManager.GetString("RecieveHttpBadRequest", resourceCulture);
             }
         }
     }

@@ -20,7 +20,7 @@ public class CatalogCategory
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(name));
+            throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(name));
         }
 
         this.Name = name;

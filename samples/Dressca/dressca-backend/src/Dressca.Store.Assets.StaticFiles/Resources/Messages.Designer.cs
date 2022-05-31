@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dressca.SystemCommon.Resources {
+namespace Dressca.Store.Assets.StaticFiles.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Dressca.SystemCommon.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SystemCommonMessages {
+    internal class Messages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SystemCommonMessages() {
+        internal Messages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Dressca.SystemCommon.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.SystemCommon.Resources.SystemCommonMessages", typeof(SystemCommonMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Store.Assets.StaticFiles.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,29 @@ namespace Dressca.SystemCommon.Resources {
         }
         
         /// <summary>
-        ///   業務例外が発生しました。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{0} のファイルストリームが見つかりません。ファイルパスは {1} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string BusinessError {
+        internal static string FileNotFound {
             get {
-                return ResourceManager.GetString("BusinessError", resourceCulture);
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   アセットコード:{0} のファイルストリームを取得しました。ファイルパスは {1} です。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StaticFileAssetStore_GetStreamEnd {
+            get {
+                return ResourceManager.GetString("StaticFileAssetStore_GetStreamEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   アセットコード:{0} のストリームを取得します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StaticFileAssetStore_GetStreamStart {
+            get {
+                return ResourceManager.GetString("StaticFileAssetStore_GetStreamStart", resourceCulture);
             }
         }
     }

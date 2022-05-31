@@ -42,7 +42,7 @@ public class BusinessExceptionDevelopmentFilter : BusinessExceptionFilterBase
                 context.HttpContext,
                 context.ModelState,
                 statusCode: (int)HttpStatusCode.BadRequest,
-                title: WebMessages.BusinessExceptionHandled,
+                title: Messages.BusinessExceptionHandled,
                 detail: context.Exception.ToString());
     }
 }
