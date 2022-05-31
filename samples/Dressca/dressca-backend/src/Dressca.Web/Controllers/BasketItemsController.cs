@@ -23,7 +23,7 @@ public class BasketItemsController : ControllerBase
     private readonly CatalogDomainService catalogDomainService;
     private readonly ICatalogRepository catalogRepository;
     private readonly IObjectMapper<Basket, BasketResponse> basketMapper;
-    private readonly IObjectMapper<BasketItem, BasketItemDto> basketItemMapper;
+    private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
     private readonly IObjectMapper<CatalogItem, CatalogItemDto> catalogItemMapper;
     private readonly ILogger<BasketItemsController> logger;
 
@@ -34,7 +34,7 @@ public class BasketItemsController : ControllerBase
     /// <param name="catalogDomainService">カタログドメインサービス。</param>
     /// <param name="catalogRepository">カタログアリポジトリ。</param>
     /// <param name="basketMapper"><see cref="Basket"/> と <see cref="BasketResponse"/> のマッパー。</param>
-    /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemDto"/> のマッパー。</param>
+    /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemResponse"/> のマッパー。</param>
     /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemDto"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
@@ -53,7 +53,7 @@ public class BasketItemsController : ControllerBase
         CatalogDomainService catalogDomainService,
         ICatalogRepository catalogRepository,
         IObjectMapper<Basket, BasketResponse> basketMapper,
-        IObjectMapper<BasketItem, BasketItemDto> basketItemMapper,
+        IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper,
         IObjectMapper<CatalogItem, CatalogItemDto> catalogItemMapper,
         ILogger<BasketItemsController> logger)
     {

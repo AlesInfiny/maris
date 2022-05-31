@@ -22,5 +22,5 @@ public class BasketResponse
     /// <summary>
     ///  買い物かごアイテムのリストを取得または設定します。
     /// </summary>
-    public IList<BasketItemDto> BasketItems { get; set; } = new List<BasketItemDto>();
+    public IList<BasketItemResponse> BasketItems { get; set; } = new List<BasketItemResponse>();
 }

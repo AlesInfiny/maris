@@ -11,7 +11,7 @@ namespace Dressca.Web.Mapper;
 /// </summary>
 public class BasketMapper : IObjectMapper<Basket, BasketResponse>
 {
-    private readonly IObjectMapper<BasketItem, BasketItemDto> basketItemMapper;
+    private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
 
     /// <summary>
     ///  <see cref="BasketMapper"/> クラスの新しいインスタンスを初期化します。
@@ -20,7 +20,7 @@ public class BasketMapper : IObjectMapper<Basket, BasketResponse>
     /// <exception cref="ArgumentNullException">
     ///  <paramref name="basketItemMapper"/> が <see langword="null"/> です。
     /// </exception>
-    public BasketMapper(IObjectMapper<BasketItem, BasketItemDto> basketItemMapper)
+    public BasketMapper(IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper)
         => this.basketItemMapper = basketItemMapper ?? throw new ArgumentNullException(nameof(basketItemMapper));
 
     /// <inheritdoc/>

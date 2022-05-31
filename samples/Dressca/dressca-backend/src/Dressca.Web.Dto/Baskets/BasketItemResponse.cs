@@ -4,9 +4,9 @@ using Dressca.Web.Dto.Catalog;
 namespace Dressca.Web.Dto.Baskets;
 
 /// <summary>
-///  買い物かごのアイテムを表す DTO です。
+///  買い物かごのアイテムのレスポンスデータを表します
 /// </summary>
-public class BasketItemDto
+public class BasketItemResponse
 {
     /// <summary>
     ///  カタログアイテム Id を取得または設定します。

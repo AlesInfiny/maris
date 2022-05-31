@@ -6,20 +6,20 @@ using Dressca.Web.Dto.Baskets;
 namespace Dressca.Web.Mapper;
 
 /// <summary>
-///  <see cref="BasketItem"/> と <see cref="BasketItemDto"/> のマッパーです。
+///  <see cref="BasketItem"/> と <see cref="BasketItemResponse"/> のマッパーです。
 /// </summary>
-public class BasketItemMapper : IObjectMapper<BasketItem, BasketItemDto>
+public class BasketItemMapper : IObjectMapper<BasketItem, BasketItemResponse>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull("value")]
-    public BasketItemDto? Convert(BasketItem? value)
+    public BasketItemResponse? Convert(BasketItem? value)
     {
         if (value is null)
         {
             return null;
         }
 
-        return new BasketItemDto
+        return new BasketItemResponse
         {
             CatalogItemId = value.CatalogItemId,
             Quantity = value.Quantity,
