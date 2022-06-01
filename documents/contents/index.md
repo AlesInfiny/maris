@@ -65,5 +65,3 @@ Maris OSS 版で構築した Web アプリケーションのサンプルを手�
    いくつかプロンプト画面が立ち上がった後、ブラウザーが起動し、アプリケーションの実行が開始します。
 
     [![Dressca トップページ](images/dressca-top.png){ width="600" loading=lazy }](images/dressca-top.png)
-
---8<-- "includes/abbreviations.md"

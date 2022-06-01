@@ -126,5 +126,3 @@ Maris OSS 版の各ドキュメントは、本節に記載されている環境�
     また GUI ベースの開発ができるため、 Visual Studio のほうが初学者にとって扱いやすい環境です。
 [^2]:
     Node.js のインストーラーは、原則 LTS 版を利用してください。
-
---8<-- "includes/abbreviations.md"
