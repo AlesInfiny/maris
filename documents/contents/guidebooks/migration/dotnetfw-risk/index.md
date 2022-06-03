@@ -14,7 +14,9 @@
 - .NET （旧称：.NET Core）
     - 様々な OS 上で動作する OSS
     - 大幅な軽量化により動作性能が大きく向上
-    - .NET 5 で GUI の開発に強みを持つ Mono / Xamarin を統合
+    - .NET 6 で GUI の開発に強みを持つ Mono / Xamarin を統合完了
+
+![.NET ランタイムの進化と統合](../../../images/guidebooks/migration/dotnetfw-risk/evolution-and-integration-of-dotnet.png)
 
 ### 1-1. .NET Frameworkから.NETへ ### {: #dotnetfw-to-dotnet}
 
@@ -41,7 +43,7 @@
 
 ### 1-2. .NET Frameworkの開発停止 ### {: #stop-development-of-dotnetfw}
 
-2019年5月、Microsoft は [.NET Framework の開発停止を宣言](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net/)しました。
+2019年5月、Microsoft は .NET Framework の開発停止を宣言しました（[.NET Core is Future of .NET](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net/)）。
 
 この宣言では、次のことが明記されています。
 
@@ -185,7 +187,18 @@ Grapecty 社の製品である [InputMan](https://www.grapecity.co.jp/developer/
 - 同じシステムを5年以上、一切手を加えずに使い続ける前提である
 - セキュリティリスクを受け入れることができる（または、他の方法で担保できる）
 
-## コラム「.NET Framework は塩漬けに適していたのか？」
+ただし、.NET Framework 3.5 SP1 以前を使用しているシステムは、上掲の条件をすべて満たしていたとしても移行を検討すべきです。.NET Framework 3.5 SP1 は OS のバージョンによらず、2029年1月にサポートが終了するためです。
+
+???+ note "コラム：.NET Framework は塩漬けシステムに適していたのか？"
+
+    2-5 ではいわゆる「塩漬けシステム」は移行を急ぐ必要は無いと記載しましたが、
+    .NET Framework はそのようなシステムに適していたのでしょうか？
+
+    実際には、.NET Framework は一度インストールすればバージョンを固定できるようなものではなく、
+    サーバー OS の更新時には新しいバージョンへアップデートする必要があります。
+
+    .NET Framework には強い後方互換性があるため、テストを再実施しなくても
+    非互換が発生しないパターンが多かっただけといえるでしょう。
 
 ## 3. .NETへの移行
 
