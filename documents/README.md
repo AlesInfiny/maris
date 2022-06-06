@@ -23,9 +23,9 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 |               |                  | images                |                    |                                               |
 |               | guidebooks       |                       |                    | ガイドライン系ドキュメント                    |
 |               |                  | app-testing           |                    | アプリケーションテスト（*）                   |
+|               |                  | git                   |                    | Git リポジトリ構築ガイド                      |
 |               |                  | how-to-develop        |                    | アプリケーション開発手順                      |
 |               |                  |                       | dotnet             | .NET 編                                       |
-|               |                  |                       | git                | Git リポジトリ構築編                          |
 |               |                  |                       | local-environment  | ローカル開発環境の構築                        |
 |               |                  |                       | vue-js             | Vue.js 編                                     |
 |               |                  | migration             |                    | マイグレーション                              |
