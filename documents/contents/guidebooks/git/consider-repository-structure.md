@@ -9,9 +9,9 @@ Git リポジトリの管理方式として、「mono-repo」と「poly-repo ( m
 ![mono-repo の構造例](../../images/guidebooks/git/mono-repo-structure-dark.png#only-dark){ align=right loading=lazy }
 
 すべてのソースコードを単一の Git リポジトリで管理するパターンを「mono-repo」と呼びます。
-様々なアプリケーションのソースコードをサブフォルダーに分割して、 1 つの Git リポジトリに格納します。
+様々なアプリケーションのソースコードをサブディレクトリに分割して、 1 つの Git リポジトリに格納します。
 
-多くはサブシステム単位でサブフォルダーを分割します。
+多くはサブシステム単位でサブディレクトリを分割します。
 サブシステム間で共用するライブラリも、同じリポジトリ内に配置して管理します。
 
 ## poly-repo とは ## {: #about-poly-repo }
