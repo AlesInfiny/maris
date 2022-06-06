@@ -25,6 +25,9 @@ nav:
 #       - 帳票印刷: cook-book/report.md
   - ガイド:
       - guidebooks/index.md
+      - Git リポジトリ構築ガイド:
+          - guidebooks/git/index.md
+          - guidebooks/git/select-git-hosting-service.md
       - アプリケーション開発手順:
           - guidebooks/how-to-develop/index.md
           - .NET 編:
