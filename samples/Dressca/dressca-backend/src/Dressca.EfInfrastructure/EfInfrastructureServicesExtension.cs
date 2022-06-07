@@ -44,7 +44,7 @@ public static class EfInfrastructureServicesExtension
         if (string.IsNullOrWhiteSpace(connectionString))
         {
             throw new ArgumentException(
-                message: string.Format(EfInfrastructureMessages.NotFoundConnectionString, ConnectionStringName),
+                message: string.Format(Messages.NotFoundConnectionString, ConnectionStringName),
                 paramName: nameof(configuration));
         }
 

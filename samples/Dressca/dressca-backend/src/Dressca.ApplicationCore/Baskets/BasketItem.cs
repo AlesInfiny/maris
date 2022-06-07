@@ -36,7 +36,7 @@ public class BasketItem
     /// <exception cref="InvalidOperationException"><see cref="Basket"/> が設定されていません。</exception>
     public Basket Basket
     {
-        get => this.basket ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.Basket)));
+        get => this.basket ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Basket)));
         private set => this.basket = value;
     }
 
@@ -66,7 +66,7 @@ public class BasketItem
         {
             if (value < 0)
             {
-                throw new ArgumentException(ApplicationCoreMessages.BasketItemQuantityMustBePositive, nameof(value));
+                throw new ArgumentException(Messages.BasketItemQuantityMustBePositive, nameof(value));
             }
 
             this.quantity = value;

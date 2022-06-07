@@ -54,7 +54,7 @@ public record CatalogItemOrdered
                 throw new ArgumentOutOfRangeException(
                     paramName: nameof(value),
                     actualValue: value,
-                    message: ApplicationCoreMessages.CatalogItemIdMustBePositive);
+                    message: Messages.CatalogItemIdMustBePositive);
             }
 
             this.catalogItemId = value;
@@ -74,7 +74,7 @@ public record CatalogItemOrdered
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
             }
 
             this.productName = value;
@@ -94,7 +94,7 @@ public record CatalogItemOrdered
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
             }
 
             this.productCode = value;

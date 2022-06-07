@@ -17,7 +17,7 @@ public class OrdersController : ControllerBase
 {
     private readonly OrderApplicationService orderApplicationService;
     private readonly BasketApplicationService basketApplicationService;
-    private readonly IObjectMapper<Order, OrderDto> orderMapper;
+    private readonly IObjectMapper<Order, OrderResponse> orderMapper;
     private readonly ILogger<OrdersController> logger;
 
     /// <summary>
@@ -25,7 +25,7 @@ public class OrdersController : ControllerBase
     /// </summary>
     /// <param name="orderApplicationService">注文アプリケーションサービス。</param>
     /// <param name="basketApplicationService">買い物かごアプリケーションサービス。</param>
-    /// <param name="orderMapper"><see cref="Order"/> と <see cref="OrderDto"/> のマッパー。</param>
+    /// <param name="orderMapper"><see cref="Order"/> と <see cref="OrderResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -38,7 +38,7 @@ public class OrdersController : ControllerBase
     public OrdersController(
         OrderApplicationService orderApplicationService,
         BasketApplicationService basketApplicationService,
-        IObjectMapper<Order, OrderDto> orderMapper,
+        IObjectMapper<Order, OrderResponse> orderMapper,
         ILogger<OrdersController> logger)
     {
         this.orderApplicationService = orderApplicationService ?? throw new ArgumentNullException(nameof(orderApplicationService));
@@ -55,7 +55,7 @@ public class OrdersController : ControllerBase
     /// <response code="200">成功。</response>
     /// <response code="404">注文 Id が存在しない。</response>
     [HttpGet("{orderId:long}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderDto))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetByIdAsync(long orderId)
     {
@@ -85,7 +85,7 @@ public class OrdersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
-    public async Task<IActionResult> PostOrderAsync(PostOrderInputDto postOrderInput)
+    public async Task<IActionResult> PostOrderAsync(PostOrderRequest postOrderInput)
     {
         var buyerId = this.HttpContext.GetBuyerId();
         var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);

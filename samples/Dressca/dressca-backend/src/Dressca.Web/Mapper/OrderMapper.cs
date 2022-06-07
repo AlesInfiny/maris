@@ -7,20 +7,20 @@ using Dressca.Web.Dto.Ordering;
 namespace Dressca.Web.Mapper;
 
 /// <summary>
-///  <see cref="Order"/> と <see cref="OrderDto"/> のマッパーです。
+///  <see cref="Order"/> と <see cref="OrderResponse"/> のマッパーです。
 /// </summary>
-public class OrderMapper : IObjectMapper<Order, OrderDto>
+public class OrderMapper : IObjectMapper<Order, OrderResponse>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull("value")]
-    public OrderDto? Convert(Order? value)
+    public OrderResponse? Convert(Order? value)
     {
         if (value is null)
         {
             return null;
         }
 
-        return new OrderDto
+        return new()
         {
             Id = value.Id,
             BuyerId = value.BuyerId,
@@ -41,15 +41,15 @@ public class OrderMapper : IObjectMapper<Order, OrderDto>
             OrderItems = value.OrderItems.Select(item => ConvertToOrderItemDto(item)).ToList(),
         };
 
-        static OrderItemDto ConvertToOrderItemDto(OrderItem orderItem)
+        static OrderItemResponse ConvertToOrderItemDto(OrderItem orderItem)
         {
-            return new OrderItemDto
+            return new OrderItemResponse
             {
                 Id = orderItem.Id,
                 Quantity = orderItem.Quantity,
                 UnitPrice = orderItem.UnitPrice,
                 SubTotal = orderItem.GetSubTotal(),
-                ItemOrdered = new CatalogItemSummaryDto
+                ItemOrdered = new CatalogItemSummaryResponse
                 {
                     Id = orderItem.ItemOrdered.CatalogItemId,
                     Name = orderItem.ItemOrdered.ProductName,

@@ -14,7 +14,7 @@ public class AssetNotFoundException : Exception
     /// </summary>
     /// <param name="assetCode">見つからなかった買い物かご Id 。</param>
     public AssetNotFoundException(string assetCode)
-        : base(string.Format(ApplicationCoreMessages.AssetNotFound, assetCode))
+        : base(string.Format(Messages.AssetNotFound, assetCode))
     {
     }
 

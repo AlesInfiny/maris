@@ -47,7 +47,7 @@ public class OrderItem
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
     public CatalogItemOrdered ItemOrdered
     {
-        get => this.itemOrdered ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.ItemOrdered)));
+        get => this.itemOrdered ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.ItemOrdered)));
 
         [MemberNotNull(nameof(itemOrdered))]
         private set => this.itemOrdered = value ?? throw new ArgumentNullException(nameof(value));
@@ -83,7 +83,7 @@ public class OrderItem
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
     public Order Order
     {
-        get => this.order ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.Order)));
+        get => this.order ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Order)));
         private set => this.order = value ?? throw new ArgumentNullException(nameof(value));
     }
 
