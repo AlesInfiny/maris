@@ -10,7 +10,8 @@ Maris OSS 版を利用することで構築できるアプリケーションの�
     画面初期表示時にはコンパイル済みの静的ファイルをダウンロードして、 JavaScript で動的に画面をレンダリングします。
     業務データの取得、更新などの処理を行う際は、 Web API 経由でサーバー側の業務ロジックを呼び出します。
 
-    ![クライアントサイドレンダリング](../../images/app-architecture/overview/client-side-rendering.png){ loading=lazy }
+    ![クライアントサイドレンダリング](../../images/app-architecture/overview/client-side-rendering-light.png#only-light){ loading=lazy }
+    ![クライアントサイドレンダリング](../../images/app-architecture/overview/client-side-rendering-dark.png#only-dark){ loading=lazy }
 
 - Web アプリケーション（サーバーサイドサイドレンダリング）
 
@@ -34,7 +35,8 @@ Vue.js を用いた SPA の構成をとります。
 サーバーサイドは .NET 6 以降をベースとした ASP.NET Core の Web API アプリケーションです。
 データアクセスには Entity Framework Core を利用します。
 
-![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris.png){ loading=lazy }
+![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
+![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading=lazy }
 
 ### Web アプリケーション（サーバーサイドレンダリング）
 
@@ -86,14 +88,16 @@ Maris OSS 版では、 1 システム 1 ソリューションを基本として�
 
     最も基本的な構造は、以下の通りです。
 
-    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture.png)
+    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture-light.png#only-light){ loading=lazy }
+    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture-dark.png#only-dark){ loading=lazy }
 
 1. サブシステム/機能をプロジェクト構造に当てはめる
 
     プロジェクトは原則としてサブシステム/機能で分割を行ってから、レイヤー分割を行います。
     ただし、アプリケーションをマイクロサービス化しないのであれば、エントリーポイントのプロジェクトは単一プロジェクトとすることを推奨します。
 
-    ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions.png)
+    ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-light.png#only-light){ loading=lazy }
+    ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-dark.png#only-dark){ loading=lazy }
 
 [^1]:
     プロジェクト同士がお互いに参照しあう構造のことを言います。
