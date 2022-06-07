@@ -176,7 +176,7 @@ Grapecty 社の製品である [InputMan](https://www.grapecity.co.jp/developer/
 
 .NET Framework にいつまでも留まり続けることで、業界内だけでなく、就職・転職市場においても、企業の価値が低下することは避けられません。
 
-### 2-5. 移行を急がなくても良いケース
+### 2-5. 移行を急がなくても良いケース ### {: #cases-no-need-to-rush-the-migration}
 
 ここまで、.NET Framework に留まり続けることのリスクについて解説しましたが、実のところ移行を急ぐ必要があまりないアプリケーションも存在します。
 
@@ -200,10 +200,88 @@ Grapecty 社の製品である [InputMan](https://www.grapecity.co.jp/developer/
     .NET Framework には強い後方互換性があるため、テストを再実施しなくても
     非互換が発生しないパターンが多かっただけといえるでしょう。
 
-## 3. .NETへの移行
+## 3. .NETへの移行 ## {: #migration-to-dotnet}
 
-### 3-1. 基本的な方針
+前章では、.NET Framework に留まり続けることのリスクについて説明しました。この章では、.NET Framework から .NET へ移行することになったときの方針やハードルについて説明します。
 
-### 3-2. 移行のハードル
+### 3-1. 基本的な方針 ### {: #basic-policy}
 
-## 4. まとめ
+.NET Framework と .NET の間には単純互換性がないため、基本的にはコードを書き直す必要があります。
+ただし、以下のアプリケーション形式については、Microsoft から提供される「[.NET Upgrade Assistant](https://docs.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
+
+- .NET Framework Windows フォーム アプリ
+- .NET Framework WPF アプリ
+- .NET Framework UWP アプリ
+- .NET Framework ASP.NET MVC アプリ
+- .NET Framework コンソール アプリ
+- .NET Framework クラス ライブラリ
+
+.NET Upgrade Assistant を使用すると、.NET Framework のソリューションやプロジェクトが .NET 形式へ変換されます。このツールを使用して変換した後、ビルドエラーや実行時エラーに手動で対応します。
+
+ASP.NET Web Forms はこのツールに対応していないため、手動でコードを書き直す必要があります。
+
+### 3-2. 移行のハードル ### {: #obstacles-to-migration}
+
+#### (1) 書き換えが必要な .NET Framework の機能 #### {: #dotnetfw-function-to-rewrite}
+
+以下の .NET Framework 機能は、.NET では廃止または非常に使用しづらいため、.NET の機能へ書き換える必要があります。
+
+##### ASP.NET Web Forms（廃止） ##### {: #aspnet-web-forms}
+
+- 移行先候補：ASP.NET MVC や Single Page Application (Vue.js, Blazor)
+- 移行方法：移行ツールは存在せず、手作業でのソースコード書き換えが必要
+
+!!! warning
+
+    ただし、ASP.NET Web Forms でサードパーティ製品を使用している場合、同じ画面を再現できない可能性があります。
+
+##### ASMX Web Services （廃止） ##### {: #asmx-web-services}
+
+- 移行先候補：ASP.NET Web API
+- 移行方法：移行ツールは存在せず、手作業でのソースコード書き換えが必要
+
+!!! warning
+
+    サーバーサイドの SOAP サービスを構築する手段は .NET にはありません。SOAP 以外のプロトコルを検討する必要があります。
+
+##### DataSet / TableAdapter （廃止ではないが使いづらい） ##### {: #dataset-tableadapter}
+
+- 移行先候補：Entity Framework Core
+- 移行方法：移行ツールは存在せず、手作業でのソースコード書き換えが必要
+
+??? note "その他、廃止された機能"
+
+    他にも以下の .NET Framework のテクノロジー、機能、API が廃止されています。
+
+    - アプリケーションドメイン
+    - .NET Remoting
+    - 透過的セキュリティ
+    - COM+ (System.EnterpriseService)
+    - コードアクセスセキュリティ (CAS)
+
+    大半のケースでこれらの影響を受けることはありませんが、影響確認は必要です。
+
+    なお、API レベルでの影響調査であれば、ツールを用いてある程度は自動的に実施可能です。
+
+    - [.NET Portablity Analyzer](https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer)
+
+#### (2) 短い製品ライフサイクルへの追従 #### {: #adapt-to-short-product-life-cycles}
+
+.NET は、.NET Framework に対して製品ライフサイクルが短期化されています。具体的には、LTS 版であっても3年間のサポートしか提供されません。
+
+つまり、.NET の場合、これまでの「納品までが仕事」というビジネスモデルは通用しません。
+
+.NET へ移行する場合、DevOpsの導入など、継続的メンテナンスを行うことを前提としたビジネスモデルへの変革が必要となります。
+
+## 4. まとめ ## {: #conclusion}
+
+.NET 関連技術は、大きな変革の時期を迎えています。
+
+- .NET Framework の開発停止
+- Web Forms など過去の主要技術の終焉
+- .NET Framework にとどまることのリスク増加
+- .NET Framework / Core / Mono / Xamarin を統合した .NET
+
+.NET Framework から .NET への移行を進めるかどうか、判断すべきです。
+なお、コードベースが大きければ大きいほど、移行への道は重く／長くなります。
+移行するかどうかに限らず、早期の方針検討・計画化が重要となります。
