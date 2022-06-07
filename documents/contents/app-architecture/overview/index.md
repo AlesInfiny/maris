@@ -34,7 +34,8 @@ Vue.js を用いた SPA の構成をとります。
 サーバーサイドは .NET 6 以降をベースとした ASP.NET Core の Web API アプリケーションです。
 データアクセスには Entity Framework Core を利用します。
 
-![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris.png){ loading=lazy }
+![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
+![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading=lazy }
 
 ### Web アプリケーション（サーバーサイドレンダリング）
 
