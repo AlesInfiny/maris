@@ -9,6 +9,7 @@
 *[GUI]: Graphical User Interface
 *[HTML]: Hyper Text Markup Language
 *[LTS]: Long Time Support：長期サポート版。
+*[NET MAUI]: .NET Multi-Platform App UI
 *[OS]: Operating System
 *[OSS]: Open Source Software
 *[RAM]: Random Access Memory：「メモリ」とも表現される。
