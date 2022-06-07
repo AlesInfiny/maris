@@ -93,7 +93,8 @@ Maris OSS 版では、 1 システム 1 ソリューションを基本として�
     プロジェクトは原則としてサブシステム/機能で分割を行ってから、レイヤー分割を行います。
     ただし、アプリケーションをマイクロサービス化しないのであれば、エントリーポイントのプロジェクトは単一プロジェクトとすることを推奨します。
 
-    ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions.png)
+    ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-light.png#only-light){ loading=lazy }
+    ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-dark.png#only-dark){ loading=lazy }
 
 [^1]:
     プロジェクト同士がお互いに参照しあう構造のことを言います。
