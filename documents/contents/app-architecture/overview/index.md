@@ -86,7 +86,8 @@ Maris OSS 版では、 1 システム 1 ソリューションを基本として�
 
     最も基本的な構造は、以下の通りです。
 
-    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture.png)
+    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture-light.png#only-light){ loading=lazy }
+    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture-dark.png#only-dark){ loading=lazy }
 
 1. サブシステム/機能をプロジェクト構造に当てはめる
 
