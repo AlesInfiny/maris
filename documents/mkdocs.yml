@@ -29,6 +29,7 @@ nav:
           - guidebooks/git/index.md
           - guidebooks/git/select-git-hosting-service.md
           - guidebooks/git/consider-repository-structure.md
+          - guidebooks/git/consider-directory-structure.md
       - アプリケーション開発手順:
           - guidebooks/how-to-develop/index.md
           - .NET 編:
