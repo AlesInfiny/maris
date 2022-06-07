@@ -16,8 +16,8 @@ Git リポジトリの管理方式として、「mono-repo」と「poly-repo ( m
 
 ## poly-repo とは ## {: #about-poly-repo }
 
-![mono-repo の構造例](../../images/guidebooks/git/poly-repo-structure-light.png#only-light){ align=right loading=lazy }
-![mono-repo の構造例](../../images/guidebooks/git/poly-repo-structure-dark.png#only-dark){ align=right loading=lazy }
+![poly-repo の構造例](../../images/guidebooks/git/poly-repo-structure-light.png#only-light){ align=right loading=lazy }
+![poly-repo の構造例](../../images/guidebooks/git/poly-repo-structure-dark.png#only-dark){ align=right loading=lazy }
 
 ソースコードを複数の Git リポジトリで管理するパターンを「poly-repo」と呼びます。
 リポジトリの作成単位は特に定められていませんが、多くの場合でリリースをかける単位でリポジトリを分割します。
