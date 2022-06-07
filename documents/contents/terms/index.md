@@ -43,8 +43,8 @@ Maris OSS 版（以下、本サイト）は、以下を提供します。
 - Git and the Git logo are either registered trademarks or trademarks of Software Freedom Conservancy, Inc., corporate home of the Git Project, in the United States and/or other countries.
 - Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
 - 「macOS」は、米国およびその他の国で登録されたApple Inc.の商標です。
-- その他記載されている会社名・商品名などは、各社の商標および登録商標です。
   Maris OSS 版は、独立したドキュメントであり、Apple Inc.が認定、後援、その他承認したものではありません。
+- その他記載されている会社名・商品名などは、各社の商標および登録商標です。
 - 本サイトに記載の商品名、製品名、社名などには、必ずしも商標表示 ( (R)、TM ) を付記していません。
 
 本サイトに記載されている内容の著作権や肖像権等は、各権利所有者に帰属します。
