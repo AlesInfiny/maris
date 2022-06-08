@@ -1,7 +1,5 @@
 # .NET ランタイムの最新動向
 
---8<-- "includes/abbreviations.md"
-
 2022年6月現在、 .NET ランタイムには以下があります。
 
 - .NET Framework

@@ -1,7 +1,5 @@
 # .NET Framework にとどまることのリスク
 
---8<-- "includes/abbreviations.md"
-
 最近の .NET ランタイムをめぐる動向を解説したうえで、.NET Framework にとどまり続けることで起こりうるリスクについて説明します。
 
 1. [.NET ランタイムの最新動向](dotnet-runtime-trends.md)
