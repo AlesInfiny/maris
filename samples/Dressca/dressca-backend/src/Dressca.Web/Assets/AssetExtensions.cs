@@ -25,7 +25,7 @@ public static class AssetExtensions
         return asset.AssetType switch
         {
             AssetTypes.Png => ContentTypes.ImagePng,
-            _ => throw new NotSupportedException(string.Format(WebMessages.CannotConvertAssetTypeToContentType, asset.AssetType)),
+            _ => throw new NotSupportedException(string.Format(Messages.CannotConvertAssetTypeToContentType, asset.AssetType)),
         };
     }
 

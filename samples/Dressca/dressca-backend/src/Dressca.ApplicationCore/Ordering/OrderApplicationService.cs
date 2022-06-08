@@ -53,7 +53,7 @@ public class OrderApplicationService
     /// <exception cref="EmptyBasketOnCheckoutException"><paramref name="basketId"/> に該当する買い物かごが空の場合。</exception>
     public async Task<Order> CreateOrderAsync(long basketId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_CreateOrderAsyncStart, basketId);
+        this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncStart, basketId);
         var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
         if (basket is null)
         {
@@ -81,7 +81,7 @@ public class OrderApplicationService
             }).ToList();
         var order = new Order(basket.BuyerId, shipToAddress, orderItems);
         var ordered = await this.orderRepository.AddAsync(order, cancellationToken);
-        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_CreateOrderAsyncEnd, basketId, ordered.Id);
+        this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncEnd, basketId, ordered.Id);
         return ordered;
     }
 
@@ -95,14 +95,14 @@ public class OrderApplicationService
     /// <exception cref="OrderNotFoundException">注文情報が見つからない場合。</exception>
     public async Task<Order> GetOrderAsync(long orderId, string buyerId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_GetOrderAsyncStart, orderId);
+        this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncStart, orderId);
         var order = await this.orderRepository.FindAsync(orderId, cancellationToken);
         if (order is null || order.BuyerId != buyerId)
         {
             throw new OrderNotFoundException(orderId, buyerId);
         }
 
-        this.logger.LogDebug(ApplicationCoreMessages.OrderApplicationService_GetOrderAsyncEnd, orderId);
+        this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncEnd, orderId);
         return order;
     }
 }

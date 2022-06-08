@@ -21,7 +21,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { CatalogCategoryDto } from '../models';
+import { CatalogCategoryResponse } from '../models';
 /**
  * CatalogCategoriesApi - axios parameter creator
  * @export
@@ -74,7 +74,7 @@ export const CatalogCategoriesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async catalogCategoriesGetCatalogCategories(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogCategoryDto>>> {
+        async catalogCategoriesGetCatalogCategories(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogCategoryResponse>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.catalogCategoriesGetCatalogCategories(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -94,7 +94,7 @@ export const CatalogCategoriesApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogCategoriesGetCatalogCategories(options?: any): AxiosPromise<Array<CatalogCategoryDto>> {
+        catalogCategoriesGetCatalogCategories(options?: any): AxiosPromise<Array<CatalogCategoryResponse>> {
             return localVarFp.catalogCategoriesGetCatalogCategories(options).then((request) => request(axios, basePath));
         },
     };

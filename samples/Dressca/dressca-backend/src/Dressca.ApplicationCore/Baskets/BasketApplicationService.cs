@@ -37,7 +37,7 @@ public class BasketApplicationService
     /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
     public async Task AddItemToBasketAsync(long basketId, long catalogItemId, decimal price, int quantity = 1, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_AddItemToBasketAsyncStart, basketId, catalogItemId, quantity);
+        this.logger.LogDebug(Messages.BasketApplicationService_AddItemToBasketAsyncStart, basketId, catalogItemId, quantity);
         var basket = await this.basketRepository.GetAsync(basketId, cancellationToken);
         if (basket is null)
         {
@@ -47,7 +47,7 @@ public class BasketApplicationService
         basket.AddItem(catalogItemId, price, quantity);
         basket.RemoveEmptyItems();
         await this.basketRepository.UpdateAsync(basket, cancellationToken);
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_AddItemToBasketAsyncEnd, basketId, catalogItemId, quantity);
+        this.logger.LogDebug(Messages.BasketApplicationService_AddItemToBasketAsyncEnd, basketId, catalogItemId, quantity);
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ public class BasketApplicationService
     /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
     public async Task DeleteBasketAsync(long basketId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_DeleteBasketAsyncStart, basketId);
+        this.logger.LogDebug(Messages.BasketApplicationService_DeleteBasketAsyncStart, basketId);
         var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
         if (basket is null)
         {
@@ -67,7 +67,7 @@ public class BasketApplicationService
         }
 
         await this.basketRepository.RemoveAsync(basket, cancellationToken);
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_DeleteBasketAsyncEnd, basketId);
+        this.logger.LogDebug(Messages.BasketApplicationService_DeleteBasketAsyncEnd, basketId);
     }
 
     /// <summary>
@@ -82,7 +82,7 @@ public class BasketApplicationService
     /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
     public async Task SetQuantitiesAsync(long basketId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantitiesAsyncStart, basketId);
+        this.logger.LogDebug(Messages.BasketApplicationService_SetQuantitiesAsyncStart, basketId);
         ArgumentNullException.ThrowIfNull(quantities);
         var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
         if (basket is null)
@@ -94,14 +94,14 @@ public class BasketApplicationService
         {
             if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
             {
-                this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantity, item.CatalogItemId, quantity);
+                this.logger.LogDebug(Messages.BasketApplicationService_SetQuantity, item.CatalogItemId, quantity);
                 item.SetQuantity(quantity);
             }
         }
 
         basket.RemoveEmptyItems();
         await this.basketRepository.UpdateAsync(basket, cancellationToken);
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_SetQuantitiesAsyncEnd, basketId);
+        this.logger.LogDebug(Messages.BasketApplicationService_SetQuantitiesAsyncEnd, basketId);
     }
 
     /// <summary>
@@ -114,21 +114,21 @@ public class BasketApplicationService
     /// <exception cref="ArgumentException"><paramref name="buyerId"/> が <see langword="null"/> または空白の場合.</exception>
     public async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserAsyncStart, buyerId);
+        this.logger.LogDebug(Messages.BasketApplicationService_GetOrCreateBasketForUserAsyncStart, buyerId);
         if (string.IsNullOrWhiteSpace(buyerId))
         {
-            throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(buyerId));
+            throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(buyerId));
         }
 
         var basket = await this.basketRepository.GetWithBasketItemsAsync(buyerId, cancellationToken);
         if (basket is null)
         {
-            this.logger.LogDebug(ApplicationCoreMessages.CreateNewBasket_UserBasketNotFound, buyerId);
+            this.logger.LogDebug(Messages.CreateNewBasket_UserBasketNotFound, buyerId);
             basket = new Basket(buyerId);
             return await this.basketRepository.AddAsync(basket, cancellationToken);
         }
 
-        this.logger.LogDebug(ApplicationCoreMessages.BasketApplicationService_GetOrCreateBasketForUserAsyncEnd, buyerId);
+        this.logger.LogDebug(Messages.BasketApplicationService_GetOrCreateBasketForUserAsyncEnd, buyerId);
         return basket;
     }
 }

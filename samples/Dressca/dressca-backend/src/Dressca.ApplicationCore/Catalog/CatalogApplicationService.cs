@@ -51,7 +51,7 @@ public class CatalogApplicationService
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
     public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.CatalogApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
+        this.logger.LogDebug(Messages.CatalogApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
         var itemsOnPage = await this.catalogRepository.FindAsync(
             item =>
                 (!brandId.HasValue || item.CatalogBrandId == brandId) &&
@@ -64,7 +64,7 @@ public class CatalogApplicationService
                 (!brandId.HasValue || item.CatalogBrandId == brandId) &&
                 (!categoryId.HasValue || item.CatalogCategoryId == categoryId),
             cancellationToken);
-        this.logger.LogDebug(ApplicationCoreMessages.CatalogApplicationService_GetCatalogItemsAsyncEnd, brandId, categoryId);
+        this.logger.LogDebug(Messages.CatalogApplicationService_GetCatalogItemsAsyncEnd, brandId, categoryId);
         return (ItemsOnPage: itemsOnPage, TotalItems: totalItems);
     }
 

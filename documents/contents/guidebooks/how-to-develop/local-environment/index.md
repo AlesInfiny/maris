@@ -38,6 +38,9 @@ Web API アプリケーションやコンソールアプリケーションなど
 | Vue.js アプリケーション  | ×            | 〇      |
 | .NET アプリケーション    | 〇            | △ [^1] |
 
+!!! info "Maris OSS 版の前提とする開発環境"
+    Maris OSS 版の提供する情報は、原則として上記推奨環境についてのみ取り扱います。
+
 ## ローカル開発環境の構築手順 ## {: #setup-development-environment }
 
 本節では開発に最低限必要なソフトウェアのインストール方法について解説します。
@@ -104,7 +107,7 @@ Maris OSS 版の各ドキュメントは、本節に記載されている環境�
     npm --version
     ```
 
-### Entity Framework Core Tool のインストール ### {: #install-efcore-tool }
+### Entity Framework Core Tool のインストール ### {: #install-ef-core-tool }
 
 1. 以下のコマンドを実行します。
 
@@ -123,5 +126,3 @@ Maris OSS 版の各ドキュメントは、本節に記載されている環境�
     また GUI ベースの開発ができるため、 Visual Studio のほうが初学者にとって扱いやすい環境です。
 [^2]:
     Node.js のインストーラーは、原則 LTS 版を利用してください。
-
---8<-- "includes/abbreviations.md"

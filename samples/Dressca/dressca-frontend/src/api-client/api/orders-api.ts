@@ -21,9 +21,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { OrderDto } from '../models';
+import { OrderResponse } from '../models';
 // @ts-ignore
-import { PostOrderInputDto } from '../models';
+import { PostOrderRequest } from '../models';
 // @ts-ignore
 import { ProblemDetails } from '../models';
 /**
@@ -69,13 +69,13 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @summary 買い物かごに登録されている商品を注文します。
-         * @param {PostOrderInputDto} postOrderInputDto 注文に必要な配送先などの情報。
+         * @param {PostOrderRequest} postOrderRequest 注文に必要な配送先などの情報。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        ordersPostOrder: async (postOrderInputDto: PostOrderInputDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'postOrderInputDto' is not null or undefined
-            assertParamExists('ordersPostOrder', 'postOrderInputDto', postOrderInputDto)
+        ordersPostOrder: async (postOrderRequest: PostOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'postOrderRequest' is not null or undefined
+            assertParamExists('ordersPostOrder', 'postOrderRequest', postOrderRequest)
             const localVarPath = `/api/orders`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -95,7 +95,7 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(postOrderInputDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(postOrderRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -119,19 +119,19 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async ordersGetById(orderId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderDto>> {
+        async ordersGetById(orderId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.ordersGetById(orderId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @summary 買い物かごに登録されている商品を注文します。
-         * @param {PostOrderInputDto} postOrderInputDto 注文に必要な配送先などの情報。
+         * @param {PostOrderRequest} postOrderRequest 注文に必要な配送先などの情報。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async ordersPostOrder(postOrderInputDto: PostOrderInputDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.ordersPostOrder(postOrderInputDto, options);
+        async ordersPostOrder(postOrderRequest: PostOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.ordersPostOrder(postOrderRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -151,18 +151,18 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        ordersGetById(orderId: number, options?: any): AxiosPromise<OrderDto> {
+        ordersGetById(orderId: number, options?: any): AxiosPromise<OrderResponse> {
             return localVarFp.ordersGetById(orderId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary 買い物かごに登録されている商品を注文します。
-         * @param {PostOrderInputDto} postOrderInputDto 注文に必要な配送先などの情報。
+         * @param {PostOrderRequest} postOrderRequest 注文に必要な配送先などの情報。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        ordersPostOrder(postOrderInputDto: PostOrderInputDto, options?: any): AxiosPromise<void> {
-            return localVarFp.ordersPostOrder(postOrderInputDto, options).then((request) => request(axios, basePath));
+        ordersPostOrder(postOrderRequest: PostOrderRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.ordersPostOrder(postOrderRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -189,12 +189,12 @@ export class OrdersApi extends BaseAPI {
     /**
      * 
      * @summary 買い物かごに登録されている商品を注文します。
-     * @param {PostOrderInputDto} postOrderInputDto 注文に必要な配送先などの情報。
+     * @param {PostOrderRequest} postOrderRequest 注文に必要な配送先などの情報。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OrdersApi
      */
-    public ordersPostOrder(postOrderInputDto: PostOrderInputDto, options?: AxiosRequestConfig) {
-        return OrdersApiFp(this.configuration).ordersPostOrder(postOrderInputDto, options).then((request) => request(this.axios, this.basePath));
+    public ordersPostOrder(postOrderRequest: PostOrderRequest, options?: AxiosRequestConfig) {
+        return OrdersApiFp(this.configuration).ordersPostOrder(postOrderRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }

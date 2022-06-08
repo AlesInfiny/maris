@@ -45,7 +45,7 @@ public class AssetApplicationService
     /// </exception>
     public AssetStreamInfo GetAssetStreamInfo(string assetCode)
     {
-        this.logger.LogDebug(ApplicationCoreMessages.AssetApplicationService_GetAssetStreamInfoStart, assetCode);
+        this.logger.LogDebug(Messages.AssetApplicationService_GetAssetStreamInfoStart, assetCode);
         var asset = this.repository.Find(assetCode);
         if (asset == null)
         {
@@ -58,7 +58,7 @@ public class AssetApplicationService
             throw new AssetNotFoundException(assetCode);
         }
 
-        this.logger.LogDebug(ApplicationCoreMessages.AssetApplicationService_GetAssetStreamInfoEnd, assetCode);
+        this.logger.LogDebug(Messages.AssetApplicationService_GetAssetStreamInfoEnd, assetCode);
         return new(asset, stream);
     }
 

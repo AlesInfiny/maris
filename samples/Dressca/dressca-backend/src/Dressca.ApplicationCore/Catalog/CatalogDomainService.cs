@@ -52,7 +52,7 @@ public class CatalogDomainService
         if (notExistsCatalogItemIds.Any())
         {
             this.logger.LogWarning(
-                ApplicationCoreMessages.CatalogItemIdDoesNotExistInRepository,
+                Messages.CatalogItemIdDoesNotExistInRepository,
                 string.Join(',', notExistsCatalogItemIds));
             return (ExistsAll: false, CatalogItems: items);
         }

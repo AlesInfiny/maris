@@ -25,6 +25,11 @@ nav:
 #       - 帳票印刷: cook-book/report.md
   - ガイド:
       - guidebooks/index.md
+      - Git リポジトリ構築ガイド:
+          - guidebooks/git/index.md
+          - guidebooks/git/select-git-hosting-service.md
+          - guidebooks/git/consider-repository-structure.md
+          - guidebooks/git/consider-directory-structure.md
       - アプリケーション開発手順:
           - guidebooks/how-to-develop/index.md
           - .NET 編:
@@ -103,7 +108,10 @@ markdown_extensions:
       linenums: true
   - pymdownx.inlinehilite
   - pymdownx.keys
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      check_paths: true
+      auto_append:
+        - includes/abbreviations.md
   - pymdownx.superfences
   - pymdownx.tabbed
   - toc:

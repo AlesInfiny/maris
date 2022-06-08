@@ -14,7 +14,7 @@ public class BasketNotFoundException : Exception
     /// </summary>
     /// <param name="basketId">見つからなかった買い物かご Id 。</param>
     public BasketNotFoundException(long basketId)
-        : base(string.Format(ApplicationCoreMessages.BasketNotFound, basketId))
+        : base(string.Format(Messages.BasketNotFound, basketId))
     {
     }
 

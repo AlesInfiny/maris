@@ -42,12 +42,12 @@ public class Asset
     /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
     public string AssetCode
     {
-        get => this.assetCode ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.AssetCode)));
+        get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));
         private set
         {
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException(ApplicationCoreMessages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
             }
 
             this.assetCode = value;
@@ -61,12 +61,12 @@ public class Asset
     /// <exception cref="NotSupportedException">サポートされていないアセットタイプが指定されました。</exception>
     public string AssetType
     {
-        get => this.assetType ?? throw new InvalidOperationException(string.Format(ApplicationCoreMessages.PropertyNotInitialized, nameof(this.AssetType)));
+        get => this.assetType ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetType)));
         private set
         {
             if (!AssetTypes.IsSupportedAssetType(value))
             {
-                throw new NotSupportedException(string.Format(ApplicationCoreMessages.InvalidAssetType, value));
+                throw new NotSupportedException(string.Format(Messages.InvalidAssetType, value));
             }
 
             this.assetType = value;

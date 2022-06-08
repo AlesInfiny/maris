@@ -16,13 +16,13 @@ namespace Dressca.Web.Controllers;
 public class CatalogItemsController : ControllerBase
 {
     private readonly CatalogApplicationService service;
-    private readonly IObjectMapper<CatalogItem, CatalogItemDto> mapper;
+    private readonly IObjectMapper<CatalogItem, CatalogItemResponse> mapper;
 
     /// <summary>
     ///  <see cref="CatalogItemsController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="service">カタログアプリケーションサービス。</param>
-    /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="CatalogItemDto"/> のマッパー。</param>
+    /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
@@ -31,7 +31,7 @@ public class CatalogItemsController : ControllerBase
     /// </exception>
     public CatalogItemsController(
         CatalogApplicationService service,
-        IObjectMapper<CatalogItem, CatalogItemDto> mapper)
+        IObjectMapper<CatalogItem, CatalogItemResponse> mapper)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -45,7 +45,7 @@ public class CatalogItemsController : ControllerBase
     /// <response code="200">成功。</response>
     /// <response code="400">リクエストエラー。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(PagedList<CatalogItemDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(PagedList<CatalogItemResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
@@ -58,7 +58,7 @@ public class CatalogItemsController : ControllerBase
         var items = catalogItems
             .Select(catalogItem => this.mapper.Convert(catalogItem))
             .ToList();
-        var returnValue = new PagedList<CatalogItemDto>(
+        var returnValue = new PagedList<CatalogItemResponse>(
             items: items,
             totalCount: totalCount,
             page: query.Page,

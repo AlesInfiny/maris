@@ -6,12 +6,24 @@ using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
 using Dressca.Web.Mapper;
 using Dressca.Web.Resources;
+using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddControllers(options => options.Filters.Add(new BuyerIdFilterAttribute()))
+    .AddControllers(options =>
+    {
+        options.Filters.Add<BuyerIdFilterAttribute>();
+        if (builder.Environment.IsDevelopment())
+        {
+            options.Filters.Add<BusinessExceptionDevelopmentFilter>();
+        }
+        else
+        {
+            options.Filters.Add<BusinessExceptionFilter>();
+        }
+    })
     .ConfigureApiBehaviorOptions(options =>
     {
         // Bad Request となった場合の処理。
@@ -20,7 +32,7 @@ builder.Services
         {
             // エラーの原因をログに出力。
             var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation(WebMessages.RecieveHttpBadRequest, JsonSerializer.Serialize(context.ModelState));
+            logger.LogInformation(Messages.RecieveHttpBadRequest, JsonSerializer.Serialize(context.ModelState));
 
             // ASP.NET Core の既定の実装を使ってレスポンスを返却。
             return builtInFactory(context);
