@@ -54,7 +54,7 @@ RESTful API の Open API 仕様書を生成するためのフレームワーク�
 .NET Framework に留まり続けた場合、開発自体が困難になるだけでなく、開発体制を構築することも困難になります。
 ここでは、その理由について説明します。
 
-### UI デザイナーとの協業ができない ### {: #cannot-work-with-UI-designers }
+### UI デザイナーとの協業ができない ### {: #cannot-work-with-ui-designers }
 
 .NET Framework の代表的な Web アプリケーションフレームワークである ASP.NET Web Forms は、かつてその開発生産性の高さが評価されていました。
 しかし、開発時にデザインと画面機能を完全には分離することができないという欠点があります。
