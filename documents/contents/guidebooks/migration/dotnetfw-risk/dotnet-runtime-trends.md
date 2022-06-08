@@ -10,7 +10,8 @@
     - 大幅な軽量化により動作性能が大きく向上
     - .NET 6 で GUI の開発に強みを持つ Mono / Xamarin を統合完了
 
-![.NET ランタイムの進化と統合](../../../images/guidebooks/migration/dotnetfw-risk/evolution-and-integration-of-dotnet.png)
+![.NET ランタイムの進化と統合](../../../images/guidebooks/migration/dotnetfw-risk/evolution-and-integration-of-dotnet-light.png#only-light){ loading=lazy }
+![.NET ランタイムの進化と統合](../../../images/guidebooks/migration/dotnetfw-risk/evolution-and-integration-of-dotnet-dark.png#only-dark){ loading=lazy }
 
 ## .NET Framework から.NETへ ## {: #dotnetfw-to-dotnet }
 
