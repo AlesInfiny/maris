@@ -1,6 +1,6 @@
 # 概要編
 
-## 構築できるアプリケーション形態
+## 構築できるアプリケーション形態 ## {: #application-kind }
 
 Maris OSS 版を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
 
@@ -23,13 +23,13 @@ Maris OSS 版を利用することで構築できるアプリケーションの�
     クライアント端末で動作するネイティブアプリケーションです。
     （今後追加予定）
   
-## アプリケーション構成
+## アプリケーション構成 ## {: #application-structure }
 
 Maris OSS 版として、アプリケーション形態ごとに標準的なアプリケーション構成を定義しています。
 ここでは主要な構成要素を示します。
 詳細はアプリケーション種別ごとの詳細ページ、および、サンプルプリケーションを参照してください。
 
-### Web アプリケーション（クライアントサイドレンダリング）
+### Web アプリケーション ( クライアントサイドレンダリング ) ### {: #client-side-rendering }
 
 Vue.js を用いた SPA の構成をとります。
 サーバーサイドは .NET 6 以降をベースとした ASP.NET Core の Web API アプリケーションです。
@@ -38,17 +38,17 @@ Vue.js を用いた SPA の構成をとります。
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading=lazy }
 
-### Web アプリケーション（サーバーサイドレンダリング）
+### Web アプリケーション ( サーバーサイドレンダリング ) ### {: #server-side-rendering }
 
 （今後追加予定）
 
-### コンソールアプリケーション
+### コンソールアプリケーション ### {: #console-application }
 
 （今後追加予定）
 
-## ソリューション構造
+## ソリューション構造 ## {: #solution-structure }
 
-### ソリューションの単位
+### ソリューションの単位 ### {: #unit-of-solution }
 
 Maris OSS 版では、 1 サブシステム 1 ソリューションを基本として推奨します。
 ただし、複数サブシステム ( 複数ソリューション ) で共用する共通機能を作成する場合は、必要に応じてソリューション分割を検討してください。
@@ -58,7 +58,7 @@ Maris OSS 版では、 1 サブシステム 1 ソリューションを基本と�
 
 [Visual Studio のフィルター処理済みソリューション - ソリューション フィルター ファイル](https://docs.microsoft.com/ja-jp/visualstudio/ide/filtered-solutions?view=vs-2022#solution-filter-files)
 
-### プロジェクトの単位
+### プロジェクトの単位 ### {: #unit-of-project }
 
 プロジェクトは、原則として機能単位、レイヤー単位で分割することを推奨します。
 プロジェクトの分割にあたっては、以下の手順で分割を検討してください。
