@@ -16,7 +16,8 @@
 			"Pymarkdown",
 			"Remoting",
 			"SaaS",
-			"winbatch"
+			"winbatch",
+			"xunit"
 		]
 	},
 	"extensions": {
