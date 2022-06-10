@@ -38,6 +38,8 @@ nav:
           - guidebooks/how-to-develop/index.md
           - .NET 編:
               - guidebooks/how-to-develop/dotnet/index.md
+              - guidebooks/how-to-develop/dotnet/preparation.md
+              - guidebooks/how-to-develop/dotnet/create-solution-structure.md
           - Vue.js 編:
               - guidebooks/how-to-develop/vue-js/index.md
           - ローカル開発環境の構築:
