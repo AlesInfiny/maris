@@ -91,14 +91,14 @@
     ![規模の小さなソリューションにおける構成](../../../images/guidebooks/how-to-develop/dotnet/project-structure-light.png#only-light){ loading=lazy }
     ![規模の小さなソリューションにおける構成](../../../images/guidebooks/how-to-develop/dotnet/project-structure-dark.png#only-dark){ loading=lazy }
 
-    規模の小さいソリューションにおけるクリーンアーキテクチャに則ったプロジェクトの配置と命名例を示しています。
-    物理的なディレクトリ配置と、ソリューション内の配置を揃えることで、何がどこにあるかをすぐに判断できるよう整理しています。
+    規模の小さいソリューションにおけるクリーンアーキテクチャに則ったプロジェクトの配置と命名例を示します。
+    まず、物理的なディレクトリ配置と、ソリューション内の配置を揃えることで、何がどこにあるかをすぐに判断できるよう整理しています。
 
-    Infrastructure 層は、実装の具体的な方式をプロジェクト名の末尾や接頭辞として付けることを推奨します。
+    Infrastructure 層のプロジェクトは、実装の具体的な方式をプロジェクト名の末尾や接頭辞として付けることを推奨します。
     このように命名することで、各プロジェクト内に様々な実装テクノロジーが混在することを避け、適切な機能配置を実現できます。
     以下に例を示します。
     
-    - AaaSubSystem.EFInfrastructure : Entity Framework Coreを使った Repository の実装
+    - AaaSubSystem.EFInfrastructure : Entity Framework Coreを使った Repository の実装 ( 別案 : AaaSubSystem.Infrastructure.EFCore )
     - AaaSubSystem.Store.StaticFiles : 静的ファイルを用いたストアの実装
 
     ASP.NET Core Web API のプロジェクトを作成する場合は、 Web API の入出力インターフェースを管理する DTO を集めたプロジェクトを作りましょう。
