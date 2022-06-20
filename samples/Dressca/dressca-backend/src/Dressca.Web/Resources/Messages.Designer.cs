@@ -90,9 +90,9 @@ namespace Dressca.Web.Resources {
         /// <summary>
         ///   HTTP 要求に誤りがあります。詳細情報: {0} 。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string RecieveHttpBadRequest {
+        internal static string ReceiveHttpBadRequest {
             get {
-                return ResourceManager.GetString("RecieveHttpBadRequest", resourceCulture);
+                return ResourceManager.GetString("ReceiveHttpBadRequest", resourceCulture);
             }
         }
     }

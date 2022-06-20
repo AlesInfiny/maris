@@ -126,7 +126,7 @@
   <data name="CatalogItemIdDoesNotExistInBasket" xml:space="preserve">
     <value>リクエストに指定されたカタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。</value>
   </data>
-  <data name="RecieveHttpBadRequest" xml:space="preserve">
+  <data name="ReceiveHttpBadRequest" xml:space="preserve">
     <value>HTTP 要求に誤りがあります。詳細情報: {0} 。</value>
   </data>
 </root>
