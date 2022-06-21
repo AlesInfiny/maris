@@ -7,12 +7,15 @@
 	"settings": {
 		"tableformatter.common.centerAlignedHeader": false,
 		"cSpell.words": [
+			"ASPNETCore",
 			"BIPROGY",
 			"Blazor",
 			"drawio",
 			"dressca",
 			"mkdocs",
+			"Newtonsoft",
 			"Noto",
+			"nswag",
 			"Pymarkdown",
 			"Remoting",
 			"SaaS",
