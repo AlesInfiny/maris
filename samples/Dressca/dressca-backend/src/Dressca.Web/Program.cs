@@ -39,7 +39,7 @@ builder.Services
         };
     });
 
-builder.Services.AddSwaggerDocument(config =>
+builder.Services.AddOpenApiDocument(config =>
 {
     config.PostProcess = document =>
     {
