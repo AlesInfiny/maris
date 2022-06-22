@@ -209,6 +209,9 @@ stylecop.json は、各プロジェクトのルートディレクトリにある
 
 ## メッセージリソースの追加 {: #add-message-resource }
 
+![メッセージリソースの配置](../../../images/guidebooks/how-to-develop/dotnet/resx-placement-light.png#only-light){ loading=lazy align=right }
+![メッセージリソースの配置](../../../images/guidebooks/how-to-develop/dotnet/resx-placement-dark.png#only-dark){ loading=lazy align=right }
+
 プロダクションコード用のプロジェクト内で使用するメッセージを管理するために、リソースファイルを追加しましょう。
 プロダクションコード用のプロジェクトに [Resources] ディレクトリを追加し、その中に [Messages.resx] ファイルを追加します。
 例外メッセージやログメッセージなど、プロジェクト内で使用するメッセージは、すべてこのリソースファイルに集約して管理します。
