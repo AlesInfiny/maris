@@ -17,8 +17,7 @@ ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力�
 ### NSwag 構成ファイルの追加 {: #add-nswag-json }
 
 [nswag.json] ファイルをプロジェクトルートに追加します。
-この段階ではコードの生成を行いません。
-Open API 仕様書の生成に関する設定のみ実施してください。
+NSwag を用いた実装コードの生成は行わないため、 Open API 仕様書の生成に関する設定のみ実施してください。
 [nswag.json] の設定値の詳細は、以下を参照してください。
 
 - [NSwag Configuration Document](https://github.com/RicoSuter/NSwag/wiki/NSwag-Configuration-Document)
@@ -160,12 +159,13 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 キャッチされなかった例外の情報を返却するために、エラー情報を取得できるコントローラーを追加します。
 エラーレスポンスは [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc7807.html)) に従った形式で返却するようにしましょう。
 
-本番環境では内部情報の流出を防ぐため、スタックトレースを返却しないようにします。
+本番環境ではアプリケーションの内部情報流出を防ぐため、スタックトレースを返却しないようにします。
 開発環境ではエラーの詳細を簡単に開発者が把握できるよう、スタックトレースをエラーレスポンスに含めることを検討しましょう。
 
 ??? example "システムエラーのエラー情報を返却するコントローラー実装例"
-    `#!csharp ErrorController` は [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc7807.html)) に従ったエラーレスポンスを返却するように実装します。
-    `#!csharp ControllerBase.Problem` メソッドを利用すると、 RFC 7807 に準拠したレスポンスを構築することができます。
+    システムエラーのエラー情報を返却するためには、未処理例外の情報を取得し、適切な形式に変換するコントローラー ( この例では `#!csharp ErrorController` ) を作成します。
+    このコントローラーは、 [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc7807.html)) に従ったエラーレスポンスを返却するように実装しましょう。
+    `#!csharp ControllerBase.Problem` メソッドを利用すると、 RFC 7807 に準拠したレスポンスを簡単に構築できます。
 
     開発環境で使用するアクションメソッドと、それ以外の環境で使用するアクションメソッドは分割して定義しましょう。
     開発環境で使用するアクションメソッドでは、スタックトレースをレスポンスに含めるように実装します。
@@ -228,7 +228,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 
 ### 未処理例外発生時の例外ハンドラーを設定 {: #setup-exception-handler }
 
-未処理の例外が ASP.NET Core のランタイムまで到達した場合、[先ほど](#create-error-controller)作成したエラー情報を取得できるコントローラーを呼び出すようにランタイムを構成します。
+未処理の例外が ASP.NET Core のランタイムまで到達した場合、[先ほど](#create-error-controller)作成したエラー情報を取得できるコントローラーを呼び出すようランタイムを構成します。
 開発環境ではスタックトレース込みのエラー情報を返す処理を登録します。
 それ以外の環境ではスタックトレースを返さない処理を登録します。
 
@@ -250,7 +250,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 
 ## HTTP 400 応答時のログ出力 {: #logging-on-http-400 }
 
-Web API から HTTP 400 の応答を返却する際、ログに問題となった個所の情報を記録するようにします。
+Web API から HTTP 400 の応答を返却する際、問題の原因となった入力値の情報をログに記録しましょう。
 入力値検証などのエラー情報をサーバー側でロギングでき、障害発生時の追跡性を高めることができます。
 
 ??? example "HTTP 400 の場合ログを出力する実装例"

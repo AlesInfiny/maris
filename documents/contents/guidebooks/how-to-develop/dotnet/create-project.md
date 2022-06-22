@@ -9,12 +9,13 @@
 
 以下の用途で利用します。
 
-- エントリーポイント以外のビジネスロジック ( Application Core, Business Logic, Infrastructure, Data Access ) を提供するプロジェクト
+- エントリーポイント以外のビジネスロジック ( アプリケーションコア層 ) やデータアクセス処理 ( インフラストラクチャ層 ) を提供するプロジェクト
 - DTO を管理するプロジェクト
 - システム共通処理を提供するプロジェクト
 
-??? info "【参考】 .NET CLI を用いる場合"
-    .NET CLI を用いてクラスライブラリプロジェクトを作成する場合、以下のコマンドを利用します。
+??? info "【参考】 .NET CLI を用いてクラスライブラリプロジェクトを作成する方法"
+    プロジェクトを作成するディレクトリに移動して、以下のコマンドを利用します。
+    プロジェクト名はディレクトリ名と同名になります。
 
     ```winbatch title="クラスライブラリプロジェクトの作成コマンド"
     dotnet new classlib
@@ -26,8 +27,9 @@
 
 - バッチアプリケーションのエントリーポイントとなるプロジェクト
 
-??? info "【参考】 .NET CLI を用いる場合"
-    .NET CLI を用いてコンソールアプリケーションプロジェクトを作成する場合、以下のコマンドを利用します。
+??? info "【参考】 .NET CLI を用いてコンソールアプリケーションプロジェクトを作成する方法"
+    プロジェクトを作成するディレクトリに移動して、以下のコマンドを利用します。
+    プロジェクト名はディレクトリ名と同名になります。
 
     ```winbatch title="コンソールアプリケーションプロジェクトの作成コマンド"
     dotnet new console
@@ -39,8 +41,9 @@
 
 - Web API だけを公開する Web アプリケーション
 
-??? info "【参考】 .NET CLI を用いる場合"
-    .NET CLI を用いて ASP.NET Core Web API プロジェクトを作成する場合、以下のコマンドを利用します。
+??? info "【参考】 .NET CLI を用いて ASP.NET Core Web API プロジェクトを作成する方法"
+    プロジェクトを作成するディレクトリに移動して、以下のコマンドを利用します。
+    プロジェクト名はディレクトリ名と同名になります。
 
     ```winbatch title="ASP.NET Core Web API プロジェクトの作成コマンド"
     dotnet new webapi
@@ -50,14 +53,15 @@
 
 以下の用途で利用します。
 
-- Vue.js のクライアントアプリケーションから接続する Web API を提供する Web アプリケーション
+- Vue.js などの JavaScript ベースのクライアントアプリケーションから接続する Web API を提供する Web アプリケーション ( SPA のバックエンドアプリケーション )
 
 ??? info "プロジェクトを作る前に必要な作業"
     ASP.NET Core with Vite のプロジェクトテンプレートは、 Visual Studio をインストールしただけでは利用できません。
     [JohannDev.DotNet.Web.Spa.ProjectTemplates](https://www.nuget.org/packages/JohannDev.DotNet.Web.Spa.ProjectTemplates/) の NuGet パッケージを事前にインストールしてください。
 
-??? info "【参考】 .NET CLI を用いる場合"
-    .NET CLI を用いて ASP.NET Core with Vite プロジェクトを作成する場合、以下のコマンドを利用します。
+??? info "【参考】 .NET CLI を用いて ASP.NET Core with Vite プロジェクトを作成する方法"
+    プロジェクトを作成するディレクトリに移動して、以下のコマンドを利用します。
+    プロジェクト名はディレクトリ名と同名になります。
 
     ```winbatch title="ASP.NET Core with Vite プロジェクトの作成コマンド"
     dotnet new vite
@@ -69,8 +73,9 @@
 
 - 単体 / 結合 / E2E テストドライバー
 
-??? info "【参考】 .NET CLI を用いる場合"
-    .NET CLI を用いて xUnit テストプロジェクトを作成する場合、以下のコマンドを利用します。
+??? info "【参考】 .NET CLI を用いて xUnit テストプロジェクトを作成する方法"
+    プロジェクトを作成するディレクトリに移動して、以下のコマンドを利用します。
+    プロジェクト名はディレクトリ名と同名になります。
 
     ```winbatch title="xUnit テストプロジェクトの作成コマンド"
     dotnet new xunit
