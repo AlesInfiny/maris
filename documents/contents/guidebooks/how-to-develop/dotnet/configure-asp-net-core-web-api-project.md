@@ -1,6 +1,6 @@
 # ASP.NET Core Web API プロジェクトの構成
 
-ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力設定と例外ハンドリングのための設定を行います。
+ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力設定と例外ハンドリングのための設定、ログ出力設定を行います。
 
 ## Open API 仕様書の出力設定 {: #open-api-specification-output-configuration }
 
@@ -275,4 +275,93 @@ Web API から HTTP 400 の応答を返却する際、問題の原因となっ�
                 return builtInFactory(context);
             };
         });
+    ```
+
+## HTTP 通信ログの出力 {: #configure-http-communication-log }
+
+Web API アプリケーションの入出力は、 HTTP 通信の形式になります。
+実際の開発作業では、意図した通りの HTTP リクエスト / レスポンスが送受信できているか確認することがよくあります。
+これをサポートするため、開発環境では HTTP 通信ログを出力するよう設定することを推奨します。
+
+この設定を行ったら、開発環境の[ログレベルの設定](#configure-log-level)をあわせて実施するようにしてください。
+
+??? example "HTTP 通信ログを出力する実装例"
+    HTTP 通信ログの出力は、 ASP.NET Core のミドルウェアを用いて実現します。
+    通常開発者がログ出力処理を記述する必要はありません。
+    開発環境でのみ HTTP 通信ログが出力されるよう ASP.NET Core ランタイムを組み立てます。
+    ASP.NET Core Web API プロジェクトの [Program.cs] または [Startup.cs] に、以下の 2 つの実装を加えてください。
+
+    ```csharp title="HTTP 通信ログ出力設定 1 ( Program.cs )"
+    if (builder.Environment.IsDevelopment())
+    {
+        builder.Services.AddHttpLogging(logging =>
+        {
+            // どのデータをどのくらいの量出力するか設定。
+            // 適宜設定値は変更する。
+            logging.LoggingFields = HttpLoggingFields.All;
+            logging.RequestBodyLogLimit = 4096;
+            logging.ResponseBodyLogLimit = 4096;
+        });
+    }
+    ```
+
+    ```csharp title="HTTP 通信ログ出力設定 2 ( Program.cs )"
+    if (app.Environment.IsDevelopment())
+    {
+        // HTTP 通信ログを有効にする。
+        app.UseHttpLogging();
+    }
+    ```
+
+## ログレベルの設定 {: #configure-log-level }
+
+ソースコード内で `#!csharp ILogger` を用いてログ出力を行っても、ログレベルを正しく構成しない限りログ出力は行われません。
+ASP.NET Core Web API プロジェクトを作成した際、一緒に作成される [appsettings.json] および [appsettings.Development.json] ファイルに対してログレベルの設定を行います。
+ログレベルの設定方法については、以下を参照してください。
+
+- [.NET でのログの記録 - ログの構成](https://docs.microsoft.com/ja-JP/dotnet/core/extensions/logging#configure-logging)
+
+ログレベルは、本番環境向けの設定と開発環境向けの設定を別々に管理します。
+本番環境向けには原則 Information 以上のログのみを出力するように設定します。
+開発環境向けには、アプリケーション内で出力するように設定したログがすべて出力できるように設定します。
+
+??? example "基本のログ構成例"
+    本番環境向けのログレベル設定は、 [appsettings.json] に行います。
+    Information レベル以上のログを出力するように設定しましょう。
+    ただし、 `Microsoft.AspNetCore` のカテゴリについては、 Warning 以上のレベルのみ出力するようにします。
+
+    開発しているアプリケーションから出力するログのログレベルも、明示的に設定しておくことを推奨します。
+    例のように、 `LogLLevel` 要素にソリューション名と同名のキーを追加し、値としてログレベルを設定します。
+    通常は Information を設定しましょう。
+
+    ```json title="appsettings.json"
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft.AspNetCore": "Warning",
+          "AaaSubSystem": "Information"
+        }
+      }
+    }
+    ```
+
+    開発環境向けのログレベル設定は [appsettings.Development.json] に行います。
+    開発環境では、開発者が設定したデバッグレベルのログも出力できるように設定します。
+    例のように、 `LogLLevel` 要素にソリューション名と同名のキーを追加し、 Debug を設定します。
+
+    [HTTP 通信ログ](#configure-http-communication-log)を記録するように設定した場合は、そのログが出力されるよう個別に設定を追加します。
+    例のように、 `LogLLevel` 要素に Microsoft.AspNetCore.HttpLogging のキーを追加し、 Information を設定します。
+
+    ```json title="appsettings.Development.json"
+    {
+      "Logging": {
+        "LogLevel": {
+          "Default": "Information",
+          "Microsoft.AspNetCore": "Warning",
+          "Microsoft.AspNetCore.HttpLogging": "Information",
+          "AaaSubSystem": "Debug"
+        }
+      }
+    }
     ```
