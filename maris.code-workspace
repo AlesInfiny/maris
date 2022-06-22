@@ -7,16 +7,26 @@
 	"settings": {
 		"tableformatter.common.centerAlignedHeader": false,
 		"cSpell.words": [
+			"appsettings",
+			"ASPNETCore",
 			"BIPROGY",
 			"Blazor",
 			"drawio",
 			"dressca",
 			"mkdocs",
+			"Newtonsoft",
 			"Noto",
+			"nswag",
 			"Pymarkdown",
 			"Remoting",
+			"resx",
 			"SaaS",
-			"winbatch"
+			"seealso",
+			"struct",
+			"StyleCop",
+			"vite",
+			"winbatch",
+			"xunit"
 		]
 	},
 	"extensions": {
