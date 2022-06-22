@@ -7,6 +7,7 @@
 	"settings": {
 		"tableformatter.common.centerAlignedHeader": false,
 		"cSpell.words": [
+			"appsettings",
 			"ASPNETCore",
 			"BIPROGY",
 			"Blazor",
