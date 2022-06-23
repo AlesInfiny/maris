@@ -59,14 +59,14 @@ public class OrderTest
 
     [Theory]
     [MemberData(nameof(EmptyOrderItems))]
-    public void Constructor_注文アイテムは必須(List<OrderItem>? orderItems)
+    public void Constructor_注文アイテムは必須(List<OrderItem>? emptyOrderItems)
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
 
         // Act
-        var action = () => new Order(buyerId, shipTo, orderItems!);
+        var action = () => new Order(buyerId, shipTo, emptyOrderItems!);
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("orderItems", action);
