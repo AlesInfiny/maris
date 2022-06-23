@@ -20,7 +20,7 @@ public class BasketApplicationServiceTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idがnullまたは空白なら例外が発生する(string? buyerId)
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idがnullまたは空白なら例外が発生する(string? nullOrEmptyBuyerId)
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
@@ -28,7 +28,7 @@ public class BasketApplicationServiceTest
         var service = new BasketApplicationService(repo, logger);
 
         // Act
-        var action = () => service.GetOrCreateBasketForUserAsync(buyerId!);
+        var action = () => service.GetOrCreateBasketForUserAsync(nullOrEmptyBuyerId!);
 
         // Assert
         var ex = await Assert.ThrowsAsync<ArgumentException>("buyerId", action);
