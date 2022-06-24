@@ -53,7 +53,7 @@ nav:
   #           - guidebooks/app-testing/index.md
       - マイグレーション:
           - guidebooks/migration/index.md
-          - .NET Frameworkにとどまることのリスク:
+          - .NET Framework にとどまることのリスク:
               - guidebooks/migration/dotnetfw-risk/index.md
               - guidebooks/migration/dotnetfw-risk/dotnet-runtime-trends.md
               - guidebooks/migration/dotnetfw-risk/risk-of-dotnet-framework.md
