@@ -13,7 +13,7 @@
 ![.NET ランタイムの進化と統合](../../../images/guidebooks/migration/dotnetfw-risk/evolution-and-integration-of-dotnet-light.png#only-light){ loading=lazy }
 ![.NET ランタイムの進化と統合](../../../images/guidebooks/migration/dotnetfw-risk/evolution-and-integration-of-dotnet-dark.png#only-dark){ loading=lazy }
 
-## .NET Framework から.NETへ ## {: #dotnetfw-to-dotnet }
+## .NET Framework から.NETへ {: #dotnetfw-to-dotnet }
 
 .NET Framework と .NET は一見似ていますが、その成り立ちをたどると別の物であることが分かります。
 
@@ -39,7 +39,7 @@
 
 つまり、 .NET Framework と .NET の間に単純な互換性はありません。
 
-## .NET Framework の開発停止 ## {: #stop-development-of-dotnetfw }
+## .NET Framework の開発停止 {: #stop-development-of-dotnetfw }
 
 2019 年 5 月、 Microsoft は .NET Framework の開発停止を宣言しました ( [.NET Core is Future of .NET](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net/) ) 。
 
@@ -55,7 +55,7 @@
 また、上述の Microsoft の宣言により、これまで .NET Framework 向けにサードパーティ製品を提供していた企業も、投資先を .NET へ切り替えています。
 新製品は .NET 向けに提供され、 .NET Framework をサポートすることはないでしょう。
 
-## .NET ランタイムのサポート期限 ## {: #dotnet-runtime-support-expiration }
+## .NET ランタイムのサポート期限 {: #dotnet-runtime-support-expiration }
 
 .NET Framework のサポート期限を以下の表に示します。
 
