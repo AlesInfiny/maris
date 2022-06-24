@@ -13,7 +13,7 @@ Maris OSS 版を利用することで構築できるアプリケーションの�
     ![クライアントサイドレンダリング](../../images/app-architecture/overview/client-side-rendering-light.png#only-light){ loading=lazy }
     ![クライアントサイドレンダリング](../../images/app-architecture/overview/client-side-rendering-dark.png#only-dark){ loading=lazy }
 
-- Web アプリケーション（サーバーサイドサイドレンダリング）
+- Web アプリケーション（サーバーサイドレンダリング）
 
     サーバーサイドで構築した HTML を表示する方式の Web アプリケーションです。
     （今後追加予定）
@@ -27,7 +27,7 @@ Maris OSS 版を利用することで構築できるアプリケーションの�
 
 Maris OSS 版として、アプリケーション形態ごとに標準的なアプリケーション構成を定義しています。
 ここでは主要な構成要素を示します。
-詳細はアプリケーション種別ごとの詳細ページ、および、サンプルプリケーションを参照してください。
+<!-- （CSR編など、アプリケーション種別ごとのアーキテクチャ解説ができたら右記の文を差しこむ。）詳細はアプリケーション種別ごとの詳細ページ、および、サンプルアプリケーションを参照してください。 -->
 
 ### Web アプリケーション ( クライアントサイドレンダリング ) ### {: #client-side-rendering }
 
