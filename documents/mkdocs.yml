@@ -62,8 +62,8 @@ nav:
   #           - guidebooks/migration/from-dotnetfw/index.md
   #   - 開発プロセスのモダナイズ:
   #       - guidebooks/modern-dev-process/index.md
-  - サンプル解説:
-      - samples/index.md
+  #- サンプル解説:
+  #   - samples/index.md
   - 利用規約:
       - terms/index.md
 
