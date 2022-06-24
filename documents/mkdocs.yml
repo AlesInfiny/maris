@@ -15,7 +15,7 @@ nav:
   - Maris OSS版にようこそ:
       - index.md
   - アプリケーションアーキテクチャ:
-      - app-architecture/index.md
+  #    - app-architecture/index.md
       - 概要編:
           - app-architecture/overview/index.md
   #   - クライアントサイドレンダリング編:
