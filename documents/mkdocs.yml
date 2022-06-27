@@ -16,7 +16,7 @@ nav:
   - Maris OSS版にようこそ:
       - index.md
   - アプリケーションアーキテクチャ:
-  #    - app-architecture/index.md
+      #    - app-architecture/index.md
       - 概要編:
           - app-architecture/overview/index.md
   #   - クライアントサイドレンダリング編:
@@ -46,12 +46,12 @@ nav:
               - guidebooks/how-to-develop/dotnet/create-project-structure.md
               - guidebooks/how-to-develop/dotnet/configure-asp-net-core-web-api-project.md
               - guidebooks/how-to-develop/dotnet/configure-asp-net-core-with-vite-project.md
-  #       - Vue.js 編:
-  #           - guidebooks/how-to-develop/vue-js/index.md
+          - Vue.js 編:
+              - guidebooks/how-to-develop/vue-js/index.md
           - ローカル開発環境の構築:
               - guidebooks/how-to-develop/local-environment/index.md
-  #       - アプリケーションテスト:
-  #           - guidebooks/app-testing/index.md
+      #       - アプリケーションテスト:
+      #           - guidebooks/app-testing/index.md
       - マイグレーション:
           - guidebooks/migration/index.md
           - .NET Framework にとどまることのリスク:
