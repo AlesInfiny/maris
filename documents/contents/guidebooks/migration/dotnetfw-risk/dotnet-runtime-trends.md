@@ -1,5 +1,7 @@
 # .NET ランタイムの最新動向
 
+<!-- cSpell:ignore dotnetfw -->
+
 2022 年 6 月現在、 .NET ランタイムには以下があります。
 
 - .NET Framework

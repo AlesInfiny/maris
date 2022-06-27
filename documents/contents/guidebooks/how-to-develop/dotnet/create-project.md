@@ -1,5 +1,7 @@
 # プロジェクトの作成
 
+<!-- cSpell:ignore classlib webapi -->
+
 ## プロジェクトテンプレートの選択 ## {: #select-project-template }
 
 開発するプログラムの種類に応じて、適切なプロジェクトテンプレートを選択しましょう。

@@ -1,5 +1,7 @@
 # プロジェクトの共通設定
 
+<!-- cSpell:ignore contentfiles buildtransitive -->
+
 ## プロジェクトファイルの設定 {: #csproj-settings }
 
 [前節](./create-project.md)で作成したプロジェクトの設定作業を行います。

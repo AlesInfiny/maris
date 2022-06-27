@@ -8,6 +8,7 @@
 		"tableformatter.common.centerAlignedHeader": false,
 		"cSpell.words": [
 			"appsettings",
+			"ASMX",
 			"ASPNETCore",
 			"BIPROGY",
 			"Blazor",
@@ -24,6 +25,7 @@
 			"seealso",
 			"struct",
 			"StyleCop",
+			"Swashbuckle",
 			"vite",
 			"winbatch",
 			"xunit"

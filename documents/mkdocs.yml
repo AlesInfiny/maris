@@ -1,4 +1,5 @@
 ---
+# cSpell:ignore dotnetfw htmlmin inlinehilite linenums materialx prebuild pymdownx superfences twemoji
 site_name: Maris OSS版
 site_url: https://example.com/
 docs_dir: contents

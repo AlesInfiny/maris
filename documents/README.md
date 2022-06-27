@@ -1,5 +1,7 @@
 # Maris OSS 版 ドキュメントについて
 
+<!-- cSpell:ignore hoge hogehoge dotnetfw pymdown -->
+
 ## 本番環境
 
 <https://wwww.marisossedition.org>
@@ -150,6 +152,23 @@ markdownlint の拡張機能をインストールしていると、 [問題] ウ
 
 本リポジトリでは Markdown の体裁に誤りがあると、 Web サイトの発行が行えないようになっています。
 警告が出ている場合は、メッセージを読んで必ず解消しましょう。
+
+### 用語集の整理
+
+cSpell の拡張機能をインストールしていると、 [問題] ウィンドウに上記と同じような用語誤りやスペルミスを指摘するコメントが出ることがあります。
+ドキュメントに関連する部分で警告が出る場合は対策を講じてください。
+対応方法は以下の通りです。
+
+1. 一般的な用語 / 技術用語である場合
+
+    ワークスペース ( maris.code-workspace ) の用語集に単語を追加してください。
+
+1. 特定のページでのみ使用する特殊な用語や略語の場合
+
+    以下を参考にして、ページ内に `cSpell:ignore` を追加して、警告を除外する用語を追加してください。
+    設定はページ最上部に記述します。
+
+    <https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell#ignore>
 
 ### 修正内容のコミット
 
