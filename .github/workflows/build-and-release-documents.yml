@@ -32,6 +32,7 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILTER_REGEX_INCLUDE: 'documents/.*'
           LINTER_RULES_PATH: /
           MARKDOWN_CONFIG_FILE: '.markdownlint.yaml'
           VALIDATE_MARKDOWN: true
@@ -53,12 +54,17 @@ jobs:
 
       - name: ドキュメントのビルド
         run: |
+          # リリースタグを打ったときだけ github.event.release.name が設定される。
+          # 設定されているときは、著作権表記の前にバージョン番号を付与する。
           if [ -n "${{ github.event.release.name }}" ]; then
-            export COPYRIGHT="${{ github.event.release.name }} Copyright &copy; 2021 Nihon Unisys, Ltd. All rights reserved."
+            export COPYRIGHT="${{ github.event.release.name }} Copyright &copy; 2022 BIPROGY Inc. All rights reserved."
           fi
-          mkdocs build --config-file documents/mkdocs.yml --verbose --clean --strict
-          cp -T -v -f -r iis-files documents/build-artifacts/
-          cd documents/build-artifacts
+          cd samples/Dressca
+          zip -r ../../documents/contents/samples/downloads/dressca.zip *
+          cd ../../documents
+          mkdocs build --verbose --clean --strict
+          cp -T -v -f -r ../iis-files build-artifacts/
+          cd build-artifacts
           zip -r ../${{ env.DOCUMENT_ARTIFACTS_FILENAME }} *
 
       - name: ビルドアーティファクトのアップロード
@@ -67,45 +73,45 @@ jobs:
           name: documents
           path: documents/${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
 
-#  release:
-#    name: ドキュメントのリリース
-#    needs: build
-#    if: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/') }}
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: ビルドアーティファクトのダウンロード
-#        uses: actions/download-artifact@v2.0.10
-#        with:
-#          name: documents
-#
-#      - name: ステージング環境へのデプロイ
-#        uses: azure/webapps-deploy@v2
-#        with:
-#          app-name: ${{ env.OSS_MARIS_WEBAPP_NAME }}
-#          slot-name: staging
-#          publish-profile: ${{ secrets.APP_OSS_MARIS_STAGING_PUBLISH_PROFILE  }}
-#          package: '${{ env.DOCUMENT_ARTIFACTS_FILENAME }}'
-#
-#      - name: Teams への通知
-#        uses: fjogeleit/http-request-action@v1.8.1
-#        with:
-#          url: ${{ secrets.POST_MESSAGE_TO_TEAMS_URL  }}
-#          method: POST
-#          contentType: application/json
-#          data: '{"messageType": 0,"branchName": "${{ github.ref }}","actor": "${{ github.actor }}","sha": "${{ github.sha }}","eventName": "${{ github.event_name }}"}'
-#          timeout: 30000
-#
-#  swap:
-#    name: 本番環境への反映承認
-#    needs: release
-#    if: ${{ !github.event.release.prerelease && github.event.action == 'published' }}
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: 本番環境への反映承認
-#        uses: fjogeleit/http-request-action@v1.8.1
-#        with:
-#          url: ${{ secrets.APPROVE_REQUEST_TO_TEAMS_URL  }}
-#          method: POST
-#          contentType: application/json
-#          data: '{"branchName": "${{ github.ref }}","actor": "${{ github.actor }}","sha": "${{ github.sha }}","eventName": "${{ github.event_name }}"}'
-#          preventFailureOnNoResponse: true
+  release:
+    name: ドキュメントのリリース
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: ビルドアーティファクトのダウンロード
+        uses: actions/download-artifact@v2.0.10
+        with:
+          name: documents
+
+      - name: ステージング環境へのデプロイ
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.OSS_MARIS_WEBAPP_NAME }}
+          slot-name: staging
+          publish-profile: ${{ secrets.APP_OSS_MARIS_STAGING_PUBLISH_PROFILE  }}
+          package: '${{ env.DOCUMENT_ARTIFACTS_FILENAME }}'
+
+      - name: Teams への通知
+        uses: fjogeleit/http-request-action@v1.8.1
+        with:
+          url: ${{ secrets.POST_MESSAGE_TO_TEAMS_URL  }}
+          method: POST
+          contentType: application/json
+          data: '{"messageType": 0,"branchName": "${{ github.ref }}","actor": "${{ github.actor }}","sha": "${{ github.sha }}","eventName": "${{ github.event_name }}"}'
+          timeout: 30000
+
+  swap:
+    name: 本番環境への反映承認
+    needs: release
+    if: ${{ !github.event.release.prerelease && github.event.action == 'published' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 本番環境への反映承認
+        uses: fjogeleit/http-request-action@v1.8.1
+        with:
+          url: ${{ secrets.APPROVE_REQUEST_TO_TEAMS_URL  }}
+          method: POST
+          contentType: application/json
+          data: '{"branchName": "${{ github.ref }}","actor": "${{ github.actor }}","sha": "${{ github.sha }}","eventName": "${{ github.event_name }}"}'
+          preventFailureOnNoResponse: true

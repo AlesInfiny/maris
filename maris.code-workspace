@@ -4,12 +4,39 @@
 			"path": "."
 		}
 	],
-	"settings": {},
+	"settings": {
+		"tableformatter.common.centerAlignedHeader": false,
+		"cSpell.words": [
+			"appsettings",
+			"ASMX",
+			"ASPNETCore",
+			"BIPROGY",
+			"Blazor",
+			"drawio",
+			"dressca",
+			"mkdocs",
+			"Newtonsoft",
+			"Noto",
+			"nswag",
+			"Pymarkdown",
+			"Remoting",
+			"resx",
+			"SaaS",
+			"seealso",
+			"struct",
+			"StyleCop",
+			"Swashbuckle",
+			"vite",
+			"winbatch",
+			"xunit"
+		]
+	},
 	"extensions": {
         "recommendations": [
-            "hediet.vscode-drawio",
+			"hediet.vscode-drawio",
 			"yzhang.markdown-all-in-one",
-			"davidanson.vscode-markdownlint"			
-        ]
+			"davidanson.vscode-markdownlint",
+			"shuworks.vscode-table-formatter"
+		]
     }
 }
