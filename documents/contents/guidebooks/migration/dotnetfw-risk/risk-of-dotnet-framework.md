@@ -1,5 +1,7 @@
 # .NET Framework の開発停止によるリスク
 
+<!-- cSpell:ignore dotnetfw -->
+
 前章で述べたとおり、 .NET Framework の開発はすでに停止しているため、これから始まる開発プロジェクトにおいては、 .NET が第一の選択肢となります。
 他方、 .NET Framework で構築済みの既存のシステムについては、 2 つの選択肢 ―― .NET へ移行するか、 .NET Framework に留まり続けるか―― が存在します。
 

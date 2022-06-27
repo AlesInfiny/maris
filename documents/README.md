@@ -1,5 +1,7 @@
 # Maris OSS 版 ドキュメントについて
 
+<!-- cSpell:ignore hoge hogehoge dotnetfw pymdown -->
+
 ## 本番環境
 
 <https://wwww.marisossedition.org>

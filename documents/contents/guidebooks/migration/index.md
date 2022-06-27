@@ -1,5 +1,7 @@
 # マイグレーション
 
+<!-- cSpell:ignore dotnetfw -->
+
 最新アーキテクチャへの移行に関するガイドラインです。
 
 - [.NET Framework にとどまることのリスク](./dotnetfw-risk/index.md)
