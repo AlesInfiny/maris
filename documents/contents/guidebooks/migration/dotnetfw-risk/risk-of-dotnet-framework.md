@@ -46,7 +46,7 @@ RESTful API の Open API 仕様書を生成するためのフレームワーク�
 
 ### 実行環境が制限される {: #restriction-of-runtime }
 
-2022 年 6 月現在、 [Azure Web Apps](https://azure.microsoft.com/ja-jp/get-started/web-app/) では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
+2022 年 6 月現在、 [Azure Web Apps](https://docs.microsoft.com/ja-JP/azure/app-service/) では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
 また、 Microsoft の公式 docker イメージである [.NET Framework Runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/) も、バージョンとして選択できるのは .NET Framework 3.5 と 4.8 のみです。
 .NET Framework は、クラウド環境やコンテナー環境から徐々に締め出されつつあります。
 将来的に、クラウド環境やコンテナー環境で .NET Framework が使用できなくなる可能性は高いです。
