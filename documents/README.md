@@ -247,7 +247,7 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
 
 ライトモード用/ダークモード用の画像作成やマークダウンの実装方法は以下の通りです。
 
-1. 画像原本の \*.drawio ファイルについて、ライトモード用、ダークモード用の 2 通りのファイルを作成します。
+1. 画像原本の \*.drawio ファイルについて、ライトモード用、ダークモード用の 2 通りのファイルを作成します。  
 以下の命名規則に従い、どちらのモード用のファイルかを \*.drawio ファイル名末尾の文字列で表現します。
 
     | 対象モード               | \*.drawio ファイル名末尾の文字列                                    |
@@ -256,11 +256,11 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
     | ダークモード | -dark.drawio                                              |
 
 1. コンテンツとして配置する png ファイルも、ライトモード用、ダークモード用の 2 通り用意します。  
-   ファイル名の命名規則については \*.drawio ファイルと同様の規則を適用します。
+ファイル名の命名規則については \*.drawio ファイルと同様の規則を適用します。
    
-1. マークダウンの実装は以下のように「#only-light」または「#only-dark」を付加して配置します。  
-   - 「align=right」は画面デザインにあわせて任意で付加します。  
-   - 「loading=lazy」は必須で付加します。
+1. マークダウンの実装は以下のように「#only-light」または「#only-dark」を付加して配置します。
+    - 「align=right」は画面デザインにあわせて任意で付加します。  
+    - 「loading=lazy」は必須で付加します。
    
     ```plain
     ![mono-repo の第 2 階層構造例](../../images/guidebooks/git/mono-repo-structure-2nd-subsystem-light.png#only-light){ align=right loading=lazy }
