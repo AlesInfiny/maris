@@ -239,6 +239,13 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
 
 ![フォントファミリーの設定例](readme-images/drawio-font-family.png)
 
+### マークダウンの実装
+
+マークダウンを実装することで、様々な機能を利用できます。
+例を以下に示します。
+
+
+
 ### ライトモード/ダークモードに関する設定
 
 本ドキュメントでは、ライトモード/ダークモードの切り替えができるように設定されています。
@@ -258,9 +265,17 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
 1. コンテンツとして配置する png ファイルも、ライトモード用、ダークモード用の 2 通り用意します。  
 ファイル名の命名規則については \*.drawio ファイルと同様の規則を適用します。
 
-1. マークダウンの実装は以下のように「#only-light」または「#only-dark」を付加して配置します。
-    - 「align=right」は画面デザインにあわせて任意で付加します。  
-    - 「loading=lazy」は必須で付加します。
+1. マークダウンの実装は以下のように「#only-light」または「#only-dark」を付加して配置します。  
+   詳細は以下の公式ドキュメントを参照してください。  
+   https://squidfunk.github.io/mkdocs-material/reference/images/#light-and-dark-mode
+
+    - 「align=right」は画像の配置に関する属性であり、画面デザインにあわせて任意で付加します。  
+    詳細は以下の公式ドキュメントを参照してください。  
+    https://squidfunk.github.io/mkdocs-material/reference/images/#image-alignment
+    
+    - 「loading=lazy」は画像の遅延読込に関する属性であり、必須で付加します。  
+    詳細は以下の公式ドキュメントを参照してください。  
+    https://squidfunk.github.io/mkdocs-material/reference/images/#image-lazy-loading
 
     ```plain
     ![mono-repo の第 2 階層構造例](../../images/guidebooks/git/mono-repo-structure-2nd-subsystem-light.png#only-light){ align=right loading=lazy }
