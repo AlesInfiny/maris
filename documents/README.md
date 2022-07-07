@@ -239,13 +239,6 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
 
 ![フォントファミリーの設定例](readme-images/drawio-font-family.png)
 
-### マークダウンの実装
-
-マークダウンを実装することで、様々な機能を利用できます。
-例を以下に示します。
-
-
-
 ### ライトモード/ダークモードに関する設定
 
 本ドキュメントでは、ライトモード/ダークモードの切り替えができるように設定されています。
@@ -272,7 +265,7 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
     - 「align=right」は画像の配置に関する属性であり、画面デザインにあわせて任意で付加します。  
     詳細は以下の公式ドキュメントを参照してください。  
     https://squidfunk.github.io/mkdocs-material/reference/images/#image-alignment
-    
+
     - 「loading=lazy」は画像の遅延読込に関する属性であり、必須で付加します。  
     詳細は以下の公式ドキュメントを参照してください。  
     https://squidfunk.github.io/mkdocs-material/reference/images/#image-lazy-loading
