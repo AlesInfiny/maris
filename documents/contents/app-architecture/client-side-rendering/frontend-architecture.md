@@ -2,7 +2,7 @@
 
 ## 技術スタック ## {: #tech-stack }
 
-Maris OSS 版を構成するOSSは以下のようになります。
+Maris OSS 版を構成する OSS は以下のようになります。
 
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components.png)
 
@@ -20,7 +20,9 @@ Maris OSS 版で採用しているVueのソフトウェア・アーキテクチ�
 | ビューモデル     | ブラウザからのイベントを受けて、レンダリングのための処理や入力チェックを行い、データ取得や更新処理をModelの呼び出しを通じて行います。Vue.jsの単一ファイルコンポーネントに実装します。 |
 | モデル            | View間の引継ぎ情報を保存し、WebAPI呼び出しやWebAPI呼び出し結果のハンドリングを行います。Piniaアーキテクチャに従って実装する。 |
 
-### ビュー（コンポーネント）＆ビューモデル（コンポーネント）### {: #view-and-viewmodel-component }
+ただし、Vue では画面に表示するデザインや構成要素と、その要素に対するロジックや画面動作を同一のファイル(拡張子.vue)に記述するため、ここではビュー&ビューモデルとしています。
+
+### ビューコンポーネント＆ビューモデルコンポーネント ### {: #view-and-viewmodel-component }
 
 ![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/mvvm-pattern.png)
 
@@ -30,48 +32,54 @@ Maris OSS 版で採用しているVueのソフトウェア・アーキテクチ�
 
 #### 画面コンポーネント #### {: #screen-components }
 
-Vue.jsはコンポーネント指向のFWであることから画面要素をコンポーネントという再利用可能な単位で分割し、複数の画面コンポーネントを組み合わせることによって一つの画面を構成します。Maris OSS 版では、画面要素を役割ごとに「フレーム」「ページ」「セクション」「UI パーツ」という四つの画面コンポーネントに分割します。
+Vue.jsはコンポーネント指向のFWであることから画面要素をコンポーネントという再利用可能な単位で分割し、複数の画面コンポーネントを組み合わせることによって一つの画面を構成します。Maris OSS 版では、画面要素を役割ごとに「Frame」「Page」「Section」「UI Parts」という四つの画面コンポーネントに分割します。
 
 | 名称 | 説明 |
 | ---- | ---- |
-| フレーム | ヘッダーやサイドバーなど画面レイアウト要素。 |
-| ページ | 業務処理で切り替わる画面。セクションを参照。 |
-| セクション | Pageを構成する画面要素のまとまり。UIパーツを参照。粒度の大きなセクションがより粒度の小さいセクションを参照することが可能。 |
-| UI パーツ | 複数のページやセクションで利用するボタンやテキストボックスなどの汎用的な画面要素。 |
+| Frame | ヘッダーやサイドバーなど画面レイアウト要素。 |
+| Page | 業務処理で切り替わる画面。Section を参照する。 |
+| Section | Page を構成する画面要素のまとまり。UI Parts を参照する。また粒度の大きな Section がより粒度の小さい Section を参照することが可能。 |
+| UI Parts | 複数の Page や Section で利用するボタンやテキストボックスなどの汎用的な画面要素。 |
 
 各画面コンポーネントは実際の画面では以下のようなイメージになります。
 
 ![画面コンポーネント イメージ](../../images/app-architecture/client-side-rendering/screen-component-detail.png)
 
-#### モデル（コンポーネント）との連携 #### {: #linkage-with-model-component }
-
-Vue ではバックエンドのアプリケーションとの連携をモデルが行います。そのため、ユーザーが行うビュー・ビューモデルからの処理や入力情報をモデルに連携する必要があります。この連携ではビューモデルのロジックから、モデルの Store の Getter や Action を呼び出して行います。
-
 #### 画面遷移 #### {: #screen-transition }
 
-画面遷移には、Vue Router という Vue.js の拡張ライブラリを利用します。Vue Router はルーティング定義に基づいて遷移先の画面コンポーネントを特定し、表示する画面コンポーネントを切り替えることで画面遷移を実現します。Vue Router による画面遷移はフロントエンドのみで完結するためバックエンドへの通信を行いません。またMaris OSS 版では、「ページ」を切り替えの単位としています。
+画面遷移には、Vue Router という Vue.js の拡張ライブラリを利用します。Vue Router はルーティング定義に基づいて遷移先の画面コンポーネントを特定し、表示する画面コンポーネントを切り替えることで画面遷移を実現します。Vue Router による画面遷移はフロントエンドのみで完結するためバックエンドへの通信を行いません。またMaris OSS 版では、「Page」を切り替えの単位としています。
+
+Vue Router : [公式ドキュメント](https://router.vuejs.org/introduction.html)
 
 ![Vue Router によるルーティング](../../images/app-architecture/client-side-rendering/routing-by-vue-router.png)
 
+#### モデルコンポーネントとの連携 #### {: #linkage-with-model-component }
+
+Vue ではバックエンドのアプリケーションとの連携をモデルが行います。そのため、ユーザーが行うビュー・ビューモデルからの処理や入力情報をモデルに連携する必要があります。この連携ではビューモデルのロジックから、モデルの Store の Getter や Action を呼び出して行います。
+
 #### 入力チェック #### {: #input-validation }
 
-入力チェックには、 VeeValidate と yup というライブラリを利用します。
-| 名前 | 説明 |
-| ---- | ---- |
-| VeeValidate | Vue.js用のリアルタイムバリデーションコンポーネントライブラリ。 |
-| yup | JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ。 |
+文字種や文字数などの入力チェックは、ビューモデルで行い、Maris OSS 版では VeeValidate と yup という OSS ライブラリを利用します。それぞれのライブラリの役割は以下の通りです。
+| 名前 | 説明 | ドキュメント |
+| ---- | ---- | ---- |
+| VeeValidate | Vue.js用のリアルタイムバリデーションコンポーネントライブラリ。| [公式ドキュメント](https://vee-validate.logaretm.com/v3/overview.html) |
+| yup | JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ。 | [github](https://github.com/jquense/yup) |
 
+![VeeValidation と yup による入力チェック](../../images/app-architecture/client-side-rendering/input-validation.png)
 
-
-### モデル（コンポーネント） ### {: #model-component }
+### モデルコンポーネント ### {: #model-component }
 
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/mvvm-pattern.png)
 
 フロントエンドのアーキテクチャのうち、モデルはフロントエンドアプリケーションで扱うデータの状態管理や画面(ビュー)へデータを連携する役割を持つコンポーネントです。 Maris では Pinia という Vue.js の拡張ライブラリを利用します。
 
+Pinia : [公式ドキュメント](https://pinia.vuejs.org/introduction.html)
+
 #### Storeの構成 #### {: #store-structure }
 
-Pinia は入力途中の一時データや認証情報、エラー情報などアプリケーションで利用するデータを管理する領域である Store と、State・Getter・Actionという三つの要素から構成されています。
+Pinia は入力途中の一時データや認証情報、エラー情報などアプリケーションで利用するデータを管理する領域である Store と、State・Getter・Action という三つの要素から構成されています。
+
+![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture.png)
 
 | 名称 | 説明 |
 | ---- | ---- |
@@ -80,5 +88,14 @@ Pinia は入力途中の一時データや認証情報、エラー情報など�
 | Action | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。 |
 
 #### APIの呼び出しについて ####{: #about-invoke-api }
+
+API の呼び出しは Action で行います。 Maris OSS 版では、 Promise ベースでリクエストの設定が容易な axios という OSS を利用します。
+
+axios : [github](https://github.com/axios/axios)
+
+## バックエンドとの連携
+
+### OpenAPI
+
 
 ## プロジェクト構成

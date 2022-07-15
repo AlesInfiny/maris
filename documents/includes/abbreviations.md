@@ -11,6 +11,7 @@
 *[GUI]: Graphical User Interface
 *[HTML]: Hyper Text Markup Language
 *[LTS]: Long Time Support：長期サポート版。
+*[MVVM]: Model-View-ViewModel
 *[NET MAUI]: .NET Multi-Platform App UI
 *[OS]: Operating System
 *[OSS]: Open Source Software
