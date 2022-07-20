@@ -1,5 +1,5 @@
 ---
-name: dressca-backend CI
+name: dressca-backend_2 CI
 
 on:
   pull_request:
@@ -40,4 +40,9 @@ jobs:
         run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: 単体テストの実行
-        run: dotnet test --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}
+        run: |
+          dotnet add package coverlet.msbuild
+          dotnet test --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+          echo '# Coverage :rocket:' >> $GITHUB_STEP_SUMMARY
+          cat TestResults/coverage.info >> $GITHUB_STEP_SUMMARY
+        
