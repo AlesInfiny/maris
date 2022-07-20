@@ -1,5 +1,5 @@
 ---
-name: dressca-backend_2 CI
+name: dressca-backend CI
 
 on:
   pull_request:
