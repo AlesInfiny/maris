@@ -42,7 +42,6 @@ jobs:
       - name: 単体テストの実行
         run: |
           dotnet add tests/Dressca.UnitTests/Dressca.UnitTests.csproj package coverlet.msbuild
-          echo '' > testResult.txt 
           dotnet test --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov > testResult.txt
           echo '# Coverage :rocket:' >> $GITHUB_STEP_SUMMARY
           cat testResult.txt >> $GITHUB_STEP_SUMMARY
