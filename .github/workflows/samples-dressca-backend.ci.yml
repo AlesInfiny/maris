@@ -44,5 +44,5 @@ jobs:
           dotnet add tests/Dressca.UnitTests/Dressca.UnitTests.csproj package coverlet.msbuild
           dotnet test --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
           echo '# Coverage :rocket:' >> $GITHUB_STEP_SUMMARY
-          cat TestResults/coverage.info >> $GITHUB_STEP_SUMMARY
+          cat tests/Dressca.UnitTests/TestResults/coverage.info >> $GITHUB_STEP_SUMMARY
         
