@@ -44,7 +44,7 @@ jobs:
           dotnet add tests/Dressca.UnitTests/Dressca.UnitTests.csproj package coverlet.msbuild
           dotnet test --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov > testResult.txt
           echo '# Test Result :rocket:' >> $GITHUB_STEP_SUMMARY
-          cat testResult.txt | sed -n -e '/A total of/,/Passed!/p' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/A total of/,/Passed/p' >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
           echo '# Coverage :rocket:' >> $GITHUB_STEP_SUMMARY
           cat testResult.txt | sed -n -e '/+----------------------------------+--------+--------+--------+/,/+---------+--------+--------+--------+/p' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '/+----------------------------------+--------+--------+--------+/d' | sed -e 's/|//' | sed -e 's/|*$//g' | sed -e '1d' | sed -e '1i --------------------------|--------|--------|------------------' | sed -e '1i Module | Line | Branch | Method' >> $GITHUB_STEP_SUMMARY
