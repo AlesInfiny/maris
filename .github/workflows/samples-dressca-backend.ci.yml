@@ -53,5 +53,5 @@ jobs:
           echo '# Coverage :triangular_ruler:' >> $GITHUB_STEP_SUMMARY
           cat testResult.txt | sed -n -e '/+----------------------------------+--------+--------+--------+/,/+---------+--------+--------+--------+/p' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '/+----------------------------------+--------+--------+--------+/d' | sed -e 's/|//' | sed -e 's/|*$//g' | sed -e '1d' | sed -e '1i --------------------------|--------|--------|------------------' | sed -e '1i Module | Line | Branch | Method' >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
-          
+          cat testResult.txt | sed -n -e '/+---------+--------+--------+--------+/,/Average/p' | sed -e '1,2d' | sed -e '/+---------+--------+--------+--------+/d' | sed -e 's/|//' | sed -e 's/|*$//g' | sed -e '1i ----------|--------|--------|---------' | sed -e '1i --- | Line | Branch | Method' >> $GITHUB_STEP_SUMMARY
         
