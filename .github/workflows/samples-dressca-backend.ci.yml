@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths:
       - 'samples/Dressca/dressca-backend/**'
+      - '.github/workflows/samples-dressca-backend.ci.yml'
   workflow_dispatch:
 
 defaults:
