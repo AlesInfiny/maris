@@ -6,6 +6,23 @@ Maris OSS 版を構成する OSS は以下のようになります。
 
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components.png)
 
+| 名称 | 説明 | ドキュメント |
+| ---- | ---- | ---- |
+| TypeScript | JavaScript を拡張して静的型付にしたプログラミング言語。 | [github](https://github.com/microsoft/TypeScript) |
+| Vue.js | シンプルな設計で拡張性の高い JavaScript のフレームワーク。 | [公式ドキュメント](https://v3.ja.vuejs.org/) |
+| Vite | ES module を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。 | [公式ドキュメント](https://ja.vitejs.dev/) |
+| Pinia | Vue.js 用の状態管理ライブラリ。 | [公式ドキュメント](https://pinia.vuejs.org/) |
+| Vue Router | Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。 | [公式ドキュメント](https://router.vuejs.org/) |
+| Axios | Vue.js で非同期通信を行うためのプロミスベースのHTTPクライアント。 | [github](https://github.com/axios/axios) |
+| VeeValidate | Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。| [公式ドキュメント](https://vee-validate.logaretm.com/v3/overview.html) |
+| yup | JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ。 | [github](https://github.com/jquense/yup) |
+| Tailwind CSS | utility class を使って独自のボタンなどを作成する CSS フレームワーク | [公式ドキュメント](https://tailwindcss.jp/) |
+| Prettier | JavaScript, Vue, HTML, CSS, JSON などのコードフォーマッター。 | [公式ドキュメント](https://prettier.io/) |
+| ESLint | JavaScript の静的検証ツール。 | [公式ドキュメント](https://typescript-eslint.io/) |
+| Stylelint | CSSの静的検証ツール。 | [公式ドキュメント](https://stylelint.io/) |
+| Vitest | Vite 環境で動作する高速テスティングフレームワーク。 | [公式ドキュメント](https://vitest.dev/) |
+| Cypress | E2E テストツール。 | [公式ドキュメント](https://www.cypress.io/) |
+
 ## アーキテクチャ ## {: #frontend-architecture }
 
 ### MVVMパターン ### {: #mvvm-pattern }
@@ -22,7 +39,7 @@ Maris OSS 版で採用しているVueのソフトウェア・アーキテクチ�
 
 ただし、Vue では画面に表示するデザインや構成要素と、その要素に対するロジックや画面動作を同一のファイル(拡張子.vue)に記述するため、ここではビュー&ビューモデルとしています。
 
-### ビューコンポーネント＆ビューモデルコンポーネント ### {: #view-and-viewmodel-component }
+### ビュー＆ビューモデル コンポーネント ### {: #view-and-viewmodel-component }
 
 ![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/mvvm-pattern.png)
 
@@ -59,11 +76,7 @@ Vue ではバックエンドのアプリケーションとの連携をモデル�
 
 #### 入力チェック #### {: #input-validation }
 
-文字種や文字数などの入力チェックは、ビューモデルで行い、Maris OSS 版では VeeValidate と yup という OSS ライブラリを利用します。それぞれのライブラリの役割は以下の通りです。
-| 名前 | 説明 | ドキュメント |
-| ---- | ---- | ---- |
-| VeeValidate | Vue.js用のリアルタイムバリデーションコンポーネントライブラリ。| [公式ドキュメント](https://vee-validate.logaretm.com/v3/overview.html) |
-| yup | JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ。 | [github](https://github.com/jquense/yup) |
+文字種や文字数などの入力チェックは、ビューモデルで行い、Maris OSS 版では VeeValidate と yup という OSS ライブラリを利用します。VeeValidate はフォームや入力コンポーネントの監視を行い、yup は検証スキームを定義する OSS です。
 
 ![VeeValidation と yup による入力チェック](../../images/app-architecture/client-side-rendering/input-validation.png)
 
@@ -87,15 +100,22 @@ Pinia は入力途中の一時データや認証情報、エラー情報など�
 | Getter | Store で管理しているデータである State を画面コンポーネント(ビュー & ビューモデル)に返すもの。 |
 | Action | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。 |
 
-#### APIの呼び出しについて ####{: #about-invoke-api }
+#### APIの呼び出しについて #### {: #about-invoke-api }
 
 API の呼び出しは Action で行います。 Maris OSS 版では、 Promise ベースでリクエストの設定が容易な axios という OSS を利用します。
 
 axios : [github](https://github.com/axios/axios)
 
-## バックエンドとの連携
+#### バックエンドとのAPI連携
 
-### OpenAPI
+Maris OSS 版では API 仕様を OpenAPI を用いて作成します。ここには API の機能が説明されており、フロントエンドエンジニアとバックエンドエンジニアの間で API 設計に乖離が生じないようにします。
 
+OpenAPI仕様 : [公式ドキュメント](https://swagger.io/specification/)
+
+![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/client-side-rendering/maris-oss-edition-details.png)
+
+<!-- バックエンド編のAPIドキュメントへリンク -->
+
+<!-- ### OpenAPI generator -->
 
 ## プロジェクト構成
