@@ -10,7 +10,7 @@
 
 1. OpenAPI Generator をインストールします。ターミナルで以下のコマンドを入力します。
 
-```cmd
+```bash
 npm install -D @openapitools/openapi-generator-cli
 ```
 
