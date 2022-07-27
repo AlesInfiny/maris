@@ -95,6 +95,6 @@ public class Basket
     /// <returns>買い物かごアイテムが空の場合は <see langword="true"/> 、そうでない場合は <see langword="false"/> 。</returns>
     public bool IsEmpty()
     {
-        return !this.Items.Any();
+        return !this.items.Any();
     }
 }
