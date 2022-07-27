@@ -60,7 +60,7 @@ public class OrderApplicationService
             throw new BasketNotFoundException(basketId);
         }
 
-        if (!basket.Items.Any())
+        if (basket.IsEmpty())
         {
             throw new EmptyBasketOnCheckoutException();
         }

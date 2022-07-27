@@ -346,4 +346,31 @@ public class BasketTest
         // Assert
         Assert.Equal(4000m, account.GetItemsTotalPrice());
     }
+
+    [Fact]
+    public void IsEmpty_買い物かごアイテムが空である()
+    {
+        // Arrange
+        var basket = new Basket(Guid.NewGuid().ToString());
+
+        // Act
+        var result = basket.IsEmpty();
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void IsEmpty_買い物かごにアイテムが存在する()
+    {
+        // Arrange
+        var basket = new Basket(Guid.NewGuid().ToString());
+        basket.AddItem(1L, 1000m);
+
+        // Act
+        var result = basket.IsEmpty();
+
+        // Assert
+        Assert.False(result);
+    }
 }
