@@ -70,9 +70,20 @@ nav:
 
 theme:
   name: material
+  custom_dir: overrides
+  favicon: assets/images/favicon.png
+  features:
+    - content.code.annotate
+    - navigation.indexes
+    - navigation.instant
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+  font:
+    text: Noto Sans JP
+    code: Source Code Pro
   language: ja
   locale: ja
-  favicon: assets/images/favicon.png
   logo: assets/maris-logo.png
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -89,16 +100,6 @@ theme:
         name: Switch to light mode
       primary: blue
       accent: cyan
-  font:
-    text: Noto Sans JP
-    code: Source Code Pro
-  features:
-    - content.code.annotate
-    - navigation.indexes
-    - navigation.instant
-    - navigation.tabs
-    - navigation.top
-    - navigation.tracking
   plugins:
     - search:
         lang: ja
@@ -132,6 +133,13 @@ markdown_extensions:
   - toc:
       permalink: ⚓︎
       toc_depth: 3
+
+extra:
+  footer_urls:
+    terms: terms/
+    license: terms/#license
+    disclaimer: terms/#disclaimer
+    other_company_trademarks: terms/#trademarks-owned-by-other-companies
 
 extra_css:
   - stylesheets/overrides.css
