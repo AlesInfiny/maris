@@ -11,11 +11,6 @@ copyright:
 site_author: "アドバンスド開発技術部"
 site_description: "Maris OSS版のポータルサイトです。"
 site_dir: build-artifacts
-footer_urls:
-  terms: terms/
-  license: terms/#license
-  disclaimer: terms/#disclaimer
-  other_company_trademarks: terms/#trademarks-owned-by-other-companies
 
 nav:
   - Maris OSS版にようこそ:
@@ -138,6 +133,13 @@ markdown_extensions:
   - toc:
       permalink: ⚓︎
       toc_depth: 3
+
+extra:
+  footer_urls:
+    terms: terms/
+    license: terms/#license
+    disclaimer: terms/#disclaimer
+    other_company_trademarks: terms/#trademarks-owned-by-other-companies
 
 extra_css:
   - stylesheets/overrides.css
