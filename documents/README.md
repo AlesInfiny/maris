@@ -19,7 +19,7 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 | contents      |                  |                       |                    | ドキュメント本体                              |
 |               | app-architecture |                       |                    | アプリケーションアーキテクチャ                |
 |               |                  | client-side-rendering |                    | CSR編                                         |
-|               |                  | console-app           |                    | コンソールアプリケーション編（\*）            |
+|               |                  | console-app           |                    | コンソールアプリケーション編                  |
 |               |                  | overview              |                    | 概要編                                        |
 |               | assets           |                       |                    | 共通資材（ロゴなど）                          |
 |               |                  | images                |                    |                                               |
@@ -32,8 +32,8 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 |               |                  |                       | vue-js             | Vue.js 編                                     |
 |               |                  | migration             |                    | マイグレーション                              |
 |               |                  |                       | dotnetfw-risk      | .NET Frameworkにとどまることのリスク          |
-|               |                  |                       | from-dotnetfw      | .NET Frameworkからの移行（\*）                |
-|               |                  | modern-dev-process    |                    | 開発プロセスのモダナイズ（\*）                |
+|               |                  |                       | from-dotnetfw      | .NET Frameworkからの移行                      |
+|               |                  | modern-dev-process    |                    | 開発プロセスのモダナイズ                      |
 |               | images           |                       |                    | ページ固有の画像ファイル置き場                |
 |               |                  | app-architecture      |                    | mdファイルの配置ディレクトリと構造をそろえる  |
 |               |                  |                       | hoge.png           | 画像ファイルはsvgかpngにする                  |
@@ -49,6 +49,7 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 |               |                  | downloads             |                    | サンプルアプリケーションコード置き場(zip圧縮) |
 |               | stylesheets      |                       |                    | 既定のスタイルシートの上書き設定              |
 |               | terms            |                       |                    | 利用規約                                      |
+| overrides     |                  |                       |                    | Mkdocs Materialの拡張ファイル置き場（\*）     |
 | includes      |                  |                       |                    | Snippets の置き場                             |
 |               | abbreviations.md |                       |                    | 略語用語集                                    |
 | readme-images |                  |                       |                    | README.md 内の画像ファイル置き場              |
@@ -56,7 +57,7 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 | mkdocs.yml    |                  |                       |                    | mkdocs の設定ファイル                         |
 | README.md     |                  |                       |                    | このドキュメント                              |
 
-\*：v0.1では対象外
+\*：詳細は [Mkdocs Materialの解説](https://squidfunk.github.io/mkdocs-material/customization/?h=theme#extending-the-theme)と [GitHub リポジトリ](https://github.com/squidfunk/mkdocs-material/tree/master/src/overrides)を参照
 
 ## ドキュメントの作成方法（わかっている人向けの大雑把な手順）
 
