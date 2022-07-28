@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - 'documents/**'
+      - '.github/workflows/build-and-release-documents.yml'
   release:
     types: [published]
   workflow_dispatch:
