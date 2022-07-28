@@ -1,15 +1,11 @@
 ---
 # cSpell:ignore dotnetfw htmlmin inlinehilite linenums materialx prebuild pymdownx superfences twemoji
-site_name: Maris OSS版
-site_url: https://example.com/
+site_name: Maris OSS 版
+site_url: https://www.marisossedition.org/
 docs_dir: contents
-copyright:
-  !ENV [
-    COPYRIGHT,
-    "Test Version Copyright &copy; 2022 BIPROGY Inc. All rights reserved.",
-  ]
+copyright: "Copyright &copy; 2022 BIPROGY Inc. All rights reserved."
 site_author: "アドバンスド開発技術部"
-site_description: "Maris OSS版のポータルサイトです。"
+site_description: "Maris OSS 版のポータルサイトです。"
 site_dir: build-artifacts
 
 nav:
@@ -140,6 +136,7 @@ extra:
     license: terms/#license
     disclaimer: terms/#disclaimer
     other_company_trademarks: terms/#trademarks-owned-by-other-companies
+  version: !ENV [VERSION, "Local Version"]
 
 extra_css:
   - stylesheets/overrides.css
