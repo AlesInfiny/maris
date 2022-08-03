@@ -13,7 +13,30 @@
 - インデントの形式（空白を設定）
 - 行末の空白を削除
 
-.editorconfig の概要については [アプリケーション開発手順 .NET編](../dotnet/project-settings/#editorconfig) を参照してください。
+.editorconfig の概要については [アプリケーション開発手順 .NET編](../dotnet/create-project.md) を参照してください。
+
+## Prettier
+
+Prettier は Vue.js のブランクプロジェクト作成時にオプションとしてインストールしているため、追加でインストールする必要はありません。
+
+### Prettier の設定
+
+Prettier の設定ファイルは初期状態では存在しないので、作成するところから始めます。
+
+1. 設定ファイル「.prettierrc.js」を作成します。
+1. 既定の設定を上書きする場合、設定値を記述します。以下はサンプルアプリケーションでの設定例です。
+
+```javascript
+module.exports = {
+  semi: true,
+  arrowParens: 'always',
+  singleQuote: true,
+  trailingComma: 'all',
+  endOfLine: 'auto',
+};
+```
+
+全ての設定可能な値は [公式ドキュメント](https://prettier.io/docs/en/options.html) を参照してください。
 
 ## ESLint
 
@@ -21,12 +44,12 @@ ESLint は Vue.js のブランクプロジェクト作成時にオプション�
 
 ### ESLint の設定
 
-設定ファイル「.eslintrc.cjs」で行います。デフォルトの状態でも静的コード分析は実施可能です。
+設定ファイル「.eslintrc.cjs」で行います。このファイルはデフォルトで追加済みであり、変更しなくても静的コード分析は実施可能です。他のパッケージとの連携など、必要に応じて変更してください。
 
 ### ESLint と Prettier の連携
 
-Vue.js のブランクプロジェクト作成時に ESLint と Prettier をそれぞれオプションとしてインストールした場合、ESLint と Prettier を連携させるプラグインが自動的にインストールされます。
-そのため、
+Vue.js のブランクプロジェクト作成時に ESLint と Prettier をそれぞれオプションとしてインストールした場合、ESLint と Prettier を連携させるプラグインが自動的にインストール・設定されます。
+したがって、ESLint と Prettier を連携させるための追加の設定は必要ありません。
 
 ## StyleLint
 
@@ -56,7 +79,7 @@ Stylelint の設定ファイルは初期状態では存在しないので、作�
 
 1. 設定ファイル「.stylelintrc.js」 を作成します。
 
-1. コードを記述します。以下はインストールしたオプションやプラグインを最低限動作させるために必要な設定例です。
+1. コードを記述します。以下はインストールしたオプションやプラグインを最低限動作させるために必要な設定例です。他のパッケージとの連携など、必要に応じて設定を変更してください。
 
 ```javascript
 module.exports = {
@@ -72,38 +95,17 @@ module.exports = {
 };
 ```
 
-## Prettier
-
-Prettier は Vue.js のブランクプロジェクト作成時にオプションとしてインストールしているため、追加でインストールする必要はありません。
-
-### Prettier の設定
-
-Prettier の設定ファイルは初期状態では存在しないので、作成するところから始めます。
-
-1. 設定ファイル「.prettierrc.js」を作成します。
-1. 上書きする設定値を記述します。以下はサンプルアプリケーションでの設定例です。
-
-```javascript
-module.exports = {
-  semi: true,
-  arrowParens: 'always',
-  singleQuote: true,
-  trailingComma: 'all',
-  endOfLine: 'auto',
-};
-```
-
-全ての設定可能な値は [公式ドキュメント](https://prettier.io/docs/en/options.html) を参照してください。
-
 ## 静的コード分析とフォーマットの実行
 
-package.json に ESLint 用の script がデフォルトで追加されています。ここに Stylelint も実施するようコマンドを追加します。追加後の script は以下のようになります（以下の例では関係のない部分は省略しています）。
+package.json に ESLint 用の script がデフォルトで追加されています。ここに Stylelint も同時に実行するようコマンドを追加します。追加後の script は以下のようになります。
 
 ```json
 "scripts": {
-  "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.css --fix",
+  "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
 }
 ```
+
+上の例では、関係のないコマンドは省略しています。また、Stylelintを vue ファイルと css ファイルに対して実行するように設定しています。
 
 ターミナルを開き、コマンドを実行します。
 
