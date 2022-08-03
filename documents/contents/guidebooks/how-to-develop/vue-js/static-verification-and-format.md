@@ -4,7 +4,7 @@
 
 ## .editorconfigの追加
 
-.editorconfig を追加することで、IDE (Visual Studio や VSCode) に対してコーディングルールを課すことが可能になります。サンプルアプリケーションでは、.editorconfig によって以下のようなルールを定義しています。
+プロジェクトのルートフォルダーに [.editorconfig](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options) を追加することで、IDE (Visual Studio や VSCode) に対してコーディングルールを課すことが可能になります。サンプルアプリケーションでは、.editorconfig によって以下のようなルールを定義しています。
 
 - エンコード（UTF-8 に設定）
 - 改行コード（LF に設定）
@@ -12,8 +12,6 @@
 - インデントのサイズ（2 を設定）
 - インデントの形式（空白を設定）
 - 行末の空白を削除
-
-.editorconfig の概要については [アプリケーション開発手順 .NET編](../dotnet/create-project.md) を参照してください。
 
 ## Prettier
 
