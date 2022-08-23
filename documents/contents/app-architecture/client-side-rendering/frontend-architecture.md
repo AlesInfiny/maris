@@ -118,4 +118,90 @@ OpenAPI仕様 : [公式ドキュメント](https://swagger.io/specification/)
 
 <!-- ### OpenAPI generator -->
 
-## プロジェクト構成
+## ディレクトリ構成 ## {: #project-structure }
+
+vue プロジェクトのディレクトリ構成は以下のように行います。
+
+``` no-language
+root/
+├─ src/
+│  ├─ components/
+│  ├─ config/
+│  ├─ router/
+│  ├─ stores/
+│  ├─ views/
+│  ├─ App.vue
+│  └─ main.ts
+├─ index.html
+└─ package.json
+```
+
+| 名称 | 説明 |
+| ---- | ---- |
+| views | ルーティングで指定される vue ファイルを格納します。またページ固有の挙動などもここに含めます。 |
+| components | 単体で自己完結している再利用性の高い画面に関する vue ファイルを格納します。 |
+| router | ルーティング定義を格納します。 |
+| stores | store に関するファイルを格納します。 |
+
+なおこのディレクトリ配下の構成については、コンポーネント設計方法に依存するため、各プロジェクトの方針に従います。
+
+### viewsディレクトリ
+
+viewsディレクトリはルーティングで指定される vue ファイルを格納します。そのためこの下層のディレクトリ構造は URL となるので、サイト構造を意識して作成するようにしましょう。
+
+``` no-language
+root/
+└─ views/
+   ├─ account/
+   │  ├─ Login.vue
+   │  └─ Logout.vue
+   ├─ catalog/
+   └─ order/
+```
+
+### componentsディレクトリ
+
+components ディレクトリは主に、再利用性の高い vue コンポーネントファイルを格納します。さらにこの下層ディレクトリはドメインで分割し、それを操作するコンポーネントを格納します。
+
+``` no-language
+root/
+└─ components/
+   ├─ account/
+   │  ├─ LoginForm.vue
+   │  └─ LogoutMessage.vue
+   ├─ product/
+   │  ├─ ProductDetail.vue
+   │  └─ ProductList.vue
+   └─ icon/
+```
+
+Atomic Designでコンポーネント設計をする場合、atoms, molecules, organismsでディレクトリを構成します。この際、atoms と molecules は同一フォルダにコンポーネント構成パーツとしてまとめ、organisms との区別を「store へのアクセスの有無」で行うことでドメイン分割が容易になります。
+
+``` no-language
+root/
+└─ components/
+   ├─ atoms&molecules/
+   │  ├─ Button.vue
+   │  ├─ Input.vue
+   │  └─ Form.vue
+   │
+   ├─ organisms/
+   │  ├─ account/
+   │  │  ├─ LoginForm.vue
+   │  │  └─ LogoutMessage.vue
+   │  └─ product/
+   │     ├─ ProductDetail.vue
+   │     └─ ProductList.vue
+   └─ icon/
+```
+
+!!! note "URLとドメイン"
+    views ディレクトリと components ディレクトリの下層ディレクトリ構造は一致しません。（部分的に一致することはあります。）
+
+また vue ファイルに限らずプロジェクト内で再利用性の高いもの（iconなど）もこちらに格納します。
+
+<!--
+#### テストファイル
+
+テストファイルは ``` __test__ ``` ディレクトリを作らず、対象コンポーネントの隣に配置します。
+-->
