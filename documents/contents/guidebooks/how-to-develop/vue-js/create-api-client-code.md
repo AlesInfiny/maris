@@ -1,10 +1,10 @@
 # API 仕様書からのクライアントコード生成
 
-## 事前準備
+## 事前準備 ## {: #preparation }
 
 1. [Open API 仕様書の出力設定](../dotnet/configure-asp-net-core-web-api-project.md) に示す手順に従って生成した Open API 仕様書をローカルに保存します。ここでは、ファイル名をサンプルアプリケーションで使用しているファイルと同じ「dressca-api.json」とします。
 
-## インストールとクライアントコード生成
+## インストールとクライアントコード生成 ## {: #install-and-create-client-code }
 
 1. OpenAPI Generator をインストールします。ターミナルで以下のコマンドを入力します。
 
