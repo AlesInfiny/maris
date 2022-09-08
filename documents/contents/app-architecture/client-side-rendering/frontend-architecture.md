@@ -74,9 +74,9 @@ Vue Router : [公式ドキュメント](https://router.vuejs.org/introduction.ht
 
 Vue ではバックエンドのアプリケーションとの連携をモデルが行います。そのため、ユーザーが行うビュー・ビューモデルからの処理や入力情報をモデルに連携する必要があります。この連携ではビューモデルのロジックから、モデルの Store の Getter や Action を呼び出して行います。
 
-#### 入力チェック #### {: #input-validation }
+#### フロント入力チェック #### {: #input-validation }
 
-文字種や文字数などの入力チェックは、ビューモデルで行い、Maris OSS 版では VeeValidate と yup という OSS ライブラリを利用します。VeeValidate はフォームや入力コンポーネントの監視を行い、yup は検証スキームを定義する OSS です。
+文字種や文字数などの入力チェックは、ビューモデルで行い、不要なバックエンドとの通信の発生を防止します。 Maris OSS 版では VeeValidate と yup という OSS ライブラリを利用します。VeeValidate はフォームや入力コンポーネントの監視を行い、yup は検証スキームを定義する OSS です。
 
 ![VeeValidation と yup による入力チェック](../../images/app-architecture/client-side-rendering/input-validation.png)
 
@@ -129,6 +129,7 @@ root/
 │  ├─ config/
 │  ├─ router/
 │  ├─ stores/
+│  ├─ shared/
 │  ├─ views/
 │  ├─ App.vue
 │  └─ main.ts
@@ -139,9 +140,10 @@ root/
 | 名称 | 説明 |
 | ---- | ---- |
 | views | ルーティングで指定される vue ファイルを格納します。またページ固有の挙動などもここに含めます。 |
-| components | 単体で自己完結している再利用性の高い画面に関する vue ファイルを格納します。 |
+| components | 単体で自己完結している再利用性の高い vue コンポーネントなどを格納します。 |
 | router | ルーティング定義を格納します。 |
 | stores | store に関するファイルを格納します。 |
+| shared | 共通部品を格納します。 |
 
 なおこのディレクトリ配下の構成については、コンポーネント設計方法に依存するため、各プロジェクトの方針に従います。
 
