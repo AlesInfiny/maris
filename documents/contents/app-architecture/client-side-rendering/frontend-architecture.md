@@ -6,22 +6,22 @@ Maris OSS 版を構成する OSS は以下のようになります。
 
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components.png)
 
-| 名称 | 説明 | ドキュメント |
-| ---- | ---- | ---- |
-| TypeScript | JavaScript を拡張して静的型付にしたプログラミング言語。 | [github](https://github.com/microsoft/TypeScript) |
-| Vue.js | シンプルな設計で拡張性の高い JavaScript のフレームワーク。 | [公式ドキュメント](https://v3.ja.vuejs.org/) |
-| Vite | ES module を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。 | [公式ドキュメント](https://ja.vitejs.dev/) |
-| Pinia | Vue.js 用の状態管理ライブラリ。 | [公式ドキュメント](https://pinia.vuejs.org/) |
-| Vue Router | Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。 | [公式ドキュメント](https://router.vuejs.org/) |
-| Axios | Vue.js で非同期通信を行うためのプロミスベースのHTTPクライアント。 | [github](https://github.com/axios/axios) |
-| VeeValidate | Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。| [公式ドキュメント](https://vee-validate.logaretm.com/v3/overview.html) |
-| yup | JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ。 | [github](https://github.com/jquense/yup) |
-| Tailwind CSS | utility class を使って独自のボタンなどを作成する CSS フレームワーク | [公式ドキュメント](https://tailwindcss.jp/) |
-| Prettier | JavaScript, Vue, HTML, CSS, JSON などのコードフォーマッター。 | [公式ドキュメント](https://prettier.io/) |
-| ESLint | JavaScript の静的検証ツール。 | [公式ドキュメント](https://typescript-eslint.io/) |
-| Stylelint | CSSの静的検証ツール。 | [公式ドキュメント](https://stylelint.io/) |
-| Vitest | Vite 環境で動作する高速テスティングフレームワーク。 | [公式ドキュメント](https://vitest.dev/) |
-| Cypress | E2E テストツール。 | [公式ドキュメント](https://www.cypress.io/) |
+| 名称          | 説明                                                                               | ドキュメント |
+| ----          | ----                                                                              | ---- |
+| TypeScript    | JavaScript を拡張して静的型付にしたプログラミング言語。                               | [github](https://github.com/microsoft/TypeScript) |
+| Vue.js        | シンプルな設計で拡張性の高い JavaScript のフレームワーク。                            | [公式ドキュメント](https://v3.ja.vuejs.org/) |
+| Vite          | ES module を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。 | [公式ドキュメント](https://ja.vitejs.dev/) |
+| Pinia         | Vue.js 用の状態管理ライブラリ。                                                     | [公式ドキュメント](https://pinia.vuejs.org/) |
+| Vue Router    | Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。                 | [公式ドキュメント](https://router.vuejs.org/) |
+| Axios         | Vue.js で非同期通信を行うためのプロミスベースのHTTPクライアント。                      | [github](https://github.com/axios/axios) |
+| VeeValidate   | Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。                        | [公式ドキュメント](https://vee-validate.logaretm.com/v3/overview.html) |
+| yup           | JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ。     | [github](https://github.com/jquense/yup) |
+| Tailwind CSS  | utility class を使って独自のボタンなどを作成する CSS フレームワーク                    | [公式ドキュメント](https://tailwindcss.jp/) |
+| Prettier      | JavaScript, Vue, HTML, CSS, JSON などのコードフォーマッター。                        | [公式ドキュメント](https://prettier.io/) |
+| ESLint        | JavaScript の静的検証ツール。                                                       | [公式ドキュメント](https://typescript-eslint.io/) |
+| Stylelint     | CSSの静的検証ツール。                                                               | [公式ドキュメント](https://stylelint.io/) |
+| Vitest        | Vite 環境で動作する高速テスティングフレームワーク。                                    | [公式ドキュメント](https://vitest.dev/) |
+| Cypress       | E2E テストツール。                                                                  | [公式ドキュメント](https://www.cypress.io/) |
 
 ## アーキテクチャ ## {: #frontend-architecture }
 
@@ -51,12 +51,12 @@ Maris OSS 版で採用しているVueのソフトウェア・アーキテクチ�
 
 Vue.js はコンポーネント指向のフレームワークであることから画面要素をコンポーネントという再利用可能な単位で分割し、複数の画面コンポーネントを組み合わせることによって一つの画面を構成します。Maris OSS 版では、画面要素を役割ごとに「Frame」「Page」「Section」「UI Parts」という四つの画面コンポーネントに分割します。
 
-| 名称 | 説明 |
-| ---- | ---- |
-| Frame | ヘッダーやサイドバーなど画面レイアウト要素。 |
-| Page | 業務処理で切り替わる画面。Section を参照します。 |
-| Section | Page を構成する画面要素のまとまり。UI Parts を参照します。また粒度の大きな Section がより粒度の小さい Section を参照することが可能です。 |
-| UI Parts | 複数の Page や Section で利用するボタンやテキストボックスなどの汎用的な画面要素。 |
+| 名称        | 説明                                                                                                                             |
+| ----        | ----                                                                                                                            |
+| Frame       | ヘッダーやサイドバーなど画面レイアウト要素。                                                                                        |
+| Page        | 業務処理で切り替わる画面。Section を参照します。                                                                                    |
+| Section     | Page を構成する画面要素のまとまり。UI Parts を参照します。また粒度の大きな Section がより粒度の小さい Section を参照することが可能です。 |
+| UI Parts    | 複数の Page や Section で利用するボタンやテキストボックスなどの汎用的な画面要素。                                                     |
 
 各画面コンポーネントは実際の画面では以下のようなイメージになります。
 
@@ -94,11 +94,11 @@ Pinia における Store は、State・Getter・Action という三つの要素�
 
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture.png)
 
-| 名称 | 説明 |
-| ---- | ---- |
-| State | Store で管理するデータそのもの。 |
-| Getter | Store で管理しているデータである State を画面コンポーネント(ビュー & ビューモデル)に返すもの。 |
-| Action | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。 |
+| 名称        | 説明                                                                                                                   |
+| ----        | ----                                                                                                                  |
+| State       | Store で管理するデータそのもの。                                                                                        |
+| Getter      | Store で管理しているデータである State を画面コンポーネント(ビュー & ビューモデル)に返すもの。                               |
+| Action      | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。 |
 
 #### APIの呼び出しについて #### {: #about-invoke-api }
 
@@ -120,36 +120,28 @@ OpenAPI仕様 : [公式ドキュメント](https://swagger.io/specification/)
 
 ## ディレクトリ構成 ## {: #project-structure }
 
-vue プロジェクトのディレクトリ構成は以下のように行います。
+vue プロジェクトのディレクトリ構成は、ブランクプロジェクト作成時のデフォルトの構成を基に以下のように行います。なおこのディレクトリ配下の構成については、コンポーネント設計方法に依存するため、各プロジェクトの方針に従います。
 
 ``` no-language
-root/
+<project-name>
+├─ cypress/ ------------------ cypress による E2E テストに関するファイルを格納します。
+├─ public/ ------------------- メディアファイルや favicon など静的な資産を格納します。
 ├─ src/
-│  ├─ components/
-│  ├─ config/
-│  ├─ router/
-│  ├─ stores/
-│  ├─ shared/
-│  ├─ views/
+│  ├─ assets/ ---------------- コードや動的ファイルが必要とするCSSや画像などのアセットを格納します。
+│  ├─ components/ ------------ 単体で自己完結している再利用性の高い vue コンポーネントなどを格納します。
+│  ├─ config/ ---------------- 設定ファイルを格納します。
+│  ├─ router/ ---------------- ルーティング定義を格納します。
+│  ├─ stores/ ---------------- store に関するファイルを格納します。
+│  ├─ views/ ----------------- ルーティングで指定される vue ファイルを格納します。またページ固有の挙動などもここに含めます。
 │  ├─ App.vue
 │  └─ main.ts
 ├─ index.html
 └─ package.json
 ```
 
-| 名称 | 説明 |
-| ---- | ---- |
-| views | ルーティングで指定される vue ファイルを格納します。またページ固有の挙動などもここに含めます。 |
-| components | 単体で自己完結している再利用性の高い vue コンポーネントなどを格納します。 |
-| router | ルーティング定義を格納します。 |
-| stores | store に関するファイルを格納します。 |
-| shared | 共通部品を格納します。 |
-
-なおこのディレクトリ配下の構成については、コンポーネント設計方法に依存するため、各プロジェクトの方針に従います。
-
 ### viewsディレクトリ
 
-viewsディレクトリはルーティングで指定される vue ファイルを格納します。そのためこの下層のディレクトリ構造は URL となるので、サイト構造を意識して作成するようにしましょう。
+views ディレクトリはルーティングで指定される vue ファイルを格納します。そのためこの下層のディレクトリ構造は URL となるので、サイト構造を意識して作成するようにしましょう。
 
 ``` no-language
 root/
@@ -163,7 +155,7 @@ root/
 
 ### componentsディレクトリ
 
-components ディレクトリは主に、再利用性の高い vue コンポーネントファイルを格納します。さらにこの下層ディレクトリはドメインで分割し、それを操作するコンポーネントを格納します。
+components ディレクトリは主に、再利用性の高い vue コンポーネントファイルを格納します。さらにこの下層ディレクトリはドメインで分割し、それを操作するコンポーネントを格納します。また vue ファイルに限らずプロジェクト内で再利用性の高いもの（iconなど）もこちらに格納します。
 
 ``` no-language
 root/
@@ -198,9 +190,9 @@ root/
 ```
 
 !!! note "URLとドメイン"
-    views ディレクトリと components ディレクトリの下層ディレクトリ構造は一致しません。（部分的に一致することはあります。）
+    views ディレクトリは URL 本位、components ディレクトリはドメイン本位で構成するため、下層ディレクトリ構造は一致しません。（部分的に一致することはあります。）
 
-また vue ファイルに限らずプロジェクト内で再利用性の高いもの（iconなど）もこちらに格納します。
+
 
 <!--
 #### テストファイル
