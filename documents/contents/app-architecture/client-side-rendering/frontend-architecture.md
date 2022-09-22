@@ -2,7 +2,7 @@
 
 ## 技術スタック ## {: #tech-stack }
 
-Maris OSS 版を構成する OSS は以下のようになります。
+Maris OSS 版を構成する OSS を以下に示します。
 
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components.png)
 
@@ -10,7 +10,7 @@ Maris OSS 版を構成する OSS は以下のようになります。
 | ----          | ----                                                                              | ---- |
 | TypeScript    | JavaScript を拡張して静的型付にしたプログラミング言語。                               | [github](https://github.com/microsoft/TypeScript) |
 | Vue.js        | シンプルな設計で拡張性の高い JavaScript のフレームワーク。                            | [公式ドキュメント](https://v3.ja.vuejs.org/) |
-| Vite          | ES module を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。 | [公式ドキュメント](https://ja.vitejs.dev/) |
+| Vite          | ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。 | [公式ドキュメント](https://ja.vitejs.dev/) |
 | Pinia         | Vue.js 用の状態管理ライブラリ。                                                     | [公式ドキュメント](https://pinia.vuejs.org/) |
 | Vue Router    | Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。                 | [公式ドキュメント](https://router.vuejs.org/) |
 | Axios         | Vue.js で非同期通信を行うためのプロミスベースのHTTPクライアント。                      | [github](https://github.com/axios/axios) |
@@ -19,7 +19,7 @@ Maris OSS 版を構成する OSS は以下のようになります。
 | Tailwind CSS  | utility class を使って独自のボタンなどを作成する CSS フレームワーク                    | [公式ドキュメント](https://tailwindcss.jp/) |
 | Prettier      | JavaScript, Vue, HTML, CSS, JSON などのコードフォーマッター。                        | [公式ドキュメント](https://prettier.io/) |
 | ESLint        | JavaScript の静的検証ツール。                                                       | [公式ドキュメント](https://typescript-eslint.io/) |
-| Stylelint     | CSSの静的検証ツール。                                                               | [公式ドキュメント](https://stylelint.io/) |
+| Stylelint     | CSS の静的検証ツール。                                                               | [公式ドキュメント](https://stylelint.io/) |
 | Vitest        | Vite 環境で動作する高速テスティングフレームワーク。                                    | [公式ドキュメント](https://vitest.dev/) |
 | Cypress       | E2E テストツール。                                                                  | [公式ドキュメント](https://www.cypress.io/) |
 
@@ -27,17 +27,17 @@ Maris OSS 版を構成する OSS は以下のようになります。
 
 ### MVVMパターン ### {: #mvvm-pattern }
 
-Maris OSS 版で採用しているVueのソフトウェア・アーキテクチャは MVVM パターンに分類されます。
-レイヤー構成は以下のようになります。
+Maris OSS 版で採用している Vue のソフトウェア・アーキテクチャは MVVM パターンに分類されます。
+以下にアーキテクチャを示します。
 ![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture.png)
 
 | 名称 | 説明 |
 | ---- | ---- |
-| ビュー           | ブラウザへのレンダリングおよびブラウザからのイベントの待ち受けを行います。Vue.jsの単一ファイルコンポーネントにテンプレートとして実装します。 |
-| ビューモデル     | ブラウザからのイベントを受けて、レンダリングのための処理や入力チェックを行い、データ取得や更新処理をModelの呼び出しを通じて行います。Vue.jsの単一ファイルコンポーネントに実装します。 |
-| モデル            | View間の引継ぎ情報を保存し、WebAPI呼び出しやWebAPI呼び出し結果のハンドリングを行います。Piniaアーキテクチャに従って実装します。 |
+| ビュー           | ブラウザへのレンダリングおよびブラウザからのイベントの待ち受けを役割として担います。ビューには UI の構造やスタイルを定義します。 |
+| ビューモデル     | ブラウザからのイベントを受け、プレゼンテーションロジックを実行します。ビューモデルのプレゼンテーションロジックには、レンダリングに必要な処理や入力チェック、モデルを通じたデータの取得や更新などの処理を実装します。 |
+| モデル            | ビジネスロジックとして状態管理やブラウザ外部との入出力を担います。モデルのビジネスロジックには、データ構造やデータの状態管理、WebAPI 呼び出しや WebAPI 呼び出し結果のハンドリングなどの処理を実装します。モデルは後述する Pinia のアーキテクチャに従って実装します。 |
 
-ただし、Vue では画面に表示するデザインや構成要素と、その要素に対するロジックや画面動作を同一のファイル(拡張子.vue)に記述するため、ここではビュー&ビューモデルとしています。
+Vue ではビューとビューモデルを [単一ファイルコンポーネント(SFC)](https://v3.ja.vuejs.org/guide/single-file-component.html#単一ファイルコンポーネント) と呼ばれる同一のファイル(拡張子.vue)に記述することができるので、図ではビュー&ビューモデルと表現しています。
 
 ### ビュー＆ビューモデル コンポーネント ### {: #view-and-viewmodel-component }
 
