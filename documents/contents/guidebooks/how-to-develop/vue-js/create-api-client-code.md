@@ -1,8 +1,14 @@
 # API 仕様書からのクライアントコード生成
 
+サーバー側で公開される Web API は、Open API 仕様書を自動生成しています（詳細は [ASP.NET Core Web API プロジェクトの構成](../dotnet/configure-asp-net-core-web-api-project.md) を参照）。Vue.js アプリケーションでは、Open API Generator を使用して、この Open API 仕様書からクライアントコードを生成します。
+
 ## 事前準備 ## {: #preparation }
 
-1. [Open API 仕様書の出力設定](../dotnet/configure-asp-net-core-web-api-project.md) に示す手順に従って生成した Open API 仕様書をローカルに保存します。ここでは、ファイル名をサンプルアプリケーションで使用しているファイルと同じ「dressca-api.json」とします。
+[Open API 仕様書の出力設定](../dotnet/configure-asp-net-core-web-api-project.md) に示す手順に従って生成した Open API 仕様書をローカルに保存します。ここでは、ファイル名を「dressca-api.json」とします。
+
+### JDK のインストール ## { #install-jdk }
+
+Open API Generator を使用するためには、Java 8 以降のランタイムと、システム環境変数 JAVA_HOME の設定が必要です。Oracle JDK や Eclipse Adoptium など、適当な JDK をインストールし、JAVA_HOME を設定してください。
 
 ## インストールとクライアントコード生成 ## {: #install-and-create-client-code }
 
