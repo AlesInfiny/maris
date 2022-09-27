@@ -13,6 +13,8 @@
 - インデントの形式（空白を設定）
 - 行末の空白を削除
 
+.editorconfig の設定には、自動的に適用されるもの（例：エンコードや改行コード）と、違反すると IDE のエディター上に警告が表示されるもの（例：行末の空白）があります。
+
 ## Prettier ## {: #prettier }
 
 Prettier は Vue.js のブランクプロジェクト作成時にオプションとしてインストールしているため、追加でインストールする必要はありません。
@@ -64,7 +66,7 @@ Stylelint および、標準の設定や vue ファイルで使用する設定�
 |stylelint-prettier                |Stylelint と Prettier の連携プラグイン|
 
 ```bash
-npm install --save-dev stylelint \
+npm install -D stylelint \
   stylelint-config-standard \
   stylelint-config-prettier \
   stylelint-config-recommended-vue \

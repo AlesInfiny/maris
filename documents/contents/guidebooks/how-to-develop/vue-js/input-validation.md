@@ -5,7 +5,7 @@
 サンプルアプリケーションでは、入力値検証に vee-validate と yup を使用しています。
 
 ```bash
-npm install --save vee-validate yup
+npm install vee-validate yup
 ```
 
 ## 入力値検証時の設定 ## {: #validation-settings }
