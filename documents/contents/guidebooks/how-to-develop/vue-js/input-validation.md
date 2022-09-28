@@ -1,8 +1,10 @@
 # 入力値検証（バリデーション）
 
+フロントエンドのアーキテクチャに基づき、入力値検証には VeeValidate と yup を使用します。
+
 ## 必要なパッケージのインストール ## {: #install-packages }
 
-サンプルアプリケーションでは、入力値検証に vee-validate と yup を使用しています。
+ターミナルを開き、以下のコマンドを実行します。
 
 ```bash
 npm install vee-validate yup
@@ -10,7 +12,7 @@ npm install vee-validate yup
 
 ## 入力値検証時の設定 ## {: #validation-settings }
 
-vee-validate と yup を使用する場合、設定ファイルは特に必要ありません。
+VeeValidate と yup を使用する場合、設定ファイルは特に必要ありません。
 
 ## 入力値検証の実施 ## {: #input-validation }
 

@@ -52,6 +52,7 @@ nav:
               - guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md
               - guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
               - guidebooks/how-to-develop/vue-js/optional-packages.md
+              - guidebooks/how-to-develop/vue-js/css.md
               - guidebooks/how-to-develop/vue-js/static-verification-and-format.md
               - guidebooks/how-to-develop/vue-js/input-validation.md
               - guidebooks/how-to-develop/vue-js/create-api-client-code.md

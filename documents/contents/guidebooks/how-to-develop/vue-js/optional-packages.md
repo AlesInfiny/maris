@@ -35,4 +35,4 @@
 |stylelint-prettier                |Stylelint と Prettier の連携プラグイン|[参照](static-verification-and-format.md)|
 |Tailwind CSS                      |CSSフレームワーク                         |``` npm install -D taiilwindcss ```|
 |VeeValidate                       |Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ |[参照](input-validation.md)
-|yup                               |JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ|``` npm install yup ```|
+|yup                               |JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ|[参照](input-validation.md)|

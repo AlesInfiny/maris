@@ -15,10 +15,10 @@ Open API Generator を使用するためには、Java 8 以降のランタイム
 1. OpenAPI Generator をインストールします。ターミナルで以下のコマンドを入力します。
 
 ```bash
-npm install --save-dev @openapitools/openapi-generator-cli
+npm install --D @openapitools/openapi-generator-cli
 ```
 
-1. package.json の script セクションにタスクを追加します。なお、ここで追加しているオプションはサンプルアプリケーションでの設定値です。
+1. package.json の script セクションにタスクを追加します。
 
 ```json
 {
@@ -27,6 +27,13 @@ npm install --save-dev @openapitools/openapi-generator-cli
   }
 }
 ```
+
+|オプション|説明|
+|-----|-----|
+| ``` -g typescript-axios ``` |ジェネレーターとして typescript-axios を指定します。|
+| ``` -i ./dressca-api.json ``` |入力のAPI仕様書として「dressca-api.json」というファイルを指定します。|
+| ``` --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true ``` |withSeparateModelsAndApi=true：model と API を別クラス・別フォルダーに配置する<br>modelPackage=models：model クラスのパッケージ名を「models」に設定する<br>apiPackage=api：API クラスのパッケージ名を「api」に設定する<br>supportsES6=true：ES6 に準拠したコードを生成する|
+| ``` -o ./src/api-client ``` |生成されたコードの出力先を「./src/api-client」に設定します。|
 
 1. ターミナルで以下のコマンドを実行します。
 
