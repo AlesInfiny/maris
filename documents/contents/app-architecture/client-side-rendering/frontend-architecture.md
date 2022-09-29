@@ -114,7 +114,7 @@ OpenAPI仕様 : [公式ドキュメント](https://swagger.io/specification/)
 
 Vue.js プロジェクトのディレクトリ構成は、ブランクプロジェクト作成時のデフォルトの構成を基に以下のように行います。なおこのディレクトリ配下の構成については、コンポーネント設計方法に依存するため、各プロジェクトの方針に従います。
 
-``` text linenums="0"
+``` text title="プロジェクトのディレクトリ構成全体像" linenums="0"
 <project-name>
 ├─ cypress/ ------------------ cypress による E2E テストに関するファイルを格納します。
 ├─ public/ ------------------- メディアファイルや favicon など静的な資産を格納します。
@@ -135,7 +135,7 @@ Vue.js プロジェクトのディレクトリ構成は、ブランクプロジ�
 
 views ディレクトリはルーティングで指定される vue ファイルを格納します。そのためこの下層のディレクトリ構造は URL となるので、サイト構造を意識して作成するようにしましょう。
 
-``` text linenums="0"
+``` text title="viewsディレクトリ" linenums="0"
 src/
 └─ views/
    ├─ account/
@@ -149,7 +149,7 @@ src/
 
 components ディレクトリは主に、再利用性の高い vue コンポーネントファイルを格納します。さらにこの下層ディレクトリはドメインで分割し、それを操作するコンポーネントを格納します。また vue ファイルに限らずプロジェクト内で再利用性の高いもの（iconなど）もこちらに格納します。
 
-``` text linenums="0"
+``` text title="componentsディレクトリ" linenums="0"
 src/
 └─ components/
    ├─ account/
@@ -161,9 +161,12 @@ src/
    └─ icon/
 ```
 
-Atomic Designでコンポーネント設計をする場合、atoms, molecules, organismsでディレクトリを構成します。この際、atoms と molecules は同一フォルダにコンポーネント構成パーツとしてまとめ、organisms との区別を「store へのアクセスの有無」で行うことでドメイン分割が容易になります。
+Atomic Design でコンポーネント設計をする場合、atoms, molecules, organismsでディレクトリを構成します。この際、atoms と molecules は同一フォルダにコンポーネント構成パーツとしてまとめ、organisms との区別を「store へのアクセスの有無」で行うことでドメイン分割が容易になります。
 
-``` text linenums="0"
+!!! note "Atomic Design"
+      Atomic Design とは UI の構成要素を5段階に分けてパーツ単位で UI デザインを設計する手法のことです。最も小さい単位である Atoms パーツを組み合わせた Molecules。さらにそれらを組み合わせた Organisms。 というように要素を細分化し、それらを組み合わせて画面を作成します。コンポーネントの再利用性やデザイン変更の反映のしやすさといったメリットがあります。[Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
+
+``` text title="componentsディレクトリ by Atomic Design" linenums="0"
 src/
 └─ components/
    ├─ atoms&molecules/
