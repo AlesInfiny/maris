@@ -27,7 +27,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
 ### MVVMパターン ### {: #mvvm-pattern }
 
-Maris OSS 版で採用している Vue のソフトウェア・アーキテクチャは MVVM パターンに分類されます。
+Maris OSS 版で採用している Vue.js のソフトウェア・アーキテクチャは MVVM パターンに分類されます。
 以下にアーキテクチャを示します。
 ![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture.png)
 
