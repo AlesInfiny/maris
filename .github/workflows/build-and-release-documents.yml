@@ -64,6 +64,8 @@ jobs:
           fi
           cd samples/Dressca
           zip -r ../../documents/contents/samples/downloads/dressca.zip *
+          cd samples/ConsoleAppWithDI
+          zip -r ../../documents/contents/samples/downloads/console-app-with-di.zip *
           cd ../../documents
           mkdocs build --verbose --clean --strict
           cp -T -v -f -r ../iis-files build-artifacts/
