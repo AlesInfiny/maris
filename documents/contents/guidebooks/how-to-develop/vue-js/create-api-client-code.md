@@ -35,10 +35,10 @@ npm install --D @openapitools/openapi-generator-cli
 | ``` --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true ``` |withSeparateModelsAndApi=true：model と API を別クラス・別フォルダーに配置する<br>modelPackage=models：model クラスのパッケージ名を「models」に設定する<br>apiPackage=api：API クラスのパッケージ名を「api」に設定する<br>supportsES6=true：ES6 に準拠したコードを生成する|
 | ``` -o ./src/api-client ``` |生成されたコードの出力先を「./src/api-client」に設定します。|
 
-1. ターミナルで以下のコマンドを実行します。
+ターミナルで以下のコマンドを実行します。
 
 ```cmd
 npm run generate-client
 ```
 
-1. scripts に追加したタスクの ``` -o ``` に定義した出力先に、クライアントコードが生成されます。
+scripts に追加したタスクの ``` -o ``` に定義した出力先に、クライアントコードが生成されます。

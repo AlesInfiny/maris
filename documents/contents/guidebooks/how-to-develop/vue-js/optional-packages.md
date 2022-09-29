@@ -24,15 +24,15 @@
 |パッケージ名                       |説明                                     |インストール|
 |----------------------------------|-----------------------------------------|------------|
 |Axios                             |Vue.js で非同期通信を行うためのプロミスベースのHTTPクライアント|``` npm install axios ```|
-|autoprefixer                      |ベンダープレフィックスを付与するプラグイン |``` npm install -D autoprefixer ```|
+|autoprefixer                      |ベンダープレフィックスを付与するプラグイン |[参照](css.md)|
 |openapi-generator                 |Web API仕様からクライアントコードの自動生成|[参照](create-api-client-code.md)|
-|postcss                           |CSSの最適化                               |``` npm install -D postcss ```|
-|postcss-nesting                   |CSS最適化時にネストするプラグイン          |``` npm install -D postcss-nesting ```|
+|postCSS                           |CSSの最適化                               |[参照](css.md)|
+|postcss-nesting                   |スタイルルールを互いに入れ子にするためのプラグイン|[参照](css.md)|
 |stylelint                         |CSS の静的検証ツール                      |[参照](static-verification-and-format.md)|
 |stylelint-config-standard         |Stylelint の標準設定|[参照](static-verification-and-format.md)|
 |stylelint-config-prettier         |Stylelint の Ptettier 向け設定|[参照](static-verification-and-format.md)|
 |stylelint-config-recommended-vue  |Stylelint の .vue ファイル向け推奨設定|[参照](static-verification-and-format.md)|
 |stylelint-prettier                |Stylelint と Prettier の連携プラグイン|[参照](static-verification-and-format.md)|
-|Tailwind CSS                      |CSSフレームワーク                         |``` npm install -D taiilwindcss ```|
+|Tailwind CSS                      |CSSフレームワーク                         |[参照](css.md)|
 |VeeValidate                       |Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ |[参照](input-validation.md)
 |yup                               |JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ|[参照](input-validation.md)|

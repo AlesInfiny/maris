@@ -13,19 +13,19 @@
 │ ├ router/ --------------- ルーティング制御を行うコードが配置されるフォルダー
 │ ├ stores/ --------------- 状態管理を行うコードが配置されるフォルダー
 │ ├ views/ ---------------- ルーティングの対象となるページのコードが配置されるフォルダー
-│ ├ App.vue -------------- ├ 画面のフレームを構成するコード
-│ └ main.ts -------------- └ 各ライブラリ等を読み込むためのコード
-├ .eslintrc.cjs ---------- ESLint の設定ファイル
-├ cypress.config.ts ------ cypress の設定ファイル
-├ env.d.ts --------------- TypeScript でコード補完機能（Intellisense）を適用するための設定ファイル
-├ index.html ------------- Web サイトのトップページとなるファイル
-├ package.json ----------- パッケージのメタデータ（依存するパッケージなど）を定義するファイル
-├ README.md -------------- ブランクプロジェクト作成時点ではテンプレートの説明が記述されたファイル
-├ tsconfig.app.json ------ アプリケーションの TypeScript として読み込む対象を定義する設定ファイル
-├ tsconfig.config.json --- TypeScript の設定ファイルとして読み込む対象を定義する設定ファイル
-├ tsconfig.json ---------- TypeScrpt の設定ファイル
-├ tsconfig.vitest.json --- 単体テストの TypeScript として読み込む対象を定義する設定ファイル
-└ vite.config.ts --------- 単体テストの設定ファイル
+│ ├ App.vue --------------- 画面のフレームを構成するコード
+│ └ main.ts --------------- 各ライブラリ等を読み込むためのコード
+├ .eslintrc.cjs ----------- ESLint の設定ファイル
+├ cypress.config.ts ------- cypress の設定ファイル
+├ env.d.ts ---------------- TypeScript でコード補完機能（Intellisense）を適用するための設定ファイル
+├ index.html -------------- Web サイトのトップページとなるファイル
+├ package.json ------------ パッケージのメタデータ（依存するパッケージなど）を定義するファイル
+├ README.md --------------- ブランクプロジェクト作成時点ではテンプレートの説明が記述されたファイル
+├ tsconfig.app.json ------- アプリケーションの TypeScript として読み込む対象を定義する設定ファイル
+├ tsconfig.config.json ---- TypeScript の設定ファイルとして読み込む対象を定義する設定ファイル
+├ tsconfig.json ----------- TypeScrpt の設定ファイル
+├ tsconfig.vitest.json ---- 単体テストの TypeScript として読み込む対象を定義する設定ファイル
+└ vite.config.ts ---------- 単体テストの設定ファイル
 ```
 
 各フォルダーの内部にどのようなサブフォルダーを作成するかは、[アーキテクチャ解説](../../../app-architecture/client-side-rendering/frontend-architecture.md) を参照してください。
