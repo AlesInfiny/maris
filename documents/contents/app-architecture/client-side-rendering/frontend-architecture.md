@@ -164,7 +164,7 @@ src/
 上記の拡張として Atomic Design でコンポーネント設計をする場合は、atoms, molecules, organismsでディレクトリを構成します。この際 atoms と molecules は同一フォルダにコンポーネント構成パーツとしてまとめ、organisms との区別を「store へのアクセスの有無」で行うことでドメイン分割が容易になります。
 
 !!! note "Atomic Design"
-      Atomic Design とは UI の構成要素を5段階に分けてパーツ単位で UI デザインを設計する手法のことです。最も小さい単位である Atoms パーツを組み合わせた Molecules。さらにそれらを組み合わせた Organisms。 というように要素を細分化し、それらを組み合わせて画面を作成します。コンポーネントの再利用性やデザイン変更の反映のしやすさといったメリットがあります。
+      Atomic Design とは UI の構成要素を5段階に分けてパーツ単位で UI デザインを設計する手法のことです。最も小さい単位である Atoms パーツを組み合わせた Molecules, さらにそれらを組み合わせた Organism, というように要素を細分化し、それらを組み合わせて画面を作成します。コンポーネントの再利用性やデザイン変更の反映のしやすさといったメリットがあります。
       [Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
 
 ``` text title="componentsディレクトリ by Atomic Design" linenums="0"
