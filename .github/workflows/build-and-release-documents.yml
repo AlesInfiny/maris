@@ -8,6 +8,8 @@ on:
     branches: [main]
     paths:
       - 'documents/**'
+      - 'iis-files/**'
+      - 'samples/**'
       - '.github/workflows/build-and-release-documents.yml'
   release:
     types: [published]
