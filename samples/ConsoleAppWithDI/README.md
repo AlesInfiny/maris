@@ -3,9 +3,9 @@
 ## このサンプルについて
 
 このサンプルアプリケーションは、汎用ホスト上でコンソールアプリケーションを実行するためのフレームワークと、実際の利用例で構成しています。
-DI コンテナーの存在を前提とした、アプリケーションコア層やインフラストラクチャ層のクラス群を、コンソールアプリケーション上で実行することができます。
+DI コンテナーの存在を前提とした、アプリケーションコア層やインフラストラクチャ層のクラス群を、コンソールアプリケーション上で実行できます。
 
-またアプリケーションの構成設定は appsettings.json に記述することができます。
+またアプリケーションの構成設定は appsettings.json に記述できます。
 DI コンテナーを用いた一般的な .NET の実装を、コンソールアプリケーション上でも実現できます。
 
 ## 動作環境
@@ -80,7 +80,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 ### ソリューションへのファイル・プロジェクトの取り込み
 
 作成したソリューションを Visual Studio で開き、ソリューションファイルの直下に「src」ソリューションフォルダーと「tests」ソリューションフォルダーを作成します。
-「src」ソリューションフォルダーに「Maris.ConsoleApp.Core」プロジェクト、「Maris.ConsoleApp.Hosting」プロジェクト、「Maris.Testing」プロジェクトを追加します。
+「src」ソリューションフォルダーに「Maris.ConsoleApp.Core」・「Maris.ConsoleApp.Hosting」・「Maris.Testing」の各プロジェクトを追加します。
 また「tests」ソリューションフォルダーに「Maris.ConsoleApp.UnitTests」プロジェクトを追加します。
 
 ![各プロジェクト追加後のソリューション構造](readme-images/load-projects-to-solution.png)
@@ -152,7 +152,7 @@ Maris.Samples.Cli.exe sample --loop-number 5
 続いて、起動パラメーターから受け取る値をバインドするプロパティを作成します。
 この例では `--loop-number` に設定した値をバインドする `LoopNumber` プロパティを定義しています。
 プロパティのアクセス修飾子は、必ず `public` に設定してください。
-起動パラメーターのパラメーター名は、各プロパティに付与する `CommandLine.OptionAttribute` 属性に設定します。
+起動パラメーターのパラメーター名は、各プロパティへ付与する `CommandLine.OptionAttribute` 属性に設定します。
 `OptionAttribute` に設定するパラメーター名は、先頭に付与する「--」を除いた文字列を設定します。
 
 単項目レベルの入力値検証であれば、サンプルのように `System.ComponentModel.DataAnnotations` 名前空間に定義されている、属性検証が利用できます。
@@ -179,7 +179,7 @@ internal class Parameter
 
 #### コマンドクラス
 
-コマンドクラスは `Maris.ConsoleApp.Core.SyncCommand<TParam>` クラス、または `Maris.ConsoleApp.Core.AsyncCommand<TParam>` クラスを継承して作成します。
+コマンドクラスは `Maris.ConsoleApp.Core.SyncCommand<TParam>` または `Maris.ConsoleApp.Core.AsyncCommand<TParam>` を継承したクラスです。
 処理内部が同期処理の場合は `SyncCommand<TParam>` を、 async/await を用いた非同期処理を利用する場合は `AsyncCommand<TParam>` を継承してください。
 `TParam` には、前述したパラメータークラスの型を指定します。
 
@@ -307,7 +307,7 @@ info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
       sample コマンドのホストの処理が終了コード 0 で完了しました。実行時間は 22 ms でした。
 ```
 
-Visual Studio から起動パラメーターを指定して実行したい場合は、コンソールアプリケーションプロジェクトの設定を行ってください。
+Visual Studio から起動パラメーターを指定して実行したい場合は、コンソールアプリケーションプロジェクトの設定してください。
 具体的な手順は以下を参照して下さい。
 
 - [C# デバッグ構成のプロジェクト設定 (.NET Core、.NET 5+、ASP.NET Core) の設定](https://learn.microsoft.com/ja-jp/visualstudio/debugger/project-settings-for-csharp-debug-configurations-dotnetcore?view=vs-2022)
@@ -321,7 +321,7 @@ Visual Studio から起動パラメーターを指定して実行したい場合
 | DefaultErrorExitCode           | `int.MaxValue` | アプリケーション内でハンドルされない例外が発生したときの終了コード。 |
 | DefaultValidationErrorExitCode | `int.MinValue` | 起動パラメーターの入力値検証に失敗したときの終了コード。             |
 
-エントリーポイントで `AddConsoleAppService` メソッドを呼び出す際、以下のように設定値を変更することができます。
+エントリーポイントで `AddConsoleAppService` メソッドを呼び出す際、以下のように設定値を変更できます。
 
 ```csharp
 using Maris.ConsoleApp.Hosting;
@@ -359,12 +359,12 @@ await app.RunAsync();
 - コマンドクラスでカスタムの検証ロジックを実装する
 
 入力値検証で実施する処理内容に応じて、適切な方式を選択してください。
-パラメータークラス 1 つに対して、複数の入力値検証方式を組み合わせて実装することもできます。
+パラメータークラス 1 つに対して、複数の入力値検証の方式を組み合わせて実装できます。
 
 #### パラメータークラスのプロパティに検証属性を付与する
 
-パラメータークラスのプロパティに対して、 `System.ComponentModel.DataAnnotations` 名前空間に定義されている検証属性を付与して検証を行います。
-検証ロジックを自前で実装せずに済むため、効率よく検証を行うことができる反面、複雑な入力値検証を行うことはできません。
+パラメータークラスのプロパティに対して、 `System.ComponentModel.DataAnnotations` 名前空間に定義されている検証属性を付与して検証します。
+検証ロジックを自前で実装せずに済むため、効率よく検証できる反面、複雑な入力値検証はできません。
 
 ```csharp
 using System.ComponentModel.DataAnnotations;
@@ -399,7 +399,8 @@ internal class Parameter
 
 #### パラメータークラスにカスタムの検証ロジックを実装する
 
-属性検証では実行できないような検証ロジックを組み込みたい場合は、パラメータークラスで `System.ComponentModel.DataAnnotations.IValidatableObject` インターフェースを実装し、 `Validate` メソッドにカスタムの検証ロジックを実装します。
+属性検証では実行できないような検証ロジックを組み込みたい場合は、パラメータークラスに検証ロジックを実装します。
+パラメータークラスで `System.ComponentModel.DataAnnotations.IValidatableObject` インターフェースを実装し、 `Validate` メソッドにカスタムの検証ロジックを実装します。
 入力値にエラーがある場合は、エラーの情報を記録した `ValidationResult` のリストを返却します。
 複数のプロパティ同士を比較するような入力値検証も、このように実装します。
 
@@ -475,7 +476,7 @@ internal class ValidatableCommand : SyncCommand<ValidatableParameter>
 
 ### DI コンテナーの利用
 
-コマンドクラスでは、 `Microsoft.Extensions.DependencyInjection` を用いた DI を利用することができます。
+コマンドクラスでは、 `Microsoft.Extensions.DependencyInjection` を用いた DI を利用できます。
 パラメータークラスでは、 DI を利用できません。
 
 DI を利用する場合は、通常の .NET の DI の実装方法に従い、コンストラクターインジェクションできるように実装します。
@@ -548,15 +549,15 @@ await app.RunAsync();
 
 ### 構成設定
 
-汎用ホストを利用した本サンプルでは、ASP.NET Core と同等の構成設定を行うことができます。
+汎用ホストを利用した本サンプルでは、 ASP.NET Core と同等の構成設定を行うことができます。
 一般的な設定は appsettings.json に対して行います。
-開発環境でのみ利用する設定は appsettings.Development.json に設定を行います。
+開発環境でのみ利用する設定は appsettings.Development.json に設定します。
 環境変数に対する設定を読み込むこともできます。
 詳細は以下を参照してください。
 
 - [ASP.NET Core の構成](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/configuration/)
 
-appsettings.json や appsettings.Development.json に設定を行う場合、これらのファイルがビルド成果物を出力するディレクトリにコピーされるよう csproj ファイルを設定してください。
+appsettings.json や appsettings.Development.json に設定する場合、これらのファイルがビルド成果物を出力するディレクトリにコピーされるよう csproj ファイルを設定してください。
 単純に json ファイルを追加しただけだと、ビルド成果物のディレクトリにファイルが配置されません。
 以下に設定例を示します。
 
