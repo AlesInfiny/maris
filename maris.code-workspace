@@ -27,6 +27,7 @@
 			"struct",
 			"StyleCop",
 			"Swashbuckle",
+			"textlint",
 			"vite",
 			"winbatch",
 			"xunit"
