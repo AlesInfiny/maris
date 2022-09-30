@@ -1,0 +1,20 @@
+{
+  "filters": {},
+  "rules": {
+    "preset-ja-spacing": {
+      "ja-space-between-half-and-full-width": {
+        "space": "always",
+        "exceptPunctuation": false
+      },
+      "ja-no-space-around-parentheses": false  
+    },
+    "preset-ja-technical-writing": {
+      "sentence-length": {
+        "max": 120
+      },
+      "max-kanji-continuous-len": {
+        "max": 8
+      }
+    }
+  }
+}
