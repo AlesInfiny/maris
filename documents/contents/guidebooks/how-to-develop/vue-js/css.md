@@ -1,61 +1,90 @@
 # CSSの設定とCSSフレームワークの適用
 
-## postCSS
-
-postCSS は、CSS を操作するための JavaScript ベースのプラグインです。このプラグインの API を利用する多くのプラグインが公開されており、後述の autoprefixer もその１つです。
-
-```cmd
-npm install -D postcss
-```
-
-## autoprefixer
-
-autoprefixer は、CSS に対してベンダープレフィクスを自動的に付与する postCSS のプラグインです。
-このプラグインを使用することにより、ベンダープレフィクスを意識する必要が無くなります。
-
-```cmd
-npm install -D autoprefixer
-```
-
-!!! info "ベンダープレフィクス"
-    ベンダープレフィクスとは、ブラウザーのベンダーが独自の拡張機能を実装する際に、
-    それがブラウザー独自であることを明示するために付ける識別子のことです。
-    たとえば、Chrome 独自の拡張機能の場合、 -webkit- というプレフィックスを使用します。
-
-## postcss-nesting
-
-postcss-nesting は、CSS Nestingの仕様に従って、スタイルルールを互いに入れ子にすることができる postcss のプラグインです。
-
-```cmd
-npm install -D postcss-nesting
-```
-
 ## Tailwind CSS
 
 Tailwind CSS は、Web サイトを構築するための CSS フレームワークです。
 
 ### Tailwind CSS のインストール
 
-```cmd
-npm install -D tailwindcss
+[公式ドキュメント](https://tailwindcss.com/docs/installation/using-postcss) が推奨するとおり、postCSS のプラグインとして Tailwind CSS、postCSS、autoprefixer をインストールします。
+
+> Installing Tailwind CSS as a PostCSS plugin is the most seamless way to integrate it with build tools like webpack, Rollup, Vite, and Parcel.
+
+```terminal
+npm install -D tailwindcss postcss autoprefixer postcss-nesting
 ```
+
+|プラグイン名    |説明|
+|---------------|----|
+|postCSS        |後述|
+|autoprefixer   |CSS に対してベンダープレフィクスを自動的に付与する postCSS のプラグインです。このプラグインを使用することにより、ベンダープレフィクスを意識する必要が無くなります。|
+|postcss-nesting|CSS Nestingの仕様に従って、スタイルルールを互いに入れ子にすることができる postcss のプラグインです。|
+
+!!! info "ベンダープレフィクス"
+    ベンダープレフィクスとは、ブラウザーのベンダーが独自の拡張機能を実装する際に、
+    それがブラウザー独自であることを明示するために付ける識別子のことです。
+    たとえば、Chrome 独自の拡張機能の場合、 -webkit- というプレフィックスを使用します。
 
 ### Tailwind CSS の設定
 
 以下のコマンドを入力すると、tailwind.config.js ファイルが作成されます。
 
-```cmd
+```terminal
 npx tailwindcss init
 ```
 
-content に、Tailwind CSS を適用するファイルのパス（ワイルドカード使用可）を設定します。
+作成された直後の tailwind.config.js は以下のとおりです（Tailwind CSS 3.1.8）。
 
 ```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+content に、Tailwind CSS を適用する対象ファイルのパス（ワイルドカード使用可）を設定します。
+
+```javascript
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
   plugins: [],
+}
+```
+
+アプリケーションで使用するメインの CSS ファイル（デフォルトでは ./src/assets/base.css）の最初の行に、以下のように Tailwind CSS の各レイヤーの @tailwind ディレクティブを追加します。
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+## postCSS
+
+CSS を操作するための JavaScript ベースのプラグインです。このプラグインの API を利用する多くのプラグインが公開されており、前述のTailwind CSS もその１つです。
+
+postCSS は Tailwind CSS と一緒にすでにインストール済みなので、インストールの必要はありません。
+
+### postCSS の設定
+
+設定ファイル「postcss.config.js」を作成します。
+
+```javascript
+module.exports = {
+  plugins: [
+    require('tailwindcss'),
+    require('autoprefixer'),
+    require('postcss-nesting'),
+  ],
 };
 ```
+
+プラグインとして Tailwind CSS、autoprefixer、postcss-nesting を使用することを宣言します。
