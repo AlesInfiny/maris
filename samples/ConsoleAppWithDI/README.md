@@ -1,3 +1,7 @@
+<!-- textlint-disable @textlint-rule/require-header-id -->
+
+<!-- cSpell:ignore Validatable -->
+
 # コンソールアプリケーションサンプル
 
 ## このサンプルについて
@@ -577,3 +581,5 @@ appsettings.json や appsettings.Development.json に設定する場合、これ
 
 </Project>
 ```
+
+<!-- textlint-enable @textlint-rule/require-header-id -->

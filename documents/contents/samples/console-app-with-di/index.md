@@ -1,6 +1,11 @@
-# コンソールアプリケーションで DI を利用する
+---
+title: コンソールアプリでの DI
+description: コンソールアプリケーションで DI を利用するためのサンプルと、その使い方を解説します。
+---
 
-## 概要 {: #about-this-sample }
+# コンソールアプリケーションで DI を利用する {#top}
+
+## 概要 {#about-this-sample}
 
 コンソールアプリケーションでは、通常 [Microsoft.Extensions.DependencyInjection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/) を用いた DI を利用できません。
 DI を利用するためには、汎用ホストを用いてコンソールアプリケーションを構築しなければなりません。
@@ -11,7 +16,7 @@ DI を利用するためには、汎用ホストを用いてコンソールア�
 
 このサンプルでは、上記の課題を解決するためのコンソールアプリケーションのフレームワークを提供します。
 
-## 簡易な実装サンプル {: #implementation-sample }
+## 簡易な実装サンプル {#implementation-sample}
 
 このサンプルを利用すると、起動パラメーターをバインドするためのパラメータークラスと、アプリケーションの処理本体となるコマンドクラスを実装できます。
 以下に実装サンプルを示します。
@@ -79,11 +84,11 @@ internal class Command : AsyncCommand<Parameter>
 Maris.Samples.Cli.exe get-by-unit-price-range --minimum 2000 --maximum 3000
 ```
 
-## フレームワークを用いたコンソールアプリケーションの開発方法 {: #how-to-develop }
+## フレームワークを用いたコンソールアプリケーションの開発方法 {#how-to-develop}
 
 詳細なフレームワークの使い方や開発方法については、 [サンプルアプリケーション](#download) に付属する README.md を参照してください。
 
-## 本サンプルで利用する代表的な OSS {: #oss-libraries }
+## 本サンプルで利用する代表的な OSS {#oss-libraries}
 
 本サンプルでは以下の OSS ライブラリを使用しています。
 他の OSS ライブラリについては、 [サンプルアプリケーションをダウンロード](#download) して確認してください。
@@ -96,7 +101,7 @@ Maris.Samples.Cli.exe get-by-unit-price-range --minimum 2000 --maximum 3000
     - [Moq](https://www.nuget.org/packages/Moq/)
     - [xunit](https://www.nuget.org/packages/xunit/)
 
-## ダウンロード {: #download }
+## ダウンロード {#download}
 
 サンプルアプリケーションと詳細な解説は以下からダウンロードできます。
 
