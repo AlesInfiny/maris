@@ -16,6 +16,7 @@
 			"dressca",
 			"linenums",
 			"mkdocs",
+			"nameof",
 			"Newtonsoft",
 			"Noto",
 			"nswag",
@@ -28,6 +29,7 @@
 			"StyleCop",
 			"Swashbuckle",
 			"textlint",
+			"typeof",
 			"vite",
 			"winbatch",
 			"xunit"
