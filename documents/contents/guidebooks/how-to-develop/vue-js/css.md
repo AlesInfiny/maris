@@ -1,5 +1,27 @@
 # CSSの設定とCSSフレームワークの適用
 
+## CSS の設定
+
+Vue のブランクプロジェクトを作成すると、デフォルトで以下の2つの CSS ファイルが追加されます。
+
+- ```./src/assets/base.css```
+- ```./src/assets/main.css```
+
+また、```./src/main.ts``` に、以下のように main.css を読み込むコードが自動的に追加されます。
+
+```typescript
+import './assets/main.css'
+```
+
+しかし、役割分担が不明瞭なため、サンプルアプリケーションでは base.css に統一します。
+
+1. ```./src/assets/main.css``` を削除します。
+1. ```./src/main.ts``` の import を以下のように書き換えます。
+
+```typescript
+import './assets/base.css'
+```
+
 ## Tailwind CSS
 
 Tailwind CSS は、Web サイトを構築するための CSS フレームワークです。
