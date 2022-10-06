@@ -41,11 +41,11 @@ Vue.js ではビューとビューモデルを [単一ファイルコンポー�
 
 ### ビュー＆ビューモデル コンポーネント ### {: #view-and-viewmodel-component }
 
-![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/mvvm-pattern.png)
+![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/view%26viewmodel-component.png)
 
 ビューとビューモデルはそれぞれブラウザへのレンダリングとそのブラウザから受けたイベントに対するプレゼンテーションロジックなどを行うコンポーネントです。
 ブラウザに表示する画面は Component という複数の画面構成要素と View というそれらを組み立てたページから構成されます。
-これらの画面コンポーネントが、デザインやデータバインドなどの画面表示と、イベント処理や入力処理などの画面要素に対する処理を持っています。
+これらの画面コンポーネントが、デザインやデータバインドなどの画面表示（ビュー）と、イベント処理や入力処理などの画面要素に対する処理（ビューモデル）を持っています。
 
 #### 画面コンポーネント #### {: #screen-components }
 
@@ -64,7 +64,7 @@ Vue Router : [公式ドキュメント](https://router.vuejs.org/introduction.ht
 
 #### モデルコンポーネントとの連携 #### {: #linkage-with-model-component }
 
-Vue.js ではバックエンドのアプリケーションとの連携をモデルが行います。そのため、ユーザーが行うビュー・ビューモデルからの処理や入力情報をモデルに連携する必要があります。この連携ではビューモデルのロジックから、モデルの Store の Getter や Action を呼び出して行います。
+Vue.js ではバックエンドのアプリケーションとの連携をモデルが行います。そのため、ユーザーが行う画面コンポーネントからの処理や入力情報をモデルに連携する必要があります。この連携ではビューモデルのプレゼンテーションロジックから、後述するモデルコンポーネントの Store が持つ Action を呼び出して行います。
 
 #### フロント入力チェック #### {: #input-validation }
 
@@ -74,9 +74,11 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 
 ### モデルコンポーネント ### {: #model-component }
 
-![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/mvvm-pattern.png)
+![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component.png)
 
-モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。このフロントエンドで扱う状態のことを Store と呼び、Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
+モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。またフロントエンドで扱うデータモデルとAPIモデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
+
+このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
 
 Pinia : [公式ドキュメント](https://pinia.vuejs.org/introduction.html)
 
