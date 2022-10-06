@@ -30,7 +30,6 @@ package.json の script セクションにタスクを追加します。
 
 追加したタスクのオプションについて説明します。
 
-
 ジェネレーターとして typescript-axios を指定します。
 
 ``` terminal
