@@ -28,4 +28,4 @@
 └ vite.config.ts ---------- 単体テストの設定ファイル
 ```
 
-各フォルダーの内部にどのようなサブフォルダーを作成するかは、[アーキテクチャ解説](../../../app-architecture/client-side-rendering/frontend-architecture.md) を参照してください。
+各フォルダーの内部にどのようなサブフォルダーを作成するかは、[アーキテクチャ解説](./../../../app-architecture/client-side-rendering/index.md) を参照してください。
