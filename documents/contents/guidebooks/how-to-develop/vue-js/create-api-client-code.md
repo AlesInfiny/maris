@@ -10,15 +10,15 @@
 
 Open API Generator を使用するためには、Java 8 以降のランタイムと、システム環境変数 JAVA_HOME の設定が必要です。Oracle JDK や Eclipse Adoptium など、適当な JDK をインストールし、JAVA_HOME を設定してください。
 
-## インストールとクライアントコード生成 ## {: #install-and-create-client-code }
+## インストールと設定 ## {: #install-and-setting }
 
-1. OpenAPI Generator をインストールします。ターミナルで以下のコマンドを入力します。
+OpenAPI Generator をインストールします。ターミナルで以下のコマンドを入力します。
 
 ```bash
 npm install --D @openapitools/openapi-generator-cli
 ```
 
-1. package.json の script セクションにタスクを追加します。
+package.json の script セクションにタスクを追加します。
 
 ```json
 {
@@ -28,12 +28,39 @@ npm install --D @openapitools/openapi-generator-cli
 }
 ```
 
-|オプション|説明|
-|-----|-----|
-| ``` -g typescript-axios ``` |ジェネレーターとして typescript-axios を指定します。|
-| ``` -i ./dressca-api.json ``` |入力のAPI仕様書として「dressca-api.json」というファイルを指定します。|
-| ``` --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true ``` |withSeparateModelsAndApi=true：model と API を別クラス・別フォルダーに配置する<br>modelPackage=models：model クラスのパッケージ名を「models」に設定する<br>apiPackage=api：API クラスのパッケージ名を「api」に設定する<br>supportsES6=true：ES6 に準拠したコードを生成する|
-| ``` -o ./src/api-client ``` |生成されたコードの出力先を「./src/api-client」に設定します。|
+追加したタスクのオプションについて説明します。
+
+
+ジェネレーターとして typescript-axios を指定します。
+
+``` terminal
+-g typescript-axios
+```
+
+入力のAPI仕様書として「dressca-api.json」というファイルを指定します。
+
+``` terminal
+-i ./dressca-api.json 
+```
+
+以下のプロパティを追加します。
+
+- withSeparateModelsAndApi=true：model と API を別クラス・別フォルダーに配置する
+- modelPackage=models：model クラスのパッケージ名を「models」に設定する
+- apiPackage=api：API クラスのパッケージ名を「api」に設定する
+- supportsES6=true：ES6 に準拠したコードを生成する
+
+``` terminal
+--additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true
+```
+
+生成されたコードの出力先を ```./src/api-client``` に設定します。
+
+``` terminal
+-o ./src/api-client
+```
+
+## クライアントコードの生成 ## {: #create-client-code }
 
 ターミナルで以下のコマンドを実行します。
 
