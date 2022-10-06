@@ -12,7 +12,7 @@ npm install vee-validate yup
 
 ## 入力値検証時の設定 ## {: #validation-settings }
 
-yup のデフォルトのエラーメッセージは英語であるため、日本語のメッセージを設定します。ファイル「yup.config.ts」を作成し、以下のように記述します。
+yup のデフォルトのメッセージは英語であるため、日本語のメッセージを設定します。ファイル「yup.config.ts」を作成し、以下のように記述します。
 
 ```typescript
 import { setLocale } from 'yup';
@@ -27,14 +27,14 @@ setLocale({
 });
 ```
 
-!!! info "設定の集約について"
-    上掲の設定は、個別の typescript ファイルや vue ファイルに記載してもアプリケーションとしては問題なく動作します。ここでは、
-
 作成したファイルを読み込むため、main.ts に import を記述します。
 
 ```typescript
 import '@/config/yup.config';
 ```
+
+!!! info "設定の集約について"
+    日本語メッセージの設定は、個別の typescript ファイルに記載してもアプリケーションとしては問題なく動作します。サンプルアプリケーションでは、役割ごとにクラスを定義し、それを main.ts で読み込むことで、コードの見通しを良くしています。
 
 ## 入力値検証の実施 ## {: #input-validation }
 

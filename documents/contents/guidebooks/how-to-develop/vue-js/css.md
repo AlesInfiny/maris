@@ -13,7 +13,7 @@ Vue のブランクプロジェクトを作成すると、デフォルトで以�
 import './assets/main.css'
 ```
 
-しかし、役割分担が不明瞭なため、サンプルアプリケーションでは base.css に統一します。
+サンプルアプリケーションでは base.css に統一します。
 
 1. ```./src/assets/main.css``` を削除します。
 1. ```./src/main.ts``` の import を以下のように書き換えます。
@@ -81,7 +81,7 @@ module.exports = {
 }
 ```
 
-アプリケーションで使用するメインの CSS ファイル（デフォルトでは ./src/assets/base.css）の最初の行に、以下のように Tailwind CSS の各レイヤーの @tailwind ディレクティブを追加します。
+```./src/assets/base.css``` の最初の行に、以下のように Tailwind CSS の各レイヤーの @tailwind ディレクティブを追加します。
 
 ```css
 @tailwind base;
