@@ -135,7 +135,7 @@ Vue.js プロジェクトのディレクトリ構成は、ブランクプロジ�
 
 ### viewsディレクトリ
 
-views ディレクトリはルーティングで指定される vue ファイルを格納します。そのためこの下層のディレクトリ構造は URL となるので、サイト構造を意識して作成するようにしましょう。以下の例で Login.vue なら ```https://xxxx.com/views/account/Login``` と設定します。
+views ディレクトリはルーティングで指定される vue ファイルを格納します。そのためこの下層のディレクトリ構造は URL となるので、サイト構造を意識して作成するようにしましょう。以下の例で Login.vue なら ```https://xxxx.com/views/account/login``` と設定します。
 
 ``` text title="viewsディレクトリ" linenums="0"
 src/
