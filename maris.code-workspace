@@ -33,6 +33,9 @@
 			"vite",
 			"winbatch",
 			"xunit"
+		],
+		"markdownlint.ignore": [
+			"LICENSE"
 		]
 	},
 	"extensions": {
