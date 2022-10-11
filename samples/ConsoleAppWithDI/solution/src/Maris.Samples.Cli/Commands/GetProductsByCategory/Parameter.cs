@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using CommandLine;
 using Maris.ConsoleApp.Core;
 
 namespace Maris.Samples.Cli.Commands.GetProductsByCategory;
 
 /// <summary>
-///  商品カテゴリーを検索キーにして商品情報を取得するコマンドのパラメーターです。
+///  商品カテゴリを検索キーにして商品情報を取得するコマンドのパラメーターです。
 /// </summary>
 [Command("get-by-category", typeof(Command))]
 internal class Parameter

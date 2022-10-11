@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
@@ -70,7 +70,7 @@ public class XunitLoggerFactory : ILoggerFactory, IDisposable
     ///  <see cref="ILogger{TCategoryName}"/> のオブジェクトを生成します。
     /// </summary>
     /// <typeparam name="T">
-    ///  ログのカテゴリー名を表す型。
+    ///  ログのカテゴリ名を表す型。
     ///  通常はこの ILogger を使用するクラスの型。
     /// </typeparam>
     /// <returns>ロガー。</returns>

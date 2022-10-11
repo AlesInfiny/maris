@@ -1,11 +1,11 @@
-﻿using Maris.ConsoleApp.Core;
+using Maris.ConsoleApp.Core;
 using Maris.Samples.ApplicationCore;
 using Microsoft.Extensions.Logging;
 
 namespace Maris.Samples.Cli.Commands.GetProductsByCategory;
 
 /// <summary>
-///  商品カテゴリーを検索キーにして商品情報を取得する同期コマンドです。
+///  商品カテゴリを検索キーにして商品情報を取得する同期コマンドです。
 /// </summary>
 internal class Command : SyncCommand<Parameter>
 {

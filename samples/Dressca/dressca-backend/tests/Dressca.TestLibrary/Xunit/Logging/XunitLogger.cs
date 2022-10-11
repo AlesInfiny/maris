@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
 namespace Dressca.TestLibrary.Xunit.Logging;
@@ -12,11 +12,11 @@ internal class XunitLogger : ILogger
     private readonly string categoryName;
 
     /// <summary>
-    ///  <see cref="ITestOutputHelper"/> オブジェクトとログのカテゴリー名を指定して
+    ///  <see cref="ITestOutputHelper"/> オブジェクトとログのカテゴリ名を指定して
     ///  <see cref="XunitLogger"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="testOutputHelper"><see cref="ITestOutputHelper"/> オブジェクト。</param>
-    /// <param name="categoryName">カテゴリー名。</param>
+    /// <param name="categoryName">カテゴリ名。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="testOutputHelper"/> が <see langword="null"/> です。</item>
