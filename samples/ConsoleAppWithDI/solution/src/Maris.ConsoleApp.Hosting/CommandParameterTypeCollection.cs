@@ -88,10 +88,10 @@ internal class CommandParameterTypeCollection : IEnumerable<Type>
     /// </exception>
     private void Add(Type parameterType, string commandName)
     {
-        if (this.commandParameterTypes.TryGetValue(commandName, out var registerdType))
+        if (this.commandParameterTypes.TryGetValue(commandName, out var registeredType))
         {
             throw new ArgumentException(
-                Messages.CommandNameDuplicated.Embed(commandName, parameterType, registerdType),
+                Messages.CommandNameDuplicated.Embed(commandName, parameterType, registeredType),
                 nameof(commandName));
         }
 

@@ -50,8 +50,8 @@ public class ConsoleAppHostedServiceTest
         ConsoleAppSettings settings = new ConsoleAppSettings();
         var factoryMock = CreateCommandFactoryMock();
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, comandExecutorLogger);
+        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
         ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
 
         // Act
@@ -69,8 +69,8 @@ public class ConsoleAppHostedServiceTest
         ConsoleAppSettings? settings = null;
         var factoryMock = CreateCommandFactoryMock();
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, comandExecutorLogger);
+        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
         ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
 
         // Act
@@ -88,7 +88,6 @@ public class ConsoleAppHostedServiceTest
         ConsoleAppSettings settings = new ConsoleAppSettings();
         var factoryMock = CreateCommandFactoryMock();
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
         CommandExecutor? executor = null;
         ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
 
@@ -107,8 +106,8 @@ public class ConsoleAppHostedServiceTest
         ConsoleAppSettings settings = new ConsoleAppSettings();
         var factoryMock = CreateCommandFactoryMock();
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, comandExecutorLogger);
+        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
         ILogger<ConsoleAppHostedService>? logger = null;
 
         // Act
@@ -132,8 +131,8 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var factoryMock = CreateCommandFactoryMock(command);
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, comandExecutorLogger);
+        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
         ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
@@ -161,8 +160,8 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var factoryMock = CreateCommandFactoryMock(command);
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, comandExecutorLogger);
+        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
         ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
@@ -190,8 +189,8 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var factoryMock = CreateCommandFactoryMock(command);
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, comandExecutorLogger);
+        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
         ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
@@ -216,8 +215,8 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var factoryMock = CreateCommandFactoryMock(command);
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, comandExecutorLogger);
+        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
         ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
@@ -239,8 +238,8 @@ public class ConsoleAppHostedServiceTest
         ConsoleAppSettings settings = new ConsoleAppSettings();
         var factoryMock = CreateCommandFactoryMock();
         ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> comandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, comandExecutorLogger);
+        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
         ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         var cancellationToken = new CancellationToken(false);

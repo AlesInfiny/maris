@@ -71,7 +71,7 @@ public class CommandTypeExtensionsTest
 
     private class AsyncCommandImpl : AsyncCommand<AsyncCommandParameter>
     {
-        protected internal override Task<ICommandResult> ExecuteAsync(AsyncCommandParameter parmeter, CancellationToken cancellationToken)
+        protected internal override Task<ICommandResult> ExecuteAsync(AsyncCommandParameter parameter, CancellationToken cancellationToken)
             => throw new NotImplementedException();
     }
 }
