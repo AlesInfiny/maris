@@ -150,14 +150,18 @@ Maris.Samples.Cli.exe sample --loop-number 5
 #### パラメータークラス
 
 まず何も継承していないクラスを作成します。
-このクラスに対して、 `Maris.ConsoleApp.Core.CommandAttribute` 属性を追加して、コマンドの名前と、後述するコマンドクラスの型を設定します。
+このクラスに対して、 `Maris.ConsoleApp.Core.CommandAttribute` 属性を追加して、コマンドの名前と、後述するコマンドクラスの型、ヘルプテキストを設定します。
 コマンドの名前は、起動パラメーターの 1 番目のパラメーターと一致するように実装します。
+ヘルプテキストは、コンソールアプリケーションを実行したとき、コマンドの解説として機能します。
+ヘルプテキストの設定は任意であり、省略してもかまいません。
 
 続いて、起動パラメーターから受け取る値をバインドするプロパティを作成します。
 この例では `--loop-number` に設定した値をバインドする `LoopNumber` プロパティを定義しています。
 プロパティのアクセス修飾子は、必ず `public` に設定してください。
 起動パラメーターのパラメーター名は、各プロパティへ付与する `CommandLine.OptionAttribute` 属性に設定します。
 `OptionAttribute` に設定するパラメーター名は、先頭に付与する「--」を除いた文字列を設定します。
+`OptionAttribute` には、起動パラメーターの意味を表すヘルプテキストを設定できます。
+ヘルプテキストの設定は任意であり、省略してもかまいません。
 
 単項目レベルの入力値検証であれば、サンプルのように `System.ComponentModel.DataAnnotations` 名前空間に定義されている、属性検証が利用できます。
 この例では 0 ～ 20 の値以外受け入れないように設定しています。
@@ -172,10 +176,10 @@ using Maris.ConsoleApp.Core;
 
 namespace Maris.Samples.Cli.Commands.SampleCommand;
 
-[Command("sample", typeof(Command))]
+[Command("sample", typeof(Command), HelpText = "サンプルのコマンドです。")]
 internal class Parameter
 {
-    [Option("loop-number", Required = true)]
+    [Option("loop-number", Required = true, HelpText = "繰り返しの回数を 0 ～ 20 の整数値で指定します。")]
     [Range(minimum: 0, maximum: 20)]
     public int LoopNumber { get; set; }
 }
@@ -253,7 +257,7 @@ Copyright (C) 2022 Maris.Samples.Cli
 ERROR(S):
   No verb selected.
 
-  sample
+  sample     サンプルのコマンドです。
 
   help       Display more information on a specific command.
 
