@@ -586,4 +586,77 @@ appsettings.json や appsettings.Development.json に設定する場合、これ
 </Project>
 ```
 
+## アーキテクチャ
+
+### プロジェクト構造
+
+本サンプルを用いて開発するコンソールアプリケーションは、以下のようなプロジェクト構造をとります。
+
+```mermaid
+flowchart TD
+    Cli[Create.Your.Self.Cli project]
+    Biz[ApplicationCore project]
+    Infra[Infrastructure project]
+    Host[Maris.ConsoleApp.Hosting]
+    Core[Maris.ConsoleApp.Core]
+    UnitTests[Maris.ConsoleApp.UnitTests]
+    TestLib[Maris.Testing]
+    subgraph Your application
+    Cli-->Biz
+    Cli-->Infra
+    Infra-->Biz
+    end
+    Cli-->Host
+    subgraph Maris
+    Host-->Core
+    UnitTests-->Core
+    UnitTests-->Host
+    UnitTests-->TestLib
+    end
+```
+
+### 処理シーケンスの概要
+
+本サンプルを用いて開発したコンソールアプリケーションは、以下の処理フローでビジネスロジックを実行します。
+開発者は `Program.cs` の定型的な実装と、 `Parameter` クラス、 `Command` クラスを最低限実装しなければなりません。
+
+```mermaid
+sequenceDiagram
+    Program.cs->>Host: ランタイム構築
+    activate Program.cs
+    activate Host
+    Program.cs->>ConsoleApp.Host: AddConsoleAppService
+    activate ConsoleApp.Host
+    ConsoleApp.Host->>ConsoleApp.Host: 初期化
+    deactivate Host
+    deactivate ConsoleApp.Host
+    Program.cs->>Host: ビルドと実行
+    activate Host
+    Host->>ConsoleApp.Host:Start
+    activate ConsoleApp.Host
+    ConsoleApp.Host->>Parameter: 生成
+    activate Parameter
+    ConsoleApp.Host->>Parameter: Validate
+    ConsoleApp.Host->>Command: 生成
+    activate Command
+    Note over ConsoleApp.Host,Command: Parameterオブジェクト
+    ConsoleApp.Host->>Command: ValidateParameter
+    Command->>Parameter: 値の参照
+    ConsoleApp.Host->>Command: Execute or ExecuteAsync
+    Command->>Parameter: 値の参照
+    Command-->>Application: ビジネスロジックの実行
+    activate Application
+    Application-->>Command: 処理結果
+    deactivate Application
+    Command->>ConsoleApp.Host:処理終了
+    deactivate Command
+    Note over Command,ConsoleApp.Host: ICommandResultオブジェクト
+    deactivate Parameter
+    ConsoleApp.Host->>Host: 処理終了
+    deactivate ConsoleApp.Host
+    Host->>Program.cs: 処理終了
+    deactivate Host
+    deactivate Program.cs
+```
+
 <!-- textlint-enable @textlint-rule/require-header-id -->
