@@ -1,4 +1,4 @@
-using Maris.ConsoleApp.Core;
+﻿using Maris.ConsoleApp.Core;
 using Maris.Samples.ApplicationCore;
 using Microsoft.Extensions.Logging;
 
