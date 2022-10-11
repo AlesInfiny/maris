@@ -23,6 +23,7 @@
 			"cref",
 			"drawio",
 			"dressca",
+			"EditorBrowsable",
 			"inheritdoc",
 			"langword",
 			"linenums",
