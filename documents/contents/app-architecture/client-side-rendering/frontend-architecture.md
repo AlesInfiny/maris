@@ -135,17 +135,35 @@ Vue.js プロジェクトのディレクトリ構成は、ブランクプロジ�
 
 ### viewsディレクトリ
 
-views ディレクトリはルーティングで指定される vue ファイルを格納します。そのためこの下層のディレクトリ構造は URL となるので、サイト構造を意識して作成するようにしましょう。以下の例で Login.vue なら ```https://xxxx.com/views/account/login``` と設定します。
+views ディレクトリはルーティングで指定される vue ファイルを格納します。そのためこの下層のディレクトリ構造はサイト構造を意識して作成することを推奨します。以下の例で Login.vue なら ```https://xxxx.com/account/login``` と設定します。
 
 ``` text title="viewsディレクトリ" linenums="0"
 src/
 └─ views/
    ├─ account/
-   │  ├─ Login.vue
-   │  └─ Logout.vue
+   │  ├─ LoginView.vue
+   │  └─ LogoutView.vue
    ├─ catalog/
    └─ order/
 ```
+
+!!! note "Vue Routerの設定"
+      Vue Router では URL のパスと対象のファイルを指定することで、ルーティングの設定を行います。以下は `https://xxxx.com/account/login` という URL に対して上記の `LoginView.vue` を設定している例です。
+
+      ``` TypeScript title="index.ts"
+      import { createRouter, createWebHistory } from "vue-router";
+
+      const router = createRouter({
+         history: createWebHistory(import.meta.env.BASE_URL),
+         routes: [
+            {
+               path: "/account/login",
+               name: "account/login",
+               component: () => import('@/views/account/LoginView.vue'),
+            },
+         ],
+      });
+      ```
 
 ### componentsディレクトリ
 
@@ -167,7 +185,8 @@ src/
 
 !!! note "Atomic Design"
       Atomic Design とは UI の構成要素を5段階に分けてパーツ単位で UI デザインを設計する手法のことです。最も小さい単位である Atoms パーツを組み合わせた Molecules, さらにそれらを組み合わせた Organism, というように要素を細分化し、それらを組み合わせて画面を作成します。コンポーネントの再利用性やデザイン変更の反映のしやすさといったメリットがあります。
-      [Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
+
+      - [Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
 
 ``` text title="componentsディレクトリ by Atomic Design" linenums="0"
 src/
