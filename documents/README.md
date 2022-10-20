@@ -357,6 +357,7 @@ Visual Studio Code の [ファイル] メニューから [ワークスペース�
 このダイアログ経由でインストールしなかった場合は、 [拡張機能] メニューから [推奨] のグループを開いて、以下の拡張機能をインストールします。
 
 - Markdown All in One
+- Markdown Preview Mermaid Support
 - markdownlint
 - Code Spell Checker
 - vscode-textlint

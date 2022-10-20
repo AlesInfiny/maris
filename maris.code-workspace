@@ -55,12 +55,13 @@
 		]
 	},
 	"extensions": {
-        "recommendations": [
-			"hediet.vscode-drawio",
-			"yzhang.markdown-all-in-one",
+		"recommendations": [
+			"bierner.markdown-mermaid",
 			"davidanson.vscode-markdownlint",
+			"hediet.vscode-drawio",
 			"shuworks.vscode-table-formatter",
-			"taichi.vscode-textlint"
+			"taichi.vscode-textlint",
+			"yzhang.markdown-all-in-one"
 		]
     }
 }
