@@ -14,7 +14,7 @@ Open API Generator を使用するためには、Java 8 以降のランタイム
 
 OpenAPI Generator をインストールします。ターミナルで以下のコマンドを入力します。
 
-```bash
+```terminal
 npm install --D @openapitools/openapi-generator-cli
 ```
 
@@ -63,7 +63,7 @@ package.json の script セクションにタスクを追加します。
 
 ターミナルで以下のコマンドを実行します。
 
-```cmd
+```terminal
 npm run generate-client
 ```
 

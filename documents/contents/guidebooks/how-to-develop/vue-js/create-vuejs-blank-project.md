@@ -4,7 +4,7 @@
 
 以下のコマンドを実行して Vue.js をインストールします。
 
-```bash
+```terminal
 npm init vue@3
 ```
 
@@ -12,13 +12,13 @@ create-vue パッケージをインストールする必要があり、続行す
 
 プロジェクト名を入力します。
 
-```bash
+```terminal
 √ Project name: ... <project-name>
 ```
 
 インストールオプションを確認されるので、左右カーソルキーで Yes / No を選択します。クライアントサイドのアーキテクチャに基づき、使用するものに対して Yes を選択すると、以下のようになります。
 
-```cmd
+```terminal
 √ Add TypeScript? ... Yes
 √ Add JSX Support? ... Yes
 √ Add Vue Router for Single Page Application development? ... Yes
@@ -33,7 +33,7 @@ create-vue パッケージをインストールする必要があり、続行す
 
 以下のようにコマンドを実行し、必要なパッケージをインストールしてアプリケーションを実行します。
 
-```bash
+```terminal
 cd <project-name>
 npm install
 npm run dev
@@ -41,7 +41,7 @@ npm run dev
 
 `npm run dev` が成功すると以下のように表示されるので、「Local:」に表示されたURLをブラウザーで表示します。ブランクプロジェクトのランディングページが表示されます。
 
-```bash
+```terminal
 vite v2.7.7 dev server running at:
 
 > Local: http://localhost:3000/

@@ -6,7 +6,7 @@
 
 ターミナルを開き、以下のコマンドを実行します。
 
-```bash
+```terminal
 npm install vee-validate yup
 ```
 

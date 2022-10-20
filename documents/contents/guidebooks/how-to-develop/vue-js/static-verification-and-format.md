@@ -124,7 +124,7 @@ Stylelint および、標準の設定や vue ファイルで使用する設定�
 |stylelint-config-recommended-vue  |Stylelint の .vue ファイル向け推奨設定|
 |stylelint-prettier                |Stylelint と Prettier の連携プラグイン|
 
-```bash
+```terminal
 npm install -D stylelint \
   stylelint-config-standard \
   stylelint-config-prettier \
@@ -183,7 +183,7 @@ package.json に ESLint 用の script がデフォルトで追加されていま
 
 ターミナルを開き、コマンドを実行します。
 
-```bash
+```terminal
 npm run lint
 ```
 
