@@ -1,9 +1,14 @@
-# リポジトリ構造の検討
+---
+title: Git 構築ガイド
+description: Git リポジトリの構築に関するガイドラインを示します。
+---
+
+# リポジトリ構造の検討 {#top}
 
 Git リポジトリの管理方式として、「mono-repo」と「poly-repo ( multi-repo ) 」の 2 種類があります。
 本章では、リポジトリの各管理方法とメリットについて簡単に解説します。
 
-## mono-repo とは ## {: #about-mono-repo }
+## mono-repo とは {#about-mono-repo}
 
 ![mono-repo の構造例](../../images/guidebooks/git/mono-repo-structure-light.png#only-light){ align=right loading=lazy }
 ![mono-repo の構造例](../../images/guidebooks/git/mono-repo-structure-dark.png#only-dark){ align=right loading=lazy }
@@ -17,7 +22,7 @@ mono-repo とはいえ、すべてのソースコードを 1 つのリポジト�
 リポジトリのルートディレクトリには、サブシステム単位でディレクトリを作成して整理します。
 サブシステム間で共用するライブラリも、同じリポジトリ内に配置して管理します。
 
-## poly-repo とは ## {: #about-poly-repo }
+## poly-repo とは {#about-poly-repo}
 
 ![poly-repo の構造例](../../images/guidebooks/git/poly-repo-structure-light.png#only-light){ align=right loading=lazy }
 ![poly-repo の構造例](../../images/guidebooks/git/poly-repo-structure-dark.png#only-dark){ align=right loading=lazy }
@@ -29,7 +34,7 @@ mono-repo とはいえ、すべてのソースコードを 1 つのリポジト�
 リポジトリ間で共有するライブラリがある場合も、他の機能同様、別のリポジトリとして管理します。
 共有ライブラリは、通常パッケージ管理システムを通して、他のリポジトリに取り込みます。
 
-## リポジトリ管理方法の比較 ## {: #repo-management-method-comparison }
+## リポジトリ管理方法の比較 {#repo-management-method-comparison}
 
 mono-repo のメリットは以下の通りです。
 
