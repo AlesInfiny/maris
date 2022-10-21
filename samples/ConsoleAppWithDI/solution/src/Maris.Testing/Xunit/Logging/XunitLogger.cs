@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Dressca.TestLibrary.Xunit.Logging;
+namespace Maris.Testing.Xunit.Logging;
 
 /// <summary>
 ///  Xunit で使用可能な <see cref="ILogger"/> の具象クラスです。

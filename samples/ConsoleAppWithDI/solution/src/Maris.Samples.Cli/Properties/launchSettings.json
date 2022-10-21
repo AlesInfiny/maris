@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Maris.Samples.Cli": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
