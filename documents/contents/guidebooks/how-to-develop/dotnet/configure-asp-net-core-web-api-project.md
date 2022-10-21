@@ -1,12 +1,17 @@
-# ASP.NET Core Web API プロジェクトの構成
+---
+title: .NET 編
+description: バックエンドで動作する .NET アプリケーションの開発手順を解説します。
+---
 
-ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力設定と例外ハンドリングのための設定、ログ出力設定を行います。
+# ASP.NET Core Web API プロジェクトの構成 {#top}
 
-## Open API 仕様書の出力設定 {: #open-api-specification-output-configuration }
+ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力設定と例外ハンドリングのための設定、ログ出力設定をします。
+
+## Open API 仕様書の出力設定 {#open-api-specification-output-configuration}
 
 ブラウザー上で確認できる Web API の仕様書と、クライアントコードを生成するための Open API 仕様書のファイル生成ができるようにプロジェクトを設定します。
 
-### Open API 出力用 NuGet パッケージの追加 {: #add-nuget-package-for-generating-open-api }
+### Open API 出力用 NuGet パッケージの追加 {#add-nuget-package-for-generating-open-api}
 
 以下の NuGet パッケージを ASP.NET Core Web API プロジェクトに追加します。
 
@@ -14,7 +19,7 @@ ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力�
 - [NSwag.MSBuild](https://www.nuget.org/packages/NSwag.MSBuild)
 - [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson)
 
-### NSwag 構成ファイルの追加 {: #add-nswag-json }
+### NSwag 構成ファイルの追加 {#add-nswag-json}
 
 [nswag.json] ファイルをプロジェクトルートに追加します。
 NSwag を用いた実装コードの生成は行わないため、 Open API 仕様書の生成に関する設定のみ実施してください。
@@ -95,7 +100,7 @@ NSwag を用いた実装コードの生成は行わないため、 Open API 仕�
     }
     ```
 
-### Open API 仕様書ファイルの出力設定 {: #setup-for-generate-open-api-specification-file }
+### Open API 仕様書ファイルの出力設定 {#setup-for-generate-open-api-specification-file}
 
 Open API 仕様書のファイルがビルド時に生成されるようプロジェクトファイルを設定します。
 設定方法の詳細は、以下を参照してください。
@@ -118,7 +123,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     </Project>
     ```
 
-### ブラウザーで Open API 仕様書を表示する設定 {: #setup-for-generate-open-api-specification-gui }
+### ブラウザーで Open API 仕様書を表示する設定 {#setup-for-generate-open-api-specification-gui}
 
 ブラウザー上で確認できる Web API の仕様書の出力設定を変更します。
 開発環境でのみ、 Open API v3 の仕様書をブラウザー経由で参照できるように設定します。
@@ -126,7 +131,10 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 
 - [AspNetCore Middleware](https://github.com/RicoSuter/NSwag/wiki/AspNetCore-Middleware)
 
+<!-- textlint-disable ja-technical-writing/ja-no-mixed-period -->
 ??? example "Web API 仕様書をブラウザーから確認できるようにする設定例"
+    <!-- textlint-enable ja-technical-writing/ja-no-mixed-period -->
+
     ブラウザーから Web API 仕様書を確認できるようにするためには、 Open API v3 仕様書の出力設定と、 Web UI の設定が必要です。
     ASP.NET Core Web API プロジェクトの [Program.cs] または [Startup.cs] に、以下のように実装を加えてください。
 
@@ -150,11 +158,11 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     }
     ```
 
-## 例外ハンドリングの設定 {: #exception-handling-configuration }
+## 例外ハンドリングの設定 {#exception-handling-configuration}
 
 サーバー処理内で発生する例外に対処する共通的な設定と実装を追加します。
 
-### 未処理例外のエラー情報を返却するコントローラークラスの作成 {: #create-error-controller }
+### 未処理例外のエラー情報を返却するコントローラークラスの作成 {#create-error-controller}
 
 キャッチされなかった例外の情報を返却するために、エラー情報を取得できるコントローラーを追加します。
 エラーレスポンスは [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc7807.html)) に従った形式で返却するようにしましょう。
@@ -162,7 +170,10 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 本番環境ではアプリケーションの内部情報流出を防ぐため、スタックトレースを返却しないようにします。
 開発環境ではエラーの詳細を簡単に開発者が把握できるよう、スタックトレースをエラーレスポンスに含めることを検討しましょう。
 
+<!-- textlint-disable ja-technical-writing/ja-no-mixed-period -->
 ??? example "システムエラーのエラー情報を返却するコントローラー実装例"
+    <!-- textlint-enable ja-technical-writing/ja-no-mixed-period -->
+
     システムエラーのエラー情報を返却するためには、未処理例外の情報を取得し、適切な形式に変換するコントローラー ( この例では `#!csharp ErrorController` ) を作成します。
     このコントローラーは、 [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc7807.html)) に従ったエラーレスポンスを返却するように実装しましょう。
     `#!csharp ControllerBase.Problem` メソッドを利用すると、 RFC 7807 に準拠したレスポンスを簡単に構築できます。
@@ -226,7 +237,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     }
     ```
 
-### 未処理例外発生時の例外ハンドラーを設定 {: #setup-exception-handler }
+### 未処理例外発生時の例外ハンドラーを設定 {#setup-exception-handler}
 
 未処理の例外が ASP.NET Core のランタイムまで到達した場合、[先ほど](#create-error-controller)作成したエラー情報を取得できるコントローラーを呼び出すようランタイムを構成します。
 開発環境ではスタックトレース込みのエラー情報を返す処理を登録します。
@@ -248,7 +259,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     }
     ```
 
-## HTTP 400 応答時のログ出力 {: #logging-on-http-400 }
+## HTTP 400 応答時のログ出力 {#logging-on-http-400}
 
 Web API から HTTP 400 の応答を返却する際、問題の原因となった入力値の情報をログに記録しましょう。
 入力値検証などのエラー情報をサーバー側でロギングでき、障害発生時の追跡性を高めることができます。
@@ -277,13 +288,13 @@ Web API から HTTP 400 の応答を返却する際、問題の原因となっ�
         });
     ```
 
-## HTTP 通信ログの出力 {: #configure-http-communication-log }
+## HTTP 通信ログの出力 {#configure-http-communication-log}
 
 Web API アプリケーションの入出力は、 HTTP 通信の形式になります。
 実際の開発作業では、意図した通りの HTTP リクエスト / レスポンスが送受信できているか確認することがよくあります。
 これをサポートするため、開発環境では HTTP 通信ログを出力するよう設定することを推奨します。
 
-この設定を行ったら、開発環境の[ログレベルの設定](#configure-log-level)をあわせて実施するようにしてください。
+設定したら、開発環境の[ログレベルの設定](#configure-log-level)をあわせて実施するようにしてください。
 
 ??? example "HTTP 通信ログを出力する実装例"
     HTTP 通信ログの出力は、 ASP.NET Core のミドルウェアを用いて実現します。
@@ -313,10 +324,10 @@ Web API アプリケーションの入出力は、 HTTP 通信の形式になり
     }
     ```
 
-## ログレベルの設定 {: #configure-log-level }
+## ログレベルの設定 {#configure-log-level}
 
 ソースコード内で `#!csharp ILogger` を用いてログ出力を行っても、ログレベルを正しく構成しない限りログ出力は行われません。
-ASP.NET Core Web API プロジェクトを作成した際、一緒に作成される [appsettings.json] および [appsettings.Development.json] ファイルに対してログレベルの設定を行います。
+ASP.NET Core Web API プロジェクトを作成した際、一緒に作成される [appsettings.json] および [appsettings.Development.json] ファイルに対してログレベルを設定します。
 ログレベルの設定方法については、以下を参照してください。
 
 - [.NET でのログの記録 - ログの構成](https://docs.microsoft.com/ja-JP/dotnet/core/extensions/logging#configure-logging)

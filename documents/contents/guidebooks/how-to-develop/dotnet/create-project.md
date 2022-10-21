@@ -1,13 +1,18 @@
-# プロジェクトの作成
+---
+title: .NET 編
+description: バックエンドで動作する .NET アプリケーションの開発手順を解説します。
+---
+
+# プロジェクトの作成 {#top}
 
 <!-- cSpell:ignore classlib webapi -->
 
-## プロジェクトテンプレートの選択 ## {: #select-project-template }
+## プロジェクトテンプレートの選択 {#select-project-template}
 
 開発するプログラムの種類に応じて、適切なプロジェクトテンプレートを選択しましょう。
 以下、利用することの多いプロジェクトテンプレートについて解説します。
 
-### クラスライブラリ ### {: #class-library }
+### クラスライブラリ {#class-library}
 
 以下の用途で利用します。
 
@@ -23,7 +28,7 @@
     dotnet new classlib
     ```
 
-### コンソールアプリ ### {: #console-application }
+### コンソールアプリ {#console-application}
 
 以下の用途で利用します。
 
@@ -37,7 +42,7 @@
     dotnet new console
     ```
 
-### ASP.NET Core Web API ### {: #web-api }
+### ASP.NET Core Web API {#web-api}
 
 以下の用途で利用します。
 
@@ -51,7 +56,7 @@
     dotnet new webapi
     ```
 
-### ASP.NET Core with Vite ### {: #spa-app }
+### ASP.NET Core with Vite {#spa-app}
 
 以下の用途で利用します。
 
@@ -69,7 +74,7 @@
     dotnet new vite
     ```
 
-### xUnit テストプロジェクト ### {: #xunit }
+### xUnit テストプロジェクト {#xunit}
 
 以下の用途で利用します。
 
@@ -83,7 +88,7 @@
     dotnet new xunit
     ```
 
-## プロジェクトの命名 ## {: #project-naming-rule }
+## プロジェクトの命名 {#project-naming-rule}
 
 プロジェクト名は、原則としてプロジェクトのルートディレクトリ名と同名にします。
 一般的な命名規則は以下の通りです。

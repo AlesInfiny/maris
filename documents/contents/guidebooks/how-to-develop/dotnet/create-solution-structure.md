@@ -1,20 +1,25 @@
-# ソリューション構造の作成
+---
+title: .NET 編
+description: バックエンドで動作する .NET アプリケーションの開発手順を解説します。
+---
 
-## Git リポジトリの作成 ## {: #create-git-repository }
+# ソリューション構造の作成 {#top}
+
+## Git リポジトリの作成 {#create-git-repository}
 
 まずは Git リポジトリを構築しましょう。
 Git リポジトリの構築については、以下を参照してください。
 
 - [Git リポジトリ構築ガイド](../../git/index.md)
 
-## ソリューションの作成 ## {: #create-solution }
+## ソリューションの作成 {#create-solution}
 
 作成した Git リポジトリ内に、ソリューションを作成していきます。
 原則としてソリューションはサブシステムごとに作成します。
 ソリューション全体構造の概略は「[アプリケーションアーキテクチャ概要編 - ソリューション構造](../../../app-architecture/overview/index.md#solution-structure)」を参照してください。
 本節では、単一のソリューション内の構造について、更に詳細に解説します。
 
-### ソリューション構成と物理ディレクトリの関係 ### {: #solution-and-physical-directory-relationships }
+### ソリューション構成と物理ディレクトリの関係 {#solution-and-physical-directory-relationships}
 
 Visual Studio でソリューションを開いたとき、ソリューションエクスプローラーに表示される構造と、物理的なディレクトリの構造は合致しないことがあります。
 不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー](https://docs.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder)」の存在です。
@@ -23,7 +28,7 @@ Visual Studio でソリューションを開いたとき、ソリューション
 Maris OSS 版では、ソリューションフォルダーと物理的なディレクトリを完全に一致させて管理することを推奨します。
 ソリューションエクスプローラー内の配置と、物理的な配置を一致させることで、ファイルの検索性が大きく向上します。
 
-### ソリューションファイルの作成 ### {: #create-solution-file }
+### ソリューションファイルの作成 {#create-solution-file}
 
 バックエンドアプリケーションを配置するディレクトリ内に、 Visual Studio を利用して[空のソリューションファイルを作成](https://docs.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions)します。
 ソリューションファイルの名前は、以下のいずれかのパターンに従って命名します。
@@ -43,7 +48,7 @@ Maris OSS 版では、ソリューションフォルダーと物理的なディ�
 会社名やシステム名、サブシステム名は、略称や開発コードネームを付与してもかまいません。
 開発メンバーの共通認識の取れる適切な単語や略語があれば、それを利用して文字数が削減できないか検討してください。
 
-### ソリューションフォルダーと物理ディレクトリの作成 ### {: #create-solution-folder-and-directory }
+### ソリューションフォルダーと物理ディレクトリの作成 {#create-solution-folder-and-directory}
 
 ![ソリューションの物理ディレクトリ構造](../../../images/guidebooks/how-to-develop/dotnet/solution-root-directories-light.png#only-light){ loading=lazy align=right }
 ![ソリューションの物理ディレクトリ構造](../../../images/guidebooks/how-to-develop/dotnet/solution-root-directories-dark.png#only-dark){ loading=lazy align=right }
@@ -61,7 +66,7 @@ src ディレクトリにはプロダクションコードを、 tests ディレ
     プロダクションコードとテストコードでは、コーディングルールの厳しさに濃淡をつけることが一般的です[^1]。
     そのため、プロダクションコードを配置するディレクトリとテストコードを配置するディレクトリを最初に分類しておくことで、各コード向けの .editorconfig ファイルの適用が簡単になります。
 
-## プロジェクト配置の定義 ## {: #define-project }
+## プロジェクト配置の定義 {#define-project}
 
 src ディレクトリ、 tests ディレクトリには、プロジェクトを格納するディレクトリをフラットに並べます。
 プロジェクトを格納するディレクトリは、各プロジェクトのルート名前空間の名前を付けます。
