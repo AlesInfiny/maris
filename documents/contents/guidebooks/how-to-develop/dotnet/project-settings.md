@@ -1,16 +1,21 @@
-# プロジェクトの共通設定
+---
+title: .NET 編
+description: バックエンドで動作する .NET アプリケーションの開発手順を解説します。
+---
+
+# プロジェクトの共通設定 {#top}
 
 <!-- cSpell:ignore contentfiles buildtransitive -->
 
-## プロジェクトファイルの設定 {: #csproj-settings }
+## プロジェクトファイルの設定 {#csproj-settings}
 
 [前節](./create-project.md)で作成したプロジェクトの設定作業を行います。
 Maris OSS 版では、プロダクションコード用のプロジェクトと、テストコード用のプロジェクトで基本的な設定に差を持たせることを推奨します。
 静的コード分析のルールに差を持たせ、より重要なプロダクションコードの開発に力をかけることが目的です。
 
-### プロダクションコード用のプロジェクトファイル設定 {: #csproj-settings-for-production }
+### プロダクションコード用のプロジェクトファイル設定 {#csproj-settings-for-production}
 
-以下の設定が有効になるように、プロジェクトファイルの設定を行います。
+以下の設定が有効になるように、プロジェクトファイルを設定します。
 
 - [ImplicitUsings オプション](https://docs.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#implicitusings)
 - [Nullable オプション](https://docs.microsoft.com/ja-jp/dotnet/csharp/language-reference/compiler-options/language#nullable)
@@ -28,7 +33,7 @@ Maris OSS 版では、プロダクションコード用のプロジェクトと�
 </PropertyGroup>
 ```
 
-### テストコード用のプロジェクトファイル設定 {: #csproj-settings-for-test }
+### テストコード用のプロジェクトファイル設定 {#csproj-settings-for-test}
 
 `GenerateDocumentationFile` オプションの設定は無効にするか、未設定にしてください。
 その他の設定は「[プロダクションコード用のプロジェクトファイル設定](#csproj-settings-for-production)」とそろえます。
@@ -42,30 +47,30 @@ Maris OSS 版では、プロダクションコード用のプロジェクトと�
 </PropertyGroup>
 ```
 
-## 静的コード解析用パッケージと設定ファイルの導入 {: #setup-static-code-testing }
+## 静的コード解析用パッケージと設定ファイルの導入 {#setup-static-code-testing}
 
-コードの品質を一定以上に保つため、静的コード解析ツールの導入を行います。
+コードの品質を一定以上に保つため、静的コード解析ツールを導入します。
 
-### .editorconfig {: #editorconfig }
+### .editorconfig {#editorconfig}
 
 ![.editorconfig ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/editorconfig-placement-light.png#only-light){ loading=lazy align=right }
 ![.editorconfig ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/editorconfig-placement-dark.png#only-dark){ loading=lazy align=right }
 
 複数の開発者で、一貫したコーディングスタイルを維持するために利用します。
-また .NET 開発においては、静的コード解析ルールの調整を行うためにも利用します。
+また .NET 開発においては、静的コード解析ルールを調整するためにも利用します。
 
-#### .editorconfig ファイルの配置 {: #editorconfig-placement }
+#### .editorconfig ファイルの配置 {#editorconfig-placement}
 
 .editorconfig ファイルを追加すると、ファイルを配置したディレクトリと、その配下のディレクトリすべての該当ファイルに設定値が適用されます。
-.editorconfig の設定を下位ディレクトリでオーバーライドすることもできます。
+.editorconfig の設定を下位ディレクトリでオーバーライドできます。
 オーバーライド設定を記述した .editorconfig ファイルを適用したいディレクトリに配置すると、それ以下のディレクトリでオーバーライドした設定が有効になります。
 
 Maris OSS 版の標準的な構成では、ソリューションルートのディレクトリに、アプリケーション全体のコーディングスタイルを設定した .editorconfig ファイルを配置します。
-tests ディレクトリには、テストコード専用の設定を行うための .editorconfig ファイルを作成して全体の設定をオーバーライドします。
+tests ディレクトリには、テストコード専用の設定をするための .editorconfig ファイルを作成して全体の設定をオーバーライドします。
 
 .editorconfig ファイルについての詳細は「 [EditorConfig で移植可能なカスタム エディター設定を作成する](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options)」を参照してください。
 
-#### .editorconfig のルール設定
+#### .editorconfig のルール設定 {#setup-editorconfig-rule}
 
 ソリューションルートに配置する .editorconfig ファイルは、 Visual Studio を用いて生成したファイルを使用します。
 ルールの設定も Visual Studio を用いると、 GUI 上で設定変更できます。
@@ -83,7 +88,7 @@ dotnet_diagnostic.SA1600.severity=none
 ```
 
 ??? info "設定値の解説"
-    上記の .editorconfig では、主に XML コメントの記述制限緩和と、テストコード記述でよく利用する記法に対する制限の緩和を行っています。
+    上記の .editorconfig では、主に XML コメントの記述制限緩和と、テストコード記述でよく利用する記法に対する制限を緩和しています。
     詳細は以下の通りです。
 
     | ID                                                                                                 | 緩和する理由                                                           |
@@ -106,7 +111,7 @@ dotnet_diagnostic.SA1600.severity=none
     プロジェクト設定の都合によって、上記の設定では対処しきれない警告がある場合は、個別にルールの重大度を `none` に設定します。
     設定方法の詳細は「[コード分析の構成オプション - Scope](https://docs.microsoft.com/ja-jp/dotnet/fundamentals/code-analysis/configuration-options#scope)」を参照してください。
 
-### StyleCop Analyzers {: #stylecop-analyzers }
+### StyleCop Analyzers {#stylecop-analyzers}
 
 ![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-light.png#only-light){ loading=lazy align=right }
 ![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-dark.png#only-dark){ loading=lazy align=right }
@@ -114,19 +119,22 @@ dotnet_diagnostic.SA1600.severity=none
 複数の開発者で、一貫したコーディングスタイルを維持するために利用します。
 .editorconfig では統一しきれない細かなコーディングルールを定義する目的に使用します。
 
-#### StyleCop Analyzers のインストール {: #install-stylecop-analyzers }
+#### StyleCop Analyzers のインストール {#install-stylecop-analyzers}
 
 StyleCop Analyzers は [NuGet パッケージ](https://www.nuget.org/packages/StyleCop.Analyzers/)として提供されています。
-StyleCop Analyzers を用いて静的コード解析を行いたいプロジェクトから参照設定を行ってください。
+StyleCop Analyzers を用いて静的コード解析したいプロジェクトから参照設定を行ってください。
 通常はすべてのプロジェクトから参照するように設定します。
 
+<!-- textlint-disable ja-technical-writing/ja-no-mixed-period -->
 !!! warning "StyleCop Analyzers のバージョンに注意"
+    <!-- textlint-enable ja-technical-writing/ja-no-mixed-period -->
+
     .NET 6 以降利用できるようになった[ファイルスコープ名前空間](https://docs.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace)を利用する場合、 StyleCop Analyzers 1.2.0 以降 ( Pre-release 版も可 ) を使用してください。
     1.1.118 では正常に解析が行われません。
 
-#### stylecop.json ファイルの配置 {: #stylecop-json-placement }
+#### stylecop.json ファイルの配置 {#stylecop-json-placement}
 
-StyleCop Analyzers は、 stylecop.json ファイルを用いてコーディングルールの設定を行います。
+StyleCop Analyzers は、 stylecop.json ファイルを用いてコーディングルールを設定します。
 stylecop.json にはソリューション内のすべてのコードに対して適用すべきコーディングルールを設定します。
 stylecop.json ファイルはソリューション内にひとつだけ作成し、ソリューションファイルと同じディレクトリに配置します。
 stylecop.json の設定方法については[公式ドキュメント](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md)を参照してください。
@@ -182,12 +190,13 @@ stylecop.json の設定方法については[公式ドキュメント](https://g
     }
     ```
 
-#### プロジェクトから stylecop.json を参照する {: #reference-stylecop-json-from-project  }
+#### プロジェクトから stylecop.json を参照する {#reference-stylecop-json-from-project}
 
 stylecop.json は、各プロジェクトのルートディレクトリにあるかのように設定しなければなりません。
 同時にコーディングルールの管理負荷軽減のため、 stylecop.json を各プロジェクトに分散配置せず、ソリューション内にひとつだけ配置することが望まれます。
-これらを両立するため、各プロジェクトからは、ソリューションルートに配置した stylecop.json をリンクとしてプロジェクトに追加するようにしましょう。
-そして stylecop.json が StyleCop Analyzers の設定ファイルであることをコンパイラーに通知するため、 Visual Studio のソリューションエクスプローラーを利用して、 stylecop.json ファイルの [ビルドアクション] プロパティを [C# アナライザー追加ファイル] に設定します。
+これらを両立するため、各プロジェクトからは、ソリューションルートに配置した stylecop.json をリンクとしてプロジェクトに追加しましょう。
+また Visual Studio のソリューションエクスプローラーを利用して、 stylecop.json ファイルの [ビルドアクション] プロパティを [C# アナライザー追加ファイル] に設定します。
+これにより、 StyleCop Analyzers の設定ファイルであることをコンパイラーに通知できます。
 
 ここまで解説した内容を実施すると、最終的にプロジェクトファイルの設定は以下のようになります。
 
@@ -209,7 +218,7 @@ stylecop.json は、各プロジェクトのルートディレクトリにある
 </Project>
 ```
 
-## メッセージリソースの追加 {: #add-message-resource }
+## メッセージリソースの追加 {#add-message-resource}
 
 ![メッセージリソースの配置](../../../images/guidebooks/how-to-develop/dotnet/resx-placement-light.png#only-light){ loading=lazy align=right }
 ![メッセージリソースの配置](../../../images/guidebooks/how-to-develop/dotnet/resx-placement-dark.png#only-dark){ loading=lazy align=right }
@@ -222,7 +231,7 @@ stylecop.json は、各プロジェクトのルートディレクトリにある
 詳細な手順は「 [.NET アプリ用のリソース ファイルを作成する](https://docs.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files)」を参照してください。
 
 Visual Studio を用いてリソースファイルを作成すると、リソースファイルに定義したメッセージを取得するコードが自動生成されます。
-また Visual Studio の GUI 上で、リソースの公開範囲を指定することができます。
+また Visual Studio の GUI 上で、リソースの公開範囲を指定できます。
 リソースの公開範囲は `#!csharp internal` にすることを推奨します。
 同じメッセージが複数のプロジェクトで使われる場合も、プロジェクトごとにリソースを管理しましょう。
 
