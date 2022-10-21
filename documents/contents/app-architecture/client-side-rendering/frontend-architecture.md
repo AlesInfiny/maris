@@ -4,7 +4,8 @@
 
 Maris OSS 版を構成する OSS を以下に示します。
 
-![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components.png)
+![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
+![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
 
 | 名称          | 説明                                                                               | ドキュメント |
 | ----          | ----                                                                              | ---- |
@@ -29,7 +30,8 @@ Maris OSS 版を構成する OSS を以下に示します。
 
 Maris OSS 版で採用している Vue.js のソフトウェア・アーキテクチャは MVVM パターンに分類されます。
 以下にアーキテクチャを示します。
-![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture.png)
+![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture-light.png#only-light){ loading=lazy }
+![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture-dark.png#only-dark){ loading=lazy }
 
 | 名称 | 説明 |
 | ---- | ---- |
@@ -41,7 +43,8 @@ Vue.js ではビューとビューモデルを [単一ファイルコンポー�
 
 ### ビュー＆ビューモデル コンポーネント ### {: #view-and-viewmodel-component }
 
-![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/view%26viewmodel-component.png)
+![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/view%26viewmodel-component-light.png#only-light){ loading=lazy }
+![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/view%26viewmodel-component-dark.png#only-dark){ loading=lazy }
 
 ビューとビューモデルはそれぞれブラウザへのレンダリングとそのブラウザから受けたイベントに対するプレゼンテーションロジックなどを行うコンポーネントです。
 ブラウザに表示する画面は Component という複数の画面構成要素と View というそれらを組み立てたページから構成されます。
@@ -52,7 +55,8 @@ Vue.js ではビューとビューモデルを [単一ファイルコンポー�
 Vue.js はコンポーネント指向のフレームワークであることから画面要素を Component という再利用可能な単位で分割し、複数の画面コンポーネントを組み合わせることによって一つの画面(View)を構成します。
 View がルーティングによって遷移される画面として指定されます。画面コンポーネントは実際の画面では以下のようなイメージになります。
 
-![画面コンポーネント イメージ](../../images/app-architecture/client-side-rendering/screen-component-detail.png)
+![画面コンポーネント イメージ](../../images/app-architecture/client-side-rendering/screen-component-detail-light.png#only-light){ loading=lazy }
+![画面コンポーネント イメージ](../../images/app-architecture/client-side-rendering/screen-component-detail-dark.png#only-dark){ loading=lazy }
 
 #### 画面遷移 #### {: #screen-transition }
 
@@ -60,7 +64,8 @@ View がルーティングによって遷移される画面として指定され
 
 Vue Router : [公式ドキュメント](https://router.vuejs.org/introduction.html)
 
-![Vue Router によるルーティング](../../images/app-architecture/client-side-rendering/routing-by-vue-router.png)
+![Vue Router によるルーティング](../../images/app-architecture/client-side-rendering/routing-by-vue-router-light.png#only-light){ loading=lazy }
+![Vue Router によるルーティング](../../images/app-architecture/client-side-rendering/routing-by-vue-router-dark.png#only-dark){ loading=lazy }
 
 #### モデルコンポーネントとの連携 #### {: #linkage-with-model-component }
 
@@ -70,11 +75,13 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 
 文字種や文字数などの入力チェックは、ビューモデルで行い、不要なバックエンドとの通信の発生を防止します。 Maris OSS 版では VeeValidate と yup という OSS ライブラリを利用します。VeeValidate はフォームや入力コンポーネントの監視を行い、yup は検証スキームを定義する OSS です。
 
-![VeeValidation と yup による入力チェック](../../images/app-architecture/client-side-rendering/input-validation.png)
+![VeeValidation と yup による入力チェック](../../images/app-architecture/client-side-rendering/input-validation-light.png#only-light){ loading=lazy }
+![VeeValidation と yup による入力チェック](../../images/app-architecture/client-side-rendering/input-validation-dark.png#only-dark){ loading=lazy }
 
 ### モデルコンポーネント ### {: #model-component }
 
-![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component.png)
+![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-light.png#only-light){ loading=lazy }
+![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-dark.png#only-dark){ loading=lazy }
 
 モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。またフロントエンドで扱うデータモデルとAPIモデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
 
@@ -86,7 +93,8 @@ Pinia : [公式ドキュメント](https://pinia.vuejs.org/introduction.html)
 
 Pinia における Store は、State・Getter・Action という三つの要素から構成されています。
 
-![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture.png)
+![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-light.png#only-light){ loading=lazy }
+![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-dark.png#only-dark){ loading=lazy }
 
 | 名称        | 説明                                                                                                                   |
 | ----        | ----                                                                                                                  |
@@ -106,7 +114,8 @@ Maris OSS 版では API 仕様を OpenAPI を用いて作成します。ここ�
 
 OpenAPI仕様 : [公式ドキュメント](https://swagger.io/specification/)
 
-![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/client-side-rendering/maris-oss-edition-details.png)
+![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading-lazy }
+![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading-lazy }
 
 <!-- バックエンド編のAPIドキュメントへリンク -->
 
