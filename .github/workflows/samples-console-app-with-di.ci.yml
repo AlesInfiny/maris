@@ -1,0 +1,57 @@
+---
+name: ConsoleAppWithDI CI
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'samples/ConsoleAppWithDI/**'
+      - '.github/workflows/samples-console-app-with-di.ci.yml'
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: samples/ConsoleAppWithDI/solution
+
+jobs:
+  build:
+    name: コンソールアプリケーションのビルド
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      BUILD_CONFIGURATION: Debug
+
+    steps:
+      - name: ブランチのチェックアウト
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: .NET SDK のセットアップ
+        uses: actions/setup-dotnet@v2.0.0
+        with:
+          dotnet-version: 6.0.x
+          include-prerelease: false
+
+      - name: NuGet パッケージの復元
+        run: dotnet restore
+
+      - name: アプリケーションのビルド
+        run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }}
+
+      - name: 単体テストの実行
+        run: |
+          dotnet add tests/Maris.ConsoleApp.UnitTests/Maris.ConsoleApp.UnitTests.csproj package coverlet.msbuild
+          dotnet test --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov > testResult.txt
+          echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/Done/,/Elapsed/p' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '# Test Result :memo:' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/A total of/,/Passed/p' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '# Coverage :triangular_ruler:' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/+----------------------------------+--------+--------+--------+/,/+---------+--------+--------+--------+/p' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '/+----------------------------------+--------+--------+--------+/d' | sed -e 's/|//' | sed -e 's/|*$//g' | sed -e '1d' | sed -e '1i --------------------------|--------|--------|------------------' | sed -e '1i Module | Line | Branch | Method' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/+---------+--------+--------+--------+/,/Average/p' | sed -e '1,2d' | sed -e '/+---------+--------+--------+--------+/d' | sed -e 's/|//' | sed -e 's/|*$//g' | sed -e '1i ----------|--------|--------|---------' | sed -e '1i --- | Line | Branch | Method' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '$d' >> $GITHUB_STEP_SUMMARY
+        

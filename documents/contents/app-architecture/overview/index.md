@@ -1,6 +1,11 @@
-# 概要編
+---
+title: 概要編
+description: Maris OSS 版を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
+---
 
-## 構築できるアプリケーション形態 ## {: #application-kind }
+# 概要編 {#top}
+
+## 構築できるアプリケーション形態 {#application-kind}
 
 Maris OSS 版を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
 
@@ -23,13 +28,13 @@ Maris OSS 版を利用することで構築できるアプリケーションの�
     クライアント端末で動作するネイティブアプリケーションです。
     （今後追加予定）
   
-## アプリケーション構成 ## {: #application-structure }
+## アプリケーション構成 {#application-structure}
 
 Maris OSS 版として、アプリケーション形態ごとに標準的なアプリケーション構成を定義しています。
 ここでは主要な構成要素を示します。
 <!-- （CSR編など、アプリケーション種別ごとのアーキテクチャ解説ができたら右記の文を差しこむ。）詳細はアプリケーション種別ごとの詳細ページ、および、サンプルアプリケーションを参照してください。 -->
 
-### Web アプリケーション ( クライアントサイドレンダリング ) ### {: #client-side-rendering }
+### Web アプリケーション ( クライアントサイドレンダリング ) {#client-side-rendering}
 
 Vue.js を用いた SPA の構成をとります。
 サーバーサイドは .NET 6 以降をベースとした ASP.NET Core の Web API アプリケーションです。
@@ -38,17 +43,17 @@ Vue.js を用いた SPA の構成をとります。
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading=lazy }
 
-### Web アプリケーション ( サーバーサイドレンダリング ) ### {: #server-side-rendering }
+### Web アプリケーション ( サーバーサイドレンダリング ) {#server-side-rendering}
 
 （今後追加予定）
 
-### コンソールアプリケーション ### {: #console-application }
+### コンソールアプリケーション {#console-application}
 
 （今後追加予定）
 
-## ソリューション構造 ## {: #solution-structure }
+## ソリューション構造 {#solution-structure}
 
-### ソリューションの単位 ### {: #unit-of-solution }
+### ソリューションの単位 {#unit-of-solution}
 
 Web アプリケーションやコンソールアプリケーション ( バッチ ) など、 1 つのサブシステムは通常複数のアプリケーションで構成されます。
 Maris OSS 版では、 1 サブシステム 1 ソリューションを基本として推奨します。
@@ -59,7 +64,7 @@ Maris OSS 版では、 1 サブシステム 1 ソリューションを基本と�
 
 [Visual Studio のフィルター処理済みソリューション - ソリューション フィルター ファイル](https://docs.microsoft.com/ja-jp/visualstudio/ide/filtered-solutions?view=vs-2022#solution-filter-files)
 
-### プロジェクトの単位 ### {: #unit-of-project }
+### プロジェクトの単位 {#unit-of-project}
 
 プロジェクトは、原則として機能単位、レイヤー単位で分割することを推奨します。
 プロジェクトの分割にあたっては、以下の手順で分割を検討してください。
@@ -94,7 +99,7 @@ Maris OSS 版では、 1 サブシステム 1 ソリューションを基本と�
 
 1. 業務 / 機能をプロジェクト構造に当てはめる
 
-    プロジェクトは原則として業務 / 機能で分割を行ってから、レイヤー分割を行います。
+    プロジェクトは原則として業務 / 機能で分割してから、レイヤー分割します。
     アプリケーションをマイクロサービス化しないのであれば、エントリーポイントのプロジェクトは単一プロジェクトとすることを推奨します。
 
     ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-light.png#only-light){ loading=lazy }

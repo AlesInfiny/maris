@@ -1,3 +1,4 @@
+<!-- textlint-disable @textlint-rule/require-header-id -->
 # Maris OSS 版 ドキュメントについて
 
 <!-- cSpell:ignore hoge hogehoge dotnetfw pymdown -->
@@ -19,7 +20,7 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 | contents      |                  |                       |                    | ドキュメント本体                              |
 |               | app-architecture |                       |                    | アプリケーションアーキテクチャ                |
 |               |                  | client-side-rendering |                    | CSR編                                         |
-|               |                  | console-app           |                    | コンソールアプリケーション編（\*）            |
+|               |                  | console-app           |                    | コンソールアプリケーション編                  |
 |               |                  | overview              |                    | 概要編                                        |
 |               | assets           |                       |                    | 共通資材（ロゴなど）                          |
 |               |                  | images                |                    |                                               |
@@ -32,8 +33,8 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 |               |                  |                       | vue-js             | Vue.js 編                                     |
 |               |                  | migration             |                    | マイグレーション                              |
 |               |                  |                       | dotnetfw-risk      | .NET Frameworkにとどまることのリスク          |
-|               |                  |                       | from-dotnetfw      | .NET Frameworkからの移行（\*）                |
-|               |                  | modern-dev-process    |                    | 開発プロセスのモダナイズ（\*）                |
+|               |                  |                       | from-dotnetfw      | .NET Frameworkからの移行                      |
+|               |                  | modern-dev-process    |                    | 開発プロセスのモダナイズ                      |
 |               | images           |                       |                    | ページ固有の画像ファイル置き場                |
 |               |                  | app-architecture      |                    | mdファイルの配置ディレクトリと構造をそろえる  |
 |               |                  |                       | hoge.png           | 画像ファイルはsvgかpngにする                  |
@@ -46,9 +47,11 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 |               |                  | samples               |                    |                                               |
 |               |                  | terms                 |                    |                                               |
 |               | samples          |                       |                    | サンプルアプリケーション解説                  |
+|               |                  | console-app-with-di   |                    | コンソールアプリの要件別サンプル解説          |
 |               |                  | downloads             |                    | サンプルアプリケーションコード置き場(zip圧縮) |
 |               | stylesheets      |                       |                    | 既定のスタイルシートの上書き設定              |
 |               | terms            |                       |                    | 利用規約                                      |
+| overrides     |                  |                       |                    | Mkdocs Materialの拡張ファイル置き場（\*）     |
 | includes      |                  |                       |                    | Snippets の置き場                             |
 |               | abbreviations.md |                       |                    | 略語用語集                                    |
 | readme-images |                  |                       |                    | README.md 内の画像ファイル置き場              |
@@ -56,12 +59,12 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 | mkdocs.yml    |                  |                       |                    | mkdocs の設定ファイル                         |
 | README.md     |                  |                       |                    | このドキュメント                              |
 
-\*：v0.1では対象外
+\*：詳細は [Mkdocs Materialの解説](https://squidfunk.github.io/mkdocs-material/customization/?h=theme#extending-the-theme)と [GitHub リポジトリ](https://github.com/squidfunk/mkdocs-material/tree/master/src/overrides)を参照。
 
 ## ドキュメントの作成方法（わかっている人向けの大雑把な手順）
 
-このリポジトリは GitHub-flow で開発を行います。
-Feature ブランチの名前は「feature/<更新内容を表す名前>」として開発を行ってください。
+このリポジトリは GitHub-flow で開発します。
+Feature ブランチの名前は「feature/<更新内容を表す名前>」として開発してください。
 記事の作成後は main ブランチへのマージを行う Pull Request を投げてください。
 
 ## ドキュメントの作成方法（詳細版）
@@ -106,7 +109,7 @@ Markdown の作成にあたっては、 Material for MkDocs の Web サイトを
 
 ### 動作確認
 
-記事をある程度作成したら、 mkdocs を用いて確認を行います。
+記事をある程度作成したら、 mkdocs を用いて確認します。
 
 Visual Studio Code で [ターミナル] を開きます。
 ターミナルが開いていない場合は、以下の通り新たに開いてください。
@@ -146,16 +149,56 @@ Markdown ファイルを追加した場合、ほとんどのケースで mkdocs.
 
 ### 体裁の修正
 
-markdownlint の拡張機能をインストールしていると、 [問題] ウィンドウに以下のような Markdown の体裁誤りを指摘するコメントが出ることがあります。
+#### markdownlint
+
+markdownlint の拡張機能をインストールしていると、 [問題] ウィンドウに以下のような Markdown の体裁誤りを指摘するコメントが出ます。
 
 ![markdownlint の警告メッセージ](readme-images/markdownlint-result.png)
 
 本リポジトリでは Markdown の体裁に誤りがあると、 Web サイトの発行が行えないようになっています。
 警告が出ている場合は、メッセージを読んで必ず解消しましょう。
 
+#### cSpell
+
+cSpell の拡張機能をインストールしていると、 [問題] ウィンドウに未定義の単語の存在を知らせるコメントが出ます。
+この拡張機能は、英単語のスペルミスを検出するために導入するものであり、コメントの多くはスペルミスに起因しています。
+必ず対応するようにしてください。
+
+複合語や技術用語は、辞書登録しないと誤検知されることがあります。
+その場合はワークスペースの辞書に、単語を登録するようにしてください。
+[maris.code-workspace] ファイルの `settings` / `cSpell.words` に単語を登録できます。
+
+コード内や設定ファイル内の文字など、単語登録することが望ましくないと考える場合は、以下の記事を参考にして、各ページで抑制してください。
+cSpell が実行されないようにするのではなく、そのページ内で使用する抑制しても良い単語を、ページの先頭に記述する方式で抑制しましょう。
+このページの上部にも設定してあります。
+
+<https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell#enable--disable-checking-sections-of-code>
+
+#### textlint
+
+vscode-textlint の拡張機能をインストールしていると、 [問題] ウィンドウに文書校正に関するコメントが出ます。
+この拡張機能は、技術文書を書く際の冗長な表現を排除したり、表記ゆれの検出したりする自動校正ツールです。
+多くの場合、文章の見直しによってエラーを回避できます。
+必ず対応するようにしてください。
+
+一部の機能については、誤検知をしてしまう場合や、ルールの適用が不適切なケースもあります。
+その場合は、文書内に以下のようなコメントを記述することで、一部の解析ルールを無視するよう設定できます。
+
+```markdown
+<!-- textlint-disable @textlint-rule/require-header-id -->
+
+# 解析ルールが無効になる場所
+
+<!-- textlint-enabled @textlint-rule/require-header-id -->
+```
+
+詳細は以下を参照してください。
+
+<https://github.com/textlint/textlint-filter-rule-comments#usage>
+
 ### 用語集の整理
 
-cSpell の拡張機能をインストールしていると、 [問題] ウィンドウに上記と同じような用語誤りやスペルミスを指摘するコメントが出ることがあります。
+cSpell の拡張機能をインストールしていると、 [問題] ウィンドウに上記と同じような用語誤りやスペルミスを指摘するコメントが出ます。
 ドキュメントに関連する部分で警告が出る場合は対策を講じてください。
 対応方法は以下の通りです。
 
@@ -190,22 +233,15 @@ cSpell の拡張機能をインストールしていると、 [問題] ウィン
 GitHub でプッシュした Feature ブランチを main ブランチにマージするプルリクエストを作成してください。
 プルリクエストを作成すると、 Markdown と YAML の Lint と、ビルド可否のチェックが行われます。
 
-Lint の結果、警告がある場合はGitHub Actionsが失敗します。
+Lint の結果、警告がある場合は GitHub Actions が失敗します。
 
 ![linter の警告による GitHub Actions の失敗](readme-images/linter-error.png)
 
-mkdocs のビルドがエラーとなった場合もGitHub Actionsは失敗します。
+mkdocs のビルドがエラーとなった場合も GitHub Actions は失敗します。
 いずれの場合も GitHub Actions のログからエラー情報を確認できます。
 右側の詳細ログからエラーとなっている箇所を開くことで、ログメッセージを確認できます。
 
 ![mkdocs の実行エラー](readme-images/mkdocs-error.png)
-
-続いて mkdocs の実行ログを参照し、警告が出ていないことを確認してください。
-警告が出ている場合は解消するようにします。
-mkdocs で警告が出ても、 GitHub Actions は正常に終了してしまいます。
-必ずログを確認するようにしましょう。
-
-なお mkdocs の警告は、ローカル PC で `mkdocs serve` コマンドを実行しても確認できます。
 
 プルリクエストをマージすると、継続的デプロイメントが走り、自動的にステージング環境の Web サイトが更新されます。
 
@@ -219,6 +255,8 @@ Web サイトの更新が完了したら、以下にアクセスして問題な�
 修正に時間がかかる場合は、以前のリリース物を再リリースし、切り戻すようにしてください。
 
 ## 画像の作成方法
+
+### 画像の作成ルール
 
 図を作成する場合は \*.drawio で作成してください。
 \*.drawio ファイルは、 _materials/images ディレクトリの配下に作成してください。
@@ -236,6 +274,42 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
 | フォントファミリー | [カスタム] > [Google Fonts] > 「Noto Sans JP」を設定 |
 
 ![フォントファミリーの設定例](readme-images/drawio-font-family.png)
+
+### ライトモード/ダークモードに関する設定
+
+本ドキュメントでは、ライトモード/ダークモードの切り替えができるように設定されています。
+各モードへ対応するために、ライトモード向け / ダークモード向けの 2 通りの画像を作成します。
+また、モードによる切り替わりが行われるよう、マークダウンを実装します。
+
+ライトモード用/ダークモード用の画像作成やマークダウンの実装方法は以下の通りです。
+
+1. 画像原本の \*.drawio ファイルについて、ライトモード用、ダークモード用の 2 通りのファイルを作成します。  
+   以下の命名規則に従い、どちらのモード用のファイルかを \*.drawio ファイル名末尾の文字列で表現します。
+
+    | 対象モード   | \*.drawio ファイル名末尾の文字列 |
+    | ------------ | -------------------------------- |
+    | ライトモード | -light.drawio                    |
+    | ダークモード | -dark.drawio                     |
+
+1. コンテンツとして配置する png ファイルも、ライトモード用、ダークモード用の 2 通り用意します。  
+   ファイル名の命名規則については \*.drawio ファイルと同様の規則を適用します。
+
+1. マークダウンの実装は以下のように「#only-light」または「#only-dark」を付加して配置します。  
+   詳細は以下の公式ドキュメントを参照してください。  
+   <https://squidfunk.github.io/mkdocs-material/reference/images/#light-and-dark-mode>
+
+    - 「align=right」は画像の配置に関する属性であり、画面デザインにあわせて任意で付加します。  
+    詳細は以下の公式ドキュメントを参照してください。  
+    <https://squidfunk.github.io/mkdocs-material/reference/images/#image-alignment>
+
+    - 「loading=lazy」は画像の遅延読込に関する属性であり、必須で付加します。  
+    詳細は以下の公式ドキュメントを参照してください。  
+    <https://squidfunk.github.io/mkdocs-material/reference/images/#image-lazy-loading>
+
+    ```md
+    ![mono-repo の第 2 階層構造例](../../images/guidebooks/git/mono-repo-structure-2nd-subsystem-light.png#only-light){ align=right loading=lazy }
+    ![mono-repo の第 2 階層構造例](../../images/guidebooks/git/mono-repo-structure-2nd-subsystem-dark.png#only-dark){ align=right loading=lazy }
+    ```
 
 ## ドキュメント執筆環境の構築方法
 
@@ -283,7 +357,10 @@ Visual Studio Code の [ファイル] メニューから [ワークスペース�
 このダイアログ経由でインストールしなかった場合は、 [拡張機能] メニューから [推奨] のグループを開いて、以下の拡張機能をインストールします。
 
 - Markdown All in One
+- Markdown Preview Mermaid Support
 - markdownlint
+- Code Spell Checker
+- vscode-textlint
 
 ![拡張機能メニュー](readme-images/recommend-vscode-extensions.png)
 
@@ -291,11 +368,18 @@ Visual Studio Code の [ファイル] メニューから [ワークスペース�
 
 - Japanese Language Pack for Visual Studio Code
 - Draw.io integration
+- Table Formatter
+
+### Node.js のインストール
+
+以下のサイトから安定版の Node.js インストーラーをダウンロードし、インストールしてください。
+
+<https://nodejs.org/ja/>
 
 ### Pythonのインストール
 
 以下のサイトから、 Windows 用の最新版 Python をインストールします。
-インストール時に [Add Python 3.x to PATH] にチェックを入れてからインストールしてください。
+インストール時に [Add Python 3.x to PATH] へチェックを入れてからインストールしてください。
 
 <https://www.python.org/downloads/>
 
@@ -308,7 +392,7 @@ pip install --upgrade pip
 
 ### MkDocs と拡張機能のインストール
 
-以下のコマンドを実行して、 Mkdocs と Mkdocs Material 拡張機能、Pymarkdown 拡張機能、 MkDocs Minify 拡張機能をインストールします。
+以下のコマンドを実行して、 Mkdocs と Mkdocs Material 拡張機能、 Pymarkdown 拡張機能、 MkDocs Minify 拡張機能をインストールします。
 
 ```plain
 pip install mkdocs
@@ -316,3 +400,14 @@ pip install mkdocs-material
 pip install pymdown-extensions
 pip install mkdocs-minify-plugin
 ```
+
+### Node モジュールのインストール
+
+本リポジトリでは textlint を使用して、校正を自動化します。
+以下のコマンドを実行して、 textlint の実行に必要な Node モジュールをインストールしてください。
+
+```plane
+npm install
+```
+
+<!-- textlint-enabled @textlint-rule/require-header-id -->
