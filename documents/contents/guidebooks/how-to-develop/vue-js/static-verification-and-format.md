@@ -19,11 +19,11 @@
 
 Prettier は Vue.js のブランクプロジェクト作成時にオプションとしてインストールしているため、追加でインストールする必要はありません。
 
-### Prettier の設定 ### {: #prettier-setting }
+### Prettier の設定 ### {: #settings-prettier }
 
 Prettier の設定ファイルは初期状態では存在しないので、作成するところから始めます。
 
-1. 設定ファイル「.prettierrc.js」を作成します。
+1. プロジェクトのルートフォルダーに設定ファイル ```./.prettierrc.js``` を作成します。
 1. 既定の設定を上書きする場合、設定値を記述します。以下はサンプルアプリケーションでの設定例です。
 
 ```javascript
@@ -42,9 +42,9 @@ module.exports = {
 
 ESLint は Vue.js のブランクプロジェクト作成時にオプションとしてインストールしているため、追加でインストールする必要はありません。
 
-### ESLint の設定 ### {: #eslint-setting }
+### ESLint の設定 ### {: #settings-eslint }
 
-設定ファイル「.eslintrc.cjs」で行います。このファイルはインストール時に自動的に追加され、デフォルトでは以下のような内容になっています（ESLint バージョン 8.5.0 の場合）。
+設定ファイル ```./.eslintrc.cjs``` で行います。このファイルはインストール時に自動的に追加され、デフォルトでは以下のような内容になっています（ESLint バージョン 8.5.0 の場合）。
 
 ```javascript
 /* eslint-env node */
@@ -132,9 +132,9 @@ npm install -D stylelint \
   stylelint-prettier
 ```
 
-### StyleLint の設定 ### {: #stylelint-setting }
+### StyleLint の設定 ### {: #settings-stylelint }
 
-設定ファイル「.stylelintrc.js」 を作成し、コードを記述します。
+プロジェクトのルートフォルダーに設定ファイル ```./.stylelintrc.js``` を作成し、コードを記述します。
 
 ```javascript
 module.exports = {
@@ -171,7 +171,7 @@ module.exports = {
 
 ## 静的コード分析とフォーマットの実行 ## {: #static-code-analysis-and-format }
 
-package.json に ESLint 用の script がデフォルトで追加されています。ここに Stylelint も同時に実行するようコマンドを追加します。追加後の script は以下のようになります。
+```./package.json``` に ESLint 用の script がデフォルトで追加されています。ここに Stylelint も同時に実行するようコマンドを追加します。追加後の scripts は以下のようになります（関係のないコマンドは省略しています）。
 
 ```json
 "scripts": {
@@ -179,7 +179,7 @@ package.json に ESLint 用の script がデフォルトで追加されていま
 }
 ```
 
-上の例では、関係のないコマンドは省略しています。また、Stylelintを vue ファイルと css ファイルに対して実行するように設定しています。
+Stylelintを vue ファイルと css ファイルに対して実行するように設定しています。
 
 ターミナルを開き、コマンドを実行します。
 

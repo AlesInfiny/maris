@@ -56,7 +56,6 @@ nav:
               - guidebooks/how-to-develop/vue-js/static-verification-and-format.md
               - guidebooks/how-to-develop/vue-js/input-validation.md
               - guidebooks/how-to-develop/vue-js/create-api-client-code.md
-              - guidebooks/how-to-develop/vue-js/tests.md
           - ローカル開発環境の構築:
               - guidebooks/how-to-develop/local-environment/index.md
       #       - アプリケーションテスト:

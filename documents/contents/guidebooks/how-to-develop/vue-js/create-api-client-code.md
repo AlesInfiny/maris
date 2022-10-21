@@ -6,17 +6,47 @@
 
 [Open API 仕様書の出力設定](../dotnet/configure-asp-net-core-web-api-project.md) に示す手順に従って生成した Open API 仕様書をローカルに保存します。ここでは、ファイル名を「dressca-api.json」とします。
 
-### JDK のインストール ## { #install-jdk }
+### JDK のインストール ## {: #install-jdk }
 
 Open API Generator を使用するためには、Java 8 以降のランタイムと、システム環境変数 JAVA_HOME の設定が必要です。Oracle JDK や Eclipse Adoptium など、適当な JDK をインストールし、JAVA_HOME を設定してください。
 
-## インストールと設定 ## {: #install-and-setting }
+## Axios ## {: #axios }
+
+### Axios のインストール {: #install-axios }
+
+```terminal
+npm install axios
+```
+
+### Axios の設定 {: #settings-axios }
+
+```./src/config/axios.config.ts``` というファイルを作成し、以下のように記述します。
+
+```typescript
+import axios from 'axios';
+
+axios.defaults.baseURL = `作成済みの Web API の URL`;
+```
+
+- ```axios.defaults.baseURL``` ：Web API のベース URL を設定します。
+
+作成したファイルを読み込むため、main.ts に import を記述します。
+
+```typescript
+import '@/config/axios.config';
+```
+
+## Open API Generator ## {: #openapi-generator }
+
+### Open API Generator のインストール　### {: #install-openapi-generator }
 
 OpenAPI Generator をインストールします。ターミナルで以下のコマンドを入力します。
 
 ```terminal
 npm install --D @openapitools/openapi-generator-cli
 ```
+
+### Open API Generator の設定 ### {: #settings-openapi-generator }
 
 package.json の script セクションにタスクを追加します。
 
@@ -36,7 +66,7 @@ package.json の script セクションにタスクを追加します。
 -g typescript-axios
 ```
 
-入力のAPI仕様書として「dressca-api.json」というファイルを指定します。
+入力のAPI仕様書として ```./dressca-api.json``` というファイルを指定します。
 
 ``` terminal
 -i ./dressca-api.json 
@@ -44,10 +74,10 @@ package.json の script セクションにタスクを追加します。
 
 以下のプロパティを追加します。
 
-- withSeparateModelsAndApi=true：model と API を別クラス・別フォルダーに配置する
-- modelPackage=models：model クラスのパッケージ名を「models」に設定する
-- apiPackage=api：API クラスのパッケージ名を「api」に設定する
-- supportsES6=true：ES6 に準拠したコードを生成する
+- ```withSeparateModelsAndApi=true``` ：model と API を別クラス・別フォルダーに配置する
+- ```modelPackage=models：model``` ：クラスのパッケージ名を「models」に設定する
+- ```apiPackage=api``` ：API クラスのパッケージ名を「api」に設定する
+- ```supportsES6=true``` ：ES6 に準拠したコードを生成する
 
 ``` terminal
 --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true

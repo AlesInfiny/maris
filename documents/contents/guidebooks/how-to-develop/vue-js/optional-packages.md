@@ -17,13 +17,13 @@
 
 なお、上の表では、特定のパッケージをインストールすることで付随してインストールされるパッケージ（例： ESLint に対する eslint-config-prettier）は省略しています。
 
-## 追加でインストールするパッケージ ## {: #additional-package }
+## 追加でインストールするパッケージ ## {: #additional-packages }
 
 以下のパッケージは別途インストールが必要です。
 
 |パッケージ名                       |説明                                     |インストール|
 |----------------------------------|-----------------------------------------|------------|
-|Axios                             |Vue.js で非同期通信を行うためのプロミスベースのHTTPクライアント|``` npm install axios ```|
+|Axios                             |Vue.js で非同期通信を行うためのプロミスベースのHTTPクライアント|[参照](create-api-client-code.md)|
 |autoprefixer                      |ベンダープレフィックスを付与するプラグイン |[参照](css.md)|
 |openapi-generator                 |Web API仕様からクライアントコードの自動生成|[参照](create-api-client-code.md)|
 |postCSS                           |CSSの最適化                               |[参照](css.md)|
