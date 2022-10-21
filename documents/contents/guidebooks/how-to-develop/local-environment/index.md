@@ -1,20 +1,25 @@
-# ローカル開発環境の構築
+---
+title: 開発環境構築
+description: Maris OSS 版のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+---
+
+# ローカル開発環境の構築 {#top}
 
 Maris OSS 版のアプリケーション開発で最低限必要な環境の構築方法を解説します。
 
-## システム要件 ## {: #system-requirements }
+## システム要件 {#system-requirements}
 
-Maris OSS 版のアプリケーション開発を行うコンピューターが満たすべき要件について解説します。
+Maris OSS 版のアプリケーションを開発するコンピューターが満たすべき要件について解説します。
 ここに記載のない環境でも開発できることがありますが、動作確認は行われていません。
 
-### OS 要件 ### {: #os-requirements }
+### OS 要件 {#os-requirements}
 
 - Windows 10
 - Windows 11
 
 原則としてサポートされている最新の Windows クライアント OS を対象とします。
 
-### ハードウェア要件 ### {: #hardware-requirements }
+### ハードウェア要件 {#hardware-requirements}
 
 - 1.8 GHz 以上、 4 コア以上の 64 ビットプロセッサ ( ARM プロセッサは対象外です ) が必要です。
     - 8 論理コア ( ハイパースレッディングなど ) 以上を推奨します。
@@ -23,15 +28,15 @@ Maris OSS 版のアプリケーション開発を行うコンピューターが�
 - 50 GB 以上の空き容量を持つ SSD が必要です。
 - FullHD ( 1920 * 1080 ) 以上の解像度を持つディスプレイが必要です。
 
-### ネットワーク要件 ### {: #network-requirements }
+### ネットワーク要件 {#network-requirements}
 
 - インターネット接続が必要です。
 
-### ソフトウェア要件 ### {: #software-requirements }
+### ソフトウェア要件 {#software-requirements}
 
 Maris OSS 版のアプリケーション開発には、 Visual Studio または VS Code を利用できます。
-Vue.js を含む SPA アプリケーションの開発を行う場合は VS Code を使用します。
-Web API アプリケーションやコンソールアプリケーションなど、 .NET アプリケーションの開発を行う場合は Visual Studio の利用を推奨します。
+Vue.js を含む SPA アプリケーションを開発する場合は VS Code を使用します。
+Web API アプリケーションやコンソールアプリケーションなど、 .NET アプリケーションを開発する場合は Visual Studio の利用を推奨します。
 
 | 開発するアプリケーション | Visual Studio | VS Code |
 | ------------------------ | ------------- | ------- |
@@ -41,12 +46,12 @@ Web API アプリケーションやコンソールアプリケーションなど
 !!! info "Maris OSS 版の前提とする開発環境"
     Maris OSS 版の提供する情報は、原則として上記推奨環境についてのみ取り扱います。
 
-## ローカル開発環境の構築手順 ## {: #setup-development-environment }
+## ローカル開発環境の構築手順 {#setup-development-environment}
 
 本節では開発に最低限必要なソフトウェアのインストール方法について解説します。
 Maris OSS 版の各ドキュメントは、本節に記載されている環境が整っていることを前提に記載されています。
 
-### Visual Studio のインストール ### {: #install-visual-studio }
+### Visual Studio のインストール {#install-visual-studio}
 
 1. 以下のサイトから、 Visual Studio のインストーラーをダウンロードします。
    エディションは、 Visual Studio のライセンス条項を確認のうえ、ご自身の利用できるものを選択してください。
@@ -55,11 +60,11 @@ Maris OSS 版の各ドキュメントは、本節に記載されている環境�
     <https://visualstudio.microsoft.com/ja/vs/>
 
 1. ダウンロードしたインストーラーを実行します。
-1. ワークロードの選択画面で、 [ASP.NET と Web 開発] と [.NET デスクトップ開発] を選択してインストールします。
+1. ワークロードの選択画面で、 [ASP.NET と Web 開発] 、 [.NET デスクトップ開発] を選択してインストールします。
    これ以外に必要なものがあれば、適宜追加してインストールしてください。
 1. Visual Studio が起動できればインストールは完了です。
 
-### VS Code のインストール ### {: #install-vscode }
+### VS Code のインストール {#install-vscode}
 
 1. 以下のサイトから、コンピューターの環境にあった VS Code のインストーラーをダウンロードします。
 
@@ -72,7 +77,7 @@ Maris OSS 版の各ドキュメントは、本節に記載されている環境�
 
     - [Japanese Language Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
 
-### Git for Windows のインストール ### {: #install-git-for-windows }
+### Git for Windows のインストール {#install-git-for-windows}
 
 !!!warning "Git for Windows インストールの前に"
     [VS Code のインストール](#install-vscode) を完了させておくことを推奨します。
@@ -91,7 +96,7 @@ Maris OSS 版の各ドキュメントは、本節に記載されている環境�
     git --version
     ```
 
-### Node.js のインストール ### {: #install-nodejs }
+### Node.js のインストール {#install-nodejs}
 
 1. 以下のサイトから、コンピューターの環境にあった Node.js のインストーラー [^2] をダウンロードします。
 
@@ -107,7 +112,7 @@ Maris OSS 版の各ドキュメントは、本節に記載されている環境�
     npm --version
     ```
 
-### Entity Framework Core Tool のインストール ### {: #install-ef-core-tool }
+### Entity Framework Core Tool のインストール {#install-ef-core-tool}
 
 1. 以下のコマンドを実行します。
 
