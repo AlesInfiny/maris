@@ -1,8 +1,12 @@
-# ディレクトリ構造の検討
+---
+title: Git 構築ガイド
+description: Git リポジトリの構築に関するガイドラインを示します。
+---
+# ディレクトリ構造の検討 {#top}
 
 本章では、 mono-repo の場合のディレクトリ構造について解説します。
 
-## 第 1 階層 ## {: #1st }
+## 第 1 階層 {#1st}
 
 ![mono-repo の第 1 階層構造例](../../images/guidebooks/git/mono-repo-structure-light.png#only-light){ align=right loading=lazy }
 ![mono-repo の第 1 階層構造例](../../images/guidebooks/git/mono-repo-structure-dark.png#only-dark){ align=right loading=lazy }
@@ -23,7 +27,7 @@ Readme.md ファイルには、このシステムの全体的な説明を記載�
 プロジェクトの開始時に開発者が把握しておくべき情報をまとめて記載することを推奨します。
 多くの場合、プロジェクトキックオフで説明する内容や、開発環境の構築方法など、開発を始めるまでに必要な情報を記載します。
 
-## 第 2 階層 ## {: #2nd }
+## 第 2 階層 {#2nd}
 
 ![mono-repo の第 2 階層構造例](../../images/guidebooks/git/mono-repo-structure-2nd-subsystem-light.png#only-light){ align=right loading=lazy }
 ![mono-repo の第 2 階層構造例](../../images/guidebooks/git/mono-repo-structure-2nd-subsystem-dark.png#only-dark){ align=right loading=lazy }
