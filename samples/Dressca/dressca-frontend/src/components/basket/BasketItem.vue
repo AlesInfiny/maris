@@ -73,6 +73,7 @@ const remove = () => {
         </div>
         <div class="basis-2/5">
           <button
+            id="updateButton"
             type="button"
             class="w-12 mt-2 mr-2 py-2 rounded bg-transparent disabled:bg-transparent hover:bg-blue-500 font-semibold text-blue-700 disabled:text-blue-700 hover:text-white border border-blue-500 disabled:border-blue-500 disabled:cursor-not-allowed"
             :disabled="isUpdateDisabled"
