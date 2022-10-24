@@ -94,7 +94,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 Visual Studio を用いてソリューションをビルドします。
 ビルドが正常に完了したら、 [テストエクスプローラー] ウィンドウを開いて、テストを実行してください。
 「Maris.ConsoleApp.Core」プロジェクト、「Maris.ConsoleApp.Hosting」プロジェクトに対する単体テストが実行されます。
-正しくプロジェクトの取り込みが実施できていれば、すべてのテストが正常に終了します。
+正しくプロジェクトが取り込めていれば、すべてのテストが正常に終了します。
 
 ### コンソールアプリケーションプロジェクトの作成と参照設定の追加
 
@@ -144,7 +144,7 @@ Maris.Samples.Cli.exe sample --loop-number 5
 ```
 
 起動パラメーターの 1 番目には、コマンドの名前を指定します。
-2 番目以降には、パラメーター名とその値を設定できます。
+2 番目以降には、パラメーターの名前とその値を設定できます。
 これらを受け取るパラメータークラスとコマンドクラスは以下のように作成します。
 
 #### パラメータークラス
@@ -158,8 +158,8 @@ Maris.Samples.Cli.exe sample --loop-number 5
 続いて、起動パラメーターから受け取る値をバインドするプロパティを作成します。
 この例では `--loop-number` に設定した値をバインドする `LoopNumber` プロパティを定義しています。
 プロパティのアクセス修飾子は、必ず `public` に設定してください。
-起動パラメーターのパラメーター名は、各プロパティへ付与する `CommandLine.OptionAttribute` 属性に設定します。
-`OptionAttribute` に設定するパラメーター名は、先頭に付与する「--」を除いた文字列を設定します。
+起動パラメーターの名前は、各プロパティへ付与する `CommandLine.OptionAttribute` 属性に設定します。
+`OptionAttribute` に設定するパラメーターの名前は、先頭に付与する「--」を除いた文字列を設定します。
 `OptionAttribute` には、起動パラメーターの意味を表すヘルプテキストを設定できます。
 ヘルプテキストの設定は任意であり、省略してもかまいません。
 
@@ -360,14 +360,14 @@ await app.RunAsync();
 
 ### パラメーターの入力値検証
 
-パラメーターの入力値検証は、以下の方法で実施できます。
+パラメーターの入力値検証は、以下の方法で実行できます。
 
 - パラメータークラスのプロパティに検証属性を付与する
 - パラメータークラスにカスタムの検証ロジックを実装する
 - コマンドクラスでカスタムの検証ロジックを実装する
 
-入力値検証で実施する処理内容に応じて、適切な方式を選択してください。
-パラメータークラス 1 つに対して、複数の入力値検証の方式を組み合わせて実装できます。
+入力値検証で実行する処理内容に応じて、適切な方法を選択してください。
+パラメータークラス 1 つに対して、複数の入力値検証方式を組み合わせて実装できます。
 
 #### パラメータークラスのプロパティに検証属性を付与する
 
@@ -402,7 +402,7 @@ internal class Parameter
 - [RegularExpressionAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute)：指定した正規表現の形式にマッチすることを検証する。
 - [StringLengthAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute)：文字列長が指定した長さの範囲内であることを検証する。
 
-[RequiredAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.requiredattribute) 検証属性を用いた必須チェックは行わないでください。
+[RequiredAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.requiredattribute) 検証属性を用いた必須検証は行わないでください。
 入力が必須のパラメーターを作成したい場合は、 `OptionAttribute` の `Required` プロパティを `true` に設定します。
 
 #### パラメータークラスにカスタムの検証ロジックを実装する
@@ -440,7 +440,7 @@ internal class ValidatableParameter : IValidatableObject
 #### コマンドクラスでカスタムの検証ロジックを実装する
 
 パラメータークラスだけでは完結できない検証ロジックを組み込みたい場合は、コマンドクラスで `ValidateParameter` メソッドをオーバーライドし、カスタムの検証ロジックを実装してください。
-例に示すように、データベースとの突合せによって行う入力値検証は、コマンドクラスの `ValidateParameter` メソッドで実装することを推奨します。
+例に示すように、データベースとの突合せる入力値検証は、コマンドクラスの `ValidateParameter` メソッドで実装することを推奨します。
 入力値にエラーがある場合は、 `ValidateParameter` メソッドから `ArgumentException` をスローしてください。
 
 ```csharp
@@ -487,7 +487,7 @@ internal class ValidatableCommand : SyncCommand<ValidatableParameter>
 コマンドクラスでは、 `Microsoft.Extensions.DependencyInjection` を用いた DI を利用できます。
 パラメータークラスでは、 DI を利用できません。
 
-DI を利用する場合は、通常の .NET の DI の実装方法に従い、コンストラクターインジェクションできるように実装します。
+DI を利用する場合は、一般的な .NET の DI の実装方法に従い、コンストラクターインジェクションできるように実装します。
 以下にアプリケーションサービスのオブジェクトや、 `ILogger` を受け取るコマンドクラスのコード例を示します。
 
 ```csharp
@@ -557,10 +557,10 @@ await app.RunAsync();
 
 ### 構成設定
 
-汎用ホストを利用した本サンプルでは、 ASP.NET Core と同等の構成設定を行うことができます。
+汎用ホストを利用した本サンプルでは、 ASP.NET Core と同等の構成設定ができます。
 一般的な設定は appsettings.json に対して行います。
 開発環境でのみ利用する設定は appsettings.Development.json に設定します。
-環境変数に対する設定を読み込むこともできます。
+環境変数に対する設定を読み込めます。
 詳細は以下を参照してください。
 
 - [ASP.NET Core の構成](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/configuration/)
