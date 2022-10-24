@@ -17,6 +17,12 @@
       },
       "max-kanji-continuous-len": {
         "max": 8
+      },
+      "ja-no-mixed-period": {
+        "periodMark": "。",
+        "allowPeriodMarks": ["\""],
+        "allowEmojiAtEnd": false,
+        "forceAppendPeriod": false
       }
     },
     "ja-no-orthographic-variants": true,
