@@ -7,15 +7,15 @@
 
 <https://wwww.marisossedition.org>
 
-## ディレクトリ構造
+## フォルダー構造
 
-documents ディレクトリ配下のディレクトリ、ファイルの配置は以下の通りです。
+documents フォルダー配下のフォルダー、ファイルの配置は以下の通りです。
 
 |               |                  |                       |                    |                                               |
 | ------------- | ---------------- | --------------------- | ------------------ | --------------------------------------------- |
 | _materials    |                  |                       |                    | ドキュメント内で利用する素材                  |
 |               | images           |                       |                    | 画像素材（画像を作るための元ファイル）        |
-|               |                  | app-architecture      |                    | contents/imagesディレクトリと構造をそろえる   |
+|               |                  | app-architecture      |                    | contents/imagesフォルダーと構造をそろえる     |
 |               |                  |                       | hoge.drawio        | ファイル名は生成後の画像ファイルと同じにする  |
 | contents      |                  |                       |                    | ドキュメント本体                              |
 |               | app-architecture |                       |                    | アプリケーションアーキテクチャ                |
@@ -36,7 +36,7 @@ documents ディレクトリ配下のディレクトリ、ファイルの配置�
 |               |                  |                       | from-dotnetfw      | .NET Frameworkからの移行                      |
 |               |                  | modern-dev-process    |                    | 開発プロセスのモダナイズ                      |
 |               | images           |                       |                    | ページ固有の画像ファイル置き場                |
-|               |                  | app-architecture      |                    | mdファイルの配置ディレクトリと構造をそろえる  |
+|               |                  | app-architecture      |                    | mdファイルの配置フォルダーと構造をそろえる    |
 |               |                  |                       | hoge.png           | 画像ファイルはsvgかpngにする                  |
 |               |                  |                       | animation.gif      | gifアニメも利用可                             |
 |               |                  | guidebooks            |                    |                                               |
@@ -72,7 +72,7 @@ Feature ブランチの名前は「feature/<更新内容を表す名前>」と�
 ### ローカルの main ブランチを最新にする
 
 Visual Studio Code を起動して、 [ファイル] メニューから [ワークスペースを開く] を選択します。
-クローンしたディレクトリ内にある maris.code-workspace ファイルを選択して開きます。
+クローンしたフォルダー内にある maris.code-workspace ファイルを選択して開きます。
 
 [ソース管理] メニューを開き、 [チェックアウト先] を選択します。
 
@@ -100,7 +100,7 @@ main ブランチをチェックアウトしたら、 pull を実行して最新
 
 ### ドキュメントの作成
 
-ディレクトリ構成に従って Markdown ファイルを作成してください。
+フォルダー構成に従って Markdown ファイルを作成してください。
 
 Markdown の作成にあたっては、 Material for MkDocs の Web サイトを参考にしてください。
 素の Markdown とは異なる表現パターンがあるので、参考にしてください。
@@ -121,8 +121,8 @@ Visual Studio Code で [ターミナル] を開きます。
 
 ![コマンドプロンプトを起動](readme-images/open-command-prompt.png)
 
-ターミナルのコマンドプロンプトで、 [mkdocs.yml] ファイルのあるディレクトリに移動してください。
-ディレクトリ移動後、以下のコマンドを実行してください。
+ターミナルのコマンドプロンプトで、 [mkdocs.yml] ファイルのあるフォルダーに移動してください。
+フォルダー移動後、以下のコマンドを実行してください。
 
 ```plain
 mkdocs serve
@@ -259,12 +259,12 @@ Web サイトの更新が完了したら、以下にアクセスして問題な�
 ### 画像の作成ルール
 
 図を作成する場合は \*.drawio で作成してください。
-\*.drawio ファイルは、 _materials/images ディレクトリの配下に作成してください。
-画像ファイルは svg 形式または png 形式で出力し、出力した画像ファイルを contents/images ディレクトリの配下に配置してください。
+\*.drawio ファイルは、 _materials/images フォルダーの配下に作成してください。
+画像ファイルは svg 形式または png 形式で出力し、出力した画像ファイルを contents/images フォルダーの配下に配置してください。
 
-スクリーンショットなど、元となる \*.drawio ファイルが存在しない場合は、 _materials/images ディレクトリの配下にファイルを配置する必要ありません。
+スクリーンショットなど、元となる \*.drawio ファイルが存在しない場合は、 _materials/images フォルダーの配下にファイルを配置する必要ありません。
 
-_materials/images ディレクトリ、 contents/images ディレクトリの配下は、画像を配置するマークダウンの置き場所にあわせてディレクトリを掘り、その中に各ファイルを配置してください。
+_materials/images フォルダー、 contents/images フォルダーの配下は、画像を配置するマークダウンの置き場所にあわせてフォルダーを掘り、その中に各ファイルを配置してください。
 
 画像ファイル作成にあたり、以下のルールを守って作成してください。
 
@@ -321,7 +321,7 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
 
 ### リポジトリのクローン
 
-ローカルマシン内の適当なディレクトリで、このリポジトリをクローンします。
+ローカルマシン内の適当なフォルダーで、このリポジトリをクローンします。
 詳細な手順は以下を参照してください。
 
 <https://docs.github.com/ja/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository>
@@ -329,7 +329,7 @@ _materials/images ディレクトリ、 contents/images ディレクトリの配
 ### ユーザー名、メールアドレスの設定
 
 クローンした Git リポジトリに対して、自分のユーザー名、メールアドレスを設定します。
-コマンドプロンプトでクローンしたリポジトリのあるディレクトリに移動して、現在設定されているユーザー名、メールアドレスを確認します。
+コマンドプロンプトでクローンしたリポジトリのあるフォルダーに移動して、現在設定されているユーザー名、メールアドレスを確認します。
 
 ```plane
 c:\hogehoge\maris>git config user.name
@@ -348,7 +348,7 @@ YYYYY@hoge.com
 ### Visual Studio Code 拡張機能のインストール
 
 Visual Studio Code の [ファイル] メニューから [ワークスペースを開く] を選択します。
-クローンしたディレクトリ内にある maris.code-workspace ファイルを選択して開きます。
+クローンしたフォルダー内にある maris.code-workspace ファイルを選択して開きます。
 
 はじめてワークスペースを開いたとき、以下のようなダイアログが表示されるので、 [インストール] ボタンを押下します。
 

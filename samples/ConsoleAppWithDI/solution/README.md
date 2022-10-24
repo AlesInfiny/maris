@@ -64,22 +64,22 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 適当な名前でソリューションを作成してください。
 本稿では「MarisSamples.ConsoleApp」という名前のソリューションを作成した前提で解説します。
 
-### 必要なファイル・ディレクトリの配置
+### 必要なファイル・フォルダーの配置
 
-ソリューションファイルを配置したディレクトリを第 1 階層として、本サンプルに付属するファイル・ディレクトリを、以下のように配置します。
+ソリューションファイルを配置したフォルダーを第 1 階層として、本サンプルに付属するファイル・フォルダーを、以下のように配置します。
 
-| 第 1 階層                            | 第 2 階層                  | 備考                                     |
-| ------------------------------------ | -------------------------- | ---------------------------------------- |
-| src                                  |                            |                                          |
-|                                      | Maris.ConsoleApp.Core      | ディレクトリごと配置する                 |
-|                                      | Maris.ConsoleApp.Hosting   | ディレクトリごと配置する                 |
-|                                      | Maris.Testing              | ディレクトリごと配置する                 |
-| tests                                |                            |                                          |
-|                                      | Maris.ConsoleApp.UnitTests | ディレクトリごと配置する                 |
-|                                      | .editorconfig              | tests ディレクトリ内のファイルを配置する |
-| <作成したソリューションファイル>.sln |                            |                                          |
-| .editorconfig                        |                            |                                          |
-| stylecop.json                        |                            |                                          |
+| 第 1 階層                            | 第 2 階層                  | 備考                                   |
+| ------------------------------------ | -------------------------- | -------------------------------------- |
+| src                                  |                            |                                        |
+|                                      | Maris.ConsoleApp.Core      | フォルダーごと配置する                 |
+|                                      | Maris.ConsoleApp.Hosting   | フォルダーごと配置する                 |
+|                                      | Maris.Testing              | フォルダーごと配置する                 |
+| tests                                |                            |                                        |
+|                                      | Maris.ConsoleApp.UnitTests | フォルダーごと配置する                 |
+|                                      | .editorconfig              | tests フォルダー内のファイルを配置する |
+| <作成したソリューションファイル>.sln |                            |                                        |
+| .editorconfig                        |                            |                                        |
+| stylecop.json                        |                            |                                        |
 
 ### ソリューションへのファイル・プロジェクトの取り込み
 
@@ -265,7 +265,7 @@ ERROR(S):
 ```
 
 続いて起動パラメーターを指定して、作成したコマンドを実行してみます。
-ビルドした exe を直接実行する場合は、ビルドしたアプリケーションの出力されたディレクトリに移動し、以下のように実行します。
+ビルドした exe を直接実行する場合は、ビルドしたアプリケーションの出力されたフォルダーに移動し、以下のように実行します。
 
 ```plane
 C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net6.0>Maris.Samples.Cli.exe sample --loop-number 5
@@ -290,7 +290,7 @@ info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
       sample コマンドのホストの処理が終了コード 0 で完了しました。実行時間は 20 ms でした。
 ```
 
-`dotnet run` を利用して実行する場合は、コンソールアプリケーションプロジェクトのルートディレクトリに移動して、以下のように実行します。
+`dotnet run` を利用して実行する場合は、コンソールアプリケーションプロジェクトのルートフォルダーに移動して、以下のように実行します。
 
 ```plane
 C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli>dotnet run sample --loop-number 5
@@ -565,8 +565,8 @@ await app.RunAsync();
 
 - [ASP.NET Core の構成](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/configuration/)
 
-appsettings.json や appsettings.Development.json に設定する場合、これらのファイルがビルド成果物を出力するディレクトリにコピーされるよう csproj ファイルを設定してください。
-単純に json ファイルを追加しただけだと、ビルド成果物のディレクトリにファイルが配置されません。
+appsettings.json や appsettings.Development.json に設定する場合、これらのファイルがビルド成果物を出力するフォルダーにコピーされるよう csproj ファイルを設定してください。
+単純に json ファイルを追加しただけだと、ビルド成果物のフォルダーにファイルが配置されません。
 以下に設定例を示します。
 
 ```xml
