@@ -27,6 +27,25 @@
     },
     "ja-no-orthographic-variants": true,
     "@textlint-rule/require-header-id": true,
-    "@textlint-ja/no-synonyms": true
+    "@textlint-ja/no-synonyms": {
+      "allows": [
+        "アプリ",
+        "アプリケーション",
+        "以降",
+        "今後",
+        "完了",
+        "終了",
+        "使用",
+        "利用"
+      ],
+      "preferWords": [
+        "コミュニティ",
+        "サーバー",
+        "ユーザー"
+      ],
+      "allowAlphabet": true,
+      "allowNumber": false,
+      "allowLexeme": false
+    }
   }
 }
