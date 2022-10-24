@@ -20,7 +20,7 @@
       },
       "ja-no-mixed-period": {
         "periodMark": "。",
-        "allowPeriodMarks": ["\""],
+        "allowPeriodMarks": ["\"", "."],
         "allowEmojiAtEnd": false,
         "forceAppendPeriod": false
       }
