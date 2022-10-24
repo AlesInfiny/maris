@@ -1,4 +1,9 @@
-# .NET Framework にとどまることのリスク
+---
+title: .NET Fw のリスク
+description: .NET Framework にとどまり続けることで起こりうるリスクについて説明します。
+---
+
+# .NET Framework にとどまることのリスク {#top}
 
 最近の .NET ランタイムをめぐる動向を解説したうえで、.NET Framework にとどまり続けることで起こりうるリスクについて説明します。
 
