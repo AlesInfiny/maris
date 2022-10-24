@@ -20,7 +20,7 @@
       },
       "ja-no-mixed-period": {
         "periodMark": "。",
-        "allowPeriodMarks": ["\""],
+        "allowPeriodMarks": ["\"", "."],
         "allowEmojiAtEnd": false,
         "forceAppendPeriod": false
       }
@@ -35,6 +35,8 @@
         "今後",
         "完了",
         "終了",
+        "記憶",
+        "メモリ",
         "使用",
         "利用"
       ],

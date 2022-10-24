@@ -1,29 +1,31 @@
 ---
+title: Maris OSS 版にようこそ
+description: Maris OSS 版の概要を説明します。
 hide:
   - navigation
 ---
 
-# Maris OSS 版にようこそ
+# Maris OSS 版にようこそ {#top}
 
-## Maris OSS 版とは { #what-is-maris-oss-version }
+## Maris OSS 版とは {#what-is-maris-oss-version}
 
-Maris OSS 版は、 .NET アプリケーションの基本アーキテクチャを実装したサンプルアプリケーションと、その開発ガイドで構成されています。
+Maris OSS 版は、 .NET アプリケーションの一般的なアーキテクチャを実装したサンプルアプリケーションと、その開発ガイドで構成されています。
 エンタープライズシステムに求められるアプリケーション構造を誰でも無償で手に入れることができます。
 Maris OSS 版の提供物は以下の通りです。
 
 - システム形態別の標準的なアプリケーションアーキテクチャ
-- 利用頻度の高い有用な OSS ライブラリ／フレームワークをベースとしたサンプルアプリケーションとその解説
+- 利用頻度の高い有用な OSS ライブラリ／フレームワークを基盤としたサンプルアプリケーションおよびその解説
 - アプリケーション開発環境／プロジェクト初期構築までのチュートリアル
 - 実現したい要件別のサンプルコード、および実現方式の解説
 
 Maris OSS 版は、商用のエンタープライズシステム開発から個人開発の小規模なシステムまで、 Apache License, Version 2.0 にて無償で利用可能です。
 ライセンスについての詳細は「[利用規約 - ライセンス](terms/index.md#license)」を参照してください。
 
-## クイックスタート { #quick-start }
+## クイックスタート {#quick-start}
 
 Maris OSS 版で構築した Web アプリケーションのサンプルを手元で動かしながら確認いただけます。
 
-1. 以下を参照し、開発環境の構築を行ってください
+1. 以下を参照し、開発環境を構築してください
 
     - 「[ローカル開発環境の構築](guidebooks/how-to-develop/local-environment/index.md)」
 
@@ -50,7 +52,7 @@ Maris OSS 版で構築した Web アプリケーションのサンプルを手�
 
 1. Visual Studio で「dressca\\dressca-backend\\Dressca.sln」を開き、ソリューションをビルドします。
 
-1. データベースの構築を行います。
+1. データベースを構築します。
    コマンドプロンプトを開き、「dressca\\dressca-backend\\src\\Dressca.EfInfrastructure」に移動して以下のコマンドを実行します。
 
     ```winbatch title="SQL Server のデータベース構築"
