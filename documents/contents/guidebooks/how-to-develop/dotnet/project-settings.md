@@ -61,12 +61,12 @@ Maris OSS 版では、プロダクションコード用のプロジェクトと�
 
 #### .editorconfig ファイルの配置 {#editorconfig-placement}
 
-.editorconfig ファイルを追加すると、ファイルを配置したディレクトリと、その配下のディレクトリすべての該当ファイルに設定値が適用されます。
-.editorconfig の設定を下位ディレクトリでオーバーライドできます。
-オーバーライド設定を記述した .editorconfig ファイルを適用したいディレクトリに配置すると、それ以下のディレクトリでオーバーライドした設定が有効になります。
+.editorconfig ファイルを追加すると、ファイルを配置したフォルダーと、その配下のフォルダーすべての該当ファイルに設定値が適用されます。
+.editorconfig の設定を下位フォルダーでオーバーライドできます。
+オーバーライド設定を記述した .editorconfig ファイルを適用したいフォルダーに配置すると、それ以下のフォルダーでオーバーライドした設定が有効になります。
 
-Maris OSS 版の標準的な構成では、ソリューションルートのディレクトリに、アプリケーション全体のコーディングスタイルを設定した .editorconfig ファイルを配置します。
-tests ディレクトリには、テストコード専用の設定をするための .editorconfig ファイルを作成して全体の設定をオーバーライドします。
+Maris OSS 版の標準的な構成では、ソリューションルートのフォルダーに、アプリケーション全体のコーディングスタイルを設定した .editorconfig ファイルを配置します。
+tests フォルダーには、テストコード専用の設定をするための .editorconfig ファイルを作成して全体の設定をオーバーライドします。
 
 .editorconfig ファイルについての詳細は「 [EditorConfig で移植可能なカスタム エディター設定を作成する](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options)」を参照してください。
 
@@ -76,10 +76,10 @@ tests ディレクトリには、テストコード専用の設定をするた�
 ルールの設定も Visual Studio を用いると、 GUI 上で設定変更できます。
 詳細な手順は「 [EditorConfig ファイルの追加と削除](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options#add-and-remove-editorconfig-files)」を参照してください。
 
-tests ディレクトリに配置するテストコード専用の設定は、原則コード分析ルールの設定のみ行います。
+tests フォルダーに配置するテストコード専用の設定は、原則コード分析ルールの設定のみ行います。
 以下に設定例を示します。
 
-```ini title="tests ディレクトリに配置する .editorconfig の例"
+```ini title="tests フォルダーに配置する .editorconfig の例"
 [*.cs]
 # Wrapping preferences
 dotnet_diagnostic.SA0001.severity=none
@@ -99,8 +99,8 @@ dotnet_diagnostic.SA1600.severity=none
 
 !!! tip "自動生成コードの静的コード解析"
     Visual Studio や .NET CLI など、コード自動生成機能が生成したコードに対する静的コード解析は原則実施しません。
-    .editorconfig ファイルはディレクトリ単位でのルール設定が可能であるため、自動生成するコードと自分で実装するコードのディレクトリを分割しておくことを推奨します。
-    自動生成したコードを配置するディレクトリには、以下のようにすべての解析ルールを無効に設定した .editorconfig を配置します。
+    .editorconfig ファイルはフォルダー単位でのルール設定が可能であるため、自動生成するコードと自分で実装するコードのフォルダーを分割しておくことを推奨します。
+    自動生成したコードを配置するフォルダーには、以下のようにすべての解析ルールを無効に設定した .editorconfig を配置します。
 
     ```ini
     [*.cs]
@@ -125,9 +125,7 @@ StyleCop Analyzers は [NuGet パッケージ](https://www.nuget.org/packages/St
 StyleCop Analyzers を用いて静的コード解析したいプロジェクトから参照設定を行ってください。
 通常はすべてのプロジェクトから参照するように設定します。
 
-<!-- textlint-disable ja-technical-writing/ja-no-mixed-period -->
 !!! warning "StyleCop Analyzers のバージョンに注意"
-    <!-- textlint-enable ja-technical-writing/ja-no-mixed-period -->
 
     .NET 6 以降利用できるようになった[ファイルスコープ名前空間](https://docs.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace)を利用する場合、 StyleCop Analyzers 1.2.0 以降 ( Pre-release 版も可 ) を使用してください。
     1.1.118 では正常に解析が行われません。
@@ -136,7 +134,7 @@ StyleCop Analyzers を用いて静的コード解析したいプロジェクト�
 
 StyleCop Analyzers は、 stylecop.json ファイルを用いてコーディングルールを設定します。
 stylecop.json にはソリューション内のすべてのコードに対して適用すべきコーディングルールを設定します。
-stylecop.json ファイルはソリューション内にひとつだけ作成し、ソリューションファイルと同じディレクトリに配置します。
+stylecop.json ファイルはソリューション内にひとつだけ作成し、ソリューションファイルと同じフォルダーに配置します。
 stylecop.json の設定方法については[公式ドキュメント](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md)を参照してください。
 
 ??? example "stylecop.json の設定例"
@@ -192,7 +190,7 @@ stylecop.json の設定方法については[公式ドキュメント](https://g
 
 #### プロジェクトから stylecop.json を参照する {#reference-stylecop-json-from-project}
 
-stylecop.json は、各プロジェクトのルートディレクトリにあるかのように設定しなければなりません。
+stylecop.json は、各プロジェクトのルートフォルダーにあるかのように設定しなければなりません。
 同時にコーディングルールの管理負荷軽減のため、 stylecop.json を各プロジェクトに分散配置せず、ソリューション内にひとつだけ配置することが望まれます。
 これらを両立するため、各プロジェクトからは、ソリューションルートに配置した stylecop.json をリンクとしてプロジェクトに追加しましょう。
 また Visual Studio のソリューションエクスプローラーを利用して、 stylecop.json ファイルの [ビルドアクション] プロパティを [C# アナライザー追加ファイル] に設定します。
@@ -224,7 +222,7 @@ stylecop.json は、各プロジェクトのルートディレクトリにある
 ![メッセージリソースの配置](../../../images/guidebooks/how-to-develop/dotnet/resx-placement-dark.png#only-dark){ loading=lazy align=right }
 
 プロダクションコード用のプロジェクト内で使用するメッセージを管理するために、リソースファイルを追加しましょう。
-プロダクションコード用のプロジェクトに [Resources] ディレクトリを追加し、その中に [Messages.resx] ファイルを追加します。
+プロダクションコード用のプロジェクトに [Resources] フォルダーを追加し、その中に [Messages.resx] ファイルを追加します。
 例外メッセージやログメッセージなど、プロジェクト内で使用するメッセージは、すべてこのリソースファイルに集約して管理します。
 
 リソースファイルの作成は、 Visual Studio を用いるのが最も簡単です。
@@ -235,7 +233,7 @@ Visual Studio を用いてリソースファイルを作成すると、リソー
 リソースの公開範囲は `#!csharp internal` にすることを推奨します。
 同じメッセージが複数のプロジェクトで使われる場合も、プロジェクトごとにリソースを管理しましょう。
 
-!!! note "同じメッセージが複数のプロジェクトで必要になるケース"
+!!! note "同じメッセージが複数のプロジェクトで必要になるパターン"
     同じようなメッセージが複数のプロジェクトで必要になった場合は、そのメッセージを使用する処理を共通処理として抽出できないか検討しましょう。
     通常メッセージは何かの事象に対して 1 つ設定されます。
     仮に同じメッセージを複数の場所で使うことになるのであれば、同じ処理が複数の場所にコピーされている可能性が考えられます。

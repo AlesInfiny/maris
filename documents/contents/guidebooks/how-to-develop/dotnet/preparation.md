@@ -17,7 +17,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 ローカル開発環境で使用する SQL Server は、原則として SQL Server Express LocalDB ( 以降 LocalDB ) を使用します。
 LocalDB は SQL Server の様々なエディションのインストーラーに付属しているほか、 Visual Studio のインストーラーにも付属しています。
-「[ローカル開発環境の構築](../../how-to-develop/local-environment/index.md)」の手順を実施すれば、インストールされます。
+「[ローカル開発環境の構築](../../how-to-develop/local-environment/index.md)」の手順を実行すれば、インストールされます。
 
 !!! note "ローカル開発環境で使用する SQL Server のエディション"
     SQL Server LocalDB を利用すると、コンピューターリソースを節約しながら、データベースを用いた開発ができます。

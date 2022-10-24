@@ -37,7 +37,7 @@ Maris OSS 版として、アプリケーション形態ごとに標準的なア�
 ### Web アプリケーション ( クライアントサイドレンダリング ) {#client-side-rendering}
 
 Vue.js を用いた SPA の構成をとります。
-サーバーサイドは .NET 6 以降をベースとした ASP.NET Core の Web API アプリケーションです。
+サーバーサイドは .NET 6 以降の ASP.NET Core の Web API アプリケーションです。
 データアクセスには Entity Framework Core を利用します。
 
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
@@ -60,13 +60,13 @@ Maris OSS 版では、 1 サブシステム 1 ソリューションを基本と�
 ただし、複数サブシステム ( 複数ソリューション ) で共用する共通機能を作成する場合は、必要に応じてソリューション分割を検討してください。
 
 ビルド時間が長すぎる場合や、開発者の PC スペックがソリューションの大きさに耐えられない場合は、ソリューションフィルターの機能を活用しましょう。
-単一ソリューションを保ちながら、プロジェクト単位でフィルター処理を行うことができます。
+1 ソリューションを保ちながら、プロジェクト単位でフィルター処理を行うことができます。
 
 [Visual Studio のフィルター処理済みソリューション - ソリューション フィルター ファイル](https://docs.microsoft.com/ja-jp/visualstudio/ide/filtered-solutions?view=vs-2022#solution-filter-files)
 
 ### プロジェクトの単位 {#unit-of-project}
 
-プロジェクトは、原則として機能単位、レイヤー単位で分割することを推奨します。
+プロジェクトは、原則として機能単位、層単位で分割することを推奨します。
 プロジェクトの分割にあたっては、以下の手順で分割を検討してください。
 
 1. 業務分割、機能分割
@@ -99,8 +99,8 @@ Maris OSS 版では、 1 サブシステム 1 ソリューションを基本と�
 
 1. 業務 / 機能をプロジェクト構造に当てはめる
 
-    プロジェクトは原則として業務 / 機能で分割してから、レイヤー分割します。
-    アプリケーションをマイクロサービス化しないのであれば、エントリーポイントのプロジェクトは単一プロジェクトとすることを推奨します。
+    プロジェクトは原則として業務 / 機能で分割してから、層で分割します。
+    アプリケーションをマイクロサービス化しないのであれば、エントリーポイントのプロジェクトは 1 プロジェクトとすることを推奨します。
 
     ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-light.png#only-light){ loading=lazy }
     ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-dark.png#only-dark){ loading=lazy }

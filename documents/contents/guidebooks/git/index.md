@@ -17,6 +17,6 @@ description: Git リポジトリの構築に関するガイドラインを示し
 
     Git リポジトリの構造として「mono-repo」「poly-repo」をどう使い分けるか説明します。
 
-1. [ディレクトリ構造の検討](consider-directory-structure.md)
+1. [フォルダー構造の検討](consider-folder-structure.md)
 
-    主に mono-repo の Git リポジトリを対象として、リポジトリ内のディレクトリ構造をどうすべきか解説します。
+    主に mono-repo の Git リポジトリを対象として、リポジトリ内のフォルダー構造をどうすべきか解説します。

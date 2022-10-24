@@ -19,18 +19,18 @@ Git リポジトリの構築については、以下を参照してください�
 ソリューション全体構造の概略は「[アプリケーションアーキテクチャ概要編 - ソリューション構造](../../../app-architecture/overview/index.md#solution-structure)」を参照してください。
 本節では、単一のソリューション内の構造について、更に詳細に解説します。
 
-### ソリューション構成と物理ディレクトリの関係 {#solution-and-physical-directory-relationships}
+### ソリューション構成と物理フォルダーの関係 {#solution-and-physical-folder-relationships}
 
-Visual Studio でソリューションを開いたとき、ソリューションエクスプローラーに表示される構造と、物理的なディレクトリの構造は合致しないことがあります。
+Visual Studio でソリューションを開いたとき、ソリューションエクスプローラーに表示される構造と、物理的なフォルダーの構造は一致しないことがあります。
 不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー](https://docs.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder)」の存在です。
 
 ソリューションフォルダーは、 Visual Studio のソリューションエクスプローラー内にのみ存在する仮想的なフォルダーです。
-Maris OSS 版では、ソリューションフォルダーと物理的なディレクトリを完全に一致させて管理することを推奨します。
+Maris OSS 版では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
 ソリューションエクスプローラー内の配置と、物理的な配置を一致させることで、ファイルの検索性が大きく向上します。
 
 ### ソリューションファイルの作成 {#create-solution-file}
 
-バックエンドアプリケーションを配置するディレクトリ内に、 Visual Studio を利用して[空のソリューションファイルを作成](https://docs.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions)します。
+バックエンドアプリケーションを配置するフォルダー内に、 Visual Studio を利用して[空のソリューションファイルを作成](https://docs.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions)します。
 ソリューションファイルの名前は、以下のいずれかのパターンに従って命名します。
 
 | #   | パターン                                   |
@@ -48,34 +48,34 @@ Maris OSS 版では、ソリューションフォルダーと物理的なディ�
 会社名やシステム名、サブシステム名は、略称や開発コードネームを付与してもかまいません。
 開発メンバーの共通認識の取れる適切な単語や略語があれば、それを利用して文字数が削減できないか検討してください。
 
-### ソリューションフォルダーと物理ディレクトリの作成 {#create-solution-folder-and-directory}
+### ソリューションフォルダーと物理フォルダーの作成 {#create-solution-folder-and-physical-folder}
 
-![ソリューションの物理ディレクトリ構造](../../../images/guidebooks/how-to-develop/dotnet/solution-root-directories-light.png#only-light){ loading=lazy align=right }
-![ソリューションの物理ディレクトリ構造](../../../images/guidebooks/how-to-develop/dotnet/solution-root-directories-dark.png#only-dark){ loading=lazy align=right }
+![ソリューションの物理フォルダー構造](../../../images/guidebooks/how-to-develop/dotnet/solution-root-folders-light.png#only-light){ loading=lazy align=right }
+![ソリューションの物理フォルダー構造](../../../images/guidebooks/how-to-develop/dotnet/solution-root-folders-dark.png#only-dark){ loading=lazy align=right }
 
 ソリューション内は、本番環境に配置するソースコード ( 以降プロダクションコード ) と、テストに使用するソースコード ( 以降テストコード ) を分割して配置します。
-まずソリューションファイルを配置したディレクトリに「src」ディレクトリと「tests」ディレクトリを作成します。
-src ディレクトリにはプロダクションコードを、 tests ディレクトリにはテストコードを配置していきます。
+まずソリューションファイルを配置したフォルダーに「src」フォルダーと「tests」フォルダーを作成します。
+src フォルダーにはプロダクションコードを、 tests フォルダーにはテストコードを配置していきます。
 
-この物理ディレクトリと対応するように、 Visual Studio のソリューションエクスプローラー上で「src」ソリューションフォルダーと「tests」ソリューションフォルダーを作成します。
-この後作成するプロジェクトやソースコードは、 src ソリューションフォルダーまたは tests ソリューションフォルダーに物理ディレクトリと同じように配置します。
+この物理フォルダーと対応するように、 Visual Studio のソリューションエクスプローラー上で「src」ソリューションフォルダーと「tests」ソリューションフォルダーを作成します。
+この後作成するプロジェクトやソースコードは、 src ソリューションフォルダーまたは tests ソリューションフォルダーに物理フォルダーと同じように配置します。
 
-!!! note "プロダクションコードとテストコードのディレクトリを最初に分割する理由"
+!!! note "プロダクションコードとテストコードのフォルダーを最初に分割する理由"
     .NET アプリケーションの開発では、静的コード分析やコーディングルールの設定に [.editorconfig ファイル](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options) を用います。
-    .editorconfig ファイルは、ファイルを配置したディレクトリ以下すべてのファイルに対して、設定した値が影響を与えます。
-    プロダクションコードとテストコードでは、コーディングルールの厳しさに濃淡をつけることが一般的です[^1]。
-    そのため、プロダクションコードを配置するディレクトリとテストコードを配置するディレクトリを最初に分類しておくことで、各コード向けの .editorconfig ファイルの適用が簡単になります。
+    .editorconfig ファイルは、ファイルを配置したフォルダー以下すべてのファイルに対して、設定した値が影響を与えます。
+    プロダクションコードとテストコードでは、通常コーディングルールの厳しさに濃淡をつけます[^1]。
+    そのため、プロダクションコードを配置するフォルダーとテストコードを配置するフォルダーを最初に分類しておくことで、各コード向けの .editorconfig ファイルの適用が簡単になります。
 
 ## プロジェクト配置の定義 {#define-project}
 
-src ディレクトリ、 tests ディレクトリには、プロジェクトを格納するディレクトリをフラットに並べます。
-プロジェクトを格納するディレクトリは、各プロジェクトのルート名前空間の名前を付けます。
+src フォルダー、 tests フォルダーには、プロジェクトを格納するフォルダーをフラットに並べます。
+プロジェクトを格納するフォルダーは、各プロジェクトのルート名前空間の名前を付けます。
 これは通常プロジェクト名と一致します。
 
-src ディレクトリにどのようなプロジェクトを作成するかは、採用するアーキテクチャや、業務の構造・規模にあわせて柔軟に検討します。
+src フォルダーにどのようなプロジェクトを作成するかは、採用するアーキテクチャや、業務の構造・規模にあわせて柔軟に検討します。
 詳細は「[アプリケーションアーキテクチャ概要編 - プロジェクトの単位](../../../app-architecture/overview/index.md#unit-of-project)」を参照してください。
-tests ディレクトリ内は、テストの目的にあわせてテストプロジェクトを分割しましょう。
-単体機能確認、結合機能確認、性能検査などが、よくあるテストプロジェクトの分割単位です。
+tests フォルダー内は、テストの目的にあわせてテストプロジェクトを分割しましょう。
+単体機能確認、結合機能確認、性能確認などが、よくあるテストプロジェクトの分割単位です。
 
 プロジェクトの数が多くなりすぎると、単一のソリューションで開発を進めるのが困難になります。
 その場合は、[ソリューションフィルター](https://docs.microsoft.com/ja-jp/visualstudio/msbuild/solution-filters#solution-filter-files)を用いて業務や機能の単位でプロジェクトをフィルタリングします。
