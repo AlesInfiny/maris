@@ -10,7 +10,7 @@ ASP.NET Core with Vite プロジェクトには、フロントエンドのアプ
 ## ASP.NET Core Web API の設定 {#setup-asp-net-core-web-api}
 
 ASP.NET Core with Vite プロジェクトは、 ASP.NET Core Web API プロジェクトと同じ Web API 向け構成を組みこみます。
-[ASP.NET Core Web API プロジェクトの構成](./configure-asp-net-core-web-api-project.md) を参照し、設定を実施してください。
+[ASP.NET Core Web API プロジェクトの構成](./configure-asp-net-core-web-api-project.md) を参照し、設定してください。
 
 ## フロントエンドアプリケーションの配置変更 {#change-frontend-app-placement}
 

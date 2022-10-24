@@ -27,7 +27,7 @@ Maris OSS 版として推奨する設定や、共通的に使用する実装コ�
 
 1. [プロジェクト構造の作成](./create-project-structure.md)
 
-    プロジェクト内のディレクトリ構造について全体的な方針を示します。
+    プロジェクト内のフォルダー構造について全体的な方針を示します。
 
 1. [ASP.NET Core Web API プロジェクトの構成](./configure-asp-net-core-web-api-project.md)
 

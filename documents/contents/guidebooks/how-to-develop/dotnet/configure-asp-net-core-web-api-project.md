@@ -240,7 +240,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 ### 未処理例外発生時の例外ハンドラーを設定 {#setup-exception-handler}
 
 未処理の例外が ASP.NET Core のランタイムまで到達した場合、[先ほど](#create-error-controller)作成したエラー情報を取得できるコントローラーを呼び出すようランタイムを構成します。
-開発環境ではスタックトレース込みのエラー情報を返す処理を登録します。
+開発環境ではスタックトレース込みのエラー情報を返却する処理を登録します。
 それ以外の環境ではスタックトレースを返さない処理を登録します。
 
 ??? example "例外ハンドラーの登録例"
@@ -259,9 +259,9 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     }
     ```
 
-## HTTP 400 応答時のログ出力 {#logging-on-http-400}
+## HTTP 400 時のログ出力 {#logging-on-http-400}
 
-Web API から HTTP 400 の応答を返却する際、問題の原因となった入力値の情報をログに記録しましょう。
+Web API から HTTP 400 のレスポンスを返却する際、問題の原因となった入力値の情報をログに記録しましょう。
 入力値検証などのエラー情報をサーバー側でロギングでき、障害発生時の追跡性を高めることができます。
 
 ??? example "HTTP 400 の場合ログを出力する実装例"
@@ -269,7 +269,7 @@ Web API から HTTP 400 の応答を返却する際、問題の原因となっ�
     HTTP レスポンスは、 ASP.NET Core の既定の実装を使って返却するようにします。
     ASP.NET Core Web API プロジェクトの [Program.cs] または [Startup.cs] に、以下のように実装を加えてください。
 
-    ```csharp title="HTTP 400 応答時のログ出力設定 ( Program.cs )"
+    ```csharp title="HTTP 400 時のログ出力設定 ( Program.cs )"
     builder.Services
         .AddControllers()
         .ConfigureApiBehaviorOptions(options =>
@@ -299,7 +299,7 @@ Web API アプリケーションの入出力は、 HTTP 通信の形式になり
 ??? example "HTTP 通信ログを出力する実装例"
     HTTP 通信ログの出力は、 ASP.NET Core のミドルウェアを用いて実現します。
     通常開発者がログ出力処理を記述する必要はありません。
-    開発環境でのみ HTTP 通信ログが出力されるよう ASP.NET Core ランタイムを組み立てます。
+    開発環境でのみ HTTP 通信ログが出力されるよう ASP.NET Core ランタイムを構成します。
     ASP.NET Core Web API プロジェクトの [Program.cs] または [Startup.cs] に、以下の 2 つの実装を加えてください。
 
     ```csharp title="HTTP 通信ログ出力設定 1 ( Program.cs )"
