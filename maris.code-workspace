@@ -46,6 +46,7 @@
             "typeof",
             "typeparam",
             "typeparamref",
+            "Vetur",
             "vite",
             "winbatch",
             "xunit"
