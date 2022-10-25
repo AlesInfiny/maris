@@ -176,7 +176,7 @@ module.exports = {
 
 ## 静的コード分析とフォーマットの実行 {#static-code-analysis-and-format}
 
-```./package.json``` に ESLint 用の script がデフォルトで追加されています。ここに Stylelint も同時に実行するようにコマンドを追加します。追加後の scripts は以下のようになります（関係のないコマンドは省略しています）。
+```./package.json``` に ESLint を実行するための script がデフォルトで追加されています。ここに Stylelint も同時に実行するようにコマンドを追加します。追加後の scripts は以下のようになります（関係のないコマンドは省略しています）。
 
 ```json
 "scripts": {
