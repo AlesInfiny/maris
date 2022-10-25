@@ -121,13 +121,13 @@ Vue.js のブランクプロジェクト作成時に ESLint と Prettier をそ�
 
 Stylelint および、標準の設定や vue ファイルで使用する設定等をインストールします。サンプルアプリケーションでは以下をインストールしています。
 
-| パッケージ名                      | 使用目的 |
-|----------------------------------|----------|
-|stylelint                         |cssファイルの構文検証|
-|stylelint-config-standard         |Stylelint の標準設定|
-|stylelint-config-prettier         |Stylelint の Ptettier 向け設定|
-|stylelint-config-recommended-vue  |Stylelint の .vue ファイル向け推奨設定|
-|stylelint-prettier                |Stylelint と Prettier の連携プラグイン|
+| パッケージ名                     | 使用目的                               |
+| -------------------------------- | -------------------------------------- |
+| stylelint                        | cssファイルの構文検証                  |
+| stylelint-config-standard        | Stylelint の標準設定                   |
+| stylelint-config-prettier        | Stylelint の Ptettier 向け設定         |
+| stylelint-config-recommended-vue | Stylelint の .vue ファイル向け推奨設定 |
+| stylelint-prettier               | Stylelint と Prettier の連携プラグイン |
 
 ```terminal
 npm install -D stylelint \
@@ -166,13 +166,13 @@ module.exports = {
 };
 ```
 
-|プロパティ  |説明|
-|-----------|---|
-|plugins    |使用する外部のプラグインを宣言します。|
-|extends    |既存の構成を拡張します。|
-|rules      |使用するルールを宣言します。|
-|ignoreFiles|分析の対象外とするファイルまたはフォルダーを設定します。|
-|overrides  |特定のファイルにのみ別のルールを設定したい場合に使用します。|
+| プロパティ  | 説明                                                         |
+| ----------- | ------------------------------------------------------------ |
+| plugins     | 使用する外部のプラグインを宣言します。                       |
+| extends     | 既存の構成を拡張します。                                     |
+| rules       | 使用するルールを宣言します。                                 |
+| ignoreFiles | 分析の対象外とするファイルまたはフォルダーを設定します。     |
+| overrides   | 特定のファイルにのみ別のルールを設定したい場合に使用します。 |
 
 ## 静的コード分析とフォーマットの実行 {#static-code-analysis-and-format}
 
