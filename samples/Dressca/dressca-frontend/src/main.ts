@@ -13,6 +13,12 @@ import { authenticationGuard } from '@/shared/authentication/authentication-guar
 const app = createApp(App);
 const pinia = createPinia();
 
+app.config.errorHandler = (err: unknown, vm, info) => {
+  // エラーに対する処理
+  console.log(err, vm, info);
+  router.replace({ name: 'error' });
+};
+
 pinia.use(({ store }) => {
   store.router = markRaw(router);
 });

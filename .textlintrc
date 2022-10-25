@@ -1,0 +1,78 @@
+{
+  "filters": {
+    "comments": true
+  },
+  "rules": {
+    "preset-ja-spacing": {
+      "ja-space-between-half-and-full-width": {
+        "space": "always",
+        "exceptPunctuation": false
+      },
+      "ja-no-space-around-parentheses": false  
+    },
+    "preset-ja-technical-writing": {
+      "no-exclamation-question-mark": false,
+      "sentence-length": {
+        "max": 120
+      },
+      "max-kanji-continuous-len": {
+        "max": 8
+      },
+      "ja-no-mixed-period": {
+        "periodMark": "。",
+        "allowPeriodMarks": ["\"", "."],
+        "allowEmojiAtEnd": false,
+        "forceAppendPeriod": false
+      }
+    },
+    "ja-no-orthographic-variants": true,
+    "@textlint-rule/require-header-id": true,
+    "@textlint-ja/no-synonyms": {
+      "allows": [
+        "アプリ",
+        "アプリケーション",
+        "以降",
+        "運用",
+        "エディション",
+        "行う",
+        "完結",
+        "完了",
+        "記憶",
+        "規則",
+        "検査",
+        "今後",
+        "作成",
+        "使用",
+        "終了",
+        "済む",
+        "即時",
+        "チェック",
+        "作る",
+        "名前",
+        "パラメーター",
+        "開く",
+        "変数",
+        "名",
+        "メソッド",
+        "メモリ",
+        "呼び出し",
+        "呼び出す",
+        "利用",
+        "ルール",
+        "ログ"
+      ],
+      "preferWords": [
+        "インターフェース",
+        "コミュニティ",
+        "サーバー",
+        "層",
+        "パラメーター",
+        "フォルダー",
+        "ユーザー"
+      ],
+      "allowAlphabet": true,
+      "allowNumber": false,
+      "allowLexeme": false
+    }
+  }
+}

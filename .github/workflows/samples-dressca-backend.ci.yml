@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths:
       - 'samples/Dressca/dressca-backend/**'
+      - '.github/workflows/samples-dressca-backend.ci.yml'
   workflow_dispatch:
 
 defaults:
@@ -40,4 +41,17 @@ jobs:
         run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: 単体テストの実行
-        run: dotnet test --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}
+        run: |
+          dotnet add tests/Dressca.UnitTests/Dressca.UnitTests.csproj package coverlet.msbuild
+          dotnet test --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov > testResult.txt
+          echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/Done/,/Elapsed/p' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '# Test Result :memo:' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/A total of/,/Passed/p' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          echo '# Coverage :triangular_ruler:' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/+----------------------------------+--------+--------+--------+/,/+---------+--------+--------+--------+/p' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '/+----------------------------------+--------+--------+--------+/d' | sed -e 's/|//' | sed -e 's/|*$//g' | sed -e '1d' | sed -e '1i --------------------------|--------|--------|------------------' | sed -e '1i Module | Line | Branch | Method' >> $GITHUB_STEP_SUMMARY
+          echo '' >> $GITHUB_STEP_SUMMARY
+          cat testResult.txt | sed -n -e '/+---------+--------+--------+--------+/,/Average/p' | sed -e '1,2d' | sed -e '/+---------+--------+--------+--------+/d' | sed -e 's/|//' | sed -e 's/|*$//g' | sed -e '1i ----------|--------|--------|---------' | sed -e '1i --- | Line | Branch | Method' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '$d' | sed -e '$d' >> $GITHUB_STEP_SUMMARY
+        

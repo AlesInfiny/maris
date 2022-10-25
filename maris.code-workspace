@@ -1,42 +1,68 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"tableformatter.common.centerAlignedHeader": false,
-		"cSpell.words": [
-			"appsettings",
-			"ASMX",
-			"ASPNETCore",
-			"BIPROGY",
-			"Blazor",
-			"drawio",
-			"dressca",
-			"mkdocs",
-			"Newtonsoft",
-			"Noto",
-			"nswag",
-			"Pymarkdown",
-			"Remoting",
-			"resx",
-			"SaaS",
-			"seealso",
-			"struct",
-			"StyleCop",
-			"Swashbuckle",
-			"vite",
-			"winbatch",
-			"xunit"
-		]
-	},
-	"extensions": {
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "tableformatter.common.centerAlignedHeader": false,
+        "cSpell.ignorePaths": [
+            "maris.code-workspace",
+            "package.json",
+            "package-lock.json",
+            "**/node_modules/**",
+            "**/build-artifacts/**",
+            ".vscode",
+        ],
+        "cSpell.words": [
+            "appsettings",
+            "ASMX",
+            "ASPNETCore",
+            "BIPROGY",
+            "Blazor",
+            "cref",
+            "drawio",
+            "dressca",
+            "EditorBrowsable",
+            "inheritdoc",
+            "langword",
+            "linenums",
+            "mkdocs",
+            "nameof",
+            "Newtonsoft",
+            "Noto",
+            "nswag",
+            "paramref",
+            "pinia",
+            "Pymarkdown",
+            "Remoting",
+            "resx",
+            "SaaS",
+            "seealso",
+            "struct",
+            "StyleCop",
+            "Swashbuckle",
+            "textlint",
+            "typeof",
+            "typeparam",
+            "typeparamref",
+            "Vetur",
+            "vite",
+            "winbatch",
+            "xunit"
+        ],
+        "markdownlint.ignore": [
+            "LICENSE"
+        ]
+    },
+    "extensions": {
         "recommendations": [
-			"hediet.vscode-drawio",
-			"yzhang.markdown-all-in-one",
-			"davidanson.vscode-markdownlint",
-			"shuworks.vscode-table-formatter"
-		]
+            "bierner.markdown-mermaid",
+            "davidanson.vscode-markdownlint",
+            "hediet.vscode-drawio",
+            "shuworks.vscode-table-formatter",
+            "taichi.vscode-textlint",
+            "yzhang.markdown-all-in-one"
+        ]
     }
 }
