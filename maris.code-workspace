@@ -48,6 +48,7 @@
             "typeparam",
             "typeparamref",
             "viewmodel",
+            "Vetur",
             "vite",
             "winbatch",
             "xunit"
