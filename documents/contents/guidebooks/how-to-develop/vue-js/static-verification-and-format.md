@@ -1,10 +1,15 @@
-# 静的コード分析とフォーマット
+---
+title: Vue.js 開発手順
+description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
+---
 
-静的コード分析とフォーマットには、.editorconfig、ESLint、StyleLint、および Prettier を使用します。
+# 静的コード分析とフォーマット {#top}
 
-## .editorconfigの追加 ## {: #add-editorconfig }
+静的コード分析とフォーマットには .editorconfig 、 ESLint 、 StyleLint 、および Prettier を使用します。
 
-プロジェクトのルートフォルダーに [.editorconfig](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options) を追加することで、IDE (Visual Studio や VSCode) に対してコーディングルールを課すことが可能になります。サンプルアプリケーションでは、.editorconfig によって以下のようなルールを定義しています。
+## .editorconfigの追加 {#add-editorconfig}
+
+プロジェクトのルートフォルダーに [.editorconfig](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options) を追加することで、 IDE (Visual Studio や VSCode) に対してコーディングルールを課すことが可能になります。サンプルアプリケーションでは、.editorconfig によって以下のようなルールを定義しています。
 
 - エンコード（UTF-8 に設定）
 - 改行コード（LF に設定）
@@ -15,11 +20,11 @@
 
 .editorconfig の設定には、自動的に適用されるもの（例：エンコードや改行コード）と、違反すると IDE のエディター上に警告が表示されるもの（例：行末の空白）があります。
 
-## Prettier ## {: #prettier }
+## Prettier {#prettier}
 
 Prettier は Vue.js のブランクプロジェクト作成時にオプションとしてインストールしているため、追加でインストールする必要はありません。
 
-### Prettier の設定 ### {: #settings-prettier }
+### Prettier の設定 {#settings-prettier}
 
 Prettier の設定ファイルは初期状態では存在しないので、作成するところから始めます。
 
@@ -38,11 +43,11 @@ module.exports = {
 
 全ての設定可能な値は [公式ドキュメント](https://prettier.io/docs/en/options.html) を参照してください。
 
-## ESLint ## {: #eslint }
+## ESLint {#eslint}
 
 ESLint は Vue.js のブランクプロジェクト作成時にオプションとしてインストールしているため、追加でインストールする必要はありません。
 
-### ESLint の設定 ### {: #settings-eslint }
+### ESLint の設定 {#settings-eslint}
 
 設定ファイル ```./.eslintrc.cjs``` で行います。このファイルはインストール時に自動的に追加され、デフォルトでは以下のような内容になっています（ESLint バージョン 8.5.0 の場合）。
 
@@ -74,7 +79,7 @@ module.exports = {
 }
 ```
 
-この状態でも静的コード分析は可能ですが、postCSS の設定ファイルなど、分析する必要のないファイルまで分析対象となってしまうため、以下のように ignorePatterns を追加します（25行目）。
+この状態でも静的コード分析は可能ですが、 postCSS の設定ファイルなど、分析する必要のないファイルまで分析対象となってしまうため、以下のように ignorePatterns を追加します（25 行目）。
 
 ```javascript
 /* eslint-env node */
@@ -105,14 +110,14 @@ module.exports = {
 }
 ```
 
-### ESLint と Prettier の連携 ### {: #eslint-and-prettier }
+### ESLint と Prettier の連携 {#eslint-and-prettier}
 
-Vue.js のブランクプロジェクト作成時に ESLint と Prettier をそれぞれオプションとしてインストールした場合、ESLint と Prettier を連携させるプラグインが自動的にインストール・設定されます。
-したがって、ESLint と Prettier を連携させるための追加の設定は必要ありません。
+Vue.js のブランクプロジェクト作成時に ESLint と Prettier をそれぞれオプションとしてインストールした場合、 ESLint と Prettier を連携させるプラグインが自動的にインストール・設定されます。
+したがって、 ESLint と Prettier を連携させるための追加の設定は必要ありません。
 
-## StyleLint ## {: #stylelint }
+## StyleLint {#stylelint}
 
-### Stylelint のインストール ### {: #install-stylelint }
+### Stylelint のインストール {#install-stylelint}
 
 Stylelint および、標準の設定や vue ファイルで使用する設定等をインストールします。サンプルアプリケーションでは以下をインストールしています。
 
@@ -132,7 +137,7 @@ npm install -D stylelint \
   stylelint-prettier
 ```
 
-### StyleLint の設定 ### {: #settings-stylelint }
+### StyleLint の設定 {#settings-stylelint}
 
 プロジェクトのルートフォルダーに設定ファイル ```./.stylelintrc.js``` を作成し、コードを記述します。
 
@@ -166,12 +171,12 @@ module.exports = {
 |plugins    |使用する外部のプラグインを宣言します。|
 |extends    |既存の構成を拡張します。|
 |rules      |使用するルールを宣言します。|
-|ignoreFiles|分析の対象外とするファイルまたはディレクトリを設定します。|
+|ignoreFiles|分析の対象外とするファイルまたはフォルダーを設定します。|
 |overrides  |特定のファイルにのみ別のルールを設定したい場合に使用します。|
 
-## 静的コード分析とフォーマットの実行 ## {: #static-code-analysis-and-format }
+## 静的コード分析とフォーマットの実行 {#static-code-analysis-and-format}
 
-```./package.json``` に ESLint 用の script がデフォルトで追加されています。ここに Stylelint も同時に実行するようコマンドを追加します。追加後の scripts は以下のようになります（関係のないコマンドは省略しています）。
+```./package.json``` に ESLint 用の script がデフォルトで追加されています。ここに Stylelint も同時に実行するようにコマンドを追加します。追加後の scripts は以下のようになります（関係のないコマンドは省略しています）。
 
 ```json
 "scripts": {
@@ -179,7 +184,7 @@ module.exports = {
 }
 ```
 
-Stylelintを vue ファイルと css ファイルに対して実行するように設定しています。
+Stylelint を vue ファイルと css ファイルに対して実行するように設定しています。
 
 ターミナルを開き、コマンドを実行します。
 

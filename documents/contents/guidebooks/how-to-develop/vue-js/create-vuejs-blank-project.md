@@ -1,6 +1,11 @@
-# ブランクプロジェクトの作成
+---
+title: Vue.js 開発手順
+description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
+---
 
-## Vue.jsおよびオプションのインストール ## {: #install-vuejs-and-options }
+# ブランクプロジェクトの作成 {#top}
+
+## Vue.jsおよびオプションのインストール {#install-vuejs-and-options}
 
 以下のコマンドを実行して Vue.js をインストールします。
 
@@ -29,7 +34,7 @@ create-vue パッケージをインストールする必要があり、続行す
 √ Add Prettier for code formatting? ... Yes
 ```
 
-## ブランクプロジェクトのビルドと実行 ## {: #build-and-serve-blank-project }
+## ブランクプロジェクトのビルドと実行 {#build-and-serve-blank-project}
 
 以下のようにコマンドを実行し、必要なパッケージをインストールしてアプリケーションを実行します。
 
@@ -39,7 +44,7 @@ npm install
 npm run dev
 ```
 
-`npm run dev` が成功すると以下のように表示されるので、「Local:」に表示されたURLをブラウザーで表示します。ブランクプロジェクトのランディングページが表示されます。
+`npm run dev` が成功すると以下のように表示されるので、「 Local: 」に表示された URL をブラウザーで表示します。ブランクプロジェクトのランディングページが表示されます。
 
 ```terminal
 vite v2.7.7 dev server running at:
