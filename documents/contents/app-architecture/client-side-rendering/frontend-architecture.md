@@ -12,59 +12,59 @@ Maris OSS 版を構成する OSS を以下に示します。
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
 
-- [TypeScript](https://github.com/microsoft/TypeScript){ target=_blank }
+- [TypeScript :material-open-in-new:](https://github.com/microsoft/TypeScript){ target=_blank }
 
       JavaScript を拡張して静的型付にしたプログラミング言語。
 
-- [Vue.js](https://v3.ja.vuejs.org/){ target=_blank }
+- [Vue.js :material-open-in-new:](https://v3.ja.vuejs.org/){ target=_blank }
 
       シンプルな設計で拡張性の高い JavaScript のフレームワーク。
 
-- [Vite](https://ja.vitejs.dev/)
+- [Vite :material-open-in-new:](https://ja.vitejs.dev/){ target=_blank }
 
       ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。
 
-- [Pinia](https://pinia.vuejs.org/)
+- [Pinia :material-open-in-new:](https://pinia.vuejs.org/){ target=_blank }
 
       Vue.js 用の状態管理ライブラリ。
 
-- [Vue Router](https://router.vuejs.org/)
+- [Vue Router :material-open-in-new:](https://router.vuejs.org/){ target=_blank }
 
       Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。
 
-- [Axios](https://github.com/axios/axios)
+- [Axios :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
 
       Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
 
-- [VeeValidate](https://vee-validate.logaretm.com/v3/overview.html)
+- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/v3/overview.html){ target=_blank }
 
       Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
 
-- [yup](https://github.com/jquense/yup)
+- [yup :material-open-in-new:](https://github.com/jquense/yup){ target=_blank }
 
       JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
 
-- [Tailwind CSS](https://tailwindcss.jp/)
+- [Tailwind CSS :material-open-in-new:](https://tailwindcss.jp/){ target=_blank }
 
       utility class を使って独自のボタンなどを作成する CSS フレームワーク
 
-- [Prettier](https://prettier.io/)
+- [Prettier :material-open-in-new:](https://prettier.io/){ target=_blank }
 
       JavaScript, Vue, CSS, JSON などのコードフォーマッター。
 
-- [ESLint](https://typescript-eslint.io/)
+- [ESLint :material-open-in-new:](https://typescript-eslint.io/){ target=_blank }
 
       JavaScript の静的検証ツール。
 
-- [Stylelint](https://stylelint.io/)
+- [Stylelint :material-open-in-new:](https://stylelint.io/){ target=_blank }
 
       CSS の静的検証ツール。
 
-- [Vitest](https://vitest.dev/)
+- [Vitest :material-open-in-new:](https://vitest.dev/){ target=_blank }
 
       Vite 環境で動作する高速テスティングフレームワーク。
 
-- [Cypress](https://www.cypress.io/)
+- [Cypress :material-open-in-new:](https://www.cypress.io/){ target=_blank }
 
       E2E テストツール。
 
@@ -92,7 +92,8 @@ Maris OSS 版で採用している Vue.js のソフトウェア・アーキテ�
 
 :  ビジネスロジックとして状態管理やブラウザ外部との入出力を担います。モデルのビジネスロジックには、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。モデルは後述する Pinia のアーキテクチャに従って実装します。
 
-Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC)](https://v3.ja.vuejs.org/guide/single-file-component.html#単一ファイルコンポーネント) と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
+<!-- textlint-disable -->
+Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://v3.ja.vuejs.org/guide/single-file-component.html#単一ファイルコンポーネント){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
 
 ### ビュー＆ビューモデル コンポーネント {#view-and-viewmodel-component}
 
@@ -115,7 +116,7 @@ View がルーティングによって遷移される画面として指定され
 
 画面遷移には、 Vue Router という Vue.js の拡張ライブラリを利用します。 Vue Router はルーティング定義に基づいて遷移先の画面コンポーネントを特定し、表示する画面コンポーネントを切り替えることで画面遷移を実現します。 Vue Router による画面遷移はフロントエンドのみで完結するためバックエンドへ通信しません。また Maris OSS 版では、「View」を切り替えの単位としています。
 
-Vue Router : [公式ドキュメント](https://router.vuejs.org/introduction.html)
+Vue Router : [公式ドキュメント :material-open-in-new:](https://router.vuejs.org/introduction.html){ target=_blank }
 
 ![Vue Router によるルーティング](../../images/app-architecture/client-side-rendering/routing-by-vue-router-light.png#only-light){ loading=lazy }
 
@@ -141,7 +142,7 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 
 このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、 Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
 
-Pinia : [公式ドキュメント](https://pinia.vuejs.org/introduction.html)
+Pinia : [公式ドキュメント :material-open-in-new:](https://pinia.vuejs.org/introduction.html){ target=_blank }
 
 #### Storeの構成要素 {#store-structure}
 
@@ -167,13 +168,13 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 
 API の呼び出しは Action で行います。 Maris OSS 版では、 Promise ベースでリクエストの設定が容易な axios という OSS を利用します。
 
-axios : [github](https://github.com/axios/axios)
+axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
 
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
 Maris OSS 版では API 仕様を OpenAPI を用いて作成します。ここには API の機能が説明されており、フロントエンドエンジニアとバックエンドエンジニアの間で API 設計に乖離が生じないようにします。
 
-OpenAPI 仕様 : [公式ドキュメント](https://swagger.io/specification/)
+OpenAPI 仕様 : [公式ドキュメント :material-open-in-new:](https://swagger.io/specification/){ target=_blank }
 
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading-lazy }
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading-lazy }
@@ -256,7 +257,7 @@ src/
 !!! note "Atomic Design"
       Atomic Design とは UI の構成要素を 5 段階に分けてパーツ単位で UI デザインを設計する方法のことです。最も小さい単位である Atoms パーツを組み合わせた Molecules, さらにそれらを組み合わせた Organism, というように要素を細分化し、それらを組み合わせて画面を作成します。コンポーネントの再利用性やデザイン変更の反映のしやすさといったメリットがあります。
 
-      - [Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
+      - [Atomic Design by Brad Frost :material-open-in-new:](https://atomicdesign.bradfrost.com/){ target=_blank }
 
 ``` text title="components フォルダー by Atomic Design" linenums="0"
 src/
