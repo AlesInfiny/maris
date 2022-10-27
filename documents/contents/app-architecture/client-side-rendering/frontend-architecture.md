@@ -12,22 +12,61 @@ Maris OSS 版を構成する OSS を以下に示します。
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
 
-| 名称          | 説明                                                                               | ドキュメント |
-| ----          | ----                                                                              | ---- |
-| TypeScript    | JavaScript を拡張して静的型付にしたプログラミング言語。                               | [github](https://github.com/microsoft/TypeScript) |
-| Vue.js        | シンプルな設計で拡張性の高い JavaScript のフレームワーク。                            | [公式ドキュメント](https://v3.ja.vuejs.org/) |
-| Vite          | ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。 | [公式ドキュメント](https://ja.vitejs.dev/) |
-| Pinia         | Vue.js 用の状態管理ライブラリ。                                                     | [公式ドキュメント](https://pinia.vuejs.org/) |
-| Vue Router    | Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。                 | [公式ドキュメント](https://router.vuejs.org/) |
-| Axios         | Vue.js で非同期通信を行うためのプロミスベースのHTTPクライアント。                      | [github](https://github.com/axios/axios) |
-| VeeValidate   | Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。                        | [公式ドキュメント](https://vee-validate.logaretm.com/v3/overview.html) |
-| yup           | JavaScriptでフォームのバリデーションルールを宣言的に記述することのできるライブラリ。     | [github](https://github.com/jquense/yup) |
-| Tailwind CSS  | utility class を使って独自のボタンなどを作成する CSS フレームワーク                    | [公式ドキュメント](https://tailwindcss.jp/) |
-| Prettier      | JavaScript, Vue, HTML, CSS, JSON などのコードフォーマッター。                        | [公式ドキュメント](https://prettier.io/) |
-| ESLint        | JavaScript の静的検証ツール。                                                       | [公式ドキュメント](https://typescript-eslint.io/) |
-| Stylelint     | CSS の静的検証ツール。                                                               | [公式ドキュメント](https://stylelint.io/) |
-| Vitest        | Vite 環境で動作する高速テスティングフレームワーク。                                    | [公式ドキュメント](https://vitest.dev/) |
-| Cypress       | E2E テストツール。                                                                  | [公式ドキュメント](https://www.cypress.io/) |
+- [TypeScript](https://github.com/microsoft/TypeScript){ target=_blank }
+
+      JavaScript を拡張して静的型付にしたプログラミング言語。
+
+- [Vue.js](https://v3.ja.vuejs.org/){ target=_blank }
+
+      シンプルな設計で拡張性の高い JavaScript のフレームワーク。
+
+- [Vite](https://ja.vitejs.dev/)
+
+      ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。
+
+- [Pinia](https://pinia.vuejs.org/)
+
+      Vue.js 用の状態管理ライブラリ。
+
+- [Vue Router](https://router.vuejs.org/)
+
+      Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。
+
+- [Axios](https://github.com/axios/axios)
+
+      Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
+
+- [VeeValidate](https://vee-validate.logaretm.com/v3/overview.html)
+
+      Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
+
+- [yup](https://github.com/jquense/yup)
+
+      JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
+
+- [Tailwind CSS](https://tailwindcss.jp/)
+
+      utility class を使って独自のボタンなどを作成する CSS フレームワーク
+
+- [Prettier](https://prettier.io/)
+
+      JavaScript, Vue, CSS, JSON などのコードフォーマッター。
+
+- [ESLint](https://typescript-eslint.io/)
+
+      JavaScript の静的検証ツール。
+
+- [Stylelint](https://stylelint.io/)
+
+      CSS の静的検証ツール。
+
+- [Vitest](https://vitest.dev/)
+
+      Vite 環境で動作する高速テスティングフレームワーク。
+
+- [Cypress](https://www.cypress.io/)
+
+      E2E テストツール。
 
 ## アーキテクチャ {#frontend-architecture}
 
@@ -38,11 +77,20 @@ Maris OSS 版で採用している Vue.js のソフトウェア・アーキテ�
 ![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture-light.png#only-light){ loading=lazy }
 ![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture-dark.png#only-dark){ loading=lazy }
 
-| 名称 | 説明 |
-| ---- | ---- |
-| ビュー           | ブラウザへのレンダリングおよびブラウザからのイベントの待ち受けを役割として担います。ビューには UI の構造やスタイルを定義します。 |
-| ビューモデル     | ブラウザからのイベントを受け、プレゼンテーションロジックを実行します。ビューモデルのプレゼンテーションロジックには、レンダリングに必要な処理や入力チェック、モデルを通じたデータの取得や更新などの処理を実装します。 |
-| モデル            | ビジネスロジックとして状態管理やブラウザ外部との入出力を担います。モデルのビジネスロジックには、データ構造やデータの状態管理、Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。モデルは後述する Pinia のアーキテクチャに従って実装します。 |
+<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
+**ビュー**
+
+:  ブラウザへのレンダリングおよびブラウザからのイベントの待ち受けを役割として担います。ビューには UI の構造やスタイルを定義します。
+
+<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
+**ビューモデル**
+
+:  ブラウザからのイベントを受け、プレゼンテーションロジックを実行します。ビューモデルのプレゼンテーションロジックには、レンダリングに必要な処理や入力チェック、モデルを通じたデータの取得や更新などの処理を実装します。
+
+<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
+**モデル**
+
+:  ビジネスロジックとして状態管理やブラウザ外部との入出力を担います。モデルのビジネスロジックには、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。モデルは後述する Pinia のアーキテクチャに従って実装します。
 
 Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC)](https://v3.ja.vuejs.org/guide/single-file-component.html#単一ファイルコンポーネント) と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
 
@@ -102,11 +150,18 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-light.png#only-light){ loading=lazy }
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-dark.png#only-dark){ loading=lazy }
 
-| 名称        | 説明                                                                                                                   |
-| ----        | ----                                                                                                                  |
-| State       | Store で管理するデータそのもの。                                                                                        |
-| Getter      | Store で管理しているデータである State を画面コンポーネント(ビュー & ビューモデル)に返すもの。                               |
-| Action      | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。 |
+<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
+**State**
+:  Store で管理するデータそのもの。
+
+<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
+**Getter**
+:  Store で管理しているデータである State を画面コンポーネント(ビュー & ビューモデル)に返すもの。
+
+<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
+**Action**
+<!-- textlint-disable -->
+:  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。
 
 #### APIの呼び出しについて {#about-invoke-api}
 
@@ -163,7 +218,7 @@ src/
 ```
 
 !!! note "Vue Router の設定"
-      Vue Router では URL のパスと対象のファイルを指定することで、ルーティングを設定します。以下は     `https://xxxx.com/account/login` という URL に対して上記の `LoginView.vue` を設定している例です。
+      Vue Router では URL のパスと対象のファイルを指定することで、ルーティングを設定します。以下は `https://xxxx.com/account/login` という URL に対して上記の `LoginView.vue` を設定している例です。
 
       ``` TypeScript title="index.ts"
       import { createRouter, createWebHistory } from "vue-router";
