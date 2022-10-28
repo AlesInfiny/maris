@@ -88,4 +88,13 @@ public class Basket
             .Select(basketItem => new AccountItem(basketItem.Quantity, basketItem.UnitPrice));
         return new Account(accountItems);
     }
+
+    /// <summary>
+    ///  買い物かごアイテムが空かどうか示す値を取得します。
+    /// </summary>
+    /// <returns>買い物かごアイテムが空の場合は <see langword="true"/> 、そうでない場合は <see langword="false"/> 。</returns>
+    public bool IsEmpty()
+    {
+        return !this.items.Any();
+    }
 }

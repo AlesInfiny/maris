@@ -16,7 +16,7 @@ internal class StaticFileAssetStore : IAssetStore
     ///  <see cref="StaticFileAssetStore"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="logger">ロガー。</param>
-    /// <param name="basePath">Images ディレクトリが存在するパス。未指定時はこのクラスのアセンブリが存在するディレクトリ。</param>
+    /// <param name="basePath">Images フォルダーが存在するパス。未指定時はこのクラスのアセンブリが存在するフォルダー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <paramref name="logger"/> が <see langword="null"/> です。
     /// </exception>
