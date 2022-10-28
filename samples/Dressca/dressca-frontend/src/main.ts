@@ -14,7 +14,8 @@ const app = createApp(App);
 const pinia = createPinia();
 
 app.config.errorHandler = (err: unknown, vm, info) => {
-  // エラーに対する処理
+  // 本サンプルAPではログの出力とエラー画面への遷移を行っています。
+  // APの要件によってはサーバーやログ収集ツールにログを送信し、エラーを握りつぶすこともあります。
   console.log(err, vm, info);
   router.replace({ name: 'error' });
 };
