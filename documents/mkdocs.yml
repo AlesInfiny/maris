@@ -17,11 +17,7 @@ nav:
           - app-architecture/overview/index.md
       - クライアントサイドレンダリング編:
           - app-architecture/client-side-rendering/index.md
-  #        - app-architecture/client-side-rendering/overview.md
-          - app-architecture/client-side-rendering/frontend-architecture.md
-  #        - app-architecture/client-side-rendering/backend-architecture.md
-  #       - アプリケーションスタック: app-architecture/client-side-rendering/app-stack.md
-  #       - アプリケーションの論理構造: app-architecture/client-side-rendering/app-structure.md
+          - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
   #   - コンソールアプリケーション編:
   #       - app-architecture/console-app/index.md
   #- クックブック:
