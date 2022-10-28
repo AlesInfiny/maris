@@ -12,11 +12,14 @@ nav:
   - Maris OSS版にようこそ:
       - index.md
   - アプリケーションアーキテクチャ:
-  #    - app-architecture/index.md
+      - app-architecture/index.md
       - 概要編:
           - app-architecture/overview/index.md
-  #   - クライアントサイドレンダリング編:
-  #       - app-architecture/client-side-rendering/index.md
+      - クライアントサイドレンダリング編:
+          - app-architecture/client-side-rendering/index.md
+  #        - app-architecture/client-side-rendering/overview.md
+          - app-architecture/client-side-rendering/frontend-architecture.md
+  #        - app-architecture/client-side-rendering/backend-architecture.md
   #       - アプリケーションスタック: app-architecture/client-side-rendering/app-stack.md
   #       - アプリケーションの論理構造: app-architecture/client-side-rendering/app-structure.md
   #   - コンソールアプリケーション編:
