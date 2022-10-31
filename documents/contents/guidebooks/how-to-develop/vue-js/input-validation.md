@@ -17,7 +17,7 @@ npm install vee-validate yup
 
 ## 入力値検証時の設定 {#settings-validation}
 
-yup のデフォルトのメッセージは英語であるため、日本語のメッセージを設定します。ファイル ```./src/config/yup.config.ts``` を作成し、以下のように記述します。
+yup のデフォルトのメッセージは英語であるため、日本語のメッセージを設定します。ファイル `./src/config/yup.config.ts` を作成し、以下のように記述します。
 
 ```typescript title="yup.config.ts"
 import { setLocale } from 'yup';

@@ -25,7 +25,7 @@ npm install axios
 
 ### Axios の設定 {#settings-axios}
 
-```./src/config/axios.config.ts``` というファイルを作成し、以下のように記述します。
+`./src/config/axios.config.ts` というファイルを作成し、以下のように記述します。
 
 ```typescript title="axios.config.ts"
 import axios from 'axios';
@@ -33,7 +33,7 @@ import axios from 'axios';
 axios.defaults.baseURL = `作成済みの Web API の URL`;
 ```
 
-- ```axios.defaults.baseURL``` ：Web API のベース URL を設定します。
+- `axios.defaults.baseURL` ：Web API のベース URL を設定します。
 
 作成したファイルを読み込むため、 main.ts に import を記述します。
 
@@ -71,7 +71,7 @@ package.json の script セクションにタスクを追加します。
 -g typescript-axios
 ```
 
-入力の API 仕様書として ```./dressca-api.json``` というファイルを指定します。
+入力の API 仕様書として `./dressca-api.json` というファイルを指定します。
 
 ``` terminal
 -i ./dressca-api.json 
@@ -79,16 +79,16 @@ package.json の script セクションにタスクを追加します。
 
 以下のプロパティを追加します。
 
-- ```withSeparateModelsAndApi=true``` ：model と API を別クラス・別フォルダーに配置する
-- ```modelPackage=models：model``` ：クラスのパッケージ名を「models」に設定する
-- ```apiPackage=api``` ：API クラスのパッケージ名を「api」に設定する
-- ```supportsES6=true``` ：ES6 に準拠したコードを生成する
+- `withSeparateModelsAndApi=true` ：model と API を別クラス・別フォルダーに配置する
+- `modelPackage=models：model` ：クラスのパッケージ名を「models」に設定する
+- `apiPackage=api` ：API クラスのパッケージ名を「api」に設定する
+- `supportsES6=true` ：ES6 に準拠したコードを生成する
 
 ``` terminal
 --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true
 ```
 
-生成されたコードの出力先を ```./src/api-client``` に設定します。
+生成されたコードの出力先を `./src/api-client` に設定します。
 
 ``` terminal
 -o ./src/api-client
@@ -102,4 +102,4 @@ package.json の script セクションにタスクを追加します。
 npm run generate-client
 ```
 
-オプション ``` -o ``` に定義した出力先へ、クライアントコードが生成されます。
+オプション ` -o ` に定義した出力先へ、クライアントコードが生成されます。

@@ -9,10 +9,10 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 Vue.js のブランクプロジェクトを作成すると、デフォルトで以下の 2 つの CSS ファイルが追加されます。
 
-- ```./src/assets/base.css```
-- ```./src/assets/main.css```
+- `./src/assets/base.css`
+- `./src/assets/main.css`
 
-また、```./src/main.ts``` に、以下のように main.css を読み込むコードが自動的に追加されます。
+また、`./src/main.ts` に、以下のように main.css を読み込むコードが自動的に追加されます。
 
 ```typescript title="main.ts"
 import './assets/main.css'
@@ -20,8 +20,8 @@ import './assets/main.css'
 
 サンプルアプリケーションでは base.css に統一します。
 
-1. ```./src/assets/main.css``` を削除します。
-1. ```./src/main.ts``` の import を以下のように書き換えます。
+1. `./src/assets/main.css` を削除します。
+1. `./src/main.ts` の import を以下のように書き換えます。
 
 ```typescript title="main.ts"
 import './assets/base.css'
@@ -60,7 +60,7 @@ npm install -D tailwindcss postcss autoprefixer postcss-nesting
 
 ### Tailwind CSS の設定 {#settings-tailwind-css}
 
-以下のコマンドを入力すると、```./tailwind.config.js``` ファイルが作成されます。
+以下のコマンドを入力すると、`./tailwind.config.js` ファイルが作成されます。
 
 ```terminal
 npx tailwindcss init
@@ -92,7 +92,7 @@ module.exports = {
 }
 ```
 
-```./src/assets/base.css``` の最初の行に、以下のように Tailwind CSS の各コンポーネントの @tailwind ディレクティブを追加します。
+`./src/assets/base.css` の最初の行に、以下のように Tailwind CSS の各コンポーネントの @tailwind ディレクティブを追加します。
 
 ```css title="base.css"
 @tailwind base;
@@ -108,7 +108,7 @@ postCSS は Tailwind CSS と一緒にすでにインストール済みなので�
 
 ### postCSS の設定 {#settings-postcss}
 
-設定ファイル ```./postcss.config.js``` を作成します。
+設定ファイル `./postcss.config.js` を作成します。
 
 ```javascript title="postcss.config.js"
 module.exports = {
