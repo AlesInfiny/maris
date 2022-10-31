@@ -49,52 +49,52 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 - [Axios :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
 
-    Vue.js で非同期通信するためのプロミスベースの HTTP クライアント（[参照](create-api-client-code.md#install-axios)）
+    Vue.js で非同期通信するためのプロミスベースの HTTP クライアント（[インストール方法](create-api-client-code.md#install-axios)）
 
 - [autoprefixer :material-open-in-new:](https://autoprefixer.github.io/){ target=_blank }
 
-    ベンダープレフィックスを付与するプラグイン（[参照](css.md#install-tailwind-css)）
+    ベンダープレフィックスを付与するプラグイン（[インストール方法](css.md#install-tailwind-css)）
 
 - [openapi-generator :material-open-in-new:](https://github.com/OpenAPITools/openapi-generator){ target=_blank }
 
-    Web API 仕様からクライアントコードの自動生成（[参照](create-api-client-code.md#install-openapi-generator)）
+    Web API 仕様からクライアントコードの自動生成（[インストール方法](create-api-client-code.md#install-openapi-generator)）
 
 - [postCSS :material-open-in-new:](https://github.com/postcss/postcss){ target=_blank }
 
-    CSS の最適化（[参照](css.md#install-tailwind-css)）
+    CSS の最適化（[インストール方法](css.md#install-tailwind-css)）
 
-- [postcss-nesting :material-open-in-new:](https://github.com/csstools/postcss-nesting){ target=_blank }
+- [postcss-nesting :material-open-in-new:](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting){ target=_blank }
 
-    スタイルルールを互いに入れ子にするためのプラグイン（[参照](css.md#install-tailwind-css)）
+    スタイルルールを互いに入れ子にするためのプラグイン（[インストール方法](css.md#install-tailwind-css)）
 
 - [stylelint :material-open-in-new:](https://stylelint.io/){ target=_blank }
 
-    CSS の静的検証ツール（[参照](static-verification-and-format.md#install-stylelint)）
+    CSS の静的検証ツール（[インストール方法](static-verification-and-format.md#install-stylelint)）
 
 - [stylelint-config-standard :material-open-in-new:](https://github.com/stylelint/stylelint-config-standard){ target=_blank }
 
-    Stylelint の標準設定（[参照](static-verification-and-format.md#install-stylelint)）
+    Stylelint の標準設定（[インストール方法](static-verification-and-format.md#install-stylelint)）
 
 - [stylelint-config-prettier :material-open-in-new:](https://github.com/prettier/stylelint-config-prettier){ target=_blank }
 
-    Stylelint の Ptettier 向け設定（[参照](static-verification-and-format.md#install-stylelint)）
+    Stylelint の Ptettier 向け設定（[インストール方法](static-verification-and-format.md#install-stylelint)）
 
 - [stylelint-config-recommended-vue :material-open-in-new:](https://github.com/ota-meshi/stylelint-config-recommended-vue){ target=_blank }
 
-    Stylelint の .vue ファイル向け推奨設定（[参照](static-verification-and-format.md#install-stylelint)）
+    Stylelint の .vue ファイル向け推奨設定（[インストール方法](static-verification-and-format.md#install-stylelint)）
 
 - [stylelint-prettier :material-open-in-new:](https://github.com/prettier/stylelint-prettier){ target=_blank }
 
-    Stylelint と Prettier の連携プラグイン（[参照](static-verification-and-format.md#install-stylelint)）
+    Stylelint と Prettier の連携プラグイン（[インストール方法](static-verification-and-format.md#install-stylelint)）
 
 - [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
 
-    CSS フレームワーク（[参照](css.md#install-tailwind-css)）
+    CSS フレームワーク（[インストール方法](css.md#install-tailwind-css)）
 
 - [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
 
-    Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ（[参照](input-validation.md#install-packages)）
+    Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ（[インストール方法](input-validation.md#install-packages)）
 
 - [yup :material-open-in-new:](https://github.com/jquense/yup){ target=_blank }
 
-    JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ（[参照](input-validation.md#install-packages)）
+    JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ（[インストール方法](input-validation.md#install-packages)）
