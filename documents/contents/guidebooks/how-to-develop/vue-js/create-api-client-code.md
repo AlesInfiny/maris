@@ -3,7 +3,7 @@ title: Vue.js 開発手順
 description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
 ---
 
-# API 仕様書からのクライアントコード生成 {#top}
+# Open API 仕様書からのクライアントコード生成 {#top}
 
 サーバー側で公開される Web API は、 Open API 仕様書を自動生成しています（詳細は [ASP.NET Core Web API プロジェクトの構成](../dotnet/configure-asp-net-core-web-api-project.md#open-api-specification-output-configuration) を参照）。 Vue.js アプリケーションでは、 Open API Generator を使用して、この Open API 仕様書からクライアントコードを生成します。
 
