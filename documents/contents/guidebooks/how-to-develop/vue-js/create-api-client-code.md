@@ -5,7 +5,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 # API 仕様書からのクライアントコード生成 {#top}
 
-サーバー側で公開される Web API は、 Open API 仕様書を自動生成しています（詳細は [ASP.NET Core Web API プロジェクトの構成](../dotnet/configure-asp-net-core-web-api-project.md) を参照）。 Vue.js アプリケーションでは、 Open API Generator を使用して、この Open API 仕様書からクライアントコードを生成します。
+サーバー側で公開される Web API は、 Open API 仕様書を自動生成しています（詳細は [ASP.NET Core Web API プロジェクトの構成](../dotnet/configure-asp-net-core-web-api-project.md#open-api-specification-output-configuration) を参照）。 Vue.js アプリケーションでは、 Open API Generator を使用して、この Open API 仕様書からクライアントコードを生成します。
 
 ## 事前準備 {#preparation}
 
@@ -27,7 +27,7 @@ npm install axios
 
 ```./src/config/axios.config.ts``` というファイルを作成し、以下のように記述します。
 
-```typescript
+```typescript title="axios.config.ts"
 import axios from 'axios';
 
 axios.defaults.baseURL = `作成済みの Web API の URL`;
@@ -37,7 +37,7 @@ axios.defaults.baseURL = `作成済みの Web API の URL`;
 
 作成したファイルを読み込むため、 main.ts に import を記述します。
 
-```typescript
+```typescript title="main.ts"
 import '@/config/axios.config';
 ```
 
@@ -48,14 +48,14 @@ import '@/config/axios.config';
 OpenAPI Generator をインストールします。ターミナルで以下のコマンドを入力します。
 
 ```terminal
-npm install --D @openapitools/openapi-generator-cli
+npm install -D @openapitools/openapi-generator-cli
 ```
 
 ### Open API Generator の設定 {#settings-openapi-generator}
 
 package.json の script セクションにタスクを追加します。
 
-```json
+```json title="package.json"
 {
   "scripts": {
     "generate-client": "openapi-generator-cli generate -g typescript-axios -i ./dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/api-client"

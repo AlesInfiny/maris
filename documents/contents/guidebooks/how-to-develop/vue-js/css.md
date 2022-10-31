@@ -7,14 +7,14 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 ## CSS の設定 {#settings-css}
 
-Vue のブランクプロジェクトを作成すると、デフォルトで以下の 2 つの CSS ファイルが追加されます。
+Vue.js のブランクプロジェクトを作成すると、デフォルトで以下の 2 つの CSS ファイルが追加されます。
 
 - ```./src/assets/base.css```
 - ```./src/assets/main.css```
 
 また、```./src/main.ts``` に、以下のように main.css を読み込むコードが自動的に追加されます。
 
-```typescript
+```typescript title="main.ts"
 import './assets/main.css'
 ```
 
@@ -23,7 +23,7 @@ import './assets/main.css'
 1. ```./src/assets/main.css``` を削除します。
 1. ```./src/main.ts``` の import を以下のように書き換えます。
 
-```typescript
+```typescript title="main.ts"
 import './assets/base.css'
 ```
 
@@ -41,11 +41,17 @@ Tailwind CSS は、 Web サイトを構築するための CSS フレームワー
 npm install -D tailwindcss postcss autoprefixer postcss-nesting
 ```
 
-|プラグイン名    |説明|
-|---------------|----|
-|postCSS        |後述|
-|autoprefixer   |CSS に対してベンダープレフィクスを自動的に付与する postCSS のプラグインです。このプラグインを使用することにより、ベンダープレフィクスを意識する必要が無くなります。|
-|postcss-nesting|CSS Nesting の仕様に従って、スタイルルールを互いに入れ子にすることができる postcss のプラグインです。|
+- [postCSS :material-open-in-new:](https://github.com/postcss/postcss){ target=_blank }
+
+    [postCSS](#postcss) で説明します。
+
+- [autoprefixer :material-open-in-new:](https://autoprefixer.github.io/){ target=_blank }
+
+    CSS に対してベンダープレフィクスを自動的に付与する postCSS のプラグインです。このプラグインを使用することにより、ベンダープレフィクスを意識する必要が無くなります。
+
+- [postcss-nesting :material-open-in-new:](https://github.com/csstools/postcss-nesting){ target=_blank }
+
+    CSS Nesting の仕様に従って、スタイルルールを互いに入れ子にできる postcss のプラグインです。
 
 !!! info "ベンダープレフィクス"
     ベンダープレフィクスとは、ブラウザーのベンダーが独自の拡張機能を実装する際に、
@@ -62,7 +68,7 @@ npx tailwindcss init
 
 作成された直後の tailwind.config.js は以下のとおりです（Tailwind CSS 3.1.8 の場合）。
 
-```javascript
+```javascript title="tailwind.config.js"
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [],
@@ -75,7 +81,7 @@ module.exports = {
 
 content に、 Tailwind CSS を適用する対象ファイルのパス（ワイルドカード使用可）を設定します。
 
-```javascript
+```javascript title="tailwind.config.js"
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
@@ -88,7 +94,7 @@ module.exports = {
 
 ```./src/assets/base.css``` の最初の行に、以下のように Tailwind CSS の各コンポーネントの @tailwind ディレクティブを追加します。
 
-```css
+```css title="base.css"
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -104,7 +110,7 @@ postCSS は Tailwind CSS と一緒にすでにインストール済みなので�
 
 設定ファイル ```./postcss.config.js``` を作成します。
 
-```javascript
+```javascript title="postcss.config.js"
 module.exports = {
   plugins: [
     require('tailwindcss'),

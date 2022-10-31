@@ -31,7 +31,7 @@ Prettier の設定ファイルは初期状態では存在しないので、作�
 1. プロジェクトのルートフォルダーに設定ファイル ```./.prettierrc.js``` を作成します。
 1. 既定の設定を上書きする場合、設定値を記述します。以下はサンプルアプリケーションでの設定例です。
 
-```javascript
+```javascript title=".prettierrc.js"
 module.exports = {
   semi: true,
   arrowParens: 'always',
@@ -51,7 +51,7 @@ ESLint は Vue.js のブランクプロジェクト作成時にオプション�
 
 設定ファイル ```./.eslintrc.cjs``` で行います。このファイルはインストール時に自動的に追加され、デフォルトでは以下のような内容になっています（ESLint バージョン 8.5.0 の場合）。
 
-```javascript
+```javascript title=".eslintrc.cjs"
 /* eslint-env node */
 require('@rushstack/eslint-patch/modern-module-resolution')
 
@@ -81,7 +81,7 @@ module.exports = {
 
 この状態でも静的コード分析は可能ですが、 postCSS の設定ファイルなど、分析する必要のないファイルまで分析対象となってしまうため、以下のように ignorePatterns を追加します（25 行目）。
 
-```javascript
+```javascript title=".eslintrc.cjs"
 /* eslint-env node */
 require('@rushstack/eslint-patch/modern-module-resolution')
 
@@ -141,7 +141,7 @@ npm install -D stylelint \
 
 プロジェクトのルートフォルダーに設定ファイル ```./.stylelintrc.js``` を作成し、コードを記述します。
 
-```javascript
+```javascript title=".stylelintrc.js"
 module.exports = {
   plugins: ['stylelint-prettier'],
   extends: [
@@ -178,7 +178,7 @@ module.exports = {
 
 ```./package.json``` に ESLint を実行するための script がデフォルトで追加されています。ここに Stylelint も同時に実行するようにコマンドを追加します。追加後の scripts は以下のようになります（関係のないコマンドは省略しています）。
 
-```json
+```json title="package.json"
 "scripts": {
   "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
 }

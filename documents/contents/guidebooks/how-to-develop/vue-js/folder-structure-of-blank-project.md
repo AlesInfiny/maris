@@ -7,7 +7,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 ブランクプロジェクトを作成した時点でのフォルダー構造は以下のようになっています。
 
-```terminal
+```terminal linenums="0"
 <project-name>
 ├ cypress/ ---------------- cypress による End-to-End テスト用のフォルダー
 ├ dist/ ------------------- ビルド後の成果物が配置されるフォルダー

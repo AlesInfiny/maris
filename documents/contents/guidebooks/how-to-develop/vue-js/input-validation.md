@@ -19,7 +19,7 @@ npm install vee-validate yup
 
 yup のデフォルトのメッセージは英語であるため、日本語のメッセージを設定します。ファイル ```./src/config/yup.config.ts``` を作成し、以下のように記述します。
 
-```typescript
+```typescript title="yup.config.ts"
 import { setLocale } from 'yup';
 
 setLocale({
@@ -34,7 +34,7 @@ setLocale({
 
 作成したファイルを読み込むため、 main.ts に import を記述します。
 
-```typescript
+```typescript title="main.ts"
 import '@/config/yup.config';
 ```
 
