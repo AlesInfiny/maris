@@ -45,7 +45,7 @@ module.exports = {
 
 一部の設定値は、既定で .editorconfig に記述している値が適用されます。したがって、`./.prettierrc.js` では、 .editorconfig では設定できないもののみ設定すると良いでしょう。
 
-全ての設定可能な値は [公式ドキュメント :material-open-in-new:](https://prettier.io/docs/en/options.html){ target=_blank } を参照してください。
+全ての設定可能な値は [Options - Prettier :material-open-in-new:](https://prettier.io/docs/en/options.html){ target=_blank } を参照してください。また、設定方法は [Configuration File - Prettier :material-open-in-new:](https://prettier.io/docs/en/configuration.html){ target=_blank } を参照してください。
 
 ## ESLint {#eslint}
 
@@ -53,37 +53,9 @@ ESLint は Vue.js のブランクプロジェクト作成時にオプション�
 
 ### ESLint の設定 {#settings-eslint}
 
-設定ファイル `./.eslintrc.cjs` で行います。このファイルはインストール時に自動的に追加され、デフォルトでは以下のような内容になっています（ESLint バージョン 8.5.0 の場合）。
+設定ファイル `./.eslintrc.cjs` で行います。このファイルはインストール時に自動的に追加されます。
 
-```javascript title=".eslintrc.cjs"
-/* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
-
-module.exports = {
-  root: true,
-  'extends': [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier'
-  ],
-  overrides: [
-    {
-      files: [
-        'cypress/e2e/**.{cy,spec}.{js,ts,jsx,tsx}'
-      ],
-      'extends': [
-        'plugin:cypress/recommended'
-      ]
-    }
-  ],
-  parserOptions: {
-    ecmaVersion: 'latest'
-  }
-}
-```
-
-この状態でも静的コード分析は可能ですが、 postCSS の設定ファイルなど、分析する必要のないファイルまで分析対象となってしまうため、以下のように ignorePatterns を追加します。
+既定の状態でも静的コード分析は可能ですが、 postCSS の設定ファイルなど、分析する必要のないファイルまで分析対象となってしまうため、以下のように ignorePatterns を追加します。
 
 ```javascript title=".eslintrc.cjs" hl_lines="13 13"
 /* eslint-env node */
@@ -177,6 +149,8 @@ module.exports = {
 `overrides`
 
 :   特定のファイルにのみ別のルールを設定したい場合に使用します。
+
+具体的な設定方法や設定値については [公式ドキュメント :material-open-in-new:](https://stylelint.io/user-guide/configure){ target=_blank } を参照してください。
 
 ## 静的コード分析とフォーマットの実行 {#static-code-analysis-and-format}
 
