@@ -84,6 +84,7 @@ const remove = () => {
       </div>
       <div class="mt-2 mb-1 ml-4 mr-2 grid place-items-end">
         <TrashIcon
+          id="removeButton"
           class="h-8 w-8 text-gray-500 hover:text-gray-700"
           @click="remove()"
         />
