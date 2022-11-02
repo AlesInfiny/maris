@@ -9,10 +9,10 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'documents/**'
-      - 'iis-files/**'
-      - 'samples/**'
-      - '.github/workflows/build-and-release-documents.yml'
+      - "documents/**"
+      - "iis-files/**"
+      - "samples/**"
+      - ".github/workflows/build-and-release-documents.yml"
   release:
     types: [published]
   workflow_dispatch:
@@ -43,12 +43,12 @@ jobs:
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILTER_REGEX_INCLUDE: 'documents/.*'
+          FILTER_REGEX_INCLUDE: "documents/.*"
           LINTER_RULES_PATH: /
-          MARKDOWN_CONFIG_FILE: '.markdownlint.yaml'
+          MARKDOWN_CONFIG_FILE: ".markdownlint.yaml"
           VALIDATE_MARKDOWN: true
           VALIDATE_YAML: true
-          YAML_CONFIG_FILE: '.yaml-lint.yml'
+          YAML_CONFIG_FILE: ".yaml-lint.yml"
 
       - name: GitHub Super Linter の結果表示
         run: |
@@ -93,12 +93,12 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat textlint-result.txt | sed -n -e '/problems\?/p' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-#          exit 1 textlintの適用が全面的に完了してからエラー扱いする
+          exit 1
 
       - name: Python のセットアップ
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: mkdocs のインストール
         run: |
@@ -171,7 +171,7 @@ jobs:
           app-name: ${{ env.OSS_MARIS_WEBAPP_NAME }}
           slot-name: staging
           publish-profile: ${{ secrets.APP_OSS_MARIS_STAGING_PUBLISH_PROFILE  }}
-          package: '${{ env.DOCUMENT_ARTIFACTS_FILENAME }}'
+          package: "${{ env.DOCUMENT_ARTIFACTS_FILENAME }}"
 
       - name: Teams への通知
         uses: fjogeleit/http-request-action@v1.8.1
