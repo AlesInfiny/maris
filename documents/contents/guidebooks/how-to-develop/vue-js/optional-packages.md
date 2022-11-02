@@ -57,7 +57,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 - [openapi-generator :material-open-in-new:](https://github.com/OpenAPITools/openapi-generator){ target=_blank }
 
-    Web API 仕様からクライアントコードの自動生成（[インストール方法](create-api-client-code.md#install-openapi-generator)）
+    Web API 仕様からクライアントコードの自動生成（[インストール方法](create-api-client-code.md#install-open-api-generator)）
 
 - [postCSS :material-open-in-new:](https://github.com/postcss/postcss){ target=_blank }
 

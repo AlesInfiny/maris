@@ -3,17 +3,19 @@ title: Vue.js 開発手順
 description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
 ---
 
-# Open-API 仕様書からのクライアントコード生成 {#top}
+<!-- cSpell:ignore openapi -->
 
-サーバー側で公開される Web API は、 Open API 仕様書を自動生成しています（詳細は [ASP.NET Core Web API プロジェクトの構成](../dotnet/configure-asp-net-core-web-api-project/) を参照）。 Vue.js アプリケーションでは、 Open-API Generator を使用して、この Open-API 仕様書からクライアントコードを生成します。
+# Open API 仕様書からのクライアントコード生成 {#top}
+
+サーバー側で公開される Web API は、 Open API 仕様書を自動生成しています（詳細は [ASP.NET Core Web API プロジェクトの構成](../dotnet/configure-asp-net-core-web-api-project/) を参照）。 Vue.js アプリケーションでは、 Open API Generator を使用して、この Open API 仕様書からクライアントコードを生成します。
 
 ## 事前準備 {#preparation}
 
-[Open-API 仕様書の出力設定](../dotnet/configure-asp-net-core-web-api-project.md#open-api-specification-output-configuration) に示す手順に従って生成した Open-API 仕様書をローカルに保存します。ここでは、ファイル名を「dressca-api.json」とします。
+[Open API 仕様書の出力設定](../dotnet/configure-asp-net-core-web-api-project.md#open-api-specification-output-configuration) に示す手順に従って生成した Open API 仕様書をローカルに保存します。ここでは、ファイル名を「dressca-api.json」とします。
 
 ### JDK のインストール {#install-jdk}
 
-Open-API Generator を使用するためには、 Java 8 以降のランタイムと、システム環境変数 JAVA_HOME の設定が必要です。 Oracle JDK や Eclipse Adoptium など、適当な JDK をインストールし、 JAVA_HOME を設定してください。
+Open API Generator を使用するためには、 Java 8 以降のランタイムと、システム環境変数 JAVA_HOME の設定が必要です。 Oracle JDK や Eclipse Adoptium など、適当な JDK をインストールし、 JAVA_HOME を設定してください。
 
 ## Axios {#axios}
 
@@ -41,17 +43,17 @@ axios.defaults.baseURL = `作成済みの Web API の URL`;
 import '@/config/axios.config';
 ```
 
-## Open-API Generator {#openapi-generator}
+## Open API Generator {#open-api-generator}
 
-### Open-API Generator のインストール {#install-openapi-generator}
+### Open API Generator のインストール {#install-open-api-generator}
 
-Open-API Generator をインストールします。ターミナルで以下のコマンドを入力します。
+Open API Generator をインストールします。ターミナルで以下のコマンドを入力します。
 
 ```terminal
 npm install -D @openapitools/openapi-generator-cli
 ```
 
-### Open-API Generator の設定 {#settings-openapi-generator}
+### Open API Generator の設定 {#settings-open-api-generator}
 
 package.json の scripts セクションにタスクを追加します。
 
