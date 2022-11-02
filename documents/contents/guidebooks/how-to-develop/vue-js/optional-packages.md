@@ -77,7 +77,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 - [stylelint-config-prettier :material-open-in-new:](https://github.com/prettier/stylelint-config-prettier){ target=_blank }
 
-    Stylelint の Ptettier 向け設定（[インストール方法](static-verification-and-format.md#install-stylelint)）
+    Stylelint の Prettier 向け設定（[インストール方法](static-verification-and-format.md#install-stylelint)）
 
 - [stylelint-config-recommended-vue :material-open-in-new:](https://github.com/ota-meshi/stylelint-config-recommended-vue){ target=_blank }
 

@@ -3,6 +3,8 @@ title: Vue.js 開発手順
 description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
 ---
 
+<!-- cSpell:ignore parens rushstack stylelintrc -->
+
 # 静的コード分析とフォーマット {#top}
 
 静的コード分析とフォーマットには .editorconfig 、 ESLint 、 Stylelint 、および Prettier を使用します。
@@ -19,6 +21,8 @@ VSCode の推奨プラグインである [EditorConfig for Visual Studio Code :m
 - インデントのサイズ
 - インデントの形式
 - 行末の空白を削除
+
+開発時に統一する必要がある項目を .editorconfig に定義します。特に開発者によって差が出やすいエンコード、改行コードやインデントのサイズなどを定めておくと良いでしょう。
 
 .editorconfig の設定には、自動的に適用されるものと、違反すると IDE のエディター上に警告として表示されるものがあります。詳細は [公式ドキュメント :material-open-in-new:](https://github.com/editorconfig/editorconfig-vscode){ target=_blank } を参照してください。
 
@@ -74,6 +78,8 @@ module.exports = {
 }
 ```
 
+その他の設定方法については [公式ドキュメント :material-open-in-new:](https://eslint.org/docs/latest/user-guide/configuring/){ target=_blank } を参照してください。
+
 ### ESLint と Prettier の連携 {#eslint-and-prettier}
 
 Vue.js のブランクプロジェクト作成時に ESLint と Prettier をそれぞれオプションとしてインストールした場合、 ESLint と Prettier を連携させるプラグインが自動的にインストール・設定されます。
@@ -89,7 +95,7 @@ Stylelint および、標準の設定や vue ファイルで使用する設定�
 | -------------------------------- | -------------------------------------- |
 | stylelint                        | cssファイルの構文検証                  |
 | stylelint-config-standard        | Stylelint の標準設定                   |
-| stylelint-config-prettier        | Stylelint の Ptettier 向け設定         |
+| stylelint-config-prettier        | Stylelint の Prettier 向け設定         |
 | stylelint-config-recommended-vue | Stylelint の .vue ファイル向け推奨設定 |
 | stylelint-prettier               | Stylelint と Prettier の連携プラグイン |
 

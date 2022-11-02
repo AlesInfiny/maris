@@ -28,7 +28,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 ├ README.md --------------- ブランクプロジェクト作成時点ではテンプレートの説明が記述されたファイル
 ├ tsconfig.app.json ------- アプリケーションの TypeScript として読み込む対象を定義する設定ファイル
 ├ tsconfig.config.json ---- TypeScript の設定ファイルとして読み込む対象を定義する設定ファイル
-├ tsconfig.json ----------- TypeScrpt の設定ファイル
+├ tsconfig.json ----------- TypeScript の設定ファイル
 ├ tsconfig.vitest.json ---- 単体テストの TypeScript として読み込む対象を定義する設定ファイル
 └ vite.config.ts ---------- 単体テストの設定ファイル
 ```

@@ -5,7 +5,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 # ブランクプロジェクトの作成 {#top}
 
-## Vue.jsおよびオプションのインストール {#install-vuejs-and-options}
+## Vue.js およびオプションのインストール {#install-vue-js-and-options}
 
 以下のコマンドを実行して Vue.js をインストールします。
 
