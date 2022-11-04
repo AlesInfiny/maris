@@ -55,7 +55,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
     ベンダープレフィックスを付与するプラグイン（[インストール方法](css.md#install-tailwind-css)）
 
-- [openapi-generator :material-open-in-new:](https://github.com/OpenAPITools/openapi-generator){ target=_blank }
+- <!-- cSpell:disable -->[openapi-generator :material-open-in-new:](https://github.com/OpenAPITools/openapi-generator){ target=_blank }<!-- cSpell:enable -->
 
     Web API 仕様からクライアントコードの自動生成（[インストール方法](create-api-client-code.md#install-open-api-generator)）
 
