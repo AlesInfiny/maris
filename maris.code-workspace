@@ -15,6 +15,7 @@
             ".vscode",
         ],
         "cSpell.words": [
+            "Adoptium",
             "appsettings",
             "ASMX",
             "ASPNETCore",
@@ -44,6 +45,7 @@
             "StyleCop",
             "stylelint",
             "Swashbuckle",
+            "tailwindcss",
             "textlint",
             "typeof",
             "typeparam",
