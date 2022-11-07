@@ -3,7 +3,7 @@ title: Vue.js 開発手順
 description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
 ---
 
-# CSSの設定とCSSフレームワークの適用 {#top}
+# CSS の設定と CSS フレームワークの適用 {#top}
 
 ## CSS の設定 {#settings-css}
 

@@ -27,30 +27,30 @@ nav:
       - guidebooks/index.md
       - Git リポジトリ構築ガイド:
           - guidebooks/git/index.md
-          - guidebooks/git/select-git-hosting-service.md
-          - guidebooks/git/consider-repository-structure.md
-          - guidebooks/git/consider-folder-structure.md
+          - Git リポジトリホスティングサービスの選択: guidebooks/git/select-git-hosting-service.md
+          - リポジトリ構造の検討: guidebooks/git/consider-repository-structure.md
+          - フォルダー構造の検討: guidebooks/git/consider-folder-structure.md
       - アプリケーション開発手順:
           - guidebooks/how-to-develop/index.md
           - .NET 編:
               - guidebooks/how-to-develop/dotnet/index.md
-              - guidebooks/how-to-develop/dotnet/preparation.md
-              - guidebooks/how-to-develop/dotnet/create-solution-structure.md
-              - guidebooks/how-to-develop/dotnet/create-project.md
-              - guidebooks/how-to-develop/dotnet/project-settings.md
-              - guidebooks/how-to-develop/dotnet/create-project-structure.md
-              - guidebooks/how-to-develop/dotnet/configure-asp-net-core-web-api-project.md
-              - guidebooks/how-to-develop/dotnet/configure-asp-net-core-with-vite-project.md
+              - 事前準備: guidebooks/how-to-develop/dotnet/preparation.md
+              - ソリューション構造の作成: guidebooks/how-to-develop/dotnet/create-solution-structure.md
+              - プロジェクトの作成: guidebooks/how-to-develop/dotnet/create-project.md
+              - プロジェクトの共通設定: guidebooks/how-to-develop/dotnet/project-settings.md
+              - プロジェクト構造の作成: guidebooks/how-to-develop/dotnet/create-project-structure.md
+              - ASP.NET Core Web API プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-web-api-project.md
+              - ASP.NET Core with Vite プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-with-vite-project.md
           - Vue.js 編:
               - guidebooks/how-to-develop/vue-js/index.md
-              - guidebooks/how-to-develop/vue-js/preparation.md
-              - guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md
-              - guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
-              - guidebooks/how-to-develop/vue-js/optional-packages.md
-              - guidebooks/how-to-develop/vue-js/css.md
-              - guidebooks/how-to-develop/vue-js/static-verification-and-format.md
-              - guidebooks/how-to-develop/vue-js/input-validation.md
-              - guidebooks/how-to-develop/vue-js/create-api-client-code.md
+              - 事前準備: guidebooks/how-to-develop/vue-js/preparation.md
+              - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md # cspell: disable-line
+              - ブランクプロジェクトのフォルダー構造: guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
+              - 開発に使用するパッケージ: guidebooks/how-to-develop/vue-js/optional-packages.md
+              - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/vue-js/css.md
+              - 静的コード分析とフォーマット: guidebooks/how-to-develop/vue-js/static-verification-and-format.md
+              - 入力値検証: guidebooks/how-to-develop/vue-js/input-validation.md
+              - Open API 仕様書からのクライアントコード生成: guidebooks/how-to-develop/vue-js/create-api-client-code.md
           - ローカル開発環境の構築:
               - guidebooks/how-to-develop/local-environment/index.md
   #       - アプリケーションテスト:
@@ -59,11 +59,9 @@ nav:
           - guidebooks/migration/index.md
           - .NET Framework にとどまることのリスク:
               - guidebooks/migration/dotnetfw-risk/index.md
-              - guidebooks/migration/dotnetfw-risk/dotnet-runtime-trends.md
-              - guidebooks/migration/dotnetfw-risk/risk-of-dotnet-framework.md
-              - guidebooks/migration/dotnetfw-risk/migration-to-dotnet.md
-  #       - .NET Frameworkからの移行:
-  #           - guidebooks/migration/from-dotnetfw/index.md
+              - .NET ランタイムの最新動向: guidebooks/migration/dotnetfw-risk/dotnet-runtime-trends.md
+              - .NET Framework の開発停止によるリスク: guidebooks/migration/dotnetfw-risk/risk-of-dotnet-framework.md
+              - .NET への移行: guidebooks/migration/dotnetfw-risk/migration-to-dotnet.md
   #   - 開発プロセスのモダナイズ:
   #       - guidebooks/modern-dev-process/index.md
   - サンプル解説:
