@@ -127,7 +127,7 @@ StyleCop Analyzers を用いて静的コード解析したいプロジェクト�
 
 !!! warning "StyleCop Analyzers のバージョンに注意"
 
-    .NET 6 以降利用できるようになった[ファイルスコープ名前空間](https://docs.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace)を利用する場合、 StyleCop Analyzers 1.2.0 以降 ( Pre-release 版も可 ) を使用してください。
+    .NET 6 以降利用できるようになった[ファイルスコープ名前空間](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace)を利用する場合、 StyleCop Analyzers 1.2.0 以降を使用してください。
     1.1.118 では正常に解析が行われません。
 
 #### stylecop.json ファイルの配置 {#stylecop-json-placement}
