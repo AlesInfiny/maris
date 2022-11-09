@@ -22,7 +22,7 @@ Git リポジトリの構築については、以下を参照してください�
 ### ソリューション構成と物理フォルダーの関係 {#solution-and-physical-folder-relationships}
 
 Visual Studio でソリューションを開いたとき、ソリューションエクスプローラーに表示される構造と、物理的なフォルダーの構造は一致しないことがあります。
-不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー](https://docs.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder)」の存在です。
+不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー](https://learn.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder)」の存在です。
 
 ソリューションフォルダーは、 Visual Studio のソリューションエクスプローラー内にのみ存在する仮想的なフォルダーです。
 Maris OSS 版では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
@@ -30,7 +30,7 @@ Maris OSS 版では、ソリューションフォルダーと物理的なフォ�
 
 ### ソリューションファイルの作成 {#create-solution-file}
 
-バックエンドアプリケーションを配置するフォルダー内に、 Visual Studio を利用して[空のソリューションファイルを作成](https://docs.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions)します。
+バックエンドアプリケーションを配置するフォルダー内に、 Visual Studio を利用して[空のソリューションファイルを作成](https://learn.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions)します。
 ソリューションファイルの名前は、以下のいずれかのパターンに従って命名します。
 
 | #   | パターン                                   |
@@ -61,7 +61,7 @@ src フォルダーにはプロダクションコードを、 tests フォルダ
 この後作成するプロジェクトやソースコードは、 src ソリューションフォルダーまたは tests ソリューションフォルダーに物理フォルダーと同じように配置します。
 
 !!! note "プロダクションコードとテストコードのフォルダーを最初に分割する理由"
-    .NET アプリケーションの開発では、静的コード分析やコーディングルールの設定に [.editorconfig ファイル](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options) を用います。
+    .NET アプリケーションの開発では、静的コード分析やコーディングルールの設定に [.editorconfig ファイル](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options) を用います。
     .editorconfig ファイルは、ファイルを配置したフォルダー以下すべてのファイルに対して、設定した値が影響を与えます。
     プロダクションコードとテストコードでは、通常コーディングルールの厳しさに濃淡をつけます[^1]。
     そのため、プロダクションコードを配置するフォルダーとテストコードを配置するフォルダーを最初に分類しておくことで、各コード向けの .editorconfig ファイルの適用が簡単になります。
@@ -78,7 +78,7 @@ tests フォルダー内は、テストの目的にあわせてテストプロ�
 単体機能確認、結合機能確認、性能確認などが、よくあるテストプロジェクトの分割単位です。
 
 プロジェクトの数が多くなりすぎると、単一のソリューションで開発を進めるのが困難になります。
-その場合は、[ソリューションフィルター](https://docs.microsoft.com/ja-jp/visualstudio/msbuild/solution-filters#solution-filter-files)を用いて業務や機能の単位でプロジェクトをフィルタリングします。
+その場合は、[ソリューションフィルター](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/solution-filters#solution-filter-files)を用いて業務や機能の単位でプロジェクトをフィルタリングします。
 プロジェクトの総数が 30 を超えるようなソリューションの場合、ソリューションフィルターの活用を検討しましょう。
 プロジェクトを業務単位で分割しておくことで、ソリューションフィルターが効果的に活用できます。
 ソリューションフィルターを使用する場合は、単体機能確認のためのテストプロジェクトも業務単位で分割しましょう。
