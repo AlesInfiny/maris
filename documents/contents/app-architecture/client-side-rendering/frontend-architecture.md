@@ -36,7 +36,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
       Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
 
-- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/v4/){ target=_blank }
+- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
 
       Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
 
