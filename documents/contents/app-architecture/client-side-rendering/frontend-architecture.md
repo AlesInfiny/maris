@@ -44,7 +44,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
       JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
 
-- [Tailwind CSS :material-open-in-new:](https://tailwindcss.jp/){ target=_blank }
+- [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
 
       utility class を使って独自のボタンなどを作成する CSS フレームワーク
 
