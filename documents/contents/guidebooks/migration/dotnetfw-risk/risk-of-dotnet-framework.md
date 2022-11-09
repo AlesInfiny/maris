@@ -34,7 +34,7 @@ RESTful API の Open API 仕様書を生成する Swagger のライブラリ「 
 
 ### ランタイムの進化に追従できない {#cannot-keep-up-with-runtime-evolution}
 
-暗号の利用モードの 1 つである AEM-GCM を C# で使用できる [System.Security.Cryptography.AesGcm クラス](https://docs.microsoft.com/ja-jp/dotnet/api/system.security.cryptography.aesgcm?view=net-6.0) は、 .NET Framework 4.8 では使用できません。
+暗号の利用モードの 1 つである AEM-GCM を C# で使用できる [System.Security.Cryptography.AesGcm クラス](https://learn.microsoft.com/ja-jp/dotnet/api/system.security.cryptography.aesgcm) は、 .NET Framework 4.8 では使用できません。
 これは .NET Standard 2.1 で追加されたため、 .NET Standard 2.0 の実装である .NET Framework 4.8 からは使用できないのです。
 すでに .NET Framework は .NET に新しく追加される API から取り残されつつあります。
 

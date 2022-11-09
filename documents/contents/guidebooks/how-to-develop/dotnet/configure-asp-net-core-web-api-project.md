@@ -326,7 +326,7 @@ Web API アプリケーションの入出力は、 HTTP 通信の形式になり
 ASP.NET Core Web API プロジェクトを作成した際、一緒に作成される [appsettings.json] および [appsettings.Development.json] ファイルに対してログレベルを設定します。
 ログレベルの設定方法については、以下を参照してください。
 
-- [.NET でのログの記録 - ログの構成](https://docs.microsoft.com/ja-JP/dotnet/core/extensions/logging#configure-logging)
+- [.NET でのログの記録 - ログの構成](https://learn.microsoft.com/ja-JP/dotnet/core/extensions/logging#configure-logging)
 
 ログレベルは、本番環境向けの設定と開発環境向けの設定を別々に管理します。
 本番環境向けには原則 Information 以上のログのみを出力するように設定します。
