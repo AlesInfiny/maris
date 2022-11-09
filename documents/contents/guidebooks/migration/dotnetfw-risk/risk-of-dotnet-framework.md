@@ -54,7 +54,7 @@ C# 8.0 以降追加された便利で生産性を上げてくれる記法は使�
 
 ### 実行環境が制限される {#restriction-of-runtime}
 
-2022 年 6 月現在、 [Azure Web Apps](https://docs.microsoft.com/ja-JP/azure/app-service/) では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
+2022 年 6 月現在、 [Azure Web Apps](https://learn.microsoft.com/ja-JP/azure/app-service/) では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
 また、 Microsoft の公式 docker イメージである [.NET Framework Runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/) も、バージョンとして選択できるのは .NET Framework 3.5 と 4.8 のみです。
 .NET Framework は、クラウド環境やコンテナー環境から徐々に締め出されつつあります。
 将来的に、クラウド環境やコンテナー環境で .NET Framework が使用できなくなる可能性は高いです。
@@ -128,4 +128,4 @@ C# 8.0 以降追加された便利で生産性を上げてくれる記法は使�
     .NET Framework は、インストール後バージョンを固定できるようなものではなく、サーバー OS の更新時に新しいバージョンへと自動でアップデートされます。
     .NET Framework には強い後方互換性があるため、テストを再実施しなくても非互換が発生しないパターンが多かっただけといえるでしょう。
 
-[^1]: [Microsoft のクイックスタートガイド](https://docs.microsoft.com/ja-jp/azure/app-service/quickstart-dotnetcore?tabs=netframework48&pivots=development-environment-vs) では、 .NET Framework 3.5 が選択できることすら説明されていません。
+[^1]: [Microsoft のクイックスタートガイド](https://learn.microsoft.com/ja-jp/azure/app-service/quickstart-dotnetcore?tabs=netframework48&pivots=development-environment-vs) では、 .NET Framework 3.5 が選択できることすら説明されていません。

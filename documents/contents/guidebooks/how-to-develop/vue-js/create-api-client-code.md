@@ -5,7 +5,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 
 # Open API 仕様書からのクライアントコード生成 {#top}
 
-サーバー側で公開される Web API は、 Open API 仕様書を自動生成しています（詳細は [ASP.NET Core Web API プロジェクトの構成](../dotnet/configure-asp-net-core-web-api-project/) を参照）。 Vue.js アプリケーションでは、 Open API Generator を使用して、この Open API 仕様書からクライアントコードを生成します。
+サーバー側で公開される Web API は、 Open API 仕様書を自動生成しています（詳細は [ASP.NET Core Web API プロジェクトの構成](../dotnet/configure-asp-net-core-web-api-project.md) を参照）。 Vue.js アプリケーションでは、 Open API Generator を使用して、この Open API 仕様書からクライアントコードを生成します。
 
 ## 事前準備 {#preparation}
 

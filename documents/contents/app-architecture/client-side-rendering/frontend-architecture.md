@@ -36,7 +36,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
       Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
 
-- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/v3/overview.html){ target=_blank }
+- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/v4/){ target=_blank }
 
       Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
 
@@ -44,7 +44,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
       JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
 
-- [Tailwind CSS :material-open-in-new:](https://tailwindcss.jp/){ target=_blank }
+- [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
 
       utility class を使って独自のボタンなどを作成する CSS フレームワーク
 
@@ -52,7 +52,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
       JavaScript, Vue, CSS, JSON などのコードフォーマッター。
 
-- [ESLint :material-open-in-new:](https://typescript-eslint.io/){ target=_blank }
+- [ESLint :material-open-in-new:](https://eslint.org/){ target=_blank }
 
       JavaScript の静的検証ツール。
 
