@@ -12,7 +12,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
 
-- [TypeScript :material-open-in-new:](https://github.com/microsoft/TypeScript){ target=_blank }
+- [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
 
       JavaScript を拡張して静的型付にしたプログラミング言語。
 
