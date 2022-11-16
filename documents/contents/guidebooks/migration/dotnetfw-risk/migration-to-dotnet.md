@@ -17,6 +17,7 @@ description: .NET Framework にとどまり続けることで起こりうるリ�
 
 - .NET Framework Windows フォーム アプリ
 - .NET Framework WPF アプリ
+- .NET Framework サーバーサイド WCF アプリ
 - .NET Framework UWP アプリ
 - .NET Framework ASP.NET MVC アプリ
 - .NET Framework コンソール アプリ
