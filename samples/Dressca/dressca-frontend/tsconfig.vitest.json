@@ -1,20 +1,8 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.node.json",
-  "include": [
-    "env.d.ts",
-    "src/**/*",
-    "src/**/*.vue",
-    "src/api-client/models/*",
-    "src/**/__tests__/*"
-  ],
+  "extends": "./tsconfig.app.json",
+  "exclude": [],
   "compilerOptions": {
     "composite": true,
-    "types": ["node", "jsdom"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "preserveValueImports": false,
-    "importsNotUsedAsValues": "preserve"
+    "types": ["node", "jsdom"]
   }
 }
