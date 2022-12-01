@@ -153,6 +153,7 @@ jobs:
         with:
           name: documents
           path: documents/${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
+          retention-days: 1
 
   release:
     name: ドキュメントのリリース
