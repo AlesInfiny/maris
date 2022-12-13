@@ -187,7 +187,7 @@ jobs:
           package: "${{ env.DOCUMENT_ARTIFACTS_FILENAME }}"
 
       - name: Teams への通知
-        uses: fjogeleit/http-request-action@v1.8.1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.POST_MESSAGE_TO_TEAMS_URL  }}
           method: POST
