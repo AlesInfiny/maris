@@ -112,7 +112,7 @@ jobs:
         id: build_documents
         continue-on-error: true
         run: |
-          # リリースタグを打ったときだけ github.event.release.name が設定される。
+          # リリースタグを打ったときだけ github.ref_name が設定される。
           if [ ${{ startsWith(github.ref, 'refs/tags/v') }} ];
           then
             export VERSION="${{ github.ref_name }}"
