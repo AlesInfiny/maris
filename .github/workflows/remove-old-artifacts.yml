@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: 古いアーティファクトの削除
-        uses: c-hive/gha-remove-artifacts@v1
+        uses: c-hive/gha-remove-artifacts@v1.3.0
         with:
           age: '{{ github.event.inputs.target }} days'
           skip-tags: true
