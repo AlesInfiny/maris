@@ -6,6 +6,8 @@ name: ドキュメントのビルドとリリース
 on:
   push:
     branches: [main]
+    tags: 
+      - 'v[0-9]+.[0-9]+.[0-9]+'
   pull_request:
     branches: [main]
     paths:
@@ -13,8 +15,6 @@ on:
       - "iis-files/**"
       - "samples/**"
       - ".github/workflows/build-and-release-documents.yml"
-  release:
-    types: [published]
   workflow_dispatch:
 
 env:
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ブランチのチェックアウト
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -96,7 +96,7 @@ jobs:
           exit 1
 
       - name: Python のセットアップ
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.x"
 
@@ -112,10 +112,9 @@ jobs:
         id: build_documents
         continue-on-error: true
         run: |
-          # リリースタグを打ったときだけ github.event.release.name が設定される。
-          if [ -n "${{ github.event.release.name }}" ];
+          if [ ${{ startsWith(github.ref, 'refs/tags/v') }} ];
           then
-            export VERSION="${{ github.event.release.name }}"
+            export VERSION="${{ github.ref_name }}"
           else
             export VERSION="Test Version"
           fi
@@ -149,19 +148,32 @@ jobs:
           zip -r ../${{ env.DOCUMENT_ARTIFACTS_FILENAME }} *
 
       - name: ビルドアーティファクトのアップロード
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v3
         with:
           name: documents
           path: documents/${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
+          retention-days: 7
 
-  release:
+  release-github:
+    name: Githubのリリース
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Githubのリリース
+        uses: softprops/action-gh-release@v1
+        with:
+          files: documents/${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
+          generate_release_notes: true
+
+  release-documents:
     name: ドキュメントのリリース
     needs: build
-    if: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/') }}
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - name: ビルドアーティファクトのダウンロード
-        uses: actions/download-artifact@v2.0.10
+        uses: actions/download-artifact@v3
         with:
           name: documents
 
@@ -174,7 +186,7 @@ jobs:
           package: "${{ env.DOCUMENT_ARTIFACTS_FILENAME }}"
 
       - name: Teams への通知
-        uses: fjogeleit/http-request-action@v1.8.1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.POST_MESSAGE_TO_TEAMS_URL  }}
           method: POST
@@ -184,12 +196,12 @@ jobs:
 
   swap:
     name: 本番環境への反映承認
-    needs: release
-    if: ${{ !github.event.release.prerelease && github.event.action == 'published' }}
+    needs: [release-github, release-documents]
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - name: 本番環境への反映承認
-        uses: fjogeleit/http-request-action@v1.8.1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.APPROVE_REQUEST_TO_TEAMS_URL  }}
           method: POST
