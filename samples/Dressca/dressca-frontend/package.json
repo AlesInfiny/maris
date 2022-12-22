@@ -17,7 +17,7 @@
     "@heroicons/vue": "^1.0.5",
     "axios": "^0.25.0",
     "pinia": "^2.0.11",
-    "vee-validate": "^4.5.8",
+    "vee-validate": "^4.7.3",
     "vue": "^3.2.29",
     "vue-router": "^4.0.12",
     "vue-virtual-carousel": "github:ha6-6ru/vue-virtual-carousel",
