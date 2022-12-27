@@ -1,8 +1,9 @@
 const base = 'api';
 import * as url from 'url';
-import type { CatalogCategoryResponse } from '../../src/api-client/models/catalog-category-response'
+import type { CatalogCategoryResponse } from '../../src/api-client/models/catalog-category-response';
 import type { CatalogBrandResponse } from '../../src/api-client/models/catalog-brand-response';
 import type { PagedListOfCatalogItemResponse } from '../../src/api-client/models/paged-list-of-catalog-item-response';
+import type { Express } from 'express-serve-static-core';
 
 const categories: CatalogCategoryResponse[] = [
   {
@@ -157,7 +158,7 @@ const catalogItemPage: PagedListOfCatalogItemResponse = {
   ],
 };
 
-export const catalogApiMock = (middlewares) => {
+export const catalogApiMock = (middlewares: Express) => {
   middlewares.use(`/${base}/catalog-categories`, (_, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(categories));
@@ -181,17 +182,17 @@ export const catalogApiMock = (middlewares) => {
     };
     let filterdItems = catalogItemPage.items;
 
-    if (!!query && !!query.categoryId) {
+    if (query && query.categoryId && filterdItems) {
       filterdItems = filterdItems.filter(
         // 文字列で比較
-        (item) => item.catalogCategoryId == query.categoryId,
+        (item) => item.catalogCategoryId.toString() === query.categoryId,
       );
     }
 
-    if (!!query && !!query.brandId) {
+    if (query && query.brandId && filterdItems) {
       filterdItems = filterdItems.filter(
         // 文字列で比較
-        (item) => item.catalogBrandId == query.brandId,
+        (item) => item.catalogBrandId.toString() === query.brandId,
       );
     }
 
