@@ -24,8 +24,8 @@ export const useOrderingStore = defineStore({
       };
       const orderResponse = await ordersApi.ordersPostOrder(postOrderInput);
       const url = new URL(orderResponse.headers.location);
-      const getPath = url.pathname.split('/').pop();
-      const orderResultResponse = await ordersApi.ordersGetById(getPath);
+      const orderId = Number(url.pathname.split('/').pop());
+      const orderResultResponse = await ordersApi.ordersGetById(orderId);
       this.lastOrder = orderResultResponse.data;
     },
     clearLastOrder() {
