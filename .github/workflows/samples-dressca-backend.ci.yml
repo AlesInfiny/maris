@@ -1,4 +1,6 @@
 ---
+# cSpell:ignore lcov msbuild NOLOGO OPTOUT
+
 name: dressca-backend CI
 
 on:

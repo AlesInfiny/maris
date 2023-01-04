@@ -1,5 +1,5 @@
 ---
-# cSpell:ignore markdownlint endgroup pymdown webapps fjogeleit
+# cSpell:ignore endgroup fjogeleit markdownlint pymdown softprops textlintignore textlintrc webapps
 
 name: ドキュメントのビルドとリリース
 
@@ -15,6 +15,12 @@ on:
       - "iis-files/**"
       - "samples/**"
       - ".github/workflows/build-and-release-documents.yml"
+      - ".markdownlint.yaml"
+      - ".textlintignore"
+      - ".textlintrc"
+      - ".yaml-lint.yml"
+      - "package-lock.json"
+      - "package.json"
   workflow_dispatch:
 
 env:
