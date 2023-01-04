@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 import BasketItem from '@/components/basket/BasketItem.vue';
 import type { BasketItemResponse } from '../../api-client/models/basket-item-response';
 
-describe('HelloWorld', () => {
+describe('BasketItemコンポーネントのテスト', () => {
   it('小計が日本円形式で表示できる', () => {
     const basketItemResponse: BasketItemResponse = {
       catalogItemId: 10,
