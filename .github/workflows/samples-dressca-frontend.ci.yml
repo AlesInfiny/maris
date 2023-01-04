@@ -31,14 +31,17 @@ jobs:
         id: setup_node_id
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
+      - uses: actions/cache@v3
+        id: node_modules_cache_id
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'    
       - name: node パッケージのインストール
-        run: echo '${{ toJSON(steps.setup_node_id.outputs) }}'
-      - if: ${{ steps.setup_node_id.outputs.cache-hit != 'true' }}
+        if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: npm install
-      - run: ls -a
-      - run: npm ls -g --depth=0
-      - run: npm ls --depth=0
       - name: TypeScript の型チェック
         run: npm run typecheck
       - name: 単体テストの実行
