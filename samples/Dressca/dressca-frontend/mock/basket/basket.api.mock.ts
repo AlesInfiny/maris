@@ -1,8 +1,8 @@
 const base = 'api';
-import type { BasketResponse } from '../../src/api-client/models/basket-response';
-import type { BasketItemResponse } from '../../src/api-client/models/basket-item-response';
-import type { PostBasketItemsRequest } from '../../src/api-client/models/post-basket-items-request';
-import type { PutBasketItemsRequest } from '../../src/api-client/models/put-basket-items-request';
+import type { BasketResponse } from '../../src/generated/api-client/models/basket-response';
+import type { BasketItemResponse } from '../../src/generated/api-client/models/basket-item-response';
+import type { PostBasketItemsRequest } from '../../src/generated/api-client/models/post-basket-items-request';
+import type { PutBasketItemsRequest } from '../../src/generated/api-client/models/put-basket-items-request';
 import { addAbortSignal } from 'stream';
 import type { Express } from 'express-serve-static-core';
 
