@@ -12,7 +12,7 @@
       "msBuildOutputPath": null,
       "verbose": true,
       "workingDirectory": null,
-      "requireParametersWithoutDefault": true,
+      "requireParametersWithoutDefault": false,
       "apiGroupNames": null,
       "defaultPropertyNameHandling": "Default",
       "defaultReferenceTypeNullHandling": "Null",
