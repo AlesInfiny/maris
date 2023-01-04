@@ -1,10 +1,11 @@
 const base = 'api';
 import * as url from 'url';
-import type { CatalogCategoryDto } from '../../src/api-client/models/catalog-category-dto';
-import type { CatalogBrandDto } from '../../src/api-client/models/catalog-brand-dto';
-import type { PagedListOfCatalogItemDto } from '../../src/api-client/models/paged-list-of-catalog-item-dto';
+import type { CatalogCategoryResponse } from '../../src/api-client/models/catalog-category-response';
+import type { CatalogBrandResponse } from '../../src/api-client/models/catalog-brand-response';
+import type { PagedListOfCatalogItemResponse } from '../../src/api-client/models/paged-list-of-catalog-item-response';
+import type { Express } from 'express-serve-static-core';
 
-const categories: CatalogCategoryDto[] = [
+const categories: CatalogCategoryResponse[] = [
   {
     id: 1,
     name: '服',
@@ -19,7 +20,7 @@ const categories: CatalogCategoryDto[] = [
   },
 ];
 
-const brands: CatalogBrandDto[] = [
+const brands: CatalogBrandResponse[] = [
   {
     id: 1,
     name: '高級なブランド',
@@ -34,7 +35,7 @@ const brands: CatalogBrandDto[] = [
   },
 ];
 
-const catalogItemPage: PagedListOfCatalogItemDto = {
+const catalogItemPage: PagedListOfCatalogItemResponse = {
   hasNext: false,
   hasPrevious: false,
   page: 1,
@@ -157,7 +158,7 @@ const catalogItemPage: PagedListOfCatalogItemDto = {
   ],
 };
 
-export const catalogApiMock = (middlewares) => {
+export const catalogApiMock = (middlewares: Express) => {
   middlewares.use(`/${base}/catalog-categories`, (_, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(categories));
@@ -171,7 +172,7 @@ export const catalogApiMock = (middlewares) => {
   middlewares.use(`/${base}/catalog-items`, (_, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     const query = url.parse(_.url, true).query;
-    const page: PagedListOfCatalogItemDto = {
+    const page: PagedListOfCatalogItemResponse = {
       hasNext: catalogItemPage.hasNext,
       hasPrevious: catalogItemPage.hasPrevious,
       page: catalogItemPage.page,
@@ -181,17 +182,17 @@ export const catalogApiMock = (middlewares) => {
     };
     let filterdItems = catalogItemPage.items;
 
-    if (!!query && !!query.categoryId) {
+    if (query && query.categoryId && filterdItems) {
       filterdItems = filterdItems.filter(
         // 文字列で比較
-        (item) => item.catalogCategoryId == query.categoryId,
+        (item) => item.catalogCategoryId.toString() === query.categoryId,
       );
     }
 
-    if (!!query && !!query.brandId) {
+    if (query && query.brandId && filterdItems) {
       filterdItems = filterdItems.filter(
         // 文字列で比較
-        (item) => item.catalogBrandId == query.brandId,
+        (item) => item.catalogBrandId.toString() === query.brandId,
       );
     }
 

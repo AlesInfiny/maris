@@ -5,9 +5,10 @@ name: dressca-frontend CI
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'samples/Dressca/dressca-frontend/**'
+      - '.github/workflows/samples-dressca-frontend.ci.yml'
   workflow_dispatch:
 
 defaults:
@@ -24,12 +25,24 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: ci
-      run: |
-        npm install
-        npm run test:unit
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        id: setup_node_id
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v3
+        id: node_modules_cache_id
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'    
+      - name: node パッケージのインストール
+        if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+        run: npm install
+      - name: TypeScript の型チェック
+        run: npm run typecheck
+      - name: 単体テストの実行
+        run: npm run test:unit

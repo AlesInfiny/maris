@@ -1,10 +1,12 @@
 const base = 'api';
-import type { BasketDto } from '../../src/api-client/models/basket-dto';
-import type { BasketItemDto } from '../../src/api-client/models/basket-item-dto';
-import type { PostBasketItemsInputDto } from '../../src/api-client/models/post-basket-items-input-dto';
-import type { PutBasketItemsInputDto } from '../../src/api-client/models/put-basket-items-input-dto';
+import type { BasketResponse } from '../../src/api-client/models/basket-response';
+import type { BasketItemResponse } from '../../src/api-client/models/basket-item-response';
+import type { PostBasketItemsRequest } from '../../src/api-client/models/post-basket-items-request';
+import type { PutBasketItemsRequest } from '../../src/api-client/models/put-basket-items-request';
+import { addAbortSignal } from 'stream';
+import type { Express } from 'express-serve-static-core';
 
-const basket: BasketDto = {
+const basket: BasketResponse = {
   buyerId: 'xxxxxxxxxxxxxxxxxxxxxxxxxx',
   account: {
     consumptionTaxRate: 0.1,
@@ -16,7 +18,7 @@ const basket: BasketDto = {
   basketItems: [],
 };
 
-const mockBasketItems: BasketItemDto[] = [
+const mockBasketItems: BasketItemResponse[] = [
   {
     catalogItemId: 1,
     quantity: 0,
@@ -151,7 +153,7 @@ const mockBasketItems: BasketItemDto[] = [
   },
 ];
 
-export const basketApiMock = (middlewares) => {
+export const basketApiMock = (middlewares: Express) => {
   middlewares.use(`/${base}/basket-items`, (_, res) => {
     if (_.method === 'GET') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -176,20 +178,22 @@ export const basketApiMock = (middlewares) => {
     _.on('data', (chunk) => (body += chunk));
     _.on('end', () => {
       if (_.method === 'POST') {
-        const dto: PostBasketItemsInputDto = JSON.parse(body);
+        const dto: PostBasketItemsRequest = JSON.parse(body);
         const target = basket.basketItems?.filter(
           (item) => item.catalogItemId === dto.catalogItemId,
         );
-        if (target.length === 0) {
-          const addBasketItem = mockBasketItems.find(
-            (item) => item.catalogItemId === dto.catalogItemId,
-          );
-          if (typeof addBasketItem !== 'undefined') {
-            addBasketItem.quantity = dto.addedQuantity;
-            basket.basketItems?.push(addBasketItem);
+        if (target) {
+          if (target && target.length === 0) {
+            const addBasketItem = mockBasketItems.find(
+              (item) => item.catalogItemId === dto.catalogItemId,
+            );
+            if (typeof addBasketItem !== 'undefined') {
+              addBasketItem.quantity = dto.addedQuantity ?? 0;
+              basket.basketItems?.push(addBasketItem);
+            }
+          } else {
+            target[0].quantity += dto.addedQuantity ?? 0;
           }
-        } else {
-          target[0].quantity += dto.addedQuantity;
         }
         calcBasketAccount();
         res.writeHead(201, { 'Content-Type': 'application/json' });
@@ -198,17 +202,19 @@ export const basketApiMock = (middlewares) => {
       }
 
       if (_.method === 'PUT') {
-        const dto: PutBasketItemsInputDto[] = JSON.parse(body);
+        const dto: PutBasketItemsRequest[] = JSON.parse(body);
         dto.forEach((putBasketItem) => {
           const target = basket.basketItems?.filter(
             (item) => item.catalogItemId === putBasketItem.catalogItemId,
           );
-          if (target.length === 0) {
-            res.writeHead(400, { 'Content-Type': 'application/json' });
-            res.end();
-            return;
-          } else {
-            target[0].quantity = putBasketItem.quantity;
+          if (target) {
+            if (target.length === 0) {
+              res.writeHead(400, { 'Content-Type': 'application/json' });
+              res.end();
+              return;
+            } else {
+              target[0].quantity = putBasketItem.quantity;
+            }
           }
         });
 
@@ -227,6 +233,9 @@ function calcBasketAccount() {
     item.subTotal = item.unitPrice * item.quantity;
     totalItemsPrice += item.subTotal;
   });
+  if (!basket || !basket.account) {
+    return;
+  }
   basket.account.consumptionTaxRate = 0.1;
   basket.account.totalItemsPrice = totalItemsPrice;
   const deliveryCharge = totalItemsPrice >= 5000 ? 0 : 500;

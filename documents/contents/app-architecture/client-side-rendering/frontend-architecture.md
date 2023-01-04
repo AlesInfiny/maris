@@ -12,7 +12,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
 
-- [TypeScript :material-open-in-new:](https://github.com/microsoft/TypeScript){ target=_blank }
+- [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
 
       JavaScript を拡張して静的型付にしたプログラミング言語。
 
@@ -36,7 +36,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
       Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
 
-- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/v3/overview.html){ target=_blank }
+- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
 
       Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
 
@@ -44,7 +44,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
       JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
 
-- [Tailwind CSS :material-open-in-new:](https://tailwindcss.jp/){ target=_blank }
+- [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
 
       utility class を使って独自のボタンなどを作成する CSS フレームワーク
 
@@ -52,7 +52,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
       JavaScript, Vue, CSS, JSON などのコードフォーマッター。
 
-- [ESLint :material-open-in-new:](https://typescript-eslint.io/){ target=_blank }
+- [ESLint :material-open-in-new:](https://eslint.org/){ target=_blank }
 
       JavaScript の静的検証ツール。
 

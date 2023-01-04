@@ -8,7 +8,7 @@
     "test:unit": "vitest --environment jsdom",
     "test:e2e": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress open'",
     "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress run'",
-    "typecheck": "vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
     "mock": "vite --mode mock",
     "generate-client": "openapi-generator-cli generate -g typescript-axios -i ./../dressca-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/api-client"
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.4.26",
     "@rushstack/eslint-patch": "^1.1.0",
+    "@types/express": "^4.17.15",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^16.11.22",
     "@vitejs/plugin-vue": "^2.1.0",

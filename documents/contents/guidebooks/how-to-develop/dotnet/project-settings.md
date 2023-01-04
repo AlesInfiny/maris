@@ -17,9 +17,9 @@ Maris OSS 版では、プロダクションコード用のプロジェクトと�
 
 以下の設定が有効になるように、プロジェクトファイルを設定します。
 
-- [ImplicitUsings オプション](https://docs.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#implicitusings)
-- [Nullable オプション](https://docs.microsoft.com/ja-jp/dotnet/csharp/language-reference/compiler-options/language#nullable)
-- [GenerateDocumentationFile オプション](https://docs.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#generatedocumentationfile)
+- [ImplicitUsings オプション](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#implicitusings)
+- [Nullable オプション](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/compiler-options/language#nullable)
+- [GenerateDocumentationFile オプション](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#generatedocumentationfile)
 
 .NET 6 以降のプロジェクトテンプレートで `ImplicitUsings` オプションと `Nullable` オプションは、あらかじめ有効に設定されています。
 以下に上記設定を有効にしたプロジェクトファイルの設定例を示します。
@@ -68,13 +68,13 @@ Maris OSS 版では、プロダクションコード用のプロジェクトと�
 Maris OSS 版の標準的な構成では、ソリューションルートのフォルダーに、アプリケーション全体のコーディングスタイルを設定した .editorconfig ファイルを配置します。
 tests フォルダーには、テストコード専用の設定をするための .editorconfig ファイルを作成して全体の設定をオーバーライドします。
 
-.editorconfig ファイルについての詳細は「 [EditorConfig で移植可能なカスタム エディター設定を作成する](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options)」を参照してください。
+.editorconfig ファイルについての詳細は「 [EditorConfig で移植可能なカスタム エディター設定を作成する](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options)」を参照してください。
 
 #### .editorconfig のルール設定 {#setup-editorconfig-rule}
 
 ソリューションルートに配置する .editorconfig ファイルは、 Visual Studio を用いて生成したファイルを使用します。
 ルールの設定も Visual Studio を用いると、 GUI 上で設定変更できます。
-詳細な手順は「 [EditorConfig ファイルの追加と削除](https://docs.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options#add-and-remove-editorconfig-files)」を参照してください。
+詳細な手順は「 [EditorConfig ファイルの追加と削除](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options#add-and-remove-editorconfig-files)」を参照してください。
 
 tests フォルダーに配置するテストコード専用の設定は、原則コード分析ルールの設定のみ行います。
 以下に設定例を示します。
@@ -109,7 +109,7 @@ dotnet_diagnostic.SA1600.severity=none
     ```
 
     プロジェクト設定の都合によって、上記の設定では対処しきれない警告がある場合は、個別にルールの重大度を `none` に設定します。
-    設定方法の詳細は「[コード分析の構成オプション - Scope](https://docs.microsoft.com/ja-jp/dotnet/fundamentals/code-analysis/configuration-options#scope)」を参照してください。
+    設定方法の詳細は「[コード分析の構成オプション - Scope](https://learn.microsoft.com/ja-jp/dotnet/fundamentals/code-analysis/configuration-options#scope)」を参照してください。
 
 ### StyleCop Analyzers {#stylecop-analyzers}
 
@@ -127,7 +127,7 @@ StyleCop Analyzers を用いて静的コード解析したいプロジェクト�
 
 !!! warning "StyleCop Analyzers のバージョンに注意"
 
-    .NET 6 以降利用できるようになった[ファイルスコープ名前空間](https://docs.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace)を利用する場合、 StyleCop Analyzers 1.2.0 以降 ( Pre-release 版も可 ) を使用してください。
+    .NET 6 以降利用できるようになった[ファイルスコープ名前空間](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace)を利用する場合、 StyleCop Analyzers 1.2.0 以降を使用してください。
     1.1.118 では正常に解析が行われません。
 
 #### stylecop.json ファイルの配置 {#stylecop-json-placement}
@@ -226,7 +226,7 @@ stylecop.json は、各プロジェクトのルートフォルダーにあるか
 例外メッセージやログメッセージなど、プロジェクト内で使用するメッセージは、すべてこのリソースファイルに集約して管理します。
 
 リソースファイルの作成は、 Visual Studio を用いるのが最も簡単です。
-詳細な手順は「 [.NET アプリ用のリソース ファイルを作成する](https://docs.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files)」を参照してください。
+詳細な手順は「 [.NET アプリ用のリソース ファイルを作成する](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files)」を参照してください。
 
 Visual Studio を用いてリソースファイルを作成すると、リソースファイルに定義したメッセージを取得するコードが自動生成されます。
 また Visual Studio の GUI 上で、リソースの公開範囲を指定できます。

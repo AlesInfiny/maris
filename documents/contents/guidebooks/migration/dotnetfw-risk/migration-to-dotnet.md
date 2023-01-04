@@ -13,10 +13,11 @@ description: .NET Framework にとどまり続けることで起こりうるリ�
 ## 基本的な方針 {#basic-policy}
 
 .NET Framework と .NET の間には単純互換性がないため、基本的にはコードを書き直す必要があります。
-ただし、 2022/06 現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://docs.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
+ただし、 2022/11 現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
 
 - .NET Framework Windows フォーム アプリ
 - .NET Framework WPF アプリ
+- .NET Framework サーバーサイド WCF アプリ
 - .NET Framework UWP アプリ
 - .NET Framework ASP.NET MVC アプリ
 - .NET Framework コンソール アプリ

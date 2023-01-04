@@ -1,10 +1,13 @@
 const base = 'api';
-import type { OrderDto } from '../../src/api-client/models/order-dto';
-import type { PostOrderInputDto } from '../../src/api-client/models/post-order-input-dto';
+import type { OrderResponse } from '../../src/api-client/models/order-response';
+import type { PostOrderRequest } from '../../src/api-client/models/post-order-request';
+import type { Express } from 'express-serve-static-core';
 
 // mock のため、注文データはidとorderDate以外固定値を返却する
-const order: OrderDto = {
+const order: OrderResponse = {
+  id: 0,
   buyerId: 'xxxxxxxxxxxxxxxxxxxxxxxxxx',
+  orderDate: '',
   fullName: '国会　太郎',
   postalCode: '100-8924',
   todofuken: '東京都',
@@ -45,7 +48,7 @@ const order: OrderDto = {
   },
 };
 
-export const orderingApiMock = (middlewares) => {
+export const orderingApiMock = (middlewares: Express) => {
   middlewares.use(`/${base}/orders`, (_, res) => {
     if (_.method === 'GET') {
       const orderId = Number(_.url.substring(1));
@@ -61,7 +64,7 @@ export const orderingApiMock = (middlewares) => {
     _.on('data', (chunk) => (body += chunk));
     _.on('end', () => {
       if (_.method === 'POST') {
-        const dto: PostOrderInputDto = JSON.parse(body);
+        const dto: PostOrderRequest = JSON.parse(body);
         order.fullName = dto.fullName;
         order.postalCode = dto.postalCode;
         order.todofuken = dto.todofuken;
