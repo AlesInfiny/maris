@@ -1,8 +1,10 @@
 const base = 'api';
 import * as url from 'url';
-import type { CatalogCategoryResponse } from '../../src/generated/api-client/models/catalog-category-response';
-import type { CatalogBrandResponse } from '../../src/generated/api-client/models/catalog-brand-response';
-import type { PagedListOfCatalogItemResponse } from '../../src/generated/api-client/models/paged-list-of-catalog-item-response';
+import type {
+  CatalogCategoryResponse,
+  CatalogBrandResponse,
+  PagedListOfCatalogItemResponse,
+} from '../../src/generated/api-client';
 import type { Express } from 'express-serve-static-core';
 
 const categories: CatalogCategoryResponse[] = [
