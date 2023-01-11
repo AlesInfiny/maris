@@ -7,7 +7,7 @@ updates:
     commit-message:
       prefix: "npm-root"
     labels:
-      - "repo-root"
+      - "ドキュメント改善"
       - "npm"
       - "dependencies"
   - package-ecosystem: "npm"
@@ -21,65 +21,11 @@ updates:
       - "npm"
       - "dependencies"
   - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.ApplicationCore"
+    directory: "/samples/Dressca/dressca-backend"
     schedule:
       interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.Store.Assets.StaticFiles"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.SystemCommon"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.Web.Dto"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.Web"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/tests/Dressca.TestLibrary"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/tests/Dressca.UnitTests"
-    schedule:
-      interval: "daily"
+    commit-message:
+      prefix: "nuget-dressca"
     labels:
       - "target: Dressca"
       - "nuget"

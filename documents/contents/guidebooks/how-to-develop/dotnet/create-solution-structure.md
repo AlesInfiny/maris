@@ -66,6 +66,13 @@ src フォルダーにはプロダクションコードを、 tests フォルダ
     プロダクションコードとテストコードでは、通常コーディングルールの厳しさに濃淡をつけます[^1]。
     そのため、プロダクションコードを配置するフォルダーとテストコードを配置するフォルダーを最初に分類しておくことで、各コード向けの .editorconfig ファイルの適用が簡単になります。
 
+    またフォルダー構造に基づく設定は、他にもいくつか存在します。
+
+    - [Directory.Build.props と Directory.Build.targets](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/customize-your-build#directorybuildprops-and-directorybuildtargets)
+    - [Central Package Management](https://devblogs.microsoft.com/nuget/introducing-central-package-management/)
+
+    プロダクションコードを配置するフォルダーとテストコードを配置するフォルダーの分割は、これらの機能を活用するためにも役立ちます。
+
 ## プロジェクト配置の定義 {#define-project}
 
 src フォルダー、 tests フォルダーには、プロジェクトを格納するフォルダーをフラットに並べます。
