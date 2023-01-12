@@ -108,6 +108,7 @@ Visual Studio を用いてソリューションをビルドします。
 続いて必要なフレームワークの参照設定を行います。
 「Maris.ConsoleApp.Core」プロジェクト、「Maris.ConsoleApp.Hosting」プロジェクトを「Maris.Samples.Cli」プロジェクトから参照してください。
 また汎用ホスト上でアプリケーションを実行するため、「[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)」 NuGet パッケージも参照に追加してください。
+バージョンは 6.x 系の最新バージョンの導入を推奨します。
 Maris.Samples.Cli.csproj ファイルは、以下のようになります。
 
 ```xml
