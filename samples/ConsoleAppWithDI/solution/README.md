@@ -256,7 +256,7 @@ Visual Studio でアプリケーションをビルドして実行してくださ
 
 ```plane
 Maris.Samples.Cli 1.0.0
-Copyright (C) 2022 Maris.Samples.Cli
+Copyright © 2023 BIPROGY Inc. All rights reserved.
 
 ERROR(S):
   No verb selected.
