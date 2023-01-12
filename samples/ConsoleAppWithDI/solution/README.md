@@ -74,11 +74,15 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 |                                      | Maris.ConsoleApp.Core      | フォルダーごと配置する                 |
 |                                      | Maris.ConsoleApp.Hosting   | フォルダーごと配置する                 |
 |                                      | Maris.Testing              | フォルダーごと配置する                 |
+|                                      | Directory.Build.props      |                                        |
 | tests                                |                            |                                        |
 |                                      | Maris.ConsoleApp.UnitTests | フォルダーごと配置する                 |
 |                                      | .editorconfig              | tests フォルダー内のファイルを配置する |
+|                                      | Directory.Build.props      |                                        |
 | <作成したソリューションファイル>.sln |                            |                                        |
 | .editorconfig                        |                            |                                        |
+| Directory.Build.props                |                            |                                        |
+| Directory.Package.props              |                            |                                        |
 | stylecop.json                        |                            |                                        |
 
 ### ソリューションへのファイル・プロジェクトの取り込み
