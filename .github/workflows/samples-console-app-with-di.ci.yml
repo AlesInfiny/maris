@@ -26,6 +26,7 @@ jobs:
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       BUILD_CONFIGURATION: Debug
+      TEST_SUMMARY_FILE: TestSummary.md
 
     steps:
       - name: ブランチのチェックアウト
@@ -68,9 +69,10 @@ jobs:
         shell: bash
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         run: |
-          echo '## Test Result :memo:' >> $GITHUB_STEP_SUMMARY
-          echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> $GITHUB_STEP_SUMMARY
-          echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> $GITHUB_STEP_SUMMARY
+          echo '## Test Result :memo:' >> ${{ env.TEST_SUMMARY_FILE }}
+          echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> ${{ env.TEST_SUMMARY_FILE }}
+          echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> ${{ env.TEST_SUMMARY_FILE }}
+          cat ${{ env.TEST_SUMMARY_FILE }} >> $GITHUB_STEP_SUMMARY
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
