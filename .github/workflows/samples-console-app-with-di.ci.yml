@@ -69,30 +69,26 @@ jobs:
           echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> $GITHUB_STEP_SUMMARY
           echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> $GITHUB_STEP_SUMMARY
 
-      - name: コードカバレッジレポートの解析
-        uses: irongut/CodeCoverageSummary@v1.3.0
+      - id: create-coverage-report
+        name: コードカバレッジレポートの解析と作成
+        uses: danielpalme/ReportGenerator-GitHub-Action@5
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
-          filename: '**/TestResults/*/coverage.cobertura.xml'
-          badge: true
-          fail_below_min: true
-          format: markdown
-          hide_branch_rate: false
-          hide_complexity: false
-          indicators: true
-          output: both
-          thresholds: '60 80'
+          reports: '**/TestResults/*/coverage.cobertura.xml'
+          targetdir: 'CoverageReport'
+          reporttypes: 'MarkdownSummaryGithub'
 
       - name: コードカバレッジの結果表示
         shell: bash
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         run: |
-          echo '## Coverage :triangular_ruler:' >> $GITHUB_STEP_SUMMARY
-          cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
+          sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
+          sed -i -e '/^## Coverage/d' CoverageReport/SummaryGithub.md
+          cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
 
       - name: コードカバレッジの結果をPull-requestに表示
         uses: marocchino/sticky-pull-request-comment@v2
         if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
         with:
           recreate: true
-          path: code-coverage-results.md
+          path: CoverageReport/SummaryGithub.md
