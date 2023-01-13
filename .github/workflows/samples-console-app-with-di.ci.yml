@@ -83,7 +83,7 @@ jobs:
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         run: |
           sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
-          sed -i -e '/^## Coverage/d' CoverageReport/SummaryGithub.md
+          sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
           cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
 
       - name: コードカバレッジの結果をPull-requestに表示
