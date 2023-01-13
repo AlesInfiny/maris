@@ -11,12 +11,9 @@ on:
       - '.github/workflows/samples-console-app-with-di.ci.yml'
   workflow_dispatch:
 
-env:
-  WORKING_DIRECTORY: samples/ConsoleAppWithDI/solution
-
 defaults:
   run:
-    working-directory: ${{ env.WORKING_DIRECTORY }}
+    working-directory: samples/ConsoleAppWithDI/solution
 
 jobs:
   build:
@@ -78,7 +75,7 @@ jobs:
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           reports: '**/TestResults/*/coverage.cobertura.xml'
-          targetdir: 'CoverageReport'
+          targetdir: 'samples/ConsoleAppWithDI/solution/CoverageReport'
           reporttypes: 'MarkdownSummaryGithub'
           verbosity: 'Verbose'
 
