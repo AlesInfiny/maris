@@ -30,11 +30,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: NuGet パッケージの復元
-        run: dotnet restore
-
       - name: アプリケーションのビルド
-        run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }}
+        run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: 単体テストの実行
         run: |
