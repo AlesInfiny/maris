@@ -1,97 +1,89 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Castle.Core.Logging;
+﻿using System.ComponentModel.DataAnnotations;
 using CommandLine;
 using Maris.ConsoleApp.Core;
 using Microsoft.Extensions.Logging;
-using static Maris.ConsoleApp.UnitTests.Core.SyncCommandTest;
 
 namespace Maris.ConsoleApp.UnitTests.Core;
 
 public class CommandExecutorTest
 {
     [Fact]
-    public void Constructor_factoryがnullの場合は例外()
+    public void Constructor_managerがnullの場合は例外()
     {
         // Arrange
-        ICommandFactory? factory = null;
+        ICommandManager? manager = null;
         ILogger<CommandExecutor>? logger = null;
 
         // Act
-        var action = () => new CommandExecutor(factory!, logger!);
+        var action = () => new CommandExecutor(manager!, logger!);
 
         // Assert
-        Assert.Throws<ArgumentNullException>("factory", action);
+        Assert.Throws<ArgumentNullException>("commandManager", action);
     }
 
     [Fact]
     public void Constructor_ロガーがnullの場合は例外()
     {
         // Arrange
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         ILogger<CommandExecutor>? logger = null;
 
         // Act
-        var action = () => new CommandExecutor(factoryMock.Object, logger!);
+        var action = () => new CommandExecutor(managerMock.Object, logger!);
 
         // Assert
         Assert.Throws<ArgumentNullException>("logger", action);
     }
 
     [Fact]
-    public void Constructor_factoryを使ってコマンドが生成される()
+    public void Constructor_managerを使ってコマンドが生成される()
     {
         // Arrange
-        var factoryMock = new Mock<ICommandFactory>();
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        var managerMock = new Mock<ICommandManager>();
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(new CommandImpl("dummy-command"));
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
 
         // Act
-        _ = new CommandExecutor(factoryMock.Object, loggerMock.Object);
+        _ = new CommandExecutor(managerMock.Object, loggerMock.Object);
 
         // Assert
-        factoryMock.Verify(factory => factory.CreateCommand(), Times.Once);
+        managerMock.Verify(manager => manager.CreateCommand(), Times.Once);
     }
 
     [Fact]
-    public void Constructor_ファクトリーがコマンドを作成できなかった場合は例外()
+    public void Constructor_マネージャーがコマンドを作成できなかった場合は例外()
     {
         // Arrange
-        var factoryMock = new Mock<ICommandFactory>();
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        var managerMock = new Mock<ICommandManager>();
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns((CommandBase?)null!);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
 
         // Act
-        var action = () => new CommandExecutor(factoryMock.Object, loggerMock.Object);
+        var action = () => new CommandExecutor(managerMock.Object, loggerMock.Object);
 
         // Assert
-        var exception = Assert.Throws<ArgumentException>("factory", action);
-        Assert.StartsWith($"{factoryMock.Object.GetType()} クラスの CreateCommand メソッドを呼び出しましたが null を取得しました。", exception.Message);
+        var exception = Assert.Throws<ArgumentException>("commandManager", action);
+        Assert.StartsWith($"{managerMock.Object.GetType()} クラスの CreateCommand メソッドを呼び出しましたが null を取得しました。", exception.Message);
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("dummy-command")]
-    public void CommandName_ファクトリーで生成したコマンドオブジェクトの名前を取得できる(string? commandName)
+    public void CommandName_マネージャーで生成したコマンドオブジェクトの名前を取得できる(string? commandName)
     {
         // Arrange
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         var command = new CommandImpl(commandName);
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(command);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
-        var executor = new CommandExecutor(factoryMock.Object, loggerMock.Object);
+        var executor = new CommandExecutor(managerMock.Object, loggerMock.Object);
 
         // Act
         var actualCommandName = executor.CommandName;
@@ -107,15 +99,15 @@ public class CommandExecutorTest
         var commandAttribute = new CommandAttribute("sync-command", typeof(SyncCommandImpl));
         var parameter = new CommandParameter { StringParam = "123456" };
         var context = new ConsoleAppContext(commandAttribute, parameter);
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         var command = new SyncCommandImpl();
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(command);
         command.Initialize(context);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
-        var executor = new CommandExecutor(factoryMock.Object, loggerMock.Object);
-        CancellationToken cancellationToken = new CancellationToken(false);
+        var executor = new CommandExecutor(managerMock.Object, loggerMock.Object);
+        var cancellationToken = new CancellationToken(false);
 
         // Act
         var action = () => executor.ExecuteCommandAsync(cancellationToken);
@@ -133,15 +125,15 @@ public class CommandExecutorTest
         // Arrange
         var parameter = new ValidatableParameter();
         var context = new ConsoleAppContext(parameter);
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         var command = new ValidatableCommand();
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(command);
         command.Initialize(context);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
-        var executor = new CommandExecutor(factoryMock.Object, loggerMock.Object);
-        CancellationToken cancellationToken = new CancellationToken(false);
+        var executor = new CommandExecutor(managerMock.Object, loggerMock.Object);
+        var cancellationToken = new CancellationToken(false);
 
         // Act
         var action = () => executor.ExecuteCommandAsync(cancellationToken);
@@ -161,7 +153,7 @@ public class CommandExecutorTest
         var input = "9999";
         var parameter = new CommandParameter { StringParam = input };
         var context = new ConsoleAppContext(commandAttribute, parameter);
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         var errorMessage = "9999 は明示的にエラー";
         var command = new SyncCommandImpl((param) =>
         {
@@ -170,13 +162,13 @@ public class CommandExecutorTest
                 throw new ArgumentException(errorMessage);
             }
         });
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(command);
         command.Initialize(context);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
-        var executor = new CommandExecutor(factoryMock.Object, loggerMock.Object);
-        CancellationToken cancellationToken = new CancellationToken(false);
+        var executor = new CommandExecutor(managerMock.Object, loggerMock.Object);
+        var cancellationToken = new CancellationToken(false);
 
         // Act
         var action = () => executor.ExecuteCommandAsync(cancellationToken);
@@ -196,15 +188,15 @@ public class CommandExecutorTest
         var commandAttribute = new CommandAttribute("sync-command", typeof(SyncCommandImpl));
         var parameter = new CommandParameter { StringParam = "12345" };
         var context = new ConsoleAppContext(commandAttribute, parameter);
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         var command = new SyncCommandImpl();
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(command);
         command.Initialize(context);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
-        var executor = new CommandExecutor(factoryMock.Object, loggerMock.Object);
-        CancellationToken cancellationToken = new CancellationToken(false);
+        var executor = new CommandExecutor(managerMock.Object, loggerMock.Object);
+        var cancellationToken = new CancellationToken(false);
 
         // Act
         var exitCode = await executor.ExecuteCommandAsync(cancellationToken);
@@ -221,19 +213,19 @@ public class CommandExecutorTest
         var parameter = new object();
         var exitCode = 901;
         var context = new ConsoleAppContext(commandAttribute, parameter);
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         var commandMock = new Mock<SyncCommand<object>>();
         commandMock
             .Setup(command => command.Execute(It.IsAny<object>()))
             .Returns(new TestCommandResult(exitCode));
         var command = commandMock.Object;
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(command);
         command.Initialize(context);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
-        var executor = new CommandExecutor(factoryMock.Object, loggerMock.Object);
-        CancellationToken cancellationToken = new CancellationToken(false);
+        var executor = new CommandExecutor(managerMock.Object, loggerMock.Object);
+        var cancellationToken = new CancellationToken(false);
 
         // Act
         var actualExitCode = await executor.ExecuteCommandAsync(cancellationToken);
@@ -250,15 +242,15 @@ public class CommandExecutorTest
         var commandAttribute = new CommandAttribute("async-command", typeof(AsyncCommandImpl));
         var parameter = new CommandParameter { StringParam = "12345" };
         var context = new ConsoleAppContext(commandAttribute, parameter);
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         var command = new AsyncCommandImpl();
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(command);
         command.Initialize(context);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
-        var executor = new CommandExecutor(factoryMock.Object, loggerMock.Object);
-        CancellationToken cancellationToken = new CancellationToken(false);
+        var executor = new CommandExecutor(managerMock.Object, loggerMock.Object);
+        var cancellationToken = new CancellationToken(false);
 
         // Act
         var exitCode = await executor.ExecuteCommandAsync(cancellationToken);
@@ -275,19 +267,19 @@ public class CommandExecutorTest
         var parameter = new object();
         var exitCode = 801;
         var context = new ConsoleAppContext(commandAttribute, parameter);
-        var factoryMock = new Mock<ICommandFactory>();
+        var managerMock = new Mock<ICommandManager>();
         var commandMock = new Mock<AsyncCommand<object>>();
         commandMock
             .Setup(command => command.ExecuteAsync(It.IsAny<object>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult<ICommandResult>(new TestCommandResult(exitCode)));
         var command = commandMock.Object;
-        factoryMock
-            .Setup(factory => factory.CreateCommand())
+        managerMock
+            .Setup(manager => manager.CreateCommand())
             .Returns(command);
         command.Initialize(context);
         var loggerMock = new Mock<ILogger<CommandExecutor>>();
-        var executor = new CommandExecutor(factoryMock.Object, loggerMock.Object);
-        CancellationToken cancellationToken = new CancellationToken(false);
+        var executor = new CommandExecutor(managerMock.Object, loggerMock.Object);
+        var cancellationToken = new CancellationToken(false);
 
         // Act
         var actualExitCode = await executor.ExecuteCommandAsync(cancellationToken);
@@ -306,10 +298,7 @@ public class CommandExecutorTest
         {
         }
 
-        internal CommandImpl(string? commandName)
-        {
-            this.commandName = commandName;
-        }
+        internal CommandImpl(string? commandName) => this.commandName = commandName;
 
         internal override string? CommandName => this.commandName;
 

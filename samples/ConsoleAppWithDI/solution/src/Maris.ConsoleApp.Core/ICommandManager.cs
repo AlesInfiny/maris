@@ -1,9 +1,9 @@
 ﻿namespace Maris.ConsoleApp.Core;
 
 /// <summary>
-///  <see cref="CommandBase"/> オブジェクトを生成するファクトリーのインターフェースです。
+///  <see cref="CommandBase"/> オブジェクトのライフサイクルを管理するマネージャーのインターフェースです。
 /// </summary>
-public interface ICommandFactory
+public interface ICommandManager
 {
     /// <summary>
     ///  生成する <see cref="CommandBase"/> を特定するための
@@ -22,4 +22,9 @@ public interface ICommandFactory
     ///  </list>
     /// </exception>
     CommandBase CreateCommand();
+
+    /// <summary>
+    ///  マネージャーの管理するコマンドのリソースを開放します。
+    /// </summary>
+    void ReleaseCommand();
 }

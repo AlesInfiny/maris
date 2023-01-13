@@ -46,8 +46,8 @@ public class ServiceCollectionExtensionsTest
             },
             service =>
             {
-                Assert.Equal(typeof(ICommandFactory), service.ServiceType);
-                Assert.Equal(typeof(DefaultCommandFactory), service.ImplementationType);
+                Assert.Equal(typeof(ICommandManager), service.ServiceType);
+                Assert.Equal(typeof(DefaultCommandManager), service.ImplementationType);
             });
     }
 
@@ -180,10 +180,7 @@ public class ServiceCollectionExtensionsTest
     {
         private readonly Type[] types;
 
-        internal TestAssembly1(Type[] types)
-        {
-            this.types = types;
-        }
+        internal TestAssembly1(Type[] types) => this.types = types;
 
         public override Type[] GetTypes() => this.types;
 
@@ -194,10 +191,7 @@ public class ServiceCollectionExtensionsTest
     {
         private readonly Type[] types;
 
-        internal TestAssembly2(Type[] types)
-        {
-            this.types = types;
-        }
+        internal TestAssembly2(Type[] types) => this.types = types;
 
         public override Type[] GetTypes() => this.types;
 
