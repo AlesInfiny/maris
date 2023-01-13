@@ -11,9 +11,12 @@ on:
       - '.github/workflows/samples-console-app-with-di.ci.yml'
   workflow_dispatch:
 
+env:
+  WORKING_DIRECTORY: samples/ConsoleAppWithDI/solution
+
 defaults:
   run:
-    working-directory: samples/ConsoleAppWithDI/solution
+    working-directory: ${{ env.WORKING_DIRECTORY }}
 
 jobs:
   build:
