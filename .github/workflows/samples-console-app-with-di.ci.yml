@@ -30,12 +30,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: .NET SDK のセットアップ
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '6.0.x'
-          dotnet-quality: 'ga'
-
       - id: application-build
         name: アプリケーションのビルド
         run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
