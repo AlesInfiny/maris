@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: アプリケーションのビルド
-        run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
+        run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
 
       - name: 単体テストの実行
         run: |
