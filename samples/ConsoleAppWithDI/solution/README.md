@@ -43,6 +43,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
     - Maris.ConsoleApp.Core
     - Maris.ConsoleApp.Hosting
     - Maris.ConsoleApp.UnitTests
+    - Maris.ConsoleApp.IntegrationTests
 
 - テスト用の xUnit 拡張機能
     - Maris.Testing
@@ -68,28 +69,29 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 
 ソリューションファイルを配置したフォルダーを第 1 階層として、本サンプルに付属するファイル・フォルダーを、以下のように配置します。
 
-| 第 1 階層                            | 第 2 階層                  | 備考                                   |
-| ------------------------------------ | -------------------------- | -------------------------------------- |
-| src                                  |                            |                                        |
-|                                      | Maris.ConsoleApp.Core      | フォルダーごと配置する                 |
-|                                      | Maris.ConsoleApp.Hosting   | フォルダーごと配置する                 |
-|                                      | Maris.Testing              | フォルダーごと配置する                 |
-|                                      | Directory.Build.props      |                                        |
-| tests                                |                            |                                        |
-|                                      | Maris.ConsoleApp.UnitTests | フォルダーごと配置する                 |
-|                                      | .editorconfig              | tests フォルダー内のファイルを配置する |
-|                                      | Directory.Build.props      |                                        |
-| <作成したソリューションファイル>.sln |                            |                                        |
-| .editorconfig                        |                            |                                        |
-| Directory.Build.props                |                            |                                        |
-| Directory.Package.props              |                            |                                        |
-| stylecop.json                        |                            |                                        |
+| 第 1 階層                            | 第 2 階層                         | 備考                                   |
+| ------------------------------------ | --------------------------------- | -------------------------------------- |
+| src                                  |                                   |                                        |
+|                                      | Maris.ConsoleApp.Core             | フォルダーごと配置する                 |
+|                                      | Maris.ConsoleApp.Hosting          | フォルダーごと配置する                 |
+|                                      | Maris.Testing                     | フォルダーごと配置する                 |
+|                                      | Directory.Build.props             |                                        |
+| tests                                |                                   |                                        |
+|                                      | Maris.ConsoleApp.IntegrationTests | フォルダーごと配置する                 |
+|                                      | Maris.ConsoleApp.UnitTests        | フォルダーごと配置する                 |
+|                                      | .editorconfig                     | tests フォルダー内のファイルを配置する |
+|                                      | Directory.Build.props             |                                        |
+| <作成したソリューションファイル>.sln |                                   |                                        |
+| .editorconfig                        |                                   |                                        |
+| Directory.Build.props                |                                   |                                        |
+| Directory.Package.props              |                                   |                                        |
+| stylecop.json                        |                                   |                                        |
 
 ### ソリューションへのファイル・プロジェクトの取り込み
 
 作成したソリューションを Visual Studio で開き、ソリューションファイルの直下に「src」ソリューションフォルダーと「tests」ソリューションフォルダーを作成します。
 「src」ソリューションフォルダーに「Maris.ConsoleApp.Core」・「Maris.ConsoleApp.Hosting」・「Maris.Testing」の各プロジェクトを追加します。
-また「tests」ソリューションフォルダーに「Maris.ConsoleApp.UnitTests」プロジェクトを追加します。
+また「tests」ソリューションフォルダーに「Maris.ConsoleApp.IntegrationTests」・「Maris.ConsoleApp.UnitTests」プロジェクトを追加します。
 
 ![各プロジェクト追加後のソリューション構造](readme-images/load-projects-to-solution.png)
 
