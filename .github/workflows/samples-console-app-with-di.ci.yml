@@ -11,6 +11,9 @@ on:
       - '.github/workflows/samples-console-app-with-di.ci.yml'
   workflow_dispatch:
 
+env:
+  WORKING_DIRECTORY: samples/ConsoleAppWithDI/solution
+
 defaults:
   run:
     working-directory: samples/ConsoleAppWithDI/solution
@@ -75,7 +78,7 @@ jobs:
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           reports: '**/TestResults/*/coverage.cobertura.xml'
-          targetdir: 'samples/ConsoleAppWithDI/solution/CoverageReport'
+          targetdir: '${{ env.WORKING_DIRECTORY }}/CoverageReport'
           reporttypes: 'MarkdownSummaryGithub'
           verbosity: 'Verbose'
 
@@ -83,7 +86,6 @@ jobs:
         shell: bash
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         run: |
-          pwd; find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/|  /g'
           sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
           sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
           cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
@@ -93,4 +95,4 @@ jobs:
         if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
         with:
           recreate: true
-          path: CoverageReport/SummaryGithub.md
+          path: '${{ env.WORKING_DIRECTORY }}/CoverageReport/SummaryGithub.md'
