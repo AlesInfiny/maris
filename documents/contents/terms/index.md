@@ -7,7 +7,7 @@ hide:
 
 # 利用規約 {#top}
 
-## AlesInfiny Maris の提供物について {#maris-oss-version-license}
+## AlesInfiny Maris の提供物について {#alesinfiny-maris-license}
 
 AlesInfiny Maris（以下、本サイト）は、以下を提供します。
 

@@ -7,7 +7,7 @@ hide:
 
 # AlesInfiny Maris にようこそ {#top}
 
-## AlesInfiny Maris とは {#what-is-maris-oss-version}
+## AlesInfiny Maris とは {#what-is-alesinfiny-maris-version}
 
 AlesInfiny Maris は、 .NET アプリケーションの一般的なアーキテクチャを実装したサンプルアプリケーションと、その開発ガイドで構成されています。
 エンタープライズシステムに求められるアプリケーション構造を誰でも無償で手に入れることができます。
