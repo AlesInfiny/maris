@@ -10,7 +10,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 ## プロジェクトファイルの設定 {#csproj-settings}
 
 [前節](./create-project.md)で作成したプロジェクトの設定作業を行います。
-Maris OSS 版では、各プロジェクトの設定差分がなるべく発生しないよう、 Directory.Build.props ファイルを用いてプロジェクト設定の集約を推奨します。
+AlesInfiny Maris では、各プロジェクトの設定差分がなるべく発生しないよう、 Directory.Build.props ファイルを用いてプロジェクト設定の集約を推奨します。
 Directory.Build.props ファイルを用いたプロジェクト設定は、アプリケーション全体に対して適用する設定と、プロダクションコード全体に対して適用する設定、テストコード全体に対して適用する設定の 3 種類を原則用意します。
 
 ### アプリケーション全体に対するプロジェクト設定 {#project-settings-for-overall}
@@ -134,7 +134,7 @@ Directory.Packages.props ファイルは、 NuGet を用いて外部のパッケ
 .editorconfig の設定を下位フォルダーでオーバーライドできます。
 オーバーライド設定を記述した .editorconfig ファイルを適用したいフォルダーに配置すると、それ以下のフォルダーでオーバーライドした設定が有効になります。
 
-Maris OSS 版の標準的な構成では、ソリューションルートのフォルダーに、アプリケーション全体のコーディングスタイルを設定した .editorconfig ファイルを配置します。
+AlesInfiny Maris の標準的な構成では、ソリューションルートのフォルダーに、アプリケーション全体のコーディングスタイルを設定した .editorconfig ファイルを配置します。
 tests フォルダーには、テストコード専用の設定をするための .editorconfig ファイルを作成して全体の設定をオーバーライドします。
 
 .editorconfig ファイルについての詳細は「 [EditorConfig で移植可能なカスタム エディター設定を作成する :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options){ target=_blank }」を参照してください。
@@ -215,7 +215,7 @@ stylecop.json の設定方法については[公式ドキュメント :material-
       "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
       "settings": {
         "documentationRules": {
-          "companyName": "Maris OSS Edition",
+          "companyName": "AlesInfiny Maris Edition",
           "documentInterfaces": true,
           "documentExposedElements": true,
           "documentInternalElements": true,
@@ -290,7 +290,7 @@ Visual Studio のソリューションエクスプローラーを利用して、
     stylecop.json ファイルを各プロジェクトからリンクとして追加する操作は、煩雑なうえに間違いやすく、間違いに気付きにくい作業です。
     設定誤りを起こさないために、 Directory.Build.props ファイルを用いて、設定の統合を検討してください。
 
-    Maris OSS 版の推奨するプロジェクト構成をとる場合、 csproj ファイルはソリューションルートから見て同じ深さのフォルダーに配置されます。
+    AlesInfiny Maris の推奨するプロジェクト構成をとる場合、 csproj ファイルはソリューションルートから見て同じ深さのフォルダーに配置されます。
     この前提をすべてのプロジェクトが満たす場合、 Directory.Build.props ファイルに stylecop.json ファイルを追加する設定が記述できます。
     具体的には以下のように Directory.Build.props ファイルを設定します。
 

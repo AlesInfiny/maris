@@ -1,23 +1,23 @@
 ---
 title: 利用規約
-description: Maris OSS 版の利用規約です。
+description: AlesInfiny Maris の利用規約です。
 hide:
   - navigation
 ---
 
 # 利用規約 {#top}
 
-## Maris OSS 版 の提供物について {#maris-oss-version-license}
+## AlesInfiny Maris の提供物について {#maris-oss-version-license}
 
-Maris OSS 版（以下、本サイト）は、以下を提供します。
+AlesInfiny Maris（以下、本サイト）は、以下を提供します。
 
 - 各種ドキュメント
 - サンプルアプリケーション
 
 ## ライセンス {#license}
 
-Maris OSS 版は Apache License, Version 2.0 にて、個人、商用とも無料でご利用いただけます。
-本ライセンスは、 Maris OSS 版のドキュメントとサンプルアプリケーションに対するライセンスであり、サンプルアプリケーションが依存するパッケージのライセンスではありません。
+AlesInfiny Maris は Apache License, Version 2.0 にて、個人、商用とも無料でご利用いただけます。
+本ライセンスは、 AlesInfiny Maris のドキュメントとサンプルアプリケーションに対するライセンスであり、サンプルアプリケーションが依存するパッケージのライセンスではありません。
 
 ### Apache License, Version 2.0 {#apache-license-v2.0}
 
@@ -53,7 +53,7 @@ limitations under the License.
 - Git and the Git logo are either registered trademarks or trademarks of Software Freedom Conservancy, Inc., corporate home of the Git Project, in the United States and/or other countries.
 - Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
 - 「macOS」は、米国およびその他の国で登録された Apple Inc. の商標です。
-  Maris OSS 版は、独立したドキュメントであり、 Apple Inc.が認定、後援、その他承認したものではありません。
+  AlesInfiny Maris は、独立したドキュメントであり、 Apple Inc.が認定、後援、その他承認したものではありません。
 - その他記載されている会社名・商品名などは、各社の商標および登録商標です。
 - 本サイトに記載の商品名、製品名、社名などには、必ずしも商標表示 ( (R) 、 TM ) を付記していません。
 

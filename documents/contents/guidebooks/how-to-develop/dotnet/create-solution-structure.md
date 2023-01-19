@@ -25,7 +25,7 @@ Visual Studio でソリューションを開いたとき、ソリューション
 不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー](https://learn.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder)」の存在です。
 
 ソリューションフォルダーは、 Visual Studio のソリューションエクスプローラー内にのみ存在する仮想的なフォルダーです。
-Maris OSS 版では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
+AlesInfiny Maris では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
 ソリューションエクスプローラー内の配置と、物理的な配置を一致させることで、ファイルの検索性が大きく向上します。
 
 ### ソリューションファイルの作成 {#create-solution-file}
