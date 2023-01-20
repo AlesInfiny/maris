@@ -7,7 +7,7 @@ description: クライアントサイドレンダリングを行う Web アプ�
 
 ## 技術スタック {#tech-stack}
 
-Maris OSS 版を構成する OSS を以下に示します。
+AlesInfiny Maris を構成する OSS を以下に示します。
 
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
@@ -72,7 +72,7 @@ Maris OSS 版を構成する OSS を以下に示します。
 
 ### MVVMパターン {#mvvm-pattern}
 
-Maris OSS 版で採用している Vue.js のソフトウェア・アーキテクチャは MVVM パターンに分類されます。
+AlesInfiny Maris で採用している Vue.js のソフトウェア・アーキテクチャは MVVM パターンに分類されます。
 以下にアーキテクチャを示します。
 ![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture-light.png#only-light){ loading=lazy }
 ![フロントエンド コンポーネント構成](../../images/app-architecture/client-side-rendering/frontend-architecture-dark.png#only-dark){ loading=lazy }
@@ -114,7 +114,7 @@ View がルーティングによって遷移される画面として指定され
 
 #### 画面遷移 {#screen-transition}
 
-画面遷移には、 Vue Router という Vue.js の拡張ライブラリを利用します。 Vue Router はルーティング定義に基づいて遷移先の画面コンポーネントを特定し、表示する画面コンポーネントを切り替えることで画面遷移を実現します。 Vue Router による画面遷移はフロントエンドのみで完結するためバックエンドへ通信しません。また Maris OSS 版では、「View」を切り替えの単位としています。
+画面遷移には、 Vue Router という Vue.js の拡張ライブラリを利用します。 Vue Router はルーティング定義に基づいて遷移先の画面コンポーネントを特定し、表示する画面コンポーネントを切り替えることで画面遷移を実現します。 Vue Router による画面遷移はフロントエンドのみで完結するためバックエンドへ通信しません。また AlesInfiny Maris では、「View」を切り替えの単位としています。
 
 Vue Router : [公式ドキュメント :material-open-in-new:](https://router.vuejs.org/introduction.html){ target=_blank }
 
@@ -128,7 +128,7 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 
 #### フロント入力チェック {#input-validation}
 
-文字種や文字数などの入力チェックは、ビューモデルで行い、不要なバックエンドとの通信の発生を防止します。  Maris OSS 版では VeeValidate と yup という OSS ライブラリを利用します。 VeeValidate はフォームや入力コンポーネントを監視し、 yup は検証スキームを定義する OSS です。
+文字種や文字数などの入力チェックは、ビューモデルで行い、不要なバックエンドとの通信の発生を防止します。  AlesInfiny Maris では VeeValidate と yup という OSS ライブラリを利用します。 VeeValidate はフォームや入力コンポーネントを監視し、 yup は検証スキームを定義する OSS です。
 
 ![VeeValidation と yup による入力チェック](../../images/app-architecture/client-side-rendering/input-validation-light.png#only-light){ loading=lazy }
 ![VeeValidation と yup による入力チェック](../../images/app-architecture/client-side-rendering/input-validation-dark.png#only-dark){ loading=lazy }
@@ -140,7 +140,7 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 
 モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
 
-このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、 Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
+このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、 AlesInfiny Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
 
 Pinia : [公式ドキュメント :material-open-in-new:](https://pinia.vuejs.org/introduction.html){ target=_blank }
 
@@ -166,13 +166,13 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 
 #### APIの呼び出しについて {#about-invoke-api}
 
-API の呼び出しは Action で行います。 Maris OSS 版では、 Promise ベースでリクエストの設定が容易な axios という OSS を利用します。
+API の呼び出しは Action で行います。 AlesInfiny Maris では、 Promise ベースでリクエストの設定が容易な axios という OSS を利用します。
 
 axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
 
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
-Maris OSS 版では API 仕様を OpenAPI を用いて作成します。ここには API の機能が説明されており、フロントエンドエンジニアとバックエンドエンジニアの間で API 設計に乖離が生じないようにします。
+AlesInfiny Maris では API 仕様を OpenAPI を用いて作成します。ここには API の機能が説明されており、フロントエンドエンジニアとバックエンドエンジニアの間で API 設計に乖離が生じないようにします。
 
 OpenAPI 仕様 : [公式ドキュメント :material-open-in-new:](https://swagger.io/specification/){ target=_blank }
 

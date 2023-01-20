@@ -1,5 +1,5 @@
 <!-- textlint-disable @textlint-rule/require-header-id -->
-# Maris OSS 版 ドキュメントについて
+# AlesInfiny Maris ドキュメントについて
 
 <!-- cSpell:ignore hoge hogehoge dotnetfw pymdown -->
 

@@ -1,15 +1,15 @@
 ---
 title: 開発環境構築
-description: Maris OSS 版のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+description: AlesInfiny Maris のアプリケーション開発で最低限必要な環境の構築方法を解説します。
 ---
 
 # ローカル開発環境の構築 {#top}
 
-Maris OSS 版のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+AlesInfiny Maris のアプリケーション開発で最低限必要な環境の構築方法を解説します。
 
 ## システム要件 {#system-requirements}
 
-Maris OSS 版のアプリケーションを開発するコンピューターが満たすべき要件について解説します。
+AlesInfiny Maris のアプリケーションを開発するコンピューターが満たすべき要件について解説します。
 ここに記載のない環境でも開発できることがありますが、動作確認は行われていません。
 
 ### OS 要件 {#os-requirements}
@@ -34,7 +34,7 @@ Maris OSS 版のアプリケーションを開発するコンピューターが�
 
 ### ソフトウェア要件 {#software-requirements}
 
-Maris OSS 版のアプリケーション開発には、 Visual Studio または VS Code を利用できます。
+AlesInfiny Maris のアプリケーション開発には、 Visual Studio または VS Code を利用できます。
 Vue.js を含む SPA アプリケーションを開発する場合は VS Code を使用します。
 Web API アプリケーションやコンソールアプリケーションなど、 .NET アプリケーションを開発する場合は Visual Studio の利用を推奨します。
 
@@ -43,13 +43,13 @@ Web API アプリケーションやコンソールアプリケーションなど
 | Vue.js アプリケーション  | ×            | 〇      |
 | .NET アプリケーション    | 〇            | △ [^1] |
 
-!!! info "Maris OSS 版の前提とする開発環境"
-    Maris OSS 版の提供する情報は、原則として上記推奨環境についてのみ取り扱います。
+!!! info "AlesInfiny Maris の前提とする開発環境"
+    AlesInfiny Maris の提供する情報は、原則として上記推奨環境についてのみ取り扱います。
 
 ## ローカル開発環境の構築手順 {#setup-development-environment}
 
 本節では開発に最低限必要なソフトウェアのインストール方法について解説します。
-Maris OSS 版の各ドキュメントは、本節に記載されている環境が整っていることを前提に記載されています。
+AlesInfiny Maris の各ドキュメントは、本節に記載されている環境が整っていることを前提に記載されています。
 
 ### Visual Studio のインストール {#install-visual-studio}
 

@@ -1,29 +1,29 @@
 ---
-title: Maris OSS 版にようこそ
-description: Maris OSS 版の概要を説明します。
+title: AlesInfiny Maris にようこそ
+description: AlesInfiny Maris の概要を説明します。
 hide:
   - navigation
 ---
 
-# Maris OSS 版にようこそ {#top}
+# AlesInfiny Maris にようこそ {#top}
 
-## Maris OSS 版とは {#what-is-maris-oss-version}
+## AlesInfiny Maris とは {#what-is-alesinfiny-maris-version}
 
-Maris OSS 版は、 .NET アプリケーションの一般的なアーキテクチャを実装したサンプルアプリケーションと、その開発ガイドで構成されています。
+AlesInfiny Maris は、 .NET アプリケーションの一般的なアーキテクチャを実装したサンプルアプリケーションと、その開発ガイドで構成されています。
 エンタープライズシステムに求められるアプリケーション構造を誰でも無償で手に入れることができます。
-Maris OSS 版の提供物は以下の通りです。
+AlesInfiny Maris の提供物は以下の通りです。
 
 - システム形態別の標準的なアプリケーションアーキテクチャ
 - 利用頻度の高い有用な OSS ライブラリ／フレームワークを基盤としたサンプルアプリケーションおよびその解説
 - アプリケーション開発環境／プロジェクト初期構築までのチュートリアル
 - 実現したい要件別のサンプルコード、および実現方式の解説
 
-Maris OSS 版は、商用のエンタープライズシステム開発から個人開発の小規模なシステムまで、 Apache License, Version 2.0 にて無償で利用可能です。
+AlesInfiny Maris は、商用のエンタープライズシステム開発から個人開発の小規模なシステムまで、 Apache License, Version 2.0 にて無償で利用可能です。
 ライセンスについての詳細は「[利用規約 - ライセンス](terms/index.md#license)」を参照してください。
 
 ## クイックスタート {#quick-start}
 
-Maris OSS 版で構築した Web アプリケーションのサンプルを手元で動かしながら確認いただけます。
+AlesInfiny Maris で構築した Web アプリケーションのサンプルを手元で動かしながら確認いただけます。
 
 1. 以下を参照し、開発環境を構築してください
 
