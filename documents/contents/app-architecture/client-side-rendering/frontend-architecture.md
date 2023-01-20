@@ -140,7 +140,7 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 
 モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
 
-このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、 Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
+このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、 AlesInfiny Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
 
 Pinia : [公式ドキュメント :material-open-in-new:](https://pinia.vuejs.org/introduction.html){ target=_blank }
 

@@ -614,7 +614,7 @@ flowchart TD
     Infra-->Biz
     end
     Cli-->Host
-    subgraph Maris
+    subgraph AlesInfiny Maris
     Host-->Core
     UnitTests-->Core
     UnitTests-->Host

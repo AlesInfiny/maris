@@ -215,7 +215,7 @@ stylecop.json の設定方法については[公式ドキュメント :material-
       "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
       "settings": {
         "documentationRules": {
-          "companyName": "AlesInfiny Maris Edition",
+          "companyName": "AlesInfiny Maris",
           "documentInterfaces": true,
           "documentExposedElements": true,
           "documentInternalElements": true,
