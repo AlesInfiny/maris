@@ -164,24 +164,25 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 <!-- textlint-disable -->
 :  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。
 
-#### APIの呼び出しについて {#about-invoke-api}
-
-API の呼び出しは Action で行います。 AlesInfiny Maris では、 Promise ベースでリクエストの設定が容易な axios という OSS を利用します。
-
-axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
-
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
 AlesInfiny Maris では API 仕様を OpenAPI を用いて作成します。ここには API の機能が説明されており、フロントエンドエンジニアとバックエンドエンジニアの間で API 設計に乖離が生じないようにします。
+また [OpenAPI generator :material-open-in-new:](https://github.com/OpenAPITools/openapi-generator){ target=_blank } というツールを利用して、 API クライアントコードを自動生成できます。
+AlesInfiny Maris ではクライアント API アクセス方式に、 Promise ベースでリクエストの設定が容易である Axios を採用しています。
 
-OpenAPI 仕様 : [公式ドキュメント :material-open-in-new:](https://swagger.io/specification/){ target=_blank }
+OpenAPI : [公式ドキュメント :material-open-in-new:](https://swagger.io/specification/){ target=_blank }
+
+Axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
 
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading-lazy }
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading-lazy }
 
-<!-- バックエンド編のAPIドキュメントへリンク -->
+!!! note "OpenAPI Generator の自動生成コード"
+      OpenAPI Generator はサーバー、クライアント双方の様々なコードの自動生成に対応しています。生成可能なコードについては公式ドキュメントを参照してください。
 
-<!-- ### OpenAPI generator -->
+      - [OpenAPI Generator : Generators List :material-open-in-new:](https://openapi-generator.tech/docs/generators){ target=_blank }
+
+<!-- バックエンド編のAPIドキュメントへリンク -->
 
 ## フォルダー構成 {#project-structure}
 
@@ -195,6 +196,7 @@ Vue.js プロジェクトのフォルダー構成は、ブランクプロジェ�
 │  ├─ assets/ ---------------- コードや動的ファイルが必要とするCSSや画像などのアセットを格納します。
 │  ├─ components/ ------------ 単体で自己完結している再利用性の高い vue コンポーネントなどを格納します。
 │  ├─ config/ ---------------- 設定ファイルを格納します。
+│  ├─ generated/ ------------- 自動生成されたファイルを格納します。
 │  ├─ router/ ---------------- ルーティング定義を格納します。
 │  ├─ stores/ ---------------- store に関するファイルを格納します。
 │  ├─ views/ ----------------- ルーティングで指定される vue ファイルを格納します。またページ固有の挙動などもここに含めます。
