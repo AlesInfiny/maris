@@ -168,11 +168,11 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 
 AlesInfiny Maris では API 仕様を OpenAPI を用いて作成します。ここには API の機能が説明されており、フロントエンドエンジニアとバックエンドエンジニアの間で API 設計に乖離が生じないようにします。
 また [OpenAPI generator :material-open-in-new:](https://github.com/OpenAPITools/openapi-generator){ target=_blank } というツールを利用して、 API クライアントコードを自動生成できます。
-AlesInfiny Maris ではクライアント API アクセス方式に、 Promise ベースでリクエストの設定が容易である Axios を採用しています。
+AlesInfiny Maris ではクライアント API アクセス方式に、 Promise ベースでリクエストの設定が容易である axios を採用しています。
 
 OpenAPI : [公式ドキュメント :material-open-in-new:](https://swagger.io/specification/){ target=_blank }
 
-Axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
+axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
 
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading-lazy }
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading-lazy }
