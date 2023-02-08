@@ -23,6 +23,7 @@ Open API Generator を使用するためには、 Java 8 以降のランタイ�
 npm install axios
 ```
 
+<!--
 ### Axios の設定 {#settings-axios}
 
 `./src/config/axios.config.ts` というファイルを作成し、以下のように記述します。
@@ -40,6 +41,7 @@ axios.defaults.baseURL = `作成済みの Web API の URL`;
 ```typescript title="main.ts"
 import '@/config/axios.config';
 ```
+-->
 
 ## Open API Generator {#open-api-generator}
 
@@ -96,10 +98,10 @@ package.json の scripts セクションにタスクを追加します。
 --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true
 ```
 
-生成されたコードの出力先を `./src/api-client` に設定します。
+生成されたコードの出力先を `./src/generated/api-client` に設定します。
 
 ``` terminal
--o ./src/api-client
+-o ./src/generated/api-client
 ```
 
 ## クライアントコードの生成 {#create-client-code}
@@ -111,3 +113,28 @@ npm run generate-client
 ```
 
 オプション ` -o ` に定義した出力先へ、クライアントコードが生成されます。
+
+## クライアントコードの設定
+
+`./src/api-client/index.ts` という設定ファイルを作成し、以下のように記述します。
+
+```typescript title="index.ts"
+import axios from 'axios';
+import * as apiClient from '@/generated/api-client';
+
+const config = new apiClient.Configuration({});
+
+const axiosInstance = axios.create({});
+
+const ordersApi = new apiClient.OrdersApi(config, '', axiosInstance);
+
+export { ordersApi };
+```
+
+- `apiClient.Configuration` : api-client の共通の Configuration があればここに定義します。
+- `axios.create` : axios の共通の設定があればここに定義します。詳しくは[公式ドキュメント :material-open-in-new:](https://github.com/axios/axios#request-config){ target=_blank }を参照してください。
+
+このファイルでは、 api-client や axios 共通の設定を行います。
+API を追加する際は、`src/generated/api-client/api` に自動生成された API を `import` し、各 API が継承している `BaseAPI` のコンストラクターを利用して初期化します。
+
+- `constructor BaseAPI(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios)`
