@@ -135,7 +135,7 @@ export { defaultApi };
 - `axios.create` : axios インスタンスを生成し、共通の設定をカスタマイズします。詳しくは[公式ドキュメント :material-open-in-new:](https://github.com/axios/axios#request-config){ target=_blank }を参照してください。
 
 このファイルでは、 api-client や axios 共通の設定をします。
-API を追加する際は、`src/generated/api-client/api` に自動生成された API を `import` し、各 API が継承している `BaseAPI` のコンストラクターを利用してインスタンスを生成し、 `export` します。
+API を追加する際は `src/generated/api-client/api` に自動生成された API を `import` します。そして、各 API が継承している `BaseAPI` のコンストラクターでインスタンスを生成して `export` します。
 
 ??? info "BaseAPIのコンストラクター"
     `BaseAPI` は OpenAPI Generator で自動生成されるコードの `base.ts` に含まれるクラスです。コンストラクターの引数に api-client の共通設定、 base URL 、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。
