@@ -126,15 +126,29 @@ const config = new apiClient.Configuration({});
 
 const axiosInstance = axios.create({});
 
-const ordersApi = new apiClient.OrdersApi(config, '', axiosInstance);
+const defaultApi = new apiClient.DefaultApi(config, '', axiosInstance);
 
-export { ordersApi };
+export { defaultApi };
 ```
 
-- `apiClient.Configuration` : api-client の共通の Configuration があればここに定義します。
-- `axios.create` : axios の共通の設定があればここに定義します。詳しくは[公式ドキュメント :material-open-in-new:](https://github.com/axios/axios#request-config){ target=_blank }を参照してください。
+- `apiClient.Configuration` : api-client の共通の Configuration があればここに定義します。詳しくは[公式実装例 :material-open-in-new:](https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/resources/typescript-axios/configuration.mustache){ target=_blank }を参照してください。
+- `axios.create` : axios インスタンスを生成し、共通の設定をカスタマイズします。詳しくは[公式ドキュメント :material-open-in-new:](https://github.com/axios/axios#request-config){ target=_blank }を参照してください。
 
-このファイルでは、 api-client や axios 共通の設定を行います。
-API を追加する際は、`src/generated/api-client/api` に自動生成された API を `import` し、各 API が継承している `BaseAPI` のコンストラクターを利用して初期化します。
+このファイルでは、 api-client や axios 共通の設定をします。
+API を追加する際は、`src/generated/api-client/api` に自動生成された API を `import` し、各 API が継承している `BaseAPI` のコンストラクターを利用してインスタンスを生成し、 `export` します。
 
-- `constructor BaseAPI(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios)`
+??? info "BaseAPIのコンストラクター"
+    `BaseAPI` は OpenAPI Generator で自動生成されるコードの `base.ts` に含まれるクラスです。コンストラクターの引数に api-client の共通設定、 base URL 、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。
+
+    ```typescript title="base.ts"
+    export class BaseAPI {
+      protected configuration: Configuration | undefined;
+
+      constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios) {
+        if (configuration) {
+            this.configuration = configuration;
+            this.basePath = configuration.basePath || this.basePath;
+        }
+      }
+    };
+    ```
