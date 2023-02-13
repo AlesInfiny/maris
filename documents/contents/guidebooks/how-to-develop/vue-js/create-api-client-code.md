@@ -23,26 +23,6 @@ Open API Generator を使用するためには、 Java 8 以降のランタイ�
 npm install axios
 ```
 
-<!--
-### Axios の設定 {#settings-axios}
-
-`./src/config/axios.config.ts` というファイルを作成し、以下のように記述します。
-
-```typescript title="axios.config.ts"
-import axios from 'axios';
-
-axios.defaults.baseURL = `作成済みの Web API の URL`;
-```
-
-- `axios.defaults.baseURL` ：Web API のベース URL を設定します。
-
-作成したファイルを読み込むため、 main.ts に import を記述します。
-
-```typescript title="main.ts"
-import '@/config/axios.config';
-```
--->
-
 ## Open API Generator {#open-api-generator}
 
 ### Open API Generator のインストール {#install-open-api-generator}
@@ -138,7 +118,7 @@ export { defaultApi };
 API を追加する際は `src/generated/api-client/api` に自動生成された API を `import` します。そして、各 API が継承している `BaseAPI` のコンストラクターでインスタンスを生成して `export` します。
 
 ??? info "BaseAPIのコンストラクター"
-    `BaseAPI` は OpenAPI Generator で自動生成されるコードの `base.ts` に含まれるクラスです。コンストラクターの引数に api-client の共通設定、 base URL 、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。
+    `BaseAPI` は OpenAPI Generator で自動生成されるコードの `base.ts` に含まれるクラスです。コンストラクターの引数に api-client の共通設定、 ベースパス 、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。 OpenAPI Generator ではデフォルトで Open API 仕様書の URL をベースパスとして生成されます。そのため開発環境で相対パスを有効にするためには、第 2 引数のベースパスを空文字で上書きする必要があります。
 
     ```typescript title="base.ts"
     export class BaseAPI {
