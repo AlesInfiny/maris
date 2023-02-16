@@ -122,10 +122,13 @@ API を追加する際は、以下の手順で追加します。
 1. 生成したインスタンスを `export` します。
 
 ??? info "BaseAPI のコンストラクター"
+    - `BaseAPI(configuration?: Configuration, basePath?: string, axios?: AxiosInstance)`
+  
     `BaseAPI` は OpenAPI Generator で自動生成されるコードの `base.ts` に含まれるクラスです。
-    各 API が継承している `BaseAPI(configuration?: Configuration, basePath?: string, axios?: AxiosInstance)` コンストラクターの引数に api-client の共通設定、ベースパス、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。
+    各 API が継承している `BaseAPI` コンストラクターの引数に api-client の共通設定、ベースパス、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。
+    
     OpenAPI Generator で生成されたクライアントコードはデフォルトで Open API 仕様書の URL が設定されます。
-    開発環境やモックで API サーバーなしでアプリを起動するためには、アプリレベルでエンドポイントの設定を行う必要があります。
+    開発環境やモックで API サーバーなしでアプリを起動するためには、アプリレベルでエンドポイントを設定する必要があります。
     Vite では `/api` のような相対パスに対して異なるエンドポイントの設定ができ、これを有効にするためには、 `BaseAPI` コンストラクターの第 2 引数のベースパスを空文字で上書きする必要があります。
 
     ```typescript title="base.ts"
