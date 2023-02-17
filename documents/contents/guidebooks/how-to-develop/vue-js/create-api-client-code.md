@@ -115,7 +115,6 @@ export { defaultApi };
 - `axios.create` : axios インスタンスを生成し、共通の設定をカスタマイズします。詳しくは[公式ドキュメント :material-open-in-new:](https://github.com/axios/axios#request-config){ target=_blank }を参照してください。
 
 このファイルでは、 api-client や axios 共通の設定をします。
-API を追加する際は、以下の手順で追加します。
 
 1. `src/generated/api-client/api` に自動生成された API を `import` します。
 1. 上記の例の `DefaultApi` と同様に `apiClient.XxxApi(config, '', axiosInstance)` コンストラクターでインスタンスを生成します。
@@ -125,11 +124,13 @@ API を追加する際は、以下の手順で追加します。
     - `BaseAPI(configuration?: Configuration, basePath?: string, axios?: AxiosInstance)`
   
     `BaseAPI` は OpenAPI Generator で自動生成されるコードの `base.ts` に含まれるクラスです。
-    各 API が継承している `BaseAPI` コンストラクターの引数に api-client の共通設定、ベースパス、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。
+    各 API が継承している `BaseAPI` コンストラクターの引数に api-client の共通設定、ベースパス[^1]、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。
     
     OpenAPI Generator で生成されたクライアントコードはデフォルトで Open API 仕様書の URL が設定されます。
     開発環境やモックで API サーバーなしでアプリを起動するためには、アプリレベルでエンドポイントを設定する必要があります。
     Vite では `/api` のような相対パスに対して異なるエンドポイントの設定ができ、これを有効にするためには、 `BaseAPI` コンストラクターの第 2 引数のベースパスを空文字で上書きする必要があります。
+
+    [^1]: ベースパスは `https://www.website.com` のようなリンク先の基準となる URL です。
 
     ```typescript title="base.ts"
     export class BaseAPI {
