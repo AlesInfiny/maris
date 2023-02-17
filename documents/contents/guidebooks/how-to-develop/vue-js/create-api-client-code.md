@@ -130,7 +130,7 @@ export { defaultApi };
     開発環境やモックで API サーバーなしでアプリを起動するためには、アプリレベルでエンドポイントを設定する必要があります。
     Vite では `/api` のような相対パスに対して異なるエンドポイントの設定ができ、これを有効にするためには、 `BaseAPI` コンストラクターの第 2 引数のベースパスを空文字で上書きする必要があります。
 
-    [^1]: ベースパスは `https://www.website.com` のようなリンク先の基準となる URL です。
+    [^1]: ベースパスは `https://www.example.com` のようなリンク先の基準となる URL です。
 
     ```typescript title="base.ts"
     export class BaseAPI {
