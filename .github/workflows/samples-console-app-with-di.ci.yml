@@ -29,6 +29,7 @@ jobs:
       BUILD_SUMMARY_FILE: BuildSummary.md
     permissions:
       checks: write
+      contents: read
       pull-requests: write
 
     steps:
