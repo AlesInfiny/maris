@@ -27,6 +27,8 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       BUILD_CONFIGURATION: Debug
       BUILD_SUMMARY_FILE: BuildSummary.md
+    permissions:
+      checks: write
 
     steps:
       - name: ブランチのチェックアウト
