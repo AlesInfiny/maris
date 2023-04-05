@@ -13,7 +13,7 @@ description: .NET Framework にとどまり続けることで起こりうるリ�
 ## 基本的な方針 {#basic-policy}
 
 .NET Framework と .NET の間には単純互換性がないため、基本的にはコードを書き直す必要があります。
-ただし、 2022/11 現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
+ただし、 2023 年 4 月現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
 
 - .NET Framework Windows フォーム アプリ
 - .NET Framework WPF アプリ
