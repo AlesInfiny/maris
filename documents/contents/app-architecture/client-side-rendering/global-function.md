@@ -28,6 +28,10 @@ Vue.js アーキテクチャで例外が発生する箇所は以下のような�
 ### クライアントコード内で発生する例外 {#client-code-error}
 
 TypeScript で記述するコード(Store や共通部品)のハンドリングできる例外については、基本的に `try-catch` で処理します。
+
+（ただし非同期処理についてはキャッチできないため、Vue.js では親コンポーネントに対する `errorCaptured` フックを利用してハンドリングします。）
+`catch` チェーンで書くのが良いのでは？
+
 予期しないエラーについては、TypeScript の `window.onerror` や Vue.js の `Vue.config.errorHandler` のようなグローバルエラーハンドリングを利用します。
 
 Vue コンポーネントで発生した例外は、ハンドリングしない場合、親コンポーネントへ例外が伝播し続けます。
@@ -37,14 +41,15 @@ Vue コンポーネントで発生した例外は、ハンドリングしない�
 
 API 通信で発生する例外についてはいくつかの段階に分けて処理します。なお API 通信には Axios を利用していることを前提としています。
 
+![API 通信のエラーハンドリング](../../images/app-architecture/client-side-rendering/http-error-handling-light.png)
+
 1. HTTP ステータスコードの共通処理
 
    HTTP ステータスコード 500 番等に対して、 `axios.interceptors` を利用し、共通処理を実装します。
 
 1. API レスポンスの業務例外に対する処理
 
-    HTTP メソッドに対して `try-catch` で処理します。
-    `then-catch` を用いた Promise の処理は、複雑になるとインデントの位置やネストによって可読性を損なうため推奨しません。
+    HTTP メソッドに対して `try-catch`(同期) もしくは `catch` チェーン(非同期)で処理します。
 
 1. API レスポンスに対する画面処理
 
