@@ -2,3 +2,4 @@ samples/** -linguist-documentation
 documents/** linguist-documentation
 
 samples/Dressca/dressca-frontend/src/generated/api-client/** eol=lf
+samples/Dressca/dressca-frontend/src/generated/api-client/**/* eol=lf
