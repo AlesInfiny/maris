@@ -1,5 +1,5 @@
 samples/** -linguist-documentation
 documents/** linguist-documentation
 
-samples/Dressca/dressca-frontend/src/generated/api-client/** text eol=lf
+samples/Dressca/dressca-frontend/src/generated/api-client/** text=auto eol=lf
 *.ts text eol=lf
