@@ -20,7 +20,6 @@
     "vee-validate": "^4.5.8",
     "vue": "^3.2.29",
     "vue-router": "^4.1.6",
-    "vue-virtual-carousel": "github:ha6-6ru/vue-virtual-carousel",
     "yup": "^0.32.11"
   },
   "devDependencies": {
