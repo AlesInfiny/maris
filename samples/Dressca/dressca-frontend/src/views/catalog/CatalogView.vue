@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useSpecialContentStore } from '@/stores/special-content/special-content';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { useBasketStore } from '@/stores/basket/basket';
-import { VirtualCarousel } from 'vue-virtual-carousel';
+import CarouselSlider from '@/components/common/CarouselSlider.vue';
 import Loading from '@/components/common/Loading.vue';
 import { useRouter } from 'vue-router';
 import currencyHelper from '@/shared/helpers/currencyHelper';
@@ -54,14 +54,14 @@ watch([selectedCategory, selectedBrand], async () => {
     <Loading :show="state.showLoading"></Loading>
     <div v-if="!state.showLoading">
       <div class="flex justify-center m-4">
-        <VirtualCarousel :items="getSpecialContents" class="h-[350px] w-full">
+        <CarouselSlider :items="getSpecialContents" class="h-auto w-full">
           <template #default="{ item }">
             <img
               :src="getAssetUrl(item.assetCode)"
-              class="h-full m-auto pointer-events-none"
+              class="max-h-[350px] min-w-0 m-auto pointer-events-none"
             />
           </template>
-        </VirtualCarousel>
+        </CarouselSlider>
       </div>
       <div class="flex justify-center">
         <div class="grid lg:gap-24 grid-cols-1 lg:grid-cols-2 my-4 text-lg">
