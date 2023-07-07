@@ -10,42 +10,111 @@ description: バックエンドで動作する .NET アプリケーションの�
 ## プロジェクトファイルの設定 {#csproj-settings}
 
 [前節](./create-project.md)で作成したプロジェクトの設定作業を行います。
-Maris OSS 版では、プロダクションコード用のプロジェクトと、テストコード用のプロジェクトで基本的な設定に差を持たせることを推奨します。
-静的コード分析のルールに差を持たせ、より重要なプロダクションコードの開発に力をかけることが目的です。
+AlesInfiny Maris では、各プロジェクトの設定差分がなるべく発生しないよう、 Directory.Build.props ファイルを用いてプロジェクト設定の集約を推奨します。
+Directory.Build.props ファイルを用いたプロジェクト設定は、アプリケーション全体に対して適用する設定と、プロダクションコード全体に対して適用する設定、テストコード全体に対して適用する設定の 3 種類を原則用意します。
 
-### プロダクションコード用のプロジェクトファイル設定 {#csproj-settings-for-production}
+### アプリケーション全体に対するプロジェクト設定 {#project-settings-for-overall}
 
-以下の設定が有効になるように、プロジェクトファイルを設定します。
+ソリューションファイルの配置されているフォルダーに、 「Directory.Build.props」 という名前のファイルを作成します。
+ファイル名は、大文字/小文字まで一致するように作成してください。
+以下の設定が有効になるよう、 Directory.Build.props を設定します。
 
-- [ImplicitUsings オプション](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#implicitusings)
-- [Nullable オプション](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/compiler-options/language#nullable)
-- [GenerateDocumentationFile オプション](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#generatedocumentationfile)
+- [ImplicitUsings オプション :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#implicitusings){ target=_blank }
+- [Nullable オプション :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/compiler-options/language#nullable){ target=_blank }
+- [ManagePackageVersionsCentrally オプション :material-open-in-new:](https://devblogs.microsoft.com/nuget/introducing-central-package-management/#enabling-central-package-management){ target=_blank }
 
-.NET 6 以降のプロジェクトテンプレートで `ImplicitUsings` オプションと `Nullable` オプションは、あらかじめ有効に設定されています。
+また利用するフレームワークのバージョンも設定します。
 以下に上記設定を有効にしたプロジェクトファイルの設定例を示します。
 
-```xml title="プロダクションコード用のプロジェクトファイル設定例"
-<PropertyGroup>
-  <TargetFramework>net6.0</TargetFramework>
-  <ImplicitUsings>enable</ImplicitUsings>
-  <Nullable>enable</Nullable>
-  <GenerateDocumentationFile>true</GenerateDocumentationFile>
-</PropertyGroup>
+```xml title="アプリケーション全体の Directory.Build.props ファイル設定例"
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+
+</Project>
 ```
 
-### テストコード用のプロジェクトファイル設定 {#csproj-settings-for-test}
+著作権表記など、全プロジェクトに対して有効にしたい設定がある場合は、上記に加えて設定してください。
 
-`GenerateDocumentationFile` オプションの設定は無効にするか、未設定にしてください。
-その他の設定は「[プロダクションコード用のプロジェクトファイル設定](#csproj-settings-for-production)」とそろえます。
-以下にプロジェクトファイルの設定例を示します。
+### プロダクションコード用のプロジェクト設定 {#project-settings-for-production}
 
-```xml title="テストコード用のプロジェクトファイル設定例"
-<PropertyGroup>
-  <TargetFramework>net6.0</TargetFramework>
-  <ImplicitUsings>enable</ImplicitUsings>
-  <Nullable>enable</Nullable>
-</PropertyGroup>
+プロダクションコードを配置する src フォルダーに、「Directory.Build.props」 という名前のファイルを作成します。
+ルートフォルダーに配置した Directory.Build.props ファイルを上書き設定できるよう、 `#!xml <import>` 要素を定義して、親フォルダーにある Directory.Build.props を読み込んでください。
+また以下の設定が有効になるように、プロジェクトファイルを設定します。
+
+- [GenerateDocumentationFile オプション :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#generatedocumentationfile){ target=_blank }
+
+また NeutralLanguage の設定[^1] もあわせて行っておくことを推奨します。
+上記設定を有効にしたプロジェクトファイルの設定例を示します。
+
+```xml title="プロダクションコード用の Directory.Build.props ファイル設定例"
+<Project>
+
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>ja-JP</NeutralLanguage>
+  </PropertyGroup>
+
+</Project>
 ```
+
+### テストコード用のプロジェクト設定 {#project-settings-for-test}
+
+テストコードを配置する tests フォルダーに、「Directory.Build.props」 という名前のファイルを作成します。
+[プロダクションコード用のプロジェクト設定](#project-settings-for-production) でも解説した通り、ルートフォルダーに配置した Directory.Build.props ファイルを上書き設定できるよう、 `#!xml <import>` 要素の追加を推奨します。
+特に設定する項目がなければ、 tests フォルダーに Directory.Build.props ファイルを追加する必要ありません。
+
+### プロジェクトファイルの設定値削除 {#delete-csproj-settings}
+
+プロジェクトを新規作成したとき、 csproj ファイルには、ここまでに解説した設定と重複するものが自動的に追加されます。
+このままでは、 csproj ファイルの設定値が有効になり、せっかく作成した Directory.Build.props ファイルが利用されません。
+これまでの手順で行った設定値を参照しながら、 csproj ファイルに個別に設定されている値を削除します。
+
+例えば、コンソールアプリケーションのプロジェクトを作成した場合、 csproj ファイルから削除すべき設定は以下の通りです。
+csproj ファイルから設定を削除しても、 Directory.Build.props ファイルの設定が有効になります。
+
+```xml hl_lines="5 6 7" title="csproj ファイルから削除するべき設定値の例"
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
+```
+
+## パッケージ集中管理の導入 {#setup-central-package-management}
+
+.NET アプリケーションでは、[NuGet :material-open-in-new:](https://www.nuget.org/){ target=_blank } を用いて、様々なパッケージの参照や管理をします。
+既定のまま NuGet を用いると、 csproj ファイルに参照する NuGet パッケージのバージョンを設定しなければなりません。
+プロジェクト数が少ないうちは、この管理方法でも問題ありませんが、プロジェクト数が増えるにしたがって、管理は煩雑になっていきます。
+こういった問題を解消するため、 NuGet 6.2 から [パッケージ集中管理 :material-open-in-new:](https://devblogs.microsoft.com/nuget/introducing-central-package-management/){ target=_blank } 機能が追加されました。
+参照するパッケージのバージョンを 1 つのファイルで管理できるため、積極的な活用を推奨します。
+
+パッケージ集中管理の機能を利用するには、[アプリケーション全体に対するプロジェクト設定](#project-settings-for-overall) で解説した `ManagePackageVersionsCentrally` プロパティを有効にします。
+ルートフォルダーの Directory.Build.props ファイルに設定すれば、すべてのプロジェクトに対してこの設定を反映できます。
+
+続いて、ルートフォルダーに 「Directory.Packages.props」 という名前のファイルを作成します。
+ファイル名は、大文字/小文字まで一致するように作成してください。
+ソリューションをゼロから作成する場合は、以下のように `#!xml <Project>` 要素だけを定義します。
+
+```xml title="最初の Directory.Packages.props ファイル"
+<Project>
+</Project>
+```
+
+開発に Visual Studio を利用している場合は、ソリューションを開きなおして、パッケージ集中管理の機能を有効化してください。
+Directory.Packages.props ファイルは、 NuGet を用いて外部のパッケージを参照したとき、自動的に設定が書きこまれます。
 
 ## 静的コード解析用パッケージと設定ファイルの導入 {#setup-static-code-testing}
 
@@ -65,16 +134,16 @@ Maris OSS 版では、プロダクションコード用のプロジェクトと�
 .editorconfig の設定を下位フォルダーでオーバーライドできます。
 オーバーライド設定を記述した .editorconfig ファイルを適用したいフォルダーに配置すると、それ以下のフォルダーでオーバーライドした設定が有効になります。
 
-Maris OSS 版の標準的な構成では、ソリューションルートのフォルダーに、アプリケーション全体のコーディングスタイルを設定した .editorconfig ファイルを配置します。
+AlesInfiny Maris の標準的な構成では、ソリューションルートのフォルダーに、アプリケーション全体のコーディングスタイルを設定した .editorconfig ファイルを配置します。
 tests フォルダーには、テストコード専用の設定をするための .editorconfig ファイルを作成して全体の設定をオーバーライドします。
 
-.editorconfig ファイルについての詳細は「 [EditorConfig で移植可能なカスタム エディター設定を作成する](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options)」を参照してください。
+.editorconfig ファイルについての詳細は「 [EditorConfig で移植可能なカスタム エディター設定を作成する :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options){ target=_blank }」を参照してください。
 
 #### .editorconfig のルール設定 {#setup-editorconfig-rule}
 
 ソリューションルートに配置する .editorconfig ファイルは、 Visual Studio を用いて生成したファイルを使用します。
 ルールの設定も Visual Studio を用いると、 GUI 上で設定変更できます。
-詳細な手順は「 [EditorConfig ファイルの追加と削除](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options#add-and-remove-editorconfig-files)」を参照してください。
+詳細な手順は「 [EditorConfig ファイルの追加と削除 :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options#add-and-remove-editorconfig-files){ target=_blank }」を参照してください。
 
 tests フォルダーに配置するテストコード専用の設定は、原則コード分析ルールの設定のみ行います。
 以下に設定例を示します。
@@ -91,11 +160,11 @@ dotnet_diagnostic.SA1600.severity=none
     上記の .editorconfig では、主に XML コメントの記述制限緩和と、テストコード記述でよく利用する記法に対する制限を緩和しています。
     詳細は以下の通りです。
 
-    | ID                                                                                                 | 緩和する理由                                                           |
-    | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-    | [SA0001](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md) | テストプロジェクトの XML ドキュメントは不要なため。                    |
-    | [SA1123](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1123.md) | テストコード内で `#!csharp #region` を使ったコード整理を多用するため。 |
-    | [SA1600](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md) | テストプロジェクトの XML ドキュメントは不要なため。                    |
+    | ID                                                                                                                                         | 緩和する理由                                                           |
+    | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+    | [SA0001 :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md){ target=_blank } | テストプロジェクトの XML ドキュメントは不要なため。                    |
+    | [SA1123 :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1123.md){ target=_blank } | テストコード内で `#!csharp #region` を使ったコード整理を多用するため。 |
+    | [SA1600 :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md){ target=_blank } | テストプロジェクトの XML ドキュメントは不要なため。                    |
 
 !!! tip "自動生成コードの静的コード解析"
     Visual Studio や .NET CLI など、コード自動生成機能が生成したコードに対する静的コード解析は原則実施しません。
@@ -109,7 +178,7 @@ dotnet_diagnostic.SA1600.severity=none
     ```
 
     プロジェクト設定の都合によって、上記の設定では対処しきれない警告がある場合は、個別にルールの重大度を `none` に設定します。
-    設定方法の詳細は「[コード分析の構成オプション - Scope](https://learn.microsoft.com/ja-jp/dotnet/fundamentals/code-analysis/configuration-options#scope)」を参照してください。
+    設定方法の詳細は「[コード分析の構成オプション - Scope :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/fundamentals/code-analysis/configuration-options#scope){ target=_blank }」を参照してください。
 
 ### StyleCop Analyzers {#stylecop-analyzers}
 
@@ -121,13 +190,13 @@ dotnet_diagnostic.SA1600.severity=none
 
 #### StyleCop Analyzers のインストール {#install-stylecop-analyzers}
 
-StyleCop Analyzers は [NuGet パッケージ](https://www.nuget.org/packages/StyleCop.Analyzers/)として提供されています。
+StyleCop Analyzers は [NuGet パッケージ :material-open-in-new:](https://www.nuget.org/packages/StyleCop.Analyzers/){ target=_blank } として提供されています。
 StyleCop Analyzers を用いて静的コード解析したいプロジェクトから参照設定を行ってください。
 通常はすべてのプロジェクトから参照するように設定します。
 
 !!! warning "StyleCop Analyzers のバージョンに注意"
 
-    .NET 6 以降利用できるようになった[ファイルスコープ名前空間](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace)を利用する場合、 StyleCop Analyzers 1.2.0 以降を使用してください。
+    .NET 6 以降利用できるようになった[ファイルスコープ名前空間 :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace){ target=_blank }を利用する場合、 StyleCop Analyzers 1.2.0 以降を使用してください。
     1.1.118 では正常に解析が行われません。
 
 #### stylecop.json ファイルの配置 {#stylecop-json-placement}
@@ -135,7 +204,7 @@ StyleCop Analyzers を用いて静的コード解析したいプロジェクト�
 StyleCop Analyzers は、 stylecop.json ファイルを用いてコーディングルールを設定します。
 stylecop.json にはソリューション内のすべてのコードに対して適用すべきコーディングルールを設定します。
 stylecop.json ファイルはソリューション内にひとつだけ作成し、ソリューションファイルと同じフォルダーに配置します。
-stylecop.json の設定方法については[公式ドキュメント](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md)を参照してください。
+stylecop.json の設定方法については[公式ドキュメント :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md){ target=_blank }を参照してください。
 
 ??? example "stylecop.json の設定例"
     StyleCop Analyzers 1.2.0-beta.435 に対応した stylecop.json の設定例を以下に示します。
@@ -146,7 +215,7 @@ stylecop.json の設定方法については[公式ドキュメント](https://g
       "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
       "settings": {
         "documentationRules": {
-          "companyName": "Maris OSS Edition",
+          "companyName": "AlesInfiny Maris",
           "documentInterfaces": true,
           "documentExposedElements": true,
           "documentInternalElements": true,
@@ -193,7 +262,7 @@ stylecop.json の設定方法については[公式ドキュメント](https://g
 stylecop.json は、各プロジェクトのルートフォルダーにあるかのように設定しなければなりません。
 同時にコーディングルールの管理負荷軽減のため、 stylecop.json を各プロジェクトに分散配置せず、ソリューション内にひとつだけ配置することが望まれます。
 これらを両立するため、各プロジェクトからは、ソリューションルートに配置した stylecop.json をリンクとしてプロジェクトに追加しましょう。
-また Visual Studio のソリューションエクスプローラーを利用して、 stylecop.json ファイルの [ビルドアクション] プロパティを [C# アナライザー追加ファイル] に設定します。
+Visual Studio のソリューションエクスプローラーを利用して、 stylecop.json ファイルの [ビルドアクション] プロパティを [C# アナライザー追加ファイル] に設定します。
 これにより、 StyleCop Analyzers の設定ファイルであることをコンパイラーに通知できます。
 
 ここまで解説した内容を実施すると、最終的にプロジェクトファイルの設定は以下のようになります。
@@ -208,13 +277,33 @@ stylecop.json は、各プロジェクトのルートフォルダーにあるか
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.406">
+    <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 </Project>
 ```
+
+!!! info "Directory.Build.props ファイルを利用して設定の統合を検討する"
+
+    stylecop.json ファイルを各プロジェクトからリンクとして追加する操作は、煩雑なうえに間違いやすく、間違いに気付きにくい作業です。
+    設定誤りを起こさないために、 Directory.Build.props ファイルを用いて、設定の統合を検討してください。
+
+    AlesInfiny Maris の推奨するプロジェクト構成をとる場合、 csproj ファイルはソリューションルートから見て同じ深さのフォルダーに配置されます。
+    この前提をすべてのプロジェクトが満たす場合、 Directory.Build.props ファイルに stylecop.json ファイルを追加する設定が記述できます。
+    具体的には以下のように Directory.Build.props ファイルを設定します。
+
+    ```xml title="stylecop.json ファイルをリンクとして追加する Directory.Build.props ファイルの設定例"
+    <Project>
+      <!-- 無関係の部分は省略 -->
+      <ItemGroup>
+        <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
+      </ItemGroup>
+    </Project>
+    ```
+
+    ソリューションルートの Directory.Build.props ファイルを上記のように設定したら、各プロジェクトファイルからは、 stylecop.json ファイルのへのリンク設定を削除できます。
 
 ## メッセージリソースの追加 {#add-message-resource}
 
@@ -226,7 +315,7 @@ stylecop.json は、各プロジェクトのルートフォルダーにあるか
 例外メッセージやログメッセージなど、プロジェクト内で使用するメッセージは、すべてこのリソースファイルに集約して管理します。
 
 リソースファイルの作成は、 Visual Studio を用いるのが最も簡単です。
-詳細な手順は「 [.NET アプリ用のリソース ファイルを作成する](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files)」を参照してください。
+詳細な手順は「 [.NET アプリ用のリソース ファイルを作成する :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files){ target=_blank }」を参照してください。
 
 Visual Studio を用いてリソースファイルを作成すると、リソースファイルに定義したメッセージを取得するコードが自動生成されます。
 また Visual Studio の GUI 上で、リソースの公開範囲を指定できます。
@@ -240,3 +329,5 @@ Visual Studio を用いてリソースファイルを作成すると、リソー
 
     また同じメッセージであっても、異なる事象を表すのであれば異なるメッセージとして定義することを検討しましょう。
     メッセージが本当に同じで良いか、見直してみる価値があります。
+
+[^1]: アプリケーションの既定のカルチャを設定します。日本語を既定値に用いるシステムの場合は `ja-JP` を設定してください。

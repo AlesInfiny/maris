@@ -1,9 +1,11 @@
 const base = 'api';
 import * as url from 'url';
-import type { CatalogCategoryResponse } from '../../src/api-client/models/catalog-category-response';
-import type { CatalogBrandResponse } from '../../src/api-client/models/catalog-brand-response';
-import type { PagedListOfCatalogItemResponse } from '../../src/api-client/models/paged-list-of-catalog-item-response';
-import type { Express } from 'express-serve-static-core';
+import type {
+  CatalogCategoryResponse,
+  CatalogBrandResponse,
+  PagedListOfCatalogItemResponse,
+} from '../../src/generated/api-client';
+import type { Connect } from 'vite';
 
 const categories: CatalogCategoryResponse[] = [
   {
@@ -158,20 +160,20 @@ const catalogItemPage: PagedListOfCatalogItemResponse = {
   ],
 };
 
-export const catalogApiMock = (middlewares: Express) => {
-  middlewares.use(`/${base}/catalog-categories`, (_, res) => {
+export const catalogApiMock = (middlewares: Connect.Server) => {
+  middlewares.use(`/${base}/catalog-categories`, (req, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(categories));
     res.end();
   });
-  middlewares.use(`/${base}/catalog-brands`, (_, res) => {
+  middlewares.use(`/${base}/catalog-brands`, (req, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(brands));
     res.end();
   });
-  middlewares.use(`/${base}/catalog-items`, (_, res) => {
+  middlewares.use(`/${base}/catalog-items`, (req, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    const query = url.parse(_.url, true).query;
+    const query = req.url && url.parse(req.url, true).query;
     const page: PagedListOfCatalogItemResponse = {
       hasNext: catalogItemPage.hasNext,
       hasPrevious: catalogItemPage.hasPrevious,

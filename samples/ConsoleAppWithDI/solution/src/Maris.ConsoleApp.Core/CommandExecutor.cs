@@ -10,31 +10,32 @@ public class CommandExecutor
 {
     private readonly ILogger logger;
     private readonly CommandBase command;
+    private readonly ICommandManager commandManager;
 
     /// <summary>
     ///  <see cref="CommandExecutor"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="factory">実行する <see cref="CommandBase"/> オブジェクトを生成するファクトリー。</param>
+    /// <param name="commandManager">実行する <see cref="CommandBase"/> オブジェクトのライフサイクルを管理するマネージャー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
-    ///   <item><paramref name="factory"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="commandManager"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     /// <exception cref="ArgumentException">
     ///  <list type="bullet">
-    ///   <item><paramref name="factory"/> がコマンドを生成できませんでした。</item>
+    ///   <item><paramref name="commandManager"/> がコマンドを生成できませんでした。</item>
     ///  </list>
     /// </exception>
-    public CommandExecutor(ICommandFactory factory, ILogger<CommandExecutor> logger)
+    public CommandExecutor(ICommandManager commandManager, ILogger<CommandExecutor> logger)
     {
-        ArgumentNullException.ThrowIfNull(factory);
+        this.commandManager = commandManager ?? throw new ArgumentNullException(nameof(commandManager));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        this.command = factory.CreateCommand() ??
+        this.command = commandManager.CreateCommand() ??
             throw new ArgumentException(
-                Messages.MethodReturnNull.Embed(factory.GetType(), "CreateCommand"),
-                nameof(factory));
+                Messages.MethodReturnNull.Embed(commandManager.GetType(), "CreateCommand"),
+                nameof(commandManager));
     }
 
     /// <summary>
@@ -43,7 +44,7 @@ public class CommandExecutor
     public string? CommandName => this.command?.CommandName; // command は null 非許容なので ? 演算子は不要だが、保険のためつけておく。
 
     /// <summary>
-    ///  コンストラクターに設定した <see cref="ICommandFactory"/> で生成したコマンドを非同期実行します。
+    ///  コンストラクターに設定した <see cref="ICommandManager"/> で生成したコマンドを非同期実行します。
     /// </summary>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>コマンドの終了コード。</returns>
@@ -58,6 +59,18 @@ public class CommandExecutor
     ///  </list>
     /// </exception>
     public async Task<int> ExecuteCommandAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await this.ExecuteCommandInternalAsync(cancellationToken);
+        }
+        finally
+        {
+            this.commandManager.ReleaseCommand();
+        }
+    }
+
+    private async Task<int> ExecuteCommandInternalAsync(CancellationToken cancellationToken)
     {
         ICommandResult result;
         this.logger.LogDebug(Messages.CommandExecutor_ValidatingParameter, this.CommandName);

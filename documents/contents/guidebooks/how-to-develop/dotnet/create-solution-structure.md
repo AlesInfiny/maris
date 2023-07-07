@@ -25,7 +25,7 @@ Visual Studio でソリューションを開いたとき、ソリューション
 不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー](https://learn.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder)」の存在です。
 
 ソリューションフォルダーは、 Visual Studio のソリューションエクスプローラー内にのみ存在する仮想的なフォルダーです。
-Maris OSS 版では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
+AlesInfiny Maris では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
 ソリューションエクスプローラー内の配置と、物理的な配置を一致させることで、ファイルの検索性が大きく向上します。
 
 ### ソリューションファイルの作成 {#create-solution-file}
@@ -65,6 +65,13 @@ src フォルダーにはプロダクションコードを、 tests フォルダ
     .editorconfig ファイルは、ファイルを配置したフォルダー以下すべてのファイルに対して、設定した値が影響を与えます。
     プロダクションコードとテストコードでは、通常コーディングルールの厳しさに濃淡をつけます[^1]。
     そのため、プロダクションコードを配置するフォルダーとテストコードを配置するフォルダーを最初に分類しておくことで、各コード向けの .editorconfig ファイルの適用が簡単になります。
+
+    またフォルダー構造に基づく設定は、他にもいくつか存在します。
+
+    - [Directory.Build.props と Directory.Build.targets](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/customize-your-build#directorybuildprops-and-directorybuildtargets)
+    - [Central Package Management](https://devblogs.microsoft.com/nuget/introducing-central-package-management/)
+
+    プロダクションコードを配置するフォルダーとテストコードを配置するフォルダーの分割は、これらの機能を活用するためにも役立ちます。
 
 ## プロジェクト配置の定義 {#define-project}
 

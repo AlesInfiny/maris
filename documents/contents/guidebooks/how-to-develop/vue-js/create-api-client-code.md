@@ -23,24 +23,6 @@ Open API Generator を使用するためには、 Java 8 以降のランタイ�
 npm install axios
 ```
 
-### Axios の設定 {#settings-axios}
-
-`./src/config/axios.config.ts` というファイルを作成し、以下のように記述します。
-
-```typescript title="axios.config.ts"
-import axios from 'axios';
-
-axios.defaults.baseURL = `作成済みの Web API の URL`;
-```
-
-- `axios.defaults.baseURL` ：Web API のベース URL を設定します。
-
-作成したファイルを読み込むため、 main.ts に import を記述します。
-
-```typescript title="main.ts"
-import '@/config/axios.config';
-```
-
 ## Open API Generator {#open-api-generator}
 
 ### Open API Generator のインストール {#install-open-api-generator}
@@ -96,10 +78,10 @@ package.json の scripts セクションにタスクを追加します。
 --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true
 ```
 
-生成されたコードの出力先を `./src/api-client` に設定します。
+生成されたコードの出力先を `./src/generated/api-client` に設定します。
 
 ``` terminal
--o ./src/api-client
+-o ./src/generated/api-client
 ```
 
 ## クライアントコードの生成 {#create-client-code}
@@ -111,3 +93,54 @@ npm run generate-client
 ```
 
 オプション ` -o ` に定義した出力先へ、クライアントコードが生成されます。
+
+## クライアントコードの設定 {#set-client-code}
+
+`./src/api-client/index.ts` という設定ファイルを作成し、以下のように記述します。
+
+```typescript title="index.ts"
+import axios from 'axios';
+import * as apiClient from '@/generated/api-client';
+
+const config = new apiClient.Configuration({});
+
+const axiosInstance = axios.create({});
+
+const defaultApi = new apiClient.DefaultApi(config, '', axiosInstance);
+
+export { defaultApi };
+```
+
+- `apiClient.Configuration` : api-client の共通の Configuration があればここに定義します。プロパティの詳細は[こちら :material-open-in-new:](https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator/src/main/resources/typescript-axios/configuration.mustache){ target=_blank }を参照してください。
+- `axios.create` : axios インスタンスを生成し、共通の設定をカスタマイズします。詳しくは[公式ドキュメント :material-open-in-new:](https://github.com/axios/axios#request-config){ target=_blank }を参照してください。
+
+このファイルでは、 api-client や axios 共通の設定をします。
+
+1. `src/generated/api-client/api` に自動生成された API を `import` します。
+1. 上記の例の `DefaultApi` と同様に `apiClient.XxxApi(config, '', axiosInstance)` コンストラクターでインスタンスを生成します。
+1. 生成したインスタンスを `export` します。
+
+??? info "BaseAPI のコンストラクター"
+    - `BaseAPI(configuration?: Configuration, basePath?: string, axios?: AxiosInstance)`
+  
+    `BaseAPI` は OpenAPI Generator で自動生成されるコードの `base.ts` に含まれるクラスです。
+    各 API が継承している `BaseAPI` コンストラクターの引数に api-client の共通設定、ベースパス[^1]、 axios インスタンスを設定することで、 API に関するグローバルな設定を適用します。
+    
+    OpenAPI Generator で生成されたクライアントコードはデフォルトで Open API 仕様書の URL が設定されます。
+    開発環境やモックで API サーバーなしでアプリを起動するためには、アプリレベルでエンドポイントを設定する必要があります。
+    Vite では `/api` のような相対パスに対して異なるエンドポイントの設定ができ、これを有効にするためには、 `BaseAPI` コンストラクターの第 2 引数のベースパスを空文字で上書きする必要があります。
+
+    [^1]: ベースパスは `https://www.example.com` のようなリンク先の基準となる URL です。
+
+    ```typescript title="base.ts"
+    export class BaseAPI {
+      protected configuration: Configuration | undefined;
+
+      constructor(configuration?: Configuration, protected basePath: string = BASE_PATH, protected axios: AxiosInstance = globalAxios) {
+        if (configuration) {
+            this.configuration = configuration;
+            this.basePath = configuration.basePath || this.basePath;
+        }
+      }
+    };
+    ```

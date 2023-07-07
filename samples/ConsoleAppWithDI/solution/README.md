@@ -17,7 +17,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 本サンプルは以下の環境で動作確認を行っています。
 
 - .NET 6
-- Visual Studio 2022 17.3
+- Visual Studio 2022 17.4
 
 ## 前提となる OSS ライブラリ
 
@@ -43,6 +43,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
     - Maris.ConsoleApp.Core
     - Maris.ConsoleApp.Hosting
     - Maris.ConsoleApp.UnitTests
+    - Maris.ConsoleApp.IntegrationTests
 
 - テスト用の xUnit 拡張機能
     - Maris.Testing
@@ -52,7 +53,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
     - （Maris.Samples.ApplicationCore）※
     - （Maris.Samples.InMemoryInfrastructure）※
 
-※：サンプルアプリケーションを実行するために、 Maris OSS 版の定義するアーキテクチャを簡略化して実装したサンプルです。
+※：サンプルアプリケーションを実行するために、 AlesInfiny Maris の定義するアーキテクチャを簡略化して実装したサンプルです。
 コンソールアプリケーションの実行フレームワークと、本質的な関連はありません。
 
 コンソールアプリケーションの実行フレームワークは、プロジェクトごとご自身のソリューションに取り込んで利用します。
@@ -68,24 +69,29 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 
 ソリューションファイルを配置したフォルダーを第 1 階層として、本サンプルに付属するファイル・フォルダーを、以下のように配置します。
 
-| 第 1 階層                            | 第 2 階層                  | 備考                                   |
-| ------------------------------------ | -------------------------- | -------------------------------------- |
-| src                                  |                            |                                        |
-|                                      | Maris.ConsoleApp.Core      | フォルダーごと配置する                 |
-|                                      | Maris.ConsoleApp.Hosting   | フォルダーごと配置する                 |
-|                                      | Maris.Testing              | フォルダーごと配置する                 |
-| tests                                |                            |                                        |
-|                                      | Maris.ConsoleApp.UnitTests | フォルダーごと配置する                 |
-|                                      | .editorconfig              | tests フォルダー内のファイルを配置する |
-| <作成したソリューションファイル>.sln |                            |                                        |
-| .editorconfig                        |                            |                                        |
-| stylecop.json                        |                            |                                        |
+| 第 1 階層                            | 第 2 階層                         | 備考                                   |
+| ------------------------------------ | --------------------------------- | -------------------------------------- |
+| src                                  |                                   |                                        |
+|                                      | Maris.ConsoleApp.Core             | フォルダーごと配置する                 |
+|                                      | Maris.ConsoleApp.Hosting          | フォルダーごと配置する                 |
+|                                      | Maris.Testing                     | フォルダーごと配置する                 |
+|                                      | Directory.Build.props             |                                        |
+| tests                                |                                   |                                        |
+|                                      | Maris.ConsoleApp.IntegrationTests | フォルダーごと配置する                 |
+|                                      | Maris.ConsoleApp.UnitTests        | フォルダーごと配置する                 |
+|                                      | .editorconfig                     | tests フォルダー内のファイルを配置する |
+|                                      | Directory.Build.props             |                                        |
+| <作成したソリューションファイル>.sln |                                   |                                        |
+| .editorconfig                        |                                   |                                        |
+| Directory.Build.props                |                                   |                                        |
+| Directory.Package.props              |                                   |                                        |
+| stylecop.json                        |                                   |                                        |
 
 ### ソリューションへのファイル・プロジェクトの取り込み
 
 作成したソリューションを Visual Studio で開き、ソリューションファイルの直下に「src」ソリューションフォルダーと「tests」ソリューションフォルダーを作成します。
 「src」ソリューションフォルダーに「Maris.ConsoleApp.Core」・「Maris.ConsoleApp.Hosting」・「Maris.Testing」の各プロジェクトを追加します。
-また「tests」ソリューションフォルダーに「Maris.ConsoleApp.UnitTests」プロジェクトを追加します。
+また「tests」ソリューションフォルダーに「Maris.ConsoleApp.IntegrationTests」・「Maris.ConsoleApp.UnitTests」プロジェクトを追加します。
 
 ![各プロジェクト追加後のソリューション構造](readme-images/load-projects-to-solution.png)
 
@@ -104,6 +110,10 @@ Visual Studio を用いてソリューションをビルドします。
 続いて必要なフレームワークの参照設定を行います。
 「Maris.ConsoleApp.Core」プロジェクト、「Maris.ConsoleApp.Hosting」プロジェクトを「Maris.Samples.Cli」プロジェクトから参照してください。
 また汎用ホスト上でアプリケーションを実行するため、「[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)」 NuGet パッケージも参照に追加してください。
+バージョンは 6.x 系の最新バージョンの導入を推奨します。
+
+最後に、 Directory.Build.props と重複している設定を Maris.Samples.Cli.csproj ファイルから削除します。
+`TargetFramework` 、 `ImplicitUsings` 、 `Nullable` は、ソリューションルートへ配置した Directory.Build.props に設定してあるため削除対象です。
 Maris.Samples.Cli.csproj ファイルは、以下のようになります。
 
 ```xml
@@ -111,13 +121,10 @@ Maris.Samples.Cli.csproj ファイルは、以下のようになります。
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
   </ItemGroup>
 
   <ItemGroup>
@@ -252,7 +259,7 @@ Visual Studio でアプリケーションをビルドして実行してくださ
 
 ```plane
 Maris.Samples.Cli 1.0.0
-Copyright (C) 2022 Maris.Samples.Cli
+Copyright © 2023 BIPROGY Inc. All rights reserved.
 
 ERROR(S):
   No verb selected.
@@ -607,7 +614,7 @@ flowchart TD
     Infra-->Biz
     end
     Cli-->Host
-    subgraph Maris
+    subgraph AlesInfiny Maris
     Host-->Core
     UnitTests-->Core
     UnitTests-->Host

@@ -7,7 +7,7 @@ updates:
     commit-message:
       prefix: "npm-root"
     labels:
-      - "repo-root"
+      - "ドキュメント改善"
       - "npm"
       - "dependencies"
   - package-ecosystem: "npm"
@@ -21,121 +21,21 @@ updates:
       - "npm"
       - "dependencies"
   - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.ApplicationCore"
+    directory: "/samples/Dressca/dressca-backend"
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "nuget-dressca"
     labels:
       - "target: Dressca"
       - "nuget"
       - "dependencies"
   - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure"
+    directory: "/samples/ConsoleAppWithDI/solution"
     schedule:
       interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.Store.Assets.StaticFiles"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.SystemCommon"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.Web.Dto"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/src/Dressca.Web"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/tests/Dressca.TestLibrary"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/Dressca/dressca-backend/tests/Dressca.UnitTests"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: Dressca"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/ConsoleAppWithDI/solution/src/Maris.ConsoleApp.Core"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: ConsoleAppWithDI"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/ConsoleAppWithDI/solution/src/Maris.ConsoleApp.Hosting"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: ConsoleAppWithDI"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/ConsoleAppWithDI/solution/src/Maris.Samples.ApplicationCore"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: ConsoleAppWithDI"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/ConsoleAppWithDI/solution/src/Maris.Samples.Cli"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: ConsoleAppWithDI"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/ConsoleAppWithDI/solution/src/Maris.Samples.InMemoryInfrastructure"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: ConsoleAppWithDI"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/ConsoleAppWithDI/solution/src/Maris.Testing"
-    schedule:
-      interval: "daily"
-    labels:
-      - "target: ConsoleAppWithDI"
-      - "nuget"
-      - "dependencies"
-  - package-ecosystem: "nuget"
-    directory: "/samples/ConsoleAppWithDI/solution/tests/Maris.ConsoleApp.UnitTests"
-    schedule:
-      interval: "daily"
+    commit-message:
+      prefix: "nuget-console-app-with-di"
     labels:
       - "target: ConsoleAppWithDI"
       - "nuget"

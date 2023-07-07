@@ -1,5 +1,5 @@
 ---
-# cSpell:ignore markdownlint endgroup pymdown webapps fjogeleit
+# cSpell:ignore endgroup fjogeleit markdownlint pymdown softprops textlintignore textlintrc webapps
 
 name: ドキュメントのビルドとリリース
 
@@ -15,6 +15,12 @@ on:
       - "iis-files/**"
       - "samples/**"
       - ".github/workflows/build-and-release-documents.yml"
+      - ".markdownlint.yaml"
+      - ".textlintignore"
+      - ".textlintrc"
+      - ".yaml-lint.yml"
+      - "package-lock.json"
+      - "package.json"
   workflow_dispatch:
 
 env:
@@ -185,7 +191,7 @@ jobs:
       - name: ステージング環境へのデプロイ
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.OSS_MARIS_WEBAPP_NAME }}
+          app-name: ${{ env.APP_OSS_MARIS_WEBAPP_NAME }}
           slot-name: staging
           publish-profile: ${{ secrets.APP_OSS_MARIS_STAGING_PUBLISH_PROFILE  }}
           package: "${{ env.DOCUMENT_ARTIFACTS_FILENAME }}"

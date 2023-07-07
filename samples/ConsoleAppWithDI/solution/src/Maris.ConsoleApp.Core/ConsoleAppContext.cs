@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
+﻿using System.Reflection;
 using Maris.ConsoleApp.Core.Resources;
 
 namespace Maris.ConsoleApp.Core;
@@ -47,7 +46,7 @@ public class ConsoleAppContext
         this.Parameter = parameter;
     }
 
-     /// <summary>
+    /// <summary>
     ///  コンソールアプリケーションの起動パラメーターオブジェクトを取得します。
     /// </summary>
     public object Parameter { get; private set; }

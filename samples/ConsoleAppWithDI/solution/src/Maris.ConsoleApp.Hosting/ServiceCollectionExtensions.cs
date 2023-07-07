@@ -38,7 +38,7 @@ public static class ServiceCollectionExtensions
         services.AddConsoleAppSettings(options);
         services.AddConsoleAppContext(args);
         services.AddSingleton<CommandExecutor>();
-        services.AddSingleton<ICommandFactory, DefaultCommandFactory>();
+        services.AddSingleton<ICommandManager, DefaultCommandManager>();
         return services;
     }
 

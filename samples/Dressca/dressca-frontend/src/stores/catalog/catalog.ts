@@ -1,8 +1,14 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
-import type { CatalogCategoryResponse } from '@/api-client/models/catalog-category-response';
-import type { CatalogBrandResponse } from '@/api-client/models/catalog-brand-response';
-import type { PagedListOfCatalogItemResponse } from '@/api-client/models/paged-list-of-catalog-item-response';
+import type {
+  CatalogCategoryResponse,
+  CatalogBrandResponse,
+  PagedListOfCatalogItemResponse,
+} from '@/generated/api-client';
+import {
+  catalogCategoriesApi,
+  catalogBrandsApi,
+  catalogItemsApi,
+} from '@/api-client';
 
 export const useCatalogStore = defineStore({
   id: 'catalog',
@@ -13,28 +19,23 @@ export const useCatalogStore = defineStore({
   }),
   actions: {
     async fetchCategories() {
-      const response = await axios.get('catalog-categories');
+      const response =
+        await catalogCategoriesApi.catalogCategoriesGetCatalogCategories();
       this.categories = response.data;
       this.categories.unshift({ id: 0, name: 'すべて' });
     },
     async fetchBrands() {
-      const response = await axios.get('catalog-brands');
+      const response = await catalogBrandsApi.catalogBrandsGetCatalogBrands();
       this.brands = response.data;
       this.brands.unshift({ id: 0, name: 'すべて' });
     },
     async fetchItems(categoryId: number, brandId: number, page?: number) {
-      const params = new GetCatalogItemsQuery();
-      params.page = page;
-
-      if (categoryId !== 0) {
-        params.categoryId = categoryId;
-      }
-
-      if (brandId !== 0) {
-        params.brandId = brandId;
-      }
-
-      const response = await axios.get('catalog-items', { params: params });
+      const response = await catalogItemsApi.catalogItemsGetByQuery(
+        brandId === 0 ? undefined : brandId,
+        categoryId === 0 ? undefined : categoryId,
+        page,
+        undefined,
+      );
       this.catalogItemPage = response.data;
     },
   },
@@ -50,30 +51,3 @@ export const useCatalogStore = defineStore({
     },
   },
 });
-
-class GetCatalogItemsQuery {
-  /**
-   * カタログカテゴリIdを取得または設定します。
-   * @type {number}
-   * @memberof GetCatalogItemsQuery
-   */
-  categoryId?: number;
-  /**
-   * カタログブランドIdを取得または設定します。
-   * @type {number}
-   * @memberof GetCatalogItemsQuery
-   */
-  brandId?: number;
-  /**
-   * ページ番号を取得または設定します。
-   * @type {number}
-   * @memberof GetCatalogItemsQuery
-   */
-  page?: number;
-  /**
-   * ページサイズを取得または設定します。
-   * @type {number}
-   * @memberof GetCatalogItemsQuery
-   */
-  pageSize?: number;
-}

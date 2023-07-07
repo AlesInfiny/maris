@@ -47,12 +47,12 @@ public class ConsoleAppHostedServiceTest
     {
         // Arrange
         IHostApplicationLifetime? lifetime = null;
-        ConsoleAppSettings settings = new ConsoleAppSettings();
-        var factoryMock = CreateCommandFactoryMock();
-        ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
-        ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
+        var settings = new ConsoleAppSettings();
+        var managerMock = CreateCommandManagerMock();
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
+        var logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime!, settings, executor, logger);
@@ -65,13 +65,13 @@ public class ConsoleAppHostedServiceTest
     public void Constructor_settingsがnullの場合は例外()
     {
         // Arrange
-        IHostApplicationLifetime lifetime = Mock.Of<IHostApplicationLifetime>();
+        var lifetime = Mock.Of<IHostApplicationLifetime>();
         ConsoleAppSettings? settings = null;
-        var factoryMock = CreateCommandFactoryMock();
-        ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
-        ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
+        var managerMock = CreateCommandManagerMock();
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
+        var logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime, settings!, executor, logger);
@@ -84,12 +84,10 @@ public class ConsoleAppHostedServiceTest
     public void Constructor_executorがnullの場合は例外()
     {
         // Arrange
-        IHostApplicationLifetime lifetime = Mock.Of<IHostApplicationLifetime>();
-        ConsoleAppSettings settings = new ConsoleAppSettings();
-        var factoryMock = CreateCommandFactoryMock();
-        ICommandFactory factory = factoryMock.Object;
+        var lifetime = Mock.Of<IHostApplicationLifetime>();
+        var settings = new ConsoleAppSettings();
         CommandExecutor? executor = null;
-        ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime, settings, executor!, logger);
@@ -102,12 +100,12 @@ public class ConsoleAppHostedServiceTest
     public void Constructor_loggerがnullの場合は例外()
     {
         // Arrange
-        IHostApplicationLifetime lifetime = Mock.Of<IHostApplicationLifetime>();
-        ConsoleAppSettings settings = new ConsoleAppSettings();
-        var factoryMock = CreateCommandFactoryMock();
-        ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
+        var lifetime = Mock.Of<IHostApplicationLifetime>();
+        var settings = new ConsoleAppSettings();
+        var managerMock = CreateCommandManagerMock();
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
         ILogger<ConsoleAppHostedService>? logger = null;
 
         // Act
@@ -121,19 +119,19 @@ public class ConsoleAppHostedServiceTest
     public async Task StartAsync_コマンドが正常に完了するとコマンドから返却した終了コードが設定される()
     {
         // Arrange
-        IHostApplicationLifetime lifetime = Mock.Of<IHostApplicationLifetime>();
-        ConsoleAppSettings settings = new ConsoleAppSettings();
+        var lifetime = Mock.Of<IHostApplicationLifetime>();
+        var settings = new ConsoleAppSettings();
         var commandAttribute = new CommandAttribute("dummy-command", typeof(SyncCommandImpl));
         var parameter = new CommandParameter();
         var context = new ConsoleAppContext(commandAttribute, parameter);
         int exitCode = 999;
         var command = new SyncCommandImpl(exitCode);
         command.Initialize(context);
-        var factoryMock = CreateCommandFactoryMock(command);
-        ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
-        ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
+        var managerMock = CreateCommandManagerMock(command);
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
+        var logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -150,19 +148,19 @@ public class ConsoleAppHostedServiceTest
     public async Task StartAsync_コマンドの入力値エラーがあると設定の入力値検証エラーの終了コードが設定される()
     {
         // Arrange
-        IHostApplicationLifetime lifetime = Mock.Of<IHostApplicationLifetime>();
+        var lifetime = Mock.Of<IHostApplicationLifetime>();
         int exitCode = 990;
-        ConsoleAppSettings settings = new ConsoleAppSettings { DefaultValidationErrorExitCode = exitCode };
+        var settings = new ConsoleAppSettings { DefaultValidationErrorExitCode = exitCode };
         var commandAttribute = new CommandAttribute("validation-error-command", typeof(ValidationErrorCommand));
         var parameter = new CommandParameter();
         var context = new ConsoleAppContext(commandAttribute, parameter);
         var command = new ValidationErrorCommand();
         command.Initialize(context);
-        var factoryMock = CreateCommandFactoryMock(command);
-        ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
-        ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
+        var managerMock = CreateCommandManagerMock(command);
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
+        var logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -179,19 +177,19 @@ public class ConsoleAppHostedServiceTest
     public async Task StartAsync_コマンドの実行時に例外が発生すると設定のエラーの既定の終了コードが設定される()
     {
         // Arrange
-        IHostApplicationLifetime lifetime = Mock.Of<IHostApplicationLifetime>();
+        var lifetime = Mock.Of<IHostApplicationLifetime>();
         int exitCode = 991;
-        ConsoleAppSettings settings = new ConsoleAppSettings { DefaultErrorExitCode = exitCode };
+        var settings = new ConsoleAppSettings { DefaultErrorExitCode = exitCode };
         var commandAttribute = new CommandAttribute("error-command", typeof(TestCommand));
         var parameter = new CommandParameter();
         var context = new ConsoleAppContext(commandAttribute, parameter);
         var command = new TestCommand();
         command.Initialize(context);
-        var factoryMock = CreateCommandFactoryMock(command);
-        ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
-        ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
+        var managerMock = CreateCommandManagerMock(command);
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
+        var logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -210,14 +208,14 @@ public class ConsoleAppHostedServiceTest
     {
         // Arrange
         var lifetimeMock = new Mock<IHostApplicationLifetime>();
-        IHostApplicationLifetime lifetime = lifetimeMock.Object;
-        ConsoleAppSettings settings = new ConsoleAppSettings();
+        var lifetime = lifetimeMock.Object;
+        var settings = new ConsoleAppSettings();
         command.Initialize(context);
-        var factoryMock = CreateCommandFactoryMock(command);
-        ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
-        ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
+        var managerMock = CreateCommandManagerMock(command);
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
+        var logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -234,13 +232,13 @@ public class ConsoleAppHostedServiceTest
     public async Task StopAsync_例外が発生しない()
     {
         // Arrange
-        IHostApplicationLifetime lifetime = Mock.Of<IHostApplicationLifetime>();
-        ConsoleAppSettings settings = new ConsoleAppSettings();
-        var factoryMock = CreateCommandFactoryMock();
-        ICommandFactory factory = factoryMock.Object;
-        ILogger<CommandExecutor> commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
-        CommandExecutor executor = new CommandExecutor(factory, commandExecutorLogger);
-        ILogger<ConsoleAppHostedService> logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
+        var lifetime = Mock.Of<IHostApplicationLifetime>();
+        var settings = new ConsoleAppSettings();
+        var managerMock = CreateCommandManagerMock();
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.loggerFactory.CreateLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
+        var logger = this.loggerFactory.CreateLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         var cancellationToken = new CancellationToken(false);
 
@@ -248,11 +246,11 @@ public class ConsoleAppHostedServiceTest
         await service.StopAsync(cancellationToken);
     }
 
-    private static Mock<ICommandFactory> CreateCommandFactoryMock(CommandBase? creatingCommand = null)
+    private static Mock<ICommandManager> CreateCommandManagerMock(CommandBase? creatingCommand = null)
     {
         var command = creatingCommand ?? new TestCommand();
-        var mock = new Mock<ICommandFactory>();
-        mock.Setup(factory => factory.CreateCommand())
+        var mock = new Mock<ICommandManager>();
+        mock.Setup(manager => manager.CreateCommand())
             .Returns(command);
         return mock;
     }
