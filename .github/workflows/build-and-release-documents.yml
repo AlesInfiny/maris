@@ -160,27 +160,27 @@ jobs:
           path: documents/${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
           retention-days: 7
 
-  release-github:
-    name: Githubのリリース
-    needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    steps:
-      - name: ビルドアーティファクトのダウンロード
-        uses: actions/download-artifact@v3
-        with:
-          name: documents
+  # release-github:
+  #   name: Githubのリリース
+  #   needs: build
+  #   if: startsWith(github.ref, 'refs/tags/v')
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: ビルドアーティファクトのダウンロード
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: documents
 
-      - name: Githubのリリース
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
-          generate_release_notes: true
+  #     - name: Githubのリリース
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         files: ${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
+  #         generate_release_notes: true
 
   release-documents:
     name: ドキュメントのリリース
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v')
+  #  if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - name: ビルドアーティファクトのダウンロード
@@ -193,13 +193,13 @@ jobs:
         with:
           app-name: ${{ env.APP_OSS_MARIS_WEBAPP_NAME }}
           slot-name: staging
-          publish-profile: ${{ secrets.APP_OSS_MARIS_STAGING_PUBLISH_PROFILE  }}
+          publish-profile: ${{ secrets.APP_ALESINFINY_MARIS_STAGING_PUBLISH_PROFILE  }}
           package: "${{ env.DOCUMENT_ARTIFACTS_FILENAME }}"
 
       - name: Teams への通知
         uses: fjogeleit/http-request-action@v1
         with:
-          url: ${{ secrets.POST_MESSAGE_TO_TEAMS_URL  }}
+          url: ${{ secrets.ALESINFINY_POST_MESSAGE_TO_TEAMS_URL  }}
           method: POST
           contentType: application/json
           data: '{"messageType": 0,"branchName": "${{ github.ref }}","actor": "${{ github.actor }}","sha": "${{ github.sha }}","eventName": "${{ github.event_name }}"}'
