@@ -23,6 +23,10 @@ on:
       - "package.json"
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 env:
   APP_ALESINFINY_MARIS_WEBAPP_NAME: app-alesinfiny-maris-docs-prod
   DOCUMENT_ARTIFACTS_FILENAME: docs.zip
