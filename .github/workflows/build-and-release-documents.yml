@@ -204,7 +204,6 @@ jobs:
         with:
           app-name: ${{ env.APP_ALESINFINY_MARIS_WEBAPP_NAME }}
           slot-name: staging
-        #  publish-profile: ${{ secrets.APP_ALESINFINY_MARIS_STAGING_PUBLISH_PROFILE  }}
           package: "${{ env.DOCUMENT_ARTIFACTS_FILENAME }}"
 
       - name: Teams への通知
