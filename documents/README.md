@@ -5,7 +5,7 @@
 
 ## 本番環境
 
-<https://wwww.marisossedition.org>
+<https://maris.alesinfiny.org/>
 
 ## フォルダー構造
 
