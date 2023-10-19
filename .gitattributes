@@ -1,2 +1,4 @@
 samples/** -linguist-documentation
 documents/** linguist-documentation
+
+* eol=lf
