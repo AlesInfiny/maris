@@ -2,6 +2,7 @@
 using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
+using Dressca.Web;
 using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
 using Dressca.Web.Mapper;
@@ -66,6 +67,9 @@ if (builder.Environment.IsDevelopment())
         logging.ResponseBodyLogLimit = 4096;
     });
 }
+
+builder.Services.AddHealthChecks()
+    .AddCheck<DbHealthCheck>("DbHealthCheck");
 
 var app = builder.Build();
 
