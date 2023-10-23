@@ -11,6 +11,9 @@ on:
       - '.github/workflows/samples-dressca-backend.ci.yml'
   workflow_dispatch:
 
+env:
+  WORKING_DIRECTORY: samples/Dressca/dressca-backend
+
 defaults:
   run:
     working-directory: samples/Dressca/dressca-backend
@@ -53,7 +56,7 @@ jobs:
         if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
         run: |
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
-          cat buildResult.txt | sed -n -e '/Done/,/Elapsed/p' >> $GITHUB_STEP_SUMMARY
+          cat build-Result.txt | sed -n -e '/Done/,/Elapsed/p' >> $GITHUB_STEP_SUMMARY
 
       - id: run-tests
         name: テストの実行
