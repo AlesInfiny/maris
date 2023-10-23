@@ -56,7 +56,7 @@ jobs:
         if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
         run: |
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
-          cat build-result.txt | sed -n -e '/Done/,/Elapsed/p' >> $GITHUB_STEP_SUMMARY
+          cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
       - id: run-tests
         name: テストの実行
