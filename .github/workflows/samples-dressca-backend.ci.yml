@@ -49,14 +49,14 @@ jobs:
 
       - id: application-build
         name: アプリケーションのビルド
-        run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} > build-result.txt
+        run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
 
       - name: ビルド結果の表示
         shell: bash
         if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
         run: |
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
-          cat build-Result.txt | sed -n -e '/Done/,/Elapsed/p' >> $GITHUB_STEP_SUMMARY
+          cat build-result.txt | sed -n -e '/Done/,/Elapsed/p' >> $GITHUB_STEP_SUMMARY
 
       - id: run-tests
         name: テストの実行
