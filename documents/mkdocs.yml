@@ -86,7 +86,6 @@ theme:
     text: Noto Sans JP
     code: Source Code Pro
   language: ja
-  locale: ja
   logo: assets/maris-logo.png
   palette:
     - media: "(prefers-color-scheme: light)"
