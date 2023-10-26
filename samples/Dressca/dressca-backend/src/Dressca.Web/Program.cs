@@ -2,9 +2,9 @@
 using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
-using Dressca.Web;
 using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
+using Dressca.Web.Diagnostics.HealthChecks;
 using Dressca.Web.Mapper;
 using Dressca.Web.Resources;
 using Dressca.Web.Runtime;
@@ -69,7 +69,7 @@ if (builder.Environment.IsDevelopment())
 }
 
 builder.Services.AddHealthChecks()
-    .AddCheck<DbHealthCheck>("DbHealthCheck");
+    .AddCheck<DatabaseHealthCheck>("DbHealthCheck");
 
 var app = builder.Build();
 
