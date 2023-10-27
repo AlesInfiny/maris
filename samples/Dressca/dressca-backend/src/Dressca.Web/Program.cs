@@ -72,7 +72,8 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, HealthCheckDescriptionProvider>());
 
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddDresscaDbContextCheck("DresscaDatabaseHealthCheck");
 
 var app = builder.Build();
 
