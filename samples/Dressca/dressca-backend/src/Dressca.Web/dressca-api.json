@@ -422,12 +422,12 @@
         }
       }
     },
-    "/health": {
+    "/api/health": {
       "get": {
         "tags": [
           "HealthChecks"
         ],
-        "operationId": "HealthChecks_health",
+        "operationId": "HealthChecks_api/health",
         "responses": {
           "200": {
             "description": "",

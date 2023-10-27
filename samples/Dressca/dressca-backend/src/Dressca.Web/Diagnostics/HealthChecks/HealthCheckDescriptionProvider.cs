@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Dressca.EfInfrastructure;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -9,42 +10,54 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Dressca.Web.Diagnostics.HealthChecks;
 
+/// <summary>
+///  ヘルスチェック用に <see cref="IApiDescriptionProvider"/> を実装したクラス。
+/// </summary>
 public class HealthCheckDescriptionProvider : IApiDescriptionProvider
 {
-    private readonly IModelMetadataProvider _modelMetadataProvider;
+    private readonly IModelMetadataProvider modelMetadataProvider;
 
+    /// <summary>
+    ///  <see cref="HealthCheckDescriptionProvider"/> の新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="modelMetadataProvider">モデルメタデータプロバイダー。</param>
     public HealthCheckDescriptionProvider(IModelMetadataProvider modelMetadataProvider)
     {
-        _modelMetadataProvider = modelMetadataProvider;
+        this.modelMetadataProvider = modelMetadataProvider;
     }
 
+    /// <summary>
+    ///  <see cref="IApiDescriptionProvider"/> を実装したクラスが処理される順番を表します。
+    /// </summary>
     public int Order => -1;
 
+    /// <summary>
+    ///  <see cref="ApiDescription"/> を生成あるいは変更します。
+    /// </summary>
+    /// <param name="context">API 情報を保持するコンテキスト。</param>
     public void OnProvidersExecuting(ApiDescriptionProviderContext context)
-    { }
+    {
+    }
 
+    /// <summary>
+    ///  <see cref="OnProvidersExecuting(ApiDescriptionProviderContext)"/> の処理が終わった後に呼び出されます。
+    /// </summary>
+    /// <param name="context">API 情報を保持するコンテキスト。</param>
     public void OnProvidersExecuted(ApiDescriptionProviderContext context)
     {
         var actionDescriptor = new ControllerActionDescriptor
         {
             ControllerName = "HealthChecks",
-            ActionName = "health",
+            ActionName = "api/health",
             Parameters = new List<ParameterDescriptor>(),
-            EndpointMetadata = new List<object>(),
-            ActionConstraints = new List<IActionConstraintMetadata>(),
-            DisplayName = "Health check endpoint",
-            Properties = new Dictionary<object, object?>(),
-            BoundProperties = new List<ParameterDescriptor>(),
-            FilterDescriptors = new List<FilterDescriptor>(),
-            ControllerTypeInfo = new TypeDelegator(typeof(string))
+            ControllerTypeInfo = new TypeDelegator(typeof(string)),
         };
 
         var apiDescription = new ApiDescription
         {
             ActionDescriptor = actionDescriptor,
             HttpMethod = HttpMethods.Get,
-            RelativePath = "health",
-            GroupName = "v1",
+            RelativePath = "api/health",
         };
 
         var apiResponseType = new ApiResponseType
