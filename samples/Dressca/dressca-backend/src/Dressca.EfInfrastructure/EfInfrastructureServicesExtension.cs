@@ -1,12 +1,13 @@
-﻿using Dressca.ApplicationCore.Assets;
+﻿using System.Xml.Linq;
+using Dressca.ApplicationCore.Assets;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
-using Dressca.ApplicationCore.Diagnostics;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.EfInfrastructure.Resources;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Dressca.EfInfrastructure;
 
@@ -63,7 +64,6 @@ public static class EfInfrastructureServicesExtension
         services.AddTransient<ICatalogRepository, EfCatalogRepository>();
         services.AddTransient<IOrderRepository, EfOrderRepository>();
         services.AddTransient<IAssetRepository, EfAssetRepository>();
-        services.AddTransient<IDresscaHealthChecker, DresscaHealthChecker>();
 
         return services;
     }

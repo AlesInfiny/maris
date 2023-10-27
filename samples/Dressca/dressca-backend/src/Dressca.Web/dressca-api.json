@@ -331,48 +331,6 @@
         }
       }
     },
-    "/api/health": {
-      "get": {
-        "tags": [
-          "Health"
-        ],
-        "summary": "ヘルスチェックの結果を返します。",
-        "operationId": "Health_Get",
-        "responses": {
-          "200": {
-            "description": "ヘルスチェックの結果。",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      },
-      "head": {
-        "tags": [
-          "Health"
-        ],
-        "summary": "ヘルスチェックの結果を返します。",
-        "operationId": "Health_Head",
-        "responses": {
-          "200": {
-            "description": "ヘルスチェックの結果。",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/orders/{orderId}": {
       "get": {
         "tags": [
@@ -457,6 +415,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "HealthChecks_health",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }

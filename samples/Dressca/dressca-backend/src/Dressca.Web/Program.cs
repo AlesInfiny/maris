@@ -9,6 +9,8 @@ using Dressca.Web.Mapper;
 using Dressca.Web.Resources;
 using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,8 +70,9 @@ if (builder.Environment.IsDevelopment())
     });
 }
 
-builder.Services.AddHealthChecks()
-    .AddCheck<DatabaseHealthCheck>("DbHealthCheck");
+builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, HealthCheckDescriptionProvider>());
+
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -90,5 +93,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHealthChecks("/api/health");
 
 app.Run();
