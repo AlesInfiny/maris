@@ -32,6 +32,7 @@ public static class HealthChecksBuilderExtensions
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex);
                     return false;
                 }
             });
