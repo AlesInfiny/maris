@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dressca.EfInfrastructure.Resources;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
@@ -19,7 +20,7 @@ public static class HealthChecksBuilderExtensions
     /// <param name="tags">ヘルスチェックのタグ。</param>
     /// <param name="logLevel">ログレベル。</param>
     /// <returns><see cref="DresscaDbContext"/> のヘルスチェックを実装した<see cref="IHealthChecksBuilder"/>。</returns>
-    public static IHealthChecksBuilder AddDresscaDbContextCheck(this IHealthChecksBuilder builder, string? name = null, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default, LogLevel? logLevel = LogLevel.Warning)
+    public static IHealthChecksBuilder AddDresscaDbContextCheck(this IHealthChecksBuilder builder, string? name = null, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default, LogLevel logLevel = LogLevel.Warning)
     {
         return builder.AddDbContextCheck<DresscaDbContext>(
             name,
@@ -35,13 +36,11 @@ public static class HealthChecksBuilderExtensions
                 catch (Exception ex)
                 {
                     var loggerFactory = builder.Services.BuildServiceProvider().GetRequiredService<ILoggerFactory>();
-                    var logger = loggerFactory.CreateLogger(nameof(Dressca.EfInfrastructure));
-                    logger.Log<string>(
-                        logLevel: (LogLevel)logLevel,
-                        eventId: 0,
-                        state: "データベースのヘルスチェックが失敗しました。",
+                    var logger = loggerFactory.CreateLogger("Dressca.EfInfrastructure.HealthChecksBuilderExtensions");
+                    logger.Log(
+                        logLevel: logLevel,
                         exception: ex,
-                        formatter: (state, ex) => state);
+                        message: Messages.FailedDatabaseHealthCheck);
                     return false;
                 }
             });
