@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using Dressca.ApplicationCore.Assets;
+﻿using Dressca.ApplicationCore.Assets;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
@@ -7,7 +6,6 @@ using Dressca.EfInfrastructure.Resources;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Dressca.EfInfrastructure;
 
@@ -43,7 +41,6 @@ public static class EfInfrastructureServicesExtension
 
         // Connection Strings
         var connectionString = configuration.GetConnectionString(ConnectionStringName);
-
         if (string.IsNullOrWhiteSpace(connectionString))
         {
             throw new ArgumentException(
