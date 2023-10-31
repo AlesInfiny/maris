@@ -41,7 +41,7 @@ public static class HealthChecksBuilderExtensions
                         eventId: 0,
                         state: "データベースのヘルスチェックが失敗しました。",
                         exception: ex,
-                        formatter: (state, ex) => state.ToString());
+                        formatter: (state, ex) => state);
                     return false;
                 }
             });
