@@ -98,3 +98,8 @@ app.MapControllers();
 app.MapHealthChecks("/api/health");
 
 app.Run();
+
+/// <summary>
+///  結合テストプロジェクト用の部分クラス。
+/// </summary>
+public partial class Program { }
