@@ -62,6 +62,7 @@ jobs:
         working-directory: samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure
         shell: bash
         run: |
+           dotnet tool install --global dotnet-ef
            dotnet ef database update
 
       - id: run-tests
