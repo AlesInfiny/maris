@@ -88,8 +88,7 @@ internal class DresscaDbContext : DbContext
         ArgumentNullException.ThrowIfNull(optionsBuilder);
         if (!optionsBuilder.IsConfigured)
         {
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Dressca.Eshop;Integrated Security=True");
-            optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=Dressca.Eshop;User=sa;Password=Passw0rd;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Dressca.Eshop;Integrated Security=True");
         }
     }
 
