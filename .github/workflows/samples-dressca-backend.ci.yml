@@ -59,10 +59,10 @@ jobs:
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
       - name: 結合テスト用にマイグレーション適用
+        working-directory: samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure
         shell: bash
         run: |
-          cd src\Dressca.EfInfrastructure
-          dotnet ef database update
+           dotnet ef database update
 
       - id: run-tests
         name: テストの実行
