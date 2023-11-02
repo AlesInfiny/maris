@@ -58,11 +58,10 @@ jobs:
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
-      - name: 結合テスト用にマイグレーション適用
+      - name: 結合テスト用 SQL Server のセットアップ
         working-directory: samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure
         shell: bash
         run: |
-           dotnet tool install --global dotnet-ef
            sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
            sudo docker run -e "ACCEPT_EULA=Y" \
            -e "MSSQL_SA_PASSWORD=Passw0rd" \
@@ -70,7 +69,6 @@ jobs:
            --hostname sql1 \
            -d \
            mcr.microsoft.com/mssql/server:2022-latest
-           dotnet ef database update
 
       - id: run-tests
         name: テストの実行
