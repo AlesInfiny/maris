@@ -29,6 +29,9 @@ public class CustomWebApplicationFactory<TProgram>
             {
                 options.UseNpgsql("Host=localhost;Database=dressca_eshop;Username=postgres;Password=postgres");
             });
+
+            var dbContext = services.BuildServiceProvider().GetRequiredService<DresscaDbContext>();
+            dbContext.Database.EnsureCreated();
         });
 
         builder.UseEnvironment("Development");
