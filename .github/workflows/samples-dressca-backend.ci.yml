@@ -61,7 +61,7 @@ jobs:
       - name: 結合テスト用 SQL Server のセットアップ
         shell: bash
         run: |
-          sqlcmd -S localhost -q "CREATE DATABASE Dressca.Eshop"
+          sudo systemctl start mssql-server
 
       - id: run-tests
         name: テストの実行
