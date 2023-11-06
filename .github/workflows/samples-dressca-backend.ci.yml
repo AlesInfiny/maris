@@ -62,9 +62,8 @@ jobs:
         shell: bash
         run: |
           sudo systemctl start postgresql.service
-          sudo su - postgres
-          psql -U postgres
-          alter role postgres with password 'postgres';
+          sudo bash -c "echo \"local all all md5\" >> /etc/postgresql/14/main/pg_hba.conf"
+          sudo su postgres -c "psql postgres -c \"alter role postgres with login password 'postgres';\""
 
       - id: run-tests
         name: テストの実行
