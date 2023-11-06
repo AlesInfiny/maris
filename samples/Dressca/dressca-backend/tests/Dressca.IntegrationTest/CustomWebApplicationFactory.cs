@@ -27,7 +27,7 @@ public class CustomWebApplicationFactory<TProgram>
 
             services.AddDbContext<DresscaDbContext>( options =>
             {
-                options.UseNpgsql("Host=localhost;Database=dressca_eshop;Username=postgres;Password=postgres");
+                options.UseMySql("server=localhost;user=root;password=root;database=dressca_eshop;",new MySqlServerVersion(new Version(8,0,34)));
             });
         });
 

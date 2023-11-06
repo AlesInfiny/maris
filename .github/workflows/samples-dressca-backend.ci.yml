@@ -58,13 +58,13 @@ jobs:
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
-      - name: 結合テスト用 PostgreSQL のセットアップ
+      - name: 結合テスト用 MySQL のセットアップ
         shell: bash
         run: |
-          sudo systemctl start postgresql.service
-          sudo bash -c "echo \"local all all md5\" >> /etc/postgresql/14/main/pg_hba.conf"
-          sudo su postgres -c "psql postgres -c \"alter role postgres with login password 'postgres';\""
-          sudo su postgres -c "psql postgres -c 'create database dressca_eshop;'"
+          sudo systemctl start mysql.service
+          sudo mysql -u root -p
+          root
+          create database dressca_eshop;
 
       - id: run-tests
         name: テストの実行

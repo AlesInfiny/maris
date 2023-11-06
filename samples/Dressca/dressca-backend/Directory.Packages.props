@@ -16,6 +16,7 @@
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
     <PackageVersion Include="NSwag.AspNetCore" Version="13.19.0" />
     <PackageVersion Include="NSwag.MSBuild" Version="13.19.0" />
+    <PackageVersion Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.435" />
     <PackageVersion Include="xunit" Version="2.5.0" />
     <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
