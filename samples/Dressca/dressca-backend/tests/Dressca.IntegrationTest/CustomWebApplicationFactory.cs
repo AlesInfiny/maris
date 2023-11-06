@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Dressca.IntegrationTest;
 public class CustomWebApplicationFactory<TProgram>
@@ -28,11 +27,8 @@ public class CustomWebApplicationFactory<TProgram>
 
             services.AddDbContext<DresscaDbContext>( options =>
             {
-                options.UseSqlServer(@"Server=localhost,1433;Database=Dressca.Eshop;User=sa;Password=Passw0rd;");
+                options.UseNpgsql("Host=localhost;Database=dressca_eshop;Username=postgres;Password=postgres");
             });
-
-            var dbContext = services.BuildServiceProvider().GetRequiredService<DresscaDbContext>();
-            dbContext.Database.EnsureCreated();
         });
 
         builder.UseEnvironment("Development");

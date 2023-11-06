@@ -58,17 +58,14 @@ jobs:
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
-      - name: 結合テスト用 SQL Server のセットアップ
-        working-directory: samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure
+      - name: 結合テスト用 PostgreSQL のセットアップ
         shell: bash
         run: |
-           sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
-           sudo docker run -e "ACCEPT_EULA=Y" \
-           -e "MSSQL_SA_PASSWORD=Passw0rd" \
-           -p 1433:1433 --name sql1 \
-           --hostname sql1 \
-           -d \
-           mcr.microsoft.com/mssql/server:2022-latest
+           	sudo systemctl start postgresql.service
+            sudo su - postgres
+            psql
+            alter role postgres with password 'postgres';
+            create database dressca_eshop;
 
       - id: run-tests
         name: テストの実行
