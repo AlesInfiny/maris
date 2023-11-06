@@ -58,11 +58,10 @@ jobs:
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
-      - name: 結合テスト用 MySQL のセットアップ
+      - name: 結合テスト用 SQL Server のセットアップ
         shell: bash
         run: |
-          sudo systemctl start mysql.service
-          sudo mysql -u root -proot -e "create database dressca_eshop;"
+          sqlcmd -S localhost -q "CREATE DATABASE Dressca.Eshop"
 
       - id: run-tests
         name: テストの実行
