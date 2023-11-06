@@ -3,11 +3,11 @@ using Xunit;
 
 namespace Dressca.IntegrationTest;
 
-public class DatabaseHealthCheckTest : IClassFixture<WebApplicationFactory<Program>>
+public class DatabaseHealthCheckTest : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> factory;
+    private readonly CustomWebApplicationFactory<Program> factory;
 
-    public DatabaseHealthCheckTest(WebApplicationFactory<Program> factory)
+    public DatabaseHealthCheckTest(CustomWebApplicationFactory<Program> factory)
     {
         this.factory = factory;
     }
