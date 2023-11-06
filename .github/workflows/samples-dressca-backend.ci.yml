@@ -61,7 +61,7 @@ jobs:
       - name: 結合テスト用 PostgreSQL のセットアップ
         shell: bash
         run: |
-           	sudo systemctl start postgresql.service
+            sudo systemctl start postgresql.service
             sudo su - postgres
             psql
             alter role postgres with password 'postgres';
