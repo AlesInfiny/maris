@@ -93,7 +93,7 @@ jobs:
 
       - name: 結合テスト用にSQL Serverをセットアップ
         run: |
-          sudo docker run -w ${{ steps.imagetag.outputs.TAG }} \
+          sudo docker run -w ${{ steps.imagetag.outputs.PATH_TAR }} \
           -e "ACCEPT_EULA=Y" \
           -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
           -p 1433:1433 --name sql1 \
