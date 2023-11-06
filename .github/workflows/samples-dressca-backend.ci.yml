@@ -62,8 +62,7 @@ jobs:
         shell: bash
         run: |
           sudo systemctl start mysql.service
-          sudo mysql -u root -proot
-          create database dressca_eshop;
+          sudo mysql -u root -proot -e "create database dressca_eshop;"
 
       - id: run-tests
         name: テストの実行
