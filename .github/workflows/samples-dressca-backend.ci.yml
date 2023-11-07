@@ -94,7 +94,7 @@ jobs:
 
       - name: 結合テスト用にSQL Serverをセットアップ
         run: |
-          sudo docker run mcr.microsoft.com/mssql/server:2022-latest \
+          sudo docker run --user root mcr.microsoft.com/mssql/server:2022-latest \
           -e "ACCEPT_EULA=Y" \
           -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
           -p 1433:1433 --name sql1 \
@@ -102,7 +102,7 @@ jobs:
           -d \
           mcr.microsoft.com/mssql/server:2022-latest
           sudo docker exec -it --user root sql1 "bash"
-          /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P P@ssw0rd -q "CREATE DATABASE Dressca.Eshop;"
+          /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -q "CREATE DATABASE Dressca.Eshop;"
 
       - id: run-tests
         name: テストの実行
