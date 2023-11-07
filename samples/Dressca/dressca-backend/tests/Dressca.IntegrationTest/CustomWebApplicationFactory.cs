@@ -27,7 +27,7 @@ public class CustomWebApplicationFactory<TProgram>
 
             services.AddDbContext<DresscaDbContext>( options =>
             {
-                options.UseSqlServer(@"Server=localhost,1433;Database=Dressca.Eshop;User=sa;Password=P@ssw0rd;");
+                options.UseSqlServer(@"Server=localhost,1433;Database=Dressca_Eshop;User=sa;Password=P@ssw0rd;");
             });
         });
 
