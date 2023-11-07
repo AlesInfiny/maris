@@ -105,7 +105,7 @@ jobs:
       - id: run-tests
         name: テストの実行
         continue-on-error: true
-        run: dotnet test --settings:./Dressca.IntegrationTest/citest.runsettings --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+        run: dotnet test --settings:./tests/Dressca.IntegrationTest/citest.runsettings --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
       
       - id: create-test-result-report
         name: テスト結果ページの作成
