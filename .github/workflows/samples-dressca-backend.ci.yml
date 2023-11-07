@@ -90,11 +90,11 @@ jobs:
         run: |
           mkdir -p ${{ env.PATH_CACHE }}
           sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
-          sudo docker save mcr.microsoft.com/mssql/server:2022-latest > ${{ steps.imagetag.outputs.NAME_TAR }}
+          sudo docker save mcr.microsoft.com/mssql/server:2022-latest -o ${{ steps.imagetag.outputs.PATH_TAR }}
 
       - name: 結合テスト用にSQL Serverをセットアップ
         run: |
-          sudo docker run -w ${{ steps.imagetag.outputs.PATH_TAR }} \
+          sudo docker run mcr.microsoft.com/mssql/server:2022-latest \
           -e "ACCEPT_EULA=Y" \
           -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
           -p 1433:1433 --name sql1 \
