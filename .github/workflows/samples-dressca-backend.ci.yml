@@ -101,7 +101,7 @@ jobs:
           --hostname sql1 \
           -d \
           mcr.microsoft.com/mssql/server:2022-latest
-          sudo docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca.Eshop;"
+          sudo docker exec sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca.Eshop;"
 
       - id: run-tests
         name: テストの実行
