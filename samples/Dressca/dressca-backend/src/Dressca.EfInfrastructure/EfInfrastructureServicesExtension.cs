@@ -6,6 +6,7 @@ using Dressca.EfInfrastructure.Resources;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Dressca.EfInfrastructure;
 
@@ -49,6 +50,7 @@ public static class EfInfrastructureServicesExtension
         }
 
         // DbContext
+        services.RemoveAll<DbContextOptions<DresscaDbContext>>();
         services.AddDbContext<DresscaDbContext>(option =>
         {
             option.UseSqlServer(connectionString);

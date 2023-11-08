@@ -15,32 +15,15 @@ public class CustomWebApplicationFactory<TProgram>
     {
         builder.ConfigureServices(services =>
         {
-            //var dbContextDescriptor = services.SingleOrDefault(
-            //    d => d.ServiceType ==
-            //        typeof(DbContextOptions<DresscaDbContext>));
-
-            //services.Remove(dbContextDescriptor);
-
-            //var dbConnectionDescriptor = services.SingleOrDefault(
-            //    d => d.ServiceType ==
-            //        typeof(DbConnection));
-
-            //services.Remove(dbConnectionDescriptor);
-
             var fileDirectory = Environment.GetEnvironmentVariable("appSettingsFileDirectory");
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(fileDirectory, optional: true, reloadOnChange: true)
                 .Build();
 
-
             services.AddDresscaEfInfrastructure(config);
-
-            //var dbContext = services.BuildServiceProvider().GetRequiredService<DbContext>();
-            //dbContext.Database.EnsureCreated();
         });
 
         builder.UseEnvironment("Development");
-
     }
 }
