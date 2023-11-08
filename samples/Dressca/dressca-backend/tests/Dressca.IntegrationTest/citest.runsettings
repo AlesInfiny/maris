@@ -2,7 +2,7 @@
 <RunSettings>
     <RunConfiguration>
         <EnvironmentVariables>
-            <appSettingsFileDirectory>./appsettings.json</appSettingsFileDirectory>
+            <appSettingsFileDirectory>./appsettings.citest.json</appSettingsFileDirectory>
         </EnvironmentVariables>
     </RunConfiguration>
 </RunSettings>
