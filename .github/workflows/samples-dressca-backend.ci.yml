@@ -63,7 +63,6 @@ jobs:
         id: imagetag
         run: |
           VARIANT=$(TZ=UTC-9 date '+%Y%m')
-          # イメージのタグを作成
           NAME_IMAGE=SQLServerDockerImage
           # キャッシュする tar アーカイブ名とパスの設定
           NAME_TAR="${NAME_IMAGE}.${VARIANT}.tar"
@@ -79,28 +78,15 @@ jobs:
           path: ${{ env.PATH_CACHE }}
           key: ${{ steps.imagetag.outputs.NAME_TAR }}
 
-      - name: キャッシュがある場合にロード
-        if: steps.cache.outputs.cache-hit == 'true'
-        run: docker load --input ${{ steps.imagetag.outputs.PATH_TAR }}
+      #- name: キャッシュがある場合にロード
+      #  if: steps.cache.outputs.cache-hit == 'true'
+      #  run: docker load --input ${{ steps.imagetag.outputs.PATH_TAR }}
 
-      - name: キャッシュがない場合にイメージをプル
+      - name: キャッシュがない場合にイメージをプルして保存
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p ${{ env.PATH_CACHE }}
           sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
-          sudo docker save mcr.microsoft.com/mssql/server:2022-latest -o ${{ steps.imagetag.outputs.PATH_TAR }}
-
-      - name: キャッシュの保存
-        if: steps.cache.outputs.cache-hit != 'true'
-        id: cache
-        uses: actions/cache/save@v3
-        with:
-          path: ${{ env.PATH_CACHE }}
-          key: ${{ steps.imagetag.outputs.NAME_TAR }}
-
-      - name: 結合テスト用にSQL Serverをセットアップ
-        run: |
-          #sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
           sudo docker run -e "ACCEPT_EULA=Y" \
           -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
           -p 1433:1433 --name sql1 \
@@ -108,6 +94,12 @@ jobs:
           -d \
           mcr.microsoft.com/mssql/server:2022-latest
           sudo docker exec sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca_Eshop;"
+          sudo docker save mcr.microsoft.com/mssql/server:2022-latest -o ${{ steps.imagetag.outputs.PATH_TAR }}
+
+      - name: 結合テスト用にSQL Serverをセットアップ
+        run: |
+          sudo docker load --input ${{ steps.imagetag.outputs.PATH_TAR }}
+          sudo docker run
 
       - id: run-tests
         name: テストの実行
