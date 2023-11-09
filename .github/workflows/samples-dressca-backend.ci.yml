@@ -99,7 +99,7 @@ jobs:
       - name: 結合テスト用にSQL Serverをセットアップ
         run: |
           sudo docker load --input ${{ steps.imagetag.outputs.PATH_TAR }}
-          sudo docker run mcr.microsoft.com/mssql/server:2022-latest -e "ACCEPT_EULA=Y" \
+          sudo docker run -e "ACCEPT_EULA=Y" \
           -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
           -p 1433:1433 --name sql1 \
           --hostname sql1 \
