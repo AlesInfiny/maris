@@ -99,7 +99,7 @@ jobs:
       - name: 結合テスト用にSQL Serverをセットアップ
         run: |
           sudo docker load --input ${{ steps.imagetag.outputs.PATH_TAR }}
-          sudo docker run
+          sudo docker run mcr.microsoft.com/mssql/server:2022-latest
 
       - id: run-tests
         name: テストの実行
