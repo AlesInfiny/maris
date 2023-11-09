@@ -13,7 +13,6 @@ on:
 
 env:
   WORKING_DIRECTORY: samples/Dressca/dressca-backend
-  ASPNETCORE_ENVIRONMENT: CI
 
 defaults:
   run:
@@ -76,6 +75,8 @@ jobs:
       - id: run-tests
         name: テストの実行
         continue-on-error: true
+        env:
+          ASPNETCORE_ENVIRONMENT: CI
         run: dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
       
       - id: create-test-result-report
