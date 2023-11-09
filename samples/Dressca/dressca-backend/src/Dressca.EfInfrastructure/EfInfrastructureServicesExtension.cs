@@ -50,6 +50,7 @@ public static class EfInfrastructureServicesExtension
         }
 
         // DbContext
+        // 結合テスト実行時に設定を差し替えるため、サービス登録をいったん削除してから登録
         services.RemoveAll<DbContextOptions<DresscaDbContext>>();
         services.AddDbContext<DresscaDbContext>(option =>
         {

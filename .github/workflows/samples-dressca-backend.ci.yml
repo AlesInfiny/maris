@@ -14,6 +14,7 @@ on:
 env:
   WORKING_DIRECTORY: samples/Dressca/dressca-backend
   PATH_CACHE: /tmp/docker-img
+  ASPNETCORE_ENVIRONMENT: CI
 
 defaults:
   run:
@@ -59,30 +60,7 @@ jobs:
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
-      - name: キャッシュIDの作成
-        id: imagetag
-        run: |
-          VARIANT=$(TZ=UTC-9 date '+%Y%m')
-          NAME_IMAGE=SQLServerDockerImage
-          # キャッシュする tar アーカイブ名とパスの設定
-          NAME_TAR="${NAME_IMAGE}.${VARIANT}.tar"
-          PATH_TAR=${{ env.PATH_CACHE }}"/${NAME_TAR}"
-          # 変数を他の run でも使えるように output
-          echo "NAME_TAR=${NAME_TAR}" >> "$GITHUB_OUTPUT"
-          echo "PATH_TAR=${PATH_TAR}" >> "$GITHUB_OUTPUT"
-
-      - name: キャッシュ有効化
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.PATH_CACHE }}
-          key: ${{ steps.imagetag.outputs.NAME_TAR }}
-
-      #- name: キャッシュがある場合にロード
-      #  if: steps.cache.outputs.cache-hit == 'true'
-      #  run: docker load --input ${{ steps.imagetag.outputs.PATH_TAR }}
-
-      - name: キャッシュがない場合にイメージをプルして保存
+      - name: 結合テスト用にSQL ServerのDockerイメージをプル
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p ${{ env.PATH_CACHE }}
@@ -94,22 +72,14 @@ jobs:
           -d \
           mcr.microsoft.com/mssql/server:2022-latest
           sudo docker exec sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca_Eshop;"
-          sudo docker save mcr.microsoft.com/mssql/server:2022-latest -o ${{ steps.imagetag.outputs.PATH_TAR }}
 
       - name: 結合テスト用にSQL Serverをセットアップ
         run: |
-          sudo docker load --input ${{ steps.imagetag.outputs.PATH_TAR }}
-          sudo docker run -e "ACCEPT_EULA=Y" \
-          -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
-          -p 1433:1433 --name sql1 \
-          --hostname sql1 \
-          -d \
-          mcr.microsoft.com/mssql/server:2022-latest
 
       - id: run-tests
         name: テストの実行
         continue-on-error: true
-        run: dotnet test --settings:./tests/Dressca.IntegrationTest/citest.runsettings --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+        run: dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
       
       - id: create-test-result-report
         name: テスト結果ページの作成

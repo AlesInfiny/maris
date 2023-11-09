@@ -1,11 +1,7 @@
-﻿using System.Data.Common;
-using Dressca.EfInfrastructure;
-using Microsoft.AspNetCore.Builder;
+﻿using Dressca.EfInfrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Dressca.IntegrationTest;
 public class CustomWebApplicationFactory<TProgram>
@@ -13,17 +9,27 @@ public class CustomWebApplicationFactory<TProgram>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+
+        //var webhostenv = builder.GetSetting("environment");
+        //builder.UseEnvironment("Development");
+
         builder.ConfigureServices(services =>
         {
-            var fileDirectory = Environment.GetEnvironmentVariable("appSettingsFileDirectory");
+            //var filePath = Environment.GetEnvironmentVariable("appSettingsFilePath");
+            //var config = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile(filePath, optional: true, reloadOnChange: true)
+            //    .Build();
+
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile(fileDirectory, optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables()
                 .Build();
 
             services.AddDresscaEfInfrastructure(config);
         });
 
-        builder.UseEnvironment("Development");
     }
 }

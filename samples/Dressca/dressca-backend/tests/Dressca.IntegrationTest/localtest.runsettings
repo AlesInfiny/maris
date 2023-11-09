@@ -2,7 +2,7 @@
 <RunSettings>
     <RunConfiguration>
         <EnvironmentVariables>
-            <appSettingsFileDirectory>./appsettings.Development.json</appSettingsFileDirectory>
+            <appSettingsFilePath>./appsettings.Development.json</appSettingsFilePath>
         </EnvironmentVariables>
     </RunConfiguration>
 </RunSettings>
