@@ -83,12 +83,20 @@ jobs:
         if: steps.cache.outputs.cache-hit == 'true'
         run: docker load --input ${{ steps.imagetag.outputs.PATH_TAR }}
 
-      - name: キャッシュがない場合にイメージを保存
+      - name: キャッシュがない場合にイメージをプル
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p ${{ env.PATH_CACHE }}
           sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
           sudo docker save mcr.microsoft.com/mssql/server:2022-latest -o ${{ steps.imagetag.outputs.PATH_TAR }}
+
+      - name: キャッシュの保存
+        if: steps.cache.outputs.cache-hit != 'true'
+        id: cache
+        uses: actions/cache/save@v3
+        with:
+          path: ${{ env.PATH_CACHE }}
+          key: ${{ steps.imagetag.outputs.NAME_TAR }}
 
       - name: 結合テスト用にSQL Serverをセットアップ
         run: |
@@ -99,7 +107,7 @@ jobs:
           --hostname sql1 \
           -d \
           mcr.microsoft.com/mssql/server:2022-latest
-          sudo docker exec sql1 /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1,1433 -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca_Eshop;"
+          sudo docker exec sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca_Eshop;"
 
       - id: run-tests
         name: テストの実行
