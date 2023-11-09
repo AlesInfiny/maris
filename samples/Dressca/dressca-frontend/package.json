@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.5",
-    "axios": "^1.6.0",
+    "axios": "^1.6.1",
     "pinia": "^2.0.11",
     "vee-validate": "^4.5.8",
     "vue": "^3.2.29",
@@ -23,7 +23,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@rushstack/eslint-patch": "^1.1.0",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^16.11.22",
