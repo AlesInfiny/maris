@@ -60,8 +60,10 @@ jobs:
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
       - name: SQL ServerのDockerイメージをプル(結合テスト用)
+        run: sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: SQL Serverのコンテナを起動(結合テスト用)
         run: |
-          sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
           sudo docker run -e "ACCEPT_EULA=Y" \
           -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
           -p 1433:1433 --name sql1 \
