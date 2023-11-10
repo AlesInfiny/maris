@@ -69,11 +69,14 @@ jobs:
           #sudo docker exec sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca_Eshop;"
 
       - name: 結合テスト用にマイグレーション適用
-        working-directory: samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure
+        working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
         shell: bash
+        env:
+          APPSETTINGS_FILEPATH: ${{ env.WORKING_DIRECTORY }}/tests/Dressca.IntegrationTest/appsettings.CI.json
         run: |
            dotnet tool install --global dotnet-ef
-           dotnet ef database update --connection "Server=localhost,1433;Database=Dressca_Eshop;User=sa;Password=P@ssw0rd;"
+           connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings[].DresscaDbContext')
+           dotnet ef database update --connection $connectionString
 
       - id: run-tests
         name: テストの実行
