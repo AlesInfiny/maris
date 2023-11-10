@@ -76,12 +76,14 @@ jobs:
            connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
            echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
 
+      - name: EF Core ツールのインストール(結合テスト用)
+        shell: bash
+        run: dotnet tool install --global dotnet-ef
+
       - name: マイグレーション適用(結合テスト用)
         working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
         shell: bash
-        run: |
-           dotnet tool install --global dotnet-ef
-           dotnet ef database update --connection ${{ steps.get-connection-string.outputs.CONNECTION_STRING }}
+        run: dotnet ef database update --connection ${{ steps.get-connection-string.outputs.CONNECTION_STRING }}
 
       - id: run-tests
         name: テストの実行
