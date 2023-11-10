@@ -17,7 +17,7 @@ public class CustomWebApplicationFactory<TProgram>
             {
                 var config = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.IntegrationTest.json", optional: true, reloadOnChange: true)
                     .Build();
 
                 services.AddDresscaEfInfrastructure(config);
