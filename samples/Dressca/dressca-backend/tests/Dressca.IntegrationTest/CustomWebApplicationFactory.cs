@@ -12,7 +12,7 @@ public class CustomWebApplicationFactory<TProgram>
     {
         var env = Environment.GetEnvironmentVariable("TEST_ENVIRONMENT") ?? Environments.Development;
 
-        if (env != Environments.Development)
+        if (!env.Equals(Environments.Development, StringComparison.OrdinalIgnoreCase))
         {
             builder.ConfigureServices(services =>
             {
