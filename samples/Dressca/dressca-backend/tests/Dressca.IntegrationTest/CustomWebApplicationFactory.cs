@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace Dressca.IntegrationTest;
 public class CustomWebApplicationFactory<TProgram>
@@ -9,9 +10,9 @@ public class CustomWebApplicationFactory<TProgram>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+        var env = Environment.GetEnvironmentVariable("TEST_ENVIRONMENT") ?? Environments.Development;
 
-        if (env != "Development")
+        if (env != Environments.Development)
         {
             builder.ConfigureServices(services =>
             {

@@ -87,7 +87,7 @@ jobs:
         name: テストの実行
         continue-on-error: true
         run: |
-          export ASPNETCORE_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
+          export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
           dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
       
       - id: create-test-result-report
