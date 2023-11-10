@@ -9,11 +9,10 @@ public class CustomWebApplicationFactory<TProgram>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-        if (env == "Development")
+        builder.ConfigureServices((context, services) =>
         {
-            builder.ConfigureServices(services =>
+            var env = context.HostingEnvironment.EnvironmentName;
+            if (env != "Development")
             {
                 var config = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
@@ -21,7 +20,24 @@ public class CustomWebApplicationFactory<TProgram>
                     .Build();
 
                 services.AddDresscaEfInfrastructure(config);
-            });
-        }
+            }
+        });
+
+        //builder.UseEnvironment("Development");
+
+        //var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+        //if (env == "Development")
+        //{
+        //    builder.ConfigureServices(services =>
+        //    {
+        //        var config = new ConfigurationBuilder()
+        //            .SetBasePath(Directory.GetCurrentDirectory())
+        //            .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
+        //            .Build();
+
+        //        services.AddDresscaEfInfrastructure(config);
+        //    });
+        //}
     }
 }
