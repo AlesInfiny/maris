@@ -71,7 +71,7 @@ jobs:
       - name: 結合テスト用データベース接続文字列を取得
         id: get-connection-string
         env:
-          APPSETTINGS_FILEPATH: ${{ env.WORKING_DIRECTORY }}/tests/Dressca.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
+          APPSETTINGS_FILEPATH: tests/Dressca.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
         run: |
            connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
            echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
