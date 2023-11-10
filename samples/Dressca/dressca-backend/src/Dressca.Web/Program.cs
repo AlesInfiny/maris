@@ -95,7 +95,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapHealthChecks("/api/health");
+app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
 
 app.Run();
 

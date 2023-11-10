@@ -12,6 +12,11 @@ namespace Dressca.Web.HealthChecks;
 /// </summary>
 public class HealthCheckDescriptionProvider : IApiDescriptionProvider
 {
+    /// <summary>
+    ///  ヘルスチェックAPIの相対パス。
+    /// </summary>
+    public static readonly string HealthCheckRelativePath = "api/health";
+
     private readonly IModelMetadataProvider modelMetadataProvider;
 
     /// <summary>
@@ -45,19 +50,26 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
         var actionDescriptor = new ControllerActionDescriptor
         {
             ControllerName = "HealthChecks",
-            ActionName = "api/health",
+            ActionName = HealthCheckRelativePath,
             Parameters = new List<ParameterDescriptor>(),
             ControllerTypeInfo = new TypeDelegator(typeof(string)),
         };
 
-        var apiDescription = new ApiDescription
+        var getApiDescription = new ApiDescription
         {
             ActionDescriptor = actionDescriptor,
             HttpMethod = HttpMethods.Get,
-            RelativePath = "api/health",
+            RelativePath = HealthCheckRelativePath,
         };
 
-        var apiResponseType = new ApiResponseType
+        var headApiDescription = new ApiDescription
+        {
+            ActionDescriptor = actionDescriptor,
+            HttpMethod = HttpMethods.Head,
+            RelativePath = HealthCheckRelativePath,
+        };
+
+        var normalApiResponseType = new ApiResponseType
         {
             ApiResponseFormats = new List<ApiResponseFormat>
             {
@@ -71,7 +83,26 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
             StatusCode = StatusCodes.Status200OK,
         };
 
-        apiDescription.SupportedResponseTypes.Add(apiResponseType);
-        context.Results.Add(apiDescription);
+        var errorApiResponseType = new ApiResponseType
+        {
+            ApiResponseFormats = new List<ApiResponseFormat>
+            {
+                new ApiResponseFormat
+                {
+                    MediaType = "text/plain",
+                    Formatter = new StringOutputFormatter(),
+                },
+            },
+            Type = typeof(string),
+            StatusCode = StatusCodes.Status503ServiceUnavailable,
+        };
+
+        getApiDescription.SupportedResponseTypes.Add(normalApiResponseType);
+        getApiDescription.SupportedResponseTypes.Add(errorApiResponseType);
+        headApiDescription.SupportedResponseTypes.Add(normalApiResponseType);
+        headApiDescription.SupportedResponseTypes.Add(errorApiResponseType);
+
+        context.Results.Add(getApiDescription);
+        context.Results.Add(headApiDescription);
     }
 }
