@@ -75,7 +75,7 @@ jobs:
           APPSETTINGS_FILEPATH: ../../tests/Dressca.IntegrationTest/appsettings.CI.json
         run: |
            dotnet tool install --global dotnet-ef
-           connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings[].DresscaDbContext')
+           connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
            dotnet ef database update --connection $connectionString
 
       - id: run-tests
