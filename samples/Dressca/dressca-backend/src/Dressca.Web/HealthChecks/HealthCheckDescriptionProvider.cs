@@ -69,7 +69,7 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
             RelativePath = HealthCheckRelativePath,
         };
 
-        var normalApiResponseType = new ApiResponseType
+        var normalGetApiResponseType = new ApiResponseType
         {
             ApiResponseFormats = new List<ApiResponseFormat>
             {
@@ -83,7 +83,7 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
             StatusCode = StatusCodes.Status200OK,
         };
 
-        var errorApiResponseType = new ApiResponseType
+        var errorGetApiResponseType = new ApiResponseType
         {
             ApiResponseFormats = new List<ApiResponseFormat>
             {
@@ -97,10 +97,20 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
             StatusCode = StatusCodes.Status503ServiceUnavailable,
         };
 
-        getApiDescription.SupportedResponseTypes.Add(normalApiResponseType);
-        getApiDescription.SupportedResponseTypes.Add(errorApiResponseType);
-        headApiDescription.SupportedResponseTypes.Add(normalApiResponseType);
-        headApiDescription.SupportedResponseTypes.Add(errorApiResponseType);
+        var normalHeadApiResponseType = new ApiResponseType
+        {
+            StatusCode = StatusCodes.Status200OK,
+        };
+
+        var errorHeadApiResponseType = new ApiResponseType
+        {
+            StatusCode = StatusCodes.Status503ServiceUnavailable,
+        };
+
+        getApiDescription.SupportedResponseTypes.Add(normalGetApiResponseType);
+        getApiDescription.SupportedResponseTypes.Add(errorGetApiResponseType);
+        headApiDescription.SupportedResponseTypes.Add(normalHeadApiResponseType);
+        headApiDescription.SupportedResponseTypes.Add(errorHeadApiResponseType);
 
         context.Results.Add(getApiDescription);
         context.Results.Add(headApiDescription);
