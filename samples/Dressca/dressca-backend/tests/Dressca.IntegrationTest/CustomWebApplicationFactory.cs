@@ -9,14 +9,13 @@ public class CustomWebApplicationFactory<TProgram>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+        var env = Environment.GetEnvironmentVariable("TEST_ENVIRONMENT") ?? "Development";
 
         builder.ConfigureServices(services =>
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
                 .Build();
 
             services.AddDresscaEfInfrastructure(config);
