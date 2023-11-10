@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
-using Xunit;
+﻿using Xunit;
 
 namespace Dressca.IntegrationTest;
 
@@ -23,6 +22,7 @@ public class DatabaseHealthCheckTest : IClassFixture<CustomWebApplicationFactory
 
         // Assert
         response.EnsureSuccessStatusCode();
-        Assert.Equal("Healthy", response.Content.ReadAsStringAsync().Result);
+        var healthCheckResult = await response.Content.ReadAsStringAsync();
+        Assert.Equal("Healthy", healthCheckResult);
     }
 }

@@ -102,4 +102,6 @@ app.Run();
 /// <summary>
 ///  結合テストプロジェクト用の部分クラス。
 /// </summary>
-public partial class Program { }
+public partial class Program
+{
+}
