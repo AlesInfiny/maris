@@ -9,7 +9,7 @@ public class CustomWebApplicationFactory<TProgram>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        var env = Environment.GetEnvironmentVariable("TEST_ENVIRONMENT") ?? "Development";
+        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
 
         builder.ConfigureServices(services =>
         {

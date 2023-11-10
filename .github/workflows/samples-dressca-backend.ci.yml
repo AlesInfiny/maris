@@ -27,7 +27,7 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       BUILD_CONFIGURATION: Debug
       BUILD_SUMMARY_FILE: BuildSummary.md
-      TEST_ENVIRONMENT: CI
+      ASPNETCORE_ENVIRONMENT: CI
     permissions:
       checks: write
       contents: read
@@ -71,7 +71,7 @@ jobs:
       - name: 結合テスト用データベース接続文字列を取得
         id: get-connection-string
         env:
-          APPSETTINGS_FILEPATH: tests/Dressca.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
+          APPSETTINGS_FILEPATH: tests/Dressca.IntegrationTest/appsettings.${{ env.ASPNETCORE_ENVIRONMENT }}.json
         run: |
            connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
            echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
@@ -87,7 +87,7 @@ jobs:
         name: テストの実行
         continue-on-error: true
         run: |
-          export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
+          export ASPNETCORE_ENVIRONMENT=${{ env.ASPNETCORE_ENVIRONMENT }}
           dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
       
       - id: create-test-result-report
