@@ -9,15 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.CI.json" />
     <None Remove="appsettings.Development.json" />
+    <None Remove="appsettings.DevelopmentLocal.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.CI.json">
+    <Content Include="appsettings.Development.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="appsettings.Development.json">
+    <Content Include="appsettings.DevelopmentLocal.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
