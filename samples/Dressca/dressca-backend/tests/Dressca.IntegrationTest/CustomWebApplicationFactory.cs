@@ -9,36 +9,19 @@ public class CustomWebApplicationFactory<TProgram>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureServices((context, services) =>
+        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+
+        if (env != "Development")
         {
-            // CIのビルドマシン上で実行する場合はappsettingsを読み込む
-            var env = context.HostingEnvironment.EnvironmentName;
-            if (env == "Development")
+            builder.ConfigureServices(services =>
             {
                 var config = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile($"appsettings.IntegrationTest.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
                     .Build();
 
                 services.AddDresscaEfInfrastructure(config);
-            }
-        });
-
-        //builder.UseEnvironment("Development");
-
-        //var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-        //if (env == "Development")
-        //{
-        //    builder.ConfigureServices(services =>
-        //    {
-        //        var config = new ConfigurationBuilder()
-        //            .SetBasePath(Directory.GetCurrentDirectory())
-        //            .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
-        //            .Build();
-
-        //        services.AddDresscaEfInfrastructure(config);
-        //    });
-        //}
+            });
+        }
     }
 }
