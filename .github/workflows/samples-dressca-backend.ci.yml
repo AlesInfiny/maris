@@ -58,19 +58,22 @@ jobs:
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
-      #- name: 結合テスト用にSQL ServerのDockerイメージをプル
-      #  run: |
-      #    sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
-      #    sudo docker run -e "ACCEPT_EULA=Y" \
-      #    -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
-      #    -p 1433:1433 --name sql1 \
-      #    --hostname sql1 \
-      #    -d \
-      #    mcr.microsoft.com/mssql/server:2022-latest
-      #    sudo docker exec sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca_Eshop;"
+      - name: 結合テスト用にSQL ServerのDockerイメージをプル
+        run: |
+          sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
+          sudo docker run -e "ACCEPT_EULA=Y" \
+          -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
+          -p 1433:1433 --name sql1 \
+          --hostname sql1 \
+          -d mcr.microsoft.com/mssql/server:2022-latest
+          #sudo docker exec sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "P@ssw0rd" -Q "CREATE DATABASE Dressca_Eshop;"
 
-      #- name: 結合テスト用にSQL Serverをセットアップ
-      #  run: |
+      - name: 結合テスト用にマイグレーション適用
+        working-directory: samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure
+        shell: bash
+        run: |
+           dotnet tool install --global dotnet-ef
+           dotnet ef database update --connection "Server=localhost,1433;Database=Dressca_Eshop;User=sa;Password=P@ssw0rd;"
 
       - id: run-tests
         name: テストの実行

@@ -11,17 +11,8 @@ public class CustomWebApplicationFactory<TProgram>
     {
         var env = Environment.GetEnvironmentVariable("TEST_ENVIRONMENT") ?? "Development";
 
-        //var webhostenv = builder.GetSetting("environment");
-        //builder.UseEnvironment("Development");
-
         builder.ConfigureServices(services =>
         {
-            //var filePath = Environment.GetEnvironmentVariable("appSettingsFilePath");
-            //var config = new ConfigurationBuilder()
-            //    .SetBasePath(Directory.GetCurrentDirectory())
-            //    .AddJsonFile(filePath, optional: true, reloadOnChange: true)
-            //    .Build();
-
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
