@@ -88,7 +88,7 @@ jobs:
         continue-on-error: true
         run: |
           #export DOTNET_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
-          dotnet test --environment IntegrationTest --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+          dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
       
       - id: create-test-result-report
         name: テスト結果ページの作成

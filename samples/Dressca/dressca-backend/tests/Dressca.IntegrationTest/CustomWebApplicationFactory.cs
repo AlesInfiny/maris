@@ -13,7 +13,7 @@ public class CustomWebApplicationFactory<TProgram>
         {
             // CIのビルドマシン上で実行する場合はappsettingsを読み込む
             var env = context.HostingEnvironment.EnvironmentName;
-            if (env == "IntegrationTest")
+            if (env == "Development")
             {
                 var config = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
