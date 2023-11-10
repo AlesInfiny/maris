@@ -4,7 +4,7 @@ using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
 using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
-using Dressca.Web.Diagnostics.HealthChecks;
+using Dressca.Web.HealthChecks;
 using Dressca.Web.Mapper;
 using Dressca.Web.Resources;
 using Dressca.Web.Runtime;
