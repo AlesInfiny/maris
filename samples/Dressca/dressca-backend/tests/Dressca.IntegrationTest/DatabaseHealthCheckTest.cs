@@ -2,11 +2,11 @@
 
 namespace Dressca.IntegrationTest;
 
-public class DatabaseHealthCheckTest : IClassFixture<CustomWebApplicationFactory<Program>>
+public class DatabaseHealthCheckTest : IClassFixture<IntegrationTestWebApplicationFactory<Program>>
 {
-    private readonly CustomWebApplicationFactory<Program> factory;
+    private readonly IntegrationTestWebApplicationFactory<Program> factory;
 
-    public DatabaseHealthCheckTest(CustomWebApplicationFactory<Program> factory)
+    public DatabaseHealthCheckTest(IntegrationTestWebApplicationFactory<Program> factory)
     {
         this.factory = factory;
     }
