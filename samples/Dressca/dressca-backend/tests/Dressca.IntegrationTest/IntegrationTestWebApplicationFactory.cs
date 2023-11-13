@@ -5,8 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Dressca.IntegrationTest;
+
 public class IntegrationTestWebApplicationFactory<TProgram>
-    : WebApplicationFactory<TProgram> where TProgram : class
+    : WebApplicationFactory<TProgram>
+    where TProgram : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
