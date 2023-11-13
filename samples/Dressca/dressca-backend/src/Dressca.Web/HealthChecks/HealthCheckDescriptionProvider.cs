@@ -13,7 +13,7 @@ namespace Dressca.Web.HealthChecks;
 public class HealthCheckDescriptionProvider : IApiDescriptionProvider
 {
     /// <summary>
-    ///  ヘルスチェックAPIの相対パス。
+    ///  ヘルスチェックAPIの相対パス "api/health" 。
     /// </summary>
     public static readonly string HealthCheckRelativePath = "api/health";
 
