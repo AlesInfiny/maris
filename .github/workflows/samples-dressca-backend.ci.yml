@@ -27,6 +27,7 @@ jobs:
       DOTNET_CLI_TELEMETRY_OPTOUT: true
       BUILD_CONFIGURATION: Debug
       BUILD_SUMMARY_FILE: BuildSummary.md
+      TEST_ENVIRONMENT: IntegrationTest
     permissions:
       checks: write
       contents: read
@@ -58,10 +59,40 @@ jobs:
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
 
+      - name: SQL ServerのDockerイメージをプル(結合テスト用)
+        run: sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: SQL Serverのコンテナを起動(結合テスト用)
+        run: |
+          sudo docker run -e "ACCEPT_EULA=Y" \
+          -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
+          -p 1433:1433 --name sql1 \
+          --hostname sql1 \
+          -d mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: データベース接続文字列を取得(結合テスト用)
+        id: get-connection-string
+        env:
+          APPSETTINGS_FILEPATH: tests/Dressca.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
+        run: |
+           connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
+           echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
+
+      - name: EF Core ツールのインストール(結合テスト用)
+        shell: bash
+        run: dotnet tool install --global dotnet-ef
+
+      - name: マイグレーション適用(結合テスト用)
+        working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
+        shell: bash
+        run: dotnet ef database update --connection ${{ steps.get-connection-string.outputs.CONNECTION_STRING }}
+
       - id: run-tests
         name: テストの実行
         continue-on-error: true
-        run: dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+        run: |
+          export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
+          dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
       
       - id: create-test-result-report
         name: テスト結果ページの作成
