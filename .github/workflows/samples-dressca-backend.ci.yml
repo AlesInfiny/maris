@@ -80,7 +80,7 @@ jobs:
 
       - name: EF Core ツールのインストール(結合テスト用)
         shell: bash
-        run: dotnet tool install --global dotnet-ef
+        run: dotnet tool install --global dotnet-ef --version 6.*
 
       - name: マイグレーション適用(結合テスト用)
         working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
