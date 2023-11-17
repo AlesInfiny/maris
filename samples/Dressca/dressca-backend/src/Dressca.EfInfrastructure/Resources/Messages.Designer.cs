@@ -61,6 +61,15 @@ namespace Dressca.EfInfrastructure.Resources {
         }
         
         /// <summary>
+        ///   データベースのヘルスチェックが失敗しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string FailedDatabaseHealthCheck {
+            get {
+                return ResourceManager.GetString("FailedDatabaseHealthCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} 接続文字列を構成から取得できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string NotFoundConnectionString {

@@ -4,10 +4,13 @@ using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
 using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
+using Dressca.Web.HealthChecks;
 using Dressca.Web.Mapper;
 using Dressca.Web.Resources;
 using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +70,11 @@ if (builder.Environment.IsDevelopment())
     });
 }
 
+builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, HealthCheckDescriptionProvider>());
+
+builder.Services.AddHealthChecks()
+    .AddDresscaDbContextCheck("DresscaDatabaseHealthCheck");
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -87,4 +95,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
+
 app.Run();
+
+/// <summary>
+///  結合テストプロジェクト用の部分クラス。
+/// </summary>
+public partial class Program
+{
+}

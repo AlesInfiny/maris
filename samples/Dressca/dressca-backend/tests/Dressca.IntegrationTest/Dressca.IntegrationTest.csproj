@@ -5,13 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
-    <Using Include="Moq" />
+    <Content Include="appsettings.IntegrationTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
-    <PackageReference Include="Moq" />
     <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -28,9 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Dressca.ApplicationCore\Dressca.ApplicationCore.csproj" />
     <ProjectReference Include="..\..\src\Dressca.Web\Dressca.Web.csproj" />
-    <ProjectReference Include="..\Dressca.TestLibrary\Dressca.TestLibrary.csproj" />
   </ItemGroup>
 
 </Project>
