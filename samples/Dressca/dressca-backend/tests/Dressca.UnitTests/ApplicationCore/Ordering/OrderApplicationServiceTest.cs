@@ -27,7 +27,7 @@ public class OrderApplicationServiceTest
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
         {
-            new CatalogItem(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+            new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
         };
         var basketRepositoryMock = new Mock<IBasketRepository>();
         basketRepositoryMock
@@ -54,7 +54,7 @@ public class OrderApplicationServiceTest
     }
 
     [Fact]
-    public void CreateOrderAsync_注文作成処理で指定した買い物かごが存在しない場合は業務例外が発生する()
+    public async Task CreateOrderAsync_注文作成処理で指定した買い物かごが存在しない場合は業務例外が発生する()
     {
         // Arrange
         const long basketId = 999L;
@@ -72,11 +72,11 @@ public class OrderApplicationServiceTest
         var action = () => service.CreateOrderAsync(basketId, shipTo);
 
         // Assert
-        Assert.ThrowsAsync<BasketNotFoundException>(action);
+        await Assert.ThrowsAsync<BasketNotFoundException>(action);
     }
 
     [Fact]
-    public void CreateOrderAsync_注文作成処理で指定した買い物かごが空の場合は業務例外が発生する()
+    public async Task CreateOrderAsync_注文作成処理で指定した買い物かごが空の場合は業務例外が発生する()
     {
         // Arrange
         const long basketId = 3L;
@@ -96,7 +96,7 @@ public class OrderApplicationServiceTest
         var action = () => service.CreateOrderAsync(basketId, shipTo);
 
         // Assert
-        Assert.ThrowsAsync<EmptyBasketOnCheckoutException>(action);
+        await Assert.ThrowsAsync<EmptyBasketOnCheckoutException>(action);
     }
 
     [Fact]
@@ -125,7 +125,7 @@ public class OrderApplicationServiceTest
     }
 
     [Fact]
-    public void GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが異なる場合例外になる()
+    public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが異なる場合例外になる()
     {
         // Arrange
         var orderId = 10L;
@@ -146,11 +146,11 @@ public class OrderApplicationServiceTest
         var action = () => service.GetOrderAsync(orderId, "dummy");
 
         // Assert
-        Assert.ThrowsAsync<OrderNotFoundException>(action);
+        await Assert.ThrowsAsync<OrderNotFoundException>(action);
     }
 
     [Fact]
-    public void GetOrderAsync_注文リポジトリから注文情報を取得できない場合例外になる()
+    public async Task GetOrderAsync_注文リポジトリから注文情報を取得できない場合例外になる()
     {
         // Arrange
         var orderId = 10L;
@@ -168,7 +168,7 @@ public class OrderApplicationServiceTest
         var action = () => service.GetOrderAsync(orderId, buyerId);
 
         // Assert
-        Assert.ThrowsAsync<OrderNotFoundException>(action);
+        await Assert.ThrowsAsync<OrderNotFoundException>(action);
     }
 
     private static Address CreateDefaultAddress()
@@ -195,7 +195,7 @@ public class OrderApplicationServiceTest
 
         var items = new List<OrderItem>()
         {
-            new OrderItem(new CatalogItemOrdered(1, productName, productCode), 1000m, 1),
+            new(new CatalogItemOrdered(1, productName, productCode), 1000m, 1),
         };
 
         return items;
