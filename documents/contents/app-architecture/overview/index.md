@@ -113,16 +113,16 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
 
 ### 改行コードの統一 {#unify-line-break-code}
 
-AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行コードが LF で統一されることから、リモートリポジトリの改行コードも LF に統一する方針を採用しています。
+AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行コードが LF で統一されることから、ローカルリポジトリの改行コードも LF に統一する方針を採用しています。
 各ツール・エディターの設定を以下のようにします。
 
 - Git
 
-    Git はデフォルトでローカルリポジトリへフェッチする際に改行コードを CRLF へ自動変換します。
+    Git はチェックアウトするとき、テキストファイルの改行コードを CRLF に自動変換することがあります。
     これを無効化するために、以下のコマンドを実行します。
 
     ```bash
-    git config --local core.autocrlf false
+    git config --local core.autocrlf input
     ```
 
     ただしこれらの方法は Git の設定を開発者自身が行わなければいけないため、改行コードが開発者の環境によって混在する可能性があります。
@@ -151,6 +151,14 @@ AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行�
         settings: {
             "files.eol": "\n"
         }
+    }
+    ```
+
+    またワークスペースを作成しない場合は、ディレクトリ単位で設定します。対象のディレクトリで .vscode/settings.json ファイルを作成し、以下のように設定します。
+
+    ```text title=.vscode/settings.json
+    {
+        "files.eol": "\n"
     }
     ```
 
