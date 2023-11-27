@@ -6,7 +6,7 @@
     <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.25" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.25" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.25" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.25" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.4" />
