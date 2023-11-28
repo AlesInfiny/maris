@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <Copyright>Copyright © 2023 BIPROGY Inc. All rights reserved.</Copyright>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
   </PropertyGroup>
 
   <ItemGroup>
