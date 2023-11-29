@@ -7,6 +7,7 @@ description: AlesInfiny Maris のアプリケーションアーキテクチャ�
 
 AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
 
+<!--
 ## 例外処理方針 {#exception-handling-policy}
 
 ### 例外の種類 {#exception-type}
@@ -14,6 +15,7 @@ AlesInfiny Maris で構築する .NET アプリケーションの共通的な処
 ### 各層における例外の取り扱い {#exception-handling-in-each-layer}
 
 ### 例外の伝播 {#exception-propagation}
+-->
 
 ## ログ出力方針 {#logging-policy}
 
@@ -103,6 +105,8 @@ AlesInfiny Maia で定義するログの種類は以下の通りです。
 
 AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.logging.ilogger) インターフェースを使用します。ログプロバイダーは、アプリケーションの形態に合わせて適切なものを選択します。
 
+<!--
 ## トランザクション方針 {#transaction-policy}
 
 ### Entity Framework Core によるトランザクション {#transaction-by-entity-framework-core}
+-->
