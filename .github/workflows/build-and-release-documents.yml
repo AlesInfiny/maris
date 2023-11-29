@@ -60,8 +60,7 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Linter の処理開始
-        run: |
-          echo '# Linter Result :newspaper:' >> $GITHUB_STEP_SUMMARY
+        run: echo '# Linter Result :newspaper:' >> $GITHUB_STEP_SUMMARY
 
       - name: Markdownlint の実行
         id: run-markdownlint
