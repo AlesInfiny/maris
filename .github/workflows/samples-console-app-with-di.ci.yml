@@ -5,7 +5,7 @@ name: ConsoleAppWithDI CI
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'samples/ConsoleAppWithDI/**'
       - '.github/workflows/samples-console-app-with-di.ci.yml'

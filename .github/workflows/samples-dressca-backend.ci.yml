@@ -5,7 +5,7 @@ name: dressca-backend CI
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'samples/Dressca/dressca-backend/**'
       - '.github/workflows/samples-dressca-backend.ci.yml'
@@ -93,7 +93,7 @@ jobs:
         run: |
           export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
           dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
-      
+
       - id: create-test-result-report
         name: テスト結果ページの作成
         uses: dorny/test-reporter@v1
