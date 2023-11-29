@@ -41,6 +41,11 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Node.js のセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
       - name: Linter の処理開始
         run: |
           echo '# Linter Result :newspaper:' >> $GITHUB_STEP_SUMMARY
