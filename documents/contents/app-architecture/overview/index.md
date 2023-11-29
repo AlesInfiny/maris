@@ -108,3 +108,71 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
 [^1]:
     プロジェクト同士がお互いに参照しあう構造のことを言います。
     .NET ではプロジェクト間の循環参照は許可されていないため、循環参照の発生しない構造を定義しなければなりません。
+
+## 構成管理 {#configuration-management}
+
+### 改行コードの統一 {#unify-line-break-code}
+
+AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行コードが LF で統一されることから、ローカルリポジトリの改行コードも LF に統一する方針を採用しています。
+各ツール・エディターの設定を以下のようにします。
+
+- Git
+
+    Git はチェックアウトする時、テキストファイルの改行コードを CRLF に自動変換することがあります。
+    以下のコマンドを実行し、チェックアウト時の CRLF への自動変換を無効化し、コミット時は LF へ自動変換するように設定します。
+
+    ```bash
+    git config --local core.autocrlf input
+    ```
+
+    ただしこれらの方法は Git の設定を開発者自身が行わなければいけないため、改行コードが開発者の環境によって混在する可能性があります。
+    そのため .gitattributes を利用して、ソースコードの改行コードを強制的に LF に変換するように設定します。
+
+    ```text title=.gitattributes
+    * text=auto eol=lf
+    ```
+
+- Visual Studio
+
+    Visual Studio はデフォルトで改行コードを CRLF に変換します。
+    これを無効化するために、プロジェクトに editorconfig を作成し `end_of_line = lf` を追加します。
+
+    ```text title=.editorconfig
+    [*]
+    end_of_line = lf
+    ```
+
+- Visual Studio Code
+
+    プロジェクトで共通の設定をするため、 ワークスペースで設定します。 .code-workspace ファイルへ以下のように設定します。
+
+    ```text title=.code-workspace
+    {
+        settings: {
+            "files.eol": "\n"
+        }
+    }
+    ```
+
+    またワークスペースを作成しない場合は、フォルダー単位で設定します。対象のフォルダーで .vscode/settings.json ファイルを作成し、以下のように設定します。
+
+    ```text title=.vscode/settings.json
+    {
+        "files.eol": "\n"
+    }
+    ```
+
+- OpenAPI
+
+    OpenAPI の NSwag で生成されるコードの改行コードは、デフォルトで CRLF です。
+    そのため、改行コードを LF にするには、 nswag.json へ以下の設定を追加します。
+
+    ```text title=nswag.json
+    {
+        "documentGenerator": {
+            "aspNetCoreToOpenApi": {
+                "newLineBehavior": "LF",
+            }
+        }
+    }
+    ```
