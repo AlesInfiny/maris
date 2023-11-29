@@ -11,12 +11,12 @@ description: AlesInfiny Maris を利用することで構築できるアプリ�
   
 1. [アプリケーション構成](application-structure.md)
 
-AlesInfiny Maris として、アプリケーション形態ごとに標準的なアプリケーション構成要素を説明します。またソリューション・プロジェクト構造についても説明します。
+    AlesInfiny Maris として、アプリケーション形態ごとに標準的なアプリケーション構成要素を説明します。またソリューション・プロジェクト構造についても説明します。
 
 1. [構成管理](configuration-management.md)
 
-Git リポジトリの構成や、推奨するリポジトリ構造について説明します。
+    Git リポジトリの構成や、推奨するリポジトリ構造について説明します。
 
 1. [.NETアプリケーションの処理方式](dotnet-application-processing-system.md)
 
-AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
+    AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
