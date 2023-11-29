@@ -117,18 +117,21 @@ jobs:
           echo 'LINT_STATUS=Error' >> $GITHUB_ENV
 
       - name: yamllint の実行
+        id: run-yamllint
+        continue-on-error: true
         run: |
           echo '## yamllint Result' >> $GITHUB_STEP_SUMMARY
           yamllint --config-file .yaml-lint.yml . > yamllint-result.txt
-          if [ test -s yamllint-result.txt ]; then
-            echo ':x: yamllint に失敗しました。  ' >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            cat yamllint-result.txt >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            echo 'LINT_STATUS=Error' >> $GITHUB_ENV
-          else
-            echo ':heavy_check_mark: yamllint に成功しました。' >> $GITHUB_STEP_SUMMARY
-          fi
+          echo ':heavy_check_mark: yamllint に成功しました。' >> $GITHUB_STEP_SUMMARY
+
+      - name: yamllint 失敗時の結果表示
+        if: ${{ steps.run-yamllint.outcome == 'failure' }}
+        run: |
+          echo ':x: yamllint に失敗しました。  ' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat yamllint-result.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo 'LINT_STATUS=Error' >> $GITHUB_ENV
 
       - name: textlint の実行
         run: |
