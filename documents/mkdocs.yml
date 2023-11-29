@@ -15,6 +15,10 @@ nav:
       - app-architecture/index.md
       - 概要編:
           - app-architecture/overview/index.md
+          - 構築できるアプリケーション形態: app-architecture/overview/application-kind.md
+          - アプリケーション構成: app-architecture/overview/application-structure.md
+          - 構成管理: app-architecture/overview/configuration-management.md
+          - .NETアプリケーションの処理方式: app-architecture/overview/dotnet-application-processing-system.md
       - クライアントサイドレンダリング編:
           - app-architecture/client-side-rendering/index.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
