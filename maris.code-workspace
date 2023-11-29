@@ -59,7 +59,8 @@
         ],
         "markdownlint.ignore": [
             "LICENSE"
-        ]
+        ],
+        "files.eol": "\n"
     },
     "extensions": {
         "recommendations": [

@@ -55,7 +55,7 @@
       "useHttpAttributeNameAsOperationId": false,
       "output": "dressca-api.json",
       "outputType": "OpenApi3",
-      "newLineBehavior": "Auto",
+      "newLineBehavior": "LF",
       "assemblyPaths": [],
       "assemblyConfig": null,
       "referencePaths": [],
