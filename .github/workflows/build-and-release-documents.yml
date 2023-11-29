@@ -128,9 +128,7 @@ jobs:
         if: ${{ steps.run-yamllint.outcome == 'failure' }}
         run: |
           echo ':x: yamllint に失敗しました。  ' >> $GITHUB_STEP_SUMMARY
-#          echo '```' >> $GITHUB_STEP_SUMMARY
           cat yamllint-result.txt >> $GITHUB_STEP_SUMMARY
-#          echo '```' >> $GITHUB_STEP_SUMMARY
           echo 'LINT_STATUS=Error' >> $GITHUB_ENV
 
       - name: textlint の実行
