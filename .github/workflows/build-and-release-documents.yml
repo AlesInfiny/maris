@@ -46,6 +46,9 @@ jobs:
         with:
           node-version: 18
 
+      - name: npm パッケージのインストール
+        run: npm ci
+
       - name: Linter の処理開始
         run: |
           echo '# Linter Result :newspaper:' >> $GITHUB_STEP_SUMMARY
@@ -85,10 +88,6 @@ jobs:
 #        if: ${{ steps.execute_super_linter.outcome == 'failure' }}
 #        run: |
 #          exit 1
-
-      - name: npm パッケージのインストール
-        run: |
-          npm install
 
       - name: Python のセットアップ
         uses: actions/setup-python@v4
