@@ -49,6 +49,16 @@ jobs:
       - name: npm パッケージのインストール
         run: npm ci
 
+      - name: Python のセットアップ
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: pip パッケージのインストール
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
       - name: Linter の処理開始
         run: |
           echo '# Linter Result :newspaper:' >> $GITHUB_STEP_SUMMARY
@@ -88,16 +98,6 @@ jobs:
 #        if: ${{ steps.execute_super_linter.outcome == 'failure' }}
 #        run: |
 #          exit 1
-
-      - name: Python のセットアップ
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
-
-      - name: pip パッケージのインストール
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
 
       - name: Markdownlint の実行
         id: run-markdownlint
