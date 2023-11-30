@@ -21,6 +21,7 @@ on:
       - ".yaml-lint.yml"
       - "package-lock.json"
       - "package.json"
+      - "requirements.txt"
   workflow_dispatch:
 
 permissions:
