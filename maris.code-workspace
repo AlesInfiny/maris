@@ -10,6 +10,7 @@
             "maris.code-workspace",
             "package.json",
             "package-lock.json",
+            "requirements.txt",
             "**/node_modules/**",
             "**/build-artifacts/**",
             ".vscode",
