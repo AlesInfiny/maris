@@ -114,13 +114,6 @@ jobs:
         if: ${{ env.LINT_STATUS == 'Error' }}
         run: exit 1
 
-      - name: mkdocs のインストール
-        run: |
-          python -m pip install mkdocs
-          python -m pip install mkdocs-material
-          python -m pip install pymdown-extensions
-          python -m pip install mkdocs-minify-plugin
-
       - name: dressca.zip の作成
         run: |
           cd samples/Dressca
