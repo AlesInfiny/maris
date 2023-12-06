@@ -18,6 +18,7 @@ nav:
       - クライアントサイドレンダリング編:
           - app-architecture/client-side-rendering/index.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
+          - 全体処理方式: app-architecture/client-side-rendering/global-function.md
       # - コンソールアプリケーション編:
           # - app-architecture/console-app/index.md
       # - クックブック:
