@@ -16,7 +16,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 アプリケーションの起動以外にリクエスト受付に必要な条件がない限り、活動性の確認で十分にアプリケーションの稼働状況が把握できます。
 
-以下の実装を `Program.cs` に追加することで、アプリケーションの活動性が確認されます。
+以下の実装を `Program.cs` に追加することで、アプリケーションの活動性が確認できます。
 
 ``` C# hl_lines="4 9"
 var builder = WebApplication.CreateBuilder(args);
@@ -56,14 +56,12 @@ app.Run();
 
 ## ヘルスチェックロジックをカスタムする場合 {#customize-health-check-logic}
 
-アプリケーションがリクエストに応答可能か以外の条件も併せてヘルスチェックをしたい場合、`IHealthCheck` インターフェースを実装したクラスを作成します。
+アプリケーションの起動以外にリクエスト受付に必要な条件がある場合、以下の手順でヘルスチェックロジックを追加します。
 
-- クラスの実装例
+- `IHealthCheck` インターフェースを実装したクラスで、`CheckHealthAsync` メソッドをオーバーライドする
+- `Program.cs` でヘルスチェックサービスを登録する
 
-`IHealthCheck` インターフェースを実装したクラスで、
-`CheckHealthAsync` メソッドをオーバーライドしてヘルスチェックのロジックを追加します。
-
-``` C#
+``` C# title="SampleHealthCheck.cs"
 public class SampleHealthCheck : IHealthCheck
 {
     public Task<HealthCheckResult> CheckHealthAsync(
@@ -86,11 +84,7 @@ public class SampleHealthCheck : IHealthCheck
 }
 ```
 
-- `Program.cs` の実装
-
-`AddCheck` メソッドを利用して `SampleHealthCheck` クラスで実装したヘルスチェックを登録します。
-
-``` C#
+``` C# title="Program.cs"
 builder.Services.AddHealthChecks()
     .AddCheck<SampleHealthCheck>("Sample");
 ```
@@ -126,7 +120,7 @@ Entity Framework Core を利用したアプリケーションの場合、以下�
 - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) の参照を追加
 - DbContextのヘルスチェックをサービスに追加
 
-``` C# hl_lines="4-6 9 10"
+``` C# title="Program.cs" hl_lines="4-6 9 10"
 var builder = WebApplication.CreateBuilder(args);
 
 // DbContext の登録
@@ -155,7 +149,7 @@ app.Run();
 
 以下のようにヘルスチェックを複数登録し、ヘルスチェックAPIのエンドポイントが1つの場合、既定ではヘルスチェックAPIが呼び出された際に全てのヘルスチェックが実行されます。
 
-``` C#
+``` C# title="Program.cs"
 // IHealthCheck実装クラスで定義したヘルスチェックを登録
 builder.Services.AddHealthChecks()
     .AddCheck<SampleServerCheck>("SampleServerCheck");
@@ -171,7 +165,7 @@ app.MapHealthChecks("/api/health");
 - ヘルスチェックをサービスに登録する際にタグ付けする
 - サーバーとDBのヘルスチェック機能を別々のエンドポイントにマッピングする
 
-``` C# hl_lines="8 10-18"
+``` C# title="Program.cs" hl_lines="8 10-18"
 builder.Services.AddHealthChecks()
     .AddCheck<SampleServerCheck>("SampleServerCheck");
 
