@@ -7,15 +7,48 @@ description: AlesInfiny Maris のアプリケーションアーキテクチャ�
 
 AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
 
-<!--
 ## 例外処理方針 {#exception-handling-policy}
+
+アプリケーション全体での例外処理方針を定めます。
 
 ### 例外の種類 {#exception-type}
 
-### 各層における例外の取り扱い {#exception-handling-in-each-layer}
+AlesInfiny Maris では、アプリケーションで発生する例外を[業務例外](#business-exception)と[システム例外](#system-exception)の 2 つに分類します。
+それぞれの例外の意味や処理方針を以下に示します。
 
-### 例外の伝播 {#exception-propagation}
--->
+#### 業務例外 {#business-exception}
+
+- 意味
+
+    業務フロー上、想定されるエラーを表す例外です。
+
+- 発生箇所
+
+    アプリケーションコア層の業務ロジック内で、明示的にスローします。
+
+- 処理方針
+
+    プレゼンテーション層でキャッチし、業務フローに応じた処理を行います。
+
+#### システム例外 {#system-exception}
+
+- 意味
+
+    業務フロー上は想定されないシステムのエラーを表す例外です。
+    実行ランタイムまでキャッチされずに到達した例外は、すべてシステム例外として扱います。
+
+- 発生箇所
+
+    .NET の実行ランタイム内からスローされます。
+    またアプリケーションとして想定していない状態となったとき、業務ロジック内から明示的にスローすることがあります。
+
+- 処理方針
+
+    集約例外ハンドラー内でキャッチして、システムエラーの処理フローを実行します。
+
+### 業務例外とシステム例外の使い分け {#business-exception-and-system-exception}
+
+原則として、システム例外は業務ロジック内からスローしないようにします。 何らかのエラー状態を業務ロジックとして検出するのであれば、そのエラーを回復するための手段を業務フローとして設計し、業務例外として処理します。
 
 ## ログ出力方針 {#logging-policy}
 
@@ -25,7 +58,7 @@ AlesInfiny Maris で構築する .NET アプリケーションの共通的な処
 
 ### ログの種類 {#log-pattern}
 
-AlesInfiny Maia で定義するログの種類は以下の通りです。
+AlesInfiny Maris で定義するログの種類は以下の通りです。
 
 - 操作ログ
 
@@ -49,41 +82,47 @@ AlesInfiny Maia で定義するログの種類は以下の通りです。
 ログに出力する情報によって、適切なログレベルを選択します。
 ログレベルの定義は以下の通りです。
 
-- FATAL
+- Critical
 
     業務の即時停止につながる可能性のあるログを出力するときに使用するログレベルです。
 
-- ERROR
+- Error
 
     一部の業務が停止する可能性のあるログを出力するときに使用するログレベルです。
     マスターデータの不整合や、原因の不明なエラー発生など、システム運用担当者による確認や対処が必要となる状態を通知する目的に使用します。
 
-- WARN
+- Warning
 
     業務は継続できるものの、一時的に発生したエラー状態を出力するときに使用するログレベルです。
     業務エラーの記録など、システム運用担当者による対応は不要なものの、システムとして不安定な状態を記録する際使用します。
 
-- INFO
+- Information
 
     システム運用にあたって必要となる情報を出力するときに使用するログレベルです。
     バッチ処理の開始／終了の記録など、システムの状態を記録する際使用します。
 
-- DEBUG
+- Debug
 
     開発者がアプリケーションの開発のために使用するログレベルです。
     各メソッドの入出力データなど、開発目的の情報を記録する際使用します。
+
+- Trace
+  
+    最も詳細なメッセージを含むログレベルです。
+    機密性の高いアプリデータを含む場合があり、本番環境では使用しません。
 
 ### ログレベルと環境ごとの出力設定 {#configuration-of-log-levels-and-output-per-environment}
 
 システムの実行環境にあわせて、適切なレベルのログを出力するように構成します。
 
-| ログレベル |      本番環境      |     テスト環境     |  ローカル開発環境  |
-| ---------- | :----------------: | :----------------: | :----------------: |
-| FATAL      | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| ERROR      | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| WARN       | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| INFO       | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| DEBUG      |                    |                    | :white_check_mark: |
+| ログレベル   |      本番環境      |     テスト環境     |  ローカル開発環境  |
+| ----------- | :----------------: | :----------------: | :----------------: |
+| Critical    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Error       | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Warning     | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Information | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Debug       |                    |                    | :white_check_mark: |
+| Trace       |                    |                    | :white_check_mark: |
 
 ### ログに含める標準データ {#standard-log-data}
 
@@ -92,21 +131,23 @@ AlesInfiny Maia で定義するログの種類は以下の通りです。
 - ログ出力日時
 - ログレベル
 - メッセージ
-- スレッド名
+<!-- - スレッド名 -->
 - 例外メッセージとスタックトレース ( 例外を記録するログのみ )
 
-!!! info "スレッド名の用途"
+<!-- !!! info "スレッド名の用途"
     スレッド名はログをトレースするために出力します。
     複数の処理が同時に動作しながらログ出力すると、各処理で出力したログが混ざりあった状態のログができあがります。
     スレッド名は、 1 つのスレッド内で出力したログだけをフィルタリングして、処理ごとにログを分解して解析するために使用できます。
-    マルチスレッドプログラミングを行うなど、スレッド名だけではログのトレースが実現できない場合は、別途ログをトレースするための手段を検討します。
+    マルチスレッドプログラミングを行うなど、スレッド名だけではログのトレースが実現できない場合は、別途ログをトレースするための手段を検討します。 -->
 
 ### ロギングライブラリ {#logging-libraries}
 
 AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.logging.ilogger) インターフェースを使用します。ログプロバイダーは、アプリケーションの形態に合わせて適切なものを選択します。
 
-<!--
-## トランザクション方針 {#transaction-policy}
+## メッセージ管理方針 {#message-management-policy}
 
-### Entity Framework Core によるトランザクション {#transaction-by-entity-framework-core}
--->
+メッセージ文字列は、表記の統一を図る目的にリソースファイルで管理します。
+
+## 入力検証方針 {#input-validation-policy}
+
+入力値単体や、入力値同士の比較によって検証可能な入力値検証は、入出力インターフェースとなる場所で行います。 入力値単体では検証できず、データストア内のデータとの比較によって検証する場合はアプリケーションコア層の業務ロジックで検証します。
