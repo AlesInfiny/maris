@@ -9,7 +9,14 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 ## 基本的な実装方法 {#basic}
 
-以下の実装を `Program.cs` に追加することで、アプリケーションがリクエストに応答可能かどうかが判定されます。
+ヘルスチェックでは以下の 2 つのアプリケーションの状態を区別する場合があります。
+
+- 活動性：アプリケーションが起動しているかどうか
+- 対応性：アプリケーションが起動しており、かつリクエスト受付可能かどうか
+
+アプリケーションの起動以外にリクエスト受付に必要な条件がない限り、活動性の確認で十分にアプリケーションの稼働状況が把握できます。
+
+以下の実装を `Program.cs` に追加することで、アプリケーションの活動性が確認されます。
 
 ``` C# hl_lines="4 9"
 var builder = WebApplication.CreateBuilder(args);
@@ -20,15 +27,34 @@ builder.Services.AddHealthChecks();
 var app = builder.Build();
 
 // ヘルスチェック API のエンドポイントをマッピングする
-app.MapHealthChecks("/healthz");
+app.MapHealthChecks("/health");
 
 app.Run();
 ```
 
-上記の実装では、`/healthz` にアクセスすることでヘルスチェックが実施されます。
-ヘルスチェックの結果である [`HealthStatus`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus) の値がレスポンスとして返されます。 `HealthStatus` は、 `Healthy, Degraded, Unhealthy` のいずれかの値を取ります。
+上記の実装では、`/health` にアクセスすることでヘルスチェックが実行されます。
 
-## ヘルスチェックロジックをカスタムする場合 {#custom-health-check-logic}
+ヘルスチェック実行時のレスポンスとして [`HealthStatus`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus) がプレーンテキスト形式で返されます。
+サーバーが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
+
+ `HealthStatus` は、 `Healthy, Degraded, Unhealthy` のいずれかの値を取ります。
+
+### HealthStatus の使い分け
+
+|      HealthStatus      | ステータスコード | レスポンスボディ |                   詳細                   |
+| ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
+| HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能             |
+| HealthStatus.Degraded  | 200              | Degraded         | サーバーが起動済みだがリクエスト受付不可 |
+| HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可(停止状態)   |
+
+既定のヘルスチェック機能ではサーバーが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
+
+活動性と対応性を分けてヘルスチェックを行いたい場合に `Degraded` を返すよう実装する場合があります。
+例えば、独自に追加したヘルスチェックロジックが正常に動作する場合に `Healthy` 、正常に動作しない場合に `Degraded` を返すよう実装することができます。
+
+詳しくは、[ヘルスチェックロジックをカスタムする場合](#customize-health-check-logic) を参照してください。
+
+## ヘルスチェックロジックをカスタムする場合 {#customize-health-check-logic}
 
 アプリケーションがリクエストに応答可能か以外の条件も併せてヘルスチェックをしたい場合、`IHealthCheck` インターフェースを実装したクラスを作成します。
 
@@ -43,7 +69,15 @@ public class SampleHealthCheck : IHealthCheck
     public Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context, CancellationToken cancellationToken = default)
     {
-        // ここに独自のヘルスチェックロジックを実装
+        var isHealthy = true;
+
+        // 独自のヘルスチェックロジックを実装
+
+        if (isHealthy)
+        {
+            return Task.FromResult(
+                HealthCheckResult.Healthy("A healthy result."));
+        }
 
         return Task.FromResult(
             new HealthCheckResult(
@@ -52,7 +86,7 @@ public class SampleHealthCheck : IHealthCheck
 }
 ```
 
-- Program.csの実装
+- `Program.cs` の実装
 
 `AddCheck` メソッドを利用して `SampleHealthCheck` クラスで実装したヘルスチェックを登録します。
 
@@ -61,7 +95,7 @@ builder.Services.AddHealthChecks()
     .AddCheck<SampleHealthCheck>("Sample");
 ```
 
-これによってヘルスチェックAPI呼び出しの際に独自に実装したヘルスチェックロジックが実行されます。
+これにより、ヘルスチェック API 呼び出しの際に独自に実装したヘルスチェックロジックが実行されます。
 
 !!! info "`AddCheck` メソッドにラムダ式を渡す"
 
@@ -73,6 +107,17 @@ builder.Services.AddHealthChecks()
     ```
 
     複雑なロジックを追加する場合は、`IHealthChecksBuilder` の拡張メソッドとして別のクラスに処理を切り出すか、`IHealthCheck` インターフェースを実装したクラスを作成することを推奨します。
+
+!!! info "ヘルスチェック失敗時の `HealthStatus` を `Degraded` に指定する"
+
+    ヘルスチェックサービスを登録する際に `failureStatus` オプションを利用することで、ヘルスチェックが失敗した際の `HealthStatus` を指定できます。
+
+    ``` C#
+    builder.Services.AddHealthChecks()
+        .AddCheck<SampleHealthCheck>(
+        "Sample",
+        failureStatus: HealthStatus.Degraded);
+    ```
 
 ## データベースのヘルスチェックを追加する場合 {#database-health-check}
 
@@ -96,15 +141,15 @@ builder.Services.AddHealthChecks()
 var app = builder.Build();
 
 // ヘルスチェック API のエンドポイントをマッピングする
-app.MapHealthChecks("/healthz");
+app.MapHealthChecks("/health");
 
 app.Run();
 ```
 
-上記の例では、`/healthz` にアクセスすることでアプリケーションとデータベースのヘルスチェックが実施されます。
-アプリケーションとデータベースのヘルスチェックを行うタイミングを分けたい場合は、[複数のヘルスチェックを別々に実行する場合](#複数のヘルスチェックを別に実行する場合) を参照してください。
+上記の例では、`/health` にアクセスすることでアプリケーションとデータベースのヘルスチェックが実施されます。
+アプリケーションとデータベースのヘルスチェックを行うタイミングを分けたい場合は、[複数のヘルスチェックを別々に実行する場合](#execute-health-checks-separately) を参照してください。
 
-データベースのヘルスチェックの際に独自のロジックを実行したい場合は、[ヘルスチェックロジックをカスタムする場合](#ヘルスチェックロジックをカスタムする場合)と同様に、`IHealthCheck` インターフェースを実装したクラスを作成します。
+データベースのヘルスチェックの際に独自のロジックを実行したい場合は、[ヘルスチェックロジックをカスタムする場合](#customize-health-check-logic)と同様に、`IHealthCheck` インターフェースを実装したクラスを作成します。
 
 ## 複数のヘルスチェックを別々に実行する場合 {#execute-health-checks-separately}
 
