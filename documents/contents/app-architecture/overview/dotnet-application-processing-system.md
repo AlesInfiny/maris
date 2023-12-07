@@ -109,7 +109,7 @@ AlesInfiny Maris で定義するログの種類は以下の通りです。
 - Trace
   
     最も詳細なメッセージを含むログレベルです。
-    機密性の高いアプリデータを含む場合があり、本番環境では使用しません。
+    機密性の高い情報を記録する必要がある場合のみ使用します。
 
 ### ログレベルと環境ごとの出力設定 {#configuration-of-log-levels-and-output-per-environment}
 
@@ -122,7 +122,10 @@ AlesInfiny Maris で定義するログの種類は以下の通りです。
 | Warning     | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Information | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Debug       |                    |                    | :white_check_mark: |
-| Trace       |                    |                    | :white_check_mark: |
+| Trace       |                    |                    |                    |
+
+!!! note "ログレベル Trace の使用について"
+    ログレベル Trace は、気密性の高い情報を含むことがあり、開発環境であってもログファイル等に出力されることを防ぐため原則使用しません。
 
 ### ログに含める標準データ {#standard-log-data}
 
