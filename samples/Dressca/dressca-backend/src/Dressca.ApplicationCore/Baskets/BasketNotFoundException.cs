@@ -17,14 +17,4 @@ public class BasketNotFoundException : Exception
         : base(string.Format(Messages.BasketNotFound, basketId))
     {
     }
-
-    /// <summary>
-    ///  <see cref="BasketNotFoundException"/> クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    /// <param name="info">オブジェクトをシリアライズまたはデシリアライズするために必要なすべてのデータを格納するオブジェクト。</param>
-    /// <param name="context">ストリーミングコンテキスト。</param>
-    protected BasketNotFoundException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
 }
