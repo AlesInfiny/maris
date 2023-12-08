@@ -6,6 +6,12 @@
     "description": "Dressca の Web API 仕様",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://localhost:5001",
+      "description": "ローカル開発用のサーバーです。"
+    }
+  ],
   "paths": {
     "/api/assets/{assetCode}": {
       "get": {
