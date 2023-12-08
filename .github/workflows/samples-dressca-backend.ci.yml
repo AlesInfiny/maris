@@ -40,10 +40,9 @@ jobs:
           fetch-depth: 0
 
       - name: .NET SDK のセットアップ
-        uses: actions/setup-dotnet@v2.0.0
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
-          include-prerelease: false
+          global-json-file: samples/Dressca/dressca-backend/global.json
 
       - name: NuGet パッケージの復元
         run: dotnet restore
