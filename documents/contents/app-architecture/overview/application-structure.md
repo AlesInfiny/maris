@@ -24,7 +24,7 @@ Vue.js を用いた SPA の構成をとります。
 
 ## コンソールアプリケーション {#console-application}
 
-コンソールアプリケーションでは、汎用ホスト [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) を用いて構築します。
+コンソールアプリケーションでは、汎用ホスト [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) を用いて構築します。データアクセスには Entity Framework Core を利用します。
 
 ![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-light.png#only-light){ loading=lazy }
 ![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-dark.png#only-dark){ loading=lazy }
