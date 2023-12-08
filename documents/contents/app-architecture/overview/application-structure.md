@@ -24,7 +24,10 @@ Vue.js を用いた SPA の構成をとります。
 
 ## コンソールアプリケーション {#console-application}
 
-（今後追加予定）
+コンソールアプリケーションでは、汎用ホスト [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) を用いて構築します。
+
+![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-light.png#only-light){ loading=lazy }
+![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-dark.png#only-dark){ loading=lazy }
 
 ## ソリューションの単位 {#unit-of-solution}
 
@@ -67,8 +70,15 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
 
     最も基本的な構造は、以下の通りです。
 
+    - クライアントサイドレンダリング
+
     ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture-light.png#only-light){ loading=lazy }
     ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture-dark.png#only-dark){ loading=lazy }
+
+    - コンソールアプリケーション
+
+    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/console-application-architecture-light.png#only-light){ loading=lazy }
+    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/console-application-architecture-dark.png#only-dark){ loading=lazy }
 
 1. 業務 / 機能をプロジェクト構造に当てはめる
 

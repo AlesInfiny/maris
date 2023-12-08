@@ -23,5 +23,7 @@ HTML をクライアント側 JavaScript でレンダリングする方式の We
 
 ## コンソールアプリケーション {#console-application}
 
-クライアント端末で動作するネイティブアプリケーションです。
-（今後追加予定）
+クライアント端末で動作するネイティブアプリケーションです。コマンドラインからプログラム名と引数を指定して起動し、処理結果はコマンドラインに文字列で出力されます。バッチ処理の作成に適した構成です。
+
+![コンソールアプリケーション](../../images/app-architecture/overview/console-application-light.png#only-light){ loading=lazy }
+![コンソールアプリケーション](../../images/app-architecture/overview/console-application-dark.png#only-dark){ loading=lazy }
