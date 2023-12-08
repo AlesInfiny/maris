@@ -29,7 +29,8 @@ internal class XunitLogger : ILogger
     }
 
     /// <inheritdoc/>
-    public IDisposable BeginScope<TState>(TState state) => NoopDisposable.Instance;
+    public IDisposable BeginScope<TState>(TState state)
+        where TState : notnull => NoopDisposable.Instance;
 
     /// <inheritdoc/>
     public bool IsEnabled(LogLevel logLevel) => true;
