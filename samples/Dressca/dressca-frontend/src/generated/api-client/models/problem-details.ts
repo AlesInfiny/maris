@@ -52,11 +52,5 @@ export interface ProblemDetails {
      * @memberof ProblemDetails
      */
     'instance'?: string | null;
-    /**
-     * 
-     * @type {{ [key: string]: any; }}
-     * @memberof ProblemDetails
-     */
-    'extensions'?: { [key: string]: any; };
 }
 
