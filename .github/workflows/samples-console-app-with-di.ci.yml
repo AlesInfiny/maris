@@ -1,5 +1,5 @@
 ---
-# cSpell:ignore cobertura danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
+# cSpell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
 
 name: ConsoleAppWithDI CI
 
