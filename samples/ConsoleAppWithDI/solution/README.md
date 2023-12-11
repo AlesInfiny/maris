@@ -16,8 +16,8 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 
 本サンプルは以下の環境で動作確認を行っています。
 
-- .NET 6
-- Visual Studio 2022 17.4
+- .NET 8
+- Visual Studio 2022 17.8.3
 
 ## 前提となる OSS ライブラリ
 
@@ -275,7 +275,7 @@ ERROR(S):
 ビルドした exe を直接実行する場合は、ビルドしたアプリケーションの出力されたフォルダーに移動し、以下のように実行します。
 
 ```plane
-C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net6.0>Maris.Samples.Cli.exe sample --loop-number 5
+C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net8.0>Maris.Samples.Cli.exe sample --loop-number 5
 info: Maris.ConsoleApp.Hosting.ServiceCollectionExtensions[0]
       起動パラメーター:sample --loop-number 5 のパースを行います。
 info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
@@ -292,7 +292,7 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: C:\temp\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net6.0
+      Content root path: C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net8.0
 info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
       sample コマンドのホストの処理が終了コード 0 で完了しました。実行時間は 20 ms でした。
 ```
@@ -317,7 +317,7 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Development
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: C:\temp\MarisSamples.ConsoleApp\src\Maris.Samples.Cli
+      Content root path: C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli
 info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
       sample コマンドのホストの処理が終了コード 0 で完了しました。実行時間は 22 ms でした。
 ```
