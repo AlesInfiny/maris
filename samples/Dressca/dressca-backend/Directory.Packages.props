@@ -15,7 +15,7 @@
     <PackageVersion Include="NSwag.AspNetCore" Version="14.0.0-preview011" />
     <PackageVersion Include="NSwag.MSBuild" Version="14.0.0-preview011" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.507" />
-    <PackageVersion Include="xunit" Version="2.6.2" />
+    <PackageVersion Include="xunit" Version="2.6.3" />
     <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.4" />
   </ItemGroup>
