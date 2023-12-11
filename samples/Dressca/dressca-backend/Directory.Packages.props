@@ -12,7 +12,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="Moq" Version="4.20.70" />
-    <PackageVersion Include="NSwag.AspNetCore" Version="14.0.0-preview011" />
+    <PackageVersion Include="NSwag.AspNetCore" Version="14.0.0-preview012" />
     <PackageVersion Include="NSwag.MSBuild" Version="14.0.0-preview011" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.507" />
     <PackageVersion Include="xunit" Version="2.6.3" />
