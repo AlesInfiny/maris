@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目
 		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
+		global.json = global.json
 		README.md = README.md
 		stylecop.json = stylecop.json
 	EndProjectSection
@@ -37,7 +38,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maris.Samples.Cli", "src\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maris.ConsoleApp.UnitTests", "tests\Maris.ConsoleApp.UnitTests\Maris.ConsoleApp.UnitTests.csproj", "{E3470347-A48E-4899-AFC9-1B6C4832FFC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maris.ConsoleApp.IntegrationTests", "tests\Maris.ConsoleApp.IntegrationTests\Maris.ConsoleApp.IntegrationTests.csproj", "{0DF6783C-412B-4124-99DD-70385C577FAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maris.ConsoleApp.IntegrationTests", "tests\Maris.ConsoleApp.IntegrationTests\Maris.ConsoleApp.IntegrationTests.csproj", "{0DF6783C-412B-4124-99DD-70385C577FAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
