@@ -6,6 +6,7 @@ api/basket-items-api.ts
 api/catalog-brands-api.ts
 api/catalog-categories-api.ts
 api/catalog-items-api.ts
+api/health-checks-api.ts
 api/orders-api.ts
 base.ts
 common.ts

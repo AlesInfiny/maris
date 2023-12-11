@@ -49,6 +49,11 @@ builder.Services.AddOpenApiDocument(config =>
         document.Info.Version = "1.0.0";
         document.Info.Title = "Dressca Web API";
         document.Info.Description = "Dressca の Web API 仕様";
+        document.Servers.Add(new()
+        {
+            Description = "ローカル開発用のサーバーです。",
+            Url = "https://localhost:5001",
+        });
     };
 });
 
@@ -80,7 +85,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
-    app.UseSwaggerUi3();
+    app.UseSwaggerUi();
     app.UseHttpLogging();
     app.UseExceptionHandler(ErrorController.DevelopmentErrorRoute);
 }
