@@ -30,7 +30,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 <Project>
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
@@ -85,7 +85,7 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
