@@ -9,14 +9,8 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 ## 基本的な実装方法 {#basic}
 
-ヘルスチェックでは以下の 2 つのアプリケーションの状態を区別する場合があります。
-
-- 活動性：アプリケーションが起動しているかどうか
-- 対応性：アプリケーションが起動しており、かつリクエスト受付可能かどうか
-
-アプリケーションの起動以外にリクエスト受付に必要な条件がない限り、活動性の確認で十分にアプリケーションの稼働状況が把握できます。
-
 以下の実装を `Program.cs` に追加することで、アプリケーションの活動性が確認できます。
+活動性については、[正常性の区分](../../../app-architecture/overview/dotnet-application-processing-system.md#health-check-probe) を参照してください。
 
 ``` C# hl_lines="4 9"
 var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +33,7 @@ app.Run();
 
  `HealthStatus` は、 `Healthy, Degraded, Unhealthy` のいずれかの値を取ります。
 
-### HealthStatus の使い分け
+### HealthStatus の使い分け {#health-status}
 
 |      HealthStatus      | ステータスコード | レスポンスボディ |                   詳細                   |
 | ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
