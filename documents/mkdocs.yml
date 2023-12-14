@@ -22,11 +22,11 @@ nav:
       - クライアントサイドレンダリング編:
           - app-architecture/client-side-rendering/index.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
-  #   - コンソールアプリケーション編:
-  #       - app-architecture/console-app/index.md
-  #- クックブック:
-  #    - cook-book/index.md
-  #    - 帳票印刷: cook-book/report.md
+      # - コンソールアプリケーション編:
+          # - app-architecture/console-app/index.md
+      # - クックブック:
+          # - cook-book/index.md
+          # - 帳票印刷: cook-book/report.md
   - ガイド:
       - guidebooks/index.md
       - Git リポジトリ構築ガイド:
@@ -48,7 +48,7 @@ nav:
           - Vue.js 編:
               - guidebooks/how-to-develop/vue-js/index.md
               - 事前準備: guidebooks/how-to-develop/vue-js/preparation.md
-              - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md # cspell: disable-line
+              - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md
               - ブランクプロジェクトのフォルダー構造: guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
               - 開発に使用するパッケージ: guidebooks/how-to-develop/vue-js/optional-packages.md
               - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/vue-js/css.md
@@ -57,8 +57,8 @@ nav:
               - Open API 仕様書からのクライアントコード生成: guidebooks/how-to-develop/vue-js/create-api-client-code.md
           - ローカル開発環境の構築:
               - guidebooks/how-to-develop/local-environment/index.md
-  #       - アプリケーションテスト:
-  #           - guidebooks/app-testing/index.md
+          # - アプリケーションテスト:
+              # - guidebooks/app-testing/index.md
       - マイグレーション:
           - guidebooks/migration/index.md
           - .NET Framework にとどまることのリスク:
@@ -66,8 +66,8 @@ nav:
               - .NET ランタイムの最新動向: guidebooks/migration/dotnetfw-risk/dotnet-runtime-trends.md
               - .NET Framework の開発停止によるリスク: guidebooks/migration/dotnetfw-risk/risk-of-dotnet-framework.md
               - .NET への移行: guidebooks/migration/dotnetfw-risk/migration-to-dotnet.md
-  #   - 開発プロセスのモダナイズ:
-  #       - guidebooks/modern-dev-process/index.md
+          # - 開発プロセスのモダナイズ:
+              # - guidebooks/modern-dev-process/index.md
   - サンプル解説:
       - samples/index.md
       - コンソールアプリケーションでの DI の利用:

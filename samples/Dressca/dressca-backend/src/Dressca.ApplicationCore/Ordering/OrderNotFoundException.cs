@@ -18,14 +18,4 @@ public class OrderNotFoundException : Exception
         : base(string.Format(Messages.OrderNotFound, orderId, buyerId))
     {
     }
-
-    /// <summary>
-    ///  <see cref="OrderNotFoundException"/> クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    /// <param name="info">オブジェクトをシリアライズまたはデシリアライズするために必要なすべてのデータを格納するオブジェクト。</param>
-    /// <param name="context">ストリーミングコンテキスト。</param>
-    protected OrderNotFoundException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
 }
