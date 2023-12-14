@@ -12,7 +12,7 @@ AlesInfiny Maris として、アプリケーション形態ごとに標準的な
 ## Web アプリケーション ( クライアントサイドレンダリング ) {#client-side-rendering}
 
 Vue.js を用いた SPA の構成をとります。
-サーバーサイドは .NET 6 以降の ASP.NET Core の Web API アプリケーションです。
+サーバーサイドは .NET 8 以降の ASP.NET Core の Web API アプリケーションです。
 データアクセスには Entity Framework Core を利用します。
 
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
