@@ -132,16 +132,12 @@ AlesInfiny Maris で定義するログの種類は以下の通りです。
 以下の情報をログに含めます。
 
 - ログ出力日時
-- ログレベル
-- メッセージ
-<!-- - スレッド名 -->
-- 例外メッセージとスタックトレース ( 例外を記録するログのみ )
-
-<!-- !!! info "スレッド名の用途"
-    スレッド名はログをトレースするために出力します。
-    複数の処理が同時に動作しながらログ出力すると、各処理で出力したログが混ざりあった状態のログができあがります。
-    スレッド名は、 1 つのスレッド内で出力したログだけをフィルタリングして、処理ごとにログを分解して解析するために使用できます。
-    マルチスレッドプログラミングを行うなど、スレッド名だけではログのトレースが実現できない場合は、別途ログをトレースするための手段を検討します。 -->
+- [ログのカテゴリ](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-category)
+- [ログレベル](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-level)
+- [イベントID](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-event-id)
+- [メッセージ](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-message-template)
+- [例外情報（スタックトレースなど）](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-exceptions)
+- [スコープ](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-scopes)
 
 ### ロギングライブラリ {#logging-libraries}
 
