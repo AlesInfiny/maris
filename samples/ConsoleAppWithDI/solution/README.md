@@ -482,7 +482,7 @@ internal class ValidatableCommand : SyncCommand<Parameter>
         if (parameter.ExecuteBusinessDate < businessDate.AddDays(-7))
         {
             throw new ArgumentException(
-                "業務日付 1 週間より前の業務日付は指定できません。",
+                "1 週間より前の業務日付は指定できません。",
                 nameof(parameter));
         }
     }
