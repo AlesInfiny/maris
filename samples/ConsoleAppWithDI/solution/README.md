@@ -464,25 +464,25 @@ internal class Parameter
     public DateTimeOffset ExecuteBusinessDate { get; set; }
 }
 
-internal class ValidatableCommand : SyncCommand<ValidatableParameter>
+internal class ValidatableCommand : SyncCommand<Parameter>
 {
     private readonly IBusinessDateRepository repository;
 
     public ValidatableCommand(IBusinessDateRepository repository) => this.repository = repository;
 
-    protected override ICommandResult Execute(ValidatableParameter parameter)
+    protected override ICommandResult Execute(Parameter parameter)
     {
         Console.WriteLine(parameter.ExecuteBusinessDate.ToString("G"));
         return new SuccessResult();
     }
 
-    protected override void ValidateParameter(ValidatableParameter parameter)
+    protected override void ValidateParameter(Parameter parameter)
     {
         var businessDate = this.repository.GetBusinessDate();
         if (parameter.ExecuteBusinessDate < businessDate.AddDays(-7))
         {
             throw new ArgumentException(
-                "業務日付 1 週間より前の業務日付は指定できません。",
+                "1 週間より前の業務日付は指定できません。",
                 nameof(parameter));
         }
     }
