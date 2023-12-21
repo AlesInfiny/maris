@@ -1,6 +1,7 @@
 {
   "name": "dressca-frontend",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite --mode dev",
     "build": "vue-tsc --noEmit && vite build",
