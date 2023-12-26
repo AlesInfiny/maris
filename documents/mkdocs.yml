@@ -143,10 +143,8 @@ markdown_extensions:
 
 extra:
   footer_urls:
-    terms: terms/
-    license: terms/#license
-    disclaimer: terms/#disclaimer
-    other_company_trademarks: terms/#trademarks-owned-by-other-companies
+    terms: about-maris/terms/
+    trademarks: about-maris/trademarks/
   version: !ENV [VERSION, "Local Version"]
 
 extra_css:
