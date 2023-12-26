@@ -5,7 +5,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 # ヘルスチェック API の実装 {#top}
 
-アプリケーションサーバーやデータベースの死活確認のため、ASP.NET Core の機能を利用してヘルスチェック API を実装できます。
+アプリケーションサーバーやデータベースの死活確認のため、 ASP.NET Core の機能を利用してヘルスチェック API を実装できます。
 
 ## 基本的な実装方法 {#basic}
 
@@ -44,13 +44,13 @@ app.Run();
 既定のヘルスチェック機能ではサーバーが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
 
 活動性と対応性を分けてヘルスチェックを行いたい場合に `Degraded` を返すよう実装する場合があります。
-例えば、独自に追加したヘルスチェックロジックが正常に動作する場合に `Healthy` 、正常に動作しない場合に `Degraded` を返すよう実装することができます。
+例えば、独自に追加したヘルスチェックロジックが正常に動作する場合に `Healthy` 、正常に動作しない場合に `Degraded` を返すよう実装できます。
 
 詳しくは、[ヘルスチェックロジックをカスタムする場合](#customize-health-check-logic) を参照してください。
 
 ## ヘルスチェックロジックをカスタムする場合 {#customize-health-check-logic}
 
-アプリケーションの起動以外にリクエスト受付に必要な条件がある場合、以下の手順でヘルスチェックロジックを追加します。
+アプリケーションの起動以外でリクエスト受付に必要な条件がある場合、以下の手順でヘルスチェックロジックを追加します。
 
 - `IHealthCheck` インターフェースを実装したクラスで、`CheckHealthAsync` メソッドをオーバーライドする
 - `Program.cs` でヘルスチェックサービスを登録する
@@ -110,7 +110,7 @@ builder.Services.AddHealthChecks()
 Entity Framework Core を利用したアプリケーションの場合、以下の手順でデータベースのヘルスチェックを行うことができます。
 
 - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) の参照を追加
-- DbContextのヘルスチェックをサービスに追加
+- DbContext のヘルスチェックをサービスに追加
 
 ``` C# title="Program.cs" hl_lines="4-6 9 10"
 var builder = WebApplication.CreateBuilder(args);
@@ -132,14 +132,14 @@ app.MapHealthChecks("/health");
 app.Run();
 ```
 
-上記の例では、`/health` にアクセスすることでアプリケーションとデータベースのヘルスチェックが実施されます。
+上記の例では、`/health` にアクセスすることでアプリケーションとデータベースのヘルスチェックが実行されます。
 アプリケーションとデータベースのヘルスチェックを行うタイミングを分けたい場合は、[複数のヘルスチェックを別々に実行する場合](#execute-health-checks-separately) を参照してください。
 
 データベースのヘルスチェックの際に独自のロジックを実行したい場合は、[ヘルスチェックロジックをカスタムする場合](#customize-health-check-logic)と同様に、`IHealthCheck` インターフェースを実装したクラスを作成します。
 
 ## 複数のヘルスチェックを別々に実行する場合 {#execute-health-checks-separately}
 
-以下のようにヘルスチェックを複数登録し、ヘルスチェックAPIのエンドポイントが1つの場合、既定ではヘルスチェックAPIが呼び出された際に全てのヘルスチェックが実行されます。
+以下のようにヘルスチェックを複数登録し、ヘルスチェック API のエンドポイントが 1 つの場合、既定ではヘルスチェック API が呼び出された際に全てのヘルスチェックが実行されます。
 
 ``` C# title="Program.cs"
 // IHealthCheck実装クラスで定義したヘルスチェックを登録
@@ -154,8 +154,8 @@ app.MapHealthChecks("/api/health");
 
 サーバーとデータベースのヘルスチェックを個別に行いたい場合等、別々のタイミングでヘルスチェックを行いたい場合は以下の手順で実装します。
 
-- ヘルスチェックをサービスに登録する際にタグ付けする
-- サーバーとDBのヘルスチェック機能を別々のエンドポイントにマッピングする
+- ヘルスチェックをサービス登録時にタグ付けする
+- サーバーと DB のヘルスチェック機能を別々のエンドポイントにマッピングする
 
 ``` C# title="Program.cs" hl_lines="8 10-18"
 builder.Services.AddHealthChecks()
@@ -178,7 +178,7 @@ app.MapHealthChecks("/api/health/db", new HealthCheckOptions
 });
 ```
 
-ヘルスチェックをサービスに登録する際にタグを付けることができます。タグを利用して API 呼び出しで実行されるヘルスチェックをフィルター処理します。
+ヘルスチェックのサービス登録時にタグを付けることができます。タグを利用して API 呼び出しで実行されるヘルスチェックをフィルター処理します。
 エンドポイントをマッピングする際、 `HealthCheckOptions` の `Predicate` オプションに `bool` 値を返す関数を指定することで特定の正常性チェックを実行できます。
 
 上記のコード例では、`db` タグが付いているかどうかでヘルスチェックが実行されるエンドポイントを分けています。これにより、 `/api/health/server` を呼び出すと `SampleServerCheck` が実行され、 `/api/health/db` を呼び出すと `SampleDbCheck` が実行されます。
