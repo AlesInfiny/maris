@@ -29,18 +29,21 @@ AlesInfiny Maris において定義しているヘルスチェック機能につ
 
 ASP.NET Core を用いた Web アプリケーションでは、`Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用することでアプリケーションおよびデータベースの死活監視が可能です。
 
-`Program.cs` で、アプリケーションにヘルスチェックサービスを登録し、ヘルスチェック実行用のエンドポイントを作成することでヘルスチェック機能を実現できます。
 実装方法の詳細については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
 
-AlesInfiny Maris のサンプルアプリケーションにおいて、以下のアドレスへアクセスすることでヘルスチェックを実行できます。
+AlesInfiny Maris のサンプルアプリケーションにおいて、以下のアドレスへアクセスすることでヘルスチェックを実行します。
 
 <http://localhost:3000/api/health>
 
-ヘルスチェック実行時のレスポンスとして以下の [`HealthStatus`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus) のいずれかが返されます。
+上記のアドレスにアクセスするとバックエンドアプリケーションにリクエストが送信され、アプリケーションおよびデータベースの稼働状況が確認されます。
+アプリケーションとデータベースが両方とも正常稼働している場合は HTTP 200 のレスポンスをフロントエンドアプリケーションに返却します。
+アプリケーションとデータベースのいずれかに異常がある場合は HTTP 503 のレスポンスが返却されます。
 
 |      HealthStatus      | ステータスコード | レスポンスボディ |                   詳細                   |
 | ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
 | HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能             |
 | HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可/停止状態   |
 
-`HealthStatus` をどのように使い分けるかについては、[HealthStatus の使い分け](../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。
+[`HealthStatus`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus)  をどのように使い分けるかについては、[HealthStatus の使い分け](../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。
+
+また、ロードバランサーによってはヘルスチェック実行時の HTTP メソッドが限られるため、 HTTP GET/HEAD メソッドに対応しています。
