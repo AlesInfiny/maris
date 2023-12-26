@@ -86,7 +86,6 @@ builder.Services.AddHealthChecks()
 これにより、ヘルスチェック API 呼び出しの際に独自に実装したヘルスチェックロジックが実行されます。
 
 !!! info "`AddCheck` メソッドにラムダ式を渡す"
-
     `AddCheck` メソッドに `HealthCheckResult` を戻り値とするラムダ式を渡すことでヘルスチェックロジックを追加できます。
 
     ``` C#
@@ -97,7 +96,6 @@ builder.Services.AddHealthChecks()
     複雑なロジックを追加する場合は、`IHealthChecksBuilder` の拡張メソッドとして別のクラスに処理を切り出すか、`IHealthCheck` インターフェースを実装したクラスを作成することを推奨します。
 
 !!! info "ヘルスチェック失敗時の `HealthStatus` を `Degraded` に指定する"
-
     ヘルスチェックサービスを登録する際に `failureStatus` オプションを利用することで、ヘルスチェックが失敗した際の `HealthStatus` を指定できます。
 
     ``` C#
