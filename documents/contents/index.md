@@ -19,7 +19,7 @@ AlesInfiny Maris の提供物は以下の通りです。
 - 実現したい要件別のサンプルコード、および実現方式の解説
 
 AlesInfiny Maris は、商用のエンタープライズシステム開発から個人開発の小規模なシステムまで、 Apache License, Version 2.0 にて無償で利用可能です。
-ライセンスについての詳細は「[利用規約 - ライセンス](terms/index.md#license)」を参照してください。
+ライセンスについての詳細は「[利用規約 - ライセンス](about-maris/terms.md#license)」を参照してください。
 
 ## クイックスタート {#quick-start}
 
