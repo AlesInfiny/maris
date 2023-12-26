@@ -17,14 +17,4 @@ public class AssetNotFoundException : Exception
         : base(string.Format(Messages.AssetNotFound, assetCode))
     {
     }
-
-    /// <summary>
-    ///  <see cref="AssetNotFoundException"/> クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    /// <param name="info">オブジェクトをシリアライズまたはデシリアライズするために必要なすべてのデータを格納するオブジェクト。</param>
-    /// <param name="context">ストリーミングコンテキスト。</param>
-    protected AssetNotFoundException(SerializationInfo info, StreamingContext context)
-        : base(info, context)
-    {
-    }
 }

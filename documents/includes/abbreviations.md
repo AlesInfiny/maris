@@ -11,6 +11,7 @@
 *[GB]: Gigabyte：記憶媒体の容量を表す単位。
 *[GUI]: Graphical User Interface.
 *[HTML]: Hyper Text Markup Language.
+*[LB]: Load Balancer.
 *[LTS]: Long Time Support：長期サポート版。
 *[MVVM]: Model-View-ViewModel
 *[NET MAUI]: .NET Multi-Platform App UI.

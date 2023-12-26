@@ -68,7 +68,8 @@
         "層",
         "パラメーター",
         "フォルダー",
-        "ユーザー"
+        "ユーザー",
+        "ロードバランサー"
       ],
       "allowAlphabet": true,
       "allowNumber": false,

@@ -1,5 +1,5 @@
 ---
-# cSpell:ignore lcov msbuild NOLOGO OPTOUT
+# cSpell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
 
 name: dressca-backend CI
 
@@ -35,15 +35,14 @@ jobs:
 
     steps:
       - name: ブランチのチェックアウト
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: .NET SDK のセットアップ
-        uses: actions/setup-dotnet@v2.0.0
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
-          include-prerelease: false
+          global-json-file: samples/Dressca/dressca-backend/global.json
 
       - name: NuGet パッケージの復元
         run: dotnet restore
@@ -80,7 +79,7 @@ jobs:
 
       - name: EF Core ツールのインストール(結合テスト用)
         shell: bash
-        run: dotnet tool install --global dotnet-ef --version 6.*
+        run: dotnet tool install --global dotnet-ef --version 8.*
 
       - name: マイグレーション適用(結合テスト用)
         working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure

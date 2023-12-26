@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Dressca.Web.Resources;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -52,7 +53,8 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
             ControllerName = "HealthChecks",
             ActionName = HealthCheckRelativePath,
             Parameters = new List<ParameterDescriptor>(),
-            ControllerTypeInfo = new TypeDelegator(typeof(string)),
+            ControllerTypeInfo = new TypeDelegator(typeof(HealthCheckControllerMetadata)),
+            MethodInfo = HealthCheckControllerMetadata.GetApiMethodInfo(),
         };
 
         var getApiDescription = new ApiDescription
@@ -114,5 +116,27 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
 
         context.Results.Add(getApiDescription);
         context.Results.Add(headApiDescription);
+    }
+
+    /// <summary>
+    ///  ヘルスチェック API の形式を模したメタデータを提供します。
+    /// </summary>
+    private class HealthCheckControllerMetadata
+    {
+        /// <summary>
+        ///  ヘルスチェック API を表す <see cref="MethodInfo"/> を取得します。
+        /// </summary>
+        /// <returns>ヘルスチェック API を表す <see cref="MethodInfo"/> 。</returns>
+        /// <exception cref="InvalidOperationException">
+        ///  ヘルスチェック API の <see cref="MethodInfo"/> を取得できませんでした。
+        /// </exception>
+        internal static MethodInfo GetApiMethodInfo()
+        {
+            return typeof(HealthCheckControllerMetadata)
+                .GetMethod(nameof(Health), BindingFlags.NonPublic | BindingFlags.Static)
+                ?? throw new InvalidOperationException(Messages.HealthCheckMethodNotFound);
+        }
+
+        private static string Health() => string.Empty;
     }
 }

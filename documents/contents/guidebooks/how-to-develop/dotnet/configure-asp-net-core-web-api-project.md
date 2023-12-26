@@ -33,11 +33,12 @@ NSwag を用いた実装コードの生成は行わないため、 Open API 仕�
 
     ```json title="nswag.json"
     {
-      "runtime": "Net60",
+      "runtime": "Net80",
       "defaultVariables": null,
       "documentGenerator": {
         "aspNetCoreToOpenApi": {
           "project": "AaaSubSystem.Web.csproj", // プロジェクト名を指定
+          "documentName": "v1",
           "msBuildProjectExtensionsPath": null,
           "configuration": "$(Configuration)",
           "runtime": null,
@@ -46,54 +47,9 @@ NSwag を用いた実装コードの生成は行わないため、 Open API 仕�
           "msBuildOutputPath": null,
           "verbose": true,
           "workingDirectory": null,
-          "requireParametersWithoutDefault": true,
-          "apiGroupNames": null,
-          "defaultPropertyNameHandling": "Default",
-          "defaultReferenceTypeNullHandling": "Null",
-          "defaultDictionaryValueReferenceTypeNullHandling": "NotNull",
-          "defaultResponseReferenceTypeNullHandling": "NotNull",
-          "generateOriginalParameterNames": true,
-          "defaultEnumHandling": "Integer",
-          "flattenInheritanceHierarchy": false,
-          "generateKnownTypes": true,
-          "generateEnumMappingDescription": false,
-          "generateXmlObjects": false,
-          "generateAbstractProperties": false,
-          "generateAbstractSchemas": true,
-          "ignoreObsoleteProperties": false,
-          "allowReferencesWithProperties": false,
-          "useXmlDocumentation": true,
-          "resolveExternalXmlDocumentation": true,
-          "excludedTypeNames": [],
-          "serviceHost": "localhost:5001",
-          "serviceBasePath": null,
-          "serviceSchemes": [
-            "https"
-          ],
-          "infoTitle": "Xxx Web API", // Open API 仕様書のタイトルや説明、バージョンを指定
-          "infoDescription": "Xxx の Web API 仕様",
-          "infoVersion": "1.0.0",
-          "documentTemplate": null,
-          "documentProcessorTypes": [],
-          "operationProcessorTypes": [],
-          "typeNameGeneratorType": null,
-          "schemaNameGeneratorType": null,
-          "contractResolverType": null,
-          "serializerSettingsType": null,
-          "useDocumentProvider": false,
-          "documentName": "v1",
           "aspNetCoreEnvironment": "Development",
-          "createWebHostBuilderMethod": null,
-          "startupType": null,
-          "allowNullableBodyParameters": true,
-          "useHttpAttributeNameAsOperationId": false,
           "output": "XXXXXXXXX-api.json", // 出力するファイル名を指定
-          "outputType": "OpenApi3",
-          "newLineBehavior": "Auto",
-          "assemblyPaths": [],
-          "assemblyConfig": null,
-          "referencePaths": [],
-          "useNuGetCache": false
+          "newLineBehavior": "LF"
         }
       },
       "codeGenerators": {}
@@ -107,14 +63,14 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 
 - [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild)
 
-??? example ".NET 6 の場合のプロジェクトファイル設定例"
-    .NET 6 を使用するプロジェクトの場合、プロジェクトファイルには以下のように設定することで、 Open API 仕様書のファイルを出力できます。
+??? example ".NET 8 の場合のプロジェクトファイル設定例"
+    .NET 8 を使用するプロジェクトの場合、プロジェクトファイルには以下のように設定することで、 Open API 仕様書のファイルを出力できます。
 
     ```xml title="Open API 仕様書のファイルを出力する csproj の設定例"
     <Project Sdk="Microsoft.NET.Sdk.Web">
       <!-- 追加箇所以外は省略 -->
       <Target Name="NSwag" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
-        <Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net60) run nswag.json /variables:Configuration=$(Configuration)" />
+        <Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration)" />
       </Target>
 
       <PropertyGroup>
@@ -144,6 +100,11 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
             document.Info.Version = "1.0.0";
             document.Info.Title = "Xxx Web API";
             document.Info.Description = "Xxx の Web API 仕様";
+            document.Servers.Add(new()
+            {
+                Description = "ローカル開発用のサーバーです。",
+                Url = "https://localhost:5001",
+            });
         };
     });
     ```
@@ -152,7 +113,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     if (app.Environment.IsDevelopment())
     {
         app.UseOpenApi();
-        app.UseSwaggerUi3();
+        app.UseSwaggerUi();
     }
     ```
 
