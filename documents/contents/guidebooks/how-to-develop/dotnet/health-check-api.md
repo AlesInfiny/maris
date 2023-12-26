@@ -9,8 +9,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 ## 基本的な実装方法 {#basic}
 
-以下の実装を `Program.cs` に追加することで、アプリケーションの活動性が確認できます。
-活動性については、[正常性の区分](../../../app-architecture/overview/dotnet-application-processing-system.md#health-check-probe) を参照してください。
+以下の実装を `Program.cs` に追加することで、アプリケーションの正常性を確認できます。
 
 ``` C# hl_lines="4 9"
 var builder = WebApplication.CreateBuilder(args);
