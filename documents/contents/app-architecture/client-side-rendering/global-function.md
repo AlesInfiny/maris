@@ -43,4 +43,4 @@ AlesInfiny Maris のサンプルアプリケーションにおいて、以下の
 | HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能             |
 | HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可/停止状態   |
 
-`HealthStatus` の使い分けについては、[HealthStatus の使い分け](../../guidebooks/how-to-develop/dotnet/health-check-api.md#healthstatus) を参照してください。
+`HealthStatus` をどのように使い分けるかについては、[HealthStatus の使い分け](../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。
