@@ -96,7 +96,7 @@ builder.Services.AddHealthChecks()
     複雑なロジックを追加する場合は、`IHealthChecksBuilder` の拡張メソッドとして別のクラスに処理を切り出すか、`IHealthCheck` インターフェースを実装したクラスを作成することを推奨します。
 
 !!! info "ヘルスチェック失敗時の `HealthStatus` を `Degraded` に指定する"
-    ヘルスチェックサービス登録時、 `failureStatus` オプションにヘルスチェック失敗時の `HealthStatus` を指定できます。
+    ヘルスチェックサービスを登録する際、 `failureStatus` にヘルスチェック失敗時の `HealthStatus` を指定できます。
 
     ``` C#
     builder.Services.AddHealthChecks()
