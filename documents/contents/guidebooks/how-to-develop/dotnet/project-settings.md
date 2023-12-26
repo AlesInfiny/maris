@@ -2,10 +2,34 @@
 title: .NET 編
 description: バックエンドで動作する .NET アプリケーションの開発手順を解説します。
 ---
+<!-- cSpell:ignore contentfiles buildtransitive -->
 
 # プロジェクトの共通設定 {#top}
 
-<!-- cSpell:ignore contentfiles buildtransitive -->
+## .NET SDKの設定 {#dotnet-sdk-settings}
+
+AlesInfiny Maris では、 global.json ファイルを用いて、ビルドに利用する .NET SDK のバージョンを設定します。
+ソリューションファイルの配置されているフォルダーに、「global.json」という名前のファイルを作成します。
+ファイル名は、大文字/小文字まで一致するように作成してください。
+
+global.json ファイルには、ビルドに利用する .NET SDK のバージョンと、指定された .NET SDK バージョンが存在しない場合のロールフォワードポリシーを設定します。
+
+```json title="global.json ファイル設定例"
+{
+  "sdk": {
+    "rollForward": "latestMinor",
+    "version": "8.0.100"
+  }
+}
+```
+
+設定値の詳細は、 [global.json の概要 :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/tools/global-json){ target=_blank } を参照してください。
+
+!!! note "rollForward の設定について"
+    .NET SDK のバージョンが固定されていればいるほど環境差異は少なくなり、アプリケーションの安定化につながります。
+    その反面、 .NET SDK のバージョン更新にあわせて、開発環境を更新する手間が発生します。
+    この例では、 .NET SDK のメジャーバージョンのみを固定し、最新のマイナーバージョンにロールフォワードする設定としています。
+    どの程度厳密に管理するかは、プロジェクトの特性に応じて決定してください。
 
 ## プロジェクトファイルの設定 {#csproj-settings}
 
@@ -30,7 +54,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 <Project>
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
@@ -85,7 +109,7 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

@@ -1,11 +1,11 @@
 ---
-# cSpell:ignore lcov msbuild NOLOGO OPTOUT
+# cSpell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
 
 name: dressca-backend CI
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'samples/Dressca/dressca-backend/**'
       - '.github/workflows/samples-dressca-backend.ci.yml'
@@ -35,15 +35,14 @@ jobs:
 
     steps:
       - name: ブランチのチェックアウト
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: .NET SDK のセットアップ
-        uses: actions/setup-dotnet@v2.0.0
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
-          include-prerelease: false
+          global-json-file: samples/Dressca/dressca-backend/global.json
 
       - name: NuGet パッケージの復元
         run: dotnet restore
@@ -80,7 +79,7 @@ jobs:
 
       - name: EF Core ツールのインストール(結合テスト用)
         shell: bash
-        run: dotnet tool install --global dotnet-ef
+        run: dotnet tool install --global dotnet-ef --version 8.*
 
       - name: マイグレーション適用(結合テスト用)
         working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
@@ -93,7 +92,7 @@ jobs:
         run: |
           export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
           dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
-      
+
       - id: create-test-result-report
         name: テスト結果ページの作成
         uses: dorny/test-reporter@v1
