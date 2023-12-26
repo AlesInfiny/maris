@@ -30,7 +30,7 @@ AlesInfiny Maris において定義しているヘルスチェック機能につ
 ASP.NET Core を用いた Web アプリケーションでは、`Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用することでアプリケーションおよびデータベースの死活監視が可能です。
 
 `Program.cs` で、アプリケーションにヘルスチェックサービスを登録し、ヘルスチェック実行用のエンドポイントを作成することでヘルスチェック機能を実現できます。
-詳しい実装方法については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
+実装方法の詳細については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
 
 AlesInfiny Maris のサンプルアプリケーションにおいて、以下のアドレスへアクセスすることでヘルスチェックを実行できます。
 
