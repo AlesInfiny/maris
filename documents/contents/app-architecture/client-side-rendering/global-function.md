@@ -26,7 +26,8 @@ description: クライアントサイドレンダリングを行う Web アプ�
 AlesInfiny Maris では、 Web API を通じてシステムが正常稼働中か確認します。
 `Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用してヘルスチェック用の Web API を実装しています。
 
-実装方法の詳細については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
+<!-- 実装方法の詳細については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。 -->
+実装方法の詳細については、「ヘルスチェック API の実装」(今後追加予定) およびサンプルアプリケーションを参照してください。
 また、ヘルスチェックの全体方針については、[ヘルスチェックの必要性](../overview/dotnet-application-processing-system.md#health-check-necessity)を参照してください。
 
 ### API の仕様 {#api-specs}
@@ -43,7 +44,9 @@ AlesInfiny Maris では、 Web API を通じてシステムが正常稼働中か
 | HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能             |
 | HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可/停止状態   |
 
-[`HealthStatus`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus)  をどのように使い分けるかについては、[HealthStatus の使い分け](../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。
+`HealthStatus` については [こちら](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus) を参照してください。
+
+<!-- [`HealthStatus`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus)  をどのように使い分けるかについては、[HealthStatus の使い分け](../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。 -->
 
 また、ロードバランサーによってはヘルスチェック実行時の HTTP メソッドが限られるため、 HTTP GET/HEAD メソッドに対応しています。
 
