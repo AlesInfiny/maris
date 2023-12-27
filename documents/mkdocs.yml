@@ -72,8 +72,9 @@ nav:
       - samples/index.md
       - コンソールアプリケーションでの DI の利用:
           - samples/console-app-with-di/index.md
-  - 利用規約:
-      - terms/index.md
+  - AlesInfiny Maris について:
+      - 利用規約: about-maris/terms.md
+      - 商標: about-maris/trademarks.md
 
 theme:
   name: material
@@ -142,10 +143,8 @@ markdown_extensions:
 
 extra:
   footer_urls:
-    terms: terms/
-    license: terms/#license
-    disclaimer: terms/#disclaimer
-    other_company_trademarks: terms/#trademarks-owned-by-other-companies
+    terms: about-maris/terms/
+    trademarks: about-maris/trademarks/
   version: !ENV [VERSION, "Local Version"]
 
 extra_css:
