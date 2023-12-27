@@ -23,21 +23,20 @@ description: クライアントサイドレンダリングを行う Web アプ�
 
 ## ヘルスチェック機能の実装方針 {#health-check-implementation}
 
-AlesInfiny Maris において定義しているヘルスチェック機能について説明します。
-
-ヘルスチェック機能の概要については、[ヘルスチェックの必要性](../overview/dotnet-application-processing-system.md#health-check-necessity)を参照してください。
-
-ASP.NET Core を用いた Web アプリケーションでは、`Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用することでアプリケーションおよびデータベースの死活監視が可能です。
+AlesInfiny Maris では、 Web API を通じてシステムが正常稼働中か確認します。
+`Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用してヘルスチェック用の Web API を実装しています。
 
 実装方法の詳細については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
+また、ヘルスチェックの全体方針については、[ヘルスチェックの必要性](../overview/dotnet-application-processing-system.md#health-check-necessity)を参照してください。
 
-AlesInfiny Maris のサンプルアプリケーションにおいて、以下のアドレスへアクセスすることでヘルスチェックを実行します。
+### API の仕様 {#api-specs}
 
-<http://localhost:3000/api/health>
+ヘルスチェック用の Web API にリクエストを送信すると、アプリケーションおよび関連するデータベース等の稼働状況が確認されます。
 
-上記のアドレスにアクセスするとバックエンドアプリケーションにリクエストが送信され、アプリケーションおよびデータベースの稼働状況が確認されます。
-アプリケーションとデータベースが両方とも正常稼働している場合は HTTP 200 のレスポンスをフロントエンドアプリケーションに返却します。
-アプリケーションとデータベースのいずれかに異常がある場合は HTTP 503 のレスポンスが返却されます。
+アプリケーションとデータベース等の外部サービスが全て正常稼働している場合を正常状態とします。
+アプリケーションとデータベース等の外部サービスのいずれかに異常がある場合を以上状態とします。
+
+正常状態の場合は、 HTTP 200 のレスポンスを返却し、異常状態の場合は HTTP 503 のレスポンスを返却します。
 
 |      HealthStatus      | ステータスコード | レスポンスボディ |                   詳細                   |
 | ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
@@ -47,3 +46,9 @@ AlesInfiny Maris のサンプルアプリケーションにおいて、以下の
 [`HealthStatus`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus)  をどのように使い分けるかについては、[HealthStatus の使い分け](../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。
 
 また、ロードバランサーによってはヘルスチェック実行時の HTTP メソッドが限られるため、 HTTP GET/HEAD メソッドに対応しています。
+
+### 検証ロジックの追加 {#add-health-check-logic}
+
+ヘルスチェック API 実行時に独自の検証ロジックを含める場合は、検証対象に応じたプロジェクトへ実装します。
+例えば、データベースに関する検証ロジックを追加する場合は、直接プレゼンテーション層にロジックを実装しないようにします。
+インフラストラクチャ層に検証ロジックを追加した上でプレゼンテーション層から参照するようにします。
