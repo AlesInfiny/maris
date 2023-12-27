@@ -41,6 +41,8 @@ jobs:
       - name: node パッケージのインストール
         if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: npm install
+      - name: アプリケーションのビルド
+        run: npm run build
       - name: TypeScript の型チェック
         run: npm run typecheck
       - name: 単体テストの実行
