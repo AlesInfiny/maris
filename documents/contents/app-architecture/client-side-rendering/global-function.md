@@ -59,3 +59,4 @@ AlesInfiny Maris では、 Web API を通じてシステムが正常稼働中か
 検証対象の外部サービスに対応するそれぞれのプロジェクトへ分割してロジックを追加し、 Web プロジェクトから参照するようにします。
 
 ![検証ロジックの配置](../../images/app-architecture/client-side-rendering/add-health-check-logic-light.png#only-light){ loading=lazy }
+![検証ロジックの配置](../../images/app-architecture/client-side-rendering/add-health-check-logic-dark.png#only-dark){ loading=lazy }
