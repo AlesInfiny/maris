@@ -33,7 +33,7 @@ AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行�
     ただしこれらの方法は Git の設定を開発者自身が行わなければいけないため、改行コードが開発者の環境によって混在する可能性があります。
     そのため .gitattributes を利用して、ソースコードの改行コードを強制的に LF に変換するように設定します。
 
-    ```text title=.gitattributes
+    ```text title=".gitattributes"
     * text=auto eol=lf
     ```
 
@@ -42,7 +42,7 @@ AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行�
     Visual Studio はデフォルトで改行コードを CRLF に変換します。
     これを無効化するために、プロジェクトに editorconfig を作成し `end_of_line = lf` を追加します。
 
-    ```text title=.editorconfig
+    ```text title=".editorconfig"
     [*]
     end_of_line = lf
     ```
@@ -51,7 +51,7 @@ AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行�
 
     プロジェクトで共通の設定をするため、 ワークスペースで設定します。 .code-workspace ファイルへ以下のように設定します。
 
-    ```text title=.code-workspace
+    ```json title=".code-workspace"
     {
         settings: {
             "files.eol": "\n"
@@ -61,7 +61,7 @@ AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行�
 
     またワークスペースを作成しない場合は、フォルダー単位で設定します。対象のフォルダーで .vscode/settings.json ファイルを作成し、以下のように設定します。
 
-    ```text title=.vscode/settings.json
+    ```json title=".vscode/settings.json"
     {
         "files.eol": "\n"
     }
@@ -72,11 +72,11 @@ AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行�
     OpenAPI の NSwag で生成されるコードの改行コードは、デフォルトで CRLF です。
     そのため、改行コードを LF にするには、 nswag.json へ以下の設定を追加します。
 
-    ```text title=nswag.json
+    ```json title="nswag.json"
     {
         "documentGenerator": {
             "aspNetCoreToOpenApi": {
-                "newLineBehavior": "LF",
+                "newLineBehavior": "LF"
             }
         }
     }
