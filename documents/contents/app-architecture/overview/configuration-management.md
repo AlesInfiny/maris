@@ -1,6 +1,6 @@
 ---
 title: 概要編
-description: AlesInfiny Maris を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
+description: AlesInfiny Maris のアプリケーションアーキテクチャ概要を解説します。
 ---
 
 # 構成管理 {#top}
