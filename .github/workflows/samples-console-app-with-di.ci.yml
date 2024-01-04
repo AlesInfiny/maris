@@ -1,5 +1,5 @@
 ---
-# cSpell:ignore cobertura danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
+# cSpell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
 
 name: ConsoleAppWithDI CI
 
@@ -34,9 +34,14 @@ jobs:
 
     steps:
       - name: ブランチのチェックアウト
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
+
+      - name: .NET SDK のセットアップ
+        uses: actions/setup-dotnet@v3
+        with:
+          global-json-file: samples/ConsoleAppWithDI/solution/global.json
 
       - id: application-build
         name: アプリケーションのビルド
