@@ -5,7 +5,7 @@ description: AlesInfiny Maris を利用することで構築できるアプリ�
 
 # 構成管理 {#top}
 
-## ソールコード管理 {#source-code-management}
+## ソースコード管理 {#source-code-management}
 
 AlesInfiny Maris では、ソースコードの管理に Git を推奨しています。 Git を採用するメリットは以下の通りです。
 
