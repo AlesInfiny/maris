@@ -37,30 +37,39 @@ app.MapHealthChecks("/health");
 app.Run();
 ```
 
-上記の例では、`/health` にアクセスすることでアプリケーションとデータベースのヘルスチェックが実行されます。
-アプリケーションとデータベースのヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks) を参照してください。
+上記の例では、 `/health` にアクセスすることでアプリケーションとデータベースのヘルスチェックが実行されます。
 
-ヘルスチェックの際に実行するロジックを追加したい場合は、[ヘルスチェックロジックをカスタムする場合](#customize-health-check-logic)を参照してください。
+ヘルスチェック実行時のレスポンスとして [`HealthStatus` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus){ target=_blank } がプレーンテキスト形式で返されます。
+アプリケーションが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
+`HealthStatus` をどのように使い分けるかについては、[HealthStatus の使い分け](#health-status) を参照してください。
+
+また、既定では `/health` にアクセスすることで登録されているヘルスチェックが全て実行されます。
+アプリケーションとデータベースのヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks){ target=_blank } を参照してください。
+
+### ヘルスチェックロジックをカスタムする場合 {#customize-health-check-logic}
+
+データベース以外の関連サービスのヘルスチェックを行う等、ヘルスチェックロジックを追加する場合は以下のいずれかの方法で実装します。
+
+- [`IHealthCheck` インターフェースを実装したクラスで、`CheckHealthAsync` メソッドをオーバーライドする :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks)
+- `AddCheck` メソッドや `AddDbContextCheck` メソッドのオーバーロードにヘルスチェックロジックを渡す
+    - [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank }
+    - [`AddDbContextCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck){ target=_blank }
 
 AlesInfiny Maris のサンプルアプリケーションでは、対象のデータベースに対応するプロジェクトへヘルスチェックロジックを配置する都合上、 `Program.cs` に直接ヘルスチェックロジックを追加していません。
  `IHealthChecksBuilder` の拡張メソッドとして処理を切り出し、`AddDbContextCheck` メソッドにヘルスチェックロジックを渡しています。
 
-ヘルスチェック実行時のレスポンスとして [`HealthStatus`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus) がプレーンテキスト形式で返されます。
-サーバーが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
-`HealthStatus` は、 `Healthy, Degraded, Unhealthy` のいずれかの値を取ります。
-
-`HealthStatus` をどのように使い分けるかについては、[HealthStatus の使い分け](#health-status) を参照してください。
-
-### 活動性の確認 {#liveness-probe}
+## 活動性の確認 {#liveness-probe}
 
 ヘルスチェックでは以下の 2 つの状態を区別してアプリケーションの正常性を確認する場合があります。
 
 - 活動性：アプリケーションが正常に起動していること
 - 対応性：アプリケーションが正常に起動しており、かつリクエスト受付可能であること
 
-活動性と対応性については[こちら](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#separate-readiness-and-liveness-probes)を参照してください。
+活動性と対応性については[こちら :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#separate-readiness-and-liveness-probes){ target=_blank }を参照してください。
 
-ヘルスチェック API へのアクセスが非常に多くなる等、アプリケーションの活動性のみを確認したい場合は以下の実装を `Program.cs` に追加します。
+[基本的な実装方法](#basic) では、アプリケーションに加え関連するデータベースのヘルスチェックを行い、対応性を含めた正常性の確認をしていました。
+
+一方、ヘルスチェック API へのアクセスが非常に多くなる等の事情により、アプリケーションの活動性のみを確認したい場合は以下のように実装します。
 
 ``` C# title="Program.cs" hl_lines="4 9"
 var builder = WebApplication.CreateBuilder(args);
@@ -78,7 +87,7 @@ app.Run();
 
 上記の実装では、`/health` にアクセスすることでアプリケーションが正常に起動していることを確認できます。
 
-### HealthStatus の使い分け {#health-status}
+## HealthStatus の使い分け {#health-status}
 
 |      HealthStatus      | ステータスコード | レスポンスボディ |                   詳細                   |
 | ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
@@ -86,7 +95,8 @@ app.Run();
 | HealthStatus.Degraded  | 200              | Degraded         | サーバーが起動済みだがリクエスト受付不可 |
 | HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可(停止状態)   |
 
-既定のヘルスチェック機能ではサーバーが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
+既定のヘルスチェック機能ではアプリケーションが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
+`HealthStatus` は、 `Healthy, Degraded, Unhealthy` のいずれかの値を取ります。
 
 活動性と対応性を分けてヘルスチェックを行いたい場合に `Degraded` を返すよう実装する場合があります。
 例えば、独自に追加したヘルスチェックロジックが正常に動作する場合に `Healthy` 、正常に動作しない場合に `Degraded` を返すよう実装できます。
@@ -100,12 +110,3 @@ app.Run();
         "Sample",
         failureStatus: HealthStatus.Degraded);
     ```
-
-## ヘルスチェックロジックをカスタムする場合 {#customize-health-check-logic}
-
-ヘルスチェックロジックを追加する場合、以下のいずれかの方法で実装します。
-
-- [`IHealthCheck` インターフェースを実装したクラスで、`CheckHealthAsync` メソッドをオーバーライドする](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks)
-- `AddCheck` メソッドや `AddDbContextCheck` メソッドのオーバーロードにヘルスチェックロジックを渡す
-    - [`AddCheck` メソッド](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck)
-    - [`AddDbContextCheck` メソッド](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck)
