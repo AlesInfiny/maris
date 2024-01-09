@@ -42,10 +42,14 @@ app.Run();
 
 システム全体の対応性を確認するため、データベース等の関連する外部サービスのヘルスチェックを行う際はヘルスチェックロジックを追加します。
 
-AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-rendering/global-function.md#add-health-check-logic) で説明している通り、 `Program.cs` に直接ヘルスチェックロジックを追加していません。
- `IHealthChecksBuilder` の拡張メソッドとして処理を切り出し[^1]、ヘルスチェック対象の外部サービスに依存するプロジェクトにヘルスチェックロジックを配置しています。
+AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-rendering/global-function.md#add-health-check-logic) で説明している通り、 `Program.cs` に直接ヘルスチェックロジックを追加せず、ヘルスチェック対象の外部サービスに依存するプロジェクトへヘルスチェックロジックを配置します。
 
-以下の手順で実装します。
+プロジェクトごとにヘルスチェックロジックを分割する方法としては以下の 2 通りがあります。
+
+- `IHealthChecksBuilder` の拡張メソッドを実装
+- [`IHealthCheck` インターフェース実装クラス :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks)を作成
+
+### `IHealthChecksBuilder` の拡張メソッドを実装 {#extension-method}
 
 1. `IHealthChecksBuilder` を戻り値とする `IHealthChecksBuilder` の拡張メソッドを実装
 
@@ -153,13 +157,66 @@ AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-
 また、既定では `/health` にアクセスすることで登録されているヘルスチェックが全て実行されます。
 アプリケーションと外部サービスのヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks){ target=_blank } を参照してください。
 
+### `IHealthCheck` インターフェースを実装したクラスを作成 {#using-interface}
+
+[`IHealthCheck` インターフェースを実装したクラスで、`CheckHealthAsync` メソッドをオーバーライドする :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks){ target=_blank }ことでヘルスチェックロジックを追加できます。
+
+1. `IHealthCheck` インターフェース実装クラスを作成
+
+    ``` C# title="SampleHealthCheck.cs" hl_lines="9-18"
+    using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+    namespace SampleSystem.XxxService;
+
+    public class SampleHealthCheck : IHealthCheck
+    {
+        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        {
+            var isHealthy = true;
+
+            // ヘルスチェックロジックを実装
+
+            if (isHealthy)
+            {
+                return Task.FromResult(HealthCheckResult.Healthy());
+            }
+
+            return Task.FromResult(new HealthCheckResult(context.Registration.FailureStatus));
+        }
+    }
+    ```
+
+1. `Program.cs` で作成したヘルスチェックロジックを登録する
+
+    ``` C# title="Program.cs" hl_lines="6-7"
+    using SampleSystem.XxxService;
+
+    var builder = WebApplication.CreateBuilder(args);
+
+    // 各プロジェクトに配置したヘルスチェックサービスを登録
+    builder.Services.AddHealthChecks()
+        .AddCheck<SampleHealthCheck>("SampleHealthCheck");
+
+    var app = builder.Build();
+
+    // ヘルスチェック API のエンドポイントをマッピングする
+    app.MapHealthChecks("/health");
+
+    app.Run();    
+    ```
+
+上記の例では、 `/health` にアクセスすることでアプリケーションとデータベース等の外部サービスを含めたヘルスチェックが実行されます。
+
+また、`IHealthCheck` インターフェース実装クラスを複数作成して `Program.cs` で登録した場合、既定では `/health` にアクセスすることで登録されているヘルスチェックが全て実行されます。
+ヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks){ target=_blank } を参照してください。
+
 ## HealthStatus の使い分け {#health-status}
 
-| HealthStatus           | ステータスコード | レスポンスボディ | 詳細                                     |
-| ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
-| HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能             |
-| HealthStatus.Degraded  | 200              | Degraded         | サーバーが起動済みだがリクエスト受付不可 |
-| HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可(停止状態)   |
+| HealthStatus           | ステータスコード | レスポンスボディ |
+| ---------------------- | ---------------- | ---------------- |
+| HealthStatus.Healthy   | 200              | Healthy          |
+| HealthStatus.Degraded  | 200              | Degraded         |
+| HealthStatus.Unhealthy | 503              | Unhealthy        |
 
 既定のヘルスチェック機能ではアプリケーションが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
 `HealthStatus` は、 `Healthy, Degraded, Unhealthy` のいずれかの値を取ります。
@@ -176,5 +233,3 @@ AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-
         "Sample",
         failureStatus: HealthStatus.Degraded);
     ```
-
-[^1]: プロジェクトごとにヘルスチェックロジックを分割するために、 [`IHealthCheck` インターフェースを実装したクラス :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks) も利用できます。
