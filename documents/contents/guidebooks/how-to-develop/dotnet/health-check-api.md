@@ -56,7 +56,13 @@ AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-
     1. Entity Framework Core を利用したアプリケーションにおいてデータベースのヘルスチェックを行う場合
         - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) の参照を追加
 
-        ``` C# title="DbHealthChecksBuilderExtensions.cs" hl_lines="7 14-24"
+        ``` C# title="DbHealthChecksBuilderExtensions.cs" hl_lines="13 20-30"
+        using Microsoft.EntityFrameworkCore;
+        using Microsoft.Extensions.DependencyInjection;
+        using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+        namespace SampleSystem.Infrastructure;
+
         public static class DbHealthChecksBuilderExtensions
         {
             public static IHealthChecksBuilder AddSampleDbContextCheck(
@@ -88,7 +94,12 @@ AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-
 
     1. その他の外部サービスについてヘルスチェックを行う場合
 
-        ``` C# title="SampleHealthChecksBuilderExtensions.cs" hl_lines="7 11-20"
+        ``` C# title="SampleHealthChecksBuilderExtensions.cs" hl_lines="12 16-25"
+        using Microsoft.Extensions.DependencyInjection;
+        using Microsoft.Extensions.Diagnostics.HealthChecks;
+        
+        namespace SampleSystem.XxxService;
+
         public static class SampleHealthChecksBuilderExtensions
         {
             public static IHealthChecksBuilder AddSampleHealthCheck(
@@ -118,7 +129,10 @@ AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-
 
 1. `Program.cs` で作成したヘルスチェックロジックをまとめて登録する
 
-    ``` C# title="Program.cs" hl_lines="4-6"
+    ``` C# title="Program.cs" hl_lines="7-9"
+    using SampleSystem.Infrastructure;
+    using SampleSystem.XxxService;
+
     var builder = WebApplication.CreateBuilder(args);
 
     // 各プロジェクトに配置したヘルスチェックサービスを登録
