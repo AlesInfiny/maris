@@ -38,18 +38,18 @@ app.Run();
 アプリケーションが起動状態の場合に `Healthy` 、停止状態の場合に `Unhealthy` が返されます。
 `HealthStatus` をどのように使い分けるかについては、[HealthStatus の使い分け](#health-status) を参照してください。
 
-## 対応性を確認する場合 {#readiness-probe}
+## 対応性を確認するための実装方法 {#readiness-probe}
 
 システム全体の対応性を確認するため、データベース等の関連する外部サービスのヘルスチェックを行う際はヘルスチェックロジックを追加します。
 
-AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-rendering/global-function.md#add-health-check-logic) で説明している通り、 `Program.cs` に直接ヘルスチェックロジックを追加せず、ヘルスチェック対象の外部サービスに依存するプロジェクトへヘルスチェックロジックを配置します。
+[実装方針](../../../app-architecture/client-side-rendering/global-function.md#add-health-check-logic) で説明している通り、 `Program.cs` に直接ヘルスチェックロジックを追加せず、ヘルスチェック対象の外部サービスに依存するプロジェクトへヘルスチェックロジックを配置します。
 
 プロジェクトごとにヘルスチェックロジックを分割する方法としては以下の 2 通りがあります。
 
-- `IHealthChecksBuilder` の拡張メソッドを実装
-- [`IHealthCheck` インターフェース実装クラス :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks)を作成
+- [`IHealthChecksBuilder` の拡張メソッドを作成する方法](#extension-method)
+- [`IHealthCheck` インターフェース実装クラスを作成する方法](#using-interface)
 
-### `IHealthChecksBuilder` の拡張メソッドを実装 {#extension-method}
+### `IHealthChecksBuilder` の拡張メソッドを作成する方法 {#extension-method}
 
 1. `IHealthChecksBuilder` を戻り値とする `IHealthChecksBuilder` の拡張メソッドを実装
 
@@ -157,7 +157,7 @@ AlesInfiny Maris では、 [実装方針](../../../app-architecture/client-side-
 また、既定では `/health` にアクセスすることで登録されているヘルスチェックが全て実行されます。
 アプリケーションと外部サービスのヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks){ target=_blank } を参照してください。
 
-### `IHealthCheck` インターフェースを実装したクラスを作成 {#using-interface}
+### `IHealthCheck` インターフェース実装クラスを作成する方法 {#using-interface}
 
 [`IHealthCheck` インターフェースを実装したクラスで、`CheckHealthAsync` メソッドをオーバーライドする :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks){ target=_blank }ことでヘルスチェックロジックを追加できます。
 
