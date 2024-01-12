@@ -30,13 +30,110 @@ AlesInfiny Maris では、ソースコードの管理に Git を推奨してい�
 
         リリースするバージョン単位で develop ブランチを作成し開発・修正内容をマージします。 develop ブランチでの結合・システムテストの完了後に main ブランチへマージすることで常に main ブランチを安定した状態で保つことができます。
 
+        ```mermaid
+        gitGraph
+            commit
+            branch developA
+            checkout developA
+            commit
+            branch featureA
+            branch featureB
+            checkout featureA
+            commit
+            commit
+            checkout developA
+            merge featureA
+            checkout featureB
+            commit
+            checkout developA
+            merge featureB
+            checkout main
+            merge developA
+            commit id: "Release" tag: "v1.0.0"
+        ```
+
         develop ブランチを作成しない方針の場合、システムテスト完了後の main ブランチからリリースブランチを作成することで、安定したリリース版として保つことが可能です。この方法では各リリースバージョンをそれぞれ管理できます。
 
+        ```mermaid
+        gitGraph
+            commit
+            commit
+            branch featureA
+            branch featureB
+            checkout featureA
+            commit
+            commit
+            checkout main
+            merge featureA
+            checkout featureB
+            commit
+            checkout main
+            merge featureB
+            commit type: HIGHLIGHT
+            branch releaseA
+            checkout releaseA
+            commit
+            checkout main
+            commit
+        ```
+
         常に最新のプログラムのみをリリースする場合は、リリースブランチにシステムテスト完了後の main ブランチを統合する方法も考えられます。
+
+        ```mermaid
+        gitGraph
+            commit
+            branch release
+            checkout main
+            commit
+            branch developA
+            commit
+            checkout main
+            merge developA
+            commit
+            checkout release
+            merge main
+            commit type: HIGHLIGHT id: "v1.0.0"
+            checkout main
+            commit
+            branch developB
+            commit
+            checkout main
+            merge developB
+            commit
+            checkout release
+            merge main
+            commit type: HIGHLIGHT id: "v2.0.0"
+            checkout main
+            commit
+        ```
 
     - 常に main ブランチをリリースバージョンとする
 
         プログラムの安定性よりも、新機能の開発・既存機能の修正への対応が重視されておりリリース頻度が高い場合、 main ブランチと開発ブランチで運用するシンプルなブランチ戦略を取ることも考えられます。この場合は、リリース時点での main ブランチの状態に対して、タグを付与してバージョン管理します。
+
+        ```mermaid
+        gitGraph
+            commit
+            commit type: HIGHLIGHT tag: "v0.9.0"
+            branch featureA
+            branch featureB
+            checkout featureA
+            commit
+            commit
+            checkout main
+            merge featureA
+            checkout featureB
+            commit
+            checkout main
+            merge featureB
+            commit type: HIGHLIGHT tag: "v1.0.0"
+            branch featureC
+            checkout featureC
+            commit
+            checkout main
+            merge featureC
+            commit type: HIGHLIGHT tag: "v1.0.1"
+        ```
 
 - main ブランチや develop ブランチの破壊的な変更への対策の要否
 
