@@ -32,22 +32,20 @@ Prettier は Vue.js のブランクプロジェクト作成時にオプション
 
 ### Prettier の設定 {#settings-prettier}
 
-Prettier の設定ファイルは初期状態では存在しないので、作成するところから始めます。
+設定ファイル `./.prettierrc.json` で行います。このファイルはインストール時に自動的に追加されます。
+既定の設定を上書きする場合、設定値を記述します。以下は設定例です。
 
-1. プロジェクトのルートフォルダーに設定ファイル `./.prettierrc.js` を作成します。
-1. 既定の設定を上書きする場合、設定値を記述します。以下は設定例です。
-
-```javascript title=".prettierrc.js"
-module.exports = {
-  semi: true,
-  arrowParens: 'always',
-  singleQuote: true,
-  trailingComma: 'all',
-  endOfLine: 'auto',
-};
+```json title=".prettierrc.json"
+{
+  "semi": true,
+  "arrowParens": "always",
+  "singleQuote": true,
+  "trailingComma": "all",
+  "endOfLine": "auto"
+}
 ```
 
-一部の設定値は、既定で .editorconfig に記述している値が適用されます。したがって、`./.prettierrc.js` では、 .editorconfig では設定できないもののみ設定すると良いでしょう。
+一部の設定値は、既定で .editorconfig に記述している値が適用されます。したがって、`./.prettierrc.json` では、 .editorconfig では設定できないもののみ設定すると良いでしょう。
 
 全ての設定可能な値は [Options - Prettier :material-open-in-new:](https://prettier.io/docs/en/options.html){ target=_blank } を参照してください。また、設定方法は [Configuration File - Prettier :material-open-in-new:](https://prettier.io/docs/en/configuration.html){ target=_blank } を参照してください。
 
@@ -71,7 +69,7 @@ module.exports = {
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier'
+    '@vue/eslint-config-prettier/skip-formatting',
   ],
   /* 中略 */
   ignorePatterns: ['postcss.config.js', 'tailwind.config.js'],
@@ -95,14 +93,12 @@ Stylelint および、標準の設定や vue ファイルで使用する設定�
 | -------------------------------- | -------------------------------------- |
 | stylelint                        | cssファイルの構文検証                  |
 | stylelint-config-standard        | Stylelint の標準設定                   |
-| stylelint-config-prettier        | Stylelint の Prettier 向け設定         |
 | stylelint-config-recommended-vue | Stylelint の .vue ファイル向け推奨設定 |
 | stylelint-prettier               | Stylelint と Prettier の連携プラグイン |
 
 ```terminal
 npm install -D stylelint \
   stylelint-config-standard \
-  stylelint-config-prettier \
   stylelint-config-recommended-vue \
   stylelint-prettier
 ```
@@ -112,7 +108,7 @@ npm install -D stylelint \
 プロジェクトのルートフォルダーに設定ファイル `./.stylelintrc.js` を作成し、コードを記述します。
 
 ```javascript title=".stylelintrc.js"
-module.exports = {
+export default {
   plugins: ['stylelint-prettier'],
   extends: [
     'stylelint-config-standard',

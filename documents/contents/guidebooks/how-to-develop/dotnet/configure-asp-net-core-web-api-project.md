@@ -316,10 +316,12 @@ ASP.NET Core Web API プロジェクトを作成した際、一緒に作成さ�
 
     開発環境向けのログレベル設定は [appsettings.Development.json] に行います。
     開発環境では、開発者が設定したデバッグレベルのログも出力できるように設定します。
-    例のように、 `LogLLevel` 要素にソリューション名と同名のキーを追加し、 Debug を設定します。
+    例のように、 `LogLevel` 要素にソリューション名と同名のキーを追加し、 Debug を設定します。
 
     [HTTP 通信ログ](#configure-http-communication-log)を記録するように設定した場合は、そのログが出力されるよう個別に設定を追加します。
-    例のように、 `LogLLevel` 要素に Microsoft.AspNetCore.HttpLogging のキーを追加し、 Information を設定します。
+    例のように、 `LogLevel` 要素に Microsoft.AspNetCore.HttpLogging のキーを追加し、 Information を設定します。
+
+    [ヘルスチェック](../../../app-architecture/client-side-rendering/global-function.md#health-check-implementation)実行時のログを出力する場合も個別に設定を追加します。 例のように、 `LogLevel` 要素に Microsoft.Extensions.Diagnostics.HealthChecks のキーを追加し、Debug を設定しています。
 
     ```json title="appsettings.Development.json"
     {
@@ -328,6 +330,7 @@ ASP.NET Core Web API プロジェクトを作成した際、一緒に作成さ�
           "Default": "Information",
           "Microsoft.AspNetCore": "Warning",
           "Microsoft.AspNetCore.HttpLogging": "Information",
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "Debug",
           "AaaSubSystem": "Debug"
         }
       }
