@@ -147,7 +147,7 @@ AlesInfiny Maris では、ソースコードの管理に Git を推奨してい�
 ### 改行コード {#line-break-code}
 
 AlesInfiny Maris では、通常 Git のリモートリポジトリ内の改行コードが LF で統一されることから、ローカルリポジトリの改行コードも LF に統一する方針を採用しています。
-詳細な設定方法は [Git の基本設定](../../guidebooks/git/git-setting.md#line-break-code) を参照してください。
+詳細な設定方法は [Git の基本設定](../../guidebooks/git/git-settings.md#line-break-code) を参照してください。
 
 ## 推奨するリポジトリ構造 {#repository-structure}
 
