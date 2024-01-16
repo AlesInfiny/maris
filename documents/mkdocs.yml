@@ -35,6 +35,7 @@ nav:
           - Git リポジトリホスティングサービスの選択: guidebooks/git/select-git-hosting-service.md
           - リポジトリ構造の検討: guidebooks/git/consider-repository-structure.md
           - フォルダー構造の検討: guidebooks/git/consider-folder-structure.md
+          - Git の基本設定: guidebooks/git/git-settings.md
       - アプリケーション開発手順:
           - guidebooks/how-to-develop/index.md
           - .NET 編:
