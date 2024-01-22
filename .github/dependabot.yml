@@ -36,13 +36,31 @@ updates:
     directory: "/samples/Dressca/dressca-backend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 10
+    open-pull-request-limit: 10
     commit-message:
-      prefix: "nuget-dressca"
+      prefix: "nuget-dressca-backend"
     labels:
       - "target: Dressca"
       - "nuget"
       - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.AspNetCore.*"
+          - "Microsoft.EntityFrameworkCore.*"
+          - "Microsoft.Extensions.*"
+      xunit-packages:
+        patterns:
+          - "xunit.*"
+      others:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "Microsoft.AspNetCore.*"
+          - "Microsoft.EntityFrameworkCore.*"
+          - "Microsoft.Extensions.*"
+          - "xunit.*"
+
   - package-ecosystem: "nuget"
     directory: "/samples/ConsoleAppWithDI/solution"
     schedule:
@@ -54,3 +72,19 @@ updates:
       - "target: ConsoleAppWithDI"
       - "nuget"
       - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.EntityFrameworkCore.*"
+          - "Microsoft.Extensions.*"
+      xunit-packages:
+        patterns:
+          - "xunit.*"
+      others:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "Microsoft.AspNetCore.*"
+          - "Microsoft.EntityFrameworkCore.*"
+          - "Microsoft.Extensions.*"
+          - "xunit.*"
