@@ -36,9 +36,9 @@ updates:
     directory: "/samples/Dressca/dressca-backend"
     schedule:
       interval: "daily"
-    open-pull-request-limit: 10
+    open-pull-requests-limit: 10
     commit-message:
-      prefix: "nuget-dressca-backend"
+      prefix: "nuget-dressca"
     labels:
       - "target: Dressca"
       - "nuget"
