@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Baskets;
+using Dressca.ApplicationCore.Facades;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
@@ -15,34 +16,29 @@ namespace Dressca.Web.Controllers;
 [Produces("application/json")]
 public class OrdersController : ControllerBase
 {
-    private readonly OrderApplicationService orderApplicationService;
-    private readonly BasketApplicationService basketApplicationService;
+    private readonly OrdersApplicationServiceFacade applicationServiceFacade;
     private readonly IObjectMapper<Order, OrderResponse> orderMapper;
     private readonly ILogger<OrdersController> logger;
 
     /// <summary>
     ///  <see cref="OrdersController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="orderApplicationService">注文アプリケーションサービス。</param>
-    /// <param name="basketApplicationService">買い物かごアプリケーションサービス。</param>
+    /// <param name="applicationServiceFacade">アプリケーションサービスファサード。</param>
     /// <param name="orderMapper"><see cref="Order"/> と <see cref="OrderResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
-    ///   <item><paramref name="orderApplicationService"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="basketApplicationService"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="applicationServiceFacade"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="orderMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     public OrdersController(
-        OrderApplicationService orderApplicationService,
-        BasketApplicationService basketApplicationService,
+        OrdersApplicationServiceFacade applicationServiceFacade,
         IObjectMapper<Order, OrderResponse> orderMapper,
         ILogger<OrdersController> logger)
     {
-        this.orderApplicationService = orderApplicationService ?? throw new ArgumentNullException(nameof(orderApplicationService));
-        this.basketApplicationService = basketApplicationService ?? throw new ArgumentNullException(nameof(basketApplicationService));
+        this.applicationServiceFacade = applicationServiceFacade ?? throw new ArgumentNullException(nameof(applicationServiceFacade));
         this.orderMapper = orderMapper ?? throw new ArgumentNullException(nameof(orderMapper));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -62,7 +58,7 @@ public class OrdersController : ControllerBase
         var buyerId = this.HttpContext.GetBuyerId();
         try
         {
-            var order = await this.orderApplicationService.GetOrderAsync(orderId, buyerId);
+            var order = await this.applicationServiceFacade.GetOrderAsync(orderId, buyerId);
             var orderDto = this.orderMapper.Convert(order);
             return this.Ok(orderDto);
         }
@@ -88,7 +84,6 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> PostOrderAsync(PostOrderRequest postOrderInput)
     {
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
 
         var address = new Address(
             postalCode: postOrderInput.PostalCode,
@@ -96,10 +91,10 @@ public class OrdersController : ControllerBase
             shikuchoson: postOrderInput.Shikuchoson,
             azanaAndOthers: postOrderInput.AzanaAndOthers);
         var shipToAddress = new ShipTo(postOrderInput.FullName, address);
-        var order = await this.orderApplicationService.CreateOrderAsync(basket.Id, shipToAddress);
 
-        // 買い物かごを削除
-        await this.basketApplicationService.DeleteBasketAsync(basket.Id);
+        // 商品を注文
+        var order = await this.applicationServiceFacade.PostOrderAsync(shipToAddress, buyerId);
+
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetByIdAsync));
         return this.CreatedAtAction(actionName, new { orderId = order.Id }, null);
     }
