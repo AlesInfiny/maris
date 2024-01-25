@@ -46,20 +46,15 @@ updates:
     groups:
       dotnet-packages:
         patterns:
-          - "Microsoft.AspNetCore.*"
-          - "Microsoft.EntityFrameworkCore.*"
-          - "Microsoft.Extensions.*"
+          - "Microsoft.AspNetCore*"
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.Extensions*"
       xunit-packages:
         patterns:
-          - "xunit.*"
-      others:
+          - "xunit*"
+      nswag-packages:
         patterns:
-          - "*"
-        exclude-patterns:
-          - "Microsoft.AspNetCore.*"
-          - "Microsoft.EntityFrameworkCore.*"
-          - "Microsoft.Extensions.*"
-          - "xunit.*"
+          - "NSwag*"
 
   - package-ecosystem: "nuget"
     directory: "/samples/ConsoleAppWithDI/solution"
@@ -75,16 +70,8 @@ updates:
     groups:
       dotnet-packages:
         patterns:
-          - "Microsoft.EntityFrameworkCore.*"
-          - "Microsoft.Extensions.*"
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.Extensions*"
       xunit-packages:
         patterns:
-          - "xunit.*"
-      others:
-        patterns:
-          - "*"
-        exclude-patterns:
-          - "Microsoft.AspNetCore.*"
-          - "Microsoft.EntityFrameworkCore.*"
-          - "Microsoft.Extensions.*"
-          - "xunit.*"
+          - "xunit*"
