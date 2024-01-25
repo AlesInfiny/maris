@@ -43,6 +43,19 @@ updates:
       - "target: Dressca"
       - "nuget"
       - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.AspNetCore*"
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.Extensions*"
+      xunit-packages:
+        patterns:
+          - "xunit*"
+      nswag-packages:
+        patterns:
+          - "NSwag*"
+
   - package-ecosystem: "nuget"
     directory: "/samples/ConsoleAppWithDI/solution"
     schedule:
@@ -54,3 +67,11 @@ updates:
       - "target: ConsoleAppWithDI"
       - "nuget"
       - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.Extensions*"
+      xunit-packages:
+        patterns:
+          - "xunit*"
