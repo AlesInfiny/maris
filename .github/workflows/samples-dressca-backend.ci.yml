@@ -42,7 +42,7 @@ jobs:
       - name: .NET SDK のセットアップ
         uses: actions/setup-dotnet@v3
         with:
-          global-json-file: samples/Dressca/dressca-backend/global.json
+          dotnet-version: '8.*'
 
       - name: NuGet パッケージの復元
         run: dotnet restore
@@ -74,8 +74,8 @@ jobs:
         env:
           APPSETTINGS_FILEPATH: tests/Dressca.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
         run: |
-           connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
-           echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
+          connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
+          echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
 
       - name: EF Core ツールのインストール(結合テスト用)
         shell: bash
