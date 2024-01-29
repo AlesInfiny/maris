@@ -4,7 +4,7 @@
     <IsPackable>false</IsPackable>
     <NoDefaultLaunchSettingsFile Condition="'$(ExcludeLaunchSettings)' == 'True'">True</NoDefaultLaunchSettingsFile>
     <SpaRoot>..\..\..\dressca-frontend\</SpaRoot>
-    <SpaProxyServerUrl>http://localhost:3000</SpaProxyServerUrl>
+    <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
     <!-- <SpaProxyServerUrl Condition="'$(RequiresHttps)' == 'True'">https://localhost:5002</SpaProxyServerUrl>
     <SpaProxyServerUrl Condition="'$(RequiresHttps)' != 'True'">http://localhost:5002</SpaProxyServerUrl> -->
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
@@ -14,6 +14,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
     <PackageReference Include="NSwag.AspNetCore" />
     <PackageReference Include="NSwag.MSBuild">
       <PrivateAssets>all</PrivateAssets>
@@ -59,7 +60,7 @@
   </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
-    <Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net60) run nswag.json /variables:Configuration=$(Configuration)" />
+    <Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration)" />
   </Target>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

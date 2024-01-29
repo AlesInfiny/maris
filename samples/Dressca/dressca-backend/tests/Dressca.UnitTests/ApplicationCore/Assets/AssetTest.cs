@@ -8,13 +8,13 @@ public class AssetTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public void Constructor_アセットコードがnullまたは空の文字列の場合例外(string assetCode)
+    public void Constructor_アセットコードがnullまたは空の文字列の場合例外(string? assetCode)
     {
         // Arrange
         var assetType = AssetTypes.Png;
 
         // Act
-        var action = () => new Asset(assetCode, assetType);
+        var action = () => new Asset(assetCode!, assetType);
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("value", action);

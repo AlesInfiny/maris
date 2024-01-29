@@ -4,10 +4,13 @@ using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
 using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
+using Dressca.Web.HealthChecks;
 using Dressca.Web.Mapper;
 using Dressca.Web.Resources;
 using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +49,11 @@ builder.Services.AddOpenApiDocument(config =>
         document.Info.Version = "1.0.0";
         document.Info.Title = "Dressca Web API";
         document.Info.Description = "Dressca の Web API 仕様";
+        document.Servers.Add(new()
+        {
+            Description = "ローカル開発用のサーバーです。",
+            Url = "https://localhost:5001",
+        });
     };
 });
 
@@ -67,12 +75,17 @@ if (builder.Environment.IsDevelopment())
     });
 }
 
+builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, HealthCheckDescriptionProvider>());
+
+builder.Services.AddHealthChecks()
+    .AddDresscaDbContextCheck("DresscaDatabaseHealthCheck");
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
-    app.UseSwaggerUi3();
+    app.UseSwaggerUi();
     app.UseHttpLogging();
     app.UseExceptionHandler(ErrorController.DevelopmentErrorRoute);
 }
@@ -87,4 +100,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
+
 app.Run();
+
+/// <summary>
+///  結合テストプロジェクト用の部分クラス。
+/// </summary>
+public partial class Program
+{
+}

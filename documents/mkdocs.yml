@@ -1,7 +1,7 @@
 ---
 # cSpell:ignore dotnetfw htmlmin inlinehilite materialx prebuild pymdownx superfences twemoji
 site_name: AlesInfiny Maris
-site_url: https://www.marisossedition.org/
+site_url: https://maris.alesinfiny.org/
 docs_dir: contents
 copyright: "Copyright &copy; 2023 BIPROGY Inc. All rights reserved."
 site_author: "アドバンスド開発技術部"
@@ -15,14 +15,19 @@ nav:
       - app-architecture/index.md
       - 概要編:
           - app-architecture/overview/index.md
+          - 構築できるアプリケーション形態: app-architecture/overview/application-kind.md
+          - アプリケーション構成: app-architecture/overview/application-structure.md
+          - 構成管理: app-architecture/overview/configuration-management.md
+          - .NETアプリケーションの処理方式: app-architecture/overview/dotnet-application-processing-system.md
       - クライアントサイドレンダリング編:
           - app-architecture/client-side-rendering/index.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
-  #   - コンソールアプリケーション編:
-  #       - app-architecture/console-app/index.md
-  #- クックブック:
-  #    - cook-book/index.md
-  #    - 帳票印刷: cook-book/report.md
+          - 全体処理方式: app-architecture/client-side-rendering/global-function.md
+      # - コンソールアプリケーション編:
+          # - app-architecture/console-app/index.md
+      # - クックブック:
+          # - cook-book/index.md
+          # - 帳票印刷: cook-book/report.md
   - ガイド:
       - guidebooks/index.md
       - Git リポジトリ構築ガイド:
@@ -30,6 +35,7 @@ nav:
           - Git リポジトリホスティングサービスの選択: guidebooks/git/select-git-hosting-service.md
           - リポジトリ構造の検討: guidebooks/git/consider-repository-structure.md
           - フォルダー構造の検討: guidebooks/git/consider-folder-structure.md
+          - Git の基本設定: guidebooks/git/git-settings.md
       - アプリケーション開発手順:
           - guidebooks/how-to-develop/index.md
           - .NET 編:
@@ -41,10 +47,11 @@ nav:
               - プロジェクト構造の作成: guidebooks/how-to-develop/dotnet/create-project-structure.md
               - ASP.NET Core Web API プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-web-api-project.md
               - ASP.NET Core with Vite プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-with-vite-project.md
+              - ヘルスチェック API の実装: guidebooks/how-to-develop/dotnet/health-check-api.md
           - Vue.js 編:
               - guidebooks/how-to-develop/vue-js/index.md
               - 事前準備: guidebooks/how-to-develop/vue-js/preparation.md
-              - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md # cspell: disable-line
+              - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md
               - ブランクプロジェクトのフォルダー構造: guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
               - 開発に使用するパッケージ: guidebooks/how-to-develop/vue-js/optional-packages.md
               - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/vue-js/css.md
@@ -53,8 +60,8 @@ nav:
               - Open API 仕様書からのクライアントコード生成: guidebooks/how-to-develop/vue-js/create-api-client-code.md
           - ローカル開発環境の構築:
               - guidebooks/how-to-develop/local-environment/index.md
-  #       - アプリケーションテスト:
-  #           - guidebooks/app-testing/index.md
+          # - アプリケーションテスト:
+              # - guidebooks/app-testing/index.md
       - マイグレーション:
           - guidebooks/migration/index.md
           - .NET Framework にとどまることのリスク:
@@ -62,14 +69,15 @@ nav:
               - .NET ランタイムの最新動向: guidebooks/migration/dotnetfw-risk/dotnet-runtime-trends.md
               - .NET Framework の開発停止によるリスク: guidebooks/migration/dotnetfw-risk/risk-of-dotnet-framework.md
               - .NET への移行: guidebooks/migration/dotnetfw-risk/migration-to-dotnet.md
-  #   - 開発プロセスのモダナイズ:
-  #       - guidebooks/modern-dev-process/index.md
+          # - 開発プロセスのモダナイズ:
+              # - guidebooks/modern-dev-process/index.md
   - サンプル解説:
       - samples/index.md
       - コンソールアプリケーションでの DI の利用:
           - samples/console-app-with-di/index.md
-  - 利用規約:
-      - terms/index.md
+  - AlesInfiny Maris について:
+      - 利用規約: about-maris/terms.md
+      - 商標: about-maris/trademarks.md
 
 theme:
   name: material
@@ -86,7 +94,6 @@ theme:
     text: Noto Sans JP
     code: Source Code Pro
   language: ja
-  locale: ja
   logo: assets/maris-logo.png
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -121,8 +128,8 @@ markdown_extensions:
   - footnotes
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       linenums: true
   - pymdownx.inlinehilite
@@ -131,7 +138,11 @@ markdown_extensions:
       check_paths: true
       auto_append:
         - includes/abbreviations.md
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed
   - toc:
       permalink: ⚓︎
@@ -139,10 +150,8 @@ markdown_extensions:
 
 extra:
   footer_urls:
-    terms: terms/
-    license: terms/#license
-    disclaimer: terms/#disclaimer
-    other_company_trademarks: terms/#trademarks-owned-by-other-companies
+    terms: about-maris/terms/
+    trademarks: about-maris/trademarks/
   version: !ENV [VERSION, "Local Version"]
 
 extra_css:

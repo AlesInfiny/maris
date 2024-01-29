@@ -16,8 +16,8 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 
 本サンプルは以下の環境で動作確認を行っています。
 
-- .NET 6
-- Visual Studio 2022 17.4
+- .NET 8
+- Visual Studio 2022 17.8.3
 
 ## 前提となる OSS ライブラリ
 
@@ -110,7 +110,7 @@ Visual Studio を用いてソリューションをビルドします。
 続いて必要なフレームワークの参照設定を行います。
 「Maris.ConsoleApp.Core」プロジェクト、「Maris.ConsoleApp.Hosting」プロジェクトを「Maris.Samples.Cli」プロジェクトから参照してください。
 また汎用ホスト上でアプリケーションを実行するため、「[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)」 NuGet パッケージも参照に追加してください。
-バージョンは 6.x 系の最新バージョンの導入を推奨します。
+バージョンは 8.x 系の最新バージョンの導入を推奨します。
 
 最後に、 Directory.Build.props と重複している設定を Maris.Samples.Cli.csproj ファイルから削除します。
 `TargetFramework` 、 `ImplicitUsings` 、 `Nullable` は、ソリューションルートへ配置した Directory.Build.props に設定してあるため削除対象です。
@@ -275,7 +275,7 @@ ERROR(S):
 ビルドした exe を直接実行する場合は、ビルドしたアプリケーションの出力されたフォルダーに移動し、以下のように実行します。
 
 ```plane
-C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net6.0>Maris.Samples.Cli.exe sample --loop-number 5
+C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net8.0>Maris.Samples.Cli.exe sample --loop-number 5
 info: Maris.ConsoleApp.Hosting.ServiceCollectionExtensions[0]
       起動パラメーター:sample --loop-number 5 のパースを行います。
 info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
@@ -292,7 +292,7 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: C:\temp\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net6.0
+      Content root path: C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net8.0
 info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
       sample コマンドのホストの処理が終了コード 0 で完了しました。実行時間は 20 ms でした。
 ```
@@ -317,7 +317,7 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Development
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: C:\temp\MarisSamples.ConsoleApp\src\Maris.Samples.Cli
+      Content root path: C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli
 info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
       sample コマンドのホストの処理が終了コード 0 で完了しました。実行時間は 22 ms でした。
 ```
@@ -464,25 +464,25 @@ internal class Parameter
     public DateTimeOffset ExecuteBusinessDate { get; set; }
 }
 
-internal class ValidatableCommand : SyncCommand<ValidatableParameter>
+internal class ValidatableCommand : SyncCommand<Parameter>
 {
     private readonly IBusinessDateRepository repository;
 
     public ValidatableCommand(IBusinessDateRepository repository) => this.repository = repository;
 
-    protected override ICommandResult Execute(ValidatableParameter parameter)
+    protected override ICommandResult Execute(Parameter parameter)
     {
         Console.WriteLine(parameter.ExecuteBusinessDate.ToString("G"));
         return new SuccessResult();
     }
 
-    protected override void ValidateParameter(ValidatableParameter parameter)
+    protected override void ValidateParameter(Parameter parameter)
     {
         var businessDate = this.repository.GetBusinessDate();
         if (parameter.ExecuteBusinessDate < businessDate.AddDays(-7))
         {
             throw new ArgumentException(
-                "業務日付 1 週間より前の業務日付は指定できません。",
+                "1 週間より前の業務日付は指定できません。",
                 nameof(parameter));
         }
     }

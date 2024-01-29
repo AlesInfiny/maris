@@ -8,7 +8,7 @@ public class AssetTypesTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public void IsSupportedAssetType_アセットタイプがnullまたは空の文字列の場合(string assetType)
+    public void IsSupportedAssetType_アセットタイプがnullまたは空の文字列の場合(string? assetType)
     {
         // Arrange: Do Nothing
         // Act

@@ -4,6 +4,7 @@ using Dressca.TestLibrary.Xunit.Logging;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Catalog;
+
 public class CatalogDomainServiceTest
 {
     private readonly XunitLoggerFactory loggerFactory;
