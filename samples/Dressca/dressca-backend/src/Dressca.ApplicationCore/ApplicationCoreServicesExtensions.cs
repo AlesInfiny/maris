@@ -28,6 +28,7 @@ public static class ApplicationCoreServicesExtensions
 
         // Domain Services
         services.AddTransient<CatalogDomainService>();
+        services.AddTransient<BasketDomainService>();
 
         // Application Services
         services.AddTransient<BasketApplicationService>();

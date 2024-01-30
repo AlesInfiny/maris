@@ -20,8 +20,6 @@ namespace Dressca.Web.Controllers;
 public class BasketItemsController : ControllerBase
 {
     private readonly BasketApplicationService basketApplicationService;
-    private readonly CatalogDomainService catalogDomainService;
-    private readonly ICatalogRepository catalogRepository;
     private readonly IObjectMapper<Basket, BasketResponse> basketMapper;
     private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
     private readonly IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper;
@@ -50,16 +48,12 @@ public class BasketItemsController : ControllerBase
     /// </exception>
     public BasketItemsController(
         BasketApplicationService basketApplicationService,
-        CatalogDomainService catalogDomainService,
-        ICatalogRepository catalogRepository,
         IObjectMapper<Basket, BasketResponse> basketMapper,
         IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper,
         IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper,
         ILogger<BasketItemsController> logger)
     {
         this.basketApplicationService = basketApplicationService ?? throw new ArgumentNullException(nameof(basketApplicationService));
-        this.catalogDomainService = catalogDomainService ?? throw new ArgumentNullException(nameof(catalogDomainService));
-        this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
         this.basketMapper = basketMapper ?? throw new ArgumentNullException(nameof(basketMapper));
         this.basketItemMapper = basketItemMapper ?? throw new ArgumentNullException(nameof(basketItemMapper));
         this.catalogItemMapper = catalogItemMapper ?? throw new ArgumentNullException(nameof(catalogItemMapper));
@@ -76,9 +70,9 @@ public class BasketItemsController : ControllerBase
     public async Task<IActionResult> GetBasketItemsAsync()
     {
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
-        var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
-        var catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id));
+
+        var (basket, catalogItems) = await this.basketApplicationService.GetBasketItemsAsync(buyerId);
+
         var basketResponse = this.basketMapper.Convert(basket);
         foreach (var basketItem in basketResponse.BasketItems)
         {
@@ -125,24 +119,13 @@ public class BasketItemsController : ControllerBase
                 return putBasketItem.Quantity.Value;
             });
 
-        // 買い物かごに入っていないカタログアイテムが指定されていないか確認
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
-        var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
-        if (notExistsInBasketCatalogIds.Any())
-        {
-            this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(',', notExistsInBasketCatalogIds));
-            return this.BadRequest();
-        }
-
-        // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
-        var (existsAll, _) = await this.catalogDomainService.ExistsAllAsync(quantities.Keys);
-        if (!existsAll)
+        var result = await this.basketApplicationService.PutBasketItemsAsync(buyerId, quantities);
+        if (!result)
         {
             return this.BadRequest();
         }
 
-        await this.basketApplicationService.SetQuantitiesAsync(basket.Id, quantities);
         return this.NoContent();
     }
 
@@ -175,17 +158,14 @@ public class BasketItemsController : ControllerBase
         postBasketItem.AddedQuantity.ThrowIfNull();
 
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
 
-        // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
-        var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync(new[] { postBasketItem.CatalogItemId.Value });
-        if (!existsAll)
+        var result = await this.basketApplicationService.PostBasketItemAsync(buyerId, postBasketItem.CatalogItemId.Value, postBasketItem.AddedQuantity.Value);
+
+        if (!result)
         {
             return this.BadRequest();
         }
 
-        var catalogItem = catalogItems[0];
-        await this.basketApplicationService.AddItemToBasketAsync(basket.Id, postBasketItem.CatalogItemId.Value, catalogItem.Price, postBasketItem.AddedQuantity.Value);
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetBasketItemsAsync));
         return this.CreatedAtAction(actionName, null);
     }
@@ -214,14 +194,13 @@ public class BasketItemsController : ControllerBase
     {
         // 買い物かごに入っていないカタログアイテムが指定されていないか確認
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
-        if (!basket.IsInCatalogItem(catalogItemId))
+
+        var result = await this.basketApplicationService.DeleteBasketItemAsync(buyerId, catalogItemId);
+        if (!result)
         {
-            this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, catalogItemId);
             return this.NotFound();
         }
 
-        await this.basketApplicationService.SetQuantitiesAsync(basket.Id, new() { { catalogItemId, 0 } });
         return this.NoContent();
     }
 

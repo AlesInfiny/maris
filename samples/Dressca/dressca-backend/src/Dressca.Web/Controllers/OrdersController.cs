@@ -88,7 +88,6 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> PostOrderAsync(PostOrderRequest postOrderInput)
     {
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
 
         var address = new Address(
             postalCode: postOrderInput.PostalCode,
@@ -96,10 +95,9 @@ public class OrdersController : ControllerBase
             shikuchoson: postOrderInput.Shikuchoson,
             azanaAndOthers: postOrderInput.AzanaAndOthers);
         var shipToAddress = new ShipTo(postOrderInput.FullName, address);
-        var order = await this.orderApplicationService.CreateOrderAsync(basket.Id, shipToAddress);
 
-        // 買い物かごを削除
-        await this.basketApplicationService.DeleteBasketAsync(basket.Id);
+        var order = await this.orderApplicationService.PostOrderAsync(buyerId, shipToAddress);
+
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetByIdAsync));
         return this.CreatedAtAction(actionName, new { orderId = order.Id }, null);
     }

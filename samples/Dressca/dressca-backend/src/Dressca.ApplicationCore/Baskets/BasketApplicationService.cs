@@ -1,4 +1,7 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using System.Collections.Generic;
+using System.Transactions;
+using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
 namespace Dressca.ApplicationCore.Baskets;
@@ -8,7 +11,9 @@ namespace Dressca.ApplicationCore.Baskets;
 /// </summary>
 public class BasketApplicationService
 {
-    private readonly IBasketRepository basketRepository;
+    private readonly ICatalogRepository catalogRepository;
+    private readonly BasketDomainService basketDomainService;
+    private readonly CatalogDomainService catalogDomainService;
     private readonly ILogger<BasketApplicationService> logger;
 
     /// <summary>
@@ -19,116 +24,115 @@ public class BasketApplicationService
     /// <exception cref="ArgumentNullException">
     ///  <paramref name="basketRepository"/> または <paramref name="logger"/> が <see langword="null"/> です。
     /// </exception>
-    public BasketApplicationService(IBasketRepository basketRepository, ILogger<BasketApplicationService> logger)
+    public BasketApplicationService(
+        ICatalogRepository catalogRepository,
+        BasketDomainService basketDomainService,
+        CatalogDomainService catalogDomainService,
+        ILogger<BasketApplicationService> logger)
     {
-        this.basketRepository = basketRepository ?? throw new ArgumentNullException(nameof(basketRepository));
+        this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
+        this.basketDomainService = basketDomainService ?? throw new ArgumentNullException(nameof(basketDomainService));
+        this.catalogDomainService = catalogDomainService ?? throw new ArgumentNullException(nameof(catalogDomainService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    /// <summary>
-    ///  アイテムを買い物かごに追加します。
-    /// </summary>
-    /// <param name="basketId">買い物かご Id。</param>
-    /// <param name="catalogItemId">カタログアイテム Id 。</param>
-    /// <param name="price">単価。</param>
-    /// <param name="quantity">数量。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>非同期処理を表すタスク。</returns>
-    /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
-    public async Task AddItemToBasketAsync(long basketId, long catalogItemId, decimal price, int quantity = 1, CancellationToken cancellationToken = default)
+    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems)> GetBasketItemsAsync(string buyerId)
     {
-        this.logger.LogDebug(Messages.BasketApplicationService_AddItemToBasketAsyncStart, basketId, catalogItemId, quantity);
-        var basket = await this.basketRepository.GetAsync(basketId, cancellationToken);
-        if (basket is null)
+        Basket basket;
+        IReadOnlyList<CatalogItem> catalogItems;
+
+        using (var scope = new TransactionScope(
+            TransactionScopeOption.RequiresNew,
+            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
+            TransactionScopeAsyncFlowOption.Enabled))
         {
-            throw new BasketNotFoundException(basketId);
+            basket = await this.basketDomainService.GetOrCreateBasketForUserAsync(buyerId);
+            var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
+            catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id));
+
+            scope.Complete();
         }
 
-        basket.AddItem(catalogItemId, price, quantity);
-        basket.RemoveEmptyItems();
-        await this.basketRepository.UpdateAsync(basket, cancellationToken);
-        this.logger.LogDebug(Messages.BasketApplicationService_AddItemToBasketAsyncEnd, basketId, catalogItemId, quantity);
+        return (BasketResult: basket, CatalogItems: catalogItems);
     }
 
-    /// <summary>
-    ///  買い物かごを削除します。
-    /// </summary>
-    /// <param name="basketId">買い物かご Id 。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>非同期処理を表すタスク。</returns>
-    /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
-    public async Task DeleteBasketAsync(long basketId, CancellationToken cancellationToken = default)
+    public async Task<bool> PutBasketItemsAsync(string buyerId, Dictionary<long, int> quantities)
     {
-        this.logger.LogDebug(Messages.BasketApplicationService_DeleteBasketAsyncStart, basketId);
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
-        if (basket is null)
+        using (var scope = new TransactionScope(
+            TransactionScopeOption.RequiresNew,
+            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
+            TransactionScopeAsyncFlowOption.Enabled))
         {
-            throw new BasketNotFoundException(basketId);
-        }
-
-        await this.basketRepository.RemoveAsync(basket, cancellationToken);
-        this.logger.LogDebug(Messages.BasketApplicationService_DeleteBasketAsyncEnd, basketId);
-    }
-
-    /// <summary>
-    ///  買い物かごの各アイテムの数量を一括で設定します。
-    /// </summary>
-    /// <param name="basketId">買い物かご Id 。</param>
-    /// <param name="quantities">カタログアイテム Id ごとの数量。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>非同期処理を表すタスク。</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="quantities"/> が <see langword="null"/> です。</exception>
-    /// <exception cref="InvalidOperationException">買い物かご内のいずれかのアイテムの数量が 0 未満になる場合。</exception>
-    /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
-    public async Task SetQuantitiesAsync(long basketId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
-    {
-        this.logger.LogDebug(Messages.BasketApplicationService_SetQuantitiesAsyncStart, basketId);
-        ArgumentNullException.ThrowIfNull(quantities);
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
-        if (basket is null)
-        {
-            throw new BasketNotFoundException(basketId);
-        }
-
-        foreach (var item in basket.Items)
-        {
-            if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
+            // 買い物かごに入っていないカタログアイテムが指定されていないか確認
+            var basket = await this.basketDomainService.GetOrCreateBasketForUserAsync(buyerId);
+            var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
+            if (notExistsInBasketCatalogIds.Any())
             {
-                this.logger.LogDebug(Messages.BasketApplicationService_SetQuantity, item.CatalogItemId, quantity);
-                item.SetQuantity(quantity);
+                // 後ほどログメッセージ追加
+                //this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(',', notExistsInBasketCatalogIds));
+                return false;
             }
+
+            // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
+            var (existsAll, _) = await this.catalogDomainService.ExistsAllAsync(quantities.Keys);
+            if (!existsAll)
+            {
+                return false;
+            }
+
+            await this.basketDomainService.SetQuantitiesAsync(basket.Id, quantities);
+
+            scope.Complete();
         }
 
-        basket.RemoveEmptyItems();
-        await this.basketRepository.UpdateAsync(basket, cancellationToken);
-        this.logger.LogDebug(Messages.BasketApplicationService_SetQuantitiesAsyncEnd, basketId);
+        return true;
     }
 
-    /// <summary>
-    ///  <paramref name="buyerId"/> に対応する買い物かご情報を取得します。
-    ///  対応する買い物かご情報がない場合は、作成します。
-    /// </summary>
-    /// <param name="buyerId">購入者 Id 。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
-    /// <exception cref="ArgumentException"><paramref name="buyerId"/> が <see langword="null"/> または空白の場合.</exception>
-    public async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken = default)
+    public async Task<bool> PostBasketItemAsync(string buyerId, long catalogItemId, int addedQuantity)
     {
-        this.logger.LogDebug(Messages.BasketApplicationService_GetOrCreateBasketForUserAsyncStart, buyerId);
-        if (string.IsNullOrWhiteSpace(buyerId))
+        using (var scope = new TransactionScope(
+            TransactionScopeOption.RequiresNew,
+            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
+            TransactionScopeAsyncFlowOption.Enabled))
         {
-            throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(buyerId));
+            var basket = await this.basketDomainService.GetOrCreateBasketForUserAsync(buyerId);
+
+            // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
+            var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync(new[] { catalogItemId });
+            if (!existsAll)
+            {
+                return false;
+            }
+
+            var catalogItem = catalogItems[0];
+            await this.basketDomainService.AddItemToBasketAsync(basket.Id, catalogItemId, catalogItem.Price, addedQuantity);
+
+            scope.Complete();
         }
 
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(buyerId, cancellationToken);
-        if (basket is null)
+        return true;
+    }
+
+    public async Task<bool> DeleteBasketItemAsync(string buyerId, long catalogItemId)
+    {
+        using (var scope = new TransactionScope(
+            TransactionScopeOption.RequiresNew,
+            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
+            TransactionScopeAsyncFlowOption.Enabled))
         {
-            this.logger.LogDebug(Messages.CreateNewBasket_UserBasketNotFound, buyerId);
-            basket = new Basket(buyerId);
-            return await this.basketRepository.AddAsync(basket, cancellationToken);
+            var basket = await this.basketDomainService.GetOrCreateBasketForUserAsync(buyerId);
+            if (!basket.IsInCatalogItem(catalogItemId))
+            {
+                // 後ほどログメッセージ追加
+                //this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, catalogItemId);
+                return false;
+            }
+
+            await this.basketDomainService.SetQuantitiesAsync(basket.Id, new() { { catalogItemId, 0 } });
+
+            scope.Complete();
         }
 
-        this.logger.LogDebug(Messages.BasketApplicationService_GetOrCreateBasketForUserAsyncEnd, buyerId);
-        return basket;
+        return true;
     }
 }

@@ -1,4 +1,6 @@
-﻿using Dressca.ApplicationCore.Baskets;
+﻿using System.Threading;
+using System.Transactions;
+using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
@@ -11,8 +13,8 @@ namespace Dressca.ApplicationCore.Ordering;
 public class OrderApplicationService
 {
     private readonly IOrderRepository orderRepository;
-    private readonly IBasketRepository basketRepository;
     private readonly ICatalogRepository catalogRepository;
+    private readonly BasketDomainService basketDomainService;
     private readonly ILogger<OrderApplicationService> logger;
 
     /// <summary>
@@ -34,54 +36,59 @@ public class OrderApplicationService
         IOrderRepository orderRepository,
         IBasketRepository basketRepository,
         ICatalogRepository catalogRepository,
+        BasketDomainService basketDomainService,
         ILogger<OrderApplicationService> logger)
     {
         this.orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
-        this.basketRepository = basketRepository ?? throw new ArgumentNullException(nameof(basketRepository));
         this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
+        this.basketDomainService = basketDomainService ?? throw new ArgumentNullException(nameof(basketDomainService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    /// <summary>
-    ///  注文を作成します。
-    /// </summary>
-    /// <param name="basketId">買い物かご Id 。</param>
-    /// <param name="shipToAddress">お届け先。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>作成した注文情報を返す非同期処理を表すタスク。</returns>
-    /// <exception cref="BasketNotFoundException"><paramref name="basketId"/> に該当する買い物かごが存在しない場合。</exception>
-    /// <exception cref="EmptyBasketOnCheckoutException"><paramref name="basketId"/> に該当する買い物かごが空の場合。</exception>
-    public async Task<Order> CreateOrderAsync(long basketId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
+    public async Task<Order> PostOrderAsync(string buyerId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncStart, basketId);
-        var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
-        if (basket is null)
-        {
-            throw new BasketNotFoundException(basketId);
-        }
+        //this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncStart, basketId);
 
-        if (basket.IsEmpty())
-        {
-            throw new EmptyBasketOnCheckoutException();
-        }
+        Order ordered;
+        Basket checkoutBasket;
 
-        var catalogItemIds = basket.Items.Select(item => item.CatalogItemId).ToArray();
-        var catalogItems =
-            await this.catalogRepository.FindAsync(item => catalogItemIds.Contains(item.Id), cancellationToken);
-        var orderItems = basket.Items.Select(
-            basketItem =>
+        using (var scope = new TransactionScope(
+            TransactionScopeOption.RequiresNew,
+            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
+            TransactionScopeAsyncFlowOption.Enabled))
+        {
+            checkoutBasket = await this.basketDomainService.GetOrCreateBasketForUserAsync(buyerId);
+
+            if (checkoutBasket.IsEmpty())
             {
-                var catalogItem = catalogItems.First(c => c.Id == basketItem.CatalogItemId);
-                var itemOrdered = new CatalogItemOrdered(catalogItem.Id, catalogItem.Name, catalogItem.ProductCode);
-                var orderItem = new OrderItem(itemOrdered, basketItem.UnitPrice, basketItem.Quantity);
-                var orderItemAssets = catalogItem.Assets
-                    .Select(catalogItemAsset => new OrderItemAsset(catalogItemAsset.AssetCode, orderItem.Id));
-                orderItem.AddAssets(orderItemAssets);
-                return orderItem;
-            }).ToList();
-        var order = new Order(basket.BuyerId, shipToAddress, orderItems);
-        var ordered = await this.orderRepository.AddAsync(order, cancellationToken);
-        this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncEnd, basketId, ordered.Id);
+                throw new EmptyBasketOnCheckoutException();
+            }
+
+            var catalogItemIds = checkoutBasket.Items.Select(item => item.CatalogItemId).ToArray();
+            var catalogItems =
+                await this.catalogRepository.FindAsync(item => catalogItemIds.Contains(item.Id), cancellationToken);
+            var orderItems = checkoutBasket.Items.Select(
+                basketItem =>
+                {
+                    var catalogItem = catalogItems.First(c => c.Id == basketItem.CatalogItemId);
+                    var itemOrdered = new CatalogItemOrdered(catalogItem.Id, catalogItem.Name, catalogItem.ProductCode);
+                    var orderItem = new OrderItem(itemOrdered, basketItem.UnitPrice, basketItem.Quantity);
+                    var orderItemAssets = catalogItem.Assets
+                        .Select(catalogItemAsset => new OrderItemAsset(catalogItemAsset.AssetCode, orderItem.Id));
+                    orderItem.AddAssets(orderItemAssets);
+                    return orderItem;
+                }).ToList();
+            var order = new Order(checkoutBasket.BuyerId, shipToAddress, orderItems);
+            ordered = await this.orderRepository.AddAsync(order, cancellationToken);
+
+            // 買い物かごを削除
+            await this.basketDomainService.DeleteBasketAsync(checkoutBasket.Id);
+
+            scope.Complete();
+        }
+
+        //this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncEnd, checkoutBasket.Id, ordered.Id);
+
         return ordered;
     }
 
