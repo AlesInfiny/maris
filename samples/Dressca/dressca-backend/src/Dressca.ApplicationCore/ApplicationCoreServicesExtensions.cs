@@ -27,8 +27,8 @@ public static class ApplicationCoreServicesExtensions
         ArgumentNullException.ThrowIfNull(services);
 
         // Domain Services
-        services.AddTransient<CatalogDomainService>();
-        services.AddTransient<BasketDomainService>();
+        services.AddTransient<ICatalogDomainService, CatalogDomainService>();
+        services.AddTransient<IBasketDomainService, BasketDomainService>();
 
         // Application Services
         services.AddTransient<BasketApplicationService>();
