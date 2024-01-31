@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Dressca.TestLibrary.Xunit.Logging;
+namespace Dressca.Diagnostics.Testing.Xunit;
 
 /// <summary>
 /// <see cref="Microsoft.Extensions.Logging"/> と xUnit のテスト出力を統合するための <see cref="ILoggerProvider"/> です.
