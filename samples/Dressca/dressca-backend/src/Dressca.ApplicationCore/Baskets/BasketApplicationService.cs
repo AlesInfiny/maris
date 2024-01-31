@@ -12,22 +12,28 @@ namespace Dressca.ApplicationCore.Baskets;
 public class BasketApplicationService
 {
     private readonly ICatalogRepository catalogRepository;
-    private readonly BasketDomainService basketDomainService;
-    private readonly CatalogDomainService catalogDomainService;
+    private readonly IBasketDomainService basketDomainService;
+    private readonly ICatalogDomainService catalogDomainService;
     private readonly ILogger<BasketApplicationService> logger;
 
     /// <summary>
     ///  <see cref="BasketApplicationService"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="basketRepository">買い物かごリポジトリ。</param>
+    /// <param name="catalogRepository">カタログリポジトリ。</param>
+    /// <param name="basketDomainService">買い物かごドメインサービス。</param>
+    /// <param name="catalogDomainService">カタログドメインサービス。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
-    ///  <paramref name="basketRepository"/> または <paramref name="logger"/> が <see langword="null"/> です。
-    /// </exception>
+    ///  <list type="bullet">
+    ///   <item><paramref name="catalogRepository"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="basketDomainService"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="catalogDomainService"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
+    ///  </list>/// </exception>
     public BasketApplicationService(
         ICatalogRepository catalogRepository,
-        BasketDomainService basketDomainService,
-        CatalogDomainService catalogDomainService,
+        IBasketDomainService basketDomainService,
+        ICatalogDomainService catalogDomainService,
         ILogger<BasketApplicationService> logger)
     {
         this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
@@ -56,7 +62,7 @@ public class BasketApplicationService
         return (BasketResult: basket, CatalogItems: catalogItems);
     }
 
-    public async Task<bool> PutBasketItemsAsync(string buyerId, Dictionary<long, int> quantities)
+    public async Task<bool> ChangeBasketItemsQuantitiesAsync(string buyerId, Dictionary<long, int> quantities)
     {
         using (var scope = new TransactionScope(
             TransactionScopeOption.RequiresNew,
@@ -88,7 +94,7 @@ public class BasketApplicationService
         return true;
     }
 
-    public async Task<bool> PostBasketItemAsync(string buyerId, long catalogItemId, int addedQuantity)
+    public async Task<bool> AddItemToBasketAsync(string buyerId, long catalogItemId, int addedQuantity)
     {
         using (var scope = new TransactionScope(
             TransactionScopeOption.RequiresNew,

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Dressca.ApplicationCore.Baskets;
 
-public class BasketDomainService
+public class BasketDomainService : IBasketDomainService
 {
     private readonly IBasketRepository basketRepository;
     private readonly ILogger<BasketDomainService> logger;
@@ -14,6 +14,7 @@ public class BasketDomainService
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
+    /// <inheritdoc/>
     public async Task AddItemToBasketAsync(long basketId, long catalogItemId, decimal price, int quantity = 1, CancellationToken cancellationToken = default)
     {
         var basket = await this.basketRepository.GetAsync(basketId, cancellationToken);
@@ -27,13 +28,7 @@ public class BasketDomainService
         await this.basketRepository.UpdateAsync(basket, cancellationToken);
     }
 
-    /// <summary>
-    ///  買い物かごを削除します。
-    /// </summary>
-    /// <param name="basketId">買い物かご Id 。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>非同期処理を表すタスク。</returns>
-    /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
+    /// <inheritdoc/>
     public async Task DeleteBasketAsync(long basketId, CancellationToken cancellationToken = default)
     {
         var basket = await this.basketRepository.GetWithBasketItemsAsync(basketId, cancellationToken);
@@ -45,16 +40,7 @@ public class BasketDomainService
         await this.basketRepository.RemoveAsync(basket, cancellationToken);
     }
 
-    /// <summary>
-    ///  買い物かごの各アイテムの数量を一括で設定します。
-    /// </summary>
-    /// <param name="basketId">買い物かご Id 。</param>
-    /// <param name="quantities">カタログアイテム Id ごとの数量。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>非同期処理を表すタスク。</returns>
-    /// <exception cref="ArgumentNullException"><paramref name="quantities"/> が <see langword="null"/> です。</exception>
-    /// <exception cref="InvalidOperationException">買い物かご内のいずれかのアイテムの数量が 0 未満になる場合。</exception>
-    /// <exception cref="BasketNotFoundException">買い物かごが見つからない場合。</exception>
+    /// <inheritdoc/>
     public async Task SetQuantitiesAsync(long basketId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(quantities);
@@ -77,14 +63,7 @@ public class BasketDomainService
         await this.basketRepository.UpdateAsync(basket, cancellationToken);
     }
 
-    /// <summary>
-    ///  <paramref name="buyerId"/> に対応する買い物かご情報を取得します。
-    ///  対応する買い物かご情報がない場合は、作成します。
-    /// </summary>
-    /// <param name="buyerId">購入者 Id 。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
-    /// <exception cref="ArgumentException"><paramref name="buyerId"/> が <see langword="null"/> または空白の場合.</exception>
+    /// <inheritdoc/>
     public async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(buyerId))

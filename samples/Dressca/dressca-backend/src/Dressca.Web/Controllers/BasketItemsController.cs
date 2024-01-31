@@ -120,7 +120,7 @@ public class BasketItemsController : ControllerBase
             });
 
         var buyerId = this.HttpContext.GetBuyerId();
-        var result = await this.basketApplicationService.PutBasketItemsAsync(buyerId, quantities);
+        var result = await this.basketApplicationService.ChangeBasketItemsQuantitiesAsync(buyerId, quantities);
         if (!result)
         {
             return this.BadRequest();
@@ -159,7 +159,7 @@ public class BasketItemsController : ControllerBase
 
         var buyerId = this.HttpContext.GetBuyerId();
 
-        var result = await this.basketApplicationService.PostBasketItemAsync(buyerId, postBasketItem.CatalogItemId.Value, postBasketItem.AddedQuantity.Value);
+        var result = await this.basketApplicationService.AddItemToBasketAsync(buyerId, postBasketItem.CatalogItemId.Value, postBasketItem.AddedQuantity.Value);
 
         if (!result)
         {

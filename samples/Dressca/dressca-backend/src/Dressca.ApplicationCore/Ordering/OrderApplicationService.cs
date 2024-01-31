@@ -8,35 +8,34 @@ using Microsoft.Extensions.Logging;
 namespace Dressca.ApplicationCore.Ordering;
 
 /// <summary>
-///  注文に関連するビジネスユースケースを実現する Applicaiton Service です。
+///  注文に関連するビジネスユースケースを実現する Application Service です。
 /// </summary>
 public class OrderApplicationService
 {
     private readonly IOrderRepository orderRepository;
     private readonly ICatalogRepository catalogRepository;
-    private readonly BasketDomainService basketDomainService;
+    private readonly IBasketDomainService basketDomainService;
     private readonly ILogger<OrderApplicationService> logger;
 
     /// <summary>
     ///  <see cref="OrderApplicationService"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="orderRepository">注文リポジトリ。</param>
-    /// <param name="basketRepository">買い物かごリポジトリ。</param>
     /// <param name="catalogRepository">カタログリポジトリ。</param>
+    /// <param name="basketDomainService">買い物かごドメインサービス。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="orderRepository"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="basketRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="catalogRepository"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="basketDomainService"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     public OrderApplicationService(
         IOrderRepository orderRepository,
-        IBasketRepository basketRepository,
         ICatalogRepository catalogRepository,
-        BasketDomainService basketDomainService,
+        IBasketDomainService basketDomainService,
         ILogger<OrderApplicationService> logger)
     {
         this.orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
@@ -45,7 +44,15 @@ public class OrderApplicationService
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<Order> PostOrderAsync(string buyerId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
+    /// <summary>
+    ///  注文を作成します。
+    /// </summary>
+    /// <param name="buyerId">購入者 Id 。</param>
+    /// <param name="shipToAddress">お届け先。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
+    /// <returns>作成した注文情報を返す非同期処理を表すタスク。</returns>
+    /// <exception cref="EmptyBasketOnCheckoutException">注文を作成する対象の買い物かごが空の場合。</exception>
+    public async Task<Order> CreateOrderAsync(string buyerId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
     {
         //this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncStart, basketId);
 
