@@ -29,8 +29,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dressca.ApplicationCore\Dressca.ApplicationCore.csproj" />
-    <ProjectReference Include="..\..\src\Dressca.Diagnostics.Testing\Dressca.Diagnostics.Testing.csproj" />
     <ProjectReference Include="..\..\src\Dressca.Web\Dressca.Web.csproj" />
+    <ProjectReference Include="..\..\src\Maris.Diagnostics.Testing\Maris.Diagnostics.Testing.csproj" />
   </ItemGroup>
 
 </Project>
