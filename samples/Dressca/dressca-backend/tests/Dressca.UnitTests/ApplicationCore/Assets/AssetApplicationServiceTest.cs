@@ -1,5 +1,5 @@
 ﻿using Dressca.ApplicationCore.Assets;
-using Dressca.TestLibrary.Xunit.Logging;
+using Maris.Diagnostics.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Assets;

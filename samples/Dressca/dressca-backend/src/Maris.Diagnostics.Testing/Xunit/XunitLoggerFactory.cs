@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Dressca.TestLibrary.Xunit.Logging;
+namespace Maris.Diagnostics.Testing.Xunit;
 
 /// <summary>
 ///  xUnit で使用できる <see cref="ILogger{TCategoryName}"/> のファクトリークラスです。

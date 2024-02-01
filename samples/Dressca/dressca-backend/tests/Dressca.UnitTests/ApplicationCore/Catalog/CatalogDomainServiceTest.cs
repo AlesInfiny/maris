@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Dressca.ApplicationCore.Catalog;
-using Dressca.TestLibrary.Xunit.Logging;
+using Maris.Diagnostics.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Catalog;
