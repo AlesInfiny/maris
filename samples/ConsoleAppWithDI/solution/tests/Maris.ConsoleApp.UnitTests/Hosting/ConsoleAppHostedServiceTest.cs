@@ -1,6 +1,6 @@
 ﻿using Maris.ConsoleApp.Core;
 using Maris.ConsoleApp.Hosting;
-using Maris.Testing.Xunit.Logging;
+using Maris.Diagnostics.Testing.Xunit;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
