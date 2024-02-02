@@ -1,6 +1,6 @@
 ﻿using Maris.ConsoleApp.Hosting;
 using Maris.ConsoleApp.IntegrationTests.ScopeTests.Commands;
-using Maris.Diagnostics.Testing.Xunit;
+using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit.Abstractions;

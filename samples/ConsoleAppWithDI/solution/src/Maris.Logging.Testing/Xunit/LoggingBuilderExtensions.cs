@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Maris.Diagnostics.Testing.Xunit;
+namespace Maris.Logging.Testing.Xunit;
 
 /// <summary>
 ///  Xunit で使用可能な <see cref="ILogger"/> を登録する処理を提供します。

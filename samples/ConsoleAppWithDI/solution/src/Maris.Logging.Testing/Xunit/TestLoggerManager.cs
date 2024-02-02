@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging.Testing;
 using Xunit.Abstractions;
 
-namespace Maris.Diagnostics.Testing.Xunit;
+namespace Maris.Logging.Testing.Xunit;
 
 /// <summary>
 ///  Xunit で使用できる <see cref="ILogger{TCategoryName}"/> を管理するクラスです。
