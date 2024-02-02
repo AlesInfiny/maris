@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon;
@@ -6,7 +7,6 @@ using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
 using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Catalog;
-using Dressca.Web.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dressca.Web.Controllers;
@@ -19,7 +19,7 @@ namespace Dressca.Web.Controllers;
 [Produces("application/json")]
 public class BasketItemsController : ControllerBase
 {
-    private readonly BasketApplicationService basketApplicationService;
+    private readonly ShoppingApplicationService service;
     private readonly IObjectMapper<Basket, BasketResponse> basketMapper;
     private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
     private readonly IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper;
@@ -28,18 +28,13 @@ public class BasketItemsController : ControllerBase
     /// <summary>
     ///  <see cref="BasketItemsController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="basketApplicationService">買い物かごアプリケーションサービス。</param>
-    /// <param name="catalogDomainService">カタログドメインサービス。</param>
-    /// <param name="catalogRepository">カタログアリポジトリ。</param>
+    /// <param name="service">ショッピングアプリケーションサービス。</param>
     /// <param name="basketMapper"><see cref="Basket"/> と <see cref="BasketResponse"/> のマッパー。</param>
     /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemResponse"/> のマッパー。</param>
     /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
-    ///   <item><paramref name="basketApplicationService"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="catalogDomainService"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="catalogRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="basketMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="basketItemMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="catalogItemMapper"/> が <see langword="null"/> です。</item>
@@ -47,13 +42,13 @@ public class BasketItemsController : ControllerBase
     ///  </list>
     /// </exception>
     public BasketItemsController(
-        BasketApplicationService basketApplicationService,
+        ShoppingApplicationService service,
         IObjectMapper<Basket, BasketResponse> basketMapper,
         IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper,
         IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper,
         ILogger<BasketItemsController> logger)
     {
-        this.basketApplicationService = basketApplicationService ?? throw new ArgumentNullException(nameof(basketApplicationService));
+        this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.basketMapper = basketMapper ?? throw new ArgumentNullException(nameof(basketMapper));
         this.basketItemMapper = basketItemMapper ?? throw new ArgumentNullException(nameof(basketItemMapper));
         this.catalogItemMapper = catalogItemMapper ?? throw new ArgumentNullException(nameof(catalogItemMapper));
@@ -71,7 +66,7 @@ public class BasketItemsController : ControllerBase
     {
         var buyerId = this.HttpContext.GetBuyerId();
 
-        var (basket, catalogItems) = await this.basketApplicationService.GetBasketItemsAsync(buyerId);
+        var (basket, catalogItems) = await this.service.GetBasketItemsAsync(buyerId);
 
         var basketResponse = this.basketMapper.Convert(basket);
         foreach (var basketItem in basketResponse.BasketItems)
@@ -120,7 +115,7 @@ public class BasketItemsController : ControllerBase
             });
 
         var buyerId = this.HttpContext.GetBuyerId();
-        var result = await this.basketApplicationService.ChangeBasketItemsQuantitiesAsync(buyerId, quantities);
+        var result = await this.service.SetBasketItemsQuantitiesAsync(buyerId, quantities);
         if (!result)
         {
             return this.BadRequest();
@@ -159,7 +154,7 @@ public class BasketItemsController : ControllerBase
 
         var buyerId = this.HttpContext.GetBuyerId();
 
-        var result = await this.basketApplicationService.AddItemToBasketAsync(buyerId, postBasketItem.CatalogItemId.Value, postBasketItem.AddedQuantity.Value);
+        var result = await this.service.AddItemToBasketAsync(buyerId, postBasketItem.CatalogItemId.Value, postBasketItem.AddedQuantity.Value);
 
         if (!result)
         {
@@ -195,7 +190,7 @@ public class BasketItemsController : ControllerBase
         // 買い物かごに入っていないカタログアイテムが指定されていないか確認
         var buyerId = this.HttpContext.GetBuyerId();
 
-        var result = await this.basketApplicationService.DeleteBasketItemAsync(buyerId, catalogItemId);
+        var result = await this.service.SetBasketItemsQuantitiesAsync(buyerId, new() { { catalogItemId, 0 } });
         if (!result)
         {
             return this.NotFound();

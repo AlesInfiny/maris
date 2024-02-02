@@ -1,7 +1,5 @@
-﻿using Dressca.ApplicationCore.Assets;
-using Dressca.ApplicationCore.Baskets;
+﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Catalog;
-using Dressca.ApplicationCore.Ordering;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Dressca.ApplicationCore;
@@ -28,12 +26,10 @@ public static class ApplicationCoreServicesExtensions
 
         // Domain Services
         services.AddTransient<ICatalogDomainService, CatalogDomainService>();
-        services.AddTransient<IBasketDomainService, BasketDomainService>();
 
         // Application Services
-        services.AddTransient<BasketApplicationService>();
+        services.AddTransient<ShoppingApplicationService>();
         services.AddTransient<CatalogApplicationService>();
-        services.AddTransient<OrderApplicationService>();
         services.AddTransient<AssetApplicationService>();
 
         return services;

@@ -1,7 +1,8 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using Dressca.ApplicationCore.Assets;
+using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
-namespace Dressca.ApplicationCore.Assets;
+namespace Dressca.ApplicationCore.ApplicationService;
 
 /// <summary>
 ///  アセット情報に関するビジネスユースケースを実現するアプリケーションサービスです。

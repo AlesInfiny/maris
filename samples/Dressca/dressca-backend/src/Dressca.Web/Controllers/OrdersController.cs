@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Baskets;
+﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
@@ -15,8 +15,9 @@ namespace Dressca.Web.Controllers;
 [Produces("application/json")]
 public class OrdersController : ControllerBase
 {
-    private readonly OrderApplicationService orderApplicationService;
-    private readonly BasketApplicationService basketApplicationService;
+    //private readonly OrderApplicationService orderApplicationService;
+    //private readonly BasketApplicationService basketApplicationService;
+    private readonly ShoppingApplicationService service;
     private readonly IObjectMapper<Order, OrderResponse> orderMapper;
     private readonly ILogger<OrdersController> logger;
 
@@ -36,13 +37,11 @@ public class OrdersController : ControllerBase
     ///  </list>
     /// </exception>
     public OrdersController(
-        OrderApplicationService orderApplicationService,
-        BasketApplicationService basketApplicationService,
+        ShoppingApplicationService service,
         IObjectMapper<Order, OrderResponse> orderMapper,
         ILogger<OrdersController> logger)
     {
-        this.orderApplicationService = orderApplicationService ?? throw new ArgumentNullException(nameof(orderApplicationService));
-        this.basketApplicationService = basketApplicationService ?? throw new ArgumentNullException(nameof(basketApplicationService));
+        this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.orderMapper = orderMapper ?? throw new ArgumentNullException(nameof(orderMapper));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -62,7 +61,7 @@ public class OrdersController : ControllerBase
         var buyerId = this.HttpContext.GetBuyerId();
         try
         {
-            var order = await this.orderApplicationService.GetOrderAsync(orderId, buyerId);
+            var order = await this.service.GetOrderAsync(orderId, buyerId);
             var orderDto = this.orderMapper.Convert(order);
             return this.Ok(orderDto);
         }
@@ -96,7 +95,7 @@ public class OrdersController : ControllerBase
             azanaAndOthers: postOrderInput.AzanaAndOthers);
         var shipToAddress = new ShipTo(postOrderInput.FullName, address);
 
-        var order = await this.orderApplicationService.CreateOrderAsync(buyerId, shipToAddress);
+        var order = await this.service.CreateOrderAsync(buyerId, shipToAddress);
 
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetByIdAsync));
         return this.CreatedAtAction(actionName, new { orderId = order.Id }, null);

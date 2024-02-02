@@ -1,7 +1,8 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
-namespace Dressca.ApplicationCore.Catalog;
+namespace Dressca.ApplicationCore.ApplicationService;
 
 /// <summary>
 ///  カタログに関するビジネスユースケースを実現する Applicaiton Service です。

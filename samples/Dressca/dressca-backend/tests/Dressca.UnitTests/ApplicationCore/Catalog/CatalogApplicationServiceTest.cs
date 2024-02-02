@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.TestLibrary.Xunit.Logging;
 using Xunit.Abstractions;
