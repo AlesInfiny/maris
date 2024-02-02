@@ -1,15 +1,15 @@
 ﻿using Dressca.ApplicationCore.Assets;
-using Maris.Diagnostics.Testing.Xunit;
+using Maris.Diagnostics.Testing;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Assets;
 
 public class AssetApplicationServiceTest
 {
-    private readonly XunitLoggerFactory loggerFactory;
+    private readonly TestLoggerManager loggerManager;
 
     public AssetApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerFactory = XunitLoggerFactory.Create(testOutputHelper);
+        => this.loggerManager = new TestLoggerManager(testOutputHelper);
 
     [Fact]
     public void GetAssetStreamInfo_リポジトリに指定したアセットコードの情報が見つからない場合は例外()
@@ -21,7 +21,7 @@ public class AssetApplicationServiceTest
             .Setup(r => r.Find(assetCode))
             .Returns((Asset?)null);
         var store = Mock.Of<IAssetStore>();
-        var logger = this.loggerFactory.CreateLogger<AssetApplicationService>();
+        var logger = this.loggerManager.CreateLogger<AssetApplicationService>();
         var service = new AssetApplicationService(repositoryMock.Object, store, logger);
 
         // Act
@@ -46,7 +46,7 @@ public class AssetApplicationServiceTest
         storeMock
             .Setup(s => s.GetStream(asset))
             .Returns((Stream?)null);
-        var logger = this.loggerFactory.CreateLogger<AssetApplicationService>();
+        var logger = this.loggerManager.CreateLogger<AssetApplicationService>();
         var service = new AssetApplicationService(repositoryMock.Object, storeMock.Object, logger);
 
         // Act
@@ -72,7 +72,7 @@ public class AssetApplicationServiceTest
         storeMock
             .Setup(s => s.GetStream(asset))
             .Returns(stream);
-        var logger = this.loggerFactory.CreateLogger<AssetApplicationService>();
+        var logger = this.loggerManager.CreateLogger<AssetApplicationService>();
         var service = new AssetApplicationService(repositoryMock.Object, storeMock.Object, logger);
 
         // Act

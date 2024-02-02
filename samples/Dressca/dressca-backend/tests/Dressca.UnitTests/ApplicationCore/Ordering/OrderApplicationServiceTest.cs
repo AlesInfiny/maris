@@ -2,17 +2,17 @@
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
-using Maris.Diagnostics.Testing.Xunit;
+using Maris.Diagnostics.Testing;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
 public class OrderApplicationServiceTest
 {
-    private readonly XunitLoggerFactory loggerFactory;
+    private readonly TestLoggerManager loggerManager;
 
     public OrderApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerFactory = XunitLoggerFactory.Create(testOutputHelper);
+        => this.loggerManager = new TestLoggerManager(testOutputHelper);
 
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
@@ -41,7 +41,7 @@ public class OrderApplicationServiceTest
         orderRepositoryMock
             .Setup(r => r.AddAsync(It.IsAny<Order>(), AnyToken))
             .ReturnsAsync(new Order(buyerId, shipTo, CreateDefaultOrderItems()));
-        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepositoryMock.Object, catalogRepositoryMock.Object, logger);
 
         // Act
@@ -64,7 +64,7 @@ public class OrderApplicationServiceTest
             .ReturnsAsync((Basket?)null);
         var catalogRepository = Mock.Of<ICatalogRepository>();
         var orderRepository = Mock.Of<IOrderRepository>();
-        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepository, basketRepositoryMock.Object, catalogRepository, logger);
         var shipTo = CreateDefaultShipTo();
 
@@ -88,7 +88,7 @@ public class OrderApplicationServiceTest
             .ReturnsAsync(basket);
         var catalogRepository = Mock.Of<ICatalogRepository>();
         var orderRepository = Mock.Of<IOrderRepository>();
-        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepository, basketRepositoryMock.Object, catalogRepository, logger);
         var shipTo = CreateDefaultShipTo();
 
@@ -114,7 +114,7 @@ public class OrderApplicationServiceTest
             .ReturnsAsync(order);
         var basketRepository = Mock.Of<IBasketRepository>();
         var catalogRepository = Mock.Of<ICatalogRepository>();
-        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
 
         // Act
@@ -139,7 +139,7 @@ public class OrderApplicationServiceTest
             .ReturnsAsync(order);
         var basketRepository = Mock.Of<IBasketRepository>();
         var catalogRepository = Mock.Of<ICatalogRepository>();
-        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
 
         // Act
@@ -161,7 +161,7 @@ public class OrderApplicationServiceTest
             .ReturnsAsync((Order?)null);
         var basketRepository = Mock.Of<IBasketRepository>();
         var catalogRepository = Mock.Of<ICatalogRepository>();
-        var logger = this.loggerFactory.CreateLogger<OrderApplicationService>();
+        var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
 
         // Act
