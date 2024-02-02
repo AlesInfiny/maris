@@ -2,7 +2,7 @@
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
-using Maris.Diagnostics.Testing;
+using Maris.Diagnostics.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
