@@ -27,11 +27,7 @@ internal class XunitLoggerProvider : ILoggerProvider, IDisposable
     /// <inheritdoc/>
     public ILogger CreateLogger(string categoryName)
     {
-        if (this.testOutputHelper is null)
-        {
-            throw new ObjectDisposedException(nameof(XunitLoggerProvider));
-        }
-
+        ObjectDisposedException.ThrowIf(this.testOutputHelper is null, this);
         return new XunitLogger(this.testOutputHelper, categoryName);
     }
 
