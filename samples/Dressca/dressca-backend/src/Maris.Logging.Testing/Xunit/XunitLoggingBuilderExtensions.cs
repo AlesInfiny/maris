@@ -1,6 +1,4 @@
-﻿using Maris.Diagnostics.Testing.Xunit;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Maris.Logging.Testing.Xunit;
 
 namespace Microsoft.Extensions.Logging;
 
@@ -25,8 +23,7 @@ public static class XunitLoggingBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(loggerManager);
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider, XunitLoggerProvider>(
-            provider => loggerManager.XunitLoggerProvider));
+        builder.AddProvider(loggerManager.XunitLoggerProvider);
         return builder;
     }
 }

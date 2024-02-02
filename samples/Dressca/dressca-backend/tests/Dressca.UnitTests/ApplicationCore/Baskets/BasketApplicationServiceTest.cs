@@ -1,5 +1,5 @@
 ﻿using Dressca.ApplicationCore.Baskets;
-using Maris.Diagnostics.Testing.Xunit;
+using Maris.Logging.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Baskets;

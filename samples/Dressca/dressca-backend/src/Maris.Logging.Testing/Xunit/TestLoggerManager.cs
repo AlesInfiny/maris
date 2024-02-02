@@ -2,11 +2,12 @@
 using Microsoft.Extensions.Logging.Testing;
 using Xunit.Abstractions;
 
-namespace Maris.Diagnostics.Testing.Xunit;
+namespace Maris.Logging.Testing.Xunit;
 
 /// <summary>
-///  Xunit で使用できる <see cref="ILogger{TCategoryName}"/> を管理するクラスです。
-///  テスト対象クラスが <see cref="ILogger{TCategoryName}"/> のオブジェクトを必要とするケースで使用してください。
+///  Xunit で使用できる <see cref="ILogger"/> を管理するクラスです。
+///  テスト対象クラスが <see cref="ILogger"/> または
+///  <see cref="ILogger{TCategoryName}"/> のオブジェクトを必要とするケースで使用してください。
 /// </summary>
 /// <example>
 ///  <para>

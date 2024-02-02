@@ -1,13 +1,10 @@
-﻿using Maris.Diagnostics.Testing.Xunit;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-///  Xunit で使用可能な <see cref="ILogger"/> と、
-///  <see cref="FakeLogger"/> を登録する処理を提供します。
+///  <see cref="TestLoggerManager"/> で管理できる <see cref="ILogger"/> を登録する処理を提供します。
 /// </summary>
 public static class TestLoggerServiceCollectionExtensions
 {
@@ -15,7 +12,7 @@ public static class TestLoggerServiceCollectionExtensions
     ///  テストで使用するログ出力の構成をします。
     /// </summary>
     /// <param name="services">ログ出力の構成を行う <see cref="IServiceCollection"/> 。</param>
-    /// <param name="loggerManager">Xunit で利用できる <see cref="ILogger"/> を管理する <see cref="TestLoggerManager"/> 。</param>
+    /// <param name="loggerManager">Xunit のテストクラスで使用する <see cref="TestLoggerManager"/> 。</param>
     /// <returns><see cref="IServiceCollection"/> 。</returns>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -30,7 +27,7 @@ public static class TestLoggerServiceCollectionExtensions
         services.AddLogging(builder =>
         {
             builder.AddXunitLogging(loggerManager);
-            builder.AddFakeLogging();
+            builder.AddFakeLogging(loggerManager);
         });
 
         return services;
