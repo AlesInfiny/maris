@@ -16,7 +16,7 @@ public class ShoppingApplicationService
     private readonly IOrderRepository orderRepository;
     private readonly ICatalogRepository catalogRepository;
     private readonly ICatalogDomainService catalogDomainService;
-    private readonly ILogger<BasketApplicationService> logger;
+    private readonly ILogger<ShoppingApplicationService> logger;
 
     /// <summary>
     ///  <see cref="BasketApplicationService"/> クラスの新しいインスタンスを初期化します。
@@ -37,7 +37,7 @@ public class ShoppingApplicationService
         IOrderRepository orderRepository,
         ICatalogRepository catalogRepository,
         ICatalogDomainService catalogDomainService,
-        ILogger<BasketApplicationService> logger)
+        ILogger<ShoppingApplicationService> logger)
     {
         this.basketRepository = basketRepository ?? throw new ArgumentNullException(nameof(basketRepository));
         this.orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
