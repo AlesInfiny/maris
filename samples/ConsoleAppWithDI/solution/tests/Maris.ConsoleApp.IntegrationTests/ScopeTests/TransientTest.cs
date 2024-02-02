@@ -10,10 +10,10 @@ namespace Maris.ConsoleApp.IntegrationTests.ScopeTests;
 [Collection(nameof(ScopeTests))]
 public class TransientTest
 {
-    private readonly ITestOutputHelper testOutputHelper;
+    private readonly TestLoggerManager loggerManager;
 
     public TransientTest(ITestOutputHelper testOutputHelper)
-        => this.testOutputHelper = testOutputHelper;
+        => this.loggerManager = new TestLoggerManager(testOutputHelper);
 
     [Fact]
     public async Task Transientで登録したインスタンスはインジェクション時に毎回初期化される()
@@ -130,7 +130,7 @@ public class TransientTest
         var builder = Host.CreateDefaultBuilder(args);
         builder.ConfigureServices((context, services) =>
         {
-            services.AddLogging(builder => builder.AddXunitLogger(this.testOutputHelper));
+            services.AddTestLogging(this.loggerManager);
             services.AddTransient<TestObject1>(); // Command 内で利用
             services.AddTransient<TestObject2>(); // Command, TestObject1 内で利用
             services.AddConsoleAppService(args);

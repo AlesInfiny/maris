@@ -10,10 +10,10 @@ namespace Maris.ConsoleApp.IntegrationTests.ScopeTests;
 [Collection(nameof(ScopeTests))]
 public class ScopedTest
 {
-    private readonly ITestOutputHelper testOutputHelper;
+    private readonly TestLoggerManager loggerManager;
 
     public ScopedTest(ITestOutputHelper testOutputHelper)
-        => this.testOutputHelper = testOutputHelper;
+        => this.loggerManager = new TestLoggerManager(testOutputHelper);
 
     [Fact]
     public async Task Scopedで登録したインスタンスはコマンド実行時に1回だけ初期化される()
@@ -127,7 +127,7 @@ public class ScopedTest
         var builder = Host.CreateDefaultBuilder(args);
         builder.ConfigureServices((context, services) =>
         {
-            services.AddLogging(builder => builder.AddXunitLogger(this.testOutputHelper));
+            services.AddTestLogging(this.loggerManager);
             services.AddScoped<TestObject1>(); // Command 内で利用
             services.AddScoped<TestObject2>(); // Command, TestObject1 内で利用
             services.AddConsoleAppService(args);
