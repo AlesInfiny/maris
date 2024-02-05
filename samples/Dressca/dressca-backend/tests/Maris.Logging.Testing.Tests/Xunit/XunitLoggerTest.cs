@@ -42,9 +42,9 @@ public class XunitLoggerTest
     public void Log_WritesToOutputHelper()
     {
         // Arrange
-        var outputHelperMock = new Mock<ITestOutputHelper>();
+        var testOutputHelperMock = new Mock<ITestOutputHelper>();
         var categoryName = "TestCategory";
-        var logger = new XunitLogger(outputHelperMock.Object, categoryName);
+        var logger = new XunitLogger(testOutputHelperMock.Object, categoryName);
         var logLevel = LogLevel.Information;
         var eventId = new EventId(1);
         var state = "TestState";
@@ -55,8 +55,8 @@ public class XunitLoggerTest
         logger.Log(logLevel, eventId, state, exception, formatter);
 
         // Assert
-        outputHelperMock.Verify(h => h.WriteLine(It.IsAny<string>()), Times.Once);
-        outputHelperMock.Verify(
+        testOutputHelperMock.Verify(h => h.WriteLine(It.IsAny<string>()), Times.Once);
+        testOutputHelperMock.Verify(
             h => h.WriteLine($"{logLevel}: {categoryName}[{eventId}] {formatter(state, exception)}"), Times.Once);
     }
 
@@ -64,9 +64,9 @@ public class XunitLoggerTest
     public void Log_WritesExceptionToOutputHelper_WhenExceptionIsNotNull()
     {
         // Arrange
-        var outputHelperMock = new Mock<ITestOutputHelper>();
+        var testOutputHelperMock = new Mock<ITestOutputHelper>();
         var categoryName = "TestCategory";
-        var logger = new XunitLogger(outputHelperMock.Object, categoryName);
+        var logger = new XunitLogger(testOutputHelperMock.Object, categoryName);
         var logLevel = LogLevel.Information;
         var eventId = new EventId(1);
         var state = "TestState";
@@ -77,10 +77,10 @@ public class XunitLoggerTest
         logger.Log(logLevel, eventId, state, exception, formatter);
 
         // Assert
-        outputHelperMock.Verify(h => h.WriteLine(It.IsAny<string>()), Times.Exactly(2));
-        outputHelperMock.Verify(
+        testOutputHelperMock.Verify(h => h.WriteLine(It.IsAny<string>()), Times.Exactly(2));
+        testOutputHelperMock.Verify(
             h => h.WriteLine($"{logLevel}: {categoryName}[{eventId}] {formatter(state, exception)}"), Times.Once);
-        outputHelperMock.Verify(
+        testOutputHelperMock.Verify(
             h => h.WriteLine(exception.ToString()), Times.Once);
     }
 }
