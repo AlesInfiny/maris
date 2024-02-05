@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ShoppingCartIcon } from '@heroicons/vue/24/solid';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
+import NotificationToast from './components/common/NotificationToast.vue';
 
 const authenticationStore = useAuthenticationStore();
 const isAuthenticated = () => {
@@ -9,7 +10,10 @@ const isAuthenticated = () => {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen justify-between">
+  <div class="z-2">
+    <NotificationToast />
+  </div>
+  <div class="flex flex-col h-screen justify-between z-0">
     <header>
       <nav
         aria-label="Jump links"
