@@ -9,7 +9,7 @@ namespace Maris.Logging.Testing.Xunit;
 internal class XunitLoggerProvider : ILoggerProvider, IDisposable
 {
     private ITestOutputHelper? testOutputHelper;
-    private bool disposedValue;
+    private bool disposed;
 
     /// <summary>
     ///  テスト標準出力のためのヘルパーオブジェクトを指定して
@@ -44,10 +44,10 @@ internal class XunitLoggerProvider : ILoggerProvider, IDisposable
     /// <param name="disposing">明示的に破棄する場合は <see langword="true"/> 、そうでない場合は <see langword="false"/> 。</param>
     protected virtual void Dispose(bool disposing)
     {
-        if (!this.disposedValue)
+        if (!this.disposed)
         {
             this.testOutputHelper = null;
-            this.disposedValue = true;
+            this.disposed = true;
         }
     }
 }
