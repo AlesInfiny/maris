@@ -28,8 +28,8 @@ public class XunitLoggerTest
     public void IsEnabled_ReturnsTrue_ForAllLogLevels(LogLevel logLevel)
     {
         // Arrange
-        var outputHelperMock = new Mock<ITestOutputHelper>();
-        var logger = new XunitLogger(outputHelperMock.Object, "TestCategory");
+        var testOutputHelper = Mock.Of<ITestOutputHelper>();
+        var logger = new XunitLogger(testOutputHelper, "TestCategory");
 
         // Act
         var isEnabled = logger.IsEnabled(logLevel);
