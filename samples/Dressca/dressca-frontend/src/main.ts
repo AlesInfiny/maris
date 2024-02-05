@@ -7,16 +7,10 @@ import '@/assets/base.css';
 import '@/config/yup.config';
 
 import { authenticationGuard } from '@/shared/authentication/authentication-guard';
+import ExceptionHandlingPlugin from '@/shared/exceptions/globalExceptionHandling';
 
 const app = createApp(App);
 const pinia = createPinia();
-
-app.config.errorHandler = (err: unknown, vm, info) => {
-  // 本サンプルAPではログの出力とエラー画面への遷移を行っています。
-  // APの要件によってはサーバーやログ収集ツールにログを送信し、エラーを握りつぶすこともあります。
-  console.log(err, vm, info);
-  router.replace({ name: 'error' });
-};
 
 pinia.use(({ store }) => {
   store.router = markRaw(router);
@@ -24,6 +18,8 @@ pinia.use(({ store }) => {
 
 app.use(pinia);
 app.use(router);
+
+app.use(ExceptionHandlingPlugin);
 
 authenticationGuard(router);
 
