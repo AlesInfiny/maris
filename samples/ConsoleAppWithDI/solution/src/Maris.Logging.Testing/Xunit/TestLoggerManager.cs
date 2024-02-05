@@ -68,13 +68,13 @@ public class TestLoggerManager
     ///  <see cref="ILogger"/> の生成に使用する
     ///  Xunit 向けの <see cref="ILoggerProvider"/> を取得します。
     /// </summary>
-    internal XunitLoggerProvider XunitLoggerProvider { get; private set; }
+    internal XunitLoggerProvider XunitLoggerProvider { get; }
 
     /// <summary>
     ///  <see cref="ILogger"/> の生成に使用する
     ///  <see cref="ILoggerProvider"/> を取得します。
     /// </summary>
-    internal FakeLoggerProvider FakeLoggerProvider { get; private set; }
+    internal FakeLoggerProvider FakeLoggerProvider { get; }
 
     /// <summary>
     ///  指定した型の名称を使って新しい <see cref="ILogger{T}"/> インスタンスを作成します。
