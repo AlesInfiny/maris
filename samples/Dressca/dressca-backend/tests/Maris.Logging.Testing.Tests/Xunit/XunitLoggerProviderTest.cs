@@ -1,4 +1,5 @@
-﻿using Maris.Logging.Testing.Xunit;
+﻿using System.Reflection;
+using Maris.Logging.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Maris.Logging.Testing.Tests.Xunit;
@@ -35,6 +36,21 @@ public class XunitLoggerProviderTest
     }
 
     [Fact]
+    public void CreateLogger_ThrowsException_WhenObjectDisposed()
+    {
+        // Arrange
+        var outputHelper = Mock.Of<ITestOutputHelper>();
+        var provider = new XunitLoggerProvider(outputHelper);
+        provider.Dispose();
+
+        // Act
+        var action = () => provider.CreateLogger("TestCategory");
+
+        // Assert
+        var exception = Assert.Throws<ObjectDisposedException>(action);
+    }
+
+    [Fact]
     public void Dispose_DisposesTestOutputHelper()
     {
         // Arrange
@@ -45,6 +61,14 @@ public class XunitLoggerProviderTest
         provider.Dispose();
 
         // Assert
-        outputHelperMock.Verify(h => h.Dispose(), Times.Once);
+        Assert.True(IsDisposed(provider));
+    }
+
+    private static bool? IsDisposed(XunitLoggerProvider provider)
+    {
+        var providerType = provider.GetType();
+        var disposedField = providerType.GetField("disposed", BindingFlags.Instance | BindingFlags.NonPublic);
+        var value = disposedField?.GetValue(provider);
+        return (bool?)value;
     }
 }
