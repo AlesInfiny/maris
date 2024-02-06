@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Dressca.ApplicationCore.Accounting;
+using Dressca.ApplicationCore.Assets;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Baskets;
 
@@ -63,6 +65,18 @@ public class Basket
 
         var existingItem = this.items.First(i => i.CatalogItemId == catalogItemId);
         existingItem.AddQuantity(quantity);
+    }
+
+    public void SetItemsQuantity(Dictionary<long, int> quantities)
+    {
+        foreach (var item in this.Items)
+        {
+            if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
+            {
+                //this.logger.LogDebug(Messages.BasketApplicationService_SetQuantity, item.CatalogItemId, quantity);
+                item.SetQuantity(quantity);
+            }
+        }
     }
 
     /// <summary>

@@ -104,15 +104,7 @@ public class ShoppingApplicationService
                 return false;
             }
 
-            foreach (var item in basket.Items)
-            {
-                if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
-                {
-                    this.logger.LogDebug(Messages.BasketApplicationService_SetQuantity, item.CatalogItemId, quantity);
-                    item.SetQuantity(quantity);
-                }
-            }
-
+            basket.SetItemsQuantity(quantities);
             basket.RemoveEmptyItems();
             await this.basketRepository.UpdateAsync(basket);
 
