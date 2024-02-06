@@ -50,11 +50,12 @@ public class ShoppingApplicationService
     ///  買い物かごアイテムの一覧を取得します。
     /// </summary>
     /// <param name="buyerId">購入者 Id 。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>
     ///  BasketResult : <paramref name="buyerId"/> に対応する買い物かご。
     ///  CatalogItems : 買い物かごアイテムの一覧。
     /// </returns>
-    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems)> GetBasketItemsAsync(string buyerId)
+    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
     {
         Basket basket;
         IReadOnlyList<CatalogItem> catalogItems;
@@ -64,7 +65,7 @@ public class ShoppingApplicationService
             new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
             TransactionScopeAsyncFlowOption.Enabled))
         {
-            basket = await this.GetOrCreateBasketForUserAsync(buyerId);
+            basket = await this.GetOrCreateBasketForUserAsync(buyerId, default);
             var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
             catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id));
 
@@ -79,8 +80,9 @@ public class ShoppingApplicationService
     /// </summary>
     /// <param name="buyerId">購入者 Id 。</param>
     /// <param name="quantities">各カタログアイテムの数量。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
-    public async Task<bool> SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<long, int> quantities)
+    public async Task<bool> SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
     {
         using (var scope = new TransactionScope(
             TransactionScopeOption.RequiresNew,
@@ -88,7 +90,7 @@ public class ShoppingApplicationService
             TransactionScopeAsyncFlowOption.Enabled))
         {
             // 買い物かごに入っていないカタログアイテムが指定されていないか確認
-            var basket = await this.GetOrCreateBasketForUserAsync(buyerId);
+            var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
             var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
             if (notExistsInBasketCatalogIds.Any())
             {
@@ -120,15 +122,16 @@ public class ShoppingApplicationService
     /// <param name="buyerId">購入者 Id 。</param>
     /// <param name="catalogItemId">カタログアイテム Id 。</param>
     /// <param name="addedQuantity">数量。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
-    public async Task<bool> AddItemToBasketAsync(string buyerId, long catalogItemId, int addedQuantity)
+    public async Task<bool> AddItemToBasketAsync(string buyerId, long catalogItemId, int addedQuantity, CancellationToken cancellationToken = default)
     {
         using (var scope = new TransactionScope(
             TransactionScopeOption.RequiresNew,
             new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
             TransactionScopeAsyncFlowOption.Enabled))
         {
-            var basket = await this.GetOrCreateBasketForUserAsync(buyerId);
+            var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
 
             // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
             var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync(new[] { catalogItemId });
@@ -168,7 +171,7 @@ public class ShoppingApplicationService
             new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
             TransactionScopeAsyncFlowOption.Enabled))
         {
-            checkoutBasket = await this.GetOrCreateBasketForUserAsync(buyerId);
+            checkoutBasket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
 
             if (checkoutBasket.IsEmpty())
             {
@@ -224,7 +227,7 @@ public class ShoppingApplicationService
         return order;
     }
 
-    private async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken = default)
+    private async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(buyerId))
         {
