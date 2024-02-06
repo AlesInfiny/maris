@@ -65,7 +65,7 @@ public class ShoppingApplicationService
             new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
             TransactionScopeAsyncFlowOption.Enabled))
         {
-            basket = await this.GetOrCreateBasketForUserAsync(buyerId, default);
+            basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
             var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
             catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id));
 
@@ -108,7 +108,7 @@ public class ShoppingApplicationService
 
             basket.SetItemsQuantity(quantities);
             basket.RemoveEmptyItems();
-            await this.basketRepository.UpdateAsync(basket);
+            await this.basketRepository.UpdateAsync(basket, cancellationToken);
 
             scope.Complete();
         }
@@ -143,7 +143,7 @@ public class ShoppingApplicationService
             var catalogItem = catalogItems[0];
             basket.AddItem(catalogItemId, catalogItem.Price, addedQuantity);
             basket.RemoveEmptyItems();
-            await this.basketRepository.UpdateAsync(basket);
+            await this.basketRepository.UpdateAsync(basket, cancellationToken);
 
             scope.Complete();
         }
@@ -181,17 +181,7 @@ public class ShoppingApplicationService
             var catalogItemIds = checkoutBasket.Items.Select(item => item.CatalogItemId).ToArray();
             var catalogItems =
                 await this.catalogRepository.FindAsync(item => catalogItemIds.Contains(item.Id), cancellationToken);
-            var orderItems = checkoutBasket.Items.Select(
-                basketItem =>
-                {
-                    var catalogItem = catalogItems.First(c => c.Id == basketItem.CatalogItemId);
-                    var itemOrdered = new CatalogItemOrdered(catalogItem.Id, catalogItem.Name, catalogItem.ProductCode);
-                    var orderItem = new OrderItem(itemOrdered, basketItem.UnitPrice, basketItem.Quantity);
-                    var orderItemAssets = catalogItem.Assets
-                        .Select(catalogItemAsset => new OrderItemAsset(catalogItemAsset.AssetCode, orderItem.Id));
-                    orderItem.AddAssets(orderItemAssets);
-                    return orderItem;
-                }).ToList();
+            var orderItems = checkoutBasket.GetOrderItems(catalogItems);
             var order = new Order(checkoutBasket.BuyerId, shipToAddress, orderItems);
             ordered = await this.orderRepository.AddAsync(order, cancellationToken);
 
