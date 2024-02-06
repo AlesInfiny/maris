@@ -14,20 +14,21 @@ description: クライアントサイドレンダリングを行う Web アプ�
 フロントエンドの例外処理方針は、ユーザーが自身で対応できるか、という観点が重要になります、
 たとえばセッションタイムアウトになるといったようなケースではユーザーが再度ログインすることで対処できます。
 一方で、 WebAPI サーバー内で予期しない問題が発生するといったケースでは、ユーザーは時間をおいて再度リクエストするなどのことしかできません。
-このようにフロントエンドでは、ユーザーが例外を知りどのような対応をするか、ということに注目しメッセージの内容や通知方法を決定します。
+このようにフロントエンドでは、ユーザーが例外を知りどのような対応をするか、ということに注目しハンドリングや通知方法を決定します。
 
-### 例外ハンドリング {#client-error-handling}
+### エラーハンドリング {#client-error-handling}
 
-エラーハンドリングについては、以下の 2 種類に分けて考えます。
+エラーハンドリングは、以下の 2 種類に分けて考えます。
 
 - クライアントコード内で発生する例外
 - API 通信で発生する例外
 
 #### クライアントコード内で発生する例外 {#client-code-error}
 
-TypeScript で記述するコード(Store や共通部品)のハンドリングできる例外については、同期処理なら `try-catch` 、 Promise を利用した非同期処理なら `catch` メソッドで処理します。
+TypeScript で記述するコードのハンドリングできる例外については、同期処理は `try-catch` 、 Promise を利用した非同期処理は `catch` メソッドで処理します。
 
-JavaScript の構文エラーや予期しない例外をグローバルにハンドリングする場合は、 Vue.js の `app.config.errorHandler` や JavaScript の `window.onerror` などを利用します。
+Vue コンポーネント内で例外が発生した場合、それがハンドリングされないと、例外は親コンポーネントに伝播し続けます。そのため、 main.ts ファイルでグローバルエラーハンドリングを行い、例外を処理する必要があります。
+グローバルエラーハンドリングには、 Vue.js の `app.config.errorHandler` や JavaScript の `window.onerror` などを利用します。
 
 | 例外の種類 | ハンドリング方法 |
 | ---------- | ---------------- |
@@ -35,27 +36,37 @@ JavaScript の構文エラーや予期しない例外をグローバルにハン
 | 一般的な JavaScript エラーや構文エラー | `window.onerror` |
 | 非同期処理で発生する例外 | `window.onunhandledrejection` |
 
-Vue コンポーネントで発生した例外は、ハンドリングしない場合、親コンポーネントへ例外が伝播し続けます。
-ハンドリングされない例外については、最上位である main.ts のグローバルエラーハンドリングで処理されます。
-
 #### API 通信で発生する例外 {#api-connection-error}
 
 API 通信で発生する例外についてはいくつかの段階に分けて処理します。なお API 通信には Axios を利用していることを前提としています。
 
-![API 通信のエラーハンドリング](../../images/app-architecture/client-side-rendering/http-error-handling-light.png)
-
 1. レスポンスに対する共通処理
 
-   HTTP ステータスコードに対する共通処理を `axios.interceptors.response` に集約します。`axios.interceptors.response` は、レスポンスの受信後、 `then` や `catch` の処理の前に共通処理を挟むことができます。[axios.interceptors.response :material-open-in-new:](https://axios-http.com/ja/docs/interceptors)
-   ここで行う共通処理については以下のようなものが考えられます。
+    HTTP ステータスコードに対する共通処理を [axios.interceptors.response :material-open-in-new:](https://axios-http.com/ja/docs/interceptors) に集約します。`axios.interceptors.response` は、レスポンスの受信後、 `then` や `catch` の処理の前に共通処理を挟むことができます。
+     ここで行う共通処理については以下のようなものが考えられます。
 
-   - 401 番(認証エラー)であれば、ログイン画面へ遷移する。
-   - 404 番(リソースが見つからない)であれば、 Not Found ページへリダイレクトする、もしくはトーストで通知する。
-   - 500 番(サーバーエラー)であれば、エラーページへリダイレクトする。
+    - 401 番(認証エラー)であれば、ログイン画面へ遷移する。
+    - 404 番(リソースが見つからない)であれば、 Not Found ページへリダイレクトする、もしくはトーストで通知する。
+    - 500 番(サーバーエラー)であれば、エラーページへリダイレクトする。
 
-   400 番は、バリデーションエラーなどの業務例外であるため、個別で処理します。
+    400 番は、バリデーションエラーなどの業務例外であるため、個別で処理します。
 
-1. API レスポンスの業務例外に対する処理
+    ```mermaid
+        sequenceDiagram
+        participant C as Vue コンポーネント
+        participant A as Axios.Post
+        participant I as Axios.interceptors.response
+        participant S as サーバー
+
+        C->>A: API リクエスト呼び出し
+        A-)S: API リクエスト
+        S--)I: 401 Unauthorized
+        rect rgba(255, 0, 0, 0.5)
+            I->>C: 共通処理：ログイン画面へ遷移
+        end
+    ```
+
+2. API レスポンスの業務例外に対する処理
 
     API 通信で発生する業務例外については、 API 通信のレスポンスハンドリングで個別に処理します。
     リクエストに不備がある、といったユーザーが対応できるようなエラーについては、対応方法をユーザーに通知します。
@@ -66,7 +77,23 @@ API 通信で発生する例外についてはいくつかの段階に分けて�
     - エラー番号やエラーメッセージを通知し、開発者が問合せるための情報を提供する
     - ユーザーの状況やエラー内容をログ収集ツールに送信する
 
-1. API 通信のリトライ処理
+    ```mermaid
+        sequenceDiagram
+        participant C as Vue コンポーネント
+        participant A as Axios.Post
+        participant I as Axios.interceptors.response
+        participant S as サーバー
+        
+        C->>A: API リクエスト呼び出し
+        A-)S: API リクエスト
+        S--)I: 400 Bad Request
+        I-->>A: Post レスポンス処理
+        rect rgba(255, 0, 0, 0.5)
+            A-)C: 個別のエラー処理
+        end
+    ```
+
+3. API 通信のリトライ処理
 
     クライアントサイドでの自動リトライ処理は原則行いません。例えばポストリクエストに対して、サーバーサイドで処理が実施されているにもかかわらずリトライ処理を行ってしまった場合、重複してデータが登録されうるためです。
     自動でリトライ処理を行ってもいいのは fetch メソッドなど冪等性のあるリクエストのみです。
