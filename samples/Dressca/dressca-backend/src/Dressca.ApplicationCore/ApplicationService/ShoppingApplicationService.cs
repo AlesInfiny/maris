@@ -14,6 +14,7 @@ public class ShoppingApplicationService
 {
     private readonly IBasketRepository basketRepository;
     private readonly IOrderRepository orderRepository;
+    private readonly OrderFactory orderFactory;
     private readonly ICatalogRepository catalogRepository;
     private readonly ICatalogDomainService catalogDomainService;
     private readonly ILogger<ShoppingApplicationService> logger;
@@ -35,12 +36,14 @@ public class ShoppingApplicationService
     public ShoppingApplicationService(
         IBasketRepository basketRepository,
         IOrderRepository orderRepository,
+        OrderFactory orderFactory,
         ICatalogRepository catalogRepository,
         ICatalogDomainService catalogDomainService,
         ILogger<ShoppingApplicationService> logger)
     {
         this.basketRepository = basketRepository ?? throw new ArgumentNullException(nameof(basketRepository));
         this.orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
+        this.orderFactory = orderFactory ?? throw new ArgumentNullException(nameof(orderFactory));
         this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
         this.catalogDomainService = catalogDomainService ?? throw new ArgumentNullException(nameof(catalogDomainService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -181,7 +184,7 @@ public class ShoppingApplicationService
             var catalogItemIds = checkoutBasket.Items.Select(item => item.CatalogItemId).ToArray();
             var catalogItems =
                 await this.catalogRepository.FindAsync(item => catalogItemIds.Contains(item.Id), cancellationToken);
-            var order = OrderFactory.CreateOrder(checkoutBasket, catalogItems, shipToAddress);
+            var order = this.orderFactory.CreateOrder(checkoutBasket, catalogItems, shipToAddress);
             ordered = await this.orderRepository.AddAsync(order, cancellationToken);
 
             // 買い物かごを削除

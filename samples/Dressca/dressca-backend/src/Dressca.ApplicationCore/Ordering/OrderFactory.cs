@@ -3,9 +3,9 @@ using Dressca.ApplicationCore.Catalog;
 
 namespace Dressca.ApplicationCore.Ordering;
 
-public static class OrderFactory
+public class OrderFactory
 {
-    public static Order CreateOrder(Basket basket, IReadOnlyList<CatalogItem> catalogItems, ShipTo shipToAddress)
+    public Order CreateOrder(Basket basket, IReadOnlyList<CatalogItem> catalogItems, ShipTo shipToAddress)
     {
         var orderItems = basket.Items.Select(
             basketItem =>
