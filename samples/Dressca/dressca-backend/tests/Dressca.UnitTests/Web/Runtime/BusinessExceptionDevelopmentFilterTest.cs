@@ -1,6 +1,5 @@
 ﻿using Dressca.SystemCommon;
 using Dressca.Web.Runtime;
-using Maris.Logging.Testing.Xunit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -12,12 +11,12 @@ using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.Web.Runtime;
 
-public class BusinessExceptionDevelopmentFilterTest
+public class BusinessExceptionDevelopmentFilterTest : TestBase
 {
-    private readonly TestLoggerManager loggerManager;
-
     public BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
+        : base(testOutputHelper)
+    {
+    }
 
     [Fact]
     public void OnException_業務エラーの情報がActionResultの値に設定される()
@@ -84,7 +83,7 @@ public class BusinessExceptionDevelopmentFilterTest
     private BusinessExceptionDevelopmentFilter CreateFilter()
     {
         var problemDetailsFactory = new TestProblemDetailsFactory();
-        var logger = this.loggerManager.CreateLogger<BusinessExceptionDevelopmentFilter>();
+        var logger = this.CreateTestLogger<BusinessExceptionDevelopmentFilter>();
         return new BusinessExceptionDevelopmentFilter(problemDetailsFactory, logger);
     }
 

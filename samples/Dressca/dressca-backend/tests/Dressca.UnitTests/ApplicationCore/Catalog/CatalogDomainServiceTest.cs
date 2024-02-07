@@ -1,16 +1,15 @@
 ﻿using System.Linq.Expressions;
 using Dressca.ApplicationCore.Catalog;
-using Maris.Logging.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Catalog;
 
-public class CatalogDomainServiceTest
+public class CatalogDomainServiceTest : TestBase
 {
-    private readonly TestLoggerManager loggerManager;
-
     public CatalogDomainServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
+        : base(testOutputHelper)
+    {
+    }
 
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
@@ -28,7 +27,7 @@ public class CatalogDomainServiceTest
             .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
             .ReturnsAsync(catalogItems);
 
-        var logger = this.loggerManager.CreateLogger<CatalogDomainService>();
+        var logger = this.CreateTestLogger<CatalogDomainService>();
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
@@ -55,7 +54,7 @@ public class CatalogDomainServiceTest
             .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
             .ReturnsAsync(catalogItems);
 
-        var logger = this.loggerManager.CreateLogger<CatalogDomainService>();
+        var logger = this.CreateTestLogger<CatalogDomainService>();
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
@@ -78,7 +77,7 @@ public class CatalogDomainServiceTest
             .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
             .ReturnsAsync(catalogItems);
 
-        var logger = this.loggerManager.CreateLogger<CatalogDomainService>();
+        var logger = this.CreateTestLogger<CatalogDomainService>();
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act

@@ -12,12 +12,12 @@ using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.Web.Runtime;
 
-public class BusinessExceptionFilterTest
+public class BusinessExceptionFilterTest : TestBase
 {
-    private readonly TestLoggerManager loggerManager;
-
     public BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
+        : base(testOutputHelper)
+    {
+    }
 
     [Fact]
     public void OnException_業務エラーの情報がActionResultの値に設定される()
@@ -84,7 +84,7 @@ public class BusinessExceptionFilterTest
     private BusinessExceptionFilter CreateFilter()
     {
         var problemDetailsFactory = new TestProblemDetailsFactory();
-        var logger = this.loggerManager.CreateLogger<BusinessExceptionFilter>();
+        var logger = this.CreateTestLogger<BusinessExceptionFilter>();
         return new BusinessExceptionFilter(problemDetailsFactory, logger);
     }
 

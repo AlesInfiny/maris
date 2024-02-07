@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Dressca.ApplicationCore.Catalog;
-using Maris.Logging.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Catalog;
@@ -8,12 +7,12 @@ namespace Dressca.UnitTests.ApplicationCore.Catalog;
 /// <summary>
 ///  カタログアプリケーションサービスの単体テストです。
 /// </summary>
-public class CatalogApplicationServiceTest
+public class CatalogApplicationServiceTest : TestBase
 {
-    private readonly TestLoggerManager loggerManager;
-
     public CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
+        : base(testOutputHelper)
+    {
+    }
 
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
@@ -24,7 +23,7 @@ public class CatalogApplicationServiceTest
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var logger = this.loggerManager.CreateLogger<CatalogApplicationService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, logger);
         const int skip = 1;
         const int take = 10;
@@ -45,7 +44,7 @@ public class CatalogApplicationServiceTest
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var logger = this.loggerManager.CreateLogger<CatalogApplicationService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, logger);
 
         // Act
@@ -64,7 +63,7 @@ public class CatalogApplicationServiceTest
         var catalogRepository = Mock.Of<ICatalogRepository>();
         var catalogBrandRepositoryMock = new Mock<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var logger = this.loggerManager.CreateLogger<CatalogApplicationService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepository, catalogBrandRepositoryMock.Object, catalogCategoryRepository, logger);
 
         // Act
@@ -81,7 +80,7 @@ public class CatalogApplicationServiceTest
         var catalogRepository = Mock.Of<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = new Mock<ICatalogCategoryRepository>();
-        var logger = this.loggerManager.CreateLogger<CatalogApplicationService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
 
         var service = new CatalogApplicationService(catalogRepository, catalogBrandRepository, catalogCategoryRepositoryMock.Object, logger);
 

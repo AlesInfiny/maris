@@ -1,5 +1,4 @@
 ﻿using Dressca.ApplicationCore.Baskets;
-using Maris.Logging.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Baskets;
@@ -7,12 +6,12 @@ namespace Dressca.UnitTests.ApplicationCore.Baskets;
 /// <summary>
 ///  買い物かごアプリケーションサービスの単体テストです。
 /// </summary>
-public class BasketApplicationServiceTest
+public class BasketApplicationServiceTest : TestBase
 {
-    private readonly TestLoggerManager loggerManager;
-
     public BasketApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
+        : base(testOutputHelper)
+    {
+    }
 
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
@@ -24,7 +23,7 @@ public class BasketApplicationServiceTest
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         // Act
@@ -44,7 +43,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(dummyBuyerId, AnyToken))
             .ReturnsAsync((Basket?)null);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -63,7 +62,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(buyerId, AnyToken))
             .ReturnsAsync((Basket?)null);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -90,7 +89,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.AddAsync(It.IsAny<Basket>(), AnyToken))
             .ReturnsAsync(newBasket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -106,7 +105,7 @@ public class BasketApplicationServiceTest
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
         var repoMock = new Mock<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -126,7 +125,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(buyerId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -148,7 +147,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(buyerId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -172,7 +171,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetAsync(basketId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -192,7 +191,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetAsync(basketId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -209,7 +208,7 @@ public class BasketApplicationServiceTest
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         // Act
@@ -231,7 +230,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetAsync(basketId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -252,7 +251,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(new Basket("dummy"));
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -272,7 +271,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(new Basket(buyerId));
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -289,7 +288,7 @@ public class BasketApplicationServiceTest
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         // Act
@@ -304,7 +303,7 @@ public class BasketApplicationServiceTest
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         // Act
@@ -319,7 +318,7 @@ public class BasketApplicationServiceTest
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         var quantities = new Dictionary<long, int> { { 1L, 1 }, { 2L, 1 }, { 3L, 1 } };
@@ -341,7 +340,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(new Basket(buyerId));
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         var quantities = new Dictionary<long, int> { { 1L, 5 } };
@@ -365,7 +364,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(new Basket(buyerId));
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         var quantities = new Dictionary<long, int> { { 1L, 5 } };
@@ -392,7 +391,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         var quantities = new Dictionary<long, int> { { 100L, newQuantity } };
