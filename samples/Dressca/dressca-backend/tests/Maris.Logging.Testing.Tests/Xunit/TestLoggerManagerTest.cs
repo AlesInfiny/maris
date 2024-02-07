@@ -116,13 +116,15 @@ public class TestLoggerManagerTest
         Assert.NotNull(collector);
         Assert.Collection(
             collector.GetSnapshot(),
-            firstRecord => {
+            firstRecord =>
+            {
                 Assert.Equal(LogLevel.Error, firstRecord.Level);
                 Assert.Equal(eventId, firstRecord.Id);
                 Assert.Equal(exception, firstRecord.Exception);
                 Assert.Equal(message1, firstRecord.Message);
             },
-            secondRecord => {
+            secondRecord =>
+            {
                 Assert.Equal(LogLevel.Trace, secondRecord.Level);
                 Assert.Equal(default(EventId), secondRecord.Id);
                 Assert.Null(secondRecord.Exception);
