@@ -29,7 +29,7 @@ public static class ApplicationCoreServicesExtensions
         services.AddTransient<ICatalogDomainService, CatalogDomainService>();
 
         // Factory
-        services.AddTransient<OrderFactory>();
+        services.AddTransient<IOrderFactory, OrderFactory>();
 
         // Application Services
         services.AddTransient<ShoppingApplicationService>();

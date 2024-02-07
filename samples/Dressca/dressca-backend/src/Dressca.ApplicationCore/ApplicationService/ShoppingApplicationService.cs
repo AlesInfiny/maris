@@ -14,7 +14,7 @@ public class ShoppingApplicationService
 {
     private readonly IBasketRepository basketRepository;
     private readonly IOrderRepository orderRepository;
-    private readonly OrderFactory orderFactory;
+    private readonly IOrderFactory orderFactory;
     private readonly ICatalogRepository catalogRepository;
     private readonly ICatalogDomainService catalogDomainService;
     private readonly ILogger<ShoppingApplicationService> logger;
@@ -36,7 +36,7 @@ public class ShoppingApplicationService
     public ShoppingApplicationService(
         IBasketRepository basketRepository,
         IOrderRepository orderRepository,
-        OrderFactory orderFactory,
+        IOrderFactory orderFactory,
         ICatalogRepository catalogRepository,
         ICatalogDomainService catalogDomainService,
         ILogger<ShoppingApplicationService> logger)

@@ -3,7 +3,7 @@ using Dressca.ApplicationCore.Catalog;
 
 namespace Dressca.ApplicationCore.Ordering;
 
-public class OrderFactory
+internal class OrderFactory : IOrderFactory
 {
     public Order CreateOrder(Basket basket, IReadOnlyList<CatalogItem> catalogItems, ShipTo shipToAddress)
     {
