@@ -208,7 +208,7 @@ public class ShoppingApplicationService
     {
         this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncStart, orderId);
         var order = await this.orderRepository.FindAsync(orderId, cancellationToken);
-        if (order is null || order.BuyerId != buyerId)
+        if (order is null || !order.HasMatchingBuyerId(buyerId))
         {
             throw new OrderNotFoundException(orderId, buyerId);
         }

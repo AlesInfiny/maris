@@ -123,4 +123,9 @@ public class Order
     ///  注文アイテムのリストを取得します。
     /// </summary>
     public IReadOnlyCollection<OrderItem> OrderItems => this.orderItems.AsReadOnly();
+
+    public bool HasMatchingBuyerId(string buyerId)
+    {
+        return this.BuyerId == buyerId;
+    }
 }
