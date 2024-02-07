@@ -103,21 +103,6 @@ public class Basket
         return new Account(accountItems);
     }
 
-    public List<OrderItem> GetOrderItems(IReadOnlyList<CatalogItem> catalogItems)
-    {
-        return this.Items.Select(
-            basketItem =>
-            {
-                var catalogItem = catalogItems.First(c => c.Id == basketItem.CatalogItemId);
-                var itemOrdered = new CatalogItemOrdered(catalogItem.Id, catalogItem.Name, catalogItem.ProductCode);
-                var orderItem = new OrderItem(itemOrdered, basketItem.UnitPrice, basketItem.Quantity);
-                var orderItemAssets = catalogItem.Assets
-                    .Select(catalogItemAsset => new OrderItemAsset(catalogItemAsset.AssetCode, orderItem.Id));
-                orderItem.AddAssets(orderItemAssets);
-                return orderItem;
-            }).ToList();
-    }
-
     /// <summary>
     ///  買い物かごアイテムが空かどうか示す値を取得します。
     /// </summary>

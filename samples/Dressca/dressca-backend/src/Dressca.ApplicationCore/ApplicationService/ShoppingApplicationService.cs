@@ -181,8 +181,7 @@ public class ShoppingApplicationService
             var catalogItemIds = checkoutBasket.Items.Select(item => item.CatalogItemId).ToArray();
             var catalogItems =
                 await this.catalogRepository.FindAsync(item => catalogItemIds.Contains(item.Id), cancellationToken);
-            var orderItems = checkoutBasket.GetOrderItems(catalogItems);
-            var order = new Order(checkoutBasket.BuyerId, shipToAddress, orderItems);
+            var order = OrderFactory.CreateOrder(checkoutBasket, catalogItems, shipToAddress);
             ordered = await this.orderRepository.AddAsync(order, cancellationToken);
 
             // 買い物かごを削除
