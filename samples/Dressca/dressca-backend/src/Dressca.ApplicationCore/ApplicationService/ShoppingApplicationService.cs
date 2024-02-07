@@ -63,14 +63,11 @@ public class ShoppingApplicationService
         Basket basket;
         IReadOnlyList<CatalogItem> catalogItems;
 
-        using (var scope = new TransactionScope(
-            TransactionScopeOption.RequiresNew,
-            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
-            TransactionScopeAsyncFlowOption.Enabled))
+        using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
             var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
-            catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id));
+            catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id), cancellationToken);
 
             scope.Complete();
         }
@@ -87,10 +84,7 @@ public class ShoppingApplicationService
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     public async Task<bool> SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
     {
-        using (var scope = new TransactionScope(
-            TransactionScopeOption.RequiresNew,
-            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
-            TransactionScopeAsyncFlowOption.Enabled))
+        using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             // 買い物かごに入っていないカタログアイテムが指定されていないか確認
             var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
@@ -103,7 +97,7 @@ public class ShoppingApplicationService
             }
 
             // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
-            var (existsAll, _) = await this.catalogDomainService.ExistsAllAsync(quantities.Keys);
+            var (existsAll, _) = await this.catalogDomainService.ExistsAllAsync(quantities.Keys, cancellationToken);
             if (!existsAll)
             {
                 return false;
@@ -129,15 +123,12 @@ public class ShoppingApplicationService
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     public async Task<bool> AddItemToBasketAsync(string buyerId, long catalogItemId, int addedQuantity, CancellationToken cancellationToken = default)
     {
-        using (var scope = new TransactionScope(
-            TransactionScopeOption.RequiresNew,
-            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
-            TransactionScopeAsyncFlowOption.Enabled))
+        using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
 
             // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
-            var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync(new[] { catalogItemId });
+            var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync(new[] { catalogItemId }, cancellationToken);
             if (!existsAll)
             {
                 return false;
@@ -169,10 +160,7 @@ public class ShoppingApplicationService
         Order ordered;
         Basket checkoutBasket;
 
-        using (var scope = new TransactionScope(
-            TransactionScopeOption.RequiresNew,
-            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
-            TransactionScopeAsyncFlowOption.Enabled))
+        using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             checkoutBasket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
 
