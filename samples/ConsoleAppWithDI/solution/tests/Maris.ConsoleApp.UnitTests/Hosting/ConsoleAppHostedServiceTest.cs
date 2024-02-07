@@ -1,18 +1,17 @@
 ﻿using Maris.ConsoleApp.Core;
 using Maris.ConsoleApp.Hosting;
-using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
 
-public class ConsoleAppHostedServiceTest
+public class ConsoleAppHostedServiceTest : TestBase
 {
-    private readonly TestLoggerManager loggerManager;
-
     public ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
+        : base(testOutputHelper)
+    {
+    }
 
     public static IEnumerable<object[]> GetContextsAndCommands()
     {
@@ -50,9 +49,9 @@ public class ConsoleAppHostedServiceTest
         var settings = new ConsoleAppSettings();
         var managerMock = CreateCommandManagerMock();
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime!, settings, executor, logger);
@@ -69,9 +68,9 @@ public class ConsoleAppHostedServiceTest
         ConsoleAppSettings? settings = null;
         var managerMock = CreateCommandManagerMock();
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime, settings!, executor, logger);
@@ -87,7 +86,7 @@ public class ConsoleAppHostedServiceTest
         var lifetime = Mock.Of<IHostApplicationLifetime>();
         var settings = new ConsoleAppSettings();
         CommandExecutor? executor = null;
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime, settings, executor!, logger);
@@ -104,7 +103,7 @@ public class ConsoleAppHostedServiceTest
         var settings = new ConsoleAppSettings();
         var managerMock = CreateCommandManagerMock();
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         ILogger<ConsoleAppHostedService>? logger = null;
 
@@ -129,9 +128,9 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var managerMock = CreateCommandManagerMock(command);
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -158,9 +157,9 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var managerMock = CreateCommandManagerMock(command);
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -187,9 +186,9 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var managerMock = CreateCommandManagerMock(command);
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -213,9 +212,9 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var managerMock = CreateCommandManagerMock(command);
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -236,9 +235,9 @@ public class ConsoleAppHostedServiceTest
         var settings = new ConsoleAppSettings();
         var managerMock = CreateCommandManagerMock();
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         var cancellationToken = new CancellationToken(false);
 
