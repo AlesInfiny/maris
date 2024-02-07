@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Maris.Diagnostics.Testing.Xunit;
+namespace Maris.Logging.Testing.Xunit;
 
 /// <summary>
 /// <see cref="Microsoft.Extensions.Logging"/> と xUnit のテスト出力を統合するための <see cref="ILoggerProvider"/> です.
@@ -27,11 +27,7 @@ internal class XunitLoggerProvider : ILoggerProvider, IDisposable
     /// <inheritdoc/>
     public ILogger CreateLogger(string categoryName)
     {
-        if (this.testOutputHelper is null)
-        {
-            throw new ObjectDisposedException(nameof(XunitLoggerProvider));
-        }
-
+        ObjectDisposedException.ThrowIf(this.testOutputHelper is null, this);
         return new XunitLogger(this.testOutputHelper, categoryName);
     }
 
