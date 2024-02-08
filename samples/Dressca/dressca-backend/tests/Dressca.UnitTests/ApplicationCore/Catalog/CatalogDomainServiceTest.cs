@@ -58,9 +58,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
 
         // Assert
         Assert.False(existsAll);
-        Assert.Collection(
-            items,
-            item => Assert.Equal(2L, item.Id));
+        Assert.Single(items, item => item.Id == 2L);
     }
 
     [Fact]

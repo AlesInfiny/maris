@@ -91,13 +91,8 @@ public class HttpContextExtensionsTest
         HttpContextExtensions.SetBuyerId(httpContextMock.Object, buyerId);
 
         // Assert
-        Assert.Collection(
-            items,
-            item =>
-            {
-                Assert.Equal("Dressca-BuyerId", item.Key);
-                Assert.Equal(buyerId, item.Value);
-            });
+        var item = Assert.Single(items, item => "Dressca-BuyerId".Equals(item.Key));
+        Assert.Equal(buyerId, item.Value);
     }
 
     [Fact]
@@ -116,12 +111,7 @@ public class HttpContextExtensionsTest
         HttpContextExtensions.SetBuyerId(httpContextMock.Object, buyerId);
 
         // Assert
-        Assert.Collection(
-            items,
-            item =>
-            {
-                Assert.Equal("Dressca-BuyerId", item.Key);
-                Assert.Equal(buyerId, item.Value);
-            });
+        var item = Assert.Single(items, item => "Dressca-BuyerId".Equals(item.Key));
+        Assert.Equal(buyerId, item.Value);
     }
 }

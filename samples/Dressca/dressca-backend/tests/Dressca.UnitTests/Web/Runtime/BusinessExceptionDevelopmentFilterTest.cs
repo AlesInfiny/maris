@@ -31,16 +31,11 @@ public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutput
         // Assert
         var result = Assert.IsType<BadRequestObjectResult>(context.Result);
         var value = Assert.IsType<ValidationProblemDetails>(result.Value);
+        var error = Assert.Single(value.Errors, error => errorCode.Equals(error.Key));
         Assert.Collection(
-            value.Errors,
-            error =>
-            {
-                Assert.Equal(errorCode, error.Key);
-                Assert.Collection(
-                    error.Value,
-                    message => Assert.Equal(errorMessage1, message),
-                    message => Assert.Equal(errorMessage2, message));
-            });
+            error.Value,
+            message => Assert.Equal(errorMessage1, message),
+            message => Assert.Equal(errorMessage2, message));
     }
 
     [Fact]

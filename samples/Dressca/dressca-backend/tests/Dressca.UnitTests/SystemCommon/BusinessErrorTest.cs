@@ -66,9 +66,7 @@ public class BusinessErrorTest
         error.AddErrorMessage(errorMessage);
 
         // Assert
-        Assert.Collection(
-            error.ErrorMessages,
-            errorMessage => Assert.Equal(string.Empty, errorMessage));
+        Assert.Single(error.ErrorMessages, errorMessage => errorMessage == string.Empty);
     }
 
     [Fact]

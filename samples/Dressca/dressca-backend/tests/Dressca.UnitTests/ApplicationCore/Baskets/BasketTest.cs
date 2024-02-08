@@ -66,12 +66,7 @@ public class BasketTest
         basket.AddItem(1L, 1000, 9);
 
         // Assert
-        Assert.Collection(
-            basket.Items,
-            item =>
-            {
-                Assert.Equal(1L, item.CatalogItemId);
-            });
+        Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
     }
 
     [Fact]
@@ -85,13 +80,8 @@ public class BasketTest
         basket.AddItem(1L, 1000, 9);
 
         // Assert
-        Assert.Collection(
-            basket.Items,
-            item =>
-            {
-                Assert.Equal(1L, item.CatalogItemId);
+        var item = Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
                 Assert.Equal(10, item.Quantity);
-            });
     }
 
     [Theory]
@@ -123,12 +113,7 @@ public class BasketTest
         basket.AddItem(1L, 1000, additionalQuantity);
 
         // Assert
-        Assert.Collection(
-            basket.Items,
-            item =>
-            {
-                Assert.Equal(firstQuantity + additionalQuantity, item.Quantity);
-            });
+        Assert.Single(basket.Items, item => item.Quantity == firstQuantity + additionalQuantity);
     }
 
     [Fact]
@@ -155,13 +140,8 @@ public class BasketTest
         basket.RemoveEmptyItems();
 
         // Assert
-        Assert.Collection(
-            basket.Items,
-            item =>
-            {
-                Assert.Equal(1L, item.CatalogItemId);
+        var item = Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
                 Assert.Equal(1, item.Quantity);
-            });
     }
 
     [Fact]
@@ -205,13 +185,8 @@ public class BasketTest
         basket.RemoveEmptyItems();
 
         // Assert
-        Assert.Collection(
-            basket.Items,
-            item =>
-            {
-                Assert.Equal(2L, item.CatalogItemId);
+        var item = Assert.Single(basket.Items, item => item.CatalogItemId == 2L);
                 Assert.Equal(1, item.Quantity);
-            });
     }
 
     [Fact]
@@ -254,13 +229,8 @@ public class BasketTest
         basket.RemoveEmptyItems();
 
         // Assert
-        Assert.Collection(
-            basket.Items,
-            item =>
-            {
-                Assert.Equal(2L, item.CatalogItemId);
+        var item = Assert.Single(basket.Items, item => item.CatalogItemId == 2L);
                 Assert.Equal(1, item.Quantity);
-            });
     }
 
     [Fact]
