@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
 
-public class ConsoleAppHostedServiceTest : TestBase
+public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
     public static TheoryData<ConsoleAppContext, CommandBase> GetContextsAndCommands()
     {

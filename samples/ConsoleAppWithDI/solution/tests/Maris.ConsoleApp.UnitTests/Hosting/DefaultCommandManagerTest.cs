@@ -94,13 +94,8 @@ public class DefaultCommandManagerTest
             => throw new NotImplementedException();
     }
 
-    private class DefaultCommandManagerMock : DefaultCommandManager
+    private class DefaultCommandManagerMock(ConsoleAppContext context, IServiceProvider provider) : DefaultCommandManager(context, provider)
     {
-        public DefaultCommandManagerMock(ConsoleAppContext context, IServiceProvider provider)
-            : base(context, provider)
-        {
-        }
-
         internal override CommandBase CreateCommandInScope()
             => new TestCommand();
     }
