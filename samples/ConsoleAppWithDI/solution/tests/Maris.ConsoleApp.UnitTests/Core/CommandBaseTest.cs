@@ -88,7 +88,8 @@ public class CommandBaseTest
         var command = new CommandImpl();
         string commandName = "dummy-command";
         var commandAttribute = new CommandAttribute(commandName, typeof(CommandImpl));
-        var context = new ConsoleAppContext(commandAttribute, new object());
+        var parameter = new object();
+        var context = new ConsoleAppContext(commandAttribute, parameter);
         command.Initialize(context);
 
         // Act and Assert(例外が発生しないこと)
@@ -102,7 +103,8 @@ public class CommandBaseTest
         var command = new CommandImpl();
         string commandName = "dummy-command";
         var commandAttribute = new CommandAttribute(commandName, typeof(CommandImpl));
-        var context = new ConsoleAppContext(commandAttribute, new NoDataAnnotationParameter());
+        var parameter = new NoDataAnnotationParameter();
+        var context = new ConsoleAppContext(commandAttribute, parameter);
         command.Initialize(context);
 
         // Act and Assert(例外が発生しないこと)
