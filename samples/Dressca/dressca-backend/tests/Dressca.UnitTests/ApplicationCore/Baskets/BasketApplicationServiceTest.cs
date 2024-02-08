@@ -233,7 +233,7 @@ public class BasketApplicationServiceTest(ITestOutputHelper testOutputHelper) : 
 
         // Assert
         repoMock.Verify(
-            r => r.UpdateAsync(It.Is<Basket>(b => !b.Items.Any()), AnyToken),
+            r => r.UpdateAsync(It.Is<Basket>(b => b.Items.Count == 0), AnyToken),
             Times.Once);
     }
 
