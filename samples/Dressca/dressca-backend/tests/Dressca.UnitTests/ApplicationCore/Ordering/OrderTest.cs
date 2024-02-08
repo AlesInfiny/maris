@@ -4,9 +4,9 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
 public class OrderTest
 {
-    public static TheoryData<List<OrderItem>> EmptyOrderItems => new()
+    public static TheoryData<List<OrderItem>?> EmptyOrderItems => new()
     {
-        null!,
+        null,
         new List<OrderItem>(),
     };
 
