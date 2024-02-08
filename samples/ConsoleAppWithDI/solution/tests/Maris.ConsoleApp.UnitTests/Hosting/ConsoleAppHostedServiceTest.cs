@@ -8,12 +8,7 @@ namespace Maris.ConsoleApp.UnitTests.Hosting;
 
 public class ConsoleAppHostedServiceTest : TestBase
 {
-    public ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
-    public static IEnumerable<object[]> GetContextsAndCommands()
+    public static TheoryData<ConsoleAppContext, CommandBase> GetContextsAndCommands()
     {
         // パターン1：正常終了するコマンド
         var commandAttribute1 = new CommandAttribute("dummy-command", typeof(SyncCommandImpl));
@@ -33,12 +28,13 @@ public class ConsoleAppHostedServiceTest : TestBase
         var context3 = new ConsoleAppContext(commandAttribute3, parameter3);
         var command3 = new TestCommand();
 
-        return new List<object[]>
+        var data = new TheoryData<ConsoleAppContext, CommandBase>
         {
-            new object[] { context1, command1 },
-            new object[] { context2, command2 },
-            new object[] { context3, command3 },
+            { context1, command1 },
+            { context2, command2 },
+            { context3, command3 },
         };
+        return data;
     }
 
     [Fact]
