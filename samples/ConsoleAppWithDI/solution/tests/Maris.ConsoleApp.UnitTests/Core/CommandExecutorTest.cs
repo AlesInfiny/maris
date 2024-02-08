@@ -334,7 +334,7 @@ public class CommandExecutorTest
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            yield return new ValidationResult("Validate メソッド内で検証", new string[] { "dummy-member-name" });
+            yield return new ValidationResult("Validate メソッド内で検証", ["dummy-member-name"]);
         }
     }
 
