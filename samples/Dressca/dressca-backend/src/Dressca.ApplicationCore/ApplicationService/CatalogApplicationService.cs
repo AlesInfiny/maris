@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 namespace Dressca.ApplicationCore.ApplicationService;
 
 /// <summary>
-///  カタログに関するビジネスユースケースを実現する Applicaiton Service です。
+///  カタログに関するビジネスユースケースを実現するアプリケーションサービスです。
 /// </summary>
 public class CatalogApplicationService
 {

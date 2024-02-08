@@ -3,8 +3,12 @@ using Dressca.ApplicationCore.Catalog;
 
 namespace Dressca.ApplicationCore.Ordering;
 
+/// <summary>
+///  注文エンティティを生成するファクトリークラス。
+/// </summary>
 internal class OrderFactory : IOrderFactory
 {
+    /// <inheritdoc/>
     public Order CreateOrder(Basket basket, IReadOnlyList<CatalogItem> catalogItems, ShipTo shipToAddress)
     {
         var orderItems = basket.Items.Select(

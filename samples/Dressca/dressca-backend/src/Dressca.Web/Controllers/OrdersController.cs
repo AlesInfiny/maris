@@ -15,8 +15,6 @@ namespace Dressca.Web.Controllers;
 [Produces("application/json")]
 public class OrdersController : ControllerBase
 {
-    //private readonly OrderApplicationService orderApplicationService;
-    //private readonly BasketApplicationService basketApplicationService;
     private readonly ShoppingApplicationService service;
     private readonly IObjectMapper<Order, OrderResponse> orderMapper;
     private readonly ILogger<OrdersController> logger;
@@ -24,14 +22,12 @@ public class OrdersController : ControllerBase
     /// <summary>
     ///  <see cref="OrdersController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="orderApplicationService">注文アプリケーションサービス。</param>
-    /// <param name="basketApplicationService">買い物かごアプリケーションサービス。</param>
+    /// <param name="service">ショッピングアプリケーションサービス。</param>
     /// <param name="orderMapper"><see cref="Order"/> と <see cref="OrderResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
-    ///   <item><paramref name="orderApplicationService"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="basketApplicationService"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="orderMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>

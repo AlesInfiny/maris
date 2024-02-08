@@ -67,6 +67,10 @@ public class Basket
         existingItem.AddQuantity(quantity);
     }
 
+    /// <summary>
+    ///  買い物かご内のアイテムの数量を一括で設定します。
+    /// </summary>
+    /// <param name="quantities">各アイテムの数量。</param>
     public void SetItemsQuantity(Dictionary<long, int> quantities)
     {
         foreach (var item in this.Items)

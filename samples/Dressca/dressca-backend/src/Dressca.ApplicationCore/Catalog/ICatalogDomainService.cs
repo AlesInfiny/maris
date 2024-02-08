@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Dressca.ApplicationCore.Catalog;
 
+/// <summary>
+///  カタログドメインサービス。
+/// </summary>
 public interface ICatalogDomainService
 {
     /// <summary>

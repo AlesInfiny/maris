@@ -23,11 +23,15 @@ public class ShoppingApplicationService
     /// </summary>
     /// <param name="basketRepository">買い物かごリポジトリ。</param>
     /// <param name="orderRepository">注文リポジトリ。</param>
+    /// <param name="orderFactory">注文エンティティファクトリー。</param>
     /// <param name="catalogRepository">カタログリポジトリ。</param>
     /// <param name="catalogDomainService">カタログドメインサービス。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
+    ///   <item><paramref name="basketRepository"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="orderRepository"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="orderFactory"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="catalogRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="catalogDomainService"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
