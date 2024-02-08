@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.Web.Runtime;
@@ -65,6 +66,29 @@ public class BusinessExceptionDevelopmentFilterTest : TestBase
         var result = Assert.IsType<BadRequestObjectResult>(context.Result);
         var value = Assert.IsType<ValidationProblemDetails>(result.Value);
         Assert.Equal(context.Exception.ToString(), value.Detail);
+    }
+
+    [Fact]
+    public void OnException_情報ログが1件登録される()
+    {
+        // Arrange
+        var filter = this.CreateFilter();
+        var errorCode = "ERR_CODE";
+        var errorMessage1 = "ERR_MESSAGE1";
+        var errorMessage2 = "ERR_MESSAGE2";
+        var businessError = new BusinessError(errorCode, errorMessage1, errorMessage2);
+        var context = CreateExceptionContext(businessError);
+
+        // Act
+        filter.OnException(context);
+
+        // Assert
+        Assert.Equal(1, this.LogCollector.Count);
+        var record = this.LogCollector.LatestRecord;
+        Assert.Equal("業務エラーが発生しました。", record.Message);
+        Assert.Equal(LogLevel.Information, record.Level);
+        Assert.Equal(new EventId(0), record.Id);
+        Assert.Same(context.Exception, record.Exception);
     }
 
     private static ExceptionContext CreateExceptionContext(BusinessError businessError)
