@@ -155,9 +155,7 @@ public class CommandBaseTest
 
         // Assert
         var ex = Assert.Throws<InvalidParameterException>(action);
-        Assert.Collection(
-            ex.ValidationResults,
-            result => Assert.Equal("Param2 は 0 から 5 の間で設定してください。", result.ErrorMessage));
+        Assert.Single(ex.ValidationResults, result => result.ErrorMessage == "Param2 は 0 から 5 の間で設定してください。");
     }
 
     [Fact]
