@@ -67,7 +67,7 @@ public class AsyncCommandTest
     public void Initialize_パラメーターの型にインターフェースを使用できる()
     {
         // Arrange
-        var parameter = new ParameterWithInterface();
+        IParameter parameter = new ParameterWithInterface();
         var commandAttribute = new CommandAttribute("dummy-command", typeof(CommandWithInterface));
         var context = new ConsoleAppContext(commandAttribute, parameter);
         var commandMock = new Mock<CommandWithInterface>();
