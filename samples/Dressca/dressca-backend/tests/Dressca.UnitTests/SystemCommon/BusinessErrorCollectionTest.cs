@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.SystemCommon;
 public class BusinessErrorCollectionTest
 {
     [Fact]
-    public void AddOrMerge_nullを追加しようとすると例外()
+    public void AddOrMerge_nullを追加する_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var errors = new BusinessErrorCollection();

@@ -15,7 +15,7 @@ public class CatalogDomainServiceTest : TestBase
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Fact]
-    public async Task ExistsAllAsync_カタログアイテムIdがすべて存在する場合_existsAllはfalse_itemsは見つかったカタログアイテムのリスト()
+    public async Task ExistsAllAsync_カタログアイテムIdがすべて存在する_existsAllはfalse_itemsは見つかったカタログアイテムのリスト()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -43,7 +43,7 @@ public class CatalogDomainServiceTest : TestBase
     }
 
     [Fact]
-    public async Task ExistsAllAsync_カタログアイテムIdが一部だけ存在する場合_existsAllはfalse_itemsは見つかったカタログアイテムのリスト()
+    public async Task ExistsAllAsync_カタログアイテムIdが一部だけ存在する_existsAllはfalse_itemsは見つかったカタログアイテムのリスト()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -69,7 +69,7 @@ public class CatalogDomainServiceTest : TestBase
     }
 
     [Fact]
-    public async Task ExistsAllAsync_カタログアイテムIdが一部だけ存在する場合_情報ログが1件出る()
+    public async Task ExistsAllAsync_カタログアイテムIdが一部だけ存在する_情報ログが1件出る()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -96,7 +96,7 @@ public class CatalogDomainServiceTest : TestBase
     }
 
     [Fact]
-    public async Task ExistsAllAsync_カタログアイテムIdが1件も存在しない場合_existsAllはfalse_itemsは空()
+    public async Task ExistsAllAsync_カタログアイテムIdが1件も存在しない_existsAllはfalse_itemsは空()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -117,7 +117,7 @@ public class CatalogDomainServiceTest : TestBase
     }
 
     [Fact]
-    public async Task ExistsAllAsync_カタログアイテムIdが1件も存在しない場合_情報ログが1件出る()
+    public async Task ExistsAllAsync_カタログアイテムIdが1件も存在しない_情報ログが1件出る()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();

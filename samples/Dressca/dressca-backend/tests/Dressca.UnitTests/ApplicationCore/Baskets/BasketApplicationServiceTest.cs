@@ -19,7 +19,7 @@ public class BasketApplicationServiceTest : TestBase
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idがnullまたは空白なら例外が発生する(string? nullOrEmptyBuyerId)
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idがnullまたは空白_ArgumentExceptionが発生する(string? nullOrEmptyBuyerId)
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
@@ -35,7 +35,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない場合買い物かごの作成処理としてリポジトリのGetWithBasketItemsを1度だけ呼出す()
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない_買い物かごの作成処理としてリポジトリのGetWithBasketItemsを1度だけ呼出す()
     {
         // Arrange
         const string dummyBuyerId = "dummyId";
@@ -54,7 +54,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない場合買い物かごの作成処理としてリポジトリのAddAsyncを1度だけ呼出す()
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない_買い物かごの作成処理としてリポジトリのAddAsyncを1度だけ呼出す()
     {
         // Arrange
         const string buyerId = "not-exists-Id";
@@ -77,7 +77,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない場合AddAsyncで生成した買い物かごを取得できる()
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない_AddAsyncで生成した買い物かごを取得できる()
     {
         // Arrange
         const string buyerId = "not-exists-Id";
@@ -116,7 +116,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごが取得できたときはリポジトリのAddAsyncを呼び出さない()
+    public async Task GetOrCreateBasketForUserAsync_買い物かごが取得できた_リポジトリのAddAsyncを呼び出さない()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -204,7 +204,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task AddItemToBasketAsync_買い物かごへの商品追加処理で買い物かごが見つからない場合は業務例外が発生する()
+    public async Task AddItemToBasketAsync_買い物かごへの商品追加処理で買い物かごが見つからない_BasketNotFoundExceptionが発生する()
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
@@ -219,7 +219,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task AddItemToBasketAsync_買い物かごへの商品追加処理後に数量が0となる場合買い物かごアイテムは削除される()
+    public async Task AddItemToBasketAsync_買い物かごへの商品追加処理後に数量が0となる_買い物かごアイテムは削除される()
     {
         // Arrange
         const long basketId = 1;
@@ -284,7 +284,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task DeleteBasketAsync_買い物かごの削除処理で買い物かごが見つからない場合は業務例外が発生する()
+    public async Task DeleteBasketAsync_買い物かごの削除処理で買い物かごが見つからない_BasketNotFoundExceptionが発生する()
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
@@ -299,7 +299,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_数量の設定処理で数量パラメータがnullならArgumentNullExceptionが発生する()
+    public async Task SetQuantitiesAsync_数量パラメータがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
@@ -314,7 +314,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_数量の設定処理で買い物かごが見つからないなら業務例外が発生する()
+    public async Task SetQuantitiesAsync_買い物かごが見つからない_BasketNotFoundExceptionが発生する()
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
@@ -331,7 +331,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_数量の設定処理はリポジトリのUpdateAsyncを1度だけ呼出す()
+    public async Task SetQuantitiesAsync_リポジトリのUpdateAsyncを1度だけ呼出す()
     {
         // Arrange
         const long basketId = 1L;
@@ -355,7 +355,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_買い物かごに存在しない商品を指定しても買い物かごには追加されない()
+    public async Task SetQuantitiesAsync_買い物かごに存在しない商品を指定_買い物かごには追加されない()
     {
         // Arrange
         const long basketId = 1L;
@@ -379,7 +379,7 @@ public class BasketApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_買い物かごに存在する商品を指定すると買い物かごの商品数が更新される()
+    public async Task SetQuantitiesAsync_買い物かごに存在する商品を指定_買い物かごの商品数が更新される()
     {
         // Arrange
         const long basketId = 1L;

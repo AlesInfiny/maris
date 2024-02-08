@@ -89,7 +89,7 @@ public class BusinessErrorTest
     }
 
     [Fact]
-    public void ToString_エラーコードが未設定の場合キーが空文字のJSON形式に変換される()
+    public void ToString_エラーコードが未設定_キーが空文字のJSON形式に変換される()
     {
         // Arrange
         var error = new BusinessError();

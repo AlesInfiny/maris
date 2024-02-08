@@ -30,7 +30,7 @@ public class OrderTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Constructor_購入者Idは必須(string? buyerId)
+    public void Constructor_購入者Idがnullまたは空の文字列_ArgumentExceptionが発生する(string? buyerId)
     {
         // Arrange
         var shipTo = CreateDefaultShipTo();
@@ -44,7 +44,7 @@ public class OrderTest
     }
 
     [Fact]
-    public void Constructor_住所は必須()
+    public void Constructor_住所がnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -59,7 +59,7 @@ public class OrderTest
 
     [Theory]
     [MemberData(nameof(EmptyOrderItems))]
-    public void Constructor_注文アイテムは必須(List<OrderItem>? emptyOrderItems)
+    public void Constructor_注文アイテムがnullまたは空のリスト_ArgumentExceptionが発生する(List<OrderItem>? emptyOrderItems)
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");

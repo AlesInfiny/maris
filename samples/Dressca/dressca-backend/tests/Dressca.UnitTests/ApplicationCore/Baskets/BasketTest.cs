@@ -132,7 +132,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void RemoveEmptyItems_買い物かごにアイテムが1件も存在しないとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごにアイテムが1件も存在しない_アイテムは0件のまま()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -145,7 +145,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void RemoveEmptyItems_買い物かごに数量1のアイテムが1件存在するとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量1のアイテムが1件存在する_アイテムは変化しない()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -165,7 +165,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件存在するとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件存在する_数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -179,7 +179,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void RemoveEmptyItems_買い物かごに数量0のアイテムが2件存在するとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量0のアイテムが2件存在する_数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -194,7 +194,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件_数量1のアイテムが1件存在するとき_数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件_数量1のアイテムが1件存在する_数量0のアイテムを除去する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -215,7 +215,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void RemoveEmptyItems_買い物かごに数量1のアイテムが2件存在するとき数量0のアイテムを除去する()
+    public void RemoveEmptyItems_買い物かごに数量1のアイテムが2件存在する_アイテムは変化しない()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -264,7 +264,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void AddItem_数量は0未満にできない()
+    public void AddItem_数量は0未満にする_ArgumentExceptionが発生する()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -280,7 +280,7 @@ public class BasketTest
     [Theory]
     [InlineData(10, -11)]
     [InlineData(10, 2147483647)]
-    public void AddItem_商品の数量を加減算して0未満にはできない(int firstQuantity, int additionalQuantity)
+    public void AddItem_商品の数量を加減算して0未満にする_ArgumentExceptionが発生する(int firstQuantity, int additionalQuantity)
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -295,7 +295,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void Constructor_買い物かごの購入者Idはnullにできない()
+    public void Constructor_買い物かごの購入者Idをnullにする_ArgumentNullExceptionが発生する()
     {
         // Arrange & Act
         var action = () => new Basket(null!);
@@ -305,7 +305,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void IsInCatalogItem_買い物かご内に存在するカタログアイテムIdを渡す()
+    public void IsInCatalogItem_買い物かご内に存在するカタログアイテムIdを渡す_true()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -319,7 +319,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void IsInCatalogItem_買い物かご内に存在しないカタログアイテムIdを渡す()
+    public void IsInCatalogItem_買い物かご内に存在しないカタログアイテムIdを渡す_false()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -348,7 +348,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void IsEmpty_買い物かごアイテムが空である()
+    public void IsEmpty_買い物かごアイテムが空_true()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());
@@ -361,7 +361,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void IsEmpty_買い物かごにアイテムが存在する()
+    public void IsEmpty_買い物かごにアイテムが存在する_false()
     {
         // Arrange
         var basket = new Basket(Guid.NewGuid().ToString());

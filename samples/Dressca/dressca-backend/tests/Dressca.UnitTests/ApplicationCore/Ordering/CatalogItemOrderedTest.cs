@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 public class CatalogItemOrderedTest
 {
     [Fact]
-    public void Constructor_カタログアイテムIdが0以下の場合例外()
+    public void Constructor_カタログアイテムIdが0以下_ArgumentOutOfRangeExceptionが発生する()
     {
         // Arrange
         long catalogItemId = 0L;
@@ -25,7 +25,7 @@ public class CatalogItemOrderedTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public void Constructor_製品名がnullまたは空の文字列の場合例外(string? productName)
+    public void Constructor_製品名がnullまたは空の文字列_ArgumentExceptionが発生する(string? productName)
     {
         // Arrange
         long catalogItemId = 1L;
@@ -43,7 +43,7 @@ public class CatalogItemOrderedTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public void Constructor_製品コードがnullまたは空の文字列の場合例外(string? productCode)
+    public void Constructor_製品コードがnullまたは空の文字列_ArgumentExceptionが発生する(string? productCode)
     {
         // Arrange
         long catalogItemId = 1L;

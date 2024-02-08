@@ -11,7 +11,7 @@ public class AssetApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public void GetAssetStreamInfo_リポジトリに指定したアセットコードの情報が見つからない場合は例外()
+    public void GetAssetStreamInfo_リポジトリに指定したアセットコードの情報が見つからない_AssetNotFoundExceptionが発生する()
     {
         // Arrange
         var assetCode = "dummy";
@@ -32,7 +32,7 @@ public class AssetApplicationServiceTest : TestBase
     }
 
     [Fact]
-    public void GetAssetStreamInfo_ストアに指定したアセットコードのストリームが見つからない場合は例外()
+    public void GetAssetStreamInfo_ストアに指定したアセットコードのストリームが見つからない場合_AssetNotFoundExceptionが発生する()
     {
         // Arrange
         var assetCode = "dummy";
