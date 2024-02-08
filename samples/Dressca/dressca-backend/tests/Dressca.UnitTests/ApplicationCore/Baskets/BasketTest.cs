@@ -81,7 +81,7 @@ public class BasketTest
 
         // Assert
         var item = Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
-                Assert.Equal(10, item.Quantity);
+        Assert.Equal(10, item.Quantity);
     }
 
     [Theory]
@@ -141,7 +141,7 @@ public class BasketTest
 
         // Assert
         var item = Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
-                Assert.Equal(1, item.Quantity);
+        Assert.Equal(1, item.Quantity);
     }
 
     [Fact]
@@ -186,7 +186,7 @@ public class BasketTest
 
         // Assert
         var item = Assert.Single(basket.Items, item => item.CatalogItemId == 2L);
-                Assert.Equal(1, item.Quantity);
+        Assert.Equal(1, item.Quantity);
     }
 
     [Fact]
@@ -230,7 +230,7 @@ public class BasketTest
 
         // Assert
         var item = Assert.Single(basket.Items, item => item.CatalogItemId == 2L);
-                Assert.Equal(1, item.Quantity);
+        Assert.Equal(1, item.Quantity);
     }
 
     [Fact]

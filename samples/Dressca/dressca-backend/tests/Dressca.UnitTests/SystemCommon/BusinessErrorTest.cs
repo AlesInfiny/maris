@@ -29,7 +29,7 @@ public class BusinessErrorTest
     {
         // Arrange
         string? errorCode = "ERR_CODE";
-        string[] errorMessages = new[] { "ERR_MESSAGE1", "ERR_MESSAGE2" };
+        string[] errorMessages = ["ERR_MESSAGE1", "ERR_MESSAGE2"];
 
         // Act
         var error = new BusinessError(errorCode, errorMessages);
@@ -43,7 +43,7 @@ public class BusinessErrorTest
     {
         // Arrange
         string? errorCode = "ERR_CODE";
-        string[] errorMessages = new[] { "ERR_MESSAGE1", "ERR_MESSAGE2" };
+        string[] errorMessages = ["ERR_MESSAGE1", "ERR_MESSAGE2"];
 
         // Act
         var error = new BusinessError(errorCode, errorMessages);
@@ -73,7 +73,7 @@ public class BusinessErrorTest
     public void AddErrorMessage_エラーメッセージを追加できる()
     {
         // Arrange
-        var error = new BusinessError("ERR_CODE", new[] { "ERR_MESSAGE1" });
+        var error = new BusinessError("ERR_CODE", ["ERR_MESSAGE1"]);
         string? errorMessage = "ERR_MESSAGE2";
 
         // Act

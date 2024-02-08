@@ -27,7 +27,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
-        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L, 2L });
+        var (existsAll, items) = await domainService.ExistsAllAsync([1L, 2L]);
 
         // Assert
         Assert.True(existsAll);
@@ -54,7 +54,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
-        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L, 2L });
+        var (existsAll, items) = await domainService.ExistsAllAsync([1L, 2L]);
 
         // Assert
         Assert.False(existsAll);
@@ -78,7 +78,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
-        _ = await domainService.ExistsAllAsync(new[] { 1L, 2L });
+        _ = await domainService.ExistsAllAsync([1L, 2L]);
 
         // Assert
         Assert.Equal(1, this.LogCollector.Count);
@@ -102,7 +102,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
-        var (existsAll, items) = await domainService.ExistsAllAsync(new[] { 1L });
+        var (existsAll, items) = await domainService.ExistsAllAsync([1L]);
 
         // Assert
         Assert.False(existsAll);
@@ -123,7 +123,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
 
         // Act
-        _ = await domainService.ExistsAllAsync(new[] { 1L });
+        _ = await domainService.ExistsAllAsync([1L]);
 
         // Assert
         Assert.Equal(1, this.LogCollector.Count);
