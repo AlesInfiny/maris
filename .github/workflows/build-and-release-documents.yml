@@ -51,7 +51,7 @@ jobs:
         run: npm ci
 
       - name: Python のセットアップ
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
@@ -169,7 +169,7 @@ jobs:
           zip -r ../${{ env.DOCUMENT_ARTIFACTS_FILENAME }} *
 
       - name: ビルドアーティファクトのアップロード
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documents
           path: documents/${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
@@ -182,7 +182,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ビルドアーティファクトのダウンロード
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: documents
 
@@ -199,7 +199,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ビルドアーティファクトのダウンロード
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: documents
 

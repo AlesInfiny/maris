@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Dressca.TestLibrary.Xunit.Logging;
+namespace Maris.Logging.Testing.Xunit;
 
 /// <summary>
 /// <see cref="Microsoft.Extensions.Logging"/> と xUnit のテスト出力を統合するための <see cref="ILoggerProvider"/> です.
@@ -9,7 +9,7 @@ namespace Dressca.TestLibrary.Xunit.Logging;
 internal class XunitLoggerProvider : ILoggerProvider, IDisposable
 {
     private ITestOutputHelper? testOutputHelper;
-    private bool disposedValue;
+    private bool disposed;
 
     /// <summary>
     ///  テスト標準出力のためのヘルパーオブジェクトを指定して
@@ -27,11 +27,7 @@ internal class XunitLoggerProvider : ILoggerProvider, IDisposable
     /// <inheritdoc/>
     public ILogger CreateLogger(string categoryName)
     {
-        if (this.testOutputHelper is null)
-        {
-            throw new ObjectDisposedException(nameof(XunitLoggerProvider));
-        }
-
+        ObjectDisposedException.ThrowIf(this.testOutputHelper is null, this);
         return new XunitLogger(this.testOutputHelper, categoryName);
     }
 
@@ -48,10 +44,10 @@ internal class XunitLoggerProvider : ILoggerProvider, IDisposable
     /// <param name="disposing">明示的に破棄する場合は <see langword="true"/> 、そうでない場合は <see langword="false"/> 。</param>
     protected virtual void Dispose(bool disposing)
     {
-        if (!this.disposedValue)
+        if (!this.disposed)
         {
             this.testOutputHelper = null;
-            this.disposedValue = true;
+            this.disposed = true;
         }
     }
 }

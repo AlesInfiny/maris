@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Dressca.TestLibrary.Xunit.Logging;
+namespace Maris.Logging.Testing.Xunit;
 
 /// <summary>
 ///  Xunit で使用可能な <see cref="ILogger"/> の具象クラスです。
@@ -38,7 +38,7 @@ internal class XunitLogger : ILogger
     /// <inheritdoc/>
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
-        this.testOutputHelper.WriteLine($"[{logLevel}] {this.categoryName} {formatter(state, exception)}");
+        this.testOutputHelper.WriteLine($"{logLevel}: {this.categoryName}[{eventId}] {formatter(state, exception)}");
         if (exception != null)
         {
             this.testOutputHelper.WriteLine(exception.ToString());
