@@ -1,6 +1,5 @@
 ﻿using Dressca.SystemCommon;
 using Dressca.Web.Runtime;
-using Maris.Logging.Testing.Xunit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
