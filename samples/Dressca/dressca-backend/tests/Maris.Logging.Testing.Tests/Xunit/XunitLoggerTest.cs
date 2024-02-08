@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using Maris.Logging.Testing.Xunit;
+﻿using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
