@@ -1,4 +1,5 @@
-﻿using Maris.Logging.Testing.Xunit;
+﻿using System.Net.Http.Headers;
+using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
@@ -6,8 +7,19 @@ namespace Maris.Logging.Testing.Tests.Xunit;
 
 public class XunitLoggerTest
 {
-    public static IEnumerable<object[]> LogLevels
-        => Enum.GetValues<LogLevel>().Select(logLevel => new object[] { logLevel });
+    public static TheoryData<LogLevel> LogLevels
+    {
+        get
+        {
+            var data = new TheoryData<LogLevel>();
+            foreach (var logLevel in Enum.GetValues<LogLevel>())
+            {
+                data.Add(logLevel);
+            }
+
+            return data;
+        }
+    }
 
     [Fact]
     public void Constructor_ThrowsException_WhenTestOutputHelperIsNull()
