@@ -114,9 +114,7 @@ public class CommandExecutorTest
 
         // Assert
         var exception = await Assert.ThrowsAsync<InvalidParameterException>(action);
-        Assert.Collection(
-            exception.ValidationResults,
-            result => Assert.Equal("StringParam は 5 文字以下に設定してください。", result.ErrorMessage));
+        Assert.Single(exception.ValidationResults, result => result.ErrorMessage == "StringParam は 5 文字以下に設定してください。");
     }
 
     [Fact]
@@ -140,9 +138,7 @@ public class CommandExecutorTest
 
         // Assert
         var exception = await Assert.ThrowsAsync<InvalidParameterException>(action);
-        Assert.Collection(
-            exception.ValidationResults,
-            result => Assert.Equal("Validate メソッド内で検証", result.ErrorMessage));
+        Assert.Single(exception.ValidationResults, result => result.ErrorMessage == "Validate メソッド内で検証");
     }
 
     [Fact]
