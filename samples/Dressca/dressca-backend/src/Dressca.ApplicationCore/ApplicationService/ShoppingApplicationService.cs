@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-using Dressca.ApplicationCore.Baskets;
+﻿using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.ApplicationCore.Resources;

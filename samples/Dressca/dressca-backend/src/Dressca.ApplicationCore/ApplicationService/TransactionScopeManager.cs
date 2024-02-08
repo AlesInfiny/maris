@@ -2,7 +2,7 @@
 
 namespace Dressca.ApplicationCore.ApplicationService;
 
-public static class TransactionScopeManager
+internal static class TransactionScopeManager
 {
     private static readonly TransactionOptions defaultTransactionOptions = new() { IsolationLevel = IsolationLevel.ReadCommitted };
 
