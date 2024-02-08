@@ -102,7 +102,7 @@ public class ServiceCollectionExtensionsTest
         services.AddSingleton<IApplicationProcess, TestApplicationProcess>(provider => testApplicationProcess);
         var types = Array.Empty<Type>();
         var assembly1 = new TestAssembly1(types);
-        var assembly2 = new TestAssembly2(Array.Empty<Type>());
+        var assembly2 = new TestAssembly2([]);
 
         // Act
         services.AddConsoleAppContext(args, types =>

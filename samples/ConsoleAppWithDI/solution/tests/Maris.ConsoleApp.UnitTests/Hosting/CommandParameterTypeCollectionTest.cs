@@ -43,7 +43,7 @@ public class CommandParameterTypeCollectionTest
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
-        var testAssembly = new TestAssembly(Array.Empty<Type>());
+        var testAssembly = new TestAssembly([]);
 
         // Act
         collection.AddCommandParameterTypeFrom(testAssembly);
@@ -57,13 +57,7 @@ public class CommandParameterTypeCollectionTest
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
-        var testAssembly = new TestAssembly(
-            new Type[]
-            {
-                typeof(int),
-                typeof(DateTime),
-                typeof(CommandParameterTypeCollection),
-            });
+        var testAssembly = new TestAssembly([typeof(int), typeof(DateTime), typeof(CommandParameterTypeCollection)]);
 
         // Act
         collection.AddCommandParameterTypeFrom(testAssembly);
@@ -78,14 +72,13 @@ public class CommandParameterTypeCollectionTest
         // Arrange
         var collection = new CommandParameterTypeCollection();
         var testAssembly = new TestAssembly(
-            new Type[]
-            {
+            [
                 typeof(int),
                 typeof(DateTime),
                 typeof(CommandParameterTypeCollection),
                 typeof(CommandParameter1),
                 typeof(CommandParameter2),
-            });
+            ]);
 
         // Act
         collection.AddCommandParameterTypeFrom(testAssembly);
@@ -103,12 +96,11 @@ public class CommandParameterTypeCollectionTest
         // Arrange
         var collection = new CommandParameterTypeCollection();
         var testAssembly = new TestAssembly(
-            new Type[]
-            {
+            [
                 typeof(CommandParameter1),
                 typeof(CommandParameter2),
                 typeof(CommandParameter1Dash),
-            });
+            ]);
 
         // Act
         var action = () => collection.AddCommandParameterTypeFrom(testAssembly);
@@ -123,8 +115,8 @@ public class CommandParameterTypeCollectionTest
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
-        var assembly1 = new TestAssembly(Array.Empty<Type>());
-        var assembly2 = new TestAssembly(Array.Empty<Type>());
+        var assembly1 = new TestAssembly([]);
+        var assembly2 = new TestAssembly([]);
         collection.AddCommandParameterTypeFrom(assembly1);
         collection.AddCommandParameterTypeFrom(assembly2);
 
