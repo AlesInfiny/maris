@@ -8,7 +8,7 @@ public class DatabaseHealthCheckTest(IntegrationTestWebApplicationFactory<Progra
     private readonly IntegrationTestWebApplicationFactory<Program> factory = factory;
 
     [Fact]
-    public async Task DatabaseConnectionTest()
+    public async Task Get_ApiHealth_DBまで含めたヘルスチェックが正常に動作_Healthyを返す()
     {
         // Arrange
         var client = this.factory.CreateClient();
