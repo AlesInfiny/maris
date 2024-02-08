@@ -26,7 +26,7 @@ public class InvalidParameterExceptionTest
         var memberNames = new string[] { "param1", "param2" };
         var validationResults = new List<ValidationResult>
         {
-            new ValidationResult(errorMessage, memberNames),
+            new(errorMessage, memberNames),
         };
         var ex = new InvalidParameterException(validationResults);
 
@@ -47,8 +47,8 @@ public class InvalidParameterExceptionTest
         var memberNames2 = new string[] { "param2", "param3" };
         var validationResults = new List<ValidationResult>
         {
-            new ValidationResult(errorMessage1, memberNames1),
-            new ValidationResult(errorMessage2, memberNames2),
+            new(errorMessage1, memberNames1),
+            new(errorMessage2, memberNames2),
         };
         var ex = new InvalidParameterException(validationResults);
 
@@ -80,8 +80,8 @@ public class InvalidParameterExceptionTest
         string errorMessage2 = "error message2";
         var results = new List<ValidationResult>
         {
-            new ValidationResult(errorMessage1),
-            new ValidationResult(errorMessage2),
+            new(errorMessage1),
+            new(errorMessage2),
         };
         var ex = new InvalidParameterException(validationResults: results);
 
