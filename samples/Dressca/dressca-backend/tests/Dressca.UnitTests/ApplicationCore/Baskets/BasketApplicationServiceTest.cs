@@ -1,5 +1,4 @@
 ﻿using Dressca.ApplicationCore.Baskets;
-using Maris.Logging.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Baskets;
@@ -7,24 +6,19 @@ namespace Dressca.UnitTests.ApplicationCore.Baskets;
 /// <summary>
 ///  買い物かごアプリケーションサービスの単体テストです。
 /// </summary>
-public class BasketApplicationServiceTest
+public class BasketApplicationServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    private readonly TestLoggerManager loggerManager;
-
-    public BasketApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
-
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idがnullまたは空白なら例外が発生する(string? nullOrEmptyBuyerId)
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idがnullまたは空白_ArgumentExceptionが発生する(string? nullOrEmptyBuyerId)
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         // Act
@@ -36,7 +30,7 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない場合買い物かごの作成処理としてリポジトリのGetWithBasketItemsを1度だけ呼出す()
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない_買い物かごの作成処理としてリポジトリのGetWithBasketItemsを1度だけ呼出す()
     {
         // Arrange
         const string dummyBuyerId = "dummyId";
@@ -44,7 +38,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(dummyBuyerId, AnyToken))
             .ReturnsAsync((Basket?)null);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -55,7 +49,7 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない場合買い物かごの作成処理としてリポジトリのAddAsyncを1度だけ呼出す()
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない_買い物かごの作成処理としてリポジトリのAddAsyncを1度だけ呼出す()
     {
         // Arrange
         const string buyerId = "not-exists-Id";
@@ -63,7 +57,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(buyerId, AnyToken))
             .ReturnsAsync((Basket?)null);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -78,7 +72,7 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない場合AddAsyncで生成した買い物かごを取得できる()
+    public async Task GetOrCreateBasketForUserAsync_買い物かごの取得処理で購入者Idに対応する買い物かご情報が存在しない_AddAsyncで生成した買い物かごを取得できる()
     {
         // Arrange
         const string buyerId = "not-exists-Id";
@@ -90,7 +84,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.AddAsync(It.IsAny<Basket>(), AnyToken))
             .ReturnsAsync(newBasket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -106,7 +100,7 @@ public class BasketApplicationServiceTest
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
         var repoMock = new Mock<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -117,7 +111,7 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task GetOrCreateBasketForUserAsync_買い物かごが取得できたときはリポジトリのAddAsyncを呼び出さない()
+    public async Task GetOrCreateBasketForUserAsync_買い物かごが取得できた_リポジトリのAddAsyncを呼び出さない()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
@@ -126,7 +120,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(buyerId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -148,7 +142,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(buyerId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -172,7 +166,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetAsync(basketId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -192,7 +186,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetAsync(basketId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -205,11 +199,11 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task AddItemToBasketAsync_買い物かごへの商品追加処理で買い物かごが見つからない場合は業務例外が発生する()
+    public async Task AddItemToBasketAsync_買い物かごへの商品追加処理で買い物かごが見つからない_BasketNotFoundExceptionが発生する()
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         // Act
@@ -220,7 +214,7 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task AddItemToBasketAsync_買い物かごへの商品追加処理後に数量が0となる場合買い物かごアイテムは削除される()
+    public async Task AddItemToBasketAsync_買い物かごへの商品追加処理後に数量が0となる_買い物かごアイテムは削除される()
     {
         // Arrange
         const long basketId = 1;
@@ -231,7 +225,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetAsync(basketId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -239,7 +233,7 @@ public class BasketApplicationServiceTest
 
         // Assert
         repoMock.Verify(
-            r => r.UpdateAsync(It.Is<Basket>(b => !b.Items.Any()), AnyToken),
+            r => r.UpdateAsync(It.Is<Basket>(b => b.Items.Count == 0), AnyToken),
             Times.Once);
     }
 
@@ -252,7 +246,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(new Basket("dummy"));
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -272,7 +266,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(new Basket(buyerId));
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         // Act
@@ -285,11 +279,11 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task DeleteBasketAsync_買い物かごの削除処理で買い物かごが見つからない場合は業務例外が発生する()
+    public async Task DeleteBasketAsync_買い物かごの削除処理で買い物かごが見つからない_BasketNotFoundExceptionが発生する()
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         // Act
@@ -300,11 +294,11 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_数量の設定処理で数量パラメータがnullならArgumentNullExceptionが発生する()
+    public async Task SetQuantitiesAsync_数量パラメータがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         // Act
@@ -315,11 +309,11 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_数量の設定処理で買い物かごが見つからないなら業務例外が発生する()
+    public async Task SetQuantitiesAsync_買い物かごが見つからない_BasketNotFoundExceptionが発生する()
     {
         // Arrange
         var repo = Mock.Of<IBasketRepository>();
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repo, logger);
 
         var quantities = new Dictionary<long, int> { { 1L, 1 }, { 2L, 1 }, { 3L, 1 } };
@@ -332,7 +326,7 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_数量の設定処理はリポジトリのUpdateAsyncを1度だけ呼出す()
+    public async Task SetQuantitiesAsync_リポジトリのUpdateAsyncを1度だけ呼出す()
     {
         // Arrange
         const long basketId = 1L;
@@ -341,7 +335,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(new Basket(buyerId));
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         var quantities = new Dictionary<long, int> { { 1L, 5 } };
@@ -356,7 +350,7 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_買い物かごに存在しない商品を指定しても買い物かごには追加されない()
+    public async Task SetQuantitiesAsync_買い物かごに存在しない商品を指定_買い物かごには追加されない()
     {
         // Arrange
         const long basketId = 1L;
@@ -365,7 +359,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(new Basket(buyerId));
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         var quantities = new Dictionary<long, int> { { 1L, 5 } };
@@ -380,7 +374,7 @@ public class BasketApplicationServiceTest
     }
 
     [Fact]
-    public async Task SetQuantitiesAsync_買い物かごに存在する商品を指定すると買い物かごの商品数が更新される()
+    public async Task SetQuantitiesAsync_買い物かごに存在する商品を指定_買い物かごの商品数が更新される()
     {
         // Arrange
         const long basketId = 1L;
@@ -392,7 +386,7 @@ public class BasketApplicationServiceTest
         repoMock
             .Setup(r => r.GetWithBasketItemsAsync(basketId, AnyToken))
             .ReturnsAsync(basket);
-        var logger = this.loggerManager.CreateLogger<BasketApplicationService>();
+        var logger = this.CreateTestLogger<BasketApplicationService>();
         var service = new BasketApplicationService(repoMock.Object, logger);
 
         var quantities = new Dictionary<long, int> { { 100L, newQuantity } };

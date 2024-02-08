@@ -1,20 +1,14 @@
 ﻿using Maris.ConsoleApp.Core;
 using Maris.ConsoleApp.Hosting;
-using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
 
-public class ConsoleAppHostedServiceTest
+public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    private readonly TestLoggerManager loggerManager;
-
-    public ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
-
-    public static IEnumerable<object[]> GetContextsAndCommands()
+    public static TheoryData<ConsoleAppContext, CommandBase> GetContextsAndCommands()
     {
         // パターン1：正常終了するコマンド
         var commandAttribute1 = new CommandAttribute("dummy-command", typeof(SyncCommandImpl));
@@ -34,25 +28,26 @@ public class ConsoleAppHostedServiceTest
         var context3 = new ConsoleAppContext(commandAttribute3, parameter3);
         var command3 = new TestCommand();
 
-        return new List<object[]>
+        var data = new TheoryData<ConsoleAppContext, CommandBase>
         {
-            new object[] { context1, command1 },
-            new object[] { context2, command2 },
-            new object[] { context3, command3 },
+            { context1, command1 },
+            { context2, command2 },
+            { context3, command3 },
         };
+        return data;
     }
 
     [Fact]
-    public void Constructor_lifetimeがnullの場合は例外()
+    public void Constructor_lifetimeがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         IHostApplicationLifetime? lifetime = null;
         var settings = new ConsoleAppSettings();
         var managerMock = CreateCommandManagerMock();
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime!, settings, executor, logger);
@@ -62,16 +57,16 @@ public class ConsoleAppHostedServiceTest
     }
 
     [Fact]
-    public void Constructor_settingsがnullの場合は例外()
+    public void Constructor_settingsがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
         ConsoleAppSettings? settings = null;
         var managerMock = CreateCommandManagerMock();
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime, settings!, executor, logger);
@@ -81,13 +76,13 @@ public class ConsoleAppHostedServiceTest
     }
 
     [Fact]
-    public void Constructor_executorがnullの場合は例外()
+    public void Constructor_executorがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
         var settings = new ConsoleAppSettings();
         CommandExecutor? executor = null;
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
         var action = () => new ConsoleAppHostedService(lifetime, settings, executor!, logger);
@@ -97,14 +92,14 @@ public class ConsoleAppHostedServiceTest
     }
 
     [Fact]
-    public void Constructor_loggerがnullの場合は例外()
+    public void Constructor_loggerがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
         var settings = new ConsoleAppSettings();
         var managerMock = CreateCommandManagerMock();
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         ILogger<ConsoleAppHostedService>? logger = null;
 
@@ -116,7 +111,7 @@ public class ConsoleAppHostedServiceTest
     }
 
     [Fact]
-    public async Task StartAsync_コマンドが正常に完了するとコマンドから返却した終了コードが設定される()
+    public async Task StartAsync_コマンドが正常に完了する_コマンドから返却した終了コードが設定される()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -129,9 +124,9 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var managerMock = CreateCommandManagerMock(command);
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -145,7 +140,7 @@ public class ConsoleAppHostedServiceTest
     }
 
     [Fact]
-    public async Task StartAsync_コマンドの入力値エラーがあると設定の入力値検証エラーの終了コードが設定される()
+    public async Task StartAsync_コマンドの入力値エラーがある_入力値検証エラーの終了コードが設定される()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -158,9 +153,9 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var managerMock = CreateCommandManagerMock(command);
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -174,7 +169,7 @@ public class ConsoleAppHostedServiceTest
     }
 
     [Fact]
-    public async Task StartAsync_コマンドの実行時に例外が発生すると設定のエラーの既定の終了コードが設定される()
+    public async Task StartAsync_コマンドの実行時に例外が発生する_既定のエラー終了コードが設定される()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -187,9 +182,9 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var managerMock = CreateCommandManagerMock(command);
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -204,7 +199,7 @@ public class ConsoleAppHostedServiceTest
 
     [Theory]
     [MemberData(nameof(GetContextsAndCommands))]
-    public async Task StartAsync_コマンドが完了するとIHostApplicationLifetimeのStopApplicationが呼び出される(ConsoleAppContext context, CommandBase command)
+    public async Task StartAsync_コマンドが完了_IHostApplicationLifetimeのStopApplicationが1回呼び出される(ConsoleAppContext context, CommandBase command)
     {
         // Arrange
         var lifetimeMock = new Mock<IHostApplicationLifetime>();
@@ -213,9 +208,9 @@ public class ConsoleAppHostedServiceTest
         command.Initialize(context);
         var managerMock = CreateCommandManagerMock(command);
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
@@ -236,9 +231,9 @@ public class ConsoleAppHostedServiceTest
         var settings = new ConsoleAppSettings();
         var managerMock = CreateCommandManagerMock();
         var manager = managerMock.Object;
-        var commandExecutorLogger = this.loggerManager.CreateLogger<CommandExecutor>();
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
-        var logger = this.loggerManager.CreateLogger<ConsoleAppHostedService>();
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         var cancellationToken = new CancellationToken(false);
 

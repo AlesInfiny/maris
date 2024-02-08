@@ -8,7 +8,7 @@ public class CatalogItemAssetTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public void Constructor_アセットコードがnullまたは空の文字列の場合例外(string? assetCode)
+    public void Constructor_アセットコードがnullまたは空の文字列_ArgumentExceptionが発生する(string? assetCode)
     {
         // Arrange
         var catalogItemId = 1L;
@@ -22,7 +22,7 @@ public class CatalogItemAssetTest
     }
 
     [Fact]
-    public void CatalogItem_カタログアイテムが初期化されていない場合例外()
+    public void CatalogItem_カタログアイテムが初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
         string assetCode = "Asset Code";

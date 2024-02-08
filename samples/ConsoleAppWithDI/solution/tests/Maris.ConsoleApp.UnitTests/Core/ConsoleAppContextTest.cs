@@ -5,7 +5,7 @@ namespace Maris.ConsoleApp.UnitTests.Core;
 public class ConsoleAppContextTest
 {
     [Fact]
-    public void Constructor_パラメーターがnullの場合は例外()
+    public void Constructor_パラメーターがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         object? parameter = null;
@@ -18,7 +18,7 @@ public class ConsoleAppContextTest
     }
 
     [Fact]
-    public void Constructor_パラメーターにCommandAttributeがついていない場合は例外()
+    public void Constructor_パラメーターにCommandAttributeがついていない_ArgumentExceptionが発生する()
     {
         // Arrange
         object parameter = new NoCommandAttributeParameter();

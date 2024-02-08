@@ -10,7 +10,7 @@ namespace Maris.ConsoleApp.UnitTests.Hosting;
 public class ServiceCollectionExtensionsTest
 {
     [Fact]
-    public void コンソールアプリケーションの初期化処理を呼び出すと必要なサービスが登録される()
+    public void AddConsoleAppService_必要なサービスが登録される()
     {
         // Arrange
         var services = new ServiceCollection();
@@ -52,7 +52,7 @@ public class ServiceCollectionExtensionsTest
     }
 
     [Fact]
-    public void ConsoleAppSettingsの設定処理を指定しないと既定のオブジェクトで初期化される()
+    public void AddConsoleAppSettings_ConsoleAppSettingsの設定処理を指定しない_既定のオブジェクトで初期化される()
     {
         // Arrange
         var services = new ServiceCollection();
@@ -69,7 +69,7 @@ public class ServiceCollectionExtensionsTest
     }
 
     [Fact]
-    public void ConsoleAppSettingsの設定処理を指定すると指定した値で初期化される()
+    public void AddConsoleAppSettings_ConsoleAppSettingsの設定処理を指定する_指定した値で初期化される()
     {
         // Arrange
         var services = new ServiceCollection();
@@ -91,7 +91,7 @@ public class ServiceCollectionExtensionsTest
     }
 
     [Fact]
-    public void アセンブリ内にコマンドが登録されていない場合は例外()
+    public void アセンブリ内にコマンドが登録されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
         var services = new ServiceCollection();
@@ -102,7 +102,7 @@ public class ServiceCollectionExtensionsTest
         services.AddSingleton<IApplicationProcess, TestApplicationProcess>(provider => testApplicationProcess);
         var types = Array.Empty<Type>();
         var assembly1 = new TestAssembly1(types);
-        var assembly2 = new TestAssembly2(Array.Empty<Type>());
+        var assembly2 = new TestAssembly2([]);
 
         // Act
         services.AddConsoleAppContext(args, types =>
@@ -119,7 +119,7 @@ public class ServiceCollectionExtensionsTest
     }
 
     [Fact]
-    public void 登録されていないコマンド名を指定した場合は検証エラーのエラーコードを伴ってアプリケーションが終了する()
+    public void 登録されていないコマンド名を指定_検証エラーのエラーコードを伴ってApplicationExceptionが発生する()
     {
         // Arrange
         var services = new ServiceCollection();
@@ -147,7 +147,7 @@ public class ServiceCollectionExtensionsTest
     [Theory]
     [InlineData("test-command1", typeof(TestParameter1), typeof(TestCommand1))]
     [InlineData("test-command2", typeof(TestParameter2), typeof(TestCommand2))]
-    public void 登録されているコマンド名を指定するとDIコンテナーからConsoleAppContextが生成できる(string commandName, Type parameterType, Type commandType)
+    public void 登録されているコマンド名を指定_DIコンテナーからConsoleAppContextが生成できる(string commandName, Type parameterType, Type commandType)
     {
         // Arrange
         var services = new ServiceCollection();

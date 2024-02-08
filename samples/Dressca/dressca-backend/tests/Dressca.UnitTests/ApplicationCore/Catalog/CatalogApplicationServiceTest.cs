@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Dressca.ApplicationCore.Catalog;
-using Maris.Logging.Testing.Xunit;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Catalog;
@@ -8,23 +7,18 @@ namespace Dressca.UnitTests.ApplicationCore.Catalog;
 /// <summary>
 ///  カタログアプリケーションサービスの単体テストです。
 /// </summary>
-public class CatalogApplicationServiceTest
+public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    private readonly TestLoggerManager loggerManager;
-
-    public CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        => this.loggerManager = new TestLoggerManager(testOutputHelper);
-
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Fact]
-    public async Task GetCatalogItemsAsync_カタログ取得処理はリポジトリのFindを1回呼出す()
+    public async Task GetCatalogItemsAsync_リポジトリのFindAsyncを1回呼出す()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var logger = this.loggerManager.CreateLogger<CatalogApplicationService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, logger);
         const int skip = 1;
         const int take = 10;
@@ -39,13 +33,13 @@ public class CatalogApplicationServiceTest
     }
 
     [Fact]
-    public async Task GetCatalogItemsAsync_カタログ取得処理はリポジトリのCountを1回呼出す()
+    public async Task GetCatalogItemsAsync_リポジトリのCountAsyncを1回呼出す()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var logger = this.loggerManager.CreateLogger<CatalogApplicationService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, logger);
 
         // Act
@@ -58,13 +52,13 @@ public class CatalogApplicationServiceTest
     }
 
     [Fact]
-    public async Task GetBrandsAsync_ブランド取得処理はブランドリポジトリのGetAllを1回呼出す()
+    public async Task GetBrandsAsync_ブランドリポジトリのGetAllAsyncを1回呼出す()
     {
         // Arrange
         var catalogRepository = Mock.Of<ICatalogRepository>();
         var catalogBrandRepositoryMock = new Mock<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var logger = this.loggerManager.CreateLogger<CatalogApplicationService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepository, catalogBrandRepositoryMock.Object, catalogCategoryRepository, logger);
 
         // Act
@@ -75,13 +69,13 @@ public class CatalogApplicationServiceTest
     }
 
     [Fact]
-    public async Task GetCategoriesAsync_カテゴリ取得処理はカテゴリリポジトリのGetAllを1回呼出す()
+    public async Task GetCategoriesAsync_カテゴリリポジトリのGetAllAsyncを1回呼出す()
     {
         // Arrange
         var catalogRepository = Mock.Of<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = new Mock<ICatalogCategoryRepository>();
-        var logger = this.loggerManager.CreateLogger<CatalogApplicationService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
 
         var service = new CatalogApplicationService(catalogRepository, catalogBrandRepository, catalogCategoryRepositoryMock.Object, logger);
 
