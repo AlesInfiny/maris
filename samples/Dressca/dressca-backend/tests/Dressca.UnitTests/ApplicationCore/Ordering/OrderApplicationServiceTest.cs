@@ -6,13 +6,8 @@ using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
-public class OrderApplicationServiceTest : TestBase
+public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public OrderApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Fact]

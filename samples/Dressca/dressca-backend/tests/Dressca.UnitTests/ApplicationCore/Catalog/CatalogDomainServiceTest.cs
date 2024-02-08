@@ -5,13 +5,8 @@ using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Catalog;
 
-public class CatalogDomainServiceTest : TestBase
+public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public CatalogDomainServiceTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Fact]

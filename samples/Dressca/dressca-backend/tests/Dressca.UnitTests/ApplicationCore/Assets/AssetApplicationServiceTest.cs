@@ -3,13 +3,8 @@ using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Assets;
 
-public class AssetApplicationServiceTest : TestBase
+public class AssetApplicationServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public AssetApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     [Fact]
     public void GetAssetStreamInfo_リポジトリに指定したアセットコードの情報が見つからない_AssetNotFoundExceptionが発生する()
     {

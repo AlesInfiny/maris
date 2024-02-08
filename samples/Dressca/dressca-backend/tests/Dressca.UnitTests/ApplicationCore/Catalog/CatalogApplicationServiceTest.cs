@@ -7,13 +7,8 @@ namespace Dressca.UnitTests.ApplicationCore.Catalog;
 /// <summary>
 ///  カタログアプリケーションサービスの単体テストです。
 /// </summary>
-public class CatalogApplicationServiceTest : TestBase
+public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Fact]

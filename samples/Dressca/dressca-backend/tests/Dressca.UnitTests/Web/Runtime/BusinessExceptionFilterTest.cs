@@ -13,13 +13,8 @@ using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.Web.Runtime;
 
-public class BusinessExceptionFilterTest : TestBase
+public class BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     [Fact]
     public void OnException_業務エラーの情報がActionResultの値に設定される()
     {

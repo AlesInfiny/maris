@@ -6,13 +6,8 @@ namespace Dressca.UnitTests.ApplicationCore.Baskets;
 /// <summary>
 ///  買い物かごアプリケーションサービスの単体テストです。
 /// </summary>
-public class BasketApplicationServiceTest : TestBase
+public class BasketApplicationServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public BasketApplicationServiceTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
     [Theory]
