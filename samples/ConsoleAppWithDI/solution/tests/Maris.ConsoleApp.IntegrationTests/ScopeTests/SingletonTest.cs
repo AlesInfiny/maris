@@ -7,13 +7,8 @@ using Xunit.Abstractions;
 namespace Maris.ConsoleApp.IntegrationTests.ScopeTests;
 
 [Collection(nameof(ScopeTests))]
-public class SingletonTest : TestBase
+public class SingletonTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public SingletonTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     [Fact]
     public async Task Singletonで登録したインスタンスはコマンド実行時に1回だけ初期化される()
     {

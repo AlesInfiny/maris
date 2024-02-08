@@ -7,13 +7,8 @@ using Xunit.Abstractions;
 namespace Maris.ConsoleApp.IntegrationTests.ScopeTests;
 
 [Collection(nameof(ScopeTests))]
-public class TransientTest : TestBase
+public class TransientTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public TransientTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     [Fact]
     public async Task Transientで登録したインスタンスはインジェクション時に毎回初期化される()
     {

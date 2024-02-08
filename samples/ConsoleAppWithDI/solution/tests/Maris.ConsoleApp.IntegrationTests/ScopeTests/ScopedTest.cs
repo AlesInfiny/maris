@@ -7,13 +7,8 @@ using Xunit.Abstractions;
 namespace Maris.ConsoleApp.IntegrationTests.ScopeTests;
 
 [Collection(nameof(ScopeTests))]
-public class ScopedTest : TestBase
+public class ScopedTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    public ScopedTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
-
     [Fact]
     public async Task Scopedで登録したインスタンスはコマンド実行時に1回だけ初期化される()
     {
