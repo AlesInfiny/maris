@@ -6,7 +6,7 @@ namespace Maris.ConsoleApp.UnitTests.Core;
 public class InvalidParameterExceptionTest
 {
     [Fact]
-    public void Message_メッセージの既定値の確認()
+    public void Message_メッセージの既定値_コマンドのパラメーターに入力エラーがあります()
     {
         // Arrange
         var ex = new InvalidParameterException();
@@ -19,7 +19,7 @@ public class InvalidParameterExceptionTest
     }
 
     [Fact]
-    public void Message_検証結果が1件登録されている場合()
+    public void Message_検証結果が1件登録されている_メンバー名とエラーメッセージが含まれている()
     {
         // Arrange
         var errorMessage = "error message";
@@ -38,7 +38,7 @@ public class InvalidParameterExceptionTest
     }
 
     [Fact]
-    public void Message_検証結果が2件登録されている場合()
+    public void Message_検証結果が2件登録されている場合_メンバー名とエラーメッセージが含まれている()
     {
         // Arrange
         var errorMessage1 = "error message1";
@@ -60,7 +60,7 @@ public class InvalidParameterExceptionTest
     }
 
     [Fact]
-    public void ValidationResults_検証結果のリストを指定しない場合は空のリストを取得できる()
+    public void ValidationResults_検証結果のリストを指定しない_空のリスト()
     {
         // Arrange
         var ex = new InvalidParameterException();
@@ -73,7 +73,7 @@ public class InvalidParameterExceptionTest
     }
 
     [Fact]
-    public void ValidationResults_検証結果のリストを指定した場合はそれを取得できる()
+    public void ValidationResults_検証結果のリストを指定_指定したリストを取得できる()
     {
         // Arrange
         string errorMessage1 = "error message1";

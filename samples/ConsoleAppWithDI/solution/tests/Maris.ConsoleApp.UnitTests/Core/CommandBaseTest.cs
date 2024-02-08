@@ -37,7 +37,7 @@ public class CommandBaseTest
     }
 
     [Fact]
-    public void Context_初期値のまま取得すると例外()
+    public void Context_初期値のまま取得する_InvalidOperationExceptionが発生する()
     {
         // Arrange
         var command = new CommandImpl();
@@ -68,7 +68,7 @@ public class CommandBaseTest
     }
 
     [Fact]
-    public void Initialize_nullで初期化すると例外()
+    public void Initialize_nullで初期化する_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var command = new CommandImpl();
@@ -82,7 +82,7 @@ public class CommandBaseTest
     }
 
     [Fact]
-    public void ValidateAllParameter_入力パラメータのクラスにプロパティが定義されていない()
+    public void ValidateAllParameter_入力パラメータのクラスにプロパティが定義されていない_例外が発生しない()
     {
         // Arrange
         var command = new CommandImpl();
@@ -96,7 +96,7 @@ public class CommandBaseTest
     }
 
     [Fact]
-    public void ValidateAllParameter_入力パラメータのクラスにプロパティがあるが検証属性が定義されていない()
+    public void ValidateAllParameter_入力パラメータのクラスにプロパティがあるが検証属性が定義されていない_例外が発生しない()
     {
         // Arrange
         var command = new CommandImpl();
@@ -112,7 +112,7 @@ public class CommandBaseTest
     [Theory]
     [InlineData("", 0)]
     [InlineData("1234567890", 5)]
-    public void ValidateAllParameter_入力パラメータのクラスに検証属性を定義したプロパティがあり検証に成功する値が設定されている(string param1, int param2)
+    public void ValidateAllParameter_入力パラメータのクラスに検証属性を定義したプロパティがあり検証に成功する値が設定されている_例外が発生しない(string param1, int param2)
     {
         // Arrange
         var command = new CommandImpl();
@@ -131,7 +131,7 @@ public class CommandBaseTest
     }
 
     [Fact]
-    public void ValidateAllParameter_入力パラメータのクラスに検証属性を定義したプロパティがあり一部検証に失敗する値が設定されている()
+    public void ValidateAllParameter_入力パラメータのクラスに検証属性を定義したプロパティがあり一部検証に失敗する値が設定されている_検証失敗メッセージを伴うInvalidParameterExceptionが発生する()
     {
         // Arrange
         var command = new CommandImpl();
@@ -159,7 +159,7 @@ public class CommandBaseTest
     }
 
     [Fact]
-    public void ValidateAllParameter_入力パラメータのクラスに検証属性を定義したプロパティがあり複数検証に失敗する値が設定されている()
+    public void ValidateAllParameter_入力パラメータのクラスに検証属性を定義したプロパティがあり複数検証に失敗する値が設定されている_検証失敗メッセージを伴うInvalidParameterExceptionが発生する()
     {
         // Arrange
         var command = new CommandImpl();
@@ -188,7 +188,7 @@ public class CommandBaseTest
     }
 
     [Fact]
-    public void ValidateAllParameter_コマンドクラスのロジック内でパラメーターの入力値検証エラーがあった()
+    public void ValidateAllParameter_コマンドクラスのロジック内でパラメーターの入力値検証エラーがあった_InvalidParameterExceptionが発生する()
     {
         // Arrange
         var command = new ValidationErrorCommand();

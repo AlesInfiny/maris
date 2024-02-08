@@ -42,7 +42,7 @@ public class ConsoleAppHostedServiceTest : TestBase
     }
 
     [Fact]
-    public void Constructor_lifetimeがnullの場合は例外()
+    public void Constructor_lifetimeがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         IHostApplicationLifetime? lifetime = null;
@@ -61,7 +61,7 @@ public class ConsoleAppHostedServiceTest : TestBase
     }
 
     [Fact]
-    public void Constructor_settingsがnullの場合は例外()
+    public void Constructor_settingsがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -80,7 +80,7 @@ public class ConsoleAppHostedServiceTest : TestBase
     }
 
     [Fact]
-    public void Constructor_executorがnullの場合は例外()
+    public void Constructor_executorがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -96,7 +96,7 @@ public class ConsoleAppHostedServiceTest : TestBase
     }
 
     [Fact]
-    public void Constructor_loggerがnullの場合は例外()
+    public void Constructor_loggerがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -115,7 +115,7 @@ public class ConsoleAppHostedServiceTest : TestBase
     }
 
     [Fact]
-    public async Task StartAsync_コマンドが正常に完了するとコマンドから返却した終了コードが設定される()
+    public async Task StartAsync_コマンドが正常に完了する_コマンドから返却した終了コードが設定される()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -144,7 +144,7 @@ public class ConsoleAppHostedServiceTest : TestBase
     }
 
     [Fact]
-    public async Task StartAsync_コマンドの入力値エラーがあると設定の入力値検証エラーの終了コードが設定される()
+    public async Task StartAsync_コマンドの入力値エラーがある_入力値検証エラーの終了コードが設定される()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -173,7 +173,7 @@ public class ConsoleAppHostedServiceTest : TestBase
     }
 
     [Fact]
-    public async Task StartAsync_コマンドの実行時に例外が発生すると設定のエラーの既定の終了コードが設定される()
+    public async Task StartAsync_コマンドの実行時に例外が発生する_既定のエラー終了コードが設定される()
     {
         // Arrange
         var lifetime = Mock.Of<IHostApplicationLifetime>();
@@ -203,7 +203,7 @@ public class ConsoleAppHostedServiceTest : TestBase
 
     [Theory]
     [MemberData(nameof(GetContextsAndCommands))]
-    public async Task StartAsync_コマンドが完了するとIHostApplicationLifetimeのStopApplicationが呼び出される(ConsoleAppContext context, CommandBase command)
+    public async Task StartAsync_コマンドが完了_IHostApplicationLifetimeのStopApplicationが1回呼び出される(ConsoleAppContext context, CommandBase command)
     {
         // Arrange
         var lifetimeMock = new Mock<IHostApplicationLifetime>();

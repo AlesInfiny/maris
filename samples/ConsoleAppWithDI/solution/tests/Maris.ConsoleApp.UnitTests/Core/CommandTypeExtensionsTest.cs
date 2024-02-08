@@ -5,7 +5,7 @@ namespace Maris.ConsoleApp.UnitTests.Core;
 public class CommandTypeExtensionsTest
 {
     [Fact]
-    public void IsCommandType_コマンドとは無関係の型を指定するとfalseを取得する()
+    public void IsCommandType_コマンドとは無関係の型を指定_false()
     {
         // Arrange
         Type type = typeof(DateTime);
@@ -18,7 +18,7 @@ public class CommandTypeExtensionsTest
     }
 
     [Fact]
-    public void IsCommandType_CommandBaseだけを継承した型を指定するとfalseを取得する()
+    public void IsCommandType_CommandBaseだけを継承した型を指定_false()
     {
         // Arrange
         Type type = typeof(OnlyCommandBaseImpl);
@@ -33,7 +33,7 @@ public class CommandTypeExtensionsTest
     [Theory]
     [InlineData(typeof(SyncCommandImpl))]
     [InlineData(typeof(AsyncCommandImpl))]
-    public void IsCommandType_SyncCommandまたはAsyncCommandを継承した型を指定するとtrueを取得する(Type t)
+    public void IsCommandType_SyncCommandまたはAsyncCommandを継承した型を指定_true(Type t)
     {
         // Arrange
         Type type = t;
