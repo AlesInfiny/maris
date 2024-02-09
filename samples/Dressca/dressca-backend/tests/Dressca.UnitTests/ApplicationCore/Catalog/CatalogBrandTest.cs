@@ -21,7 +21,7 @@ public class CatalogBrandTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Constructor_ブランド名は必須(string? brandName)
+    public void Constructor_ブランド名がnullまたは空白文字_ArgumentExceptionが発生する(string? brandName)
     {
         // Arrange & Act
         var action = () => new CatalogBrand(brandName!);

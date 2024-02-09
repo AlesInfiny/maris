@@ -126,7 +126,7 @@ public class TestLoggerManagerTest
             secondRecord =>
             {
                 Assert.Equal(LogLevel.Trace, secondRecord.Level);
-                Assert.Equal(default(EventId), secondRecord.Id);
+                Assert.Equal(default, secondRecord.Id);
                 Assert.Null(secondRecord.Exception);
                 Assert.Equal(message2, secondRecord.Message);
             });

@@ -26,7 +26,7 @@ public class SyncCommandTest
     }
 
     [Fact]
-    public void ValidateAllParameterを呼び出すとValidateParameterメソッドが指定したパラメーターを伴って呼び出される()
+    public void ValidateAllParameter_ValidateParameterメソッドがコンテキストに指定したパラメーターを伴って1回呼び出される()
     {
         // Arrange
         var parameter = new CommandParameter();
@@ -44,7 +44,7 @@ public class SyncCommandTest
     }
 
     [Fact]
-    public void ISyncCommandのExecuteを呼び出すとExecuteメソッドが指定したパラメーターを伴って呼び出される()
+    public void ISyncCommandのExecute_Executeメソッドがコンテキストに指定したパラメーターを伴って1回呼び出される()
     {
         // Arrange
         var parameter = new CommandParameter();
@@ -63,7 +63,7 @@ public class SyncCommandTest
     }
 
     [Fact]
-    public void パラメーターの型にインターフェースを使用できる()
+    public void Initialize_パラメーターの型にインターフェースを使用できる()
     {
         // Arrange
         var parameter = new ParameterWithInterface();
@@ -77,7 +77,7 @@ public class SyncCommandTest
     }
 
     [Fact]
-    public void パラメーターの型とコンテキストのパラメーター型が一致しない場合は例外()
+    public void Initialize_パラメーターの型とコンテキストのパラメーター型が一致しない_InvalidOperationExceptionが発生する()
     {
         // Arrange
         var parameter = new ParameterWithInterface();

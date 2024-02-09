@@ -21,7 +21,7 @@ public class BasketItemTest
     }
 
     [Fact]
-    public void Basket_買い物かごのナビゲーションプロパティが初期化されていない場合例外()
+    public void Basket_買い物かごのナビゲーションプロパティが初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
         long catalogItemId = 1L;

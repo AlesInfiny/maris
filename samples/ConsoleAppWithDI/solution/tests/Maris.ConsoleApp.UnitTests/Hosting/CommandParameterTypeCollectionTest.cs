@@ -26,7 +26,7 @@ public class CommandParameterTypeCollectionTest
     }
 
     [Fact]
-    public void GetEnumerator_要素を追加せずに取得すると空の列挙子を取得できる()
+    public void GetEnumerator_要素を追加せずに取得する_空の列挙子()
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
@@ -39,11 +39,11 @@ public class CommandParameterTypeCollectionTest
     }
 
     [Fact]
-    public void クラスの定義されていないアセンブリを読み込んでもパラメーターの型は登録されない()
+    public void AddCommandParameterTypeFrom_クラスの定義されていないアセンブリを読み込む_パラメーターの型は登録されない()
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
-        var testAssembly = new TestAssembly(Array.Empty<Type>());
+        var testAssembly = new TestAssembly([]);
 
         // Act
         collection.AddCommandParameterTypeFrom(testAssembly);
@@ -53,17 +53,11 @@ public class CommandParameterTypeCollectionTest
     }
 
     [Fact]
-    public void パラメーターではないクラスだけが定義されたアセンブリを読み込んでもパラメーターの型は登録されない()
+    public void AddCommandParameterTypeFrom_パラメーターではないクラスだけが定義されたアセンブリを読み込む_パラメーターの型は登録されない()
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
-        var testAssembly = new TestAssembly(
-            new Type[]
-            {
-                typeof(int),
-                typeof(DateTime),
-                typeof(CommandParameterTypeCollection),
-            });
+        var testAssembly = new TestAssembly([typeof(int), typeof(DateTime), typeof(CommandParameterTypeCollection)]);
 
         // Act
         collection.AddCommandParameterTypeFrom(testAssembly);
@@ -73,19 +67,18 @@ public class CommandParameterTypeCollectionTest
     }
 
     [Fact]
-    public void アセンブリからパラメーターの型だけが登録される()
+    public void AddCommandParameterTypeFrom_パラメーターを含むクラスが定義されたアセンブリを読み込む_アセンブリからパラメーターの型だけが登録される()
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
         var testAssembly = new TestAssembly(
-            new Type[]
-            {
+            [
                 typeof(int),
                 typeof(DateTime),
                 typeof(CommandParameterTypeCollection),
                 typeof(CommandParameter1),
                 typeof(CommandParameter2),
-            });
+            ]);
 
         // Act
         collection.AddCommandParameterTypeFrom(testAssembly);
@@ -98,17 +91,16 @@ public class CommandParameterTypeCollectionTest
     }
 
     [Fact]
-    public void 同じ名前のコマンドがあると登録エラーになる()
+    public void AddCommandParameterTypeFrom_同じ名前のコマンドがある_ArgumentExceptionが発生する()
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
         var testAssembly = new TestAssembly(
-            new Type[]
-            {
+            [
                 typeof(CommandParameter1),
                 typeof(CommandParameter2),
                 typeof(CommandParameter1Dash),
-            });
+            ]);
 
         // Act
         var action = () => collection.AddCommandParameterTypeFrom(testAssembly);
@@ -119,12 +111,12 @@ public class CommandParameterTypeCollectionTest
     }
 
     [Fact]
-    public void 読み込んだアセンブリのリストを取得できる()
+    public void LoadedAssemblies_読み込んだアセンブリのリストを取得できる()
     {
         // Arrange
         var collection = new CommandParameterTypeCollection();
-        var assembly1 = new TestAssembly(Array.Empty<Type>());
-        var assembly2 = new TestAssembly(Array.Empty<Type>());
+        var assembly1 = new TestAssembly([]);
+        var assembly2 = new TestAssembly([]);
         collection.AddCommandParameterTypeFrom(assembly1);
         collection.AddCommandParameterTypeFrom(assembly2);
 

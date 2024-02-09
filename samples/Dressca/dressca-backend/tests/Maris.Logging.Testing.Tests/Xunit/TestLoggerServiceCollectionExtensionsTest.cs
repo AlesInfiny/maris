@@ -38,7 +38,7 @@ public class TestLoggerServiceCollectionExtensionsTest
     }
 
     [Fact]
-    public void AddTestLogging_ValidInputs_AddsTestLoggingAndTwoLoggerProviders()
+    public void AddTestLogging_ValidInputs_AddsLoggerAndTwoLoggerProviders()
     {
         // Arrange
         var services = new ServiceCollection();

@@ -1,25 +1,19 @@
-// using System.Linq.Expressions;
+﻿// using System.Linq.Expressions;
 // using Dressca.ApplicationCore.Baskets;
 // using Dressca.ApplicationCore.Catalog;
 // using Dressca.ApplicationCore.Ordering;
-// using Maris.Logging.Testing.Xunit;
 // using Xunit.Abstractions;
 
 // namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
-// public class OrderApplicationServiceTest
+// public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 // {
-//     private readonly TestLoggerManager loggerManager;
-
-//     public OrderApplicationServiceTest(ITestOutputHelper testOutputHelper)
-//         => this.loggerManager = new TestLoggerManager(testOutputHelper);
-
-//    private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
+//     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
 //     [Fact]
-//     public async Task CreateOrderAsync_注文作成処理は注文リポジトリのAddを1回呼出す()
+//     public async Task CreateOrderAsync_注文リポジトリのAddAsyncを1回呼出す()
 //     {
-//         Arrange
+//         // Arrange
 //         const long basketId = 1L;
 //         var buyerId = Guid.NewGuid().ToString("D");
 //         var basket = new Basket(buyerId);
@@ -41,7 +35,7 @@
 //         orderRepositoryMock
 //             .Setup(r => r.AddAsync(It.IsAny<Order>(), AnyToken))
 //             .ReturnsAsync(new Order(buyerId, shipTo, CreateDefaultOrderItems()));
-//         var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
+//         var logger = this.CreateTestLogger<OrderApplicationService>();
 //         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepositoryMock.Object, catalogRepositoryMock.Object, logger);
 
 //        // Act
@@ -54,9 +48,9 @@
 //    }
 
 //     [Fact]
-//     public async Task CreateOrderAsync_注文作成処理で指定した買い物かごが存在しない場合は業務例外が発生する()
+//     public async Task CreateOrderAsync_注文作成処理で指定した買い物かごが存在しない_BasketNotFoundExceptionが発生する()
 //     {
-//         Arrange
+//         // Arrange
 //         const long basketId = 999L;
 //         var basketRepositoryMock = new Mock<IBasketRepository>();
 //         basketRepositoryMock
@@ -64,7 +58,7 @@
 //             .ReturnsAsync((Basket?)null);
 //         var catalogRepository = Mock.Of<ICatalogRepository>();
 //         var orderRepository = Mock.Of<IOrderRepository>();
-//         var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
+//         var logger = this.CreateTestLogger<OrderApplicationService>();
 //         var service = new OrderApplicationService(orderRepository, basketRepositoryMock.Object, catalogRepository, logger);
 //         var shipTo = CreateDefaultShipTo();
 
@@ -76,9 +70,9 @@
 //    }
 
 //     [Fact]
-//     public async Task CreateOrderAsync_注文作成処理で指定した買い物かごが空の場合は業務例外が発生する()
+//     public async Task CreateOrderAsync_注文作成処理で指定した買い物かごが空_EmptyBasketOnCheckoutExceptionが発生する()
 //     {
-//         Arrange
+//         // Arrange
 //         const long basketId = 3L;
 //         string buyerId = Guid.NewGuid().ToString("D");
 //         var basket = new Basket(buyerId);
@@ -88,7 +82,7 @@
 //             .ReturnsAsync(basket);
 //         var catalogRepository = Mock.Of<ICatalogRepository>();
 //         var orderRepository = Mock.Of<IOrderRepository>();
-//         var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
+//         var logger = this.CreateTestLogger<OrderApplicationService>();
 //         var service = new OrderApplicationService(orderRepository, basketRepositoryMock.Object, catalogRepository, logger);
 //         var shipTo = CreateDefaultShipTo();
 
@@ -100,9 +94,9 @@
 //    }
 
 //     [Fact]
-//     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが合致する場合注文情報を取得できる()
+//     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが合致する_注文情報を取得できる()
 //     {
-//         Arrange
+//         // Arrange
 //         var orderId = 10L;
 //         var buyerId = Guid.NewGuid().ToString("D");
 //         var shipToAddress = CreateDefaultShipTo();
@@ -114,7 +108,7 @@
 //             .ReturnsAsync(order);
 //         var basketRepository = Mock.Of<IBasketRepository>();
 //         var catalogRepository = Mock.Of<ICatalogRepository>();
-//         var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
+//         var logger = this.CreateTestLogger<OrderApplicationService>();
 //         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
 
 //        // Act
@@ -125,9 +119,9 @@
 //    }
 
 //     [Fact]
-//     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが異なる場合例外になる()
+//     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが異なる_OrderNotFoundExceptionが発生する()
 //     {
-//         Arrange
+//         // Arrange
 //         var orderId = 10L;
 //         var buyerId = Guid.NewGuid().ToString("D");
 //         var shipToAddress = CreateDefaultShipTo();
@@ -139,7 +133,7 @@
 //             .ReturnsAsync(order);
 //         var basketRepository = Mock.Of<IBasketRepository>();
 //         var catalogRepository = Mock.Of<ICatalogRepository>();
-//         var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
+//         var logger = this.CreateTestLogger<OrderApplicationService>();
 //         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
 
 //        // Act
@@ -150,9 +144,9 @@
 //    }
 
 //     [Fact]
-//     public async Task GetOrderAsync_注文リポジトリから注文情報を取得できない場合例外になる()
+//     public async Task GetOrderAsync_注文リポジトリから注文情報を取得できない_OrderNotFoundExceptionが発生する()
 //     {
-//         Arrange
+//         // Arrange
 //         var orderId = 10L;
 //         var buyerId = Guid.NewGuid().ToString("D");
 //         var orderRepositoryMock = new Mock<IOrderRepository>();
@@ -161,7 +155,7 @@
 //             .ReturnsAsync((Order?)null);
 //         var basketRepository = Mock.Of<IBasketRepository>();
 //         var catalogRepository = Mock.Of<ICatalogRepository>();
-//         var logger = this.loggerManager.CreateLogger<OrderApplicationService>();
+//         var logger = this.CreateTestLogger<OrderApplicationService>();
 //         var service = new OrderApplicationService(orderRepositoryMock.Object, basketRepository, catalogRepository, logger);
 
 //        // Act
