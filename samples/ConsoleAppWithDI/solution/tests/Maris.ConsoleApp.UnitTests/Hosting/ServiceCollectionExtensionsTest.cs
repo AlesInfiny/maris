@@ -41,6 +41,10 @@ public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper)
             },
             service =>
             {
+                Assert.Equal(typeof(ConsoleAppContextFactory), service.ServiceType);
+            },
+            service =>
+            {
                 Assert.Equal(typeof(ConsoleAppContext), service.ServiceType);
             },
             service =>
@@ -106,6 +110,8 @@ public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper)
         var types = Array.Empty<Type>();
         var assembly1 = new TestAssembly1(types);
         var assembly2 = new TestAssembly2([]);
+        services.AddTestLogging(this.LoggerManager);
+        services.AddSingleton<ConsoleAppContextFactory>();
 
         // Act
         services.AddConsoleAppContext(args, types =>
@@ -133,6 +139,8 @@ public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper)
         services.AddSingleton<IApplicationProcess, TestApplicationProcess>(provider => testApplicationProcess);
         var types = new Type[] { typeof(TestParameter1) };
         var assembly = new TestAssembly1(types);
+        services.AddTestLogging(this.LoggerManager);
+        services.AddSingleton<ConsoleAppContextFactory>();
 
         // Act
         services.AddConsoleAppContext(args, types =>
@@ -163,6 +171,8 @@ public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper)
         var assembly1 = new TestAssembly1(types1);
         var types2 = new Type[] { typeof(TestParameter2) };
         var assembly2 = new TestAssembly1(types2);
+        services.AddTestLogging(this.LoggerManager);
+        services.AddSingleton<ConsoleAppContextFactory>();
 
         // Act
         services.AddConsoleAppContext(args, types =>
@@ -177,29 +187,6 @@ public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper)
         Assert.Equal(commandName, context.CommandName);
         Assert.IsType(parameterType, context.Parameter);
         Assert.Equal(commandType, context.CommandType);
-    }
-
-    [Fact]
-    public void CreateConsoleAppContext_起動パラメーターが情報レベルでログに出力される()
-    {
-        // Arrange
-        var args = new string[] { "test-command3", "--category-id", "123" };
-        var types = new Type[] { typeof(TestParameter3) };
-        var assembly = new TestAssembly1(types);
-        Action<CommandParameterTypeCollection>? commandParametersOption = collection => collection.AddCommandParameterTypeFrom(assembly);
-        var appProcess = new TestApplicationProcess();
-        var settings = new ConsoleAppSettings();
-        var logger = this.CreateTestLogger<ServiceCollectionExtensionsTest>();
-
-        // Act
-        ServiceCollectionExtensions.CreateConsoleAppContext(args, commandParametersOption, appProcess, settings, logger);
-
-        // Assert
-        Assert.Equal(1, this.LogCollector.Count);
-        var record = this.LogCollector.LatestRecord;
-        Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(default, record.Id);
-        Assert.Equal("起動パラメーター:test-command3 --category-id 123 のパースを行います。", record.Message);
     }
 
     private class TestAssembly1 : Assembly
@@ -244,19 +231,6 @@ public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper)
     {
         protected internal override ICommandResult Execute(TestParameter2 parameter)
             => throw new NotImplementedException();
-    }
-
-    [Command("test-command3", typeof(TestCommand3))]
-    private class TestParameter3
-    {
-        [Option("category-id", Required = true)]
-        public long CategoryId { get; set; }
-    }
-
-    private class TestCommand3 : SyncCommand<TestParameter3>
-    {
-        protected internal override ICommandResult Execute(TestParameter3 parameter)
-            => new SuccessResult();
     }
 
     private class TestApplicationProcess : IApplicationProcess

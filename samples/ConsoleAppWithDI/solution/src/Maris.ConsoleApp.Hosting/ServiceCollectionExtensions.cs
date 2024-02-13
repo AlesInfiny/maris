@@ -36,6 +36,7 @@ public static class ServiceCollectionExtensions
         services.AddHostedService<ConsoleAppHostedService>();
         services.AddSingleton<IApplicationProcess, ConsoleAppProcess>();
         services.AddConsoleAppSettings(options);
+        services.AddSingleton<ConsoleAppContextFactory>();
         services.AddConsoleAppContext(args);
         services.AddSingleton<CommandExecutor>();
         services.AddSingleton<ICommandManager, DefaultCommandManager>();
@@ -77,62 +78,7 @@ public static class ServiceCollectionExtensions
     internal static IServiceCollection AddConsoleAppContext(this IServiceCollection services, IEnumerable<string> args, Action<CommandParameterTypeCollection>? commandParametersOption = null)
         => services.AddSingleton(provider =>
         {
-            var logger = provider.GetService<ILoggerFactory>()?.CreateLogger(typeof(ServiceCollectionExtensions));
-            var settings = provider.GetRequiredService<ConsoleAppSettings>();
-            var appProcess = provider.GetRequiredService<IApplicationProcess>();
-            return CreateConsoleAppContext(args, commandParametersOption, appProcess, settings, logger);
+            var factory = provider.GetRequiredService<ConsoleAppContextFactory>();
+            return factory.CreateConsoleAppContext(args, commandParametersOption);
         });
-
-    /// <summary>
-    ///  コンソールアプリケーションの実行コンテキストを生成します。
-    ///  単体テスト用に公開しています。
-    /// </summary>
-    /// <param name="args">コンソールアプリケーションの起動引数。</param>
-    /// <param name="commandParametersOption">
-    ///  コマンドの名前とコマンドの型を管理するコレクションのオプション設定を実行します。
-    ///  既定値は <see langword="null"/> です。
-    /// </param>
-    /// <param name="appProcess">アプリケーションのプロセスを表すインターフェース。</param>
-    /// <param name="settings">コンソールアプリケーションの設定。</param>
-    /// <param name="logger">ロガー。</param>
-    /// <returns>生成した <see cref="CreateConsoleAppContext"/> 。</returns>
-    /// <exception cref="InvalidOperationException">
-    ///  <list type="bullet">
-    ///   <item>コマンドパラメーターの型が見つかりません。</item>
-    ///  </list>
-    /// </exception>
-    internal static ConsoleAppContext CreateConsoleAppContext(
-        IEnumerable<string> args,
-        Action<CommandParameterTypeCollection>? commandParametersOption,
-        IApplicationProcess appProcess,
-        ConsoleAppSettings settings,
-        ILogger? logger)
-    {
-        logger?.LogInformation(Messages.ParseParameter.Embed(string.Join(' ', args)));
-
-        var commandParameterTypes = new CommandParameterTypeCollection();
-        if (commandParametersOption is null)
-        {
-            commandParameterTypes.InitializeFromAllAssemblies();
-        }
-        else
-        {
-            commandParametersOption(commandParameterTypes);
-        }
-
-        if (!commandParameterTypes.Any())
-        {
-            var assemblies = string.Join(',', commandParameterTypes.LoadedAssemblies.Select(asm => asm.GetName().Name));
-            throw new InvalidOperationException(
-                Messages.CommandParameterIsNotExists.Embed(typeof(CommandAttribute), assemblies));
-        }
-
-        var param = Parser.Default.ParseArguments(args, commandParameterTypes.ToArray());
-        if (param is null || param.Tag == ParserResultType.NotParsed)
-        {
-            appProcess.Exit(settings.DefaultValidationErrorExitCode);
-        }
-
-        return new ConsoleAppContext(param.Value);
-    }
 }
