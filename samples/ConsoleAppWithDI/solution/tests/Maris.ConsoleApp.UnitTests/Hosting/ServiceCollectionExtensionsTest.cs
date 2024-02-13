@@ -1,13 +1,16 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using CommandLine;
 using Maris.ConsoleApp.Core;
 using Maris.ConsoleApp.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
 
-public class ServiceCollectionExtensionsTest
+public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
     [Fact]
     public void AddConsoleAppService_必要なサービスが登録される()
@@ -176,6 +179,29 @@ public class ServiceCollectionExtensionsTest
         Assert.Equal(commandType, context.CommandType);
     }
 
+    [Fact]
+    public void CreateConsoleAppContext_起動パラメーターが情報レベルでログに出力される()
+    {
+        // Arrange
+        var args = new string[] { "test-command3", "--category-id", "123" };
+        var types = new Type[] { typeof(TestParameter3) };
+        var assembly = new TestAssembly1(types);
+        Action<CommandParameterTypeCollection>? commandParametersOption = collection => collection.AddCommandParameterTypeFrom(assembly);
+        var appProcess = new TestApplicationProcess();
+        var settings = new ConsoleAppSettings();
+        var logger = this.CreateTestLogger<ServiceCollectionExtensionsTest>();
+
+        // Act
+        ServiceCollectionExtensions.CreateConsoleAppContext(args, commandParametersOption, appProcess, settings, logger);
+
+        // Assert
+        Assert.Equal(1, this.LogCollector.Count);
+        var record = this.LogCollector.LatestRecord;
+        Assert.Equal(LogLevel.Information, record.Level);
+        Assert.Equal(default, record.Id);
+        Assert.Equal("起動パラメーター:test-command3 --category-id 123 のパースを行います。", record.Message);
+    }
+
     private class TestAssembly1 : Assembly
     {
         private readonly Type[] types;
@@ -218,6 +244,19 @@ public class ServiceCollectionExtensionsTest
     {
         protected internal override ICommandResult Execute(TestParameter2 parameter)
             => throw new NotImplementedException();
+    }
+
+    [Command("test-command3", typeof(TestCommand3))]
+    private class TestParameter3
+    {
+        [Option("category-id", Required = true)]
+        public long CategoryId { get; set; }
+    }
+
+    private class TestCommand3 : SyncCommand<TestParameter3>
+    {
+        protected internal override ICommandResult Execute(TestParameter3 parameter)
+            => new SuccessResult();
     }
 
     private class TestApplicationProcess : IApplicationProcess
