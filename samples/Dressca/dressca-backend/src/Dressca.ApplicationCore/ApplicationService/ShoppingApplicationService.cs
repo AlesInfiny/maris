@@ -63,6 +63,8 @@ public class ShoppingApplicationService
     /// </returns>
     public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
     {
+        this.logger.LogDebug(Messages.ShoppingApplicationService_GetBasketItemsAsyncStart, buyerId);
+
         Basket basket;
         IReadOnlyList<CatalogItem> catalogItems;
 
@@ -74,6 +76,8 @@ public class ShoppingApplicationService
 
             scope.Complete();
         }
+
+        this.logger.LogDebug(Messages.ShoppingApplicationService_GetBasketItemsAsyncEnd, buyerId);
 
         return (BasketResult: basket, CatalogItems: catalogItems);
     }
@@ -87,6 +91,8 @@ public class ShoppingApplicationService
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     public async Task<bool> SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
     {
+        this.logger.LogDebug(Messages.ShoppingApplicationService_SetBasketItemsQuantitiesAsyncStart, buyerId);
+
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             // 買い物かごに入っていないカタログアイテムが指定されていないか確認
@@ -94,8 +100,7 @@ public class ShoppingApplicationService
             var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
             if (notExistsInBasketCatalogIds.Any())
             {
-                // 後ほどログメッセージ追加
-                //this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(',', notExistsInBasketCatalogIds));
+                this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(',', notExistsInBasketCatalogIds));
                 return false;
             }
 
@@ -106,12 +111,15 @@ public class ShoppingApplicationService
                 return false;
             }
 
-            basket.SetItemsQuantity(quantities);
+            var message = basket.SetItemsQuantity(quantities);
+            this.logger.LogDebug(string.Join(",", message));
             basket.RemoveEmptyItems();
             await this.basketRepository.UpdateAsync(basket, cancellationToken);
 
             scope.Complete();
         }
+
+        this.logger.LogDebug(Messages.ShoppingApplicationService_SetBasketItemsQuantitiesAsyncEnd, buyerId);
 
         return true;
     }
@@ -126,6 +134,8 @@ public class ShoppingApplicationService
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     public async Task<bool> AddItemToBasketAsync(string buyerId, long catalogItemId, int addedQuantity, CancellationToken cancellationToken = default)
     {
+        this.logger.LogDebug(Messages.ShoppingApplicationService_AddItemToBasketAsyncStart, buyerId, catalogItemId, addedQuantity);
+
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
@@ -145,6 +155,8 @@ public class ShoppingApplicationService
             scope.Complete();
         }
 
+        this.logger.LogDebug(Messages.ShoppingApplicationService_AddItemToBasketAsyncEnd, buyerId, catalogItemId, addedQuantity);
+
         return true;
     }
 
@@ -159,7 +171,7 @@ public class ShoppingApplicationService
     /// <exception cref="EmptyBasketOnCheckoutException">注文を作成する対象の買い物かごが空の場合。</exception>
     public async Task<Order> CheckoutAsync(string buyerId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
     {
-        //this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncStart, basketId);
+        this.logger.LogDebug(Messages.ShoppingApplicationService_CheckoutAsyncStart, buyerId);
 
         Order ordered;
         Basket? checkoutBasket;
@@ -197,13 +209,15 @@ public class ShoppingApplicationService
             scope.Complete();
         }
 
-        //this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncEnd, checkoutBasket.Id, ordered.Id);
+        this.logger.LogDebug(Messages.ShoppingApplicationService_CheckoutAsyncEnd, checkoutBasket.Id, ordered.Id);
 
         return ordered;
     }
 
     private async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken)
     {
+        this.logger.LogDebug(Messages.ShoppingApplicationService_GetOrCreateBasketForUserAsyncStart, buyerId);
+
         if (string.IsNullOrWhiteSpace(buyerId))
         {
             throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(buyerId));
@@ -216,6 +230,8 @@ public class ShoppingApplicationService
             basket = new Basket(buyerId);
             return await this.basketRepository.AddAsync(basket, cancellationToken);
         }
+
+        this.logger.LogDebug(Messages.ShoppingApplicationService_GetOrCreateBasketForUserAsyncEnd, buyerId);
 
         return basket;
     }

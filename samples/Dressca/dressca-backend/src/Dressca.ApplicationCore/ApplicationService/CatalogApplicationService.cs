@@ -53,18 +53,28 @@ public class CatalogApplicationService
     public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Messages.CatalogApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
-        var itemsOnPage = await this.catalogRepository.FindAsync(
-            item =>
-                (!brandId.HasValue || item.CatalogBrandId == brandId) &&
-                (!categoryId.HasValue || item.CatalogCategoryId == categoryId),
-            skip,
-            take,
-            cancellationToken);
-        var totalItems = await this.catalogRepository.CountAsync(
-            item =>
-                (!brandId.HasValue || item.CatalogBrandId == brandId) &&
-                (!categoryId.HasValue || item.CatalogCategoryId == categoryId),
-            cancellationToken);
+
+        IReadOnlyList<CatalogItem> itemsOnPage;
+        int totalItems;
+
+        using (var scope = TransactionScopeManager.CreateTransactionScope())
+        {
+            itemsOnPage = await this.catalogRepository.FindAsync(
+                item =>
+                    (!brandId.HasValue || item.CatalogBrandId == brandId) &&
+                    (!categoryId.HasValue || item.CatalogCategoryId == categoryId),
+                skip,
+                take,
+                cancellationToken);
+            totalItems = await this.catalogRepository.CountAsync(
+                item =>
+                    (!brandId.HasValue || item.CatalogBrandId == brandId) &&
+                    (!categoryId.HasValue || item.CatalogCategoryId == categoryId),
+                cancellationToken);
+
+            scope.Complete();
+        }
+
         this.logger.LogDebug(Messages.CatalogApplicationService_GetCatalogItemsAsyncEnd, brandId, categoryId);
         return (ItemsOnPage: itemsOnPage, TotalItems: totalItems);
     }

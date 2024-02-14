@@ -132,33 +132,6 @@
   <data name="AssetNotFound" xml:space="preserve">
     <value>アセットコード: {0} のアセットが見つかりませんでした。</value>
   </data>
-  <data name="BasketApplicationService_AddItemToBasketAsyncEnd" xml:space="preserve">
-    <value>ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加しました。</value>
-  </data>
-  <data name="BasketApplicationService_AddItemToBasketAsyncStart" xml:space="preserve">
-    <value>ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加します。</value>
-  </data>
-  <data name="BasketApplicationService_DeleteBasketAsyncEnd" xml:space="preserve">
-    <value>ID: {0} の買い物かごを削除しました。</value>
-  </data>
-  <data name="BasketApplicationService_DeleteBasketAsyncStart" xml:space="preserve">
-    <value>ID: {0} の買い物かごを削除します。</value>
-  </data>
-  <data name="BasketApplicationService_GetOrCreateBasketForUserAsyncEnd" xml:space="preserve">
-    <value>購入者 ID: {0} の買い物かご情報を取得または作成しました。</value>
-  </data>
-  <data name="BasketApplicationService_GetOrCreateBasketForUserAsyncStart" xml:space="preserve">
-    <value>購入者 ID: {0} の買い物かご情報を取得または作成します。</value>
-  </data>
-  <data name="BasketApplicationService_SetQuantitiesAsyncEnd" xml:space="preserve">
-    <value>ID: {0} の買い物かごの数量を一括で設定しました。</value>
-  </data>
-  <data name="BasketApplicationService_SetQuantitiesAsyncStart" xml:space="preserve">
-    <value>ID: {0} の買い物かごの数量を一括で設定します。</value>
-  </data>
-  <data name="BasketApplicationService_SetQuantity" xml:space="preserve">
-    <value>カタログアイテム ID: {0} の数量を {1} に設定します。</value>
-  </data>
   <data name="BasketIsEmptyOnCheckout" xml:space="preserve">
     <value>注文のチェックアウト処理開始時、買い物かご内に商品がありませんでした。</value>
   </data>
@@ -170,6 +143,9 @@
   </data>
   <data name="BasketNotFound" xml:space="preserve">
     <value>ID: {0} の買い物かごが見つかりませんでした。</value>
+  </data>
+  <data name="Basket_SetQuantity" xml:space="preserve">
+    <value>カタログアイテム ID: {0} の数量を {1} に設定します。</value>
   </data>
   <data name="CatalogApplicationService_GetCatalogItemsAsyncEnd" xml:space="preserve">
     <value>カタログブランド ID: {0} 、カタログカテゴリ ID: {1} のカテゴリ情報を取得しました。</value>
@@ -183,6 +159,9 @@
   <data name="CatalogCategoryIdMustBePositive" xml:space="preserve">
     <value>カタログカテゴリ ID は 0 以下にできません。</value>
   </data>
+  <data name="CatalogItemIdDoesNotExistInBasket" xml:space="preserve">
+    <value>カタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。</value>
+  </data>
   <data name="CatalogItemIdDoesNotExistInRepository" xml:space="preserve">
     <value>指定されたカタログアイテム ID: [{0}] のカタログアイテムがリポジトリに存在しません。</value>
   </data>
@@ -194,12 +173,6 @@
   </data>
   <data name="InvalidAssetType" xml:space="preserve">
     <value>アセットタイプ: {0} はサポートされていません。</value>
-  </data>
-  <data name="OrderApplicationService_CreateOrderAsyncEnd" xml:space="preserve">
-    <value>買い物かご ID: {0} の情報をもとに注文 ID: {1} を作成しました。</value>
-  </data>
-  <data name="OrderApplicationService_CreateOrderAsyncStart" xml:space="preserve">
-    <value>買い物かご ID: {0} の情報をもとに注文を作成します。</value>
   </data>
   <data name="OrderApplicationService_GetOrderAsyncEnd" xml:space="preserve">
     <value>注文 ID: {0} の注文情報を取得しました。</value>
@@ -215,5 +188,35 @@
   </data>
   <data name="PropertyNotInitialized" xml:space="preserve">
     <value>{0} プロパティが初期化されていません。</value>
+  </data>
+  <data name="ShoppingApplicationService_AddItemToBasketAsyncEnd" xml:space="preserve">
+    <value>ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加しました。</value>
+  </data>
+  <data name="ShoppingApplicationService_AddItemToBasketAsyncStart" xml:space="preserve">
+    <value>ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加します。</value>
+  </data>
+  <data name="ShoppingApplicationService_CheckoutAsyncEnd" xml:space="preserve">
+    <value>買い物かご ID: {0} の情報をもとに注文 ID: {1} を作成しました。</value>
+  </data>
+  <data name="ShoppingApplicationService_CheckoutAsyncStart" xml:space="preserve">
+    <value>買い物かご ID: {0} の情報をもとに注文を作成します。</value>
+  </data>
+  <data name="ShoppingApplicationService_GetBasketItemsAsyncEnd" xml:space="preserve">
+    <value>購入者 ID: {0} の買い物かごアイテムの一覧を取得しました。</value>
+  </data>
+  <data name="ShoppingApplicationService_GetBasketItemsAsyncStart" xml:space="preserve">
+    <value>購入者 ID: {0} の買い物かごアイテムの一覧を取得します。</value>
+  </data>
+  <data name="ShoppingApplicationService_GetOrCreateBasketForUserAsyncEnd" xml:space="preserve">
+    <value>購入者 ID: {0} の買い物かご情報を取得または作成しました。</value>
+  </data>
+  <data name="ShoppingApplicationService_GetOrCreateBasketForUserAsyncStart" xml:space="preserve">
+    <value>購入者 ID: {0} の買い物かご情報を取得または作成します。</value>
+  </data>
+  <data name="ShoppingApplicationService_SetBasketItemsQuantitiesAsyncEnd" xml:space="preserve">
+    <value>ID: {0} の買い物かごの数量を一括で設定しました。</value>
+  </data>
+  <data name="ShoppingApplicationService_SetBasketItemsQuantitiesAsyncStart" xml:space="preserve">
+    <value>ID: {0} の買い物かごの数量を一括で設定します。</value>
   </data>
 </root>

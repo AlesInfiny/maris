@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.Catalog;
-using Dressca.ApplicationCore.Ordering;
+﻿using Dressca.ApplicationCore.Ordering;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
@@ -48,10 +41,18 @@ public class OrderApplicationService
     public async Task<Order> GetOrderAsync(long orderId, string buyerId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncStart, orderId);
-        var order = await this.orderRepository.FindAsync(orderId, cancellationToken);
-        if (order is null || !order.HasMatchingBuyerId(buyerId))
+
+        Order? order;
+
+        using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            throw new OrderNotFoundException(orderId, buyerId);
+            order = await this.orderRepository.FindAsync(orderId, cancellationToken);
+            if (order is null || !order.HasMatchingBuyerId(buyerId))
+            {
+                throw new OrderNotFoundException(orderId, buyerId);
+            }
+
+            scope.Complete();
         }
 
         this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncEnd, orderId);
