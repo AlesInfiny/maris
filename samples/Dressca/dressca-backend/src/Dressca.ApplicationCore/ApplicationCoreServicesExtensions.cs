@@ -33,6 +33,7 @@ public static class ApplicationCoreServicesExtensions
 
         // Application Services
         services.AddTransient<ShoppingApplicationService>();
+        services.AddTransient<OrderApplicationService>();
         services.AddTransient<CatalogApplicationService>();
         services.AddTransient<AssetApplicationService>();
 

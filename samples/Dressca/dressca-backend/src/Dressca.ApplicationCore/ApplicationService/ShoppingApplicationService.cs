@@ -189,27 +189,6 @@ public class ShoppingApplicationService
         return ordered;
     }
 
-    /// <summary>
-    ///  指定した注文 Id 、購入者 Id の注文情報を取得します。
-    /// </summary>
-    /// <param name="orderId">注文 Id 。</param>
-    /// <param name="buyerId">購入者 Id 。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>注文情報。</returns>
-    /// <exception cref="OrderNotFoundException">注文情報が見つからない場合。</exception>
-    public async Task<Order> GetOrderAsync(long orderId, string buyerId, CancellationToken cancellationToken = default)
-    {
-        this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncStart, orderId);
-        var order = await this.orderRepository.FindAsync(orderId, cancellationToken);
-        if (order is null || !order.HasMatchingBuyerId(buyerId))
-        {
-            throw new OrderNotFoundException(orderId, buyerId);
-        }
-
-        this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncEnd, orderId);
-        return order;
-    }
-
     private async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(buyerId))

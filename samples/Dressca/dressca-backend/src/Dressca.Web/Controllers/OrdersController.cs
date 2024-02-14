@@ -15,29 +15,34 @@ namespace Dressca.Web.Controllers;
 [Produces("application/json")]
 public class OrdersController : ControllerBase
 {
-    private readonly ShoppingApplicationService service;
+    private readonly ShoppingApplicationService shoppingApplicationService;
+    private readonly OrderApplicationService orderApplicationService;
     private readonly IObjectMapper<Order, OrderResponse> orderMapper;
     private readonly ILogger<OrdersController> logger;
 
     /// <summary>
     ///  <see cref="OrdersController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="service">ショッピングアプリケーションサービス。</param>
+    /// <param name="shoppingApplicationService">ショッピングアプリケーションサービス。</param>
+    /// <param name="orderApplicationService">注文アプリケーションサービス。</param>
     /// <param name="orderMapper"><see cref="Order"/> と <see cref="OrderResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
-    ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="shoppingApplicationService"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="orderApplicationService"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="orderMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     public OrdersController(
-        ShoppingApplicationService service,
+        ShoppingApplicationService shoppingApplicationService,
+        OrderApplicationService orderApplicationService,
         IObjectMapper<Order, OrderResponse> orderMapper,
         ILogger<OrdersController> logger)
     {
-        this.service = service ?? throw new ArgumentNullException(nameof(service));
+        this.shoppingApplicationService = shoppingApplicationService ?? throw new ArgumentNullException(nameof(shoppingApplicationService));
+        this.orderApplicationService = orderApplicationService ?? throw new ArgumentNullException(nameof(orderApplicationService));
         this.orderMapper = orderMapper ?? throw new ArgumentNullException(nameof(orderMapper));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -57,7 +62,7 @@ public class OrdersController : ControllerBase
         var buyerId = this.HttpContext.GetBuyerId();
         try
         {
-            var order = await this.service.GetOrderAsync(orderId, buyerId);
+            var order = await this.orderApplicationService.GetOrderAsync(orderId, buyerId);
             var orderDto = this.orderMapper.Convert(order);
             return this.Ok(orderDto);
         }
@@ -91,7 +96,7 @@ public class OrdersController : ControllerBase
             azanaAndOthers: postOrderInput.AzanaAndOthers);
         var shipToAddress = new ShipTo(postOrderInput.FullName, address);
 
-        var order = await this.service.CreateOrderAsync(buyerId, shipToAddress);
+        var order = await this.shoppingApplicationService.CreateOrderAsync(buyerId, shipToAddress);
 
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetByIdAsync));
         return this.CreatedAtAction(actionName, new { orderId = order.Id }, null);
