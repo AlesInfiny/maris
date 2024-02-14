@@ -196,6 +196,15 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   注文のチェックアウト処理開始時、買い物かごが存在しませんでした。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string BasketIsNullOnCheckout {
+            get {
+                return ResourceManager.GetString("BasketIsNullOnCheckout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   買い物かごアイテムの数量は 0 未満にできません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string BasketItemQuantityMustBePositive {

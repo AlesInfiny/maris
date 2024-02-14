@@ -161,11 +161,23 @@ public class ShoppingApplicationService
         //this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncStart, basketId);
 
         Order ordered;
-        Basket checkoutBasket;
+        Basket? checkoutBasket;
+
+        if (string.IsNullOrWhiteSpace(buyerId))
+        {
+            throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(buyerId));
+        }
 
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            checkoutBasket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
+            checkoutBasket = await this.basketRepository.GetWithBasketItemsAsync(buyerId, cancellationToken);
+
+            if (checkoutBasket is null)
+            {
+                // 該当する購入者Idの買い物かごが存在しない(メッセージ追加)
+                // this.logger.LogDebug(Messages.CreateNewBasket_UserBasketNotFound, buyerId);
+                throw new NullBasketOnCheckoutException();
+            }
 
             if (checkoutBasket.IsEmpty())
             {

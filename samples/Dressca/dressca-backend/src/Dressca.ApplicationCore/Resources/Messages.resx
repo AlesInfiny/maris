@@ -162,6 +162,9 @@
   <data name="BasketIsEmptyOnCheckout" xml:space="preserve">
     <value>注文のチェックアウト処理開始時、買い物かご内に商品がありませんでした。</value>
   </data>
+  <data name="BasketIsNullOnCheckout" xml:space="preserve">
+    <value>注文のチェックアウト処理開始時、買い物かごが存在しませんでした。</value>
+  </data>
   <data name="BasketItemQuantityMustBePositive" xml:space="preserve">
     <value>買い物かごアイテムの数量は 0 未満にできません。</value>
   </data>
