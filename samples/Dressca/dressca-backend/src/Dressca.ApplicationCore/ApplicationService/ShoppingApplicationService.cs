@@ -149,14 +149,15 @@ public class ShoppingApplicationService
     }
 
     /// <summary>
-    ///  注文を作成します。
+    ///  買い物かご内の商品を注文します。
     /// </summary>
     /// <param name="buyerId">購入者 Id 。</param>
     /// <param name="shipToAddress">お届け先。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>作成した注文情報を返す非同期処理を表すタスク。</returns>
+    /// <exception cref="NullBasketOnCheckoutException">注文を作成する対象の買い物かごが存在しない場合。</exception>
     /// <exception cref="EmptyBasketOnCheckoutException">注文を作成する対象の買い物かごが空の場合。</exception>
-    public async Task<Order> CreateOrderAsync(string buyerId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
+    public async Task<Order> CheckoutAsync(string buyerId, ShipTo shipToAddress, CancellationToken cancellationToken = default)
     {
         //this.logger.LogDebug(Messages.OrderApplicationService_CreateOrderAsyncStart, basketId);
 

@@ -96,7 +96,7 @@ public class OrdersController : ControllerBase
             azanaAndOthers: postOrderInput.AzanaAndOthers);
         var shipToAddress = new ShipTo(postOrderInput.FullName, address);
 
-        var order = await this.shoppingApplicationService.CreateOrderAsync(buyerId, shipToAddress);
+        var order = await this.shoppingApplicationService.CheckoutAsync(buyerId, shipToAddress);
 
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetByIdAsync));
         return this.CreatedAtAction(actionName, new { orderId = order.Id }, null);
