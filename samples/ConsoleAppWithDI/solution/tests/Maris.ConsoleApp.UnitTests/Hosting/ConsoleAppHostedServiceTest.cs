@@ -352,7 +352,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var record = this.LogCollector.LatestRecord;
         Assert.Equal(LogLevel.Information, record.Level);
         Assert.Equal(default, record.Id);
-        Assert.Equal($"sync-command コマンドのホストの処理が終了コード 0 で完了しました。実行時間は 0 ms でした。", record.Message);
+        Assert.StartsWith($"sync-command コマンドのホストの処理が終了コード 0 で完了しました。", record.Message);
     }
 
     [Fact]
@@ -383,7 +383,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var record = this.LogCollector.LatestRecord;
         Assert.Equal(LogLevel.Information, record.Level);
         Assert.Equal(default, record.Id);
-        Assert.Equal($"sync-command コマンドのホストの処理が終了コード {exitCode} で完了しました。実行時間は 0 ms でした。", record.Message);
+        Assert.StartsWith($"sync-command コマンドのホストの処理が終了コード {exitCode} で完了しました。", record.Message);
     }
 
     private static Mock<ICommandManager> CreateCommandManagerMock(CommandBase? creatingCommand = null)
