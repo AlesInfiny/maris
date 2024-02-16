@@ -4,6 +4,7 @@ using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
+using Dressca.Web.Constants;
 using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Catalog;
 using Dressca.Web.Resources;
@@ -131,7 +132,7 @@ public class BasketItemsController : ControllerBase
         var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
         if (notExistsInBasketCatalogIds.Any())
         {
-            this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(',', notExistsInBasketCatalogIds));
+            this.logger.LogWarning(WebLogEvents.CatalogItemIdDoesNotExistInBasket, Messages.CatalogItemIdDoesNotExistInBasket, string.Join(',', notExistsInBasketCatalogIds));
             return this.BadRequest();
         }
 
@@ -217,7 +218,7 @@ public class BasketItemsController : ControllerBase
         var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
         if (!basket.IsInCatalogItem(catalogItemId))
         {
-            this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, catalogItemId);
+            this.logger.LogWarning(WebLogEvents.CatalogItemIdDoesNotExistInBasket, Messages.CatalogItemIdDoesNotExistInBasket, catalogItemId);
             return this.NotFound();
         }
 

@@ -1,5 +1,6 @@
 ﻿using Dressca.ApplicationCore.Assets;
 using Dressca.Web.Assets;
+using Dressca.Web.Constants;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dressca.Web.Controllers;
@@ -53,7 +54,7 @@ public class AssetsController : ControllerBase
         }
         catch (AssetNotFoundException ex)
         {
-            this.logger.LogWarning(ex, ex.Message);
+            this.logger.LogWarning(WebLogEvents.AssetNotFound, ex, ex.Message);
             return this.NotFound();
         }
     }
