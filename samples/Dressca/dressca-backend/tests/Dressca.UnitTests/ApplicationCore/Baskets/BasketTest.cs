@@ -373,7 +373,7 @@ public class BasketTest
         var quantities = new Dictionary<long, int>() { { 100L, 5 } };
 
         // Act
-        var result = basket.SetItemsQuantity(quantities);
+        basket.SetItemsQuantity(quantities);
 
         // Assert
         Assert.True(basket.Items.Count == 1);
