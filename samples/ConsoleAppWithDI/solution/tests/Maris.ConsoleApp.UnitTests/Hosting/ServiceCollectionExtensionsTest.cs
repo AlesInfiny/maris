@@ -1,13 +1,16 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using CommandLine;
 using Maris.ConsoleApp.Core;
 using Maris.ConsoleApp.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
 
-public class ServiceCollectionExtensionsTest
+public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
     [Fact]
     public void AddConsoleAppService_必要なサービスが登録される()
@@ -35,6 +38,10 @@ public class ServiceCollectionExtensionsTest
             service =>
             {
                 Assert.Equal(typeof(ConsoleAppSettings), service.ServiceType);
+            },
+            service =>
+            {
+                Assert.Equal(typeof(ConsoleAppContextFactory), service.ServiceType);
             },
             service =>
             {
@@ -103,6 +110,8 @@ public class ServiceCollectionExtensionsTest
         var types = Array.Empty<Type>();
         var assembly1 = new TestAssembly1(types);
         var assembly2 = new TestAssembly2([]);
+        services.AddTestLogging(this.LoggerManager);
+        services.AddSingleton<ConsoleAppContextFactory>();
 
         // Act
         services.AddConsoleAppContext(args, types =>
@@ -130,6 +139,8 @@ public class ServiceCollectionExtensionsTest
         services.AddSingleton<IApplicationProcess, TestApplicationProcess>(provider => testApplicationProcess);
         var types = new Type[] { typeof(TestParameter1) };
         var assembly = new TestAssembly1(types);
+        services.AddTestLogging(this.LoggerManager);
+        services.AddSingleton<ConsoleAppContextFactory>();
 
         // Act
         services.AddConsoleAppContext(args, types =>
@@ -160,6 +171,8 @@ public class ServiceCollectionExtensionsTest
         var assembly1 = new TestAssembly1(types1);
         var types2 = new Type[] { typeof(TestParameter2) };
         var assembly2 = new TestAssembly1(types2);
+        services.AddTestLogging(this.LoggerManager);
+        services.AddSingleton<ConsoleAppContextFactory>();
 
         // Act
         services.AddConsoleAppContext(args, types =>

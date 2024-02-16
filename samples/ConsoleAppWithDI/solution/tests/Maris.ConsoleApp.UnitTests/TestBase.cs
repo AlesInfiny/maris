@@ -7,16 +7,16 @@ namespace Maris.ConsoleApp.UnitTests;
 
 public class TestBase
 {
-    private readonly TestLoggerManager loggerManager;
-
     protected TestBase(ITestOutputHelper testOutputHelper)
     {
         ArgumentNullException.ThrowIfNull(testOutputHelper);
-        this.loggerManager = new TestLoggerManager(testOutputHelper);
+        this.LoggerManager = new TestLoggerManager(testOutputHelper);
     }
 
-    protected FakeLogCollector LogCollector => this.loggerManager.LogCollector;
+    protected TestLoggerManager LoggerManager { get; }
+
+    protected FakeLogCollector LogCollector => this.LoggerManager.LogCollector;
 
     protected ILogger<T> CreateTestLogger<T>()
-        => this.loggerManager.CreateLogger<T>();
+        => this.LoggerManager.CreateLogger<T>();
 }
