@@ -47,7 +47,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
-            .Setup(r => r.AddAsync(basket, AnyToken))
+            .Setup(r => r.AddAsync(It.IsAny<Basket>(), AnyToken))
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
@@ -179,19 +179,82 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var result = await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
-        Assert.True(result);
+        basketRepo.Verify(
+            r => r.UpdateAsync(It.Is<Basket>(b => b.BuyerId == dummyBuyerId), AnyToken),
+            Times.Once);
     }
 
     [Fact]
     public async Task SetBasketItemsQuantitiesAsync_買い物かご内とカタログリポジトリに存在するカタログアイテムが数量設定対象_買い物かごの商品数が更新される()
     {
+        // Arrange
+        var dummyBuyerId = "dummyId";
+        var dummyBasket = new Basket(dummyBuyerId);
+        dummyBasket.AddItem(10L, 1000m);
+        var newQuantity = 5;
+        var quantities = new Dictionary<long, int>() { { 10L, newQuantity } };
+        var catalogItems = new List<CatalogItem>
+         {
+             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+         };
 
+        var basketRepo = new Mock<IBasketRepository>();
+        basketRepo
+            .Setup(r => r.GetWithBasketItemsAsync(dummyBuyerId, AnyToken))
+            .ReturnsAsync(dummyBasket);
+        var orderRepo = Mock.Of<IOrderRepository>();
+        var orderFactory = Mock.Of<IOrderFactory>();
+        var catalogRepo = Mock.Of<ICatalogRepository>();
+        var catalogDomainService = new Mock<ICatalogDomainService>();
+        catalogDomainService
+            .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
+            .ReturnsAsync((true, catalogItems.AsReadOnly()));
+        var logger = this.CreateTestLogger<ShoppingApplicationService>();
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+
+        // Act
+        var result = await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+
+        // Assert
+        basketRepo.Verify(
+            r => r.UpdateAsync(It.Is<Basket>(b => b.Items.First().Quantity == newQuantity), AnyToken),
+            Times.Once);
     }
 
     [Fact]
     public async Task SetBasketItemsQuantitiesAsync_数量設定後に数量が0となる_買い物かごアイテムが削除される()
     {
+        // Arrange
+        var dummyBuyerId = "dummyId";
+        var dummyBasket = new Basket(dummyBuyerId);
+        dummyBasket.AddItem(10L, 1000m);
+        var quantities = new Dictionary<long, int>() { { 10L, 0 } };
+        var catalogItems = new List<CatalogItem>
+         {
+             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+         };
 
+        var basketRepo = new Mock<IBasketRepository>();
+        basketRepo
+            .Setup(r => r.GetWithBasketItemsAsync(dummyBuyerId, AnyToken))
+            .ReturnsAsync(dummyBasket);
+        var orderRepo = Mock.Of<IOrderRepository>();
+        var orderFactory = Mock.Of<IOrderFactory>();
+        var catalogRepo = Mock.Of<ICatalogRepository>();
+        var catalogDomainService = new Mock<ICatalogDomainService>();
+        catalogDomainService
+            .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
+            .ReturnsAsync((true, catalogItems.AsReadOnly()));
+        var logger = this.CreateTestLogger<ShoppingApplicationService>();
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+
+        // Act
+        var result = await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+
+        // Assert
+        basketRepo.Verify(
+            r => r.UpdateAsync(It.Is<Basket>(b => b.Items.Count == 0), AnyToken),
+            Times.Once);
     }
 
     [Theory]
@@ -277,14 +340,8 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         // Assert
         basketRepo.Verify(
-            r => r.UpdateAsync(It.IsAny<Basket>(), AnyToken),
+            r => r.UpdateAsync(It.Is<Basket>(b => b.BuyerId == dummyBuyerId), AnyToken),
             Times.Once);
-    }
-
-    [Fact]
-    public async Task AddItemToBasketAsync_数量設定後に数量が0となる_買い物かごアイテムが削除される()
-    {
-
     }
 
     [Theory]
@@ -451,7 +508,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         // Assert
         orderRepo.Verify(
-            r => r.AddAsync(It.IsAny<Order>(), AnyToken),
+            r => r.AddAsync(It.Is<Order>(o => o.BuyerId == dummyBuyerId), AnyToken),
             Times.Once);
     }
 
@@ -497,7 +554,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         // Assert
         basketRepo.Verify(
-            r => r.RemoveAsync(It.IsAny<Basket>(), AnyToken),
+            r => r.RemoveAsync(It.Is<Basket>(b => b.BuyerId == dummyBuyerId), AnyToken),
             Times.Once);
     }
 

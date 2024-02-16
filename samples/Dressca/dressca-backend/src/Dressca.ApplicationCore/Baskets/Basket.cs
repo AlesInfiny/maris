@@ -79,7 +79,7 @@ public class Basket
         {
             if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
             {
-                message.Add(string.Format(Messages.Basket_SetQuantity, new object [] { item.CatalogItemId, quantity }));
+                message.Add(string.Format(Messages.Basket_SetQuantity, new object[] { item.CatalogItemId, quantity }));
                 item.SetQuantity(quantity);
             }
         }
