@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Assets;
+using Dressca.Store.Assets.StaticFiles.Constants;
 using Dressca.Store.Assets.StaticFiles.Resources;
 using Microsoft.Extensions.Logging;
 
@@ -32,16 +33,16 @@ internal class StaticFileAssetStore : IAssetStore
     public Stream? GetStream(Asset asset)
     {
         ArgumentNullException.ThrowIfNull(asset);
-        this.logger.LogDebug(Messages.StaticFileAssetStore_GetStreamStart, asset.AssetCode);
+        this.logger.LogDebug(StaticFileAssetLogEvents.DebugEvent, Messages.StaticFileAssetStore_GetStreamStart, asset.AssetCode);
         var filePath = this.GetFilePath(asset);
         if (File.Exists(filePath))
         {
-            this.logger.LogDebug(Messages.StaticFileAssetStore_GetStreamEnd, asset.AssetCode, filePath);
+            this.logger.LogDebug(StaticFileAssetLogEvents.DebugEvent, Messages.StaticFileAssetStore_GetStreamEnd, asset.AssetCode, filePath);
             return new FileStream(filePath, FileMode.Open);
         }
         else
         {
-            this.logger.LogInformation(Messages.FileNotFound, asset.AssetCode, filePath);
+            this.logger.LogInformation(StaticFileAssetLogEvents.AssetImageFileNotFound, Messages.FileNotFound, asset.AssetCode, filePath);
             return null;
         }
     }
