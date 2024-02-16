@@ -1,8 +1,8 @@
-using Dressca.ApplicationCore.ApplicationService;
+﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Assets;
 using Xunit.Abstractions;
 
-namespace Dressca.UnitTests.ApplicationCore.Assets;
+namespace Dressca.UnitTests.ApplicationCore.ApplicationService;
 
 public class AssetApplicationServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {

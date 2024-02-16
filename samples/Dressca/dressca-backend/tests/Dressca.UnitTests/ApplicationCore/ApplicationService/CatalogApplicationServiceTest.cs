@@ -3,7 +3,7 @@ using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Catalog;
 using Xunit.Abstractions;
 
-namespace Dressca.UnitTests.ApplicationCore.Catalog;
+namespace Dressca.UnitTests.ApplicationCore.ApplicationService;
 
 /// <summary>
 ///  カタログアプリケーションサービスの単体テストです。

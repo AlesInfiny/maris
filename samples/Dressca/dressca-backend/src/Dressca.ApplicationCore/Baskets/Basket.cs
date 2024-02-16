@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Dressca.ApplicationCore.Accounting;
-using Dressca.ApplicationCore.Catalog;
-using Dressca.ApplicationCore.Ordering;
 using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Baskets;

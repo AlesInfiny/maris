@@ -10,7 +10,7 @@ namespace Dressca.ApplicationCore.ApplicationService;
 public class OrderApplicationService
 {
     private readonly IOrderRepository orderRepository;
-    private readonly ILogger<ShoppingApplicationService> logger;
+    private readonly ILogger<OrderApplicationService> logger;
 
     /// <summary>
     ///  <see cref="OrderApplicationService"/> クラスの新しいインスタンスを初期化します。
@@ -24,7 +24,7 @@ public class OrderApplicationService
     ///  </list>/// </exception>
     public OrderApplicationService(
         IOrderRepository orderRepository,
-        ILogger<ShoppingApplicationService> logger)
+        ILogger<OrderApplicationService> logger)
     {
         this.orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));

@@ -187,8 +187,6 @@ public class ShoppingApplicationService
 
             if (checkoutBasket is null)
             {
-                // 該当する購入者Idの買い物かごが存在しない(メッセージ追加)
-                // this.logger.LogDebug(Messages.CreateNewBasket_UserBasketNotFound, buyerId);
                 throw new NullBasketOnCheckoutException();
             }
 
