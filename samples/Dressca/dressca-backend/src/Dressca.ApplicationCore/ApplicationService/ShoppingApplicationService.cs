@@ -67,18 +67,15 @@ public class ShoppingApplicationService
 
         Basket basket;
         IReadOnlyList<CatalogItem> catalogItems;
-
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
             var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
             catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id), cancellationToken);
-
             scope.Complete();
         }
 
         this.logger.LogDebug(Messages.ShoppingApplicationService_GetBasketItemsAsyncEnd, buyerId);
-
         return (BasketResult: basket, CatalogItems: catalogItems);
     }
 
@@ -95,8 +92,9 @@ public class ShoppingApplicationService
 
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            // 買い物かごに入っていないカタログアイテムが指定されていないか確認
             var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
+
+            // 買い物かごに入っていないカタログアイテムが指定されていないか確認
             var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
             if (notExistsInBasketCatalogIds.Any())
             {
@@ -115,12 +113,10 @@ public class ShoppingApplicationService
             this.logger.LogDebug(string.Join(",", message));
             basket.RemoveEmptyItems();
             await this.basketRepository.UpdateAsync(basket, cancellationToken);
-
             scope.Complete();
         }
 
         this.logger.LogDebug(Messages.ShoppingApplicationService_SetBasketItemsQuantitiesAsyncEnd, buyerId);
-
         return true;
     }
 
@@ -151,12 +147,10 @@ public class ShoppingApplicationService
             basket.AddItem(catalogItemId, catalogItem.Price, addedQuantity);
             basket.RemoveEmptyItems();
             await this.basketRepository.UpdateAsync(basket, cancellationToken);
-
             scope.Complete();
         }
 
         this.logger.LogDebug(Messages.ShoppingApplicationService_AddItemToBasketAsyncEnd, buyerId, catalogItemId, addedQuantity);
-
         return true;
     }
 
@@ -173,14 +167,13 @@ public class ShoppingApplicationService
     {
         this.logger.LogDebug(Messages.ShoppingApplicationService_CheckoutAsyncStart, buyerId);
 
-        Order ordered;
-        Basket? checkoutBasket;
-
         if (string.IsNullOrWhiteSpace(buyerId))
         {
             throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(buyerId));
         }
 
+        Order ordered;
+        Basket? checkoutBasket;
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             checkoutBasket = await this.basketRepository.GetWithBasketItemsAsync(buyerId, cancellationToken);
@@ -203,12 +196,10 @@ public class ShoppingApplicationService
 
             // 買い物かごを削除
             await this.basketRepository.RemoveAsync(checkoutBasket, cancellationToken);
-
             scope.Complete();
         }
 
         this.logger.LogDebug(Messages.ShoppingApplicationService_CheckoutAsyncEnd, checkoutBasket.Id, ordered.Id);
-
         return ordered;
     }
 
@@ -230,7 +221,6 @@ public class ShoppingApplicationService
         }
 
         this.logger.LogDebug(Messages.ShoppingApplicationService_GetOrCreateBasketForUserAsyncEnd, buyerId);
-
         return basket;
     }
 }

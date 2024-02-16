@@ -587,5 +587,4 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         return items;
     }
-
 }

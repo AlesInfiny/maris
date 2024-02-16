@@ -43,7 +43,6 @@ public class OrderApplicationService
         this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncStart, orderId);
 
         Order? order;
-
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             order = await this.orderRepository.FindAsync(orderId, cancellationToken);

@@ -56,7 +56,6 @@ public class CatalogApplicationService
 
         IReadOnlyList<CatalogItem> itemsOnPage;
         int totalItems;
-
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             itemsOnPage = await this.catalogRepository.FindAsync(
@@ -71,7 +70,6 @@ public class CatalogApplicationService
                     (!brandId.HasValue || item.CatalogBrandId == brandId) &&
                     (!categoryId.HasValue || item.CatalogCategoryId == categoryId),
                 cancellationToken);
-
             scope.Complete();
         }
 
