@@ -143,6 +143,21 @@ AlesInfiny Maris で定義するログの種類は以下の通りです。
 
 AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.logging.ilogger) インターフェースを使用します。ログプロバイダーは、アプリケーションの形態に合わせて適切なものを選択します。
 
+## イベントID管理方針 {#eventid-management-policy}
+
+イベント ID は、ログを機械的に識別するために使用します。
+適切なイベント ID をログに出力することで、イベントの発生原因や対処手段の特定が容易になり、
+効率的なサービス運用が可能になります。
+イベント ID は、プロジェクトごとにクラスファイルで管理します。
+
+- 識別子
+  
+    プロジェクト内で一意になるような識別子を付与します。
+
+- 名前
+  
+    プロジェクト内で一意かつ、発生したイベントの意味が理解できる名前を付与します。
+  
 ## メッセージ管理方針 {#message-management-policy}
 
 メッセージ文字列は、表記の統一を図る目的にリソースファイルで管理します。

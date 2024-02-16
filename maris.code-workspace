@@ -58,7 +58,8 @@
             "Vetur",
             "vite",
             "winbatch",
-            "xunit"
+            "xunit",
+            "eventid"
         ],
         "markdownlint.ignore": [
             "LICENSE"
