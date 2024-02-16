@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Baskets;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 namespace Dressca.UnitTests.ApplicationCore.Baskets;
 
@@ -342,5 +343,40 @@ public class BasketTest
 
         // Assert
         Assert.False(result);
+    }
+
+    [Fact]
+    public void SetItemsQuantity_買い物かご内に存在するアイテムの数量を指定_数量を設定できる()
+    {
+        // Arrange
+        var basket = new Basket(Guid.NewGuid().ToString());
+        basket.AddItem(1L, 1000m);
+        var itemId = 1L;
+        var newQuantity = 5;
+        var quantities = new Dictionary<long, int>() { { itemId, newQuantity } };
+
+        // Act
+        var result = basket.SetItemsQuantity(quantities);
+
+        // Assert
+        Assert.StartsWith($"カタログアイテム ID: {itemId} の数量を {newQuantity} に設定します。", string.Join(",", result));
+        Assert.True(basket.Items.First().Quantity == newQuantity);
+    }
+
+    [Fact]
+    public void SetItemsQuantity_買い物かご内に存在しないアイテムの数量を指定_買い物かご内にアイテムが追加されない()
+    {
+        // Arrange
+        var basket = new Basket(Guid.NewGuid().ToString());
+        var itemId = 1L;
+        basket.AddItem(itemId, 1000m);
+        var quantities = new Dictionary<long, int>() { { 100L, 5 } };
+
+        // Act
+        var result = basket.SetItemsQuantity(quantities);
+
+        // Assert
+        Assert.True(basket.Items.Count == 1);
+        Assert.True(basket.Items.First().CatalogItemId == itemId);
     }
 }
