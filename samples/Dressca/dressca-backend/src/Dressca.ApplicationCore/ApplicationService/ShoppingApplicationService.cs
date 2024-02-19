@@ -86,7 +86,7 @@ public class ShoppingApplicationService
     /// <param name="quantities">各カタログアイテムの数量。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
-    public async Task<bool> SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
+    public async Task SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Messages.ShoppingApplicationService_SetBasketItemsQuantitiesAsyncStart, buyerId);
 
@@ -98,15 +98,17 @@ public class ShoppingApplicationService
             var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
             if (notExistsInBasketCatalogIds.Any())
             {
-                this.logger.LogWarning(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(',', notExistsInBasketCatalogIds));
-                return false;
+                throw new CatalogItemNotExistingInBasketException(notExistsInBasketCatalogIds);
             }
 
             // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
-            var (existsAll, _) = await this.catalogDomainService.ExistsAllAsync(quantities.Keys, cancellationToken);
+            var (existsAll, existingCatalogItems) = await this.catalogDomainService.ExistsAllAsync(quantities.Keys, cancellationToken);
             if (!existsAll)
             {
-                return false;
+                var notExistingInRepositoryCatalogIds =
+                    quantities.Keys
+                       .Where(catalogItemId => existingCatalogItems.Select(item => item.Id).Any(id => id != catalogItemId));
+                throw new CatalogItemNotExistingInRepositoryException(notExistingInRepositoryCatalogIds);
             }
 
             var message = basket.SetItemsQuantity(quantities);
@@ -117,7 +119,6 @@ public class ShoppingApplicationService
         }
 
         this.logger.LogDebug(Messages.ShoppingApplicationService_SetBasketItemsQuantitiesAsyncEnd, buyerId);
-        return true;
     }
 
     /// <summary>
@@ -128,7 +129,7 @@ public class ShoppingApplicationService
     /// <param name="addedQuantity">数量。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
-    public async Task<bool> AddItemToBasketAsync(string buyerId, long catalogItemId, int addedQuantity, CancellationToken cancellationToken = default)
+    public async Task AddItemToBasketAsync(string buyerId, long catalogItemId, int addedQuantity, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Messages.ShoppingApplicationService_AddItemToBasketAsyncStart, buyerId, catalogItemId, addedQuantity);
 
@@ -140,7 +141,8 @@ public class ShoppingApplicationService
             var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync(new[] { catalogItemId }, cancellationToken);
             if (!existsAll)
             {
-                return false;
+                var notExistingInRepositoryCatalogIds = new List<long>() { catalogItemId };
+                throw new CatalogItemNotExistingInRepositoryException(notExistingInRepositoryCatalogIds);
             }
 
             var catalogItem = catalogItems[0];
@@ -151,7 +153,6 @@ public class ShoppingApplicationService
         }
 
         this.logger.LogDebug(Messages.ShoppingApplicationService_AddItemToBasketAsyncEnd, buyerId, catalogItemId, addedQuantity);
-        return true;
     }
 
     /// <summary>

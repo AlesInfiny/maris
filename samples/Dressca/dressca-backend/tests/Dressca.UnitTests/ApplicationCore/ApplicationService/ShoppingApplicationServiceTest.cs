@@ -92,7 +92,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task SetBasketItemsQuantitiesAsync_買い物かご内に存在しないカタログアイテムが数量設定対象_falseを返す()
+    public async Task SetBasketItemsQuantitiesAsync_買い物かご内に存在しないカタログアイテムが数量設定対象_CatalogItemNotExistingInBasketExceptionを返す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
@@ -112,14 +112,14 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
 
         // Act
-        var result = await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+        var action = () => service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
-        Assert.False(result);
+        await Assert.ThrowsAsync<CatalogItemNotExistingInBasketException>(action);
     }
 
     [Fact]
-    public async Task SetBasketItemsQuantitiesAsync_カタログリポジトリに存在しないカタログアイテムが数量設定対象_falseを返す()
+    public async Task SetBasketItemsQuantitiesAsync_カタログリポジトリに存在しないカタログアイテムが数量設定対象_CatalogItemNotExistingInRepositoryExceptionを返す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
@@ -142,10 +142,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
 
         // Act
-        var result = await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+        var action = () => service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
-        Assert.False(result);
+        await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
     }
 
     [Fact]
@@ -176,7 +176,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
 
         // Act
-        var result = await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
         basketRepo.Verify(
@@ -213,7 +213,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
 
         // Act
-        var result = await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
         basketRepo.Verify(
@@ -249,7 +249,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
 
         // Act
-        var result = await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
         basketRepo.Verify(
@@ -281,7 +281,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task AddItemToBasketAsync_カタログリポジトリに存在しないカタログアイテムが追加対象_falseを返す()
+    public async Task AddItemToBasketAsync_カタログリポジトリに存在しないカタログアイテムが追加対象_CatalogItemNotExistingInRepositoryExceptionを返す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
@@ -303,10 +303,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
 
         // Act
-        var result = await service.AddItemToBasketAsync(dummyBuyerId, 10L, 5);
+        var action = () => service.AddItemToBasketAsync(dummyBuyerId, 10L, 5);
 
         // Assert
-        Assert.False(result);
+        await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
     }
 
     [Fact]
@@ -417,7 +417,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var action = () => service.CheckoutAsync(dummyBuyerId, shipTo);
 
         // Assert
-        var ex = await Assert.ThrowsAsync<EmptyBasketOnCheckoutException>(action);
+        await Assert.ThrowsAsync<EmptyBasketOnCheckoutException>(action);
     }
 
     [Fact]
