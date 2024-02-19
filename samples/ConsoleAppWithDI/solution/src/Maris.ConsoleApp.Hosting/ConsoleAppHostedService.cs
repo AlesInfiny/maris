@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Maris.ConsoleApp.Core;
+using Maris.ConsoleApp.Hosting.Constants;
 using Maris.ConsoleApp.Hosting.Resources;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -55,7 +56,7 @@ internal class ConsoleAppHostedService : IHostedService
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         this.stopwatch.Start();
-        this.logger.LogInformation(Messages.StartHostingService, this.executor.CommandName);
+        this.logger.LogInformation(ConsoleAppHostingLogEvents.StartHostingService, Messages.StartHostingService, this.executor.CommandName);
         try
         {
             var returnCode = await this.executor.ExecuteCommandAsync(cancellationToken);
@@ -63,12 +64,12 @@ internal class ConsoleAppHostedService : IHostedService
         }
         catch (InvalidParameterException ex)
         {
-            this.logger.LogError(ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
+            this.logger.LogError(ConsoleAppHostingLogEvents.InvalidParameterDetected, ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
             this.SetExitCode(this.settings.DefaultValidationErrorExitCode);
         }
         catch (Exception ex)
         {
-            this.logger.LogError(ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
+            this.logger.LogError(ConsoleAppHostingLogEvents.ExceptionrDetected, ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
             this.SetExitCode(this.settings.DefaultErrorExitCode);
         }
         finally
@@ -87,6 +88,7 @@ internal class ConsoleAppHostedService : IHostedService
     {
         this.stopwatch.Stop();
         this.logger.LogInformation(
+            ConsoleAppHostingLogEvents.StopHostingService,
             Messages.StopHostingService,
             this.executor.CommandName,
             Environment.ExitCode,

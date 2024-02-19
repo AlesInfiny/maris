@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Maris.Samples.ApplicationCore.Constants;
+using Microsoft.Extensions.Logging;
 
 namespace Maris.Samples.ApplicationCore;
 
@@ -34,9 +35,9 @@ public class ProductApplicationService
     /// <returns>商品一覧。</returns>
     public List<Product> GetProductsByCategory(ProductCategory category)
     {
-        this.logger.LogInformation($"{category.Id} の商品情報を取得します。");
+        this.logger.LogInformation(SampleApplicationCoreLogEvents.GetProductsByCategoryStart, $"{category.Id} の商品情報を取得します。");
         var products = productRepository.GetProductsByCategory(category);
-        this.logger.LogInformation($"{category.CategoryName} の商品情報を {products.Count} 件取得しました。");
+        this.logger.LogInformation(SampleApplicationCoreLogEvents.GetProductsByCategoryNormalEnd, $"{category.CategoryName} の商品情報を {products.Count} 件取得しました。");
         return products;
     }
 
@@ -58,9 +59,9 @@ public class ProductApplicationService
     {
         var minimumPrice = minPrice ?? decimal.MinValue;
         var maximumPrice = maxPrice ?? decimal.MaxValue;
-        this.logger.LogInformation($"{minimumPrice} ～ {maximumPrice} の単価の商品情報を取得します。");
+        this.logger.LogInformation(SampleApplicationCoreLogEvents.GetProductsByUnitPriceRangeStart, $"{minimumPrice} ～ {maximumPrice} の単価の商品情報を取得します。");
         var products = await productRepository.GetProductsByUnitPriceRangeAsync(minimumPrice, maximumPrice, cancellationToken);
-        this.logger.LogInformation($"{minimumPrice} ～ {maximumPrice} の単価の商品情報を {products.Count} 件取得しました。");
+        this.logger.LogInformation(SampleApplicationCoreLogEvents.GetProductsByUnitPriceRangeNormalEnd, $"{minimumPrice} ～ {maximumPrice} の単価の商品情報を {products.Count} 件取得しました。");
         return products;
 
     }

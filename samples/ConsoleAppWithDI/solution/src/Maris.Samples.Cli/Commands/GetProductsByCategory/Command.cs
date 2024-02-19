@@ -1,5 +1,6 @@
 ﻿using Maris.ConsoleApp.Core;
 using Maris.Samples.ApplicationCore;
+using Maris.Samples.Cli.Constants;
 using Microsoft.Extensions.Logging;
 
 namespace Maris.Samples.Cli.Commands.GetProductsByCategory;
@@ -38,9 +39,9 @@ internal class Command : SyncCommand<Parameter>
     protected override ICommandResult Execute(Parameter parameter)
     {
         var category = new ProductCategory { Id = parameter.CategoryId };
-        this.logger.LogDebug($"商品カテゴリ ID {category.Id} の商品一覧を検索します。");
+        this.logger.LogDebug(SampleCliLogEvents.DebugEvent, $"商品カテゴリ ID {category.Id} の商品一覧を検索します。");
         var products = this.service.GetProductsByCategory(category);
-        this.logger.LogDebug($"商品カテゴリ {category.CategoryName} (ID:{category.Id}) の商品が {products.Count} 件見つかりました。");
+        this.logger.LogDebug(SampleCliLogEvents.DebugEvent, $"商品カテゴリ {category.CategoryName} (ID:{category.Id}) の商品が {products.Count} 件見つかりました。");
         Console.WriteLine($"{category.CategoryName} の商品一覧");
         foreach (var product in products)
         {

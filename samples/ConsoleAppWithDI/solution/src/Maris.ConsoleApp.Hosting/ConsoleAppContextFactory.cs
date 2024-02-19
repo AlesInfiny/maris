@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using Maris.ConsoleApp.Core;
+using Maris.ConsoleApp.Hosting.Constants;
 using Maris.ConsoleApp.Hosting.Resources;
 using Microsoft.Extensions.Logging;
 
@@ -53,7 +54,7 @@ internal class ConsoleAppContextFactory
         IEnumerable<string> args,
         Action<CommandParameterTypeCollection>? commandParametersOption)
     {
-        this.logger.LogInformation(Messages.ParseParameter.Embed(string.Join(' ', args)));
+        this.logger.LogInformation(ConsoleAppHostingLogEvents.StartParseParameter, Messages.ParseParameter.Embed(string.Join(' ', args)));
         var commandParameterTypes = new CommandParameterTypeCollection();
         if (commandParametersOption is null)
         {

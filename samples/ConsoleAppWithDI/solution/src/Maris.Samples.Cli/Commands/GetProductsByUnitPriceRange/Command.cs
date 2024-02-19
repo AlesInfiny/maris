@@ -1,5 +1,6 @@
 ﻿using Maris.ConsoleApp.Core;
 using Maris.Samples.ApplicationCore;
+using Maris.Samples.Cli.Constants;
 using Microsoft.Extensions.Logging;
 
 namespace Maris.Samples.Cli.Commands.GetProductsByUnitPriceRange;
@@ -42,7 +43,7 @@ internal class Command : AsyncCommand<Parameter>
             parameter.MinimumUnitPrice, parameter.MaximumUnitPrice, cancellationToken);
         if (products.Count >= 10)
         {
-            this.logger.LogWarning($"単価が {parameter.MinimumUnitPrice} ～ " +
+            this.logger.LogWarning(SampleCliLogEvents.Over10ProductsFoundInRange, $"単価が {parameter.MinimumUnitPrice} ～ " +
                 $"{parameter.MaximumUnitPrice} の商品情報が 10 件以上あります。" +
                 $"範囲を絞り込んでください。");
             return CommandResult.CreateWarning(2);
