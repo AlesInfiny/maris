@@ -6,7 +6,7 @@ namespace Dressca.ApplicationCore.Catalog;
 /// <summary>
 ///  カタログに関するドメインサービスを提供します。
 /// </summary>
-public class CatalogDomainService : ICatalogDomainService
+internal class CatalogDomainService : ICatalogDomainService
 {
     private readonly ICatalogRepository catalogRepository;
     private readonly ILogger<CatalogDomainService> logger;
