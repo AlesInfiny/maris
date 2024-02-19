@@ -142,15 +142,6 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ID: {0} の買い物かごが見つかりませんでした。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketNotFound {
-            get {
-                return ResourceManager.GetString("BasketNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   カタログブランド ID: {0} 、カタログカテゴリ ID: {1} のカテゴリ情報を取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogApplicationService_GetCatalogItemsAsyncEnd {

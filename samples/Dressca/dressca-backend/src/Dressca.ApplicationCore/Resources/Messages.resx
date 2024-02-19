@@ -141,9 +141,6 @@
   <data name="BasketItemQuantityMustBePositive" xml:space="preserve">
     <value>買い物かごアイテムの数量は 0 未満にできません。</value>
   </data>
-  <data name="BasketNotFound" xml:space="preserve">
-    <value>ID: {0} の買い物かごが見つかりませんでした。</value>
-  </data>
   <data name="Basket_SetQuantity" xml:space="preserve">
     <value>カタログアイテム ID: {0} の数量を {1} に設定します。</value>
   </data>
