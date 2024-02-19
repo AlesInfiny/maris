@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
 
-const apiUrl = import.meta.env.VITE_BACKEND_ENDPOINT_ORIGIN;
+const apiUrl = import.meta.env.AXIOS_BASE_ENDPOINT_ORIGIN;
 
 /** api-client の共通の Configuration があればここに定義します。 */
 const config = new apiClient.Configuration({});
