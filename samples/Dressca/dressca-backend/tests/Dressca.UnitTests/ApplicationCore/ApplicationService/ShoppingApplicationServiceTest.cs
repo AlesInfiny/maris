@@ -137,7 +137,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = new Mock<ICatalogDomainService>();
         catalogDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((false, null));
+            .ReturnsAsync((false, new List<CatalogItem>().AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
 
@@ -298,7 +298,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = new Mock<ICatalogDomainService>();
         catalogDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((false, null));
+            .ReturnsAsync((false, new List<CatalogItem>().AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
 

@@ -16,7 +16,7 @@ public class CatalogItemNotExistingInRepositoryException : BusinessException
     /// </summary>
     /// <param name="catalogItemIds">見つからなかったカタログアイテム Id 。</param>
     public CatalogItemNotExistingInRepositoryException(IEnumerable<long> catalogItemIds)
-        : base(new BusinessError(ErrorCode, string.Format(Messages.CatalogItemIdDoesNotExistInBasket, catalogItemIds)))
+        : base(new BusinessError(ErrorCode, string.Format(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(",", catalogItemIds))))
     {
     }
 }

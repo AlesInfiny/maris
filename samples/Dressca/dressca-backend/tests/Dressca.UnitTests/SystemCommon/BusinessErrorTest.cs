@@ -103,14 +103,12 @@ public class BusinessErrorTest
     public void ToString_エラーコードがキーでエラーメッセージのリストが値のJSON形式に変換される()
     {
         // Arrange
-        //var error = new BusinessError("ERR_CODE", "ERR_MESSAGE1", "ERR_MESSAGE2");
         var error = new BusinessError("ERR_CODE", "エラー1", "ERR_MESSAGE2");
 
         // Act
         var str = error.ToString();
 
         // Assert
-        //Assert.Equal("{\"ERR_CODE\":[\"ERR_MESSAGE1\",\"ERR_MESSAGE2\"]}", str);
         Assert.Equal("{\"ERR_CODE\":[\"エラー1\",\"ERR_MESSAGE2\"]}", str);
     }
 }
