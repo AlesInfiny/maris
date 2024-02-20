@@ -15,9 +15,13 @@ API エンドポイントの設定は Axios のインスタンス生成時に行
 
 ```typescript title="src/api-client/index.ts"
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.API_ENDPOINT,
+  baseURL: import.meta.env.VITE_API_ENDPOINT,
 });
 ```
+
+??? info "Vite の環境変数"
+
+    Vite で環境変数を利用するためには、環境変数名の前に `VITE_` を付ける必要があります。例えば、 `API_ENDPOINT` という環境変数を利用する場合、 `VITE_API_ENDPOINT` という名前で設定します。
 
 OpenAPI Generator を利用する際は、 OpenAPI 定義書に記載されているエンドポイントが上書きされてしまいます。そのため、 OpenAPI Generator で生成されたコードをラップしてエンドポイントを上書きする必要があります。
 
@@ -28,7 +32,7 @@ const axiosInstance = axios.create({});
 
 const wrappedApi = new apiClient.generatedApi(
   config,
-  import.meta.env.API_ENDPOINT,
+  import.meta.env.VITE_API_ENDPOINT,
   axiosInstance
 );
 
@@ -40,7 +44,7 @@ export default wrappedApi;
 本番用の環境変数ファイルを作成します。 `.env.production` や `.env.prod` など本番用と判断できる名前で env ファイルを作成します。前の手順で作成した `import.meta.env.API_ENDPOINT` に対応する値を設定します。
 
 ```env title=".env.prod"
-API_ENDPOINT=https://api.example.com
+VITE_API_ENDPOINT=https://api.example.com
 ```
 
 ### 本番ビルドスクリプトの作成 {#create-production-build-script}
