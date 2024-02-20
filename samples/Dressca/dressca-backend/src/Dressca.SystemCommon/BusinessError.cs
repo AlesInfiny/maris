@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 
 namespace Dressca.SystemCommon;
 
@@ -66,6 +68,12 @@ public class BusinessError
         {
             { this.ErrorCode, this.errorMessages.ToArray() },
         };
-        return JsonSerializer.Serialize(data);
+
+        var options = new JsonSerializerOptions
+        {
+            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+        };
+
+        return JsonSerializer.Serialize(data, options);
     }
 }
