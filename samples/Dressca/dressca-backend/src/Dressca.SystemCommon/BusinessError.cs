@@ -69,11 +69,6 @@ public class BusinessError
             { this.ErrorCode, this.errorMessages.ToArray() },
         };
 
-        var options = new JsonSerializerOptions
-        {
-            Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
-        };
-
-        return JsonSerializer.Serialize(data, options);
+        return JsonSerializer.Serialize(data, DefaultJsonSerializerOptions.Options);
     }
 }
