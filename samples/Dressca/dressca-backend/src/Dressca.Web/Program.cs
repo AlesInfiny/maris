@@ -2,7 +2,7 @@
 using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
-using Dressca.SystemCommon;
+using Dressca.SystemCommon.Text.Json;
 using Dressca.Web.Baskets;
 using Dressca.Web.Controllers;
 using Dressca.Web.HealthChecks;
@@ -36,7 +36,7 @@ builder.Services
         {
             // エラーの原因をログに出力。
             var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation(Messages.ReceiveHttpBadRequest, JsonSerializer.Serialize(context.ModelState, DefaultJsonSerializerOptions.Options));
+            logger.LogInformation(Messages.ReceiveHttpBadRequest, JsonSerializer.Serialize(context.ModelState, DefaultJsonSerializerOptions.GetInstance()));
 
             // ASP.NET Core の既定の実装を使ってレスポンスを返却。
             return builtInFactory(context);
