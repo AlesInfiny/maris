@@ -1,8 +1,6 @@
-﻿using System.Text.Encodings.Web;
-using System.Text.Unicode;
-using Dressca.SystemCommon.Text.Json;
+﻿using Dressca.SystemCommon.Text.Json;
 
-namespace Dressca.UnitTests.SystemCommon;
+namespace Dressca.UnitTests.SystemCommon.Text.Json;
 
 public class DefaultJsonSerializerOptionsTest
 {
