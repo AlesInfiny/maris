@@ -1,7 +1,8 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using Dressca.ApplicationCore.Assets;
+using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
-namespace Dressca.ApplicationCore.Assets;
+namespace Dressca.ApplicationCore.ApplicationService;
 
 /// <summary>
 ///  アセット情報に関するビジネスユースケースを実現するアプリケーションサービスです。
@@ -46,16 +47,25 @@ public class AssetApplicationService
     public AssetStreamInfo GetAssetStreamInfo(string assetCode)
     {
         this.logger.LogDebug(Messages.AssetApplicationService_GetAssetStreamInfoStart, assetCode);
-        var asset = this.repository.Find(assetCode);
-        if (asset == null)
-        {
-            throw new AssetNotFoundException(assetCode);
-        }
 
-        var stream = this.store.GetStream(asset);
-        if (stream == null)
+        Asset? asset;
+        Stream? stream;
+
+        using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            throw new AssetNotFoundException(assetCode);
+            asset = this.repository.Find(assetCode);
+            if (asset == null)
+            {
+                throw new AssetNotFoundException(assetCode);
+            }
+
+            stream = this.store.GetStream(asset);
+            if (stream == null)
+            {
+                throw new AssetNotFoundException(assetCode);
+            }
+
+            scope.Complete();
         }
 
         this.logger.LogDebug(Messages.AssetApplicationService_GetAssetStreamInfoEnd, assetCode);

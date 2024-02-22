@@ -6,7 +6,7 @@ namespace Dressca.ApplicationCore.Catalog;
 /// <summary>
 ///  カタログに関するドメインサービスを提供します。
 /// </summary>
-public class CatalogDomainService
+internal class CatalogDomainService : ICatalogDomainService
 {
     private readonly ICatalogRepository catalogRepository;
     private readonly ILogger<CatalogDomainService> logger;
@@ -30,16 +30,7 @@ public class CatalogDomainService
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    /// <summary>
-    ///  指定したカタログアイテム Id がリポジトリ内にすべて存在するか示す値を取得します。
-    ///  また存在したカタログアイテムの一覧を返却します。
-    /// </summary>
-    /// <param name="catalogItemIds">存在することを確認するカタログアイテム Id 。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>
-    ///  ExistsAll : すべて存在する場合は <see langword="true"/> 、一部でも不在の場合は <see langword="false"/> 。
-    ///  CatalogItems : 存在したカタログアイテムの一覧。
-    /// </returns>
+    /// <inheritdoc/>
     public async Task<(bool ExistsAll, IReadOnlyList<CatalogItem> CatalogItems)> ExistsAllAsync(IEnumerable<long> catalogItemIds, CancellationToken cancellationToken = default)
     {
         var items =
