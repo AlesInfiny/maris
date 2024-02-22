@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Assets;
+using Dressca.ApplicationCore.Constants;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
@@ -46,7 +47,7 @@ public class AssetApplicationService
     /// </exception>
     public AssetStreamInfo GetAssetStreamInfo(string assetCode)
     {
-        this.logger.LogDebug(Messages.AssetApplicationService_GetAssetStreamInfoStart, assetCode);
+        this.logger.LogDebug(ApplicationCoreLogEvents.DebugEvent, Messages.AssetApplicationService_GetAssetStreamInfoStart, assetCode);
 
         Asset? asset;
         Stream? stream;
@@ -68,7 +69,7 @@ public class AssetApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Messages.AssetApplicationService_GetAssetStreamInfoEnd, assetCode);
+        this.logger.LogDebug(ApplicationCoreLogEvents.DebugEvent, Messages.AssetApplicationService_GetAssetStreamInfoEnd, assetCode);
         return new(asset, stream);
     }
 

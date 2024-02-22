@@ -85,7 +85,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         var record = this.LogCollector.LatestRecord;
         Assert.Equal("指定されたカタログアイテム ID: [1] のカタログアイテムがリポジトリに存在しません。", record.Message);
         Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(new EventId(0), record.Id);
+        Assert.Equal(1001, record.Id);
     }
 
     [Fact]
@@ -130,7 +130,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         var record = this.LogCollector.LatestRecord;
         Assert.Equal("指定されたカタログアイテム ID: [1] のカタログアイテムがリポジトリに存在しません。", record.Message);
         Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(new EventId(0), record.Id);
+        Assert.Equal(1001, record.Id);
     }
 
     private static CatalogItem CreateCatalogItem(long id)

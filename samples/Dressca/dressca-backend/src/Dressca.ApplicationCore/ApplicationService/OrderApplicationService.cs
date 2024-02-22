@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Ordering;
+﻿using Dressca.ApplicationCore.Constants;
+using Dressca.ApplicationCore.Ordering;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
@@ -40,7 +41,7 @@ public class OrderApplicationService
     /// <exception cref="OrderNotFoundException">注文情報が見つからない場合。</exception>
     public async Task<Order> GetOrderAsync(long orderId, string buyerId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncStart, orderId);
+        this.logger.LogDebug(ApplicationCoreLogEvents.DebugEvent, Messages.OrderApplicationService_GetOrderAsyncStart, orderId);
 
         Order? order;
         using (var scope = TransactionScopeManager.CreateTransactionScope())
@@ -54,7 +55,7 @@ public class OrderApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Messages.OrderApplicationService_GetOrderAsyncEnd, orderId);
+        this.logger.LogDebug(ApplicationCoreLogEvents.DebugEvent, Messages.OrderApplicationService_GetOrderAsyncEnd, orderId);
         return order;
     }
 }
