@@ -97,11 +97,15 @@ else
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
+
+app.MapFallbackToFile("/index.html");
 
 app.Run();
 
