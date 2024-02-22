@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Dressca.ApplicationCore.Accounting;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Baskets;
 
@@ -63,6 +64,22 @@ public class Basket
 
         var existingItem = this.items.First(i => i.CatalogItemId == catalogItemId);
         existingItem.AddQuantity(quantity);
+    }
+
+    /// <summary>
+    ///  買い物かご内のアイテムの数量を一括で設定します。
+    /// </summary>
+    /// <param name="quantities">各アイテムの数量。</param>
+    public void SetItemsQuantity(Dictionary<long, int> quantities)
+    {
+        var message = new List<string>();
+        foreach (var item in this.Items)
+        {
+            if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
+            {
+                item.SetQuantity(quantity);
+            }
+        }
     }
 
     /// <summary>

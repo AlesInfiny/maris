@@ -33,6 +33,7 @@ public class DefaultJsonSerializerOptionsTest
 
         // Assert
         // UnicodeRanges.All の範囲がエンコード可能か確認
+        Assert.NotNull(options.Encoder);
         Assert.True(options.Encoder.WillEncode(0x0000));
         Assert.True(options.Encoder.WillEncode(0xFFFF));
         Assert.True(options.Encoder.WillEncode(0x3040));

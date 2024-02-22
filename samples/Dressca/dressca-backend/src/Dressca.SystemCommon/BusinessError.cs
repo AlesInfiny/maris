@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Dressca.SystemCommon.Text.Json;
 
 namespace Dressca.SystemCommon;
 
@@ -66,6 +67,7 @@ public class BusinessError
         {
             { this.ErrorCode, this.errorMessages.ToArray() },
         };
-        return JsonSerializer.Serialize(data);
+
+        return JsonSerializer.Serialize(data, DefaultJsonSerializerOptions.GetInstance());
     }
 }
