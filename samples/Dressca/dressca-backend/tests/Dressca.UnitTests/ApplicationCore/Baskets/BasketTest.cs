@@ -359,7 +359,8 @@ public class BasketTest
         basket.SetItemsQuantity(quantities);
 
         // Assert
-        Assert.True(basket.Items.First().Quantity == newQuantity);
+        var basketItem = Assert.Single(basket.Items);
+        Assert.Equal(newQuantity, basketItem.Quantity);
     }
 
     [Fact]
@@ -375,7 +376,7 @@ public class BasketTest
         basket.SetItemsQuantity(quantities);
 
         // Assert
-        Assert.True(basket.Items.Count == 1);
-        Assert.True(basket.Items.First().CatalogItemId == itemId);
+        var basketItem = Assert.Single(basket.Items);
+        Assert.Equal(itemId, basketItem.CatalogItemId);
     }
 }
