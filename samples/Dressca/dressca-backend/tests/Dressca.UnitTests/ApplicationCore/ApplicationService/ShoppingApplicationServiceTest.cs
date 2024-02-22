@@ -27,7 +27,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
 
         // Act
-        var action = () => service.GetBasketItemsAsync(nullOrEmptyBuyerId);
+        var action = () => service.GetBasketItemsAsync(nullOrEmptyBuyerId!);
 
         // Assert
         var ex = await Assert.ThrowsAsync<ArgumentException>("buyerId", action);
@@ -84,7 +84,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
 
         // Act
-        var action = () => service.SetBasketItemsQuantitiesAsync(nullOrEmptyBuyerId, new() { { 1, 1 } });
+        var action = () => service.SetBasketItemsQuantitiesAsync(nullOrEmptyBuyerId!, new() { { 1, 1 } });
 
         // Assert
         var ex = await Assert.ThrowsAsync<ArgumentException>("buyerId", action);
@@ -273,7 +273,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
 
         // Act
-        var action = () => service.AddItemToBasketAsync(nullOrEmptyBuyerId, 10L, 5);
+        var action = () => service.AddItemToBasketAsync(nullOrEmptyBuyerId!, 10L, 5);
 
         // Assert
         var ex = await Assert.ThrowsAsync<ArgumentException>("buyerId", action);
@@ -361,7 +361,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
 
         // Act
-        var action = () => service.CheckoutAsync(nullOrEmptyBuyerId, shipTo);
+        var action = () => service.CheckoutAsync(nullOrEmptyBuyerId!, shipTo);
 
         // Assert
         var ex = await Assert.ThrowsAsync<ArgumentException>("buyerId", action);

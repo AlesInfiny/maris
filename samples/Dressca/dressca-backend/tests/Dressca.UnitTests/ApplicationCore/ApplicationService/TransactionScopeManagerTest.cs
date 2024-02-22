@@ -12,6 +12,7 @@ public class TransactionScopeManagerTest
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             // Assert
+            Assert.NotNull(Transaction.Current);
             Assert.Equal(IsolationLevel.ReadCommitted, Transaction.Current.IsolationLevel);
             scope.Complete();
         }
@@ -44,6 +45,7 @@ public class TransactionScopeManagerTest
             transactionOptions: new TransactionOptions { IsolationLevel = IsolationLevel.Snapshot }))
         {
             // Assert
+            Assert.NotNull(Transaction.Current);
             Assert.Equal(IsolationLevel.Snapshot, Transaction.Current.IsolationLevel);
             scope.Complete();
         }
