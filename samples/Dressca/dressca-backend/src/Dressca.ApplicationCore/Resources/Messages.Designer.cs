@@ -106,11 +106,20 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   カタログアイテム ID: {0} の数量を {1} に設定します。 に類似しているローカライズされた文字列を検索します。
+        ///   数量設定後の買い物かごアイテム: {0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Basket_SetQuantity {
+        internal static string Basket_AfterSettingQuantity {
             get {
-                return ResourceManager.GetString("Basket_SetQuantity", resourceCulture);
+                return ResourceManager.GetString("Basket_AfterSettingQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   カタログアイテム ID: {0}, 数量: {1}  に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Basket_ItemQuantity {
+            get {
+                return ResourceManager.GetString("Basket_ItemQuantity", resourceCulture);
             }
         }
         

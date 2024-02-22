@@ -356,10 +356,9 @@ public class BasketTest
         var quantities = new Dictionary<long, int>() { { itemId, newQuantity } };
 
         // Act
-        var result = basket.SetItemsQuantity(quantities);
+        basket.SetItemsQuantity(quantities);
 
         // Assert
-        Assert.StartsWith($"カタログアイテム ID: {itemId} の数量を {newQuantity} に設定します。", string.Join(",", result));
         Assert.True(basket.Items.First().Quantity == newQuantity);
     }
 

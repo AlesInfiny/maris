@@ -111,8 +111,9 @@ public class ShoppingApplicationService
                 throw new CatalogItemNotExistingInRepositoryException(notExistingInRepositoryCatalogIds);
             }
 
-            var message = basket.SetItemsQuantity(quantities);
-            this.logger.LogDebug(string.Join(",", message));
+            basket.SetItemsQuantity(quantities);
+            var currentBasketItems = basket.Items.Select(i => string.Format(Messages.Basket_ItemQuantity, i.CatalogItemId, i.Quantity));
+            this.logger.LogDebug(Messages.Basket_AfterSettingQuantity, string.Join(";", currentBasketItems));
             basket.RemoveEmptyItems();
             await this.basketRepository.UpdateAsync(basket, cancellationToken);
             scope.Complete();

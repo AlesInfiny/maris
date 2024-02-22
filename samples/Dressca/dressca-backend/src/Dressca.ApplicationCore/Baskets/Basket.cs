@@ -70,20 +70,16 @@ public class Basket
     ///  買い物かご内のアイテムの数量を一括で設定します。
     /// </summary>
     /// <param name="quantities">各アイテムの数量。</param>
-    /// <returns>アイテムの数量設定の内容。</returns>
-    public List<string> SetItemsQuantity(Dictionary<long, int> quantities)
+    public void SetItemsQuantity(Dictionary<long, int> quantities)
     {
         var message = new List<string>();
         foreach (var item in this.Items)
         {
             if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
             {
-                message.Add(string.Format(Messages.Basket_SetQuantity, new object[] { item.CatalogItemId, quantity }));
                 item.SetQuantity(quantity);
             }
         }
-
-        return message;
     }
 
     /// <summary>
