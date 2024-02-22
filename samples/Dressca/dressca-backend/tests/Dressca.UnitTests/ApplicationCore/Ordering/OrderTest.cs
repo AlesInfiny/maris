@@ -137,6 +137,40 @@ public class OrderTest
         Assert.Equal(4950m, totalPrice);
     }
 
+    [Fact]
+    public void HasMatchingBuyerId_指定の購入者Idと一致_true()
+    {
+        // Arrange
+        var buyerId = Guid.NewGuid().ToString("D");
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var order = new Order(buyerId, shipTo, items);
+
+        // Act
+        var result = order.HasMatchingBuyerId(buyerId);
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void HasMatchingBuyerId_指定の購入者Idと一致しない_false()
+    {
+        // Arrange
+        var buyerId = Guid.NewGuid().ToString("D");
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var order = new Order(buyerId, shipTo, items);
+
+        var unmatchingBuyerId = Guid.NewGuid().ToString("D");
+
+        // Act
+        var result = order.HasMatchingBuyerId(unmatchingBuyerId);
+
+        // Assert
+        Assert.False(result);
+    }
+
     private static Address CreateDefaultAddress()
     {
         const string defaultPostalCode = "100-8924";
