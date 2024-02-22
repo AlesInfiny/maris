@@ -423,6 +423,46 @@
         }
       }
     },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_GetByAccessToken",
+        "parameters": [
+          {
+            "name": "accessToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/health": {
       "get": {
         "tags": [
@@ -974,6 +1014,21 @@
             "description": "字／番地／建物名／部屋番号を取得または設定します。\n            ",
             "maxLength": 128,
             "minLength": 0
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "description": "ユーザー情報のレスポンスデータを表します。",
+        "additionalProperties": false,
+        "required": [
+          "userName"
+        ],
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "ユーザー名を取得または設定します。",
+            "minLength": 1
           }
         }
       }
