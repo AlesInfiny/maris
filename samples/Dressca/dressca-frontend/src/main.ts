@@ -6,6 +6,10 @@ import router from './router';
 import '@/assets/base.css';
 import '@/config/yup.config';
 
+// Azure AD B2C に必要
+import { msalPlugin } from './plugins/msalPlugin';
+import { msalInstance } from './authConfig';
+
 import { authenticationGuard } from '@/shared/authentication/authentication-guard';
 
 const app = createApp(App);
@@ -24,6 +28,9 @@ pinia.use(({ store }) => {
 
 app.use(pinia);
 app.use(router);
+
+// Azure AD B2C に必要
+app.use(msalPlugin, msalInstance);
 
 authenticationGuard(router);
 
