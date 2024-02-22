@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Baskets;
+﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
@@ -16,34 +16,34 @@ namespace Dressca.Web.Controllers;
 [Produces("application/json")]
 public class OrdersController : ControllerBase
 {
+    private readonly ShoppingApplicationService shoppingApplicationService;
     private readonly OrderApplicationService orderApplicationService;
-    private readonly BasketApplicationService basketApplicationService;
     private readonly IObjectMapper<Order, OrderResponse> orderMapper;
     private readonly ILogger<OrdersController> logger;
 
     /// <summary>
     ///  <see cref="OrdersController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
+    /// <param name="shoppingApplicationService">ショッピングアプリケーションサービス。</param>
     /// <param name="orderApplicationService">注文アプリケーションサービス。</param>
-    /// <param name="basketApplicationService">買い物かごアプリケーションサービス。</param>
     /// <param name="orderMapper"><see cref="Order"/> と <see cref="OrderResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
+    ///   <item><paramref name="shoppingApplicationService"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="orderApplicationService"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="basketApplicationService"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="orderMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     public OrdersController(
+        ShoppingApplicationService shoppingApplicationService,
         OrderApplicationService orderApplicationService,
-        BasketApplicationService basketApplicationService,
         IObjectMapper<Order, OrderResponse> orderMapper,
         ILogger<OrdersController> logger)
     {
+        this.shoppingApplicationService = shoppingApplicationService ?? throw new ArgumentNullException(nameof(shoppingApplicationService));
         this.orderApplicationService = orderApplicationService ?? throw new ArgumentNullException(nameof(orderApplicationService));
-        this.basketApplicationService = basketApplicationService ?? throw new ArgumentNullException(nameof(basketApplicationService));
         this.orderMapper = orderMapper ?? throw new ArgumentNullException(nameof(orderMapper));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -89,7 +89,6 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> PostOrderAsync(PostOrderRequest postOrderInput)
     {
         var buyerId = this.HttpContext.GetBuyerId();
-        var basket = await this.basketApplicationService.GetOrCreateBasketForUserAsync(buyerId);
 
         var address = new Address(
             postalCode: postOrderInput.PostalCode,
@@ -97,10 +96,9 @@ public class OrdersController : ControllerBase
             shikuchoson: postOrderInput.Shikuchoson,
             azanaAndOthers: postOrderInput.AzanaAndOthers);
         var shipToAddress = new ShipTo(postOrderInput.FullName, address);
-        var order = await this.orderApplicationService.CreateOrderAsync(basket.Id, shipToAddress);
 
-        // 買い物かごを削除
-        await this.basketApplicationService.DeleteBasketAsync(basket.Id);
+        var order = await this.shoppingApplicationService.CheckoutAsync(buyerId, shipToAddress);
+
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetByIdAsync));
         return this.CreatedAtAction(actionName, new { orderId = order.Id }, null);
     }
