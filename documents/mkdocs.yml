@@ -23,6 +23,12 @@ nav:
           - app-architecture/client-side-rendering/index.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
           - 全体処理方式: app-architecture/client-side-rendering/global-function.md
+          - テスト方針:
+              - app-architecture/client-side-rendering/test/index.md
+              - バックエンドアプリケーションのテスト:
+                  - app-architecture/client-side-rendering/test/backend-application/index.md
+                  # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
+                  - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md 
       # - コンソールアプリケーション編:
           # - app-architecture/console-app/index.md
       # - クックブック:
