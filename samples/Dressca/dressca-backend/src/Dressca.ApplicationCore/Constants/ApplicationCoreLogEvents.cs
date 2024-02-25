@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.Constants;
 internal class ApplicationCoreLogEvents
 {
     /// <summary>
-    /// カタログIDがレポジトリ内に存在しないことを示すイベントID 
+    /// カタログIDがレポジトリ内に存在しないことを示すイベントID
     /// </summary>
     internal static readonly EventId CatalogItemIdDoesNotExistInRepository = new(1001, "CatalogItemIdDoesNotExistInRepository");
 

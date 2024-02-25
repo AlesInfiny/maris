@@ -186,7 +186,7 @@ public class BasketItemsController : ControllerBase
         }
         catch (CatalogItemNotExistingInBasketException ex)
         {
-            this.logger.LogWarning(WebLogEvents.CatalogItemIdDoesNotExistInBasket,ex, ex.Message);
+            this.logger.LogWarning(WebLogEvents.CatalogItemIdDoesNotExistInBasket, ex, ex.Message);
             return this.NotFound();
         }
 
