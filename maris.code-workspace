@@ -59,7 +59,6 @@
             "vite",
             "winbatch",
             "xunit",
-            "eventid"
         ],
         "markdownlint.ignore": [
             "LICENSE"
