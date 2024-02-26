@@ -7,6 +7,9 @@ description: .NET + Vue.js で構成されたアプリケーションの発行�
 
 .NET + Vue.js のアプリケーションを発行する手順について解説します。なお、本手順は Web サーバーと AP サーバーを統合する構成を前提としています。
 
+![Web サーバーと AP サーバーを統合する構成](../../../images/guidebooks/how-to-develop/publication/integrated-server-constructure-light.png#only-light){ loading=lazy }
+![Web サーバーと AP サーバーを統合する構成](../../../images/guidebooks/how-to-develop/publication/integrated-server-constructure-dark.png#only-dark){ loading=lazy }
+
 ## クライアントサイドの設定 {#client-side-settings}
 
 ### API エンドポイントの設定 {#api-endpoint-settings}
@@ -44,7 +47,7 @@ export default wrappedApi;
 本番用の環境変数ファイルを作成します。 `.env.production` や `.env.prod` など本番用と判断できる名前で env ファイルを作成します。前の手順で作成した `import.meta.env.API_ENDPOINT` に対応する値を設定します。
 
 ```env title=".env.prod"
-VITE_API_ENDPOINT=https://api.example.com
+VITE_API_ENDPOINT=https://www.example.com
 ```
 
 ### 本番ビルドスクリプトの作成 {#create-production-build-script}
