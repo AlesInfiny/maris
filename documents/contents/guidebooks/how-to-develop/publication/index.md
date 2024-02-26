@@ -5,7 +5,7 @@ description: .NET + Vue.js で構成されたアプリケーションの発行�
 
 # アプリケーションの発行 {#top}
 
-.NET + Vue.js のアプリケーションを発行する手順について解説します。なお、本手順は単一サーバー構成を前提としています。
+.NET + Vue.js のアプリケーションを発行する手順について解説します。なお、本手順は Web サーバーと AP サーバーを統合する構成を前提としています。
 
 ## クライアントサイドの設定 {#client-side-settings}
 
@@ -63,7 +63,7 @@ VITE_API_ENDPOINT=https://api.example.com
 
 ### Program.cs の設定 {#program-cs-settings}
 
-単一サーバーでの運用では、ドメイン名へのリクエストに対してエントリーページとなる静的ファイルを返します。そのため、 `Program.cs` に以下のような設定を追加します。
+Web サーバーと AP サーバーを統合するサーバーでの運用では、ドメイン名へのリクエストに対してエントリーページとなる静的ファイルを返します。そのため、 `Program.cs` に以下のような設定を追加します。
 
 ```csharp title="Program.cs" hl_lines="12 26"
 var builder = WebApplication.CreateBuilder(args);
@@ -132,4 +132,7 @@ app.Run();
 
 ### アプリケーションの発行 {#publish-application}
 
-`dotnet publish` コマンドや Visual Studio などのツールを利用して、アプリケーションを発行します。発行したファイルをサーバーに配置し、アプリケーションを起動します。
+`dotnet publish` コマンドや Visual Studio などのツールを利用して、アプリケーションを発行します。 `publish` フォルダー直下にサーバーサイドのビルドアーティファクトと `wwwroot` フォルダーにクライアントサイドの静的ファイル群が出力されます。発行したファイルをサーバーに配置し、アプリケーションを起動します。
+
+![dotnet publish の出力ファイル](../../../images/guidebooks/how-to-develop/publication/published-folders-light.png#only-light){ loading=lazy }
+![dotnet publish の出力ファイル](../../../images/guidebooks/how-to-develop/publication/published-folders-dark.png#only-dark){ loading=lazy }
