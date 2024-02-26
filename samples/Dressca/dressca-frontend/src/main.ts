@@ -7,7 +7,7 @@ import '@/assets/base.css';
 import '@/config/yup.config';
 
 // Azure AD B2C に必要
-import { msalInstance } from '@/stores/authentication/authentication-config';
+import { msalInstance } from '@/shared/authentication/authentication-config';
 
 import { authenticationGuard } from '@/shared/authentication/authentication-guard';
 

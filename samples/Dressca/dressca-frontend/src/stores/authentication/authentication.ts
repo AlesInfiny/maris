@@ -5,7 +5,7 @@ import {
   loginRequest,
   tokenRequest,
   msalInstance,
-} from './authentication-config';
+} from '@/shared/authentication/authentication-config';
 
 msalInstance.initialize();
 
