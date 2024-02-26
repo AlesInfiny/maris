@@ -65,10 +65,31 @@ VITE_API_ENDPOINT=https://api.example.com
 
 単一サーバーでの運用では、ドメイン名へのリクエストに対してエントリーページとなる静的ファイルを返します。そのため、 `Program.cs` に以下のような設定を追加します。
 
-```csharp title="Program.cs"
+```csharp title="Program.cs" hl_lines="12 26"
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+app.UseDefaultFiles();
 app.UseStaticFiles();
 
-...
+if (app.Environment.IsDevelopment())
+{
+  app.UseSwagger();
+  app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
 
