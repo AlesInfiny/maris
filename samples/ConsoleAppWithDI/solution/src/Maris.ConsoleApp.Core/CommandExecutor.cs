@@ -1,5 +1,4 @@
-﻿using Maris.ConsoleApp.Core.Constants;
-using Maris.ConsoleApp.Core.Resources;
+﻿using Maris.ConsoleApp.Core.Resources;
 using Microsoft.Extensions.Logging;
 
 namespace Maris.ConsoleApp.Core;
@@ -74,21 +73,21 @@ public class CommandExecutor
     private async Task<int> ExecuteCommandInternalAsync(CancellationToken cancellationToken)
     {
         ICommandResult result;
-        this.logger.LogDebug(ConsoleAppCoreLogEvents.DebugEvent, Messages.CommandExecutor_ValidatingParameter, this.CommandName);
+        this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ValidatingParameter, this.CommandName);
         this.command.ValidateAllParameter();
-        this.logger.LogDebug(ConsoleAppCoreLogEvents.DebugEvent, Messages.CommandExecutor_ValidatedParameter, this.CommandName);
+        this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ValidatedParameter, this.CommandName);
 
         if (this.command is ISyncCommand syncCommand)
         {
-            this.logger.LogDebug(ConsoleAppCoreLogEvents.DebugEvent, Messages.CommandExecutor_ExecutingSyncCommand, this.CommandName);
+            this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ExecutingSyncCommand, this.CommandName);
             result = syncCommand.Execute();
-            this.logger.LogDebug(ConsoleAppCoreLogEvents.DebugEvent, Messages.CommandExecutor_ExecutedSyncCommand, this.CommandName, result);
+            this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ExecutedSyncCommand, this.CommandName, result);
         }
         else if (this.command is IAsyncCommand asyncCommand)
         {
-            this.logger.LogDebug(ConsoleAppCoreLogEvents.DebugEvent, Messages.CommandExecutor_ExecutingAsyncCommand, this.CommandName);
+            this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ExecutingAsyncCommand, this.CommandName);
             result = await asyncCommand.ExecuteAsync(cancellationToken);
-            this.logger.LogDebug(ConsoleAppCoreLogEvents.DebugEvent, Messages.CommandExecutor_ExecutedAsyncCommand, this.CommandName, result);
+            this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ExecutedAsyncCommand, this.CommandName, result);
         }
         else
         {

@@ -1,5 +1,4 @@
-﻿using Dressca.EfInfrastructure.Constants;
-using Dressca.EfInfrastructure.Resources;
+﻿using Dressca.EfInfrastructure.Resources;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -39,7 +38,7 @@ public static class HealthChecksBuilderExtensions
                     var loggerFactory = builder.Services.BuildServiceProvider().GetRequiredService<ILoggerFactory>();
                     var logger = loggerFactory.CreateLogger("Dressca.EfInfrastructure.HealthChecksBuilderExtensions");
                     logger.Log(
-                        eventId: EfInfrastructureLogEvents.FailedDatabaseHealthCheck,
+                        eventId: Events.FailedDatabaseHealthCheck,
                         logLevel: logLevel,
                         exception: ex,
                         message: Messages.FailedDatabaseHealthCheck);

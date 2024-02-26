@@ -5,7 +5,6 @@ using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
-using Dressca.Web.Constants;
 using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Catalog;
 using Microsoft.AspNetCore.Mvc;
@@ -186,7 +185,7 @@ public class BasketItemsController : ControllerBase
         }
         catch (CatalogItemNotExistingInBasketException ex)
         {
-            this.logger.LogWarning(WebLogEvents.CatalogItemIdDoesNotExistInBasket, ex, ex.Message);
+            this.logger.LogWarning(Events.CatalogItemIdDoesNotExistInBasket, ex, ex.Message);
             return this.NotFound();
         }
 

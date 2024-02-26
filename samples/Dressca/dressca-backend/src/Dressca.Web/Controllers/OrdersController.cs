@@ -2,7 +2,6 @@
 using Dressca.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
-using Dressca.Web.Constants;
 using Dressca.Web.Dto.Ordering;
 using Microsoft.AspNetCore.Mvc;
 
@@ -69,7 +68,7 @@ public class OrdersController : ControllerBase
         }
         catch (OrderNotFoundException ex)
         {
-            this.logger.LogWarning(WebLogEvents.OrderNotFound, ex, ex.Message);
+            this.logger.LogWarning(Events.OrderNotFound, ex, ex.Message);
             return this.NotFound();
         }
     }

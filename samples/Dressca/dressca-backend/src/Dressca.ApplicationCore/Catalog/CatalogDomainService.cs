@@ -1,5 +1,4 @@
-﻿using Dressca.ApplicationCore.Constants;
-using Dressca.ApplicationCore.Resources;
+﻿using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
 namespace Dressca.ApplicationCore.Catalog;
@@ -44,7 +43,7 @@ internal class CatalogDomainService : ICatalogDomainService
         if (notExistsCatalogItemIds.Any())
         {
             this.logger.LogInformation(
-                ApplicationCoreLogEvents.CatalogItemIdDoesNotExistInRepository,
+                Events.CatalogItemIdDoesNotExistInRepository,
                 Messages.CatalogItemIdDoesNotExistInRepository,
                 string.Join(',', notExistsCatalogItemIds));
             return (ExistsAll: false, CatalogItems: items);

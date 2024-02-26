@@ -3,8 +3,8 @@ using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
 using Dressca.SystemCommon.Text.Json;
+using Dressca.Web;
 using Dressca.Web.Baskets;
-using Dressca.Web.Constants;
 using Dressca.Web.Controllers;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Mapper;
@@ -37,7 +37,7 @@ builder.Services
         {
             // エラーの原因をログに出力。
             var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation(WebLogEvents.ReceiveHttpBadRequest, Messages.ReceiveHttpBadRequest, JsonSerializer.Serialize(context.ModelState, DefaultJsonSerializerOptions.GetInstance()));
+            logger.LogInformation(Events.ReceiveHttpBadRequest, Messages.ReceiveHttpBadRequest, JsonSerializer.Serialize(context.ModelState, DefaultJsonSerializerOptions.GetInstance()));
 
             // ASP.NET Core の既定の実装を使ってレスポンスを返却。
             return builtInFactory(context);

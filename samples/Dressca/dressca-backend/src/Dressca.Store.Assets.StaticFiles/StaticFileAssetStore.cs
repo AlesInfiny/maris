@@ -33,16 +33,16 @@ internal class StaticFileAssetStore : IAssetStore
     public Stream? GetStream(Asset asset)
     {
         ArgumentNullException.ThrowIfNull(asset);
-        this.logger.LogDebug(StaticFileAssetLogEvents.DebugEvent, Messages.StaticFileAssetStore_GetStreamStart, asset.AssetCode);
+        this.logger.LogDebug(Events.DebugEvent, Messages.StaticFileAssetStore_GetStreamStart, asset.AssetCode);
         var filePath = this.GetFilePath(asset);
         if (File.Exists(filePath))
         {
-            this.logger.LogDebug(StaticFileAssetLogEvents.DebugEvent, Messages.StaticFileAssetStore_GetStreamEnd, asset.AssetCode, filePath);
+            this.logger.LogDebug(Events.DebugEvent, Messages.StaticFileAssetStore_GetStreamEnd, asset.AssetCode, filePath);
             return new FileStream(filePath, FileMode.Open);
         }
         else
         {
-            this.logger.LogInformation(StaticFileAssetLogEvents.AssetImageFileNotFound, Messages.FileNotFound, asset.AssetCode, filePath);
+            this.logger.LogInformation(Events.AssetImageFileNotFound, Messages.FileNotFound, asset.AssetCode, filePath);
             return null;
         }
     }

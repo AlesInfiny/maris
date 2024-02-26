@@ -1,5 +1,4 @@
 ﻿using Dressca.SystemCommon;
-using Dressca.Web.Constants;
 using Dressca.Web.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -31,7 +30,7 @@ public abstract class BusinessExceptionFilterBase : IExceptionFilter
     {
         if (context.Exception is BusinessException businessEx)
         {
-            this.logger.LogInformation(WebLogEvents.BusinessExceptionHandled, businessEx, Messages.BusinessExceptionHandled);
+            this.logger.LogInformation(Events.BusinessExceptionHandled, businessEx, Messages.BusinessExceptionHandled);
             var errors = businessEx.GetErrors();
             foreach (var (errorCode, errorMessage) in errors)
             {
