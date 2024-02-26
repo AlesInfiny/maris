@@ -14,12 +14,17 @@
 
 
 
-export * from './api/assets-api';
-export * from './api/basket-items-api';
-export * from './api/catalog-brands-api';
-export * from './api/catalog-categories-api';
-export * from './api/catalog-items-api';
-export * from './api/health-checks-api';
-export * from './api/orders-api';
-export * from './api/users-api';
+/**
+ * ユーザー情報のレスポンスデータを表します。
+ * @export
+ * @interface UserResponse
+ */
+export interface UserResponse {
+    /**
+     * ユーザー名を取得または設定します。
+     * @type {string}
+     * @memberof UserResponse
+     */
+    'userName': string;
+}
 
