@@ -55,7 +55,7 @@ internal class ConsoleAppHostedService : IHostedService
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         this.stopwatch.Start();
-        this.logger.LogInformation(Messages.StartHostingService, this.executor.CommandName);
+        this.logger.LogInformation(Events.StartHostingService, Messages.StartHostingService, this.executor.CommandName);
         try
         {
             var returnCode = await this.executor.ExecuteCommandAsync(cancellationToken);
@@ -63,12 +63,12 @@ internal class ConsoleAppHostedService : IHostedService
         }
         catch (InvalidParameterException ex)
         {
-            this.logger.LogError(ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
+            this.logger.LogError(Events.InvalidParameterDetected, ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
             this.SetExitCode(this.settings.DefaultValidationErrorExitCode);
         }
         catch (Exception ex)
         {
-            this.logger.LogError(ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
+            this.logger.LogError(Events.CommandExecutorRaiseException, ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
             this.SetExitCode(this.settings.DefaultErrorExitCode);
         }
         finally
@@ -87,6 +87,7 @@ internal class ConsoleAppHostedService : IHostedService
     {
         this.stopwatch.Stop();
         this.logger.LogInformation(
+            Events.StopHostingService,
             Messages.StopHostingService,
             this.executor.CommandName,
             Environment.ExitCode,

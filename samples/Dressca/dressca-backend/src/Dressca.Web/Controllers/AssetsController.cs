@@ -54,7 +54,7 @@ public class AssetsController : ControllerBase
         }
         catch (AssetNotFoundException ex)
         {
-            this.logger.LogWarning(ex, ex.Message);
+            this.logger.LogWarning(Events.AssetNotFound, ex, ex.Message);
             return this.NotFound();
         }
     }

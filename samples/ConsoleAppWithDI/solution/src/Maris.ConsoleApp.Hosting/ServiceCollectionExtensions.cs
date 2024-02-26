@@ -1,8 +1,5 @@
-﻿using CommandLine;
-using Maris.ConsoleApp.Core;
-using Maris.ConsoleApp.Hosting.Resources;
+﻿using Maris.ConsoleApp.Core;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Maris.ConsoleApp.Hosting;
 

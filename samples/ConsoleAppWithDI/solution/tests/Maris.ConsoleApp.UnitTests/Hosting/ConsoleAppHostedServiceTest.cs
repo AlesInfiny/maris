@@ -252,7 +252,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         // Assert
         var record = this.LogCollector.GetSnapshot()
             .Single(log => log.Level == LogLevel.Information);
-        Assert.Equal(default, record.Id);
+        Assert.Equal(1101, record.Id);
         Assert.Equal("dummy-command コマンドのホストの処理を開始します。", record.Message);
     }
 
@@ -284,7 +284,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         // Assert
         var record = this.LogCollector.GetSnapshot()
             .Single(log => log.Level == LogLevel.Error);
-        Assert.Equal(default, record.Id);
+        Assert.Equal(1102, record.Id);
         Assert.Equal("validation-error-command コマンドの実行時に例外が発生し、処理が失敗しました。", record.Message);
         var exception = Assert.IsType<InvalidParameterException>(record.Exception);
         Assert.Equal("コマンドのパラメーターに入力エラーがあります。", exception.Message);
@@ -320,7 +320,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         // Assert
         var record = this.LogCollector.GetSnapshot()
             .Single(log => log.Level == LogLevel.Error);
-        Assert.Equal(default, record.Id);
+        Assert.Equal(1103, record.Id);
         Assert.Equal("error-command コマンドの実行時に例外が発生し、処理が失敗しました。", record.Message);
         var exception = Assert.IsType<NotImplementedException>(record.Exception);
     }
@@ -351,7 +351,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         // Assert
         var record = this.LogCollector.LatestRecord;
         Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(default, record.Id);
+        Assert.Equal(1104, record.Id);
         Assert.StartsWith($"sync-command コマンドのホストの処理が終了コード 0 で完了しました。", record.Message);
     }
 
@@ -382,7 +382,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         // Assert
         var record = this.LogCollector.LatestRecord;
         Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(default, record.Id);
+        Assert.Equal(1104, record.Id);
         Assert.StartsWith($"sync-command コマンドのホストの処理が終了コード {exitCode} で完了しました。", record.Message);
     }
 
