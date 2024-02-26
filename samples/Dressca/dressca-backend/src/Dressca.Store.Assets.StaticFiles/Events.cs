@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Dressca.Store.Assets.StaticFiles.Constants;
+namespace Dressca.Store.Assets.StaticFiles;
 
 /// <summary>
 /// イベントIDを管理するクラスです。

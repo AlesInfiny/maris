@@ -1,6 +1,5 @@
 ﻿using CommandLine;
 using Maris.ConsoleApp.Core;
-using Maris.ConsoleApp.Hosting.Constants;
 using Maris.ConsoleApp.Hosting.Resources;
 using Microsoft.Extensions.Logging;
 

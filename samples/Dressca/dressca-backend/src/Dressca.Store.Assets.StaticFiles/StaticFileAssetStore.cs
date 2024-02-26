@@ -1,5 +1,4 @@
 ﻿using Dressca.ApplicationCore.Assets;
-using Dressca.Store.Assets.StaticFiles.Constants;
 using Dressca.Store.Assets.StaticFiles.Resources;
 using Microsoft.Extensions.Logging;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Maris.ConsoleApp.Hosting.Constants;
+namespace Maris.ConsoleApp.Hosting;
 
 /// <summary>
 /// イベントIDを管理するクラスです。
