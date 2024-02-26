@@ -32,11 +32,11 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
-         * @param {string} [accessToken] 
+         * @param {string} [homeAccountId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersGetByAccessToken: async (accessToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usersGetByUserHomeAccountId: async (homeAccountId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -49,8 +49,8 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (accessToken !== undefined) {
-                localVarQueryParameter['accessToken'] = accessToken;
+            if (homeAccountId !== undefined) {
+                localVarQueryParameter['homeAccountId'] = homeAccountId;
             }
 
 
@@ -76,12 +76,12 @@ export const UsersApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} [accessToken] 
+         * @param {string} [homeAccountId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersGetByAccessToken(accessToken?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersGetByAccessToken(accessToken, options);
+        async usersGetByUserHomeAccountId(homeAccountId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersGetByUserHomeAccountId(homeAccountId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -96,12 +96,12 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
-         * @param {string} [accessToken] 
+         * @param {string} [homeAccountId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersGetByAccessToken(accessToken?: string, options?: any): AxiosPromise<UserResponse> {
-            return localVarFp.usersGetByAccessToken(accessToken, options).then((request) => request(axios, basePath));
+        usersGetByUserHomeAccountId(homeAccountId?: string, options?: any): AxiosPromise<UserResponse> {
+            return localVarFp.usersGetByUserHomeAccountId(homeAccountId, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -115,12 +115,12 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
 export class UsersApi extends BaseAPI {
     /**
      * 
-     * @param {string} [accessToken] 
+     * @param {string} [homeAccountId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public usersGetByAccessToken(accessToken?: string, options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersGetByAccessToken(accessToken, options).then((request) => request(this.axios, this.basePath));
+    public usersGetByUserHomeAccountId(homeAccountId?: string, options?: AxiosRequestConfig) {
+        return UsersApiFp(this.configuration).usersGetByUserHomeAccountId(homeAccountId, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -428,10 +428,10 @@
         "tags": [
           "Users"
         ],
-        "operationId": "Users_GetByAccessToken",
+        "operationId": "Users_GetByUserHomeAccountId",
         "parameters": [
           {
-            "name": "accessToken",
+            "name": "homeAccountId",
             "in": "query",
             "schema": {
               "type": "string"

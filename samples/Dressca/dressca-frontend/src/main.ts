@@ -7,8 +7,7 @@ import '@/assets/base.css';
 import '@/config/yup.config';
 
 // Azure AD B2C に必要
-import { msalPlugin } from './plugins/msalPlugin';
-import { msalInstance } from './authConfig';
+import { msalInstance } from '../authConfig';
 
 import { authenticationGuard } from '@/shared/authentication/authentication-guard';
 
@@ -30,7 +29,7 @@ app.use(pinia);
 app.use(router);
 
 // Azure AD B2C に必要
-app.use(msalPlugin, msalInstance);
+app.use(msalInstance);
 
 authenticationGuard(router);
 

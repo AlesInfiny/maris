@@ -1,11 +1,24 @@
 import { LogLevel, PublicClientApplication } from '@azure/msal-browser';
 
+export const b2cPolicies = {
+  names: {
+    signUpSignIn: 'B2C_1_signupsignintest001',
+  },
+  authorities: {
+    signUpSignIn: {
+      authority:
+        'https://alesmaiamarisb2ctest.b2clogin.com/alesmaiamarisb2ctest.onmicrosoft.com/B2C_1_signupsignintest001',
+    },
+  },
+  authorityDomain: 'alesmaiamarisb2ctest.b2clogin.com',
+};
+
 // Config object to be passed to Msal on creation
 export const msalConfig = {
   auth: {
     clientId: 'f8021ade-a554-4e71-a15e-f8c93443f176',
-    authority:
-      'https://login.microsoftonline.com/88b4bf48-190e-4aba-9397-1f3482e64e6d',
+    authority: b2cPolicies.authorities.signUpSignIn.authority,
+    knownAuthorities: [b2cPolicies.authorityDomain],
     redirectUri: '/', // Must be registered as a SPA redirectURI on your app registration
     postLogoutRedirectUri: '/', // Must be registered as a SPA redirectURI on your app registration
   },
@@ -48,5 +61,9 @@ export const msalInstance = new PublicClientApplication(msalConfig);
 
 // Add here scopes for id token to be used at MS Identity Platform endpoints.
 export const loginRequest = {
-  scopes: ['User.Read'],
+  scopes: ['demo.Read', 'demo.Write'],
+};
+
+export const tokenRequest = {
+  scopes: ['demo.Read', 'demo.Write'],
 };

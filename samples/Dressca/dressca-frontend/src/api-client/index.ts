@@ -25,6 +25,7 @@ const catalogItemsApi = new apiClient.CatalogItemsApi(
   axiosInstance,
 );
 const ordersApi = new apiClient.OrdersApi(config, '', axiosInstance);
+const userApi = new apiClient.UsersApi(config, '', axiosInstance);
 
 export {
   assetsApi,
@@ -33,4 +34,5 @@ export {
   catalogCategoriesApi,
   catalogItemsApi,
   ordersApi,
+  userApi,
 };

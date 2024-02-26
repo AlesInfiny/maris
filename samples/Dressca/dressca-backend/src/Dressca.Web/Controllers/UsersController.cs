@@ -22,7 +22,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Authorize]
-    public async Task<IActionResult> GetByAccessTokenAsync(string accessToken)
+    public async Task<IActionResult> GetByUserHomeAccountId(string homeAccountId)
     {
         if (this.HttpContext is null)
         {

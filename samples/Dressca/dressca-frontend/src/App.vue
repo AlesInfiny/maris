@@ -23,9 +23,13 @@ const isAuthenticated = () => {
             <router-link to="/basket">
               <ShoppingCartIcon class="h-8 w-8 text-amber-600" />
             </router-link>
-            <router-link v-if="!isAuthenticated()" to="/account/login">
+            <button
+              v-if="!isAuthenticated()"
+              @click="authenticationStore.signIn()"
+            >
               ログイン
-            </router-link>
+            </button>
+            <span v-if="isAuthenticated()">ログイン済み</span>
           </div>
         </div>
       </nav>
