@@ -9,21 +9,17 @@ description: バックエンドアプリケーションのテスト方針につ�
 
 ## 結合テストの目的 {#purpose}
 
-- [UT0](unit-test.md) でテストしたクラスやメソッドを組み合わせて、単一の業務機能が仕様通りに動作することを確認します
+- UT0 でテストしたクラスやメソッドを組み合わせて、単一の業務機能が仕様通りに動作することを確認します
 - プレゼンテーション層からデータベースまでを結合し、 Web API ごとの動作を検証します。
 
 ## 結合テストで利用するツール {#testing-tools}
 
-上記の目的を達成するため、 AlesInfiny Maia では以下のテストフレームワークを用いて結合テストを行います。
+上記の目的を達成するため、 AlesInfiny Maris では以下のテストフレームワークを用いて結合テストを行います。
 
-- [JUnit :material-open-in-new:](https://junit.org/){ target=_blank }
-    - Java のテストフレームワークです。
-- [Spring Test :material-open-in-new:](https://spring.pleiades.io/spring-framework/docs/current/reference/html/testing.html){ target=_blank }
-    - Spring で構築したアプリケーションのテストを実行するためのツールセットです。
-    - 主に Spring Boot アプリケーションのランタイムを結合テスト用に初期化するため使用します。
-- [H2 :material-open-in-new:](https://www.h2database.com/){ target=_blank }
-    - テスト用のデータベースエンジンとして使用します。
-    - インメモリデータベースであり、高速に動作する特徴があります。
+- [xUnit :material-open-in-new:](https://xunit.net/){ target=_blank }
+    - .NET のテストフレームワークです。
+- [Microsoft.AspNetCore.Mvc.Testing :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing){ target=_blank }
+    - MVC アプリケーションの結合テスト用の機能を提供するパッケージです。
 
 ## 結合テストのテスト対象 {#testing-targets}
 
@@ -38,13 +34,12 @@ description: バックエンドアプリケーションのテスト方針につ�
 
 ## 結合テストの実行方法 {#testing-method}
 
-AlesInfiny Maia の CSR 方式のバックエンドアプリケーションは、 Spring Boot を用いた Web API のアプリケーションです。
+AlesInfiny Maris の CSR 方式のバックエンドアプリケーションは、 .NET を用いた Web API のアプリケーションです。
 結合テストでは、 Web API のリクエストを疑似的に再現し、アプリケーションの実行とレスポンスの検証します。
-Web API のリクエスト送信は、 Spring Test の [MockMvc :material-open-in-new:](https://spring.pleiades.io/spring-framework/docs/current/reference/html/testing.html#spring-mvc-test-framework){ target=_blank } を活用します。
-テストフレームワークは JUnit を利用します。
+Web API のリクエスト送信には、 Microsoft.AspNetCore.Mvc.Testing を活用します。
+テストフレームワークは xUnit を利用します。
 
-テストが実行環境に依存しないように、データベースはインメモリの H2 を利用します。
-各テストケースの処理開始時に、そのテストで利用するデータベースを構築します。
+データベースは必要に応じてコンテキスト情報を差し替えてテストを実行します。
 
 単体テストで確認済みの仕様は、結合テストで改めて確認しません。
 層の間で結合をしたときのアプリケーションの動作を重点的に確認するようにします。

@@ -11,9 +11,9 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 - テスト対象プロジェクトを参照
 - 結合テストプロジェクト実行に必要な NuGet パッケージのインストール
-    - [xunit](https://www.nuget.org/packages/xunit)
-    - [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio)
-    - [Microsoft.AspNetCore.Mvc.Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing)
+    - [xunit :material-open-in-new:](https://www.nuget.org/packages/xunit){ target=_blank }
+    - [xunit.runner.visualstudio :material-open-in-new:](https://www.nuget.org/packages/xunit.runner.visualstudio){ target=_blank }
+    - [Microsoft.AspNetCore.Mvc.Testing :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing){ target=_blank }
 
 ## テスト対象プロジェクトの設定 {#target-project-settings}
 
