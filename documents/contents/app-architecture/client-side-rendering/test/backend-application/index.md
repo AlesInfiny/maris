@@ -11,11 +11,11 @@ description: バックエンドアプリケーションのテスト方針につ�
 
     主に以下のテストを実施します。
 
-    <!-- - Checkstyle や SpotBugs を用いた、ソースコード内の潜在的な不具合を検出する静的テスト
-    - JUnit や Spring Test を用いた、クラスやメソッド単位で機能性を確認する動的テスト -->
+    - StyleCopAnalyzers を用いた、ソースコード内の潜在的な不具合を検出する静的テスト
+    - xUnit を用いた、クラスやメソッド単位で機能性を確認する動的テスト
 
 1. [結合テスト ( ITa )](integration-test.md)
 
     主に以下のテストを実施します。
 
-    <!-- - JUnit 、 Spring Test 、 H2 を用いた、 Web API のコントローラーからデータベースまで一気通貫で機能性を確認する動的テスト -->
+    - xUnit や Microsoft.AspNetCore.Mvc.Testing を用いた、 Web API のコントローラーからデータベースまで一気通貫で機能性を確認する動的テスト
