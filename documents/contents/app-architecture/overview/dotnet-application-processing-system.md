@@ -184,7 +184,7 @@ AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger]
 
 ### デッドロック対策 {#deadlock-prevention}
 
-1 つのトランザクション内で複数テーブルへのアクセスがある場合、トランザクション間でアクセスする順序を統一します。
+単一のトランザクション内で複数テーブルへのアクセスがある場合、トランザクション間でアクセスする順序を統一します。
 
 ### Web アプリケーションにおけるトランザクション管理方針 {#web-apps-transaction-policy}
 
