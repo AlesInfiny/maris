@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Maris.ConsoleApp.Core;
+﻿using Maris.ConsoleApp.Core;
 using Maris.ConsoleApp.Hosting.Resources;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -15,7 +14,8 @@ internal class ConsoleAppHostedService : IHostedService
     private readonly ConsoleAppSettings settings;
     private readonly CommandExecutor executor;
     private readonly ILogger logger;
-    private readonly Stopwatch stopwatch = new();
+    private readonly TimeProvider timeProvider;
+    private long startTime;
 
     /// <summary>
     ///  <see cref="ConsoleAppHostedService"/> クラスの新しいインスタンスを初期化します。
@@ -24,20 +24,23 @@ internal class ConsoleAppHostedService : IHostedService
     /// <param name="settings">コンソールアプリケーションの設定項目を管理するオブジェクト。</param>
     /// <param name="executor">コマンドの実行を管理するオブジェクト。</param>
     /// <param name="logger">ロガー</param>
+    /// <param name="timeProvider">日時のプロバイダ。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="lifetime"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="settings"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="executor"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    public ConsoleAppHostedService(IHostApplicationLifetime lifetime, ConsoleAppSettings settings, CommandExecutor executor, ILogger<ConsoleAppHostedService> logger)
+    public ConsoleAppHostedService(IHostApplicationLifetime lifetime, ConsoleAppSettings settings, CommandExecutor executor, ILogger<ConsoleAppHostedService> logger, TimeProvider timeProvider)
     {
         this.lifetime = lifetime ?? throw new ArgumentNullException(nameof(lifetime));
         this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
         this.executor = executor ?? throw new ArgumentNullException(nameof(executor));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
     }
 
     /// <summary>
@@ -54,7 +57,7 @@ internal class ConsoleAppHostedService : IHostedService
     /// <returns>タスク。</returns>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        this.stopwatch.Start();
+        this.startTime = this.timeProvider.GetTimestamp();
         this.logger.LogInformation(Events.StartHostingService, Messages.StartHostingService, this.executor.CommandName);
         try
         {
@@ -85,13 +88,12 @@ internal class ConsoleAppHostedService : IHostedService
     /// <returns>タスク。</returns>
     public Task StopAsync(CancellationToken cancellationToken)
     {
-        this.stopwatch.Stop();
         this.logger.LogInformation(
             Events.StopHostingService,
             Messages.StopHostingService,
             this.executor.CommandName,
             Environment.ExitCode,
-            this.stopwatch.ElapsedMilliseconds);
+            this.timeProvider.GetElapsedTime(this.startTime).TotalMilliseconds);
         return Task.CompletedTask;
     }
 }

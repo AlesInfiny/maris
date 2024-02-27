@@ -12,6 +12,8 @@ public class Order
     private readonly Account? account;
     private string? buyerId;
     private ShipTo? shipToAddress;
+    private DateTimeOffset orderDate;
+    private TimeProvider timeProvider;
 
     /// <summary>
     ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
@@ -46,11 +48,52 @@ public class Order
         this.DeliveryCharge = this.account.GetDeliveryCharge();
         this.ConsumptionTax = this.account.GetConsumptionTax();
         this.TotalPrice = this.account.GetTotalPrice();
+        this.timeProvider = TimeProvider.System;
+        this.orderDate = this.timeProvider.GetLocalNow();
+    }
+
+    /// <summary>
+    ///  <see cref="Order"/> クラスの新しいインスタンスをテスト用に初期化します。
+    /// </summary>
+    /// <param name="buyerId">購入者 Id 。</param>
+    /// <param name="shipToAddress">配送先住所。</param>
+    /// <param name="orderItems">注文アイテムのリスト。</param>
+    /// <param name="timeProvider">日時のプロバイダ。</param>
+    /// <exception cref="ArgumentException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="buyerId"/> が <see langword="null"/> または空の文字列です。</item>
+    ///   <item><paramref name="orderItems"/> が <see langword="null"/> または空のリストです。</item>
+    ///  </list>
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="shipToAddress"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
+    internal Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems, TimeProvider timeProvider)
+    {
+        if (orderItems is null || !orderItems.Any())
+        {
+            throw new ArgumentException(Messages.ArgumentIsNullOrEmptyList, nameof(orderItems));
+        }
+
+        this.BuyerId = buyerId;
+        this.ShipToAddress = shipToAddress;
+        this.orderItems = orderItems;
+        this.account = new Account(orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
+        this.ConsumptionTaxRate = Account.ConsumptionTaxRate;
+        this.TotalItemsPrice = this.account.GetItemsTotalPrice();
+        this.DeliveryCharge = this.account.GetDeliveryCharge();
+        this.ConsumptionTax = this.account.GetConsumptionTax();
+        this.TotalPrice = this.account.GetTotalPrice();
+        this.timeProvider = timeProvider;
+        this.orderDate = this.timeProvider.GetLocalNow();
     }
 
     private Order()
     {
         // Required by EF Core.
+        this.timeProvider = TimeProvider.System;
     }
 
     /// <summary>
@@ -81,7 +124,11 @@ public class Order
     ///  注文日を取得します。
     ///  このクラスのインスタンスが生成されたシステム日時が自動的に設定されます.
     /// </summary>
-    public DateTimeOffset OrderDate { get; private set; } = DateTimeOffset.Now;
+    public DateTimeOffset OrderDate
+    {
+        get => this.orderDate;
+        private set => this.orderDate = value;
+    }
 
     /// <summary>
     ///  お届け先を取得します。
