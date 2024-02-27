@@ -26,18 +26,16 @@ const axiosInstance = axios.create({
 
     Vite で環境変数を利用するためには、環境変数名の前に `VITE_` を付ける必要があります。例えば、 `API_ENDPOINT` という環境変数を利用する場合、 `VITE_API_ENDPOINT` という名前で設定します。
 
-OpenAPI Generator を利用する際は、 OpenAPI 定義書に記載されているエンドポイントが上書きされてしまいます。そのため、 OpenAPI Generator で生成されたコードをラップしてエンドポイントを上書きする必要があります。
+OpenAPI Generator を利用する際は、 OpenAPI 定義書に記載されているエンドポイントが上書きされてしまいます。そのため、 `axiosInstance` での設定ではなく、 API クライアントの初期化時にエンドポイントを設定する方法を利用します。
 
 ```typescript title="src/api-client/index.ts"
-const config = new apiClient.Configuration({});
+const config = new apiClient.Configuration({
+  basePath: import.meta.env.VITE_API_ENDPOINT,
+});
 
 const axiosInstance = axios.create({});
 
-const wrappedApi = new apiClient.generatedApi(
-  config,
-  import.meta.env.VITE_API_ENDPOINT,
-  axiosInstance
-);
+const wrappedApi = new apiClient.generatedApi(config, '', axiosInstance);
 
 export default wrappedApi;
 ```
@@ -50,6 +48,20 @@ export default wrappedApi;
 VITE_API_ENDPOINT=https://www.example.com
 ```
 
+`VITE_` で始まる環境変数に対して TypeScript で型定義をしたい場合、 `env.d.ts` に以下のような設定を追加します。
+
+```typescript title="env.d.ts"
+/// <reference types="vite/client" />
+
+interface ImportMetaEnv {
+  readonly VITE_API_ENDPOINT: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
+```
+
 ### 本番ビルドスクリプトの作成 {#create-production-build-script}
 
 本番用の env ファイルを読み込むビルドスクリプトを `package.json` に作成します。 `mode` オプションの値は、前の手順で作成した env ファイルの名前に合わせます。 `.env.prod` の場合、 `mode prod` となります。
@@ -57,7 +69,7 @@ VITE_API_ENDPOINT=https://www.example.com
 ```json title="package.json"
 {
   "scripts": {
-    "build:prod": "vue-tsc --noEmit && vite build -- mode prod"
+    "build:prod": "vue-tsc --noEmit && vite build --mode prod"
   }
 }
 ```
@@ -72,10 +84,6 @@ Web サーバーと AP サーバーを統合するサーバーでの運用では
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
