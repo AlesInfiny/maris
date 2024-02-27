@@ -153,9 +153,45 @@ AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger]
 
 ## トランザクション管理方針 {#transaction-management-policy}
 
-トランザクション管理はアプリケーションコア層の業務ロジックで行います。
-具体的には、トランザクションの単位をアプリケーションサービス内の各 public メソッドとし、データアクセスを含む処理を一律でトランザクション管理の対象とします。
-単一のトランザクション内で処理が失敗した場合は、トランザクション内のすべての処理をロールバックします。
+トランザクション管理はアプリケーションコア層のアプリケーションサービスで行います。
+
+### データ不整合の対策 {#preventing-inconsistency}
+
+.NET のトランザクション制御機能を利用してデータ不整合の発生を防ぎます。
+
+- Entity Framework Core による楽観同時実行制御
+
+    Entity Framework Core では楽観同時実行制御が実装されています。更新対象データにロックをかけず、更新操作の際にデータの整合性が取れているかを確認します。
+    詳細は以下を確認してください。
+
+    [オプティミスティックコンカレンシー :material-open-in-new:](https://learn.microsoft.com/ja-jp/ef/core/saving/concurrency?tabs=data-annotations#optimistic-concurrency){ target=_blank }
+
+- TransactionScope
+
+    TransactionScope を利用してトランザクションの範囲を定めます。以下のように設定します。
+
+    - [TransactionOptions.IsolationLevel](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionoptions.isolationlevel) : ReadCommitted
+    - [TransactionScopeOption](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscopeoption) : Required/RequiresNew
+    - [TransactionScopeAsyncFlowOption](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscopeasyncflowoption) : Enabled
+
+    TransactionScopeAsyncFlowOption を Enabled と設定することで、非同期処理を呼び出した際に呼び出し元の TransactionScope が使用されます。
+
+### データ不整合の発生検知/ロールバック {#detecting-inconsistency-and-rollback}
+
+[`DbContext.SaveChanges()`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges) または [`DbContext.SaveChangesAsync()`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync) を呼び出した際に更新対象データの不整合が検知されると例外が発生します。
+これにより [`TransactionScope.Complete()`](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscope.complete) が呼び出されずにスコープを抜けるため、スコープ内で行った更新操作がロールバックされます。
+データ不整合により発生した例外は、システム例外として集約例外ハンドラーに処理されます。
+
+### デッドロック対策 {#deadlock-prevention}
+
+1 つのトランザクション内で複数テーブルへのアクセスがある場合、トランザクション間でアクセスする順序を統一します。
+
+### Web アプリケーションにおけるトランザクション管理方針 {#web-apps-transaction-policy}
+
+オンライン処理を行うアプリケーションでは、以下の方針でトランザクションを管理します。
+
+- トランザクションの単位をアプリケーションサービス内の各 public メソッドとする
+- データアクセスを含む処理を一律でトランザクション管理の対象とする
 
 !!! note "その他のトランザクション管理方針"
     更新系のデータアクセスを含む処理のまとまりのみトランザクション制御する方針も取ることができます。つまり、参照系のデータアクセスのみ行う処理のまとまりはトランザクション制御しないということです。
