@@ -2,11 +2,16 @@
 
 internal class ObjectState
 {
-    internal ObjectState(Guid objectId, Type objectType, Condition condition)
+    private readonly TimeProvider timeProvider;
+    private DateTime createDate;
+
+    internal ObjectState(Guid objectId, Type objectType, Condition condition, TimeProvider timeProvider)
     {
         this.ObjectId = objectId;
         this.ObjectType = objectType;
         this.Condition = condition;
+        this.timeProvider = timeProvider;
+        this.createDate = timeProvider.GetLocalNow().UtcDateTime;
     }
 
     internal Guid ObjectId { get; private set; }
@@ -15,5 +20,5 @@ internal class ObjectState
 
     internal Condition Condition { get; private set; }
 
-    internal DateTime CreateDate { get; } = DateTime.Now;
+    internal DateTime CreateDate { get => this.createDate; }
 }
