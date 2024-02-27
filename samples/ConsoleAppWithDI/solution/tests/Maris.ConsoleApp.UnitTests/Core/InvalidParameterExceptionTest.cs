@@ -6,7 +6,7 @@ namespace Maris.ConsoleApp.UnitTests.Core;
 public class InvalidParameterExceptionTest
 {
     [Fact]
-    public void Message_メッセージの既定値の確認()
+    public void Message_メッセージの既定値_コマンドのパラメーターに入力エラーがあります()
     {
         // Arrange
         var ex = new InvalidParameterException();
@@ -19,14 +19,14 @@ public class InvalidParameterExceptionTest
     }
 
     [Fact]
-    public void Message_検証結果が1件登録されている場合()
+    public void Message_検証結果が1件登録されている_メンバー名とエラーメッセージが含まれている()
     {
         // Arrange
         var errorMessage = "error message";
         var memberNames = new string[] { "param1", "param2" };
         var validationResults = new List<ValidationResult>
         {
-            new ValidationResult(errorMessage, memberNames),
+            new(errorMessage, memberNames),
         };
         var ex = new InvalidParameterException(validationResults);
 
@@ -38,7 +38,7 @@ public class InvalidParameterExceptionTest
     }
 
     [Fact]
-    public void Message_検証結果が2件登録されている場合()
+    public void Message_検証結果が2件登録されている場合_メンバー名とエラーメッセージが含まれている()
     {
         // Arrange
         var errorMessage1 = "error message1";
@@ -47,8 +47,8 @@ public class InvalidParameterExceptionTest
         var memberNames2 = new string[] { "param2", "param3" };
         var validationResults = new List<ValidationResult>
         {
-            new ValidationResult(errorMessage1, memberNames1),
-            new ValidationResult(errorMessage2, memberNames2),
+            new(errorMessage1, memberNames1),
+            new(errorMessage2, memberNames2),
         };
         var ex = new InvalidParameterException(validationResults);
 
@@ -60,7 +60,7 @@ public class InvalidParameterExceptionTest
     }
 
     [Fact]
-    public void ValidationResults_検証結果のリストを指定しない場合は空のリストを取得できる()
+    public void ValidationResults_検証結果のリストを指定しない_空のリスト()
     {
         // Arrange
         var ex = new InvalidParameterException();
@@ -73,15 +73,15 @@ public class InvalidParameterExceptionTest
     }
 
     [Fact]
-    public void ValidationResults_検証結果のリストを指定した場合はそれを取得できる()
+    public void ValidationResults_検証結果のリストを指定_指定したリストを取得できる()
     {
         // Arrange
         string errorMessage1 = "error message1";
         string errorMessage2 = "error message2";
         var results = new List<ValidationResult>
         {
-            new ValidationResult(errorMessage1),
-            new ValidationResult(errorMessage2),
+            new(errorMessage1),
+            new(errorMessage2),
         };
         var ex = new InvalidParameterException(validationResults: results);
 

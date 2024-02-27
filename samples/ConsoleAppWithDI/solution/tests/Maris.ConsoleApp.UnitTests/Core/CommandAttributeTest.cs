@@ -5,7 +5,7 @@ namespace Maris.ConsoleApp.UnitTests.Core;
 public class CommandAttributeTest
 {
     [Fact]
-    public void Constructor_コマンドの型がnullの場合は例外()
+    public void Constructor_コマンドの型がnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         string name = "command";
@@ -19,7 +19,7 @@ public class CommandAttributeTest
     }
 
     [Fact]
-    public void Constructor_コマンドの型がコマンドの定義を満たしていない場合は例外()
+    public void Constructor_コマンドの型がコマンドの定義を満たしていない_ArgumentExceptionが発生する()
     {
         // Arrange
         string name = "command";
