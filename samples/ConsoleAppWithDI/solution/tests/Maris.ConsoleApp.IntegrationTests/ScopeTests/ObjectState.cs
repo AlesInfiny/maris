@@ -11,7 +11,7 @@ internal class ObjectState
         this.ObjectType = objectType;
         this.Condition = condition;
         this.timeProvider = timeProvider;
-        this.createDate = timeProvider.GetLocalNow().UtcDateTime;
+        this.createDate = this.timeProvider.GetLocalNow().UtcDateTime;
     }
 
     internal Guid ObjectId { get; private set; }
