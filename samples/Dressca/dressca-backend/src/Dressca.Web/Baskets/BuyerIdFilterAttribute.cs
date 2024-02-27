@@ -19,16 +19,22 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
 {
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
+    private readonly TimeProvider timeProvider;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
+    /// <param name="timeProvider">日時のプロバイダ。</param>
     /// <exception cref="ArgumentNullException">
     ///  <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
+    ///  <paramref name="timeProvider"/> が <see langword="null"/> です。
     /// </exception>
-    public BuyerIdFilterAttribute(string buyerIdCookieName = DefaultBuyerIdCookieName)
-        => this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
+    public BuyerIdFilterAttribute(TimeProvider timeProvider, string buyerIdCookieName = DefaultBuyerIdCookieName)
+    {
+        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
+        this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
+    }
 
     /// <inheritdoc/>
     public override void OnActionExecuting(ActionExecutingContext context)
@@ -61,7 +67,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
                 HttpOnly = true,
                 SameSite = SameSiteMode.Strict,
                 Secure = true,
-                Expires = DateTimeOffset.Now.AddDays(7),
+                Expires = this.timeProvider.GetLocalNow().AddDays(7),
             });
 
         base.OnActionExecuted(context);
