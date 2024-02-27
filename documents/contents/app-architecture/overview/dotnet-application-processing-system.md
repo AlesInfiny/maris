@@ -179,7 +179,7 @@ AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger]
 ### データ不整合の発生検知/ロールバック {#detecting-inconsistency-and-rollback}
 
 [`DbContext.SaveChanges()`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges) または [`DbContext.SaveChangesAsync()`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync) を呼び出した際に更新対象データの不整合が検知されると例外が発生します。
-これにより [`TransactionScope.Complete()`](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscope.complete) が呼び出されずにスコープを抜けるため、スコープ内で行った更新操作がロールバックされます。
+これにより [`TransactionScope.Complete()`](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscope.complete) が呼び出されずにスコープを抜けるため、スコープ内で行った更新操作が全てロールバックされます。
 データ不整合により発生した例外は、システム例外として集約例外ハンドラーに処理されます。
 
 ### デッドロック対策 {#deadlock-prevention}
