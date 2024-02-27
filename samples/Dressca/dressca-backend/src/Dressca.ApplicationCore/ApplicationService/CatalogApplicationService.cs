@@ -52,7 +52,7 @@ public class CatalogApplicationService
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
     public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Messages.CatalogApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
+        this.logger.LogDebug(Events.DebugEvent, Messages.CatalogApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
 
         IReadOnlyList<CatalogItem> itemsOnPage;
         int totalItems;
@@ -73,7 +73,7 @@ public class CatalogApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Messages.CatalogApplicationService_GetCatalogItemsAsyncEnd, brandId, categoryId);
+        this.logger.LogDebug(Events.DebugEvent, Messages.CatalogApplicationService_GetCatalogItemsAsyncEnd, brandId, categoryId);
         return (ItemsOnPage: itemsOnPage, TotalItems: totalItems);
     }
 

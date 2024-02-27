@@ -43,6 +43,7 @@ internal class CatalogDomainService : ICatalogDomainService
         if (notExistsCatalogItemIds.Any())
         {
             this.logger.LogInformation(
+                Events.CatalogItemIdDoesNotExistInRepository,
                 Messages.CatalogItemIdDoesNotExistInRepository,
                 string.Join(',', notExistsCatalogItemIds));
             return (ExistsAll: false, CatalogItems: items);
