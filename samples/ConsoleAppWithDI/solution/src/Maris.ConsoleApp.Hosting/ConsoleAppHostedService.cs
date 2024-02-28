@@ -24,6 +24,26 @@ internal class ConsoleAppHostedService : IHostedService
     /// <param name="settings">コンソールアプリケーションの設定項目を管理するオブジェクト。</param>
     /// <param name="executor">コマンドの実行を管理するオブジェクト。</param>
     /// <param name="logger">ロガー</param>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="lifetime"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="settings"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="executor"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
+    public ConsoleAppHostedService(IHostApplicationLifetime lifetime, ConsoleAppSettings settings, CommandExecutor executor, ILogger<ConsoleAppHostedService> logger)
+        : this(lifetime, settings, executor, logger, TimeProvider.System)
+    {
+    }
+
+    /// <summary>
+    ///   <see cref="ConsoleAppHostedService"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="lifetime">アプリケーションのライフタイムイベントを通知できるようにするためのオブジェクト</param>
+    /// <param name="settings">コンソールアプリケーションの設定項目を管理するオブジェクト。</param>
+    /// <param name="executor">コマンドの実行を管理するオブジェクト。</param>
+    /// <param name="logger">ロガー</param>
     /// <param name="timeProvider">日時のプロバイダ。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -34,7 +54,7 @@ internal class ConsoleAppHostedService : IHostedService
     ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    public ConsoleAppHostedService(IHostApplicationLifetime lifetime, ConsoleAppSettings settings, CommandExecutor executor, ILogger<ConsoleAppHostedService> logger, TimeProvider timeProvider)
+    internal ConsoleAppHostedService(IHostApplicationLifetime lifetime, ConsoleAppSettings settings, CommandExecutor executor, ILogger<ConsoleAppHostedService> logger, TimeProvider timeProvider)
     {
         this.lifetime = lifetime ?? throw new ArgumentNullException(nameof(lifetime));
         this.settings = settings ?? throw new ArgumentNullException(nameof(settings));

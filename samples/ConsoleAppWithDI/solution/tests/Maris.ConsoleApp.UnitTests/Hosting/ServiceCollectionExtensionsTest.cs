@@ -53,10 +53,6 @@ public class ServiceCollectionExtensionsTest(ITestOutputHelper testOutputHelper)
             {
                 Assert.Equal(typeof(ICommandManager), service.ServiceType);
                 Assert.Equal(typeof(DefaultCommandManager), service.ImplementationType);
-            },
-            service =>
-            {
-                Assert.Equal(typeof(TimeProvider), service.ServiceType);
             });
     }
 

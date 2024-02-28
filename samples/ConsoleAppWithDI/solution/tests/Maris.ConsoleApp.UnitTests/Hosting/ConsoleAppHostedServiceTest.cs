@@ -9,8 +9,6 @@ namespace Maris.ConsoleApp.UnitTests.Hosting;
 
 public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    private TimeProvider systemTimeProvider = TimeProvider.System;
-
     public static TheoryData<ConsoleAppContext, CommandBase> GetContextsAndCommands()
     {
         // パターン1：正常終了するコマンド
@@ -53,7 +51,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
-        var action = () => new ConsoleAppHostedService(lifetime!, settings, executor, logger, this.systemTimeProvider);
+        var action = () => new ConsoleAppHostedService(lifetime!, settings, executor, logger);
 
         // Assert
         Assert.Throws<ArgumentNullException>("lifetime", action);
@@ -72,7 +70,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
-        var action = () => new ConsoleAppHostedService(lifetime, settings!, executor, logger, this.systemTimeProvider);
+        var action = () => new ConsoleAppHostedService(lifetime, settings!, executor, logger);
 
         // Assert
         Assert.Throws<ArgumentNullException>("settings", action);
@@ -88,7 +86,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
 
         // Act
-        var action = () => new ConsoleAppHostedService(lifetime, settings, executor!, logger, this.systemTimeProvider);
+        var action = () => new ConsoleAppHostedService(lifetime, settings, executor!, logger);
 
         // Assert
         Assert.Throws<ArgumentNullException>("executor", action);
@@ -107,7 +105,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         ILogger<ConsoleAppHostedService>? logger = null;
 
         // Act
-        var action = () => new ConsoleAppHostedService(lifetime, settings, executor, logger!, this.systemTimeProvider);
+        var action = () => new ConsoleAppHostedService(lifetime, settings, executor, logger!);
 
         // Assert
         Assert.Throws<ArgumentNullException>("logger", action);
@@ -130,7 +128,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider);
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
         var cancellationToken = new CancellationToken(false);
@@ -159,7 +157,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider);
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
         var cancellationToken = new CancellationToken(false);
@@ -188,7 +186,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider);
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
         var cancellationToken = new CancellationToken(false);
@@ -214,7 +212,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider);
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         int actualExitCode = 0;
         service.SetExitCode = (exitCode) => actualExitCode = exitCode;
         var cancellationToken = new CancellationToken(false);
@@ -243,7 +241,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider)
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger)
         {
             SetExitCode = exitCode => { },
         };
@@ -275,7 +273,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider)
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger)
         {
             SetExitCode = exitCode => { },
         };
@@ -311,7 +309,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider)
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger)
         {
             SetExitCode = exitCode => { },
         };
@@ -345,7 +343,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider);
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         var cancellationToken = new CancellationToken(false);
 
         // Act
@@ -375,7 +373,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
-        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, this.systemTimeProvider);
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         var cancellationToken = new CancellationToken(false);
         await service.StartAsync(cancellationToken);
 
