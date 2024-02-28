@@ -412,12 +412,12 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         await service.StartAsync(cancellationToken);
 
         // Act
-        fakeTimeProvider.Advance(TimeSpan.FromMilliseconds(500));
+        fakeTimeProvider.Advance(TimeSpan.FromMilliseconds(1000));
         await service.StopAsync(cancellationToken);
 
         // Assert
         var record = this.LogCollector.LatestRecord;
-        Assert.Contains($"実行時間は 500 ms でした。", record.Message);
+        Assert.Contains($"実行時間は 1000 ms でした。", record.Message);
     }
 
     private static Mock<ICommandManager> CreateCommandManagerMock(CommandBase? creatingCommand = null)
