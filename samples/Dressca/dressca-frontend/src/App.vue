@@ -6,6 +6,9 @@ const authenticationStore = useAuthenticationStore();
 const isAuthenticated = () => {
   return authenticationStore.isAuthenticated;
 };
+const signIn = async () => {
+  await authenticationStore.signIn();
+};
 </script>
 
 <template>
@@ -23,10 +26,7 @@ const isAuthenticated = () => {
             <router-link to="/basket">
               <ShoppingCartIcon class="h-8 w-8 text-amber-600" />
             </router-link>
-            <button
-              v-if="!isAuthenticated()"
-              @click="authenticationStore.signIn()"
-            >
+            <button v-if="!isAuthenticated()" @click="signIn()">
               ログイン
             </button>
             <span v-if="isAuthenticated()">ログイン済み</span>

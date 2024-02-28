@@ -14,7 +14,6 @@ namespace Dressca.Web.Controllers;
 [Route("api/orders")]
 [ApiController]
 [Produces("application/json")]
-[Authorize]
 public class OrdersController : ControllerBase
 {
     private readonly OrderApplicationService orderApplicationService;
@@ -87,6 +86,7 @@ public class OrdersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    [Authorize]
     public async Task<IActionResult> PostOrderAsync(PostOrderRequest postOrderInput)
     {
         var buyerId = this.HttpContext.GetBuyerId();

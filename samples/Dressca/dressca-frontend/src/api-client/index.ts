@@ -1,11 +1,23 @@
 import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
+import { useAuthenticationStore } from '@/stores/authentication/authentication';
 
 /** api-client の共通の Configuration があればここに定義します。 */
 const config = new apiClient.Configuration({});
 
 /** axios の共通の設定があればここに定義します。 */
 const axiosInstance = axios.create({});
+axiosInstance.interceptors.request.use(async (request) => {
+  const store = useAuthenticationStore();
+
+  if (store.isAuthenticated) {
+    await store.getToken();
+    const token = store.getAccessToken;
+    console.log(`token value: ${token}`);
+    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  }
+  return request;
+});
 
 const assetsApi = new apiClient.AssetsApi(config, '', axiosInstance);
 const basketItemsApi = new apiClient.BasketItemsApi(config, '', axiosInstance);

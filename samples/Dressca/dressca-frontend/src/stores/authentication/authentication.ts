@@ -1,59 +1,34 @@
 import { defineStore } from 'pinia';
 import { string } from 'yup';
-import { InteractionRequiredAuthError } from '@azure/msal-browser';
 import {
-  loginRequest,
-  tokenRequest,
-  msalInstance,
-} from '@/shared/authentication/authentication-config';
-
-msalInstance.initialize();
+  signInAzureADB2C,
+  getTokenAzureADB2C,
+  AuthenticationResult,
+} from '@/shared/authentication/authentication-adb2c';
 
 export const useAuthenticationStore = defineStore({
   id: 'authentication',
-  state: (token: string) => ({
-    accessToken: token,
+  state: () => ({
+    accessToken: string,
     homeAccountId: string,
     authenticated: false,
+    idToken: string,
   }),
   actions: {
     async signIn() {
-      msalInstance
-        .loginPopup(loginRequest)
-        .then(function (loginResponse) {
-          this.homeAccountId = loginResponse.account.homeAccountId;
-          this.authenticated = true;
-          this.accessToken = loginResponse.account.idToken;
-        })
-        .catch(function (error) {
-          // TODO 認証に失敗した場合の処理
-          console.log(error);
-        });
+      const result = (await signInAzureADB2C()) as AuthenticationResult;
+      this.homeAccountId = result.homeAccountId;
+      this.idToken = result.idToken;
+      this.authenticated = result.isAuthenticated;
     },
     async getToken() {
-      msalInstance
-        .acquireTokenSilent(tokenRequest)
-        .then(function (accessTokenResponse) {
-          this.accessToken = accessTokenResponse.accessToken;
-          this.authenticated = true;
-          this.homeAccountId = accessTokenResponse.account.homeAccountId;
-        })
-        .catch(function (error) {
-          if (error instanceof InteractionRequiredAuthError) {
-            // ユーザーによる操作が必要な場合にスローされるエラーがスローされた場合、トークン呼び出しポップアップ画面を表示する。
-            msalInstance
-              .acquireTokenPopup(tokenRequest)
-              .then(function (accessTokenResponse) {
-                this.accessToken = accessTokenResponse.accessToken;
-                this.authenticated = true;
-                this.homeAccountId = accessTokenResponse.account.homeAccountId;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          }
-          console.log(error);
-        });
+      const result = (await getTokenAzureADB2C(
+        this.homeAccountId,
+      )) as AuthenticationResult;
+      this.accessToken = result.accessToken;
+      this.homeAccountId = result.homeAccountId;
+      this.idToken = result.idToken;
+      this.authenticated = result.isAuthenticated;
     },
   },
   getters: {
@@ -65,6 +40,9 @@ export const useAuthenticationStore = defineStore({
     },
     getHomeAccountId(state) {
       return state.homeAccountId;
+    },
+    getIdToken(state) {
+      return state.idToken;
     },
   },
 });
