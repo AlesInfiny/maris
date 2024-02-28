@@ -1,4 +1,5 @@
-﻿using Dressca.Web.Baskets;
+﻿using System.Globalization;
+using Dressca.Web.Baskets;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -18,8 +19,10 @@ public class BuyerIdFilterAttributeTest
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), Mock.Of<Controller>());
         var fakeTimeProvider = new FakeTimeProvider();
-        var testCookieCreatedTime = new DateTimeOffset(2024, 4, 1, 09, 00, 00, new(9, 0, 0));
-        fakeTimeProvider.SetUtcNow(testCookieCreatedTime);
+        var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
+        fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
+        var expectedDateTime = testCookieCreatedDateTime.AddDays(7);
+        var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
         var filter = new BuyerIdFilterAttribute(fakeTimeProvider);
 
         // Act
@@ -27,6 +30,6 @@ public class BuyerIdFilterAttributeTest
         var setCookieString = httpContext.Response.Headers.SetCookie.ToString();
 
         // Assert
-        Assert.Contains("expires=Mon, 08 Apr 2024 00:00:00 GMT;", setCookieString);
+        Assert.Contains(formattedExpectedDateTime, setCookieString);
     }
 }
