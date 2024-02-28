@@ -31,9 +31,9 @@ export async function getTokenAzureADB2C(
       throw new InteractionRequiredAuthError('accessToken is null or empty.');
     }
 
-    result.homeAccountId = accessTokenResponse.account.homeAccountId;
-    result.accessToken = accessTokenResponse.accessToken;
-    result.idToken = accessTokenResponse.idToken;
+    result.homeAccountId = tokenResponse.account.homeAccountId;
+    result.accessToken = tokenResponse.accessToken;
+    result.idToken = tokenResponse.idToken;
     result.isAuthenticated = true;
     return result;
   } catch (error) {

@@ -63,5 +63,5 @@ export const loginRequest = {
 };
 
 export const tokenRequest = {
-  scopes: ['openid', 'offline_access'],
+  scopes: ['openid', 'offline_access', '13b91f04-f2d4-4621-94b8-c5d026b0fed1'],
 };
