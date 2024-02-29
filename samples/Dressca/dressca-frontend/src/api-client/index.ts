@@ -14,7 +14,7 @@ axiosInstance.interceptors.request.use(async (request) => {
     await store.getToken();
     const token = store.getAccessToken;
     console.log(`token value: ${token}`);
-    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    request.headers['Authorization'] = `Bearer ${token}`;
   }
   return request;
 });
