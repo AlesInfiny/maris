@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import { ShoppingCartIcon } from '@heroicons/vue/24/solid';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
+import { useUserStore } from '@/stores/users/users';
 
 const authenticationStore = useAuthenticationStore();
+const userStore = useUserStore();
+
 const isAuthenticated = () => {
   return authenticationStore.isAuthenticated;
 };
 const signIn = async () => {
   await authenticationStore.signIn();
+  await userStore.fetchUserResponse();
+};
+const getUserName = () => {
+  return userStore.getUserName;
 };
 </script>
 
@@ -29,7 +36,7 @@ const signIn = async () => {
             <button v-if="!isAuthenticated()" @click="signIn()">
               ログイン
             </button>
-            <span v-if="isAuthenticated()">ログイン済み</span>
+            <span v-if="isAuthenticated()">{{ getUserName() }} さん</span>
           </div>
         </div>
       </nav>

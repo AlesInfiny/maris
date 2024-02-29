@@ -429,16 +429,6 @@
           "Users"
         ],
         "operationId": "Users_GetByUserHomeAccountId",
-        "parameters": [
-          {
-            "name": "homeAccountId",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            },
-            "x-position": 1
-          }
-        ],
         "responses": {
           "200": {
             "description": "",

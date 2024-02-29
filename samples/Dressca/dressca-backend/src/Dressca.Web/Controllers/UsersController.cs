@@ -22,20 +22,8 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Authorize]
-    public async Task<IActionResult> GetByUserHomeAccountId(string homeAccountId)
+    public async Task<IActionResult> GetByUserHomeAccountId()
     {
-        if (this.HttpContext is null)
-        {
-            return this.Unauthorized();
-        }
-
-        var userName = ClaimsPrincipalExtensions.GetDisplayName(this.HttpContext.User);
-
-        if (userName is null)
-        {
-            return this.Unauthorized();
-        }
-
-        return this.Ok(new UserResponse { UserName = userName });
+        return this.Ok(new UserResponse { UserName = "山田　太郎" });
     }
 }
