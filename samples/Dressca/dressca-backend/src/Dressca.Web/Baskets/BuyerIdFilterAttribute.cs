@@ -22,12 +22,9 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private readonly TimeProvider timeProvider;
 
     /// <summary>
-    ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
+    ///  no<see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
-    /// <exception cref="ArgumentNullException">
-    ///  <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
-    /// </exception>
     public BuyerIdFilterAttribute(string buyerIdCookieName = DefaultBuyerIdCookieName)
         : this(buyerIdCookieName, TimeProvider.System)
     {
@@ -40,7 +37,10 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
     /// <exception cref="ArgumentNullException">
-    ///  <paramref name="timeProvider"/> が <see langword="null"/> です。
+    ///  <list type="bullet">
+    ///   <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
+    ///   <paramref name="timeProvider"/> が <see langword="null"/> です。
+    ///  </list>
     /// </exception>
     internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider)
     {
