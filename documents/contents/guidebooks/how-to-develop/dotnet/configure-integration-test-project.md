@@ -7,7 +7,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 ## 結合テストプロジェクトの設定 {#test-project-settings}
 
-結合テスト用に Xunit のテストプロジェクトを作成し、以下を設定します。
+結合テスト用に xUnit のテストプロジェクトを作成し、以下を設定します。
 
 - テスト対象プロジェクトを参照
 - 結合テストプロジェクト実行に必要な NuGet パッケージのインストール
@@ -17,7 +17,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 ## テスト対象プロジェクトの設定 {#target-project-settings}
 
-テスト対象のプロジェクトの `Program.cs` を以下のいずれかの方法でテストプロジェクトに公開します。
+テスト対象プロジェクトの `Program.cs` を以下のいずれかの方法でテストプロジェクトに公開します。
 
 - テスト対象プロジェクトの internal メンバーをテストプロジェクトから参照できるようにする
 - 部分クラス宣言を利用して `Program.cs` を public にする
@@ -29,10 +29,10 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 ### 基本のテスト {#basic}
 
-テストクラスが `IClassFixture<WebApplicationFactory<Program>>` インターフェースを実装する形にします。
-これにより、テスト対象アプリケーションを模した結合テスト用の `TestServer` インスタンスを各テストケースごとに生成できます。
+テストクラスに [`IClassFixture<TFixture>`](https://xunit.net/docs/shared-context#class-fixture) インターフェースを実装し、 `WebApplicationFactory<Program>` のインスタンスをテストクラスから利用します。
+`WebApplicationFactory<Program>` はテスト対象アプリケーションの `TestServer` インスタンスを提供します。
 
-``` C#
+``` C# hl_lines="2"
 public class BasicTests 
     : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -46,93 +46,93 @@ public class BasicTests
     [Theory]
     [InlineData("/")]
     [InlineData("/Index")]
-    [InlineData("/About")]
-    [InlineData("/Privacy")]
-    [InlineData("/Contact")]
     public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
     {
         // Arrange
+        // TestServerにリクエストを送信するHttpClientを取得
         var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync(url);
 
         // Assert
-        response.EnsureSuccessStatusCode(); // Status Code 200-299
-        Assert.Equal("text/html; charset=utf-8", 
-            response.Content.Headers.ContentType.ToString());
+        response.EnsureSuccessStatusCode();
+        Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
     }
 }
 ```
 
+上記のコードでは、テスト対象のページにアクセスした際のステータスコードと Content-Type ヘッダーの内容を確認しています。
+
 詳細は以下を参照してください。
+
 [既定の WebApplicationFactory を使用した基本的なテスト](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#basic-tests-with-the-default-webapplicationfactory)
 
 ### テスト対象アプリケーションのカスタマイズ {#customize-target-app}
 
-テスト対象アプリケーションの構成を変更してテストを行いたい場合は、 `WebApplicationFactory` クラスを継承したクラスを作成します。
+テスト対象アプリケーションの構成を変更してテストを行いたい場合は、 `WebApplicationFactory<TEntryPoint>` クラスを継承したクラスを作成します。
+以下の手順では、結合テスト用にデータベースコンテキストを差し替えています。
 
-``` C#
-public class CustomWebApplicationFactory<TProgram>
-    : WebApplicationFactory<TProgram> where TProgram : class
-{
-    protected override void ConfigureWebHost(IWebHostBuilder builder)
+1. `WebApplicationFactory<TEntryPoint>` クラスを継承したクラスでテスト対象アプリケーションの構成を変更する。
+
+    ``` C#  hl_lines="2"
+    public class CustomWebApplicationFactory<TProgram>
+        : WebApplicationFactory<TProgram> where TProgram : class
     {
-        builder.ConfigureServices(services =>
+        protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            var dbContextDescriptor = services.SingleOrDefault(
-                d => d.ServiceType ==
-                    typeof(DbContextOptions<ApplicationDbContext>));
+            var env = Environment.GetEnvironmentVariable("TEST_ENVIRONMENT") ?? Environments.Development;
 
-            services.Remove(dbContextDescriptor);
-
-            var dbConnectionDescriptor = services.SingleOrDefault(
-                d => d.ServiceType ==
-                    typeof(DbConnection));
-
-            services.Remove(dbConnectionDescriptor);
-
-            // Create open SqliteConnection so EF won't automatically close it.
-            services.AddSingleton<DbConnection>(container =>
+            builder.ConfigureServices(services =>
             {
-                var connection = new SqliteConnection("DataSource=:memory:");
-                connection.Open();
+                // DbContextの設定を差し替えるためにサービス登録をいったん削除する
+                services.RemoveAll<DbContextOptions<SampleDbContext>>();
 
-                return connection;
+                // テスト用の構成を読み込む
+                var config = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
+                    .Build();
+                var connectionString = config.GetConnectionString(ConnectionStringName);
+
+                // テスト用の設定を使用してDbContextをサービス登録
+                services.AddDbContext<SampleDbContext>(option =>
+                {
+                    option.UseSqlServer(connectionString);
+                });
             });
-
-            services.AddDbContext<ApplicationDbContext>((container, options) =>
-            {
-                var connection = container.GetRequiredService<DbConnection>();
-                options.UseSqlite(connection);
-            });
-        });
-
-        builder.UseEnvironment("Development");
+        }
     }
-}
-```
+    ```
 
-テストクラスで実装する `IClassFixture` インターフェースの型引数を `CustomWebApplicationFactory` とします。
+    上記のコードでは、環境変数の値に応じて構成ファイルを読み込み、アプリケーションのデータベース接続先を変更しています。
 
-``` C#
-public class IndexPageTests :
+1. テストクラスで実装する `IClassFixture` インターフェースの型引数を `CustomWebApplicationFactory<Program>` とします。
+
+    ``` C# hl_lines="2"
+    public class IndexPageTests :
     IClassFixture<CustomWebApplicationFactory<Program>>
-{
-    private readonly HttpClient _client;
-    private readonly CustomWebApplicationFactory<Program>
-        _factory;
-
-    public IndexPageTests(
-        CustomWebApplicationFactory<Program> factory)
     {
-        _factory = factory;
-        _client = factory.CreateClient(new WebApplicationFactoryClientOptions
+        private readonly HttpClient _client;
+        private readonly CustomWebApplicationFactory<Program> _factory;
+
+        public IndexPageTests(CustomWebApplicationFactory<Program> factory)
         {
-            AllowAutoRedirect = false
-        });
+            _factory = factory;
+            _client = _factory.CreateClient();
+        }
+
+        [Fact]
+        public async Task Get_EndpointsReturnSuccess()
+        {
+            // Arrange & Act
+            var indexPage = await client.GetAsync("/Index");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, indexPage.StatusCode);
+        }
     }
-```
+    ```
 
 詳細は以下を参照してください。
 [WebApplicationFactory のカスタマイズ](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#customize-webapplicationfactory)
