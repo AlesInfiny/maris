@@ -19,7 +19,6 @@ export const msalConfig = {
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
     redirectUri: import.meta.env.VITE_ADB2C_APP_URI,
-    postLogoutRedirectUri: '/',
   },
   cache: {
     cacheLocation: 'localStorage',
@@ -58,10 +57,16 @@ export const msalConfig = {
 
 export const msalInstance = new PublicClientApplication(msalConfig);
 
+// 配列内で import.meta.env を呼び出そうとすると何でか最初の1文字しか読み込んでくれない
 export const loginRequest = {
-  scopes: ['openid', 'offline_access'],
+  scopes: [
+    'openid',
+    'https://alesmaiamarisb2ctest.onmicrosoft.com/alesmaris-api/api.read',
+  ],
 };
 
 export const tokenRequest = {
-  scopes: ['openid', 'offline_access', '13b91f04-f2d4-4621-94b8-c5d026b0fed1'],
+  scopes: [
+    'https://alesmaiamarisb2ctest.onmicrosoft.com/alesmaris-api/api.read',
+  ],
 };
