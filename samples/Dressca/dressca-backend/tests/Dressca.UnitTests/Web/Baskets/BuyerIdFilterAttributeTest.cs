@@ -15,6 +15,7 @@ public class BuyerIdFilterAttributeTest
     public void Cookieの有効期限は7日間()
     {
         // Arrange
+        var buyerIdCookieName = "Dressca-Bid";
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), Mock.Of<Controller>());
@@ -23,7 +24,7 @@ public class BuyerIdFilterAttributeTest
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
         var expectedDateTime = testCookieCreatedDateTime.AddDays(7);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
-        var filter = new BuyerIdFilterAttribute(fakeTimeProvider);
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider);
 
         // Act
         filter.OnActionExecuted(context);

@@ -29,7 +29,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     ///  <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
     /// </exception>
     public BuyerIdFilterAttribute(string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(TimeProvider.System, buyerIdCookieName)
+        : this(buyerIdCookieName, TimeProvider.System)
     {
     }
 
@@ -37,15 +37,15 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインタンスを初期化します。
     ///  単体テスト用に<see cref="TimeProvider"/> を受け取ることができます。
     /// </summary>
+    /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
-    /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
     /// <exception cref="ArgumentNullException">
     ///  <paramref name="timeProvider"/> が <see langword="null"/> です。
     /// </exception>
-    internal BuyerIdFilterAttribute(TimeProvider timeProvider, string buyerIdCookieName = DefaultBuyerIdCookieName)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider)
     {
-        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
+        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
     }
 
     /// <inheritdoc/>
