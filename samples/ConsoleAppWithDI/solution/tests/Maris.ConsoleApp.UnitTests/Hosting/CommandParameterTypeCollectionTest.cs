@@ -1,8 +1,6 @@
 ﻿using System.Reflection;
 using Maris.ConsoleApp.Core;
 using Maris.ConsoleApp.Hosting;
-using Xunit;
-using Xunit.Sdk;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
 

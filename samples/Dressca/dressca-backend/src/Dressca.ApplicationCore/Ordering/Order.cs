@@ -123,4 +123,14 @@ public class Order
     ///  注文アイテムのリストを取得します。
     /// </summary>
     public IReadOnlyCollection<OrderItem> OrderItems => this.orderItems.AsReadOnly();
+
+    /// <summary>
+    ///  このインスタンスの購入者 Id と指定の購入者 Id が一致するか判定します。
+    /// </summary>
+    /// <param name="buyerId">購入者 Id 。</param>
+    /// <returns>一致する場合 <see langword="true"/> 、一致しない場合 <see langword="false"/> を返します。</returns>
+    public bool HasMatchingBuyerId(string buyerId)
+    {
+        return this.BuyerId == buyerId;
+    }
 }

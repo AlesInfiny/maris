@@ -39,7 +39,7 @@ builder.Services
         {
             // エラーの原因をログに出力。
             var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation(Messages.ReceiveHttpBadRequest, JsonSerializer.Serialize(context.ModelState, DefaultJsonSerializerOptions.GetInstance()));
+            logger.LogInformation(Events.ReceiveHttpBadRequest, Messages.ReceiveHttpBadRequest, JsonSerializer.Serialize(context.ModelState, DefaultJsonSerializerOptions.GetInstance()));
 
             // ASP.NET Core の既定の実装を使ってレスポンスを返却。
             return builtInFactory(context);
@@ -113,11 +113,15 @@ app.UseHttpsRedirection();
 // Azure AD B2C での認証を有効にするために追加
 app.UseAuthentication();
 
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
+
+app.MapFallbackToFile("/index.html");
 
 app.Run();
 

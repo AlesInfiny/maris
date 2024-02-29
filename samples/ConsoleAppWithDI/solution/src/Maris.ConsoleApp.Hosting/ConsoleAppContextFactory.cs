@@ -53,7 +53,7 @@ internal class ConsoleAppContextFactory
         IEnumerable<string> args,
         Action<CommandParameterTypeCollection>? commandParametersOption)
     {
-        this.logger.LogInformation(Messages.ParseParameter.Embed(string.Join(' ', args)));
+        this.logger.LogInformation(Events.StartParseParameter, Messages.ParseParameter.Embed(string.Join(' ', args)));
         var commandParameterTypes = new CommandParameterTypeCollection();
         if (commandParametersOption is null)
         {
