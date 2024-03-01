@@ -20,6 +20,17 @@ public class Order
     /// <param name="buyerId">購入者 Id 。</param>
     /// <param name="shipToAddress">配送先住所。</param>
     /// <param name="orderItems">注文アイテムのリスト。</param>
+    /// <exception cref="ArgumentException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="buyerId"/> が <see langword="null"/> または空の文字列です。</item>
+    ///   <item><paramref name="orderItems"/> が <see langword="null"/> または空のリストです。</item>
+    ///  </list>
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="shipToAddress"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
     public Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems)
         : this(buyerId, shipToAddress, orderItems, TimeProvider.System)
     {
@@ -42,7 +53,6 @@ public class Order
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="shipToAddress"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     internal Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems, TimeProvider timeProvider)
@@ -52,8 +62,8 @@ public class Order
             throw new ArgumentException(Messages.ArgumentIsNullOrEmptyList, nameof(orderItems));
         }
 
-        this.BuyerId = string.IsNullOrEmpty(buyerId) ? throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(buyerId)) : buyerId;
-        this.ShipToAddress = shipToAddress ?? throw new ArgumentNullException(nameof(shipToAddress));
+        this.BuyerId = buyerId;
+        this.ShipToAddress = shipToAddress;
         this.orderItems = orderItems;
         this.account = new Account(orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
         this.ConsumptionTaxRate = Account.ConsumptionTaxRate;
@@ -61,7 +71,7 @@ public class Order
         this.DeliveryCharge = this.account.GetDeliveryCharge();
         this.ConsumptionTax = this.account.GetConsumptionTax();
         this.TotalPrice = this.account.GetTotalPrice();
-        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
+        this.timeProvider = timeProvider;
         this.OrderDate = this.timeProvider.GetLocalNow();
     }
 
