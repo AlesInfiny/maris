@@ -2,6 +2,7 @@
 using Maris.ConsoleApp.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Time.Testing;
 using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
@@ -384,6 +385,37 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         Assert.Equal(LogLevel.Information, record.Level);
         Assert.Equal(1104, record.Id);
         Assert.StartsWith($"sync-command コマンドのホストの処理が終了コード {exitCode} で完了しました。", record.Message);
+    }
+
+    [Fact]
+    public async Task StopAsync_コマンドの実行時間がログに出力される()
+    {
+        // Arrange
+        var lifetime = Mock.Of<IHostApplicationLifetime>();
+        var settings = new ConsoleAppSettings();
+        var commandAttribute = new CommandAttribute("sync-command", typeof(SyncCommandImpl));
+        var parameter = new CommandParameter();
+        var context = new ConsoleAppContext(commandAttribute, parameter);
+        var exitCode = 456;
+        var command = new SyncCommandImpl(exitCode);
+        command.Initialize(context);
+        var managerMock = CreateCommandManagerMock(command);
+        var manager = managerMock.Object;
+        var commandExecutorLogger = this.CreateTestLogger<CommandExecutor>();
+        var executor = new CommandExecutor(manager, commandExecutorLogger);
+        var logger = this.CreateTestLogger<ConsoleAppHostedService>();
+        var fakeTimeProvider = new FakeTimeProvider();
+        var service = new ConsoleAppHostedService(lifetime, settings, executor, logger, fakeTimeProvider);
+        var cancellationToken = new CancellationToken(false);
+        await service.StartAsync(cancellationToken);
+
+        // Act
+        fakeTimeProvider.Advance(TimeSpan.FromMilliseconds(1000));
+        await service.StopAsync(cancellationToken);
+
+        // Assert
+        var record = this.LogCollector.LatestRecord;
+        Assert.Contains($"実行時間は 1000 ms でした。", record.Message);
     }
 
     private static Mock<ICommandManager> CreateCommandManagerMock(CommandBase? creatingCommand = null)
