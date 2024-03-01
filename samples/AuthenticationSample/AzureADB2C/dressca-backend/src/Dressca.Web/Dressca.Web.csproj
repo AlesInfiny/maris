@@ -39,26 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dressca.ApplicationCore\Dressca.ApplicationCore.csproj" />
-    <ProjectReference Include="..\Dressca.EfInfrastructure\Dressca.EfInfrastructure.csproj" />
-    <ProjectReference Include="..\Dressca.Store.Assets.StaticFiles\Dressca.Store.Assets.StaticFiles.csproj" />
-    <ProjectReference Include="..\Dressca.SystemCommon\Dressca.SystemCommon.csproj" />
     <ProjectReference Include="..\Dressca.Web.Dto\Dressca.Web.Dto.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Resources\Messages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Messages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">

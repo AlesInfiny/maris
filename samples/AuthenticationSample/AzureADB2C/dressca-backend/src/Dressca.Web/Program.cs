@@ -1,19 +1,5 @@
-﻿using System.Text.Json;
-using Dressca.ApplicationCore;
-using Dressca.EfInfrastructure;
-using Dressca.Store.Assets.StaticFiles;
-using Dressca.SystemCommon.Text.Json;
-using Dressca.Web;
-using Dressca.Web.Baskets;
-using Dressca.Web.Controllers;
-using Dressca.Web.HealthChecks;
-using Dressca.Web.Mapper;
-using Dressca.Web.Resources;
-using Dressca.Web.Runtime;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,15 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddControllers(options =>
     {
-        options.Filters.Add<BuyerIdFilterAttribute>();
-        if (builder.Environment.IsDevelopment())
-        {
-            options.Filters.Add<BusinessExceptionDevelopmentFilter>();
-        }
-        else
-        {
-            options.Filters.Add<BusinessExceptionFilter>();
-        }
     })
     .ConfigureApiBehaviorOptions(options =>
     {
@@ -37,10 +14,6 @@ builder.Services
         var builtInFactory = options.InvalidModelStateResponseFactory;
         options.InvalidModelStateResponseFactory = context =>
         {
-            // エラーの原因をログに出力。
-            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation(Events.ReceiveHttpBadRequest, Messages.ReceiveHttpBadRequest, JsonSerializer.Serialize(context.ModelState, DefaultJsonSerializerOptions.GetInstance()));
-
             // ASP.NET Core の既定の実装を使ってレスポンスを返却。
             return builtInFactory(context);
         };
@@ -61,14 +34,6 @@ builder.Services.AddOpenApiDocument(config =>
     };
 });
 
-builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
-
-builder.Services.AddStaticFileAssetStore();
-
-builder.Services.AddDresscaApplicationCore();
-
-builder.Services.AddDresscaDtoMapper();
-
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddHttpLogging(logging =>
@@ -78,11 +43,6 @@ if (builder.Environment.IsDevelopment())
         logging.ResponseBodyLogLimit = 4096;
     });
 }
-
-builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, HealthCheckDescriptionProvider>());
-
-builder.Services.AddHealthChecks()
-    .AddDresscaDbContextCheck("DresscaDatabaseHealthCheck");
 
 // Azure AD B2C の設定をインジェクション
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -101,11 +61,6 @@ if (app.Environment.IsDevelopment())
     app.UseOpenApi();
     app.UseSwaggerUi();
     app.UseHttpLogging();
-    app.UseExceptionHandler(ErrorController.DevelopmentErrorRoute);
-}
-else
-{
-    app.UseExceptionHandler(ErrorController.ErrorRoute);
 }
 
 app.UseHttpsRedirection();
@@ -118,8 +73,6 @@ app.UseStaticFiles();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
 
 app.MapFallbackToFile("/index.html");
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ShoppingCartIcon } from '@heroicons/vue/24/solid';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 import { useUserStore } from '@/stores/users/users';
 
@@ -29,13 +28,8 @@ const getUserName = () => {
         class="text-lg font-medium text-gray-900 py-5 ring-1 ring-gray-900 ring-opacity-5 shadow-sm"
       >
         <div class="mx-auto flex justify-between px-4 md:px-24 lg:px-24">
-          <div>
-            <router-link class="text-2xl" to="/">Dressca</router-link>
-          </div>
+          <div>Dressca（Azure AD B2C 認証サンプル）</div>
           <div class="flex space-x-5 sm:space-x-8 lg:space-x-12">
-            <router-link to="/basket">
-              <ShoppingCartIcon class="h-8 w-8 text-amber-600" />
-            </router-link>
             <button v-if="!isAuthenticated()" @click="signIn()">
               ログイン
             </button>
@@ -46,7 +40,7 @@ const getUserName = () => {
     </header>
 
     <main class="mb-auto">
-      <router-view />
+      <div id="login"></div>
     </main>
 
     <footer
