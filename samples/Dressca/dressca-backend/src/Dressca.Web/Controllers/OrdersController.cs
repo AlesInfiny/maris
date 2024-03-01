@@ -68,7 +68,7 @@ public class OrdersController : ControllerBase
         }
         catch (OrderNotFoundException ex)
         {
-            this.logger.LogWarning(ex, ex.Message);
+            this.logger.LogWarning(Events.OrderNotFound, ex, ex.Message);
             return this.NotFound();
         }
     }

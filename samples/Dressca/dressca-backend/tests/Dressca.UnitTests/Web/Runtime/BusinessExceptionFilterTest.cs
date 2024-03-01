@@ -77,7 +77,7 @@ public class BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper) : T
         var record = this.LogCollector.LatestRecord;
         Assert.Equal("業務エラーが発生しました。", record.Message);
         Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(new EventId(0), record.Id);
+        Assert.Equal(1001, record.Id);
         Assert.Same(context.Exception, record.Exception);
     }
 

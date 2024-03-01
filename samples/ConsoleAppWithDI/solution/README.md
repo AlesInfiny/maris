@@ -506,6 +506,7 @@ internal class DependencyInjectionCommandSample : AsyncCommand<SampleParameter>
 {
     private readonly SampleApplicationService service;
     private readonly ILogger logger;
+    private readonly EventId GetTotalSuccess = new EventId(1001, nameof(GetTotalSuccess));
 
     public DependencyInjectionCommandSample(
         SampleApplicationService service,
@@ -520,7 +521,7 @@ internal class DependencyInjectionCommandSample : AsyncCommand<SampleParameter>
         CancellationToken cancellationToken)
     {
         var total = await this.service.GetTotalAsync(cancellationToken);
-        this.logger.LogInformation($"Total:{total}");
+        this.logger.LogInformation(GetTotalSuccess, $"Total:{total}");
         return new SuccessResult();
     }
 }
