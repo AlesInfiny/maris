@@ -22,7 +22,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private readonly TimeProvider timeProvider;
 
     /// <summary>
-    ///  no<see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
+    ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
     public BuyerIdFilterAttribute(string buyerIdCookieName = DefaultBuyerIdCookieName)
