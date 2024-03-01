@@ -13,4 +13,3 @@ export * from './post-basket-items-request';
 export * from './post-order-request';
 export * from './problem-details';
 export * from './put-basket-items-request';
-export * from './user-response';

@@ -10,11 +10,9 @@ using Dressca.Web.HealthChecks;
 using Dressca.Web.Mapper;
 using Dressca.Web.Resources;
 using Dressca.Web.Runtime;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,16 +82,6 @@ builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionPro
 builder.Services.AddHealthChecks()
     .AddDresscaDbContextCheck("DresscaDatabaseHealthCheck");
 
-// Azure AD B2C の設定をインジェクション
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(
-    options =>
-    {
-        builder.Configuration.Bind("AzureAdB2C", options);
-        options.TokenValidationParameters.NameClaimType = "name";
-    },
-    options => { builder.Configuration.Bind("AzureAdB2C", options); });
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -109,9 +97,6 @@ else
 }
 
 app.UseHttpsRedirection();
-
-// Azure AD B2C での認証を有効にするために追加
-app.UseAuthentication();
 
 app.UseStaticFiles();
 

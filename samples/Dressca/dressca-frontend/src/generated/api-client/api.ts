@@ -21,5 +21,4 @@ export * from './api/catalog-categories-api';
 export * from './api/catalog-items-api';
 export * from './api/health-checks-api';
 export * from './api/orders-api';
-export * from './api/users-api';
 

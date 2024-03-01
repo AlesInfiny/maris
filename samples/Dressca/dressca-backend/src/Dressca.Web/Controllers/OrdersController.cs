@@ -3,7 +3,6 @@ using Dressca.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
 using Dressca.Web.Dto.Ordering;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dressca.Web.Controllers;
@@ -14,7 +13,6 @@ namespace Dressca.Web.Controllers;
 [Route("api/orders")]
 [ApiController]
 [Produces("application/json")]
-[Authorize]
 public class OrdersController : ControllerBase
 {
     private readonly ShoppingApplicationService shoppingApplicationService;
