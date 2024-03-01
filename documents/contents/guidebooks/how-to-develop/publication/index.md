@@ -14,6 +14,8 @@ description: .NET + Vue.js で構成されたアプリケーションの発行�
 
 ### API エンドポイントの設定 {#api-endpoint-settings}
 
+#### OpenAPI Generator を利用しない場合 {#without-openapi-generator}
+
 API エンドポイントの設定は Axios のインスタンス生成時に行います。エンドポイントは一般的にハードコーディングせず、 env ファイルから取得した値を利用します。 AlesInfiny Maris サンプルアプリでは、 API アクセスコードに関する設定を `src/api-client/index.ts` に記述しています。
 
 ```typescript title="src/api-client/index.ts"
@@ -26,7 +28,9 @@ const axiosInstance = axios.create({
 
     Vite で環境変数を利用するためには、環境変数名の前に `VITE_` を付ける必要があります。例えば、 `API_ENDPOINT` という環境変数を利用する場合、 `VITE_API_ENDPOINT` という名前で設定します。
 
-OpenAPI Generator を利用する際は、 OpenAPI 定義書に記載されているエンドポイントが上書きされてしまいます。そのため、 `axiosInstance` での設定ではなく、 API クライアントの初期化時にエンドポイントを設定する方法を利用します。
+#### OpenAPI Generator を利用する場合 {#with-openapi-generator}
+
+OpenAPI Generator を利用する際は、 Axios のエンドポイントの設定が OpenAPI 定義書に記載されているエンドポイントで上書きされてしまいます。そのため、 API クライアントの初期化時にエンドポイントを設定する方法を利用します。
 
 ```typescript title="src/api-client/index.ts"
 const config = new apiClient.Configuration({
