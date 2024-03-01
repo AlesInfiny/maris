@@ -84,7 +84,7 @@ interface ImportMeta {
 
 Web サーバーと AP サーバーを統合するサーバーでの運用では、ドメイン名へのリクエストに対してエントリーページとなる静的ファイルを返します。そのため、 `Program.cs` に以下のような設定を追加します。
 
-```csharp title="Program.cs" hl_lines="12 26"
+```csharp title="Program.cs" hl_lines="8 22"
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
