@@ -53,6 +53,7 @@ public class Order
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="shipToAddress"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     internal Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems, TimeProvider timeProvider)
@@ -71,7 +72,7 @@ public class Order
         this.DeliveryCharge = this.account.GetDeliveryCharge();
         this.ConsumptionTax = this.account.GetConsumptionTax();
         this.TotalPrice = this.account.GetTotalPrice();
-        this.timeProvider = timeProvider;
+        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
         this.OrderDate = this.timeProvider.GetLocalNow();
     }
 
