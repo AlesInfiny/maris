@@ -11,7 +11,10 @@ const isAuthenticated = () => {
 };
 const signIn = async () => {
   await authenticationStore.signIn();
-  await userStore.fetchUserResponse();
+
+  if (authenticationStore.isAuthenticated) {
+    await userStore.fetchUserResponse();
+  }
 };
 const getUserName = () => {
   return userStore.getUserName;
