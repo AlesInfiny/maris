@@ -42,6 +42,6 @@ public class UsersController : ControllerBase
             return this.Unauthorized();
         }
 
-        return this.Ok(new UserResponse { UserName = "山田　太郎", UserId = userId });
+        return this.Ok(new UserResponse { UserId = userId });
     }
 }

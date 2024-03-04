@@ -8,12 +8,6 @@ namespace Dressca.Web.Dto.Users;
 public class UserResponse
 {
     /// <summary>
-    /// ユーザー名を取得または設定します。
-    /// </summary>
-    [Required]
-    public string UserName { get; set; } = string.Empty;
-
-    /// <summary>
     /// ユーザー ID を取得または設定します。
     /// </summary>
     [Required]

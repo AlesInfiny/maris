@@ -52,15 +52,9 @@
         "description": "ユーザー情報のレスポンスデータを表します。",
         "additionalProperties": false,
         "required": [
-          "userName",
           "userId"
         ],
         "properties": {
-          "userName": {
-            "type": "string",
-            "description": "ユーザー名を取得または設定します。",
-            "minLength": 1
-          },
           "userId": {
             "type": "string",
             "description": "ユーザー ID を取得または設定します。",

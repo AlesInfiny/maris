@@ -15,9 +15,6 @@ const signIn = async () => {
     await userStore.fetchUserResponse();
   }
 };
-const getUserName = () => {
-  return userStore.getUserName;
-};
 const getUserId = () => {
   return userStore.getUserId;
 };

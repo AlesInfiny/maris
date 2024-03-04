@@ -21,12 +21,6 @@
  */
 export interface UserResponse {
     /**
-     * ユーザー名を取得または設定します。
-     * @type {string}
-     * @memberof UserResponse
-     */
-    'userName': string;
-    /**
      * ユーザー ID を取得または設定します。
      * @type {string}
      * @memberof UserResponse
