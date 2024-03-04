@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Dressca.ApplicationCore.Accounting;
-using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Baskets;
 
@@ -15,11 +14,9 @@ public class Basket
     /// <summary>
     ///  <see cref="Basket"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="buyerId">購入者 Id 。</param>
-    /// <exception cref="ArgumentNullException">
-    ///  <paramref name="buyerId"/> が <see langword="null"/> です.
-    /// </exception>
-    public Basket(string buyerId) => this.BuyerId = buyerId;
+    public Basket()
+    {
+    }
 
     /// <summary>
     ///  買い物かご Id を取得します。
@@ -29,12 +26,12 @@ public class Basket
     /// <summary>
     ///  購入者 Id を取得します。
     /// </summary>
-    public string BuyerId
+    public required string BuyerId
     {
         get => this.buyerId;
 
         [MemberNotNull(nameof(buyerId))]
-        private set
+        init
         {
             this.buyerId = value ?? throw new ArgumentNullException(nameof(value));
         }
@@ -58,7 +55,7 @@ public class Basket
     {
         if (!this.items.Any(i => i.CatalogItemId == catalogItemId))
         {
-            this.items.Add(new BasketItem(catalogItemId, unitPrice, quantity));
+            this.items.Add(new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity });
             return;
         }
 

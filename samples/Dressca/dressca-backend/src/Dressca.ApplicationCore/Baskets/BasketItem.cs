@@ -14,15 +14,8 @@ public class BasketItem
     /// <summary>
     ///  <see cref="BasketItem"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="catalogItemId">カタログアイテム Id 。</param>
-    /// <param name="unitPrice">単価。</param>
-    /// <param name="quantity">数量。</param>
-    /// <exception cref="ArgumentException"><paramref name="quantity"/> が 0 未満の場合。</exception>
-    public BasketItem(long catalogItemId, decimal unitPrice, int quantity)
+    public BasketItem()
     {
-        this.CatalogItemId = catalogItemId;
-        this.UnitPrice = unitPrice;
-        this.Quantity = quantity;
     }
 
     /// <summary>
@@ -48,21 +41,21 @@ public class BasketItem
     /// <summary>
     ///  カタログアイテム Id を取得します。
     /// </summary>
-    public long CatalogItemId { get; private set; }
+    public required long CatalogItemId { get; init; }
 
     /// <summary>
     ///  単価を取得します。
     /// </summary>
-    public decimal UnitPrice { get; private set; }
+    public required decimal UnitPrice { get; init; }
 
     /// <summary>
     ///  数量を取得します。
     /// </summary>
     /// <exception cref="ArgumentException">0 未満を設定した場合。</exception>
-    public int Quantity
+    public required int Quantity
     {
         get => this.quantity;
-        private set
+        set
         {
             if (value < 0)
             {

@@ -11,7 +11,7 @@ public class BasketItemTest
         long catalogItemId = 1L;
         decimal unitPrice = 1000m;
         int quantity = 2;
-        var item = new BasketItem(catalogItemId, unitPrice, quantity);
+        var item = new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity };
 
         // Act
         var subTotal = item.GetSubTotal();
@@ -27,7 +27,7 @@ public class BasketItemTest
         long catalogItemId = 1L;
         decimal unitPrice = 1000m;
         int quantity = 2;
-        var item = new BasketItem(catalogItemId, unitPrice, quantity);
+        var item = new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity };
 
         // Act
         var action = () => _ = item.Basket;
