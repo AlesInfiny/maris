@@ -18,6 +18,9 @@ const signIn = async () => {
 const getUserName = () => {
   return userStore.getUserName;
 };
+const getUserId = () => {
+  return userStore.getUserId;
+};
 </script>
 
 <template>
@@ -33,7 +36,7 @@ const getUserName = () => {
             <button v-if="!isAuthenticated()" @click="signIn()">
               ログイン
             </button>
-            <span v-if="isAuthenticated()">{{ getUserName() }} さん</span>
+            <span v-if="isAuthenticated()">ユーザーID: {{ getUserId() }}</span>
           </div>
         </div>
       </nav>

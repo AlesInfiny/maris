@@ -18,10 +18,11 @@
         "tags": [
           "Users"
         ],
-        "operationId": "Users_GetByUserHomeAccountId",
+        "summary": "ログイン中のユーザー情報を取得します。",
+        "operationId": "Users_GetUser",
         "responses": {
           "200": {
-            "description": "",
+            "description": "ユーザー情報。",
             "content": {
               "application/json": {
                 "schema": {
@@ -51,12 +52,18 @@
         "description": "ユーザー情報のレスポンスデータを表します。",
         "additionalProperties": false,
         "required": [
-          "userName"
+          "userName",
+          "userId"
         ],
         "properties": {
           "userName": {
             "type": "string",
             "description": "ユーザー名を取得または設定します。",
+            "minLength": 1
+          },
+          "userId": {
+            "type": "string",
+            "description": "ユーザー ID を取得または設定します。",
             "minLength": 1
           }
         }

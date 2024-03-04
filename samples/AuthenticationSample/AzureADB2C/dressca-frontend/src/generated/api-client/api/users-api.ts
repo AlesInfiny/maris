@@ -32,10 +32,11 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
+         * @summary ログイン中のユーザー情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersGetByUserHomeAccountId: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        usersGetUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -71,11 +72,12 @@ export const UsersApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary ログイン中のユーザー情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersGetByUserHomeAccountId(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersGetByUserHomeAccountId(options);
+        async usersGetUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.usersGetUser(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -90,11 +92,12 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
+         * @summary ログイン中のユーザー情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersGetByUserHomeAccountId(options?: any): AxiosPromise<UserResponse> {
-            return localVarFp.usersGetByUserHomeAccountId(options).then((request) => request(axios, basePath));
+        usersGetUser(options?: any): AxiosPromise<UserResponse> {
+            return localVarFp.usersGetUser(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -108,11 +111,12 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
 export class UsersApi extends BaseAPI {
     /**
      * 
+     * @summary ログイン中のユーザー情報を取得します。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public usersGetByUserHomeAccountId(options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersGetByUserHomeAccountId(options).then((request) => request(this.axios, this.basePath));
+    public usersGetUser(options?: AxiosRequestConfig) {
+        return UsersApiFp(this.configuration).usersGetUser(options).then((request) => request(this.axios, this.basePath));
     }
 }
