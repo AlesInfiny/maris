@@ -38,6 +38,7 @@
             "Newtonsoft",
             "Noto",
             "nswag",
+            "openapi",
             "paramref",
             "pinia",
             "Pymarkdown",
