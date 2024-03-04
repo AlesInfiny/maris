@@ -68,6 +68,8 @@ nav:
               - Open API 仕様書からのクライアントコード生成: guidebooks/how-to-develop/vue-js/create-api-client-code.md
           - ローカル開発環境の構築:
               - guidebooks/how-to-develop/local-environment/index.md
+          - アプリケーションの発行:
+              - guidebooks/how-to-develop/publication/index.md
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
       - マイグレーション:

@@ -93,7 +93,7 @@ AlesInfiny Maris で採用している Vue.js のソフトウェア・アーキ�
 :  ビジネスロジックとして状態管理やブラウザ外部との入出力を担います。モデルのビジネスロジックには、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。モデルは後述する Pinia のアーキテクチャに従って実装します。
 
 <!-- textlint-disable -->
-Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://v3.ja.vuejs.org/guide/single-file-component.html#単一ファイルコンポーネント){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
+Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/sfc){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
 
 ### ビュー＆ビューモデル コンポーネント {#view-and-viewmodel-component}
 
