@@ -23,14 +23,15 @@ description: バックエンドで動作する .NET アプリケーションの�
 - 部分クラス宣言を利用して `Program.cs` を public にする
 
 詳細は以下を参照してください。
-[既定の WebApplicationFactory を使用した基本的なテスト](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#basic-tests-with-the-default-webapplicationfactory)
+
+[既定の WebApplicationFactory を使用した基本的なテスト :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#basic-tests-with-the-default-webapplicationfactory){ target=_blank }
 
 ## テストコード作成 {#writing-test-codes}
 
 ### 基本のテスト {#basic}
 
-テストクラスに [`IClassFixture<TFixture>`](https://xunit.net/docs/shared-context#class-fixture) インターフェースを実装し、 `WebApplicationFactory<Program>` のインスタンスをテストクラスから利用します。
-`WebApplicationFactory<Program>` はテスト対象アプリケーションの `TestServer` インスタンスを提供します。
+テストクラスに [`IClassFixture<TFixture>`](https://xunit.net/docs/shared-context#class-fixture) インターフェースを実装し、 [`WebApplicationFactory<TEntryPoint>`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) のインスタンスをテストクラスから利用します。
+`WebApplicationFactory<TEntryPoint>` はテスト対象アプリケーションの `TestServer` インスタンスを提供します。
 
 ``` C# hl_lines="2"
 public class BasicTests 
@@ -66,7 +67,7 @@ public class BasicTests
 
 詳細は以下を参照してください。
 
-[既定の WebApplicationFactory を使用した基本的なテスト](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#basic-tests-with-the-default-webapplicationfactory)
+[既定の WebApplicationFactory を使用した基本的なテスト :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#basic-tests-with-the-default-webapplicationfactory){ target=_blank }
 
 ### テスト対象アプリケーションのカスタマイズ {#customize-target-app}
 
@@ -105,9 +106,7 @@ public class BasicTests
     }
     ```
 
-    上記のコードでは、環境変数の値に応じて構成ファイルを読み込み、アプリケーションのデータベース接続先を変更しています。
-
-1. テストクラスで実装する `IClassFixture` インターフェースの型引数を `CustomWebApplicationFactory<Program>` とします。
+1. テストクラスで実装する `IClassFixture` インターフェースの型引数を `CustomWebApplicationFactory<Program>` とする。
 
     ``` C# hl_lines="2"
     public class IndexPageTests :
@@ -134,5 +133,9 @@ public class BasicTests
     }
     ```
 
+    上記の実装により、環境変数 `TEST_ENVIRONMENT` の値に応じて構成ファイルを読み込み、アプリケーションのデータベース接続先を変更しています。
+    ビルドマシンごとに異なる `TEST_ENVIRONMENT` の値を設定し、 `appsettings.{TEST_ENVIRONMENT}.json` を切り替えることができます。また、 `IClassFixture` インターフェースの型引数を `CustomWebApplicationFactory<Program>` とすることで、構成を変更したテスト対象アプリケーションの設定でテストを実行します。
+
 詳細は以下を参照してください。
-[WebApplicationFactory のカスタマイズ](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#customize-webapplicationfactory)
+
+[WebApplicationFactory のカスタマイズ :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#customize-webapplicationfactory){ target=_blank }
