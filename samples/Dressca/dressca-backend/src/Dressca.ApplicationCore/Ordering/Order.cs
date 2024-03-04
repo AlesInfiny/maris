@@ -10,6 +10,7 @@ public class Order
 {
     private readonly List<OrderItem> orderItems = new();
     private readonly Account? account;
+    private readonly TimeProvider timeProvider;
     private string? buyerId;
     private ShipTo? shipToAddress;
 
@@ -31,6 +32,31 @@ public class Order
     ///  </list>
     /// </exception>
     public Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems)
+        : this(buyerId, shipToAddress, orderItems, TimeProvider.System)
+    {
+    }
+
+    /// <summary>
+    ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
+    ///  単体テスト用に<see cref="TimeProvider"/> を受け取ることができます。
+    /// </summary>
+    /// <param name="buyerId">購入者 Id 。</param>
+    /// <param name="shipToAddress">配送先住所。</param>
+    /// <param name="orderItems">注文アイテムのリスト。</param>
+    /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
+    /// <exception cref="ArgumentException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="buyerId"/> が <see langword="null"/> または空の文字列です。</item>
+    ///   <item><paramref name="orderItems"/> が <see langword="null"/> または空のリストです。</item>
+    ///  </list>
+    /// </exception>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="shipToAddress"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
+    internal Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems, TimeProvider timeProvider)
     {
         if (orderItems is null || !orderItems.Any())
         {
@@ -46,11 +72,14 @@ public class Order
         this.DeliveryCharge = this.account.GetDeliveryCharge();
         this.ConsumptionTax = this.account.GetConsumptionTax();
         this.TotalPrice = this.account.GetTotalPrice();
+        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
+        this.OrderDate = this.timeProvider.GetLocalNow();
     }
 
     private Order()
     {
         // Required by EF Core.
+        this.timeProvider = TimeProvider.System;
     }
 
     /// <summary>
@@ -81,7 +110,7 @@ public class Order
     ///  注文日を取得します。
     ///  このクラスのインスタンスが生成されたシステム日時が自動的に設定されます.
     /// </summary>
-    public DateTimeOffset OrderDate { get; private set; } = DateTimeOffset.Now;
+    public DateTimeOffset OrderDate { get; private set; }
 
     /// <summary>
     ///  お届け先を取得します。

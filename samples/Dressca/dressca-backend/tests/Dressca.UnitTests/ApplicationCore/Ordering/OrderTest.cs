@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Ordering;
+using Microsoft.Extensions.Time.Testing;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
@@ -169,6 +170,24 @@ public class OrderTest
 
         // Assert
         Assert.False(result);
+    }
+
+    [Fact]
+    public void Constructor_OrderDateが注文時のシステム時刻と等しい()
+    {
+        // Arrange
+        var buyerId = Guid.NewGuid().ToString("D");
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var fakeTimeProvider = new FakeTimeProvider();
+        var testOrderTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, new TimeSpan(9, 0, 0));
+        fakeTimeProvider.SetUtcNow(testOrderTime);
+
+        // Act
+        var order = new Order(buyerId, shipTo, items, fakeTimeProvider);
+
+        // Assert
+        Assert.Equal(testOrderTime, order.OrderDate);
     }
 
     private static Address CreateDefaultAddress()

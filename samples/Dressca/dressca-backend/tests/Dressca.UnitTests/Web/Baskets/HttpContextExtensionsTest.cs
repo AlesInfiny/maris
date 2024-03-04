@@ -1,5 +1,6 @@
 ﻿using Dressca.Web.Baskets;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Time.Testing;
 
 namespace Dressca.UnitTests.Web.Baskets;
 
@@ -24,9 +25,10 @@ public class HttpContextExtensionsTest
     public void GetBuyerId_購入者Idが文字列型ではない_新たにGuid形式の購入者Idが発行される()
     {
         // Arrange
+        var fakeTimeProvider = new FakeTimeProvider();
         var items = new Dictionary<object, object?>
         {
-            { "Dressca-BuyerId", DateTimeOffset.Now },
+            { "Dressca-BuyerId", fakeTimeProvider.GetLocalNow() },
         };
         var httpContextMock = new Mock<HttpContext>();
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
