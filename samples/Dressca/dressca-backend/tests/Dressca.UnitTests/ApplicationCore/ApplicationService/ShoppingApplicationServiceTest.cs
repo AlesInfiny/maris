@@ -582,7 +582,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         var items = new List<OrderItem>()
         {
-            new(new CatalogItemOrdered(1, productName, productCode), 1000m, 1),
+            new() {ItemOrdered = new CatalogItemOrdered(1, productName, productCode), UnitPrice = 1000m, Quantity = 1 },
         };
 
         return items;

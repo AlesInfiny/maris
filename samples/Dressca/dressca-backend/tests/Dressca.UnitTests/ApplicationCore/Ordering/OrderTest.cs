@@ -218,8 +218,8 @@ public class OrderTest
 
         var items = new List<OrderItem>()
         {
-            new(new CatalogItemOrdered(1, productName1, productCode1), 1000m, 1),
-            new(new CatalogItemOrdered(2, productName2, productCode2), 1500m, 2),
+            new() { ItemOrdered = new CatalogItemOrdered(1, productName1, productCode1), UnitPrice = 1000m, Quantity = 1 },
+            new() { ItemOrdered = new CatalogItemOrdered(2, productName2, productCode2), UnitPrice = 1500m, Quantity = 2 },
         };
 
         return items;

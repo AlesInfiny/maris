@@ -13,7 +13,7 @@ public class OrderItemTest
         int quantity = 1;
 
         // Act
-        var action = () => new OrderItem(itemOrdered!, unitPrice, quantity);
+        var action = () => new OrderItem { ItemOrdered = itemOrdered!, UnitPrice = unitPrice, Quantity = quantity };
 
         // Assert
         Assert.Throws<ArgumentNullException>("value", action);
@@ -26,7 +26,7 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+        var orderItem = new OrderItem{ ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
 
         // Act
         var action = () => _ = orderItem.Order;
@@ -43,7 +43,7 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+        var orderItem = new OrderItem{ ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
         IEnumerable<OrderItemAsset>? orderItemAssets = null;
 
         // Act
@@ -60,7 +60,7 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+        var orderItem = new OrderItem{ ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
         var orderItemAssets = new List<OrderItemAsset>
         {
             new("asset-code-1", orderItem.Id),
@@ -84,7 +84,7 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 2;
-        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+        var orderItem = new OrderItem{ ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
 
         // Act
         var subTotal = orderItem.GetSubTotal();
