@@ -127,6 +127,7 @@ VITE_ADB2C_APP_URI=http://localhost:5173
 
 ### 動作確認
 
+1. ターミナルで `auth-frontend` のフォルダーへ移動し、 `npm install` を実行します。
 1. Visual Studio で `auth-backend\Dressca.sln` を開きます。
 1. `Dressca.Web` を右クリックし「スタートアッププロジェクトに設定」を選択します。
 1. ソリューションをデバッグなしで開始します。ブラウザーが起動し、しばらく待つと SPA の初期画面が表示されます。
