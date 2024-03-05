@@ -6,7 +6,7 @@ namespace Dressca.IntegrationTest;
 
 public class TransactionalTestDatabaseFixture
 {
-    private const string ConnectionString = @"Server=(localdb)\mssqllocaldb;Database=Dressca.Eshop.IT.;Integrated Security=True;";
+    private const string ConnectionString = @"Server=(localdb)\mssqllocaldb;Database=Dressca.Eshop.IT;Integrated Security=True;";
 
     public TransactionalTestDatabaseFixture()
     {
