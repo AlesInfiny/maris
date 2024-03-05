@@ -432,7 +432,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
          {
              new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
-        var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
+        var order = new Order { BuyerId = dummyBuyerId, ShipToAddress = shipTo, OrderItems = CreateDefaultOrderItems() };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -478,7 +478,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
          {
              new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
-        var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
+        var order = new Order { BuyerId = dummyBuyerId, ShipToAddress = shipTo, OrderItems = CreateDefaultOrderItems() };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -524,7 +524,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
          {
              new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
-        var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
+        var order = new Order { BuyerId = dummyBuyerId, ShipToAddress = shipTo, OrderItems = CreateDefaultOrderItems() };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo

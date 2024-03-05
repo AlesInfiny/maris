@@ -18,7 +18,7 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
         var buyerId = Guid.NewGuid().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipToAddress, orderItems);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipToAddress, OrderItems = orderItems };
         var orderRepositoryMock = new Mock<IOrderRepository>();
         orderRepositoryMock
             .Setup(r => r.FindAsync(orderId, AnyToken))
@@ -43,7 +43,7 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
         var buyerId = Guid.NewGuid().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipToAddress, orderItems);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipToAddress, OrderItems = orderItems };
         var orderRepositoryMock = new Mock<IOrderRepository>();
         orderRepositoryMock
             .Setup(r => r.FindAsync(orderId, AnyToken))

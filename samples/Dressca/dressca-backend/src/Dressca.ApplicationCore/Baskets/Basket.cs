@@ -69,7 +69,6 @@ public class Basket
     /// <param name="quantities">各アイテムの数量。</param>
     public void SetItemsQuantity(Dictionary<long, int> quantities)
     {
-        var message = new List<string>();
         foreach (var item in this.Items)
         {
             if (quantities.TryGetValue(item.CatalogItemId, out var quantity))

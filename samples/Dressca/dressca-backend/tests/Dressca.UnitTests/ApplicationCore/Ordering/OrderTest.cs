@@ -21,7 +21,7 @@ public class OrderTest
         var items = CreateDefaultOrderItems();
 
         // Act
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = items };
 
         // Assert
         Assert.NotNull(order);
@@ -38,7 +38,7 @@ public class OrderTest
         var items = CreateDefaultOrderItems();
 
         // Act
-        var action = () => new Order(buyerId!, shipTo, items);
+        var action = () => new Order { BuyerId = buyerId!, ShipToAddress = shipTo, OrderItems = items };
 
         // Assert
         Assert.Throws<ArgumentException>(action);
@@ -52,7 +52,7 @@ public class OrderTest
         var items = CreateDefaultOrderItems();
 
         // Act
-        var action = () => new Order(buyerId, null!, items);
+        var action = () => new Order { BuyerId = buyerId, ShipToAddress = null!, OrderItems = items };
 
         // Assert
         Assert.Throws<ArgumentNullException>(action);
@@ -67,10 +67,10 @@ public class OrderTest
         var shipTo = CreateDefaultShipTo();
 
         // Act
-        var action = () => new Order(buyerId, shipTo, emptyOrderItems!);
+        var action = () => new Order { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = emptyOrderItems! };
 
         // Assert
-        var ex = Assert.Throws<ArgumentException>("orderItems", action);
+        var ex = Assert.Throws<ArgumentException>("value", action);
         Assert.StartsWith("null または空のリストを設定できません。", ex.Message);
     }
 
@@ -81,7 +81,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = items };
 
         // Act
         var totalPrice = order.TotalItemsPrice;
@@ -97,7 +97,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = items };
 
         // Act
         var deliveryCharge = order.DeliveryCharge;
@@ -113,7 +113,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = items };
 
         // Act
         var tax = order.ConsumptionTax;
@@ -129,7 +129,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = items };
 
         // Act
         var totalPrice = order.TotalPrice;
@@ -145,7 +145,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = items };
 
         // Act
         var result = order.HasMatchingBuyerId(buyerId);
@@ -161,7 +161,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = items };
 
         var unmatchingBuyerId = Guid.NewGuid().ToString("D");
 
@@ -184,7 +184,7 @@ public class OrderTest
         fakeTimeProvider.SetUtcNow(testOrderTime);
 
         // Act
-        var order = new Order(buyerId, shipTo, items, fakeTimeProvider);
+        var order = new Order(fakeTimeProvider) { BuyerId = buyerId, ShipToAddress = shipTo, OrderItems = items };
 
         // Assert
         Assert.Equal(testOrderTime, order.OrderDate);
