@@ -21,13 +21,11 @@ public class TransactionalTestDatabaseFixture
     public void Cleanup()
     {
         using var context = this.CreateContext();
-
         context.Orders.RemoveRange(context.Orders);
         context.SaveChanges();
     }
 
     internal DresscaDbContext CreateContext()
-
         => new DresscaDbContext(
             new DbContextOptionsBuilder<DresscaDbContext>()
                 .UseSqlServer(ConnectionString)
