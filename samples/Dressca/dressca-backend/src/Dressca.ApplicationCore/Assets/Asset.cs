@@ -13,21 +13,7 @@ public class Asset
     /// <summary>
     ///  <see cref="Asset"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="assetCode">アセットコード。</param>
-    /// <param name="assetType">アセットタイプ。</param>
-    /// <exception cref="ArgumentException">
-    ///  <paramref name="assetCode"/> が <see langword="null"/> または空の文字列です。
-    /// </exception>
-    /// <exception cref="NotSupportedException">
-    ///  <paramref name="assetType"/> はサポートされていない文字列です。
-    /// </exception>
-    public Asset(string assetCode, string assetType)
-    {
-        this.AssetCode = assetCode;
-        this.AssetType = assetType;
-    }
-
-    private Asset()
+    public Asset()
     {
     }
 
@@ -40,10 +26,10 @@ public class Asset
     ///  アセットコードを取得します。
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
-    public string AssetCode
+    public required string AssetCode
     {
         get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));
-        private set
+        init
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -59,10 +45,10 @@ public class Asset
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="AssetType"/> が設定されていません。</exception>
     /// <exception cref="NotSupportedException">サポートされていないアセットタイプが指定されました。</exception>
-    public string AssetType
+    public required string AssetType
     {
         get => this.assetType ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetType)));
-        private set
+        init
         {
             if (!AssetTypes.IsSupportedAssetType(value))
             {
