@@ -27,8 +27,8 @@ nav:
               - app-architecture/client-side-rendering/test/index.md
               - バックエンドアプリケーションのテスト:
                   - app-architecture/client-side-rendering/test/backend-application/index.md
-                  # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
-                  - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md 
+                  - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md
+                  # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md 
       # - コンソールアプリケーション編:
           # - app-architecture/console-app/index.md
       # - クックブック:
