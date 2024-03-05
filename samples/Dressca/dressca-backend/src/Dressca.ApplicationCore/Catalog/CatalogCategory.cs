@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Catalog;
 
@@ -8,22 +9,13 @@ namespace Dressca.ApplicationCore.Catalog;
 public class CatalogCategory
 {
     private readonly List<CatalogItem> items = new();
+    private string name;
 
     /// <summary>
     ///  <see cref="CatalogCategory"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="name">カテゴリ名。</param>
-    /// <exception cref="ArgumentException">
-    ///  <paramref name="name"/> が <see langword="null"/> または空の文字列です。
-    /// </exception>
-    public CatalogCategory(string name)
+    public CatalogCategory()
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(name));
-        }
-
-        this.Name = name;
     }
 
     /// <summary>
@@ -34,7 +26,21 @@ public class CatalogCategory
     /// <summary>
     ///  カテゴリ名を取得します。
     /// </summary>
-    public string Name { get; private set; }
+    public required string Name
+    {
+        get => this.name;
+
+        [MemberNotNull(nameof(name))]
+        init
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
+            }
+
+            this.name = value;
+        }
+    }
 
     /// <summary>
     ///  カタログアイテムのリストを取得します。
