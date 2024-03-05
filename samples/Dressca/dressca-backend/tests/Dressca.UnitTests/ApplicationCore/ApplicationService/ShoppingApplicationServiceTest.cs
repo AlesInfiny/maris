@@ -41,7 +41,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBuyerId = "dummyId";
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -158,7 +158,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var quantities = new Dictionary<long, int>() { { 10L, 5 } };
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -195,7 +195,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var quantities = new Dictionary<long, int>() { { 10L, newQuantity } };
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -231,7 +231,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var quantities = new Dictionary<long, int>() { { 10L, 0 } };
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -318,7 +318,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var quantities = new Dictionary<long, int>() { { 10L, 5 } };
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -430,7 +430,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
         var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
 
@@ -476,7 +476,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
         var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
 
@@ -522,7 +522,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
         var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
 
