@@ -17,27 +17,9 @@ public class OrderItem
     /// <summary>
     ///  <see cref="OrderItem"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="itemOrdered">注文されたカタログアイテム。</param>
-    /// <param name="unitPrice">単価。</param>
-    /// <param name="quantity">数量。</param>
-    /// <exception cref="ArgumentNullException">
-    ///  <paramref name="itemOrdered"/> が <see langword="null"/> です。
-    /// </exception>
-    //public OrderItem(CatalogItemOrdered itemOrdered, decimal unitPrice, int quantity)
-    //{
-    //    //this.ItemOrdered = itemOrdered;
-    //    //this.UnitPrice = unitPrice;
-    //    //this.Quantity = quantity;
-    //}
-
     public OrderItem()
     {
     }
-
-    //private OrderItem()
-    //{
-    //    // Required by EF Core.
-    //}
 
     /// <summary>
     ///  注文アイテム Id を取得します。
