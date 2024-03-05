@@ -39,7 +39,7 @@ public class TransactionalTestDatabaseFixture
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
                 .Build();
-            return config.GetConnectionString("DresscaTransactionalDbContext") ?? throw new ArgumentNullException("DresscaTransactionalDbContext");
+            return config.GetConnectionString("DresscaTransactionalTestDbContext") ?? throw new ArgumentNullException("DresscaTransactionalDbContext");
         }
         else
         {
