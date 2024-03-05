@@ -181,9 +181,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 var app = builder.Build(); // （既存のコード）
 
-// 認証機能を利用
+// 認証を有効化
 app.UseAuthentication();
 ```
+
+※ `app.UseAuthentication` の呼び出し位置は、[Middleware order](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に示す順序に従ってください。
 
 3. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 4. 認証を必要とする Web API に `[Authorize]` 属性を付与します。
