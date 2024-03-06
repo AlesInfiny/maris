@@ -24,16 +24,16 @@ internal class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
             catalogItemOrderedBuider =>
             {
                 catalogItemOrderedBuider.Property(orderedItem => orderedItem.CatalogItemId)
-                .IsRequired()
-                .HasColumnName("OrderedCatalogItemId");
+                    .IsRequired()
+                    .HasColumnName("OrderedCatalogItemId");
                 catalogItemOrderedBuider.Property(orderedItem => orderedItem.ProductName)
-                .HasMaxLength(512)
-                .IsRequired()
-                .HasColumnName("OrderedProductName");
+                    .HasMaxLength(512)
+                    .IsRequired()
+                    .HasColumnName("OrderedProductName");
                 catalogItemOrderedBuider.Property(orderedItem => orderedItem.ProductCode)
-                .HasMaxLength(128)
-                .IsRequired()
-                .HasColumnName("OrderedProductCode");
+                    .HasMaxLength(128)
+                    .IsRequired()
+                    .HasColumnName("OrderedProductCode");
             });
         builder.HasOne(orderItem => orderItem.Order)
             .WithMany(order => order.OrderItems)
