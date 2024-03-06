@@ -78,7 +78,15 @@ public class BasketItem
     /// </summary>
     /// <param name="quantity">数量。</param>
     /// <exception cref="ArgumentException"><paramref name="quantity"/> が 0 未満の場合。</exception>
-    public void SetQuantity(int quantity) => this.quantity = quantity;
+    public void SetQuantity(int quantity)
+    {
+        if (quantity < 0)
+        {
+            throw new ArgumentException(Messages.BasketItemQuantityMustBePositive, nameof(quantity));
+        }
+
+        this.quantity = quantity;
+    }
 
     /// <summary>
     ///  買い物かごアイテムの小計を計算して金額を返却します。

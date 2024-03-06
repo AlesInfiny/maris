@@ -4,16 +4,6 @@ namespace Dressca.UnitTests.ApplicationCore.Baskets;
 
 public class BasketTest
 {
-    [Fact]
-    public void Constructor_正しくインスタンス化できる()
-    {
-        // Arrange & Act
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-
-        // Assert
-        Assert.NotNull(basket);
-    }
-
     [Theory]
     [InlineData(0)]
     [InlineData(1)]
@@ -260,7 +250,7 @@ public class BasketTest
         var action = () => basket.AddItem(1L, 1000, additionalQuantity);
 
         // Assert
-        var ex = Assert.Throws<ArgumentException>("value", action);
+        var ex = Assert.Throws<ArgumentException>("quantity", action);
         Assert.StartsWith("買い物かごアイテムの数量は 0 未満にできません。", ex.Message);
     }
 
