@@ -1,4 +1,4 @@
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 
@@ -13,18 +13,17 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
-axiosInstance.interceptors.request.use(
-  async (config: InternalAxiosRequestConfig) => {
-    const store = useAuthenticationStore();
-    if (store.isAuthenticated) {
-      await store.getToken();
-      const token = store.accessToken;
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-);
+axiosInstance.interceptors.request.use(async (request) => {
+  const store = useAuthenticationStore();
 
-const userApi = new apiClient.UsersApi(config, '', axiosInstance);
+  if (store.isAuthenticated) {
+    await store.getToken();
+    const token = store.getAccessToken;
+    request.headers['Authorization'] = `Bearer ${token}`;
+  }
+  return request;
+});
+
+const userApi = new apiClient.UserApi(config, '', axiosInstance);
 
 export { userApi };

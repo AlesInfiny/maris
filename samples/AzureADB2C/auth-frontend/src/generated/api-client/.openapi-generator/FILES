@@ -1,12 +1,11 @@
 .gitignore
 .npmignore
 api.ts
-api/users-api.ts
+api/user-api.ts
 base.ts
 common.ts
 configuration.ts
 git_push.sh
 index.ts
 models/index.ts
-models/problem-details.ts
 models/user-response.ts

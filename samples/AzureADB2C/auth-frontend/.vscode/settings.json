@@ -22,6 +22,17 @@
 
   "editor.guides.bracketPairs": true,
   "editor.bracketPairColorization.enabled": true,
-  "cSpell.words": ["dressca", "vite"],
-  "files.eol": "\n"
+  "cSpell.words": [
+    "dressca",
+    "heroicons",
+    "msal",
+    "openapi",
+    "openapitools",
+    "pinia",
+    "rushstack",
+    "stylelint",
+    "tailwindcss",
+    "typecheck",
+    "vite"
+  ]
 }

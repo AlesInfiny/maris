@@ -65,10 +65,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 // Azure AD B2C での認証を有効にするために追加
 app.UseAuthentication();
-
-app.UseStaticFiles();
 
 app.UseAuthorization();
 

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { string } from 'yup';
+import { useUserStore } from '@/stores/user/user';
 import {
   signInAzureADB2C,
   getTokenAzureADB2C,
@@ -9,10 +10,10 @@ import {
 export const useAuthenticationStore = defineStore({
   id: 'authentication',
   state: () => ({
-    accessToken: string,
     homeAccountId: string,
-    authenticated: false,
+    accessToken: string,
     idToken: string,
+    authenticated: false,
   }),
   actions: {
     async signIn() {
@@ -30,19 +31,33 @@ export const useAuthenticationStore = defineStore({
       this.idToken = result.idToken;
       this.authenticated = result.isAuthenticated;
     },
+    async getUserId() {
+      const loginElem = document.getElementById('login');
+      if (loginElem) {
+        try {
+          const userStore = useUserStore();
+          await userStore.fetchUserResponse();
+          const userIdRes = userStore.getUserId;
+          loginElem.innerText = userIdRes?.userId ?? 'No UserID';
+        } catch (err) {
+          loginElem.innerText = 'error occurred';
+          throw err;
+        }
+      }
+    },
   },
   getters: {
-    isAuthenticated(state) {
-      return state.authenticated;
+    getHomeAccountId(state) {
+      return state.homeAccountId;
     },
     getAccessToken(state) {
       return state.accessToken;
     },
-    getHomeAccountId(state) {
-      return state.homeAccountId;
-    },
     getIdToken(state) {
       return state.idToken;
+    },
+    isAuthenticated(state) {
+      return state.authenticated;
     },
   },
 });

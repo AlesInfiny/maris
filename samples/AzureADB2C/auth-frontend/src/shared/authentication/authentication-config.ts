@@ -2,26 +2,30 @@ import { LogLevel, PublicClientApplication } from '@azure/msal-browser';
 
 export const b2cPolicies = {
   names: {
-    signUpSignIn: import.meta.env.VITE_ADB2C_B2CPOLICIES_NAMES_SIGNUP_SIGNIN,
+    signUpSignIn: import.meta.env.VITE_USER_FLOW_SIGN_IN,
   },
   authorities: {
     signUpSignIn: {
-      authority: import.meta.env.VITE_ADB2C_AUTHORITIES_SIGNUP_SIGNIN_AUTHORITY,
+      authority: import.meta.env.VITE_ADB2C_SIGN_IN_URI,
     },
   },
-  authorityDomain: import.meta.env.VITE_ADB2C_B2CPOLICIES_AUTHORITYDOMAIN,
+  authorityDomain: import.meta.env.VITE_ADB2C_AUTHORITY_DOMAIN,
 };
 
-// Config object to be passed to Msal on creation
+export const apiConfig = {
+  b2cScopes: [import.meta.env.VITE_ADB2C_TASKS_SCOPE],
+};
+
 export const msalConfig = {
   auth: {
     clientId: import.meta.env.VITE_ADB2C_APP_CLIENT_ID,
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
-    redirectUri: import.meta.env.VITE_ADB2C_APP_URI,
+    redirectUri: import.meta.env.VITE_APP_URI,
   },
   cache: {
-    cacheLocation: 'localStorage',
+    cacheLocation: 'sessionStorage',
+    storeAuthStateInCookie: true,
   },
   system: {
     loggerOptions: {
@@ -57,16 +61,10 @@ export const msalConfig = {
 
 export const msalInstance = new PublicClientApplication(msalConfig);
 
-// 配列内で import.meta.env を呼び出そうとすると何でか最初の1文字しか読み込んでくれない
 export const loginRequest = {
-  scopes: [
-    'openid',
-    'https://alesmaiamarisb2ctest.onmicrosoft.com/alesmaris-api/api.read',
-  ],
+  scopes: ['openId', ...apiConfig.b2cScopes],
 };
 
 export const tokenRequest = {
-  scopes: [
-    'https://alesmaiamarisb2ctest.onmicrosoft.com/alesmaris-api/api.read',
-  ],
+  scopes: [...apiConfig.b2cScopes],
 };

@@ -1,12 +1,12 @@
 import {
-  InteractionRequiredAuthError,
   BrowserAuthError,
+  InteractionRequiredAuthError,
 } from '@azure/msal-browser';
 import {
-  loginRequest,
   msalInstance,
+  loginRequest,
   tokenRequest,
-} from '@/shared/authentication/authentication-config';
+} from './authentication-config';
 
 msalInstance.initialize();
 
@@ -20,7 +20,6 @@ export async function signInAzureADB2C(): Promise<AuthenticationResult> {
     return result;
   } catch (error) {
     if (error instanceof BrowserAuthError) {
-      // 認証せずにブラウザーが閉じられた場合は認証されなかったものとして戻り値を返す。
       result.isAuthenticated = false;
       return result;
     }
@@ -33,6 +32,7 @@ export async function getTokenAzureADB2C(
 ): Promise<AuthenticationResult> {
   const account = msalInstance.getAccountByHomeId(homeAccountId);
   tokenRequest.account = account;
+
   const result = new AuthenticationResult();
 
   try {
