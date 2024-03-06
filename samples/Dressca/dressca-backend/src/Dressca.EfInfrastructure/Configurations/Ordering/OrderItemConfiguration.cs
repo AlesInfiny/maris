@@ -19,20 +19,22 @@ internal class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
             .HasColumnType("decimal(18,6)");
         builder.Property(orderItem => orderItem.Quantity)
             .IsRequired();
-        builder.OwnsOne(orderItem => orderItem.ItemOrdered)
-            .Property(orderedItem => orderedItem.CatalogItemId)
+        builder.ComplexProperty(
+            orderItem => orderItem.ItemOrdered,
+            catalogItemOrderedBuider =>
+            {
+                catalogItemOrderedBuider.Property(orderedItem => orderedItem.CatalogItemId)
                 .IsRequired()
                 .HasColumnName("OrderedCatalogItemId");
-        builder.OwnsOne(orderItem => orderItem.ItemOrdered)
-            .Property(orderedItem => orderedItem.ProductName)
+                catalogItemOrderedBuider.Property(orderedItem => orderedItem.ProductName)
                 .HasMaxLength(512)
                 .IsRequired()
                 .HasColumnName("OrderedProductName");
-        builder.OwnsOne(orderItem => orderItem.ItemOrdered)
-            .Property(orderedItem => orderedItem.ProductCode)
+                catalogItemOrderedBuider.Property(orderedItem => orderedItem.ProductCode)
                 .HasMaxLength(128)
                 .IsRequired()
                 .HasColumnName("OrderedProductCode");
+            });
         builder.HasOne(orderItem => orderItem.Order)
             .WithMany(order => order.OrderItems)
             .HasForeignKey(orderItem => orderItem.OrderId)
