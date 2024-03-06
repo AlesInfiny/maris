@@ -17,6 +17,6 @@ description: AlesInfiny Maris を利用することで構築できるアプリ�
 
     Git リポジトリの構成や、推奨するリポジトリ構造について説明します。
 
-1. [.NETアプリケーションの処理方式](dotnet-application-processing-system.md)
+1. [.NETアプリケーションの処理方式](dotnet-application-processing-system/index.md)
 
     AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
