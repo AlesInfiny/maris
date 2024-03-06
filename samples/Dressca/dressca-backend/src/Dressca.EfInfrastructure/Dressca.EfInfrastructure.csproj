@@ -32,8 +32,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <InternalsVisibleTo Include="Dressca.IntegrationTest" />
-  </ItemGroup>
-
 </Project>
