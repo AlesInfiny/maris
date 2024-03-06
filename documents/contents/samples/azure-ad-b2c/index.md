@@ -10,7 +10,7 @@ description: Azure AD B2C による認証を利用するためのサンプルと
 Azure AD B2C によるユーザー認証の簡単な実装サンプルを提供します。
 
 本サンプルは、クライアントサイドレンダリングアプリケーションにおいて Azure AD B2C を利用する場合のコード例として利用することができます。
-また、 [AlesInfiny Maris のサンプルアプリケーション](../downloads/dressca.zip) に本サンプルのファイルやコードをコピーすることで、 Azure AD B2C による認証機能を組み込むことができます。
+また、 AlesInfiny Maris のアーキテクチャに準拠したアプリケーションに本サンプルのファイルやコードをコピーすることで、 Azure AD B2C による認証機能を組み込むことができます。
 
 ## 本サンプルを利用するための前提 {#prerequisites}
 
@@ -40,7 +40,6 @@ Azure AD B2C によるユーザー認証の簡単な実装サンプルを提供�
   - [MSAL.js](https://www.npmjs.com/package/@azure/msal-browser)
 - バックエンド
   - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
-  - [Microsoft.IdentityModel.JsonWebTokens](https://www.nuget.org/packages/Microsoft.IdentityModel.JsonWebTokens)
 
 ## ダウンロード {#download}
 
