@@ -88,34 +88,22 @@ public class Order
     /// <summary>
     ///  注文アイテムの税抜き合計金額を取得します。
     /// </summary>
-    public decimal TotalItemsPrice
-    {
-        get => this.AccountInfo.GetItemsTotalPrice();
-    }
+    public decimal TotalItemsPrice { get; private set; }
 
     /// <summary>
     ///  送料を取得します。
     /// </summary>
-    public decimal DeliveryCharge
-    {
-        get => this.AccountInfo.GetDeliveryCharge();
-    }
+    public decimal DeliveryCharge { get; private set; }
 
     /// <summary>
     ///  消費税額を取得します。
     /// </summary>
-    public decimal ConsumptionTax
-    {
-        get => this.AccountInfo.GetConsumptionTax();
-    }
+    public decimal ConsumptionTax { get; private set; }
 
     /// <summary>
     ///  送料、税込みの合計金額を取得します。
     /// </summary>
-    public decimal TotalPrice
-    {
-        get => this.AccountInfo.GetTotalPrice();
-    }
+    public decimal TotalPrice { get; private set; }
 
     /// <summary>
     ///  注文アイテムのリストを取得します。
@@ -132,13 +120,8 @@ public class Order
             }
 
             this.orderItems = (List<OrderItem>)value;
-            this.SetAccount();
+            this.SetAccountInfo();
         }
-    }
-
-    private Account AccountInfo
-    {
-        get => this.account ?? throw new ArgumentNullException(nameof(this.account));
     }
 
     /// <summary>
@@ -151,6 +134,12 @@ public class Order
         return this.BuyerId == buyerId;
     }
 
-    private void SetAccount()
-        => this.account = new Account(this.orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
+    private void SetAccountInfo()
+    {
+        this.account = new Account(this.orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
+        this.TotalItemsPrice = this.account.GetItemsTotalPrice();
+        this.DeliveryCharge = this.account.GetDeliveryCharge();
+        this.ConsumptionTax = this.account.GetConsumptionTax();
+        this.TotalPrice = this.account.GetTotalPrice();
+    }
 }
