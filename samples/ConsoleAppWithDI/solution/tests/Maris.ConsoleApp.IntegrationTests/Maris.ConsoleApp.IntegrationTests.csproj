@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
@@ -21,7 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Maris.ConsoleApp.Core\Maris.ConsoleApp.Core.csproj" />
     <ProjectReference Include="..\..\src\Maris.ConsoleApp.Hosting\Maris.ConsoleApp.Hosting.csproj" />
-    <ProjectReference Include="..\..\src\Maris.Testing\Maris.Testing.csproj" />
+    <ProjectReference Include="..\..\src\Maris.Logging.Testing\Maris.Logging.Testing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,7 +5,7 @@ namespace Maris.ConsoleApp.UnitTests.Hosting;
 public class ConsoleAppSettingsTest
 {
     [Fact]
-    public void DefaultErrorExitCode_既定値の確認()
+    public void DefaultErrorExitCode_intの最大値()
     {
         // Arrange
         var settings = new ConsoleAppSettings();
@@ -18,7 +18,7 @@ public class ConsoleAppSettingsTest
     }
 
     [Fact]
-    public void DefaultValidationErrorExitCode_既定値の確認()
+    public void DefaultValidationErrorExitCode_intの最小値()
     {
         // Arrange
         var settings = new ConsoleAppSettings();

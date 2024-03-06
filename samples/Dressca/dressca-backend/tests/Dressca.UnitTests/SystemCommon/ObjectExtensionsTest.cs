@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.SystemCommon;
 public class ObjectExtensionsTest
 {
     [Fact]
-    public void ThrowIfNull_参照型の値がnullの場合例外()
+    public void ThrowIfNull_参照型の値がnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         object? obj = null;
@@ -18,7 +18,7 @@ public class ObjectExtensionsTest
     }
 
     [Fact]
-    public void ThrowIfNull_Nullableな値型の値がnullの場合例外()
+    public void ThrowIfNull_Nullableな値型の値がnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         int? intValue = null;

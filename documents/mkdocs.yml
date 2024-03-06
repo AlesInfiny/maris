@@ -18,7 +18,15 @@ nav:
           - 構築できるアプリケーション形態: app-architecture/overview/application-kind.md
           - アプリケーション構成: app-architecture/overview/application-structure.md
           - 構成管理: app-architecture/overview/configuration-management.md
-          - .NETアプリケーションの処理方式: app-architecture/overview/dotnet-application-processing-system.md
+          - .NETアプリケーションの処理方式:
+              - app-architecture/overview/dotnet-application-processing-system/index.md
+              - 例外処理方針: app-architecture/overview/dotnet-application-processing-system/exception-handling-policy.md
+              - ログ出力方針: app-architecture/overview/dotnet-application-processing-system/logging-policy.md
+              - イベント ID 管理方針: app-architecture/overview/dotnet-application-processing-system/event-id-management-policy.md
+              - メッセージ管理方針: app-architecture/overview/dotnet-application-processing-system/message-management-policy.md
+              - 入力値検証方針: app-architecture/overview/dotnet-application-processing-system/input-validation-policy.md
+              - トランザクション管理方針: app-architecture/overview/dotnet-application-processing-system/transaction-management-policy.md
+              - ヘルスチェックの必要性: app-architecture/overview/dotnet-application-processing-system/health-check-necessity.md
       - クライアントサイドレンダリング編:
           - app-architecture/client-side-rendering/index.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
@@ -60,6 +68,8 @@ nav:
               - Open API 仕様書からのクライアントコード生成: guidebooks/how-to-develop/vue-js/create-api-client-code.md
           - ローカル開発環境の構築:
               - guidebooks/how-to-develop/local-environment/index.md
+          - アプリケーションの発行:
+              - guidebooks/how-to-develop/publication/index.md
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
       - マイグレーション:

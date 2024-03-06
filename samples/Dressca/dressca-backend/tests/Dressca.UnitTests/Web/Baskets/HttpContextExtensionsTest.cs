@@ -1,12 +1,13 @@
 ﻿using Dressca.Web.Baskets;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Time.Testing;
 
 namespace Dressca.UnitTests.Web.Baskets;
 
 public class HttpContextExtensionsTest
 {
     [Fact]
-    public void GetBuyerId_購入者IdがHttpContextに存在しない場合新たにGuid形式の購入者Idが発行される()
+    public void GetBuyerId_購入者IdがHttpContextに存在しない_新たにGuid形式の購入者Idが発行される()
     {
         // Arrange
         var items = new Dictionary<object, object?>();
@@ -21,12 +22,13 @@ public class HttpContextExtensionsTest
     }
 
     [Fact]
-    public void GetBuyerId_購入者Idが文字列型ではない場合新たにGuid形式の購入者Idが発行される()
+    public void GetBuyerId_購入者Idが文字列型ではない_新たにGuid形式の購入者Idが発行される()
     {
         // Arrange
+        var fakeTimeProvider = new FakeTimeProvider();
         var items = new Dictionary<object, object?>
         {
-            { "Dressca-BuyerId", DateTimeOffset.Now },
+            { "Dressca-BuyerId", fakeTimeProvider.GetLocalNow() },
         };
         var httpContextMock = new Mock<HttpContext>();
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
@@ -42,7 +44,7 @@ public class HttpContextExtensionsTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("not-guid-value")]
-    public void GetBuyerId_購入者IdがGuidの文字列ではない場合新たにGuid形式の購入者Idが発行される(string? itemValue)
+    public void GetBuyerId_購入者IdがGuidの文字列ではない_新たにGuid形式の購入者Idが発行される(string? itemValue)
     {
         // Arrange
         var items = new Dictionary<object, object?>
@@ -60,7 +62,7 @@ public class HttpContextExtensionsTest
     }
 
     [Fact]
-    public void GetBuyerId_購入者IdがGuidの文字列の場合設定されている値を取得できる()
+    public void GetBuyerId_購入者IdがGuidの文字列_設定されている値を取得できる()
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString();
@@ -91,13 +93,8 @@ public class HttpContextExtensionsTest
         HttpContextExtensions.SetBuyerId(httpContextMock.Object, buyerId);
 
         // Assert
-        Assert.Collection(
-            items,
-            item =>
-            {
-                Assert.Equal("Dressca-BuyerId", item.Key);
-                Assert.Equal(buyerId, item.Value);
-            });
+        var item = Assert.Single(items, item => "Dressca-BuyerId".Equals(item.Key));
+        Assert.Equal(buyerId, item.Value);
     }
 
     [Fact]
@@ -116,12 +113,7 @@ public class HttpContextExtensionsTest
         HttpContextExtensions.SetBuyerId(httpContextMock.Object, buyerId);
 
         // Assert
-        Assert.Collection(
-            items,
-            item =>
-            {
-                Assert.Equal("Dressca-BuyerId", item.Key);
-                Assert.Equal(buyerId, item.Value);
-            });
+        var item = Assert.Single(items, item => "Dressca-BuyerId".Equals(item.Key));
+        Assert.Equal(buyerId, item.Value);
     }
 }

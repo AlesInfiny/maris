@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Dressca.ApplicationCore.Resources;
+﻿using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Ordering;
 

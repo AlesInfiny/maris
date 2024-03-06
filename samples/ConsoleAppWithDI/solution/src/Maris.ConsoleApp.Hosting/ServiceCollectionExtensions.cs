@@ -1,8 +1,5 @@
-﻿using CommandLine;
-using Maris.ConsoleApp.Core;
-using Maris.ConsoleApp.Hosting.Resources;
+﻿using Maris.ConsoleApp.Core;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Maris.ConsoleApp.Hosting;
 
@@ -36,6 +33,7 @@ public static class ServiceCollectionExtensions
         services.AddHostedService<ConsoleAppHostedService>();
         services.AddSingleton<IApplicationProcess, ConsoleAppProcess>();
         services.AddConsoleAppSettings(options);
+        services.AddSingleton<ConsoleAppContextFactory>();
         services.AddConsoleAppContext(args);
         services.AddSingleton<CommandExecutor>();
         services.AddSingleton<ICommandManager, DefaultCommandManager>();
@@ -76,35 +74,8 @@ public static class ServiceCollectionExtensions
     /// <returns>サービスを追加済みのサービスコレクション。</returns>
     internal static IServiceCollection AddConsoleAppContext(this IServiceCollection services, IEnumerable<string> args, Action<CommandParameterTypeCollection>? commandParametersOption = null)
         => services.AddSingleton(provider =>
-            {
-                var logger = provider.GetService<ILoggerFactory>()?.CreateLogger(typeof(ServiceCollectionExtensions));
-                logger?.LogInformation(Messages.ParseParameter.Embed(string.Join(' ', args)));
-
-                var settings = provider.GetRequiredService<ConsoleAppSettings>();
-                var appProcess = provider.GetRequiredService<IApplicationProcess>();
-                var commandParameterTypes = new CommandParameterTypeCollection();
-                if (commandParametersOption is null)
-                {
-                    commandParameterTypes.InitializeFromAllAssemblies();
-                }
-                else
-                {
-                    commandParametersOption(commandParameterTypes);
-                }
-
-                if (!commandParameterTypes.Any())
-                {
-                    var assemblies = string.Join(',', commandParameterTypes.LoadedAssemblies.Select(asm => asm.GetName().Name));
-                    throw new InvalidOperationException(
-                        Messages.CommandParameterIsNotExists.Embed(typeof(CommandAttribute), assemblies));
-                }
-
-                var param = Parser.Default.ParseArguments(args, commandParameterTypes.ToArray());
-                if (param is null || param.Tag == ParserResultType.NotParsed)
-                {
-                    appProcess.Exit(settings.DefaultValidationErrorExitCode);
-                }
-
-                return new ConsoleAppContext(param.Value);
-            });
+        {
+            var factory = provider.GetRequiredService<ConsoleAppContextFactory>();
+            return factory.CreateConsoleAppContext(args, commandParametersOption);
+        });
 }

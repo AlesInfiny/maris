@@ -20,3 +20,7 @@ AlesInfiny Maris で開発可能なアプリケーションの開発手順を示
 - [ローカル開発環境の構築](./local-environment/index.md)
 
     AlesInfiny Maris のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+
+- [アプリケーションの発行](./publication/index.md)
+
+    .NET + Vue.js で構成されたアプリケーションの発行手順について解説します。

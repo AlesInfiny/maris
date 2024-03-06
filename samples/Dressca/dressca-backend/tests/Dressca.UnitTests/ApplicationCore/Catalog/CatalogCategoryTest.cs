@@ -21,7 +21,7 @@ public class CatalogCategoryTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Constructor_カテゴリ名は必須(string? categoryName)
+    public void Constructor_カテゴリ名がnullまたは空白文字_ArgumentExceptionが発生する(string? categoryName)
     {
         // Arrange & Act
         var action = () => new CatalogCategory(categoryName!);

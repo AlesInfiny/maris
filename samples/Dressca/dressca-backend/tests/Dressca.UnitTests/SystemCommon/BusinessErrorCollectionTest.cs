@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.SystemCommon;
 public class BusinessErrorCollectionTest
 {
     [Fact]
-    public void AddOrMerge_nullを追加しようとすると例外()
+    public void AddOrMerge_nullを追加する_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var errors = new BusinessErrorCollection();
@@ -31,15 +31,8 @@ public class BusinessErrorCollectionTest
         errors.AddOrMerge(newBusinessError);
 
         // Assert
-        Assert.Collection(
-            errors,
-            error =>
-            {
-                Assert.Equal(errorCode, error.ErrorCode);
-                Assert.Collection(
-                    error.ErrorMessages,
-                    message => Assert.Equal(errorMessage, message));
-            });
+        var error = Assert.Single(errors, error => error.ErrorCode == errorCode);
+        Assert.Single(error.ErrorMessages, message => message == errorMessage);
     }
 
     [Fact]
@@ -58,16 +51,11 @@ public class BusinessErrorCollectionTest
         errors.AddOrMerge(businessError2);
 
         // Assert
+        var error = Assert.Single(errors, error => error.ErrorCode == errorCode);
         Assert.Collection(
-            errors,
-            error =>
-            {
-                Assert.Equal(errorCode, error.ErrorCode);
-                Assert.Collection(
-                    error.ErrorMessages,
-                    message => Assert.Equal(errorMessage1, message),
-                    message => Assert.Equal(errorMessage2, message));
-            });
+            error.ErrorMessages,
+            message => Assert.Equal(errorMessage1, message),
+            message => Assert.Equal(errorMessage2, message));
     }
 
     [Fact]

@@ -5,7 +5,7 @@ namespace Dressca.UnitTests.ApplicationCore.Accounting;
 public class AccountTest
 {
     [Fact]
-    public void Constructor_会計アイテムがnullの場合例外()
+    public void Constructor_会計アイテムがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         IEnumerable<AccountItem>? accountItems = null;
@@ -18,7 +18,7 @@ public class AccountTest
     }
 
     [Fact]
-    public void GetItemsTotalPrice_会計アイテムがないとき会計アイムの合計金額は0円()
+    public void GetItemsTotalPrice_会計アイテムがない_合計金額は0円()
     {
         // Arrange
         var account = new Account(Array.Empty<AccountItem>());
@@ -31,7 +31,7 @@ public class AccountTest
     }
 
     [Fact]
-    public void GetItemsTotalPrice_会計アイテムが1件あるとき会計アイムの合計金額は送料と消費税をのぞく合計金額になる()
+    public void GetItemsTotalPrice_会計アイテムが1件ある_合計金額は送料と消費税をのぞく合計金額になる()
     {
         // Arrange
         var accountItems = new AccountItem[] { new(5, 300m) };
@@ -45,7 +45,7 @@ public class AccountTest
     }
 
     [Fact]
-    public void GetItemsTotalPrice_会計アイテムが2件あるとき会計アイムの合計金額は送料と消費税をのぞく合計金額になる()
+    public void GetItemsTotalPrice_会計アイテムが2件ある_合計金額は送料と消費税をのぞく合計金額になる()
     {
         // Arrange
         var accountItems = new AccountItem[]
@@ -63,7 +63,7 @@ public class AccountTest
     }
 
     [Fact]
-    public void GetDeliveryCharge_会計アイテムがないとき送料は0円()
+    public void GetDeliveryCharge_会計アイテムがない_送料は0円()
     {
         // Arrange
         var account = new Account(Array.Empty<AccountItem>());
@@ -76,7 +76,7 @@ public class AccountTest
     }
 
     [Fact]
-    public void GetDeliveryCharge_会計アイムの合計金額が5000円未満の場合は送料が500円になる()
+    public void GetDeliveryCharge_会計アイテムの合計金額が5000円未満_送料が500円()
     {
         // Arrange
         var accountItems = new AccountItem[] { new(1, 4999m) };
@@ -90,7 +90,7 @@ public class AccountTest
     }
 
     [Fact]
-    public void GetDeliveryCharge_会計アイムの合計金額が5000円以上の場合は送料が0円になる()
+    public void GetDeliveryCharge_会計アイテムの合計金額が5000円以上_送料が0円()
     {
         // Arrange
         var accountItems = new AccountItem[] { new(1, 5000m) };

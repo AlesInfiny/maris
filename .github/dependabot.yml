@@ -1,5 +1,15 @@
 version: 2
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "github-actions"
+    labels:
+      - "CI/CD"
+      - "dependencies"
+
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
@@ -10,6 +20,7 @@ updates:
     labels:
       - "pip"
       - "dependencies"
+
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -21,17 +32,19 @@ updates:
       - "ドキュメント改善"
       - "npm"
       - "dependencies"
+
   - package-ecosystem: "npm"
     directory: "/samples/Dressca/dressca-frontend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 20
     commit-message:
       prefix: "npm-dressca-frontend"
     labels:
       - "target: Dressca"
       - "npm"
       - "dependencies"
+
   - package-ecosystem: "nuget"
     directory: "/samples/Dressca/dressca-backend"
     schedule:
@@ -43,6 +56,19 @@ updates:
       - "target: Dressca"
       - "nuget"
       - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.AspNetCore*"
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.Extensions*"
+      xunit-packages:
+        patterns:
+          - "xunit*"
+      nswag-packages:
+        patterns:
+          - "NSwag*"
+
   - package-ecosystem: "nuget"
     directory: "/samples/ConsoleAppWithDI/solution"
     schedule:
@@ -54,3 +80,11 @@ updates:
       - "target: ConsoleAppWithDI"
       - "nuget"
       - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.Extensions*"
+      xunit-packages:
+        patterns:
+          - "xunit*"
