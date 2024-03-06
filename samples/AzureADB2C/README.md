@@ -232,7 +232,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 ```
 
-※ `app.UseAuthentication` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に示す順序に従ってください。
+※ `app.UseAuthentication` および `app.UserAuthorization` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に示す順序に従ってください。
 
 3. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 4. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスに付与することも、 Controller メソッド個別に付与することもできます。
@@ -338,5 +338,3 @@ const signIn = async () => {
 ```html
 <button v-if="!isAuthenticated()" @click="signIn()">ログイン</button>
 ```
-
-10. `npm install` を実行し、その他のパッケージをインストールします。
