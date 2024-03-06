@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --mode dev",
-    "build": "vue-tsc --noEmit && vite build",
+    "build:prod": "vue-tsc --noEmit && vite build --mode prod",
+    "build:dev": "vue-tsc --noEmit && vite build --mode dev",
     "preview": "vite preview --port 5050",
     "test:unit": "vitest --environment jsdom",
     "typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
-    "generate-client": "openapi-generator-cli generate -g typescript-axios -i ./../auth-backend/api-docs/api-specification.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
+    "generate-client": "openapi-generator-cli generate -g typescript-axios -i ./../auth-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
   },
   "dependencies": {
     "@azure/msal-browser": "^3.9.0",
