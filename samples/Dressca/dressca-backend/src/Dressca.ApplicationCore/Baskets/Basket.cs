@@ -26,6 +26,7 @@ public class Basket
     /// <summary>
     ///  購入者 Id を取得します。
     /// </summary>
+    /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
     public required string BuyerId
     {
         get => this.buyerId;

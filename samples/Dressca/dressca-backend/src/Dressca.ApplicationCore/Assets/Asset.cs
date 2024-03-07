@@ -26,6 +26,7 @@ public class Asset
     ///  アセットコードを取得します。
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
+    /// <exception cref="ArgumentException">null または空の文字列を設定できません。</exception>
     public required string AssetCode
     {
         get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));

@@ -26,6 +26,7 @@ public class CatalogCategory
     /// <summary>
     ///  カテゴリ名を取得します。
     /// </summary>
+    /// <exception cref="ArgumentException">null または空の文字列を設定できません。</exception>
     public required string Name
     {
         get => this.name;
