@@ -233,7 +233,7 @@ public class BasketTest
         var action = () => basket.AddItem(1L, 1000, -1);
 
         // Assert
-        var ex = Assert.Throws<ArgumentException>("value", action);
+        var ex = Assert.Throws<ArgumentException>("quantity", action);
         Assert.StartsWith("買い物かごアイテムの数量は 0 未満にできません。", ex.Message);
     }
 

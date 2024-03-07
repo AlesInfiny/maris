@@ -10,15 +10,16 @@ public class Order
 {
     private readonly List<OrderItem> orderItems = new();
     private readonly TimeProvider timeProvider;
-    private Account? account;
+    private readonly Account? account;
     private string? buyerId;
     private ShipTo? shipToAddress;
 
     /// <summary>
     ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    public Order()
-        : this(TimeProvider.System)
+    /// <param name="orderItems">注文アイテムのリスト。</param>
+    public Order(List<OrderItem> orderItems)
+        : this(orderItems, TimeProvider.System)
     {
     }
 
@@ -26,17 +27,29 @@ public class Order
     ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
     ///  単体テスト用に<see cref="TimeProvider"/> を受け取ることができます。
     /// </summary>
+    /// <param name="orderItems">注文アイテムのリスト。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    internal Order(TimeProvider timeProvider)
+    internal Order(List<OrderItem> orderItems, TimeProvider timeProvider)
     {
+        if (orderItems is null || !orderItems.Any())
+        {
+            throw new ArgumentException(Messages.ArgumentIsNullOrEmptyList, nameof(orderItems));
+        }
+
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
         this.OrderDate = this.timeProvider.GetLocalNow();
         this.ConsumptionTaxRate = Account.ConsumptionTaxRate;
+        this.orderItems = orderItems;
+        this.account = new Account(this.orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
+        this.TotalItemsPrice = this.account.GetItemsTotalPrice();
+        this.DeliveryCharge = this.account.GetDeliveryCharge();
+        this.ConsumptionTax = this.account.GetConsumptionTax();
+        this.TotalPrice = this.account.GetTotalPrice();
     }
 
     /// <summary>
@@ -108,21 +121,7 @@ public class Order
     /// <summary>
     ///  注文アイテムのリストを取得します。
     /// </summary>
-    public required IReadOnlyCollection<OrderItem> OrderItems
-    {
-        get => this.orderItems.AsReadOnly();
-
-        init
-        {
-            if (value is null || !value.Any())
-            {
-                throw new ArgumentException(Messages.ArgumentIsNullOrEmptyList, nameof(value));
-            }
-
-            this.orderItems = (List<OrderItem>)value;
-            this.SetAccountInfo();
-        }
-    }
+    public IReadOnlyCollection<OrderItem> OrderItems => this.orderItems.AsReadOnly();
 
     /// <summary>
     ///  このインスタンスの購入者 Id と指定の購入者 Id が一致するか判定します。
@@ -132,14 +131,5 @@ public class Order
     public bool HasMatchingBuyerId(string buyerId)
     {
         return this.BuyerId == buyerId;
-    }
-
-    private void SetAccountInfo()
-    {
-        this.account = new Account(this.orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
-        this.TotalItemsPrice = this.account.GetItemsTotalPrice();
-        this.DeliveryCharge = this.account.GetDeliveryCharge();
-        this.ConsumptionTax = this.account.GetConsumptionTax();
-        this.TotalPrice = this.account.GetTotalPrice();
     }
 }

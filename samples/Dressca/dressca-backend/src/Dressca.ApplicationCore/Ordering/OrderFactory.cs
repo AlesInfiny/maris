@@ -23,6 +23,6 @@ internal class OrderFactory : IOrderFactory
                 return orderItem;
             }).ToList();
 
-        return new Order { BuyerId = basket.BuyerId, ShipToAddress = shipToAddress, OrderItems = orderItems };
+        return new Order(orderItems) { BuyerId = basket.BuyerId, ShipToAddress = shipToAddress };
     }
 }
