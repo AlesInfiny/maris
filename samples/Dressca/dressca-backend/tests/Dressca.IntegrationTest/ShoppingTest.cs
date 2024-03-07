@@ -4,6 +4,8 @@ using System.Text;
 using System.Text.Json;
 using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Ordering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Dressca.IntegrationTest;
@@ -17,6 +19,13 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
     public async Task 買い物かごに入れた商品を注文できる()
     {
         // Arrange
+        using (var scope = this.factory.Services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
+            dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureCreated();
+        }
+
         var client = this.factory.CreateClient();
         var postBasketItemsRequest = this.CreateBasketItemsRequest();
         var postOrderRequestJson = JsonSerializer.Serialize(this.CreateDefaultPostOrderRequest());
