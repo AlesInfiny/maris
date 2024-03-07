@@ -57,12 +57,7 @@ public class BasketItem
         get => this.quantity;
         init
         {
-            if (value < 0)
-            {
-                throw new ArgumentException(Messages.BasketItemQuantityMustBePositive, nameof(value));
-            }
-
-            this.quantity = value;
+            this.SetQuantity(value);
         }
     }
 
