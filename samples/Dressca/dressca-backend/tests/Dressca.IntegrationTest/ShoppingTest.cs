@@ -22,8 +22,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         using (var scope = this.factory.Services.CreateScope())
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
-            dbContext.Database.EnsureDeleted();
-            dbContext.Database.EnsureCreated();
+            DatabaseHelper.ClearTransactionTable(dbContext);
         }
 
         var client = this.factory.CreateClient();
