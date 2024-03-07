@@ -37,11 +37,11 @@ description: バックエンドで動作する .NET アプリケーションの�
 public class BasicTests 
     : IClassFixture<WebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _factory;
+    private readonly WebApplicationFactory<Program> factory;
 
     public BasicTests(WebApplicationFactory<Program> factory)
     {
-        _factory = factory;
+        this.factory = factory;
     }
 
     [Theory]
@@ -51,7 +51,7 @@ public class BasicTests
     {
         // Arrange
         // TestServerにリクエストを送信するHttpClientを取得
-        var client = _factory.CreateClient();
+        var client = this.factory.CreateClient();
 
         // Act
         var response = await client.GetAsync(url);
@@ -109,16 +109,16 @@ public class BasicTests
 1. テストクラスで実装する `IClassFixture` インターフェースの型引数を `CustomWebApplicationFactory<Program>` とする。
 
     ``` C# hl_lines="2"
-    public class IndexPageTests :
-    IClassFixture<CustomWebApplicationFactory<Program>>
+    public class IndexPageTests
+        : IClassFixture<CustomWebApplicationFactory<Program>>
     {
-        private readonly HttpClient _client;
-        private readonly CustomWebApplicationFactory<Program> _factory;
+        private readonly HttpClient client;
+        private readonly CustomWebApplicationFactory<Program> factory;
 
         public IndexPageTests(CustomWebApplicationFactory<Program> factory)
         {
-            _factory = factory;
-            _client = _factory.CreateClient();
+            this.factory = factory;
+            this.client = this.factory.CreateClient();
         }
 
         [Fact]
