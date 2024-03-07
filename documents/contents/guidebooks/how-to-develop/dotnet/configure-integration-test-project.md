@@ -83,7 +83,7 @@ public class BasicTests
 
 1. `WebApplicationFactory<TEntryPoint>` クラスを継承したクラスでテスト対象アプリケーションの構成を変更する。
 
-    ``` C#  hl_lines="2"
+    ``` C# hl_lines="2"
     public class CustomWebApplicationFactory<TProgram>
         : WebApplicationFactory<TProgram> where TProgram : class
     {
@@ -101,7 +101,7 @@ public class BasicTests
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
                     .Build();
-                var connectionString = config.GetConnectionString(ConnectionStringName);
+                var connectionString = config.GetConnectionString("SampleDbContext");
 
                 // テスト用の設定を使用してDbContextをサービス登録
                 services.AddDbContext<SampleDbContext>(option =>
@@ -112,6 +112,40 @@ public class BasicTests
         }
     }
     ```
+
+    ??? example "appsettings.{env}.json の設定例"
+
+        ``` json title="appsettings.Development.json"
+        {
+            "Logging": {
+                "LogLevel": {
+                    "Default": "Information",
+                    "Microsoft.AspNetCore": "Warning",
+                    "Microsoft.AspNetCore.HttpLogging": "Information",
+                    "Microsoft.Extensions.Diagnostics.HealthChecks": "Debug",
+                    "SampleApp": "Debug"
+                    }
+            },
+            "ConnectionStrings": {
+                "SampleDbContext": "Data Source=(localdb)\\mssqllocaldb;Database=SampleDb;Integrated Security=True"
+            }
+        }
+        ```
+        ``` json title="appsettings.IntegrationTest.json"
+        {
+            "Logging": {
+                "LogLevel": {
+                    "Default": "Information",
+                    "Microsoft.AspNetCore": "Warning",
+                    "SampleApp": "Information"
+                }
+            },
+            "ConnectionStrings": {
+                "SampleDbContext": "Server=localhost,1433;Database=SampleDb;User=sa;Password=P@ssw0rd;TrustServerCertificate=true;"
+            },
+            "AllowedHosts": "*"
+        }
+        ```
 
 1. テストクラスで実装する `IClassFixture` インターフェースの型引数を `CustomWebApplicationFactory<Program>` とする。
 
