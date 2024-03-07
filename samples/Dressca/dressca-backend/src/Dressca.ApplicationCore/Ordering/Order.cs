@@ -52,6 +52,11 @@ public class Order
         this.TotalPrice = this.account.GetTotalPrice();
     }
 
+    private Order()
+    {
+        this.timeProvider = TimeProvider.System;
+    }
+
     /// <summary>
     ///  注文 Id を取得します。
     /// </summary>
