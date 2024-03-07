@@ -121,11 +121,11 @@ auth-frontend
 
 ### Azure AD B2C テナントを利用するアプリの登録（バックエンドアプリケーション）
 
-<!-- textlint-disable ja-no-redundant-expression -->
+<!-- textlint-disable ja-no-redundant-expression ja-technical-writing/sentence-length -->
 1. [Microsoft のチュートリアル「 Azure Active Directory B2C テナントに Web API アプリケーションを追加する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga) に従って、バックエンドアプリケーション用のアプリを Azure AD B2C に登録します。
     - 登録したアプリの名前を、ここでは「 `SampleWebAPI` 」とします。
     - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
-<!-- textlint-enable ja-no-redundant-expression -->
+<!-- textlint-enable ja-no-redundant-expression ja-technical-writing/sentence-length -->
 1. [Microsoft のチュートリアル「スコープを構成する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#configure-scopes)に従って、アプリにスコープを追加します。
     - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、作成するスコープは 1 つで良いです。
     - 追加したスコープの名前を、ここでは「 `api.read` 」とします。
@@ -235,9 +235,10 @@ app.UseAuthorization();
 ```
 
 ※ `app.UseAuthentication` および `app.UserAuthorization` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に従ってください。
-
-3. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
-4. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別の Controller メソッドにも付与できます
+<!-- textlint-disable ja-no-redundant-expression ja-technical-writing/sentence-length -->
+1. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
+<!-- textlint-enable ja-no-redundant-expression ja-technical-writing/sentence-length -->
+1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別の Controller メソッドにも付与できます
 
 ```cs
 using Microsoft.AspNetCore.Authorization;
@@ -252,8 +253,8 @@ public class OrdersController : ControllerBase
 ### フロントエンドアプリケーション
 
 1. ターミナルで `npm install @azure/msal-browser` を実行し、フロントエンドアプリケーションに MSAL.js をインストールします。
-2. `auth-frontend\.env.dev` に記述した Azure AD B2C の設定をフロントエンドアプリケーションの `.env.dev` にコピーします。
-3. `env.d.ts` のインターフェースに、前の手順で `.env.dev` に追加したプロパティを追加します。
+1. `auth-frontend\.env.dev` に記述した Azure AD B2C の設定をフロントエンドアプリケーションの `.env.dev` にコピーします。
+1. `env.d.ts` のインターフェースに、前の手順で `.env.dev` に追加したプロパティを追加します。
 
 ```ts
 interface ImportMetaEnv {
@@ -267,13 +268,13 @@ interface ImportMetaEnv {
 }
 ```
 
-4. `src\shared\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
+1. `src\shared\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
     - authentication-adb2c.ts
     - authentication-config.ts
-5. `src\store\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
+1. `src\store\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
     - authentication.ts
 
-6. `src\main.ts` に MSAL.js を使用するコードを追加します。
+1. `src\main.ts` に MSAL.js を使用するコードを追加します。
 
 ```ts
 import { msalInstance } from "@/shared/authentication/authentication-config";
@@ -285,7 +286,7 @@ app.use(msalInstance);
 app.mount("#app"); // 既存のコード
 ```
 
-7. 認証が成功した場合、以降の Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
+1. 認証が成功した場合、以降の Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
    AlesInfiny Maris のサンプルアプリケーション Dressca の場合、 `src\api-client\index.ts` を編集します。
 
 ```ts
@@ -314,7 +315,7 @@ axiosInstance.interceptors.request.use(
 );
 ```
 
-8. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
+1. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
 
 ```ts
 <script setup lang="ts">
@@ -334,7 +335,7 @@ const signIn = async () => {
 </script>
 ```
 
-9. `ログイン` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッドが動作すれば `button` である必要はありません）。
+1. `ログイン` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッドが動作すれば `button` である必要はありません）。
 
 ```html
 <button v-if="!isAuthenticated()" @click="signIn()">ログイン</button>
