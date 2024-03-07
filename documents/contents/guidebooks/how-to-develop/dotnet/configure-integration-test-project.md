@@ -75,9 +75,10 @@ public class BasicTests
 
 [既定の WebApplicationFactory を使用した基本的なテスト :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#basic-tests-with-the-default-webapplicationfactory){ target=_blank }
 
-### テスト対象アプリケーションのカスタマイズ {#customize-target-app}
+### テスト対象アプリケーションの構成設定 {#change-settings-of-target-app}
 
-テスト対象アプリケーションの構成を変更してテストを行いたい場合は、 `WebApplicationFactory<TEntryPoint>` クラスを継承したクラスを作成します。
+システム構成が異なるローカル環境と CI 環境でテストを行う場合等、テスト対象アプリケーションの構成を変更してテストを行う際は `WebApplicationFactory<TEntryPoint>` クラスを継承したクラスを作成します。
+
 以下の手順では、結合テスト用にデータベースコンテキストを差し替えています。
 
 1. `WebApplicationFactory<TEntryPoint>` クラスを継承したクラスでテスト対象アプリケーションの構成を変更する。
