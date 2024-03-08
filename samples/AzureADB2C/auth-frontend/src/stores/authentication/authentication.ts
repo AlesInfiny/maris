@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { useUserStore } from '@/stores/user/user';
 import {
   signInAzureADB2C,
   getTokenAzureADB2C,
@@ -29,20 +28,6 @@ export const useAuthenticationStore = defineStore({
       this.homeAccountId = result.homeAccountId;
       this.idToken = result.idToken;
       this.authenticated = result.isAuthenticated;
-    },
-    async getUserId() {
-      const loginElem = document.getElementById('login');
-      if (loginElem) {
-        try {
-          const userStore = useUserStore();
-          await userStore.fetchUserResponse();
-          const userIdRes = userStore.getUserId;
-          loginElem.innerText = userIdRes?.userId ?? 'No UserID';
-        } catch (err) {
-          loginElem.innerText = 'error occurred';
-          throw err;
-        }
-      }
     },
   },
   getters: {
