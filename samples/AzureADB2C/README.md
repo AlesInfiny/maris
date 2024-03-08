@@ -121,13 +121,13 @@ auth-frontend
 
 ### Azure AD B2C テナントを利用するアプリの登録（バックエンドアプリケーション）
 
-<!-- textlint-disable ja-no-redundant-expression sentence-length -->
+<!-- textlint-disable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
 1. [Microsoft のチュートリアル「 Azure Active Directory B2C テナントに Web API アプリケーションを追加する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga) に従って、バックエンドアプリケーション用のアプリを Azure AD B2C に登録します。
     - 登録したアプリの名前を、ここでは「 `SampleWebAPI` 」とします。
     - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
 
-<!-- textlint-enable ja-no-redundant-expression sentence-length -->
+<!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
 1. [Microsoft のチュートリアル「スコープを構成する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#configure-scopes)に従って、アプリにスコープを追加します。
     - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、作成するスコープは 1 つで良いです。
@@ -239,11 +239,11 @@ app.UseAuthorization();
 
 ※ `app.UseAuthentication` および `app.UserAuthorization` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に従ってください。
 
-<!-- textlint-disable ja-no-redundant-expression ja-technical-writing/sentence-length -->
+<!-- textlint-disable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
 1. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 
-<!-- textlint-enable ja-no-redundant-expression ja-technical-writing/sentence-length -->
+<!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
 1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別の Controller メソッドにも付与できます
 
