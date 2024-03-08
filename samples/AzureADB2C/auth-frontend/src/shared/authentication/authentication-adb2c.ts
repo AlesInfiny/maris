@@ -31,7 +31,7 @@ export async function getTokenAzureADB2C(
   homeAccountId: string,
 ): Promise<AuthenticationResult> {
   const account = msalInstance.getAccountByHomeId(homeAccountId);
-  tokenRequest.account = account;
+  tokenRequest.account = account ?? undefined;
 
   const result = new AuthenticationResult();
 
@@ -63,8 +63,8 @@ export async function getTokenAzureADB2C(
 }
 
 export class AuthenticationResult {
-  homeAccountId: string;
-  accessToken: string;
-  idToken: string;
-  isAuthenticated: boolean;
+  homeAccountId: string | undefined;
+  accessToken: string | undefined;
+  idToken: string | undefined;
+  isAuthenticated: boolean | undefined;
 }
