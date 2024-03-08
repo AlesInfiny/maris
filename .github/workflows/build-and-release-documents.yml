@@ -127,7 +127,7 @@ jobs:
 
       - name: azure-ad-b2c.zip の作成
         run: |
-          cd sampes/AzureADB2C
+          cd samples/AzureADB2C
           zip -r ../../documents/contents/samples/downloads/azure-ad-b2c.zip *
 
       - name: ドキュメントのビルド
