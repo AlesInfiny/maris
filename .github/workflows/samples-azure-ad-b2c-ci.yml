@@ -87,11 +87,4 @@ jobs:
         run: |
           echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
-      
-      - name: ビルドサマリーをPull-requestに表示
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.application-build.conclusion == 'failure')) }}
-        with:
-          recreate: true
-          path: '${{ env.BACKEND_WORKING_DIRECTORY }}/${{ env.BUILD_SUMMARY_FILE }}'
   
