@@ -15,19 +15,18 @@ env:
   BACKEND_WORKING_DIRECTORY: samples/AzureADB2C/auth-backend
   FRONTEND_WORKING_DIRECTORY: samples/AzureADB2C/auth-frontend
 
-defaults:
-  run:
-    working-directory: samples/AzureADB2C
-
 jobs:
   build-frontend:
     name: 'フロントエンドアプリケーションのビルド'
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    defaults:
+      run:
+        working-directory: ${{ env.FRONTEND_WORKING_DIRECTORY }}
 
     steps:
       - uses: actions/checkout@v4
@@ -40,14 +39,13 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: '${{ env.FRONTEND_WORKING_DIRECTORY }}/**/node_modules'
+          path: '**/node_modules'
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
       - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
       - name: node パッケージのインストール
         if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: npm install
       - name: TypeScript の型チェック
-        working-directory: ${{ env.FRONTEND_WORKING_DIRECTORY }}
         run: npm run typecheck
 
   build-backend:
