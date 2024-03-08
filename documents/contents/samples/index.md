@@ -16,3 +16,4 @@ AlesInfiny Maris の提供するサンプルの解説ドキュメント集です
 細かな機能要件・非機能要件別に、 AlesInfiny Maris として推奨する OSS ライブラリを用いたサンプルアプリケーションと、その解説を入手できます。
 
 - [コンソールアプリケーションで DI を利用する](console-app-with-di/index.md)
+- [Azure AD B2C による認証を利用する](azure-ad-b2c/index.md)

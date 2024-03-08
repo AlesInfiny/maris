@@ -5,86 +5,86 @@ name: azure-ad-b2c-sample CI
 
 on:
     pull_request:
-      branches: [main]
-      paths:
-        - 'samples/AzureADB2C/**'
-        - '.github/workflows/samples-azure-ad-b2c-ci.yml'
+        branches: [main]
+        paths:
+          - 'samples/AzureADB2C/**'
+          - '.github/workflows/samples-azure-ad-b2c-ci.yml'
     workflow_dispatch:
 
 env:
-  BACKEND_WORKING_DIRECTORY: samples/AzureADB2C/auth-backend
-  FRONTEND_WORKING_DIRECTORY: samples/AzureADB2C/auth-frontend
+    BACKEND_WORKING_DIRECTORY: samples/AzureADB2C/auth-backend
+    FRONTEND_WORKING_DIRECTORY: samples/AzureADB2C/auth-frontend
 
 jobs:
-  build-frontend:
-    name: 'フロントエンドアプリケーションのビルド'
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
+    build-frontend:
+      name: 'フロントエンドアプリケーションのビルド'
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    defaults:
-      run:
-        working-directory: ${{ env.FRONTEND_WORKING_DIRECTORY }}
+      defaults:
+        run:
+          working-directory: ${{ env.FRONTEND_WORKING_DIRECTORY }}
 
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v4
-        id: node_modules_cache_id
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
-      - name: node パッケージのインストール
-        if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
-        run: npm install
-      - name: TypeScript の型チェック
-        run: npm run typecheck
+      steps:
+        - uses: actions/checkout@v4
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v4
+          with:
+            node-version: ${{ matrix.node-version }}
+        - uses: actions/cache@v4
+          id: node_modules_cache_id
+          env:
+            cache-name: cache-node-modules
+          with:
+            path: '**/node_modules'
+            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+        - name: node パッケージのインストール
+          if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+          run: npm install
+        - name: TypeScript の型チェック
+          run: npm run typecheck
 
-  build-backend:
-    name: 'バックエンドアプリケーションのビルド'
-    runs-on: ubuntu-latest
-    env:
-        DOTNET_NOLOGO: true
-        DOTNET_CLI_TELEMETRY_OPTOUT: true
-        BUILD_CONFIGURATION: Debug
-        BUILD_SUMMARY_FILE: BuildSummary.md
-    permissions:
-        checks: write
-        contents: read
-        pull-requests: write
-    defaults:
-      run:
-        working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
-    steps:
-      - name: 'ブランチのチェックアウト'
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
+    build-backend:
+      name: 'バックエンドアプリケーションのビルド'
+      runs-on: ubuntu-latest
+      env:
+          DOTNET_NOLOGO: true
+          DOTNET_CLI_TELEMETRY_OPTOUT: true
+          BUILD_CONFIGURATION: Debug
+          BUILD_SUMMARY_FILE: BuildSummary.md
+      permissions:
+          checks: write
+          contents: read
+          pull-requests: write
+      defaults:
+        run:
+          working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
+      steps:
+        - name: 'ブランチのチェックアウト'
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 1
 
-      - name: '.NET SDK のセットアップ'
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.*'
+        - name: '.NET SDK のセットアップ'
+          uses: actions/setup-dotnet@v4
+          with:
+            dotnet-version: '8.*'
 
-      - name: 'NuGet パッケージの復元'
-        run: dotnet restore
+        - name: 'NuGet パッケージの復元'
+          run: dotnet restore
 
-      - id: application-build
-        name: 'アプリケーションのビルド'
-        run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
+        - id: application-build
+          name: 'アプリケーションのビルド'
+          run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
 
-      - name: 'ビルド結果の表示'
-        shell: bash
-        if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
-        run: |
-          echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
-          cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
+        - name: 'ビルド結果の表示'
+          shell: bash
+          if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
+          run: |
+            echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
+            cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
   
