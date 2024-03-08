@@ -53,13 +53,13 @@ auth-backend
 ├ Dressca.sln
 └ src
 　 ├ Dressca.Web
-　 │ ├ appsettings.json
-　 │ ├ Program.cs
+　 │ ├ appsettings.json ......... Azure AD B2C への接続情報を記載する設定ファイル
+　 │ ├ Program.cs ............... Web API アプリケーションのエントリーポイント。 Azure AD B2C による認証を有効化している。
 　 │ └ Controllers
-　 │ 　 └ UserController.cs
+　 │ 　 └ UserController.cs ..... 認証が必要な Web API を配置してるコントローラー
 　 └ Dressca.Web.Dto
 　 　 └ Users
-　 　 　 └ UserResponse.cs
+　 　 　 └ UserResponse.cs ....... Web API の戻り値の型
 ```
 
 ### フロントエンドアプリケーションの構成
@@ -68,24 +68,21 @@ auth-backend
 
 ```text
 auth-frontend
-├ .env.dev
-├ main.ts
-├ App.vue
+├ .env.dev ............................. Azure AD B2C への接続情報を記載する設定ファイル
+├ env.d.ts ............................. 上の設定ファイルを読み込む TypeScript ファイル
 └ src
 　 ├ api-client
-　 │ └ index.ts
-　 ├ generated
-　 ├ router
+　 │ └ index.ts ....................... Web API 呼び出し時の共通処理を記述する TypeScript ファイル
+　 ├ generated ......................... 自動生成された Axios のコードが配置されるフォルダー
 　 ├ shared
 　 │ └ authentication
-　 │ 　 ├ authentication-adb2c.ts
-　 │ 　 ├ authentication-config.ts
-　 │ 　 └ authentication-guard.ts
+　 │ 　 ├ authentication-adb2c.ts ..... Azure AD B2C による認証（サインイン、トークン取得）を行う TypeScript ファイル
+　 │ 　 └ authentication-config.ts .... 上のコードが使用する設定ファイル
 　 ├ stores
 　 │ ├ authentication
-　 │ 　 └ authentication.ts
+　 │ 　 └ authentication.ts ........... 認証の結果を保持するストア
 　 │ └ users
-　 │ 　 └ users.ts
+　 │ 　 └ users.ts .................... Web API 呼び出しの結果を保持するストア
 　 └ views
 ```
 
@@ -115,7 +112,7 @@ auth-frontend
 ### Azure AD B2C テナントの作成
 
 1. [Microsoft のチュートリアル「 Azure AD B2C テナントを作成する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/tutorial-create-tenant#create-an-azure-ad-b2c-tenant) に従って、 [Azure ポータル](https://portal.azure.com/) にサインインし、 Azure AD B2C テナントを作成します。
-   - 「`初期ドメイン名`」をメモします。
+    - 「`初期ドメイン名`」をメモします。
 1. [Microsoft のチュートリアル「 B2C テナント ディレクトリを選択する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/tutorial-create-tenant#select-your-b2c-tenant-directory) に従って、 B2C テナントディレクトリに切り替えます。
 1. [Microsoft のチュートリアル「 Azure AD B2C をお気に入りとして追加する (省略可能)」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/tutorial-create-tenant#add-azure-ad-b2c-as-a-favorite-optional) に従って、 Azure ポータル上で「 Azure サービス」から「 Azure AD B2C 」を選択しお気に入りに登録します。
 
@@ -124,24 +121,25 @@ auth-frontend
 <!-- textlint-disable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
 1. [Microsoft のチュートリアル「 Azure Active Directory B2C テナントに Web API アプリケーションを追加する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga) に従って、バックエンドアプリケーション用のアプリを Azure AD B2C に登録します。
-   - 登録したアプリの名前を、ここでは「 `SampleWebAPI` 」とします。
-   - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
 
-<!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
+    - 登録したアプリの名前を、ここでは「 `SampleWebAPI` 」とします。
+    - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
 
-2. [Microsoft のチュートリアル「スコープを構成する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#configure-scopes)に従って、アプリにスコープを追加します。
-   - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、作成するスコープは 1 つで良いです。
-   - 追加したスコープの名前を、ここでは「 `api.read` 」とします。
-3. Azure ポータルのお気に入りから「 Azure AD B2C 」を選択します。
-4. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleWebAPI 」を選択します。
-5. 「概要」ブレードに表示された「 `アプリケーション ID の URI` 」をメモします。
+   <!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
+
+1. [Microsoft のチュートリアル「スコープを構成する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#configure-scopes)に従って、アプリにスコープを追加します。
+    - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、作成するスコープは 1 つで良いです。
+    - 追加したスコープの名前を、ここでは「 `api.read` 」とします。
+1. Azure ポータルのお気に入りから「 Azure AD B2C 」を選択します。
+1. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleWebAPI 」を選択します。
+1. 「概要」ブレードに表示された「 `アプリケーション ID の URI` 」をメモします。
 
 ### Azure AD B2C テナントを利用するアプリの登録（フロントエンドアプリケーション）
 
 1. [Microsoft のチュートリアル「 SPA アプリケーションの登録」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/tutorial-register-spa#register-the-spa-application) に従って、フロントエンドアプリケーション用のアプリを Azure AD B2C に登録します。
-   - 登録したアプリの名前を、ここでは「 `SampleSPA` 」とします。
-   - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
-   - 「暗黙的フロー」に関する設定は無視してください。
+    - 登録したアプリの名前を、ここでは「 `SampleSPA` 」とします。
+    - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
+    - 「暗黙的フロー」に関する設定は無視してください。
 1. Azure ポータルのお気に入りから「 Azure AD B2C 」を選択します。
 1. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleSPA 」を選択します。
 1. 「認証」ブレードを選択し、「シングルページアプリケーション」の「リダイレクト URI」に `http://localhost` を追加します。
@@ -150,7 +148,7 @@ auth-frontend
 ### ユーザーフローの作成
 
 1. [Microsoft のチュートリアル「Azure Active Directory B2C でサインアップおよびサインイン フローを設定する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-sign-up-and-sign-in-policy?pivots=b2c-user-flow) に従って、サインアップとサインインユーザーフローを作成します。
-   - ここでは追加したサインアップとサインインユーザーフローの名前を「 `signupsignin1` 」とします（ユーザーフローの名前には自動的に『`B2C_1_`』プレフィックスが付与されます）。
+    - ここでは追加したサインアップとサインインユーザーフローの名前を「 `signupsignin1` 」とします（ユーザーフローの名前には自動的に『`B2C_1_`』プレフィックスが付与されます）。
 
 ### 設定情報の記入
 
@@ -214,48 +212,48 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
    - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
 1. ASP.NET Core Web API プロジェクトの Program.cs に Azure AD B2C の設定を追加します。
 
-```cs
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
+    ```cs
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.Identity.Web;
+    
+    var builder = WebApplication.CreateBuilder(args); // （既存のコード）
 
-var builder = WebApplication.CreateBuilder(args); // （既存のコード）
+    // Azure AD B2C 認証に必要な設定をインジェクション
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddMicrosoftIdentityWebApi(
+        options =>
+        {
+            builder.Configuration.Bind("AzureAdB2C", options);
+            options.TokenValidationParameters.NameClaimType = "name";
+        },
+        options => { builder.Configuration.Bind("AzureAdB2C", options); });
 
-// Azure AD B2C 認証に必要な設定をインジェクション
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(
-    options =>
-    {
-        builder.Configuration.Bind("AzureAdB2C", options);
-        options.TokenValidationParameters.NameClaimType = "name";
-    },
-    options => { builder.Configuration.Bind("AzureAdB2C", options); });
+    var app = builder.Build(); // （既存のコード）
 
-var app = builder.Build(); // （既存のコード）
+    // 認証を有効化
+    app.UseAuthentication();
+    app.UseAuthorization();
+    ```
 
-// 認証を有効化
-app.UseAuthentication();
-app.UseAuthorization();
-```
+    ※ `app.UseAuthentication` および `app.UserAuthorization` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に従ってください。
 
-※ `app.UseAuthentication` および `app.UserAuthorization` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に従ってください。
+    <!-- textlint-disable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
-<!-- textlint-disable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
-
-3. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
+1. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 
 <!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
-4. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別の Controller メソッドにも付与できます
+1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別の Controller メソッドにも付与できます
 
-```cs
-using Microsoft.AspNetCore.Authorization;
+    ```cs
+    using Microsoft.AspNetCore.Authorization;
 
-[Authorize]
-public class OrdersController : ControllerBase
-{
-   // 省略
-}
-```
+    [Authorize]
+    public class OrdersController : ControllerBase
+    {
+       // 省略
+    }
+    ```
 
 ### フロントエンドアプリケーション
 
@@ -263,76 +261,74 @@ public class OrdersController : ControllerBase
 1. `auth-frontend\.env.dev` に記述した Azure AD B2C の設定をフロントエンドアプリケーションの `.env.dev` にコピーします。
 1. `env.d.ts` のインターフェースに、前の手順で `.env.dev` に追加したプロパティを追加します。
 
-```ts
-interface ImportMetaEnv {
-  // 認証に関係のないプロパティは省略
-  readonly VITE_ADB2C_B2CPOLICIES_NAMES_SIGNUP_SIGNIN: string;
-  readonly VITE_ADB2C_AUTHORITIES_SIGNUP_SIGNIN_AUTHORITY: string;
-  readonly VITE_ADB2C_B2CPOLICIES_AUTHORITYDOMAIN: string;
-  readonly VITE_ADB2C_SCOPE: string;
-  readonly VITE_ADB2C_APP_CLIENT_ID: string;
-  readonly VITE_ADB2C_APP_URI: string;
-}
-```
-
-4. `src\shared\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
-   - authentication-adb2c.ts
-   - authentication-config.ts
-5. `src\store\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
-
-   - authentication.ts
-
-6. 認証が成功した場合、以降の Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
-   AlesInfiny Maris のサンプルアプリケーション Dressca の場合、 `src\api-client\index.ts` を編集します。
-
-```ts
-import { useAuthenticationStore } from "@/stores/authentication/authentication";
-
-// その他のコードは省略
-
-/** axios の共通の設定があればここに定義します。 */
-const axiosInstance = axios.create({
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-// interceptor を使用してすべてのリクエストに共通処理を追加
-axiosInstance.interceptors.request.use(
-  async (config: InternalAxiosRequestConfig) => {
-    const store = useAuthenticationStore();
-    if (store.isAuthenticated) {
-      await store.getToken();
-      const token = store.accessToken;
-      config.headers.Authorization = `Bearer ${token}`;
+    ```ts
+    interface ImportMetaEnv {
+      // 認証に関係のないプロパティは省略
+      readonly VITE_ADB2C_B2CPOLICIES_NAMES_SIGNUP_SIGNIN: string;
+      readonly VITE_ADB2C_AUTHORITIES_SIGNUP_SIGNIN_AUTHORITY: string;
+      readonly VITE_ADB2C_B2CPOLICIES_AUTHORITYDOMAIN: string;
+      readonly VITE_ADB2C_SCOPE: string;
+      readonly VITE_ADB2C_APP_CLIENT_ID: string;
+      readonly VITE_ADB2C_APP_URI: string;
     }
-    return config;
-  }
-);
-```
+    ```
 
-7. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
+1. `src\shared\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
+    - authentication-adb2c.ts
+    - authentication-config.ts
+1. `src\store\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
+    - authentication.ts
+1. 認証が成功した場合、以降の Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
+    AlesInfiny Maris のサンプルアプリケーション Dressca の場合、 `src\api-client\index.ts` を編集します。
 
-```ts
-<script setup lang="ts">
-import { useAuthenticationStore } from '@/stores/authentication/authentication';
+    ```ts
+    import { useAuthenticationStore } from "@/stores/authentication/authentication";
 
-const authenticationStore = useAuthenticationStore();
-const isAuthenticated = () => {
-  return authenticationStore.isAuthenticated;
-};
-const signIn = async () => {
-  await authenticationStore.signIn();
+    // その他のコードは省略
 
-  if (authenticationStore.isAuthenticated) {
-    // サインインが成功した場合の処理をここに記述します。
-  }
-};
-</script>
-```
+    /** axios の共通の設定があればここに定義します。 */
+    const axiosInstance = axios.create({
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-8. `ログイン` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッドが動作すれば `button` である必要はありません）。
+    // interceptor を使用してすべてのリクエストに共通処理を追加
+    axiosInstance.interceptors.request.use(
+      async (config: InternalAxiosRequestConfig) => {
+        const store = useAuthenticationStore();
+        if (store.isAuthenticated) {
+          await store.getToken();
+          const token = store.accessToken;
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      }
+    );
+    ```
 
-```html
-<button v-if="!isAuthenticated()" @click="signIn()">ログイン</button>
-```
+1. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
+
+    ```ts
+    <script setup lang="ts">
+    import { useAuthenticationStore } from '@/stores/authentication/authentication';
+
+    const authenticationStore = useAuthenticationStore();
+    const isAuthenticated = () => {
+      return authenticationStore.isAuthenticated;
+    };
+    const signIn = async () => {
+      await authenticationStore.signIn();
+
+      if (authenticationStore.isAuthenticated) {
+        // サインインが成功した場合の処理をここに記述します。
+      }
+    };
+    </script>
+    ```
+
+1. `ログイン` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッドが動作すれば `button` である必要はありません）。
+
+    ```html
+    <button v-if="!isAuthenticated()" @click="signIn()">ログイン</button>
+    ```
