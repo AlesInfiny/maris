@@ -241,7 +241,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
 
 1. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 
-<!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
+    <!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
 1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別の Controller メソッドにも付与できます
 
