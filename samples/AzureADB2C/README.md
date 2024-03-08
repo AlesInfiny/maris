@@ -239,7 +239,7 @@ app.UseAuthorization();
 
 ※ `app.UseAuthentication` および `app.UserAuthorization` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に従ってください。
 
-<!-- textlint-disable ja-no-redundant-expression sentence-length -->
+<!-- textlint-disable ja-no-redundant-expression ja-technical-writing/sentence-length -->
 
 1. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 
