@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { string } from 'yup';
 import { useUserStore } from '@/stores/user/user';
 import {
   signInAzureADB2C,
@@ -10,9 +9,9 @@ import {
 export const useAuthenticationStore = defineStore({
   id: 'authentication',
   state: () => ({
-    homeAccountId: string,
-    accessToken: string,
-    idToken: string,
+    homeAccountId: '' as string,
+    accessToken: '' as string,
+    idToken: '' as string,
     authenticated: false,
   }),
   actions: {
