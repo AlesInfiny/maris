@@ -99,9 +99,9 @@ auth-frontend
 本サンプルでは、バックエンド、フロントエンドアプリケーションそれぞれで OSS を使用しています。
 
 - バックエンドアプリケーション
-  - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
+    - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
 - フロントエンドアプリケーション
-  - [MSAL.js](https://www.npmjs.com/package/@azure/msal-browser)
+    - [MSAL.js](https://www.npmjs.com/package/@azure/msal-browser)
 
 その他の使用 OSS は、 AlesInfiny Maris のサンプルアプリケーションに準じます。
 
