@@ -47,6 +47,7 @@ jobs:
         if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: npm install
       - name: TypeScript の型チェック
+        working-directory: ${{ env.FRONTEND_WORKING_DIRECTORY }}
         run: npm run typecheck
 
   build-backend:
@@ -61,6 +62,9 @@ jobs:
         checks: write
         contents: read
         pull-requests: write
+    defaults:
+      run:
+        working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
     steps:
       - name: 'ブランチのチェックアウト'
         uses: actions/checkout@v4
