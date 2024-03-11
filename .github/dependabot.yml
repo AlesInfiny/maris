@@ -101,22 +101,22 @@ updates:
       - "npm"
       - "dependencies"
 
-- package-ecosystem: "nuget"
-  directory: "samples/AzureADB2C/auth-backend"
-  schedule: 
-    interval: "daily"
-  open-pull-requests-limit: 10
-  commit-message:
-    prefix: "nuget-azure-ad-b2c-backend"
-  labels:
-    - "target: AzureADB2C"
-    - "nuget"
-    - "dependencies"
-  groups:
-    dotnet-packages:
-      patterns:
-        - "Microsoft.AspNetCore*"
-        - "Microsoft.Extensions*"
-    nswag-packages:
-      patterns:
-        - "NSwag*"
+  - package-ecosystem: "nuget"
+    directory: "samples/AzureADB2C/auth-backend"
+    schedule: 
+      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "nuget-azure-ad-b2c-backend"
+    labels:
+      - "target: AzureADB2C"
+      - "nuget"
+      - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.AspNetCore*"
+          - "Microsoft.Extensions*"
+      nswag-packages:
+        patterns:
+          - "NSwag*"
