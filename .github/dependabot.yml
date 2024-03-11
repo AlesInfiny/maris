@@ -88,3 +88,35 @@ updates:
       xunit-packages:
         patterns:
           - "xunit*"
+
+  - package-ecosystem: "npm"
+    directory: "/samples/AzureADB2C/auth-frontend"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 20
+    commit-message:
+      prefix: "npm-azure-ad-b2c-frontend"
+    labels:
+      - "target: AzureADB2C"
+      - "npm"
+      - "dependencies"
+
+- package-ecosystem: "nuget"
+  directory: "samples/AzureADB2C/auth-backend"
+  schedule: 
+    interval: "daily"
+  open-pull-requests-limit: 10
+  commit-message:
+    prefix: "nuget-azure-ad-b2c-backend"
+  labels:
+    - "target: AzureADB2C"
+    - "nuget"
+    - "dependencies"
+  groups:
+    dotnet-packages:
+      patterns:
+        - "Microsoft.AspNetCore*"
+        - "Microsoft.Extensions*"
+    nswag-packages:
+      patterns:
+        - "NSwag*"
