@@ -79,7 +79,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   アセットコード:{0} のアセット情報を取得しました。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{assetCode} のアセット情報を取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AssetApplicationService_GetAssetStreamInfoEnd {
             get {
@@ -88,7 +88,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   アセットコード:{0} のアセット情報を取得します。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{assetCode} のアセット情報を取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AssetApplicationService_GetAssetStreamInfoStart {
             get {
@@ -106,7 +106,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   数量設定後の買い物かごアイテム: {0} に類似しているローカライズされた文字列を検索します。
+        ///   数量設定後の買い物かごアイテム: {basketItems} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Basket_AfterSettingQuantity {
             get {
@@ -151,7 +151,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   カタログブランド ID: {0} 、カタログカテゴリ ID: {1} のカテゴリ情報を取得しました。 に類似しているローカライズされた文字列を検索します。
+        ///   カタログブランド ID: {catalogBrandId} 、カタログカテゴリ ID: {catalogCategoryId} のカテゴリ情報を取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogApplicationService_GetCatalogItemsAsyncEnd {
             get {
@@ -160,7 +160,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   カタログブランド ID: {0} 、カタログカテゴリ ID: {1} のカテゴリ情報を取得します。 に類似しているローカライズされた文字列を検索します。
+        ///   カタログブランド ID: {catalogBrandId} 、カタログカテゴリ ID: {catalogCategoryId} のカテゴリ情報を取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogApplicationService_GetCatalogItemsAsyncStart {
             get {
@@ -196,7 +196,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   指定されたカタログアイテム ID: [{0}] のカタログアイテムがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
+        ///   指定されたカタログアイテム ID: [{catalogItemId}] のカタログアイテムがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogItemIdDoesNotExistInRepository {
             get {
@@ -214,7 +214,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   購入者 ID: {0} の買い物かご情報が見つからなかったため新たに作成します。 に類似しているローカライズされた文字列を検索します。
+        ///   購入者 ID: {buyerId} の買い物かご情報が見つからなかったため新たに作成します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CreateNewBasket_UserBasketNotFound {
             get {
@@ -232,7 +232,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   注文 ID: {0} の注文情報を取得しました。 に類似しているローカライズされた文字列を検索します。
+        ///   注文 ID: {orderId} の注文情報を取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string OrderApplicationService_GetOrderAsyncEnd {
             get {
@@ -241,7 +241,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   注文 ID: {0} の注文情報を取得します。 に類似しているローカライズされた文字列を検索します。
+        ///   注文 ID: {orderId} の注文情報を取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string OrderApplicationService_GetOrderAsyncStart {
             get {
@@ -277,7 +277,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加しました。 に類似しているローカライズされた文字列を検索します。
+        ///   ID: {basketId} の買い物かごにカタログアイテム ID: {catalogItemId} を {quantity} 個追加しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_AddItemToBasketAsyncEnd {
             get {
@@ -286,7 +286,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加します。 に類似しているローカライズされた文字列を検索します。
+        ///   ID: {basketId} の買い物かごにカタログアイテム ID: {catalogItemId} を {quantity} 個追加します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_AddItemToBasketAsyncStart {
             get {
@@ -295,7 +295,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   買い物かご ID: {0} の情報をもとに注文 ID: {1} を作成しました。 に類似しているローカライズされた文字列を検索します。
+        ///   買い物かご ID: {basketId} の情報をもとに注文 ID: {orderId} を作成しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_CheckoutAsyncEnd {
             get {
@@ -304,7 +304,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   買い物かご ID: {0} の情報をもとに注文を作成します。 に類似しているローカライズされた文字列を検索します。
+        ///   買い物かご ID: {basketId} の情報をもとに注文を作成します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_CheckoutAsyncStart {
             get {
@@ -313,7 +313,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   購入者 ID: {0} の買い物かごアイテムの一覧を取得しました。 に類似しているローカライズされた文字列を検索します。
+        ///   購入者 ID: {buyerId} の買い物かごアイテムの一覧を取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_GetBasketItemsAsyncEnd {
             get {
@@ -322,7 +322,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   購入者 ID: {0} の買い物かごアイテムの一覧を取得します。 に類似しているローカライズされた文字列を検索します。
+        ///   購入者 ID: {buyerId} の買い物かごアイテムの一覧を取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_GetBasketItemsAsyncStart {
             get {
@@ -331,7 +331,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   購入者 ID: {0} の買い物かご情報を取得または作成しました。 に類似しているローカライズされた文字列を検索します。
+        ///   購入者 ID: {buyerId} の買い物かご情報を取得または作成しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_GetOrCreateBasketForUserAsyncEnd {
             get {
@@ -340,7 +340,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   購入者 ID: {0} の買い物かご情報を取得または作成します。 に類似しているローカライズされた文字列を検索します。
+        ///   購入者 ID: {buyerId} の買い物かご情報を取得または作成します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_GetOrCreateBasketForUserAsyncStart {
             get {
@@ -349,7 +349,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ID: {0} の買い物かごの数量を一括で設定しました。 に類似しているローカライズされた文字列を検索します。
+        ///   ID: {basketId} の買い物かごの数量を一括で設定しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_SetBasketItemsQuantitiesAsyncEnd {
             get {
@@ -358,7 +358,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ID: {0} の買い物かごの数量を一括で設定します。 に類似しているローカライズされた文字列を検索します。
+        ///   ID: {basketId} の買い物かごの数量を一括で設定します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ShoppingApplicationService_SetBasketItemsQuantitiesAsyncStart {
             get {

@@ -113,7 +113,7 @@ public class ShoppingApplicationService
 
             basket.SetItemsQuantity(quantities);
             var currentBasketItems = basket.Items.Select(i => string.Format(Messages.Basket_ItemQuantity, i.CatalogItemId, i.Quantity));
-            this.logger.LogDebug(Events.DebugEvent, Messages.Basket_AfterSettingQuantity, string.Join(";", currentBasketItems));
+            this.logger.LogDebug(Events.DebugEvent, Messages.Basket_AfterSettingQuantity, currentBasketItems);
             basket.RemoveEmptyItems();
             await this.basketRepository.UpdateAsync(basket, cancellationToken);
             scope.Complete();
