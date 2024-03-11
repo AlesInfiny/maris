@@ -1,11 +1,8 @@
-﻿using System.Net;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Ordering;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Dressca.IntegrationTest;
@@ -19,12 +16,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
     public async Task 買い物かごに入れた商品を注文できる()
     {
         // Arrange
-        using (var scope = this.factory.Services.CreateScope())
-        {
-            var dbContext = scope.ServiceProvider.GetRequiredService<DbContext>();
-            DatabaseHelper.ClearTransactionTable(dbContext);
-        }
-
+        await this.factory.InitializeDatabaseAsync();
         var client = this.factory.CreateClient();
         var postBasketItemsRequest = this.CreateBasketItemsRequest();
         var postOrderRequestJson = JsonSerializer.Serialize(this.CreateDefaultPostOrderRequest());
@@ -34,18 +26,36 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         postBasketItemResponse.EnsureSuccessStatusCode();
         var cookies = postBasketItemResponse.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
 
-        var httpRequestMessage = new HttpRequestMessage
+        var postOrderRequest = new HttpRequestMessage
         {
             Content = new StringContent(postOrderRequestJson, Encoding.UTF8, "application/json"),
             Method = HttpMethod.Post,
             RequestUri = new Uri("api/orders", UriKind.Relative),
         };
-        httpRequestMessage.Headers.Add("Cookie", cookies);
-        var orderResponse = await client.SendAsync(httpRequestMessage);
+        postOrderRequest.Headers.Add("Cookie", cookies);
+        var postOrderResponse = await client.SendAsync(postOrderRequest);
+        postOrderResponse.EnsureSuccessStatusCode();
+
+        var getOrderRequest = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = postOrderResponse.Headers.Location,
+        };
+        getOrderRequest.Headers.Add("Cookie", cookies);
+        var result = await client.SendAsync(getOrderRequest);
+        result.EnsureSuccessStatusCode();
+
+        var orderResponseJson = await result.Content.ReadAsStringAsync();
+        var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        var orderResponse = JsonSerializer.Deserialize<OrderResponse>(orderResponseJson, options);
 
         // Assert
-        orderResponse.EnsureSuccessStatusCode();
-        Assert.Equal(HttpStatusCode.Created, orderResponse.StatusCode);
+        Assert.NotNull(orderResponse);
+        var orderItemResponse = orderResponse.OrderItems.FirstOrDefault();
+        Assert.NotNull(orderItemResponse);
+        Assert.NotNull(orderItemResponse.ItemOrdered);
+        Assert.Equal(postBasketItemsRequest.AddedQuantity, orderItemResponse.Quantity);
+        Assert.Equal(postBasketItemsRequest.CatalogItemId, orderItemResponse.ItemOrdered.Id);
     }
 
     private PostBasketItemsRequest CreateBasketItemsRequest()
