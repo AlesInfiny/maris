@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FileNotFound" xml:space="preserve">
-    <value>アセットコード:{0} のファイルストリームが見つかりません。ファイルパスは {1} です。</value>
+    <value>アセットコード:{assetCode} のファイルストリームが見つかりません。ファイルパスは {filePath} です。</value>
   </data>
   <data name="StaticFileAssetStore_GetStreamEnd" xml:space="preserve">
-    <value>アセットコード:{0} のファイルストリームを取得しました。ファイルパスは {1} です。</value>
+    <value>アセットコード:{assetCode} のファイルストリームを取得しました。ファイルパスは {filePath} です。</value>
   </data>
   <data name="StaticFileAssetStore_GetStreamStart" xml:space="preserve">
-    <value>アセットコード:{0} のストリームを取得します。</value>
+    <value>アセットコード:{assetCode} のストリームを取得します。</value>
   </data>
 </root>
