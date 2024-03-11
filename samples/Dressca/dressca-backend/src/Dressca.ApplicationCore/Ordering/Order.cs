@@ -18,6 +18,7 @@ public class Order
     ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="orderItems">注文アイテムのリスト。</param>
+    /// <exception cref="ArgumentException">null または空のリストを設定できません。</exception>
     public Order(List<OrderItem> orderItems)
         : this(orderItems, TimeProvider.System)
     {
@@ -29,11 +30,8 @@ public class Order
     /// </summary>
     /// <param name="orderItems">注文アイテムのリスト。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
-    /// <exception cref="ArgumentNullException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
-    ///  </list>
-    /// </exception>
+    /// <exception cref="ArgumentException">null または空のリストを設定できません。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="timeProvider"/> が <see langword="null"/> です。</exception>
     internal Order(List<OrderItem> orderItems, TimeProvider timeProvider)
     {
         if (orderItems is null || !orderItems.Any())
