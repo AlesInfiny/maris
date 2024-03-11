@@ -55,10 +55,7 @@ public class BasketItem
     public required int Quantity
     {
         get => this.quantity;
-        init
-        {
-            this.SetQuantity(value);
-        }
+        init => this.SetQuantity(value);
     }
 
     /// <summary>
