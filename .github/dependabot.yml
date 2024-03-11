@@ -103,7 +103,7 @@ updates:
 
   - package-ecosystem: "nuget"
     directory: "samples/AzureADB2C/auth-backend"
-    schedule: 
+    schedule:
       interval: "daily"
     open-pull-requests-limit: 10
     commit-message:
