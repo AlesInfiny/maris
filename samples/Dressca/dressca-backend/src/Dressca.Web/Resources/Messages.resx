@@ -127,6 +127,6 @@
     <value>ヘルスチェック API の MethodInfo を取得できませんでした。</value>
   </data>
   <data name="ReceiveHttpBadRequest" xml:space="preserve">
-    <value>HTTP 要求に誤りがあります。詳細情報: {0} 。</value>
+    <value>HTTP 要求に誤りがあります。詳細情報: {details} 。</value>
   </data>
 </root>

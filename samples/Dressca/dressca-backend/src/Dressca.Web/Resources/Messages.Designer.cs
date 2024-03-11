@@ -88,7 +88,7 @@ namespace Dressca.Web.Resources {
         }
         
         /// <summary>
-        ///   HTTP 要求に誤りがあります。詳細情報: {0} 。 に類似しているローカライズされた文字列を検索します。
+        ///   HTTP 要求に誤りがあります。詳細情報: {details} 。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ReceiveHttpBadRequest {
             get {
