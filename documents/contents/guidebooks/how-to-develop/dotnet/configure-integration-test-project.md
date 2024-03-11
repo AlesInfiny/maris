@@ -141,7 +141,7 @@ public class BasicTests
                 }
             },
             "ConnectionStrings": {
-                "SampleDbContext": "Server=localhost,1433;Database=SampleDb;User=sa;Password=P@ssw0rd;TrustServerCertificate=true;"
+                "SampleDbContext": "Server=localhost,1433;Database=SampleDb;User=<ユーザー名>;Password=<パスワード>;TrustServerCertificate=true;"
             },
             "AllowedHosts": "*"
         }
