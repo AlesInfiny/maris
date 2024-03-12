@@ -110,7 +110,7 @@ postCSS は Tailwind CSS と一緒にすでにインストール済みなので�
 
 設定ファイル `./postcss.config.cjs` を作成します。
 
-```javascript title="postcss.config.js"
+```javascript title="postcss.config.cjs"
 module.exports = {
   plugins: [
     require('tailwindcss'),
