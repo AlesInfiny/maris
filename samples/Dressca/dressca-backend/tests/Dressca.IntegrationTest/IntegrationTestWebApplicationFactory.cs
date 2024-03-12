@@ -17,6 +17,12 @@ public class IntegrationTestWebApplicationFactory<TProgram>
     public async Task InitializeDatabaseAsync()
     {
         var configuration = this.Services.GetRequiredService<IConfiguration>();
+
+        foreach (var ckv in configuration.AsEnumerable())
+        {
+            Console.WriteLine($"{ckv.Key} >>> {ckv.Value}");
+        }
+
         this.connectionString = configuration.GetConnectionString("DresscaDbContext");
         using var connection = new SqlConnection(this.connectionString);
         var command = connection.CreateCommand();
@@ -44,6 +50,11 @@ public class IntegrationTestWebApplicationFactory<TProgram>
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
                     .Build();
+
+                foreach (var ckv in config.AsEnumerable())
+                {
+                    Console.WriteLine($"{ckv.Key} >>> {ckv.Value}");
+                }
 
                 services.AddDresscaEfInfrastructure(config);
             });
