@@ -108,7 +108,7 @@ postCSS は Tailwind CSS と一緒にすでにインストール済みなので�
 
 ### postCSS の設定 {#settings-postcss}
 
-設定ファイル `./postcss.config.js` を作成します。
+設定ファイル `./postcss.config.cjs` を作成します。
 
 ```javascript title="postcss.config.js"
 module.exports = {
