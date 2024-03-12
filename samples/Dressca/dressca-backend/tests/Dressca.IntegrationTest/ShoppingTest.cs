@@ -16,8 +16,8 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
     public async Task 買い物かごに入れた商品を注文できる()
     {
         // Arrange
-        await this.factory.InitializeDatabaseAsync();
         var client = this.factory.CreateClient();
+        await this.factory.InitializeDatabaseAsync();
         var postBasketItemsRequest = this.CreateBasketItemsRequest();
         var postOrderRequestJson = JsonSerializer.Serialize(this.CreateDefaultPostOrderRequest());
 
