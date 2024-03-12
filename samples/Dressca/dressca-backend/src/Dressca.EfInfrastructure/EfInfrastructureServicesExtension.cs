@@ -42,7 +42,6 @@ public static class EfInfrastructureServicesExtension
 
         // Connection Strings
         var connectionString = configuration.GetConnectionString(ConnectionStringName);
-
         if (string.IsNullOrWhiteSpace(connectionString))
         {
             throw new ArgumentException(
