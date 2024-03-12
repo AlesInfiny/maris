@@ -42,7 +42,6 @@ public static class EfInfrastructureServicesExtension
 
         // Connection Strings
         var connectionString = configuration.GetConnectionString(ConnectionStringName);
-        Console.WriteLine($"[AddDresscaEfInfrastructure]{connectionString}");
 
         if (string.IsNullOrWhiteSpace(connectionString))
         {
