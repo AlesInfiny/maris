@@ -179,7 +179,7 @@ VITE_ADB2C_AUTHORITIES_SIGNUP_SIGNIN_AUTHORITY=https://[初期ドメイン名].b
 VITE_ADB2C_B2CPOLICIES_AUTHORITYDOMAIN=[初期ドメイン名].b2clogin.com
 VITE_ADB2C_SCOPE=[SampleWebAPI のアプリケーション ID の URI]/api.read
 VITE_ADB2C_APP_CLIENT_ID=[SampleSPA のクライアント ID]
-VITE_ADB2C_APP_URI=http://localhost:5173
+VITE_ADB2C_APP_URI=[フロントエンドアプリケーションのベースとなるURL。サンプルの既定では http://localhost:5173]
 ```
 
 ### 動作確認
@@ -215,7 +215,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
     ```cs
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Identity.Web;
-    
+
     var builder = WebApplication.CreateBuilder(args); // （既存のコード）
 
     // Azure AD B2C 認証に必要な設定をインジェクション
@@ -243,7 +243,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
 
     <!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
-1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別の Controller メソッドにも付与できます
+1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別の Controller メソッドにも付与できます。
 
     ```cs
     using Microsoft.AspNetCore.Authorization;
