@@ -13,10 +13,27 @@ public class IntegrationTestWebApplicationFactory<TProgram>
     : WebApplicationFactory<TProgram>
     where TProgram : class
 {
+    private bool isInitialized = false;
+    private string? connectionString;
+
     public async Task InitializeDatabaseAsync()
     {
-        var configuration = this.Services.GetRequiredService<IConfiguration>();
-        var connectionString = configuration.GetConnectionString("DresscaDbContext");
+        if (!this.isInitialized)
+        {
+            throw new InvalidOperationException("先に CreateClient メソッドを呼び出してください。");
+        }
+
+        string connectionString = string.Empty;
+        if (string.IsNullOrEmpty(this.connectionString))
+        {
+            var configuration = this.Services.GetRequiredService<IConfiguration>();
+            connectionString = configuration.GetConnectionString("DresscaDbContext") ?? throw new InvalidOperationException("DresscaDbContext の接続文字列が未設定");
+        }
+        else
+        {
+            connectionString = this.connectionString;
+        }
+
         using var connection = new SqlConnection(connectionString);
         var command = connection.CreateCommand();
         command.CommandText =
@@ -29,6 +46,12 @@ public class IntegrationTestWebApplicationFactory<TProgram>
             """;
         await connection.OpenAsync();
         await command.ExecuteNonQueryAsync();
+    }
+
+    protected override void ConfigureClient(HttpClient client)
+    {
+        base.ConfigureClient(client);
+        this.isInitialized = true;
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -45,6 +68,7 @@ public class IntegrationTestWebApplicationFactory<TProgram>
                     .Build();
 
                 services.AddDresscaEfInfrastructure(config);
+                this.connectionString = config.GetConnectionString("DresscaDbContext");
             });
         }
     }
