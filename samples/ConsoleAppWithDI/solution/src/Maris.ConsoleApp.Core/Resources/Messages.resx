@@ -118,22 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CommandExecutor_ExecutedAsyncCommand" xml:space="preserve">
-    <value>{0} コマンドの非同期実行が {1} で完了しました。</value>
+    <value>{commandName} コマンドの非同期実行が {result} で完了しました。</value>
   </data>
   <data name="CommandExecutor_ExecutedSyncCommand" xml:space="preserve">
-    <value>{0} コマンドの同期実行が {1} で完了しました。</value>
+    <value>{commandName} コマンドの同期実行が {result} で完了しました。</value>
   </data>
   <data name="CommandExecutor_ExecutingAsyncCommand" xml:space="preserve">
-    <value>{0} コマンドの非同期実行を開始します。</value>
+    <value>{commandName} コマンドの非同期実行を開始します。</value>
   </data>
   <data name="CommandExecutor_ExecutingSyncCommand" xml:space="preserve">
-    <value>{0} コマンドの同期実行を開始します。</value>
+    <value>{commandName} コマンドの同期実行を開始します。</value>
   </data>
   <data name="CommandExecutor_ValidatedParameter" xml:space="preserve">
-    <value>{0} コマンドのパラメーターの入力値検証が完了しました。</value>
+    <value>{commandName} コマンドのパラメーターの入力値検証が完了しました。</value>
   </data>
   <data name="CommandExecutor_ValidatingParameter" xml:space="preserve">
-    <value>{0} コマンドのパラメーターの入力値検証を実行します。</value>
+    <value>{commandName} コマンドのパラメーターの入力値検証を実行します。</value>
   </data>
   <data name="InvalidCommandParameter" xml:space="preserve">
     <value>コマンドのパラメーターに入力エラーがあります。</value>
