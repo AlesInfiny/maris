@@ -11,18 +11,18 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
     : IClassFixture<IntegrationTestWebApplicationFactory<Program>>
 {
     private readonly IntegrationTestWebApplicationFactory<Program> factory = factory;
+    private readonly HttpClient client = factory.CreateClient();
 
     [Fact]
     public async Task 買い物かごに入れた商品を注文できる()
     {
         // Arrange
-        var client = this.factory.CreateClient();
         await this.factory.InitializeDatabaseAsync();
         var postBasketItemsRequest = this.CreateBasketItemsRequest();
         var postOrderRequestJson = JsonSerializer.Serialize(this.CreateDefaultPostOrderRequest());
 
         // Act
-        var postBasketItemResponse = await client.PostAsJsonAsync("api/basket-items", postBasketItemsRequest);
+        var postBasketItemResponse = await this.client.PostAsJsonAsync("api/basket-items", postBasketItemsRequest);
         postBasketItemResponse.EnsureSuccessStatusCode();
         var cookies = postBasketItemResponse.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
 
@@ -33,7 +33,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
             RequestUri = new Uri("api/orders", UriKind.Relative),
         };
         postOrderRequest.Headers.Add("Cookie", cookies);
-        var postOrderResponse = await client.SendAsync(postOrderRequest);
+        var postOrderResponse = await this.client.SendAsync(postOrderRequest);
         postOrderResponse.EnsureSuccessStatusCode();
 
         var getOrderRequest = new HttpRequestMessage
@@ -42,7 +42,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
             RequestUri = postOrderResponse.Headers.Location,
         };
         getOrderRequest.Headers.Add("Cookie", cookies);
-        var result = await client.SendAsync(getOrderRequest);
+        var result = await this.client.SendAsync(getOrderRequest);
         result.EnsureSuccessStatusCode();
 
         var orderResponseJson = await result.Content.ReadAsStringAsync();
