@@ -24,6 +24,9 @@ public class IntegrationTestWebApplicationFactory<TProgram>
         }
 
         this.connectionString = configuration.GetConnectionString("DresscaDbContext");
+
+        Console.WriteLine($"[connectionString]{this.connectionString}");
+
         using var connection = new SqlConnection(this.connectionString);
         var command = connection.CreateCommand();
         command.CommandText =
@@ -53,7 +56,7 @@ public class IntegrationTestWebApplicationFactory<TProgram>
 
                 foreach (var ckv in config.AsEnumerable())
                 {
-                    Console.WriteLine($"{ckv.Key} >>> {ckv.Value}");
+                    Console.WriteLine($"[ConfigureWebHost]{ckv.Key} >>> {ckv.Value}");
                 }
 
                 services.AddDresscaEfInfrastructure(config);
