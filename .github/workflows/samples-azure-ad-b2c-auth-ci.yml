@@ -1,7 +1,7 @@
 ---
 # cSpell:ignore typecheck
 
-name: azure-ad-b2c-sample CI
+name: azure-ad-b2c-auth-sample CI
 
 on:
     pull_request:
