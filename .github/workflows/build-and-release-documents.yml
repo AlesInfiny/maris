@@ -125,10 +125,10 @@ jobs:
           cd samples/ConsoleAppWithDI
           zip -r ../../documents/contents/samples/downloads/console-app-with-di.zip *
 
-      - name: azure-ad-b2c.zip の作成
+      - name: azure-ad-b2c-auth.zip の作成
         run: |
-          cd samples/AzureADB2C
-          zip -r ../../documents/contents/samples/downloads/azure-ad-b2c.zip *
+          cd samples/AzureADB2CAuth
+          zip -r ../../documents/contents/samples/downloads/azure-ad-b2c-auth.zip *
 
       - name: ドキュメントのビルド
         id: build_documents

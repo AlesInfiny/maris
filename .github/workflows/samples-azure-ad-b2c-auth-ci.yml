@@ -7,13 +7,13 @@ on:
     pull_request:
         branches: [main]
         paths:
-            - 'samples/AzureADB2C/**'
-            - '.github/workflows/samples-azure-ad-b2c-ci.yml'
+            - 'samples/AzureADB2CAuth/**'
+            - '.github/workflows/samples-azure-ad-b2c-auth-ci.yml'
     workflow_dispatch:
 
 env:
-    BACKEND_WORKING_DIRECTORY: samples/AzureADB2C/auth-backend
-    FRONTEND_WORKING_DIRECTORY: samples/AzureADB2C/auth-frontend
+    BACKEND_WORKING_DIRECTORY: samples/AzureADB2CAuth/auth-backend
+    FRONTEND_WORKING_DIRECTORY: samples/AzureADB2CAuth/auth-frontend
 
 jobs:
     build-frontend:
