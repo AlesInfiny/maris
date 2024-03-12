@@ -9,7 +9,7 @@ interface ImportMetaEnv {
   readonly VITE_ADB2C_AUTHORITY_DOMAIN: string;
   readonly VITE_ADB2C_TASKS_SCOPE: string;
   readonly VITE_ADB2C_APP_CLIENT_ID: string;
-  readonly VITE_APP_URI: string;
+  readonly VITE_ADB2C_APP_URI: string;
 }
 
 interface ImportMeta {
