@@ -9,30 +9,18 @@ namespace Dressca.ApplicationCore.Ordering;
 public class Order
 {
     private readonly List<OrderItem> orderItems = new();
-    private readonly Account? account;
     private readonly TimeProvider timeProvider;
+    private readonly Account? account;
     private string? buyerId;
     private ShipTo? shipToAddress;
 
     /// <summary>
     ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="buyerId">購入者 Id 。</param>
-    /// <param name="shipToAddress">配送先住所。</param>
     /// <param name="orderItems">注文アイテムのリスト。</param>
-    /// <exception cref="ArgumentException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="buyerId"/> が <see langword="null"/> または空の文字列です。</item>
-    ///   <item><paramref name="orderItems"/> が <see langword="null"/> または空のリストです。</item>
-    ///  </list>
-    /// </exception>
-    /// <exception cref="ArgumentNullException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="shipToAddress"/> が <see langword="null"/> です。</item>
-    ///  </list>
-    /// </exception>
-    public Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems)
-        : this(buyerId, shipToAddress, orderItems, TimeProvider.System)
+    /// <exception cref="ArgumentException">null または空のリストを設定できません。</exception>
+    public Order(List<OrderItem> orderItems)
+        : this(orderItems, TimeProvider.System)
     {
     }
 
@@ -40,45 +28,30 @@ public class Order
     ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
     ///  単体テスト用に<see cref="TimeProvider"/> を受け取ることができます。
     /// </summary>
-    /// <param name="buyerId">購入者 Id 。</param>
-    /// <param name="shipToAddress">配送先住所。</param>
     /// <param name="orderItems">注文アイテムのリスト。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
-    /// <exception cref="ArgumentException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="buyerId"/> が <see langword="null"/> または空の文字列です。</item>
-    ///   <item><paramref name="orderItems"/> が <see langword="null"/> または空のリストです。</item>
-    ///  </list>
-    /// </exception>
-    /// <exception cref="ArgumentNullException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="shipToAddress"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
-    ///  </list>
-    /// </exception>
-    internal Order(string buyerId, ShipTo shipToAddress, List<OrderItem> orderItems, TimeProvider timeProvider)
+    /// <exception cref="ArgumentException">null または空のリストを設定できません。</exception>
+    /// <exception cref="ArgumentNullException"><paramref name="timeProvider"/> が <see langword="null"/> です。</exception>
+    internal Order(List<OrderItem> orderItems, TimeProvider timeProvider)
     {
         if (orderItems is null || !orderItems.Any())
         {
             throw new ArgumentException(Messages.ArgumentIsNullOrEmptyList, nameof(orderItems));
         }
 
-        this.BuyerId = buyerId;
-        this.ShipToAddress = shipToAddress;
-        this.orderItems = orderItems;
-        this.account = new Account(orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
+        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
+        this.OrderDate = this.timeProvider.GetLocalNow();
         this.ConsumptionTaxRate = Account.ConsumptionTaxRate;
+        this.orderItems = orderItems;
+        this.account = new Account(this.orderItems.Select(item => new AccountItem(item.Quantity, item.UnitPrice)));
         this.TotalItemsPrice = this.account.GetItemsTotalPrice();
         this.DeliveryCharge = this.account.GetDeliveryCharge();
         this.ConsumptionTax = this.account.GetConsumptionTax();
         this.TotalPrice = this.account.GetTotalPrice();
-        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
-        this.OrderDate = this.timeProvider.GetLocalNow();
     }
 
     private Order()
     {
-        // Required by EF Core.
         this.timeProvider = TimeProvider.System;
     }
 
@@ -92,10 +65,10 @@ public class Order
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="BuyerId"/> が設定されていません。</exception>
     /// <exception cref="ArgumentException"><see langword="null"/> または空の文字列を設定できません。</exception>
-    public string BuyerId
+    public required string BuyerId
     {
         get => this.buyerId ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.BuyerId)));
-        private set
+        init
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -117,10 +90,10 @@ public class Order
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="ShipToAddress"/> が設定されていません。</exception>
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
-    public ShipTo ShipToAddress
+    public required ShipTo ShipToAddress
     {
         get => this.shipToAddress ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.shipToAddress)));
-        private set => this.shipToAddress = value ?? throw new ArgumentNullException(nameof(value));
+        init => this.shipToAddress = value ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <summary>

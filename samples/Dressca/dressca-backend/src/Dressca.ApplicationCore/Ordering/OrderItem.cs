@@ -17,22 +17,8 @@ public class OrderItem
     /// <summary>
     ///  <see cref="OrderItem"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="itemOrdered">注文されたカタログアイテム。</param>
-    /// <param name="unitPrice">単価。</param>
-    /// <param name="quantity">数量。</param>
-    /// <exception cref="ArgumentNullException">
-    ///  <paramref name="itemOrdered"/> が <see langword="null"/> です。
-    /// </exception>
-    public OrderItem(CatalogItemOrdered itemOrdered, decimal unitPrice, int quantity)
+    public OrderItem()
     {
-        this.ItemOrdered = itemOrdered;
-        this.UnitPrice = unitPrice;
-        this.Quantity = quantity;
-    }
-
-    private OrderItem()
-    {
-        // Required by EF Core.
     }
 
     /// <summary>
@@ -45,26 +31,26 @@ public class OrderItem
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="ItemOrdered"/> が設定されていません。</exception>
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
-    public CatalogItemOrdered ItemOrdered
+    public required CatalogItemOrdered ItemOrdered
     {
         get => this.itemOrdered ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.ItemOrdered)));
 
         [MemberNotNull(nameof(itemOrdered))]
-        private set => this.itemOrdered = value ?? throw new ArgumentNullException(nameof(value));
+        init => this.itemOrdered = value ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <summary>
     ///  単価を取得します。
     ///  <see cref="ItemOrdered"/> プロパティも商品情報ですが、計算や情報管理の都合で単価はその中には含めていません。
     /// </summary>
-    public decimal UnitPrice { get; private set; }
+    public required decimal UnitPrice { get; init; }
 
     /// <summary>
     ///  数量を取得します。
     ///  カタログアイテムごとに取り扱い単位が異なる可能性があります。
     ///  例えば、1 ダース単位に販売する商品の場合、この数量の単位は"ダース"です。
     /// </summary>
-    public int Quantity { get; private set; }
+    public required int Quantity { get; init; }
 
     /// <summary>
     ///  注文 Id を取得します。

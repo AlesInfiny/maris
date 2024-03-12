@@ -21,7 +21,7 @@ public class OrderTest
         var items = CreateDefaultOrderItems();
 
         // Act
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Assert
         Assert.NotNull(order);
@@ -38,7 +38,7 @@ public class OrderTest
         var items = CreateDefaultOrderItems();
 
         // Act
-        var action = () => new Order(buyerId!, shipTo, items);
+        var action = () => new Order(items) { BuyerId = buyerId!, ShipToAddress = shipTo };
 
         // Assert
         Assert.Throws<ArgumentException>(action);
@@ -52,7 +52,7 @@ public class OrderTest
         var items = CreateDefaultOrderItems();
 
         // Act
-        var action = () => new Order(buyerId, null!, items);
+        var action = () => new Order(items) { BuyerId = buyerId, ShipToAddress = null! };
 
         // Assert
         Assert.Throws<ArgumentNullException>(action);
@@ -67,7 +67,7 @@ public class OrderTest
         var shipTo = CreateDefaultShipTo();
 
         // Act
-        var action = () => new Order(buyerId, shipTo, emptyOrderItems!);
+        var action = () => new Order(emptyOrderItems!) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("orderItems", action);
@@ -81,7 +81,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var totalPrice = order.TotalItemsPrice;
@@ -97,7 +97,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var deliveryCharge = order.DeliveryCharge;
@@ -113,7 +113,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var tax = order.ConsumptionTax;
@@ -129,7 +129,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var totalPrice = order.TotalPrice;
@@ -145,7 +145,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var result = order.HasMatchingBuyerId(buyerId);
@@ -161,7 +161,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         var unmatchingBuyerId = Guid.NewGuid().ToString("D");
 
@@ -184,7 +184,7 @@ public class OrderTest
         fakeTimeProvider.SetUtcNow(testOrderTime);
 
         // Act
-        var order = new Order(buyerId, shipTo, items, fakeTimeProvider);
+        var order = new Order(items, fakeTimeProvider) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Assert
         Assert.Equal(testOrderTime, order.OrderDate);
@@ -218,8 +218,8 @@ public class OrderTest
 
         var items = new List<OrderItem>()
         {
-            new(new CatalogItemOrdered(1, productName1, productCode1), 1000m, 1),
-            new(new CatalogItemOrdered(2, productName2, productCode2), 1500m, 2),
+            new() { ItemOrdered = new CatalogItemOrdered(1, productName1, productCode1), UnitPrice = 1000m, Quantity = 1 },
+            new() { ItemOrdered = new CatalogItemOrdered(2, productName2, productCode2), UnitPrice = 1500m, Quantity = 2 },
         };
 
         return items;
