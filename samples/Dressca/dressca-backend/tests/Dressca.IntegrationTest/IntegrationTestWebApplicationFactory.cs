@@ -20,7 +20,7 @@ public class IntegrationTestWebApplicationFactory<TProgram>
 
         foreach (var ckv in configuration.AsEnumerable())
         {
-            Console.WriteLine($"{ckv.Key} >>> {ckv.Value}");
+            Console.WriteLine($"[InitializedDB]{ckv.Key} >>> {ckv.Value}");
         }
 
         this.connectionString = configuration.GetConnectionString("DresscaDbContext");
