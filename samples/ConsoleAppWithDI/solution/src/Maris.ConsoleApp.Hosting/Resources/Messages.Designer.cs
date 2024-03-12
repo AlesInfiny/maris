@@ -61,7 +61,7 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   {0} コマンドの実行時に例外が発生し、処理が失敗しました。 に類似しているローカライズされた文字列を検索します。
+        ///   {commandName} コマンドの実行時に例外が発生し、処理が失敗しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandExecutorRaiseException {
             get {
@@ -97,7 +97,7 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   起動パラメーター:{0} のパースを行います。 に類似しているローカライズされた文字列を検索します。
+        ///   起動パラメーター:{parameterName} のパースを行います。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ParseParameter {
             get {
@@ -106,7 +106,7 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   {0} コマンドのホストの処理を開始します。 に類似しているローカライズされた文字列を検索します。
+        ///   {commandName} コマンドのホストの処理を開始します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StartHostingService {
             get {
@@ -115,7 +115,7 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   {0} コマンドのホストの処理が終了コード {1} で完了しました。実行時間は {2} ms でした。 に類似しているローカライズされた文字列を検索します。
+        ///   {commandName} コマンドのホストの処理が終了コード {result} で完了しました。実行時間は {executionTime} ms でした。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StopHostingService {
             get {
