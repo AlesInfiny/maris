@@ -97,7 +97,7 @@ updates:
     commit-message:
       prefix: "npm-azure-ad-b2c-frontend"
     labels:
-      - "target: AzureADB2C"
+      - "target: AzureADB2CAuth"
       - "npm"
       - "dependencies"
 
@@ -109,7 +109,7 @@ updates:
     commit-message:
       prefix: "nuget-azure-ad-b2c-backend"
     labels:
-      - "target: AzureADB2C"
+      - "target: AzureADB2CAuth"
       - "nuget"
       - "dependencies"
     groups:

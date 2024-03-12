@@ -1,5 +1,5 @@
 ---
-title: Azure AD B2C での認証の利用
+title: Azure AD B2C による認証サンプル
 description: Azure AD B2C による認証を利用するためのサンプルと、その使い方を解説します。
 ---
 
