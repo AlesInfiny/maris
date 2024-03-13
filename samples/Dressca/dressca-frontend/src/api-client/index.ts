@@ -13,18 +13,13 @@ const axiosInstance = axios.create({});
 axiosInstance.interceptors.response.use(
   (response) => response,
   function (error) {
-    if (error.response?.status === 500) {
-      notificationStore.setMessage('500 error: 不明なエラーが発生しました。');
+    if (!error.response || error.response.status === 500) {
+      notificationStore.setMessage('不明なエラーが発生しました。');
       console.log('500 error');
     } else if (error.response?.status === 401) {
       notificationStore.setMessage('401 error: ログインしてください。');
       router.replace({ name: 'account/login' });
       console.log('401 error');
-    } else if (error.response?.status === 404) {
-      notificationStore.setMessage(
-        '404 error: リソースが見つかりませんでした。',
-      );
-      console.log('404 error');
     }
   },
 );
