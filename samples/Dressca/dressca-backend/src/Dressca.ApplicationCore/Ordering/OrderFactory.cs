@@ -12,9 +12,9 @@ internal class OrderFactory : IOrderFactory
     /// <inheritdoc/>
     public Order CreateOrder(Basket basket, IReadOnlyList<CatalogItem> catalogItems, ShipTo shipToAddress)
     {
-        basket.ThrowIfNull(nameof(basket));
-        catalogItems.ThrowIfNull(nameof(catalogItems));
-        shipToAddress.ThrowIfNull(nameof(shipToAddress));
+        basket.ThrowIfNull();
+        catalogItems.ThrowIfNull();
+        shipToAddress.ThrowIfNull();
 
         var orderItems = basket.Items.Select(
             basketItem =>
