@@ -9,7 +9,7 @@ description: AlesInfiny Maris で構築する .NET アプリケーションの�
 
 ## 例外の種類 {#exception-type}
 
-AlesInfiny Maris では、アプリケーションで発生する例外を[業務例外](#business-exception)と[システム例外](#system-exception)の 2 つに分類します。
+AlesInfiny Maris では、アプリケーションで発生する例外を [業務例外](#business-exception) と [システム例外](#system-exception) の 2 つに分類します。
 それぞれの例外の意味や処理方針を以下に示します。
 
 ### 業務例外 {#business-exception}
