@@ -20,8 +20,7 @@ const ExceptionHandlingPlugin = {
     });
 
     window.addEventListener('unhandledrejection', (event) => {
-      console.log(event);
-      notificationStore.setMessage('エラーが発生しました。');
+      // やりたいことがあんまりない
     });
   },
 };
