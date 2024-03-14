@@ -33,6 +33,7 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
+                  fetch-depth: 1
             - uses: actions/cache@v4
               id: node_modules_cache_id
               env:
@@ -52,7 +53,6 @@ jobs:
         runs-on: ubuntu-latest
         env:
             DOTNET_NOLOGO: true
-            DOTNET_CLI_TELEMETRY_OPTOUT: true
             BUILD_CONFIGURATION: Debug
             BUILD_SUMMARY_FILE: BuildSummary.md
         permissions:
@@ -78,11 +78,21 @@ jobs:
 
             - id: application-build
               name: 'アプリケーションのビルド'
-              run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
-
-            - name: 'ビルド結果の表示'
-              shell: bash
-              if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
+              continue-on-error: true
               run: |
-                  echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
-                  cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
+                  echo '## Build Result :gear:' >> $GITHUB_STEP_SUMMARY
+                  dotnet build --nologo --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
+                  echo ':heavy_check_mark: アプリケーションのビルドに成功しました。' >> $GITHUB_STEP_SUMMARY
+                  echo '```' >> $GITHUB_STEP_SUMMARY
+                  cat build-result.txt >> $GITHUB_STEP_SUMMARY
+                  echo '```' >> $GITHUB_STEP_SUMMARY
+
+            - name: 'ビルド失敗時の結果の表示'
+              shell: bash
+              if: ${{ steps.application-build.outcome == 'failure' }}
+              run: |
+                  echo ':x: アプリケーションのビルドに失敗しました。  ' >> $GITHUB_STEP_SUMMARY
+                  echo '```' >> $GITHUB_STEP_SUMMARY
+                  cat build-result.txt >> $GITHUB_STEP_SUMMARY
+                  echo '```' >> $GITHUB_STEP_SUMMARY
+                  exit 1
