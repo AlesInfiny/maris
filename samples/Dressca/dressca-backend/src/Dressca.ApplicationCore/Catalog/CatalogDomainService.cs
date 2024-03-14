@@ -44,7 +44,7 @@ internal class CatalogDomainService : ICatalogDomainService
         {
             this.logger.LogInformation(
                 Events.CatalogItemIdDoesNotExistInRepository,
-                Messages.CatalogItemIdDoesNotExistInRepository,
+                LogMessages.CatalogItemIdDoesNotExistInRepository,
                 notExistsCatalogItemIds);
             return (ExistsAll: false, CatalogItems: items);
         }
