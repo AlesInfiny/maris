@@ -12,7 +12,7 @@ microsoft/TypeScript-Website is licensed under the Creative Commons Attribution 
 
 [![CC BY 4.0 DEED](../images/about-maris/cc-by.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-## Vue.js Logo
+## Vue.js Logo { style="clear:both;" }
 
 ![Vue.js Logo](../images/about-maris/vuejs-logo.svg){ width="128" align="left" }
 
@@ -20,7 +20,7 @@ Vue.js artworks by Evan You is licensed under a Creative Commons Attribution-Non
 
 [![CC BY-NC-SA 4.0 DEED](../images/about-maris/by-nc-sa.eu.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-## Vite Logo
+## Vite Logo { style="clear:both;" }
 
 ![Vite Logo](../images/about-maris/vite-logo.svg){ align="left" width="128" }
 
@@ -31,3 +31,47 @@ Copyright (c) 2019-present, Yuxi (Evan) You and Vite contributors
 ## VeeValidate Logo { style="clear:both;" }
 
 ![VeeValidate Logo](../images/about-maris/veevalidate-logo.png){ align="left" width="128" }
+
+[MIT LICENSE](https://github.com/logaretm/vee-validate/blob/main/LICENSE)
+
+Copyright (c) Abdelrahman Awad logaretm1@gmail.com
+
+## Pinia Logo { style="clear:both;" }
+
+![Pinia Logo](../images/about-maris/pinia-logo.svg){ align="left" width="128" }
+
+[MIT LICENSE](https://github.com/vuejs/pinia/blob/v2/LICENSE)
+
+Copyright (c) 2019-present Eduardo San Martin Morote
+
+## Axios Logo { style="clear:both;" }
+
+![Axios Logo](../images/about-maris/axios-logo.png){ align="left" width="128" }
+
+[MIT LICENSE](https://github.com/axios/axios-docs/blob/master/LICENSE)
+
+Copyright 2020-present John Jakob "Jake" Sarjeant
+
+## Prettier Logo { style="clear:both;" }
+
+![Prettier Logo](../images/about-maris/prettier-logo.png){ align="left" width="128" }
+
+[MIT License](https://github.com/prettier/prettier-logo/blob/master/LICENSE)
+
+Copyright 2017 James Long
+
+## StyleLint Logo { style="clear:both;" }
+
+![StyleLint Logo](../images/about-maris/stylelint-logo.png){ align="left" width="128" }
+
+[MIT License](https://github.com/stylelint/stylelint.io/blob/main/LICENSE)
+
+Copyright (c) 2015 - 2017 Maxime Thirouin, David Clark & Richard Hallows
+
+## Vitest Logo { style="clear:both;" }
+
+![Vitest Logo](../images/about-maris/vitest-logo.svg){ align="left" width="128" }
+
+[MIT License](https://github.com/vitest-dev/vitest/blob/main/LICENSE)
+
+Copyright (c) 2021-Present Vitest Team
