@@ -70,6 +70,7 @@
     "schemas": {
       "ServerTimeResponse": {
         "type": "object",
+        "description": "サーバー時間のレスポンスデータを表します。",
         "additionalProperties": false,
         "required": [
           "serverTime"
@@ -77,6 +78,7 @@
         "properties": {
           "serverTime": {
             "type": "string",
+            "description": "サーバー時間。",
             "minLength": 1
           }
         }

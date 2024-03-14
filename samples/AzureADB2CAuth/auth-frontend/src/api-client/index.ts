@@ -25,5 +25,6 @@ axiosInstance.interceptors.request.use(async (request) => {
 });
 
 const userApi = new apiClient.UsersApi(config, '', axiosInstance);
+const serverTimeApi = new apiClient.ServerTimeApi(config, '', axiosInstance);
 
-export { userApi };
+export { userApi, serverTimeApi };
