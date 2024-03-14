@@ -118,14 +118,14 @@ auth-frontend
 
 ### Azure AD B2C テナントを利用するアプリの登録（バックエンドアプリケーション）
 
-<!-- textlint-disable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
 1. [Microsoft のチュートリアル「 Azure Active Directory B2C テナントに Web API アプリケーションを追加する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga) に従って、バックエンドアプリケーション用のアプリを Azure AD B2C に登録します。
 
     - 登録したアプリの名前を、ここでは「 `SampleWebAPI` 」とします。
     - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
 
-   <!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
+   <!-- textlint-enable ja-technical-writing/sentence-length -->
 
 1. [Microsoft のチュートリアル「スコープを構成する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#configure-scopes) に従って、アプリにスコープを追加します。
     - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、本サンプルのシナリオでは作成するスコープは 1 つで良いです。
