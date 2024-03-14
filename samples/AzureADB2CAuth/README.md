@@ -163,7 +163,7 @@ auth-frontend
     "Instance": "https://[初期ドメイン名].b2clogin.com",
     "ClientId": "[SampleWebAPI のクライアント ID]",
     "Domain": "[初期ドメイン名].onmicrosoft.com",
-    "SignUpSignInPolicyId": "B2C_1_signupsignin1"
+    "SignUpSignInPolicyId": "[追加した「サインアップとサインインのユーザーフロー」の名前。本サンプルでは B2C_1_signupsignin1]"
   }
 }
 ```
@@ -174,7 +174,7 @@ auth-frontend
 1. 以下のように設定情報を記入します（以下の例では Azure AD B2C の設定以外は省略しています）。
 
 ```properties
-VITE_ADB2C_B2CPOLICIES_NAMES_SIGNUP_SIGNIN=B2C_1_signupsignin1
+VITE_ADB2C_B2CPOLICIES_NAMES_SIGNUP_SIGNIN=[追加した「サインアップとサインインのユーザーフロー」の名前。本サンプルでは B2C_1_signupsignin1]
 VITE_ADB2C_AUTHORITIES_SIGNUP_SIGNIN_AUTHORITY=https://[初期ドメイン名].b2clogin.com/[初期ドメイン名].onmicrosoft.com/B2C_1_signupsignin1
 VITE_ADB2C_B2CPOLICIES_AUTHORITYDOMAIN=[初期ドメイン名].b2clogin.com
 VITE_ADB2C_SCOPE=[SampleWebAPI のアプリケーション ID の URI]/api.read
