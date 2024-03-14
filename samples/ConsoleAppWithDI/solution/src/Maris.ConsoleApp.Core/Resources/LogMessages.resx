@@ -117,28 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InvalidCommandParameter" xml:space="preserve">
-    <value>コマンドのパラメーターに入力エラーがあります。</value>
+  <data name="CommandExecutor_ExecutedAsyncCommand" xml:space="preserve">
+    <value>{commandName} コマンドの非同期実行が {result} で完了しました。</value>
   </data>
-  <data name="InvalidCommandParameterDetails" xml:space="preserve">
-    <value>パラメーターの入力エラー情報詳細 : {0} 。</value>
+  <data name="CommandExecutor_ExecutedSyncCommand" xml:space="preserve">
+    <value>{commandName} コマンドの同期実行が {result} で完了しました。</value>
   </data>
-  <data name="InvalidCommandType" xml:space="preserve">
-    <value>指定されたコマンドの型 {0} は {1} または {2} を実装していません。</value>
+  <data name="CommandExecutor_ExecutingAsyncCommand" xml:space="preserve">
+    <value>{commandName} コマンドの非同期実行を開始します。</value>
   </data>
-  <data name="InvalidParameterType" xml:space="preserve">
-    <value>コンソールアプリケーションの実行コンテキストに設定されているパラメーター {0} のオブジェクトを、コマンドクラスの実装時に指定した型 {1} として取り扱うことができません。 {2} コマンドまたはそのパラメーターの実装を修正してください。</value>
+  <data name="CommandExecutor_ExecutingSyncCommand" xml:space="preserve">
+    <value>{commandName} コマンドの同期実行を開始します。</value>
   </data>
-  <data name="MethodReturnNull" xml:space="preserve">
-    <value>{0} クラスの {1} メソッドを呼び出しましたが null を取得しました。</value>
+  <data name="CommandExecutor_ValidatedParameter" xml:space="preserve">
+    <value>{commandName} コマンドのパラメーターの入力値検証が完了しました。</value>
   </data>
-  <data name="NoCustomAttributesAddedToParameterClass" xml:space="preserve">
-    <value>指定したパラメーターのクラス {0} に {1} 属性が追加されていません。</value>
-  </data>
-  <data name="NotInitialized" xml:space="preserve">
-    <value>{0} が初期化されていません。</value>
-  </data>
-  <data name="SuccessResult" xml:space="preserve">
-    <value>成功({0})</value>
+  <data name="CommandExecutor_ValidatingParameter" xml:space="preserve">
+    <value>{commandName} コマンドのパラメーターの入力値検証を実行します。</value>
   </data>
 </root>
