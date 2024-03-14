@@ -14,6 +14,17 @@
 
 
 
-export * from './api/server-time-api';
-export * from './api/users-api';
+/**
+ * 
+ * @export
+ * @interface ServerTimeResponse
+ */
+export interface ServerTimeResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof ServerTimeResponse
+     */
+    'serverTime': string;
+}
 

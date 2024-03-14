@@ -13,6 +13,27 @@
     }
   ],
   "paths": {
+    "/api/servertime": {
+      "get": {
+        "tags": [
+          "ServerTime"
+        ],
+        "summary": "現在のサーバー時間を返します。",
+        "operationId": "ServerTime_Get",
+        "responses": {
+          "200": {
+            "description": "サーバー時間。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerTimeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/users": {
       "get": {
         "tags": [
@@ -47,6 +68,19 @@
   },
   "components": {
     "schemas": {
+      "ServerTimeResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "serverTime"
+        ],
+        "properties": {
+          "serverTime": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
       "UserResponse": {
         "type": "object",
         "description": "ユーザー情報のレスポンスデータを表します。",

@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using Dressca.Web.Dto.Users;
+﻿using Dressca.Web.Dto.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web;
