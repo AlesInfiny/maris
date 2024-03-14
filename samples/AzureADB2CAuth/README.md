@@ -128,7 +128,7 @@ auth-frontend
    <!-- textlint-enable ja-no-redundant-expression,ja-technical-writing/sentence-length -->
 
 1. [Microsoft のチュートリアル「スコープを構成する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#configure-scopes) に従って、アプリにスコープを追加します。
-    - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、作成するスコープは 1 つで良いです。
+    - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、本サンプルのシナリオでは作成するスコープは 1 つで良いです。
     - 追加したスコープの名前を、ここでは「 `api.read` 」とします。
 1. Azure ポータルのお気に入りから「 Azure AD B2C 」を選択します。
 1. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleWebAPI 」を選択します。
