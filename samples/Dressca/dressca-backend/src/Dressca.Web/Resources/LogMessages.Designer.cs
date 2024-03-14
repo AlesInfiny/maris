@@ -22,14 +22,14 @@ namespace Dressca.Web.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Messages {
+    internal class LogMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Messages() {
+        internal LogMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Dressca.Web.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Web.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Web.Resources.LogMessages", typeof(LogMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,11 @@ namespace Dressca.Web.Resources {
         }
         
         /// <summary>
-        ///   業務エラーが発生しました。 に類似しているローカライズされた文字列を検索します。
+        ///   HTTP 要求に誤りがあります。詳細情報: {details} 。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string BusinessExceptionHandled {
+        internal static string ReceiveHttpBadRequest {
             get {
-                return ResourceManager.GetString("BusinessExceptionHandled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   アセットタイプ: {0} を Content-Type に変換できません。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CannotConvertAssetTypeToContentType {
-            get {
-                return ResourceManager.GetString("CannotConvertAssetTypeToContentType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ヘルスチェック API の MethodInfo を取得できませんでした。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string HealthCheckMethodNotFound {
-            get {
-                return ResourceManager.GetString("HealthCheckMethodNotFound", resourceCulture);
+                return ResourceManager.GetString("ReceiveHttpBadRequest", resourceCulture);
             }
         }
     }
