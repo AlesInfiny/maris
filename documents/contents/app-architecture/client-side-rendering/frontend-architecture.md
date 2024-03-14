@@ -13,7 +13,7 @@ AlesInfiny Maris を構成する OSS を以下に示します。
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
 
 !!! note ""
-    
+
     上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
 - [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
@@ -182,7 +182,7 @@ axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading-lazy }
 
 !!! note ""
-    
+
     上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
 !!! note "OpenAPI Generator の自動生成コード"

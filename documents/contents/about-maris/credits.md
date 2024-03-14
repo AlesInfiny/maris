@@ -2,11 +2,13 @@
 title: クレジット表記
 ---
 
-# 使用している OSS 製品のクレジット表記
+<!-- textlint-disable @textlint-rule/require-header-id -->
+
+# 使用している OSS 製品のクレジット表記 {#top}
 
 AlesInfiny Maris で使用している OSS 製品のクレジットおよびライセンス情報を記載します。
 
-## TypeScript
+## TypeScript {#typescript}
 
 ![TypeScript Logo](../images/about-maris/ts-logo-128.svg){ align="left" width="96" }
 
@@ -14,15 +16,19 @@ microsoft/TypeScript-Website is licensed under the Creative Commons Attribution 
 
 [![CC BY 4.0 DEED](../images/about-maris/cc-by.svg)](https://creativecommons.org/licenses/by/4.0/){ target=_blank }
 
-## Vue.js { style="clear:both;" }
+## Vue.js {#vue-js style="clear:both;" }
 
 ![Vue.js Logo](../images/about-maris/vuejs-logo.svg){ width="96" align="left" }
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
 Vue.js artworks by Evan You is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 [![CC BY-NC-SA 4.0 DEED](../images/about-maris/by-nc-sa.eu.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/){ target=_blank }
 
-## Vite { style="clear:both;" }
+## Vite {#vite style="clear:both;" }
 
 ![Vite Logo](../images/about-maris/vite-logo.svg){ align="left" width="96" }
 
@@ -30,15 +36,15 @@ Vue.js artworks by Evan You is licensed under a Creative Commons Attribution-Non
 
 Copyright (c) 2019-present, Yuxi (Evan) You and Vite contributors
 
-## VeeValidate { style="clear:both;" }
+## VeeValidate {#vee-validate style="clear:both;" }
 
 ![VeeValidate Logo](../images/about-maris/veevalidate-logo.png){ align="left" width="96" }
 
 [MIT LICENSE :material-open-in-new:](https://github.com/logaretm/vee-validate/blob/main/LICENSE){ target=_blank }
 
-Copyright (c) Abdelrahman Awad logaretm1@gmail.com
+Copyright (c) Abdelrahman Awad [logaretm1@gmail.com](mailto:logaretm1@gmail.com)
 
-## Pinia { style="clear:both;" }
+## Pinia {#pinia style="clear:both;" }
 
 ![Pinia Logo](../images/about-maris/pinia-logo.svg){ align="left" width="96" }
 
@@ -46,7 +52,7 @@ Copyright (c) Abdelrahman Awad logaretm1@gmail.com
 
 Copyright (c) 2019-present Eduardo San Martin Morote
 
-## Axios { style="clear:both;" }
+## Axios {#axios style="clear:both;" }
 
 ![Axios Logo](../images/about-maris/axios-logo.png){ align="left" width="96" }
 
@@ -54,7 +60,7 @@ Copyright (c) 2019-present Eduardo San Martin Morote
 
 Copyright 2020-present John Jakob "Jake" Sarjeant
 
-## Prettier { style="clear:both;" }
+## Prettier {#prettier style="clear:both;" }
 
 ![Prettier Logo](../images/about-maris/prettier-logo.png){ align="left" width="96" }
 
@@ -62,7 +68,7 @@ Copyright 2020-present John Jakob "Jake" Sarjeant
 
 Copyright 2017 James Long
 
-## StyleLint { style="clear:both;" }
+## StyleLint {#stylelint style="clear:both;" }
 
 ![StyleLint Logo](../images/about-maris/stylelint-logo.png){ align="left" width="96" }
 
@@ -70,10 +76,12 @@ Copyright 2017 James Long
 
 Copyright (c) 2015 - 2017 Maxime Thirouin, David Clark & Richard Hallows
 
-## Vitest { style="clear:both;" }
+## Vitest {#vitest style="clear:both;" }
 
 ![Vitest Logo](../images/about-maris/vitest-logo.svg){ align="left" width="96" }
 
 [MIT License :material-open-in-new:](https://github.com/vitest-dev/vitest/blob/main/LICENSE){ target=_blank }
 
 Copyright (c) 2021-Present Vitest Team
+
+<!-- textlint-enable @textlint-rule/require-header-id -->
