@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandNameDuplicated" xml:space="preserve">
-    <value>{0} コマンドは同じ名前で登録されています。登録を試みたコマンドパラメーターの型は {1} 、登録されているコマンドパラメーターの型は {2} です。</value>
+  <data name="CommandExecutorRaiseException" xml:space="preserve">
+    <value>{commandName} コマンドの実行時に例外が発生し、処理が失敗しました。</value>
   </data>
-  <data name="CommandParameterIsNotExists" xml:space="preserve">
-    <value>{0} 属性を追加したコマンドパラメーターの型が読み込まれたアセンブリ {1} に見つかりません。</value>
+  <data name="ParseParameter" xml:space="preserve">
+    <value>起動パラメーター:{parameterName} のパースを行います。</value>
   </data>
-  <data name="InvalidCommandType" xml:space="preserve">
-    <value>{0} コマンドのパラメーターの {1} にコマンドではない型 {2} が設定されています。</value>
+  <data name="StartHostingService" xml:space="preserve">
+    <value>{commandName} コマンドのホストの処理を開始します。</value>
+  </data>
+  <data name="StopHostingService" xml:space="preserve">
+    <value>{commandName} コマンドのホストの処理が終了コード {result} で完了しました。実行時間は {executionTime} ms でした。</value>
   </data>
 </root>
