@@ -36,7 +36,7 @@ jobs:
             - uses: actions/cache@v4
               id: node_modules_cache_id
               env:
-                  cache-name: cache-node-modules
+                  cache-name: cache-node-modules-azure-ad-b2c-auth-frontend
               with:
                   path: '**/node_modules'
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
