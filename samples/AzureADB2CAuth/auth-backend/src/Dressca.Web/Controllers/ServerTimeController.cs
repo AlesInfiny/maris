@@ -12,14 +12,26 @@ namespace Dressca.Web.Controllers;
 public class ServerTimeController : ControllerBase
 {
     private readonly ILogger<ServerTimeController> logger;
+    private readonly TimeProvider timeProvider;
 
     /// <summary>
-    /// <see cref="ServerTimeController" /> クラスの新しいインスタンスを初期化します。
+    /// <see cref="ServerTimeController"/> の新しいインスタンスを作成します。
     /// </summary>
     /// <param name="logger">ロガー。</param>
     public ServerTimeController(ILogger<ServerTimeController> logger)
+    : this(logger, TimeProvider.System)
+    {
+    }
+
+    /// <summary>
+    /// <see cref="ServerTimeController"/> の新しいインスタンスを作成します。
+    /// </summary>
+    /// <param name="logger">ロガー。</param>
+    /// <param name="timeProvider">タイムプロバイダー。</param>
+    internal ServerTimeController(ILogger<ServerTimeController> logger, TimeProvider timeProvider)
     {
         this.logger = logger;
+        this.timeProvider = timeProvider;
     }
 
     /// <summary>
@@ -28,9 +40,9 @@ public class ServerTimeController : ControllerBase
     /// <returns>サーバー時間。</returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ServerTimeResponse))]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetAsync()
     {
-        var currentTime = DateTimeOffset.Now.ToString("G");
-        return this.Ok(new ServerTimeResponse { ServerTime = currentTime });
+        var currentTime = this.timeProvider.GetLocalNow();
+        return this.Ok(new ServerTimeResponse { ServerTime = currentTime.ToString("G") });
     }
 }

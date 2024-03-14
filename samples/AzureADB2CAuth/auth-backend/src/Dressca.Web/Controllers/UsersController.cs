@@ -11,18 +11,10 @@ namespace Dressca.Web.Controllers;
 [Route("api/users")]
 [ApiController]
 [Produces("application/json")]
-public class UsersController : ControllerBase
+public class UsersController(ILogger<UsersController> logger) : ControllerBase
 {
-    private readonly ILogger<UsersController> logger;
-
-    /// <summary>
-    ///  <see cref="UsersController"/> クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    /// <param name="logger">ロガー。</param>
-    public UsersController(ILogger<UsersController> logger)
-    {
-        this.logger = logger;
-    }
+    private readonly ILogger<UsersController> logger = logger;
+    private readonly TimeProvider timeProvider;
 
     /// <summary>
     /// ログイン中のユーザー情報を取得します。
@@ -32,7 +24,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Authorize]
-    public async Task<IActionResult> GetUser()
+    public async Task<IActionResult> GetUserAsync()
     {
         var userId = this.User.GetNameIdentifierId();
 
