@@ -28,9 +28,9 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
 
         // API側でBuyerIdを特定できるように、Cookieを付加してリクエストする
         var cookies = postBasketItemResponse.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
-        var postOrderResponse = await this.PostOrder(postOrderRequestJson, cookies);
-        var getOrderResponse = await this.GetOrder(cookies, postOrderResponse);
-        var orderResponse = await this.DeserializeOrderResponse(getOrderResponse);
+        var postOrderResponse = await this.PostOrderAsync(postOrderRequestJson, cookies);
+        var getOrderResponse = await this.GetOrderAsync(cookies, postOrderResponse);
+        var orderResponse = await this.DeserializeOrderResponseAsync(getOrderResponse);
 
         // Assert
         Assert.NotNull(orderResponse);
@@ -40,14 +40,14 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         Assert.Equal(postBasketItemsRequest.CatalogItemId, orderItemResponse.ItemOrdered.Id);
     }
 
-    private async Task<OrderResponse?> DeserializeOrderResponse(HttpResponseMessage getOrderResponse)
+    private async Task<OrderResponse?> DeserializeOrderResponseAsync(HttpResponseMessage getOrderResponse)
     {
         var orderResponseJson = await getOrderResponse.Content.ReadAsStringAsync();
         var orderResponse = JsonSerializer.Deserialize<OrderResponse>(orderResponseJson, JsonSerializerWebOptions);
         return orderResponse;
     }
 
-    private async Task<HttpResponseMessage> GetOrder(IEnumerable<string> cookies, HttpResponseMessage postOrderResponse)
+    private async Task<HttpResponseMessage> GetOrderAsync(IEnumerable<string> cookies, HttpResponseMessage postOrderResponse)
     {
         var getOrderRequest = new HttpRequestMessage
         {
@@ -61,7 +61,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         return getOrderResponse;
     }
 
-    private async Task<HttpResponseMessage> PostOrder(string postOrderRequestJson, IEnumerable<string> cookies)
+    private async Task<HttpResponseMessage> PostOrderAsync(string postOrderRequestJson, IEnumerable<string> cookies)
     {
         var postOrderRequest = new HttpRequestMessage
         {
