@@ -34,10 +34,11 @@ public class UsersController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetUser()
     {
-        var userId = ClaimsPrincipalExtensions.GetNameIdentifierId(this.User);
+        var userId = this.User.GetNameIdentifierId();
 
         if (string.IsNullOrEmpty(userId))
         {
+            // [Authorize]属性があるためuserIdは取得できるはずで、通常このifには入らない。
             return this.Unauthorized();
         }
 
