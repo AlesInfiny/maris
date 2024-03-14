@@ -155,6 +155,7 @@ extra:
   footer_urls:
     terms: about-maris/terms/
     trademarks: about-maris/trademarks/
+    credits: about-maris/credits/
   version: !ENV [VERSION, "Local Version"]
 
 extra_css:
