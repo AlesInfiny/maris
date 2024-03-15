@@ -31,6 +31,12 @@ nav:
           - app-architecture/client-side-rendering/index.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
           - 全体処理方式: app-architecture/client-side-rendering/global-function.md
+          - テスト方針:
+              - app-architecture/client-side-rendering/test/index.md
+              - バックエンドアプリケーションのテスト:
+                  - app-architecture/client-side-rendering/test/backend-application/index.md
+                  - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md
+                  # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
       # - コンソールアプリケーション編:
           # - app-architecture/console-app/index.md
       # - クックブック:
@@ -55,6 +61,7 @@ nav:
               - プロジェクト構造の作成: guidebooks/how-to-develop/dotnet/create-project-structure.md
               - ASP.NET Core Web API プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-web-api-project.md
               - ASP.NET Core with Vite プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-with-vite-project.md
+              - 結合テストプロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-integration-test-project.md
               - ヘルスチェック API の実装: guidebooks/how-to-develop/dotnet/health-check-api.md
           - Vue.js 編:
               - guidebooks/how-to-develop/vue-js/index.md
@@ -88,6 +95,7 @@ nav:
   - AlesInfiny Maris について:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
+      - クレジット表記: about-maris/credits.md
 
 theme:
   name: material
@@ -162,6 +170,7 @@ extra:
   footer_urls:
     terms: about-maris/terms/
     trademarks: about-maris/trademarks/
+    credits: about-maris/credits/
   version: !ENV [VERSION, "Local Version"]
 
 extra_css:

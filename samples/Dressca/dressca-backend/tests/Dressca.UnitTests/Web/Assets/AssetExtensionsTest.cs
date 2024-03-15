@@ -22,7 +22,7 @@ public class AssetExtensionsTest
     public void GetContentType_アセットタイプがPNG_imagepngを取得できる()
     {
         // Arrange
-        Asset asset = new Asset("asset-code", AssetTypes.Png);
+        Asset asset = new Asset { AssetCode = "asset-code", AssetType = AssetTypes.Png };
 
         // Act
         var contentType = AssetExtensions.GetContentType(asset);

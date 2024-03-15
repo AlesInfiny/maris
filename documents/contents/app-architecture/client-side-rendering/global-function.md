@@ -27,7 +27,7 @@ AlesInfiny Maris では、 Web API を通じてシステムが正常稼働中か
 `Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用してヘルスチェック用の Web API を実装しています。
 
 実装方法の詳細については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
-また、ヘルスチェックの全体方針については、[ヘルスチェックの必要性](../overview/dotnet-application-processing-system/health-check-necessity.md)を参照してください。
+また、ヘルスチェックの全体方針については、[ヘルスチェックの必要性](../overview/dotnet-application-processing-system/health-check-necessity.md) を参照してください。
 
 ### API の仕様 {#api-specs}
 

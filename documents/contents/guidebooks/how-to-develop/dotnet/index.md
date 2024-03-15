@@ -37,6 +37,10 @@ AlesInfiny Maris として推奨する設定や、共通的に使用する実装
 
     SPA アプリケーションの開発で使用する ASP.NET Core with Vite プロジェクトの設定を解説します。
 
+1. [結合テストプロジェクトの構成](./configure-integration-test-project.md)
+
+    結合テスト用のプロジェクトの設定について解説します。
+
 1. [ヘルスチェック API の実装](./health-check-api.md)
 
     ヘルスチェック API を実装する方法について解説します。

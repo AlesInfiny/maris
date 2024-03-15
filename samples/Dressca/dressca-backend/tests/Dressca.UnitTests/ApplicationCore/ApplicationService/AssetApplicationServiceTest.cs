@@ -32,7 +32,7 @@ public class AssetApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     {
         // Arrange
         var assetCode = "dummy";
-        var asset = new Asset(assetCode, AssetTypes.Png);
+        var asset = new Asset { AssetCode = assetCode, AssetType = AssetTypes.Png };
         var repositoryMock = new Mock<IAssetRepository>();
         repositoryMock
             .Setup(r => r.Find(assetCode))
@@ -57,7 +57,7 @@ public class AssetApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     {
         // Arrange
         var assetCode = "assetCode";
-        var asset = new Asset(assetCode, AssetTypes.Png);
+        var asset = new Asset { AssetCode = assetCode, AssetType = AssetTypes.Png };
         var repositoryMock = new Mock<IAssetRepository>();
         repositoryMock
             .Setup(r => r.Find(assetCode))

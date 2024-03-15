@@ -12,7 +12,7 @@ public class CatalogItemTest
 
         // Act
         // コンストラクタのテストなので CreateDefaultCatalogItem は使わない
-        var catalogItem = new CatalogItem(1L, 2L, "説明", "商品名", 100m, "C000000001");
+        var catalogItem = new CatalogItem { CatalogCategoryId = 1L, CatalogBrandId = 2L, Description = "説明", Name = "商品名", Price = 100m, ProductCode = "C000000001" };
 
         // Assert
         Assert.NotNull(catalogItem);

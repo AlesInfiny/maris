@@ -142,6 +142,15 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         const string defaultName = "Name";
         const decimal defaultPrice = 100m;
         const string defaultProductCode = "C000000001";
-        return new CatalogItem(defaultCatalogCategoryId, defaultCatalogBrandId, defaultDescription, defaultName, defaultPrice, defaultProductCode) { Id = id };
+        return new CatalogItem
+        {
+            CatalogCategoryId = defaultCatalogCategoryId,
+            CatalogBrandId = defaultCatalogBrandId,
+            Description = defaultDescription,
+            Name = defaultName,
+            Price = defaultPrice,
+            ProductCode = defaultProductCode,
+            Id = id,
+        };
     }
 }
