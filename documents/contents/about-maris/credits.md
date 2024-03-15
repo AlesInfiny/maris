@@ -4,17 +4,21 @@ title: クレジット表記
 
 <!-- textlint-disable @textlint-rule/require-header-id -->
 
-# 使用している OSS 製品のクレジット表記 {#top}
-
-AlesInfiny Maris で使用している OSS 製品のクレジットおよびライセンス情報を記載します。
+# クレジット表記 {#top}
 
 ## TypeScript {#typescript}
 
 ![TypeScript Logo](../images/about-maris/ts-logo-128.svg){ align="left" width="96" }
 
-microsoft/TypeScript-Website is licensed under the Creative Commons Attribution 4.0 International.
+Microsoft and any contributors grant you a license to the Microsoft documentation and other content in this repository under the [Creative Commons Attribution 4.0 International Public License  :material-open-in-new:](https://creativecommons.org/licenses/by/4.0/legalcode){ target=_blank }, see the [LICENSE :material-open-in-new:](https://github.com/microsoft/TypeScript-Website/blob/cd489d078e7a2af8fdef6a6f7e6359f4c77a68a2/LICENSE){ target=_blank } file, and grant you a license to any code in the repository under the [MIT License :material-open-in-new:](https://opensource.org/licenses/MIT){ target=_blank }, see the [LICENSE-CODE :material-open-in-new:](https://github.com/microsoft/TypeScript-Website/blob/cd489d078e7a2af8fdef6a6f7e6359f4c77a68a2/LICENSE-CODE) file.
 
-[![CC BY 4.0 DEED](../images/about-maris/cc-by.svg)](https://creativecommons.org/licenses/by/4.0/){ target=_blank }
+Microsoft, Windows, Microsoft Azure and/or other Microsoft products and services referenced in the documentation may be either trademarks or registered trademarks of Microsoft in the United States and/or other countries. The licenses for this project do not grant you rights to use any Microsoft names, logos, or trademarks. Microsoft's general trademark guidelines can be found at http://go.microsoft.com/fwlink/?LinkID=254653.
+
+Privacy information can be found at https://privacy.microsoft.com/en-us/
+
+Microsoft and any contributors reserve all other rights, whether under their respective copyrights, patents, or trademarks, whether by implication, estoppel or otherwise..
+
+[![CC BY 4.0 DEED](../images/about-maris/cc-by.svg)](https://github.com/microsoft/TypeScript-Website/blob/cd489d078e7a2af8fdef6a6f7e6359f4c77a68a2/README.md#legal-notices){ target=_blank }
 
 ## Vue.js {#vue-js style="clear:both;" }
 
