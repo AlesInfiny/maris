@@ -10,6 +10,8 @@ title: クレジット表記
 
 ![TypeScript Logo](../images/about-maris/ts-logo-128.svg){ align="left" width="96" }
 
+[![CC BY 4.0 DEED](../images/about-maris/cc-by.svg)](https://github.com/microsoft/TypeScript-Website/blob/cd489d078e7a2af8fdef6a6f7e6359f4c77a68a2/README.md#legal-notices){ target=_blank }
+
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
 Microsoft and any contributors grant you a license to the Microsoft documentation and other content in this repository under the [Creative Commons Attribution 4.0 International Public License  :material-open-in-new:](https://creativecommons.org/licenses/by/4.0/legalcode){ target=_blank }, see the [LICENSE :material-open-in-new:](https://github.com/microsoft/TypeScript-Website/blob/cd489d078e7a2af8fdef6a6f7e6359f4c77a68a2/LICENSE){ target=_blank } file, and grant you a license to any code in the repository under the [MIT License :material-open-in-new:](https://opensource.org/licenses/MIT){ target=_blank }, see the [LICENSE-CODE :material-open-in-new:](https://github.com/microsoft/TypeScript-Website/blob/cd489d078e7a2af8fdef6a6f7e6359f4c77a68a2/LICENSE-CODE) file.
@@ -24,11 +26,11 @@ Microsoft and any contributors reserve all other rights, whether under their res
 
 <!-- textlint-enable ja-technical-writing/max-comma -->
 
-[![CC BY 4.0 DEED](../images/about-maris/cc-by.svg)](https://github.com/microsoft/TypeScript-Website/blob/cd489d078e7a2af8fdef6a6f7e6359f4c77a68a2/README.md#legal-notices){ target=_blank }
-
 ## Vue.js {#vue-js style="clear:both;" }
 
 ![Vue.js Logo](../images/about-maris/vuejs-logo.svg){ width="96" align="left" }
+
+[![CC BY-NC-SA 4.0 DEED](../images/about-maris/by-nc-sa.eu.svg)](https://github.com/vuejs/art/blob/3395ee06c61f54289ac95ea1e2613db21acc3db3/README.md){ target=_blank }
 
 Vue.js artworks by [Evan You](http://evanyou.me) is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/), with the following extra conditions:
 
@@ -45,8 +47,6 @@ Vue.js artworks by [Evan You](http://evanyou.me) is licensed under a [Creative C
 The copyright owner reserves the right of final explanation for any use case not explicitly stated above.
 
 <!-- textlint-enable ja-technical-writing/sentence-length -->
-
-[![CC BY-NC-SA 4.0 DEED](../images/about-maris/by-nc-sa.eu.svg)](https://github.com/vuejs/art/blob/3395ee06c61f54289ac95ea1e2613db21acc3db3/README.md){ target=_blank }
 
 ## Vite {#vite style="clear:both;" }
 
