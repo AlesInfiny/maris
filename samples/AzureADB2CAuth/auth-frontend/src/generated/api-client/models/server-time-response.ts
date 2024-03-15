@@ -15,13 +15,13 @@
 
 
 /**
- * 
+ * サーバー時間のレスポンスデータを表します。
  * @export
  * @interface ServerTimeResponse
  */
 export interface ServerTimeResponse {
     /**
-     * 
+     * サーバー時間。
      * @type {string}
      * @memberof ServerTimeResponse
      */

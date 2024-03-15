@@ -62,7 +62,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     }
   },
@@ -126,6 +131,14 @@
             "nullable": true
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Type into the textbox: {your JWT token}.",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

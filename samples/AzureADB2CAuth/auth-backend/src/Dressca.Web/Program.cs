@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Identity.Web;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,14 @@ builder.Services.AddOpenApiDocument(config =>
             Url = "https://localhost:5001",
         });
     };
+    config.AddSecurity("Bearer", new OpenApiSecurityScheme
+    {
+        Type = OpenApiSecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        BearerFormat = "JWT",
+        Description = "Type into the textbox: {your JWT token}.",
+    });
+    config.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
 });
 
 if (builder.Environment.IsDevelopment())
