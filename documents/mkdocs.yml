@@ -95,6 +95,7 @@ nav:
   - AlesInfiny Maris について:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
+      - クレジット表記: about-maris/credits.md
 
 theme:
   name: material
@@ -169,6 +170,7 @@ extra:
   footer_urls:
     terms: about-maris/terms/
     trademarks: about-maris/trademarks/
+    credits: about-maris/credits/
   version: !ENV [VERSION, "Local Version"]
 
 extra_css:
