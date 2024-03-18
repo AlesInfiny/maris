@@ -92,7 +92,7 @@ nav:
       - samples/index.md
       - コンソールアプリケーションでの DI の利用:
           - samples/console-app-with-di/index.md
-  - AlesInfiny Maris について:
+  - AlesInfiny Maris OSS Edition について:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
       - クレジット表記: about-maris/credits.md
