@@ -2,11 +2,6 @@ import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 
-/** api-client の共通の Configuration があればここに定義します。 */
-const config = new apiClient.Configuration({
-  basePath: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
-});
-
 /** axios の共通の設定があればここに定義します。 */
 const axiosInstance = axios.create({
   headers: {
@@ -14,10 +9,19 @@ const axiosInstance = axios.create({
   },
 });
 
-/** 認証済みの場合、アクセストークンを取得して Configuration に設定します。 */
-async function addToken(): Promise {
+/** api-client の共通の Configuration があればここに定義します。 */
+function createConfig(): apiClient.Configuration {
+  const config = new apiClient.Configuration({
+    basePath: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
+  });
+
+  return config;
+}
+
+async function addTokenAsync(config: apiClient.Configuration): Promise {
   const store = useAuthenticationStore();
 
+  // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
   if (store.isAuthenticated) {
     await store.getToken();
     const token = store.getAccessToken;
@@ -26,13 +30,16 @@ async function addToken(): Promise {
 }
 
 export async function getUsersApi(): Promise<apiClient.UsersApi> {
+  const config = createConfig();
+
   // UsersApi は認証が必要な API なので、addToken を呼び出します。
-  await addToken();
+  await addTokenAsync(config);
   const userApi = new apiClient.UsersApi(config, '', axiosInstance);
   return userApi;
 }
 
 export async function getServerTimeApi(): Promise<apiClient.ServerTimeApi> {
+  const config = createConfig();
   const serverTimeApi = new apiClient.ServerTimeApi(config, '', axiosInstance);
   return serverTimeApi;
 }

@@ -19,7 +19,7 @@ public class ServerTimeController : ControllerBase
     /// </summary>
     /// <param name="logger">ロガー。</param>
     public ServerTimeController(ILogger<ServerTimeController> logger)
-    : this(logger, TimeProvider.System)
+        : this(logger, TimeProvider.System)
     {
     }
 

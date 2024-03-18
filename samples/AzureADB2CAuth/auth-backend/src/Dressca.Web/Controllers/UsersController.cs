@@ -14,7 +14,6 @@ namespace Dressca.Web.Controllers;
 public class UsersController(ILogger<UsersController> logger) : ControllerBase
 {
     private readonly ILogger<UsersController> logger = logger;
-    private readonly TimeProvider timeProvider;
 
     /// <summary>
     /// ログイン中のユーザー情報を取得します。
@@ -24,7 +23,7 @@ public class UsersController(ILogger<UsersController> logger) : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Authorize]
-    public async Task<IActionResult> GetUserAsync()
+    public IActionResult GetUser()
     {
         var userId = this.User.GetNameIdentifierId();
 
