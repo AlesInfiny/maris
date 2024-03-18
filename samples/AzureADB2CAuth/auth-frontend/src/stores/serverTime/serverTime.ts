@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { serverTimeApi } from '@/api-client';
+import { getServerTimeApi } from '@/api-client';
 
 export const useServerTimeStore = defineStore({
   id: 'serverTime',
@@ -8,7 +8,8 @@ export const useServerTimeStore = defineStore({
   }),
   actions: {
     async fetchServerTimeResponse() {
-      const response = await serverTimeApi.serverTimeGet();
+      const api = await getServerTimeApi();
+      const response = await api.serverTimeGet();
       this.serverTime = response.data.serverTime;
     },
   },

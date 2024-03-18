@@ -13,18 +13,26 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
-axiosInstance.interceptors.request.use(async (request) => {
+
+/** 認証済みの場合、アクセストークンを取得して Configuration に設定します。 */
+async function addToken(): Promise {
   const store = useAuthenticationStore();
 
   if (store.isAuthenticated) {
     await store.getToken();
     const token = store.getAccessToken;
-    request.headers['Authorization'] = `Bearer ${token}`;
+    config.accessToken = token;
   }
-  return request;
-});
+}
 
-const userApi = new apiClient.UsersApi(config, '', axiosInstance);
-const serverTimeApi = new apiClient.ServerTimeApi(config, '', axiosInstance);
+export async function getUsersApi(): Promise<apiClient.UsersApi> {
+  // UsersApi は認証が必要な API なので、addToken を呼び出します。
+  await addToken();
+  const userApi = new apiClient.UsersApi(config, '', axiosInstance);
+  return userApi;
+}
 
-export { userApi, serverTimeApi };
+export async function getServerTimeApi(): Promise<apiClient.ServerTimeApi> {
+  const serverTimeApi = new apiClient.ServerTimeApi(config, '', axiosInstance);
+  return serverTimeApi;
+}
