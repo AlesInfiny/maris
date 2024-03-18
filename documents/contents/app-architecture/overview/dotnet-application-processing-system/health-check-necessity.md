@@ -1,6 +1,6 @@
 ---
 title: .NETアプリケーションの処理方式
-description: AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
+description: AlesInfiny Maris OSS Edition で構築する .NET アプリケーションの共通的な処理方式を解説します。
 ---
 
 # ヘルスチェックの必要性 {#top}
@@ -31,7 +31,7 @@ LB が行うヘルスチェックは、使用するプロトコルレイヤー�
 | Layer 7          | アプリケーション層で動作を監視します。 HTTP リクエストを送信し、サーバーの HTTP レスポンスの確認により動作を確認します。 |
 
 Layer 3 や Layer 4 で行うヘルスチェックは、作成した Web アプリケーションの稼働状況まで確認できません。
-AlesInfiny Maris では、監視対象のサーバーやアプリケーション、関連するデータベースなどのサービスを包含し、システムとしての正常性を Layer 7 で監視する方針とします。
+AlesInfiny Maris OSS Edition では、監視対象のサーバーやアプリケーション、関連するデータベースなどのサービスを包含し、システムとしての正常性を Layer 7 で監視する方針とします。
 
 ## レスポンス形式 {#health-check-response}
 
@@ -39,7 +39,7 @@ AlesInfiny Maris では、監視対象のサーバーやアプリケーション
 
 - ステータスコード
 
-    AlesInfiny Maris では正常値を 200 、異常値を 503 で統一します。
+    AlesInfiny Maris OSS Edition では正常値を 200 、異常値を 503 で統一します。
 
 - レスポンスボディ
 

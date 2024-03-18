@@ -7,7 +7,7 @@ description: AlesInfiny Maris のアプリケーションアーキテクチャ�
 
 ## ソースコード管理 {#source-code-management}
 
-AlesInfiny Maris では、ソースコードの管理に Git を推奨しています。 Git を採用するメリットは以下の通りです。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、ソースコードの管理に Git を推奨しています。 Git を採用するメリットは以下の通りです。
 
 - 多くの ALM ツールが Git に対応しているため、連携が容易
 - 分散型バージョン管理ツールのため、ローカル環境に中央リポジトリのクローンを作成しオフラインでも作業が可能

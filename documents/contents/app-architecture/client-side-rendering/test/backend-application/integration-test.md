@@ -14,7 +14,7 @@ description: バックエンドアプリケーションのテスト方針につ�
 
 ## 結合テストで利用するツール {#testing-tools}
 
-上記の目的を達成するため、 AlesInfiny Maris では以下のテストフレームワークを用いて結合テストを行います。
+上記の目的を達成するため、 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では以下のテストフレームワークを用いて結合テストを行います。
 
 - [xUnit :material-open-in-new:](https://xunit.net/){ target=_blank }
     - .NET のテストフレームワークです。
