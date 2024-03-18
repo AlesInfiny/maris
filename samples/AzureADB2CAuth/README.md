@@ -125,7 +125,7 @@ auth-frontend
     - 登録したアプリの名前を、ここでは「 `SampleWebAPI` 」とします。
     - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
 
-   <!-- textlint-enable ja-technical-writing/sentence-length -->
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
 
 1. [Microsoft のチュートリアル「スコープを構成する」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#configure-scopes) に従って、アプリにスコープを追加します。
     - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、本サンプルのシナリオでは作成するスコープは 1 つで良いです。
@@ -215,8 +215,23 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
     ```cs
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Identity.Web;
+    using NSwag;
+    using NSwag.Generation.Processors.Security;
 
     var builder = WebApplication.CreateBuilder(args); // （既存のコード）
+
+    // Open API ドキュメントの security scheme を有効化
+    builder.Services.AddOpenApiDocument(config =>
+    {
+        config.AddSecurity("Bearer", new OpenApiSecurityScheme
+        {
+            Type = OpenApiSecuritySchemeType.Http,
+            Scheme = JwtBearerDefaults.AuthenticationScheme,
+            BearerFormat = "JWT",
+            Description = "この API は Bearer トークンによる認証が必要です。",
+        });
+        config.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
+    });
 
     // Azure AD B2C 認証に必要な設定をインジェクション
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -281,29 +296,50 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
     AlesInfiny Maris のサンプルアプリケーション Dressca の場合、 `src\api-client\index.ts` を編集します。
 
     ```ts
+    import axios from "axios";
+    import * as apiClient from "@/generated/api-client";
     import { useAuthenticationStore } from "@/stores/authentication/authentication";
 
     // その他のコードは省略
 
-    /** axios の共通の設定があればここに定義します。 */
-    const axiosInstance = axios.create({
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    /** api-client の共通の Configuration があればここに定義します。 */
+    function createConfig(): apiClient.Configuration {
+      const config = new apiClient.Configuration({
+        basePath: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
+      });
 
-    // interceptor を使用してすべてのリクエストに共通処理を追加
-    axiosInstance.interceptors.request.use(
-      async (config: InternalAxiosRequestConfig) => {
-        const store = useAuthenticationStore();
-        if (store.isAuthenticated) {
-          await store.getToken();
-          const token = store.accessToken;
-          config.headers.Authorization = `Bearer ${token}`;
-        }
-        return config;
+      return config;
+    }
+
+    async function addTokenAsync(config: apiClient.Configuration) {
+      const store = useAuthenticationStore();
+
+      // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
+      if (store.isAuthenticated) {
+        await store.getToken();
+        const token = store.getAccessToken;
+        config.accessToken = token;
       }
-    );
+    }
+
+    export async function getUsersApi(): Promise<apiClient.UsersApi> {
+      const config = createConfig();
+
+      // UsersApi は認証が必要な API なので、addTokenAsync を呼び出します。
+      await addTokenAsync(config);
+      const userApi = new apiClient.UsersApi(config, "", axiosInstance);
+      return userApi;
+    }
+
+    export async function getServerTimeApi(): Promise<apiClient.ServerTimeApi> {
+      const config = createConfig();
+      const serverTimeApi = new apiClient.ServerTimeApi(
+        config,
+        "",
+        axiosInstance
+      );
+      return serverTimeApi;
+    }
     ```
 
 1. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
