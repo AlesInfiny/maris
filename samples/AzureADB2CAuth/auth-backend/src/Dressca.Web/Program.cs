@@ -34,12 +34,14 @@ builder.Services.AddOpenApiDocument(config =>
             Url = "https://localhost:5001",
         });
     };
+
+    // Open API ドキュメントの security scheme を有効化
     config.AddSecurity("Bearer", new OpenApiSecurityScheme
     {
         Type = OpenApiSecuritySchemeType.Http,
         Scheme = JwtBearerDefaults.AuthenticationScheme,
         BearerFormat = "JWT",
-        Description = "Type into the textbox: {your JWT token}.",
+        Description = "この API は Bearer トークンによる認証が必要です。",
     });
     config.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
 });
