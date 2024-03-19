@@ -1,6 +1,6 @@
 ---
 title: 概要編
-description: AlesInfiny Maris のアプリケーションアーキテクチャ概要を解説します。
+description: AlesInfiny Maris OSS Edition のアプリケーションアーキテクチャ概要を解説します。
 ---
 
 # 構成管理 {#top}
