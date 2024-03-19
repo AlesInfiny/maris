@@ -11,14 +11,14 @@ namespace Dressca.Web.Controllers;
 [Route("api/users")]
 [ApiController]
 [Produces("application/json")]
-public class UsersController(ILogger<UsersController> logger) : ControllerBase
+public class UsersController : ControllerBase
 {
-    private readonly ILogger<UsersController> logger = logger;
-
     /// <summary>
     /// ログイン中のユーザー情報を取得します。
     /// </summary>
     /// <returns>ユーザー情報。</returns>
+    /// <response code="200">成功。</response>
+    /// <response code="401">認証されていない。</response>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

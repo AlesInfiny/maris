@@ -21,8 +21,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { ProblemDetails } from '../models';
-// @ts-ignore
 import { UserResponse } from '../models';
 /**
  * UsersApi - axios parameter creator

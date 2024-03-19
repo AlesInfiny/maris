@@ -7,18 +7,10 @@ using NSwag.Generation.Processors.Security;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddControllers(options =>
-    {
-    })
+    .AddControllers()
     .ConfigureApiBehaviorOptions(options =>
     {
-        // Bad Request となった場合の処理。
-        var builtInFactory = options.InvalidModelStateResponseFactory;
-        options.InvalidModelStateResponseFactory = context =>
-        {
-            // ASP.NET Core の既定の実装を使ってレスポンスを返却。
-            return builtInFactory(context);
-        };
+        options.SuppressMapClientErrors = true;
     });
 
 builder.Services.AddOpenApiDocument(config =>
