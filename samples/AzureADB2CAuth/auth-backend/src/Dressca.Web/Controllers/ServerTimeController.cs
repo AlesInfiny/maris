@@ -40,7 +40,7 @@ public class ServerTimeController : ControllerBase
     /// <returns>サーバー時間。</returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ServerTimeResponse))]
-    public async Task<IActionResult> GetAsync()
+    public IActionResult Get()
     {
         var currentTime = this.timeProvider.GetLocalNow();
         return this.Ok(new ServerTimeResponse { ServerTime = currentTime.ToString("G") });
