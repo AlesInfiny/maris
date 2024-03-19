@@ -53,13 +53,12 @@ auth-backend
 ├ Dressca.sln
 └ src
 　 ├ Dressca.Web
-　 │ ├ appsettings.json ......... Azure AD B2C への接続情報を記載する設定ファイル
-　 │ ├ Program.cs ............... Web API アプリケーションのエントリーポイント。 Azure AD B2C による認証を有効化している。
+　 │ ├ appsettings.json ............. Azure AD B2C への接続情報を記載する設定ファイル
+　 │ ├ Program.cs ................... Web API アプリケーションのエントリーポイント。 Azure AD B2C による認証を有効化している。
 　 │ └ Controllers
-　 │ 　 └ UserController.cs ..... 認証が必要な Web API を配置してるコントローラー
-　 └ Dressca.Web.Dto
-　 　 └ Users
-　 　 　 └ UserResponse.cs ....... Web API の戻り値の型
+　 │ 　 ├ ServerTimeController.cs ... 認証の必要がない Web API を配置しているコントローラー
+　 │ 　 └ UserController.cs ......... 認証が必要な Web API を配置しているコントローラー
+　 └ Dressca.Web.Dto ................. Web API の戻り値の方を配置しているプロジェクト
 ```
 
 ### フロントエンドアプリケーションの構成
@@ -71,6 +70,7 @@ auth-frontend
 ├ .env.dev ............................. Azure AD B2C への接続情報を記載する設定ファイル
 ├ env.d.ts ............................. 上の設定ファイルを読み込む TypeScript ファイル
 └ src
+　 ├ App.vue ........................... 画面。本サンプルでは画面は App.vue のみ。
 　 ├ api-client
 　 │ └ index.ts ....................... Web API 呼び出し時の共通処理を記述する TypeScript ファイル
 　 ├ generated ......................... 自動生成された Axios のコードが配置されるフォルダー
@@ -78,12 +78,13 @@ auth-frontend
 　 │ └ authentication
 　 │ 　 ├ authentication-adb2c.ts ..... Azure AD B2C による認証（サインイン、トークン取得）を行う TypeScript ファイル
 　 │ 　 └ authentication-config.ts .... 上のコードが使用する設定ファイル
-　 ├ stores
-　 │ ├ authentication
-　 │ 　 └ authentication.ts ........... 認証の結果を保持するストア
-　 │ └ users
-　 │ 　 └ users.ts .................... Web API 呼び出しの結果を保持するストア
-　 └ views
+　 └ stores
+　 　 ├ authentication
+　 　 │ └ authentication.ts ........... 認証の結果を保持するストア
+　 　 ├ serverTime
+　 　 │ └ serverTime.ts ............... 認証の必要がない Web API 呼び出しの結果を保持するストア
+　 　 └ users
+　 　 　 └ users.ts .................... 認証が必要な Web API 呼び出しの結果を保持するストア
 ```
 
 ## サンプルのシナリオ
@@ -188,7 +189,7 @@ VITE_ADB2C_APP_URI=[フロントエンドアプリケーションのベースと
 1. Visual Studio で `auth-backend\Dressca.sln` を開きます。
 1. `Dressca.Web` を右クリックし「スタートアッププロジェクトに設定」を選択します。
 1. ソリューションをデバッグなしで開始します。ブラウザーが起動し、しばらく待つと SPA の初期画面が表示されます。
-1. 画面右上の「 `ログイン` 」をクリックします。 Azure AD B2C のサインイン画面がポップアップで表示されます。
+1. 画面上の「 `ログイン` 」をクリックします。 Azure AD B2C のサインイン画面がポップアップで表示されます。
 1. 「 Sign up now 」リンクをクリックします。
 1. 使用可能なメールアドレスを入力し、「 Send verification code 」をクリックします。
 1. 上の手順で入力したメールアドレス宛に Verification code が送信されるので、画面に入力して「 Verfiy code 」をクリックします。
@@ -327,7 +328,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
 
       // UsersApi は認証が必要な API なので、addTokenAsync を呼び出します。
       await addTokenAsync(config);
-      const userApi = new apiClient.UsersApi(config, "", axiosInstance);
+      const userApi = new apiClient.UsersApi(config, '', axiosInstance);
       return userApi;
     }
 
@@ -335,7 +336,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
       const config = createConfig();
       const serverTimeApi = new apiClient.ServerTimeApi(
         config,
-        "",
+        '',
         axiosInstance
       );
       return serverTimeApi;
