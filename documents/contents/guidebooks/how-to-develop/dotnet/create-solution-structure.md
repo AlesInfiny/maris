@@ -25,12 +25,12 @@ Visual Studio でソリューションを開いたとき、ソリューション
 不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー](https://learn.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder)」の存在です。
 
 ソリューションフォルダーは、 Visual Studio のソリューションエクスプローラー内にのみ存在する仮想的なフォルダーです。
-AlesInfiny Maris では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
+AlesInfiny Maris OSS Edition では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
 ソリューションエクスプローラー内の配置と、物理的な配置を一致させることで、ファイルの検索性が大きく向上します。
 
 ### ソリューションファイルの作成 {#create-solution-file}
 
-バックエンドアプリケーションを配置するフォルダー内に、 Visual Studio を利用して[空のソリューションファイルを作成](https://learn.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions)します。
+バックエンドアプリケーションを配置するフォルダー内に、 Visual Studio を利用して [空のソリューションファイルを作成](https://learn.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions) します。
 ソリューションファイルの名前は、以下のいずれかのパターンに従って命名します。
 
 | #   | パターン                                   |
@@ -85,7 +85,7 @@ tests フォルダー内は、テストの目的にあわせてテストプロ�
 単体機能確認、結合機能確認、性能確認などが、よくあるテストプロジェクトの分割単位です。
 
 プロジェクトの数が多くなりすぎると、単一のソリューションで開発を進めるのが困難になります。
-その場合は、[ソリューションフィルター](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/solution-filters#solution-filter-files)を用いて業務や機能の単位でプロジェクトをフィルタリングします。
+その場合は、[ソリューションフィルター](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/solution-filters#solution-filter-files) を用いて業務や機能の単位でプロジェクトをフィルタリングします。
 プロジェクトの総数が 30 を超えるようなソリューションの場合、ソリューションフィルターの活用を検討しましょう。
 プロジェクトを業務単位で分割しておくことで、ソリューションフィルターが効果的に活用できます。
 ソリューションフィルターを使用する場合は、単体機能確認のためのテストプロジェクトも業務単位で分割しましょう。

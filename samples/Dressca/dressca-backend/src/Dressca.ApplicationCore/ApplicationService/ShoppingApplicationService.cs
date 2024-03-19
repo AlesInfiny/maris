@@ -218,7 +218,7 @@ public class ShoppingApplicationService
         if (basket is null)
         {
             this.logger.LogDebug(Events.DebugEvent, Messages.CreateNewBasket_UserBasketNotFound, buyerId);
-            basket = new Basket(buyerId);
+            basket = new Basket { BuyerId = buyerId };
             return await this.basketRepository.AddAsync(basket, cancellationToken);
         }
 

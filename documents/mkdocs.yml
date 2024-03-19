@@ -1,15 +1,15 @@
 ---
 # cSpell:ignore dotnetfw htmlmin inlinehilite materialx prebuild pymdownx superfences twemoji
-site_name: AlesInfiny Maris
+site_name: AlesInfiny Maris OSS Edition
 site_url: https://maris.alesinfiny.org/
 docs_dir: contents
 copyright: "Copyright &copy; 2023 BIPROGY Inc. All rights reserved."
 site_author: "アドバンスド開発技術部"
-site_description: "AlesInfiny Marisのポータルサイトです。"
+site_description: "AlesInfiny Maris OSS Edition のポータルサイトです。"
 site_dir: build-artifacts
 
 nav:
-  - AlesInfiny Maris にようこそ:
+  - AlesInfiny Maris OSS Edition にようこそ:
       - index.md
   - アプリケーションアーキテクチャ:
       - app-architecture/index.md
@@ -18,11 +18,25 @@ nav:
           - 構築できるアプリケーション形態: app-architecture/overview/application-kind.md
           - アプリケーション構成: app-architecture/overview/application-structure.md
           - 構成管理: app-architecture/overview/configuration-management.md
-          - .NETアプリケーションの処理方式: app-architecture/overview/dotnet-application-processing-system.md
+          - .NETアプリケーションの処理方式:
+              - app-architecture/overview/dotnet-application-processing-system/index.md
+              - 例外処理方針: app-architecture/overview/dotnet-application-processing-system/exception-handling-policy.md
+              - ログ出力方針: app-architecture/overview/dotnet-application-processing-system/logging-policy.md
+              - イベント ID 管理方針: app-architecture/overview/dotnet-application-processing-system/event-id-management-policy.md
+              - メッセージ管理方針: app-architecture/overview/dotnet-application-processing-system/message-management-policy.md
+              - 入力値検証方針: app-architecture/overview/dotnet-application-processing-system/input-validation-policy.md
+              - トランザクション管理方針: app-architecture/overview/dotnet-application-processing-system/transaction-management-policy.md
+              - ヘルスチェックの必要性: app-architecture/overview/dotnet-application-processing-system/health-check-necessity.md
       - クライアントサイドレンダリング編:
           - app-architecture/client-side-rendering/index.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
           - 全体処理方式: app-architecture/client-side-rendering/global-function.md
+          - テスト方針:
+              - app-architecture/client-side-rendering/test/index.md
+              - バックエンドアプリケーションのテスト:
+                  - app-architecture/client-side-rendering/test/backend-application/index.md
+                  - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md
+                  # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
       # - コンソールアプリケーション編:
           # - app-architecture/console-app/index.md
       # - クックブック:
@@ -47,6 +61,7 @@ nav:
               - プロジェクト構造の作成: guidebooks/how-to-develop/dotnet/create-project-structure.md
               - ASP.NET Core Web API プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-web-api-project.md
               - ASP.NET Core with Vite プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-with-vite-project.md
+              - 結合テストプロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-integration-test-project.md
               - ヘルスチェック API の実装: guidebooks/how-to-develop/dotnet/health-check-api.md
           - Vue.js 編:
               - guidebooks/how-to-develop/vue-js/index.md
@@ -79,9 +94,10 @@ nav:
           - samples/console-app-with-di/index.md
       - Azure AD B2C による認証の利用:
           - samples/azure-ad-b2c/index.md
-  - AlesInfiny Maris について:
+  - AlesInfiny Maris OSS Edition について:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
+      - クレジット表記: about-maris/credits.md
 
 theme:
   name: material
@@ -156,6 +172,7 @@ extra:
   footer_urls:
     terms: about-maris/terms/
     trademarks: about-maris/trademarks/
+    credits: about-maris/credits/
   version: !ENV [VERSION, "Local Version"]
 
 extra_css:

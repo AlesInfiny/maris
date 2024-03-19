@@ -39,7 +39,7 @@ export const useBasketStore = defineStore({
     },
     async deleteAddedItemId() {
       this.addedItemId = undefined;
-    }
+    },
   },
   getters: {
     getBasket(state): BasketResponse {
@@ -47,6 +47,6 @@ export const useBasketStore = defineStore({
     },
     getAddedItemId(state): number | undefined {
       return state.addedItemId;
-    }
+    },
   },
 });

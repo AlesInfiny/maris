@@ -14,7 +14,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 - 活動性：アプリケーションが正常に起動していること
 - 対応性：アプリケーションが正常に起動しており、かつリクエスト受付可能であること
 
-活動性と対応性については[こちら :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#separate-readiness-and-liveness-probes){ target=_blank }を参照してください。
+活動性と対応性については [こちら :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#separate-readiness-and-liveness-probes){ target=_blank }を参照してください。
 
 ヘルスチェック API へのアクセスが非常に多くなる等の事情により、アプリケーションの活動性のみを確認したい場合は以下のように実装します。
 

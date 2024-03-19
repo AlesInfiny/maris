@@ -21,34 +21,8 @@ public class CatalogItem
     /// <summary>
     ///  <see cref="CatalogItem"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="catalogCategoryId">カタログカテゴリ Id 。</param>
-    /// <param name="catalogBrandId">カタログブランド Id 。</param>
-    /// <param name="description">説明。</param>
-    /// <param name="name">商品名。</param>
-    /// <param name="price">単価。</param>
-    /// <param name="productCode">商品コード。</param>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="catalogCategoryId"/> は 0 以下に設定できません。</item>
-    ///   <item><paramref name="catalogBrandId"/> は 0 以下に設定できません。</item>
-    ///   <item><paramref name="price"/> は負の値に設定できません。</item>
-    ///  </list>
-    /// </exception>
-    /// <exception cref="ArgumentException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="description"/> が <see langword="null"/> または空の文字列です。</item>
-    ///   <item><paramref name="name"/> が <see langword="null"/> または空の文字列です。</item>
-    ///   <item><paramref name="productCode"/> が <see langword="null"/> または空の文字列です。</item>
-    ///  </list>
-    /// </exception>
-    public CatalogItem(long catalogCategoryId, long catalogBrandId, string description, string name, decimal price, string productCode)
+    public CatalogItem()
     {
-        this.CatalogCategoryId = catalogCategoryId;
-        this.CatalogBrandId = catalogBrandId;
-        this.Description = description;
-        this.Name = name;
-        this.Price = price;
-        this.ProductCode = productCode;
     }
 
     /// <summary>
@@ -60,12 +34,12 @@ public class CatalogItem
     ///  商品名を取得します。
     /// </summary>
     /// <exception cref="ArgumentException">商品名が <see langword="null"/> または空の文字列です。</exception>
-    public string Name
+    public required string Name
     {
         get => this.name;
 
         [MemberNotNull(nameof(name))]
-        private set
+        init
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -80,12 +54,12 @@ public class CatalogItem
     ///  説明を取得します。
     /// </summary>
     /// <exception cref="ArgumentException">説明が <see langword="null"/> または空の文字列です。</exception>
-    public string Description
+    public required string Description
     {
         get => this.description;
 
         [MemberNotNull(nameof(description))]
-        private set
+        init
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -100,10 +74,10 @@ public class CatalogItem
     ///  単価を取得します。
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException">単価は負の値に設定できません。</exception>
-    public decimal Price
+    public required decimal Price
     {
         get => this.price;
-        private set
+        init
         {
             if (value < 0)
             {
@@ -125,12 +99,12 @@ public class CatalogItem
     ///  買い物かごコンテキストとは CatalogItem.Id で連携するため、注意してください。
     /// </remarks>
     /// <exception cref="ArgumentException">商品コードが <see langword="null"/> または空の文字列です。</exception>
-    public string ProductCode
+    public required string ProductCode
     {
         get => this.productCode;
 
         [MemberNotNull(nameof(productCode))]
-        private set
+        init
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -145,10 +119,10 @@ public class CatalogItem
     ///  カタログカテゴリ Id を取得します。
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException">カタログカテゴリ ID は 0 以下に設定できません。</exception>
-    public long CatalogCategoryId
+    public required long CatalogCategoryId
     {
         get => this.catalogCategoryId;
-        private set
+        init
         {
             if (value <= 0)
             {
@@ -176,10 +150,10 @@ public class CatalogItem
     ///  カタログブランド Id を取得します。
     /// </summary>
     /// <exception cref="ArgumentOutOfRangeException">カタログブランド ID は 0 以下に設定できません。</exception>
-    public long CatalogBrandId
+    public required long CatalogBrandId
     {
         get => this.catalogBrandId;
-        private set
+        init
         {
             if (value <= 0)
             {
