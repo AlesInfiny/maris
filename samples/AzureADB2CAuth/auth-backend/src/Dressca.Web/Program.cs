@@ -18,8 +18,8 @@ builder.Services.AddOpenApiDocument(config =>
     config.PostProcess = document =>
     {
         document.Info.Version = "1.0.0";
-        document.Info.Title = "Dressca Web API";
-        document.Info.Description = "Dressca の Web API 仕様";
+        document.Info.Title = "Azure AD B2C ユーザー認証";
+        document.Info.Description = "Azure AD B2Cを利用したユーザー認証機能を提供するサンプルアプリケーションです。";
         document.Servers.Add(new()
         {
             Description = "ローカル開発用のサーバーです。",
@@ -68,8 +68,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseStaticFiles();
 
 // Azure AD B2C での認証を有効にするために追加
 app.UseAuthentication();

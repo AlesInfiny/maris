@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Azure AD B2C ユーザー認証
+ * Azure AD B2Cを利用したユーザー認証機能を提供するサンプルアプリケーションです。
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -30,7 +30,7 @@ export const ServerTimeApiAxiosParamCreator = function (configuration?: Configur
     return {
         /**
          * 
-         * @summary 現在のサーバー時間を返します。
+         * @summary 認証不要で現在のサーバー時間を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -70,7 +70,7 @@ export const ServerTimeApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary 現在のサーバー時間を返します。
+         * @summary 認証不要で現在のサーバー時間を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -90,7 +90,7 @@ export const ServerTimeApiFactory = function (configuration?: Configuration, bas
     return {
         /**
          * 
-         * @summary 現在のサーバー時間を返します。
+         * @summary 認証不要で現在のサーバー時間を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -109,7 +109,7 @@ export const ServerTimeApiFactory = function (configuration?: Configuration, bas
 export class ServerTimeApi extends BaseAPI {
     /**
      * 
-     * @summary 現在のサーバー時間を返します。
+     * @summary 認証不要で現在のサーバー時間を取得します。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ServerTimeApi

@@ -35,7 +35,7 @@ public class ServerTimeController : ControllerBase
     }
 
     /// <summary>
-    /// 現在のサーバー時間を返します。
+    /// 認証不要で現在のサーバー時間を取得します。
     /// </summary>
     /// <returns>サーバー時間。</returns>
     [HttpGet]

@@ -14,7 +14,7 @@ namespace Dressca.Web.Controllers;
 public class UsersController : ControllerBase
 {
     /// <summary>
-    /// ログイン中のユーザー情報を取得します。
+    /// 認証済みユーザーのユーザー情報を取得します。
     /// </summary>
     /// <returns>ユーザー情報。</returns>
     /// <response code="200">成功。</response>

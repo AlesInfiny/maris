@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Azure AD B2C ユーザー認証
+ * Azure AD B2Cを利用したユーザー認証機能を提供するサンプルアプリケーションです。
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -30,7 +30,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
-         * @summary ログイン中のユーザー情報を取得します。
+         * @summary 認証済みユーザーのユーザー情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -74,7 +74,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary ログイン中のユーザー情報を取得します。
+         * @summary 認証済みユーザーのユーザー情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -94,7 +94,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
-         * @summary ログイン中のユーザー情報を取得します。
+         * @summary 認証済みユーザーのユーザー情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -113,7 +113,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
 export class UsersApi extends BaseAPI {
     /**
      * 
-     * @summary ログイン中のユーザー情報を取得します。
+     * @summary 認証済みユーザーのユーザー情報を取得します。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
