@@ -1,6 +1,6 @@
 ---
 title: .NETアプリケーションの処理方式
-description: AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
+description: AlesInfiny Maris OSS Edition で構築する .NET アプリケーションの共通的な処理方式を解説します。
 ---
 
 # ログ出力方針 {#top}
@@ -11,7 +11,7 @@ description: AlesInfiny Maris で構築する .NET アプリケーションの�
 
 ## ログの種類 {#log-pattern}
 
-AlesInfiny Maris で定義するログの種類は以下の通りです。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）で定義するログの種類は以下の通りです。
 
 - 操作ログ
 

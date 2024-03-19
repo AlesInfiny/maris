@@ -1,11 +1,11 @@
 ---
 title: 開発環境構築
-description: AlesInfiny Maris のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+description: AlesInfiny Maris OSS Edition のアプリケーション開発で最低限必要な環境の構築方法を解説します。
 ---
 
 # ローカル開発環境の構築 {#top}
 
-AlesInfiny Maris のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）のアプリケーション開発で最低限必要な環境の構築方法を解説します。
 
 ## システム要件 {#system-requirements}
 

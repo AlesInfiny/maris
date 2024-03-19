@@ -1,11 +1,11 @@
 ---
 title: サンプル解説
-description: AlesInfiny Maris の提供するサンプルの解説ドキュメント集。
+description: AlesInfiny Maris OSS Edition の提供するサンプルの解説ドキュメント集。
 ---
 
 # サンプル解説 {#top}
 
-AlesInfiny Maris の提供するサンプルの解説ドキュメント集です。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）の提供するサンプルの解説ドキュメント集です。
 
 ## AlesInfiny Maris で構築できるベーシックなアプリケーションのサンプル {#dressca}
 
