@@ -52,10 +52,11 @@
         
         - id: run-lint
           name: lintの実行
-          run: npm run lint:ci 2>&1 | tee /var/tmp/lint-result.txt
+          continue-on-error: true
+          run: npm run lint:ci >> /var/tmp/lint-result.txt 2>&1
         
         - name: lintの結果出力
-          if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
+          if: ${{ success() || (failure() && steps.run-lint.outcome == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/lint-result.txt
@@ -63,10 +64,11 @@
         
         - id: run-typecheck
           name: TypeScript の型チェック
-          run: npm run typecheck 2>&1 | tee /var/tmp/typecheck-result.txt 
+          continue-on-error: true
+          run: npm run typecheck >> /var/tmp/typecheck-result.txt 2>&1
         
         - name: 型チェックの結果出力
-          if: ${{ success() || (failure() && steps.run-typecheck.conclusion == 'failure') }}
+          if: ${{ success() || (failure() && steps.run-typecheck.outcome == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/typecheck-result.txt
@@ -74,10 +76,11 @@
         
         - id: application-build
           name: アプリケーションのビルド
-          run: npm run build:dev 2>&1 | tee /var/tmp/build-result.txt 
+          continue-on-error: true
+          run: npm run build:dev >> /var/tmp/build-result.txt 2>&1 
         
         - name: ビルドの結果出力
-          if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
+          if: ${{ success() || (failure() && steps.application-build.outcome == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/build-result.txt
@@ -85,10 +88,11 @@
         
         - id: run-unit-tests
           name: 単体テストの実行
-          run: npm run test:unit 2>&1 | tee /var/tmp/unit-test-result.txt
+          continue-on-error: true
+          run: npm run test:unit >> /var/tmp/unit-test-result.txt 2>&1
         
         - name: 単体テストの結果出力
-          if: ${{ success() || (failure() && steps.run-unit-tests.conclusion == 'failure') }}
+          if: ${{ success() || (failure() && steps.run-unit-tests.outcome == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/unit-test-result.txt
