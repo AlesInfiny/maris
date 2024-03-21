@@ -35,4 +35,4 @@ export async function getOrder(orderId: number): Promise<OrderResponse> {
   } catch (e) {
     throw new Error('Failed to get order');
   }
-};
+}
