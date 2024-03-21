@@ -2,7 +2,8 @@
 import { ShoppingCartIcon } from '@heroicons/vue/24/solid';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 
-const authenticationStore = useAuthenticationStore();
+//typecheckでエラーになるはず
+const authenticationStore: string = useAuthenticationStore();
 const isAuthenticated = () => {
   return authenticationStore.isAuthenticated;
 };
