@@ -13,7 +13,7 @@ describe('HelloWorld', () => {
       unitPrice: 50000,
     };
     const wrapper = mount(BasketItem, { props: { item: basketItemResponse } });
-    expect(wrapper.text()).toContain('￥100000');
+    expect(wrapper.text()).toContain('￥100,000');
   });
 
   it('単価が日本円形式で表示できる', () => {
