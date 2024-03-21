@@ -52,6 +52,7 @@
         
         - id: run-lint
           name: lintの実行
+          if: success()
           continue-on-error: true
           run: npm run lint:ci >> /var/tmp/lint-result.txt 2>&1
         
@@ -64,6 +65,7 @@
         
         - id: run-typecheck
           name: TypeScript の型チェック
+          if: success()
           continue-on-error: true
           run: npm run typecheck >> /var/tmp/typecheck-result.txt 2>&1
         
@@ -76,6 +78,7 @@
         
         - id: application-build
           name: アプリケーションのビルド
+          if: success()
           continue-on-error: true
           run: npm run build:dev >> /var/tmp/build-result.txt 2>&1 
         
@@ -88,6 +91,7 @@
         
         - id: run-unit-tests
           name: 単体テストの実行
+          if: success()
           continue-on-error: true
           run: npm run test:unit >> /var/tmp/unit-test-result.txt 2>&1
         
