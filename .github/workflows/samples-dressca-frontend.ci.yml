@@ -78,7 +78,7 @@
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/typecheck-result.txt
-            header: '型チェックの結果 :pencil:'
+            header: '型チェックの結果 :check_mark:'
         
         - name: ビルドの結果出力
           if: ${{ success() || (failure() && steps.application-build.outcome == 'failure') }}
