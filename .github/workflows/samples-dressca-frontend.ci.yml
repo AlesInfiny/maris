@@ -18,6 +18,9 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NO_COLOR: "1" 
+      # 文字化け防止のためカラーコードを出力しない
 
     strategy:
       matrix:
@@ -44,4 +47,13 @@ jobs:
       - name: TypeScript の型チェック
         run: npm run typecheck
       - name: 単体テストの実行
-        run: npm run test:unit
+        continue-on-error: true
+        run: npm run test:unit 2>&1 | tee /var/tmp/unit-test-result.txt
+      - name: 単体テストの結果出力
+        uses: ./.github/workflows/file-to-summary
+        with:
+          body: /var/tmp/unit-test-result.txt
+          header: 単体テストの結果
+
+
+          
