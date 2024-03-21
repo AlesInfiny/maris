@@ -47,7 +47,7 @@
           run: npm install
         - name: lintの実行
           continue-on-error: true
-          run: npm run lint 2>&1 | tee /var/tmp/lint-result.txt
+          run: npm run lint:ci 2>&1 | tee /var/tmp/lint-result.txt
         - name: lintの結果表示
           continue-on-error: true
           uses: ./.github/workflows/file-to-summary

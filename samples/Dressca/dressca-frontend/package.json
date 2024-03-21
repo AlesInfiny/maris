@@ -12,6 +12,7 @@
     "test:e2e:ci": "start-server-and-test dev http://localhost:5173/ 'cypress run'",
     "typecheck": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
+    "lint:ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore && stylelint **/*.{vue,css}",
     "mock": "vite --mode mock",
     "generate-client": "openapi-generator-cli generate -g typescript-axios -i ./../dressca-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
   },
