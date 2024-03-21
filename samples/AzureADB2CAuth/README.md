@@ -94,9 +94,17 @@ auth-frontend
 
 ## サンプルのシナリオ
 
+本サンプルは、ユーザー認証が必要な Web API に対し、 Azure AD B2C を利用してその機能を提供します。
+本サンプルでは、ユーザー認証が必要な Web API と、認証が不要な Web API の両方を実装しています。
+これにより、認証を必要とする Web API を選択して保護できます。
+本サンプルのシナリオは以下の通りです。
+
 1. サンプルを起動すると、ブラウザーに SPA のトップ画面が表示されます。
+1. 現在時刻を取得する Web API が認証機能なしで呼び出され、トップ画面に表示されます。
 1. トップ画面の「 `ログイン` 」をクリックすると、 Azure AD B2C の `サインイン` 画面がポップアップで表示されます。
-1. `サインイン` または `サインアップ` が成功すると、ポップアップが閉じ、ユーザー固有の ID （JWT における sub の値）が表示されます。
+1. `サインイン` または `サインアップ` が成功すると、ポップアップが閉じます。
+1. 成功した認証情報に基づき、ユーザー固有の ID （JWT における sub の値）を取得する Web API が呼び出され、トップ画面に結果が表示されます。
+1. トップ画面の「`更新`」をクリックすると、現在時刻を再度取得します。本 Web API は、引き続き認証機能なしで呼び出されます。
 
 ※本サンプルでは `サインイン` と `サインアップ` のシナリオのみ提供しており、 `サインアウト` は存在しません。
 
@@ -183,7 +191,7 @@ auth-frontend
 VITE_ADB2C_USER_FLOW_SIGN_IN=[追加した「サインアップとサインインのユーザーフロー」の名前。本サンプルでは B2C_1_signupsignin1]
 VITE_ADB2C_SIGN_IN_URI=https://[初期ドメイン名].b2clogin.com/[初期ドメイン名].onmicrosoft.com/B2C_1_[『サインアップとサインイン』のユーザフロー名]
 VITE_ADB2C_AUTHORITY_DOMAIN=[初期ドメイン名].b2clogin.com
-VITE_ADB2C_TASKS_SCOPE=[SampleWebAPI のアプリケーション ID の URI]/[Web APIに追加したスコープの名前]
+VITE_ADB2C_SCOPE=[SampleWebAPI のアプリケーション ID の URI]/[Web APIに追加したスコープの名前]
 VITE_ADB2C_APP_CLIENT_ID=[SampleSPA のクライアント ID]
 VITE_ADB2C_APP_URI=[フロントエンドアプリケーションのベースとなるURL。サンプルの既定では http://localhost:5173]
 ```
@@ -226,7 +234,16 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
 
     var builder = WebApplication.CreateBuilder(args); // （既存のコード）
 
-    // Open API ドキュメントの security scheme を有効化
+    builder.Services
+        .AddControllers()
+        .ConfigureApiBehaviorOptions(options =>
+        {
+            // Web API アクションメソッドにおいてエラーの型を指定しなかったときに
+            // 自動的に ProblemDetails へ変換されることを抑止します。
+            options.SuppressMapClientErrors = true;
+        });
+
+    // Open API ドキュメントの security scheme を有効化します。
     builder.Services.AddOpenApiDocument(config =>
     {
         config.AddSecurity("Bearer", new OpenApiSecurityScheme
@@ -239,7 +256,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
         config.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("Bearer"));
     });
 
-    // Azure AD B2C 認証に必要な設定をインジェクション
+    // Azure AD B2C 認証に必要な設定をインジェクションします。
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddMicrosoftIdentityWebApi(
         options =>
@@ -251,7 +268,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
 
     var app = builder.Build(); // （既存のコード）
 
-    // 認証を有効化
+    // 認証を有効化します。
     app.UseAuthentication();
     app.UseAuthorization();
     ```
@@ -270,7 +287,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
     using Microsoft.AspNetCore.Authorization;
 
     [Authorize]
-    public class UsersController : ControllerBase
+    public class ExampleController : ControllerBase
     {
        // 省略
     }
@@ -287,7 +304,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
       // 認証に関係のないプロパティは省略
       readonly VITE_ADB2C_USER_FLOW_SIGN_IN: string;
       readonly VITE_ADB2C_AUTHORITY_DOMAIN: string;
-      readonly VITE_ADB2C_TASKS_SCOPE: string;
+      readonly VITE_ADB2C_SCOPE: string;
       readonly VITE_ADB2C_APP_CLIENT_ID: string;
       readonly VITE_ADB2C_APP_URI: string;
     }
@@ -298,7 +315,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
     - authentication-config.ts
 1. `src\store\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
     - authentication.ts
-1. 認証が成功した場合、以降の Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
+1. 認証が成功したら、認証が必要な Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
     AlesInfiny Maris のサンプルアプリケーション Dressca の場合、 `src\api-client\index.ts` を編集します。
 
     ```ts
@@ -328,17 +345,19 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
       }
     }
 
-    export async function getUsersApi(): Promise<apiClient.UsersApi> {
+    export async function getExampleApi(): Promise<apiClient.ExampleApi> {
       const config = createConfig();
 
-      // UsersApi は認証が必要な API なので、addTokenAsync を呼び出します。
+      // 認証が必要な API では、addTokenAsync を呼び出します。
       await addTokenAsync(config);
-      const userApi = new apiClient.UsersApi(config, '', axiosInstance);
-      return userApi;
+      const exampleApi = new apiClient.ExampleApi(config, '', axiosInstance);
+      return exampleApi;
     }
 
     export async function getServerTimeApi(): Promise<apiClient.ServerTimeApi> {
       const config = createConfig();
+
+      // 認証が不要な API では、addTokenAsync は呼び出しません。
       const serverTimeApi = new apiClient.ServerTimeApi(
         config,
         '',
