@@ -34,6 +34,7 @@
           uses: actions/setup-node@v4
           with:
             node-version: ${{ matrix.node-version }}
+        
         - uses: actions/cache@v4
           id: node_modules_cache_id
           env:
@@ -41,39 +42,57 @@
           with:
             path: '**/node_modules'
             key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+        
+        - name: node パッケージのキャッシュ確認
+          run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+        
         - name: node パッケージのインストール
           if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
           run: npm install
-        - name: lintの実行
+        
+        - id: run-lint
+          name: lintの実行
           continue-on-error: true
           run: npm run lint:ci 2>&1 | tee /var/tmp/lint-result.txt
-        - name: lintの結果表示
-          continue-on-error: true
+        
+        - name: lintの結果出力
+          if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/lint-result.txt
             header: lintの結果
-        - name: TypeScript の型チェック
+        
+        - id: run-typecheck
+          name: TypeScript の型チェック
           continue-on-error: true
           run: npm run typecheck 2>&1 | tee /var/tmp/typecheck-result.txt 
+        
         - name: 型チェックの結果出力
+          if: ${{ success() || (failure() && steps.run-typecheck.conclusion == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/typecheck-result.txt
             header: 型チェックの結果
-        - name: アプリケーションのビルド
+        
+        - id: application-build
+          name: アプリケーションのビルド
           continue-on-error: true
           run: npm run build:dev 2>&1 | tee /var/tmp/build-result.txt 
+        
         - name: ビルドの結果出力
+          if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/build-result.txt
             header: ビルドの結果
-        - name: 単体テストの実行
+        
+        - id: run-unit-tests
+          name: 単体テストの実行
           continue-on-error: true
           run: npm run test:unit 2>&1 | tee /var/tmp/unit-test-result.txt
+        
         - name: 単体テストの結果出力
+          if: ${{ success() || (failure() && steps.run-unit-tests.conclusion == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/unit-test-result.txt
