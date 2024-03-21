@@ -17,7 +17,7 @@ export const b2cPolicies = {
 };
 
 export const apiConfig = {
-  b2cScopes: [import.meta.env.VITE_ADB2C_TASKS_SCOPE],
+  b2cScopes: [import.meta.env.VITE_ADB2C_SCOPE],
 };
 
 export const msalConfig = {
