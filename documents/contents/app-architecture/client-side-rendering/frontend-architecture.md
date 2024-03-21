@@ -138,7 +138,8 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-light.png#only-light){ loading=lazy }
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-dark.png#only-dark){ loading=lazy }
 
-モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
+モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。モデルは状態管理を伴うビジネスロジックを持つ Store と、伴わないビジネスロジックを持つサービス(仮)で構成されます。
+またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
 
 このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、 AlesInfiny Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
 
@@ -162,7 +163,7 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **Action**
 <!-- textlint-disable -->
-:  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。
+:  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせてはいけません。
 
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
