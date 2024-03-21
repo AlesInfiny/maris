@@ -71,25 +71,25 @@
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/lint-result.txt
-            header: lintの結果
+            header: 'lintの結果 :pen:'
         
         - name: 型チェックの結果出力
           if: ${{ success() || (failure() && steps.run-typecheck.outcome == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/typecheck-result.txt
-            header: 型チェックの結果
+            header: '型チェックの結果 :pencil:'
         
         - name: ビルドの結果出力
           if: ${{ success() || (failure() && steps.application-build.outcome == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/build-result.txt
-            header: ビルドの結果
+            header: 'ビルドの結果 :gear:'
 
         - name: 単体テストの結果出力
           if: ${{ success() || (failure() && steps.run-unit-tests.outcome == 'failure') }}
           uses: ./.github/workflows/file-to-summary
           with:
             body: /var/tmp/unit-test-result.txt
-            header: 単体テストの結果
+            header: '単体テストの結果 :memo:'
