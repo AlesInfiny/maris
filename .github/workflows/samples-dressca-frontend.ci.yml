@@ -2,6 +2,7 @@
 # cSpell:ignore typecheck
 
 name: dressca-frontend CI
+
 on:
   pull_request:
     branches: [main]
@@ -9,9 +10,11 @@ on:
       - 'samples/Dressca/dressca-frontend/**'
       - '.github/workflows/samples-dressca-frontend.ci.yml'
   workflow_dispatch:
+
 defaults:
   run:
     working-directory: samples/Dressca/dressca-frontend
+
 jobs:
   build:
     name: フロントエンドアプリケーションのビルド
@@ -22,6 +25,7 @@ jobs:
       matrix:
         node-version: [20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
