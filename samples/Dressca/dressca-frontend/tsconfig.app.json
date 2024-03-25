@@ -10,5 +10,6 @@
     },
     "preserveValueImports": false,
     "verbatimModuleSyntax": false,
+    "noEmit": false
   }
 }
