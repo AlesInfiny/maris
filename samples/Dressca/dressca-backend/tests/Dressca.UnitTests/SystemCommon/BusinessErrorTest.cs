@@ -29,7 +29,7 @@ public class BusinessErrorTest
     {
         // Arrange
         string? errorCode = "ERR_CODE";
-        string[] errorMessages = new[] { "ERR_MESSAGE1", "ERR_MESSAGE2" };
+        string[] errorMessages = ["ERR_MESSAGE1", "ERR_MESSAGE2"];
 
         // Act
         var error = new BusinessError(errorCode, errorMessages);
@@ -43,7 +43,7 @@ public class BusinessErrorTest
     {
         // Arrange
         string? errorCode = "ERR_CODE";
-        string[] errorMessages = new[] { "ERR_MESSAGE1", "ERR_MESSAGE2" };
+        string[] errorMessages = ["ERR_MESSAGE1", "ERR_MESSAGE2"];
 
         // Act
         var error = new BusinessError(errorCode, errorMessages);
@@ -66,16 +66,14 @@ public class BusinessErrorTest
         error.AddErrorMessage(errorMessage);
 
         // Assert
-        Assert.Collection(
-            error.ErrorMessages,
-            errorMessage => Assert.Equal(string.Empty, errorMessage));
+        Assert.Single(error.ErrorMessages, errorMessage => errorMessage == string.Empty);
     }
 
     [Fact]
     public void AddErrorMessage_エラーメッセージを追加できる()
     {
         // Arrange
-        var error = new BusinessError("ERR_CODE", new[] { "ERR_MESSAGE1" });
+        var error = new BusinessError("ERR_CODE", ["ERR_MESSAGE1"]);
         string? errorMessage = "ERR_MESSAGE2";
 
         // Act
@@ -89,7 +87,7 @@ public class BusinessErrorTest
     }
 
     [Fact]
-    public void ToString_エラーコードが未設定の場合キーが空文字のJSON形式に変換される()
+    public void ToString_エラーコードが未設定_キーが空文字のJSON形式に変換される()
     {
         // Arrange
         var error = new BusinessError();
@@ -105,12 +103,12 @@ public class BusinessErrorTest
     public void ToString_エラーコードがキーでエラーメッセージのリストが値のJSON形式に変換される()
     {
         // Arrange
-        var error = new BusinessError("ERR_CODE", "ERR_MESSAGE1", "ERR_MESSAGE2");
+        var error = new BusinessError("ERR_CODE", "エラー1", "ERR_MESSAGE2");
 
         // Act
         var str = error.ToString();
 
         // Assert
-        Assert.Equal("{\"ERR_CODE\":[\"ERR_MESSAGE1\",\"ERR_MESSAGE2\"]}", str);
+        Assert.Equal("{\"ERR_CODE\":[\"エラー1\",\"ERR_MESSAGE2\"]}", str);
     }
 }

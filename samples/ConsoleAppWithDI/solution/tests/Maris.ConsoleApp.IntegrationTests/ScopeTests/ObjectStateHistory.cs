@@ -2,7 +2,7 @@
 
 internal static class ObjectStateHistory
 {
-    private static readonly List<ObjectState> HistoryStore = new();
+    private static readonly List<ObjectState> HistoryStore = [];
 
     internal static IReadOnlyCollection<ObjectState> Histories => HistoryStore.AsReadOnly();
 

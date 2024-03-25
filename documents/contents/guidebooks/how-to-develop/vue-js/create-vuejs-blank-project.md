@@ -29,7 +29,7 @@ create-vue パッケージをインストールする必要があり、続行す
 √ Add Vue Router for Single Page Application development? ... Yes
 √ Add Pinia for state management? ... Yes
 √ Add Vitest for Unit Testing? ... Yes
-√ Add Cypress for End-to-End testing? ... Yes
+√ Add an End-to-End Testing Solution? » Cypress
 √ Add ESLint for code quality? ... Yes
 √ Add Prettier for code formatting? ... Yes
 ```
@@ -47,8 +47,8 @@ npm run dev
 `npm run dev` が成功すると以下のように表示されるので、「 Local: 」に表示された URL をブラウザーで表示します。ブランクプロジェクトのランディングページが表示されます。
 
 ```terminal
-vite v2.7.7 dev server running at:
+VITE v4.5.1  ready in 2970 ms
 
-> Local: http://localhost:3000/
-> Network: use `--host` to expose
+>  Local:   http://localhost:5173/
+>  Network: use --host to expose
 ```

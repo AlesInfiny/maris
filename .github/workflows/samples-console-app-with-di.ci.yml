@@ -39,9 +39,9 @@ jobs:
           fetch-depth: 1
 
       - name: .NET SDK のセットアップ
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
-          global-json-file: samples/ConsoleAppWithDI/solution/global.json
+          dotnet-version: "8.*"
 
       - id: application-build
         name: アプリケーションのビルド

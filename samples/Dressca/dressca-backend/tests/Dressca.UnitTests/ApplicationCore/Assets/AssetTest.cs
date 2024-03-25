@@ -8,13 +8,13 @@ public class AssetTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public void Constructor_アセットコードがnullまたは空の文字列の場合例外(string? assetCode)
+    public void Constructor_アセットコードがnullまたは空の文字列_ArgumentExceptionが発生する(string? assetCode)
     {
         // Arrange
         var assetType = AssetTypes.Png;
 
         // Act
-        var action = () => new Asset(assetCode!, assetType);
+        var action = () => new Asset { AssetCode = assetCode!, AssetType = assetType };
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("value", action);
@@ -22,14 +22,14 @@ public class AssetTest
     }
 
     [Fact]
-    public void Constructor_アセットタイプが未知の場合例外()
+    public void Constructor_アセットタイプが未知_NotSupportedExceptionが発生する()
     {
         // Arrange
         var assetCode = "assetCode";
         var assetType = "NOT-SUPPORTED";
 
         // Act
-        var action = () => new Asset(assetCode, assetType);
+        var action = () => new Asset { AssetCode = assetCode, AssetType = assetType };
 
         // Assert
         var ex = Assert.Throws<NotSupportedException>(action);

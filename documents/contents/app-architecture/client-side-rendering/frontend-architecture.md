@@ -7,10 +7,14 @@ description: クライアントサイドレンダリングを行う Web アプ�
 
 ## 技術スタック {#tech-stack}
 
-AlesInfiny Maris を構成する OSS を以下に示します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OSS を以下に示します。
 
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
+
+!!! note ""
+
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
 - [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
 
@@ -93,7 +97,7 @@ AlesInfiny Maris で採用している Vue.js のソフトウェア・アーキ�
 :  ビジネスロジックとして状態管理やブラウザ外部との入出力を担います。モデルのビジネスロジックには、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。モデルは後述する Pinia のアーキテクチャに従って実装します。
 
 <!-- textlint-disable -->
-Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://v3.ja.vuejs.org/guide/single-file-component.html#単一ファイルコンポーネント){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
+Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/sfc){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
 
 ### ビュー＆ビューモデル コンポーネント {#view-and-viewmodel-component}
 
@@ -176,6 +180,10 @@ axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=
 
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading-lazy }
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading-lazy }
+
+!!! note ""
+
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
 !!! note "OpenAPI Generator の自動生成コード"
       OpenAPI Generator はサーバー、クライアント双方の様々なコードの自動生成に対応しています。生成可能なコードについては公式ドキュメントを参照してください。

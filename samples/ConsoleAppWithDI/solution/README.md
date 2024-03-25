@@ -46,14 +46,14 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
     - Maris.ConsoleApp.IntegrationTests
 
 - テスト用の xUnit 拡張機能
-    - Maris.Testing
+    - Maris.Logging.Testing
 
 - 利用例
     - Maris.Samples.Cli
     - （Maris.Samples.ApplicationCore）※
     - （Maris.Samples.InMemoryInfrastructure）※
 
-※：サンプルアプリケーションを実行するために、 AlesInfiny Maris の定義するアーキテクチャを簡略化して実装したサンプルです。
+※：サンプルアプリケーションを実行するために、 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）の定義するアーキテクチャを簡略化して実装したサンプルです。
 コンソールアプリケーションの実行フレームワークと、本質的な関連はありません。
 
 コンソールアプリケーションの実行フレームワークは、プロジェクトごとご自身のソリューションに取り込んで利用します。
@@ -74,7 +74,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 | src                                  |                                   |                                        |
 |                                      | Maris.ConsoleApp.Core             | フォルダーごと配置する                 |
 |                                      | Maris.ConsoleApp.Hosting          | フォルダーごと配置する                 |
-|                                      | Maris.Testing                     | フォルダーごと配置する                 |
+|                                      | Maris.Logging.Testing             | フォルダーごと配置する                 |
 |                                      | Directory.Build.props             |                                        |
 | tests                                |                                   |                                        |
 |                                      | Maris.ConsoleApp.IntegrationTests | フォルダーごと配置する                 |
@@ -90,7 +90,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 ### ソリューションへのファイル・プロジェクトの取り込み
 
 作成したソリューションを Visual Studio で開き、ソリューションファイルの直下に「src」ソリューションフォルダーと「tests」ソリューションフォルダーを作成します。
-「src」ソリューションフォルダーに「Maris.ConsoleApp.Core」・「Maris.ConsoleApp.Hosting」・「Maris.Testing」の各プロジェクトを追加します。
+「src」ソリューションフォルダーに「Maris.ConsoleApp.Core」・「Maris.ConsoleApp.Hosting」・「Maris.Logging.Testing」の各プロジェクトを追加します。
 また「tests」ソリューションフォルダーに「Maris.ConsoleApp.IntegrationTests」・「Maris.ConsoleApp.UnitTests」プロジェクトを追加します。
 
 ![各プロジェクト追加後のソリューション構造](readme-images/load-projects-to-solution.png)
@@ -506,6 +506,7 @@ internal class DependencyInjectionCommandSample : AsyncCommand<SampleParameter>
 {
     private readonly SampleApplicationService service;
     private readonly ILogger logger;
+    private readonly EventId GetTotalSuccess = new EventId(1001, nameof(GetTotalSuccess));
 
     public DependencyInjectionCommandSample(
         SampleApplicationService service,
@@ -520,7 +521,7 @@ internal class DependencyInjectionCommandSample : AsyncCommand<SampleParameter>
         CancellationToken cancellationToken)
     {
         var total = await this.service.GetTotalAsync(cancellationToken);
-        this.logger.LogInformation($"Total:{total}");
+        this.logger.LogInformation(GetTotalSuccess, $"Total:{total}");
         return new SuccessResult();
     }
 }
@@ -607,7 +608,7 @@ flowchart TD
     Host[Maris.ConsoleApp.Hosting]
     Core[Maris.ConsoleApp.Core]
     UnitTests[Maris.ConsoleApp.UnitTests]
-    TestLib[Maris.Testing]
+    TestLib[Maris.Logging.Testing]
     subgraph Your application
     Cli-->Biz
     Cli-->Infra

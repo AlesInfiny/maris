@@ -2,17 +2,11 @@
 
 namespace Maris.ConsoleApp.IntegrationTests.ScopeTests.Commands;
 
-internal class Command : SyncCommand<Parameter>
+internal class Command(TestObject1 obj1, TestObject2 obj2) : SyncCommand<Parameter>
 {
     internal const string CommandName = "scope-test";
-    private readonly TestObject1 obj1;
-    private readonly TestObject2 obj2;
-
-    public Command(TestObject1 obj1, TestObject2 obj2)
-    {
-        this.obj1 = obj1;
-        this.obj2 = obj2;
-    }
+    private readonly TestObject1 obj1 = obj1;
+    private readonly TestObject2 obj2 = obj2;
 
     protected override ICommandResult Execute(Parameter parameter)
     {

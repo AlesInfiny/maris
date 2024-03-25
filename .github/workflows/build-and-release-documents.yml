@@ -51,7 +51,7 @@ jobs:
         run: npm ci
 
       - name: Python のセットアップ
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
@@ -169,7 +169,7 @@ jobs:
           zip -r ../${{ env.DOCUMENT_ARTIFACTS_FILENAME }} *
 
       - name: ビルドアーティファクトのアップロード
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documents
           path: documents/${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
@@ -182,12 +182,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ビルドアーティファクトのダウンロード
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: documents
 
       - name: Githubのリリース
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: ${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
           generate_release_notes: true
@@ -199,12 +199,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ビルドアーティファクトのダウンロード
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: documents
 
       - name: Azure に OIDC Login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}

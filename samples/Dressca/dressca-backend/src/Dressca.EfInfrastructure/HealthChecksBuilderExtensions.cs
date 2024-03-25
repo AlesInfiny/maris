@@ -38,6 +38,7 @@ public static class HealthChecksBuilderExtensions
                     var loggerFactory = builder.Services.BuildServiceProvider().GetRequiredService<ILoggerFactory>();
                     var logger = loggerFactory.CreateLogger("Dressca.EfInfrastructure.HealthChecksBuilderExtensions");
                     logger.Log(
+                        eventId: Events.FailedDatabaseHealthCheck,
                         logLevel: logLevel,
                         exception: ex,
                         message: Messages.FailedDatabaseHealthCheck);

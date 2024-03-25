@@ -6,7 +6,7 @@ namespace Maris.ConsoleApp.UnitTests.Hosting;
 public class DefaultCommandManagerTest
 {
     [Fact]
-    public void Constructor_ConsoleAppContextがnullの場合は例外()
+    public void Constructor_ConsoleAppContextがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         ConsoleAppContext? context = null;
@@ -20,7 +20,7 @@ public class DefaultCommandManagerTest
     }
 
     [Fact]
-    public void Constructor_IServiceProviderがnullの場合は例外()
+    public void Constructor_IServiceProviderがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var parameter = new TestParameter();
@@ -35,7 +35,7 @@ public class DefaultCommandManagerTest
     }
 
     [Fact]
-    public void マネージャーに設定したコンテキストの情報が初期化処理を通してコマンドにも設定される()
+    public void CreateCommand_マネージャーに設定したコンテキストの情報がコマンドにも設定される()
     {
         // Arrange
         var provider = Mock.Of<IServiceProvider>();
@@ -51,7 +51,7 @@ public class DefaultCommandManagerTest
     }
 
     [Fact]
-    public void ReleaseCommandを呼び出すとスコープがクローズされる()
+    public void ReleaseCommand_スコープがクローズされる()
     {
         // Arrange
         var provider = Mock.Of<IServiceProvider>();
@@ -67,7 +67,7 @@ public class DefaultCommandManagerTest
     }
 
     [Fact]
-    public void ReleaseCommandを複数回呼び出しても例外にならずスコープはクローズされる()
+    public void ReleaseCommand_複数回呼び出しても例外にならずスコープはクローズされる()
     {
         // Arrange
         var provider = Mock.Of<IServiceProvider>();
@@ -94,13 +94,8 @@ public class DefaultCommandManagerTest
             => throw new NotImplementedException();
     }
 
-    private class DefaultCommandManagerMock : DefaultCommandManager
+    private class DefaultCommandManagerMock(ConsoleAppContext context, IServiceProvider provider) : DefaultCommandManager(context, provider)
     {
-        public DefaultCommandManagerMock(ConsoleAppContext context, IServiceProvider provider)
-            : base(context, provider)
-        {
-        }
-
         internal override CommandBase CreateCommandInScope()
             => new TestCommand();
     }

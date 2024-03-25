@@ -20,3 +20,7 @@ description: Git リポジトリの構築に関するガイドラインを示し
 1. [フォルダー構造の検討](consider-folder-structure.md)
 
     主に mono-repo の Git リポジトリを対象として、リポジトリ内のフォルダー構造をどうすべきか解説します。
+
+1. [Git の基本設定](git-settings.md)
+
+    推奨する構成を実現するための Git の基本設定について解説します。

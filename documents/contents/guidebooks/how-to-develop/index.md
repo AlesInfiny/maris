@@ -1,11 +1,11 @@
 ---
 title: 開発手順
-description: AlesInfiny Maris で開発可能なアプリケーションの開発手順を示すガイドラインです。
+description: AlesInfiny Maris OSS Edition で開発可能なアプリケーションの開発手順を示すガイドラインです。
 ---
 
 # アプリケーション開発手順 {#top}
 
-AlesInfiny Maris で開発可能なアプリケーションの開発手順を示すガイドラインです。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能なアプリケーションの開発手順を示すガイドラインです。
 
 - [.NET 編](./dotnet/index.md)
 
@@ -20,3 +20,7 @@ AlesInfiny Maris で開発可能なアプリケーションの開発手順を示
 - [ローカル開発環境の構築](./local-environment/index.md)
 
     AlesInfiny Maris のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+
+- [アプリケーションの発行](./publication/index.md)
+
+    .NET + Vue.js で構成されたアプリケーションの発行手順について解説します。

@@ -14,11 +14,9 @@ public class Basket
     /// <summary>
     ///  <see cref="Basket"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="buyerId">購入者 Id 。</param>
-    /// <exception cref="ArgumentNullException">
-    ///  <paramref name="buyerId"/> が <see langword="null"/> です.
-    /// </exception>
-    public Basket(string buyerId) => this.BuyerId = buyerId;
+    public Basket()
+    {
+    }
 
     /// <summary>
     ///  買い物かご Id を取得します。
@@ -28,12 +26,13 @@ public class Basket
     /// <summary>
     ///  購入者 Id を取得します。
     /// </summary>
-    public string BuyerId
+    /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
+    public required string BuyerId
     {
         get => this.buyerId;
 
         [MemberNotNull(nameof(buyerId))]
-        private set
+        init
         {
             this.buyerId = value ?? throw new ArgumentNullException(nameof(value));
         }
@@ -57,12 +56,27 @@ public class Basket
     {
         if (!this.items.Any(i => i.CatalogItemId == catalogItemId))
         {
-            this.items.Add(new BasketItem(catalogItemId, unitPrice, quantity));
+            this.items.Add(new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity });
             return;
         }
 
         var existingItem = this.items.First(i => i.CatalogItemId == catalogItemId);
         existingItem.AddQuantity(quantity);
+    }
+
+    /// <summary>
+    ///  買い物かご内のアイテムの数量を一括で設定します。
+    /// </summary>
+    /// <param name="quantities">各アイテムの数量。</param>
+    public void SetItemsQuantity(Dictionary<long, int> quantities)
+    {
+        foreach (var item in this.Items)
+        {
+            if (quantities.TryGetValue(item.CatalogItemId, out var quantity))
+            {
+                item.SetQuantity(quantity);
+            }
+        }
     }
 
     /// <summary>

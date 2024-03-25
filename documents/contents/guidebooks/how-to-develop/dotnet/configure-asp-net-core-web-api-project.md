@@ -196,12 +196,12 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 
 ### 未処理例外発生時の例外ハンドラーを設定 {#setup-exception-handler}
 
-未処理の例外が ASP.NET Core のランタイムまで到達した場合、[先ほど](#create-error-controller)作成したエラー情報を取得できるコントローラーを呼び出すようランタイムを構成します。
+未処理の例外が ASP.NET Core のランタイムまで到達した場合、[先ほど](#create-error-controller) 作成したエラー情報を取得できるコントローラーを呼び出すようランタイムを構成します。
 開発環境ではスタックトレース込みのエラー情報を返却する処理を登録します。
 それ以外の環境ではスタックトレースを返さない処理を登録します。
 
 ??? example "例外ハンドラーの登録例"
-    [先ほど](#create-error-controller)作成した `#!csharp ErrorController` を例外ハンドラーとして使用するように構成します。
+    [先ほど](#create-error-controller) 作成した `#!csharp ErrorController` を例外ハンドラーとして使用するように構成します。
     環境に応じて、登録する例外ハンドラーを適切に設定しましょう。
     ASP.NET Core Web API プロジェクトの [Program.cs] または [Startup.cs] に、以下のように実装を加えてください。
 
@@ -251,7 +251,7 @@ Web API アプリケーションの入出力は、 HTTP 通信の形式になり
 実際の開発作業では、意図した通りの HTTP リクエスト / レスポンスが送受信できているか確認することがよくあります。
 これをサポートするため、開発環境では HTTP 通信ログを出力するよう設定することを推奨します。
 
-設定したら、開発環境の[ログレベルの設定](#configure-log-level)をあわせて実施するようにしてください。
+設定したら、開発環境の [ログレベルの設定](#configure-log-level) をあわせて実施するようにしてください。
 
 ??? example "HTTP 通信ログを出力する実装例"
     HTTP 通信ログの出力は、 ASP.NET Core のミドルウェアを用いて実現します。
@@ -316,10 +316,12 @@ ASP.NET Core Web API プロジェクトを作成した際、一緒に作成さ�
 
     開発環境向けのログレベル設定は [appsettings.Development.json] に行います。
     開発環境では、開発者が設定したデバッグレベルのログも出力できるように設定します。
-    例のように、 `LogLLevel` 要素にソリューション名と同名のキーを追加し、 Debug を設定します。
+    例のように、 `LogLevel` 要素にソリューション名と同名のキーを追加し、 Debug を設定します。
 
     [HTTP 通信ログ](#configure-http-communication-log)を記録するように設定した場合は、そのログが出力されるよう個別に設定を追加します。
-    例のように、 `LogLLevel` 要素に Microsoft.AspNetCore.HttpLogging のキーを追加し、 Information を設定します。
+    例のように、 `LogLevel` 要素に Microsoft.AspNetCore.HttpLogging のキーを追加し、 Information を設定します。
+
+    [ヘルスチェック](../../../app-architecture/client-side-rendering/global-function.md#health-check-implementation)実行時のログを出力する場合も個別に設定を追加します。 例のように、 `LogLevel` 要素に Microsoft.Extensions.Diagnostics.HealthChecks のキーを追加し、Debug を設定しています。
 
     ```json title="appsettings.Development.json"
     {
@@ -328,6 +330,7 @@ ASP.NET Core Web API プロジェクトを作成した際、一緒に作成さ�
           "Default": "Information",
           "Microsoft.AspNetCore": "Warning",
           "Microsoft.AspNetCore.HttpLogging": "Information",
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "Debug",
           "AaaSubSystem": "Debug"
         }
       }
