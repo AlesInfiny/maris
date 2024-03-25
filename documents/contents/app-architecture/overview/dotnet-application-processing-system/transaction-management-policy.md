@@ -1,6 +1,6 @@
 ---
 title: .NETアプリケーションの処理方式
-description: AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
+description: AlesInfiny Maris OSS Edition で構築する .NET アプリケーションの共通的な処理方式を解説します。
 ---
 
 # トランザクション管理方針 {#top}

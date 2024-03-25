@@ -1,11 +1,11 @@
 ---
 title: 開発手順
-description: AlesInfiny Maris で開発可能なアプリケーションの開発手順を示すガイドラインです。
+description: AlesInfiny Maris OSS Edition で開発可能なアプリケーションの開発手順を示すガイドラインです。
 ---
 
 # アプリケーション開発手順 {#top}
 
-AlesInfiny Maris で開発可能なアプリケーションの開発手順を示すガイドラインです。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能なアプリケーションの開発手順を示すガイドラインです。
 
 - [.NET 編](./dotnet/index.md)
 

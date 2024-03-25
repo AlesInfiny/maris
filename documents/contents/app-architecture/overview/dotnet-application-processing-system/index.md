@@ -1,11 +1,11 @@
 ---
 title: .NETアプリケーションの処理方式
-description: AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
+description: AlesInfiny Maris OSS Edition で構築する .NET アプリケーションの共通的な処理方式を解説します。
 ---
 
 # .NETアプリケーションの処理方式 {#top}
 
-AlesInfiny Maris で構築する .NET アプリケーションの共通的な処理方式を解説します。
+AlesInfiny Maris OSS Edition で構築する .NET アプリケーションの共通的な処理方式を解説します。
 
 1. [例外処理方針](exception-handling-policy.md)
 

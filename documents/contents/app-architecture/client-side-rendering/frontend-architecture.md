@@ -7,10 +7,14 @@ description: クライアントサイドレンダリングを行う Web アプ�
 
 ## 技術スタック {#tech-stack}
 
-AlesInfiny Maris を構成する OSS を以下に示します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OSS を以下に示します。
 
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
+
+!!! note ""
+
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
 - [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
 
@@ -176,6 +180,10 @@ axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=
 
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading-lazy }
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading-lazy }
+
+!!! note ""
+
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
 !!! note "OpenAPI Generator の自動生成コード"
       OpenAPI Generator はサーバー、クライアント双方の様々なコードの自動生成に対応しています。生成可能なコードについては公式ドキュメントを参照してください。

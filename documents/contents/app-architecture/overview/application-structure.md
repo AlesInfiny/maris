@@ -1,11 +1,11 @@
 ---
 title: 概要編
-description: AlesInfiny Maris を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
+description: AlesInfiny Maris OSS Edition を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
 ---
 
 # アプリケーション構成 {#top}
 
-AlesInfiny Maris として、アプリケーション形態ごとに標準的なアプリケーション構成を定義しています。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）として、アプリケーション形態ごとに標準的なアプリケーション構成を定義しています。
 ここでは主要な構成要素を示します。
 <!-- （CSR編など、アプリケーション種別ごとのアーキテクチャ解説ができたら右記の文を差しこむ。）詳細はアプリケーション種別ごとの詳細ページ、および、サンプルアプリケーションを参照してください。 -->
 
@@ -17,6 +17,10 @@ Vue.js を用いた SPA の構成をとります。
 
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading=lazy }
+
+!!! note ""
+
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
 ## Web アプリケーション ( サーバーサイドレンダリング ) {#server-side-rendering}
 
