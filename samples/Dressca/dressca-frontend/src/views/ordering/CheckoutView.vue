@@ -3,6 +3,7 @@ import { onMounted, reactive, toRefs } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
 import { useAccountStore } from '@/stores/account/account';
 import type { BasketResponse } from '@/generated/api-client/models/basket-response';
+import { postOrder } from '@/services/ordering/orderingService';
 
 import { useOrderingStore } from '@/stores/ordering/ordering';
 import { useRouter } from 'vue-router';
@@ -24,14 +25,28 @@ const { getFirstAssetUrl } = assetHelper();
 const orderingStore = useOrderingStore();
 
 const checkout = async () => {
-  await orderingStore.order(
+  // await orderingStore.order(
+  //   address.value.fullName,
+  //   address.value.postalCode,
+  //   address.value.todofuken,
+  //   address.value.shikuchoson,
+  //   address.value.azanaAndOthers,
+  // );
+  // router.push({ name: 'ordering/done' });
+
+  const orderId = await postOrder(
     address.value.fullName,
     address.value.postalCode,
     address.value.todofuken,
     address.value.shikuchoson,
     address.value.azanaAndOthers,
   );
-  router.push({ name: 'ordering/done' });
+  console.log(orderId);
+  router
+    .push({ name: 'ordering/done', params: { orderId: orderId } })
+    .catch(() => {
+      console.log('Failed to navigate to ordering/done');
+    });
 };
 
 const basketStore = useBasketStore();

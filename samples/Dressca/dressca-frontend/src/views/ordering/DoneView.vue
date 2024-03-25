@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
-import { useRouter } from 'vue-router';
-import { useOrderingStore } from '@/stores/ordering/ordering';
+import { useRouter, useRoute } from 'vue-router';
+// import { useOrderingStore } from '@/stores/ordering/ordering';
+import { getOrder } from '@/services/ordering/orderingService';
 import type { OrderResponse } from '@/generated/api-client/models/order-response';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 
-const orderingStore = useOrderingStore();
+// const orderingStore = useOrderingStore();
 const router = useRouter();
+// const route = useRoute();
+const props = defineProps<{
+  orderId: number;
+}>();
 const state = reactive({
   lastOrdered: null as OrderResponse | null,
 });
@@ -18,14 +23,16 @@ const goCatalog = () => {
   router.push({ name: 'catalog' });
 };
 
-onMounted(() => {
-  const lastOrder = orderingStore.getLastOrder;
-  if (typeof lastOrder === 'undefined') {
-    router.push('/');
-    return;
-  }
-  state.lastOrdered = lastOrder;
-  orderingStore.clearLastOrder();
+onMounted(async () => {
+  // const lastOrder = orderingStore.getLastOrder;
+  // if (typeof lastOrder === 'undefined') {
+  //   router.push('/');
+  //   return;
+  // }
+  // state.lastOrdered = lastOrder;
+  // orderingStore.clearLastOrder();
+
+  state.lastOrdered = await getOrder(props.orderId);
 });
 </script>
 
