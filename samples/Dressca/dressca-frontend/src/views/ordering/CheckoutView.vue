@@ -34,21 +34,19 @@ const checkout = async () => {
   // );
   // router.push({ name: 'ordering/done' });
 
-  const orderId = await postOrder(
-    address.value.fullName,
-    address.value.postalCode,
-    address.value.todofuken,
-    address.value.shikuchoson,
-    address.value.azanaAndOthers,
-  );
-  console.log(orderId);
-  router
-    .push({ name: 'ordering/done', params: { orderId: orderId } })
-    .catch(() => {
-      console.log('Failed to navigate to ordering/done');
-    });
+  try {
+    const orderId = await postOrder(
+      address.value.fullName,
+      address.value.postalCode,
+      address.value.todofuken,
+      address.value.shikuchoson,
+      address.value.azanaAndOthers,
+    );
+    router.push({ name: 'ordering/done', params: { orderId: orderId } });
+  } catch (error) {
+    console.error(error);
+  };
 };
-
 const basketStore = useBasketStore();
 
 onMounted(async () => {
