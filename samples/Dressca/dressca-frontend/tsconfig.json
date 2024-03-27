@@ -13,7 +13,6 @@
     }
   ],
   "compilerOptions": {
-    "module": "NodeNext",
-    "verbatimModuleSyntax": false
+    "module": "NodeNext"
   }
 }
