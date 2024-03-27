@@ -14,13 +14,17 @@ const ExceptionHandlingPlugin = {
     };
 
     // Vue.js 以外のエラー
+    // 不明なエラーの場合はエラー画面に遷移、エラー画面からホームに戻れるようにする
     window.addEventListener('error', (event) => {
       console.log(event);
       router.replace({ name: 'error' });
     });
 
     window.addEventListener('unhandledrejection', (event) => {
-      // やりたいことがあんまりない
+      // やりたいことがあまりない
+      // 開発時に予期せぬ非同期のエラーが発生した時に利用する
+      // Console.log でエラー内容を確認することができます。
+      console.log(event);
     });
   },
 };
