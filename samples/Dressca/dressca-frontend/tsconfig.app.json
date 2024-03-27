@@ -4,12 +4,12 @@
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
     "preserveValueImports": false,
-    "verbatimModuleSyntax": false,
-    "noEmit": false
+    "verbatimModuleSyntax": false
   }
 }
