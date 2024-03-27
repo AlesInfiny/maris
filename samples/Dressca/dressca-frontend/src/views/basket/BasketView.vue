@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, reactive, toRefs } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
+import { useNotificationStore } from '@/stores/notification/notification';
 import type { BasketResponse } from '@/generated/api-client/models/basket-response';
 import type { BasketItemResponse } from '@/generated/api-client/models/basket-item-response';
 import { useRouter } from 'vue-router';
@@ -20,6 +21,8 @@ const router = useRouter();
 const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
+const notificationStore = useNotificationStore();
+
 const isEmpty = () => {
   return (
     typeof state.basket.basketItems === 'undefined' ||
@@ -31,16 +34,25 @@ const goCatalog = () => {
   router.push({ name: 'catalog' });
 };
 
+// 変更に失敗しても変更前の数量を表示するため、ハンドリングしない
 const update = async (catalogItemId: number, newQuantity: number) => {
   state.added = null;
-  await basketStore.update(catalogItemId, newQuantity);
-  await basketStore.fetch();
+  try {
+    await basketStore.update(catalogItemId, newQuantity);
+  } catch (error) {
+    notificationStore.setMessage('数量の変更に失敗しました。');
+  }
   state.basket = basketStore.getBasket;
 };
 
+// 削除に失敗した通知を出す
 const remove = async (catalogItemId: number) => {
   state.added = null;
-  await basketStore.remove(catalogItemId);
+  try {
+    await basketStore.remove(catalogItemId);
+  } catch (error) {
+    notificationStore.setMessage('商品の削除に失敗しました。');
+  }
   await basketStore.fetch();
   state.basket = basketStore.getBasket;
 };

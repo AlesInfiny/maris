@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useSpecialContentStore } from '@/stores/special-content/special-content';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { useBasketStore } from '@/stores/basket/basket';
+import { useNotificationStore } from '@/stores/notification/notification';
 import CarouselSlider from '@/components/common/CarouselSlider.vue';
 import Loading from '@/components/common/Loading.vue';
 import { useRouter } from 'vue-router';
@@ -13,6 +14,7 @@ import assetHelper from '@/shared/helpers/assetHelper';
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
 const basketStore = useBasketStore();
+const notificationStore = useNotificationStore();
 const { getSpecialContents } = storeToRefs(specialContentStore);
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
 const router = useRouter();
@@ -32,14 +34,20 @@ const getBrandName = (catalogBrandId: number) => {
 };
 
 const addBasket = async (catalogItemId: number) => {
-  await basketStore.add(catalogItemId);
-  router.push({ name: 'basket' });
+  try {
+    await basketStore.add(catalogItemId);
+    router.push({ name: 'basket' });
+  } catch (error) {
+    notificationStore.setMessage('カートに追加できませんでした。');
+  }
 };
 
 onMounted(async () => {
   state.showLoading = true;
   catalogStore.fetchCategories();
-  catalogStore.fetchBrands();
+  catalogStore.fetchBrands().catch(() => {
+    notificationStore.setMessage('ブランドの取得に失敗しました。');
+  });
   await catalogStore.fetchItems(selectedCategory.value, selectedBrand.value);
   state.showLoading = false;
 });
