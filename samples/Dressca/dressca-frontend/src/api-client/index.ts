@@ -14,13 +14,14 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   function (error) {
     if (!error.response || error.response.status === 500) {
-      notificationStore.setMessage('不明なエラーが発生しました。');
+      // notificationStore.setMessage('不明なエラーが発生しました。');
       console.log('500 error');
     } else if (error.response?.status === 401) {
       notificationStore.setMessage('401 error: ログインしてください。');
       router.replace({ name: 'account/login' });
       console.log('401 error');
     }
+    return Promise.reject(error);
   },
 );
 
