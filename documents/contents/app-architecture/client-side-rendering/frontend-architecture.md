@@ -158,12 +158,14 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **Getter**
-:  Store で管理しているデータである State を画面コンポーネント(ビュー & ビューモデル)に返すもの。
+:  State を画面コンポーネント(ビュー & ビューモデル)に返すもの。また State から算出した結果を返すもの。
 
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **Action**
 <!-- textlint-disable -->
 :  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせてはいけません。
+
+本来 State は直接取得・変更できますが、 Getter と Action を通じてアクセスすることで、 State の参照・変更を制御します。これにより、どこで State が参照・変更されたかを把握しやすくなります。
 
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
