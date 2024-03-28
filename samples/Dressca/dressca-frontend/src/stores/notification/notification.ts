@@ -20,9 +20,4 @@ export const useNotificationStore = defineStore({
       this.message = '';
     },
   },
-  getters: {
-    getMessage(state) {
-      return state.message;
-    },
-  },
 });

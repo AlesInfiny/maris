@@ -5,7 +5,7 @@ import { useNotificationStore } from '@/stores/notification/notification';
 import { ExclamationCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 
 const notificationStore = useNotificationStore();
-const { getMessage } = storeToRefs(notificationStore);
+const { message } = storeToRefs(notificationStore);
 
 const close = () => {
   notificationStore.clearMessage();
@@ -20,7 +20,7 @@ const close = () => {
     leave-active-class="transition duration-300"
   >
     <div
-      v-if="!(getMessage === '')"
+      v-if="!(message === '')"
       class="fixed inline-flex items-center w-5/6 inset-x-0 max-w-m mx-auto mt-2 p-4 text-gray-500 bg-red-500 rounded-lg shadow"
     >
       <div
@@ -29,7 +29,7 @@ const close = () => {
         <ExclamationCircleIcon class="w-5 h-5" />
         <span class="sr-only">Error icon</span>
       </div>
-      <div class="ms-3 text-white text-sm font-normal">{{ getMessage }}</div>
+      <div class="ms-3 text-white text-sm font-normal">{{ message }}</div>
       <button
         type="button"
         class="ms-auto -mx-1.5 -my-1.5 h-8 w-8 bg-red-100 rounded-lg focus:ring-2 focus:ring-gray-300 hover:bg-gray-100 inline-flex items-center justify-center"
