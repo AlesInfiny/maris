@@ -38,9 +38,11 @@ API 通信で発生する例外については、
 
 | 例外の種類 | ハンドリング方法 |
 | ---------- | ---------------- |
-| Vue コンポーネント内で発生する例外 | `app.config.errorHandler` |
-| 一般的な JavaScript エラーや構文エラー | `window.onerror` |
+| Vue アプリケーション内で発生する例外 | `app.config.errorHandler` |
+| JavaScript の構文エラーや Vue アプリケーション外の例外 | `window.onerror` |
 | 非同期処理で発生する例外 | `window.onunhandledrejection` |
+
+また Vue コンポーネントで例外を個別に捕捉したい場合、 Vue のライフサイクルフックである `errorCaptured` を利用して例外を捕捉します。
 
 ### 例外の処理 {#error-handling}
 
