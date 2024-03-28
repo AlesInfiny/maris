@@ -158,7 +158,7 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **Getter**
-:  State を画面コンポーネント(ビュー & ビューモデル)に返すもの。また State から算出した結果を返すもの。
+:  State の値や State から算出した結果を返すもの。
 
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **Action**
