@@ -108,6 +108,12 @@ auth-frontend
 
 ※本サンプルでは `サインイン` と `サインアップ` のシナリオのみ提供しており、 `サインアウト` は存在しません。
 
+## サンプルで実現している認証フロー
+
+本サンプルでは、 Microsoft 認証ライブラリ（ MSAL ）の使用によって、 `OAuth 2.0 承認コードフロー` を実現しています。ただし、以下の処理は含まれていません。
+
+- state の検証 : `/authorize` エンドポイントへのリクエストに `state` パラメーターを設定する（この処理は MSAL によって実現されます）と、レスポンスに同じ値の `state` が設定されます。 `state` の値がリクエストとレスポンスで同じであることをクライアントアプリケーション上で確認する必要があります。
+
 ## 前提となる OSS ライブラリ
 
 本サンプルでは、バックエンド、フロントエンドアプリケーションそれぞれで OSS を使用しています。
@@ -157,6 +163,7 @@ auth-frontend
 1. Azure ポータルのお気に入りから「 Azure AD B2C 」を選択します。
 1. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleSPA 」を選択します。
 1. 「認証」ブレードを選択し、「シングルページアプリケーション」の「リダイレクト URI」に `http://localhost` を追加します。
+
 1. [Microsoft のチュートリアル「[アクセス許可の付与]」](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#grant-permissions) に従って、 SampleSPA に、前の手順で追加した SampleWebAPI のスコープ「 api.read 」へのアクセス許可を付与します。
 
 ### ユーザーフローの作成
