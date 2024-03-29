@@ -8,11 +8,9 @@ changelog:
           - dependencies
     - title: ':label: :purple_circle: NuGet package dependencies'
       labels:
-        - dependencies
         - nuget
     - title: ':label: :white_circle: npm package dependencies'
       labels:
-        - dependencies
         - npm
     - title: ':label: Other dependencies'
       labels:
