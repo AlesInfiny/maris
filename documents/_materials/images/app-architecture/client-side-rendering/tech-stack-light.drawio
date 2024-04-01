@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="YVUNjr4HZTphw-Tl1sgp" name="ページ1">
-        <mxGraphModel dx="1083" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1083" dy="506" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -162,8 +162,8 @@
                 <mxCell id="75" value="静的コード解析" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=#ffffff;fontSize=18;verticalAlign=top;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;" parent="1" vertex="1">
                     <mxGeometry x="1286.55" y="422.75" width="180" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="76" value="&lt;b&gt;StyleCop&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;fontSize=18;" parent="1" vertex="1">
-                    <mxGeometry x="1321.55" y="467.75" width="110" height="30" as="geometry"/>
+                <mxCell id="76" value="&lt;b&gt;StyleCopAnalyzers&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;fontSize=18;" parent="1" vertex="1">
+                    <mxGeometry x="1321.55" y="466.75" width="110" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="96" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=none;" edge="1" parent="1" source="83" target="51">
                     <mxGeometry relative="1" as="geometry"/>
@@ -174,13 +174,10 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="83" value="API 定義" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=#ffffff;fontSize=18;verticalAlign=top;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;" vertex="1" parent="1">
-                    <mxGeometry x="1170" y="116" width="185" height="110" as="geometry"/>
-                </mxCell>
-                <mxCell id="84" value="&lt;font style=&quot;font-size: 18px&quot;&gt;&lt;b style=&quot;font-size: 18px;&quot;&gt;Open API&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;fontSize=18;" vertex="1" parent="1">
-                    <mxGeometry x="1205" y="153" width="120" height="30" as="geometry"/>
+                    <mxGeometry x="1170" y="130" width="185" height="96" as="geometry"/>
                 </mxCell>
                 <mxCell id="85" value="&lt;font style=&quot;font-size: 18px&quot;&gt;&lt;b style=&quot;font-size: 18px;&quot;&gt;NSwag&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;fontSize=18;" vertex="1" parent="1">
-                    <mxGeometry x="1190" y="183" width="150" height="30" as="geometry"/>
+                    <mxGeometry x="1188" y="173.99999999999997" width="150" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="95" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="86" target="83">
                     <mxGeometry relative="1" as="geometry"/>
