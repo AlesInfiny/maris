@@ -7,9 +7,89 @@ description: クライアントサイドレンダリングを行う Web アプ�
 
 ## 技術スタック {#tech-stack}
 
-<!-- （フロントエンド、バックエンド含むスタック図） -->
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OSS を以下に示します。
 
-利用ライブラリについては[フロントエンドアーキテクチャ](frontend-architecture.md)、バックエンドアーキテクチャ（後日追加予定）を参照してください。
+![技術スタック](../../images/app-architecture/client-side-rendering/tech-stack-light.png#only-light){ loading=lazy }
+
+!!! note ""
+
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
+
+??? note "利用ライブラリ（フロントエンド）"
+
+    - [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
+
+          JavaScript を拡張して静的型付にしたプログラミング言語。
+      
+    - [Vue.js :material-open-in-new:](https://v3.ja.vuejs.org/){ target=_blank }
+
+          シンプルな設計で拡張性の高い JavaScript のフレームワーク。
+      
+    - [Vite :material-open-in-new:](https://ja.vitejs.dev/){ target=_blank }
+
+          ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。
+      
+    - [Pinia :material-open-in-new:](https://pinia.vuejs.org/){ target=_blank }
+
+          Vue.js 用の状態管理ライブラリ。
+      
+    - [Vue Router :material-open-in-new:](https://router.vuejs.org/){ target=_blank }
+
+          Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。
+          
+    - [Axios :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
+
+          Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
+          
+    - [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
+
+          Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
+          
+    - [yup :material-open-in-new:](https://github.com/jquense/yup){ target=_blank }
+
+          JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
+
+    - [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
+
+          utility class を使って独自のボタンなどを作成する CSS フレームワーク
+
+    - [Prettier :material-open-in-new:](https://prettier.io/){ target=_blank }
+
+          JavaScript, Vue, CSS, JSON などのコードフォーマッター。
+
+    - [ESLint :material-open-in-new:](https://eslint.org/){ target=_blank }
+
+          JavaScript の静的検証ツール。
+
+    - [Stylelint :material-open-in-new:](https://stylelint.io/){ target=_blank }
+
+          CSS の静的検証ツール。
+
+    - [Vitest :material-open-in-new:](https://vitest.dev/){ target=_blank }
+
+          Vite 環境で動作する高速テスティングフレームワーク。
+
+    - [Cypress :material-open-in-new:](https://www.cypress.io/){ target=_blank }
+
+          E2E テストツール。
+
+??? note "利用ライブラリ（バックエンド）"
+
+    - [ASP.NET Core :material-open-in-new:](https://dotnet.microsoft.com/ja-jp/learn/aspnet/what-is-aspnet-core){ target=_blank }
+
+          .NET で利用可能な Web 開発フレームワークです。
+
+    - [Entity Framework Core :material-open-in-new:](https://github.com/dotnet/efcore){ target=_blank }
+
+          .NET で利用可能な O/R マッパーです。
+
+    - [NSwag :material-open-in-new:](https://github.com/RicoSuter/NSwag){ target=_blank }
+
+          実装済みの Web API から Swagger 仕様を生成します。
+
+    - [Open API :material-open-in-new:](https://www.openapis.org/){ target=_blank }
+
+          Web API の仕様書や、 API のクライアントコードを生成します。
 
 ## アプリケーションアーキテクチャ {#application-architecture}
 
