@@ -114,7 +114,7 @@ auth-frontend
 
 なお、以下の処理は MSAL.js (JavaScript 用 Microsoft Authentication Library) によって行われます。
 
-- state の検証
+- state のリクエストへの設定、およびレスポンスの設定値の検証
 
 ## 前提となる OSS ライブラリ
 
