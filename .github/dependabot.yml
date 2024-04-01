@@ -109,7 +109,7 @@ updates:
     commit-message:
       prefix: "nuget-azure-ad-b2c-backend"
     labels:
-      - "target: AzureAD B2C Auth"
+      - "target: Azure AD B2C Auth"
       - "nuget"
       - "dependencies"
     groups:
