@@ -85,11 +85,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
     - [NSwag :material-open-in-new:](https://github.com/RicoSuter/NSwag){ target=_blank }
 
-          実装済みの Web API から Swagger 仕様を生成します。
-
-    - [Open API :material-open-in-new:](https://www.openapis.org/){ target=_blank }
-
-          Web API の仕様書や、 API のクライアントコードを生成します。
+          実装済みの Web API から Open API 仕様書を生成します。
 
 ## アプリケーションアーキテクチャ {#application-architecture}
 
