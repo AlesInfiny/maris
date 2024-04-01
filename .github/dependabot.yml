@@ -97,7 +97,7 @@ updates:
     commit-message:
       prefix: "npm-azure-ad-b2c-frontend"
     labels:
-      - "target: AzureAD B2C Auth"
+      - "target: Azure AD B2C Auth"
       - "npm"
       - "dependencies"
 
