@@ -6,6 +6,7 @@ changelog:
       exclude:
         labels:
           - dependencies
+          - 内部の改善
     - title: ':label: :purple_circle: NuGet package dependencies'
       labels:
         - nuget
@@ -19,3 +20,6 @@ changelog:
         labels:
           - nuget
           - npm
+    - title: ':lollipop: improvements in development'
+      labels:
+        - 内部の改善
