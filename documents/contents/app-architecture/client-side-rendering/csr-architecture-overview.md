@@ -93,9 +93,9 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
 ## アプリケーションアーキテクチャ {#application-architecture}
 
-AlesInfiny Maris OSS Edition のアプリケーションアーキテクチャは、クリーンアーキテクチャに基づいています。 アーキテクチャの全体概要は以下の通りです。
+AlesInfiny Maris のアプリケーションアーキテクチャは、クリーンアーキテクチャに基づいています。 アーキテクチャの全体概要は以下の通りです。
 
-<!-- 図を入れる -->
+![アーキテクチャ概要](../../images/app-architecture/client-side-rendering/csr-architecture-light.png#only-light){ loading=lazy }
 
 <!-- ## フロントエンドの構造詳細 {#frontend-structure}
 
@@ -135,7 +135,7 @@ AlesInfiny Maris OSS Edition のアプリケーションアーキテクチャは
   
     コントローラーは ASP.NET Core のコントローラーに対応し、各 Web API の定義と実装を担います。 業務処理であるアプリケーションサービスを呼び出し、その結果からレスポンスデータを生成します。
 
-- API モデル（ DTO 、ビューモデル）
+- API モデル
 
     Web API のリクエスト／レスポンスの形式を定義するクラスです。 コントローラーが受け取る引数やレスポンスの型を C# のクラスで表現します。
 
@@ -147,6 +147,6 @@ AlesInfiny Maris OSS Edition のアプリケーションアーキテクチャは
 
     インフラストラクチャ層のリポジトリは、アプリケーションコア層のリポジトリインターフェースの実装クラスで、具体的なデータベースアクセス処理を実装します。 DbContext を介してデータベースとデータをやり取りします。
 
-- DbContext(マイグレーション)
+- DbContext (マイグレーション)
 
     DbContext はデータベース接続するためのクラスです。データベーススキーマをデータベース上に反映するため、 DbContext をもとにマイグレーションを生成します。マイグレーションもインフラストラクチャ層に配置します。
