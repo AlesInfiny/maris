@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="_DG0sfizkGLdW_YoqMvD" name="ページ1">
-        <mxGraphModel dx="1083" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="1083" dy="506" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -26,7 +26,7 @@
                     <mxGeometry x="360" y="300" width="160" height="140" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" value="&lt;font color=&quot;#000000&quot;&gt;コントローラー&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Noto Sans JP;fontSize=18;fillColor=#cce5ff;strokeColor=#666666;strokeWidth=1;spacingLeft=0;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;" vertex="1" parent="1">
-                    <mxGeometry x="80" y="119" width="160" height="40" as="geometry"/>
+                    <mxGeometry x="80" y="160" width="160" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="11" value="&lt;font color=&quot;#000000&quot;&gt;DbContext&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Noto Sans JP;fontSize=18;fillColor=#cdeb8b;strokeColor=#666666;strokeWidth=1;spacingLeft=0;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;" vertex="1" parent="1">
                     <mxGeometry x="377.02" y="140" width="125.96" height="40" as="geometry"/>
@@ -75,6 +75,9 @@
                         <mxPoint x="641.76" y="575" as="sourcePoint"/>
                         <mxPoint x="686.1799999999998" y="573.1401775247027" as="targetPoint"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="21" value="&lt;font color=&quot;#000000&quot;&gt;API モデル&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Noto Sans JP;fontSize=18;fillColor=#cce5ff;strokeColor=#666666;strokeWidth=1;spacingLeft=0;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="100" width="160" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
