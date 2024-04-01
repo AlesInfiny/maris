@@ -87,6 +87,14 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
           実装済みの Web API から Open API 仕様書を生成します。
 
+    - [xUnit](https://xunit.net/)
+
+          .NET で利用可能なテストフレームワークです。
+
+    - [StyleCopAnalyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers)
+
+          C# のコードを解析し、コーディングルールに則っているかを確認します。
+
 ## アプリケーションアーキテクチャ {#application-architecture}
 
 AlesInfiny Maris のアプリケーションアーキテクチャは、クリーンアーキテクチャに基づいています。 アーキテクチャの全体概要は以下の通りです。
