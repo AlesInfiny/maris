@@ -1,0 +1,22 @@
+{
+  "runtime": "Net80",
+  "defaultVariables": null,
+  "documentGenerator": {
+    "aspNetCoreToOpenApi": {
+      "project": "Dressca.Web.csproj",
+      "documentName": "v1",
+      "msBuildProjectExtensionsPath": null,
+      "configuration": "$(Configuration)",
+      "runtime": null,
+      "targetFramework": null,
+      "noBuild": true,
+      "msBuildOutputPath": null,
+      "verbose": true,
+      "workingDirectory": null,
+      "aspNetCoreEnvironment": "Development",
+      "output": "dressca-api.json",
+      "newLineBehavior": "LF"
+    }
+  },
+  "codeGenerators": {}
+}
