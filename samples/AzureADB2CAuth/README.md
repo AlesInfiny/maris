@@ -23,7 +23,7 @@ Azure AD B2C によるユーザー認証の簡単な実装サンプルを提供�
 - Azure サブスクリプション
 - サブスクリプション内、またはサブスクリプション内のリソース グループ内で共同作成者以上のロールが割り当てられている Azure アカウント
 
-Azure サブスクリプションを持っていない場合、 [無料アカウントを作成](https://azure.microsoft.com/ja-jp/free/?WT.mc_id=A261C142F) できます。
+Azure サブスクリプションを持っていない場合、 [無料アカウントを作成](https://azure.microsoft.com/ja-jp/free) できます。
 
 ## 動作環境
 
@@ -73,7 +73,7 @@ auth-backend
 ```text
 auth-frontend
 ├ .env.dev ............................. Azure AD B2C への接続情報を記載する設定ファイル
-├ env.d.ts ............................. 上の設定ファイルを読み込む TypeScript ファイル
+├ env.d.ts ............................. 環境変数の型定義をする TypeScript ファイル
 └ src
 　 ├ App.vue ........................... 画面。本サンプルでは画面は App.vue のみ。
 　 ├ api-client
@@ -110,7 +110,7 @@ auth-frontend
 
 ## サンプルで実現している認証フロー
 
-本サンプルでは、 Microsoft 認証ライブラリ（ MSAL ）の使用によって、 `OAuth 2.0 承認コードフロー` を実現しています。
+本サンプルでは、 Microsoft 認証ライブラリ（ MSAL ）の使用によって、 [OAuth 2.0 承認コードフロー](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/authorization-code-flow) を実現しています。
 
 なお、以下の処理は MSAL.js (JavaScript 用 Microsoft Authentication Library) によって行われます。
 
@@ -129,7 +129,7 @@ auth-frontend
 
 ## サンプルの動作方法
 
-本サンプルを動作させるには、事前作業として Azure AD B2C のテナントを作成し、アプリケーションを登録する作業が必要です。
+本サンプルをローカルマシンで動作させるには、事前作業として Azure AD B2C のテナントを作成し、アプリケーションを登録する作業が必要です。
 
 ### Azure AD B2C テナントの作成
 
@@ -286,7 +286,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
 
     <!-- textlint-disable ja-technical-writing/sentence-length -->
 
-1. `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
+1. [バックエンドアプリケーションの設定](#バックエンドアプリケーションの設定) を参照し、 `auth-backend\src\Dressca.Web\appsettings.json` に記述した Azure AD B2C の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
@@ -319,6 +319,7 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
     }
     ```
 
+1. `npm run generate-client` を実行し、 Axios のクライアントコードを再生成します。
 1. `src\shared\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
     - authentication-adb2c.ts
     - authentication-config.ts
@@ -401,3 +402,17 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
     ```html
     <button v-if="!isAuthenticated()" @click="signIn()">ログイン</button>
     ```
+
+1. `npm install` を実行し、その他のパッケージをインストールします。
+
+## 参照記事
+
+本サンプルは、以下の記事に基づき作成しました。
+
+### フロントエンドアプリケーションの参照記事
+
+- [Azure AD B2C を利用した SPA アプリケーションサンプル](https://github.com/Azure-Samples/ms-identity-b2c-javascript-spa/tree/main)
+
+### バックエンドアプリケーションの参照記事
+
+- [Azure AD B2C を使用して独自の Web API で認証を有効にする](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/enable-authentication-web-api?tabs=csharpclient)
