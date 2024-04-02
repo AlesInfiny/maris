@@ -217,7 +217,7 @@ public class ShoppingApplicationService
         var basket = await this.basketRepository.GetWithBasketItemsAsync(buyerId, cancellationToken);
         if (basket is null)
         {
-            this.logger.LogDebug(Events.DebugEvent, Messages.CreateNewBasket_UserBasketNotFound, buyerId);
+            this.logger.LogDebug(Events.DebugEvent, LogMessages.CreateNewBasket_UserBasketNotFound, buyerId);
             basket = new Basket { BuyerId = buyerId };
             return await this.basketRepository.AddAsync(basket, cancellationToken);
         }
