@@ -2,6 +2,7 @@
 using Dressca.ApplicationCore.Assets;
 using Dressca.Web.Assets;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace Dressca.Web.Controllers;
 
@@ -44,6 +45,7 @@ public class AssetsController : ControllerBase
     [HttpGet("{assetCode}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [OpenApiOperation("get")]
     public IActionResult Get(string assetCode)
     {
         try
