@@ -63,7 +63,7 @@ auth-backend
 　 │ └ Controllers
 　 │ 　 ├ ServerTimeController.cs ... 認証の必要がない Web API を配置しているコントローラー
 　 │ 　 └ UserController.cs ......... 認証が必要な Web API を配置しているコントローラー
-　 └ Dressca.Web.Dto ................. Web API の戻り値の方を配置しているプロジェクト
+　 └ Dressca.Web.Dto ................. Web API の戻り値の型を配置しているプロジェクト
 ```
 
 ### フロントエンドアプリケーションの構成
