@@ -19,59 +19,59 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
     - [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
 
-          JavaScript を拡張して静的型付にしたプログラミング言語。
+          JavaScript を拡張して静的型付にしたプログラミング言語です。
       
     - [Vue.js :material-open-in-new:](https://v3.ja.vuejs.org/){ target=_blank }
 
-          シンプルな設計で拡張性の高い JavaScript のフレームワーク。
+          シンプルな設計で拡張性の高い JavaScript のフレームワークです。
       
     - [Vite :material-open-in-new:](https://ja.vitejs.dev/){ target=_blank }
 
-          ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。
+          ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツールです。
       
     - [Pinia :material-open-in-new:](https://pinia.vuejs.org/){ target=_blank }
 
-          Vue.js 用の状態管理ライブラリ。
+          Vue.js 用の状態管理ライブラリです。
       
     - [Vue Router :material-open-in-new:](https://router.vuejs.org/){ target=_blank }
 
-          Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。
+          Vue.js を利用した SPA で、ルーティング制御をするための公式プラグインです。
           
     - [Axios :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
 
-          Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
+          Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアントです。
           
     - [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
 
-          Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
+          Vue.js 用のリアルタイムバリデーションコンポーネントライブラリです。
           
     - [yup :material-open-in-new:](https://github.com/jquense/yup){ target=_blank }
 
-          JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
+          JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリです。
 
     - [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
 
-          utility class を使って独自のボタンなどを作成する CSS フレームワーク
+          utility class を使って独自のボタンなどを作成する CSS フレームワークです。
 
     - [Prettier :material-open-in-new:](https://prettier.io/){ target=_blank }
 
-          JavaScript, Vue, CSS, JSON などのコードフォーマッター。
+          JavaScript, Vue, CSS, JSON などのコードフォーマッターです。
 
     - [ESLint :material-open-in-new:](https://eslint.org/){ target=_blank }
 
-          JavaScript の静的検証ツール。
+          JavaScript の静的検証ツールです。
 
     - [Stylelint :material-open-in-new:](https://stylelint.io/){ target=_blank }
 
-          CSS の静的検証ツール。
+          CSS の静的検証ツールです。
 
     - [Vitest :material-open-in-new:](https://vitest.dev/){ target=_blank }
 
-          Vite 環境で動作する高速テスティングフレームワーク。
+          Vite 環境で動作する高速なテスティングフレームワークです。
 
     - [Cypress :material-open-in-new:](https://www.cypress.io/){ target=_blank }
 
-          E2E テストツール。
+          E2E テストツールです。
 
 ??? note "利用ライブラリ（バックエンド）"
 
