@@ -10,6 +10,7 @@ description: クライアントサイドレンダリングを行う Web アプ�
 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OSS を以下に示します。
 
 ![技術スタック](../../images/app-architecture/client-side-rendering/tech-stack-light.png#only-light){ loading=lazy }
+![技術スタック](../../images/app-architecture/client-side-rendering/tech-stack-dark.png#only-dark){ loading=lazy }
 
 !!! note ""
 
@@ -100,6 +101,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 AlesInfiny Maris のアプリケーションアーキテクチャは、クリーンアーキテクチャに基づいています。 アーキテクチャの全体概要は以下の通りです。
 
 ![アーキテクチャ概要](../../images/app-architecture/client-side-rendering/csr-architecture-light.png#only-light){ loading=lazy }
+![アーキテクチャ概要](../../images/app-architecture/client-side-rendering/csr-architecture-dark.png#only-dark){ loading=lazy }
 
 <!-- ## フロントエンドの構造詳細 {#frontend-structure}
 
