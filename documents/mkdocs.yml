@@ -29,6 +29,7 @@ nav:
               - ヘルスチェックの必要性: app-architecture/overview/dotnet-application-processing-system/health-check-necessity.md
       - クライアントサイドレンダリング編:
           - app-architecture/client-side-rendering/index.md
+          - CSR アーキテクチャ概要: app-architecture/client-side-rendering/csr-architecture-overview.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
           - 全体処理方式: app-architecture/client-side-rendering/global-function.md
           - テスト方針:
