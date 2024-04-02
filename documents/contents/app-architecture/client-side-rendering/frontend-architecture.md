@@ -16,61 +16,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
     上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
-- [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
-
-      JavaScript を拡張して静的型付にしたプログラミング言語。
-
-- [Vue.js :material-open-in-new:](https://v3.ja.vuejs.org/){ target=_blank }
-
-      シンプルな設計で拡張性の高い JavaScript のフレームワーク。
-
-- [Vite :material-open-in-new:](https://ja.vitejs.dev/){ target=_blank }
-
-      ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。
-
-- [Pinia :material-open-in-new:](https://pinia.vuejs.org/){ target=_blank }
-
-      Vue.js 用の状態管理ライブラリ。
-
-- [Vue Router :material-open-in-new:](https://router.vuejs.org/){ target=_blank }
-
-      Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。
-
-- [Axios :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
-
-      Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
-
-- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
-
-      Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
-
-- [yup :material-open-in-new:](https://github.com/jquense/yup){ target=_blank }
-
-      JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
-
-- [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
-
-      utility class を使って独自のボタンなどを作成する CSS フレームワーク
-
-- [Prettier :material-open-in-new:](https://prettier.io/){ target=_blank }
-
-      JavaScript, Vue, CSS, JSON などのコードフォーマッター。
-
-- [ESLint :material-open-in-new:](https://eslint.org/){ target=_blank }
-
-      JavaScript の静的検証ツール。
-
-- [Stylelint :material-open-in-new:](https://stylelint.io/){ target=_blank }
-
-      CSS の静的検証ツール。
-
-- [Vitest :material-open-in-new:](https://vitest.dev/){ target=_blank }
-
-      Vite 環境で動作する高速テスティングフレームワーク。
-
-- [Cypress :material-open-in-new:](https://www.cypress.io/){ target=_blank }
-
-      E2E テストツール。
+利用ライブラリの一覧については、 [技術スタック](./csr-architecture-overview.md#tech-stack) を参照してください。
 
 ## アーキテクチャ {#frontend-architecture}
 
