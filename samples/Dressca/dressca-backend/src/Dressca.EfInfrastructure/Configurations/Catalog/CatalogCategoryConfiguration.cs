@@ -20,9 +20,9 @@ internal class CatalogCategoryConfiguration : IEntityTypeConfiguration<CatalogCa
 
         builder.HasData(new CatalogCategory[]
         {
-            new CatalogCategory("服") { Id = 1L },
-            new CatalogCategory("バッグ") { Id = 2L },
-            new CatalogCategory("シューズ") { Id = 3L },
+            new() { Name = "服", Id = 1L },
+            new() { Name = "バッグ", Id = 2L },
+            new() { Name = "シューズ", Id = 3L },
         });
     }
 }

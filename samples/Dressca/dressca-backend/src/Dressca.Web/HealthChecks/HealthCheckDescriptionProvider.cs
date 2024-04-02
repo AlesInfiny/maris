@@ -24,9 +24,10 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
     ///  <see cref="HealthCheckDescriptionProvider"/> の新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="modelMetadataProvider">モデルメタデータプロバイダー。</param>
+    /// <exception cref="ArgumentNullException"><paramref name="modelMetadataProvider"/> が <see langword="null"/> です。</exception>
     public HealthCheckDescriptionProvider(IModelMetadataProvider modelMetadataProvider)
     {
-        this.modelMetadataProvider = modelMetadataProvider;
+        this.modelMetadataProvider = modelMetadataProvider ?? throw new ArgumentNullException(nameof(modelMetadataProvider));
     }
 
     /// <summary>

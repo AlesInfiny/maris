@@ -14,7 +14,7 @@ public class AssetTest
         var assetType = AssetTypes.Png;
 
         // Act
-        var action = () => new Asset(assetCode!, assetType);
+        var action = () => new Asset { AssetCode = assetCode!, AssetType = assetType };
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("value", action);
@@ -29,7 +29,7 @@ public class AssetTest
         var assetType = "NOT-SUPPORTED";
 
         // Act
-        var action = () => new Asset(assetCode, assetType);
+        var action = () => new Asset { AssetCode = assetCode, AssetType = assetType };
 
         // Assert
         var ex = Assert.Throws<NotSupportedException>(action);

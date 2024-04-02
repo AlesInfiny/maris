@@ -14,7 +14,7 @@ public class OrderItemAssetTest
         var orderItemId = 1L;
 
         // Act
-        var action = () => new OrderItemAsset(assetCode!, orderItemId);
+        var action = () => new OrderItemAsset { AssetCode = assetCode!, OrderItemId = orderItemId };
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("value", action);
@@ -27,7 +27,7 @@ public class OrderItemAssetTest
         // Arrange
         string assetCode = "Asset Code";
         var orderItemId = 1L;
-        var itemAsset = new OrderItemAsset(assetCode!, orderItemId);
+        var itemAsset = new OrderItemAsset { AssetCode = assetCode!, OrderItemId = orderItemId };
 
         // Act
         var action = () => _ = itemAsset.OrderItem;

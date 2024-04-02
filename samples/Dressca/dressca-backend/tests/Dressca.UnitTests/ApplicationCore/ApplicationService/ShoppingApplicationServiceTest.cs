@@ -41,9 +41,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBuyerId = "dummyId";
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
-        var basket = new Basket(dummyBuyerId);
+        var basket = new Basket { BuyerId = dummyBuyerId };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -96,7 +96,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(10, 100);
         var quantities = new Dictionary<long, int>() { { 0, 1 } };
 
@@ -123,7 +123,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(10L, 1000m);
         var quantities = new Dictionary<long, int>() { { 10L, 5 } };
 
@@ -153,12 +153,12 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(10L, 1000m);
         var quantities = new Dictionary<long, int>() { { 10L, 5 } };
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -189,13 +189,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(10L, 1000m);
         var newQuantity = 5;
         var quantities = new Dictionary<long, int>() { { 10L, newQuantity } };
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -226,12 +226,12 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(10L, 1000m);
         var quantities = new Dictionary<long, int>() { { 10L, 0 } };
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -285,7 +285,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         var quantities = new Dictionary<long, int>() { { 10L, 5 } };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -314,11 +314,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         var quantities = new Dictionary<long, int>() { { 10L, 5 } };
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -373,7 +373,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         var shipTo = CreateDefaultShipTo();
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -399,7 +399,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         var shipTo = CreateDefaultShipTo();
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -425,14 +425,14 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(10L, 1000);
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
-        var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
+        var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -471,14 +471,14 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(10L, 1000);
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
-        var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
+        var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -517,14 +517,14 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket(dummyBuyerId);
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(10L, 1000);
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             new(100L, 110L, "説明1", "ダミー商品1", 1000m, "C000000001") { Id = 10L },
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
          };
-        var order = new Order(dummyBuyerId, shipTo, CreateDefaultOrderItems());
+        var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -582,7 +582,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         var items = new List<OrderItem>()
         {
-            new(new CatalogItemOrdered(1, productName, productCode), 1000m, 1),
+            new() { ItemOrdered = new CatalogItemOrdered(1, productName, productCode), UnitPrice = 1000m, Quantity = 1 },
         };
 
         return items;

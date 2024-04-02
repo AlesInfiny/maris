@@ -1,0 +1,95 @@
+---
+# cSpell:ignore typecheck
+
+name: azure-ad-b2c-auth-sample CI
+
+on:
+    pull_request:
+        branches: [main]
+        paths:
+            - 'samples/AzureADB2CAuth/**'
+            - '.github/workflows/samples-azure-ad-b2c-auth-ci.yml'
+    workflow_dispatch:
+
+env:
+    BACKEND_WORKING_DIRECTORY: samples/AzureADB2CAuth/auth-backend
+    FRONTEND_WORKING_DIRECTORY: samples/AzureADB2CAuth/auth-frontend
+
+jobs:
+    build-frontend:
+        name: 'フロントエンドアプリケーションのビルド'
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [18.x]
+
+        defaults:
+            run:
+                working-directory: ${{ env.FRONTEND_WORKING_DIRECTORY }}
+
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - uses: actions/cache@v4
+              id: node_modules_cache_id
+              env:
+                  cache-name: cache-node-modules-azure-ad-b2c-auth-frontend
+              with:
+                  path: '**/node_modules'
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+            - name: node パッケージのインストール
+              if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+              run: npm install
+            - name: TypeScript の型チェック
+              run: npm run typecheck
+
+    build-backend:
+        name: 'バックエンドアプリケーションのビルド'
+        runs-on: ubuntu-latest
+        env:
+            DOTNET_NOLOGO: true
+            BUILD_CONFIGURATION: Debug
+            BUILD_SUMMARY_FILE: BuildSummary.md
+        defaults:
+            run:
+                working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
+        steps:
+            - name: 'ブランチのチェックアウト'
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 1
+
+            - name: '.NET SDK のセットアップ'
+              uses: actions/setup-dotnet@v4
+              with:
+                  dotnet-version: '8.*'
+
+            - name: 'NuGet パッケージの復元'
+              run: dotnet restore
+
+            - id: application-build
+              name: 'アプリケーションのビルド'
+              continue-on-error: true
+              run: |
+                  echo '## Build Result :gear:' >> $GITHUB_STEP_SUMMARY
+                  dotnet build --nologo --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
+                  echo ':heavy_check_mark: アプリケーションのビルドに成功しました。' >> $GITHUB_STEP_SUMMARY
+                  echo '```' >> $GITHUB_STEP_SUMMARY
+                  cat build-result.txt >> $GITHUB_STEP_SUMMARY
+                  echo '```' >> $GITHUB_STEP_SUMMARY
+
+            - name: 'ビルド失敗時の結果の表示'
+              shell: bash
+              if: ${{ steps.application-build.outcome == 'failure' }}
+              run: |
+                  echo ':x: アプリケーションのビルドに失敗しました。  ' >> $GITHUB_STEP_SUMMARY
+                  echo '```' >> $GITHUB_STEP_SUMMARY
+                  cat build-result.txt >> $GITHUB_STEP_SUMMARY
+                  echo '```' >> $GITHUB_STEP_SUMMARY
+                  exit 1
