@@ -8,9 +8,9 @@ description: クライアントサイドレンダリングを行う Web アプ�
 !!! warning "本ドキュメントの記載範囲について"
         現時点で本稿はフロントエンドアプリケーションを中心に記載しています。 バックエンドアプリケーションに対する解説は今後追加予定です。
 
-1. CSR アーキテクチャ概要
+1. [CSR アーキテクチャ概要](csr-architecture-overview.md)
 
-    AlesInfiny Maris の定義するクライアントサイドレンダリング方式の Web アプリケーションのアーキテクチャの概要について説明します。
+    AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） の定義するクライアントサイドレンダリング方式の Web アプリケーションのアーキテクチャの概要について説明します。
 
 1. [フロントエンドアーキテクチャ](frontend-architecture.md)
 

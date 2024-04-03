@@ -1,11 +1,11 @@
 ---
 title: 開発環境構築
-description: AlesInfiny Maris のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+description: AlesInfiny Maris OSS Edition のアプリケーション開発で最低限必要な環境の構築方法を解説します。
 ---
 
 # ローカル開発環境の構築 {#top}
 
-AlesInfiny Maris のアプリケーション開発で最低限必要な環境の構築方法を解説します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）のアプリケーション開発で最低限必要な環境の構築方法を解説します。
 
 ## システム要件 {#system-requirements}
 
@@ -131,6 +131,6 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
     .NET アプリケーションの開発を VS Code で行うことも可能ですが、 Visual Studio を用いたほうが生産性高く開発を進めることができます。
     また GUI ベースの開発ができるため、 Visual Studio のほうが初学者にとって扱いやすい環境です。
 [^2]:
-    Vue.js アプリケーションの開発に推奨されている拡張機能です。詳細は[公式ドキュメント :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/tooling#ide-support){ target=_blank }を参照してください。
+    Vue.js アプリケーションの開発に推奨されている拡張機能です。詳細は [公式ドキュメント :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/tooling#ide-support){ target=_blank }を参照してください。
 [^3]:
     Node.js のインストーラーは、原則 LTS 版を利用してください。

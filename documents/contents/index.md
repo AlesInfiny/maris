@@ -1,15 +1,15 @@
 ---
-title: AlesInfiny Maris にようこそ
-description: AlesInfiny Maris の概要を説明します。
+title: AlesInfiny Maris OSS Edition にようこそ
+description: AlesInfiny Maris OSS Edition の概要を説明します。
 hide:
   - navigation
 ---
 
-# AlesInfiny Maris にようこそ {#top}
+# AlesInfiny Maris OSS Edition にようこそ {#top}
 
-## AlesInfiny Maris とは {#what-is-alesinfiny-maris-version}
+## AlesInfiny Maris OSS Edition とは {#what-is-alesinfiny-maris-version}
 
-AlesInfiny Maris では、 .NET アプリケーションの一般的なアーキテクチャや方式設計のためのドキュメントおよびサンプルアプリケーションを提供します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris）では、 .NET アプリケーションの一般的なアーキテクチャや方式設計のためのドキュメントおよびサンプルアプリケーションを提供します。
 AlesInfiny Maris の提供物は以下の通りです。
 
 - システム形態別の標準的なアプリケーションアーキテクチャ
