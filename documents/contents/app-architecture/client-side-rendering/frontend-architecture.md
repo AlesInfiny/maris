@@ -138,12 +138,16 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-light.png#only-light){ loading=lazy }
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-dark.png#only-dark){ loading=lazy }
 
-モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。モデルは状態管理を伴うビジネスロジックを持つ Store と、伴わないビジネスロジックを持つサービス(仮)で構成されます。
+モデルはフロントエンドアプリケーションのビジネスロジックとして、データの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。モデルは以下の要素で構成されます。
+
+- Service : ビジネスロジックを持ちます。ビューモデルからの要求に対して、 Store の呼び出し、 Web API の呼び出しを行います。
+- Store : フロントエンドで扱う状態を保持するコンテナです。AlesInfiny Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
+
 またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
 
-このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、 AlesInfiny Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
-
 Pinia : [公式ドキュメント :material-open-in-new:](https://pinia.vuejs.org/introduction.html){ target=_blank }
+
+ただし、このモデルの構成は複雑な状態管理を行うアプリケーションを想定しており、小規模なアプリケーションや状態管理を必要としないページの場合は、モデルを省略することも考えられます。
 
 #### Storeの構成要素 {#store-structure}
 
@@ -166,6 +170,14 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 :  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせてはいけません。
 
 本来 State は直接取得・変更できますが、 Getter と Action を通じてアクセスすることで、 State の参照・変更を制御します。これにより、どこで State が参照・変更されたかを把握しやすくなります。
+
+#### State の更新 {#update-state}
+
+ビューモデルはビューからのイベントを受け取り、 Service のビジネスロジックを呼び出します。 Service は Store の Action を呼び出し、 State を更新します。このように State を更新する流れをビューモデル → Service → Store と守ることで、グローバルに操作できる性質を持つ State の一貫性を保ちます。
+
+#### State の取得 {#get-state}
+
+ビューモデルから Store の State を取得します。State は変更がある際、リアクティブに反映されるため、ビューモデルは State の変更を監視する必要はありません。また State はシングルトンであるため、複数のコンポーネントでデータの一貫性が保たれます。また State の取得に Getter を利用するルールを設けることで、 State の取得方法を統一することができます。
 
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
