@@ -73,7 +73,7 @@ interface ImportMeta {
 ```json title="package.json"
 {
   "scripts": {
-    "build:prod": "vue-tsc --noEmit && vite build --mode prod"
+    "build:prod": "vue-tsc --build --force && vite build --mode prod"
   }
 }
 ```
