@@ -61,7 +61,7 @@ namespace Maris.ConsoleApp.Core.Resources {
         }
         
         /// <summary>
-        ///   {commandName} コマンドの非同期実行が {result} で完了しました。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドの非同期実行が {CommandResult} で完了しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandExecutor_ExecutedAsyncCommand {
             get {
@@ -70,7 +70,7 @@ namespace Maris.ConsoleApp.Core.Resources {
         }
         
         /// <summary>
-        ///   {commandName} コマンドの同期実行が {result} で完了しました。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドの同期実行が {CommandResult} で完了しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandExecutor_ExecutedSyncCommand {
             get {
@@ -79,7 +79,7 @@ namespace Maris.ConsoleApp.Core.Resources {
         }
         
         /// <summary>
-        ///   {commandName} コマンドの非同期実行を開始します。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドの非同期実行を開始します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandExecutor_ExecutingAsyncCommand {
             get {
@@ -88,7 +88,7 @@ namespace Maris.ConsoleApp.Core.Resources {
         }
         
         /// <summary>
-        ///   {commandName} コマンドの同期実行を開始します。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドの同期実行を開始します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandExecutor_ExecutingSyncCommand {
             get {
@@ -97,7 +97,7 @@ namespace Maris.ConsoleApp.Core.Resources {
         }
         
         /// <summary>
-        ///   {commandName} コマンドのパラメーターの入力値検証が完了しました。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドのパラメーターの入力値検証が完了しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandExecutor_ValidatedParameter {
             get {
@@ -106,7 +106,7 @@ namespace Maris.ConsoleApp.Core.Resources {
         }
         
         /// <summary>
-        ///   {commandName} コマンドのパラメーターの入力値検証を実行します。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドのパラメーターの入力値検証を実行します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandExecutor_ValidatingParameter {
             get {
