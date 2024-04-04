@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Assets;
 
@@ -7,8 +8,8 @@ namespace Dressca.ApplicationCore.Assets;
 /// </summary>
 public class Asset
 {
-    private string? assetCode;
-    private string? assetType;
+    private string assetCode;
+    private string assetType;
 
     /// <summary>
     ///  <see cref="Asset"/> クラスの新しいインスタンスを初期化します。
@@ -29,7 +30,9 @@ public class Asset
     /// <exception cref="ArgumentException">null または空の文字列を設定できません。</exception>
     public required string AssetCode
     {
-        get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));
+        get => this.assetCode;
+
+        [MemberNotNull(nameof(assetCode))]
         init
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -48,7 +51,9 @@ public class Asset
     /// <exception cref="NotSupportedException">サポートされていないアセットタイプが指定されました。</exception>
     public required string AssetType
     {
-        get => this.assetType ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetType)));
+        get => this.assetType;
+
+        [MemberNotNull(nameof(assetType))]
         init
         {
             if (!AssetTypes.IsSupportedAssetType(value))

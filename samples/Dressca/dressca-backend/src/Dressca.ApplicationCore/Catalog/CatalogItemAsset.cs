@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Catalog;
 
@@ -8,7 +9,7 @@ namespace Dressca.ApplicationCore.Catalog;
 public class CatalogItemAsset
 {
     private CatalogItem? catalogItem;
-    private string? assetCode;
+    private string assetCode;
 
     /// <summary>
     ///  <see cref="CatalogItemAsset"/> クラスの新しいインスタンスを初期化します。
@@ -29,7 +30,9 @@ public class CatalogItemAsset
     /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
     public required string AssetCode
     {
-        get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));
+        get => this.assetCode;
+
+        [MemberNotNull(nameof(assetCode))]
         init
         {
             if (string.IsNullOrWhiteSpace(value))

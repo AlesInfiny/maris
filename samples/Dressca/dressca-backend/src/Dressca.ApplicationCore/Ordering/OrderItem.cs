@@ -11,7 +11,7 @@ namespace Dressca.ApplicationCore.Ordering;
 public class OrderItem
 {
     private readonly List<OrderItemAsset> assets = new();
-    private CatalogItemOrdered? itemOrdered;
+    private CatalogItemOrdered itemOrdered;
     private Order? order;
 
     /// <summary>
@@ -33,7 +33,7 @@ public class OrderItem
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
     public required CatalogItemOrdered ItemOrdered
     {
-        get => this.itemOrdered ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.ItemOrdered)));
+        get => this.itemOrdered;
 
         [MemberNotNull(nameof(itemOrdered))]
         init => this.itemOrdered = value ?? throw new ArgumentNullException(nameof(value));
