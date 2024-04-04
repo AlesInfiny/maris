@@ -88,7 +88,7 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   {CommandName} コマンドのホストの処理が終了コード {CommandResult} で完了しました。実行時間は {ExecutionTime} ms でした。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドのホストの処理が終了コード {ExitCode} で完了しました。実行時間は {ExecutionTime} ms でした。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StopHostingService {
             get {

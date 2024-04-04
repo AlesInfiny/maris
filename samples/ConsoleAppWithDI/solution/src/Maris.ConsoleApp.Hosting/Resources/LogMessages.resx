@@ -127,6 +127,6 @@
     <value>{CommandName} コマンドのホストの処理を開始します。</value>
   </data>
   <data name="StopHostingService" xml:space="preserve">
-    <value>{CommandName} コマンドのホストの処理が終了コード {CommandResult} で完了しました。実行時間は {ExecutionTime} ms でした。</value>
+    <value>{CommandName} コマンドのホストの処理が終了コード {ExitCode} で完了しました。実行時間は {ExecutionTime} ms でした。</value>
   </data>
 </root>
