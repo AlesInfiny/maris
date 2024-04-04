@@ -22,14 +22,14 @@ namespace Maris.ConsoleApp.Hosting.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Messages {
+    internal class LogMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Messages() {
+        internal LogMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Maris.ConsoleApp.Hosting.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Maris.ConsoleApp.Hosting.Resources.LogMessages", typeof(LogMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,38 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   {0} コマンドは同じ名前で登録されています。登録を試みたコマンドパラメーターの型は {1} 、登録されているコマンドパラメーターの型は {2} です。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドの実行時に例外が発生し、処理が失敗しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CommandNameDuplicated {
+        internal static string CommandExecutorRaiseException {
             get {
-                return ResourceManager.GetString("CommandNameDuplicated", resourceCulture);
+                return ResourceManager.GetString("CommandExecutorRaiseException", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0} 属性を追加したコマンドパラメーターの型が読み込まれたアセンブリ {1} に見つかりません。 に類似しているローカライズされた文字列を検索します。
+        ///   起動パラメーター:{CommandParameter} のパースを行います。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CommandParameterIsNotExists {
+        internal static string ParseParameter {
             get {
-                return ResourceManager.GetString("CommandParameterIsNotExists", resourceCulture);
+                return ResourceManager.GetString("ParseParameter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0} コマンドのパラメーターの {1} にコマンドではない型 {2} が設定されています。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドのホストの処理を開始します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string InvalidCommandType {
+        internal static string StartHostingService {
             get {
-                return ResourceManager.GetString("InvalidCommandType", resourceCulture);
+                return ResourceManager.GetString("StartHostingService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {CommandName} コマンドのホストの処理が終了コード {ExitCode} で完了しました。実行時間は {ExecutionTime} ms でした。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string StopHostingService {
+            get {
+                return ResourceManager.GetString("StopHostingService", resourceCulture);
             }
         }
     }

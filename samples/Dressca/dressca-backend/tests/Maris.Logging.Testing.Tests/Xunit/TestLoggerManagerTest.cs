@@ -131,4 +131,30 @@ public class TestLoggerManagerTest
                 Assert.Equal(message2, secondRecord.Message);
             });
     }
+
+    [Fact]
+    public void LogCollector_CanOutputStructuredLog()
+    {
+        // Arrange
+        var testOutputHelper = Mock.Of<ITestOutputHelper>();
+        var manager = new TestLoggerManager(testOutputHelper);
+        var logger = manager.CreateLogger<TestLoggerManagerTest>();
+        var eventId = new EventId(100);
+        var message = "Structured Log Message : {param}";
+        var param = "dummy";
+        logger.LogDebug(eventId, message, param);
+
+        // Act
+        var collector = manager.LogCollector;
+
+        // Assert
+        Assert.NotNull(collector);
+        Assert.Single(collector.GetSnapshot());
+        Assert.Equal(eventId, collector.LatestRecord.Id);
+        Assert.Equal($"Structured Log Message : {param}", collector.LatestRecord.Message);
+        Assert.Equal(nameof(param), collector.LatestRecord.StructuredState![0].Key);
+        Assert.Equal(param, collector.LatestRecord.StructuredState![0].Value);
+        Assert.Equal("{OriginalFormat}", collector.LatestRecord.StructuredState![1].Key);
+        Assert.Equal(message, collector.LatestRecord.StructuredState![1].Value);
+    }
 }
