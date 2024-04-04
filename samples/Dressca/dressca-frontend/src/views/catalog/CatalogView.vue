@@ -4,10 +4,10 @@ import {
   fetchCategoriesAndBrands,
   fetchItems,
 } from '@/services/catalog/catalog-service';
+import { addItemToBasket } from '@/services/basket/basket-service';
 import { storeToRefs } from 'pinia';
 import { useSpecialContentStore } from '@/stores/special-content/special-content';
 import { useCatalogStore } from '@/stores/catalog/catalog';
-import { useBasketStore } from '@/stores/basket/basket';
 import CarouselSlider from '@/components/common/CarouselSlider.vue';
 import Loading from '@/components/common/LoadingSpinner.vue';
 import { useRouter } from 'vue-router';
@@ -16,7 +16,6 @@ import assetHelper from '@/shared/helpers/assetHelper';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
-const basketStore = useBasketStore();
 const { getSpecialContents } = storeToRefs(specialContentStore);
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
 const router = useRouter();
@@ -36,7 +35,8 @@ const { getFirstAssetUrl, getAssetUrl } = assetHelper();
 // };
 
 const addBasket = async (catalogItemId: number) => {
-  await basketStore.add(catalogItemId);
+  // await basketStore.add(catalogItemId);
+  await addItemToBasket(catalogItemId);
   router.push({ name: 'basket' });
 };
 
