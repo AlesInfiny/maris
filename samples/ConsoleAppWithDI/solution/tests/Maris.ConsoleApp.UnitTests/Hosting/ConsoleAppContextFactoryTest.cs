@@ -76,7 +76,7 @@ public class ConsoleAppContextFactoryTest(ITestOutputHelper testOutputHelper) : 
         var record = this.LogCollector.LatestRecord;
         Assert.Equal(LogLevel.Information, record.Level);
         Assert.Equal(1001, record.Id);
-        Assert.Equal("起動パラメーター:console-app-context-factory-test, --category-id, 123 のパースを行います。", record.Message);
+        Assert.Equal("起動パラメーター:console-app-context-factory-test --category-id 123 のパースを行います。", record.Message);
     }
 
     [Fact]
