@@ -61,7 +61,7 @@ namespace Dressca.Store.Assets.StaticFiles.Resources {
         }
         
         /// <summary>
-        ///   アセットコード:{assetCode} のファイルストリームが見つかりません。ファイルパスは {filePath} です。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{AssetCode} のファイルストリームが見つかりません。ファイルパスは {FilePath} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string FileNotFound {
             get {
@@ -70,7 +70,7 @@ namespace Dressca.Store.Assets.StaticFiles.Resources {
         }
         
         /// <summary>
-        ///   アセットコード:{assetCode} のファイルストリームを取得しました。ファイルパスは {filePath} です。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{AssetCode} のファイルストリームを取得しました。ファイルパスは {FilePath} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StaticFileAssetStore_GetStreamEnd {
             get {
@@ -79,7 +79,7 @@ namespace Dressca.Store.Assets.StaticFiles.Resources {
         }
         
         /// <summary>
-        ///   アセットコード:{assetCode} のストリームを取得します。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{AssetCode} のストリームを取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string StaticFileAssetStore_GetStreamStart {
             get {
