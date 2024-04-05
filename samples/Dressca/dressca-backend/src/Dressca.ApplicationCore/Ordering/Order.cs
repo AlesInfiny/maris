@@ -13,7 +13,6 @@ public class Order
     private readonly TimeProvider timeProvider;
     private readonly Account? account;
     private string buyerId;
-    private ShipTo shipToAddress;
 
     /// <summary>
     ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
@@ -91,15 +90,7 @@ public class Order
     /// <summary>
     ///  お届け先を取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="ShipToAddress"/> が設定されていません。</exception>
-    /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
-    public required ShipTo ShipToAddress
-    {
-        get => this.shipToAddress;
-
-        [MemberNotNull(nameof(shipToAddress))]
-        init => this.shipToAddress = value ?? throw new ArgumentNullException(nameof(value));
-    }
+    public required ShipTo ShipToAddress { get; init; }
 
     /// <summary>
     ///  消費税率を取得します。
