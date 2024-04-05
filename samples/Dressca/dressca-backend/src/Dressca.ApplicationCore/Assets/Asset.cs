@@ -26,7 +26,6 @@ public class Asset
     /// <summary>
     ///  アセットコードを取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
     /// <exception cref="ArgumentException">null または空の文字列を設定できません。</exception>
     public required string AssetCode
     {
@@ -47,7 +46,6 @@ public class Asset
     /// <summary>
     ///  アセットのタイプを取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="AssetType"/> が設定されていません。</exception>
     /// <exception cref="NotSupportedException">サポートされていないアセットタイプが指定されました。</exception>
     public required string AssetType
     {

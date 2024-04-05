@@ -27,7 +27,6 @@ public class CatalogItemAsset
     ///  アセットコードを取得します。
     /// </summary>
     /// <exception cref="ArgumentException">アセットコードが <see langword="null"/> または空の文字列です。</exception>
-    /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
     public required string AssetCode
     {
         get => this.assetCode;

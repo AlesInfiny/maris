@@ -63,7 +63,6 @@ public class Order
     /// <summary>
     ///  購入者 Id を取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="BuyerId"/> が設定されていません。</exception>
     /// <exception cref="ArgumentException"><see langword="null"/> または空の文字列を設定できません。</exception>
     public required string BuyerId
     {
