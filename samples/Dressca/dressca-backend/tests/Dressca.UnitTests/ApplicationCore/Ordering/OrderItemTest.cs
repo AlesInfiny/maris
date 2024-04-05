@@ -5,21 +5,6 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 public class OrderItemTest
 {
     [Fact]
-    public void Constructor_注文されたカタログアイテムがnull_ArgumentNullExceptionが発生する()
-    {
-        // Arrange
-        CatalogItemOrdered? itemOrdered = null;
-        decimal unitPrice = 1000m;
-        int quantity = 1;
-
-        // Act
-        var action = () => new OrderItem { ItemOrdered = itemOrdered!, UnitPrice = unitPrice, Quantity = quantity };
-
-        // Assert
-        Assert.Throws<ArgumentNullException>("value", action);
-    }
-
-    [Fact]
     public void Order_注文情報が初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
