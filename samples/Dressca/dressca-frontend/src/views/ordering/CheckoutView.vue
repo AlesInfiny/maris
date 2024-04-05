@@ -5,12 +5,12 @@ import { useAccountStore } from '@/stores/account/account';
 import type { BasketResponse } from '@/generated/api-client/models/basket-response';
 import { postOrder } from '@/services/ordering/orderingService';
 
-import { useOrderingStore } from '@/stores/ordering/ordering';
 import { useRouter } from 'vue-router';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 
 const accountStore = useAccountStore();
+const basketStore = useBasketStore();
 
 const state = reactive({
   basket: {} as BasketResponse,
@@ -22,18 +22,7 @@ const router = useRouter();
 const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
-const orderingStore = useOrderingStore();
-
 const checkout = async () => {
-  // await orderingStore.order(
-  //   address.value.fullName,
-  //   address.value.postalCode,
-  //   address.value.todofuken,
-  //   address.value.shikuchoson,
-  //   address.value.azanaAndOthers,
-  // );
-  // router.push({ name: 'ordering/done' });
-
   try {
     const orderId = await postOrder(
       address.value.fullName,
@@ -45,9 +34,8 @@ const checkout = async () => {
     router.push({ name: 'ordering/done', params: { orderId: orderId } });
   } catch (error) {
     console.error(error);
-  };
+  }
 };
-const basketStore = useBasketStore();
 
 onMounted(async () => {
   await basketStore.fetch();
