@@ -34,6 +34,7 @@ const checkout = async () => {
     router.push({ name: 'ordering/done', params: { orderId: orderId } });
   } catch (error) {
     console.error(error);
+    router.push({ name: 'error' });
   }
 };
 
