@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Dressca.ApplicationCore.Accounting;
+﻿using Dressca.ApplicationCore.Accounting;
 using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Ordering;
@@ -11,7 +10,6 @@ namespace Dressca.ApplicationCore.Ordering;
 public class OrderItem
 {
     private readonly List<OrderItemAsset> assets = new();
-    private CatalogItemOrdered? itemOrdered;
     private Order? order;
 
     /// <summary>
@@ -29,15 +27,7 @@ public class OrderItem
     /// <summary>
     ///  注文された商品（カタログアイテム）を取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="ItemOrdered"/> が設定されていません。</exception>
-    /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
-    public required CatalogItemOrdered ItemOrdered
-    {
-        get => this.itemOrdered ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.ItemOrdered)));
-
-        [MemberNotNull(nameof(itemOrdered))]
-        init => this.itemOrdered = value ?? throw new ArgumentNullException(nameof(value));
-    }
+    public required CatalogItemOrdered ItemOrdered { get; init; }
 
     /// <summary>
     ///  単価を取得します。
