@@ -7,7 +7,8 @@ export async function fetchBasket() {
 }
 
 export async function addItemToBasket(itemId: number) {
-  basketStore.add(itemId);
+  await basketStore.add(itemId);
+  await basketStore.fetch();
 }
 
 export async function updateItemInBasket(
