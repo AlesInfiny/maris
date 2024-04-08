@@ -61,60 +61,6 @@ namespace Maris.ConsoleApp.Core.Resources {
         }
         
         /// <summary>
-        ///   {0} コマンドの非同期実行が {1} で完了しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CommandExecutor_ExecutedAsyncCommand {
-            get {
-                return ResourceManager.GetString("CommandExecutor_ExecutedAsyncCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} コマンドの同期実行が {1} で完了しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CommandExecutor_ExecutedSyncCommand {
-            get {
-                return ResourceManager.GetString("CommandExecutor_ExecutedSyncCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} コマンドの非同期実行を開始します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CommandExecutor_ExecutingAsyncCommand {
-            get {
-                return ResourceManager.GetString("CommandExecutor_ExecutingAsyncCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} コマンドの同期実行を開始します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CommandExecutor_ExecutingSyncCommand {
-            get {
-                return ResourceManager.GetString("CommandExecutor_ExecutingSyncCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} コマンドのパラメーターの入力値検証が完了しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CommandExecutor_ValidatedParameter {
-            get {
-                return ResourceManager.GetString("CommandExecutor_ValidatedParameter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} コマンドのパラメーターの入力値検証を実行します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CommandExecutor_ValidatingParameter {
-            get {
-                return ResourceManager.GetString("CommandExecutor_ValidatingParameter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   コマンドのパラメーターに入力エラーがあります。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InvalidCommandParameter {

@@ -86,14 +86,5 @@ namespace Dressca.Web.Resources {
                 return ResourceManager.GetString("HealthCheckMethodNotFound", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   HTTP 要求に誤りがあります。詳細情報: {0} 。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ReceiveHttpBadRequest {
-            get {
-                return ResourceManager.GetString("ReceiveHttpBadRequest", resourceCulture);
-            }
-        }
     }
 }

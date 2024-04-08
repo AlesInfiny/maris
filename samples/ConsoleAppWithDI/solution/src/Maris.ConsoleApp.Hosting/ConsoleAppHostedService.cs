@@ -78,7 +78,7 @@ internal class ConsoleAppHostedService : IHostedService
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         this.startTime = this.timeProvider.GetTimestamp();
-        this.logger.LogInformation(Events.StartHostingService, Messages.StartHostingService, this.executor.CommandName);
+        this.logger.LogInformation(Events.StartHostingService, LogMessages.StartHostingService, this.executor.CommandName);
         try
         {
             var returnCode = await this.executor.ExecuteCommandAsync(cancellationToken);
@@ -86,12 +86,12 @@ internal class ConsoleAppHostedService : IHostedService
         }
         catch (InvalidParameterException ex)
         {
-            this.logger.LogError(Events.InvalidParameterDetected, ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
+            this.logger.LogError(Events.InvalidParameterDetected, ex, LogMessages.CommandExecutorRaiseException, this.executor.CommandName);
             this.SetExitCode(this.settings.DefaultValidationErrorExitCode);
         }
         catch (Exception ex)
         {
-            this.logger.LogError(Events.CommandExecutorRaiseException, ex, Messages.CommandExecutorRaiseException, this.executor.CommandName);
+            this.logger.LogError(Events.CommandExecutorRaiseException, ex, LogMessages.CommandExecutorRaiseException, this.executor.CommandName);
             this.SetExitCode(this.settings.DefaultErrorExitCode);
         }
         finally
@@ -110,7 +110,7 @@ internal class ConsoleAppHostedService : IHostedService
     {
         this.logger.LogInformation(
             Events.StopHostingService,
-            Messages.StopHostingService,
+            LogMessages.StopHostingService,
             this.executor.CommandName,
             Environment.ExitCode,
             this.timeProvider.GetElapsedTime(this.startTime).TotalMilliseconds);

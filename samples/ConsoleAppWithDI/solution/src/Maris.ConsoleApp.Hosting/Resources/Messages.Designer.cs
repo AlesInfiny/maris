@@ -61,15 +61,6 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   {0} コマンドの実行時に例外が発生し、処理が失敗しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CommandExecutorRaiseException {
-            get {
-                return ResourceManager.GetString("CommandExecutorRaiseException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   {0} コマンドは同じ名前で登録されています。登録を試みたコマンドパラメーターの型は {1} 、登録されているコマンドパラメーターの型は {2} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CommandNameDuplicated {
@@ -93,33 +84,6 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         internal static string InvalidCommandType {
             get {
                 return ResourceManager.GetString("InvalidCommandType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   起動パラメーター:{0} のパースを行います。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ParseParameter {
-            get {
-                return ResourceManager.GetString("ParseParameter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} コマンドのホストの処理を開始します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string StartHostingService {
-            get {
-                return ResourceManager.GetString("StartHostingService", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} コマンドのホストの処理が終了コード {1} で完了しました。実行時間は {2} ms でした。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string StopHostingService {
-            get {
-                return ResourceManager.GetString("StopHostingService", resourceCulture);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Accounting;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Accounting;
 using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Ordering;
@@ -11,8 +12,7 @@ public class Order
     private readonly List<OrderItem> orderItems = new();
     private readonly TimeProvider timeProvider;
     private readonly Account? account;
-    private string? buyerId;
-    private ShipTo? shipToAddress;
+    private string buyerId;
 
     /// <summary>
     ///  <see cref="Order"/> クラスの新しいインスタンスを初期化します。
@@ -63,11 +63,12 @@ public class Order
     /// <summary>
     ///  購入者 Id を取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="BuyerId"/> が設定されていません。</exception>
     /// <exception cref="ArgumentException"><see langword="null"/> または空の文字列を設定できません。</exception>
     public required string BuyerId
     {
-        get => this.buyerId ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.BuyerId)));
+        get => this.buyerId;
+
+        [MemberNotNull(nameof(buyerId))]
         init
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -88,13 +89,7 @@ public class Order
     /// <summary>
     ///  お届け先を取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="ShipToAddress"/> が設定されていません。</exception>
-    /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
-    public required ShipTo ShipToAddress
-    {
-        get => this.shipToAddress ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.shipToAddress)));
-        init => this.shipToAddress = value ?? throw new ArgumentNullException(nameof(value));
-    }
+    public required ShipTo ShipToAddress { get; init; }
 
     /// <summary>
     ///  消費税率を取得します。
