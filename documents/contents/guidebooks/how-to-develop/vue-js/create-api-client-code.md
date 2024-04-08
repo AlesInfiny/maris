@@ -102,11 +102,16 @@ npm run generate-client
 import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
 
-const config = new apiClient.Configuration({});
+function createConfig(): apiClient.Configuration {
+  const config = new apiClient.Configuration({
+    // api-client の共通の Configuration があればここに定義します。
+  });
+  return config;
+}
 
 const axiosInstance = axios.create({});
 
-const defaultApi = new apiClient.DefaultApi(config, '', axiosInstance);
+const defaultApi = new apiClient.DefaultApi(createConfig(), '', axiosInstance);
 
 export { defaultApi };
 ```
