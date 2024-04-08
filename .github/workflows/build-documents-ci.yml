@@ -28,5 +28,9 @@ jobs:
     name: ドキュメントのビルド
     runs-on: ubuntu-latest
     steps:
+      - name: ブランチのチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
