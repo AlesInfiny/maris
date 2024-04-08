@@ -4,11 +4,6 @@
 name: ドキュメントのビルド(CI用)
 
 on:
-  push:
-    branches: [main]
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
-      - 'v[0-9]+.[0-9]+.[0-9]+-Beta[0-9]+'
   pull_request:
     branches: [main]
     paths:
@@ -32,20 +27,7 @@ jobs:
   build:
     name: ドキュメントのビルド
     runs-on: ubuntu-latest
-    outputs:
-      is_pre_release: ${{ steps.setup-variables.outputs.is_pre_release }}
     steps:
-      - id: setup-variables
-        name: 変数の初期化
-        run: |
-          pre_release=false
-          if [[ "${{ github.ref_name }}" == *"Beta"* ]]; then
-            pre_release=true
-          fi
-          echo "is_pre_release:$pre_release"
-          echo "is_pre_release=$pre_release" >> $GITHUB_ENV
-          echo "is_pre_release=$pre_release" >> $GITHUB_OUTPUT
-
       - name: ブランチのチェックアウト
         uses: actions/checkout@v4
         with:
@@ -143,12 +125,7 @@ jobs:
         id: build_documents
         continue-on-error: true
         run: |
-          if [ ${{ startsWith(github.ref, 'refs/tags/v') }} ];
-          then
-            export VERSION="${{ github.ref_name }}"
-          else
-            export VERSION="Test Version"
-          fi
+          export VERSION="Test Version"
           cd documents
           echo '# Mkdocs Build Result :factory:' >> $GITHUB_STEP_SUMMARY
           mkdocs build --verbose --clean --strict > mkdocs_build_log.txt
