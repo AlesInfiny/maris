@@ -11,56 +11,58 @@
 
 documents フォルダー配下のフォルダー、ファイルの配置は以下の通りです。
 
-|               |                  |                       |                    |                                               |
-| ------------- | ---------------- | --------------------- | ------------------ | --------------------------------------------- |
-| _materials    |                  |                       |                    | ドキュメント内で利用する素材                  |
-|               | images           |                       |                    | 画像素材（画像を作るための元ファイル）        |
-|               |                  | app-architecture      |                    | contents/imagesフォルダーと構造をそろえる     |
-|               |                  |                       | hoge.drawio        | ファイル名は生成後の画像ファイルと同じにする  |
-| contents      |                  |                       |                    | ドキュメント本体                              |
-|               | about-maris      |                       |                    | 利用規約等、ライセンス関連のファイル        |
-|               | app-architecture |                       |                    | アプリケーションアーキテクチャ                |
-|               |                  | client-side-rendering |                    | CSR編                                         |
-|               |                  | console-app           |                    | コンソールアプリケーション編                  |
-|               |                  | overview              |                    | 概要編                                        |
-|               | assets           |                       |                    | 共通資材（ロゴなど）                          |
-|               |                  | images                |                    |                                               |
-|               | guidebooks       |                       |                    | ガイドライン系ドキュメント                    |
-|               |                  | app-testing           |                    | アプリケーションテスト（*）                   |
-|               |                  | git                   |                    | Git リポジトリ構築ガイド                      |
-|               |                  | how-to-develop        |                    | アプリケーション開発手順                      |
-|               |                  |                       | dotnet             | .NET 編                                       |
-|               |                  |                       | local-environment  | ローカル開発環境の構築                        |
-|               |                  |                       | publication        | アプリケーションの発行手順                    |
-|               |                  |                       | vue-js             | Vue.js 編                                     |
-|               |                  | migration             |                    | マイグレーション                              |
-|               |                  |                       | dotnetfw-risk      | .NET Frameworkにとどまることのリスク          |
-|               |                  |                       | from-dotnetfw      | .NET Frameworkからの移行                      |
-|               |                  | modern-dev-process    |                    | 開発プロセスのモダナイズ                      |
-|               | images           |                       |                    | ページ固有の画像ファイル置き場                |
-|               |                  | app-architecture      |                    | mdファイルの配置フォルダーと構造をそろえる    |
-|               |                  |                       | hoge.png           | 画像ファイルはsvgかpngにする                  |
-|               |                  |                       | animation.gif      | gifアニメも利用可                             |
-|               |                  | guidebooks            |                    |                                               |
-|               |                  |                       | app-testing        |                                               |
-|               |                  |                       | how-to-develop     |                                               |
-|               |                  |                       | migration          |                                               |
-|               |                  |                       | modern-dev-process |                                               |
-|               |                  | samples               |                    |                                               |
-|               |                  | terms                 |                    |                                               |
-|               | samples          |                       |                    | サンプルアプリケーション解説                  |
-|               |                  | azure-ad-b2c          |                    | Azure AD B2C の認証を利用するサンプル解説     |
-|               |                  | console-app-with-di   |                    | コンソールアプリの要件別サンプル解説          |
-|               |                  | downloads             |                    | サンプルアプリケーションコード置き場(zip圧縮) |
-|               | stylesheets      |                       |                    | 既定のスタイルシートの上書き設定              |
-|               | index.md         |                       |                    | トップページ                                  |
-| includes      |                  |                       |                    | Snippets の置き場                             |
-|               | abbreviations.md |                       |                    | 略語用語集                                    |
-| overrides     |                  |                       |                    | Mkdocs Materialの拡張ファイル置き場（\*）     |
-| readme-images |                  |                       |                    | README.md 内の画像ファイル置き場              |
-| .gitignore    |                  |                       |                    | mkdocs 用の gitignore                         |
-| mkdocs.yml    |                  |                       |                    | mkdocs の設定ファイル                         |
-| README.md     |                  |                       |                    | このドキュメント                              |
+|               |                  |                       |                    |                     |                                               |
+| ------------- | ---------------- | --------------------- | ------------------ | ------------------- | --------------------------------------------- |
+| _materials    |                  |                       |                    |                     | ドキュメント内で利用する素材                  |
+|               | images           |                       |                    |                     | 画像素材（画像を作るための元ファイル）        |
+|               |                  | app-architecture      |                    |                     | contents/imagesフォルダーと構造をそろえる     |
+|               |                  |                       | hoge.drawio        |                     | ファイル名は生成後の画像ファイルと同じにする  |
+| contents      |                  |                       |                    |                     | ドキュメント本体                              |
+|               | about-maris      |                       |                    |                     | 利用規約等、ライセンス関連のファイル          |
+|               | app-architecture |                       |                    |                     | アプリケーションアーキテクチャ                |
+|               |                  | client-side-rendering |                    |                     | CSR編                                         |
+|               |                  |                       | test               |                     | テスト方針                                    |
+|               |                  |                       |                    | backend-application | バックエンドアプリのテスト方針                |
+|               |                  | console-app           |                    |                     | コンソールアプリケーション編                  |
+|               |                  | overview              |                    |                     | 概要編                                        |
+|               | assets           |                       |                    |                     | 共通資材（ロゴなど）                          |
+|               |                  | images                |                    |                     |                                               |
+|               | guidebooks       |                       |                    |                     | ガイドライン系ドキュメント                    |
+|               |                  | app-testing           |                    |                     | アプリケーションテスト（*）                   |
+|               |                  | git                   |                    |                     | Git リポジトリ構築ガイド                      |
+|               |                  | how-to-develop        |                    |                     | アプリケーション開発手順                      |
+|               |                  |                       | dotnet             |                     | .NET 編                                       |
+|               |                  |                       | local-environment  |                     | ローカル開発環境の構築                        |
+|               |                  |                       | publication        |                     | アプリケーションの発行手順                    |
+|               |                  |                       | vue-js             |                     | Vue.js 編                                     |
+|               |                  | migration             |                    |                     | マイグレーション                              |
+|               |                  |                       | dotnetfw-risk      |                     | .NET Frameworkにとどまることのリスク          |
+|               |                  |                       | from-dotnetfw      |                     | .NET Frameworkからの移行                      |
+|               |                  | modern-dev-process    |                    |                     | 開発プロセスのモダナイズ                      |
+|               | images           |                       |                    |                     | ページ固有の画像ファイル置き場                |
+|               |                  | about-maris           |                    |                     | mdファイルの配置フォルダーと構造をそろえる    |
+|               |                  |                       | hoge.png           |                     | 画像ファイルはsvgかpngにする                  |
+|               |                  |                       | animation.gif      |                     | gifアニメも利用可                             |
+|               |                  | app-architecture      |                    |                     |                                               |
+|               |                  | guidebooks            |                    |                     |                                               |
+|               |                  |                       | app-testing        |                     |                                               |
+|               |                  |                       | how-to-develop     |                     |                                               |
+|               |                  |                       | migration          |                     |                                               |
+|               |                  |                       | modern-dev-process |                     |                                               |
+|               | samples          |                       |                    |                     | サンプルアプリケーション解説                  |
+|               |                  | azure-ad-b2c          |                    |                     | Azure AD B2C の認証を利用するサンプル解説     |
+|               |                  | console-app-with-di   |                    |                     | コンソールアプリの要件別サンプル解説          |
+|               |                  | downloads             |                    |                     | サンプルアプリケーションコード置き場(zip圧縮) |
+|               | stylesheets      |                       |                    |                     | 既定のスタイルシートの上書き設定              |
+|               | index.md         |                       |                    |                     | トップページ                                  |
+| includes      |                  |                       |                    |                     | Snippets の置き場                             |
+|               | abbreviations.md |                       |                    |                     | 略語用語集                                    |
+| overrides     |                  |                       |                    |                     | Mkdocs Materialの拡張ファイル置き場（\*）     |
+| readme-images |                  |                       |                    |                     | README.md 内の画像ファイル置き場              |
+| .gitignore    |                  |                       |                    |                     | mkdocs 用の gitignore                         |
+| mkdocs.yml    |                  |                       |                    |                     | mkdocs の設定ファイル                         |
+| README.md     |                  |                       |                    |                     | このドキュメント                              |
+|               |                  |                       |                    |                     |                                               |
 
 \*：詳細は [Mkdocs Materialの解説](https://squidfunk.github.io/mkdocs-material/customization/?h=theme#extending-the-theme) と [GitHub リポジトリ](https://github.com/squidfunk/mkdocs-material/tree/master/src/overrides) を参照。
 
