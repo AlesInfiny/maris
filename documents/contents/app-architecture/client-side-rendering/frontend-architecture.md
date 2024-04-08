@@ -117,7 +117,7 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 <!-- textlint-disable -->
 :  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせてはいけません。
 
-本来 State は直接取得・変更できますが、 Getter と Action を通じてアクセスすることで、 State の参照・変更を制御します。これにより、どこで State が参照・変更されたかを把握しやすくなります。
+Store は State をグローバルなシングルトンとして管理します。そのため本来 State は直接取得・更新ができますが、 Getter と Action を通じてアクセスするルールを設けて、 State の参照・更新を制御することが重要です。
 
 #### State の更新 {#update-state}
 
@@ -125,7 +125,7 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 
 #### State の取得 {#get-state}
 
-ビューモデルから Store の State を取得します。State は変更がある際、リアクティブに反映されるため、ビューモデルは State の変更を監視する必要はありません。また State はシングルトンであるため、複数のコンポーネントでデータの一貫性が保たれます。また State の取得に Getter を利用するルールを設けることで、 State の取得方法を統一することができます。
+ビューモデルから Store の Getter を利用して State を取得します。
 
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
