@@ -3,7 +3,7 @@ import { onMounted, reactive, toRefs } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
 import { useAccountStore } from '@/stores/account/account';
 import type { BasketResponse } from '@/generated/api-client/models/basket-response';
-import { postOrder } from '@/services/ordering/orderingService';
+import { postOrder } from '@/services/ordering/ordering-service';
 
 import { useRouter } from 'vue-router';
 import currencyHelper from '@/shared/helpers/currencyHelper';

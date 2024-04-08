@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
-import { getOrder } from '@/services/ordering/orderingService';
+import { getOrder } from '@/services/ordering/ordering-service';
 import type { OrderResponse } from '@/generated/api-client/models/order-response';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
