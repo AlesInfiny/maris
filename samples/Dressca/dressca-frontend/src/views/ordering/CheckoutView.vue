@@ -146,4 +146,3 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-@/services/ordering/ordering-service
