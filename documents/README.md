@@ -1,5 +1,5 @@
 <!-- textlint-disable @textlint-rule/require-header-id -->
-# AlesInfiny Maris ドキュメントについて
+# AlesInfiny Maris OSS Edition ドキュメントについて
 
 <!-- cSpell:ignore hoge hogehoge dotnetfw pymdown -->
 
@@ -18,6 +18,7 @@ documents フォルダー配下のフォルダー、ファイルの配置は以�
 |               |                  | app-architecture      |                    | contents/imagesフォルダーと構造をそろえる     |
 |               |                  |                       | hoge.drawio        | ファイル名は生成後の画像ファイルと同じにする  |
 | contents      |                  |                       |                    | ドキュメント本体                              |
+|               | about-maris      |                       |                    | 利用規約等、ライセンス関連のファイル        |
 |               | app-architecture |                       |                    | アプリケーションアーキテクチャ                |
 |               |                  | client-side-rendering |                    | CSR編                                         |
 |               |                  | console-app           |                    | コンソールアプリケーション編                  |
@@ -30,6 +31,7 @@ documents フォルダー配下のフォルダー、ファイルの配置は以�
 |               |                  | how-to-develop        |                    | アプリケーション開発手順                      |
 |               |                  |                       | dotnet             | .NET 編                                       |
 |               |                  |                       | local-environment  | ローカル開発環境の構築                        |
+|               |                  |                       | publication        | アプリケーションの発行手順                    |
 |               |                  |                       | vue-js             | Vue.js 編                                     |
 |               |                  | migration             |                    | マイグレーション                              |
 |               |                  |                       | dotnetfw-risk      | .NET Frameworkにとどまることのリスク          |
@@ -47,13 +49,14 @@ documents フォルダー配下のフォルダー、ファイルの配置は以�
 |               |                  | samples               |                    |                                               |
 |               |                  | terms                 |                    |                                               |
 |               | samples          |                       |                    | サンプルアプリケーション解説                  |
+|               |                  | azure-ad-b2c          |                    | Azure AD B2C の認証を利用するサンプル解説     |
 |               |                  | console-app-with-di   |                    | コンソールアプリの要件別サンプル解説          |
 |               |                  | downloads             |                    | サンプルアプリケーションコード置き場(zip圧縮) |
 |               | stylesheets      |                       |                    | 既定のスタイルシートの上書き設定              |
-|               | terms            |                       |                    | 利用規約                                      |
-| overrides     |                  |                       |                    | Mkdocs Materialの拡張ファイル置き場（\*）     |
+|               | index.md         |                       |                    | トップページ                                  |
 | includes      |                  |                       |                    | Snippets の置き場                             |
 |               | abbreviations.md |                       |                    | 略語用語集                                    |
+| overrides     |                  |                       |                    | Mkdocs Materialの拡張ファイル置き場（\*）     |
 | readme-images |                  |                       |                    | README.md 内の画像ファイル置き場              |
 | .gitignore    |                  |                       |                    | mkdocs 用の gitignore                         |
 | mkdocs.yml    |                  |                       |                    | mkdocs の設定ファイル                         |
