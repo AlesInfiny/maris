@@ -102,6 +102,16 @@ runs:
       run: |
         cd samples/AzureADB2CAuth
         zip -r ../../documents/contents/samples/downloads/azure-ad-b2c-auth.zip *
+  
+    - id: setup-version
+      name: ドキュメントのバージョン設定
+      shell: bash
+      run: |
+        if [ ${{ startsWith(github.ref, 'refs/tags/v') }} ];
+        then
+        export VERSION="${{ github.ref_name }}"
+        else
+        export VERSION="Test Version"    
 
     - name: ドキュメントのビルド
       id: build_documents
