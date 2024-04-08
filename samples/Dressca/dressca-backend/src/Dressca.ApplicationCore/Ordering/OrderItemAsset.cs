@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Ordering;
 
@@ -8,7 +9,7 @@ namespace Dressca.ApplicationCore.Ordering;
 public class OrderItemAsset
 {
     private OrderItem? orderItem;
-    private string? assetCode;
+    private string assetCode;
 
     /// <summary>
     ///  <see cref="OrderItemAsset"/> クラスの新しいインスタンスを初期化します。
@@ -26,10 +27,11 @@ public class OrderItemAsset
     ///  アセットコードを取得します。
     /// </summary>
     /// <exception cref="ArgumentException">アセットコードが <see langword="null"/> または空の文字列です。</exception>
-    /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
     public required string AssetCode
     {
-        get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));
+        get => this.assetCode;
+
+        [MemberNotNull(nameof(assetCode))]
         init
         {
             if (string.IsNullOrWhiteSpace(value))

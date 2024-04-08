@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Maris.ConsoleApp.Hosting.Resources {
+namespace Maris.ConsoleApp.Core.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Maris.ConsoleApp.Hosting.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Messages {
+    internal class LogMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Messages() {
+        internal LogMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Maris.ConsoleApp.Hosting.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Maris.ConsoleApp.Core.Resources.LogMessages", typeof(LogMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,56 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   {0} コマンドは同じ名前で登録されています。登録を試みたコマンドパラメーターの型は {1} 、登録されているコマンドパラメーターの型は {2} です。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドの非同期実行が {CommandResult} で完了しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CommandNameDuplicated {
+        internal static string CommandExecutor_ExecutedAsyncCommand {
             get {
-                return ResourceManager.GetString("CommandNameDuplicated", resourceCulture);
+                return ResourceManager.GetString("CommandExecutor_ExecutedAsyncCommand", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0} 属性を追加したコマンドパラメーターの型が読み込まれたアセンブリ {1} に見つかりません。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドの同期実行が {CommandResult} で完了しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CommandParameterIsNotExists {
+        internal static string CommandExecutor_ExecutedSyncCommand {
             get {
-                return ResourceManager.GetString("CommandParameterIsNotExists", resourceCulture);
+                return ResourceManager.GetString("CommandExecutor_ExecutedSyncCommand", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0} コマンドのパラメーターの {1} にコマンドではない型 {2} が設定されています。 に類似しているローカライズされた文字列を検索します。
+        ///   {CommandName} コマンドの非同期実行を開始します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string InvalidCommandType {
+        internal static string CommandExecutor_ExecutingAsyncCommand {
             get {
-                return ResourceManager.GetString("InvalidCommandType", resourceCulture);
+                return ResourceManager.GetString("CommandExecutor_ExecutingAsyncCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {CommandName} コマンドの同期実行を開始します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CommandExecutor_ExecutingSyncCommand {
+            get {
+                return ResourceManager.GetString("CommandExecutor_ExecutingSyncCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {CommandName} コマンドのパラメーターの入力値検証が完了しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CommandExecutor_ValidatedParameter {
+            get {
+                return ResourceManager.GetString("CommandExecutor_ValidatedParameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {CommandName} コマンドのパラメーターの入力値検証を実行します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CommandExecutor_ValidatingParameter {
+            get {
+                return ResourceManager.GetString("CommandExecutor_ValidatingParameter", resourceCulture);
             }
         }
     }

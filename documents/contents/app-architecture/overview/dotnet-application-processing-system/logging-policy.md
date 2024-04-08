@@ -94,4 +94,9 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）で定義するロ
 
 ## ロギングライブラリ {#logging-libraries}
 
-AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.logging.ilogger) インターフェースを使用します。ログプロバイダーは、アプリケーションの形態に合わせて適切なものを選択します。
+AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.logging.ilogger) インターフェースを使用します。
+ログプロバイダーは、アプリケーションの形態に合わせて適切なものを選択します。
+なお、構造化ログに対応したログプロバイダーの利用を推奨します。
+構造化ログについては以下を参照してください。
+
+[ログメッセージテンプレート :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-message-template){ target=_blank }
