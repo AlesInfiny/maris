@@ -112,6 +112,7 @@ runs:
         export VERSION="${{ github.ref_name }}"
         else
         export VERSION="Test Version"
+        fi
 
     - name: ドキュメントのビルド
       id: build_documents
