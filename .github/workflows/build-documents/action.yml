@@ -135,4 +135,4 @@ runs:
           cat mkdocs_build_log.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
         fi
-        exit 1  
+        exit 1
