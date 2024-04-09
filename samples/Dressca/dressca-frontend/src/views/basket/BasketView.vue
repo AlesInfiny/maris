@@ -12,18 +12,17 @@ import Loading from '@/components/common/LoadingSpinner.vue';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
-import { BasketResponse, BasketItemResponse } from '@/generated/api-client';
+import { BasketResponse } from '@/generated/api-client';
 
 const state = reactive({
   basket: {} as BasketResponse,
-  added: null as BasketItemResponse | null,
   showLoading: true,
 });
 
 const basketStore = useBasketStore();
-const { getAddedItemId } = storeToRefs(basketStore);
+const { getAddedItem, getAddedItemId } = storeToRefs(basketStore);
 
-const { basket, added } = toRefs(state);
+const { basket } = toRefs(state);
 const router = useRouter();
 const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
@@ -54,7 +53,6 @@ onMounted(async () => {
   state.showLoading = true;
   await fetchBasket();
   state.basket = basketStore.getBasket;
-  state.added = basketStore.getAddedItem ? basketStore.getAddedItem : null;
   state.showLoading = false;
 });
 
@@ -67,20 +65,20 @@ onUnmounted(async () => {
   <div class="container mx-auto my-4 max-w-4xl">
     <Loading :show="state.showLoading"></Loading>
     <div v-if="!state.showLoading">
-      <div v-if="getAddedItemId && !!added" class="mx-2">
+      <div v-if="getAddedItemId && !!getAddedItem" class="mx-2">
         <span class="text-lg font-medium text-green-500"
           >以下の商品が追加されました。</span
         >
         <div class="grid grid-cols-1 lg:grid-cols-3 mt-4 flex items-center">
           <img
-            :src="getFirstAssetUrl(added.catalogItem?.assetCodes)"
+            :src="getFirstAssetUrl(getAddedItem.catalogItem?.assetCodes)"
             class="h-[150px] m-auto pointer-events-none"
           />
           <span class="text-center lg:text-left">{{
-            added.catalogItem?.name
+            getAddedItem.catalogItem?.name
           }}</span>
           <span class="text-center lg:text-left">{{
-            toCurrencyJPY(added.unitPrice)
+            toCurrencyJPY(getAddedItem.unitPrice)
           }}</span>
         </div>
       </div>
