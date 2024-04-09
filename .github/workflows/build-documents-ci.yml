@@ -13,6 +13,7 @@ on:
       - ".github/workflows/build-documents-ci.yml"
       - ".github/workflows/build-and-release-documents.yml"
       - ".github/workflows/build-documents/action.yml"
+      - ".github/workflows/pack-and-upload/action.yml"
       - ".markdownlint.yaml"
       - ".textlintignore"
       - ".textlintrc"
@@ -26,7 +27,7 @@ permissions:
   contents: read
 
 env:
-  DOCUMENT_ARTIFACTS_FILENAME: docs.zip  
+  DOCUMENT_ARTIFACTS_FILENAME: docs.zip
 
 jobs:
   build:
