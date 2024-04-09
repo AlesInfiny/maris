@@ -35,7 +35,7 @@ OpenAPI Generator を利用する際は、 Axios のエンドポイントの設�
 ```typescript title="src/api-client/index.ts"
 function createConfig(): apiClient.Configuration {
   const config = new apiClient.Configuration({
-    basePath: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
+    basePath: import.meta.env.VITE_API_ENDPOINT,
   });
   return config;
 }
