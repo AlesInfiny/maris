@@ -49,10 +49,10 @@ export default wrappedApi;
 
 ### 本番用 env ファイルの作成 {#create-env-prod}
 
-本番用の環境変数ファイルを作成します。 `.env.production` や `.env.prod` など本番用と判断できる名前で env ファイルを作成します。前の手順で作成した `import.meta.env.AXIOS_BASE_ENDPOINT_ORIGIN` に対応する値を設定します。
+本番用の環境変数ファイルを作成します。 `.env.production` や `.env.prod` など本番用と判断できる名前で env ファイルを作成します。前の手順で作成した `import.meta.env.API_ENDPOINT` に対応する値を設定します。
 
 ```env title=".env.prod"
-VITE_AXIOS_BASE_ENDPOINT_ORIGIN=https://www.example.com
+VITE_API_ENDPOINT=https://www.example.com
 ```
 
 `VITE_` で始まる環境変数に対して TypeScript で型定義をしたい場合、 `env.d.ts` に以下のような設定を追加します。
@@ -61,7 +61,7 @@ VITE_AXIOS_BASE_ENDPOINT_ORIGIN=https://www.example.com
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_AXIOS_BASE_ENDPOINT_ORIGIN: string;
+  readonly VITE_API_ENDPOINT: string;
 }
 
 interface ImportMeta {
