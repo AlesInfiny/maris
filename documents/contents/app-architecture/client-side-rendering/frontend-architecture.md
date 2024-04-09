@@ -162,12 +162,12 @@ Vue.js プロジェクトのフォルダー構成は、ブランクプロジェ�
 
 ### views フォルダー {#views-directory}
 
-views フォルダーはルーティングで指定される vue ファイルを格納します。そのためこの下層のフォルダー構造はサイト構造を意識して作成することを推奨します。以下の例で Login.vue なら ```https://xxxx.com/account/login``` と設定します。
+views フォルダーはルーティングで指定される vue ファイルを格納します。そのためこの下層のフォルダー構造はサイト構造を意識して作成することを推奨します。以下の例で Login.vue なら ```https://xxxx.com/authentication/login``` と設定します。
 
 ``` text title="views フォルダー" linenums="0"
 src/
 └─ views/
-   ├─ account/
+   ├─ authentication/
    │  ├─ LoginView.vue
    │  └─ LogoutView.vue
    ├─ catalog/
@@ -175,7 +175,7 @@ src/
 ```
 
 !!! note "Vue Router の設定"
-      Vue Router では URL のパスと対象のファイルを指定することで、ルーティングを設定します。以下は `https://xxxx.com/account/login` という URL に対して上記の `LoginView.vue` を設定している例です。
+      Vue Router では URL のパスと対象のファイルを指定することで、ルーティングを設定します。以下は `https://xxxx.com/authentication/login` という URL に対して上記の `LoginView.vue` を設定している例です。
 
       ``` TypeScript title="index.ts"
       import { createRouter, createWebHistory } from "vue-router";
@@ -184,9 +184,9 @@ src/
          history: createWebHistory(import.meta.env.BASE_URL),
          routes: [
             {
-               path: "/account/login",
-               name: "account/login",
-               component: () => import('@/views/account/LoginView.vue'),
+               path: "/authentication/login",
+               name: "authentication/login",
+               component: () => import('@/views/authentication/LoginView.vue'),
             },
          ],
       });
@@ -199,7 +199,7 @@ components フォルダーは主に、再利用性の高い vue コンポーネ�
 ``` text title="components フォルダー" linenums="0"
 src/
 └─ components/
-   ├─ account/
+   ├─ authentication/
    │  ├─ LoginForm.vue
    │  └─ LogoutMessage.vue
    ├─ product/
@@ -224,7 +224,7 @@ src/
    │  └─ Form.vue
    │
    ├─ organisms/
-   │  ├─ account/
+   │  ├─ authentication/
    │  │  ├─ LoginForm.vue
    │  │  └─ LogoutMessage.vue
    │  └─ product/
