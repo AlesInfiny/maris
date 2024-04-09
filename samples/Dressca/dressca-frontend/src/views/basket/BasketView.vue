@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, toRefs } from 'vue';
+import { onMounted, onUnmounted, reactive } from 'vue';
 import {
   fetchBasket,
   removeItemFromBasket,
@@ -12,23 +12,20 @@ import Loading from '@/components/common/LoadingSpinner.vue';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
-import { BasketResponse } from '@/generated/api-client';
 
 const state = reactive({
-  basket: {} as BasketResponse,
   showLoading: true,
 });
 
 const basketStore = useBasketStore();
-const { getAddedItem, getAddedItemId } = storeToRefs(basketStore);
+const { getBasket, getAddedItem, getAddedItemId } = storeToRefs(basketStore);
 
-const { basket } = toRefs(state);
 const router = useRouter();
 const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
 const isEmpty = () => {
-  return basket.value.basketItems?.length === 0;
+  return getBasket.value.basketItems?.length === 0;
 };
 
 const goCatalog = () => {
@@ -37,12 +34,10 @@ const goCatalog = () => {
 
 const update = async (catalogItemId: number, newQuantity: number) => {
   await updateItemInBasket(catalogItemId, newQuantity);
-  state.basket = basketStore.getBasket;
 };
 
 const remove = async (catalogItemId: number) => {
   await removeItemFromBasket(catalogItemId);
-  state.basket = basketStore.getBasket;
 };
 
 const order = () => {
@@ -52,7 +47,6 @@ const order = () => {
 onMounted(async () => {
   state.showLoading = true;
   await fetchBasket();
-  state.basket = basketStore.getBasket;
   state.showLoading = false;
 });
 
@@ -95,7 +89,7 @@ onUnmounted(async () => {
           <div class="text-lg font-medium text-right lg:col-span-1">数量</div>
         </div>
         <div
-          v-for="item in basketStore.basket.basketItems"
+          v-for="item in getBasket.basketItems"
           :key="item.catalogItemId"
           class="grid grid-cols-5 lg:grid-cols-8 mt-4 flex items-center"
         >
@@ -110,20 +104,20 @@ onUnmounted(async () => {
           <table class="inline-block border-separate">
             <tr>
               <th>税抜き合計</th>
-              <td>{{ toCurrencyJPY(basket.account?.totalItemsPrice) }}</td>
+              <td>{{ toCurrencyJPY(getBasket.account?.totalItemsPrice) }}</td>
             </tr>
             <tr>
               <th>送料</th>
-              <td>{{ toCurrencyJPY(basket.account?.deliveryCharge) }}</td>
+              <td>{{ toCurrencyJPY(getBasket.account?.deliveryCharge) }}</td>
             </tr>
             <tr>
               <th>消費税</th>
-              <td>{{ toCurrencyJPY(basket.account?.consumptionTax) }}</td>
+              <td>{{ toCurrencyJPY(getBasket.account?.consumptionTax) }}</td>
             </tr>
             <tr>
               <th>合計</th>
               <td class="">
-                {{ toCurrencyJPY(basket.account?.totalPrice) }}
+                {{ toCurrencyJPY(getBasket.account?.totalPrice) }}
               </td>
             </tr>
           </table>
