@@ -1,6 +1,6 @@
 <!-- textlint-disable @textlint-rule/require-header-id -->
 
-<!-- cSpell:ignore Validatable -->
+<!-- cSpell:ignore Validatable signupsignin onmicrosoft b2clogin -->
 
 # Azure AD B2C による認証サンプル
 
@@ -214,7 +214,7 @@ VITE_ADB2C_APP_URI=[フロントエンドアプリケーションのベースと
 1. 画面上の「 `ログイン` 」をクリックします。 Azure AD B2C のサインイン画面がポップアップで表示されます。
 1. 「 Sign up now 」リンクをクリックします。
 1. 使用可能なメールアドレスを入力し、「 Send verification code 」をクリックします。
-1. 上の手順で入力したメールアドレス宛に Verification code が送信されるので、画面に入力して「 Verfiy code 」をクリックします。
+1. 上の手順で入力したメールアドレス宛に Verification code が送信されるので、画面に入力して「 Verify code 」をクリックします。
 1. 画面に新しいパスワード等の必要事項を入力し、「 Create 」をクリックします。
 1. サインインが成功し、画面右上に「ユーザー ID 」が表示されれば成功です。以降は入力したメールアドレスとパスワードでサインインできるようになります。
 
