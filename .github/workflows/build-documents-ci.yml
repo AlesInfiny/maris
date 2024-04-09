@@ -4,6 +4,9 @@
 name: ドキュメントのビルド(CI用)
 
 on:
+  push:
+    branches:
+      - "feature/ドキュメントリリースのワークフローを分割する"
   pull_request:
     branches: [main]
     paths:
