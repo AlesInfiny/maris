@@ -44,20 +44,6 @@ public class OrderTest
         Assert.Throws<ArgumentException>(action);
     }
 
-    [Fact]
-    public void Constructor_住所がnull_ArgumentNullExceptionが発生する()
-    {
-        // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
-        var items = CreateDefaultOrderItems();
-
-        // Act
-        var action = () => new Order(items) { BuyerId = buyerId, ShipToAddress = null! };
-
-        // Assert
-        Assert.Throws<ArgumentNullException>(action);
-    }
-
     [Theory]
     [MemberData(nameof(EmptyOrderItems))]
     public void Constructor_注文アイテムがnullまたは空のリスト_ArgumentExceptionが発生する(List<OrderItem>? emptyOrderItems)

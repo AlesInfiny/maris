@@ -33,7 +33,9 @@ Vue.js を用いた SPA の構成をとります。
 ![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-light.png#only-light){ loading=lazy }
 ![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-dark.png#only-dark){ loading=lazy }
 
-## ソリューションの単位 {#unit-of-solution}
+## ソリューションの構造 {#solution-structure}
+
+### ソリューションの単位 {#unit-of-solution}
 
 Web アプリケーションやコンソールアプリケーション ( バッチ ) など、 1 つのサブシステムは通常複数のアプリケーションで構成されます。
 AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本として推奨します。
@@ -44,7 +46,7 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
 
 [Visual Studio のフィルター処理済みソリューション - ソリューション フィルター ファイル](https://learn.microsoft.com/ja-jp/visualstudio/ide/filtered-solutions#solution-filter-files)
 
-## プロジェクトの単位 {#unit-of-project}
+### プロジェクトの単位 {#unit-of-project}
 
 プロジェクトは、原則として機能単位、層単位で分割することを推奨します。
 プロジェクトの分割にあたっては、以下の手順で分割を検討してください。
