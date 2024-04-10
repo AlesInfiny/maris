@@ -73,7 +73,9 @@ interface ImportMeta {
 ```json title="package.json"
 {
   "scripts": {
-    "build:prod": "vue-tsc --noEmit && vite build --mode prod"
+    "build:prod": "run-p typecheck build-only:prod --print-label",
+    "build-only:prod": "vite build --mode prod",
+    "typecheck": "vue-tsc --build --force"
   }
 }
 ```
