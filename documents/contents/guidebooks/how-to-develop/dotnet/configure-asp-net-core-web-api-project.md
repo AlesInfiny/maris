@@ -124,7 +124,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 ### 未処理例外のエラー情報を返却するコントローラークラスの作成 {#create-error-controller}
 
 キャッチされなかった例外の情報を返却するために、エラー情報を取得できるコントローラーを追加します。
-エラーレスポンスは [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc7807.html)) に従った形式で返却するようにしましょう。
+エラーレスポンスは [RFC 9457](https://datatracker.ietf.org/doc/html/rfc9457) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc9457.html)) に従った形式で返却するようにしましょう。
 
 本番環境ではアプリケーションの内部情報流出を防ぐため、スタックトレースを返却しないようにします。
 開発環境ではエラーの詳細を簡単に開発者が把握できるよう、スタックトレースをエラーレスポンスに含めることを検討しましょう。
@@ -132,8 +132,8 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 ??? example "システムエラーのエラー情報を返却するコントローラー実装例"
 
     システムエラーのエラー情報を返却するためには、未処理例外の情報を取得し、適切な形式に変換するコントローラー ( この例では `#!csharp ErrorController` ) を作成します。
-    このコントローラーは、 [RFC 7807](https://datatracker.ietf.org/doc/html/rfc7807) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc7807.html)) に従ったエラーレスポンスを返却するように実装しましょう。
-    `#!csharp ControllerBase.Problem` メソッドを利用すると、 RFC 7807 に準拠したレスポンスを簡単に構築できます。
+    このコントローラーは、 [RFC 9457](https://datatracker.ietf.org/doc/html/rfc9457) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc9457.html)) に従ったエラーレスポンスを返却するように実装しましょう。
+    `#!csharp ControllerBase.Problem` メソッドを利用すると、 RFC 9457 に準拠したレスポンスを簡単に構築できます。
 
     開発環境で使用するアクションメソッドと、それ以外の環境で使用するアクションメソッドは分割して定義しましょう。
     開発環境で使用するアクションメソッドでは、スタックトレースをレスポンスに含めるように実装します。

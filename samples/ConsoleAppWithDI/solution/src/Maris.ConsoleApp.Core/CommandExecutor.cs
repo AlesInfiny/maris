@@ -73,21 +73,21 @@ public class CommandExecutor
     private async Task<int> ExecuteCommandInternalAsync(CancellationToken cancellationToken)
     {
         ICommandResult result;
-        this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ValidatingParameter, this.CommandName);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CommandExecutor_ValidatingParameter, this.CommandName);
         this.command.ValidateAllParameter();
-        this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ValidatedParameter, this.CommandName);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CommandExecutor_ValidatedParameter, this.CommandName);
 
         if (this.command is ISyncCommand syncCommand)
         {
-            this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ExecutingSyncCommand, this.CommandName);
+            this.logger.LogDebug(Events.DebugEvent, LogMessages.CommandExecutor_ExecutingSyncCommand, this.CommandName);
             result = syncCommand.Execute();
-            this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ExecutedSyncCommand, this.CommandName, result);
+            this.logger.LogDebug(Events.DebugEvent, LogMessages.CommandExecutor_ExecutedSyncCommand, this.CommandName, result);
         }
         else if (this.command is IAsyncCommand asyncCommand)
         {
-            this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ExecutingAsyncCommand, this.CommandName);
+            this.logger.LogDebug(Events.DebugEvent, LogMessages.CommandExecutor_ExecutingAsyncCommand, this.CommandName);
             result = await asyncCommand.ExecuteAsync(cancellationToken);
-            this.logger.LogDebug(Events.DebugEvent, Messages.CommandExecutor_ExecutedAsyncCommand, this.CommandName, result);
+            this.logger.LogDebug(Events.DebugEvent, LogMessages.CommandExecutor_ExecutedAsyncCommand, this.CommandName, result);
         }
         else
         {

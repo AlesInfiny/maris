@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandNameDuplicated" xml:space="preserve">
-    <value>{0} コマンドは同じ名前で登録されています。登録を試みたコマンドパラメーターの型は {1} 、登録されているコマンドパラメーターの型は {2} です。</value>
+  <data name="CommandExecutor_ExecutedAsyncCommand" xml:space="preserve">
+    <value>{CommandName} コマンドの非同期実行が {CommandResult} で完了しました。</value>
   </data>
-  <data name="CommandParameterIsNotExists" xml:space="preserve">
-    <value>{0} 属性を追加したコマンドパラメーターの型が読み込まれたアセンブリ {1} に見つかりません。</value>
+  <data name="CommandExecutor_ExecutedSyncCommand" xml:space="preserve">
+    <value>{CommandName} コマンドの同期実行が {CommandResult} で完了しました。</value>
   </data>
-  <data name="InvalidCommandType" xml:space="preserve">
-    <value>{0} コマンドのパラメーターの {1} にコマンドではない型 {2} が設定されています。</value>
+  <data name="CommandExecutor_ExecutingAsyncCommand" xml:space="preserve">
+    <value>{CommandName} コマンドの非同期実行を開始します。</value>
+  </data>
+  <data name="CommandExecutor_ExecutingSyncCommand" xml:space="preserve">
+    <value>{CommandName} コマンドの同期実行を開始します。</value>
+  </data>
+  <data name="CommandExecutor_ValidatedParameter" xml:space="preserve">
+    <value>{CommandName} コマンドのパラメーターの入力値検証が完了しました。</value>
+  </data>
+  <data name="CommandExecutor_ValidatingParameter" xml:space="preserve">
+    <value>{CommandName} コマンドのパラメーターの入力値検証を実行します。</value>
   </data>
 </root>

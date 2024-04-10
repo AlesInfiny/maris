@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Maris.ConsoleApp.Hosting.Resources {
+namespace Dressca.Store.Assets.StaticFiles.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Maris.ConsoleApp.Hosting.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Messages {
+    internal class LogMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Messages() {
+        internal LogMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Maris.ConsoleApp.Hosting.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Store.Assets.StaticFiles.Resources.LogMessages", typeof(LogMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,29 @@ namespace Maris.ConsoleApp.Hosting.Resources {
         }
         
         /// <summary>
-        ///   {0} コマンドは同じ名前で登録されています。登録を試みたコマンドパラメーターの型は {1} 、登録されているコマンドパラメーターの型は {2} です。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{AssetCode} のファイルストリームが見つかりません。ファイルパスは {FilePath} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CommandNameDuplicated {
+        internal static string FileNotFound {
             get {
-                return ResourceManager.GetString("CommandNameDuplicated", resourceCulture);
+                return ResourceManager.GetString("FileNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0} 属性を追加したコマンドパラメーターの型が読み込まれたアセンブリ {1} に見つかりません。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{AssetCode} のファイルストリームを取得しました。ファイルパスは {FilePath} です。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CommandParameterIsNotExists {
+        internal static string StaticFileAssetStore_GetStreamEnd {
             get {
-                return ResourceManager.GetString("CommandParameterIsNotExists", resourceCulture);
+                return ResourceManager.GetString("StaticFileAssetStore_GetStreamEnd", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0} コマンドのパラメーターの {1} にコマンドではない型 {2} が設定されています。 に類似しているローカライズされた文字列を検索します。
+        ///   アセットコード:{AssetCode} のストリームを取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string InvalidCommandType {
+        internal static string StaticFileAssetStore_GetStreamStart {
             get {
-                return ResourceManager.GetString("InvalidCommandType", resourceCulture);
+                return ResourceManager.GetString("StaticFileAssetStore_GetStreamStart", resourceCulture);
             }
         }
     }
