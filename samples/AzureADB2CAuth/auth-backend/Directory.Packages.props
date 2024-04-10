@@ -1,7 +1,7 @@
 <Project>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.2" />
-    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Identity.Web" Version="2.17.0" />
