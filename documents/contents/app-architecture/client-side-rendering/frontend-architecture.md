@@ -102,28 +102,21 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-light.png#only-light){ loading=lazy }
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-dark.png#only-dark){ loading=lazy }
 
-<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
-**State**
-:  Store で管理するデータそのもの。
+| 要素 | 説明 |
+| --- | --- |
+| State | Store で管理するデータそのもの。 |
+| Getter | State の値や State から算出した結果を返すもの。 |
+| Action | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせない。 |
 
-<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
-**Getter**
-:  State の値や State から算出した結果を返すもの。
-
-<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
-**Action**
-<!-- textlint-disable -->
-:  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせてはいけません。
-
-Store は State をグローバルなシングルトンとして管理します。そのため本来 State は直接取得・更新ができますが、 Getter と Action を通じてアクセスするルールを設けて、 State の参照・更新を制御することが重要です。
+Store は State をグローバルなシングルトンとして管理します。そのため本来 State は直接取得・更新ができますが、 Getter と Action を通じてアクセスするルールを設けて、 State の参照・更新を制御し、データの一貫性を保つことが重要です。
 
 #### State の更新 {#update-state}
 
-ビューモデルはビューからのイベントを受け取り、 Service のビジネスロジックを呼び出します。 Service は Store の Action を呼び出し、 State を更新します。このように State を更新する流れをビューモデル → Service → Store と守ることで、グローバルに操作できる性質を持つ State の一貫性を保ちます。
+State の更新は Action を利用します。この際、ビューモデルから Service を経由して Action を呼び出すことで、 State の更新を一元管理します。
 
-#### State の取得 {#get-state}
+#### State の参照 {#get-state}
 
-ビューモデルから Store の Getter を利用して State を取得します。
+State の参照には Getter を利用します。 Getter は State を参照することができますが、 State の値は変更できません。そのため安全に State の値を参照することができます。
 
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
