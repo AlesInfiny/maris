@@ -46,8 +46,13 @@ const order = () => {
 
 onMounted(async () => {
   state.showLoading = true;
-  await fetchBasket();
-  state.showLoading = false;
+  try {
+    await fetchBasket();
+  } catch (error) {
+    console.error(error);
+  } finally {
+    state.showLoading = false;
+  }
 });
 
 onUnmounted(async () => {
