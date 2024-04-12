@@ -15,13 +15,17 @@ export async function updateItemInBasket(
   catalogItemId: number,
   newQuantity: number,
 ) {
+  // 直前に追加された商品のIDを削除
   basketStore.deleteAddedItemId();
+
   await basketStore.update(catalogItemId, newQuantity);
   await basketStore.fetch();
 }
 
 export async function removeItemFromBasket(catalogItemId: number) {
+  // 直前に追加された商品のIDを削除
   basketStore.deleteAddedItemId();
+
   await basketStore.remove(catalogItemId);
   await basketStore.fetch();
 }
