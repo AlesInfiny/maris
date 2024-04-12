@@ -30,12 +30,7 @@ const { selectedCategory, selectedBrand } = toRefs(state);
 const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl, getAssetUrl } = assetHelper();
 
-// const getBrandName = (catalogBrandId: number) => {
-//   return getBrands.value.find((brand) => brand.id === catalogBrandId)?.name;
-// };
-
 const addBasket = async (catalogItemId: number) => {
-  // await basketStore.add(catalogItemId);
   await addItemToBasket(catalogItemId);
   router.push({ name: 'basket' });
 };
