@@ -32,6 +32,7 @@ create-vue パッケージをインストールする必要があり、続行す
 √ Add an End-to-End Testing Solution? » Cypress
 √ Add ESLint for code quality? ... Yes
 √ Add Prettier for code formatting? ... Yes
+√ Add Vue DevTools 7 extension for debugging? (experimental) ... No
 ```
 
 ## ブランクプロジェクトのビルドと実行 {#build-and-serve-blank-project}
