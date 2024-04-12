@@ -15,7 +15,7 @@ export async function updateItemInBasket(
   catalogItemId: number,
   newQuantity: number,
 ) {
-  // 直前に追加された商品のIDを削除
+  // 直前に追加された商品の表示を更新するためIDを削除
   basketStore.deleteAddedItemId();
 
   await basketStore.update(catalogItemId, newQuantity);
@@ -23,7 +23,7 @@ export async function updateItemInBasket(
 }
 
 export async function removeItemFromBasket(catalogItemId: number) {
-  // 直前に追加された商品のIDを削除
+  // 直前に追加された商品の表示を更新するためIDを削除
   basketStore.deleteAddedItemId();
 
   await basketStore.remove(catalogItemId);
