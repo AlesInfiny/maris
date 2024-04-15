@@ -56,14 +56,17 @@ Azure サブスクリプションを持っていない場合、 [無料アカウ
 ```text
 auth-backend
 ├ Dressca.sln
-└ src
-　 ├ Dressca.Web
-　 │ ├ appsettings.json ............. Azure AD B2C への接続情報を記載する設定ファイル
-　 │ ├ Program.cs ................... Web API アプリケーションのエントリーポイント。 Azure AD B2C による認証を有効化している。
-　 │ └ Controllers
-　 │ 　 ├ ServerTimeController.cs ... 認証の必要がない Web API を配置しているコントローラー
-　 │ 　 └ UserController.cs ......... 認証が必要な Web API を配置しているコントローラー
-　 └ Dressca.Web.Dto ................. Web API の戻り値の型を配置しているプロジェクト
+├ src
+│ ├ Dressca.Web
+│ │ ├ appsettings.json ............. Azure AD B2C への接続情報を記載する設定ファイル
+│ │ ├ Program.cs ................... Web API アプリケーションのエントリーポイント。 Azure AD B2C による認証を有効化している。
+│ │ └ Controllers
+│ │ 　 ├ ServerTimeController.cs ... 認証の必要がない Web API を配置しているコントローラー
+│ │ 　 └ UserController.cs ......... 認証が必要な Web API を配置しているコントローラー
+│ └ Dressca.Web.Dto ................ Web API の戻り値の型を配置しているプロジェクト
+└ tests
+  └ Dressca.IntegrationTest ........ 結合テストプロジェクト
+
 ```
 
 ### フロントエンドアプリケーションの構成
@@ -122,6 +125,7 @@ auth-frontend
 
 - バックエンドアプリケーション
     - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
+    - [Microsoft.AspNetCore.Authentication.JwtBearer](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer) （※テストプロジェクトで利用）
 - フロントエンドアプリケーション
     - [MSAL.js](https://www.npmjs.com/package/@azure/msal-browser)
 
@@ -404,6 +408,18 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
     ```
 
 1. `npm install` を実行し、その他のパッケージをインストールします。
+
+## テスト
+
+バックエンドアプリケーションの `Dressca.IntegrationTest` には、認証が必要な Web API および認証不要な Web API の両方についての結合テストが実装されています。
+Visual Studio で本サンプルのソリューションを開き、 `テストエクスプローラー` ウィンドウからテストを実行してください。
+
+※[設定情報の記入](#設定情報の記入)前でもテストを実行できます。
+
+認証が必要な Web API のテストでは、 Azure AD B2C 認証で取得できるアクセストークンの代わりに、テストコード内で生成した JWT トークンをヘッダーに追加してリクエストを送信しています。
+送信された JWT トークンはテスト用の [JwtBearer 認証](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbearerhandler)で検証しています。
+詳しくは `Dressca.IntegrationTest` のコードを参照してください。
+
 
 ## 参照記事
 
