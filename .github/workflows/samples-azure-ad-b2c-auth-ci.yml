@@ -56,6 +56,10 @@ jobs:
             DOTNET_NOLOGO: true
             BUILD_CONFIGURATION: Debug
             BUILD_SUMMARY_FILE: BuildSummary.md
+        permissions:
+          checks: write
+          contents: read
+          pull-requests: write
         defaults:
             run:
                 working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
@@ -119,10 +123,10 @@ jobs:
               shell: bash
               if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
               run: |
-                echo '## Test Result :memo:' >> ${{ env.BUILD_SUMMARY_FILE }}
-                echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> ${{ env.BUILD_SUMMARY_FILE }}
-                echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> ${{ env.BUILD_SUMMARY_FILE }}
-                cat ${{ env.BUILD_SUMMARY_FILE }} >> $GITHUB_STEP_SUMMARY
+                  echo '## Test Result :memo:' >> ${{ env.BUILD_SUMMARY_FILE }}
+                  echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> ${{ env.BUILD_SUMMARY_FILE }}
+                  echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> ${{ env.BUILD_SUMMARY_FILE }}
+                  cat ${{ env.BUILD_SUMMARY_FILE }} >> $GITHUB_STEP_SUMMARY
 
             - id: create-coverage-report
               name: 'コードカバレッジレポートの解析と作成'
@@ -137,10 +141,10 @@ jobs:
               shell: bash
               if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
               run: |
-                sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
-                sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
-                cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
-                cat CoverageReport/SummaryGithub.md >> ${{ env.BUILD_SUMMARY_FILE }}
+                  sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
+                  sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
+                  cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+                  cat CoverageReport/SummaryGithub.md >> ${{ env.BUILD_SUMMARY_FILE }}
 
             - name: 'ビルドサマリーをPull-requestに表示'
               uses: marocchino/sticky-pull-request-comment@v2
