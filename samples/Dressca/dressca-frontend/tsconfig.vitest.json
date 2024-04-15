@@ -3,6 +3,8 @@
   "exclude": [],
   "compilerOptions": {
     "composite": true,
-    "types": ["node", "jsdom"]
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
+    "lib": [],
+    "types": ["node", "jsdom"],
   }
 }
