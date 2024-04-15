@@ -93,3 +93,58 @@ jobs:
                   cat build-result.txt >> $GITHUB_STEP_SUMMARY
                   echo '```' >> $GITHUB_STEP_SUMMARY
                   exit 1
+                  
+            - id: run-tests
+              name: 'テストの実行'
+              continue-on-error: true
+              run: |
+                dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+
+            - id: create-test-result-report
+              name: 'テスト結果ページの作成'
+              uses: dorny/test-reporter@v1
+              if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+              with:
+                name: 'Test results'
+                path: '**/TestResults/*.trx'
+                path-replace-backslashes: 'true'
+                reporter: 'dotnet-trx'
+                only-summary: 'false'
+                list-suites: 'all'
+                list-tests: 'all'
+                max-annotations: '10'
+                fail-on-error: 'true'
+
+            - name: 'テスト結果のサマリー表示'
+              shell: bash
+              if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+              run: |
+                echo '## Test Result :memo:' >> ${{ env.BUILD_SUMMARY_FILE }}
+                echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> ${{ env.BUILD_SUMMARY_FILE }}
+                echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> ${{ env.BUILD_SUMMARY_FILE }}
+                cat ${{ env.BUILD_SUMMARY_FILE }} >> $GITHUB_STEP_SUMMARY
+
+            - id: create-coverage-report
+              name: 'コードカバレッジレポートの解析と作成'
+              uses: danielpalme/ReportGenerator-GitHub-Action@5
+              if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+              with:
+                reports: '**/TestResults/*/coverage.cobertura.xml'
+                targetdir: '${{ env.WORKING_DIRECTORY }}/CoverageReport'
+                reporttypes: 'MarkdownSummaryGithub'
+
+            - name: 'コードカバレッジの結果表示'
+              shell: bash
+              if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+              run: |
+                sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
+                sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
+                cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+                cat CoverageReport/SummaryGithub.md >> ${{ env.BUILD_SUMMARY_FILE }}
+
+            - name: 'ビルドサマリーをPull-requestに表示'
+              uses: marocchino/sticky-pull-request-comment@v2
+              if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
+              with:
+                recreate: true
+                path: '${{ env.WORKING_DIRECTORY }}/${{ env.BUILD_SUMMARY_FILE }}'
