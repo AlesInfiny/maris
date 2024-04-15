@@ -17,6 +17,7 @@ permissions:
 
 env:
   APP_ALESINFINY_MARIS_WEBAPP_NAME: app-alesinfiny-maris-docs-prod
+  DOCUMENT_FOLDER_PATH: documents/build-artifacts/
   DOCUMENT_ARTIFACTS_FILENAME: docs.zip
 
 jobs:
@@ -48,6 +49,7 @@ jobs:
       - name: ビルドアーティファクトのパッケージングとアップロード
         uses: ./.github/workflows/pack-and-upload
         with:
+          packaging_folder_path: ${{ env.DOCUMENT_FOLDER_PATH }}
           document_artifact_filename: ${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
 
   release-github:
