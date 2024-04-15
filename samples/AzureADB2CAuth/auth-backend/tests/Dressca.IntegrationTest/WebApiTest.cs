@@ -28,9 +28,8 @@ public class WebApiTest(IntegrationTestWebApplicationFactory<Program> factory)
     {
         // Arrange
         var client = this.factory.CreateClient();
-        // 取得したJWTをヘッダーに追加
-        var config = factory.GetConfiguration();
-        var token = this.factory.CreateToken(config["Jwt:Key"], config["Jwt:Issuer"], config["Jwt:Audience"], "testUser", "email");
+        // ログイン成功時に取得するJWTをヘッダーに追加
+        var token = this.factory.CreateToken("testUser");
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         // Act
