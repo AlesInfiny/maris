@@ -39,6 +39,8 @@ jobs:
 
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
+        with:
+          output_folder_name: build-artifacts
 
       - name: ビルドアーティファクトのパッケージングとアップロード
         if: github.event_name == 'workflow_dispatch'

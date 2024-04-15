@@ -1,5 +1,9 @@
 name: "ドキュメントのビルド"
 description: "ドキュメントをビルドします。"
+inputs:
+  output-folder-name:
+    desctiption: "ビルドしたドキュメントの出力先フォルダ名"
+    required: true
 runs:
   using: "composite"
   steps:
@@ -121,7 +125,7 @@ runs:
       run: |
         cd documents
         echo '# Mkdocs Build Result :factory:' >> $GITHUB_STEP_SUMMARY
-        mkdocs build --verbose --clean --strict > mkdocs_build_log.txt
+        mkdocs build --verbose --clean --strict --site-dir ${{ inputs.output-folder-name }} > mkdocs_build_log.txt
 
     - name: ドキュメントビルドの結果表示(成功)
       if: ${{ steps.build_documents.outcome == 'success' }}
