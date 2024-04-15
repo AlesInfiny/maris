@@ -12,6 +12,7 @@ runs:
   using: "composite"
   steps:
     - name: IIS 用のファイル配置とパッケージング
+      shell: bash
       run: |
         cp -T -v -f -r iis-files ${{ inputs.packaging-folder-path }}
         cd ${{ inputs.packaging-folder-path }}
