@@ -9,7 +9,7 @@
     "build-only:prod": "vite build --mode prod",
     "build-only:dev": "vite build --mode dev",
     "preview": "vite preview --port 5173",
-    "test:unit": "vitest --environment jsdom",
+    "test:unit": "vitest",
     "test:e2e": "start-server-and-test dev http://localhost:5173/ 'cypress open --e2e --browser chrome'",
     "test:e2e:ci": "start-server-and-test dev http://localhost:5173/ 'cypress run'",
     "typecheck": "vue-tsc --build --force",
