@@ -134,7 +134,7 @@ jobs:
               if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
               with:
                   reports: '**/TestResults/*/coverage.cobertura.xml'
-                  targetdir: '${{ env.WORKING_DIRECTORY }}/CoverageReport'
+                  targetdir: '${{ env.BACKEND_WORKING_DIRECTORY }}/CoverageReport'
                   reporttypes: 'MarkdownSummaryGithub'
 
             - name: 'コードカバレッジの結果表示'
@@ -151,4 +151,4 @@ jobs:
               if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
               with:
                   recreate: true
-                  path: '${{ env.WORKING_DIRECTORY }}/${{ env.BUILD_SUMMARY_FILE }}'
+                  path: '${{ env.BACKEND_WORKING_DIRECTORY }}/${{ env.BUILD_SUMMARY_FILE }}'
