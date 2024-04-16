@@ -42,13 +42,13 @@ jobs:
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
         with:
-          output_folder_name: build-artifacts
+          output-folder-name: build-artifacts
 
       - name: ビルドアーティファクトのパッケージングとアップロード
         uses: ./.github/workflows/pack-and-upload
         with:
-          packaging_folder_path: ${{ env.DOCUMENT_FOLDER_PATH }}
-          document_artifact_filename: ${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
+          packaging-folder-path: ${{ env.DOCUMENT_FOLDER_PATH }}
+          document-artifact-filename: ${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
 
   release-github:
     name: Githubのリリース
