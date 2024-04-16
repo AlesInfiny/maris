@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web;
+using NSwag.Annotations;
 
 namespace Dressca.Web.Controllers;
 
@@ -23,6 +24,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Authorize]
+    [OpenApiOperation("getUser")]
     public IActionResult GetUser()
     {
         var userId = this.User.GetNameIdentifierId();

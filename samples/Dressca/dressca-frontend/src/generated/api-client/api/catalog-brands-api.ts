@@ -34,7 +34,7 @@ export const CatalogBrandsApiAxiosParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogBrandsGetCatalogBrands: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCatalogBrands: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/catalog-brands`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -74,8 +74,8 @@ export const CatalogBrandsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async catalogBrandsGetCatalogBrands(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogBrandResponse>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.catalogBrandsGetCatalogBrands(options);
+        async getCatalogBrands(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogBrandResponse>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCatalogBrands(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -94,8 +94,8 @@ export const CatalogBrandsApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogBrandsGetCatalogBrands(options?: any): AxiosPromise<Array<CatalogBrandResponse>> {
-            return localVarFp.catalogBrandsGetCatalogBrands(options).then((request) => request(axios, basePath));
+        getCatalogBrands(options?: any): AxiosPromise<Array<CatalogBrandResponse>> {
+            return localVarFp.getCatalogBrands(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -114,7 +114,7 @@ export class CatalogBrandsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CatalogBrandsApi
      */
-    public catalogBrandsGetCatalogBrands(options?: AxiosRequestConfig) {
-        return CatalogBrandsApiFp(this.configuration).catalogBrandsGetCatalogBrands(options).then((request) => request(this.axios, this.basePath));
+    public getCatalogBrands(options?: AxiosRequestConfig) {
+        return CatalogBrandsApiFp(this.configuration).getCatalogBrands(options).then((request) => request(this.axios, this.basePath));
     }
 }

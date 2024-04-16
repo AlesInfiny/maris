@@ -34,7 +34,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersGetUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -78,8 +78,8 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async usersGetUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.usersGetUser(options);
+        async getUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUser(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -98,8 +98,8 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        usersGetUser(options?: any): AxiosPromise<UserResponse> {
-            return localVarFp.usersGetUser(options).then((request) => request(axios, basePath));
+        getUser(options?: any): AxiosPromise<UserResponse> {
+            return localVarFp.getUser(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -118,7 +118,7 @@ export class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public usersGetUser(options?: AxiosRequestConfig) {
-        return UsersApiFp(this.configuration).usersGetUser(options).then((request) => request(this.axios, this.basePath));
+    public getUser(options?: AxiosRequestConfig) {
+        return UsersApiFp(this.configuration).getUser(options).then((request) => request(this.axios, this.basePath));
     }
 }

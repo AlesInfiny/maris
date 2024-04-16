@@ -1,5 +1,6 @@
 ﻿using Dressca.Web.Dto.ServerTime;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace Dressca.Web.Controllers;
 
@@ -40,6 +41,7 @@ public class ServerTimeController : ControllerBase
     /// <returns>サーバー時間。</returns>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ServerTimeResponse))]
+    [OpenApiOperation("getServerTime")]
     public IActionResult Get()
     {
         var currentTime = this.timeProvider.GetLocalNow();

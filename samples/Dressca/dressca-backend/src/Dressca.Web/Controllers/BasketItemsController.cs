@@ -8,6 +8,7 @@ using Dressca.Web.Baskets;
 using Dressca.Web.Dto.Baskets;
 using Dressca.Web.Dto.Catalog;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace Dressca.Web.Controllers;
 
@@ -62,6 +63,7 @@ public class BasketItemsController : ControllerBase
     /// <response code="200">成功。</response>
     [HttpGet]
     [ProducesResponseType(typeof(BasketResponse), StatusCodes.Status200OK)]
+    [OpenApiOperation("getBasketItems")]
     public async Task<IActionResult> GetBasketItemsAsync()
     {
         var buyerId = this.HttpContext.GetBuyerId();
@@ -95,6 +97,7 @@ public class BasketItemsController : ControllerBase
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [OpenApiOperation("putBasketItems")]
     public async Task<IActionResult> PutBasketItemsAsync(IEnumerable<PutBasketItemsRequest> putBasketItems)
     {
         if (!putBasketItems.Any())
@@ -143,6 +146,7 @@ public class BasketItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    [OpenApiOperation("postBasketItem")]
     public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsRequest postBasketItem)
     {
         postBasketItem.CatalogItemId.ThrowIfNull();
@@ -176,6 +180,7 @@ public class BasketItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [OpenApiOperation("deleteBasketItem")]
     public async Task<IActionResult> DeleteBasketItemAsync([Range(1L, long.MaxValue)] long catalogItemId)
     {
         var buyerId = this.HttpContext.GetBuyerId();
