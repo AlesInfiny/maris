@@ -57,9 +57,9 @@ jobs:
             BUILD_CONFIGURATION: Debug
             BUILD_SUMMARY_FILE: BuildSummary.md
         permissions:
-          checks: write
-          contents: read
-          pull-requests: write
+            checks: write
+            contents: read
+            pull-requests: write
         defaults:
             run:
                 working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
@@ -97,12 +97,12 @@ jobs:
                   cat build-result.txt >> $GITHUB_STEP_SUMMARY
                   echo '```' >> $GITHUB_STEP_SUMMARY
                   exit 1
-                  
+     
             - id: run-tests
               name: 'テストの実行'
               continue-on-error: true
               run: |
-                dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+                  dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
 
             - id: create-test-result-report
               name: 'テスト結果ページの作成'

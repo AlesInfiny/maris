@@ -39,10 +39,10 @@ nav:
                   - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md
                 # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
     # - コンソールアプリケーション編:
-    #     - app-architecture/console-app/index.md
+        # - app-architecture/console-app/index.md
     # - クックブック:
-    #     - cook-book/index.md
-    #     - 帳票印刷: cook-book/report.md
+        # - cook-book/index.md
+        # - 帳票印刷: cook-book/report.md
   - ガイド:
       - guidebooks/index.md
       - Git リポジトリ構築ガイド:
