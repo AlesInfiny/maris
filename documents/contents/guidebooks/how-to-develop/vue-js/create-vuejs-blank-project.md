@@ -10,7 +10,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 以下のコマンドを実行して Vue.js をインストールします。
 
 ```terminal
-npm init vue@3
+npm create vue@latest
 ```
 
 create-vue パッケージをインストールする必要があり、続行するかどうかを確認するメッセージが表示されるので、「y」を選択します。
