@@ -9,7 +9,7 @@ export const useServerTimeStore = defineStore({
   actions: {
     async fetchServerTimeResponse() {
       const api = await getServerTimeApi();
-      const response = await api.serverTimeGet();
+      const response = await api.getServerTime();
       this.serverTime = response.data.serverTime;
     },
   },

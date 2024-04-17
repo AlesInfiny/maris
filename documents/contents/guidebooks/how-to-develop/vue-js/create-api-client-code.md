@@ -41,19 +41,27 @@ npm install -D @openapitools/openapi-generator-cli
 
 package.json の scripts セクションにタスクを追加します。
 
+??? note "タスクを登録する際の注意点"
+    `package.json`にタスクを登録する際には、実行環境の OS に依存するコマンドの使用を避けるように注意する必要があります。
+    例えば、フォルダーを削除したい場合に`rmdir`コマンドを使用すると Windows 環境に依存してしまい、`rm`コマンドを使用すると UNIX 環境に依存してしまいます。
+    ここで開発環境が Windows であり、 CI 環境が UNIX の場合には、開発環境では実行できていたコマンドが CI 環境では実行できないといった問題が発生します。
+    そのため、 タスク中で OS コマンドを使用したい場合には、可能であれば [Node.jsのAPI :material-open-in-new:](https://nodejs.org/api/documentation.html){ target=_blank } で代替するほうがベターです。
+
 <!-- cSpell:disable -->
 
 ```json title="package.json"
 {
   "scripts": {
-    "generate-client": "openapi-generator-cli generate -g typescript-axios -i ./dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/api-client"
+    "generate-client": "run-s openapi-client:clean openapi-client:generate --print-label",
+    "openapi-client:clean": "node -e \"fs.promises.rm('./src/generated/api-client', {recursive: true, force: true})\"",
+    "openapi-client:generate": "openapi-generator-cli generate -g typescript-axios -i ./../dressca-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
   }
 }
 ```
 
 <!-- cSpell:enable -->
 
-追加したタスクのオプションについて説明します。
+openapi-generator-cli の generate コマンドのオプションについて説明します。
 
 ジェネレーターとして typescript-axios を指定します。
 
@@ -94,6 +102,10 @@ npm run generate-client
 
 オプション ` -o ` に定義した出力先へ、クライアントコードが生成されます。
 
+!!! info "クライアントコードの削除と再生成"
+    openapi-generator-cli の generate コマンドでは、 Open API 仕様書の変更によって不要になった既存のクライアントコードは自動で削除されません。
+    そのため、既存のクライアントコードを一度削除してからクライアントコードを生成するように設定しています。
+
 ## クライアントコードの設定 {#set-client-code}
 
 `./src/api-client/index.ts` という設定ファイルを作成し、以下のように記述します。
@@ -102,11 +114,15 @@ npm run generate-client
 import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
 
-const config = new apiClient.Configuration({});
+function createConfig(): apiClient.Configuration {
+  const config = new apiClient.Configuration({
+  });
+  return config;
+}
 
 const axiosInstance = axios.create({});
 
-const defaultApi = new apiClient.DefaultApi(config, '', axiosInstance);
+const defaultApi = new apiClient.DefaultApi(createConfig(), '', axiosInstance);
 
 export { defaultApi };
 ```
@@ -117,7 +133,7 @@ export { defaultApi };
 このファイルでは、 api-client や axios 共通の設定をします。
 
 1. `src/generated/api-client/api` に自動生成された API を `import` します。
-1. 上記の例の `DefaultApi` と同様に `apiClient.XxxApi(config, '', axiosInstance)` コンストラクターでインスタンスを生成します。
+1. 上記の例の `DefaultApi` と同様に `apiClient.XxxApi(createConfig(), '', axiosInstance)` コンストラクターでインスタンスを生成します。
 1. 生成したインスタンスを `export` します。
 
 ??? info "BaseAPI のコンストラクター"

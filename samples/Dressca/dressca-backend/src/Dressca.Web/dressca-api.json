@@ -19,7 +19,7 @@
           "Assets"
         ],
         "summary": "アセットを取得します。",
-        "operationId": "Assets_Get",
+        "operationId": "get",
         "parameters": [
           {
             "name": "assetCode",
@@ -55,7 +55,7 @@
           "BasketItems"
         ],
         "summary": "買い物かごアイテムの一覧を取得します。",
-        "operationId": "BasketItems_GetBasketItems",
+        "operationId": "getBasketItems",
         "responses": {
           "200": {
             "description": "成功。",
@@ -75,7 +75,7 @@
         ],
         "summary": "買い物かごアイテム内の数量を変更します。\n買い物かご内に存在しないカタログアイテム ID は指定できません。",
         "description": "この API では、買い物かご内に存在する商品の数量を変更できます。\n 買い物かご内に存在しないカタログアイテム Id を指定すると HTTP 400 を返却します。\n またシステムに登録されていないカタログアイテム Id を指定した場合も HTTP 400 を返却します。",
-        "operationId": "BasketItems_PutBasketItems",
+        "operationId": "putBasketItems",
         "requestBody": {
           "x-name": "putBasketItems",
           "description": "変更する買い物かごアイテムのデータリスト。",
@@ -114,7 +114,7 @@
         ],
         "summary": "買い物かごに商品を追加します。",
         "description": "この API では、システムに登録されていないカタログアイテム Id を指定した場合 HTTP 400 を返却します。\n また買い物かごに追加していないカタログアイテムを指定した場合、その商品を買い物かごに追加します。\n すでに買い物かごに追加されているカタログアイテムを指定した場合、指定した数量、買い物かご内の数量を追加します。\n\n\n 買い物かご内のカタログアイテムの数量が 0 未満になるように減じることはできません。\n 計算の結果数量が 0 未満になる場合 HTTP 500 を返却します。",
-        "operationId": "BasketItems_PostBasketItem",
+        "operationId": "postBasketItem",
         "requestBody": {
           "x-name": "postBasketItem",
           "description": "追加する商品の情報。",
@@ -162,7 +162,7 @@
         ],
         "summary": "買い物かごから指定したカタログアイテム Id の商品を削除します。",
         "description": "catalogItemId には買い物かご内に存在するカタログアイテム Id を指定してください。\n カタログアイテム Id は 1 以上の整数です。\n 0 以下の値を指定したり、整数値ではない値を指定した場合 HTTP 400 を返却します。\n 買い物かご内に指定したカタログアイテムの商品が存在しない場合、 HTTP 404 を返却します。",
-        "operationId": "BasketItems_DeleteBasketItem",
+        "operationId": "deleteBasketItem",
         "parameters": [
           {
             "name": "catalogItemId",
@@ -211,7 +211,7 @@
           "CatalogBrands"
         ],
         "summary": "カタログブランドの一覧を取得します。",
-        "operationId": "CatalogBrands_GetCatalogBrands",
+        "operationId": "getCatalogBrands",
         "responses": {
           "200": {
             "description": "成功。",
@@ -235,7 +235,7 @@
           "CatalogCategories"
         ],
         "summary": "カタログカテゴリの一覧を取得します。",
-        "operationId": "CatalogCategories_GetCatalogCategories",
+        "operationId": "getCatalogCategories",
         "responses": {
           "200": {
             "description": "成功。",
@@ -259,7 +259,7 @@
           "CatalogItems"
         ],
         "summary": "カタログアイテムを検索して返します。",
-        "operationId": "CatalogItems_GetByQuery",
+        "operationId": "getByQuery",
         "parameters": [
           {
             "name": "brandId",
@@ -338,7 +338,7 @@
           "Orders"
         ],
         "summary": "注文情報を取得します。",
-        "operationId": "Orders_GetById",
+        "operationId": "getById",
         "parameters": [
           {
             "name": "orderId",
@@ -382,7 +382,7 @@
           "Orders"
         ],
         "summary": "買い物かごに登録されている商品を注文します。",
-        "operationId": "Orders_PostOrder",
+        "operationId": "postOrder",
         "requestBody": {
           "x-name": "postOrderInput",
           "description": "注文に必要な配送先などの情報。",

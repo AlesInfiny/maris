@@ -19,9 +19,11 @@ jobs:
   build-frontend:
     name: 'フロントエンドアプリケーションのビルド'
     runs-on: ubuntu-latest
+    env:
+      NO_COLOR: "1"  # 文字化け防止のためカラーコードを出力しない
     strategy:
-      matrix:
-        node-version: [18.x]
+       matrix:
+         node-version: [20.x]
 
     defaults:
       run:
@@ -31,10 +33,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+
       - uses: actions/cache@v4
         id: node_modules_cache_id
         env:
@@ -42,12 +46,46 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
-      - name: node パッケージのインストール
+
+      - name: 'node パッケージのキャッシュ確認'
+        run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+
+      - name: 'node パッケージのインストール'
         if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: npm install
-      - name: TypeScript の型チェック
-        run: npm run typecheck
+
+      - id: run-lint
+        name: 'lintの実行'
+        run: npm run lint:ci >> /var/tmp/lint-result.txt 2>&1
+
+      - id: run-typecheck
+        name: 'TypeScript の型チェック'
+        run: npm run typecheck >> /var/tmp/typecheck-result.txt 2>&1
+
+      - id: application-build
+        name: 'アプリケーションのビルド'
+        run: npm run build-only:dev >> /var/tmp/build-result.txt 2>&1
+
+      - name: 'lintの結果出力'
+        if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
+        uses: ./.github/workflows/file-to-summary
+        with:
+          body: /var/tmp/lint-result.txt
+          header: 'lintの結果 :pen:'
+
+      - name: '型チェックの結果出力'
+        if: ${{ success() || (failure() && steps.run-typecheck.conclusion == 'failure') }}
+        uses: ./.github/workflows/file-to-summary
+        with:
+          body: /var/tmp/typecheck-result.txt
+          header: '型チェックの結果 :pencil2:'
+
+      - name: 'ビルドの結果出力'
+        if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
+        uses: ./.github/workflows/file-to-summary
+        with:
+          body: /var/tmp/build-result.txt
+          header: 'ビルドの結果 :gear:'
 
   build-backend:
     name: 'バックエンドアプリケーションのビルド'
