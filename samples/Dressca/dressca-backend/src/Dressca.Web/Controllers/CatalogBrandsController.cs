@@ -3,6 +3,7 @@ using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Dto.Catalog;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace Dressca.Web.Controllers;
 
@@ -43,6 +44,7 @@ public class CatalogBrandsController : ControllerBase
     /// <response code="200">成功。</response>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<CatalogBrandResponse>), StatusCodes.Status200OK)]
+    [OpenApiOperation("getCatalogBrands")]
     public async Task<IActionResult> GetCatalogBrandsAsync()
     {
         var brands = await this.service.GetBrandsAsync();

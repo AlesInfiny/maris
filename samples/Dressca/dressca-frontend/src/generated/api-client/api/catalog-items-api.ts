@@ -40,7 +40,7 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogItemsGetByQuery: async (brandId?: number, categoryId?: number, page?: number, pageSize?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getByQuery: async (brandId?: number, categoryId?: number, page?: number, pageSize?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/catalog-items`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -100,8 +100,8 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async catalogItemsGetByQuery(brandId?: number, categoryId?: number, page?: number, pageSize?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PagedListOfCatalogItemResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.catalogItemsGetByQuery(brandId, categoryId, page, pageSize, options);
+        async getByQuery(brandId?: number, categoryId?: number, page?: number, pageSize?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PagedListOfCatalogItemResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getByQuery(brandId, categoryId, page, pageSize, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -124,8 +124,8 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogItemsGetByQuery(brandId?: number, categoryId?: number, page?: number, pageSize?: number, options?: any): AxiosPromise<PagedListOfCatalogItemResponse> {
-            return localVarFp.catalogItemsGetByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(axios, basePath));
+        getByQuery(brandId?: number, categoryId?: number, page?: number, pageSize?: number, options?: any): AxiosPromise<PagedListOfCatalogItemResponse> {
+            return localVarFp.getByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -148,7 +148,7 @@ export class CatalogItemsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CatalogItemsApi
      */
-    public catalogItemsGetByQuery(brandId?: number, categoryId?: number, page?: number, pageSize?: number, options?: AxiosRequestConfig) {
-        return CatalogItemsApiFp(this.configuration).catalogItemsGetByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(this.axios, this.basePath));
+    public getByQuery(brandId?: number, categoryId?: number, page?: number, pageSize?: number, options?: AxiosRequestConfig) {
+        return CatalogItemsApiFp(this.configuration).getByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 }

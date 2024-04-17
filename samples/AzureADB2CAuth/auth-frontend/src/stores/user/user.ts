@@ -9,7 +9,7 @@ export const useUserStore = defineStore({
   actions: {
     async fetchUserResponse() {
       const usersApi = await getUsersApi();
-      const response = await usersApi.usersGetUser();
+      const response = await usersApi.getUser();
       this.userId = response.data.userId;
     },
   },
