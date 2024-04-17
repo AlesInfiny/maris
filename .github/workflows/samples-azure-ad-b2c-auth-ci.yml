@@ -22,8 +22,8 @@ jobs:
     env:
       NO_COLOR: "1"  # 文字化け防止のためカラーコードを出力しない
     strategy:
-       matrix:
-         node-version: [20.x]
+      matrix:
+        node-version: [20.x]
 
     defaults:
       run:
