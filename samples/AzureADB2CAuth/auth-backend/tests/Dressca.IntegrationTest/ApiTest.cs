@@ -4,13 +4,13 @@ using Xunit;
 
 namespace Dressca.IntegrationTest;
 
-public class WebApiTest(IntegrationTestWebApplicationFactory<Program> factory)
-    : IClassFixture<IntegrationTestWebApplicationFactory<Program>>
+public class ApiTest(ApiTestWebApplicationFactory<Program> factory)
+    : IClassFixture<ApiTestWebApplicationFactory<Program>>
 {
-    private readonly IntegrationTestWebApplicationFactory<Program> factory = factory;
+    private readonly ApiTestWebApplicationFactory<Program> factory = factory;
 
     [Fact]
-    public async Task Get_ApiAuth_認証エラー_Status401を返す()
+    public async Task Get_認証必要なAPI_認証エラー_Status401を返す()
     {
         // Arrange
         var client = this.factory.CreateClient();
@@ -24,7 +24,7 @@ public class WebApiTest(IntegrationTestWebApplicationFactory<Program> factory)
     }
 
     [Fact]
-    public async Task Get_ApiAuth_認証成功_UserIDを返す()
+    public async Task Get_認証必要なAPI_認証成功_UserIDを返す()
     {
         // Arrange
         var client = this.factory.CreateClient();

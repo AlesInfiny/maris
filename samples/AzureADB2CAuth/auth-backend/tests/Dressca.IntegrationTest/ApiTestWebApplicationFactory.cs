@@ -8,7 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Dressca.IntegrationTest;
-public class IntegrationTestWebApplicationFactory<TProgram>
+
+public class ApiTestWebApplicationFactory<TProgram>
     : WebApplicationFactory<TProgram>
     where TProgram : class
 {
