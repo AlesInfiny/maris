@@ -17,7 +17,7 @@ env:
 
 jobs:
   build-frontend:
-    name: 'フロントエンドアプリケーションのビルド'
+    name: フロントエンドアプリケーションのビルド
     runs-on: ubuntu-latest
     env:
       NO_COLOR: "1"  # 文字化け防止のためカラーコードを出力しない
@@ -47,40 +47,40 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
-      - name: 'node パッケージのキャッシュ確認'
+      - name: node パッケージのキャッシュ確認
         run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
 
-      - name: 'node パッケージのインストール'
+      - name: node パッケージのインストール
         if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: npm install
 
       - id: run-lint
-        name: 'lintの実行'
+        name: lintの実行
         run: npm run lint:ci >> /var/tmp/lint-result.txt 2>&1
 
       - id: run-typecheck
-        name: 'TypeScript の型チェック'
+        name: TypeScript の型チェック
         run: npm run typecheck >> /var/tmp/typecheck-result.txt 2>&1
 
       - id: application-build
-        name: 'アプリケーションのビルド'
+        name: アプリケーションのビルド
         run: npm run build-only:dev >> /var/tmp/build-result.txt 2>&1
 
-      - name: 'lintの結果出力'
+      - name: lintの結果出力
         if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
         with:
           body: /var/tmp/lint-result.txt
           header: 'lintの結果 :pen:'
 
-      - name: '型チェックの結果出力'
+      - name: 型チェックの結果出力
         if: ${{ success() || (failure() && steps.run-typecheck.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
         with:
           body: /var/tmp/typecheck-result.txt
           header: '型チェックの結果 :pencil2:'
 
-      - name: 'ビルドの結果出力'
+      - name: ビルドの結果出力
         if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
         with:
@@ -88,35 +88,31 @@ jobs:
           header: 'ビルドの結果 :gear:'
 
   build-backend:
-    name: 'バックエンドアプリケーションのビルド'
+    name: バックエンドアプリケーションのビルド
     runs-on: ubuntu-latest
     env:
       DOTNET_NOLOGO: true
       BUILD_CONFIGURATION: Debug
       BUILD_SUMMARY_FILE: BuildSummary.md
-    permissions:
-      checks: write
-      contents: read
-      pull-requests: write
     defaults:
       run:
         working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
     steps:
-      - name: 'ブランチのチェックアウト'
+      - name: ブランチのチェックアウト
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: '.NET SDK のセットアップ'
+      - name: .NET SDK のセットアップ
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.*'
 
-      - name: 'NuGet パッケージの復元'
+      - name: NuGet パッケージの復元
         run: dotnet restore
 
       - id: application-build
-        name: 'アプリケーションのビルド'
+        name: アプリケーションのビルド
         continue-on-error: true
         run: |
           echo '## Build Result :gear:' >> $GITHUB_STEP_SUMMARY
@@ -126,7 +122,7 @@ jobs:
           cat build-result.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
 
-      - name: 'ビルド失敗時の結果の表示'
+      - name: ビルド失敗時の結果の表示
         shell: bash
         if: ${{ steps.application-build.outcome == 'failure' }}
         run: |
@@ -137,27 +133,12 @@ jobs:
             exit 1
 
       - id: run-tests
-        name: 'テストの実行'
+        name: テストの実行
         continue-on-error: true
         run: |
             dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
 
-      - id: create-test-result-report
-        name: 'テスト結果ページの作成'
-        uses: dorny/test-reporter@v1
-        if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
-        with:
-          name: 'Test results'
-          path: '**/TestResults/*.trx'
-          path-replace-backslashes: 'true'
-          reporter: 'dotnet-trx'
-          only-summary: 'false'
-          list-suites: 'all'
-          list-tests: 'all'
-          max-annotations: '10'
-          fail-on-error: 'true'
-
-      - name: 'テスト結果のサマリー表示'
+      - name: テスト結果のサマリー表示
         shell: bash
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         run: |
@@ -167,7 +148,7 @@ jobs:
           cat ${{ env.BUILD_SUMMARY_FILE }} >> $GITHUB_STEP_SUMMARY
 
       - id: create-coverage-report
-        name: 'コードカバレッジレポートの解析と作成'
+        name: コードカバレッジレポートの解析と作成
         uses: danielpalme/ReportGenerator-GitHub-Action@5
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
@@ -175,7 +156,7 @@ jobs:
           targetdir: '${{ env.BACKEND_WORKING_DIRECTORY }}/CoverageReport'
           reporttypes: 'MarkdownSummaryGithub'
 
-      - name: 'コードカバレッジの結果表示'
+      - name: コードカバレッジの結果表示
         shell: bash
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         run: |
@@ -183,10 +164,3 @@ jobs:
           sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
           cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
           cat CoverageReport/SummaryGithub.md >> ${{ env.BUILD_SUMMARY_FILE }}
-
-      - name: 'ビルドサマリーをPull-requestに表示'
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
-        with:
-          recreate: true
-          path: '${{ env.BACKEND_WORKING_DIRECTORY }}/${{ env.BUILD_SUMMARY_FILE }}'
