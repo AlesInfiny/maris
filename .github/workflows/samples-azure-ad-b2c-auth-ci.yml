@@ -143,7 +143,7 @@ jobs:
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         run: |
           echo '## Test Result :memo:' >> $GITHUB_STEP_SUMMARY
-          echo 'Test was a **${{ steps.run-tests.outputs.conclusion }}**.' >> $GITHUB_STEP_SUMMARY
+          echo 'Test was a **${{ steps.run-tests.conclusion }}**.' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat integration-test-result.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
