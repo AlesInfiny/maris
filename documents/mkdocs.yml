@@ -184,5 +184,6 @@ extra_css:
 
 plugins:
   - social:
+      enabled: !ENV [BUILD_DOCUMENTS, false]
       cards_layout_options:
         font_family: Noto Sans JP

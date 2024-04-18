@@ -153,6 +153,7 @@ jobs:
         id: build_documents
         continue-on-error: true
         run: |
+          export BUILD_DOCUMENTS=true
           if [ ${{ startsWith(github.ref, 'refs/tags/v') }} ];
           then
             export VERSION="${{ github.ref_name }}"
