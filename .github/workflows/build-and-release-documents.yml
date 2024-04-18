@@ -147,7 +147,7 @@ jobs:
       - name: ソーシャルカードプラグイン用のパッケージインストール
         run: |
           python -m pip install "mkdocs-material[imaging]"
-          apt-get install pngquant
+          sudo apt-get install pngquant
 
       - name: ドキュメントのビルド
         id: build_documents
