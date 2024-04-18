@@ -19,7 +19,7 @@ export async function postOrder(
     azanaAndOthers: azanaAndOthers,
   };
   try {
-    const orderResponse = await ordersApi.ordersPostOrder(postOrderInput);
+    const orderResponse = await ordersApi.postOrder(postOrderInput);
     const url = new URL(orderResponse.headers.location);
     return Number(url.pathname.split('/').pop());
   } catch (e) {
@@ -30,7 +30,7 @@ export async function postOrder(
 // ordering/done/:orderId の onMounted() から呼び出されて注文情報を取得
 export async function getOrder(orderId: number): Promise<OrderResponse> {
   try {
-    const orderResultResponse = await ordersApi.ordersGetById(orderId);
+    const orderResultResponse = await ordersApi.getById(orderId);
     return orderResultResponse.data;
   } catch (e) {
     throw new Error('Failed to get order');
