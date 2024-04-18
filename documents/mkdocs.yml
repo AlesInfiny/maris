@@ -181,3 +181,9 @@ extra:
 
 extra_css:
   - stylesheets/overrides.css
+
+plugins: 
+  - social:
+      cards_layout_options:
+        font_family: Noto Sans JP
+
