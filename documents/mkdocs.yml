@@ -184,6 +184,3 @@ plugins:
       enabled: !ENV [BUILD_DOCUMENTS, false]
       cards_layout_options:
         font_family: Noto Sans JP
-        description: null
-      # cards_layout_dir: layouts
-      # cards_layout: custom
