@@ -228,6 +228,13 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
 1. 「ユーザー」ブレードを選択します。
 1. 対象のユーザーをチェックし、画面上部から「削除」を選択します。
 
+### テストの実行
+
+バックエンドアプリケーションの `Dressca.IntegrationTest` には、認証が必要な Web API および認証不要な Web API の両方についての結合テストが実装されています。
+Visual Studio で本サンプルのソリューションを開き、 `テストエクスプローラー` ウィンドウからテストを実行してください。
+
+※[設定情報の記入](#設定情報の記入) 前でもテストを実行できます。
+
 ## アプリケーションへの認証機能の組み込み
 
 本サンプルのコードを既存のアプリケーションへコピーすることで、 Azure AD B2C の認証機能を組み込むことができます。
@@ -409,16 +416,116 @@ Azure AD B2C に追加したユーザーは、以下の手順で削除できま�
 
 1. `npm install` を実行し、その他のパッケージをインストールします。
 
-## テスト
-
-バックエンドアプリケーションの `Dressca.IntegrationTest` には、認証が必要な Web API および認証不要な Web API の両方についての結合テストが実装されています。
-Visual Studio で本サンプルのソリューションを開き、 `テストエクスプローラー` ウィンドウからテストを実行してください。
-
-※[設定情報の記入](#設定情報の記入) 前でもテストを実行できます。
+### テスト
 
 認証が必要な Web API のテストでは、 Azure AD B2C 認証で取得できるアクセストークンの代わりに、テストコード内で生成した JWT トークンをヘッダーに追加してリクエストを送信しています。
 送信された JWT トークンはテスト用の [JwtBearer 認証](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbearerhandler) で検証しています。
-詳しくは `Dressca.IntegrationTest` のコードを参照してください。
+
+1. 結合テスト用プロジェクトに対して以下の NuGet パッケージをインストールします。
+   - [Microsoft.AspNetCore.Authentication.JwtBearer](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer)
+
+1. 結合テスト用プロジェクトに `auth-backend\tests\Dressca.IntegrationTest\ApiTestWebApplicationFactory.cs` をコピーします。
+
+    ``` C# title="ApiTestWebApplicationFactory.cs"
+    using System.Text;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.Testing;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.IdentityModel.Tokens;
+
+    namespace Dressca.IntegrationTest;
+
+    public class ApiTestWebApplicationFactory<TProgram>
+     : WebApplicationFactory<TProgram>
+     where TProgram : class
+    {
+     protected override void ConfigureWebHost(IWebHostBuilder builder)
+     {
+         builder.ConfigureServices(services =>
+         {
+             // 構成情報を取得します。
+             var config = this.GetConfiguration();
+
+             // デフォルトで使用される認証スキームを"Test"に設定します。
+             // (本サンプルのProgram.csの設定ではデフォルトの認証スキームに
+             // "Bearer"が設定されているため上書きしています。)
+             services.AddAuthentication("Test")
+             // "Test"スキームでJwtBearer認証を利用します。
+             .AddJwtBearer("Test", options =>
+             {
+                 // リクエストで送信されるJWTの検証内容を設定します。
+                 options.TokenValidationParameters =
+                 new TokenValidationParameters
+                 {
+                     // Issuer,Audience,IssuerSigningKeyを検証対象とします。
+                     ValidIssuer = config["Jwt:Issuer"],
+                     ValidAudience = config["Jwt:Audience"],
+                     IssuerSigningKey = new SymmetricSecurityKey
+                         (Encoding.UTF8.GetBytes(config["Jwt:Key"] ?? throw new NullReferenceException("Jwt:Key"))),
+                     ValidateIssuer = true,
+                     ValidateAudience = true,
+                     ValidateLifetime = false,
+                     ValidateIssuerSigningKey = true
+                 };
+             });
+         });
+     }
+
+     internal string CreateToken(string userName)
+     {
+         // JWTの生成
+         // 省略
+     }
+
+     internal IConfiguration GetConfiguration()
+     {
+         // テスト用のappsettings.jsonの内容を取得。
+         // 省略
+     }
+
+    }
+
+    ```
+
+    上記のコードで設定したテスト用の認証機能は、 `[Authorize]` または `[Authorize(AuthenticationSchemes = "Test")]` が付与された Web API にリクエストが送信される際に動作します。
+
+1. 結合テスト用プロジェクトの　`appsettings.IntegrationTest.json` に `auth-backend\tests\Dressca.IntegrationTest\appsettings.json` の内容をコピーします。
+
+1. `IClassFixture<ApiTestWebApplicationFactory>` を実装するテストクラスを作成し、テストコードを追加します。 JWT をヘッダーに付与して API にリクエストを送信することで、認証済みの状態での API アクセスを再現できます。
+
+    ``` C#
+    using System.Net;
+    using System.Net.Http.Headers;
+    using Xunit;
+
+    namespace Dressca.IntegrationTest;
+
+    public class ApiTest(ApiTestWebApplicationFactory<Program> factory)
+        : IClassFixture<ApiTestWebApplicationFactory<Program>>
+    {
+        private readonly ApiTestWebApplicationFactory<Program> factory = factory;
+
+        [Fact]
+        public async Task Get_認証必要なAPI_認証成功_UserIDを返す()
+        {
+            // Arrange
+            var client = this.factory.CreateClient();
+            // 取得したJWTをBearerトークンに設定します。
+            var token = this.factory.CreateToken("testUser");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            // Act
+            // 認証が必要なAPIにリクエストを送信します。
+            var response = await client.GetAsync("api/users");
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+            var result = await response.Content.ReadAsStringAsync();
+            Assert.Equal("{\"userId\":\"testUser\"}", result);
+        }
+    }
+
+    ```
 
 ## 参照記事
 
