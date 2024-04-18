@@ -140,9 +140,6 @@ theme:
         minify_js: true
         htmlmin_opts:
           remove_comments: true
-    - social:
-        cards_layout_options:
-          font_family: Noto Sans JP
 
 markdown_extensions:
   - abbr
