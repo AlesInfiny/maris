@@ -141,7 +141,6 @@ theme:
         htmlmin_opts:
           remove_comments: true
     - social:
-        enabled: !ENV [CI, false]
         cards_layout_options:
           font_family: Noto Sans JP
 
