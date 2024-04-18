@@ -144,6 +144,11 @@ jobs:
           cd samples/AzureADB2CAuth
           zip -r ../../documents/contents/samples/downloads/azure-ad-b2c-auth.zip *
 
+      - name: ソーシャルカードプラグイン用のパッケージインストール
+        run: |
+          python -m pip install "mkdocs-material[imaging]"
+          apt-get install pngquant
+
       - name: ドキュメントのビルド
         id: build_documents
         continue-on-error: true
