@@ -35,9 +35,9 @@ export const AssetsApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        assetsGet: async (assetCode: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        get: async (assetCode: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'assetCode' is not null or undefined
-            assertParamExists('assetsGet', 'assetCode', assetCode)
+            assertParamExists('get', 'assetCode', assetCode)
             const localVarPath = `/api/assets/{assetCode}`
                 .replace(`{${"assetCode"}}`, encodeURIComponent(String(assetCode)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -79,8 +79,8 @@ export const AssetsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async assetsGet(assetCode: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.assetsGet(assetCode, options);
+        async get(assetCode: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.get(assetCode, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -100,8 +100,8 @@ export const AssetsApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        assetsGet(assetCode: string, options?: any): AxiosPromise<void> {
-            return localVarFp.assetsGet(assetCode, options).then((request) => request(axios, basePath));
+        get(assetCode: string, options?: any): AxiosPromise<void> {
+            return localVarFp.get(assetCode, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -121,7 +121,7 @@ export class AssetsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AssetsApi
      */
-    public assetsGet(assetCode: string, options?: AxiosRequestConfig) {
-        return AssetsApiFp(this.configuration).assetsGet(assetCode, options).then((request) => request(this.axios, this.basePath));
+    public get(assetCode: string, options?: AxiosRequestConfig) {
+        return AssetsApiFp(this.configuration).get(assetCode, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -34,7 +34,7 @@ export const ServerTimeApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        serverTimeGet: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getServerTime: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/servertime`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -74,8 +74,8 @@ export const ServerTimeApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async serverTimeGet(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerTimeResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.serverTimeGet(options);
+        async getServerTime(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerTimeResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getServerTime(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -94,8 +94,8 @@ export const ServerTimeApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        serverTimeGet(options?: any): AxiosPromise<ServerTimeResponse> {
-            return localVarFp.serverTimeGet(options).then((request) => request(axios, basePath));
+        getServerTime(options?: any): AxiosPromise<ServerTimeResponse> {
+            return localVarFp.getServerTime(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -114,7 +114,7 @@ export class ServerTimeApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ServerTimeApi
      */
-    public serverTimeGet(options?: AxiosRequestConfig) {
-        return ServerTimeApiFp(this.configuration).serverTimeGet(options).then((request) => request(this.axios, this.basePath));
+    public getServerTime(options?: AxiosRequestConfig) {
+        return ServerTimeApiFp(this.configuration).getServerTime(options).then((request) => request(this.axios, this.basePath));
     }
 }
