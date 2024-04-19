@@ -115,7 +115,6 @@ jobs:
         name: アプリケーションのビルド
         continue-on-error: true
         run: |
-          export Logging__LogLevel__Microsoft="Warning"
           echo '## Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           dotnet build --nologo --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
           echo ':heavy_check_mark: アプリケーションのビルドに成功しました。' >> $GITHUB_STEP_SUMMARY
@@ -146,7 +145,7 @@ jobs:
           echo '## Test Result :memo:' >> $GITHUB_STEP_SUMMARY
           echo 'Test was a **${{ steps.run-tests.conclusion }}**.' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          cat integration-test-result.txt >> $GITHUB_STEP_SUMMARY
+          cat integration-test-result.txt | sed -n -e '/^Results File:/,$p' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
 
       - id: create-coverage-report
