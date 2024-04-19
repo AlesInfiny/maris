@@ -136,7 +136,8 @@ jobs:
         name: テストの実行
         continue-on-error: true
         run: |
-          dotnet test --no-build --nologo --logger "trx;LogFileName=integration-test.trx" --logger:"console;verbosity=quiet" --verbosity quiet --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage" > integration-test-result.txt
+          export Logging__LogLevel__Microsoft=Warning
+          dotnet test --no-build --nologo --logger "trx;LogFileName=integration-test.trx" --logger:"console;verbosity=minimal" --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage" > integration-test-result.txt
 
       - name: テスト結果のサマリー表示
         shell: bash
