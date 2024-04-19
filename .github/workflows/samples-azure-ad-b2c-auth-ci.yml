@@ -115,6 +115,7 @@ jobs:
         name: アプリケーションのビルド
         continue-on-error: true
         run: |
+          export Logging__LogLevel__Microsoft="Warning"
           echo '## Build Result :gear:' >> $GITHUB_STEP_SUMMARY
           dotnet build --nologo --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
           echo ':heavy_check_mark: アプリケーションのビルドに成功しました。' >> $GITHUB_STEP_SUMMARY
@@ -136,7 +137,6 @@ jobs:
         name: テストの実行
         continue-on-error: true
         run: |
-          export Logging__LogLevel__Microsoft="Warning"
           dotnet test --no-build --nologo --logger "trx;LogFileName=integration-test.trx" --logger:"console;verbosity=minimal" --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage" > integration-test-result.txt
 
       - name: テスト結果のサマリー表示
