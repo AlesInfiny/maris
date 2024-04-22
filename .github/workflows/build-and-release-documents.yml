@@ -11,12 +11,14 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+-Beta[0-9]+'
   workflow_dispatch:
 
+permissions:
+  id-token: write
+
 env:
   APP_ALESINFINY_MARIS_WEBAPP_NAME: app-alesinfiny-maris-docs-prod
   DOCUMENT_BASE_PATH: documents
-  DOCUMENT_FOLDER_PATH: ${DOCUMENT_BASE_PATH}/build-artifacts
-  DOCUMENT_ARTIFACTS_FILENAME: docs.zip
   DOCUMENT_OUTPUT_FOLDER_NAME: build-artifacts
+  DOCUMENT_ARTIFACTS_FILENAME: docs.zip
 
 jobs:
   build:
@@ -50,8 +52,8 @@ jobs:
       - name: ビルドアーティファクトのパッケージングとアップロード
         uses: ./.github/workflows/pack-and-upload
         with:
-          packaging-folder-path: ${{ env.DOCUMENT_FOLDER_PATH }}
-          document-artifact-filename: ${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
+          packaging-folder-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.DOCUMENT_OUTPUT_FOLDER_NAME }}
+          document-artifact-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.DOCUMENT_ARTIFACTS_FILENAME }}
 
   release-github:
     name: Githubのリリース
