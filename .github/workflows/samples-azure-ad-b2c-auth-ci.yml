@@ -94,6 +94,9 @@ jobs:
       DOTNET_NOLOGO: true
       BUILD_CONFIGURATION: Debug
       BUILD_SUMMARY_FILE: BuildSummary.md
+    permissions:
+      checks: write
+      contents: read
     defaults:
       run:
         working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
@@ -142,7 +145,7 @@ jobs:
         uses: NasAmin/trx-parser@v0.6.0
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
-          TRX_PATH: '${{ env.BACKEND_WORKING_DIRECTORY }}/integration-test.trx'
+          TRX_PATH: '${{ env.BACKEND_WORKING_DIRECTORY }}'
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
