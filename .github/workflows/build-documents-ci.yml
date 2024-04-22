@@ -25,9 +25,9 @@ on:
 
 env:
   DOCUMENT_BASE_PATH: documents
+  DOCUMENT_FOLDER_PATH: ${DOCUMENT_BASE_PATH}/build-artifacts
   DOCUMENT_OUTPUT_FOLDER_NAME: build-artifacts
-  DOCUMENT_FOLDER_PATH: documents/build-artifacts
-  DOCUMENT_ARTIFACT_PATH: documtnts/docs.zip
+  DOCUMENT_ARTIFACT_PATH: ${DOCUMENT_BASE_PATH}/docs.zip
 
 jobs:
   build:
