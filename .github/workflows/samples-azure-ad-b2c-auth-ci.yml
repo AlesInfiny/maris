@@ -142,7 +142,7 @@ jobs:
         uses: NasAmin/trx-parser@v0.6.0
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
-          TRX_PATH: '${{ env.BACKEND_WORKING_DIRECTORY }}'
+          TRX_PATH: '${{ env.BACKEND_WORKING_DIRECTORY }}/integration-test.trx'
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
