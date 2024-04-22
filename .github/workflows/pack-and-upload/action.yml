@@ -7,6 +7,10 @@ inputs:
   document-artifact-path:
     description: "zipファイルのフルパス"
     required: true
+  iis-files-path:
+    description: "IIS用ファイルのフルパス"
+    required: false
+    default: iis-files
 
 runs:
   using: "composite"
@@ -14,7 +18,7 @@ runs:
     - name: IIS 用のファイル配置とパッケージング
       shell: bash
       run: |
-        cp -T -v -f -r iis-files ${{ inputs.packaging-folder-path }}
+        cp -T -v -f -r ${{ inputs.iis-files-path }} ${{ inputs.packaging-folder-path }}
         zip -r ${{ inputs.document-artifact-path }} ${{ inputs.packaging-folder-path }}
 
     - name: ビルドアーティファクトのアップロード
