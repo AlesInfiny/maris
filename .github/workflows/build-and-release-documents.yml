@@ -27,11 +27,6 @@ jobs:
     outputs:
       is_pre_release: ${{ steps.setup-variables.outputs.is_pre_release }}
     steps:
-      - name: ブランチのチェックアウト
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
       - id: setup-variables
         name: 変数の初期化
         run: |
@@ -42,6 +37,11 @@ jobs:
           echo "is_pre_release:$pre_release"
           echo "is_pre_release=$pre_release" >> $GITHUB_ENV
           echo "is_pre_release=$pre_release" >> $GITHUB_OUTPUT
+
+      - name: ブランチのチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
