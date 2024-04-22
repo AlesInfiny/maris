@@ -139,14 +139,10 @@ jobs:
           dotnet test --no-build --nologo --logger "trx;LogFileName=integration-test.trx" --logger:"console;verbosity=minimal" --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage" > integration-test-result.txt
 
       - name: テスト結果のサマリー表示
-        shell: bash
+        uses: NasAmin/trx-parser@v0.5
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
-        run: |
-          echo '## Test Result :memo:' >> $GITHUB_STEP_SUMMARY
-          echo 'Test was a **${{ steps.run-tests.conclusion }}**.' >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          cat integration-test-result.txt | sed -n -e '/^Results File:/,$p' >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+        with:
+          TRX_PATH: '**/TestResults'
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
