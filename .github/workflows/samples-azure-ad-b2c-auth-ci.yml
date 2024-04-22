@@ -139,7 +139,7 @@ jobs:
           dotnet test --no-build --nologo --logger "trx;LogFileName=integration-test.trx" --logger:"console;verbosity=minimal" --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage" > integration-test-result.txt
 
       - name: テスト結果のサマリー表示
-        uses: NasAmin/trx-parser@v0.5.0
+        uses: NasAmin/trx-parser@v0.6.0
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           TRX_PATH: '**/TestResults'
