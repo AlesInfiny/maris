@@ -95,20 +95,17 @@ runs:
     - name: dressca.zip の作成
       shell: bash
       run: |
-        cd samples/Dressca
-        zip -r ../../documents/contents/samples/downloads/dressca.zip *
+        zip -r ${{ inputs.document-base-path }}/contents/samples/downloads/dressca.zip samples/Dressca/*
 
     - name: console-app-with-di.zip の作成
       shell: bash
       run: |
-        cd samples/ConsoleAppWithDI
-        zip -r ../../documents/contents/samples/downloads/console-app-with-di.zip *
+        zip -r ${{ inputs.document-base-path }}/contents/samples/downloads/console-app-with-di.zip samples/ConsoleAppWithDI/*
 
     - name: azure-ad-b2c-auth.zip の作成
       shell: bash
       run: |
-        cd samples/AzureADB2CAuth
-        zip -r ../../documents/contents/samples/downloads/azure-ad-b2c-auth.zip *
+        zip -r ${{ inputs.document-base-path }}/contents/samples/downloads/azure-ad-b2c-auth.zip samples/ConsoleAppWithDI/*
 
     - id: setup-version
       name: ドキュメントのバージョン設定
