@@ -40,7 +40,7 @@ AlesInfiny Maris で採用している Vue.js のソフトウェア・アーキ�
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **モデル**
 
-:  ビジネスロジックとして状態管理やブラウザ外部との入出力を担います。モデルのビジネスロジックには、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。
+:  状態管理やブラウザ外部との入出力を担い、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。
 
 <!-- textlint-disable -->
 Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/sfc){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
@@ -89,9 +89,9 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-light.png#only-light){ loading=lazy }
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-dark.png#only-dark){ loading=lazy }
 
-モデルはフロントエンドアプリケーションのビジネスロジックとして、データの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。モデルは以下の要素で構成されます。またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
+モデルはデータの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。モデルは以下の要素で構成されます。またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
 
-- Service : ビジネスロジックを持ちます。ビューモデルからのリクエストに対して、 Store の呼び出しやオーケストレーション、 Web API の呼び出します。
+- Service : ビューモデルからのリクエストに対して、 Store の呼び出し、 Web API の呼び出しなどデータの連携に必要な処理をします。
 - Store : フロントエンドで扱う状態を保持するコンテナです。 AlesInfiny Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。 Pinia : [公式ドキュメント :material-open-in-new:](https://pinia.vuejs.org/introduction.html){ target=_blank }
 
 ただし、このモデルの構成は複雑な状態管理をするアプリケーションを想定しており、小規模なアプリケーションや状態管理を必要としないページの場合は、 Service やモデルを省略することも考えられます。この場合は、ビューモデルから直接 Web API を呼び出します。
@@ -109,7 +109,7 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 | Getter | State の値や State から算出した結果を返すもの。 |
 | Action | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせない。 |
 
-Store は State をグローバルなシングルトンとして管理します。そのため本来 State は直接取得・更新ができますが、 Getter と Action を通じてアクセスするルールを設けて、 State の参照・更新を制御し、データの一貫性を持つことが重要です。
+Store は State をグローバルなシングルトンとして管理します。そのため本来 State は直接取得・更新ができますが、 Getter と Action を通じてアクセスするルールを設けて State の参照・更新を制御し、データの一貫性を持つことが重要です。
 
 #### State の更新 {#update-state}
 
@@ -157,7 +157,7 @@ Vue.js プロジェクトのフォルダー構成は、ブランクプロジェ�
 │  ├─ config/ ---------------- 設定ファイルを格納します。
 │  ├─ generated/ ------------- 自動生成されたファイルを格納します。
 │  ├─ router/ ---------------- ルーティング定義を格納します。
-│　├─ services/ -------------- ビジネスロジックを持つサービスを格納します。
+│　├─ services/ -------------- サービスに関するファイルを格納します。
 │  ├─ stores/ ---------------- store に関するファイルを格納します。
 │  ├─ views/ ----------------- ルーティングで指定される vue ファイルを格納します。またページ固有の挙動などもここに含めます。
 │  ├─ App.vue
