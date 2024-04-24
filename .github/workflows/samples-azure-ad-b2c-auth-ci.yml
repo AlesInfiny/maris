@@ -140,7 +140,7 @@ jobs:
         continue-on-error: true
         run: |
           dotnet test --no-build --nologo --logger "trx;LogFileName=integration-test.trx" --logger:"console;verbosity=minimal" --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage" > integration-test-result.txt
-      
+
       - id: create-test-result-report
         name: テスト結果ページの作成
         uses: dorny/test-reporter@v1
@@ -155,7 +155,7 @@ jobs:
           list-tests: 'all'
           max-annotations: '10'
           fail-on-error: 'true'
-      
+
       - name: テスト結果のサマリー表示
         shell: bash
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
