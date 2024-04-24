@@ -38,6 +38,12 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: ドキュメントのLint
+        uses: ./.github/workflows/lint-documents
+
+      - name: サンプルアプリケーションのソースコード圧縮
+        uses: ./.github/workflows/lint-documents
+
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
         with:
