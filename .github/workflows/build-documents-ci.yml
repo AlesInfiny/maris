@@ -48,7 +48,7 @@ jobs:
       - name: サンプルアプリケーションのソースコード圧縮
         uses: ./.github/workflows/compress-sample-source
         with:
-          compressed-source-base-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.COMPRESSED_SOURCE_PATH }}
+          compressed-source-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.COMPRESSED_SOURCE_PATH }}
 
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
