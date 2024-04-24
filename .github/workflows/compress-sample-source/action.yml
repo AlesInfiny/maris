@@ -16,4 +16,4 @@ runs:
     - name: azure-ad-b2c-auth.zip の作成
       shell: bash
       run: |
-        zip -r documents/contents/samples/downloads/azure-ad-b2c-auth.zip samples/ConsoleAppWithDI/*
+        zip -r documents/contents/samples/downloads/azure-ad-b2c-auth.zip samples/AzureADB2CAuth/*
