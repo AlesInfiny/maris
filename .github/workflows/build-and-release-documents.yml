@@ -43,7 +43,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: ドキュメントのLint
+      - name: ドキュメントの Lint
         uses: ./.github/workflows/lint-documents
 
       - name: サンプルアプリケーションのソースコード圧縮
