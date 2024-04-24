@@ -42,7 +42,7 @@ jobs:
         uses: ./.github/workflows/lint-documents
 
       - name: サンプルアプリケーションのソースコード圧縮
-        uses: ./.github/workflows/lint-documents
+        uses: ./.github/workflows/compress-sample-source
 
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
