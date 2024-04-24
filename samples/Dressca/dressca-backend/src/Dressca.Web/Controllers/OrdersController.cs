@@ -4,6 +4,7 @@ using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Baskets;
 using Dressca.Web.Dto.Ordering;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace Dressca.Web.Controllers;
 
@@ -57,6 +58,7 @@ public class OrdersController : ControllerBase
     [HttpGet("{orderId:long}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [OpenApiOperation("getById")]
     public async Task<IActionResult> GetByIdAsync(long orderId)
     {
         var buyerId = this.HttpContext.GetBuyerId();
@@ -85,6 +87,7 @@ public class OrdersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+    [OpenApiOperation("postOrder")]
     public async Task<IActionResult> PostOrderAsync(PostOrderRequest postOrderInput)
     {
         var buyerId = this.HttpContext.GetBuyerId();

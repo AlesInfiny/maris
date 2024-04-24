@@ -33,13 +33,16 @@ const axiosInstance = axios.create({
 OpenAPI Generator を利用する際は、 Axios のエンドポイントの設定が OpenAPI 定義書に記載されているエンドポイントで上書きされてしまいます。そのため、 API クライアントの初期化時にエンドポイントを設定する方法を利用します。
 
 ```typescript title="src/api-client/index.ts"
-const config = new apiClient.Configuration({
-  basePath: import.meta.env.VITE_API_ENDPOINT,
-});
+function createConfig(): apiClient.Configuration {
+  const config = new apiClient.Configuration({
+    basePath: import.meta.env.VITE_API_ENDPOINT,
+  });
+  return config;
+}
 
 const axiosInstance = axios.create({});
 
-const wrappedApi = new apiClient.generatedApi(config, '', axiosInstance);
+const wrappedApi = new apiClient.generatedApi(createConfig(), '', axiosInstance);
 
 export default wrappedApi;
 ```
@@ -73,7 +76,9 @@ interface ImportMeta {
 ```json title="package.json"
 {
   "scripts": {
-    "build:prod": "vue-tsc --noEmit && vite build --mode prod"
+    "build:prod": "run-p typecheck build-only:prod --print-label",
+    "build-only:prod": "vite build --mode prod",
+    "typecheck": "vue-tsc --build --force"
   }
 }
 ```

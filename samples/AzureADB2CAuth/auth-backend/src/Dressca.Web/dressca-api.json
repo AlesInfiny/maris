@@ -19,7 +19,7 @@
           "ServerTime"
         ],
         "summary": "認証不要で現在のサーバー時間を取得します。",
-        "operationId": "ServerTime_Get",
+        "operationId": "getServerTime",
         "responses": {
           "200": {
             "description": "サーバー時間。",
@@ -40,7 +40,7 @@
           "Users"
         ],
         "summary": "認証済みユーザーのユーザー情報を取得します。",
-        "operationId": "Users_GetUser",
+        "operationId": "getUser",
         "responses": {
           "200": {
             "description": "成功。",

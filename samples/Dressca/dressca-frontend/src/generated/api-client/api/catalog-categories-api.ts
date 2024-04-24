@@ -34,7 +34,7 @@ export const CatalogCategoriesApiAxiosParamCreator = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogCategoriesGetCatalogCategories: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCatalogCategories: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/catalog-categories`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -74,8 +74,8 @@ export const CatalogCategoriesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async catalogCategoriesGetCatalogCategories(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogCategoryResponse>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.catalogCategoriesGetCatalogCategories(options);
+        async getCatalogCategories(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogCategoryResponse>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCatalogCategories(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -94,8 +94,8 @@ export const CatalogCategoriesApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        catalogCategoriesGetCatalogCategories(options?: any): AxiosPromise<Array<CatalogCategoryResponse>> {
-            return localVarFp.catalogCategoriesGetCatalogCategories(options).then((request) => request(axios, basePath));
+        getCatalogCategories(options?: any): AxiosPromise<Array<CatalogCategoryResponse>> {
+            return localVarFp.getCatalogCategories(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -114,7 +114,7 @@ export class CatalogCategoriesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CatalogCategoriesApi
      */
-    public catalogCategoriesGetCatalogCategories(options?: AxiosRequestConfig) {
-        return CatalogCategoriesApiFp(this.configuration).catalogCategoriesGetCatalogCategories(options).then((request) => request(this.axios, this.basePath));
+    public getCatalogCategories(options?: AxiosRequestConfig) {
+        return CatalogCategoriesApiFp(this.configuration).getCatalogCategories(options).then((request) => request(this.axios, this.basePath));
     }
 }
