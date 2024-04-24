@@ -140,12 +140,30 @@ jobs:
         continue-on-error: true
         run: |
           dotnet test --no-build --nologo --logger "trx;LogFileName=integration-test.trx" --logger:"console;verbosity=minimal" --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage" > integration-test-result.txt
-
-      - name: テスト結果のサマリー表示
-        uses: NasAmin/trx-parser@v0.6.0
+      
+      - id: create-test-result-report
+        name: テスト結果ページの作成
+        uses: dorny/test-reporter@v1
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
-          TRX_PATH: '**/TestResults'
+          name: 'Test results'
+          path: '**/TestResults/*.trx'
+          path-replace-backslashes: 'true'
+          reporter: 'dotnet-trx'
+          only-summary: 'false'
+          list-suites: 'all'
+          list-tests: 'all'
+          max-annotations: '10'
+          fail-on-error: 'true'
+      
+      - name: テスト結果のサマリー表示
+        shell: bash
+        if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+        run: |
+          echo '## Test Result :memo:' >> ${{ env.BUILD_SUMMARY_FILE }}
+          echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> ${{ env.BUILD_SUMMARY_FILE }}
+          echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> ${{ env.BUILD_SUMMARY_FILE }}
+          cat ${{ env.BUILD_SUMMARY_FILE }} >> $GITHUB_STEP_SUMMARY
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
