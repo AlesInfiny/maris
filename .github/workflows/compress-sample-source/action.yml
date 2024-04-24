@@ -2,8 +2,8 @@ name: "サンプルアプリケーションのソースコード圧縮"
 description: "サンプルアプリケーションのソースコードを圧縮します。"
 inputs:
   compressed-source-path:
-  desctiption: "圧縮したソースコードを配置するフォルダパス"
-  required: true
+    desctiption: "圧縮したソースコードを配置するフォルダパス"
+    required: true
 
 runs:
   using: "composite"
