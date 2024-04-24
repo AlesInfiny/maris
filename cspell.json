@@ -33,6 +33,7 @@
         "langword",
         "linenums",
         "mkdocs",
+        "MSAL",
         "mssql",
         "MVVM",
         "nameof",
