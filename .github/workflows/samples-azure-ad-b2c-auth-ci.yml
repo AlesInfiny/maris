@@ -146,7 +146,7 @@ jobs:
         uses: dorny/test-reporter@v1
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
-          name: 'Test results'
+          name: 'バックエンドのテスト結果'
           path: '**/TestResults/*.trx'
           path-replace-backslashes: 'true'
           reporter: 'dotnet-trx'
