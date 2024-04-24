@@ -1,19 +1,24 @@
 name: "サンプルアプリケーションのソースコード圧縮"
 description: "サンプルアプリケーションのソースコードを圧縮します。"
+inputs:
+  compressed-source-path:
+  desctiption: "圧縮したソースコードを配置するフォルダパス"
+  required: true
+
 runs:
   using: "composite"
   steps:
     - name: dressca.zip の作成
       shell: bash
       run: |
-        zip -r documents/contents/samples/downloads/dressca.zip samples/Dressca/*
+        zip -r "${{ inputs.compressed-source-path }}"/dressca.zip samples/Dressca/*
 
     - name: console-app-with-di.zip の作成
       shell: bash
       run: |
-        zip -r documents/contents/samples/downloads/console-app-with-di.zip samples/ConsoleAppWithDI/*
+        zip -r "${{ inputs.compressed-source-path }}"/console-app-with-di.zip samples/ConsoleAppWithDI/*
 
     - name: azure-ad-b2c-auth.zip の作成
       shell: bash
       run: |
-        zip -r documents/contents/samples/downloads/azure-ad-b2c-auth.zip samples/AzureADB2CAuth/*
+        zip -r "${{ inputs.compressed-source-path }}"/azure-ad-b2c-auth.zip samples/AzureADB2CAuth/*

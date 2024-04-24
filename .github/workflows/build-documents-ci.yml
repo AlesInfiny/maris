@@ -29,6 +29,8 @@ env:
   DOCUMENT_BASE_PATH: documents
   DOCUMENT_OUTPUT_FOLDER_NAME: build-artifacts
   DOCUMENT_ARTIFACTS_FILENAME: docs.zip
+  COMPRESSED_SOURCE_PATH: contents/samples/downloads
+
 
 jobs:
   build:
@@ -45,6 +47,8 @@ jobs:
 
       - name: サンプルアプリケーションのソースコード圧縮
         uses: ./.github/workflows/compress-sample-source
+        with:
+          compressed-source-base-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.COMPRESSED_SOURCE_PATH }}
 
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
@@ -53,7 +57,7 @@ jobs:
           output-folder-name: ${{ env.DOCUMENT_OUTPUT_FOLDER_NAME }}
 
       - name: ビルドアーティファクトのパッケージングとアップロード
-        if: github.event_name == 'workflow_dispatch'
+        #if: github.event_name == 'workflow_dispatch'
         uses: ./.github/workflows/pack-and-upload
         with:
           packaging-folder-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.DOCUMENT_OUTPUT_FOLDER_NAME }}
