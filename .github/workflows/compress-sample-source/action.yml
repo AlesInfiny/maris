@@ -12,16 +12,16 @@ runs:
       shell: bash
       run: |
         cd samples/Dressca
-        zip -j -r "${{ inputs.compressed-source-path }}"/dressca.zip *
+        zip -r "${{ inputs.compressed-source-path }}"/dressca.zip *
 
     - name: console-app-with-di.zip の作成
       shell: bash
       run: |
         cd samples/ConsoleAppWithDI
-        zip -j -r "${{ inputs.compressed-source-path }}"/console-app-with-di.zip *
+        zip -r "${{ inputs.compressed-source-path }}"/console-app-with-di.zip *
 
     - name: azure-ad-b2c-auth.zip の作成
       shell: bash
       run: |
         cd samples/AzureADB2CAuth
-        zip -j-r "${{ inputs.compressed-source-path }}"/azure-ad-b2c-auth.zip *
+        zip -r "${{ inputs.compressed-source-path }}"/azure-ad-b2c-auth.zip *
