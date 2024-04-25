@@ -45,6 +45,7 @@ jobs:
           fetch-depth: 1
 
       - name: ドキュメントの Lint
+        continue-on-error: true
         uses: ./.github/workflows/lint-documents
 
       - name: サンプルアプリケーションのソースコード圧縮

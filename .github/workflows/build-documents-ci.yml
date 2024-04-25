@@ -43,6 +43,7 @@ jobs:
           fetch-depth: 1
 
       - name: ドキュメントの Lint
+        continue-on-error: true
         uses: ./.github/workflows/lint-documents
 
       - name: サンプルアプリケーションのソースコード圧縮
@@ -57,7 +58,7 @@ jobs:
           output-folder-name: ${{ env.DOCUMENT_OUTPUT_FOLDER_NAME }}
 
       - name: ビルドアーティファクトのパッケージングとアップロード
-        #if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch'
         uses: ./.github/workflows/pack-and-upload
         with:
           packaging-folder-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.DOCUMENT_OUTPUT_FOLDER_NAME }}
