@@ -44,7 +44,7 @@ public class AssetsController : ControllerBase
     /// <response code="404">アセットコードに対応するアセットがない。</response>
     [HttpGet("{assetCode}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("get")]
     public IActionResult Get(string assetCode)
     {
