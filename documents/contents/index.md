@@ -6,7 +6,7 @@ hide:
 ---
 
 # AlesInfiny Maris OSS Edition にようこそ {#top}
-あああああああ
+
 ## AlesInfiny Maris OSS Edition とは {#what-is-alesinfiny-maris-version}
 
 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris）では、 .NET アプリケーションの一般的なアーキテクチャや方式設計のためのドキュメントおよびサンプルアプリケーションを提供します。
