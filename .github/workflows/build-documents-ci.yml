@@ -51,10 +51,6 @@ jobs:
         with:
           compressed-source-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.COMPRESSED_SOURCE_PATH }}
 
-      - name: 確認
-        run: |
-          pwd
-
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
         with:
