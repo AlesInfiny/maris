@@ -2,13 +2,13 @@ name: "ビルドアーティファクトのパッケージングとアップロ�
 description: "ドキュメントをzip化してアップロードします。"
 inputs:
   packaging-folder-path:
-    desctiption: "パッケージングする対象のhomeからの相対パス"
+    desctiption: "パッケージングする対象のGITHUB_WORKSPACEからの相対パス"
     required: true
   document-artifact-path:
-    description: "zipファイルのhomeからの相対パス"
+    description: "zipファイルのGITHUB_WORKSPACEからの相対パス"
     required: true
   iis-files-path:
-    description: "IIS用ファイルのhomeからの相対パス"
+    description: "IIS用ファイルのGITHUB_WORKSPACEからの相対パス"
     required: false
     default: iis-files
 

@@ -2,7 +2,7 @@ name: "サンプルアプリケーションのソースコード圧縮"
 description: "サンプルアプリケーションのソースコードを圧縮します。"
 inputs:
   compressed-source-path:
-    desctiption: "圧縮したソースコードを配置するフォルダパス"
+    desctiption: "圧縮したソースコードを配置するフォルダのGITHUB_WORKSPACEからの相対パス"
     required: true
 
 runs:
