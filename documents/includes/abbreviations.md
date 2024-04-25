@@ -1,4 +1,4 @@
-<!-- markdownlint-disable-file MD041 -->
+<!-- markdownlint-disable-file MD041 CMD001 -->
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 <!-- 省略語の用語集として使用します。 -->
 *[ALM]: Application Lifecycle Management：アプリケーションの構築からサービス終了まで、そのライフサイクルを管理するツールやプロセス。

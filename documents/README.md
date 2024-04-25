@@ -1,4 +1,5 @@
 <!-- textlint-disable @textlint-rule/require-header-id -->
+<!-- markdownlint-disable-file CMD001 -->
 # AlesInfiny Maris OSS Edition ドキュメントについて
 
 <!-- cSpell:ignore hoge hogehoge dotnetfw pymdown -->
