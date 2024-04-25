@@ -30,17 +30,17 @@ AlesInfiny Maris で採用している Vue.js のソフトウェア・アーキ�
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **ビュー**
 
-:  ブラウザへのレンダリングおよびブラウザからのイベントの待ち受けを役割として担います。ビューには UI の構造やスタイルを定義します。
+:  ブラウザーへのレンダリングおよびブラウザーからのイベントの待ち受けを役割として担います。ビューには UI の構造やスタイルを定義します。
 
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **ビューモデル**
 
-:  ブラウザからのイベントを受け、プレゼンテーションロジックを実行します。ビューモデルのプレゼンテーションロジックには、レンダリングに必要な処理や入力チェック、モデルを通じたデータの取得や更新などの処理を実装します。
+:  ブラウザーからのイベントを受け、プレゼンテーションロジックを実行します。ビューモデルのプレゼンテーションロジックには、レンダリングに必要な処理や入力チェック、モデルを通じたデータの取得や更新などの処理を実装します。
 
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **モデル**
 
-:  状態管理やブラウザ外部との入出力を担い、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。
+:  状態管理やブラウザー外部との入出力を担い、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。
 
 <!-- textlint-disable -->
 Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/sfc){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
@@ -51,8 +51,8 @@ Vue.js ではビューとビューモデルを [単一ファイルコンポー�
 ![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/view%26viewmodel-component-light.png#only-light){ loading=lazy }
 ![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/view%26viewmodel-component-dark.png#only-dark){ loading=lazy }
 
-ビューとビューモデルはそれぞれブラウザへのレンダリングとそのブラウザから受けたイベントに対するプレゼンテーションロジックなどを行うコンポーネントです。
-ブラウザに表示する画面は Component という複数の画面構成要素と View というそれらを組み合わせたページから構成されます。
+ビューとビューモデルはそれぞれブラウザーへのレンダリングとそのブラウザーから受けたイベントに対するプレゼンテーションロジックなどを行うコンポーネントです。
+ブラウザーに表示する画面は Component という複数の画面構成要素と View というそれらを組み合わせたページから構成されます。
 これらの画面コンポーネントが、デザインやデータバインドなどの画面表示（ビュー）と、イベント処理や入力処理などの画面要素に対する処理（ビューモデル）を持っています。
 
 #### 画面コンポーネント {#screen-components}
