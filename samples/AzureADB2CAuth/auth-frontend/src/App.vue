@@ -1,35 +1,32 @@
 <script setup lang="ts">
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 import { useUserStore } from './stores/user/user';
+import { useServerTimeStore } from './stores/serverTime/serverTime';
 import { authenticationService } from '@/services/authentication/authentication-service';
 import { fetchServerTime } from '@/services/server-time/server-time-service';
-import { onMounted, reactive, toRefs } from 'vue';
+import { onMounted } from 'vue';
 
 const authenticationStore = useAuthenticationStore();
 const userStore = useUserStore();
-
-const state = reactive({
-  serverTime: '',
-});
-const { serverTime } = toRefs(state);
+const serverTimeStore = useServerTimeStore();
 
 const signIn = async () => {
   await authenticationService.signIn();
 };
 
-const updateServerTime = async () => {
-  serverTime.value = await fetchServerTime();
-};
+async function updateServerTime() {
+  await fetchServerTime();
+}
 
 onMounted(async () => {
-  serverTime.value = await fetchServerTime();
+  await fetchServerTime();
 });
 </script>
 
 <template>
   <header><h1>Azure AD B2C 認証サンプル</h1></header>
   <div>
-    <span>現在時刻: {{ serverTime }}</span>
+    <span>現在時刻: {{ serverTimeStore.getServerTime }}</span>
     <button @click="updateServerTime()">更新</button>
   </div>
   <div>

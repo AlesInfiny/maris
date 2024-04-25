@@ -1,7 +1,6 @@
-import { getServerTimeApi } from '@/api-client';
+import { useServerTimeStore } from '@/stores/serverTime/serverTime';
 
 export async function fetchServerTime() {
-  const api = await getServerTimeApi();
-  const response = await api.getServerTime();
-  return response.data.serverTime;
+  const serverTimeStore = useServerTimeStore();
+  await serverTimeStore.fetchServerTimeResponse();
 }
