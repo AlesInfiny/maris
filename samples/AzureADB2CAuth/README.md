@@ -91,8 +91,8 @@ auth-frontend
 　 └ stores
 　 　 ├ authentication
 　 　 │ └ authentication.ts ........... 認証の結果を保持するストア
-　 　 ├ serverTime
-　 　 │ └ serverTime.ts ............... 認証の必要がない Web API 呼び出しの結果を保持するストア
+　 　 ├ server-time
+　 　 │ └ server-time.ts ............... 認証の必要がない Web API 呼び出しの結果を保持するストア
 　 　 └ users
 　 　 　 └ users.ts .................... 認証が必要な Web API 呼び出しの結果を保持するストア
 ```
