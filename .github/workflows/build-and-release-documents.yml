@@ -12,6 +12,7 @@ on:
 
 permissions:
   id-token: write
+  contents: read
 
 env:
   APP_ALESINFINY_MARIS_WEBAPP_NAME: app-alesinfiny-maris-docs-prod
