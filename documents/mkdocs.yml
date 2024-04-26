@@ -87,8 +87,8 @@ nav:
               - .NET ランタイムの最新動向: guidebooks/migration/dotnetfw-risk/dotnet-runtime-trends.md
               - .NET Framework の開発停止によるリスク: guidebooks/migration/dotnetfw-risk/risk-of-dotnet-framework.md
               - .NET への移行: guidebooks/migration/dotnetfw-risk/migration-to-dotnet.md
-          # - 開発プロセスのモダナイズ:
-              # - guidebooks/modern-dev-process/index.md
+              # - 開発プロセスのモダナイズ:
+                  # - guidebooks/modern-dev-process/index.md
   - サンプル解説:
       - samples/index.md
       - コンソールアプリケーションでの DI の利用:
