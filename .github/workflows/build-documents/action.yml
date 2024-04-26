@@ -2,10 +2,10 @@ name: "ドキュメントのビルド"
 description: "ドキュメントをビルドします。"
 inputs:
   document-base-path:
-    desctiption: "ドキュメントのベースフォルダパス"
+    description: "ドキュメントのベースフォルダパス"
     required: true
   output-folder-name:
-    desctiption: "ビルドしたドキュメントの出力先フォルダ名"
+    description: "ビルドしたドキュメントの出力先フォルダ名"
     required: true
 runs:
   using: "composite"
@@ -20,6 +20,12 @@ runs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
+
+    - name: ソーシャルカードプラグイン用のパッケージインストール
+      shell: bash
+      run: |
+        python -m pip install "mkdocs-material[imaging]"
+        sudo apt-get install pngquant
 
     - id: setup-version
       name: ドキュメントのバージョン設定
@@ -37,6 +43,7 @@ runs:
       continue-on-error: true
       shell: bash
       run: |
+        export BUILD_DOCUMENTS=true
         cd "${{ inputs.document-base-path }}"
         echo '# Mkdocs Build Result :factory:' >> $GITHUB_STEP_SUMMARY
         mkdocs build --verbose --clean --strict --site-dir "${{ inputs.output-folder-name }}" > mkdocs_build_log.txt

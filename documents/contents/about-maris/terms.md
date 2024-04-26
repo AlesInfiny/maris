@@ -1,5 +1,6 @@
 ---
 title: 利用規約
+description: AlesInfiny Maris OSS Edition ポータルサイトの利用規約です。
 ---
 
 # 利用規約 {#top}
