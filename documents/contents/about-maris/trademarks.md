@@ -1,6 +1,6 @@
 ---
 title: 商標
-description: AlesInfiny Maris OSS Edition ポータルサイトの商標について説明します。
+description: AlesInfiny Maris OSS Edition の商標について説明します。
 ---
 
 # 商標 {#top}
