@@ -2,7 +2,7 @@ name: "ビルドアーティファクトのパッケージングとアップロ�
 description: "ドキュメントをzip化してアップロードします。"
 inputs:
   packaging-folder-path:
-    desctiption: "パッケージングする対象のGITHUB_WORKSPACEからの相対パス"
+    description: "パッケージングする対象のGITHUB_WORKSPACEからの相対パス"
     required: true
   document-artifact-path:
     description: "zipファイルのGITHUB_WORKSPACEからの相対パス"

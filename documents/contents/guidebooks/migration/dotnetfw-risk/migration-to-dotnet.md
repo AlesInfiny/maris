@@ -1,6 +1,6 @@
 ---
-title: .NET Fw のリスク
-description: .NET Framework にとどまり続けることで起こりうるリスクについて説明します。
+title: .NET Framework のリスク
+description: .NET Framework にとどまり続けることで起こりうる リスクについて説明します。
 ---
 
 # .NET への移行 {#top}

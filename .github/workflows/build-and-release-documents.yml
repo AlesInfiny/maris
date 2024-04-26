@@ -52,6 +52,7 @@ jobs:
         uses: ./.github/workflows/compress-sample-source
         with:
           compressed-source-path: ${{ env.DOCUMENT_BASE_PATH }}/${{ env.COMPRESSED_SOURCE_PATH }}
+
       - name: ドキュメントのビルド
         uses: ./.github/workflows/build-documents
         with:
