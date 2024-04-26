@@ -1,4 +1,5 @@
 <!-- textlint-disable @textlint-rule/require-header-id,ja-technical-writing/sentence-length -->
+<!-- markdownlint-disable-file CMD001 -->
 
 # dressca-frontend
 
