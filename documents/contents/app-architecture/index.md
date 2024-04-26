@@ -1,3 +1,8 @@
+---
+title: アプリケーション アーキテクチャ
+description: AlesInfiny Maris OSS Edition を利用することで構築できる アプリケーションについて説明します。
+---
+
 # アプリケーションアーキテクチャ {#top}
 
 - [概要編](./overview/index.md)

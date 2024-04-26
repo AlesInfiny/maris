@@ -1,6 +1,6 @@
 ---
 title: サンプル解説
-description: AlesInfiny Maris OSS Edition の提供するサンプルの解説ドキュメント集。
+description: AlesInfiny Maris OSS Edition の提供するサンプルの 解説ドキュメント集。
 ---
 
 # サンプル解説 {#top}

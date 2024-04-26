@@ -1,5 +1,5 @@
 ---
-title: AlesInfiny Maris OSS Edition にようこそ
+title: AlesInfiny Maris OSS Edition に ようこそ
 description: AlesInfiny Maris OSS Edition の概要を説明します。
 hide:
   - navigation
