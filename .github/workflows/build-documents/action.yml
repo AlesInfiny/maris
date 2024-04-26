@@ -1,0 +1,67 @@
+name: "ドキュメントのビルド"
+description: "ドキュメントをビルドします。"
+inputs:
+  document-base-path:
+    desctiption: "ドキュメントのベースフォルダパス"
+    required: true
+  output-folder-name:
+    desctiption: "ビルドしたドキュメントの出力先フォルダ名"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Python のセットアップ
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.x"
+
+    - name: pip パッケージのインストール
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+
+    - id: setup-version
+      name: ドキュメントのバージョン設定
+      shell: bash
+      run: |
+        if [ ${{ startsWith(github.ref, 'refs/tags/v') }} ];
+        then
+        export VERSION="${{ github.ref_name }}"
+        else
+        export VERSION="Test Version"
+        fi
+
+    - name: ドキュメントのビルド
+      id: build_documents
+      continue-on-error: true
+      shell: bash
+      run: |
+        cd "${{ inputs.document-base-path }}"
+        echo '# Mkdocs Build Result :factory:' >> $GITHUB_STEP_SUMMARY
+        mkdocs build --verbose --clean --strict --site-dir "${{ inputs.output-folder-name }}" > mkdocs_build_log.txt
+
+    - name: ドキュメントビルドの結果表示(成功)
+      if: ${{ steps.build_documents.outcome == 'success' }}
+      shell: bash
+      run: |
+        echo ':heavy_check_mark: mkdocs のビルドに成功しました。' >> $GITHUB_STEP_SUMMARY
+        cd "${{ inputs.document-base-path }}"
+        if [ -s mkdocs_build_log.txt ]; then
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat mkdocs_build_log.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+        fi
+
+    - name: ドキュメントビルドの結果表示(失敗)
+      if: ${{ steps.build_documents.outcome == 'failure' }}
+      shell: bash
+      run: |
+        echo ':x: mkdocs のビルドに失敗しました。' >> $GITHUB_STEP_SUMMARY
+        cd "${{ inputs.document-base-path }}"
+        if [ -s mkdocs_build_log.txt ]; then
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat mkdocs_build_log.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+        fi
+        exit 1
