@@ -241,8 +241,6 @@ Web API コントローラーが返却するエラーレスポンスの形式は
 
     ```csharp title="SampleController.cs"
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Identity.Web;
-    using NSwag.Annotations;
 
     namespace AaaSubSystem.Web.Controllers;
 
