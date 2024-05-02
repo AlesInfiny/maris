@@ -22,7 +22,7 @@ public class UsersController : ControllerBase
     /// <response code="401">認証されていない。</response>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Authorize]
     [OpenApiOperation("getUser")]
     public IActionResult GetUser()
