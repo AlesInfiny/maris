@@ -82,6 +82,11 @@ auth-frontend
 　 ├ api-client
 　 │ └ index.ts ....................... Web API 呼び出し時の共通処理を記述する TypeScript ファイル
 　 ├ generated ......................... 自動生成された Axios のコードが配置されるフォルダー
+　 ├ services
+　 │  ├ authentication
+　 │  │ └ authentication-service.ts ..... 認証（サインイン、トークン取得）を行うサービス
+　 │  ├ server-time
+　 │    └ server-time-service.ts ........ 認証の必要がない処理を行うサービス
 　 ├ shared
 　 │ └ authentication
 　 │ 　 ├ authentication-adb2c.ts ..... Azure AD B2C による認証（サインイン、トークン取得）を行う TypeScript ファイル
@@ -89,8 +94,8 @@ auth-frontend
 　 └ stores
 　 　 ├ authentication
 　 　 │ └ authentication.ts ........... 認証の結果を保持するストア
-　 　 ├ serverTime
-　 　 │ └ serverTime.ts ............... 認証の必要がない Web API 呼び出しの結果を保持するストア
+　 　 ├ server-time
+　 　 │ └ server-time.ts ............... 認証の必要がない Web API 呼び出しの結果を保持するストア
 　 　 └ users
 　 　 　 └ users.ts .................... 認証が必要な Web API 呼び出しの結果を保持するストア
 ```
@@ -388,22 +393,33 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     }
     ```
 
+1. 認証機能を持つサービスを作成します。`src\services\authentication` フォルダーを作成し、 `authentication-service.ts` を作成します。
+
+    ```ts
+    import { useAuthenticationStore } from "@/stores/authentication/authentication";
+
+    export const authenticationService = {
+      async signIn() {
+        const authenticationStore = useAuthenticationStore();
+        await authenticationStore.signIn();
+        
+        if (authenticationStore.isAuthenticated) {
+          // サインインが成功した場合の処理をここに記述します。
+        } 
+      },
+    };
+    ```
+
 1. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
 
     ```ts
     <script setup lang="ts">
+    import { authenticationService } from '@/services/authentication/authentication-service';
     import { useAuthenticationStore } from '@/stores/authentication/authentication';
-
     const authenticationStore = useAuthenticationStore();
-    const isAuthenticated = () => {
-      return authenticationStore.isAuthenticated;
-    };
-    const signIn = async () => {
-      await authenticationStore.signIn();
 
-      if (authenticationStore.isAuthenticated) {
-        // サインインが成功した場合の処理をここに記述します。
-      }
+    const signIn = async () => {
+      await authenticationService.signIn();
     };
     </script>
     ```
@@ -411,7 +427,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 1. `ログイン` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッドが動作すれば `button` である必要はありません）。
 
     ```html
-    <button v-if="!isAuthenticated()" @click="signIn()">ログイン</button>
+    <button v-if="!authenticationStore.isAuthenticated" @click="signIn()">ログイン</button>
     ```
 
 1. `npm install` を実行し、その他のパッケージをインストールします。
