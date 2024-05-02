@@ -38,5 +38,3 @@ onMounted(async () => {
     >
   </div>
 </template>
-./stores/serverTime/server-time
-./stores/server-time/serverTime
