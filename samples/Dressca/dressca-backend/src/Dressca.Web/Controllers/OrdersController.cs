@@ -57,7 +57,7 @@ public class OrdersController : ControllerBase
     /// <response code="404">注文 Id が存在しない。</response>
     [HttpGet("{orderId:long}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderResponse))]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getById")]
     public async Task<IActionResult> GetByIdAsync(long orderId)
     {
@@ -85,7 +85,7 @@ public class OrdersController : ControllerBase
     /// <response code="500">サーバーエラー。</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("postOrder")]
     public async Task<IActionResult> PostOrderAsync(PostOrderRequest postOrderInput)

@@ -31,6 +31,8 @@ builder.Services
     })
     .ConfigureApiBehaviorOptions(options =>
     {
+        options.SuppressMapClientErrors = true;
+
         // Bad Request となった場合の処理。
         var builtInFactory = options.InvalidModelStateResponseFactory;
         options.InvalidModelStateResponseFactory = context =>
