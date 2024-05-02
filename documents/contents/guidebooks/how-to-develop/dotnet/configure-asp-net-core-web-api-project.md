@@ -216,6 +216,53 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     }
     ```
 
+### Web API コントローラーのエラーレスポンス形式の指定 {#set-error-response-type}
+
+Web API が返却するエラーレスポンスの形式は `ProducesResponseType` 属性の `Type` で明示的に指定します。
+`Type` に `typeof(ProblemDetails)` を指定することで、[RFC 9457](https://datatracker.ietf.org/doc/html/rfc9457) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc9457.html)) に従ったエラーレスポンスを返却します。
+
+また、実際のレスポンス形式と Open API 定義書に記載のレスポンス形式の不一致を防ぐため、 `Program.cs` で `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定します。
+`SuppressMapClientErrors` を `false` に設定すると、エラーレスポンスの型を指定しない限りエラーは自動的に `ProblemDetails` にマッピングされ、 Open API 定義書にも反映されます。
+しかし、この設定が有効になるのは Web API コントローラーの範囲であり、たとえば Program.cs でインジェクションした外部サービスの機能が自動的にエラーを返却する場合等は `ProblemDetails` の形式になりません。つまり、 Open API 定義書と実際に返されるエラーレスポンスの形式に差異ができてしまいます。これを防ぐため、 `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定し、 `ProblemDetails` への自動的なマッピングを停止します。
+
+??? example "エラーレスポンス形式の設定例"
+    `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定します。
+
+    ```csharp title="Program.cs"
+    builder.Services
+        .AddControllers()
+        .ConfigureApiBehaviorOptions(options =>
+        {
+            options.SuppressMapClientErrors = true;
+        });
+    ```
+
+    `ProducesResponseType` 属性の `Type` に `typeof(ProblemDetails)` を指定します。
+
+    ```csharp title="SampleController.cs"
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Identity.Web;
+    using NSwag.Annotations;
+
+    namespace AaaSubSystem.Web.Controllers;
+
+    [Route("api/sample")]
+    [ApiController]
+    [Produces("application/json")]
+    public class SampleController : ControllerBase
+    {
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
+        [Authorize]
+        public IActionResult GetSample()
+        {
+          // 省略
+        }
+    }
+    ```
+
 ## HTTP 400 時のログ出力 {#logging-on-http-400}
 
 Web API から HTTP 400 のレスポンスを返却する際、問題の原因となった入力値の情報をログに記録しましょう。
