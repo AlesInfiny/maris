@@ -68,14 +68,3 @@ AlesInfiny Maris で構築した Web アプリケーションのサンプルを�
    いくつかプロンプト画面が立ち上がった後、ブラウザーが起動し、アプリケーションの実行が開始します。
 
     [![Dressca トップページ](images/dressca-top.png){ width="600" loading=lazy }](images/dressca-top.png)
-
-## RSS フィード {#rss}
-
-- [feed_rss_created.xml](feed_rss_created.xml)
-- [feed_rss_updated.xml](feed_rss_updated.xml)
-
-[![Feedly button](https://s3.feedly.com/img/follows/feedly-follow-rectangle-flat-big_2x.png "Follow us on Feedly"){: width=130 height= 50 loading=lazy }](https://feedly.com/i/subscription/feed%2Fhttp%3A%2F%2Fmaris.alesinfiny.org%2Ffeed_rss_created.xml)
-{: align=middle }
-
-<!-- [![Feedly button](https://s3.feedly.com/img/follows/feedly-follow-rectangle-flat-big_2x.png "Follow us on Feedly"){: width=130 height= 50 loading=lazy }](https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fguts.github.io%2Fmkdocs-rss-plugin%2Ffeed_rss_created.xml)
-{: align=middle } -->
