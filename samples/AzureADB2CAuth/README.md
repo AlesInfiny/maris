@@ -427,7 +427,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 1. `ログイン` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッドが動作すれば `button` である必要はありません）。
 
     ```html
-    <button v-if="!authenticationStore.isAuthenticated()" @click="signIn()">ログイン</button>
+    <button v-if="!authenticationStore.isAuthenticated" @click="signIn()">ログイン</button>
     ```
 
 1. `npm install` を実行し、その他のパッケージをインストールします。
