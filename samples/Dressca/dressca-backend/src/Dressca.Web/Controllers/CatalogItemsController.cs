@@ -48,7 +48,7 @@ public class CatalogItemsController : ControllerBase
     /// <response code="400">リクエストエラー。</response>
     [HttpGet]
     [ProducesResponseType(typeof(PagedList<CatalogItemResponse>), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getByQuery")]
     public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {

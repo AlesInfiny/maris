@@ -96,7 +96,7 @@ public class BasketItemsController : ControllerBase
     /// <response code="400">リクエストエラー。</response>
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [OpenApiOperation("putBasketItems")]
     public async Task<IActionResult> PutBasketItemsAsync(IEnumerable<PutBasketItemsRequest> putBasketItems)
     {
@@ -144,7 +144,7 @@ public class BasketItemsController : ControllerBase
     /// <response code="500">サーバーエラー。</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("postBasketItem")]
     public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsRequest postBasketItem)
@@ -178,8 +178,8 @@ public class BasketItemsController : ControllerBase
     /// <response code="404">買い物かご内に指定したカタログアイテム Id がない。</response>
     [HttpDelete("{catalogItemId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteBasketItem")]
     public async Task<IActionResult> DeleteBasketItemAsync([Range(1L, long.MaxValue)] long catalogItemId)
     {
