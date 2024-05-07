@@ -1,12 +1,13 @@
 ﻿using Dressca.ApplicationCore.Ordering;
+using Microsoft.Extensions.Time.Testing;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
 public class OrderTest
 {
-    public static TheoryData<List<OrderItem>> EmptyOrderItems => new()
+    public static TheoryData<List<OrderItem>?> EmptyOrderItems => new()
     {
-        null!,
+        null,
         new List<OrderItem>(),
     };
 
@@ -20,7 +21,7 @@ public class OrderTest
         var items = CreateDefaultOrderItems();
 
         // Act
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Assert
         Assert.NotNull(order);
@@ -30,43 +31,29 @@ public class OrderTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Constructor_購入者Idは必須(string? buyerId)
+    public void Constructor_購入者Idがnullまたは空の文字列_ArgumentExceptionが発生する(string? buyerId)
     {
         // Arrange
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
 
         // Act
-        var action = () => new Order(buyerId!, shipTo, items);
+        var action = () => new Order(items) { BuyerId = buyerId!, ShipToAddress = shipTo };
 
         // Assert
         Assert.Throws<ArgumentException>(action);
     }
 
-    [Fact]
-    public void Constructor_住所は必須()
-    {
-        // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
-        var items = CreateDefaultOrderItems();
-
-        // Act
-        var action = () => new Order(buyerId, null!, items);
-
-        // Assert
-        Assert.Throws<ArgumentNullException>(action);
-    }
-
     [Theory]
     [MemberData(nameof(EmptyOrderItems))]
-    public void Constructor_注文アイテムは必須(List<OrderItem>? emptyOrderItems)
+    public void Constructor_注文アイテムがnullまたは空のリスト_ArgumentExceptionが発生する(List<OrderItem>? emptyOrderItems)
     {
         // Arrange
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
 
         // Act
-        var action = () => new Order(buyerId, shipTo, emptyOrderItems!);
+        var action = () => new Order(emptyOrderItems!) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("orderItems", action);
@@ -80,7 +67,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var totalPrice = order.TotalItemsPrice;
@@ -96,7 +83,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var deliveryCharge = order.DeliveryCharge;
@@ -112,7 +99,7 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var tax = order.ConsumptionTax;
@@ -128,13 +115,65 @@ public class OrderTest
         var buyerId = Guid.NewGuid().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
-        var order = new Order(buyerId, shipTo, items);
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
         // Act
         var totalPrice = order.TotalPrice;
 
         // Assert
         Assert.Equal(4950m, totalPrice);
+    }
+
+    [Fact]
+    public void HasMatchingBuyerId_指定の購入者Idと一致_true()
+    {
+        // Arrange
+        var buyerId = Guid.NewGuid().ToString("D");
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
+
+        // Act
+        var result = order.HasMatchingBuyerId(buyerId);
+
+        // Assert
+        Assert.True(result);
+    }
+
+    [Fact]
+    public void HasMatchingBuyerId_指定の購入者Idと一致しない_false()
+    {
+        // Arrange
+        var buyerId = Guid.NewGuid().ToString("D");
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
+
+        var unmatchingBuyerId = Guid.NewGuid().ToString("D");
+
+        // Act
+        var result = order.HasMatchingBuyerId(unmatchingBuyerId);
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void Constructor_OrderDateが注文時のシステム時刻と等しい()
+    {
+        // Arrange
+        var buyerId = Guid.NewGuid().ToString("D");
+        var shipTo = CreateDefaultShipTo();
+        var items = CreateDefaultOrderItems();
+        var fakeTimeProvider = new FakeTimeProvider();
+        var testOrderTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, new TimeSpan(9, 0, 0));
+        fakeTimeProvider.SetUtcNow(testOrderTime);
+
+        // Act
+        var order = new Order(items, fakeTimeProvider) { BuyerId = buyerId, ShipToAddress = shipTo };
+
+        // Assert
+        Assert.Equal(testOrderTime, order.OrderDate);
     }
 
     private static Address CreateDefaultAddress()
@@ -165,8 +204,8 @@ public class OrderTest
 
         var items = new List<OrderItem>()
         {
-            new OrderItem(new CatalogItemOrdered(1, productName1, productCode1), 1000m, 1),
-            new OrderItem(new CatalogItemOrdered(2, productName2, productCode2), 1500m, 2),
+            new() { ItemOrdered = new CatalogItemOrdered(1, productName1, productCode1), UnitPrice = 1000m, Quantity = 1 },
+            new() { ItemOrdered = new CatalogItemOrdered(2, productName2, productCode2), UnitPrice = 1500m, Quantity = 2 },
         };
 
         return items;

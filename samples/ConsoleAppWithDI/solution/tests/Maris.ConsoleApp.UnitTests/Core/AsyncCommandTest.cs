@@ -26,7 +26,7 @@ public class AsyncCommandTest
     }
 
     [Fact]
-    public void ValidateAllParameterを呼び出すとValidateParameterメソッドが指定したパラメーターを伴って呼び出される()
+    public void ValidateAllParameter_ValidateParameterメソッドがコンテキストに指定したパラメーターを伴って1回呼び出される()
     {
         // Arrange
         var parameter = new CommandParameter();
@@ -44,7 +44,7 @@ public class AsyncCommandTest
     }
 
     [Fact]
-    public void IAsyncCommandのExecuteAsyncを呼び出すとExecuteAsyncメソッドが指定したパラメーターとキャンセルトークンを伴って呼び出される()
+    public void IAsyncCommandのExecuteAsync_ExecuteAsyncメソッドがコンテキストに指定したパラメーターとキャンセルトークンを伴って1回呼び出される()
     {
         // Arrange
         var parameter = new CommandParameter();
@@ -64,10 +64,10 @@ public class AsyncCommandTest
     }
 
     [Fact]
-    public void パラメーターの型にインターフェースを使用できる()
+    public void Initialize_パラメーターの型にインターフェースを使用できる()
     {
         // Arrange
-        var parameter = new ParameterWithInterface();
+        IParameter parameter = new ParameterWithInterface();
         var commandAttribute = new CommandAttribute("dummy-command", typeof(CommandWithInterface));
         var context = new ConsoleAppContext(commandAttribute, parameter);
         var commandMock = new Mock<CommandWithInterface>();
@@ -78,7 +78,7 @@ public class AsyncCommandTest
     }
 
     [Fact]
-    public void パラメーターの型とコンテキストのパラメーター型が一致しない場合は例外()
+    public void Initialize_パラメーターの型とコンテキストのパラメーター型が一致しない_InvalidOperationExceptionが発生する()
     {
         // Arrange
         var parameter = new ParameterWithInterface();

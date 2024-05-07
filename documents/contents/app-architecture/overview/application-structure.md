@@ -1,11 +1,11 @@
 ---
 title: 概要編
-description: AlesInfiny Maris を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
+description: AlesInfiny Maris OSS Edition を利用することで構築できる アプリケーションの概要を説明します。
 ---
 
 # アプリケーション構成 {#top}
 
-AlesInfiny Maris として、アプリケーション形態ごとに標準的なアプリケーション構成を定義しています。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）として、アプリケーション形態ごとに標準的なアプリケーション構成を定義しています。
 ここでは主要な構成要素を示します。
 <!-- （CSR編など、アプリケーション種別ごとのアーキテクチャ解説ができたら右記の文を差しこむ。）詳細はアプリケーション種別ごとの詳細ページ、および、サンプルアプリケーションを参照してください。 -->
 
@@ -18,6 +18,10 @@ Vue.js を用いた SPA の構成をとります。
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading=lazy }
 
+!!! note ""
+
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
+
 ## Web アプリケーション ( サーバーサイドレンダリング ) {#server-side-rendering}
 
 （今後追加予定）
@@ -26,10 +30,14 @@ Vue.js を用いた SPA の構成をとります。
 
 コンソールアプリケーションでは、汎用ホスト [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) を用いて構築します。データアクセスには Entity Framework Core を利用します。
 
+サンプルのダウンロードおよび解説については、 [コンソールアプリケーションで DI を利用する](../../samples/console-app-with-di/index.md) を参照してください。
+
 ![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-light.png#only-light){ loading=lazy }
 ![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-dark.png#only-dark){ loading=lazy }
 
-## ソリューションの単位 {#unit-of-solution}
+## ソリューションの構造 {#solution-structure}
+
+### ソリューションの単位 {#unit-of-solution}
 
 Web アプリケーションやコンソールアプリケーション ( バッチ ) など、 1 つのサブシステムは通常複数のアプリケーションで構成されます。
 AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本として推奨します。
@@ -40,7 +48,7 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
 
 [Visual Studio のフィルター処理済みソリューション - ソリューション フィルター ファイル](https://learn.microsoft.com/ja-jp/visualstudio/ide/filtered-solutions#solution-filter-files)
 
-## プロジェクトの単位 {#unit-of-project}
+### プロジェクトの単位 {#unit-of-project}
 
 プロジェクトは、原則として機能単位、層単位で分割することを推奨します。
 プロジェクトの分割にあたっては、以下の手順で分割を検討してください。

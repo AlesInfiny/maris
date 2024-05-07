@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Assets;
 
@@ -7,27 +8,13 @@ namespace Dressca.ApplicationCore.Assets;
 /// </summary>
 public class Asset
 {
-    private string? assetCode;
-    private string? assetType;
+    private string assetCode;
+    private string assetType;
 
     /// <summary>
     ///  <see cref="Asset"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="assetCode">アセットコード。</param>
-    /// <param name="assetType">アセットタイプ。</param>
-    /// <exception cref="ArgumentException">
-    ///  <paramref name="assetCode"/> が <see langword="null"/> または空の文字列です。
-    /// </exception>
-    /// <exception cref="NotSupportedException">
-    ///  <paramref name="assetType"/> はサポートされていない文字列です。
-    /// </exception>
-    public Asset(string assetCode, string assetType)
-    {
-        this.AssetCode = assetCode;
-        this.AssetType = assetType;
-    }
-
-    private Asset()
+    public Asset()
     {
     }
 
@@ -39,11 +26,13 @@ public class Asset
     /// <summary>
     ///  アセットコードを取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
-    public string AssetCode
+    /// <exception cref="ArgumentException">null または空の文字列を設定できません。</exception>
+    public required string AssetCode
     {
-        get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));
-        private set
+        get => this.assetCode;
+
+        [MemberNotNull(nameof(assetCode))]
+        init
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -57,12 +46,13 @@ public class Asset
     /// <summary>
     ///  アセットのタイプを取得します。
     /// </summary>
-    /// <exception cref="InvalidOperationException"><see cref="AssetType"/> が設定されていません。</exception>
     /// <exception cref="NotSupportedException">サポートされていないアセットタイプが指定されました。</exception>
-    public string AssetType
+    public required string AssetType
     {
-        get => this.assetType ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetType)));
-        private set
+        get => this.assetType;
+
+        [MemberNotNull(nameof(assetType))]
+        init
         {
             if (!AssetTypes.IsSupportedAssetType(value))
             {

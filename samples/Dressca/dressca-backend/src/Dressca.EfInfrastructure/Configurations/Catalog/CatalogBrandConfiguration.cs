@@ -20,9 +20,9 @@ internal class CatalogBrandConfiguration : IEntityTypeConfiguration<CatalogBrand
 
         builder.HasData(new CatalogBrand[]
         {
-            new("高級なブランド") { Id = 1L },
-            new("カジュアルなブランド") { Id = 2L },
-            new("ノーブランド") { Id = 3L },
+            new() { Name = "高級なブランド", Id = 1L },
+            new() { Name = "カジュアルなブランド", Id = 2L },
+            new() { Name = "ノーブランド", Id = 3L },
         });
     }
 }

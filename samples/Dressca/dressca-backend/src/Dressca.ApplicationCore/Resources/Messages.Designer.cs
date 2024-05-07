@@ -79,24 +79,6 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   アセットコード:{0} のアセット情報を取得しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AssetApplicationService_GetAssetStreamInfoEnd {
-            get {
-                return ResourceManager.GetString("AssetApplicationService_GetAssetStreamInfoEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   アセットコード:{0} のアセット情報を取得します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string AssetApplicationService_GetAssetStreamInfoStart {
-            get {
-                return ResourceManager.GetString("AssetApplicationService_GetAssetStreamInfoStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   アセットコード: {0} のアセットが見つかりませんでした。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AssetNotFound {
@@ -106,83 +88,11 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加しました。 に類似しているローカライズされた文字列を検索します。
+        ///   カタログアイテム ID: {0}, 数量: {1}  に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string BasketApplicationService_AddItemToBasketAsyncEnd {
+        internal static string Basket_ItemQuantity {
             get {
-                return ResourceManager.GetString("BasketApplicationService_AddItemToBasketAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ID: {0} の買い物かごにカタログアイテム ID: {1} を {2} 個追加します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketApplicationService_AddItemToBasketAsyncStart {
-            get {
-                return ResourceManager.GetString("BasketApplicationService_AddItemToBasketAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ID: {0} の買い物かごを削除しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketApplicationService_DeleteBasketAsyncEnd {
-            get {
-                return ResourceManager.GetString("BasketApplicationService_DeleteBasketAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ID: {0} の買い物かごを削除します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketApplicationService_DeleteBasketAsyncStart {
-            get {
-                return ResourceManager.GetString("BasketApplicationService_DeleteBasketAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   購入者 ID: {0} の買い物かご情報を取得または作成しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketApplicationService_GetOrCreateBasketForUserAsyncEnd {
-            get {
-                return ResourceManager.GetString("BasketApplicationService_GetOrCreateBasketForUserAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   購入者 ID: {0} の買い物かご情報を取得または作成します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketApplicationService_GetOrCreateBasketForUserAsyncStart {
-            get {
-                return ResourceManager.GetString("BasketApplicationService_GetOrCreateBasketForUserAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ID: {0} の買い物かごの数量を一括で設定しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketApplicationService_SetQuantitiesAsyncEnd {
-            get {
-                return ResourceManager.GetString("BasketApplicationService_SetQuantitiesAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ID: {0} の買い物かごの数量を一括で設定します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketApplicationService_SetQuantitiesAsyncStart {
-            get {
-                return ResourceManager.GetString("BasketApplicationService_SetQuantitiesAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログアイテム ID: {0} の数量を {1} に設定します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketApplicationService_SetQuantity {
-            get {
-                return ResourceManager.GetString("BasketApplicationService_SetQuantity", resourceCulture);
+                return ResourceManager.GetString("Basket_ItemQuantity", resourceCulture);
             }
         }
         
@@ -196,38 +106,20 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   注文のチェックアウト処理開始時、買い物かごが存在しませんでした。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string BasketIsNullOnCheckout {
+            get {
+                return ResourceManager.GetString("BasketIsNullOnCheckout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   買い物かごアイテムの数量は 0 未満にできません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string BasketItemQuantityMustBePositive {
             get {
                 return ResourceManager.GetString("BasketItemQuantityMustBePositive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ID: {0} の買い物かごが見つかりませんでした。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string BasketNotFound {
-            get {
-                return ResourceManager.GetString("BasketNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログブランド ID: {0} 、カタログカテゴリ ID: {1} のカテゴリ情報を取得しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogApplicationService_GetCatalogItemsAsyncEnd {
-            get {
-                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログブランド ID: {0} 、カタログカテゴリ ID: {1} のカテゴリ情報を取得します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogApplicationService_GetCatalogItemsAsyncStart {
-            get {
-                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsAsyncStart", resourceCulture);
             }
         }
         
@@ -250,11 +142,11 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   指定されたカタログアイテム ID: [{0}] のカタログアイテムがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
+        ///   カタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogItemIdDoesNotExistInRepository {
+        internal static string CatalogItemIdDoesNotExistInBasket {
             get {
-                return ResourceManager.GetString("CatalogItemIdDoesNotExistInRepository", resourceCulture);
+                return ResourceManager.GetString("CatalogItemIdDoesNotExistInBasket", resourceCulture);
             }
         }
         
@@ -268,56 +160,11 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   購入者 ID: {0} の買い物かご情報が見つからなかったため新たに作成します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CreateNewBasket_UserBasketNotFound {
-            get {
-                return ResourceManager.GetString("CreateNewBasket_UserBasketNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   アセットタイプ: {0} はサポートされていません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InvalidAssetType {
             get {
                 return ResourceManager.GetString("InvalidAssetType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   買い物かご ID: {0} の情報をもとに注文 ID: {1} を作成しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string OrderApplicationService_CreateOrderAsyncEnd {
-            get {
-                return ResourceManager.GetString("OrderApplicationService_CreateOrderAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   買い物かご ID: {0} の情報をもとに注文を作成します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string OrderApplicationService_CreateOrderAsyncStart {
-            get {
-                return ResourceManager.GetString("OrderApplicationService_CreateOrderAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   注文 ID: {0} の注文情報を取得しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string OrderApplicationService_GetOrderAsyncEnd {
-            get {
-                return ResourceManager.GetString("OrderApplicationService_GetOrderAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   注文 ID: {0} の注文情報を取得します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string OrderApplicationService_GetOrderAsyncStart {
-            get {
-                return ResourceManager.GetString("OrderApplicationService_GetOrderAsyncStart", resourceCulture);
             }
         }
         

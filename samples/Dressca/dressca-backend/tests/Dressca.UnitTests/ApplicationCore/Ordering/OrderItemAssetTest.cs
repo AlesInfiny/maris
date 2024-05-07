@@ -8,13 +8,13 @@ public class OrderItemAssetTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData(" ")]
-    public void Constructor_アセットコードがnullまたは空の文字列の場合例外(string? assetCode)
+    public void Constructor_アセットコードがnullまたは空の文字列_ArgumentExceptionが発生する(string? assetCode)
     {
         // Arrange
         var orderItemId = 1L;
 
         // Act
-        var action = () => new OrderItemAsset(assetCode!, orderItemId);
+        var action = () => new OrderItemAsset { AssetCode = assetCode!, OrderItemId = orderItemId };
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("value", action);
@@ -22,12 +22,12 @@ public class OrderItemAssetTest
     }
 
     [Fact]
-    public void OrderItem_注文アイテムが初期化されていない場合例外()
+    public void OrderItem_注文アイテムが初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
         string assetCode = "Asset Code";
         var orderItemId = 1L;
-        var itemAsset = new OrderItemAsset(assetCode!, orderItemId);
+        var itemAsset = new OrderItemAsset { AssetCode = assetCode!, OrderItemId = orderItemId };
 
         // Act
         var action = () => _ = itemAsset.OrderItem;

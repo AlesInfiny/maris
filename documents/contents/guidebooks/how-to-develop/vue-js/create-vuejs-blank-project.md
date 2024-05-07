@@ -1,6 +1,6 @@
 ---
 title: Vue.js 開発手順
-description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
+description: Vue.js を用いた クライアントサイドアプリケーションの 開発手順を説明します。
 ---
 
 # ブランクプロジェクトの作成 {#top}
@@ -10,7 +10,7 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 以下のコマンドを実行して Vue.js をインストールします。
 
 ```terminal
-npm init vue@3
+npm create vue@latest
 ```
 
 create-vue パッケージをインストールする必要があり、続行するかどうかを確認するメッセージが表示されるので、「y」を選択します。
@@ -29,9 +29,10 @@ create-vue パッケージをインストールする必要があり、続行す
 √ Add Vue Router for Single Page Application development? ... Yes
 √ Add Pinia for state management? ... Yes
 √ Add Vitest for Unit Testing? ... Yes
-√ Add Cypress for End-to-End testing? ... Yes
+√ Add an End-to-End Testing Solution? » Cypress
 √ Add ESLint for code quality? ... Yes
 √ Add Prettier for code formatting? ... Yes
+√ Add Vue DevTools 7 extension for debugging? (experimental) ... No
 ```
 
 ## ブランクプロジェクトのビルドと実行 {#build-and-serve-blank-project}

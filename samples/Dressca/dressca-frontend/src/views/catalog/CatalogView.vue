@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { reactive, toRefs, onMounted, watch } from 'vue';
+import {
+  fetchCategoriesAndBrands,
+  fetchItems,
+} from '@/services/catalog/catalog-service';
+import { addItemToBasket } from '@/services/basket/basket-service';
 import { storeToRefs } from 'pinia';
 import { useSpecialContentStore } from '@/stores/special-content/special-content';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { useBasketStore } from '@/stores/basket/basket';
 import { useNotificationStore } from '@/stores/notification/notification';
 import CarouselSlider from '@/components/common/CarouselSlider.vue';
-import Loading from '@/components/common/Loading.vue';
+import Loading from '@/components/common/LoadingSpinner.vue';
 import { useRouter } from 'vue-router';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
@@ -29,13 +34,9 @@ const { selectedCategory, selectedBrand } = toRefs(state);
 const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl, getAssetUrl } = assetHelper();
 
-const getBrandName = (catalogBrandId: number) => {
-  return getBrands.value.find((brand) => brand.id === catalogBrandId)?.name;
-};
-
 const addBasket = async (catalogItemId: number) => {
   try {
-    await basketStore.add(catalogItemId);
+    await addItemToBasket(catalogItemId);
     router.push({ name: 'basket' });
   } catch (error) {
     notificationStore.setMessage('カートに追加できませんでした。');
@@ -44,16 +45,15 @@ const addBasket = async (catalogItemId: number) => {
 
 onMounted(async () => {
   state.showLoading = true;
-  catalogStore.fetchCategories();
-  catalogStore.fetchBrands().catch(() => {
+  fetchCategoriesAndBrands().catch(() => {
     notificationStore.setMessage('ブランドの取得に失敗しました。');
   });
-  await catalogStore.fetchItems(selectedCategory.value, selectedBrand.value);
+  await fetchItems(selectedCategory.value, selectedBrand.value);
   state.showLoading = false;
 });
 
 watch([selectedCategory, selectedBrand], async () => {
-  catalogStore.fetchItems(selectedCategory.value, selectedBrand.value);
+  fetchItems(selectedCategory.value, selectedBrand.value);
 });
 </script>
 
@@ -114,7 +114,7 @@ watch([selectedCategory, selectedBrand], async () => {
               />
               <div class="w-full">
                 <p class="text-md mb-2 w-full">
-                  {{ getBrandName(item.catalogBrandId) }}
+                  {{ catalogStore.getBrandName(item.catalogBrandId) }}
                 </p>
                 <p class="font-bold text-lg">
                   {{ toCurrencyJPY(item.price) }}

@@ -1,6 +1,6 @@
 ---
 title: .NET 編
-description: バックエンドで動作する .NET アプリケーションの開発手順を解説します。
+description: バックエンドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
 <!-- cSpell:ignore contentfiles buildtransitive -->
 
@@ -8,7 +8,7 @@ description: バックエンドで動作する .NET アプリケーションの�
 
 ## .NET SDKの設定 {#dotnet-sdk-settings}
 
-AlesInfiny Maris では、 global.json ファイルを用いて、ビルドに利用する .NET SDK のバージョンを設定します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、 global.json ファイルを用いて、ビルドに利用する .NET SDK のバージョンを設定します。
 ソリューションファイルの配置されているフォルダーに、「global.json」という名前のファイルを作成します。
 ファイル名は、大文字/小文字まで一致するように作成してください。
 
@@ -33,7 +33,7 @@ global.json ファイルには、ビルドに利用する .NET SDK のバージ�
 
 ## プロジェクトファイルの設定 {#csproj-settings}
 
-[前節](./create-project.md)で作成したプロジェクトの設定作業を行います。
+[前節](./create-project.md) で作成したプロジェクトの設定作業を行います。
 AlesInfiny Maris では、各プロジェクトの設定差分がなるべく発生しないよう、 Directory.Build.props ファイルを用いてプロジェクト設定の集約を推奨します。
 Directory.Build.props ファイルを用いたプロジェクト設定は、アプリケーション全体に対して適用する設定と、プロダクションコード全体に対して適用する設定、テストコード全体に対して適用する設定の 3 種類を原則用意します。
 
@@ -228,7 +228,7 @@ StyleCop Analyzers を用いて静的コード解析したいプロジェクト�
 StyleCop Analyzers は、 stylecop.json ファイルを用いてコーディングルールを設定します。
 stylecop.json にはソリューション内のすべてのコードに対して適用すべきコーディングルールを設定します。
 stylecop.json ファイルはソリューション内にひとつだけ作成し、ソリューションファイルと同じフォルダーに配置します。
-stylecop.json の設定方法については[公式ドキュメント :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md){ target=_blank }を参照してください。
+stylecop.json の設定方法については [公式ドキュメント :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md){ target=_blank }を参照してください。
 
 ??? example "stylecop.json の設定例"
     StyleCop Analyzers 1.2.0-beta.435 に対応した stylecop.json の設定例を以下に示します。

@@ -1,6 +1,6 @@
 ---
 title: CSR 編
-description: クライアントサイドレンダリングを行う Web アプリケーションのアーキテクチャについて解説します。
+description: クライアントサイドレンダリングを行う Web アプリケーションの アーキテクチャについて解説します。
 ---
 
 # 全体処理方式 {#top}
@@ -147,11 +147,11 @@ API 通信で発生する例外についてはいくつかの段階に分けて�
 
 ## ヘルスチェック機能の実装方針 {#health-check-implementation}
 
-AlesInfiny Maris では、 Web API を通じてシステムが正常稼働中か確認します。
+AlesInfiny Maris OSS Edition では、 Web API を通じてシステムが正常稼働中か確認します。
 `Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用してヘルスチェック用の Web API を実装しています。
 
 実装方法の詳細については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
-また、ヘルスチェックの全体方針については、[ヘルスチェックの必要性](../overview/dotnet-application-processing-system.md#health-check-necessity)を参照してください。
+また、ヘルスチェックの全体方針については、[ヘルスチェックの必要性](../overview/dotnet-application-processing-system/health-check-necessity.md) を参照してください。
 
 ### API の仕様 {#api-specs}
 

@@ -22,10 +22,10 @@ export const useOrderingStore = defineStore({
         shikuchoson: shikuchoson,
         azanaAndOthers: azanaAndOthers,
       };
-      const orderResponse = await ordersApi.ordersPostOrder(postOrderInput);
+      const orderResponse = await ordersApi.postOrder(postOrderInput);
       const url = new URL(orderResponse.headers.location);
       const orderId = Number(url.pathname.split('/').pop());
-      const orderResultResponse = await ordersApi.ordersGetById(orderId);
+      const orderResultResponse = await ordersApi.getById(orderId);
       this.lastOrder = orderResultResponse.data;
     },
     clearLastOrder() {

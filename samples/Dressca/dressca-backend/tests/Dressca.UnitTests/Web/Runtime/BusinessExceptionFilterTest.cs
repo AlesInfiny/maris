@@ -1,5 +1,4 @@
 ﻿using Dressca.SystemCommon;
-using Dressca.TestLibrary.Xunit.Logging;
 using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,17 +7,13 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.Web.Runtime;
 
-public class BusinessExceptionFilterTest
+public class BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
-    private readonly XunitLoggerFactory loggerFactory;
-
-    public BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper)
-        => this.loggerFactory = XunitLoggerFactory.Create(testOutputHelper);
-
     [Fact]
     public void OnException_業務エラーの情報がActionResultの値に設定される()
     {
@@ -36,16 +31,11 @@ public class BusinessExceptionFilterTest
         // Assert
         var result = Assert.IsType<BadRequestObjectResult>(context.Result);
         var value = Assert.IsType<ValidationProblemDetails>(result.Value);
+        var error = Assert.Single(value.Errors, error => errorCode.Equals(error.Key));
         Assert.Collection(
-            value.Errors,
-            error =>
-            {
-                Assert.Equal(errorCode, error.Key);
-                Assert.Collection(
-                    error.Value,
-                    message => Assert.Equal(errorMessage1, message),
-                    message => Assert.Equal(errorMessage2, message));
-            });
+            error.Value,
+            message => Assert.Equal(errorMessage1, message),
+            message => Assert.Equal(errorMessage2, message));
     }
 
     [Fact]
@@ -68,6 +58,29 @@ public class BusinessExceptionFilterTest
         Assert.Null(value.Detail);
     }
 
+    [Fact]
+    public void OnException_情報ログが1件登録される()
+    {
+        // Arrange
+        var filter = this.CreateFilter();
+        var errorCode = "ERR_CODE";
+        var errorMessage1 = "ERR_MESSAGE1";
+        var errorMessage2 = "ERR_MESSAGE2";
+        var businessError = new BusinessError(errorCode, errorMessage1, errorMessage2);
+        var context = CreateExceptionContext(businessError);
+
+        // Act
+        filter.OnException(context);
+
+        // Assert
+        Assert.Equal(1, this.LogCollector.Count);
+        var record = this.LogCollector.LatestRecord;
+        Assert.Equal("業務エラーが発生しました。", record.Message);
+        Assert.Equal(LogLevel.Information, record.Level);
+        Assert.Equal(1001, record.Id);
+        Assert.Same(context.Exception, record.Exception);
+    }
+
     private static ExceptionContext CreateExceptionContext(BusinessError businessError)
     {
         var httpContext = new DefaultHttpContext();
@@ -84,7 +97,7 @@ public class BusinessExceptionFilterTest
     private BusinessExceptionFilter CreateFilter()
     {
         var problemDetailsFactory = new TestProblemDetailsFactory();
-        var logger = this.loggerFactory.CreateLogger<BusinessExceptionFilter>();
+        var logger = this.CreateTestLogger<BusinessExceptionFilter>();
         return new BusinessExceptionFilter(problemDetailsFactory, logger);
     }
 

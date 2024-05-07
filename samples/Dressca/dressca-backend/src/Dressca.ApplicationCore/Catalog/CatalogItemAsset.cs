@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Resources;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Catalog;
 
@@ -8,25 +9,12 @@ namespace Dressca.ApplicationCore.Catalog;
 public class CatalogItemAsset
 {
     private CatalogItem? catalogItem;
-    private string? assetCode;
+    private string assetCode;
 
     /// <summary>
     ///  <see cref="CatalogItemAsset"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="assetCode">アセットコード。</param>
-    /// <param name="catalogItemId">カタログアイテム Id 。</param>
-    /// <exception cref="ArgumentException">
-    ///  <list type="bullet">
-    ///   <item><paramref name="assetCode"/> が <see langword="null"/> または空の文字列です。</item>
-    ///  </list>
-    /// </exception>
-    public CatalogItemAsset(string assetCode, long catalogItemId)
-    {
-        this.AssetCode = assetCode;
-        this.CatalogItemId = catalogItemId;
-    }
-
-    private CatalogItemAsset()
+    public CatalogItemAsset()
     {
     }
 
@@ -39,11 +27,12 @@ public class CatalogItemAsset
     ///  アセットコードを取得します。
     /// </summary>
     /// <exception cref="ArgumentException">アセットコードが <see langword="null"/> または空の文字列です。</exception>
-    /// <exception cref="InvalidOperationException"><see cref="AssetCode"/> が設定されていません。</exception>
-    public string AssetCode
+    public required string AssetCode
     {
-        get => this.assetCode ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AssetCode)));
-        private set
+        get => this.assetCode;
+
+        [MemberNotNull(nameof(assetCode))]
+        init
         {
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -57,7 +46,7 @@ public class CatalogItemAsset
     /// <summary>
     ///  カタログアイテム Id を取得します。
     /// </summary>
-    public long CatalogItemId { get; private set; }
+    public required long CatalogItemId { get; init; }
 
     /// <summary>
     ///  カタログアイテムを取得します。

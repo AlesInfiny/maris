@@ -5,28 +5,13 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 public class OrderItemTest
 {
     [Fact]
-    public void Constructor_注文されたカタログアイテムがnullの場合例外()
-    {
-        // Arrange
-        CatalogItemOrdered? itemOrdered = null;
-        decimal unitPrice = 1000m;
-        int quantity = 1;
-
-        // Act
-        var action = () => new OrderItem(itemOrdered!, unitPrice, quantity);
-
-        // Assert
-        Assert.Throws<ArgumentNullException>("value", action);
-    }
-
-    [Fact]
-    public void Order_注文情報が初期化されていない場合例外()
+    public void Order_注文情報が初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+        var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
 
         // Act
         var action = () => _ = orderItem.Order;
@@ -37,13 +22,13 @@ public class OrderItemTest
     }
 
     [Fact]
-    public void AddAssets_注文アイテムアセットにnullを追加しようとすると例外()
+    public void AddAssets_注文アイテムアセットにnullを追加する_ArgumentNullExceptionが発生する()
     {
         // Arrange
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+        var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
         IEnumerable<OrderItemAsset>? orderItemAssets = null;
 
         // Act
@@ -60,11 +45,11 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
-        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+        var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
         var orderItemAssets = new List<OrderItemAsset>
         {
-            new("asset-code-1", orderItem.Id),
-            new("asset-code-2", orderItem.Id),
+            new() { AssetCode = "asset-code-1", OrderItemId = orderItem.Id },
+            new() { AssetCode = "asset-code-2", OrderItemId = orderItem.Id },
         };
 
         // Act
@@ -84,7 +69,7 @@ public class OrderItemTest
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 2;
-        var orderItem = new OrderItem(itemOrdered, unitPrice, quantity);
+        var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
 
         // Act
         var subTotal = orderItem.GetSubTotal();

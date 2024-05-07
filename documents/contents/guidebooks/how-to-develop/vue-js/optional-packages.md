@@ -1,6 +1,6 @@
 ---
 title: Vue.js 開発手順
-description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
+description: Vue.js を用いた クライアントサイドアプリケーションの 開発手順を説明します。
 ---
 
 # 開発に使用するパッケージ {#top}
@@ -74,10 +74,6 @@ description: Vue.js を用いたクライアントサイドアプリケーショ
 - [stylelint-config-standard :material-open-in-new:](https://github.com/stylelint/stylelint-config-standard){ target=_blank }
 
     Stylelint の標準設定（[インストール方法](static-verification-and-format.md#install-stylelint)）
-
-- [stylelint-config-prettier :material-open-in-new:](https://github.com/prettier/stylelint-config-prettier){ target=_blank }
-
-    Stylelint の Prettier 向け設定（[インストール方法](static-verification-and-format.md#install-stylelint)）
 
 - [stylelint-config-recommended-vue :material-open-in-new:](https://github.com/ota-meshi/stylelint-config-recommended-vue){ target=_blank }
 

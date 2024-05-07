@@ -8,7 +8,7 @@ namespace Maris.ConsoleApp.UnitTests.Core;
 public class CommandExecutorTest
 {
     [Fact]
-    public void Constructor_managerがnullの場合は例外()
+    public void Constructor_managerがnull_ArgumentNullExceptionが発生する()
     {
         // Arrange
         ICommandManager? manager = null;
@@ -22,7 +22,7 @@ public class CommandExecutorTest
     }
 
     [Fact]
-    public void Constructor_ロガーがnullの場合は例外()
+    public void Constructor_ロガーがnullの場合_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var managerMock = new Mock<ICommandManager>();
@@ -36,7 +36,7 @@ public class CommandExecutorTest
     }
 
     [Fact]
-    public void Constructor_managerを使ってコマンドが生成される()
+    public void Constructor_ICommandManagerのCreateCommandが1回呼び出される()
     {
         // Arrange
         var managerMock = new Mock<ICommandManager>();
@@ -53,7 +53,7 @@ public class CommandExecutorTest
     }
 
     [Fact]
-    public void Constructor_マネージャーがコマンドを作成できなかった場合は例外()
+    public void Constructor_ICommandManagerがコマンドを作成できない_ArgumentExceptionが発生する()
     {
         // Arrange
         var managerMock = new Mock<ICommandManager>();
@@ -74,7 +74,7 @@ public class CommandExecutorTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("dummy-command")]
-    public void CommandName_マネージャーで生成したコマンドオブジェクトの名前を取得できる(string? commandName)
+    public void CommandName_ICommandManagerで生成したコマンドオブジェクトの名前を取得できる(string? commandName)
     {
         // Arrange
         var managerMock = new Mock<ICommandManager>();
@@ -93,7 +93,7 @@ public class CommandExecutorTest
     }
 
     [Fact]
-    public async Task ExecuteCommandAsync_パラメーターの入力検証に失敗した場合は例外()
+    public async Task ExecuteCommandAsync_パラメーターの入力検証に失敗した_InvalidParameterExceptionが発生する()
     {
         // Arrange
         var commandAttribute = new CommandAttribute("sync-command", typeof(SyncCommandImpl));
@@ -114,13 +114,11 @@ public class CommandExecutorTest
 
         // Assert
         var exception = await Assert.ThrowsAsync<InvalidParameterException>(action);
-        Assert.Collection(
-            exception.ValidationResults,
-            result => Assert.Equal("StringParam は 5 文字以下に設定してください。", result.ErrorMessage));
+        Assert.Single(exception.ValidationResults, result => result.ErrorMessage == "StringParam は 5 文字以下に設定してください。");
     }
 
     [Fact]
-    public async Task ExecuteCommandAsync_パラメーターのカスタム入力検証に失敗した場合は例外()
+    public async Task ExecuteCommandAsync_パラメーターのカスタム入力検証に失敗した_InvalidParameterExceptionが発生する()
     {
         // Arrange
         var parameter = new ValidatableParameter();
@@ -140,13 +138,11 @@ public class CommandExecutorTest
 
         // Assert
         var exception = await Assert.ThrowsAsync<InvalidParameterException>(action);
-        Assert.Collection(
-            exception.ValidationResults,
-            result => Assert.Equal("Validate メソッド内で検証", result.ErrorMessage));
+        Assert.Single(exception.ValidationResults, result => result.ErrorMessage == "Validate メソッド内で検証");
     }
 
     [Fact]
-    public async Task ExecuteCommandAsync_コマンド内のカスタム入力値検証に失敗した場合は例外()
+    public async Task ExecuteCommandAsync_コマンド内のカスタム入力値検証に失敗した_InvalidParameterExceptionが発生する()
     {
         // Arrange
         var commandAttribute = new CommandAttribute("sync-command", typeof(SyncCommandImpl));
@@ -182,7 +178,7 @@ public class CommandExecutorTest
     }
 
     [Fact]
-    public async Task ExecuteCommandAsync_SyncCommandの派生コマンドを実行可能()
+    public async Task ExecuteCommandAsync_SyncCommandの派生コマンドを実行可能_コマンドの戻り値を取得できる()
     {
         // Arrange
         var commandAttribute = new CommandAttribute("sync-command", typeof(SyncCommandImpl));
@@ -236,7 +232,7 @@ public class CommandExecutorTest
     }
 
     [Fact]
-    public async Task ExecuteCommandAsync_AsyncCommandの派生コマンドを実行可能()
+    public async Task ExecuteCommandAsync_AsyncCommandの派生コマンドを実行可能_コマンドの戻り値を取得できる()
     {
         // Arrange
         var commandAttribute = new CommandAttribute("async-command", typeof(AsyncCommandImpl));
@@ -260,7 +256,7 @@ public class CommandExecutorTest
     }
 
     [Fact]
-    public async Task ExecuteCommandAsync_AsyncCommandの派生コマンドにパラメーターとキャンセルトークンが引き渡される()
+    public async Task ExecuteCommandAsync_AsyncCommandの派生コマンドのExecuteAsyncがパラメーターとキャンセルトークンを伴い1回呼び出される()
     {
         // Arrange
         var commandAttribute = new CommandAttribute("async-command", typeof(AsyncCommand<object>));
@@ -338,7 +334,7 @@ public class CommandExecutorTest
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            yield return new ValidationResult("Validate メソッド内で検証", new string[] { "dummy-member-name" });
+            yield return new ValidationResult("Validate メソッド内で検証", ["dummy-member-name"]);
         }
     }
 

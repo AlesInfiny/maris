@@ -1,11 +1,11 @@
 ---
 title: 概要編
-description: AlesInfiny Maris を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
+description: AlesInfiny Maris OSS Edition を利用することで構築できる アプリケーションの概要を説明します。
 ---
 
 # 構築できるアプリケーション形態 {#top}
 
-AlesInfiny Maris を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
+AlesInfiny Maris OSS Edition を利用することで構築できるアプリケーションの概要を、アプリケーション形態ごとに説明します。
 
 ## Web アプリケーション（クライアントサイドレンダリング） {#web-application-client-side-rendering}
 

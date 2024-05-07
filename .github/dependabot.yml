@@ -1,5 +1,15 @@
 version: 2
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: "github-actions"
+    labels:
+      - "CI/CD"
+      - "dependencies"
+
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
@@ -10,6 +20,7 @@ updates:
     labels:
       - "pip"
       - "dependencies"
+
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -21,17 +32,19 @@ updates:
       - "ドキュメント改善"
       - "npm"
       - "dependencies"
+
   - package-ecosystem: "npm"
     directory: "/samples/Dressca/dressca-frontend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 20
     commit-message:
       prefix: "npm-dressca-frontend"
     labels:
       - "target: Dressca"
       - "npm"
       - "dependencies"
+
   - package-ecosystem: "nuget"
     directory: "/samples/Dressca/dressca-backend"
     schedule:
@@ -75,3 +88,35 @@ updates:
       xunit-packages:
         patterns:
           - "xunit*"
+
+  - package-ecosystem: "npm"
+    directory: "/samples/AzureADB2CAuth/auth-frontend"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 20
+    commit-message:
+      prefix: "npm-azure-ad-b2c-frontend"
+    labels:
+      - "target: Azure AD B2C Auth"
+      - "npm"
+      - "dependencies"
+
+  - package-ecosystem: "nuget"
+    directory: "samples/AzureADB2CAuth/auth-backend"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "nuget-azure-ad-b2c-backend"
+    labels:
+      - "target: Azure AD B2C Auth"
+      - "nuget"
+      - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.AspNetCore*"
+          - "Microsoft.Extensions*"
+      nswag-packages:
+        patterns:
+          - "NSwag*"

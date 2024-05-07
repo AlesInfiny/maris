@@ -1,72 +1,22 @@
 ---
 title: CSR 編
-description: クライアントサイドレンダリングを行う Web アプリケーションのアーキテクチャについて解説します。
+description: クライアントサイドレンダリングを行う Web アプリケーションの アーキテクチャについて解説します。
 ---
 
 # フロントエンドアーキテクチャ {#top}
 
 ## 技術スタック {#tech-stack}
 
-AlesInfiny Maris を構成する OSS を以下に示します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OSS を以下に示します。
 
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-light.png#only-light){ loading=lazy }
 ![OSS構成要素](../../images/app-architecture/client-side-rendering/oss-components-dark.png#only-dark){ loading=lazy }
 
-- [TypeScript :material-open-in-new:](https://www.typescriptlang.org/){ target=_blank }
+!!! note ""
 
-      JavaScript を拡張して静的型付にしたプログラミング言語。
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
-- [Vue.js :material-open-in-new:](https://v3.ja.vuejs.org/){ target=_blank }
-
-      シンプルな設計で拡張性の高い JavaScript のフレームワーク。
-
-- [Vite :material-open-in-new:](https://ja.vitejs.dev/){ target=_blank }
-
-      ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツール。
-
-- [Pinia :material-open-in-new:](https://pinia.vuejs.org/){ target=_blank }
-
-      Vue.js 用の状態管理ライブラリ。
-
-- [Vue Router :material-open-in-new:](https://router.vuejs.org/){ target=_blank }
-
-      Vue.js を利用した SPA で、ルーティング制御をするための公式プラグイン。
-
-- [Axios :material-open-in-new:](https://github.com/axios/axios){ target=_blank }
-
-      Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアント。
-
-- [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
-
-      Vue.js 用のリアルタイムバリデーションコンポーネントライブラリ。
-
-- [yup :material-open-in-new:](https://github.com/jquense/yup){ target=_blank }
-
-      JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ。
-
-- [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
-
-      utility class を使って独自のボタンなどを作成する CSS フレームワーク
-
-- [Prettier :material-open-in-new:](https://prettier.io/){ target=_blank }
-
-      JavaScript, Vue, CSS, JSON などのコードフォーマッター。
-
-- [ESLint :material-open-in-new:](https://eslint.org/){ target=_blank }
-
-      JavaScript の静的検証ツール。
-
-- [Stylelint :material-open-in-new:](https://stylelint.io/){ target=_blank }
-
-      CSS の静的検証ツール。
-
-- [Vitest :material-open-in-new:](https://vitest.dev/){ target=_blank }
-
-      Vite 環境で動作する高速テスティングフレームワーク。
-
-- [Cypress :material-open-in-new:](https://www.cypress.io/){ target=_blank }
-
-      E2E テストツール。
+利用ライブラリの一覧については、 [技術スタック](./csr-architecture-overview.md#tech-stack) を参照してください。
 
 ## アーキテクチャ {#frontend-architecture}
 
@@ -80,28 +30,29 @@ AlesInfiny Maris で採用している Vue.js のソフトウェア・アーキ�
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **ビュー**
 
-:  ブラウザへのレンダリングおよびブラウザからのイベントの待ち受けを役割として担います。ビューには UI の構造やスタイルを定義します。
+:  ブラウザーへのレンダリングおよびブラウザーからのイベントの待ち受けを役割として担います。ビューには UI の構造やスタイルを定義します。
 
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **ビューモデル**
 
-:  ブラウザからのイベントを受け、プレゼンテーションロジックを実行します。ビューモデルのプレゼンテーションロジックには、レンダリングに必要な処理や入力チェック、モデルを通じたデータの取得や更新などの処理を実装します。
+:  ブラウザーからのイベントを受け、プレゼンテーションロジックを実行します。ビューモデルのプレゼンテーションロジックには、レンダリングに必要な処理や入力チェック、モデルを通じたデータの取得や更新などの処理を実装します。
 
 <!-- markdownlint-disable-next-line no-emphasis-as-heading -->
 **モデル**
 
-:  ビジネスロジックとして状態管理やブラウザ外部との入出力を担います。モデルのビジネスロジックには、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。モデルは後述する Pinia のアーキテクチャに従って実装します。
+:  状態管理やブラウザー外部との入出力を担い、データ構造やデータの状態管理、 Web API 呼び出しや Web API 呼び出し結果のハンドリングなどの処理を実装します。
 
 <!-- textlint-disable -->
-Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://v3.ja.vuejs.org/guide/single-file-component.html#単一ファイルコンポーネント){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
+Vue.js ではビューとビューモデルを [単一ファイルコンポーネント(SFC) :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/sfc){ target=_blank } と呼ばれる同一のファイル(拡張子.vue)に記述できるので、図ではビュー&ビューモデルと表現しています。
+<!-- textlint-enable -->
 
 ### ビュー＆ビューモデル コンポーネント {#view-and-viewmodel-component}
 
 ![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/view%26viewmodel-component-light.png#only-light){ loading=lazy }
 ![MVVMパターン ビュー＆ビューモデル](../../images/app-architecture/client-side-rendering/view%26viewmodel-component-dark.png#only-dark){ loading=lazy }
 
-ビューとビューモデルはそれぞれブラウザへのレンダリングとそのブラウザから受けたイベントに対するプレゼンテーションロジックなどを行うコンポーネントです。
-ブラウザに表示する画面は Component という複数の画面構成要素と View というそれらを組み合わせたページから構成されます。
+ビューとビューモデルはそれぞれブラウザーへのレンダリングとそのブラウザーから受けたイベントに対するプレゼンテーションロジックなどを行うコンポーネントです。
+ブラウザーに表示する画面は Component という複数の画面構成要素と View というそれらを組み合わせたページから構成されます。
 これらの画面コンポーネントが、デザインやデータバインドなどの画面表示（ビュー）と、イベント処理や入力処理などの画面要素に対する処理（ビューモデル）を持っています。
 
 #### 画面コンポーネント {#screen-components}
@@ -124,7 +75,7 @@ Vue Router : [公式ドキュメント :material-open-in-new:](https://router.vu
 
 #### モデルコンポーネントとの連携 {#linkage-with-model-component}
 
-Vue.js ではバックエンドのアプリケーションとの連携をモデルが行います。そのため、ユーザーが行う画面コンポーネントからの処理や入力情報をモデルに連携する必要があります。この連携ではビューモデルのプレゼンテーションロジックから、後述するモデルコンポーネントの Store が持つ Action を呼び出して行います。
+Vue.js ではバックエンドのアプリケーションとの連携をモデルが行います。そのため、ユーザーが行う画面コンポーネントからの処理や入力情報をモデルに連携する必要があります。この連携ではビューモデルのプレゼンテーションロジックから、後述するモデルコンポーネントの Service や Store の Action を呼び出すことで、データの取得・更新をします。
 
 #### フロント入力チェック {#input-validation}
 
@@ -138,11 +89,12 @@ Vue.js ではバックエンドのアプリケーションとの連携をモデ�
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-light.png#only-light){ loading=lazy }
 ![MVVMパターン モデル](../../images/app-architecture/client-side-rendering/model-component-dark.png#only-dark){ loading=lazy }
 
-モデルはフロントエンドアプリケーションのビジネスロジックとして、扱うデータの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
+モデルはデータの状態管理や画面(ビュー)へのデータ連携、 Web API の呼び出しおよびハンドリングなどの役割を持つコンポーネントです。モデルは以下の要素で構成されます。またフロントエンドで扱うデータモデルと API モデルとの乖離を吸収し、扱いやすい状態に加工する役割も持ちます。
 
-このフロントエンドで扱う状態を保持するコンテナのことを Store と呼び、 AlesInfiny Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。
+- Service : ビューモデルからのリクエストに対して、 Store の呼び出し、 Web API の呼び出しなどデータの連携に必要な処理をします。
+- Store : フロントエンドで扱う状態を保持するコンテナです。 AlesInfiny Maris では Pinia という Vue.js の Store ライブラリを利用して管理します。 Pinia : [公式ドキュメント :material-open-in-new:](https://pinia.vuejs.org/introduction.html){ target=_blank }
 
-Pinia : [公式ドキュメント :material-open-in-new:](https://pinia.vuejs.org/introduction.html){ target=_blank }
+ただし、このモデルの構成は複雑な状態管理をするアプリケーションを想定しており、小規模なアプリケーションや状態管理を必要としないページの場合は、 Service やモデルを省略することも考えられます。この場合は、ビューモデルから直接 Web API を呼び出します。
 
 #### Storeの構成要素 {#store-structure}
 
@@ -151,18 +103,21 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-light.png#only-light){ loading=lazy }
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-dark.png#only-dark){ loading=lazy }
 
-<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
-**State**
-:  Store で管理するデータそのもの。
+| 要素 | 説明 |
+| --- | --- |
+| State | Store で管理するデータそのもの。 |
+| Getter | State の値や State から算出した結果を返すもの。 |
+| Action | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせない。 |
 
-<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
-**Getter**
-:  Store で管理しているデータである State を画面コンポーネント(ビュー & ビューモデル)に返すもの。
+Store は State をグローバルなシングルトンとして管理します。そのため本来 State は直接取得・更新ができますが、 Getter と Action を通じてアクセスするルールを設けて State の参照・更新を制御し、データの一貫性を持つことが重要です。
 
-<!-- markdownlint-disable-next-line no-emphasis-as-heading -->
-**Action**
-<!-- textlint-disable -->
-:  Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。
+#### State の更新 {#update-state}
+
+State の更新は Action を利用します。この際、ビューモデルから Service を経由して Action を呼び出すことで、 State の更新を一元管理します。
+
+#### State の参照 {#get-state}
+
+State の参照には Getter を利用します。 Getter は State を参照できますが、 State の値は変更できません。そのため安全に State の値を参照できます。
 
 #### バックエンドとのAPI連携 {#communicate-with-backend}
 
@@ -176,6 +131,10 @@ axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=
 
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading-lazy }
 ![OpenAPIを利用したバックエンドとの連携](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading-lazy }
+
+!!! note ""
+
+    上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
 
 !!! note "OpenAPI Generator の自動生成コード"
       OpenAPI Generator はサーバー、クライアント双方の様々なコードの自動生成に対応しています。生成可能なコードについては公式ドキュメントを参照してください。
@@ -198,6 +157,7 @@ Vue.js プロジェクトのフォルダー構成は、ブランクプロジェ�
 │  ├─ config/ ---------------- 設定ファイルを格納します。
 │  ├─ generated/ ------------- 自動生成されたファイルを格納します。
 │  ├─ router/ ---------------- ルーティング定義を格納します。
+│　├─ services/ -------------- サービスに関するファイルを格納します。
 │  ├─ stores/ ---------------- store に関するファイルを格納します。
 │  ├─ views/ ----------------- ルーティングで指定される vue ファイルを格納します。またページ固有の挙動などもここに含めます。
 │  ├─ App.vue
@@ -208,12 +168,12 @@ Vue.js プロジェクトのフォルダー構成は、ブランクプロジェ�
 
 ### views フォルダー {#views-directory}
 
-views フォルダーはルーティングで指定される vue ファイルを格納します。そのためこの下層のフォルダー構造はサイト構造を意識して作成することを推奨します。以下の例で Login.vue なら ```https://xxxx.com/account/login``` と設定します。
+views フォルダーはルーティングで指定される vue ファイルを格納します。そのためこの下層のフォルダー構造はサイト構造を意識して作成することを推奨します。以下の例で Login.vue なら ```https://xxxx.com/authentication/login``` と設定します。
 
 ``` text title="views フォルダー" linenums="0"
 src/
 └─ views/
-   ├─ account/
+   ├─ authentication/
    │  ├─ LoginView.vue
    │  └─ LogoutView.vue
    ├─ catalog/
@@ -221,7 +181,7 @@ src/
 ```
 
 !!! note "Vue Router の設定"
-      Vue Router では URL のパスと対象のファイルを指定することで、ルーティングを設定します。以下は `https://xxxx.com/account/login` という URL に対して上記の `LoginView.vue` を設定している例です。
+      Vue Router では URL のパスと対象のファイルを指定することで、ルーティングを設定します。以下は `https://xxxx.com/authentication/login` という URL に対して上記の `LoginView.vue` を設定している例です。
 
       ``` TypeScript title="index.ts"
       import { createRouter, createWebHistory } from "vue-router";
@@ -230,9 +190,9 @@ src/
          history: createWebHistory(import.meta.env.BASE_URL),
          routes: [
             {
-               path: "/account/login",
-               name: "account/login",
-               component: () => import('@/views/account/LoginView.vue'),
+               path: "/authentication/login",
+               name: "authentication/login",
+               component: () => import('@/views/authentication/LoginView.vue'),
             },
          ],
       });
@@ -245,7 +205,7 @@ components フォルダーは主に、再利用性の高い vue コンポーネ�
 ``` text title="components フォルダー" linenums="0"
 src/
 └─ components/
-   ├─ account/
+   ├─ authentication/
    │  ├─ LoginForm.vue
    │  └─ LogoutMessage.vue
    ├─ product/
@@ -270,7 +230,7 @@ src/
    │  └─ Form.vue
    │
    ├─ organisms/
-   │  ├─ account/
+   │  ├─ authentication/
    │  │  ├─ LoginForm.vue
    │  │  └─ LogoutMessage.vue
    │  └─ product/

@@ -1,9 +1,11 @@
-﻿using Dressca.ApplicationCore.Catalog;
+﻿using Dressca.ApplicationCore.ApplicationService;
+using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Controllers.ApiModel;
 using Dressca.Web.Dto;
 using Dressca.Web.Dto.Catalog;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace Dressca.Web.Controllers;
 
@@ -46,7 +48,8 @@ public class CatalogItemsController : ControllerBase
     /// <response code="400">リクエストエラー。</response>
     [HttpGet]
     [ProducesResponseType(typeof(PagedList<CatalogItemResponse>), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [OpenApiOperation("getByQuery")]
     public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
         var (catalogItems, totalCount) =

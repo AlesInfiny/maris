@@ -1,5 +1,5 @@
 ---
-title: コンソールアプリでの DI
+title: コンソールアプリ での DI
 description: コンソールアプリケーションで DI を利用するためのサンプルと、その使い方を解説します。
 ---
 
@@ -50,6 +50,7 @@ internal class Command : AsyncCommand<Parameter>
 {
     private readonly ProductApplicationService service;
     private readonly ILogger logger;
+    private readonly EventId Over10ProductsFoundInRange = new(1001, nameof(Over10ProductsFoundInRange));
 
     public Command(ProductApplicationService service, ILogger<Command> logger)
     {
@@ -64,7 +65,7 @@ internal class Command : AsyncCommand<Parameter>
             parameter.MinimumUnitPrice, parameter.MaximumUnitPrice, cancellationToken);
         if (products.Count >= 10)
         {
-            this.logger.LogWarning($"単価が {parameter.MinimumUnitPrice} ～ " +
+            this.logger.LogWarning(Over10ProductsFoundInRange, $"単価が {parameter.MinimumUnitPrice} ～ " +
                 $"{parameter.MaximumUnitPrice} の商品情報が 10 件以上あります。" +
                 $"範囲を絞り込んでください。");
             return CommandResult.CreateWarning(2);

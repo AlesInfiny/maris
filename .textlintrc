@@ -7,7 +7,11 @@
       "ja-space-between-half-and-full-width": {
         "space": ["alphabets", "numbers", "punctuation"]
       },
-      "ja-no-space-around-parentheses": false  
+      "ja-no-space-around-parentheses": false,
+      "ja-space-around-link": {
+        "before": true,
+        "after": true
+      }
     },
     "preset-ja-technical-writing": {
       "no-exclamation-question-mark": false,
@@ -33,6 +37,7 @@
     "@textlint-rule/require-header-id": true,
     "@textlint-ja/no-synonyms": {
       "allows": [
+        "=",
         "アプリ",
         "アプリケーション",
         "以降",
@@ -73,6 +78,7 @@
         "層",
         "パラメーター",
         "フォルダー",
+        "ブラウザー",
         "ユーザー",
         "ロードバランサー"
       ],

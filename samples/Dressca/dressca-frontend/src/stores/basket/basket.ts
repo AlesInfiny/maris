@@ -3,6 +3,7 @@ import type {
   BasketResponse,
   PutBasketItemsRequest,
   PostBasketItemsRequest,
+  BasketItemResponse,
 } from '@/generated/api-client';
 import { basketItemsApi } from '@/api-client';
 
@@ -18,7 +19,7 @@ export const useBasketStore = defineStore({
         catalogItemId: catalogItemId,
         addedQuantity: 1,
       };
-      await basketItemsApi.basketItemsPostBasketItem(params);
+      await basketItemsApi.postBasketItem(params);
       this.addedItemId = catalogItemId;
     },
     async update(catalogItemId: number, newQuantity: number) {
@@ -28,18 +29,18 @@ export const useBasketStore = defineStore({
           quantity: newQuantity,
         },
       ];
-      await basketItemsApi.basketItemsPutBasketItems(params);
+      await basketItemsApi.putBasketItems(params);
     },
     async remove(catalogItemId: number) {
-      await basketItemsApi.basketItemsDeleteBasketItem(catalogItemId);
+      await basketItemsApi.deleteBasketItem(catalogItemId);
     },
     async fetch() {
-      const response = await basketItemsApi.basketItemsGetBasketItems();
+      const response = await basketItemsApi.getBasketItems();
       this.basket = response.data;
     },
     async deleteAddedItemId() {
       this.addedItemId = undefined;
-    }
+    },
   },
   getters: {
     getBasket(state): BasketResponse {
@@ -47,6 +48,11 @@ export const useBasketStore = defineStore({
     },
     getAddedItemId(state): number | undefined {
       return state.addedItemId;
-    }
+    },
+    getAddedItem(state): BasketItemResponse | undefined {
+      return state.basket.basketItems?.find(
+        (item) => item.catalogItemId === state.addedItemId,
+      );
+    },
   },
 });

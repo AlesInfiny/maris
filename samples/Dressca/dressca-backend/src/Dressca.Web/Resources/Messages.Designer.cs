@@ -79,29 +79,11 @@ namespace Dressca.Web.Resources {
         }
         
         /// <summary>
-        ///   リクエストに指定されたカタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogItemIdDoesNotExistInBasket {
-            get {
-                return ResourceManager.GetString("CatalogItemIdDoesNotExistInBasket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   ヘルスチェック API の MethodInfo を取得できませんでした。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string HealthCheckMethodNotFound {
             get {
                 return ResourceManager.GetString("HealthCheckMethodNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   HTTP 要求に誤りがあります。詳細情報: {0} 。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ReceiveHttpBadRequest {
-            get {
-                return ResourceManager.GetString("ReceiveHttpBadRequest", resourceCulture);
             }
         }
     }

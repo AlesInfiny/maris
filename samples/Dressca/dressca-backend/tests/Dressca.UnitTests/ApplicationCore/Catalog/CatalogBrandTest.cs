@@ -11,7 +11,7 @@ public class CatalogBrandTest
         const string brandName = "dressca";
 
         // Act
-        var brand = new CatalogBrand(brandName);
+        var brand = new CatalogBrand() { Name = brandName };
 
         // Assert
         Assert.NotNull(brand);
@@ -21,13 +21,13 @@ public class CatalogBrandTest
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Constructor_ブランド名は必須(string? brandName)
+    public void Constructor_ブランド名がnullまたは空白文字_ArgumentExceptionが発生する(string? brandName)
     {
         // Arrange & Act
-        var action = () => new CatalogBrand(brandName!);
+        var action = () => new CatalogBrand() { Name = brandName! };
 
         // Assert
-        var ex = Assert.Throws<ArgumentException>("name", action);
+        var ex = Assert.Throws<ArgumentException>("value", action);
         Assert.StartsWith("null または空の文字列を設定できません。", ex.Message);
     }
 }

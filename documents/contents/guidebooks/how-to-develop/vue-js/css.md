@@ -1,6 +1,6 @@
 ---
 title: Vue.js 開発手順
-description: Vue.js を用いたクライアントサイドアプリケーションの開発手順を説明します。
+description: Vue.js を用いた クライアントサイドアプリケーションの 開発手順を説明します。
 ---
 
 # CSS の設定と CSS フレームワークの適用 {#top}
@@ -108,9 +108,9 @@ postCSS は Tailwind CSS と一緒にすでにインストール済みなので�
 
 ### postCSS の設定 {#settings-postcss}
 
-設定ファイル `./postcss.config.js` を作成します。
+設定ファイル `./postcss.config.cjs` を作成します。
 
-```javascript title="postcss.config.js"
+```javascript title="postcss.config.cjs"
 module.exports = {
   plugins: [
     require('tailwindcss'),

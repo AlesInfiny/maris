@@ -21,7 +21,7 @@ public class BusinessExceptionTest
     }
 
     [Fact]
-    public void AddOrMergeError_nullを追加しようとすると例外()
+    public void AddOrMergeError_nullを追加する_ArgumentNullExceptionが発生する()
     {
         // Arrange
         BusinessError? businessError = null;
