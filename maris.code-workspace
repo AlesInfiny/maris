@@ -9,6 +9,9 @@
         "markdownlint.ignore": [
             "LICENSE"
         ],
+        "markdownlint.customRules": [
+            "./custom-lint-rules/requires-title-and-description.js"
+        ],
         "files.eol": "\n"
     },
     "extensions": {
