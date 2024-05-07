@@ -131,15 +131,6 @@ theme:
         name: Switch to light mode
       primary: blue
       accent: cyan
-  plugins:
-    - search:
-        lang: ja
-        prebuild_index: true
-    - minify:
-        minify_html: true
-        minify_js: true
-        htmlmin_opts:
-          remove_comments: true
 
 markdown_extensions:
   - abbr
@@ -182,8 +173,15 @@ extra_css:
   - stylesheets/overrides.css
 
 plugins:
-  - social:
-      enabled: !ENV [BUILD_DOCUMENTS, false]
-      cards_layout_options:
-        font_family: Noto Sans JP
-  - rss
+    - search:
+        lang: ja
+    - minify:
+        minify_html: true
+        minify_js: true
+        htmlmin_opts:
+          remove_comments: true
+    - social:
+        enabled: !ENV [BUILD_DOCUMENTS, false]
+        cards_layout_options:
+          font_family: Noto Sans JP
+    - rss
