@@ -117,6 +117,9 @@ updates:
         patterns:
           - "Microsoft.AspNetCore*"
           - "Microsoft.Extensions*"
+      xunit-packages:
+        patterns:
+          - "xunit*"
       nswag-packages:
         patterns:
           - "NSwag*"
