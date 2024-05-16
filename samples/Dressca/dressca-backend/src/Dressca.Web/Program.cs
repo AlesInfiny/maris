@@ -14,7 +14,30 @@ using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
+const string corsPolicyName = "allowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+var section = builder.Configuration.GetSection("UserSettings:CorsAllowedOrigins");
+var origins = section != null ? section.Get<string[]>() : null;
+
+if (origins != null)
+{
+    builder.Services
+        .AddCors(options =>
+        {
+            options.AddPolicy(
+               name: corsPolicyName,
+               policy =>
+               {
+                   // Origins, Methods, Header すべての設定が必要（設定しないと動作しない）
+                   policy
+                       .WithOrigins(origins)
+                       .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
+                       .AllowAnyHeader();
+               });
+        });
+}
 
 builder.Services
     .AddControllers(options =>
@@ -101,6 +124,11 @@ else
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+if (origins != null)
+{
+    app.UseCors(corsPolicyName);
+}
 
 app.UseAuthorization();
 
