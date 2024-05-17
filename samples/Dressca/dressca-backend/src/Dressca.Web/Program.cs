@@ -18,7 +18,7 @@ const string corsPolicyName = "allowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-var section = builder.Configuration.GetSection("UserSettings:CorsAllowedOrigins");
+var section = builder.Configuration.GetSection("UserSettings:AllowedOrigins");
 var origins = section != null ? section.Get<string[]>() : null;
 
 if (origins != null)
@@ -30,11 +30,12 @@ if (origins != null)
                name: corsPolicyName,
                policy =>
                {
-                   // Origins, Methods, Header すべての設定が必要（設定しないと動作しない）
+                   // Origins, Methods, Header, Credentials すべての設定が必要（設定しないと CORS が動作しない）
                    policy
                        .WithOrigins(origins)
                        .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
-                       .AllowAnyHeader();
+                       .AllowAnyHeader()
+                       .AllowCredentials();
                });
         });
 }
@@ -50,6 +51,7 @@ builder.Services
         else
         {
             options.Filters.Add<BusinessExceptionFilter>();
+            options.Filters.Add<OriginVerificationResourceFilter>();
         }
     })
     .ConfigureApiBehaviorOptions(options =>

@@ -15,6 +15,7 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': import.meta.env.VITE_ALLOW_ORIGIN,
   },
+  withCredentials: true,
 });
 
 const assetsApi = new apiClient.AssetsApi(createConfig(), '', axiosInstance);

@@ -20,13 +20,15 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
     private readonly TimeProvider timeProvider;
+    private readonly IConfiguration? config;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
-    public BuyerIdFilterAttribute(string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System)
+    /// <param name="config">アプリケーション構成。</param>
+    public BuyerIdFilterAttribute(IConfiguration config, string buyerIdCookieName = DefaultBuyerIdCookieName)
+        : this(buyerIdCookieName, TimeProvider.System, config)
     {
     }
 
@@ -36,16 +38,22 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
+    /// <param name="config">アプリケーション構成。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
     ///   <paramref name="timeProvider"/> が <see langword="null"/> です。
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, IConfiguration? config)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
+
+        if (config != null)
+        {
+            this.config = config;
+        }
     }
 
     /// <inheritdoc/>
@@ -74,14 +82,63 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            new CookieOptions()
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Secure = true,
-                Expires = this.timeProvider.GetLocalNow().AddDays(7),
-            });
+            this.CreateCookieOptions());
 
         base.OnActionExecuted(context);
+    }
+
+    private CookieOptions CreateCookieOptions()
+    {
+        var defaultCookie = new CookieOptions()
+        {
+            HttpOnly = true,
+            SameSite = SameSiteMode.Strict,
+            Secure = true,
+            Expires = this.timeProvider.GetLocalNow().AddDays(7),
+        };
+
+        if (this.config == null)
+        {
+            return defaultCookie;
+        }
+
+        var optionSettings = this.config.GetSection("UserSettings:CookieOptions");
+
+        if (optionSettings == null)
+        {
+            return defaultCookie;
+        }
+
+        bool httpOnly;
+        bool secure;
+        int expiredDays;
+
+        _ = bool.TryParse(optionSettings["HttpOnly"], out httpOnly);
+        _ = bool.TryParse(optionSettings["Secure"], out secure);
+
+        if (!int.TryParse(optionSettings["ExpiredDays"], out expiredDays))
+        {
+            expiredDays = 7;
+        }
+
+        SameSiteMode sameSiteMode = SameSiteMode.Strict;
+        string? samesiteString = optionSettings["SameSite"];
+        _ = Enum.TryParse<SameSiteMode>(samesiteString, out sameSiteMode);
+
+        string? domain = optionSettings["Domain"];
+
+        var cookieOptions = new CookieOptions();
+        cookieOptions.Expires = this.timeProvider.GetLocalNow().AddDays(expiredDays);
+        cookieOptions.HttpOnly = httpOnly;
+        cookieOptions.Secure = secure;
+
+        cookieOptions.SameSite = sameSiteMode;
+
+        if (!string.IsNullOrEmpty(domain))
+        {
+            cookieOptions.Domain = domain;
+        }
+
+        return cookieOptions;
     }
 }
