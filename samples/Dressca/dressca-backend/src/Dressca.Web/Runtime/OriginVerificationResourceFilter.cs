@@ -4,12 +4,17 @@ using Microsoft.IdentityModel.Tokens;
 namespace Dressca.Web.Runtime;
 
 /// <summary>
-/// リクエストの Origin が許可されたものであるかを確認するフィルターです。
+/// リクエストの Origin ヘッダーの値が許可されたオリジンであるかを確認するフィルターです。
+/// 許可されたオリジンは構成設定から取得します。
 /// </summary>
 public class OriginVerificationResourceFilter : IResourceFilter
 {
     private readonly IConfiguration config;
 
+    /// <summary>
+    /// <see cref="OriginVerificationResourceFilter"/> クラスの新しいインタンスを初期化します。
+    /// </summary>
+    /// <param name="config">アプリケーションの構成設定。</param>
     public OriginVerificationResourceFilter(IConfiguration config)
     {
         this.config = config;
@@ -27,18 +32,22 @@ public class OriginVerificationResourceFilter : IResourceFilter
 
         if (origin.IsNullOrEmpty())
         {
+            // GET または HEAD の場合、 Origin は設定されないので処理を終了する。
             if (context.HttpContext.Request.Method == "GET" ||
                 context.HttpContext.Request.Method == "HEAD")
             {
                 return;
             }
 
+            // メソッドが GET および HEAD でない場合、 Origin が設定されていないリクエストには
+            // 403 Forbidden を返す。
             context.Result = new ForbiddenObjectResult();
             return;
         }
 
         var section = this.config.GetSection("UserSettings:AllowedOrigins");
 
+        // アプリケーション構成設定にオリジンが設定されていない場合は処理を終了する。
         if (section == null)
         {
             return;
@@ -51,12 +60,9 @@ public class OriginVerificationResourceFilter : IResourceFilter
             return;
         }
 
-        foreach (var allowedOrigin in origins)
+        if (origins.Contains<string>(origin!))
         {
-            if (origin == allowedOrigin)
-            {
-                return;
-            }
+            return;
         }
 
         context.Result = new ForbiddenObjectResult();

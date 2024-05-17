@@ -87,6 +87,10 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         base.OnActionExecuted(context);
     }
 
+    /// <summary>
+    /// 構成ファイルの内容を取得して Cookie の各種オプションを作成します。
+    /// </summary>
+    /// <returns>Cookie の各種オプション</returns>
     private CookieOptions CreateCookieOptions()
     {
         var defaultCookie = new CookieOptions()
