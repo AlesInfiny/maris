@@ -8,7 +8,6 @@ import { addItemToBasket } from '@/services/basket/basket-service';
 import { storeToRefs } from 'pinia';
 import { useSpecialContentStore } from '@/stores/special-content/special-content';
 import { useCatalogStore } from '@/stores/catalog/catalog';
-import { useBasketStore } from '@/stores/basket/basket';
 import { useNotificationStore } from '@/stores/notification/notification';
 import CarouselSlider from '@/components/common/CarouselSlider.vue';
 import Loading from '@/components/common/LoadingSpinner.vue';
@@ -18,7 +17,7 @@ import assetHelper from '@/shared/helpers/assetHelper';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
-const basketStore = useBasketStore();
+
 const notificationStore = useNotificationStore();
 const { getSpecialContents } = storeToRefs(specialContentStore);
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
@@ -45,10 +44,12 @@ const addBasket = async (catalogItemId: number) => {
 
 onMounted(async () => {
   state.showLoading = true;
-  fetchCategoriesAndBrands().catch(() => {
-    notificationStore.setMessage('ブランドの取得に失敗しました。');
-  });
-  await fetchItems(selectedCategory.value, selectedBrand.value);
+  fetchCategoriesAndBrands();
+  try {
+    await fetchItems(selectedCategory.value, selectedBrand.value);
+  } catch (error) {
+    notificationStore.setMessage('商品の取得に失敗しました。');
+  }
   state.showLoading = false;
 });
 

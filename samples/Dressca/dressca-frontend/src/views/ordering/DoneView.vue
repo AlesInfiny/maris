@@ -5,6 +5,7 @@ import { getOrder } from '@/services/ordering/ordering-service';
 import type { OrderResponse } from '@/generated/api-client/models/order-response';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
+import { useNotificationStore } from '@/stores/notification/notification';
 
 const router = useRouter();
 const props = defineProps<{
@@ -13,6 +14,8 @@ const props = defineProps<{
 const state = reactive({
   lastOrdered: null as OrderResponse | null,
 });
+
+const notificationStore = useNotificationStore();
 
 const { lastOrdered } = toRefs(state);
 const { toCurrencyJPY } = currencyHelper();
@@ -23,7 +26,12 @@ const goCatalog = () => {
 };
 
 onMounted(async () => {
-  state.lastOrdered = await getOrder(props.orderId);
+  try {
+    state.lastOrdered = await getOrder(props.orderId);
+  } catch {
+    notificationStore.setMessage('注文情報の取得に失敗しました。');
+    router.push('/');
+  }
 });
 </script>
 

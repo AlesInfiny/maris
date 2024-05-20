@@ -2,7 +2,9 @@
 import { onMounted } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
 import { useUserStore } from '@/stores/user/user';
+import { useNotificationStore } from '@/stores/notification/notification';
 import { postOrder } from '@/services/ordering/ordering-service';
+import { fetchBasket } from '@/services/basket/basket-service';
 
 import { useRouter } from 'vue-router';
 import currencyHelper from '@/shared/helpers/currencyHelper';
@@ -11,6 +13,7 @@ import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore();
 const basketStore = useBasketStore();
+const notificationStore = useNotificationStore();
 
 const { getBasket } = storeToRefs(basketStore);
 const { getAddress } = storeToRefs(userStore);
@@ -29,13 +32,14 @@ const checkout = async () => {
     );
     router.push({ name: 'ordering/done', params: { orderId: orderId } });
   } catch (error) {
-    console.error(error);
+    notificationStore.setMessage(error.message);
+    console.error(error.message);
     router.push({ name: 'error' });
   }
 };
 
 onMounted(async () => {
-  await basketStore.fetch();
+  await fetchBasket();
   if (getBasket.value.basketItems?.length === 0) {
     router.push('/');
     return;
