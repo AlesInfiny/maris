@@ -31,7 +31,7 @@ if (origins != null)
                policy =>
                {
                    // Origins, Methods, Header, Credentials すべての設定が必要（設定しないと CORS が動作しない）
-                   // レスポンスの Header を使用する場合、 WithExposedHeaders も必須
+                   // レスポンスの Header を フロントエンド側 JavaScript で使用する場合、 WithExposedHeaders も必須
                    policy
                        .WithOrigins(origins)
                        .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
