@@ -13,7 +13,8 @@ function createConfig(): apiClient.Configuration {
 const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': import.meta.env.VITE_ALLOW_ORIGIN,
+    'Access-Control-Allow-Origin': import.meta.env
+      .VITE_ACCESS_CONTROL_ALLOW_ORIGIN,
   },
   withCredentials: true,
 });
