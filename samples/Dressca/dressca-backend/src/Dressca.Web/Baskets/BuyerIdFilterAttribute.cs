@@ -129,14 +129,13 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         string? samesiteString = optionSettings["SameSite"];
         _ = Enum.TryParse<SameSiteMode>(samesiteString, out sameSiteMode);
 
-        string? domain = optionSettings["Domain"];
-
         var cookieOptions = new CookieOptions();
         cookieOptions.Expires = this.timeProvider.GetLocalNow().AddDays(expiredDays);
         cookieOptions.HttpOnly = httpOnly;
         cookieOptions.Secure = secure;
-
         cookieOptions.SameSite = sameSiteMode;
+
+        string? domain = optionSettings["Domain"];
 
         if (!string.IsNullOrEmpty(domain))
         {

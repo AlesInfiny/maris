@@ -5,12 +5,12 @@ namespace Dressca.Web.Runtime;
 /// <summary>
 /// 403 Forbidden を表す <see cref="StatusCodeResult"/> の派生クラスです。
 /// </summary>
-public class ForbiddenObjectResult : StatusCodeResult
+public class ForbiddenCodeResult : StatusCodeResult
 {
     /// <summary>
-    /// <see cref="ForbiddenObjectResult"/> クラスの新しいインタンスを初期化します。
+    /// <see cref="ForbiddenCodeResult"/> クラスの新しいインタンスを初期化します。
     /// </summary>
-    public ForbiddenObjectResult()
+    public ForbiddenCodeResult()
         : base(StatusCodes.Status403Forbidden)
     {
     }
