@@ -54,7 +54,6 @@ builder.Services
         else
         {
             options.Filters.Add<BusinessExceptionFilter>();
-            options.Filters.Add<OriginVerificationResourceFilter>();
         }
     })
     .ConfigureApiBehaviorOptions(options =>
