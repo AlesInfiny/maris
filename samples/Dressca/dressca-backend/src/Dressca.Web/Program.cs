@@ -5,6 +5,7 @@ using Dressca.Store.Assets.StaticFiles;
 using Dressca.SystemCommon.Text.Json;
 using Dressca.Web;
 using Dressca.Web.Baskets;
+using Dressca.Web.Configuration;
 using Dressca.Web.Controllers;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Mapper;
@@ -18,8 +19,8 @@ const string corsPolicyName = "allowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-var section = builder.Configuration.GetSection("AppSettings:AllowedOrigins");
-var origins = section != null ? section.Get<string[]>() : null;
+WebServerOptions? options = builder.Configuration.GetSection(nameof(WebServerOptions)).Get<WebServerOptions>();
+var origins = options != null ? options.AllowedOrigins : null;
 
 if (origins != null)
 {

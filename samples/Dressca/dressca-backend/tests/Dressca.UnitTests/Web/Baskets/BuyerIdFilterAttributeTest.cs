@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using Dressca.Web.Baskets;
+using Dressca.Web.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -45,21 +46,17 @@ public class BuyerIdFilterAttributeTest
         var context = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), Mock.Of<Controller>());
         var fakeTimeProvider = new FakeTimeProvider();
         var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
-        var testConfiguration = new Dictionary<string, string?>
-        {
-            { "AppSettings:CookieOptions:HttpOnly", "false" },
-            { "AppSettings:CookieOptions:Secure", "false" },
-            { "AppSettings:CookieOptions:SameSite", "Lax" },
-            { "AppSettings:CookieOptions:ExpiredDays", "10" },
-            { "AppSettings:CookieOptions:Domain", "example.com" },
-        };
-        var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(testConfiguration)
-            .Build();
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
         var expectedDateTime = testCookieCreatedDateTime.AddDays(10);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, config);
+        var options = new WebServerOptions();
+        options.CookieOptions = new Dressca.Web.Configuration.CookieOptions();
+        options.CookieOptions.HttpOnly = false;
+        options.CookieOptions.Secure = false;
+        options.CookieOptions.SameSite = "Lax";
+        options.CookieOptions.ExpiredDays = 10;
+        options.CookieOptions.Domain = "example.com";
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, options);
 
         // Act
         filter.OnActionExecuted(context);

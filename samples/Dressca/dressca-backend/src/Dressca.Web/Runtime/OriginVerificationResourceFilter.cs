@@ -47,7 +47,7 @@ public class OriginVerificationResourceFilter : IResourceFilter
             return;
         }
 
-        var section = this.config.GetSection("AppSettings:AllowedOrigins");
+        var section = this.config.GetSection("WebServerOptions:AllowedOrigins");
 
         // アプリケーション構成設定にオリジンが設定されていない場合は処理を終了する。
         if (section == null)

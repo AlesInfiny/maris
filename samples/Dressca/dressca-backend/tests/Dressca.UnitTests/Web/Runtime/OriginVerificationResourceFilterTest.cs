@@ -18,7 +18,7 @@ public class OriginVerificationResourceFilterTest(ITestOutputHelper testOutputHe
     {
         // Arrange
         var config = new Dictionary<string, string?>();
-        config.Add("AppSettings:AllowedOrigins:0", "http://localhost:11111");
+        config.Add("WebServerOptions:AllowedOrigins:0", "http://localhost:11111");
         var filter = new OriginVerificationResourceFilter(this.CreateConfig(config));
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Method = "GET";
@@ -37,7 +37,7 @@ public class OriginVerificationResourceFilterTest(ITestOutputHelper testOutputHe
     {
         // Arrange
         var config = new Dictionary<string, string?>();
-        config.Add("AppSettings:AllowedOrigins:0", "http://localhost:11111");
+        config.Add("WebServerOptions:AllowedOrigins:0", "http://localhost:11111");
         var filter = new OriginVerificationResourceFilter(this.CreateConfig(config));
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Method = "HEAD";
@@ -55,7 +55,7 @@ public class OriginVerificationResourceFilterTest(ITestOutputHelper testOutputHe
     {
         // Arrange
         var config = new Dictionary<string, string?>();
-        config.Add("AppSettings:AllowedOrigins:0", "http://localhost:11111");
+        config.Add("WebServerOptions:AllowedOrigins:0", "http://localhost:11111");
         var filter = new OriginVerificationResourceFilter(this.CreateConfig(config));
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Method = "POST";
@@ -73,7 +73,7 @@ public class OriginVerificationResourceFilterTest(ITestOutputHelper testOutputHe
     {
         // Arrange
         var config = new Dictionary<string, string?>();
-        config.Add("AppSettings:AllowedOrigins:0", "http://localhost:11111");
+        config.Add("WebServerOptions:AllowedOrigins:0", "http://localhost:11111");
         var filter = new OriginVerificationResourceFilter(this.CreateConfig(config));
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Method = "POST";
@@ -92,7 +92,7 @@ public class OriginVerificationResourceFilterTest(ITestOutputHelper testOutputHe
     {
         // Arrange
         var config = new Dictionary<string, string?>();
-        config.Add("AppSettings:AllowedOrigins:0", "http://localhost:11111");
+        config.Add("WebServerOptions:AllowedOrigins:0", "http://localhost:11111");
         var filter = new OriginVerificationResourceFilter(this.CreateConfig(config));
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Method = "POST";
@@ -103,7 +103,7 @@ public class OriginVerificationResourceFilterTest(ITestOutputHelper testOutputHe
         filter.OnResourceExecuting(context);
 
         // Assert
-        Assert.IsNotType<ForbiddenCodeResult>(context.Result);
+        Assert.IsType<ForbiddenCodeResult>(context.Result);
     }
 
     private ResourceExecutingContext CreateContext(DefaultHttpContext httpContext)

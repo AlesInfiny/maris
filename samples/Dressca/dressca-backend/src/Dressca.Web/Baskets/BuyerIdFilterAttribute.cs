@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Dressca.Web.Configuration;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Dressca.Web.Baskets;
 
@@ -20,7 +21,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
     private readonly TimeProvider timeProvider;
-    private readonly IConfiguration? config;
+    private readonly WebServerOptions? options;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
@@ -28,7 +29,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
     /// <param name="config">アプリケーション構成。</param>
     public BuyerIdFilterAttribute(IConfiguration config, string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System, config)
+        : this(buyerIdCookieName, TimeProvider.System, config.GetSection(nameof(WebServerOptions)).Get<WebServerOptions>())
     {
     }
 
@@ -38,22 +39,18 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
-    /// <param name="config">アプリケーション構成。</param>
+    /// <param name="options">構成オプション。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
     ///   <paramref name="timeProvider"/> が <see langword="null"/> です。
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, IConfiguration? config)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions? options)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
-
-        if (config != null)
-        {
-            this.config = config;
-        }
+        this.options = options;
     }
 
     /// <inheritdoc/>
@@ -91,9 +88,9 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// 構成ファイルの内容を取得して Cookie の各種オプションを作成します。
     /// </summary>
     /// <returns>Cookie の各種オプション</returns>
-    private CookieOptions CreateCookieOptions()
+    private Microsoft.AspNetCore.Http.CookieOptions CreateCookieOptions()
     {
-        var defaultCookie = new CookieOptions()
+        var defaultCookie = new Microsoft.AspNetCore.Http.CookieOptions()
         {
             HttpOnly = true,
             SameSite = SameSiteMode.Strict,
@@ -101,45 +98,26 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
             Expires = this.timeProvider.GetLocalNow().AddDays(7),
         };
 
-        if (this.config == null)
+        if (this.options == null || this.options.CookieOptions == null)
         {
             return defaultCookie;
         }
 
-        var optionSettings = this.config.GetSection("AppSettings:CookieOptions");
-
-        if (optionSettings == null)
-        {
-            return defaultCookie;
-        }
-
-        bool httpOnly;
-        bool secure;
-        int expiredDays;
-
-        _ = bool.TryParse(optionSettings["HttpOnly"], out httpOnly);
-        _ = bool.TryParse(optionSettings["Secure"], out secure);
-
-        if (!int.TryParse(optionSettings["ExpiredDays"], out expiredDays))
-        {
-            expiredDays = 7;
-        }
+        var optionSettings = this.options.CookieOptions;
 
         SameSiteMode sameSiteMode = SameSiteMode.Strict;
-        string? samesiteString = optionSettings["SameSite"];
+        string? samesiteString = optionSettings.SameSite;
         _ = Enum.TryParse<SameSiteMode>(samesiteString, out sameSiteMode);
 
-        var cookieOptions = new CookieOptions();
-        cookieOptions.Expires = this.timeProvider.GetLocalNow().AddDays(expiredDays);
-        cookieOptions.HttpOnly = httpOnly;
-        cookieOptions.Secure = secure;
+        var cookieOptions = new Microsoft.AspNetCore.Http.CookieOptions();
+        cookieOptions.Expires = this.timeProvider.GetLocalNow().AddDays(optionSettings.ExpiredDays);
+        cookieOptions.HttpOnly = optionSettings.HttpOnly;
+        cookieOptions.Secure = optionSettings.Secure;
         cookieOptions.SameSite = sameSiteMode;
 
-        string? domain = optionSettings["Domain"];
-
-        if (!string.IsNullOrEmpty(domain))
+        if (!string.IsNullOrEmpty(optionSettings.Domain))
         {
-            cookieOptions.Domain = domain;
+            cookieOptions.Domain = optionSettings.Domain;
         }
 
         return cookieOptions;
