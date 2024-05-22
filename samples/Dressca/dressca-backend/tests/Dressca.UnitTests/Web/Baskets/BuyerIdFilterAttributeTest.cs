@@ -47,11 +47,11 @@ public class BuyerIdFilterAttributeTest
         var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
         var testConfiguration = new Dictionary<string, string?>
         {
-            { "UserSettings:CookieOptions:HttpOnly", "false" },
-            { "UserSettings:CookieOptions:Secure", "false" },
-            { "UserSettings:CookieOptions:SameSite", "Lax" },
-            { "UserSettings:CookieOptions:ExpiredDays", "10" },
-            { "UserSettings:CookieOptions:Domain", "example.com" },
+            { "AppSettings:CookieOptions:HttpOnly", "false" },
+            { "AppSettings:CookieOptions:Secure", "false" },
+            { "AppSettings:CookieOptions:SameSite", "Lax" },
+            { "AppSettings:CookieOptions:ExpiredDays", "10" },
+            { "AppSettings:CookieOptions:Domain", "example.com" },
         };
         var config = new ConfigurationBuilder()
             .AddInMemoryCollection(testConfiguration)

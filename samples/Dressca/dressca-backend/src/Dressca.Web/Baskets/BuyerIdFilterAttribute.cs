@@ -106,7 +106,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
             return defaultCookie;
         }
 
-        var optionSettings = this.config.GetSection("UserSettings:CookieOptions");
+        var optionSettings = this.config.GetSection("AppSettings:CookieOptions");
 
         if (optionSettings == null)
         {

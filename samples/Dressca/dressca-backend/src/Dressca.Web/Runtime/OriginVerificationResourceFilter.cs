@@ -1,5 +1,4 @@
-﻿using Dressca.SystemCommon;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Dressca.Web.Runtime;
@@ -19,7 +18,7 @@ public class OriginVerificationResourceFilter : IResourceFilter
     /// <param name="config">アプリケーションの構成設定。</param>
     public OriginVerificationResourceFilter(IConfiguration config)
     {
-        config.ThrowIfNull(nameof(config));
+        ArgumentNullException.ThrowIfNull(config, nameof(config));
         this.config = config;
     }
 
@@ -48,7 +47,7 @@ public class OriginVerificationResourceFilter : IResourceFilter
             return;
         }
 
-        var section = this.config.GetSection("UserSettings:AllowedOrigins");
+        var section = this.config.GetSection("AppSettings:AllowedOrigins");
 
         // アプリケーション構成設定にオリジンが設定されていない場合は処理を終了する。
         if (section == null)
