@@ -6,6 +6,8 @@ import { useAuthenticationStore } from '@/stores/authentication/authentication';
 const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': import.meta.env
+      .VITE_ACCESS_CONTROL_ALLOW_ORIGIN,
   },
 });
 
