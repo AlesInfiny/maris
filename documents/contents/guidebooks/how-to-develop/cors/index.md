@@ -144,12 +144,12 @@ policy
 
 <!-- textlint-enabled ja-technical-writing/ja-no-mixed-period -->
 
-### Cookie を使用する場合の注意事項 {#notice}
+!!! danger "Cookie を使用する場合の注意事項"
 
-CORS 環境においてアプリケーションで Cookie を使用する場合、 `SameSite` 属性に `None` を明示的に指定する必要があります。設定しない場合、別オリジンへ Cookie を送信できません。
-なお、 Cookie の仕様上、 `SameSite` 属性に `None` を設定する場合は、必ず `Secure` 属性も併せて設定する必要があります（ [HTTP Cookie の使用 - HTTP | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies) ）。
-
-> Cookie に SameSite=None が付いた場合は、 Secure 属性も指定することになりました（安全なコンテキストが必要になりました）。
+    CORS 環境においてアプリケーションで Cookie を使用する場合、 `SameSite` 属性に `None` を明示的に指定する必要があります。設定しない場合、別オリジンへ Cookie を送信できません。
+    なお、 Cookie の仕様上 `SameSite` 属性に `None` を設定する場合は必ず `Secure` 属性も設定する必要があります（ [HTTP Cookie の使用 - HTTP | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies) ）。
+    
+    > Cookie に SameSite=None が付いた場合は、 Secure 属性も指定することになりました（安全なコンテキストが必要になりました）。
 
 ## フロントエンドアプリケーション（ Vue.js ） {#frontend}
 
@@ -203,12 +203,20 @@ const axiosInstance = axios.create({
   },
   withCredentials: true,
 });
+
+const defaultApi = new apiClient.DefaultApi(createConfig(), '', axiosInstance);
+
+export { defaultApi };
 ```
 
-`headers`
+`headers` の設定（ 10-11 行目）
 
 :   `Access-Control-Allow-Origin` ヘッダーに `env.d.ts` の値を設定します。
 
-`withCredentials`
+<!-- textlint-disable @textlint-ja/no-synonyms -->
 
-:   CORS 環境でのリクエストが Cookie 、認証ヘッダー、 TLS クライアント証明書などの資格情報を使用して行うべきかを示します。既定値は `false` なので、 `true` を明示的に設定します。
+`withCredentials: true` （ 13 行目）
+
+<!-- textlint-enabled @textlint-ja/no-synonyms -->
+
+:   CORS 環境でのリクエストが Cookie 、認証ヘッダー、 TLS クライアント証明書などの資格情報を使用して行われるべきかを示します。既定値は `false` なので、 `true` を明示的に設定します。
