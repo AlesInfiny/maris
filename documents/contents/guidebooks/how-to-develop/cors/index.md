@@ -28,7 +28,7 @@ CORS (Cross-Origin Resource Sharing: オリジン間リソース共有 ) とは�
     
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-本章で解説する CORS 環境とは、 SPA において、フロントエンドアプリケーションとバックエンドアプリケーションの配置されるサーバーのオリジンが異なる環境を意味します。 CORS 環境で SPA を構築する場合、いくつかの考慮や追加の実装が必要です。
+本章で解説する CORS 環境とは、 CSR アプリケーションにおいて、フロントエンドアプリケーションとバックエンドアプリケーションの配置されるサーバーのオリジンが異なる環境を意味します。 CORS 環境で CSR アプリケーションを構築する場合、いくつかの考慮や追加の実装が必要です。
 
 CORS の仕組みの詳細は「 [オリジン間リソース共有 (CORS) - HTTP | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS) 」を参照してください。
 
