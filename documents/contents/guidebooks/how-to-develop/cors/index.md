@@ -28,17 +28,18 @@ CORS (Cross-Origin Resource Sharing: オリジン間リソース共有 ) とは�
     
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-本章で解説する CORS 環境とは、 SPA において、フロントエンドアプリケーションとバックエンドアプリケーションの配置されるサーバーのオリジンが異なる環境を意味します。
+本章で解説する CORS 環境とは、 SPA において、フロントエンドアプリケーションとバックエンドアプリケーションの配置されるサーバーのオリジンが異なる環境を意味します。 CORS 環境で SPA を構築する場合、いくつかの考慮や追加の実装が必要です。
 
-CORS についてのその他の詳細は「 [オリジン間リソース共有 (CORS) - HTTP | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS) 」を参照してください。
+CORS の仕組みの詳細は「 [オリジン間リソース共有 (CORS) - HTTP | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS) 」を参照してください。
 
 ## バックエンドアプリケーション（ .NET ） {#backend}
 
-ASP.NET Web API アプリケーションでは、 `Program.cs` で CORS を設定します。 AlesInfiny Maris OSS Edition （以降『 AlesInfiny Maris 』）では、許可するオリジンの一覧をアプリケーション設定ファイル `appSettings.json` から取得します。
+ASP.NET Web API アプリケーションでは、 `Program.cs` で CORS に関するポリシーを設定します。
+AlesInfiny Maris OSS Edition （以降『 AlesInfiny Maris 』）では、許可するオリジンの一覧をアプリケーション設定ファイル `appSettings.json` から取得します。
 
-### appSettings.json の設定 {#appSettings-json}
+### 許可するオリジンの追加 {#appSettings-json}
 
-```json
+```json title="appSettings.json"
 "WebServerOptions": {
   "AllowedOrigins": [
     "https://frontend.example.com", "https://dev.frontend.example.net"
@@ -48,7 +49,7 @@ ASP.NET Web API アプリケーションでは、 `Program.cs` で CORS を設�
 
 ### 構成オプション用クラスの追加 {#option-settings-class}
 
-`appSettings.json` の内容をコード上で扱いやすくするため、構成オプション用のクラスを作成します。
+`appSettings.json` の内容をコード上で扱いやすくするため、構成オプション用のクラスを作成します。クラス名、プロパティ名、プロパティの型は `appSettings.json` に追加した名称と一致させる必要があります。
 
 ```csharp
 public class WebServerOptions
@@ -60,11 +61,11 @@ public class WebServerOptions
 }
 ```
 
-### Program.cs の実装 {#Program-cs}
+### CORS ポリシーの設定 {#program-cs}
 
-ASP.NET Web API では、 CORS に関する設定を `Program.cs` 上で行う必要があります。`CorsServiceCollectionExtensions.AddCors` メソッドを呼び出します。
+ASP.NET Web API では、 CORS に関する設定を `Program.cs` 上で行う必要があります。`builder.Services.AddCors` メソッドで CORS のポリシーを設定し、 `app.UseCors` メソッドで CORS ミドルウェアを有効化します。
 
-```csharp title="Program.cs の実装"
+```csharp title="Program.cs"
 // CORS ポリシーの名称です。値は任意ですが、 AddCors メソッドと UseCors メソッドで同じ値にする必要があります。
 const string corsPolicyName = "allowSpecificOrigins";
 
@@ -74,8 +75,7 @@ var builder = WebApplication.CreateBuilder(args);
 WebServerOptions? options = builder.Configuration.GetSection(nameof(WebServerOptions)).Get<WebServerOptions>();
 var origins = options != null ? options.AllowedOrigins : null;
 
-// アプリケーション設定ファイルに CORS の設定がある場合のみ、
-// CorsServiceCollectionExtensions.AddCors メソッドを呼び出します。
+// アプリケーション設定ファイルに CORS の設定がある場合のみ、builder.Services.AddCors メソッドを呼び出します。
 if (origins != null)
 {
     builder.Services
@@ -109,7 +109,7 @@ if (origins != null)
 
 #### CORS のポリシー設定について {#cors-policy}
 
-コード例「`Program.cs` の実装」の 22-27 行目を以下に抜粋します。
+上のコード例「 `Program.cs` 」の 22-27 行目を以下に抜粋します。
 
 ```csharp
 policy
@@ -124,29 +124,29 @@ policy
 
 `WithOrigins` メソッド
 
-:   CORS でリソースへのアクセスを許可するオリジンを設定します。 AlesInfiny Maris ではアプリケーション設定ファイルから値を取得します。
+:   CORS でリソースへのアクセスを許可するオリジンを設定します。 AlesInfiny Maris ではアプリケーション設定ファイルから値を取得して引数に渡します。
 
 `WithMethods` メソッド
 
-:   許可したオリジンが使用可能な HTTP メソッドを設定します。アプリケーションで許可するメソッド名を指定してください。
+:   許可したオリジンのクライアントが使用可能な HTTP メソッドを設定します。アプリケーションで許可する HTTP メソッド名を指定してください。
 
 `AllowAnyHeader` メソッド
 
-:   許可したオリジンに任意の HTTP リクエストヘッダー使用を許可します。クライアントから送信される HTTP リクエストヘッダーを制限したい場合は `WithHeaders` メソッドを使用してください。
+:   許可したオリジンのクライアントに任意の HTTP リクエストヘッダー使用を許可します。クライアントから送信される HTTP リクエストヘッダーを制限したい場合は `WithHeaders` メソッドを使用してください。
 
 `AllowCredentials` メソッド
 
-:   許可したオリジンに Cookie 等の認証情報を送信することを許可します。アプリケーションで Cookie や認証を使用する場合、このメソッドの呼び出しが必要です。
+:   許可したオリジンのクライアントに Cookie 等の認証情報を送信することを許可します。アプリケーションで Cookie や認証を使用する場合、このメソッドの呼び出しが必要です。
 
 `WithExposedHeaders` メソッド
 
-:   許可したオリジンに対して公開する必要がある HTTP レスポンスヘッダーを設定します。アプリケーションで許可する HTTP レスポンスヘッダー名を指定してください。 `WithExposedHeaders` メソッドで設定していないレスポンスヘッダーはクライアントに公開されません。
+:   許可したオリジンのクライアントに対して公開する必要がある HTTP レスポンスヘッダーを設定します。アプリケーションで許可する HTTP レスポンスヘッダー名を指定してください。 `WithExposedHeaders` メソッドで設定していないレスポンスヘッダーはクライアントに公開されません。
 
 <!-- textlint-enabled ja-technical-writing/ja-no-mixed-period -->
 
 ### Cookie を使用する場合の注意事項 {#notice}
 
-アプリケーションで Cookie を使用する場合、 `SameSite` 属性に `None` を明示的に指定する必要があります。設定しない場合、別オリジンへ Cookie を送信できません。
+CORS 環境においてアプリケーションで Cookie を使用する場合、 `SameSite` 属性に `None` を明示的に指定する必要があります。設定しない場合、別オリジンへ Cookie を送信できません。
 なお、 Cookie の仕様上、 `SameSite` 属性に `None` を設定する場合は、必ず `Secure` 属性も併せて設定する必要があります（ [HTTP Cookie の使用 - HTTP | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies) ）。
 
 > Cookie に SameSite=None が付いた場合は、 Secure 属性も指定することになりました（安全なコンテキストが必要になりました）。
@@ -170,7 +170,7 @@ VITE_ACCESS_CONTROL_ALLOW_ORIGIN=https://frontend.example.com
 
 環境変数を TypeScript 上で使用可能にするため、 `env.d.ts` に項目を追加します。
 
-```typescript
+```typescript title="env.d.ts"
 interface ImportMetaEnv {
   readonly VITE_ACCESS_CONTROL_ALLOW_ORIGIN: string;
 }
@@ -182,7 +182,11 @@ interface ImportMeta {
 
 ### Web API 呼び出し時の HTTP ヘッダーの設定 {#http-request-header}
 
-AlesInfiny Maris では、 Web API 呼び出しを共通化するために `./src/api-client/index.ts` という設定ファイルを作成するので、ここで行います（ [参照](../vue-js/create-api-client-code.md#set-client-code) ）。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+AlesInfiny Maris では Web API 呼び出しの共通処理用に `./src/api-client/index.ts` という設定ファイルを作成するので、ここで `Access-Control-Allow-Origin` ヘッダーを設定します（ [参照](../vue-js/create-api-client-code.md#set-client-code) ）。
+
+<!-- textlint-enabled ja-technical-writing/sentence-length -->
 
 ```ts title="index.ts"
 import axios from 'axios';
