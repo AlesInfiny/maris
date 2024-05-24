@@ -30,7 +30,7 @@ TypeScript で作成されたファイルは、 `tsconfig.json` の設定値を�
 - アプリケーションコードからテストコードを参照するような歪な依存関係を防ぐ
 - ビルド時のパフォーマンスを改善する
 
-Project Reference 機能については[Project References :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/project-references.html){ target=_blank }を参照してください。
+Project Reference 機能については [Project References :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/project-references.html){ target=_blank } を参照してください。
 
 なお、 `tsconfig.app.json` `tsconfig.node.json` には npm パッケージで提供されている tsconfig を継承するように設定されているため、継承元の設定値が存在します。
 `extends` に定義されている継承元ファイルを参照して実際の設定値を確認できます。
@@ -62,7 +62,7 @@ Project Reference 機能については[Project References :material-open-in-new
 - `compilerOptions.moduleResolution`
   
     モジュール解決の方針を設定するプロパティです。
-    tsconfig.node.json ではデフォルトで Vite での利用が推奨されている `Bundler` に設定されています。`Bundler` についての詳細は[--moduleResolution bundler :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#--moduleresolution-bundler){ target=_blank }を参照してください。
+    tsconfig.node.json ではデフォルトで Vite での利用が推奨されている `Bundler` に設定されています。`Bundler` についての詳細は [--moduleResolution bundler :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#--moduleresolution-bundler){ target=_blank } を参照してください。
 
 ??? note "tsconfig.json の設定例"
 
@@ -176,12 +176,12 @@ Project Reference 機能については[Project References :material-open-in-new
     設定例では mock モードでビルドした際に、デフォルトのプラグインに加えてモック用に定義したプラグインを読み込んでいます。
 
     なお、条件付き設定のために関数を export する際は `vitest.config.ts` の実装も変更が必要です。
-    `vitest.config.ts` の設定については[Managing Vitest config file :material-open-in-new:](https://vitest.dev/config/file.html){ target=_blank }を参照してください。
+    `vitest.config.ts` の設定については [Managing Vitest config file :material-open-in-new:](https://vitest.dev/config/file.html){ target=_blank } を参照してください。
 
 - `loadEnv()`
 
     モードに応じた `.env.*` ファイルを読み込み、環境変数を取得します。
-    詳しくは[環境変数を設定に使用する :material-open-in-new:](https://ja.vitejs.dev/config/#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B){ target=_blank }を参照してください。
+    詳しくは [環境変数を設定に使用する :material-open-in-new:](https://ja.vitejs.dev/config/#%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%AB%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B){ target=_blank } を参照してください。
 
 - [resolve.alias :material-open-in-new:](https://ja.vitejs.dev/config/shared-options.html#resolve-alias){ target=_blank }
 
