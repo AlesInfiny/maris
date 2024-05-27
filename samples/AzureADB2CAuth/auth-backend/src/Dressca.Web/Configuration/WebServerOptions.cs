@@ -8,10 +8,5 @@ public class WebServerOptions
     /// <summary>
     /// 許可するオリジンを取得または設定します。
     /// </summary>
-    public string[]? AllowedOrigins { get; set; }
-
-    /// <summary>
-    /// Cookie に設定するオプションを取得または設定します。
-    /// </summary>
-    public CookieOptions? CookieOptions { get; set; }
+    public string[]? AllowedOrigins { get; set; } = [];
 }
