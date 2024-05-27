@@ -91,32 +91,17 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// <returns>Cookie の各種オプション</returns>
     private CookieOptions CreateCookieOptions()
     {
-        var defaultCookie = new CookieOptions()
-        {
-            HttpOnly = true,
-            SameSite = SameSiteMode.Strict,
-            Secure = true,
-            Expires = this.timeProvider.GetLocalNow().AddDays(7),
-        };
-
         if (this.options == null || this.options.CookieSettings == null)
         {
-            return defaultCookie;
+            return new CookieOptions()
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.Strict,
+                Secure = true,
+                Expires = this.timeProvider.GetLocalNow().AddDays(7),
+            };
         }
 
-        var optionSettings = this.options.CookieSettings;
-
-        var cookieOptions = new CookieOptions();
-        cookieOptions.Expires = this.timeProvider.GetLocalNow().AddDays(optionSettings.ExpiredDays);
-        cookieOptions.HttpOnly = optionSettings.HttpOnly;
-        cookieOptions.Secure = optionSettings.Secure;
-        cookieOptions.SameSite = optionSettings.SameSite;
-
-        if (!string.IsNullOrEmpty(optionSettings.Domain))
-        {
-            cookieOptions.Domain = optionSettings.Domain;
-        }
-
-        return cookieOptions;
+        return this.options.CookieSettings.CreateCookieOptions(this.timeProvider);
     }
 }

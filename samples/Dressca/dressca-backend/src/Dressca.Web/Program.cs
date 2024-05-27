@@ -14,10 +14,13 @@ using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 const string corsPolicyName = "allowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<IValidateOptions<WebServerOptions>, ValidateWebServerOptions>();
 
 var section = builder.Configuration.GetSection(nameof(WebServerOptions));
 builder.Services.Configure<WebServerOptions>(section);
