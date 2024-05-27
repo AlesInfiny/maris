@@ -50,12 +50,12 @@ public class BuyerIdFilterAttributeTest
         var expectedDateTime = testCookieCreatedDateTime.AddDays(10);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
         var options = new WebServerOptions();
-        options.CookieOptions = new Dressca.Web.Configuration.CookieOptions();
-        options.CookieOptions.HttpOnly = false;
-        options.CookieOptions.Secure = false;
-        options.CookieOptions.SameSite = "Lax";
-        options.CookieOptions.ExpiredDays = 10;
-        options.CookieOptions.Domain = "example.com";
+        options.CookieSettings = new Dressca.Web.Configuration.CookieSettings( );
+        options.CookieSettings.HttpOnly = false;
+        options.CookieSettings.Secure = false;
+        options.CookieSettings.SameSite = SameSiteMode.Lax;
+        options.CookieSettings.ExpiredDays = 10;
+        options.CookieSettings.Domain = "example.com";
         var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, options);
 
         // Act

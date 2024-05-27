@@ -1,5 +1,6 @@
 ﻿using Dressca.Web.Configuration;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Options;
 
 namespace Dressca.Web.Baskets;
 
@@ -26,10 +27,10 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
+    /// <param name="options">構成オプションに設定された Cookie の設定。</param>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
-    /// <param name="config">アプリケーション構成。</param>
-    public BuyerIdFilterAttribute(IConfiguration config, string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System, config.GetSection(nameof(WebServerOptions)).Get<WebServerOptions>())
+    public BuyerIdFilterAttribute(IOptions<WebServerOptions> options, string buyerIdCookieName = DefaultBuyerIdCookieName)
+        : this(buyerIdCookieName, TimeProvider.System, options.Value)
     {
     }
 
@@ -88,9 +89,9 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// 構成ファイルの内容を取得して Cookie の各種オプションを作成します。
     /// </summary>
     /// <returns>Cookie の各種オプション</returns>
-    private Microsoft.AspNetCore.Http.CookieOptions CreateCookieOptions()
+    private CookieOptions CreateCookieOptions()
     {
-        var defaultCookie = new Microsoft.AspNetCore.Http.CookieOptions()
+        var defaultCookie = new CookieOptions()
         {
             HttpOnly = true,
             SameSite = SameSiteMode.Strict,
@@ -98,22 +99,18 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
             Expires = this.timeProvider.GetLocalNow().AddDays(7),
         };
 
-        if (this.options == null || this.options.CookieOptions == null)
+        if (this.options == null || this.options.CookieSettings == null)
         {
             return defaultCookie;
         }
 
-        var optionSettings = this.options.CookieOptions;
+        var optionSettings = this.options.CookieSettings;
 
-        SameSiteMode sameSiteMode = SameSiteMode.Strict;
-        string? samesiteString = optionSettings.SameSite;
-        _ = Enum.TryParse<SameSiteMode>(samesiteString, out sameSiteMode);
-
-        var cookieOptions = new Microsoft.AspNetCore.Http.CookieOptions();
+        var cookieOptions = new CookieOptions();
         cookieOptions.Expires = this.timeProvider.GetLocalNow().AddDays(optionSettings.ExpiredDays);
         cookieOptions.HttpOnly = optionSettings.HttpOnly;
         cookieOptions.Secure = optionSettings.Secure;
-        cookieOptions.SameSite = sameSiteMode;
+        cookieOptions.SameSite = optionSettings.SameSite;
 
         if (!string.IsNullOrEmpty(optionSettings.Domain))
         {

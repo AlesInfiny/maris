@@ -19,7 +19,9 @@ const string corsPolicyName = "allowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-WebServerOptions? options = builder.Configuration.GetSection(nameof(WebServerOptions)).Get<WebServerOptions>();
+var section = builder.Configuration.GetSection(nameof(WebServerOptions));
+builder.Services.Configure<WebServerOptions>(section);
+var options = section.Get<WebServerOptions>();
 var origins = options != null ? options.AllowedOrigins : null;
 
 if (origins != null)
