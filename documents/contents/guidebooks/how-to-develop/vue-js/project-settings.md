@@ -16,7 +16,7 @@ TypeScript で作成されたファイルは、 `tsconfig.json` の設定値を�
 ```terminal linenums="0"
 <project-name>
 ├ cypress
-|  └ tsconfig.json--------- 単体テストの TypeScript として読み込む対象を定義する設定ファイル(Cypress 用)
+|  └ tsconfig.json--------- E2E テストの TypeScript として読み込む対象を定義する設定ファイル(Cypress 用)
 ├ tsconfig.app.json ------- アプリケーションの TypeScript として読み込む対象を定義する設定ファイル
 ├ tsconfig.node.json ------ TypeScript の設定ファイルとして読み込む対象を定義する設定ファイル
 ├ tsconfig.json ----------- TypeScript の設定ファイル
@@ -28,11 +28,17 @@ TypeScript で作成されたファイルは、 `tsconfig.json` の設定値を�
 論理分割することにより、以下のような利点があります。
 
 - アプリケーションコードからテストコードを参照するような歪な依存関係を防ぐ
+
+    単一の `tsconfig.json` のみを定義している場合、テストコードも `include` する必要があるので、アプリケーションのコードからテストコードのクラスやメソッドを参照してもエラーにならない事があります。
+    Project Reference 機能を利用した場合、テストコードとアプリケーションコードとで `tsconfig.json` を分割し、アプリケーションコードからテストコードを参照できないように設定できます。
+
 - ビルド時のパフォーマンスを改善する
+
+    ビルドの度にコード全体をビルドするのではなく、更新があったプロジェクトのみをビルドします。
 
 Project Reference 機能については [Project References :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/project-references.html){ target=_blank } を参照してください。
 
-なお、 `tsconfig.app.json` `tsconfig.node.json` には npm パッケージで提供されている tsconfig を継承するように設定されているため、継承元の設定値が存在します。
+なお、 `tsconfig.app.json` `tsconfig.node.json` には npm パッケージで提供されている `tsconfig` を継承するように設定されているため、継承元の設定値が存在します。
 `extends` に定義されている継承元ファイルを参照して実際の設定値を確認できます。
 また、 `references` で参照されているファイルでは `compilerOptions.composite` を `true` に設定する必要があります。
 
@@ -43,26 +49,28 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 - `compilerOptions.noEmit`
 
-    コンパイルの結果を出力しないよう設定するプロパティです。デフォルト値の `true` を設定します。
-    ビルドで利用する package.json に定義されたスクリプトでは Vite でトランスパイルを行い、型チェックには `vue-tsc` が利用されるためです。
-    Vite では `esbuild` または `rollup` でトランスパイルを行い、`tsc` を型チェックのみに利用するため、トランスパイルの結果を出力しません。
+    コンパイルの結果を出力しないよう設定するプロパティです。 `create-vue` した際のデフォルト値の `true` を設定します。
+    これは、 `vue-tsc` で型チェックのみを行い、トランスパイルの結果は出力しないようにするためです。
+    ビルドで利用する package.json に定義されたスクリプトでは Vite でトランスパイルを行うため、 `vue-tsc` でのトランスパイルは不要になります。
+    （※ `vue-tsc` は Vue の単一ファイルコンポーネントをサポートする `tsc` のラッパーです。）
 
 - `compilerOptions.tsBuildInfoFile`
   
     ビルド結果の差分を示す `.tsbuildinfo` ファイルの出力先を指定するプロパティです。
-    `noEmit` を `true` としていても、出力先を明示しない場合は tsconfig.json と同じフォルダーに `.tsbuildinfo` ファイルが出力されます。
-    そのため、デフォルト値である node_modules 配下の一時フォルダーを指定し、不要なファイルの出力を防いでいます。
+    Project Reference 機能を利用する際、出力先を明示しない場合はルートの tsconfig.json と同じフォルダーに `.tsbuildinfo` ファイルが出力されます。
+    プロジェクトルートに不要なファイルが出力されると管理が煩雑になるため、 `create-vue` した際のデフォルト値である node_modules 配下の一時フォルダーを指定しています。
 
 - `compilerOptions.module`
   
     コンパイルしたファイルのモジュールシステムを設定するプロパティです。
-    tsconfig.node.json で `ESNext` 、 tsconfig.json で `NodeNext` がデフォルトで設定されます。
-    Cypress が内部で利用している `ts-node` の挙動の都合上、 tsconfig.json に `compilerOptions.module` が設定されています。
+    tsconfig.node.json で `ESNext` 、 tsconfig.json で `NodeNext` が `create-vue` した際にデフォルトで設定されます。
+    Cypress が内部で利用している `ts-node` の挙動の都合上、 tsconfig.json に `compilerOptions.module` を設定する必要があります。
+    `compilerOptions.module` の設定値については [The module output format :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/modules/theory.html#the-module-output-format){ target=_blank } を参照してください。
 
 - `compilerOptions.moduleResolution`
   
     モジュール解決の方針を設定するプロパティです。
-    tsconfig.node.json ではデフォルトで Vite での利用が推奨されている `Bundler` に設定されています。`Bundler` についての詳細は [--moduleResolution bundler :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#--moduleresolution-bundler){ target=_blank } を参照してください。
+    tsconfig.node.json では `create-vue` した際のデフォルト値として Vite での利用が推奨されている `Bundler` が設定されています。`Bundler` についての詳細は [--moduleResolution bundler :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#--moduleresolution-bundler){ target=_blank } を参照してください。
 
 ??? note "tsconfig.json の設定例"
 
@@ -90,7 +98,8 @@ Project Reference 機能については [Project References :material-open-in-ne
 
     - verbatimModuleSyntax
         
-        デフォルトの設定では `true` が設定されており、型のみを import する場合に import type 構文またはインライン type 修飾子が付いていないとエラーになります。
+        デフォルトの設定では `true` が設定されており、 import type 文 および インラインの type 修飾子が付いている識別子がトランスパイル時に削除されます。
+        また、型のみを import する場合に import type 構文を使用するか、インラインの type 修飾子が付いていないとエラーになります。
         このオプションは元々`importsNotUsedAsValues` `preserveValueImports` `isolatedModules` の3つのオプションを用いて制御していた挙動を簡略化したものです。
         詳細は [Verbatim Module Syntax :material-open-in-new:](https://www.typescriptlang.org/tsconfig/#verbatimModuleSyntax){ target=_blank } を参照してください。
         しかし、現在 `openapi-generator-cli` で自動生成されたコードでは `import` と `import type` が区別されないため、暫定的に `false` を設定しています。
@@ -115,8 +124,8 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 ??? note "tsconfig.node.json の設定例"
 
-    AlesInfiny Maris では、フロントエンドアプリを mock モードでビルドする際のソースコードを `mock` 配下に含みます。
-    本来 tsconfig.node.json は設定ファイルとして読み込む対象を定義していますが、vite.config.ts の参照先で mock を参照している都合上、 `"mock/**/*"` を include の対象にしています。
+    AlesInfiny Maris では、フロントエンドアプリを mock モードでビルドする際のソースコードを `mock` フォルダー配下に含みます。
+    本来 tsconfig.node.json は設定ファイルとして読み込む対象を定義すべきですが、vite.config.ts の参照先で `mock` フォルダー内のファイルを参照している都合上、 `"mock/**/*"` を include の対象にしています。
 
     ``` json title="tsconfig.node.json" hl_lines="4"
     {
@@ -175,6 +184,16 @@ Project Reference 機能については [Project References :material-open-in-ne
 
     設定例では mock モードでビルドした際に、デフォルトのプラグインに加えてモック用に定義したプラグインを読み込んでいます。
 
+    ``` ts
+    export default defineConfig(({ mode }) => {
+      const plugins = [vue(), vueJsx()];
+
+      return {
+        plugins: mode === 'mock' ? [...plugins, setupMockPlugin()] : plugins,
+        // ...
+      }
+    ```
+
     なお、条件付き設定のために関数を export する際は `vitest.config.ts` の実装も変更が必要です。
     `vitest.config.ts` の設定については [Managing Vitest config file :material-open-in-new:](https://vitest.dev/config/file.html){ target=_blank } を参照してください。
 
@@ -202,7 +221,6 @@ Project Reference 機能については [Project References :material-open-in-ne
     import vueJsx from '@vitejs/plugin-vue-jsx';
     import { setupMockPlugin } from './vite-plugins/setup-mock';
 
-    // https://vitejs.dev/config/
     export default defineConfig(({ mode }) => {
       const plugins = [vue(), vueJsx()];
       const env = loadEnv(mode, process.cwd());
