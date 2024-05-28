@@ -27,7 +27,7 @@ builder.Services.Configure<WebServerOptions>(section);
 var options = section.Get<WebServerOptions>();
 var origins = options != null ? options.AllowedOrigins : null;
 
-if (origins != null)
+if (origins != null && origins.Length > 0)
 {
     builder.Services
         .AddCors(options =>
@@ -134,7 +134,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-if (origins != null)
+if (origins != null && origins.Length > 0)
 {
     app.UseCors(corsPolicyName);
 }
