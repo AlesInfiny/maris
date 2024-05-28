@@ -13,7 +13,8 @@ CORS (Cross-Origin Resource Sharing: オリジン間リソース共有 ) とは�
 
     オリジンとは、 URL のスキーム（プロトコル）、ホスト（ドメイン）、ポート番号の部分を指します（ [Origin (オリジン) - MDN Web Docs 用語集: ウェブ関連用語の定義 | MDN](https://developer.mozilla.org/ja/docs/Glossary/Origin) ）。
 
-    - `https://www.example.com` と `https://www2.example.com` はホスト（ドメイン）部分が異なるので異なるオリジン
+    - `http://localhost` と `https://localhost` はスキームが異なるので異なるオリジン
+    - `https://www.example.com` と `https://www2.example.com` はホスト部分が異なるので異なるオリジン
     - `https://localhost:4431` と `https://localhost:4432` はポート番号が異なるので異なるオリジン
 
 ??? note "同一オリジンポリシーとは"
@@ -39,10 +40,22 @@ AlesInfiny Maris OSS Edition （以降『 AlesInfiny Maris 』）では、許可
 
 ### 許可するオリジンの追加 {#appSettings-json}
 
+許可するオリジンの一覧をアプリケーション設定ファイル `appSettings.json` に記述します。
+
 ```json title="appSettings.json"
 "WebServerOptions": {
   "AllowedOrigins": [
-    "https://frontend.example.com", "https://dev.frontend.example.net"
+    "https://frontend.example.com", "https://sub.frontend.example.com"
+  ]
+}
+```
+
+なお、開発時にのみ使用する設定は `appSettings.Development.json` に記述します。
+
+```json title="appSettings.Development.json"
+"WebServerOptions": {
+  "AllowedOrigins": [
+    "https://dev.frontend.example.net"
   ]
 }
 ```
@@ -57,7 +70,7 @@ public class WebServerOptions
     /// <summary>
     /// 許可するオリジンを取得または設定します。
     /// </summary>
-    public string[]? AllowedOrigins { get; set; }
+    public string[]? AllowedOrigins { get; set; } = [];
 }
 ```
 
@@ -76,7 +89,7 @@ WebServerOptions? options = builder.Configuration.GetSection(nameof(WebServerOpt
 var origins = options != null ? options.AllowedOrigins : null;
 
 // アプリケーション設定ファイルに CORS の設定がある場合のみ、builder.Services.AddCors メソッドを呼び出します。
-if (origins != null)
+if (origins != null && origins.Length > 0)
 {
     builder.Services
         .AddCors(options =>
@@ -101,7 +114,7 @@ if (origins != null)
 var app = builder.Build();
 
 // アプリケーション設定ファイルに CORS の設定がある場合のみ、 CORS ミドルウェアを有効にします。
-if (origins != null)
+if (origins != null && origins.Length > 0)
 {
     app.UseCors(corsPolicyName);
 }
@@ -132,7 +145,7 @@ policy
 
 `AllowAnyHeader` メソッド
 
-:   許可したオリジンのクライアントに任意の HTTP リクエストヘッダー使用を許可します。クライアントから送信される HTTP リクエストヘッダーを制限したい場合は `WithHeaders` メソッドを使用してください。
+:   許可したオリジンのクライアントに任意の HTTP リクエストヘッダー使用を許可します。クライアントから送信される HTTP リクエストヘッダーを制限したい場合は代わりに `WithHeaders` メソッドを使用してください。
 
 `AllowCredentials` メソッド
 
@@ -142,7 +155,7 @@ policy
 
 :   許可したオリジンのクライアントに対して公開する必要がある HTTP レスポンスヘッダーを設定します。アプリケーションで許可する HTTP レスポンスヘッダー名を指定してください。 `WithExposedHeaders` メソッドで設定していないレスポンスヘッダーはクライアントに公開されません。
 
-<!-- textlint-enabled ja-technical-writing/ja-no-mixed-period -->
+<!-- textlint-enable ja-technical-writing/ja-no-mixed-period -->
 
 !!! danger "Cookie を使用する場合の注意事項"
 
@@ -184,9 +197,9 @@ interface ImportMeta {
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
-AlesInfiny Maris では Web API 呼び出しの共通処理用に `./src/api-client/index.ts` という設定ファイルを作成するので、ここで `Access-Control-Allow-Origin` ヘッダーを設定します（ [参照](../vue-js/create-api-client-code.md#set-client-code) ）。
+AlesInfiny Maris では Web API 呼び出しの共通処理用に `./src/api-client/index.ts` という設定ファイルを作成する（ [参照](../vue-js/create-api-client-code.md#set-client-code) ）ので、ここで `Access-Control-Allow-Origin` ヘッダーを設定します。
 
-<!-- textlint-enabled ja-technical-writing/sentence-length -->
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 ```ts title="index.ts"
 import axios from 'axios';
@@ -217,6 +230,6 @@ export { defaultApi };
 
 `withCredentials: true` （ 13 行目）
 
-<!-- textlint-enabled @textlint-ja/no-synonyms -->
+<!-- textlint-enable @textlint-ja/no-synonyms -->
 
 :   CORS 環境でのリクエストが Cookie 、認証ヘッダー、 TLS クライアント証明書などの資格情報を使用して行われるべきかを示します。既定値は `false` なので、 `true` を明示的に設定します。
