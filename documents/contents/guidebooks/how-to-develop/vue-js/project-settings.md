@@ -54,6 +54,18 @@ Project Reference 機能については [Project References :material-open-in-ne
     ビルドで利用する package.json に定義されたスクリプトでは Vite でトランスパイルを行うため、 `vue-tsc` でのトランスパイルは不要になります。
     （※ `vue-tsc` は Vue の単一ファイルコンポーネントをサポートする `tsc` のラッパーです。）
 
+    ??? note "create-vue で生成されるビルドに関するスクリプト"
+
+        ```json title="package.json"
+        {
+          "scripts": {
+            "build": "run-p type-check \"build-only {@}\" --",
+            "build-only": "vite build",
+            "typecheck": "vue-tsc --build --force"
+          }
+        }
+        ```
+
 - `compilerOptions.tsBuildInfoFile`
   
     ビルド結果の差分を示す `.tsbuildinfo` ファイルの出力先を指定するプロパティです。
