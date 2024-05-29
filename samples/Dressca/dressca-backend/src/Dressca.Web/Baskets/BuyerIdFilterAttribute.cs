@@ -22,7 +22,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
     private readonly TimeProvider timeProvider;
-    private readonly WebServerOptions? options;
+    private readonly WebServerOptions options;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
@@ -47,11 +47,11 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     ///   <paramref name="timeProvider"/> が <see langword="null"/> です。
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions? options)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions options)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
-        this.options = options;
+        this.options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
     /// <inheritdoc/>
@@ -80,28 +80,8 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            this.CreateCookieOptions());
+            this.options.CookieSettings.CreateCookieOptions(this.timeProvider));
 
         base.OnActionExecuted(context);
-    }
-
-    /// <summary>
-    /// 構成ファイルの内容を取得して Cookie の各種オプションを作成します。
-    /// </summary>
-    /// <returns>Cookie の各種オプション</returns>
-    private CookieOptions CreateCookieOptions()
-    {
-        if (this.options == null || this.options.CookieSettings == null)
-        {
-            return new CookieOptions()
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Secure = true,
-                Expires = this.timeProvider.GetLocalNow().AddDays(7),
-            };
-        }
-
-        return this.options.CookieSettings.CreateCookieOptions(this.timeProvider);
     }
 }

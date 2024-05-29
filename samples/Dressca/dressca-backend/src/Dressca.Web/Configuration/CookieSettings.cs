@@ -26,7 +26,7 @@ public class CookieSettings
     /// Cookie の Expires に設定する日数を取得または設定します。
     /// </summary>
     [Range(1, 100)]
-    public int ExpiredDays { get; set; }
+    public int ExpiredDays { get; set; } = 1;
 
     /// <summary>
     /// Cookie の Domain に設定するドメインを取得または設定します。

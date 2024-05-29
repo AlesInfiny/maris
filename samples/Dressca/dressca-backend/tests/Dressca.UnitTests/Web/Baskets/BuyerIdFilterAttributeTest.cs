@@ -14,7 +14,7 @@ namespace Dressca.UnitTests.Web.Baskets;
 public class BuyerIdFilterAttributeTest
 {
     [Fact]
-    public void 構成ファイルに設定がないときCookieの有効期限は7日間()
+    public void 構成ファイルに設定がないときCookieの有効期限は1日間()
     {
         // Arrange
         var buyerIdCookieName = "Dressca-Bid";
@@ -24,9 +24,9 @@ public class BuyerIdFilterAttributeTest
         var fakeTimeProvider = new FakeTimeProvider();
         var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
-        var expectedDateTime = testCookieCreatedDateTime.AddDays(7);
+        var expectedDateTime = testCookieCreatedDateTime.AddDays(1);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, null);
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, new WebServerOptions());
 
         // Act
         filter.OnActionExecuted(context);
