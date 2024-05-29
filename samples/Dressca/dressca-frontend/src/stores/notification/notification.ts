@@ -1,19 +1,19 @@
 import { defineStore } from 'pinia';
 
-const REMAINING_TIME = 5000;
-
 export const useNotificationStore = defineStore({
   id: 'notification',
   state: () => ({
-    message: '',
+    message: '' as string,
+    timeout: 5000 as number,
   }),
   actions: {
-    setMessage(message: string) {
+    setMessage(message: string, timeout: number = 5000) {
       this.message = message;
+      this.timeout = timeout;
 
       setTimeout(() => {
         this.clearMessage();
-      }, REMAINING_TIME);
+      }, this.timeout);
     },
 
     clearMessage() {

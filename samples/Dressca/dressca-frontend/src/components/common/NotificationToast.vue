@@ -3,13 +3,28 @@ import { storeToRefs } from 'pinia';
 import { useNotificationStore } from '@/stores/notification/notification';
 
 import { ExclamationCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { reactive, watch } from 'vue';
+
+const state = reactive({
+  show: false,
+});
 
 const notificationStore = useNotificationStore();
-const { message } = storeToRefs(notificationStore);
+const { message, timeout } = storeToRefs(notificationStore);
 
 const close = () => {
+  state.show = false;
   notificationStore.clearMessage();
 };
+
+watch(message, (newMessage) => {
+  if (newMessage !== '') {
+    state.show = true;
+    setTimeout(() => {
+      close();
+    }, timeout.value);
+  }
+});
 </script>
 
 <template>
@@ -20,7 +35,7 @@ const close = () => {
     leave-active-class="transition duration-300"
   >
     <div
-      v-if="!(message === '')"
+      v-if="state.show"
       class="fixed inline-flex items-center w-5/6 inset-x-0 max-w-m mx-auto mt-2 p-4 text-gray-500 bg-red-500 rounded-lg shadow"
     >
       <div
