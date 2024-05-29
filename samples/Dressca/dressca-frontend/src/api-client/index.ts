@@ -1,9 +1,7 @@
 import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
 import router from '@/router';
-import { useNotificationStore } from '@/stores/notification/notification';
-
-const notificationStore = useNotificationStore();
+import { showToast } from '@/services/notification/notificationService';
 
 /** api-client の共通の Configuration があればここに定義します。 */
 function createConfig(): apiClient.Configuration {
@@ -22,10 +20,11 @@ axiosInstance.interceptors.response.use(
       // notificationStore.setMessage('不明なエラーが発生しました。');
       console.log('500 error');
     } else if (error.response?.status === 401) {
-      notificationStore.setMessage('401 error: ログインしてください。');
+      showToast('401 error: ログインしてください。');
       router.replace({ name: 'account/login' });
       console.log('401 error');
     }
+
     return Promise.reject(error);
   },
 );

@@ -5,8 +5,8 @@ import {
   removeItemFromBasket,
   updateItemInBasket,
 } from '@/services/basket/basket-service';
+import { showToast } from '@/services/notification/notificationService';
 import { useBasketStore } from '@/stores/basket/basket';
-import { useNotificationStore } from '@/stores/notification/notification';
 import { useRouter } from 'vue-router';
 import BasketItem from '@/components/basket/BasketItem.vue';
 import Loading from '@/components/common/LoadingSpinner.vue';
@@ -25,8 +25,6 @@ const router = useRouter();
 const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
-const notificationStore = useNotificationStore();
-
 const isEmpty = () => {
   return getBasket.value.basketItems?.length === 0;
 };
@@ -40,7 +38,7 @@ const update = async (catalogItemId: number, newQuantity: number) => {
   try {
     await updateItemInBasket(catalogItemId, newQuantity);
   } catch (error) {
-    notificationStore.setMessage('数量の変更に失敗しました。');
+    showToast('数量の変更に失敗しました。', 3000);
   }
 };
 
@@ -49,7 +47,7 @@ const remove = async (catalogItemId: number) => {
   try {
     await removeItemFromBasket(catalogItemId);
   } catch (error) {
-    notificationStore.setMessage('商品の削除に失敗しました。');
+    showToast('商品の削除に失敗しました。', 3000);
   }
 };
 
@@ -62,7 +60,7 @@ onMounted(async () => {
   try {
     await fetchBasket();
   } catch (error) {
-    console.error(error);
+    showToast('買い物かごの取得に失敗しました。', 3000);
   } finally {
     state.showLoading = false;
   }

@@ -5,10 +5,10 @@ import {
   fetchItems,
 } from '@/services/catalog/catalog-service';
 import { addItemToBasket } from '@/services/basket/basket-service';
+import { showToast } from '@/services/notification/notificationService';
 import { storeToRefs } from 'pinia';
 import { useSpecialContentStore } from '@/stores/special-content/special-content';
 import { useCatalogStore } from '@/stores/catalog/catalog';
-import { useNotificationStore } from '@/stores/notification/notification';
 import CarouselSlider from '@/components/common/CarouselSlider.vue';
 import Loading from '@/components/common/LoadingSpinner.vue';
 import { useRouter } from 'vue-router';
@@ -18,7 +18,6 @@ import assetHelper from '@/shared/helpers/assetHelper';
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
 
-const notificationStore = useNotificationStore();
 const { getSpecialContents } = storeToRefs(specialContentStore);
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
 const router = useRouter();
@@ -38,7 +37,7 @@ const addBasket = async (catalogItemId: number) => {
     await addItemToBasket(catalogItemId);
     router.push({ name: 'basket' });
   } catch (error) {
-    notificationStore.setMessage('カートに追加できませんでした。');
+    showToast('カートに追加できませんでした。');
   }
 };
 
@@ -48,7 +47,7 @@ onMounted(async () => {
   try {
     await fetchItems(selectedCategory.value, selectedBrand.value);
   } catch (error) {
-    notificationStore.setMessage('商品の取得に失敗しました。');
+    showToast('商品の取得に失敗しました。');
   }
   state.showLoading = false;
 });
