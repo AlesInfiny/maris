@@ -16,37 +16,11 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-const string corsPolicyName = "allowSpecificOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddSingleton<IValidateOptions<WebServerOptions>, ValidateWebServerOptions>();
 
 var section = builder.Configuration.GetSection(nameof(WebServerOptions));
 builder.Services.Configure<WebServerOptions>(section);
-var options = section.Get<WebServerOptions>();
-var origins = options != null ? options.AllowedOrigins : null;
-
-if (origins != null && origins.Length > 0)
-{
-    builder.Services
-        .AddCors(options =>
-        {
-            options.AddPolicy(
-               name: corsPolicyName,
-               policy =>
-               {
-                   // Origins, Methods, Header, Credentials すべての設定が必要（設定しないと CORS が動作しない）
-                   // レスポンスの Header を フロントエンド側 JavaScript で使用する場合、 WithExposedHeaders も必須
-                   policy
-                       .WithOrigins(origins)
-                       .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
-                       .AllowAnyHeader()
-                       .AllowCredentials()
-                       .WithExposedHeaders("Location");
-               });
-        });
-}
+builder.Services.AddCors();
 
 builder.Services
     .AddControllers(options =>
@@ -134,9 +108,21 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-if (origins != null && origins.Length > 0)
+var options = app.Services.GetRequiredService<IOptions<WebServerOptions>>();
+
+if (options.Value.AllowedOrigins.Length > 0)
 {
-    app.UseCors(corsPolicyName);
+    app.UseCors(policy =>
+    {
+        // Origins, Methods, Header, Credentials すべての設定が必要（設定しないと CORS が動作しない）
+        // レスポンスの Header を フロントエンド側 JavaScript で使用する場合、 WithExposedHeaders も必須
+        policy
+            .WithOrigins(options.Value.AllowedOrigins)
+            .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .WithExposedHeaders("Location");
+    });
 }
 
 app.UseAuthorization();
