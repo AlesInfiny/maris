@@ -47,7 +47,7 @@ const wrappedApi = new apiClient.generatedApi(createConfig(), '', axiosInstance)
 export default wrappedApi;
 ```
 
-※ `vite.config.ts` に `server.proxy` の設定をしている場合は [API エンドポイントを設定する際の注意点](../vue-js/project-settings.md#vite-config) も併せて参照してください。
+※ `vite.config.ts` に `server.proxy` の設定をしている場合は [vite.config の設定値の解説](../vue-js/project-settings.md#vite-config) の「API エンドポイントを設定する際の注意点」も併せて参照してください。
 
 ### 本番用 env ファイルの作成 {#create-env-prod}
 

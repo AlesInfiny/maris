@@ -99,7 +99,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 ??? note "tsconfig.node.json の設定例"
 
-    AlesInfiny Maris では、フロントエンドアプリを mock モードでビルドする際のソースコードを `mock` フォルダー配下に含みます。
+    AlesInfiny Maris サンプルアプリでは、フロントエンドアプリを mock モードでビルドする際のソースコードを `mock` フォルダー配下に含みます。
     本来 tsconfig.node.json は設定ファイルとして読み込む対象を定義すべきですが、vite.config.ts の参照先で `mock` フォルダー内のファイルを参照している都合上、 `"mock/**/*"` を include の対象にしています。
 
     ``` json title="tsconfig.node.json" hl_lines="4"
@@ -204,8 +204,8 @@ Project Reference 機能については [Project References :material-open-in-ne
             '/api': {
               target: env.VITE_PROXY_ENDPOINT_ORIGIN,
               changeOrigin: true,
-              autoRewrite = true,
-              secure = false,
+              autoRewrite: true,
+              secure: false,
             },
             '/swagger': {
               target: env.VITE_PROXY_ENDPOINT_ORIGIN,
@@ -312,7 +312,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 
     ??? info "API エンドポイントを設定する際の注意点"
 
-        AlesInfiny Maris では、 バックエンドアプリとの API 通信のための OpenAPI や axios の共通設定は `src/api-client/index.ts` で実装しています。以下の部分で `basePath` または `baseURL`を設定すると、 `dev` モードでビルドした際に `vite.config.ts` の `server.proxy` で設定した通りにパスの書換えができなくなります。そのため、 `dev` モードでは環境変数に空文字を設定して `basePath` `baseURL` に値を設定しないようにする、といった工夫が必要です。
+        AlesInfiny Maris サンプルアプリでは、 バックエンドアプリとの API 通信のための OpenAPI や axios の共通設定は `src/api-client/index.ts` で実装しています。以下の部分で `basePath` または `baseURL`を設定すると、 `dev` モードでビルドした際に `vite.config.ts` の `server.proxy` で設定した通りにパスの書換えができなくなります。そのため、 `dev` モードでは環境変数に空文字を設定して `basePath` `baseURL` に値を設定しないようにする、といった工夫が必要です。
 
         ``` ts title="src/api-client/index.ts" hl_lines="4 11"
         // OpenAPI Generator を利用する場合
