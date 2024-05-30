@@ -70,53 +70,43 @@ public class WebServerOptions
     /// <summary>
     /// 許可するオリジンを取得または設定します。
     /// </summary>
-    public string[]? AllowedOrigins { get; set; } = [];
+    public string[] AllowedOrigins { get; set; } = [];
 }
 ```
 
 ### CORS ポリシーの設定 {#program-cs}
 
-ASP.NET Web API では、 CORS に関する設定を `Program.cs` 上で行う必要があります。`builder.Services.AddCors` メソッドで CORS のポリシーを設定し、 `app.UseCors` メソッドで CORS ミドルウェアを有効化します。
+ASP.NET Web API では、 CORS に関する設定を `Program.cs` 上で行う必要があります。`builder.Services.AddCors` メソッドで CORS を有効化し、 `app.UseCors` メソッドでポリシーを追加して CORS ミドルウェアを有効化します。
 
 ```csharp title="Program.cs"
-// CORS ポリシーの名称です。値は任意ですが、 AddCors メソッドと UseCors メソッドで同じ値にする必要があります。
-const string corsPolicyName = "allowSpecificOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
 
-// アプリケーション設定ファイルから CORS の設定部分を取得し、構成オプション用クラスに変換します。
-WebServerOptions? options = builder.Configuration.GetSection(nameof(WebServerOptions)).Get<WebServerOptions>();
-var origins = options != null ? options.AllowedOrigins : null;
+// アプリケーション設定ファイルから CORS の設定部分を取得し、サービスコンテナーに追加します。
+var section = builder.Configuration.GetSection(nameof(WebServerOptions));
+builder.Services.Configure<WebServerOptions>(section);
 
-// アプリケーション設定ファイルに CORS の設定がある場合のみ、builder.Services.AddCors メソッドを呼び出します。
-if (origins != null && origins.Length > 0)
-{
-    builder.Services
-        .AddCors(options =>
-        {
-            options.AddPolicy(
-               name: corsPolicyName,
-               policy =>
-               {
-                   // CORS のポリシーを設定します。
-                   policy
-                       .WithOrigins(origins)
-                       .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
-                       .AllowAnyHeader()
-                       .AllowCredentials()
-                       .WithExposedHeaders("Location");
-               });
-        });
-}
+// CORS の使用を宣言します。
+builder.Services.AddCors();
 
 // 中略
 
 var app = builder.Build();
 
-// アプリケーション設定ファイルに CORS の設定がある場合のみ、 CORS ミドルウェアを有効にします。
-if (origins != null && origins.Length > 0)
+// サービスコンテナーに追加したアプリケーション設定を取得します。
+var options = app.Services.GetRequiredService<IOptions<WebServerOptions>>();
+
+// アプリケーション設定ファイルにオリジンが記述されている場合のみ CORS ミドルウェアを有効化します。
+if (options.Value.AllowedOrigins.Length > 0)
 {
-    app.UseCors(corsPolicyName);
+    app.UseCors(policy =>
+    {
+        policy
+            .WithOrigins(options.Value.AllowedOrigins)
+            .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .WithExposedHeaders("Location");
+    });
 }
 ```
 
