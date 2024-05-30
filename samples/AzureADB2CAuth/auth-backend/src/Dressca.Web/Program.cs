@@ -8,8 +8,10 @@ using NSwag.Generation.Processors.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var section = builder.Configuration.GetSection(nameof(WebServerOptions));
-builder.Services.Configure<WebServerOptions>(section);
+builder.Services
+    .AddOptions<WebServerOptions>()
+    .Bind(builder.Configuration.GetSection(nameof(WebServerOptions)));
+
 builder.Services.AddCors();
 
 builder.Services

@@ -82,8 +82,9 @@ ASP.NET Web API では、 CORS に関する設定を `Program.cs` 上で行う�
 var builder = WebApplication.CreateBuilder(args);
 
 // アプリケーション設定ファイルから CORS の設定部分を取得し、サービスコンテナーに追加します。
-var section = builder.Configuration.GetSection(nameof(WebServerOptions));
-builder.Services.Configure<WebServerOptions>(section);
+builder.Services
+    .AddOptions<WebServerOptions>()
+    .Bind(builder.Configuration.GetSection(nameof(WebServerOptions)));
 
 // CORS の使用を宣言します。
 builder.Services.AddCors();
