@@ -18,8 +18,10 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var section = builder.Configuration.GetSection(nameof(WebServerOptions));
-builder.Services.Configure<WebServerOptions>(section);
+builder.Services.AddOptions<WebServerOptions>()
+    .Bind(builder.Configuration.GetSection(nameof(WebServerOptions)));
+builder.Services.AddSingleton<IValidateOptions<WebServerOptions>, ValidateWebServerOptions>();
+
 builder.Services.AddCors();
 
 builder.Services
