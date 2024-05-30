@@ -18,7 +18,8 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOptions<WebServerOptions>()
+builder.Services
+    .AddOptions<WebServerOptions>()
     .Bind(builder.Configuration.GetSection(nameof(WebServerOptions)));
 builder.Services.AddSingleton<IValidateOptions<WebServerOptions>, ValidateWebServerOptions>();
 
