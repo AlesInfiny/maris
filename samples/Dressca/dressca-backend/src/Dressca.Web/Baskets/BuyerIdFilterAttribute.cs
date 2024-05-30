@@ -45,6 +45,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     ///  <list type="bullet">
     ///   <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
     ///   <paramref name="timeProvider"/> が <see langword="null"/> です。
+    ///   <paramref name="options"/> が <see langword="null"/> です。
     ///  </list>
     /// </exception>
     internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions options)
