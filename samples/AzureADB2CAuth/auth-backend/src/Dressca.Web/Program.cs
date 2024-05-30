@@ -1,37 +1,16 @@
 ﻿using Dressca.Web.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.Extensions.Options;
 using Microsoft.Identity.Web;
 using NSwag;
 using NSwag.Generation.Processors.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
-const string corsPolicyName = "allowSpecificOrigins";
-
 var section = builder.Configuration.GetSection(nameof(WebServerOptions));
 builder.Services.Configure<WebServerOptions>(section);
-var options = section.Get<WebServerOptions>();
-var origins = options != null ? options.AllowedOrigins : null;
-
-if (origins != null && origins.Length > 0)
-{
-    builder.Services
-        .AddCors(options =>
-        {
-            options.AddPolicy(
-               name: corsPolicyName,
-               policy =>
-               {
-                   // Origins, Methods, Header, Credentials すべての設定が必要（設定しないと CORS が動作しない）
-                   policy
-                       .WithOrigins(origins)
-                       .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
-                       .AllowAnyHeader()
-                       .AllowCredentials();
-               });
-        });
-}
+builder.Services.AddCors();
 
 builder.Services
     .AddControllers()
@@ -96,9 +75,18 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-if (origins != null && origins.Length > 0)
+var options = app.Services.GetRequiredService<IOptions<WebServerOptions>>();
+
+if (options.Value.AllowedOrigins.Length > 0)
 {
-    app.UseCors(corsPolicyName);
+    app.UseCors(policy =>
+    {
+        policy
+            .WithOrigins(options.Value.AllowedOrigins)
+            .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
 }
 
 // Azure AD B2C での認証を有効にするために追加
