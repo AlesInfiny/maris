@@ -7,11 +7,11 @@ description: Vue.js を用いた クライアントサイドアプリケーシ�
 
 ## TypeScript の設定 {#typescript-settings}
 
-TypeScript で作成されたファイルは、 `tsconfig.json` の設定値をもとにコンパイルが実行されます。
+TypeScript で作成されたファイルは、 `tsconfig.json` の設定値をもとにトランスパイル[^1]されます。
 `tsconfig.json` の存在するフォルダーとその配下のフォルダーの該当ファイルに設定が適用されます。
 
 [ブランクプロジェクトの作成](./create-vuejs-blank-project.md) の手順に沿って `create-vue` でプロジェクトを作成すると、以下の `tsconfig.json` および `tsconfig.*.json` が生成されます。
-各 `tsconfig.*.json` には `include` に指定したファイル群のコンパイルに関する設定値が定義されています。
+各 `tsconfig.*.json` には `include` に指定したファイル群のトランスパイルに関する設定値が定義されています。
 
 ```terminal linenums="0"
 <project-name>
@@ -32,7 +32,7 @@ TypeScript で作成されたファイルは、 `tsconfig.json` の設定値を�
     単一の `tsconfig.json` のみを定義している場合、テストコードも `include` する必要があるので、アプリケーションのコードからテストコードのクラスやメソッドを参照してもエラーにならない事があります。
     Project Reference 機能を利用した場合、テストコードとアプリケーションコードとで `tsconfig.json` を分割し、アプリケーションコードからテストコードを参照できないように設定できます。
 
-- ビルド時のパフォーマンスを改善する
+- ビルド[^2]時のパフォーマンスを改善する
 
     ビルドの度にコード全体をビルドするのではなく、更新があったプロジェクトのみをビルドします。
 
@@ -135,9 +135,9 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 - `compilerOptions.noEmit`
 
-    コンパイルの結果を出力しないよう設定するプロパティです。 `create-vue` した際のデフォルト値の `true` を設定します。
+    `tsc` によるトランスパイルの結果を出力しないよう設定するプロパティです。 `create-vue` した際のデフォルト値の `true` を設定します。
     これは、 `vue-tsc` で型チェックのみを行い、トランスパイルの結果は出力しないようにするためです。
-    ビルドで利用する package.json に定義されたスクリプトでは Vite でトランスパイルを行うため、 `vue-tsc` でのトランスパイルは不要になります。
+    ビルドで利用する package.json に定義されたスクリプトでは Vite でトランスパイルを行うため、 `vue-tsc` でのトランスパイルは不要です。
     （※ `vue-tsc` は Vue の単一ファイルコンポーネントをサポートする `tsc` のラッパーです。）
 
     ??? note "create-vue で生成されるビルドに関するスクリプト"
@@ -160,7 +160,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 - `compilerOptions.module`
   
-    コンパイルしたファイルのモジュールシステムを設定するプロパティです。
+    トランスパイルしたファイルのモジュールシステムを設定するプロパティです。
     tsconfig.node.json で `ESNext` 、 tsconfig.json で `NodeNext` が `create-vue` した際にデフォルトで設定されます。
     Cypress が内部で利用している `ts-node` の挙動の都合上、 tsconfig.json に `compilerOptions.module` を設定する必要があります。
     `compilerOptions.module` の設定値については [The module output format :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/modules/theory.html#the-module-output-format){ target=_blank } を参照してください。
@@ -329,3 +329,6 @@ Project Reference 機能については [Project References :material-open-in-ne
         });
 
         ```
+
+[^1]: 本ページでは、 TypeScript から JavaScript への変換を指します。
+[^2]: 本ページでは、`vite build` コマンドによりバンドル（トランスパイル後の JavaScript をブラウザーで扱いやすいよう単一のファイルにまとめる）まで行うことを指します。
