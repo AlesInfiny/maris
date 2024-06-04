@@ -8,10 +8,14 @@ using NSwag.Generation.Processors.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// アプリケーション設定ファイルの定義と型をバインドし、 DataAnnotation による検証を有効化する。
 builder.Services
     .AddOptions<WebServerOptions>()
-    .Bind(builder.Configuration.GetSection(nameof(WebServerOptions)));
+    .BindConfiguration(nameof(WebServerOptions))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
 
+// サービスコレクションに CORS を追加する。
 builder.Services.AddCors();
 
 builder.Services
@@ -79,6 +83,7 @@ app.UseHttpsRedirection();
 
 var options = app.Services.GetRequiredService<IOptions<WebServerOptions>>();
 
+// アプリケーション設定にオリジンの記述がある場合のみ CORS ポリシーを追加する。
 if (options.Value.AllowedOrigins.Length > 0)
 {
     app.UseCors(policy =>
