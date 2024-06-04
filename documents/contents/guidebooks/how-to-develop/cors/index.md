@@ -82,9 +82,12 @@ ASP.NET Web API では、 CORS に関する設定を `Program.cs` 上で行う�
 var builder = WebApplication.CreateBuilder(args);
 
 // アプリケーション設定ファイルから CORS の設定部分を取得し、サービスコンテナーに追加します。
+// さらに DataAnnotation による検証を有効化します。
 builder.Services
     .AddOptions<WebServerOptions>()
-    .Bind(builder.Configuration.GetSection(nameof(WebServerOptions)));
+    .BindConfiguration(nameof(WebServerOptions))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
 
 // CORS の使用を宣言します。
 builder.Services.AddCors();
@@ -113,7 +116,7 @@ if (options.Value.AllowedOrigins.Length > 0)
 
 #### CORS のポリシー設定について {#cors-policy}
 
-上のコード例「 `Program.cs` 」の 22-27 行目を以下に抜粋します。
+上のコード例「 `Program.cs` 」の 26-31 行目を以下に抜粋します。
 
 ```csharp
 policy
@@ -132,7 +135,7 @@ policy
 
 `WithMethods` メソッド
 
-:   許可したオリジンのクライアントが使用可能な HTTP メソッドを設定します。アプリケーションで許可する HTTP メソッド名を指定してください。
+:   許可したオリジンのクライアントが使用可能な HTTP メソッドを設定します。アプリケーションで許可する HTTP メソッド名を指定してください。なお、 CORS 環境の場合プリフライトリクエストが使用する `OPTIONS` は必須です。詳細は [Preflight request (プリフライトリクエスト) - MDN Web Docs 用語集: ウェブ関連用語の定義 | MDN](https://developer.mozilla.org/ja/docs/Glossary/Preflight_request) を参照してください。
 
 `AllowAnyHeader` メソッド
 
