@@ -43,7 +43,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 また、 `references` で参照されているファイルでは `compilerOptions.composite` を `true` に設定する必要があります。
 
 ![tsconfigの継承関係](../../../images/guidebooks/how-to-develop/vue-js/vue-tsconfig-light.png#only-light){ loading=lazy }
-<!-- ![tsconfigの継承関係](../../../images/guidebooks/how-to-develop/vue-js/vue-tsconfig-dark.png#only-dark){ loading=lazy } -->
+![tsconfigの継承関係](../../../images/guidebooks/how-to-develop/vue-js/vue-tsconfig-dark.png#only-dark){ loading=lazy }
 
 ### tsconfig の設定値の解説 {#tsconfig}
 
