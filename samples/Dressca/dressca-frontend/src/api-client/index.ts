@@ -17,7 +17,6 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   function (error) {
     if (!error.response || error.response.status === 500) {
-      // notificationStore.setMessage('不明なエラーが発生しました。');
       console.log('500 error');
     } else if (error.response?.status === 401) {
       showToast('401 error: ログインしてください。');
