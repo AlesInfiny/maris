@@ -33,7 +33,6 @@ const goCatalog = () => {
   router.push({ name: 'catalog' });
 };
 
-// 変更に失敗しても変更前の数量を表示するため、ハンドリングしない
 const update = async (catalogItemId: number, newQuantity: number) => {
   try {
     await updateItemInBasket(catalogItemId, newQuantity);
