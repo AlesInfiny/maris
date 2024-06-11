@@ -19,8 +19,8 @@ axiosInstance.interceptors.response.use(
     if (!error.response || error.response.status === 500) {
       console.log('500 error');
     } else if (error.response?.status === 401) {
-      showToast('401 error: ログインしてください。');
-      router.replace({ name: 'account/login' });
+      showToast('ログインしてください。');
+      router.replace({ name: 'authentication/login' });
       console.log('401 error');
     }
 
