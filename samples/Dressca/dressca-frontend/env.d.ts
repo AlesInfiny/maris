@@ -4,7 +4,6 @@ interface ImportMetaEnv {
   readonly VITE_ASSET_URL: string;
   readonly VITE_AXIOS_BASE_ENDPOINT_ORIGIN: string;
   readonly VITE_PROXY_ENDPOINT_ORIGIN: string;
-  readonly VITE_ACCESS_CONTROL_ALLOW_ORIGIN: string;
 }
 
 interface ImportMeta {
