@@ -160,40 +160,9 @@ policy
 
 ## フロントエンドアプリケーション（ Vue.js ） {#frontend}
 
-フロントエンドアプリケーションでは、 Web API 呼び出し時の HTTP リクエストヘッダーに `Access-Control-Allow-Origin` ヘッダーを追加し、自身のオリジンを設定する必要があります。
-
-### 環境変数ファイルの作成と読み込み {#env-file}
-
-環境変数用 env ファイルを作成し、 `Access-Control-Allow-Origin` ヘッダーに設定するオリジン用の変数を宣言します。
-開発用と本番用でオリジンが異なる場合は、開発用の env ファイルと本番用 env ファイルそれぞれに設定します（以下の例では、開発用 env ファイルを `.env.dev` 、本番用 env ファイルを `.env.prod` としています）。
-
-```properties title=".env.dev"
-VITE_ACCESS_CONTROL_ALLOW_ORIGIN=https://dev.frontend.example.net
-```
-
-```properties title=".env.prod"
-VITE_ACCESS_CONTROL_ALLOW_ORIGIN=https://frontend.example.com
-```
-
-環境変数を TypeScript 上で使用可能にするため、 `env.d.ts` に項目を追加します。
-
-```typescript title="env.d.ts"
-interface ImportMetaEnv {
-  readonly VITE_ACCESS_CONTROL_ALLOW_ORIGIN: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
-```
-
 ### Web API 呼び出し時の HTTP ヘッダーの設定 {#http-request-header}
 
-<!-- textlint-disable ja-technical-writing/sentence-length -->
-
-AlesInfiny Maris では Web API 呼び出しの共通処理用に `./src/api-client/index.ts` という設定ファイルを作成する（ [参照](../vue-js/create-api-client-code.md#set-client-code) ）ので、ここで `Access-Control-Allow-Origin` ヘッダーを設定します。
-
-<!-- textlint-enable ja-technical-writing/sentence-length -->
+AlesInfiny Maris では Web API 呼び出しの共通処理用に `./src/api-client/index.ts` という設定ファイルを作成する（ [参照](../vue-js/create-api-client-code.md#set-client-code) ）ので、ここで HTTP ヘッダーを設定します。
 
 ```ts title="index.ts"
 import axios from 'axios';
@@ -205,8 +174,6 @@ import * as apiClient from '@/generated/api-client';
 const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': import.meta.env
-      .VITE_ACCESS_CONTROL_ALLOW_ORIGIN,
   },
   withCredentials: true,
 });
@@ -216,13 +183,9 @@ const defaultApi = new apiClient.DefaultApi(createConfig(), '', axiosInstance);
 export { defaultApi };
 ```
 
-`headers` の設定（ 10-11 行目）
-
-:   `Access-Control-Allow-Origin` ヘッダーに `env.d.ts` の値を設定します。
-
 <!-- textlint-disable @textlint-ja/no-synonyms -->
 
-`withCredentials: true` （ 13 行目）
+`withCredentials: true` （ 11 行目）
 
 <!-- textlint-enable @textlint-ja/no-synonyms -->
 
