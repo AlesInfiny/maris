@@ -4,7 +4,6 @@ interface ImportMetaEnv {
   readonly VITE_ASSET_URL: string;
   readonly VITE_AXIOS_BASE_ENDPOINT_ORIGIN: string;
   readonly VITE_PROXY_ENDPOINT_ORIGIN: string;
-  readonly VITE_ACCESS_CONTROL_ALLOW_ORIGIN: string;
   readonly VITE_ADB2C_USER_FLOW_SIGN_IN: string;
   readonly VITE_ADB2C_AUTHORITY_DOMAIN: string;
   readonly VITE_ADB2C_SCOPE: string;
