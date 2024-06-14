@@ -5,10 +5,39 @@ description: AlesInfiny Maris OSS Edition のコーディング規約に関す�
 
 # コーディング規約 {#top}
 
-AlesInfiny Maris OSS Edition では、静的コード分析ツールを利用してコーディング規約のチェックを自動化しています。
-.NET アプリケーションでは .editorconfig と StyleCopAnalyzers 、 Vue.js アプリケーションでは Prettier 、 ES Lint 、 StyleLint を利用しています。詳しい設定方法については、アプリケーション開発手順の以下のページを参照してください。
+AlesInfiny Maris OSS Edition では、静的コード分析ツールの既定のルール等をコーディング規約として採用し、必要に応じてカスタマイズしています。これによりコーディング規約の作成を省力化し、チェックを自動化しています。
 
-- [静的コード分析とフォーマット(Vue.js)](../how-to-develop/vue-js/static-verification-and-format.md)
+.NET アプリケーション、 Vue.js アプリケーションそれぞれで以下の内容をコーディング規約の参考としています。
+
+- .NET アプリケーション
+    - .editorconfig
+
+        .editorconfig を Visual Studio で生成した際の既定値
+        [コードスタイルルールのオプション](https://learn.microsoft.com/ja-jp/dotnet/fundamentals/code-analysis/code-style-rule-options)
+
+    - StyleCopAnalyzers
+  
+        StyleCopAnalyzers の既定値
+
+- Vue.js アプリケーション
+
+    - .editorconfig
+
+        [Vue.js の .editorconfig](https://github.com/vuejs/vue/blob/main/.editorconfig)
+
+    - Prettier
+  
+        Vue.js ブランクプロジェクト作成時の既定値
+
+    - ES Lint
+
+        Vue.js ブランクプロジェクト作成時の既定値
+
+    - StyleLint
+
+        StyleLint の標準設定および vue ファイル向けの推奨設定（stylelint-config-standard, stylelint-config-recommended-vue）
+
+コーディング規約の内容および静的コード分析ツールの詳しい設定方法については、以下のページとサンプルアプリの実装を参照してください。
+
 - [静的コード解析用パッケージと設定ファイルの導入(.NET)](../how-to-develop/dotnet/project-settings.md#setup-static-code-testing)
-
-また、.NET アプリケーションでは .editorconfig や StyleCopAnalyzers を VisualStudio で導入した際の既定値をコーディング規約として採用しています。 Vue.js アプリケーションでのコーディング規約および静的コード分析ツールの詳しい設定方法については、上記のアプリケーション開発手順のページとサンプルアプリの実装を参照してください。
+- [静的コード分析とフォーマット(Vue.js)](../how-to-develop/vue-js/static-verification-and-format.md)
