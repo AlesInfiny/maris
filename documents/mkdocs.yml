@@ -80,6 +80,8 @@ nav:
               - guidebooks/how-to-develop/local-environment/index.md
           - アプリケーションの発行:
               - guidebooks/how-to-develop/publication/index.md
+          - CORS 環境の構築:
+              - guidebooks/how-to-develop/cors/index.md
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
       - マイグレーション:

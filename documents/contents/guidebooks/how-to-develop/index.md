@@ -24,3 +24,8 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能�
 - [アプリケーションの発行](./publication/index.md)
 
     .NET + Vue.js で構成されたアプリケーションの発行手順について解説します。
+
+- [CORS 環境の構築](./cors/index.md)
+
+    CORS （オリジン間リソース共有）環境でのアプリケーションの構築方法を解説します。
+    フロントエンドアプリケーションとバックエンドアプリケーションの配置されるサーバーのオリジンが異なる場合の構築方法となります。
