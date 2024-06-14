@@ -7,7 +7,7 @@ description: CORS （オリジン間リソース共有）環境での アプリ�
 
 ## CORS （オリジン間リソース共有）とは {#about-cors}
 
-CORS (Cross-Origin Resource Sharing: オリジン間リソース共有 ) とは、いくつかの HTTP ヘッダーを使用することで、同一オリジンポリシーの制限を回避する仕組みです。
+CORS とは、いくつかの HTTP ヘッダーを使用することで、同一オリジンポリシーの制限を回避する仕組みです。
 
 ??? note "オリジンとは"
 
@@ -35,7 +35,7 @@ CORS の仕組みの詳細は「 [オリジン間リソース共有 (CORS) - HTT
 
 ## バックエンドアプリケーション（ .NET ） {#backend}
 
-ASP.NET Web API アプリケーションでは、 `Program.cs` で CORS に関するポリシーを設定します。
+ASP.NET Core Web API アプリケーションでは、 `Program.cs` で CORS に関するポリシーを設定します。
 AlesInfiny Maris OSS Edition （以降『 AlesInfiny Maris 』）では、許可するオリジンの一覧をアプリケーション設定ファイル `appSettings.json` から取得します。
 
 ### 許可するオリジンの追加 {#appSettings-json}
@@ -76,7 +76,7 @@ public class WebServerOptions
 
 ### CORS ポリシーの設定 {#program-cs}
 
-ASP.NET Web API では、 CORS に関する設定を `Program.cs` 上で行う必要があります。`builder.Services.AddCors` メソッドで CORS を有効化し、 `app.UseCors` メソッドでポリシーを追加して CORS ミドルウェアを有効化します。
+ASP.NET Core Web API では、 CORS に関する設定を `Program.cs` 上で行う必要があります。`builder.Services.AddCors` メソッドで CORS を有効化し、 `app.UseCors` メソッドでポリシーを追加して CORS ミドルウェアを有効化します。
 
 ```csharp title="Program.cs"
 var builder = WebApplication.CreateBuilder(args);
@@ -120,7 +120,7 @@ if (options.Value.AllowedOrigins.Length > 0)
 
 ```csharp
 policy
-    .WithOrigins(origins)
+    .WithOrigins(options.Value.AllowedOrigins)
     .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
     .AllowAnyHeader()
     .AllowCredentials()
@@ -178,9 +178,9 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-const defaultApi = new apiClient.DefaultApi(createConfig(), '', axiosInstance);
+const exampleApi = new apiClient.ExampleApi(createConfig(), '', axiosInstance);
 
-export { defaultApi };
+export { exampleApi };
 ```
 
 <!-- textlint-disable @textlint-ja/no-synonyms -->
