@@ -31,11 +31,11 @@ runs:
       name: ドキュメントのバージョン設定
       shell: bash
       run: |
-        if [ ${{ startsWith(github.ref, 'refs/tags/v') }} ];
+        if "${{ startsWith(github.ref, 'refs/tags/v') }}";
         then
-        export VERSION="${{ github.ref_name }}"
+        echo "VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
         else
-        export VERSION="Test Version"
+        echo "VERSION=Test Version" >> $GITHUB_ENV
         fi
 
     - name: ドキュメントのビルド
@@ -44,6 +44,7 @@ runs:
       shell: bash
       run: |
         export BUILD_DOCUMENTS=true
+        export VERSION=${{ env.VERSION }}
         cd "${{ inputs.document-base-path }}"
         echo '# Mkdocs Build Result :factory:' >> $GITHUB_STEP_SUMMARY
         mkdocs build --verbose --clean --strict --site-dir "${{ inputs.output-folder-name }}" > mkdocs_build_log.txt
