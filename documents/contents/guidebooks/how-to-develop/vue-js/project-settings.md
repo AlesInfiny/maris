@@ -79,7 +79,7 @@ Project Reference 機能については [Project References :material-open-in-ne
         詳細は [Verbatim Module Syntax :material-open-in-new:](https://www.typescriptlang.org/tsconfig/#verbatimModuleSyntax){ target=_blank } を参照してください。
         しかし、現在 `openapi-generator-cli` で自動生成されたコードでは `import` と `import type` が区別されないため、暫定的に `false` を設定しています。
 
-    ``` json title="tsconfig.app.json"　hl_lines="13"
+    ``` json title="tsconfig.app.json"　hl_lines="12"
     {
       "extends": "@vue/tsconfig/tsconfig.dom.json",
       "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "mock/**/*"],
@@ -91,7 +91,6 @@ Project Reference 機能については [Project References :material-open-in-ne
         "paths": {
         "@/*": ["./src/*"]
         },
-        "preserveValueImports": false,
         "verbatimModuleSyntax": false
       }
     }
