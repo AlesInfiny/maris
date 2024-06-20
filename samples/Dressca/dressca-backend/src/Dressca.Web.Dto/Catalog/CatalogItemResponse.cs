@@ -5,7 +5,7 @@ namespace Dressca.Web.Dto.Catalog;
 /// <summary>
 ///  カタログアイテムのレスポンスデータを表します。
 /// </summary>
-public class CatalogItemResponse : CatalogItemSummaryResponse
+public class CatalogItemResponse
 {
     /// <summary>
     ///  説明を取得または設定します。
@@ -30,4 +30,27 @@ public class CatalogItemResponse : CatalogItemSummaryResponse
     /// </summary>
     [Required]
     public long CatalogBrandId { get; set; }
+
+    /// <summary>
+    ///  カタログアイテム Id を取得または設定します。
+    /// </summary>
+    [Required]
+    public long Id { get; set; }
+
+    /// <summary>
+    ///  商品名を取得または設定します。
+    /// </summary>
+    [Required]
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    ///  商品コードを取得または設定します。
+    /// </summary>
+    [Required]
+    public string ProductCode { get; set; } = string.Empty;
+
+    /// <summary>
+    ///  アセットコードの一覧を取得または設定します。
+    /// </summary>
+    public IList<string> AssetCodes { get; set; } = new List<string>();
 }
