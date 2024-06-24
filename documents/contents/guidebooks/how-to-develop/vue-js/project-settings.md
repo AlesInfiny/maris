@@ -71,15 +71,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 ??? note "tsconfig.app.json の設定例"
 
-    - verbatimModuleSyntax
-        
-        デフォルトの設定では `true` が設定されており、 import type 文 および インラインの type 修飾子が付いている識別子がトランスパイル時に削除されます。
-        また、型のみを import する場合に import type 構文を使用するか、インラインの type 修飾子が付いていないとエラーになります。
-        このオプションは元々`importsNotUsedAsValues` `preserveValueImports` `isolatedModules` の3つのオプションを用いて制御していた挙動を簡略化したものです。
-        詳細は [Verbatim Module Syntax :material-open-in-new:](https://www.typescriptlang.org/tsconfig/#verbatimModuleSyntax){ target=_blank } を参照してください。
-        しかし、現在 `openapi-generator-cli` で自動生成されたコードでは `import` と `import type` が区別されないため、暫定的に `false` を設定しています。
-
-    ``` json title="tsconfig.app.json"　hl_lines="12"
+    ``` json title="tsconfig.app.json"
     {
       "extends": "@vue/tsconfig/tsconfig.dom.json",
       "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "mock/**/*"],
@@ -91,7 +83,6 @@ Project Reference 機能については [Project References :material-open-in-ne
         "paths": {
         "@/*": ["./src/*"]
         },
-        "verbatimModuleSyntax": false
       }
     }
     ```
