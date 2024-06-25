@@ -5,7 +5,7 @@ description: AlesInfiny Maris OSS Edition において アプリケーション�
 
 # アプリケーションセキュリティ編 {#top}
 
-本章では、 AlesInfiny Maris OSS Edition （以降『AlesInfiny Maris』）のアプリケーションにおけるセキュリティ上の脅威とその対策について説明します。
+本章では、 AlesInfiny Maris OSS Edition （以降『AlesInfiny Maris』）のアプリケーションにおいてセキュリティを担保するための対策について説明します。
 
 !!! danger "注意事項"
 
