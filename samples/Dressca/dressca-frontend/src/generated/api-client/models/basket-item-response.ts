@@ -13,7 +13,9 @@
  */
 
 
-import { CatalogItemSummaryResponse } from './catalog-item-summary-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { BasketItemResponseCatalogItem } from './basket-item-response-catalog-item';
 
 /**
  * 買い物かごのアイテムのレスポンスデータを表します             
@@ -46,10 +48,10 @@ export interface BasketItemResponse {
      */
     'subTotal': number;
     /**
-     * カタログアイテムを取得または設定します。             
-     * @type {CatalogItemSummaryResponse}
+     * 
+     * @type {BasketItemResponseCatalogItem}
      * @memberof BasketItemResponse
      */
-    'catalogItem'?: CatalogItemSummaryResponse | null;
+    'catalogItem'?: BasketItemResponseCatalogItem | null;
 }
 

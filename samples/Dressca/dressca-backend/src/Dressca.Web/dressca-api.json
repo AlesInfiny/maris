@@ -778,44 +778,62 @@
         }
       },
       "CatalogItemResponse": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/CatalogItemSummaryResponse"
+        "type": "object",
+        "description": "カタログアイテムのレスポンスデータを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "description",
+          "price",
+          "catalogCategoryId",
+          "catalogBrandId",
+          "id",
+          "name",
+          "productCode"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "説明を取得または設定します。\n            ",
+            "minLength": 1
           },
-          {
-            "type": "object",
-            "description": "カタログアイテムのレスポンスデータを表します。\n            ",
-            "additionalProperties": false,
-            "required": [
-              "description",
-              "price",
-              "catalogCategoryId",
-              "catalogBrandId"
-            ],
-            "properties": {
-              "description": {
-                "type": "string",
-                "description": "説明を取得または設定します。\n            ",
-                "minLength": 1
-              },
-              "price": {
-                "type": "number",
-                "description": "単価を取得または設定します。\n            ",
-                "format": "decimal"
-              },
-              "catalogCategoryId": {
-                "type": "integer",
-                "description": "カタログカテゴリ Id を取得または設定します。\n            ",
-                "format": "int64"
-              },
-              "catalogBrandId": {
-                "type": "integer",
-                "description": "カタログブランド Id を取得または設定します。\n            ",
-                "format": "int64"
-              }
+          "price": {
+            "type": "number",
+            "description": "単価を取得または設定します。\n            ",
+            "format": "decimal"
+          },
+          "catalogCategoryId": {
+            "type": "integer",
+            "description": "カタログカテゴリ Id を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "catalogBrandId": {
+            "type": "integer",
+            "description": "カタログブランド Id を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "id": {
+            "type": "integer",
+            "description": "カタログアイテム Id を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名を取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "productCode": {
+            "type": "string",
+            "description": "商品コードを取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "assetCodes": {
+            "type": "array",
+            "description": "アセットコードの一覧を取得または設定します。\n            ",
+            "items": {
+              "type": "string"
             }
           }
-        ]
+        }
       },
       "OrderResponse": {
         "type": "object",

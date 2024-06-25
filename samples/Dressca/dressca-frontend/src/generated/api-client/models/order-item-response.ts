@@ -13,7 +13,9 @@
  */
 
 
-import { CatalogItemSummaryResponse } from './catalog-item-summary-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderItemResponseItemOrdered } from './order-item-response-item-ordered';
 
 /**
  * 注文アイテムのレスポンスデータを表します。             
@@ -28,11 +30,11 @@ export interface OrderItemResponse {
      */
     'id': number;
     /**
-     * 注文された商品（カタログアイテム）を取得または設定します。             
-     * @type {CatalogItemSummaryResponse}
+     * 
+     * @type {OrderItemResponseItemOrdered}
      * @memberof OrderItemResponse
      */
-    'itemOrdered'?: CatalogItemSummaryResponse | null;
+    'itemOrdered'?: OrderItemResponseItemOrdered | null;
     /**
      * 単価を取得または設定します。             
      * @type {number}

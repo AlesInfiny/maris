@@ -13,15 +13,16 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { CatalogCategoryResponse } from '../models';
+import type { CatalogCategoryResponse } from '../models';
 /**
  * CatalogCategoriesApi - axios parameter creator
  * @export
@@ -34,7 +35,7 @@ export const CatalogCategoriesApiAxiosParamCreator = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCatalogCategories: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCatalogCategories: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/catalog-categories`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -74,9 +75,11 @@ export const CatalogCategoriesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCatalogCategories(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogCategoryResponse>>> {
+        async getCatalogCategories(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CatalogCategoryResponse>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCatalogCategories(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CatalogCategoriesApi.getCatalogCategories']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -114,7 +117,8 @@ export class CatalogCategoriesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof CatalogCategoriesApi
      */
-    public getCatalogCategories(options?: AxiosRequestConfig) {
+    public getCatalogCategories(options?: RawAxiosRequestConfig) {
         return CatalogCategoriesApiFp(this.configuration).getCatalogCategories(options).then((request) => request(this.axios, this.basePath));
     }
 }
+
