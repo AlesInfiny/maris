@@ -302,18 +302,9 @@ Project Reference 機能については [Project References :material-open-in-ne
 
     ??? info "API エンドポイントを設定する際の注意点"
 
-        AlesInfiny Maris サンプルアプリでは、 バックエンドアプリとの API 通信のための OpenAPI や axios の共通設定は `src/api-client/index.ts` で実装しています。以下の部分で `basePath` または `baseURL`を設定すると、 `dev` モードでビルドした際に `vite.config.ts` の `server.proxy` で設定した通りにパスの書換えができなくなります。そのため、 `dev` モードでは環境変数に空文字を設定して `basePath` `baseURL` に値を設定しないようにする、といった工夫が必要です。
+        AlesInfiny Maris サンプルアプリでは、 バックエンドアプリとの API 通信のための axios の共通設定は `src/api-client/index.ts` で実装しています。以下の部分で `baseURL`を設定すると、 `dev` モードでビルドした際に `vite.config.ts` の `server.proxy` で設定した通りにパスの書換えができなくなります。そのため、 `dev` モードでは環境変数に空文字を設定して `baseURL` に値を設定しないようにする、といった工夫が必要です。
 
-        ``` ts title="src/api-client/index.ts" hl_lines="4 11"
-        // OpenAPI Generator を利用する場合
-        function createConfig(): apiClient.Configuration {
-          const config = new apiClient.Configuration({
-            basePath: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
-          });
-          return config;
-        }
-
-        // OpenAPI Generator を利用しない場合
+        ``` ts title="src/api-client/index.ts" hl_lines="2"
         const axiosInstance = axios.create({
           baseURL: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
         });
