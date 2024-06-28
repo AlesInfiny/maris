@@ -20,7 +20,7 @@ public class BuyerIdFilterAttributeTest
         var buyerIdCookieName = "Dressca-Bid";
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-        var context = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), Mock.Of<Controller>());
+        var context = new ActionExecutedContext(actionContext, [], Mock.Of<Controller>());
         var fakeTimeProvider = new FakeTimeProvider();
         var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
