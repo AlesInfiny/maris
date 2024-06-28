@@ -42,6 +42,7 @@ create-vue パッケージをインストールする必要があり、続行す
 ```terminal
 cd <project-name>
 npm install
+npm run format
 npm run dev
 ```
 
