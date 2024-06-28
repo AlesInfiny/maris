@@ -19,8 +19,8 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
     {
         // Arrange
         await this.factory.InitializeDatabaseAsync();
-        var postBasketItemsRequest = this.CreateBasketItemsRequest();
-        var postOrderRequestJson = JsonSerializer.Serialize(this.CreateDefaultPostOrderRequest());
+        var postBasketItemsRequest = CreateBasketItemsRequest();
+        var postOrderRequestJson = JsonSerializer.Serialize(CreateDefaultPostOrderRequest());
 
         // Act
         var postBasketItemResponse = await this.client.PostAsJsonAsync("api/basket-items", postBasketItemsRequest);
@@ -30,7 +30,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         var cookies = postBasketItemResponse.Headers.SingleOrDefault(header => header.Key == "Set-Cookie").Value;
         var postOrderResponse = await this.PostOrderAsync(postOrderRequestJson, cookies);
         var getOrderResponse = await this.GetOrderAsync(cookies, postOrderResponse);
-        var orderResponse = await this.DeserializeOrderResponseAsync(getOrderResponse);
+        var orderResponse = await DeserializeOrderResponseAsync(getOrderResponse);
 
         // Assert
         Assert.NotNull(orderResponse);
@@ -40,12 +40,27 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         Assert.Equal(postBasketItemsRequest.CatalogItemId, orderItemResponse.ItemOrdered.Id);
     }
 
-    private async Task<OrderResponse?> DeserializeOrderResponseAsync(HttpResponseMessage getOrderResponse)
+    private static async Task<OrderResponse?> DeserializeOrderResponseAsync(HttpResponseMessage getOrderResponse)
     {
         var orderResponseJson = await getOrderResponse.Content.ReadAsStringAsync();
         var orderResponse = JsonSerializer.Deserialize<OrderResponse>(orderResponseJson, JsonSerializerWebOptions);
         return orderResponse;
     }
+
+    private static PostBasketItemsRequest CreateBasketItemsRequest() => new()
+    {
+        CatalogItemId = 1,
+        AddedQuantity = 2,
+    };
+
+    private static PostOrderRequest CreateDefaultPostOrderRequest() => new()
+    {
+        FullName = "国会　太郎",
+        PostalCode = "100-8924",
+        Todofuken = "東京都",
+        Shikuchoson = "千代田区",
+        AzanaAndOthers = "永田町1-10-1",
+    };
 
     private async Task<HttpResponseMessage> GetOrderAsync(IEnumerable<string> cookies, HttpResponseMessage postOrderResponse)
     {
@@ -74,26 +89,5 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         var postOrderResponse = await this.client.SendAsync(postOrderRequest);
         postOrderResponse.EnsureSuccessStatusCode();
         return postOrderResponse;
-    }
-
-    private PostBasketItemsRequest CreateBasketItemsRequest()
-    {
-        return new()
-        {
-            CatalogItemId = 1,
-            AddedQuantity = 2,
-        };
-    }
-
-    private PostOrderRequest CreateDefaultPostOrderRequest()
-    {
-        return new()
-        {
-            FullName = "国会　太郎",
-            PostalCode = "100-8924",
-            Todofuken = "東京都",
-            Shikuchoson = "千代田区",
-            AzanaAndOthers = "永田町1-10-1",
-        };
     }
 }

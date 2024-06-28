@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Time.Testing;
 
 namespace Dressca.UnitTests.Web.Baskets;
@@ -20,7 +19,7 @@ public class BuyerIdFilterAttributeTest
         var buyerIdCookieName = "Dressca-Bid";
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-        var context = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), Mock.Of<Controller>());
+        var context = new ActionExecutedContext(actionContext, [], Mock.Of<Controller>());
         var fakeTimeProvider = new FakeTimeProvider();
         var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
@@ -43,19 +42,23 @@ public class BuyerIdFilterAttributeTest
         var buyerIdCookieName = "Dressca-Bid";
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-        var context = new ActionExecutedContext(actionContext, new List<IFilterMetadata>(), Mock.Of<Controller>());
+        var context = new ActionExecutedContext(actionContext, [], Mock.Of<Controller>());
         var fakeTimeProvider = new FakeTimeProvider();
         var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
         var expectedDateTime = testCookieCreatedDateTime.AddDays(10);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
-        var options = new WebServerOptions();
-        options.CookieSettings = new Dressca.Web.Configuration.CookieSettings( );
-        options.CookieSettings.HttpOnly = false;
-        options.CookieSettings.Secure = false;
-        options.CookieSettings.SameSite = SameSiteMode.Lax;
-        options.CookieSettings.ExpiredDays = 10;
-        options.CookieSettings.Domain = "example.com";
+        var options = new WebServerOptions
+        {
+            CookieSettings = new CookieSettings
+            {
+                HttpOnly = false,
+                Secure = false,
+                SameSite = SameSiteMode.Lax,
+                ExpiredDays = 10,
+                Domain = "example.com",
+            },
+        };
         var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, options);
 
         // Act

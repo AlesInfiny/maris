@@ -12,7 +12,7 @@ namespace Dressca.Web.Mapper;
 public class OrderMapper : IObjectMapper<Order, OrderResponse>
 {
     /// <inheritdoc/>
-    [return: NotNullIfNotNull("value")]
+    [return: NotNullIfNotNull(nameof(value))]
     public OrderResponse? Convert(Order? value)
     {
         if (value is null)

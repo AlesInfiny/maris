@@ -13,15 +13,15 @@ public class ProductsRepository : IProductsRepository
 
     static ProductsRepository()
     {
-        categories = new List<ProductCategory>
-        {
+        categories =
+        [
             new ProductCategory { Id = 1, CategoryName = "本" },
             new ProductCategory { Id = 2, CategoryName = "音楽" },
             new ProductCategory { Id = 3, CategoryName = "パソコン" },
-        };
+        ];
 
-        products = new List<Product>
-        {
+        products =
+        [
             new Product() { Id = 1, Name = "本1", ProductCategoryId = 1, ProductCategory = categories[0], UnitPrice = 1000 },
             new Product() { Id = 2, Name = "本2", ProductCategoryId = 1, ProductCategory = categories[0], UnitPrice = 1100 },
             new Product() { Id = 3, Name = "本3", ProductCategoryId = 1, ProductCategory = categories[0], UnitPrice = 1200 },
@@ -46,7 +46,7 @@ public class ProductsRepository : IProductsRepository
             new Product() { Id = 22, Name = "パソコン 6", ProductCategoryId = 3, ProductCategory = categories[2], UnitPrice = 250000 },
             new Product() { Id = 23, Name = "パソコン 7", ProductCategoryId = 3, ProductCategory = categories[2], UnitPrice = 260000 },
             new Product() { Id = 24, Name = "パソコン 8", ProductCategoryId = 3, ProductCategory = categories[2], UnitPrice = 270000 },
-        };
+        ];
 
     }
 

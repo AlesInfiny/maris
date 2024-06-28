@@ -23,8 +23,8 @@ internal class AssetConfiguration : IEntityTypeConfiguration<Asset>
 
         builder.HasIndex(asset => asset.AssetCode);
 
-        builder.HasData(new Asset[]
-        {
+        builder.HasData(
+        [
             new() { AssetCode = "b52dc7f712d94ca5812dd995bf926c04", AssetType = AssetTypes.Png, Id = 1L }, // TOP 用
             new() { AssetCode = "80bc8e167ccb4543b2f9d51913073492", AssetType = AssetTypes.Png, Id = 2L }, // TOP 用
             new() { AssetCode = "05d38fad5693422c8a27dd5b14070ec8", AssetType = AssetTypes.Png, Id = 3L }, // TOP 用
@@ -40,6 +40,6 @@ internal class AssetConfiguration : IEntityTypeConfiguration<Asset>
             new() { AssetCode = "ab2e78eb7fe3408aadbf1e17a9945a8c", AssetType = AssetTypes.Png, Id = 13L },
             new() { AssetCode = "0e557e96bc054f10bc91c27405a83e85", AssetType = AssetTypes.Png, Id = 14L },
             new() { AssetCode = "e622b0098808492cb883831c05486b58", AssetType = AssetTypes.Png, Id = 15L }, // now printing
-        });
+        ]);
     }
 }
