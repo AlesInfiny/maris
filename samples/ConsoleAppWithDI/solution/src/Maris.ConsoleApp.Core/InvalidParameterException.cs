@@ -46,7 +46,7 @@ public class InvalidParameterException : Exception
     {
         get
         {
-            if (this.validationResults.Any())
+            if (this.validationResults.Count != 0)
             {
                 return base.Message +
                     Messages.InvalidCommandParameterDetails.Embed(ValidationResultsToString(this.validationResults));
