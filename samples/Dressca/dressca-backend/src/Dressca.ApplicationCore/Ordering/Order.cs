@@ -9,7 +9,7 @@ namespace Dressca.ApplicationCore.Ordering;
 /// </summary>
 public class Order
 {
-    private readonly List<OrderItem> orderItems = new();
+    private readonly List<OrderItem> orderItems = [];
     private readonly TimeProvider timeProvider;
     private readonly Account? account;
     private string buyerId;

@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.Baskets;
 /// </summary>
 public class Basket
 {
-    private readonly List<BasketItem> items = new();
+    private readonly List<BasketItem> items = [];
     private string buyerId;
 
     /// <summary>

@@ -52,5 +52,5 @@ public class CatalogItemResponse
     /// <summary>
     ///  アセットコードの一覧を取得または設定します。
     /// </summary>
-    public IList<string> AssetCodes { get; set; } = new List<string>();
+    public IList<string> AssetCodes { get; set; } = [];
 }
