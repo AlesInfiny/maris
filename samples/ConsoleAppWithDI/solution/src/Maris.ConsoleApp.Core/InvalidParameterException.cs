@@ -9,7 +9,7 @@ namespace Maris.ConsoleApp.Core;
 /// </summary>
 public class InvalidParameterException : Exception
 {
-    private readonly List<ValidationResult> validationResults = new();
+    private readonly List<ValidationResult> validationResults = [];
 
     /// <summary>
     ///  <see cref="InvalidParameterException"/> クラスの新しいインスタンスを初期化します。

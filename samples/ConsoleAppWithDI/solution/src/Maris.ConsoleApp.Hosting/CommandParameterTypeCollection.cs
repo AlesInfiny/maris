@@ -10,8 +10,8 @@ namespace Maris.ConsoleApp.Hosting;
 /// </summary>
 internal class CommandParameterTypeCollection : IEnumerable<Type>
 {
-    private readonly Dictionary<string, Type> commandParameterTypes = new();
-    private readonly List<Assembly> loadedAssemblies = new();
+    private readonly Dictionary<string, Type> commandParameterTypes = [];
+    private readonly List<Assembly> loadedAssemblies = [];
 
     /// <summary>
     ///  <see cref="CommandParameterTypeCollection"/> クラスの新しいインスタンスを初期化します。
