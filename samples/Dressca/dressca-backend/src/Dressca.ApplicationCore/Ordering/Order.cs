@@ -34,7 +34,7 @@ public class Order
     /// <exception cref="ArgumentNullException"><paramref name="timeProvider"/> が <see langword="null"/> です。</exception>
     internal Order(List<OrderItem> orderItems, TimeProvider timeProvider)
     {
-        if (orderItems is null || !orderItems.Any())
+        if (orderItems is null || orderItems.Count == 0)
         {
             throw new ArgumentException(Messages.ArgumentIsNullOrEmptyList, nameof(orderItems));
         }
