@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Xml.Linq;
 using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Catalog;
