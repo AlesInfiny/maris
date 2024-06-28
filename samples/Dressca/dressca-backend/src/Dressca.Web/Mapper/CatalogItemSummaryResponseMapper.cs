@@ -11,7 +11,7 @@ namespace Dressca.Web.Mapper;
 public class CatalogItemSummaryResponseMapper : IObjectMapper<CatalogItem, CatalogItemSummaryResponse>
 {
     /// <inheritdoc/>
-    [return: NotNullIfNotNull("value")]
+    [return: NotNullIfNotNull(nameof(value))]
     public CatalogItemSummaryResponse? Convert(CatalogItem? value)
     {
         if (value is null)

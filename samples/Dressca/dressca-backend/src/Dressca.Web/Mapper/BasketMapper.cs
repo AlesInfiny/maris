@@ -24,7 +24,7 @@ public class BasketMapper : IObjectMapper<Basket, BasketResponse>
         => this.basketItemMapper = basketItemMapper ?? throw new ArgumentNullException(nameof(basketItemMapper));
 
     /// <inheritdoc/>
-    [return: NotNullIfNotNull("value")]
+    [return: NotNullIfNotNull(nameof(value))]
     public BasketResponse? Convert(Basket? value)
     {
         if (value is null)
