@@ -54,7 +54,7 @@ jobs:
           echo "アップデート要否の判定結果は ${{ env.UPDATE_REQUIRED }} です。">> $GITHUB_STEP_SUMMARY
 
       - name: issue を作成
-        id: create-issue
+        id: create-issue #  新規作成します
         if: ${{ env.UPDATE_REQUIRED == 'false' }}
         uses: JasonEtco/create-an-issue@v2
         env:
