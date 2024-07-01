@@ -24,11 +24,11 @@ jobs:
 
       - name: レスポンスの分析
         run: |
-          echo ${{ steps.get-lib-version.outputs.response }}
-          echo ${{ steps.get-lib-version.outputs.headers }}
-          echo ${{ steps.get-lib-version.outputs.status }}
-          echo ${{ fromJson(steps.get-lib-version.outputs.response).tag_name }}
-          echo LIB_VERSION=${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} >> ${GITHUB_ENV}
+          echo ${{ steps.get-lib-version.outputs.response }} >> $GITHUB_STEP_SUMMARY
+          echo ${{ steps.get-lib-version.outputs.headers }} >> $GITHUB_STEP_SUMMARY
+          echo ${{ steps.get-lib-version.outputs.status }} >> $GITHUB_STEP_SUMMARY
+          echo ${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} >> $GITHUB_STEP_SUMMARY
+          echo LIB_VERSION=${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} >> $GITHUB_ENV
           echo "openapi-generator のバージョンは ${{ env.LIB_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
 
       - name: チェックアウト
@@ -46,6 +46,7 @@ jobs:
         id: check_version
         run: |
           UPDATE_REQUIRED=false >> $GITHUB_ENV
+          echo "アップデート要否の判定結果は ${{ env.UPDATE_REQUIRED }} です。">> $GITHUB_STEP_SUMMARY
 
       - name: イシューを作成
         id: create-issue
