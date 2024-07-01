@@ -40,7 +40,7 @@ jobs:
 
       - name: アップデート要否を判定
         id: check_version
-        uses:
+        run: |
           UPDATE_REQUIRED=false >> $GITHUB_ENV
 
       - name: イシューを作成
