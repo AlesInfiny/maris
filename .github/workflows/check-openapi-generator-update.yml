@@ -30,7 +30,6 @@ jobs:
           echo ${{ steps.get-lib-version.outputs.status }}
           echo ${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} >> $GITHUB_STEP_SUMMARY
           echo "LIB_VERSION=$(echo ${{ steps.get-lib-version.outputs.response }} | jq -r '.tag_name')" >> $GITHUB_ENV
-          echo "openapi-generator のバージョンは ${{ env.LIB_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
 
       - name: チェックアウト
         uses: actions/checkout@v4
@@ -38,12 +37,16 @@ jobs:
       - name: アプリ側のバージョン取得
         run: |
           echo "APP_VERSION=$(jq -r '.["generator-cli"].version' ./samples/Dressca/dressca-frontend/openapitools.json)" >> $GITHUB_ENV
-          echo "openapitools.json の openapi-generator のバージョンは ${{ env.APP_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
 
       - name: アップデート要否を判定
         id: check_version
         run: |
           echo "UPDATE_REQUIRED=false" >> $GITHUB_ENV
+
+      - name: サマリに出力
+        run: |
+          echo "openapi-generator のバージョンは ${{ env.LIB_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
+          echo "openapitools.json の openapi-generator のバージョンは ${{ env.APP_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
           echo "アップデート要否の判定結果は ${{ env.UPDATE_REQUIRED }} です。">> $GITHUB_STEP_SUMMARY
 
       - name: issue を作成
