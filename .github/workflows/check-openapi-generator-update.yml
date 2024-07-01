@@ -55,7 +55,7 @@ jobs:
 
       - name: issue を作成
         id: create-issue
-        if: ${{ env.UPDATE_REQUIRED == 'false' }}
+        if: ${{ env.UPDATE_REQUIRED == 'true' }}
         uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,7 +65,7 @@ jobs:
           search_existing: all
 
       - name: issue の情報を出力
-        if: ${{ env.UPDATE_REQUIRED == 'false' }}
+        if: ${{ env.UPDATE_REQUIRED == 'true' }}
         run: |
           echo "# issue の作成・更新結果" >> $GITHUB_STEP_SUMMARY
           echo "Created or updated issue number: ${{ steps.create-issue.outputs.number }}" >> $GITHUB_STEP_SUMMARY
