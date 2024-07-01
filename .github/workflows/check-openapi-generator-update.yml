@@ -41,9 +41,9 @@ jobs:
         id: check_version
         run: |
           if [[ ${{ env.LIB_VERSION }} ==  ${{ env.APP_VERSION }} ]]; then
-            echo "UPDATE_REQUIRED=false" >> $GITHUB_ENV
-          else
             echo "UPDATE_REQUIRED=true" >> $GITHUB_ENV
+          else
+            echo "UPDATE_REQUIRED=false" >> $GITHUB_ENV
           fi
 
       - name: サマリに出力
@@ -55,7 +55,7 @@ jobs:
 
       - name: issue を作成
         id: create-issue #  新規作成します
-        if: ${{ env.UPDATE_REQUIRED == 'false' }}
+        if: ${{ env.UPDATE_REQUIRED == 'true' }}
         uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -65,7 +65,7 @@ jobs:
           search_existing: open
 
       - name: issue の情報を出力
-        if: ${{ env.UPDATE_REQUIRED == 'false' }}
+        if: ${{ env.UPDATE_REQUIRED == 'true' }}
         run: |
           echo "# issue の作成・更新結果" >> $GITHUB_STEP_SUMMARY
           echo "Created or updated issue number: ${{ steps.create-issue.outputs.number }}" >> $GITHUB_STEP_SUMMARY
