@@ -9,13 +9,28 @@ assignees: ''
 # 概要
 
 openapi-generatorのバージョンアップを検知しました。
+[openapi-generator](https://github.com/OpenAPITools/openapi-generator)
 
+# 詳細
 
-# 詳細 / 機能詳細（オプション）
+下記のコマンドを実行し、最新バージョンを選択します。
+openapitools.json の version が選択したバージョンに更新されます。
 
-ここに作成するドキュメントやサンプル、ライブラリの機能詳細を必要に応じて記述します。
-「概要」で説明が尽くされている場合、この節を記述する必要はありません。
+```terminal
+npx openapi-generator-cli version-manager list
+```
+
+クライアントコードを再生成します。
+
+```terminal
+npm run generate-client
+```
+
+自動生成されたクライアントコードに差分がある場合、
+差分の内容の確認とアプリケーションの動作確認を行ってください。
 
 # 完了条件
 
-ここにこの Issue の完了条件を箇条書きで記載します。
+- [ ] openapitools.json の version が最新バージョンに更新されていること
+- [ ] 生成されたクライアントコードに差分がないか、差分に問題がないこと
+- [ ] アプリケーションの動作に問題がないこと

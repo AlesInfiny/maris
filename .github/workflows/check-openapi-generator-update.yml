@@ -48,6 +48,7 @@ jobs:
 
       - name: サマリに出力
         run: |
+          echo "# 確認結果" >> $GITHUB_STEP_SUMMARY
           echo "openapi-generator のバージョンは ${{ env.LIB_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
           echo "openapitools.json の openapi-generator のバージョンは ${{ env.APP_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
           echo "アップデート要否の判定結果は ${{ env.UPDATE_REQUIRED }} です。">> $GITHUB_STEP_SUMMARY
@@ -66,6 +67,7 @@ jobs:
       - name: issue の情報を出力
         if: ${{ env.UPDATE_REQUIRED == 'false' }}
         run: |
+          echo "# issue の作成結果" >> $GITHUB_STEP_SUMMARY
           echo "Created issue number ${{ steps.create-issue.outputs.number }}" >> $GITHUB_STEP_SUMMARY
           echo "Created ${{ steps.create-issue.outputs.url }}" >> $GITHUB_STEP_SUMMARY
 
