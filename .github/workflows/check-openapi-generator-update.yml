@@ -1,0 +1,61 @@
+name: openapi-generatorのバージョンアップ確認
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+permissions:
+    contents: read
+    issues: write
+jobs:
+  check-update:
+    runs-on: ubutu-latest
+    steps:
+      - name: ライブラリ側のバージョン取得
+        id: get-lib-version
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://api.github.com/repos/OpenAPITools/openapi-generator/releases/latest'
+          method: 'GET'
+          customHeaders: '{"Content-Type": "application/json"}'
+
+      - name: レスポンスの分析
+        run: |
+          echo ${{ steps.get-lib-version.outputs.response }}
+          echo ${{ steps.get-lib-version.outputs.headers }}
+          echo ${{ steps.get-lib-version.outputs.status }}
+          echo ${{ fromJson(steps.get-lib-version.outputs.response).tag_name }}
+          echo LIB_VERSION=${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} >> ${GITHUB_ENV}
+          echo "openapi-generator のバージョンは ${{ env.LIB_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
+
+      - name: チェックアウト
+        uses: actions/checkout@v4
+
+      - name: アプリ側のバージョン取得
+        run: |
+          echo APP_VERSION=$(jq '.["generator-cli"].version' ./samples/Dressca/dressca-frontend/openapitools.json) >> $GITHUB_ENV
+
+      - name: サマリーへ出力
+        run: |
+          echo "openapitools.json の openapi-generator のバージョンは ${{ env.APP_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
+
+      - name: アップデート要否を判定
+        id: check_version
+        uses:
+          UPDATE_REQUIRED=false >> $GITHUB_ENV
+
+      - name: イシューを作成
+        id: create-issue
+        if: ${{ env.UPDATE_REQUIRED }}
+        uses: JasonEtco/create-an-issue@v2
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: イシューの情報を出力
+        if: ${{ env.UPDATE_REQUIRED }}
+        run: |
+          echo "Created issue number ${{ steps.create-issue.outputs.number }}"
+          echo "Created ${{ steps.create-issue.outputs.url }}"
+
+
+
+
