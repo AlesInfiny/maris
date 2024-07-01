@@ -8,8 +8,7 @@ assignees: ''
 
 # 概要
 
-openapi-generatorのバージョンアップを検知しました。
-[openapi-generator](https://github.com/OpenAPITools/openapi-generator)
+[openapi-generator](https://github.com/OpenAPITools/openapi-generator)のバージョンアップを検知しました。内容を確認のうえ、下記の通り対応してください。
 
 # 詳細
 
