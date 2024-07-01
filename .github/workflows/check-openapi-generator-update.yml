@@ -5,14 +5,14 @@ on:
     paths:
       - '.github/workflows/check-openapi-generator-update.yml'
   workflow_dispatch:
-  # schedule:
-  #  - cron: '0 0 * * 1'
+  schedule:
+    - cron: '0 0 * * 1'
 permissions:
     contents: read
     issues: write
 jobs:
   check-update:
-    runs-on: ubutu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: ライブラリ側のバージョン取得
         id: get-lib-version
