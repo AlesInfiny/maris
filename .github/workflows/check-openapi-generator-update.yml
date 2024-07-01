@@ -29,7 +29,7 @@ jobs:
           echo ${{ steps.get-lib-version.outputs.headers }}
           echo ${{ steps.get-lib-version.outputs.status }}
           echo ${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} >> $GITHUB_STEP_SUMMARY
-          echo "LIB_VERSION=${{ fromJson(steps.get-lib-version.outputs.response).tag_name }}" >> $GITHUB_ENV
+          echo "LIB_VERSION=$(echo ${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} |sed 's/^v//')" >> $GITHUB_ENV
 
       - name: チェックアウト
         uses: actions/checkout@v4
