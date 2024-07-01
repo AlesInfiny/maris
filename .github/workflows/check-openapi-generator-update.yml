@@ -12,6 +12,7 @@ permissions:
     issues: write
 jobs:
   check-update:
+    name: openapi-generatorのバージョンアップ確認
     runs-on: ubuntu-latest
     steps:
       - name: ライブラリ側のバージョン取得
@@ -24,12 +25,11 @@ jobs:
 
       - name: レスポンスの分析
         run: |
-          echo ${{ steps.get-lib-version.outputs.response }} >> $GITHUB_STEP_SUMMARY
-          echo ${{ steps.get-lib-version.outputs.headers }} >> $GITHUB_STEP_SUMMARY
-          echo ${{ steps.get-lib-version.outputs.status }} >> $GITHUB_STEP_SUMMARY
-          echo ${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} >> $GITHUB_STEP_SUMMARY
+          echo ${{ steps.get-lib-version.outputs.response }}
+          echo ${{ steps.get-lib-version.outputs.headers }}
+          echo ${{ steps.get-lib-version.outputs.status }}
           echo LIB_VERSION=${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} >> $GITHUB_ENV
-          echo "openapi-generator のバージョンは ${{ env.LIB_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
+          echo "openapi-generator のバージョンは ${LIB_VERSION} です。" >> $GITHUB_STEP_SUMMARY
 
       - name: チェックアウト
         uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
         id: check_version
         run: |
           UPDATE_REQUIRED=false >> $GITHUB_ENV
-          echo "アップデート要否の判定結果は ${{ env.UPDATE_REQUIRED }} です。">> $GITHUB_STEP_SUMMARY
+          echo "アップデート要否の判定結果は ${UPDATE_REQUIRED} です。">> $GITHUB_STEP_SUMMARY
 
       - name: イシューを作成
         id: create-issue
