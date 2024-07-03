@@ -6,6 +6,7 @@ import { showToast } from '@/services/notification/notificationService';
 import type { OrderResponse } from '@/generated/api-client/models/order-response';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
+import { errorHandleBase } from '@/shared/error-handler/error-handling-base';
 
 const router = useRouter();
 const props = defineProps<{
@@ -26,9 +27,11 @@ const goCatalog = () => {
 onMounted(async () => {
   try {
     state.lastOrdered = await getOrder(props.orderId);
-  } catch {
-    showToast('注文情報の取得に失敗しました。');
-    router.push('/');
+  } catch (error) {
+    errorHandleBase(error, () => {
+      showToast('注文情報の取得に失敗しました。');
+      router.push('/');
+    });
   }
 });
 </script>

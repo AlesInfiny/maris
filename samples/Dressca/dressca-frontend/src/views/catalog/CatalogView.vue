@@ -14,6 +14,7 @@ import Loading from '@/components/common/LoadingSpinner.vue';
 import { useRouter } from 'vue-router';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
+import { errorHandleBase } from '@/shared/error-handler/error-handling-base';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
@@ -37,7 +38,9 @@ const addBasket = async (catalogItemId: number) => {
     await addItemToBasket(catalogItemId);
     router.push({ name: 'basket' });
   } catch (error) {
-    showToast('カートに追加できませんでした。');
+    errorHandleBase(error, () => {
+      showToast('カートに追加できませんでした。');
+    });
   }
 };
 
@@ -47,7 +50,9 @@ onMounted(async () => {
   try {
     await fetchItems(selectedCategory.value, selectedBrand.value);
   } catch (error) {
-    showToast('商品の取得に失敗しました。');
+    errorHandleBase(error, () => {
+      showToast('商品の取得に失敗しました。');
+    });
   }
   state.showLoading = false;
 });

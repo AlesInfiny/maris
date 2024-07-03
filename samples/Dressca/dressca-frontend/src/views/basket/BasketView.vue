@@ -13,6 +13,7 @@ import Loading from '@/components/common/LoadingSpinner.vue';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
+import { errorHandleBase } from '@/shared/error-handler/error-handling-base';
 
 const state = reactive({
   showLoading: true,
@@ -37,7 +38,9 @@ const update = async (catalogItemId: number, newQuantity: number) => {
   try {
     await updateItemInBasket(catalogItemId, newQuantity);
   } catch (error) {
-    showToast('数量の変更に失敗しました。', 3000);
+    errorHandleBase(error, () => {
+      showToast('数量の変更に失敗しました。');
+    });
   }
 };
 
@@ -59,7 +62,10 @@ onMounted(async () => {
   try {
     await fetchBasket();
   } catch (error) {
-    showToast('買い物かごの取得に失敗しました。', 3000);
+    errorHandleBase(error, () => {
+      showToast('カートの取得に失敗しました。');
+      console.log(error);
+    });
   } finally {
     state.showLoading = false;
   }
