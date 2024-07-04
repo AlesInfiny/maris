@@ -16,8 +16,8 @@ const ErrorHandlerPlugin = {
       console.log(event);
     });
 
+    // テストやデバッグ時に予期せぬ非同期エラーの発生を検知するために利用する
     window.addEventListener('unhandledrejection', (event) => {
-      // テストやデバッグ時に予期せぬ非同期エラーの発生を検知するために利用する
       console.log(event);
     });
   },
