@@ -1,7 +1,7 @@
 ---
-name: openapi-generator-update-issue from {{ env.APP_VERSION }} to {{ env.LIB_VERSION }}
+name: openapi-generator-update-issue
 about: openapi-generatorのアップデート用のIssueのテンプレートです
-title: 'openapi-generatorをアップデートする'
+title: 'openapi-generatorをアップデートする from {{ env.APP_VERSION }} to {{ env.LIB_VERSION }}'
 labels: ''
 assignees: ''
 ---
