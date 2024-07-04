@@ -49,7 +49,7 @@ const remove = async (catalogItemId: number) => {
   try {
     await removeItemFromBasket(catalogItemId);
   } catch (error) {
-    showToast('商品の削除に失敗しました。', 3000);
+    showToast('商品の削除に失敗しました。');
   }
 };
 
@@ -64,7 +64,6 @@ onMounted(async () => {
   } catch (error) {
     errorHandleBase(error, () => {
       showToast('カートの取得に失敗しました。');
-      console.log(error);
     });
   } finally {
     state.showLoading = false;
