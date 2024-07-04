@@ -9,7 +9,8 @@ assignees: ''
 # 概要
 
 [openapi-generator](https://github.com/OpenAPITools/openapi-generator)のバージョンアップを検知しました。内容を確認のうえ、下記の通り対応してください。
-{{ env.APP_VERSION }} to {{ env.LIB_VERSION }}
+openapitools.json のバージョン ：{{ env.APP_VERSION }}
+ライブラリ のバージョン ：{{ env.LIB_VERSION }}
 
 # 詳細
 
