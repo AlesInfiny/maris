@@ -17,21 +17,23 @@ function createConfig(): apiClient.Configuration {
 
 /** axios の共通の設定があればここに定義します。 */
 const axiosInstance = axios.create({
-  timeout: 10000,
+  timeout: 1000,
 });
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (axios.isAxiosError(error)) {
       if (!error.response) {
-        return Promise.reject(new NetworkError('Network Error'));
+        return Promise.reject(new NetworkError('Network Error', error));
       } else if (error.response.status === 500) {
-        return Promise.reject(new ServerError('Server Error'));
+        return Promise.reject(new ServerError('Server Error', error));
       } else if (error.response.status === 401) {
-        return Promise.reject(new UnauthorizedError('Unauthorized Error'));
+        return Promise.reject(
+          new UnauthorizedError('Unauthorized Error', error),
+        );
       }
 
-      return Promise.reject(new HttpError(error));
+      return Promise.reject(new HttpError(error.message, error));
     }
   },
 );
