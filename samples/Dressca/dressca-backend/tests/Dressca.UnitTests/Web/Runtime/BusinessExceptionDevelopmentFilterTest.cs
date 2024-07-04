@@ -88,7 +88,7 @@ public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutput
         var actionDescriptor = new ControllerActionDescriptor();
         return new ExceptionContext(
             new ActionContext(httpContext, routeData, actionDescriptor),
-            new List<IFilterMetadata>())
+            [])
         {
             Exception = new BusinessException(businessError),
         };

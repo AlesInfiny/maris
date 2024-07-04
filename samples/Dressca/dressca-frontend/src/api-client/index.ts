@@ -9,15 +9,17 @@ import {
 
 /** api-client の共通の Configuration があればここに定義します。 */
 function createConfig(): apiClient.Configuration {
-  const config = new apiClient.Configuration({
-    basePath: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
-  });
+  const config = new apiClient.Configuration();
   return config;
 }
 
 /** axios の共通の設定があればここに定義します。 */
 const axiosInstance = axios.create({
-  timeout: 1000,
+  baseURL: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true,
 });
 axiosInstance.interceptors.response.use(
   (response) => response,

@@ -13,19 +13,20 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { OrderResponse } from '../models';
+import type { OrderResponse } from '../models';
 // @ts-ignore
-import { PostOrderRequest } from '../models';
+import type { PostOrderRequest } from '../models';
 // @ts-ignore
-import { ProblemDetails } from '../models';
+import type { ProblemDetails } from '../models';
 /**
  * OrdersApi - axios parameter creator
  * @export
@@ -39,7 +40,7 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getById: async (orderId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getById: async (orderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'orderId' is not null or undefined
             assertParamExists('getById', 'orderId', orderId)
             const localVarPath = `/api/orders/{orderId}`
@@ -73,7 +74,7 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postOrder: async (postOrderRequest: PostOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postOrder: async (postOrderRequest: PostOrderRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'postOrderRequest' is not null or undefined
             assertParamExists('postOrder', 'postOrderRequest', postOrderRequest)
             const localVarPath = `/api/orders`;
@@ -119,9 +120,11 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getById(orderId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderResponse>> {
+        async getById(orderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getById(orderId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrdersApi.getById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -130,9 +133,11 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postOrder(postOrderRequest: PostOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async postOrder(postOrderRequest: PostOrderRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.postOrder(postOrderRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrdersApi.postOrder']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -182,7 +187,7 @@ export class OrdersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrdersApi
      */
-    public getById(orderId: number, options?: AxiosRequestConfig) {
+    public getById(orderId: number, options?: RawAxiosRequestConfig) {
         return OrdersApiFp(this.configuration).getById(orderId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -194,7 +199,8 @@ export class OrdersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OrdersApi
      */
-    public postOrder(postOrderRequest: PostOrderRequest, options?: AxiosRequestConfig) {
+    public postOrder(postOrderRequest: PostOrderRequest, options?: RawAxiosRequestConfig) {
         return OrdersApiFp(this.configuration).postOrder(postOrderRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

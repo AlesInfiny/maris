@@ -35,52 +35,52 @@ internal class DresscaDbContext : DbContext
     /// <summary>
     ///  買い物かごを取得します。
     /// </summary>
-    public DbSet<Basket> Baskets => this.Set<Basket>();
+    public DbSet<Basket> Baskets { get; set; }
 
     /// <summary>
     ///  買い物かごアイテムを取得します。
     /// </summary>
-    public DbSet<BasketItem> BasketItems => this.Set<BasketItem>();
+    public DbSet<BasketItem> BasketItems { get; set; }
 
     /// <summary>
     ///  カタログアイテムを取得します。
     /// </summary>
-    public DbSet<CatalogItem> CatalogItems => this.Set<CatalogItem>();
+    public DbSet<CatalogItem> CatalogItems { get; set; }
 
     /// <summary>
     ///  カタログアイテムアセットを取得します。
     /// </summary>
-    public DbSet<CatalogItemAsset> CatalogItemAssets => this.Set<CatalogItemAsset>();
+    public DbSet<CatalogItemAsset> CatalogItemAssets { get; set; }
 
     /// <summary>
     ///  商品ブランドを取得します。
     /// </summary>
-    public DbSet<CatalogBrand> CatalogBrands => this.Set<CatalogBrand>();
+    public DbSet<CatalogBrand> CatalogBrands { get; set; }
 
     /// <summary>
     ///  商品カテゴリを取得します。
     /// </summary>
-    public DbSet<CatalogCategory> CatalogCategories => this.Set<CatalogCategory>();
+    public DbSet<CatalogCategory> CatalogCategories { get; set; }
 
     /// <summary>
     ///  注文を取得します。
     /// </summary>
-    public DbSet<Order> Orders => this.Set<Order>();
+    public DbSet<Order> Orders { get; set; }
 
     /// <summary>
     ///  注文アイテムを取得します。
     /// </summary>
-    public DbSet<OrderItem> OrderItems => this.Set<OrderItem>();
+    public DbSet<OrderItem> OrderItems { get; set; }
 
     /// <summary>
     ///  注文アイテムアセットを取得します。
     /// </summary>
-    public DbSet<OrderItemAsset> OrderItemAssets => this.Set<OrderItemAsset>();
+    public DbSet<OrderItemAsset> OrderItemAssets { get; set; }
 
     /// <summary>
     ///  アセットを取得します。
     /// </summary>
-    public DbSet<Asset> Assets => this.Set<Asset>();
+    public DbSet<Asset> Assets { get; set; }
 
     /// <inheritdoc/>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

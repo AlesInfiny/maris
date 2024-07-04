@@ -71,7 +71,7 @@ internal class ConsoleAppContextFactory
                 Messages.CommandParameterIsNotExists.Embed(typeof(CommandAttribute), assemblies));
         }
 
-        var param = Parser.Default.ParseArguments(args, commandParameterTypes.ToArray());
+        var param = Parser.Default.ParseArguments(args, [.. commandParameterTypes]);
         if (param is null || param.Tag == ParserResultType.NotParsed)
         {
             this.appProcess.Exit(this.settings.DefaultValidationErrorExitCode);

@@ -4,10 +4,11 @@ site_name: AlesInfiny Maris OSS Edition
 site_url: https://maris.alesinfiny.org/
 docs_dir: contents
 copyright: "Copyright &copy; 2023 BIPROGY Inc. All rights reserved."
-site_author: "アドバンスド開発技術部"
+site_author: "BIPROGY Inc."
 site_description: "AlesInfiny Maris OSS Edition のポータルサイトです。"
 site_dir: build-artifacts
 
+# yamllint disable rule:comments-indentation
 nav:
   - AlesInfiny Maris OSS Edition にようこそ:
       - index.md
@@ -69,6 +70,7 @@ nav:
               - 事前準備: guidebooks/how-to-develop/vue-js/preparation.md
               - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md
               - ブランクプロジェクトのフォルダー構造: guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
+              - プロジェクトの共通設定: guidebooks/how-to-develop/vue-js/project-settings.md
               - 開発に使用するパッケージ: guidebooks/how-to-develop/vue-js/optional-packages.md
               - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/vue-js/css.md
               - 静的コード分析とフォーマット: guidebooks/how-to-develop/vue-js/static-verification-and-format.md
@@ -78,6 +80,8 @@ nav:
               - guidebooks/how-to-develop/local-environment/index.md
           - アプリケーションの発行:
               - guidebooks/how-to-develop/publication/index.md
+          - CORS 環境の構築:
+              - guidebooks/how-to-develop/cors/index.md
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
       - マイグレーション:
@@ -99,6 +103,7 @@ nav:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
       - クレジット表記: about-maris/credits.md
+# yamllint enable rule:comments-indentation
 
 theme:
   name: material
@@ -131,15 +136,6 @@ theme:
         name: Switch to light mode
       primary: blue
       accent: cyan
-  plugins:
-    - search:
-        lang: ja
-        prebuild_index: true
-    - minify:
-        minify_html: true
-        minify_js: true
-        htmlmin_opts:
-          remove_comments: true
 
 markdown_extensions:
   - abbr
@@ -182,8 +178,16 @@ extra_css:
   - stylesheets/overrides.css
 
 plugins:
+  - search:
+      lang: ja
+  - minify:
+      minify_html: true
+      minify_js: true
+      htmlmin_opts:
+        remove_comments: true
   - social:
       enabled: !ENV [BUILD_DOCUMENTS, false]
       cards_layout_options:
         font_family: Noto Sans JP
-  - rss
+  - rss:
+      enabled: !ENV [BUILD_DOCUMENTS, false]

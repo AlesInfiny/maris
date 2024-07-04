@@ -5,6 +5,7 @@ using Dressca.Store.Assets.StaticFiles;
 using Dressca.SystemCommon.Text.Json;
 using Dressca.Web;
 using Dressca.Web.Baskets;
+using Dressca.Web.Configuration;
 using Dressca.Web.Controllers;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Mapper;
@@ -13,8 +14,19 @@ using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// アプリケーション設定ファイルの定義と型をバインドし、 DataAnnotation による検証を有効化する。
+builder.Services
+    .AddOptions<WebServerOptions>()
+    .BindConfiguration(nameof(WebServerOptions))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+// サービスコレクションに CORS を追加する。
+builder.Services.AddCors();
 
 builder.Services
     .AddControllers(options =>
@@ -101,6 +113,24 @@ else
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+var options = app.Services.GetRequiredService<IOptions<WebServerOptions>>();
+
+// アプリケーション設定にオリジンの記述がある場合のみ CORS ポリシーを追加する。
+if (options.Value.AllowedOrigins.Length > 0)
+{
+    app.UseCors(policy =>
+    {
+        // Origins, Methods, Header, Credentials すべての設定が必要（設定しないと CORS が動作しない）
+        // レスポンスの Header を フロントエンド側 JavaScript で使用する場合、 WithExposedHeaders も必須
+        policy
+            .WithOrigins(options.Value.AllowedOrigins)
+            .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .WithExposedHeaders("Location");
+    });
+}
 
 app.UseAuthorization();
 

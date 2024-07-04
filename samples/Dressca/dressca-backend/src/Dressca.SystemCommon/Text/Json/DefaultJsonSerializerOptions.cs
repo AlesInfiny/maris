@@ -9,7 +9,7 @@ namespace Dressca.SystemCommon.Text.Json;
 /// </summary>
 public static class DefaultJsonSerializerOptions
 {
-    private static JsonSerializerOptions options = new JsonSerializerOptions
+    private static readonly JsonSerializerOptions Options = new()
     {
         Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
     };
@@ -20,6 +20,6 @@ public static class DefaultJsonSerializerOptions
     /// <returns><see cref="JsonSerializerOptions"/> のインスタンス。</returns>
     public static JsonSerializerOptions GetInstance()
     {
-        return options;
+        return Options;
     }
 }

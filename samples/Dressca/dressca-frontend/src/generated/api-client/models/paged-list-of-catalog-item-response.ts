@@ -13,7 +13,9 @@
  */
 
 
-import { CatalogItemResponse } from './catalog-item-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { CatalogItemResponse } from './catalog-item-response';
 
 /**
  * ページネーションした結果のリストを管理します。             

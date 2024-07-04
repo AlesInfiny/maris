@@ -5,6 +5,7 @@
 *[API]: Application Programming Interface.
 *[CD]: Continuous Delivery：継続的デリバリー。
 *[CI]: Continuous Integration：継続的インテグレーション。
+*[CORS]: Cross-Origin Resource Sharing：オリジン間リソース共有。
 *[CSR]: Client Side Rendering.
 *[DTO]: Data Transfer Object：データ転送に利用するだけのオブジェクト。
 *[EOL]: End Of Life：製品ライフサイクルの終了。

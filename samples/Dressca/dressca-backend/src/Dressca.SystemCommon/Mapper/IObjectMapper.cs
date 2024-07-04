@@ -15,6 +15,6 @@ public interface IObjectMapper<TFrom, TTo>
     /// </summary>
     /// <param name="value">変換するオブジェクト。</param>
     /// <returns>変換後のオブジェクト。</returns>
-    [return: NotNullIfNotNull("value")]
+    [return: NotNullIfNotNull(nameof(value))]
     TTo? Convert(TFrom? value);
 }

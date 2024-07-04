@@ -24,6 +24,7 @@ public class BasketItemsController : ControllerBase
     private readonly IObjectMapper<Basket, BasketResponse> basketMapper;
     private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
     private readonly IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper;
+    private readonly IObjectMapper<CatalogItem, CatalogItemSummaryResponse> catalogItemSummaryResponseMapper;
     private readonly ILogger<BasketItemsController> logger;
 
     /// <summary>
@@ -33,12 +34,14 @@ public class BasketItemsController : ControllerBase
     /// <param name="basketMapper"><see cref="Basket"/> と <see cref="BasketResponse"/> のマッパー。</param>
     /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemResponse"/> のマッパー。</param>
     /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
+    /// <param name="catalogItemSummaryResponseMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemSummaryResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="basketMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="basketItemMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="catalogItemMapper"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="catalogItemSummaryResponseMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
@@ -47,12 +50,14 @@ public class BasketItemsController : ControllerBase
         IObjectMapper<Basket, BasketResponse> basketMapper,
         IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper,
         IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper,
+        IObjectMapper<CatalogItem, CatalogItemSummaryResponse> catalogItemSummaryResponseMapper,
         ILogger<BasketItemsController> logger)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.basketMapper = basketMapper ?? throw new ArgumentNullException(nameof(basketMapper));
         this.basketItemMapper = basketItemMapper ?? throw new ArgumentNullException(nameof(basketItemMapper));
         this.catalogItemMapper = catalogItemMapper ?? throw new ArgumentNullException(nameof(catalogItemMapper));
+        this.catalogItemSummaryResponseMapper = catalogItemSummaryResponseMapper ?? throw new ArgumentNullException(nameof(catalogItemSummaryResponseMapper));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -200,6 +205,6 @@ public class BasketItemsController : ControllerBase
     private CatalogItemSummaryResponse? GetCatalogItemSummary(long catalogItemId, IEnumerable<CatalogItem> catalogItems)
     {
         var catalogItem = catalogItems.FirstOrDefault(catalogItem => catalogItem.Id == catalogItemId);
-        return this.catalogItemMapper.Convert(catalogItem);
+        return this.catalogItemSummaryResponseMapper.Convert(catalogItem);
     }
 }

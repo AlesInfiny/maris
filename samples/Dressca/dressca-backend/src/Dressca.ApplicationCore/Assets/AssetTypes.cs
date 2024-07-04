@@ -10,7 +10,7 @@ public static class AssetTypes
     /// </summary>
     public const string Png = "png";
 
-    private static readonly HashSet<string> SupportedAssetTypes = new() { Png };
+    private static readonly HashSet<string> SupportedAssetTypes = [Png];
 
     /// <summary>
     ///  指定したアセットタイプがサポートされているかどうか示す値を取得します。

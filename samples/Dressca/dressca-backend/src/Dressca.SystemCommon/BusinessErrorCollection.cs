@@ -7,7 +7,7 @@ namespace Dressca.SystemCommon;
 /// </summary>
 public class BusinessErrorCollection : IEnumerable<BusinessError>
 {
-    private readonly Dictionary<string, BusinessError> businessErrors = new();
+    private readonly Dictionary<string, BusinessError> businessErrors = [];
 
     /// <summary>
     ///  <see cref="BusinessErrorCollection"/> クラスの新しいインスタンスを初期化します。
@@ -36,7 +36,7 @@ public class BusinessErrorCollection : IEnumerable<BusinessError>
         ArgumentNullException.ThrowIfNull(newBusinessError);
         if (this.businessErrors.TryGetValue(newBusinessError.ErrorCode, out var businessError))
         {
-            businessError.AddErrorMessages(newBusinessError.ErrorMessages.ToArray());
+            businessError.AddErrorMessages([.. newBusinessError.ErrorMessages]);
         }
         else
         {

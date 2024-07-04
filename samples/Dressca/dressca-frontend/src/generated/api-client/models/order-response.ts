@@ -13,8 +13,12 @@
  */
 
 
-import { AccountResponse } from './account-response';
-import { OrderItemResponse } from './order-item-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { BasketResponseAccount } from './basket-response-account';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { OrderItemResponse } from './order-item-response';
 
 /**
  * 注文情報のレスポンスデータを表します。             
@@ -71,11 +75,11 @@ export interface OrderResponse {
      */
     'azanaAndOthers': string;
     /**
-     * 会計情報を取得または設定します。             
-     * @type {AccountResponse}
+     * 
+     * @type {BasketResponseAccount}
      * @memberof OrderResponse
      */
-    'account'?: AccountResponse | null;
+    'account'?: BasketResponseAccount | null;
     /**
      * 注文アイテムのリストを取得または設定します。             
      * @type {Array<OrderItemResponse>}

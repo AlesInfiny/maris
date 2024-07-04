@@ -223,7 +223,7 @@ Web API コントローラーが返却するエラーレスポンスの形式は
 
 また、実際のレスポンス形式と Open API 定義書に記載のレスポンス形式の不一致を防ぐため、 `Program.cs` で `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定します。
 `SuppressMapClientErrors` の既定値は `false` であり、この場合エラーレスポンスの型を指定しない限りエラーは自動的に `ProblemDetails` にマッピングされ、 Open API 定義書にも反映されます。
-しかし、この設定が有効になるのは Web API コントローラーの範囲であり、たとえば `Program.cs` でインジェクションした外部サービスの機能が自動的にエラーを返却する場合等は `ProblemDetails` の形式になりません。つまり、 Open API 定義書と実際に返されるエラーレスポンスの形式に差異ができてしまいます。これを防ぐため、 `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定し、 `ProblemDetails` への自動的なマッピングを停止します。
+しかし、この設定が有効になるのは Web API コントローラーの範囲であり、たとえば `Program.cs` でインジェクションした外部サービスの機能が自動的にエラーを返却する場合等は `ProblemDetails` の形式になりません。つまり、 Open API 定義書と実際に返されるエラーレスポンスの形式に差ができてしまいます。これを防ぐため、 `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定し、 `ProblemDetails` への自動的なマッピングを停止します。
 
 ??? example "エラーレスポンス形式の設定例"
     `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定します。
@@ -339,7 +339,7 @@ ASP.NET Core Web API プロジェクトを作成した際、一緒に作成さ�
 ??? example "基本のログ構成例"
     本番環境向けのログレベル設定は、 [appsettings.json] に行います。
     Information レベル以上のログを出力するように設定しましょう。
-    ただし、 `Microsoft.AspNetCore` のカテゴリについては、 Warning 以上のレベルのみ出力するようにします。
+    ただし、 `Microsoft.AspNetCore` のカテゴリーについては、 Warning 以上のレベルのみ出力するようにします。
 
     開発しているアプリケーションから出力するログのログレベルも、明示的に設定しておくことを推奨します。
     例のように、 `LogLLevel` 要素にソリューション名と同名のキーを追加し、値としてログレベルを設定します。
@@ -379,3 +379,7 @@ ASP.NET Core Web API プロジェクトを作成した際、一緒に作成さ�
       }
     }
     ```
+
+## CORS （クロスオリジンリソース共有）環境の設定 {#cors-environment}
+
+Web API を公開するオリジンと、呼び出し元となるクライアントスクリプトを公開するオリジンが異なる場合（クロスオリジン）の設定は、[こちら](../cors/index.md) を参照してください。

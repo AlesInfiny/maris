@@ -1,24 +1,9 @@
 <mxfile host="65bd71144e">
     <diagram id="z3uo43hMrY5UEmzsBYZ2" name="ページ1">
-        <mxGraphModel dx="1003" dy="514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1936" dy="1429" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="モデル" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#51556E;fontColor=#FFFFFF;strokeColor=#FFFFFF;fontStyle=1;verticalAlign=top;fontSize=14;strokeWidth=2;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;" parent="1" vertex="1">
-                    <mxGeometry x="770" y="200" width="280" height="230" as="geometry"/>
-                </mxCell>
-                <mxCell id="3" value="&lt;b&gt;Store&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=top;fillColor=#C7A078;strokeColor=#36393d;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;labelBackgroundColor=none;fontColor=#000000;" parent="1" vertex="1">
-                    <mxGeometry x="785" y="240" width="245" height="170" as="geometry"/>
-                </mxCell>
-                <mxCell id="4" value="" style="endArrow=classic;html=1;fontSize=14;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;exitX=0;exitY=0.5;exitDx=0;exitDy=0;startArrow=classic;startFill=1;dashed=1;strokeWidth=3;dashPattern=1 1;strokeColor=#FFFFFF;" parent="1" source="5" edge="1">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1129" y="213" as="sourcePoint"/>
-                        <mxPoint x="1010" y="315" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="5" value="API" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;fillColor=#2E303E;strokeColor=#FFFFFF;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;fontColor=#FFFFFF;strokeWidth=2;" parent="1" vertex="1">
-                    <mxGeometry x="1160" y="285" width="120" height="60" as="geometry"/>
-                </mxCell>
                 <mxCell id="8" value="Component" style="rounded=0;whiteSpace=wrap;html=1;align=center;spacingLeft=5;fillColor=#A0C28F;fontColor=#000000;strokeColor=#FFFFFF;verticalAlign=top;fontSize=16;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;fontStyle=1;spacingTop=6;strokeWidth=2;" parent="1" vertex="1">
                     <mxGeometry x="90" y="120" width="590" height="340" as="geometry"/>
                 </mxCell>
@@ -27,12 +12,6 @@
                 </mxCell>
                 <mxCell id="10" value="&lt;b&gt;ビューモデル&lt;/b&gt;&lt;br style=&quot;font-size: 14px&quot;&gt;(イベント処理、入力チェック)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=14;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;perimeterSpacing=4;fillColor=#51556E;fontColor=#FFFFFF;strokeColor=#666666;" parent="1" vertex="1">
                     <mxGeometry x="411.25" y="264" width="250" height="95" as="geometry"/>
-                </mxCell>
-                <mxCell id="11" value="" style="endArrow=classic;html=1;fontSize=14;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=3;strokeColor=#FFFFFF;shadow=0;" parent="1" source="10" edge="1">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="640" y="262" as="sourcePoint"/>
-                        <mxPoint x="810" y="312" as="targetPoint"/>
-                    </mxGeometry>
                 </mxCell>
                 <mxCell id="20" value="" style="curved=1;endArrow=classic;html=1;rounded=1;sketch=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeWidth=3;strokeColor=#000000;labelBackgroundColor=none;fontColor=#51556E;" parent="1" source="9" target="10" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -59,6 +38,24 @@
                 </mxCell>
                 <mxCell id="24" value="データバインド" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=17;fontColor=#000000;" parent="1" vertex="1">
                     <mxGeometry x="318.75" y="410" width="132.5" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="モデル" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#51556e;fontColor=#FFFFFF;strokeColor=#666666;fontStyle=1;verticalAlign=middle;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="827" y="271.5" width="150" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="" style="endArrow=classic;html=1;fontSize=14;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;exitX=0;exitY=0.5;exitDx=0;exitDy=0;startArrow=classic;startFill=1;dashed=1;strokeWidth=6;dashPattern=1 1;strokeColor=#FFFFFF;" edge="1" parent="1" source="27">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1056" y="209.5" as="sourcePoint"/>
+                        <mxPoint x="977" y="311.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" value="API" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;fillColor=#2e303e;strokeColor=#666666;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;fontColor=#FFFFFF;" vertex="1" parent="1">
+                    <mxGeometry x="1087" y="281.5" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="" style="endArrow=classic;html=1;fontSize=14;fontFamily=Noto Sans JP;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DNoto%2BSans%2BJP;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=3;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#FFFFFF;" edge="1" parent="1" target="25">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="665.25" y="311.5" as="sourcePoint"/>
+                        <mxPoint x="770" y="310" as="targetPoint"/>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>

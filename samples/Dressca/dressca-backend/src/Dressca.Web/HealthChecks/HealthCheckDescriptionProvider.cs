@@ -53,7 +53,7 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
         {
             ControllerName = "HealthChecks",
             ActionName = HealthCheckRelativePath,
-            Parameters = new List<ParameterDescriptor>(),
+            Parameters = [],
             ControllerTypeInfo = new TypeDelegator(typeof(HealthCheckControllerMetadata)),
             MethodInfo = HealthCheckControllerMetadata.GetApiMethodInfo(),
         };
@@ -74,28 +74,28 @@ public class HealthCheckDescriptionProvider : IApiDescriptionProvider
 
         var normalGetApiResponseType = new ApiResponseType
         {
-            ApiResponseFormats = new List<ApiResponseFormat>
-            {
+            ApiResponseFormats =
+            [
                 new ApiResponseFormat
                 {
                     MediaType = "text/plain",
                     Formatter = new StringOutputFormatter(),
                 },
-            },
+            ],
             Type = typeof(string),
             StatusCode = StatusCodes.Status200OK,
         };
 
         var errorGetApiResponseType = new ApiResponseType
         {
-            ApiResponseFormats = new List<ApiResponseFormat>
-            {
+            ApiResponseFormats =
+            [
                 new ApiResponseFormat
                 {
                     MediaType = "text/plain",
                     Formatter = new StringOutputFormatter(),
                 },
-            },
+            ],
             Type = typeof(string),
             StatusCode = StatusCodes.Status503ServiceUnavailable,
         };
