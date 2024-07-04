@@ -63,8 +63,6 @@ jobs:
           filename: ./.github/ISSUE_TEMPLATE/openapi-generator-update-issue.md
           update_existing: true
           search_existing: open
-          lib_version: ${{ env.LIB_VERSION }}
-          app_version: ${{ env.APP_VERSION }}
 
       - name: issue の情報を出力
         if: ${{ env.UPDATE_REQUIRED == 'true' }}

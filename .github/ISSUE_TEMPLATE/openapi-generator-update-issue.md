@@ -1,5 +1,5 @@
 ---
-name: openapi-generator-update-issue from {{ tools.inputs.app_version }} to {{ tools.inputs.lib_version }}
+name: openapi-generator-update-issue from {{ env.APP_VERSION }} to {{ env.LIB_VERSION }}
 about: openapi-generatorのアップデート用のIssueのテンプレートです
 title: 'openapi-generatorをアップデートする'
 labels: ''
@@ -9,7 +9,7 @@ assignees: ''
 # 概要
 
 [openapi-generator](https://github.com/OpenAPITools/openapi-generator)のバージョンアップを検知しました。内容を確認のうえ、下記の通り対応してください。
-{{ tools.inputs.app_version }} to {{ tools.inputs.lib_version }}
+{{ env.APP_VERSION }} to {{ env.LIB_VERSION }}
 
 # 詳細
 
