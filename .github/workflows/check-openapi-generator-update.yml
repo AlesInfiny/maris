@@ -15,8 +15,8 @@ jobs:
     name: openapi-generatorのバージョンアップ確認
     runs-on: ubuntu-latest
     steps:
-      - name: GitHub APIを呼び出し
-        id: call-github-api
+      - name: GitHub API経由でリポジトリの情報を取得
+        id: get-repo-info-via-github-api
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://api.github.com/repos/OpenAPITools/openapi-generator/releases/latest'
@@ -26,10 +26,10 @@ jobs:
       - name: 最新のOpenAPI Generatorのバージョン取得
         id: get-latest-openapi-generator-version
         run: |
-          echo ${{ steps.call-github-api.outputs.response }}
-          echo ${{ steps.call-github-api.outputs.headers }}
-          echo ${{ steps.call-github-api.outputs.status }}
-          echo "latest-version=$(echo ${{ fromJson(steps.call-github-api.outputs.response).tag_name }} |sed 's/^v//')" >> $GITHUB_OUTPUT
+          echo ${{ steps.get-repo-info-via-github-api.outputs.response }}
+          echo ${{ steps.get-repo-info-via-github-api.outputs.headers }}
+          echo ${{ steps.get-repo-info-via-github-api.outputs.status }}
+          echo "latest-version=$(echo ${{ fromJson(steps.get-repo-info-via-github-api.outputs.response).tag_name }} |sed 's/^v//')" >> $GITHUB_OUTPUT
 
       - name: チェックアウト
         uses: actions/checkout@v4
