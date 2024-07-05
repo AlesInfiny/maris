@@ -1,7 +1,7 @@
 ---
 name: openapi-generator-update-issue
 about: openapi-generatorのアップデート用のIssueのテンプレートです
-title: openapi-generatorをアップデートする from ${CURRENT_VERSION} to ${LATEST_VERSION}
+title: openapi-generatorをアップデートする from {{ env.CURRENT_VERSION }} to {{ env.LATEST_VERSION }}
 labels: ''
 assignees: ''
 ---
@@ -9,8 +9,8 @@ assignees: ''
 # 概要
 
 [openapi-generator](https://github.com/OpenAPITools/openapi-generator)のバージョンアップを検知しました。内容を確認のうえ、下記の通り対応してください。
-openapitools.json のバージョン ：${CURRENT_VERSION}
-ライブラリ のバージョン ：${LATEST_VERSION}
+openapitools.json のバージョン ：{{ env.CURRENT_VERSION }}
+ライブラリ のバージョン ：{{ env.LATEST_VERSION }}
 
 # 詳細
 
