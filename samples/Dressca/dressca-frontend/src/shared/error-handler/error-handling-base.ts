@@ -1,6 +1,7 @@
 import router from '@/router';
 import { showToast } from '@/services/notification/notificationService';
 import { CustomError, UnauthorizedError, NetworkError } from './custom-error';
+import { useRoutingStore } from '@/stores/routing/routing';
 
 export function errorHandleBase(
   error: unknown,
