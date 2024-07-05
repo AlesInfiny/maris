@@ -49,7 +49,9 @@ const remove = async (catalogItemId: number) => {
   try {
     await removeItemFromBasket(catalogItemId);
   } catch (error) {
-    showToast('商品の削除に失敗しました。');
+    errorHandleBase(error, () => {
+      showToast('商品の削除に失敗しました。');
+    });
   }
 };
 
