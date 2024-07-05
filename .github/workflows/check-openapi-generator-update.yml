@@ -15,57 +15,61 @@ jobs:
     name: openapi-generatorのバージョンアップ確認
     runs-on: ubuntu-latest
     steps:
-      - name: ライブラリのバージョン取得
-        id: get-lib-version
+      - name: GitHub API経由でリポジトリの情報を取得
+        id: get-repo-info-via-github-api
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://api.github.com/repos/OpenAPITools/openapi-generator/releases/latest'
           method: 'GET'
           customHeaders: '{"Content-Type": "application/json"}'
 
-      - name: レスポンスの分析
+      - name: 最新のOpenAPI Generatorのバージョン取得
+        id: get-latest-openapi-generator-version
         run: |
-          echo ${{ steps.get-lib-version.outputs.response }}
-          echo ${{ steps.get-lib-version.outputs.headers }}
-          echo ${{ steps.get-lib-version.outputs.status }}
-          echo "LIB_VERSION=$(echo ${{ fromJson(steps.get-lib-version.outputs.response).tag_name }} |sed 's/^v//')" >> $GITHUB_ENV
+          echo ${{ steps.get-repo-info-via-github-api.outputs.response }}
+          echo ${{ steps.get-repo-info-via-github-api.outputs.headers }}
+          echo ${{ steps.get-repo-info-via-github-api.outputs.status }}
+          echo "latest-version=$(echo ${{ fromJson(steps.get-repo-info-via-github-api.outputs.response).tag_name }} |sed 's/^v//')" >> $GITHUB_OUTPUT
 
       - name: チェックアウト
         uses: actions/checkout@v4
 
-      - name: アプリ側のバージョン取得
+      - name: 現在のOpenAPI Generatorのバージョン取得
+        id: get-current-openapi-generator-version
         run: |
-          echo "APP_VERSION=$(jq -r '.["generator-cli"].version' ./samples/Dressca/dressca-frontend/openapitools.json)" >> $GITHUB_ENV
+          echo "current-version=$(jq -r '.["generator-cli"].version' ./samples/Dressca/dressca-frontend/openapitools.json)" >> $GITHUB_OUTPUT
 
       - name: アップデート要否を判定
-        id: check_version
+        id: check-version-update
         run: |
-          if [[ ${{ env.LIB_VERSION }} ==  ${{ env.APP_VERSION }} ]]; then
-            echo "UPDATE_REQUIRED=true" >> $GITHUB_ENV
+          if [[ ${{ steps.get-latest-openapi-generator-version.outputs.latest-version }} ==  ${{ steps.get-current-openapi-generator-version.outputs.current-version }} ]]; then
+            echo "update-required=false" >> $GITHUB_OUTPUT
           else
-            echo "UPDATE_REQUIRED=false" >> $GITHUB_ENV
+            echo "update-required=true" >> $GITHUB_OUTPUT
           fi
 
       - name: サマリに出力
         run: |
           echo "# 確認結果" >> $GITHUB_STEP_SUMMARY
-          echo "openapi-generator のバージョンは ${{ env.LIB_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
-          echo "openapitools.json の openapi-generator のバージョンは ${{ env.APP_VERSION }} です。" >> $GITHUB_STEP_SUMMARY
-          echo "アップデート要否の判定結果は ${{ env.UPDATE_REQUIRED }} です。">> $GITHUB_STEP_SUMMARY
+          echo "openapi-generator のバージョンは ${{ steps.get-latest-openapi-generator-version.outputs.latest-version }} です。" >> $GITHUB_STEP_SUMMARY
+          echo "openapitools.json の openapi-generator のバージョンは ${{ steps.get-current-openapi-generator-version.outputs.current-version }} です。" >> $GITHUB_STEP_SUMMARY
+          echo "アップデート要否の判定結果は ${{ steps.check-version-update.outputs.update-required }} です。">> $GITHUB_STEP_SUMMARY
 
       - name: issue を作成
-        id: create-issue #  新規作成します
-        if: ${{ env.UPDATE_REQUIRED == 'true' }}
+        id: create-issue
+        if: ${{ steps.check-version-update.outputs.update-required == 'true' }}
         uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LATEST_VERSION: ${{ steps.get-latest-openapi-generator-version.outputs.latest-version }}
+          CURRENT_VERSION: ${{ steps.get-current-openapi-generator-version.outputs.current-version }}
         with:
           filename: ./.github/ISSUE_TEMPLATE/openapi-generator-update-issue.md
           update_existing: true
           search_existing: open
 
       - name: issue の情報を出力
-        if: ${{ env.UPDATE_REQUIRED == 'true' }}
+        if: ${{ steps.check-version-update.outputs.update-required  == 'true' }}
         run: |
           echo "# issue の作成・更新結果" >> $GITHUB_STEP_SUMMARY
           echo "Created or updated issue number: ${{ steps.create-issue.outputs.number }}" >> $GITHUB_STEP_SUMMARY
