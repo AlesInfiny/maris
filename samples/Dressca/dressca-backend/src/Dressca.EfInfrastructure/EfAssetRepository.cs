@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Assets;
+using Microsoft.EntityFrameworkCore;
 
 namespace Dressca.EfInfrastructure;
 
@@ -21,10 +22,10 @@ internal class EfAssetRepository : IAssetRepository
         => this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
     /// <inheritdoc/>
-    public Asset? Find(string? assetCode)
+    public async Task<Asset?> FindAsync(string? assetCode)
     {
-        return this.dbContext.Assets
+        return await this.dbContext.Assets
             .Where(asset => asset.AssetCode == assetCode)
-            .FirstOrDefault();
+            .FirstOrDefaultAsync();
     }
 }
