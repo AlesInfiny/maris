@@ -58,7 +58,7 @@ jobs:
       - name: issue を作成
         id: create-issue
         if: ${{ steps.check-version-update.outputs.update-required == 'true' }}
-        uses: JasonEtco/create-an-issue@v2
+        uses: dblock/create-a-github-issue@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LATEST_VERSION: ${{ steps.get-latest-openapi-generator-version.outputs.latest-version }}
@@ -72,12 +72,6 @@ jobs:
         if: ${{ steps.check-version-update.outputs.update-required  == 'true' }}
         run: |
           echo "# issue の作成・更新結果" >> $GITHUB_STEP_SUMMARY
-          echo "Created or updated issue number: ${{ steps.create-issue.outputs.number }}" >> $GITHUB_STEP_SUMMARY
+          echo "issue number: ${{ steps.create-issue.outputs.number }}" >> $GITHUB_STEP_SUMMARY
+          echo "status: ${{ steps.create-issue.outputs.status }}" >> $GITHUB_STEP_SUMMARY
           echo "- ${{ steps.create-issue.outputs.url }}" >> $GITHUB_STEP_SUMMARY
-
-      - name: Get Issue Information
-        run: |
-            curl -X GET \
-              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              https://api.github.com/repos/AlesInfiny/maris/issues/${{ steps.create-issue.outputs.number }}
