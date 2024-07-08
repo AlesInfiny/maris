@@ -45,7 +45,7 @@ jobs:
           if [[ ${{ steps.get-latest-openapi-generator-version.outputs.latest-version }} ==  ${{ steps.get-current-openapi-generator-version.outputs.current-version }} ]]; then
             echo "update-required=false" >> $GITHUB_OUTPUT
           else
-            echo "update-required=false" >> $GITHUB_OUTPUT
+            echo "update-required=true" >> $GITHUB_OUTPUT
           fi
 
       - name: サマリに出力
