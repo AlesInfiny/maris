@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maris.Logging.Testing", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maris.Logging.Testing.Tests", "tests\Maris.Logging.Testing.Tests\Maris.Logging.Testing.Tests.csproj", "{768FE796-AC19-4360-BA73-5E1ADB56FB18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dressca.Web.Admin", "src\Dressca.Web.Admin\Dressca.Web.Admin.csproj", "{668BFA10-F7CB-463C-AF7D-7555B2F52384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web.Admin", "src\Dressca.Web.Admin\Dressca.Web.Admin.csproj", "{668BFA10-F7CB-463C-AF7D-7555B2F52384}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web.Admin.Dto", "src\Dressca.Web.Admin.Dto\Dressca.Web.Admin.Dto.csproj", "{C79AC59D-F125-4465-8263-99ACFEAFC02A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{668BFA10-F7CB-463C-AF7D-7555B2F52384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{668BFA10-F7CB-463C-AF7D-7555B2F52384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{668BFA10-F7CB-463C-AF7D-7555B2F52384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C79AC59D-F125-4465-8263-99ACFEAFC02A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C79AC59D-F125-4465-8263-99ACFEAFC02A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C79AC59D-F125-4465-8263-99ACFEAFC02A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C79AC59D-F125-4465-8263-99ACFEAFC02A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

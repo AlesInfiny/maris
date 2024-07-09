@@ -13,21 +13,22 @@
     }
   ],
   "paths": {
-    "/WeatherForecast": {
+    "/api/catalog-brands": {
       "get": {
         "tags": [
-          "WeatherForecast"
+          "CatalogBrands"
         ],
-        "operationId": "WeatherForecast_Get",
+        "summary": "カタログブランドの一覧を取得します。",
+        "operationId": "getCatalogBrands",
         "responses": {
           "200": {
-            "description": "",
+            "description": "成功。",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
+                    "$ref": "#/components/schemas/CatalogBrandResponse"
                   }
                 }
               }
@@ -39,25 +40,24 @@
   },
   "components": {
     "schemas": {
-      "WeatherForecast": {
+      "CatalogBrandResponse": {
         "type": "object",
+        "description": "カタログブランドのレスポンスデータを表します。\nカタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
         "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "temperatureC": {
+          "id": {
             "type": "integer",
-            "format": "int32"
+            "description": "カタログブランド Id を取得または設定します。\n            ",
+            "format": "int64"
           },
-          "temperatureF": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "summary": {
+          "name": {
             "type": "string",
-            "nullable": true
+            "description": "ブランド名を取得または設定します。\n            ",
+            "minLength": 1
           }
         }
       }

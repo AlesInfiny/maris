@@ -1,5 +1,9 @@
 ﻿using System.Text.Json;
+using Dressca.ApplicationCore;
+using Dressca.EfInfrastructure;
+using Dressca.Store.Assets.StaticFiles;
 using Dressca.Web.Admin.Controllers;
+using Dressca.Web.Admin.Mapper;
 using Microsoft.AspNetCore.HttpLogging;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +42,12 @@ builder.Services.AddOpenApiDocument(config =>
     };
 });
 
+builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
+builder.Services.AddStaticFileAssetStore();
+builder.Services.AddDresscaApplicationCore();
+builder.Services.AddDresscaDtoMapper();
+
+
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddHttpLogging(logging =>
@@ -54,8 +64,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
     app.UseSwaggerUi();
-    app.UseExceptionHandler(ErrorController.DevelopmentErrorRoute);
     app.UseHttpLogging();
+    app.UseExceptionHandler(ErrorController.DevelopmentErrorRoute);
 }
 else
 {
@@ -64,8 +74,12 @@ else
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapFallbackToFile("/index.html");
 
 app.Run();
