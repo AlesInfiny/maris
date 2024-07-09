@@ -4,18 +4,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "dev": "vite --mode dev",
+    "build:dev": "run-p type-check \"build-only:dev {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
-    "build-only": "vite build",
+    "build-only:dev": "vite build --mode dev",
     "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "axios": "^1.7.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
