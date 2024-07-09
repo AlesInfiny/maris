@@ -13,7 +13,10 @@
     "build-only:dev": "vite build --mode dev",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "generate-client": "run-s openapi-client:clean openapi-client:generate --print-label",
+    "openapi-client:clean": "node -e \"fs.promises.rm('./src/generated/api-client', {recursive: true, force: true})\"",
+    "openapi-client:generate": "openapi-generator-cli generate -g typescript-axios -i ../../../dressca-backend/src/Dressca.Web.Admin/dressca-admin-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
   },
   "dependencies": {
     "axios": "^1.7.2",
