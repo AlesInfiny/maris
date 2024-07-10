@@ -1,6 +1,6 @@
 ---
 title: アプリケーション セキュリティ編
-description: AlesInfiny Maris OSS Edition において アプリケーションセキュリティを担保するための 方針を説明します。
+description: アプリケーションセキュリティを 担保するための方針を説明します。
 ---
 
 # アプリケーションセキュリティ編 {#top}
