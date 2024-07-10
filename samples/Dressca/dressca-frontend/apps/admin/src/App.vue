@@ -18,7 +18,7 @@ async function ApiCall() {
       >
         <div class="mx-auto flex justify-between px-4 md:px-24 lg:px-24">
           <div>
-            <router-link class="text-2xl" to="/">Dressca 管理用</router-link>
+            Dressca 管理
           </div>
           <div class="flex space-x-5 sm:space-x-8 lg:space-x-12">
             <button @click="ApiCall">APIコール</button>
@@ -29,7 +29,7 @@ async function ApiCall() {
     <footer
       class="w-full mx-auto border-t py-4 px-24 text-base bg-black text-gray-500"
     >
-      <p>&copy; 2023 - Dressca - Privacy</p>
+      <p>&copy; 2024 - Dressca - Privacy</p>
     </footer>
   </div>
 </template>
