@@ -9,7 +9,7 @@
     "dev": "run-p dev:customer dev:admin --print-label",
     "dev:customer": "npm run dev -w apps/customer",
     "dev:admin": "npm run dev -w apps/admin",
-    "build:dev": "npm run build-only:dev --workspaces --if-present",
+    "build-only:dev": "npm run build-only:dev --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "lint:ci": "npm run lint:ci --workspaces --if-present",
     "typecheck": "vue-tsc --build --force",
