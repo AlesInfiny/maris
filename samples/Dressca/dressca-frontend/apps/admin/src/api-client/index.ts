@@ -22,6 +22,4 @@ const catalogBrandsApi = new apiClient.CatalogBrandsApi(
   axiosInstance,
 );
 
-export {
-  catalogBrandsApi,
-};
+export { catalogBrandsApi };

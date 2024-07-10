@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import { catalogBrandsApi } from '@/api-client';
 
 async function ApiCall() {
@@ -7,7 +7,6 @@ async function ApiCall() {
   console.log(catalogBrands);
   window.alert(JSON.stringify(catalogBrands));
 }
-
 </script>
 
 <template>
