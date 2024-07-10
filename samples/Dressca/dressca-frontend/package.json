@@ -12,7 +12,7 @@
     "build-only:dev": "npm run build-only:dev --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "lint:ci": "npm run lint:ci --workspaces --if-present",
-    "typecheck": "vue-tsc --build --force",
+    "typecheck": "vue-tsc --build --force --verbose",
     "test:unit": "npm run test:unit --workspaces --if-present"
   },
   "workspaces": [
