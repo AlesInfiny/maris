@@ -1,11 +1,12 @@
-const base = 'api';
+import type { Connect } from 'vite';
 import type {
   BasketResponse,
   BasketItemResponse,
   PostBasketItemsRequest,
   PutBasketItemsRequest,
 } from '../../src/generated/api-client';
-import type { Connect } from 'vite';
+
+const base = 'api';
 
 const basket: BasketResponse = {
   buyerId: 'xxxxxxxxxxxxxxxxxxxxxxxxxx',
@@ -212,7 +213,6 @@ export const basketApiMock = (middlewares: Connect.Server) => {
             if (target.length === 0) {
               res.writeHead(400, { 'Content-Type': 'application/json' });
               res.end();
-              return;
             } else {
               target[0].quantity = putBasketItem.quantity;
             }
@@ -222,7 +222,6 @@ export const basketApiMock = (middlewares: Connect.Server) => {
         calcBasketAccount();
         res.writeHead(204, { 'Content-Type': 'application/json' });
         res.end();
-        return;
       }
     });
   });
