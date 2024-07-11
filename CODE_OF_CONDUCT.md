@@ -22,18 +22,20 @@ description: AlesInfiny Maris OSS Edition コントリビューター行動規�
 - 建設的なフィードバックを与え、礼儀正しく受け入れる
 - 私たちの過ちの影響を受けた人々に責任を受け入れ、謝罪し、そしてその経験から学ぶ
 - 個人としてだけでなく、コミュニティ全体にとっても最善であることに焦点を当てる
-- 許容できない行動の例は次のとおりです:
-    - 性的な言葉や画像の使用、および性的な注意またはその他あらゆる種類の問題行為
-    - トローリング、侮辱的または中傷的なコメント、個人的または政治的攻撃
-    - 公的またはプライベートの嫌がらせ
-    - 明示的な許可なしに、住所や電子メールアドレスなど、他者の個人情報を公開する
-    - 職業上不適切と合理的に考えられるその他の行為
+
+許容できない行動の例は次のとおりです:
+
+- 性的な言葉や画像の使用、および性的な注意またはその他あらゆる種類の問題行為
+- トローリング、侮辱的または中傷的なコメント、個人的または政治的攻撃
+- 公的またはプライベートの嫌がらせ
+- 明示的な許可なしに、住所や電子メールアドレスなど、他者の個人情報を公開する
+- 職業上不適切と合理的に考えられるその他の行為
 
 ## 執行責任
 
 コミュニティリーダーは、許容される行動の基準を明確にし、実施する責任があり、不適切、脅迫的、攻撃的、または有害と見なされる行動に応じて、適切で公正な是正措置を講じます。
 
-コミュニティリーダーは、コメント、コミット、コード、 wiki の編集、問題、およびこの行動規範に沿っていないその他の貢献を削除、編集、または拒否する権利と責任を持ち、適切な場合はモデレーションの決定の理由を伝えます。
+コミュニティリーダーは、コメント、コミット、コード、wikiの編集、問題、およびこの行動規範に沿っていないその他の貢献を削除、編集、または拒否する権利と責任を持ち、適切な場合はモデレーションの決定の理由を伝えます。
 
 ## 適用範囲
 
@@ -75,11 +77,11 @@ description: AlesInfiny Maris OSS Edition コントリビューター行動規�
 
 ## 帰属
 
-この行動規範は、[https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v2.1] で利用可能な [Contributor Covenant][homepage] バージョン 2.1 を基に作成されています。
+この行動規範は、[https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v2.1]で利用可能な[Contributor Covenant][homepage] バージョン 2.1を基に作成されています。
 
-コミュニティへの影響ガイドラインは [Mozilla's code of conduct enforcement ladder][Mozilla CoC] に適合しています。
+コミュニティへの影響ガイドラインは[Mozilla's code of conduct enforcement ladder][Mozilla CoC]に適合しています。
 
-この行動規範に関する一般的な質問への回答については、 [https://www.contributor-covenant.org/faq][FAQ] のFAQを参照してください。翻訳は [https://www.contributor-covenant.org/translations][translations] で入手できます。
+この行動規範に関する一般的な質問への回答については、[https://www.contributor-covenant.org/faq][FAQ]のFAQを参照してください。翻訳は[https://www.contributor-covenant.org/translations][translations]で入手できます。
 
 [homepage]: https://www.contributor-covenant.org
 [v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
@@ -88,3 +90,18 @@ description: AlesInfiny Maris OSS Edition コントリビューター行動規�
 [translations]: https://www.contributor-covenant.org/translations
 
 <!-- textlint-enable -->
+
+<!-- textlint-disable @textlint-ja/no-synonyms -->
+
+Contributor Covenant は [Creative Commons Attribution 4.0 International Public License](https://github.com/EthicalSource/contributor_covenant/blob/release/LICENSE.md) に基づき許諾されています。
+
+## 変更箇所 {#what-is-changed}
+
+この行動規範は以下の点を改変しています。
+
+- 本プロジェクトの Markdown 記述ルールに基づき独自のヘッダーを付与
+- 本プロジェクトの Markdown 記述ルールに基づき箇条書きの記号を変更
+- 違反報告フォームのリンクを挿入
+- 「帰属」にライセンス（ Creative Commons Attribution 4.0 International Public License ）を記載
+
+<!-- textlint-enable @textlint-ja/no-synonyms -->
