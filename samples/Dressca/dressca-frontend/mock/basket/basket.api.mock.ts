@@ -155,6 +155,24 @@ const mockBasketItems: BasketItemResponse[] = [
   },
 ];
 
+function calcBasketAccount() {
+  let totalItemsPrice = 0;
+  basket.basketItems?.forEach((item) => {
+    item.subTotal = item.unitPrice * item.quantity;
+    totalItemsPrice += item.subTotal;
+  });
+  if (!basket || !basket.account) {
+    return;
+  }
+  basket.account.consumptionTaxRate = 0.1;
+  basket.account.totalItemsPrice = totalItemsPrice;
+  const deliveryCharge = totalItemsPrice >= 5000 ? 0 : 500;
+  basket.account.deliveryCharge = deliveryCharge;
+  const consumptionTax = Math.floor((totalItemsPrice + deliveryCharge) * 0.1);
+  basket.account.consumptionTax = consumptionTax;
+  basket.account.totalPrice = totalItemsPrice + consumptionTax + deliveryCharge;
+}
+
 export const basketApiMock = (middlewares: Connect.Server) => {
   middlewares.use(`/${base}/basket-items`, (req, res) => {
     if (req.method === 'GET') {
@@ -226,21 +244,3 @@ export const basketApiMock = (middlewares: Connect.Server) => {
     });
   });
 };
-
-function calcBasketAccount() {
-  let totalItemsPrice = 0;
-  basket.basketItems?.forEach((item) => {
-    item.subTotal = item.unitPrice * item.quantity;
-    totalItemsPrice += item.subTotal;
-  });
-  if (!basket || !basket.account) {
-    return;
-  }
-  basket.account.consumptionTaxRate = 0.1;
-  basket.account.totalItemsPrice = totalItemsPrice;
-  const deliveryCharge = totalItemsPrice >= 5000 ? 0 : 500;
-  basket.account.deliveryCharge = deliveryCharge;
-  const consumptionTax = Math.floor((totalItemsPrice + deliveryCharge) * 0.1);
-  basket.account.consumptionTax = consumptionTax;
-  basket.account.totalPrice = totalItemsPrice + consumptionTax + deliveryCharge;
-}

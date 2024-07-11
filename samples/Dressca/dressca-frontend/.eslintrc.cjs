@@ -10,7 +10,6 @@ module.exports = {
     '@vue/eslint-config-prettier',
   ],
   rules: {
-    '@typescript-eslint/no-use-before-define': 'off',
     'import/prefer-default-export': 'off',
     'no-console': 'off',
   },
