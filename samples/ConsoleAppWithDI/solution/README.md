@@ -438,7 +438,7 @@ internal class ValidatableParameter : IValidatableObject
         {
             yield return new ValidationResult(
                 "1 週間より前の日付は指定できません。",
-                new string[] { nameof(this.ExecuteDate) });
+                [nameof(this.ExecuteDate)]);
         }
     }
 }

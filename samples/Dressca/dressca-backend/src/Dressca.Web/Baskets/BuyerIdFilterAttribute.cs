@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Dressca.Web.Configuration;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Options;
 
 namespace Dressca.Web.Baskets;
 
@@ -20,13 +22,15 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
     private readonly TimeProvider timeProvider;
+    private readonly WebServerOptions options;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
+    /// <param name="options">構成オプションに設定された Cookie の設定。</param>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
-    public BuyerIdFilterAttribute(string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System)
+    public BuyerIdFilterAttribute(IOptions<WebServerOptions> options, string buyerIdCookieName = DefaultBuyerIdCookieName)
+        : this(buyerIdCookieName, TimeProvider.System, options.Value)
     {
     }
 
@@ -36,16 +40,19 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
+    /// <param name="options">構成オプション。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
     ///   <paramref name="timeProvider"/> が <see langword="null"/> です。
+    ///   <paramref name="options"/> が <see langword="null"/> です。
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions options)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
+        this.options = options ?? throw new ArgumentNullException(nameof(options));
     }
 
     /// <inheritdoc/>
@@ -74,13 +81,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            new CookieOptions()
-            {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Secure = true,
-                Expires = this.timeProvider.GetLocalNow().AddDays(7),
-            });
+            this.options.CookieSettings.CreateCookieOptions(this.timeProvider));
 
         base.OnActionExecuted(context);
     }

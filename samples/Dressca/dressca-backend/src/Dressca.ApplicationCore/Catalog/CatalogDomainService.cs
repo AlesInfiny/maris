@@ -40,7 +40,7 @@ internal class CatalogDomainService : ICatalogDomainService
         var notExistsCatalogItemIds = catalogItemIds
             .Where(catalogItemId => !items.Any(catalogItem => catalogItem.Id == catalogItemId))
             .ToArray();
-        if (notExistsCatalogItemIds.Any())
+        if (notExistsCatalogItemIds.Length != 0)
         {
             this.logger.LogInformation(
                 Events.CatalogItemIdDoesNotExistInRepository,

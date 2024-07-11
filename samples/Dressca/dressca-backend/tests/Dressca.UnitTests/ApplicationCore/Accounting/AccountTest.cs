@@ -21,7 +21,7 @@ public class AccountTest
     public void GetItemsTotalPrice_会計アイテムがない_合計金額は0円()
     {
         // Arrange
-        var account = new Account(Array.Empty<AccountItem>());
+        var account = new Account([]);
 
         // Act
         var itemsTotal = account.GetItemsTotalPrice();
@@ -66,7 +66,7 @@ public class AccountTest
     public void GetDeliveryCharge_会計アイテムがない_送料は0円()
     {
         // Arrange
-        var account = new Account(Array.Empty<AccountItem>());
+        var account = new Account([]);
 
         // Act
         var deliveryCharge = account.GetDeliveryCharge();

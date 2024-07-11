@@ -15,14 +15,16 @@ configuration.ts
 git_push.sh
 index.ts
 models/account-response.ts
+models/basket-item-response-catalog-item.ts
 models/basket-item-response.ts
+models/basket-response-account.ts
 models/basket-response.ts
 models/catalog-brand-response.ts
 models/catalog-category-response.ts
-models/catalog-item-response-all-of.ts
 models/catalog-item-response.ts
 models/catalog-item-summary-response.ts
 models/index.ts
+models/order-item-response-item-ordered.ts
 models/order-item-response.ts
 models/order-response.ts
 models/paged-list-of-catalog-item-response.ts

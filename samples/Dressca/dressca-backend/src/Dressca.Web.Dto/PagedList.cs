@@ -15,7 +15,7 @@ public class PagedList<T>
     /// <param name="pageSize">1 ページあたりの件数。</param>
     public PagedList(IList<T>? items, int totalCount, int page, int pageSize)
     {
-        this.Items = items ?? new List<T>();
+        this.Items = items ?? [];
         this.TotalCount = totalCount;
         this.Page = page;
         this.PageSize = pageSize;

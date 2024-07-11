@@ -4,7 +4,7 @@ site_name: AlesInfiny Maris OSS Edition
 site_url: https://maris.alesinfiny.org/
 docs_dir: contents
 copyright: "Copyright &copy; 2023 BIPROGY Inc. All rights reserved."
-site_author: "アドバンスド開発技術部"
+site_author: "AlesInfiny Maris OSS Edition コミュニティ"
 site_description: "AlesInfiny Maris OSS Edition のポータルサイトです。"
 site_dir: build-artifacts
 
@@ -70,6 +70,7 @@ nav:
               - 事前準備: guidebooks/how-to-develop/vue-js/preparation.md
               - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md
               - ブランクプロジェクトのフォルダー構造: guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
+              - プロジェクトの共通設定: guidebooks/how-to-develop/vue-js/project-settings.md
               - 開発に使用するパッケージ: guidebooks/how-to-develop/vue-js/optional-packages.md
               - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/vue-js/css.md
               - 静的コード分析とフォーマット: guidebooks/how-to-develop/vue-js/static-verification-and-format.md
@@ -79,6 +80,8 @@ nav:
               - guidebooks/how-to-develop/local-environment/index.md
           - アプリケーションの発行:
               - guidebooks/how-to-develop/publication/index.md
+          - CORS 環境の構築:
+              - guidebooks/how-to-develop/cors/index.md
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
       - マイグレーション:

@@ -13,21 +13,22 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import { BasketResponse } from '../models';
+import type { BasketResponse } from '../models';
 // @ts-ignore
-import { PostBasketItemsRequest } from '../models';
+import type { PostBasketItemsRequest } from '../models';
 // @ts-ignore
-import { ProblemDetails } from '../models';
+import type { ProblemDetails } from '../models';
 // @ts-ignore
-import { PutBasketItemsRequest } from '../models';
+import type { PutBasketItemsRequest } from '../models';
 /**
  * BasketItemsApi - axios parameter creator
  * @export
@@ -41,7 +42,7 @@ export const BasketItemsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteBasketItem: async (catalogItemId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteBasketItem: async (catalogItemId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'catalogItemId' is not null or undefined
             assertParamExists('deleteBasketItem', 'catalogItemId', catalogItemId)
             const localVarPath = `/api/basket-items/{catalogItemId}`
@@ -74,7 +75,7 @@ export const BasketItemsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBasketItems: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getBasketItems: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/basket-items`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -105,7 +106,7 @@ export const BasketItemsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postBasketItem: async (postBasketItemsRequest: PostBasketItemsRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postBasketItem: async (postBasketItemsRequest: PostBasketItemsRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'postBasketItemsRequest' is not null or undefined
             assertParamExists('postBasketItem', 'postBasketItemsRequest', postBasketItemsRequest)
             const localVarPath = `/api/basket-items`;
@@ -141,7 +142,7 @@ export const BasketItemsApiAxiosParamCreator = function (configuration?: Configu
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putBasketItems: async (putBasketItemsRequest: Array<PutBasketItemsRequest>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        putBasketItems: async (putBasketItemsRequest: Array<PutBasketItemsRequest>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'putBasketItemsRequest' is not null or undefined
             assertParamExists('putBasketItems', 'putBasketItemsRequest', putBasketItemsRequest)
             const localVarPath = `/api/basket-items`;
@@ -187,9 +188,11 @@ export const BasketItemsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteBasketItem(catalogItemId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteBasketItem(catalogItemId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteBasketItem(catalogItemId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BasketItemsApi.deleteBasketItem']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
@@ -197,9 +200,11 @@ export const BasketItemsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getBasketItems(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BasketResponse>> {
+        async getBasketItems(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BasketResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getBasketItems(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BasketItemsApi.getBasketItems']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * この API では、システムに登録されていないカタログアイテム Id を指定した場合 HTTP 400 を返却します。  また買い物かごに追加していないカタログアイテムを指定した場合、その商品を買い物かごに追加します。  すでに買い物かごに追加されているカタログアイテムを指定した場合、指定した数量、買い物かご内の数量を追加します。    買い物かご内のカタログアイテムの数量が 0 未満になるように減じることはできません。  計算の結果数量が 0 未満になる場合 HTTP 500 を返却します。
@@ -208,9 +213,11 @@ export const BasketItemsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postBasketItem(postBasketItemsRequest: PostBasketItemsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async postBasketItem(postBasketItemsRequest: PostBasketItemsRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.postBasketItem(postBasketItemsRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BasketItemsApi.postBasketItem']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * この API では、買い物かご内に存在する商品の数量を変更できます。  買い物かご内に存在しないカタログアイテム Id を指定すると HTTP 400 を返却します。  またシステムに登録されていないカタログアイテム Id を指定した場合も HTTP 400 を返却します。
@@ -219,9 +226,11 @@ export const BasketItemsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async putBasketItems(putBasketItemsRequest: Array<PutBasketItemsRequest>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async putBasketItems(putBasketItemsRequest: Array<PutBasketItemsRequest>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.putBasketItems(putBasketItemsRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['BasketItemsApi.putBasketItems']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
@@ -290,7 +299,7 @@ export class BasketItemsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BasketItemsApi
      */
-    public deleteBasketItem(catalogItemId: number, options?: AxiosRequestConfig) {
+    public deleteBasketItem(catalogItemId: number, options?: RawAxiosRequestConfig) {
         return BasketItemsApiFp(this.configuration).deleteBasketItem(catalogItemId, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -301,7 +310,7 @@ export class BasketItemsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BasketItemsApi
      */
-    public getBasketItems(options?: AxiosRequestConfig) {
+    public getBasketItems(options?: RawAxiosRequestConfig) {
         return BasketItemsApiFp(this.configuration).getBasketItems(options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -313,7 +322,7 @@ export class BasketItemsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BasketItemsApi
      */
-    public postBasketItem(postBasketItemsRequest: PostBasketItemsRequest, options?: AxiosRequestConfig) {
+    public postBasketItem(postBasketItemsRequest: PostBasketItemsRequest, options?: RawAxiosRequestConfig) {
         return BasketItemsApiFp(this.configuration).postBasketItem(postBasketItemsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -325,7 +334,8 @@ export class BasketItemsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof BasketItemsApi
      */
-    public putBasketItems(putBasketItemsRequest: Array<PutBasketItemsRequest>, options?: AxiosRequestConfig) {
+    public putBasketItems(putBasketItemsRequest: Array<PutBasketItemsRequest>, options?: RawAxiosRequestConfig) {
         return BasketItemsApiFp(this.configuration).putBasketItems(putBasketItemsRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

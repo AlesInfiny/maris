@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.Catalog;
 /// </summary>
 public class CatalogItem
 {
-    private readonly List<CatalogItemAsset> assets = new();
+    private readonly List<CatalogItemAsset> assets = [];
     private CatalogCategory? catalogCategory;
     private CatalogBrand? catalogBrand;
     private string name;
