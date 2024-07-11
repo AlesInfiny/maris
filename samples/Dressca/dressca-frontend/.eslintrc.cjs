@@ -9,6 +9,10 @@ module.exports = {
     '@vue/eslint-config-airbnb-with-typescript',
     '@vue/eslint-config-prettier',
   ],
+  rules: {
+    '@typescript-eslint/no-use-before-define': 'off',
+    'import/prefer-default-export': 'off',
+  },
   overrides: [
     {
       files: [
