@@ -12,11 +12,11 @@ export async function postOrder(
   azanaAndOthers: string,
 ): Promise<number> {
   const postOrderInput: PostOrderRequest = {
-    fullName: fullName,
-    postalCode: postalCode,
-    todofuken: todofuken,
-    shikuchoson: shikuchoson,
-    azanaAndOthers: azanaAndOthers,
+    fullName,
+    postalCode,
+    todofuken,
+    shikuchoson,
+    azanaAndOthers,
   };
   try {
     const orderResponse = await ordersApi.postOrder(postOrderInput);
