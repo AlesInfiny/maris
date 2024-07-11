@@ -11,8 +11,8 @@ import { useCatalogStore } from '@/stores/catalog/catalog';
 import CarouselSlider from '@/components/common/CarouselSlider.vue';
 import Loading from '@/components/common/LoadingSpinner.vue';
 import { useRouter } from 'vue-router';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();

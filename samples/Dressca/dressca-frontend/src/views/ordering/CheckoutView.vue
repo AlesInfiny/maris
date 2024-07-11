@@ -5,8 +5,8 @@ import { useUserStore } from '@/stores/user/user';
 import { postOrder } from '@/services/ordering/ordering-service';
 
 import { useRouter } from 'vue-router';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore();
@@ -27,7 +27,7 @@ const checkout = async () => {
       getAddress.value.shikuchoson,
       getAddress.value.azanaAndOthers,
     );
-    router.push({ name: 'ordering/done', params: { orderId: orderId } });
+    router.push({ name: 'ordering/done', params: { orderId } });
   } catch (error) {
     console.error(error);
     router.push({ name: 'error' });
@@ -38,7 +38,6 @@ onMounted(async () => {
   await basketStore.fetch();
   if (getBasket.value.basketItems?.length === 0) {
     router.push('/');
-    return;
   }
 });
 </script>

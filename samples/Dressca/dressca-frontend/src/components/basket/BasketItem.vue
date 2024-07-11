@@ -4,8 +4,8 @@ import type { BasketItemResponse } from '@/generated/api-client/models/basket-it
 import { TrashIcon } from '@heroicons/vue/24/outline';
 import * as yup from 'yup';
 import { useField, useForm } from 'vee-validate';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 
 const props = defineProps<{
   item: BasketItemResponse;

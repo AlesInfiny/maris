@@ -1,4 +1,4 @@
-export default function () {
+export function assetHelper() {
   const getAssetUrl = (assetCode: string): string => {
     if (assetCode === '') {
       return `${import.meta.env.VITE_NO_ASSET_URL}`;
