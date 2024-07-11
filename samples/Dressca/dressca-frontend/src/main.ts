@@ -1,12 +1,12 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import { authenticationGuard } from '@/shared/authentication/authentication-guard';
 import App from './App.vue';
 import router from './router';
 
 import '@/assets/base.css';
 import '@/config/yup.config';
 
-import { authenticationGuard } from '@/shared/authentication/authentication-guard';
 
 const app = createApp(App);
 const pinia = createPinia();
