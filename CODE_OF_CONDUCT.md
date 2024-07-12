@@ -77,17 +77,11 @@ description: AlesInfiny Maris OSS Edition コントリビューター行動規�
 
 ## 帰属
 
-この行動規範は、[https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v2.1]で利用可能な[Contributor Covenant][homepage] バージョン 2.1を基に作成されています。
+この行動規範は、[v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)で利用可能な[Contributor Covenant](https://www.contributor-covenant.org) バージョン 2.1を基に作成されています。
 
-コミュニティへの影響ガイドラインは[Mozilla's code of conduct enforcement ladder][Mozilla CoC]に適合しています。
+コミュニティへの影響ガイドラインは[Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity)に適合しています。
 
-この行動規範に関する一般的な質問への回答については、[https://www.contributor-covenant.org/faq][FAQ]のFAQを参照してください。翻訳は[https://www.contributor-covenant.org/translations][translations]で入手できます。
-
-[homepage]: https://www.contributor-covenant.org
-[v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
-[Mozilla CoC]: https://github.com/mozilla/diversity
-[FAQ]: https://www.contributor-covenant.org/faq
-[translations]: https://www.contributor-covenant.org/translations
+この行動規範に関する一般的な質問への回答については、[FAQ](https://github.com/mozilla/diversity)のFAQを参照してください。翻訳は[translations](https://www.contributor-covenant.org/translations)で入手できます。
 
 <!-- textlint-enable -->
 
@@ -101,6 +95,7 @@ Contributor Covenant は [Creative Commons Attribution 4.0 International Public 
 
 - 本プロジェクトの Markdown 記述ルールに基づき独自のヘッダーを付与
 - 本プロジェクトの Markdown 記述ルールに基づき箇条書きの記号を変更
+- 本プロジェクトの Markdown 記述ルールに基づきリンクの書き方を変更
 - 違反報告フォームのリンクを挿入
 - 「帰属」にライセンス（ Creative Commons Attribution 4.0 International Public License ）を記載
 
