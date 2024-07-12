@@ -1,8 +1,4 @@
----
-title: 行動規範
-description: AlesInfiny Maris OSS Edition コントリビューター行動規範です。
----
-
+<!-- markdownlint-disable CMD001 -->
 <!-- textlint-disable -->
 
 # コントリビューター行動規範
@@ -85,18 +81,18 @@ description: AlesInfiny Maris OSS Edition コントリビューター行動規�
 
 <!-- textlint-enable -->
 
-<!-- textlint-disable @textlint-ja/no-synonyms -->
+<!-- textlint-disable @textlint-ja/no-synonyms, @textlint-rule/require-header-id -->
 
 Contributor Covenant は [Creative Commons Attribution 4.0 International Public License](https://github.com/EthicalSource/contributor_covenant/blob/release/LICENSE.md) に基づき許諾されています。
 
-## 変更箇所 {#what-is-changed}
+## 変更箇所
 
 この行動規範は以下の点を改変しています。
 
-- 本プロジェクトの Markdown 記述ルールに基づき独自のヘッダーを付与
 - 本プロジェクトの Markdown 記述ルールに基づき箇条書きの記号を変更
 - 本プロジェクトの Markdown 記述ルールに基づきリンクの書き方を変更
 - 違反報告フォームのリンクを挿入
 - 「帰属」にライセンス（ Creative Commons Attribution 4.0 International Public License ）を記載
 
-<!-- textlint-enable @textlint-ja/no-synonyms -->
+<!-- textlint-enable @textlint-ja/no-synonyms, @textlint-rule/require-header-id -->
+<!-- markdownlint-enable CMD001 -->
