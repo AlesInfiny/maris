@@ -1,6 +1,11 @@
 import router from '@/router';
 import { showToast } from '@/services/notification/notificationService';
-import { CustomError, UnauthorizedError, NetworkError } from './custom-error';
+import {
+  CustomErrorBase,
+  UnauthorizedError,
+  NetworkError,
+  ServerError,
+} from './custom-error';
 import { useRoutingStore } from '@/stores/routing/routing';
 
 export function errorHandleBase(
@@ -8,9 +13,10 @@ export function errorHandleBase(
   callback: () => void,
   handlingUnauthorizedError: (() => void) | null = null,
   handlingNetworkError: (() => void) | null = null,
+  handlingServerError: (() => void) | null = null,
 ) {
   // ハンドリングできるエラーの場合はコールバックを実行
-  if (error instanceof CustomError) {
+  if (error instanceof CustomErrorBase) {
     callback();
 
     // エラーの種類によって共通処理を行う
@@ -29,6 +35,12 @@ export function errorHandleBase(
         handlingNetworkError();
       } else {
         showToast('ネットワークエラーが発生しました。');
+      }
+    } else if (error instanceof ServerError) {
+      if (handlingServerError) {
+        handlingServerError();
+      } else {
+        showToast('サーバーエラーが発生しました。');
       }
     }
   } else {
