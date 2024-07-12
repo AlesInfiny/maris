@@ -1,4 +1,4 @@
-export abstract class CustomError extends Error {
+export abstract class CustomErrorBase extends Error {
   cause?: Error | null;
   constructor(message: string, cause?: Error) {
     super(message);
@@ -7,7 +7,14 @@ export abstract class CustomError extends Error {
   }
 }
 
-export class NetworkError extends CustomError {
+export class HttpError extends CustomErrorBase {
+  constructor(message: string, cause?: Error) {
+    super(message, cause);
+    this.name = 'HttpError';
+  }
+}
+
+export class NetworkError extends HttpError {
   constructor(message: string, cause?: Error) {
     super(message, cause);
     this.name = 'NetworkError';
