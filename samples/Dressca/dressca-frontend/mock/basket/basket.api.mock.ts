@@ -158,6 +158,7 @@ const mockBasketItems: BasketItemResponse[] = [
 function calcBasketAccount() {
   let totalItemsPrice = 0;
   basket.basketItems?.forEach((item) => {
+    // eslint-disable-next-line no-param-reassign
     item.subTotal = item.unitPrice * item.quantity;
     totalItemsPrice += item.subTotal;
   });
@@ -195,7 +196,9 @@ export const basketApiMock = (middlewares: Connect.Server) => {
     }
 
     let body = '';
-    req.on('data', (chunk) => (body += chunk));
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
     req.on('end', () => {
       if (req.method === 'POST') {
         const dto: PostBasketItemsRequest = JSON.parse(body);

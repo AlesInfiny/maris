@@ -64,7 +64,9 @@ export const orderingApiMock = (middlewares: Connect.Server) => {
     }
 
     let body = '';
-    req.on('data', (chunk) => (body += chunk));
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
     req.on('end', () => {
       if (req.method === 'POST') {
         const dto: PostOrderRequest = JSON.parse(body);

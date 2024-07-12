@@ -22,7 +22,7 @@ const state = reactive({
 
 const nextSlide = () => {
   state.currentIndex =
-    (state.currentIndex + 1 + props.items?.length) % props.items.length;
+    (state.currentIndex + 1 + props.items.length) % props.items.length;
 };
 
 const prevSlide = () => {
