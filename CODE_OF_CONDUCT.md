@@ -77,11 +77,11 @@ description: AlesInfiny Maris OSS Edition コントリビューター行動規�
 
 ## 帰属
 
-この行動規範は、[v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)で利用可能な[Contributor Covenant](https://www.contributor-covenant.org) バージョン 2.1を基に作成されています。
+この行動規範は、[https://www.contributor-covenant.org/version/2/1/code_of_conduct.html](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)で利用可能な[Contributor Covenant](https://www.contributor-covenant.org) バージョン 2.1を基に作成されています。
 
 コミュニティへの影響ガイドラインは[Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity)に適合しています。
 
-この行動規範に関する一般的な質問への回答については、[FAQ](https://github.com/mozilla/diversity)のFAQを参照してください。翻訳は[translations](https://www.contributor-covenant.org/translations)で入手できます。
+この行動規範に関する一般的な質問への回答については、[FAQ](https://www.contributor-covenant.org/faq)のFAQを参照してください。翻訳は[translations](https://www.contributor-covenant.org/translations)で入手できます。
 
 <!-- textlint-enable -->
 
