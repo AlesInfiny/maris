@@ -21,23 +21,16 @@ export class NetworkError extends HttpError {
   }
 }
 
-export class UnauthorizedError extends CustomError {
+export class UnauthorizedError extends HttpError {
   constructor(message: string, cause?: Error) {
     super(message, cause);
     this.name = 'UnauthorizedError';
   }
 }
 
-export class ServerError extends CustomError {
+export class ServerError extends HttpError {
   constructor(message: string, cause?: Error) {
     super(message, cause);
     this.name = 'ServerError';
-  }
-}
-
-export class HttpError extends CustomError {
-  constructor(message: string, cause?: Error) {
-    super(message, cause);
-    this.name = 'HttpError';
   }
 }
