@@ -25,7 +25,7 @@ API 通信においては、ステータスコードが 40x のエラーを業�
 
 ### 例外の捕捉 {#catch-exceptions}
 
-クライアントサイドで発生する例外は、以下のことが考えられます。
+クライアントサイドで発生する例外には以下のようなものが考えられます。
 
 - ユーザーが操作した際に発生する例外
 - API 通信で発生する例外
@@ -40,7 +40,7 @@ API 通信においては、ステータスコードが 40x のエラーを業�
 | JavaScript の構文エラーや Vue アプリケーション外の例外 | `window.onerror`             |
 | 非同期処理で発生する例外                              | `window.onunhandledrejection` |
 
-HTTP 通信で発生する例外について、ステータスコードに対して共通処理をする場合は、 Axios の `axios.interceptors.response` を利用します。
+HTTP 通信で発生する例外について、レスポンスやステータスコードを解析する場合は、 Axios の `axios.interceptors.response` が有効です。
 
 ### 例外の処理 {#error-handling}
 
@@ -64,7 +64,7 @@ HTTP 通信で発生する例外について、ステータスコードに対し
 
 また、発生したエラーの解析には、以下の方法が考えられます。
 
-- [axios.interceptors.response :material-open-in-new:](https://axios-http.com/ja/docs/interceptors) でエラー情報を解析し、適切なカスタムエラーを返却する。
+- [axios.interceptors.response :material-open-in-new:](https://axios-http.com/ja/docs/interceptors){ target=_blank } でエラー情報を解析し、適切なカスタムエラーを返却する。
 - エラー番号やエラーメッセージを通知し、開発者が問合せるための情報を提供する
 - ユーザーの状況やエラー内容をログ収集ツールに送信する
 
