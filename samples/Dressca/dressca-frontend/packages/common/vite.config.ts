@@ -7,9 +7,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'), // エントリポイント
-      name: 'CommonLib', // グローバル変数として公開するライブラリの変数名
-      fileName: 'common-lib', // 生成するファイルのファイル名を指定します。
+      entry: resolve(__dirname, 'src/index.ts'),
       formats: ['es']
     },
   },
