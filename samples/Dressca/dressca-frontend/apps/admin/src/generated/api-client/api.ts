@@ -15,4 +15,6 @@
 
 
 export * from './api/catalog-brands-api';
+export * from './api/catalog-categories-api';
+export * from './api/catalog-items-api';
 
