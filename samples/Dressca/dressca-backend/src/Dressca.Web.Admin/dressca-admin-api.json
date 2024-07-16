@@ -36,6 +36,109 @@
           }
         }
       }
+    },
+    "/api/catalog-categories": {
+      "get": {
+        "tags": [
+          "CatalogCategories"
+        ],
+        "summary": "カタログカテゴリの一覧を取得します。",
+        "operationId": "getCatalogCategories",
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CatalogCategoryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/catalog-items": {
+      "get": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログアイテムを検索して返します。",
+        "operationId": "getByQuery",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "description": "カタログブランド ID です。\n未設定の場合は全カタログブランドを対象にします。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "カタログカテゴリ ID です。\n未設定の場合は全カタログカテゴリを対象にします。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "ページ番号です。\n未設定の場合は 1 ページ目として扱います。\n1 以上の整数値を指定できます。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 2147483647.0,
+              "minimum": 1.0
+            },
+            "x-position": 3
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "1 ページに収めるアイテムの数です。\n未設定の場合は 20 個です。\n1 以上 50 以下の整数値を指定できます。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 50.0,
+              "minimum": 1.0
+            },
+            "x-position": 4
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedListOfCatalogItemResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -58,6 +161,156 @@
             "type": "string",
             "description": "ブランド名を取得または設定します。\n            ",
             "minLength": 1
+          }
+        }
+      },
+      "CatalogCategoryResponse": {
+        "type": "object",
+        "description": "カタログカテゴリのレスポンスデータを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "カタログカテゴリ Id を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "カテゴリ名を取得または設定します。\n            ",
+            "minLength": 1
+          }
+        }
+      },
+      "PagedListOfCatalogItemResponse": {
+        "type": "object",
+        "description": "ページネーションした結果のリストを管理します。\n            ",
+        "additionalProperties": false,
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "現在のページ番号を取得します。\n最初のページは 1 です。\n            ",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "ページの総数を取得します。\n            ",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "1 ページあたりの件数を取得します。\n            ",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "アイテムの総数を取得します。\n            ",
+            "format": "int32"
+          },
+          "hasPrevious": {
+            "type": "boolean",
+            "description": "前のページが存在するかどうか示す値を取得します。\n            "
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "次のページが存在するかどうか示す値を取得します。\n            "
+          },
+          "items": {
+            "type": "array",
+            "description": "検索結果のリストを取得します。\n            ",
+            "items": {
+              "$ref": "#/components/schemas/CatalogItemResponse"
+            }
+          }
+        }
+      },
+      "CatalogItemResponse": {
+        "type": "object",
+        "description": "カタログアイテムのレスポンスデータを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "description",
+          "price",
+          "catalogCategoryId",
+          "catalogBrandId",
+          "id",
+          "name",
+          "productCode"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "説明を取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "price": {
+            "type": "number",
+            "description": "単価を取得または設定します。\n            ",
+            "format": "decimal"
+          },
+          "catalogCategoryId": {
+            "type": "integer",
+            "description": "カタログカテゴリ Id を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "catalogBrandId": {
+            "type": "integer",
+            "description": "カタログブランド Id を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "id": {
+            "type": "integer",
+            "description": "カタログアイテム Id を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名を取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "productCode": {
+            "type": "string",
+            "description": "商品コードを取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "assetCodes": {
+            "type": "array",
+            "description": "アセットコードの一覧を取得または設定します。\n            ",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": {
+          "nullable": true
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
           }
         }
       }
