@@ -19,6 +19,7 @@
     "openapi-client:generate": "openapi-generator-cli generate -g typescript-axios -i ../../../dressca-backend/src/Dressca.Web.Admin/dressca-admin-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
   },
   "dependencies": {
+    "@dressca-frontend/common": "^1.0.0",
     "axios": "^1.7.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",

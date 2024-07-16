@@ -1,6 +1,6 @@
 {
   "name": "dressca-frontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "private": "true",
@@ -17,7 +17,8 @@
   },
   "workspaces": [
     "apps/customer",
-    "apps/admin"
+    "apps/admin",
+    "packages/common"
   ],
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.13.4",

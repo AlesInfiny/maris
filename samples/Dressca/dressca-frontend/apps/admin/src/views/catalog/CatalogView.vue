@@ -6,10 +6,10 @@ import {
 } from '@/services/catalog/catalog-service';
 import { storeToRefs } from 'pinia';
 import { useCatalogStore } from '@/stores/catalog/catalog';
-import Loading from '@/components/common/LoadingSpinner.vue';
+import { LoadingSpinner } from '@dressca-frontend/common';
 import { useRouter } from 'vue-router';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@dressca-frontend/common';
+import { assetHelper }  from '@dressca-frontend/common';
 
 const catalogStore = useCatalogStore();
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
@@ -39,7 +39,7 @@ watch([selectedCategory, selectedBrand], async () => {
 
 <template>
   <div class="container mx-auto">
-    <Loading :show="state.showLoading"></Loading>
+    <LoadingSpinner :show="state.showLoading"></LoadingSpinner>
     <div v-if="!state.showLoading">
       <div class="flex justify-center">
         <div class="grid lg:gap-24 grid-cols-1 lg:grid-cols-2 my-4 text-lg">
