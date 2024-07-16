@@ -49,6 +49,7 @@ const remove = () => {
     <div class="grid grid-cols-2">
       <img
         :src="getFirstAssetUrl(item.catalogItem?.assetCodes)"
+        :alt="item.catalogItem?.name"
         class="h-[150px] pointer-events-none"
       />
       <div class="ml-2">

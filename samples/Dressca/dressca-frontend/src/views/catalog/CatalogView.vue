@@ -56,6 +56,7 @@ watch([selectedCategory, selectedBrand], async () => {
           <template #default="{ item }">
             <img
               :src="getAssetUrl(item.assetCode)"
+              alt="Special Contents"
               class="max-h-[350px] min-w-0 m-auto pointer-events-none"
             />
           </template>
@@ -100,7 +101,7 @@ watch([selectedCategory, selectedBrand], async () => {
               <img
                 class="h-[180px]"
                 :src="getFirstAssetUrl(item.assetCodes)"
-                alt="Sunset in the mountains"
+                :alt="item.name"
               />
               <div class="w-full">
                 <p class="text-md mb-2 w-full">

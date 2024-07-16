@@ -71,6 +71,7 @@ onUnmounted(async () => {
         <div class="grid grid-cols-1 lg:grid-cols-3 mt-4 flex items-center">
           <img
             :src="getFirstAssetUrl(getAddedItem.catalogItem?.assetCodes)"
+            :alt="getAddedItem.catalogItem?.name"
             class="h-[150px] m-auto pointer-events-none"
           />
           <span class="text-center lg:text-left">{{
