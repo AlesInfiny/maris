@@ -88,6 +88,6 @@ jobs:
           else
             echo "ステータスの値が不正です。" >> $GITHUB_STEP_SUMMARY
           fi
-          echo "issue number: $ISSUE_NUMBER >> $GITHUB_STEP_SUMMARY
-          echo "status: $STATUS" >> $GITHUB_STEP_SUMMARY
-          echo "- $ISSUE_URL" >> $GITHUB_STEP_SUMMARY
+          echo issue number: $ISSUE_NUMBER >> $GITHUB_STEP_SUMMARY
+          echo status: $STATUS >> $GITHUB_STEP_SUMMARY
+          echo - $ISSUE_URL >> $GITHUB_STEP_SUMMARY
