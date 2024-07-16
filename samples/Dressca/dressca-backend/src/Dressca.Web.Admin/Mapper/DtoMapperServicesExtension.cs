@@ -21,8 +21,9 @@ public static class DtoMapperServicesExtension
     public static IServiceCollection AddDresscaDtoMapper(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
+        services.AddSingleton<IObjectMapper<CatalogCategory, CatalogCategoryResponse>, CatalogCategoryMapper>();
         services.AddSingleton<IObjectMapper<CatalogBrand, CatalogBrandResponse>, CatalogBrandMapper>();
-
+        services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemResponse>, CatalogItemMapper>();
         return services;
     }
 }
