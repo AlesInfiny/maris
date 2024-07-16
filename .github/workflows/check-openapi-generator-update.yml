@@ -6,7 +6,7 @@ on:
       - '.github/workflows/check-openapi-generator-update.yml'
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 1'
+    - cron: '0 22 * * 0'
 permissions:
   contents: read
   issues: write
@@ -66,7 +66,7 @@ jobs:
             update_existing: true
             search_existing: open
           attempt_limit: 3
-          attempt_delay: 60000
+          attempt_delay: 300000
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LATEST_VERSION: ${{ steps.get-latest-openapi-generator-version.outputs.latest-version }}
