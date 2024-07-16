@@ -84,6 +84,7 @@ onMounted(async () => {
       </table>
       <button
         class="lg:col-end-3 mx-auto w-36 bg-orange-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
+        type="submit"
         @click="checkout()"
       >
         注文を確定する
