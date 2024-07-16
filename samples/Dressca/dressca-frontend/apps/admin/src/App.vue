@@ -17,15 +17,16 @@ async function ApiCall() {
         class="text-lg font-medium text-gray-900 py-5 ring-1 ring-gray-900 ring-opacity-5 shadow-sm"
       >
         <div class="mx-auto flex justify-between px-4 md:px-24 lg:px-24">
-          <div>
-            Dressca 管理
-          </div>
-          <div class="flex space-x-5 sm:space-x-8 lg:space-x-12">
-            <button @click="ApiCall">APIコール</button>
-          </div>
+          <div><router-link class="text-2xl" to="/">Dressca 管理</router-link></div>
+          <div><router-link class="text-2xl" to="/catalog">カタログアイテム一覧</router-link></div>
         </div>
       </nav>
     </header>
+
+    <main class="mb-auto">
+      <router-view />
+    </main>
+
     <footer
       class="w-full mx-auto border-t py-4 px-24 text-base bg-black text-gray-500"
     >

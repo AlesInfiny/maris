@@ -1,12 +1,20 @@
 import './assets/base.css';
-
+import router from './router';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-
 import App from './App.vue';
 
 const app = createApp(App);
+const pinia = createPinia();
 
-app.use(createPinia());
+app.config.errorHandler = (err: unknown, vm, info) => {
+  // 本サンプルAPではログの出力とエラー画面への遷移を行っています。
+  // APの要件によってはサーバーやログ収集ツールにログを送信し、エラーを握りつぶすこともあります。
+  console.log(err, vm, info);
+  router.replace({ name: 'error' });
+};
+
+app.use(pinia);
+app.use(router);
 
 app.mount('#app');
