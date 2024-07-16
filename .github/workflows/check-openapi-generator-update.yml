@@ -77,13 +77,13 @@ jobs:
         if: ${{ steps.check-version-update.outputs.update-required  == 'true' }}
         run: |
           echo "# issue の作成結果" >> $GITHUB_STEP_SUMMARY
-          if [ ${{ steps.create-issue.outputs.status }} = 'created' ]; then
+          if [ ${{ fromJson(steps.create-issue.outputs.out).status }} = 'created' ]; then
             echo "issue を新規作成しました。" >> $GITHUB_STEP_SUMMARY
-          elif [ ${{ steps.create-issue.outputs.status }} = 'updated' ]; then
+          elif [ ${{ fromJson(steps.create-issue.outputs.out).status }} = 'updated' ]; then
             echo "同名の issue が存在するため、更新のみ行いました。" >> $GITHUB_STEP_SUMMARY
           else
             echo "ステータスの値が不正です。" >> $GITHUB_STEP_SUMMARY
           fi
-          echo "issue number: ${{ steps.create-issue.outputs.number }}" >> $GITHUB_STEP_SUMMARY
-          echo "status: ${{ steps.create-issue.outputs.status }}" >> $GITHUB_STEP_SUMMARY
-          echo "- ${{ steps.create-issue.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "issue number: ${{ fromJson(steps.create-issue.outputs.out).number }} >> $GITHUB_STEP_SUMMARY
+          echo "status:${{ fromJson(steps.create-issue.outputs.out.status) }} " >> $GITHUB_STEP_SUMMARY
+          echo "- ${{ fromJson(steps.create-issue.outputs.out).status}}" >> $GITHUB_STEP_SUMMARY
