@@ -64,13 +64,15 @@ const remove = () => {
         class="lg:col-span-2 grid place-items-end lg:flex lg:flex-row lg:items-center"
       >
         <div class="basis-3/5 mt-2 ml-2 mr-2 lg:pr-10 text-right">
-          <input
-            v-model.number="quantity"
-            type="number"
-            min="1"
-            max="999"
-            class="w-full px-4 py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
-          />
+          <label>
+            <input
+              v-model.number="quantity"
+              type="number"
+              min="1"
+              max="999"
+              class="w-full px-4 py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
+            />
+          </label>
         </div>
         <div class="basis-2/5">
           <button
