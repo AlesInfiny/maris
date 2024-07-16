@@ -85,5 +85,5 @@ jobs:
             echo "ステータスの値が不正です。" >> $GITHUB_STEP_SUMMARY
           fi
           echo "issue number: ${{ fromJson(steps.create-issue.outputs.out).number }} >> $GITHUB_STEP_SUMMARY
-          echo "status:${{ fromJson(steps.create-issue.outputs.out.status) }} " >> $GITHUB_STEP_SUMMARY
+          echo "status:${{ fromJson(steps.create-issue.outputs.out).status }} " >> $GITHUB_STEP_SUMMARY
           echo "- ${{ fromJson(steps.create-issue.outputs.out).status}}" >> $GITHUB_STEP_SUMMARY
