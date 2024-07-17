@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@dressca-frontend/common': '../../packages/common/src/index.ts'
       },
     },
     server: {
