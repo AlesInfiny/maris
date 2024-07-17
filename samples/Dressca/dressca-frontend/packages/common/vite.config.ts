@@ -11,6 +11,15 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       formats: ['es'],
     },
+    rollupOptions: {
+      output: {
+        entryFileNames: `dist/[name]-[hash].js`,
+        globals: {
+          vue: 'Vue',
+        },
+      },
+      external: ['vue'],
+    },
   },
   resolve: {
     alias: {
