@@ -7,13 +7,11 @@ import {
 import { storeToRefs } from 'pinia';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { LoadingSpinner } from '@dressca-frontend/common';
-import { useRouter } from 'vue-router';
 import { currencyHelper } from '@dressca-frontend/common';
-import { assetHelper }  from '@dressca-frontend/common';
+import { assetHelper } from '@dressca-frontend/common';
 
 const catalogStore = useCatalogStore();
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
-const router = useRouter();
 
 const state = reactive({
   selectedCategory: 0,
@@ -23,7 +21,7 @@ const state = reactive({
 
 const { selectedCategory, selectedBrand } = toRefs(state);
 const { toCurrencyJPY } = currencyHelper();
-const { getFirstAssetUrl, getAssetUrl } = assetHelper();
+const { getFirstAssetUrl } = assetHelper();
 
 onMounted(async () => {
   state.showLoading = true;
@@ -91,13 +89,12 @@ watch([selectedCategory, selectedBrand], async () => {
                 </p>
               </div>
               <div class="mt-4 flex items-center justify-center">
-                  <button
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    @click=""
-                  >
-                    詳細
-                  </button>
-                </div>
+                <button
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  詳細
+                </button>
+              </div>
             </div>
           </div>
         </div>
