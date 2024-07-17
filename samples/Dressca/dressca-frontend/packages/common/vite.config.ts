@@ -9,16 +9,16 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es'],
+      name: 'CommonLib',
+      fileName: 'common-lib'
     },
     rollupOptions: {
+      external: ['vue'],
       output: {
-        entryFileNames: `dist/[name]-[hash].js`,
         globals: {
           vue: 'Vue',
         },
       },
-      external: ['vue'],
     },
   },
   resolve: {

@@ -8,7 +8,7 @@ import { storeToRefs } from 'pinia';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { LoadingSpinner } from '@dressca-frontend/common';
 import { currencyHelper } from '@dressca-frontend/common';
-import { assetHelper } from '@dressca-frontend/common';
+import assetHelper from '@/shared/helpers/assetHelper';
 
 const catalogStore = useCatalogStore();
 const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);

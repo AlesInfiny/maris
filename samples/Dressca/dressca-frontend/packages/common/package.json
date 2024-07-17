@@ -4,8 +4,14 @@
   "private": true,
   "type": "module",
   "files": ["dist"],
+  "main": "./dist/common-lib.umd.cjs",
+  "module": "./dist/common-lib.js",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/types/src/index.d.ts",
+      "import": "./dist/common-lib.js",
+      "require": "./dist/common-lib.umd.cjs"
+    }
   },
   "scripts": {
     "build": "run-p type-check \"build-only:dev {@}\" --",
