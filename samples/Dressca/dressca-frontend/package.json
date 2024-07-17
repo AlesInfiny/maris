@@ -1,34 +1,25 @@
 {
   "name": "dressca-frontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": "true",
   "type": "module",
   "scripts": {
-    "dev": "vite --mode dev",
-    "build:prod": "run-p typecheck build-only:prod --print-label",
-    "build:dev": "run-p typecheck build-only:dev --print-label",
-    "build-only:prod": "vite build --mode prod",
-    "build-only:dev": "vite build --mode dev",
-    "preview": "vite preview --port 5173",
-    "test:unit": "vitest",
-    "test:e2e": "start-server-and-test dev http://localhost:5173/ 'cypress open --e2e --browser chrome'",
-    "test:e2e:ci": "start-server-and-test dev http://localhost:5173/ 'cypress run'",
-    "typecheck": "vue-tsc --build --force",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
-    "lint:ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore && stylelint **/*.{vue,css}",
-    "mock": "vite --mode mock",
-    "generate-client": "run-s openapi-client:clean openapi-client:generate --print-label",
-    "openapi-client:clean": "node -e \"fs.promises.rm('./src/generated/api-client', {recursive: true, force: true})\"",
-    "openapi-client:generate": "openapi-generator-cli generate -g typescript-axios -i ./../dressca-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
+    "dev": "run-p dev:customer dev:admin --print-label",
+    "dev:customer": "npm run dev -w apps/customer",
+    "dev:admin": "npm run dev -w apps/admin",
+    "build-only:dev": "npm run build-only:dev --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "lint:ci": "npm run lint:ci --workspaces --if-present",
+    "typecheck": "vue-tsc --build --force --verbose",
+    "test:unit": "npm run test:unit --workspaces --if-present"
   },
-  "dependencies": {
-    "@heroicons/vue": "^2.1.4",
-    "axios": "^1.7.2",
-    "pinia": "^2.1.7",
-    "vee-validate": "^4.13.1",
-    "vue": "^3.4.30",
-    "vue-router": "^4.4.0",
-    "yup": "^1.4.0"
-  },
+  "workspaces": [
+    "apps/customer",
+    "apps/admin",
+    "packages/common"
+  ],
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.13.4",
     "@rushstack/eslint-patch": "^1.10.3",
@@ -61,8 +52,5 @@
     "vite": "^5.3.1",
     "vitest": "^1.6.0",
     "vue-tsc": "^2.0.22"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.18.0"
   }
 }

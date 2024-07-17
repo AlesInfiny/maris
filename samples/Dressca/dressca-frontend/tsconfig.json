@@ -1,17 +1,14 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.vitest.json"
-    }
-  ],
-  "compilerOptions": {
-    "module": "NodeNext"
+    "files": [],
+    "references": [
+      {
+        "path": "./apps/customer/tsconfig.json"
+      },
+      {
+        "path": "./apps/admin/tsconfig.json"
+      },
+      {
+        "path": "./packages/common/tsconfig.json"
+      }
+    ],
   }
-}

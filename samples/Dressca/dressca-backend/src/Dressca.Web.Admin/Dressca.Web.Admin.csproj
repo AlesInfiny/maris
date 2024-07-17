@@ -3,73 +3,30 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <NoDefaultLaunchSettingsFile Condition="'$(ExcludeLaunchSettings)' == 'True'">True</NoDefaultLaunchSettingsFile>
-    <SpaRoot>..\..\..\dressca-frontend\apps\customer</SpaRoot>
-    <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
+    <SpaRoot>..\..\..\dressca-frontend\apps\admin</SpaRoot>
+    <SpaProxyServerUrl>http://localhost:6173</SpaProxyServerUrl>
     <!-- <SpaProxyServerUrl Condition="'$(RequiresHttps)' == 'True'">https://localhost:5002</SpaProxyServerUrl>
     <SpaProxyServerUrl Condition="'$(RequiresHttps)' != 'True'">http://localhost:5002</SpaProxyServerUrl> -->
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" />
     <PackageReference Include="NSwag.AspNetCore" />
     <PackageReference Include="NSwag.MSBuild">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove=".template.config\**" />
-    <Content Remove="$(SpaRoot)**" />
-    <Content Remove=".template.config\**" />
-    <EmbeddedResource Remove=".template.config\**" />
-    <None Remove="$(SpaRoot)**" />
-    <None Remove=".template.config\**" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\Dressca.ApplicationCore\Dressca.ApplicationCore.csproj" />
     <ProjectReference Include="..\Dressca.EfInfrastructure\Dressca.EfInfrastructure.csproj" />
     <ProjectReference Include="..\Dressca.Store.Assets.StaticFiles\Dressca.Store.Assets.StaticFiles.csproj" />
     <ProjectReference Include="..\Dressca.SystemCommon\Dressca.SystemCommon.csproj" />
-    <ProjectReference Include="..\Dressca.Web.Dto\Dressca.Web.Dto.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Resources\LogMessages.Designer.cs">
-      <DependentUpon>LogMessages.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Messages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\LogMessages.resx">
-      <LastGenOutput>LogMessages.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Messages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <InternalsVisibleTo Include="Dressca.UnitTests" />
+    <ProjectReference Include="..\Dressca.Web.Admin.Dto\Dressca.Web.Admin.Dto.csproj" />
   </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
@@ -89,7 +46,7 @@
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
