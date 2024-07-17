@@ -9,7 +9,10 @@
     },
     {
       "path": "./tsconfig.vitest.json"
-    }
+    },
+    {
+      "path": "../../../dressca-frontend/packages/common/tsconfig.json"
+    },
   ],
   "compilerOptions": {
     "module": "NodeNext"

@@ -14,7 +14,7 @@
     }
   },
   "scripts": {
-    "build": "run-p type-check \"build-only:dev {@}\" --",
+    "build:dev": "run-p type-check build-only:dev --print-label",
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only:dev": "vite build --mode dev",
