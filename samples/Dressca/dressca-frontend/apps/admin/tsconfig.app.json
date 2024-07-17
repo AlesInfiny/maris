@@ -10,5 +10,10 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "references": [
+    {
+      "path": "../../../dressca-frontend/packages/common/tsconfig.json"
+    },
+  ]
 }

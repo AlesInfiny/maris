@@ -10,7 +10,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'CommonLib',
-      fileName: 'common-lib'
+      fileName: 'common-lib',
     },
     rollupOptions: {
       external: ['vue'],
