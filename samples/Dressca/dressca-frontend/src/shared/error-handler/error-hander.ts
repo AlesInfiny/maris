@@ -8,7 +8,7 @@ import {
 } from './custom-error';
 import { useRoutingStore } from '@/stores/routing/routing';
 
-export function errorHandleBase(
+export function errorHandler(
   error: unknown,
   callback: () => void,
   handlingUnauthorizedError: (() => void) | null = null,

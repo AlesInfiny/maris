@@ -6,7 +6,7 @@ import { showToast } from '@/services/notification/notificationService';
 import type { OrderResponse } from '@/generated/api-client/models/order-response';
 import currencyHelper from '@/shared/helpers/currencyHelper';
 import assetHelper from '@/shared/helpers/assetHelper';
-import { errorHandleBase } from '@/shared/error-handler/error-handling-base';
+import { errorHandler } from '@/shared/error-handler/error-hander';
 
 const router = useRouter();
 const props = defineProps<{
@@ -28,7 +28,7 @@ onMounted(async () => {
   try {
     state.lastOrdered = await getOrder(props.orderId);
   } catch (error) {
-    errorHandleBase(error, () => {
+    errorHandler(error, () => {
       showToast('注文情報の取得に失敗しました。');
       router.push('/');
     });
