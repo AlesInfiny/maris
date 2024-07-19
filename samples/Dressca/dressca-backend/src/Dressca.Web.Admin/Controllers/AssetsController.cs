@@ -45,11 +45,11 @@ public class AssetsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("get")]
-    public IActionResult Get(string assetCode)
+    public async Task<IActionResult> GetAsync(string assetCode)
     {
         try
         {
-            var assetStreamInfo = this.service.GetAssetStreamInfo(assetCode);
+            var assetStreamInfo = await this.service.GetAssetStreamInfoAsync(assetCode);
             var contentType = assetStreamInfo.Asset.GetContentType();
             return this.File(assetStreamInfo.Stream, contentType);
         }
