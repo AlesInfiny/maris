@@ -1,5 +1,6 @@
-<script setup lang="ts"></script>
-
+<script setup lang="ts">
+import { UserCircleIcon, Bars3Icon } from '@heroicons/vue/24/solid';
+</script>
 <template>
   <div class="flex flex-col h-screen justify-between">
     <header>
@@ -11,10 +12,9 @@
           <div>
             <router-link class="text-2xl" to="/">Dressca 管理</router-link>
           </div>
-          <div>
-            <router-link class="text-2xl" to="/catalog"
-              >カタログアイテム一覧</router-link
-            >
+          <div class="flex justify-center items-center gap-4">
+            <UserCircleIcon class="h-8 w-8 text-blue-600" />
+            <Bars3Icon class="h-8 w-8 text-gray-900" />
           </div>
         </div>
       </nav>
