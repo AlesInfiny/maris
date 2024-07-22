@@ -4,12 +4,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode dev",
-    "build:dev": "run-p type-check \"build-only:dev {@}\" --",
+    "mock": "vite --mode mock",
+    "build:dev": "run-p type-check build-only:dev",
     "preview": "vite preview",
     "test:unit": "vitest",
     "test:e2e": "start-server-and-test dev http://localhost:6173/ 'cypress open --e2e --browser chrome'",
     "test:e2e:ci": "start-server-and-test dev http://localhost:6173/ 'cypress run'",
     "build-only:dev": "vite build --mode dev",
+    "build-only:prod": "vite build --mode prod",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
     "lint:ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css}",
@@ -25,5 +27,10 @@
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

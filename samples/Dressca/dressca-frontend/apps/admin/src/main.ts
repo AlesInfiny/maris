@@ -3,6 +3,13 @@ import router from './router';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import App from './App.vue';
+import { worker } from '../mock/browser';
+
+if (import.meta.env.MODE === 'mock') {
+  worker.start({
+    onUnhandledRequest: 'bypass',
+  });
+}
 
 const app = createApp(App);
 const pinia = createPinia();

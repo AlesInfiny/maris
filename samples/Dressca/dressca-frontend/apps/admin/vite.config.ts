@@ -1,8 +1,9 @@
 import { fileURLToPath, URL } from 'node:url';
-
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig, loadEnv, Plugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import fs from 'fs';
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -10,7 +11,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
-    plugins: plugins,
+    plugins: mode === 'prod' ? [...plugins, excludeMsw()] : plugins,
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -37,3 +38,17 @@ export default defineConfig(({ mode }) => {
     },
   };
 });
+
+function excludeMsw(): Plugin {
+  return {
+    name: 'exclude-msw',
+    resolveId: (source) => {
+      return source === 'virtual-module' ? source : null;
+    },
+    renderStart() {
+      const outDir = './public';
+      const msWorker = path.resolve(outDir, 'mockServiceWorker.js');
+      fs.rm(msWorker, () => console.log(`Deleted ${msWorker}`));
+    },
+  };
+}
