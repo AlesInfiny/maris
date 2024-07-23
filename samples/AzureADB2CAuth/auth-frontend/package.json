@@ -20,6 +20,7 @@
   "dependencies": {
     "@azure/msal-browser": "^3.19.1",
     "@heroicons/vue": "^2.1.5",
+    "@vue/eslint-config-airbnb-with-typescript": "^8.0.0",
     "axios": "^1.7.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.33"
