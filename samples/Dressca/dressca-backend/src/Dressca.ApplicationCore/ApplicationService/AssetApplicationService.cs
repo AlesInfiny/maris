@@ -44,7 +44,7 @@ public class AssetApplicationService
     /// <exception cref="AssetNotFoundException">
     ///  アセット情報が見つかりませんでした。
     /// </exception>
-    public AssetStreamInfo GetAssetStreamInfo(string assetCode)
+    public async Task<AssetStreamInfo> GetAssetStreamInfoAsync(string assetCode)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.AssetApplicationService_GetAssetStreamInfoStart, assetCode);
 
@@ -53,7 +53,7 @@ public class AssetApplicationService
 
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            asset = this.repository.Find(assetCode);
+            asset = await this.repository.FindAsync(assetCode);
             if (asset == null)
             {
                 throw new AssetNotFoundException(assetCode);

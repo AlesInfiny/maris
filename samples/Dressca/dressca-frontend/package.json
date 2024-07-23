@@ -21,12 +21,12 @@
     "openapi-client:generate": "openapi-generator-cli generate -g typescript-axios -i ./../dressca-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.1.4",
+    "@heroicons/vue": "^2.1.5",
     "@vue/eslint-config-airbnb-with-typescript": "^8.0.0",
     "axios": "^1.7.2",
     "pinia": "^2.1.7",
-    "vee-validate": "^4.13.1",
-    "vue": "^3.4.30",
+    "vee-validate": "^4.13.2",
+    "vue": "^3.4.33",
     "vue-router": "^4.4.0",
     "yup": "^1.4.0"
   },
@@ -35,7 +35,7 @@
     "@rushstack/eslint-patch": "^1.10.3",
     "@tsconfig/node20": "^20.1.4",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^20.14.8",
+    "@types/node": "^20.14.11",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/eslint-config-prettier": "^9.0.0",
@@ -43,27 +43,27 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.19",
-    "cypress": "^13.12.0",
+    "cypress": "^13.13.1",
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^3.3.0",
-    "eslint-plugin-vue": "^9.26.0",
-    "jsdom": "^24.1.0",
-    "npm-run-all2": "^6.2.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "jsdom": "^24.1.1",
+    "npm-run-all2": "^6.2.2",
     "postcss": "^8.4.38",
     "postcss-nesting": "^12.1.5",
-    "prettier": "^3.3.2",
+    "prettier": "^3.3.3",
     "start-server-and-test": "^2.0.4",
-    "stylelint": "^16.6.1",
+    "stylelint": "^16.7.0",
     "stylelint-config-recommended-vue": "^1.5.0",
     "stylelint-config-standard": "^36.0.1",
-    "stylelint-prettier": "^5.0.0",
-    "tailwindcss": "^3.4.4",
+    "stylelint-prettier": "^5.0.2",
+    "tailwindcss": "^3.4.6",
     "typescript": "~5.4.5",
-    "vite": "^5.3.1",
-    "vitest": "^1.6.0",
-    "vue-tsc": "^2.0.22"
+    "vite": "^5.3.4",
+    "vitest": "^2.0.3",
+    "vue-tsc": "^2.0.28"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.18.0"
+    "@rollup/rollup-linux-x64-gnu": "^4.19.0"
   }
 }
