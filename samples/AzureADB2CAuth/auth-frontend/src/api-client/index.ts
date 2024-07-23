@@ -24,6 +24,7 @@ async function addTokenAsync(config: apiClient.Configuration): Promise<void> {
   if (store.isAuthenticated) {
     await store.getToken();
     const token = store.getAccessToken;
+    // eslint-disable-next-line no-param-reassign
     config.accessToken = token;
   }
 }

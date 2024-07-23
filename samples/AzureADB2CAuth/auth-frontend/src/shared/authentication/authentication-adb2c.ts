@@ -2,12 +2,12 @@ import {
   BrowserAuthError,
   InteractionRequiredAuthError,
 } from '@azure/msal-browser';
+import type { AccountFilter } from '@azure/msal-common';
 import {
   msalInstance,
   loginRequest,
   tokenRequest,
 } from './authentication-config';
-import type { AccountFilter } from '@azure/msal-common';
 
 msalInstance.initialize();
 
