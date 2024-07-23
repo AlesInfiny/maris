@@ -38,6 +38,9 @@ watch([selectedCategory, selectedBrand], async () => {
 <template>
   <div class="container mx-auto">
     <LoadingSpinner :show="state.showLoading"></LoadingSpinner>
+    <div class="text-center font-medium text-gray-900 font-bold text-3xl m-8">
+      カタログアイテム管理
+    </div>
     <div v-if="!state.showLoading">
       <div class="flex justify-center">
         <div class="grid lg:gap-24 grid-cols-1 lg:grid-cols-2 my-4 text-lg">
@@ -88,11 +91,16 @@ watch([selectedCategory, selectedBrand], async () => {
                   {{ toCurrencyJPY(item.price) }}
                 </p>
               </div>
-              <div class="mt-4 flex items-center justify-center">
+              <div class="mt-4 flex items-center justify-center gap-4">
                 <button
-                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
                 >
                   詳細
+                </button>
+                <button
+                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+                >
+                  削除
                 </button>
               </div>
             </div>
