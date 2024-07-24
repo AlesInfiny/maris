@@ -29,6 +29,7 @@ const checkout = async () => {
     );
     router.push({ name: 'ordering/done', params: { orderId } });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
     router.push({ name: 'error' });
   }

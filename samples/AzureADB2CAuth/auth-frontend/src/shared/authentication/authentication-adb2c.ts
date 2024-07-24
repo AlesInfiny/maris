@@ -59,6 +59,7 @@ export async function getTokenAzureADB2C(
       result.isAuthenticated = true;
       return result;
     }
+    // eslint-disable-next-line no-console
     console.log(error);
     throw error;
   }

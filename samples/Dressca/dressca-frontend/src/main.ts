@@ -13,6 +13,7 @@ const pinia = createPinia();
 app.config.errorHandler = (err: unknown, vm, info) => {
   // 本サンプルAPではログの出力とエラー画面への遷移を行っています。
   // APの要件によってはサーバーやログ収集ツールにログを送信し、エラーを握りつぶすこともあります。
+  // eslint-disable-next-line no-console
   console.log(err, vm, info);
   router.replace({ name: 'error' });
 };
