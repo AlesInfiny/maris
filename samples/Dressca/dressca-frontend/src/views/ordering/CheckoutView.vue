@@ -5,8 +5,8 @@ import { useUserStore } from '@/stores/user/user';
 import { postOrder } from '@/services/ordering/ordering-service';
 
 import { useRouter } from 'vue-router';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
 
 const userStore = useUserStore();
@@ -27,8 +27,9 @@ const checkout = async () => {
       getAddress.value.shikuchoson,
       getAddress.value.azanaAndOthers,
     );
-    router.push({ name: 'ordering/done', params: { orderId: orderId } });
+    router.push({ name: 'ordering/done', params: { orderId } });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
     router.push({ name: 'error' });
   }
@@ -38,7 +39,6 @@ onMounted(async () => {
   await basketStore.fetch();
   if (getBasket.value.basketItems?.length === 0) {
     router.push('/');
-    return;
   }
 });
 </script>
@@ -85,6 +85,7 @@ onMounted(async () => {
       </table>
       <button
         class="lg:col-end-3 mx-auto w-36 bg-orange-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
+        type="submit"
         @click="checkout()"
       >
         注文を確定する
@@ -122,6 +123,7 @@ onMounted(async () => {
           <div class="grid grid-cols-2">
             <img
               :src="getFirstAssetUrl(item.catalogItem?.assetCodes)"
+              :alt="item.catalogItem?.name"
               class="h-[150px] pointer-events-none"
             />
             <div class="ml-2">

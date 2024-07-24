@@ -2,12 +2,12 @@ import {
   BrowserAuthError,
   InteractionRequiredAuthError,
 } from '@azure/msal-browser';
+import type { AccountFilter } from '@azure/msal-common';
 import {
   msalInstance,
   loginRequest,
   tokenRequest,
 } from './authentication-config';
-import { AccountFilter } from '@azure/msal-common';
 
 msalInstance.initialize();
 
@@ -59,6 +59,7 @@ export async function getTokenAzureADB2C(
       result.isAuthenticated = true;
       return result;
     }
+    // eslint-disable-next-line no-console
     console.log(error);
     throw error;
   }

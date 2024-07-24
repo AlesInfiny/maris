@@ -22,7 +22,7 @@ const state = reactive({
 
 const nextSlide = () => {
   state.currentIndex =
-    (state.currentIndex + 1 + props.items?.length) % props.items.length;
+    (state.currentIndex + 1 + props.items.length) % props.items.length;
 };
 
 const prevSlide = () => {
@@ -65,7 +65,7 @@ const onTouchStart = (event: MouseEvent | TouchEvent) => {
 };
 
 onMounted(() => {
-  if (props.items.length == 0) {
+  if (props.items.length === 0) {
     state.hasItems = false;
     return;
   }
@@ -97,7 +97,7 @@ onBeforeUnmount(() => {
           @click="prevSlide"
         />
         <template v-for="index in props.items.length">
-          <template v-if="index == state.currentIndex + 1">
+          <template v-if="index === state.currentIndex + 1">
             <div
               :key="index"
               data-test="slider"
@@ -117,10 +117,10 @@ onBeforeUnmount(() => {
       </div>
       <div class="flex justify-center">
         <template v-for="index in props.items.length" :key="index">
-          <template v-if="index == state.currentIndex + 1">
+          <template v-if="index === state.currentIndex + 1">
             <MinusSmallIcon class="h-10 w-10 text-gray-500"></MinusSmallIcon>
           </template>
-          <template v-if="index != state.currentIndex + 1">
+          <template v-if="index !== state.currentIndex + 1">
             <MinusSmallIcon
               class="h-10 w-10 text-gray-300"
               data-test="page-indicator"

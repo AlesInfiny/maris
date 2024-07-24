@@ -13,8 +13,12 @@
  */
 
 
-import { AccountResponse } from './account-response';
-import { BasketItemResponse } from './basket-item-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { BasketItemResponse } from './basket-item-response';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { BasketResponseAccount } from './basket-response-account';
 
 /**
  * 買い物かごのレスポンスデータを表します。             
@@ -29,11 +33,11 @@ export interface BasketResponse {
      */
     'buyerId': string;
     /**
-     * 会計情報を取得または設定します。             
-     * @type {AccountResponse}
+     * 
+     * @type {BasketResponseAccount}
      * @memberof BasketResponse
      */
-    'account'?: AccountResponse | null;
+    'account'?: BasketResponseAccount | null;
     /**
      * 買い物かごアイテムのリストを取得または設定します。             
      * @type {Array<BasketItemResponse>}

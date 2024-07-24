@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export */
 import { fileURLToPath, URL } from 'url';
 
 import { defineConfig, loadEnv } from 'vite';
@@ -10,7 +11,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
 
   return {
-    plugins: plugins,
+    plugins,
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -21,10 +22,8 @@ export default defineConfig(({ mode }) => {
         '/api': {
           target: env.VITE_PROXY_ENDPOINT_ORIGIN,
           changeOrigin: true,
-          configure: (proxy, options) => {
-            options.autoRewrite = true;
-            options.secure = false;
-          },
+          autoRewrite: true,
+          secure: false,
         },
         '/swagger': {
           target: env.VITE_PROXY_ENDPOINT_ORIGIN,

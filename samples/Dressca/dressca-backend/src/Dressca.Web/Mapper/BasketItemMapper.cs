@@ -11,7 +11,7 @@ namespace Dressca.Web.Mapper;
 public class BasketItemMapper : IObjectMapper<BasketItem, BasketItemResponse>
 {
     /// <inheritdoc/>
-    [return: NotNullIfNotNull("value")]
+    [return: NotNullIfNotNull(nameof(value))]
     public BasketItemResponse? Convert(BasketItem? value)
     {
         if (value is null)

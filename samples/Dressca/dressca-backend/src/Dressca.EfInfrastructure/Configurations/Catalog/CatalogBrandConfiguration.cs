@@ -18,11 +18,11 @@ internal class CatalogBrandConfiguration : IEntityTypeConfiguration<CatalogBrand
             .HasMaxLength(128)
             .IsRequired();
 
-        builder.HasData(new CatalogBrand[]
-        {
+        builder.HasData(
+        [
             new() { Name = "高級なブランド", Id = 1L },
             new() { Name = "カジュアルなブランド", Id = 2L },
             new() { Name = "ノーブランド", Id = 3L },
-        });
+        ]);
     }
 }

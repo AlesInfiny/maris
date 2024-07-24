@@ -19,7 +19,7 @@ public static class ObjectExtensions
     /// </exception>
     public static void ThrowIfNull(
         [NotNull] this object? argument,
-        [CallerArgumentExpression("argument")] string? paramName = null)
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
     {
         if (argument is null)
         {

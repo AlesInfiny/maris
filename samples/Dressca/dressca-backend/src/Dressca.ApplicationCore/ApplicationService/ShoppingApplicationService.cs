@@ -139,10 +139,10 @@ public class ShoppingApplicationService
             var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
 
             // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
-            var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync(new[] { catalogItemId }, cancellationToken);
+            var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync([catalogItemId], cancellationToken);
             if (!existsAll)
             {
-                var notExistingInRepositoryCatalogIds = new List<long>() { catalogItemId };
+                List<long> notExistingInRepositoryCatalogIds = [catalogItemId];
                 throw new CatalogItemNotExistingInRepositoryException(notExistingInRepositoryCatalogIds);
             }
 
