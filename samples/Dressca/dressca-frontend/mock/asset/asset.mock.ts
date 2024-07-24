@@ -1,8 +1,9 @@
-const base = 'api/assets';
 import * as fs from 'fs';
 import * as path from 'path';
 import type { Connect } from 'vite';
 import * as http from 'http';
+
+const base = 'api/assets';
 
 const readFile = (file: string, response: http.ServerResponse) => {
   fs.readFile(path.resolve(__dirname, file), (errors, data) => {

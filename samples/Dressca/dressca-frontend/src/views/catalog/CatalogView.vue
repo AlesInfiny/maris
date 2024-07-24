@@ -11,8 +11,8 @@ import { useCatalogStore } from '@/stores/catalog/catalog';
 import CarouselSlider from '@/components/common/CarouselSlider.vue';
 import Loading from '@/components/common/LoadingSpinner.vue';
 import { useRouter } from 'vue-router';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();
@@ -56,6 +56,7 @@ watch([selectedCategory, selectedBrand], async () => {
           <template #default="{ item }">
             <img
               :src="getAssetUrl(item.assetCode)"
+              alt="Special Contents"
               class="max-h-[350px] min-w-0 m-auto pointer-events-none"
             />
           </template>
@@ -64,28 +65,32 @@ watch([selectedCategory, selectedBrand], async () => {
       <div class="flex justify-center">
         <div class="grid lg:gap-24 grid-cols-1 lg:grid-cols-2 my-4 text-lg">
           <div>
-            <label class="mr-2 font-bold">カテゴリ</label>
-            <select v-model="selectedCategory" class="w-48 border-2">
-              <option
-                v-for="category in getCategories"
-                :key="category.id"
-                :value="category.id"
-              >
-                {{ category.name }}
-              </option>
-            </select>
+            <label class="mr-2 font-bold"
+              >カテゴリ
+              <select v-model="selectedCategory" class="w-48 border-2">
+                <option
+                  v-for="category in getCategories"
+                  :key="category.id"
+                  :value="category.id"
+                >
+                  {{ category.name }}
+                </option>
+              </select>
+            </label>
           </div>
           <div class="mt-2 lg:mt-0">
-            <label class="mr-2 font-bold">ブランド</label>
-            <select v-model="selectedBrand" class="w-48 border-2">
-              <option
-                v-for="brand in getBrands"
-                :key="brand.id"
-                :value="brand.id"
-              >
-                {{ brand.name }}
-              </option>
-            </select>
+            <label class="mr-2 font-bold"
+              >ブランド
+              <select v-model="selectedBrand" class="w-48 border-2">
+                <option
+                  v-for="brand in getBrands"
+                  :key="brand.id"
+                  :value="brand.id"
+                >
+                  {{ brand.name }}
+                </option>
+              </select>
+            </label>
           </div>
         </div>
       </div>
@@ -100,7 +105,7 @@ watch([selectedCategory, selectedBrand], async () => {
               <img
                 class="h-[180px]"
                 :src="getFirstAssetUrl(item.assetCodes)"
-                alt="Sunset in the mountains"
+                :alt="item.name"
               />
               <div class="w-full">
                 <p class="text-md mb-2 w-full">
@@ -112,6 +117,7 @@ watch([selectedCategory, selectedBrand], async () => {
                 <div class="mt-4 flex items-center justify-center">
                   <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    type="submit"
                     @click="addBasket(item.id)"
                   >
                     買い物かごに入れる

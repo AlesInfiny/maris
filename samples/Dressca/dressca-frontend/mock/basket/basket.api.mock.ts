@@ -1,11 +1,12 @@
-const base = 'api';
+import type { Connect } from 'vite';
 import type {
   BasketResponse,
   BasketItemResponse,
   PostBasketItemsRequest,
   PutBasketItemsRequest,
 } from '../../src/generated/api-client';
-import type { Connect } from 'vite';
+
+const base = 'api';
 
 const basket: BasketResponse = {
   buyerId: 'xxxxxxxxxxxxxxxxxxxxxxxxxx',
@@ -154,6 +155,25 @@ const mockBasketItems: BasketItemResponse[] = [
   },
 ];
 
+function calcBasketAccount() {
+  let totalItemsPrice = 0;
+  basket.basketItems?.forEach((item) => {
+    // eslint-disable-next-line no-param-reassign
+    item.subTotal = item.unitPrice * item.quantity;
+    totalItemsPrice += item.subTotal;
+  });
+  if (!basket || !basket.account) {
+    return;
+  }
+  basket.account.consumptionTaxRate = 0.1;
+  basket.account.totalItemsPrice = totalItemsPrice;
+  const deliveryCharge = totalItemsPrice >= 5000 ? 0 : 500;
+  basket.account.deliveryCharge = deliveryCharge;
+  const consumptionTax = Math.floor((totalItemsPrice + deliveryCharge) * 0.1);
+  basket.account.consumptionTax = consumptionTax;
+  basket.account.totalPrice = totalItemsPrice + consumptionTax + deliveryCharge;
+}
+
 export const basketApiMock = (middlewares: Connect.Server) => {
   middlewares.use(`/${base}/basket-items`, (req, res) => {
     if (req.method === 'GET') {
@@ -176,7 +196,9 @@ export const basketApiMock = (middlewares: Connect.Server) => {
     }
 
     let body = '';
-    req.on('data', (chunk) => (body += chunk));
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
     req.on('end', () => {
       if (req.method === 'POST') {
         const dto: PostBasketItemsRequest = JSON.parse(body);
@@ -212,7 +234,6 @@ export const basketApiMock = (middlewares: Connect.Server) => {
             if (target.length === 0) {
               res.writeHead(400, { 'Content-Type': 'application/json' });
               res.end();
-              return;
             } else {
               target[0].quantity = putBasketItem.quantity;
             }
@@ -222,26 +243,7 @@ export const basketApiMock = (middlewares: Connect.Server) => {
         calcBasketAccount();
         res.writeHead(204, { 'Content-Type': 'application/json' });
         res.end();
-        return;
       }
     });
   });
 };
-
-function calcBasketAccount() {
-  let totalItemsPrice = 0;
-  basket.basketItems?.forEach((item) => {
-    item.subTotal = item.unitPrice * item.quantity;
-    totalItemsPrice += item.subTotal;
-  });
-  if (!basket || !basket.account) {
-    return;
-  }
-  basket.account.consumptionTaxRate = 0.1;
-  basket.account.totalItemsPrice = totalItemsPrice;
-  const deliveryCharge = totalItemsPrice >= 5000 ? 0 : 500;
-  basket.account.deliveryCharge = deliveryCharge;
-  const consumptionTax = Math.floor((totalItemsPrice + deliveryCharge) * 0.1);
-  basket.account.consumptionTax = consumptionTax;
-  basket.account.totalPrice = totalItemsPrice + consumptionTax + deliveryCharge;
-}
