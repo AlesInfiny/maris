@@ -1,5 +1,7 @@
+/* eslint max-classes-per-file: 0 */
 export abstract class CustomErrorBase extends Error {
   cause?: Error | null;
+
   constructor(message: string, cause?: Error) {
     super(message);
     // ラップ前のエラーを cause として保持

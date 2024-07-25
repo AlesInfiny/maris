@@ -1,12 +1,12 @@
-import router from '@/router';
+import { useRouter } from 'vue-router';
 import { showToast } from '@/services/notification/notificationService';
+import { useRoutingStore } from '@/stores/routing/routing';
 import {
   CustomErrorBase,
   UnauthorizedError,
   NetworkError,
   ServerError,
 } from './custom-error';
-import { useRoutingStore } from '@/stores/routing/routing';
 
 export function errorHandler(
   error: unknown,
@@ -25,6 +25,7 @@ export function errorHandler(
       if (handlingUnauthorizedError) {
         handlingUnauthorizedError();
       } else {
+        const router = useRouter();
         const routingStore = useRoutingStore();
         routingStore.setRedirectFrom(router.currentRoute.value.path.slice(1));
         router.push({ name: 'authentication/login' });

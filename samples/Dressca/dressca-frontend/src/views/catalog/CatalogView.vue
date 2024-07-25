@@ -14,7 +14,7 @@ import Loading from '@/components/common/LoadingSpinner.vue';
 import { useRouter } from 'vue-router';
 import { currencyHelper } from '@/shared/helpers/currencyHelper';
 import { assetHelper } from '@/shared/helpers/assetHelper';
-import { errorHandler } from '@/shared/error-handler/error-hander';
+import { errorHandler } from '@/shared/error-handler/error-handler';
 
 const specialContentStore = useSpecialContentStore();
 const catalogStore = useCatalogStore();

@@ -27,9 +27,11 @@ axiosInstance.interceptors.response.use(
     if (axios.isAxiosError(error)) {
       if (!error.response) {
         return Promise.reject(new NetworkError('Network Error', error));
-      } else if (error.response.status === 500) {
+      }
+      if (error.response.status === 500) {
         return Promise.reject(new ServerError('Server Error', error));
-      } else if (error.response.status === 401) {
+      }
+      if (error.response.status === 401) {
         return Promise.reject(
           new UnauthorizedError('Unauthorized Error', error),
         );
@@ -37,6 +39,7 @@ axiosInstance.interceptors.response.use(
 
       return Promise.reject(new HttpError(error.message, error));
     }
+    return Promise.reject(error);
   },
 );
 

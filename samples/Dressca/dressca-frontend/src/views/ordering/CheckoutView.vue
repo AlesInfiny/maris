@@ -10,7 +10,7 @@ import { useRouter } from 'vue-router';
 import { currencyHelper } from '@/shared/helpers/currencyHelper';
 import { assetHelper } from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
-import { errorHandler } from '@/shared/error-handler/error-hander';
+import { errorHandler } from '@/shared/error-handler/error-handler';
 
 const userStore = useUserStore();
 const basketStore = useBasketStore();
