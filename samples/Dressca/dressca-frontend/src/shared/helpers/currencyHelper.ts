@@ -1,4 +1,4 @@
-export default function () {
+export function currencyHelper() {
   const toCurrencyJPY = (price: number | undefined): string => {
     if (typeof price === 'undefined') {
       return '-';

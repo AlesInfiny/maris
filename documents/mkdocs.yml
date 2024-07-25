@@ -4,7 +4,7 @@ site_name: AlesInfiny Maris OSS Edition
 site_url: https://maris.alesinfiny.org/
 docs_dir: contents
 copyright: "Copyright &copy; 2023 BIPROGY Inc. All rights reserved."
-site_author: "BIPROGY Inc."
+site_author: "AlesInfiny Maris OSS Edition コミュニティ"
 site_description: "AlesInfiny Maris OSS Edition のポータルサイトです。"
 site_dir: build-artifacts
 

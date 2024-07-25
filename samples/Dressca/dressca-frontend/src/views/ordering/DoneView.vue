@@ -4,8 +4,8 @@ import { useRouter } from 'vue-router';
 import { getOrder } from '@/services/ordering/ordering-service';
 import { showToast } from '@/services/notification/notificationService';
 import type { OrderResponse } from '@/generated/api-client/models/order-response';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 import { errorHandler } from '@/shared/error-handler/error-hander';
 
 const router = useRouter();
@@ -109,6 +109,7 @@ onMounted(async () => {
           <div class="grid grid-cols-2">
             <img
               :src="getFirstAssetUrl(item.itemOrdered?.assetCodes)"
+              :alt="item.itemOrdered?.name"
               class="h-[150px] pointer-events-none"
             />
             <div class="ml-2">
@@ -128,6 +129,7 @@ onMounted(async () => {
     <div class="flex justify-between">
       <button
         class="w-36 mt-4 ml-4 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+        type="submit"
         @click="goCatalog()"
       >
         買い物を続ける

@@ -11,5 +11,5 @@ public interface IAssetRepository
     /// </summary>
     /// <param name="assetCode">アセットコード。</param>
     /// <returns>アセット情報。</returns>
-    Asset? Find(string? assetCode);
+    Task<Asset?> FindAsync(string? assetCode);
 }

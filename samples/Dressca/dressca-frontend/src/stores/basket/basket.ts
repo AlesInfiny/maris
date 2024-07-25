@@ -16,7 +16,7 @@ export const useBasketStore = defineStore({
   actions: {
     async add(catalogItemId: number) {
       const params: PostBasketItemsRequest = {
-        catalogItemId: catalogItemId,
+        catalogItemId,
         addedQuantity: 1,
       };
       await basketItemsApi.postBasketItem(params);
@@ -25,7 +25,7 @@ export const useBasketStore = defineStore({
     async update(catalogItemId: number, newQuantity: number) {
       const params: PutBasketItemsRequest[] = [
         {
-          catalogItemId: catalogItemId,
+          catalogItemId,
           quantity: newQuantity,
         },
       ];

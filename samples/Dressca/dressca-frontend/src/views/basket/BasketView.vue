@@ -10,8 +10,8 @@ import { useBasketStore } from '@/stores/basket/basket';
 import { useRouter } from 'vue-router';
 import BasketItem from '@/components/basket/BasketItem.vue';
 import Loading from '@/components/common/LoadingSpinner.vue';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
 import { errorHandler } from '@/shared/error-handler/error-hander';
 
@@ -88,6 +88,7 @@ onUnmounted(async () => {
         <div class="grid grid-cols-1 lg:grid-cols-3 mt-4 flex items-center">
           <img
             :src="getFirstAssetUrl(getAddedItem.catalogItem?.assetCodes)"
+            :alt="getAddedItem.catalogItem?.name"
             class="h-[150px] m-auto pointer-events-none"
           />
           <span class="text-center lg:text-left">{{
@@ -148,6 +149,7 @@ onUnmounted(async () => {
       <div class="flex justify-between">
         <button
           class="w-36 mt-4 ml-4 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+          type="submit"
           @click="goCatalog()"
         >
           買い物を続ける
@@ -155,6 +157,7 @@ onUnmounted(async () => {
         <span v-if="!isEmpty()">
           <button
             class="w-36 mt-4 mr-4 bg-orange-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
             @click="order()"
           >
             レジに進む
