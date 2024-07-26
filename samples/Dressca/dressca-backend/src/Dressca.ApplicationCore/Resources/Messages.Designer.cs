@@ -124,11 +124,29 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   指定されたカタログブランド ID: {0} のカタログブランドは存在しません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogBrandIdDoesNotExist {
+            get {
+                return ResourceManager.GetString("CatalogBrandIdDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   カタログブランド ID は 0 以下にできません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogBrandIdMustBePositive {
             get {
                 return ResourceManager.GetString("CatalogBrandIdMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在ません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogCategoryIdDoesNotExist {
+            get {
+                return ResourceManager.GetString("CatalogCategoryIdDoesNotExist", resourceCulture);
             }
         }
         

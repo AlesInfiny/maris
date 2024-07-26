@@ -43,4 +43,36 @@ internal class EfCatalogRepository : ICatalogRepository
 
         return await query.ToListAsync(cancellationToken);
     }
+
+    /// <inheritdoc/>
+    public Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default)
+    {
+        var keys = new object[] { id };
+        return this.dbContext.CatalogItems.FindAsync(keys, cancellationToken).AsTask();
+    }
+
+    /// <inheritdoc/>
+    public async Task UpdateAsync(CatalogItem entity, CancellationToken cancellationToken = default)
+    {
+        this.dbContext.Update(entity);
+        _ = await this.dbContext.SaveChangesAsync(cancellationToken);
+        return;
+    }
+
+    /// <inheritdoc/>
+    public async Task<CatalogItem> AddAsync(CatalogItem entity, CancellationToken cancellationToken = default)
+    {
+        this.dbContext.CatalogItems.Add(entity);
+        _ = await this.dbContext.SaveChangesAsync(cancellationToken);
+        return entity;
+    }
+
+    /// <inheritdoc/>
+    public async Task RemoveAsync(CatalogItem entity, CancellationToken cancellationToken = default)
+    {
+        this.dbContext.CatalogItems.Remove(entity);
+        _ = await this.dbContext.SaveChangesAsync(cancellationToken);
+        return;
+    }
+
 }

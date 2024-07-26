@@ -132,6 +132,12 @@
   <data name="CatalogApplicationService_GetCatalogItemsAsyncStart" xml:space="preserve">
     <value>カタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得します。</value>
   </data>
+  <data name="CatalogBrandIdDoesNotExistInRepository" xml:space="preserve">
+    <value>指定されたカタログブランド ID: [{CatalogBrandId}] のカタログブランドがリポジトリに存在しません。</value>
+  </data>
+  <data name="CatalogCategoryIdDoesNotExistInRepository" xml:space="preserve">
+    <value>指定されたカタログカテゴリ ID: [{CatalogCategoryId}] のカタログカテゴリがリポジトリに存在しません。</value>
+  </data>
   <data name="CatalogItemIdDoesNotExistInRepository" xml:space="preserve">
     <value>指定されたカタログアイテム ID: [{CatalogItemId}] のカタログアイテムがリポジトリに存在しません。</value>
   </data>

@@ -138,8 +138,14 @@
   <data name="Basket_ItemQuantity" xml:space="preserve">
     <value>カタログアイテム ID: {0}, 数量: {1} </value>
   </data>
+  <data name="CatalogBrandIdDoesNotExist" xml:space="preserve">
+    <value>指定されたカタログブランド ID: {0} のカタログブランドは存在しません。</value>
+  </data>
   <data name="CatalogBrandIdMustBePositive" xml:space="preserve">
     <value>カタログブランド ID は 0 以下にできません。</value>
+  </data>
+  <data name="CatalogCategoryIdDoesNotExist" xml:space="preserve">
+    <value>指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在ません。</value>
   </data>
   <data name="CatalogCategoryIdMustBePositive" xml:space="preserve">
     <value>カタログカテゴリ ID は 0 以下にできません。</value>

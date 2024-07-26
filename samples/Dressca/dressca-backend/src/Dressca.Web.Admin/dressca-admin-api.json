@@ -174,6 +174,125 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログにアイテムを追加します。",
+        "operationId": "postCatalogItem",
+        "requestBody": {
+          "x-name": "postCatalogItemRequest",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCatalogItemRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "201": {
+            "description": "成功。"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログアイテムの情報を更新します。",
+        "operationId": "putCatalogItem",
+        "requestBody": {
+          "x-name": "putCatalogItemRequest",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutCatalogItemRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": "成功。"
+          }
+        }
+      }
+    },
+    "/api/catalog-items/{catalogItemId}": {
+      "delete": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログから指定したカタログアイテム Id のアイテムを削除します。",
+        "operationId": "deleteCatalogItem",
+        "parameters": [
+          {
+            "name": "catalogItemId",
+            "in": "path",
+            "required": true,
+            "description": "カタログアイテム Id 。",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功。"
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "HealthChecks_api/healthGET",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "HealthChecks_api/healthHEAD",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "503": {
+            "description": ""
+          }
+        }
       }
     }
   },
@@ -347,6 +466,108 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "PostCatalogItemRequest": {
+        "type": "object",
+        "description": "カタログにアイテムを追加する処理のリクエストデータを表します。",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "description",
+          "price",
+          "productCode",
+          "catalogCategoryId",
+          "catalogBrandId"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "アイテム名を取得または設定します。\n            ",
+            "maxLength": 256,
+            "minLength": 0
+          },
+          "description": {
+            "type": "string",
+            "description": "説明を取得または設定します。\n            ",
+            "maxLength": 1024,
+            "minLength": 0
+          },
+          "price": {
+            "type": "integer",
+            "description": "単価を取得または設定します。",
+            "format": "int64"
+          },
+          "productCode": {
+            "type": "string",
+            "description": "商品コードを取得または設定します。\n            ",
+            "maxLength": 128,
+            "minLength": 0
+          },
+          "catalogCategoryId": {
+            "type": "integer",
+            "description": "カタログカテゴリIDを取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "catalogBrandId": {
+            "type": "integer",
+            "description": "カタログブランドIDを取得または設定します。\n            ",
+            "format": "int64"
+          }
+        }
+      },
+      "PutCatalogItemRequest": {
+        "type": "object",
+        "description": "カタログアイテムを変更する処理のリクエストデータを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "description",
+          "price",
+          "productCode",
+          "catalogCategoryId",
+          "catalogBrandId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "カタログアイテムID。",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "アイテム名を取得または設定します。\n            ",
+            "maxLength": 256,
+            "minLength": 0
+          },
+          "description": {
+            "type": "string",
+            "description": "説明を取得または設定します。\n            ",
+            "maxLength": 1024,
+            "minLength": 0
+          },
+          "price": {
+            "type": "integer",
+            "description": "単価を取得または設定します。",
+            "format": "int64"
+          },
+          "productCode": {
+            "type": "string",
+            "description": "商品コードを取得または設定します。\n            ",
+            "maxLength": 128,
+            "minLength": 0
+          },
+          "catalogCategoryId": {
+            "type": "integer",
+            "description": "カタログカテゴリIDを取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "catalogBrandId": {
+            "type": "integer",
+            "description": "カタログブランドIDを取得または設定します。\n            ",
+            "format": "int64"
           }
         }
       }

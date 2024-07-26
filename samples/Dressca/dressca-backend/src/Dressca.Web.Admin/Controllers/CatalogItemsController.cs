@@ -17,25 +17,28 @@ namespace Dressca.Web.Admin.Controllers
     [Produces("application/json")]
     public class CatalogItemsController : ControllerBase
     {
-        private readonly CatalogApplicationService service;
+        private readonly CatalogManagementApplicationService managementService;
         private readonly IObjectMapper<CatalogItem, CatalogItemResponse> mapper;
 
         /// <summary>
         ///  <see cref="CatalogItemsController"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="service">カタログアプリケーションサービス。</param>
+        /// <param name="managementService">カタログ管理アプリケーションサービス。</param>
         /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
         /// <exception cref="ArgumentNullException">
         ///  <list type="bullet">
         ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
+        ///   <item><paramref name="managementService"/> が <see langword="null"/> です。</item>
         ///   <item><paramref name="mapper"/> が <see langword="null"/> です。</item>
         ///  </list>
         /// </exception>
         public CatalogItemsController(
             CatalogApplicationService service,
+            CatalogManagementApplicationService managementService,
             IObjectMapper<CatalogItem, CatalogItemResponse> mapper)
         {
-            this.service = service ?? throw new ArgumentNullException(nameof(service));
+            this.managementService = managementService ?? throw new ArgumentNullException(nameof(managementService));
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -53,7 +56,7 @@ namespace Dressca.Web.Admin.Controllers
         public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
         {
             var (catalogItems, totalCount) =
-                await this.service.GetCatalogItemsAsync(
+                await this.managementService.GetCatalogItemsAsync(
                     skip: query.GetSkipCount(),
                     take: query.PageSize,
                     brandId: query.BrandId,
@@ -68,5 +71,73 @@ namespace Dressca.Web.Admin.Controllers
                 pageSize: query.PageSize);
             return this.Ok(returnValue);
         }
+
+        /// <summary>
+        ///  カタログにアイテムを追加します。
+        /// </summary>
+        /// <param name="postCatalogItemRequest"></param>
+        /// <response code="201">成功。</response>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [OpenApiOperation("postCatalogItem")]
+        public async Task<IActionResult> PostCatalogItemAsync(PostCatalogItemRequest postCatalogItemRequest)
+        {
+
+            var catalogItem = await managementService.AddItemToCatalogAsync(
+                postCatalogItemRequest.Name,
+                postCatalogItemRequest.Description,
+                postCatalogItemRequest.Price,
+                postCatalogItemRequest.ProductCode,
+                postCatalogItemRequest.CatalogBrandId,
+                postCatalogItemRequest.CatalogCategoryId
+                );
+
+            var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.PostCatalogItemAsync));
+
+            return this.CreatedAtAction(actionName, new { catalogItemId = catalogItem.Id }, null);
+        }
+
+        /// <summary>
+        ///  カタログから指定したカタログアイテム Id のアイテムを削除します。
+        /// </summary>
+        /// <param name="catalogItemId">カタログアイテム Id 。</param>
+        /// <returns>なし。</returns>
+        /// <response code="204">成功。</response>
+        [HttpDelete("{catalogItemId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [OpenApiOperation("deleteCatalogItem")]
+        public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId)
+        {
+
+            await managementService.DeleteItemFromCatalogAsync(catalogItemId);
+            return this.NoContent();
+        }
+
+        /// <summary>
+        ///  カタログアイテムの情報を更新します。
+        /// </summary>
+        /// <param name="putCatalogItemRequest"></param>
+        /// <returns>なし。</returns>
+        /// <response code="204">成功。</response>
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [OpenApiOperation("putCatalogItem")]
+        public async Task<IActionResult> PutCatalogItemAsync(PutCatalogItemRequest putCatalogItemRequest)
+        {
+
+            var command = new CatalogItemUpdateCommand(
+                putCatalogItemRequest.Id,
+                putCatalogItemRequest.Name,
+                putCatalogItemRequest.Description,
+                putCatalogItemRequest.Price,
+                putCatalogItemRequest.ProductCode,
+                putCatalogItemRequest.CatalogBrandId,
+                putCatalogItemRequest.CatalogCategoryId);
+
+            await this.managementService.UpdateCatalogItemAsync(command);
+
+            return this.NoContent();
+        }
+
     }
 }

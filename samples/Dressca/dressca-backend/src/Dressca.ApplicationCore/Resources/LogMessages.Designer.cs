@@ -106,6 +106,24 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   指定されたカタログブランド ID: [{CatalogBrandId}] のカタログブランドがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogBrandIdDoesNotExistInRepository {
+            get {
+                return ResourceManager.GetString("CatalogBrandIdDoesNotExistInRepository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   指定されたカタログカテゴリ ID: [{CatalogCategoryId}] のカタログカテゴリがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogCategoryIdDoesNotExistInRepository {
+            get {
+                return ResourceManager.GetString("CatalogCategoryIdDoesNotExistInRepository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   指定されたカタログアイテム ID: [{CatalogItemId}] のカタログアイテムがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogItemIdDoesNotExistInRepository {

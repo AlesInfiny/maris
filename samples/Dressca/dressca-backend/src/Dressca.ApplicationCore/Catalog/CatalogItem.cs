@@ -181,4 +181,58 @@ public class CatalogItem
     ///  カタログアイテムのアセットリストを取得します。
     /// </summary>
     public IReadOnlyCollection<CatalogItemAsset> Assets => this.assets.AsReadOnly();
+
+    /// <summary>
+    /// アイテム名を設定します。
+    /// </summary>
+    /// <param name="value">アイテム名に設定する値。</param>
+    public void SetName(string value)
+    {
+        this.name = value;
+    }
+
+    /// <summary>
+    /// 説明を設定します。
+    /// </summary>
+    /// <param name="value">説明に設定する値。</param>
+    public void SetDescription(string value)
+    {
+        this.description = value;
+    }
+
+    /// <summary>
+    /// 単価を設定します。
+    /// </summary>
+    /// <param name="value">単価に設定する値。</param>
+    public void SetPrice(decimal value)
+    {
+        this.price = value;
+    }
+
+    /// <summary>
+    /// 商品コードを設定します。
+    /// </summary>
+    /// <param name="value">商品コードに設定する値。</param>
+    public void SetProductCode(string value)
+    {
+        this.productCode = value;
+    }
+
+    /// <summary>
+    /// カタログブランドIDを設定します。
+    /// </summary>
+    /// <param name="value">カタログブランドIDに設定する値。</param>
+    public void SetCatalogBrandId(long value)
+    {
+        this.catalogBrandId = value;
+    }
+
+    /// <summary>
+    /// カタログカテゴリIDを設定します。
+    /// </summary>
+    /// <param name="value">カタログカテゴリIDに設定する値。</param>
+    public void SetCatalogCategoryId(long value)
+    {
+        this.catalogCategoryId = value;
+    }
 }
