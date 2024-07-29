@@ -1,5 +1,5 @@
 <!-- markdownlint-disable CMD001 -->
-<!-- textlint-disable -->
+<!-- textlint-disable @textlint-rule/require-header-id, ja-technical-writing/sentence-length, @textlint-ja/no-synonyms, ja-technical-writing/max-ten, ja-technical-writing/no-doubled-joshi, ja-spacing/ja-space-between-half-and-full-width, ja-spacing/ja-space-around-link -->
 
 # コントリビューター行動規範
 
@@ -77,11 +77,7 @@
 
 コミュニティへの影響ガイドラインは[Mozilla's code of conduct enforcement ladder](https://github.com/mozilla/diversity)に適合しています。
 
-この行動規範に関する一般的な質問への回答については、[FAQ](https://www.contributor-covenant.org/faq)のFAQを参照してください。翻訳は[translations](https://www.contributor-covenant.org/translations)で入手できます。
-
-<!-- textlint-enable -->
-
-<!-- textlint-disable @textlint-ja/no-synonyms, @textlint-rule/require-header-id -->
+この行動規範に関する一般的な質問への回答については、[https://www.contributor-covenant.org/faq](https://www.contributor-covenant.org/faq)のFAQを参照してください。翻訳は[https://www.contributor-covenant.org/translations](https://www.contributor-covenant.org/translations)で入手できます。
 
 Contributor Covenant は [Creative Commons Attribution 4.0 International Public License](https://github.com/EthicalSource/contributor_covenant/blob/release/LICENSE.md) に基づき許諾されています。
 
@@ -94,5 +90,5 @@ Contributor Covenant は [Creative Commons Attribution 4.0 International Public 
 - 違反報告フォームのリンクを挿入
 - 「帰属」にライセンス（ Creative Commons Attribution 4.0 International Public License ）を記載
 
-<!-- textlint-enable @textlint-ja/no-synonyms, @textlint-rule/require-header-id -->
+<!-- textlint-enable @textlint-rule/require-header-id, ja-technical-writing/sentence-length, @textlint-ja/no-synonyms, ja-technical-writing/max-ten, ja-technical-writing/no-doubled-joshi, ja-spacing/ja-space-between-half-and-full-width, ja-spacing/ja-space-around-link -->
 <!-- markdownlint-enable CMD001 -->
