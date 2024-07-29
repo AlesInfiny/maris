@@ -2,9 +2,11 @@
 import { onMounted, reactive, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import { getOrder } from '@/services/ordering/ordering-service';
+import { showToast } from '@/services/notification/notificationService';
 import type { OrderResponse } from '@/generated/api-client/models/order-response';
 import { currencyHelper } from '@/shared/helpers/currencyHelper';
 import { assetHelper } from '@/shared/helpers/assetHelper';
+import { errorHandler } from '@/shared/error-handler/error-handler';
 
 const router = useRouter();
 const props = defineProps<{
@@ -23,7 +25,14 @@ const goCatalog = () => {
 };
 
 onMounted(async () => {
-  state.lastOrdered = await getOrder(props.orderId);
+  try {
+    state.lastOrdered = await getOrder(props.orderId);
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('注文情報の取得に失敗しました。');
+      router.push('/');
+    });
+  }
 });
 </script>
 

@@ -5,6 +5,7 @@ import {
   removeItemFromBasket,
   updateItemInBasket,
 } from '@/services/basket/basket-service';
+import { showToast } from '@/services/notification/notificationService';
 import { useBasketStore } from '@/stores/basket/basket';
 import { useRouter } from 'vue-router';
 import BasketItem from '@/components/basket/BasketItem.vue';
@@ -12,6 +13,7 @@ import Loading from '@/components/common/LoadingSpinner.vue';
 import { currencyHelper } from '@/shared/helpers/currencyHelper';
 import { assetHelper } from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
+import { errorHandler } from '@/shared/error-handler/error-handler';
 
 const state = reactive({
   showLoading: true,
@@ -33,11 +35,24 @@ const goCatalog = () => {
 };
 
 const update = async (catalogItemId: number, newQuantity: number) => {
-  await updateItemInBasket(catalogItemId, newQuantity);
+  try {
+    await updateItemInBasket(catalogItemId, newQuantity);
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('数量の変更に失敗しました。');
+    });
+  }
 };
 
+// 削除に失敗した通知を出す
 const remove = async (catalogItemId: number) => {
-  await removeItemFromBasket(catalogItemId);
+  try {
+    await removeItemFromBasket(catalogItemId);
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('商品の削除に失敗しました。');
+    });
+  }
 };
 
 const order = () => {
@@ -49,8 +64,9 @@ onMounted(async () => {
   try {
     await fetchBasket();
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
+    errorHandler(error, () => {
+      showToast('カートの取得に失敗しました。');
+    });
   } finally {
     state.showLoading = false;
   }
