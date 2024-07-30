@@ -3,11 +3,14 @@ import { onMounted } from 'vue';
 import { useBasketStore } from '@/stores/basket/basket';
 import { useUserStore } from '@/stores/user/user';
 import { postOrder } from '@/services/ordering/ordering-service';
+import { fetchBasket } from '@/services/basket/basket-service';
+import { showToast } from '@/services/notification/notificationService';
 
 import { useRouter } from 'vue-router';
 import { currencyHelper } from '@/shared/helpers/currencyHelper';
 import { assetHelper } from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
+import { errorHandler } from '@/shared/error-handler/error-handler';
 
 const userStore = useUserStore();
 const basketStore = useBasketStore();
@@ -29,14 +32,15 @@ const checkout = async () => {
     );
     router.push({ name: 'ordering/done', params: { orderId } });
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-    router.push({ name: 'error' });
+    errorHandler(error, () => {
+      showToast('注文に失敗しました。');
+      router.push({ name: 'error' });
+    });
   }
 };
 
 onMounted(async () => {
-  await basketStore.fetch();
+  await fetchBasket();
   if (getBasket.value.basketItems?.length === 0) {
     router.push('/');
   }

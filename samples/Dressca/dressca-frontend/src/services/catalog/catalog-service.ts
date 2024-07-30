@@ -8,5 +8,5 @@ export async function fetchCategoriesAndBrands() {
 }
 
 export async function fetchItems(categoryId: number, brandsId: number) {
-  catalogStore.fetchItems(categoryId, brandsId);
+  await catalogStore.fetchItems(categoryId, brandsId);
 }
