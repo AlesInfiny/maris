@@ -5,7 +5,7 @@ description: AlesInfiny Maris OSS Edition のコーディング規約に関す�
 
 # コーディング規約 {#top}
 
-AlesInfiny Maris OSS Edition では、一般に広く採用されている規約に準拠し、必要に応じて最低限のカスタムルールを加えることを基本方針とします。
+AlesInfiny Maris OSS Edition （以下 AlesInfiny Maris ）では、一般に広く採用されている規約に準拠し、必要に応じて最低限のカスタムルールを加えることを基本方針とします。
 ゼロから独自規約を作成することは、以下のような問題があるため推奨しません。
 
 - 規約作成にかかる負荷が大きい
@@ -42,7 +42,8 @@ AlesInfiny Maris OSS Edition では、一般に広く採用されている規約
 
         [CSS specifications :material-open-in-new:](https://www.w3.org/Style/CSS/current-work){ target=_blank }
 
-上記のコーディング規約は静的コード解析ツールによって自動的にチェックできるようにします
+上記のコーディング規約は静的コード解析ツールによって自動的にチェックできるようにします。
+バックエンド側では、 Visual Studio でのコーディング中に自動チェックが行われます。
 フロントエンド側では Prettier 、 ES Lint 、 StyleLint を利用してコーディング規約の自動チェックを行っています。
 コーディング規約の内容および静的コード解析ツールの詳しい設定方法については、以下のページとサンプルアプリの実装を確認してください。
 
