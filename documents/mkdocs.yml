@@ -84,7 +84,7 @@ nav:
               - guidebooks/how-to-develop/cors/index.md
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
-      # - 規約: 
+      # - 規約:
       #     - guidebooks/conventions/index.md
           - コーディング規約: guidebooks/conventions/coding-conventions.md
       - マイグレーション:
