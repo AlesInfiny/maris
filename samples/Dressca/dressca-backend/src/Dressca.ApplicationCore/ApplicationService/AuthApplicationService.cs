@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.ApplicationService;
 /// </summary>
 public class AuthApplicationService
 {
-    private readonly IUserRepository repository;
+    private readonly IUserSession repository;
     private readonly ILogger<AuthApplicationService> logger;
 
     /// <summary>
@@ -16,7 +16,7 @@ public class AuthApplicationService
     /// </summary>
     /// <param name="repository">ユーザーレポジトリ。</param>
     /// <param name="logger">ロガー。</param>
-    public AuthApplicationService(IUserRepository repository, ILogger<AuthApplicationService> logger)
+    public AuthApplicationService(IUserSession repository, ILogger<AuthApplicationService> logger)
     {
         this.repository = repository;
         this.logger = logger;

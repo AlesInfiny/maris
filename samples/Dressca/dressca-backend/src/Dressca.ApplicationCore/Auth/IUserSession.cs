@@ -3,7 +3,7 @@
 /// <summary>
 /// ユーザレポジトリのインターフェース。
 /// </summary>
-public interface IUserRepository
+public interface IUserSession
 {
     /// <summary>
     /// 指定した認証情報を持つユーザーを検索します。
