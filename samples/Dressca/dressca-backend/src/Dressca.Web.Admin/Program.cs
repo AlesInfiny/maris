@@ -5,6 +5,7 @@ using Dressca.ApplicationCore.Auth;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
 using Dressca.Web.Admin;
+using Dressca.Web.Admin.Authorization;
 using Dressca.Web.Admin.Controllers;
 using Dressca.Web.Admin.HealthChecks;
 using Dressca.Web.Admin.Mapper;
@@ -55,6 +56,7 @@ builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
 builder.Services.AddStaticFileAssetStore();
 builder.Services.AddDresscaApplicationCore();
 builder.Services.AddTransient<IUserRepository, EfUserRepository>();
+builder.Services.AddTransient<IUserSession, UserSession>();
 builder.Services.AddTransient<AuthApplicationService>();
 builder.Services.AddDresscaDtoMapper();
 
