@@ -3,6 +3,7 @@ using Dressca.ApplicationCore.ApplicationService;
 using Dressca.Web.Admin.Dto.Auth;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 namespace Dressca.Web.Admin.Controllers;
@@ -96,6 +97,7 @@ public class AuthController : Controller
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [OpenApiOperation("logout")]
+    [Authorize]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(

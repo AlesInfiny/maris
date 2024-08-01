@@ -2,6 +2,7 @@
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Dto.Catalog;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
@@ -12,6 +13,7 @@ namespace Dressca.Web.Admin.Controllers;
 [Route("api/catalog-categories")]
 [ApiController]
 [Produces("application/json")]
+[Authorize]
 public class CatalogCategoriesController : ControllerBase
 {
     private readonly CatalogApplicationService service;

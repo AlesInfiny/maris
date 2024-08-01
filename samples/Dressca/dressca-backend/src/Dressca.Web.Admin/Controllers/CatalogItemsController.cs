@@ -4,6 +4,7 @@ using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Controllers.ApiModel;
 using Dressca.Web.Admin.Dto;
 using Dressca.Web.Admin.Dto.Catalog;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
@@ -15,6 +16,7 @@ namespace Dressca.Web.Admin.Controllers
     [Route("api/catalog-items")]
     [ApiController]
     [Produces("application/json")]
+    [Authorize]
     public class CatalogItemsController : ControllerBase
     {
         private readonly CatalogManagementApplicationService managementService;

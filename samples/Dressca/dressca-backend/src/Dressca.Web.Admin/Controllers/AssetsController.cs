@@ -1,6 +1,7 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Assets;
 using Dressca.Web.Admin.Assets;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
@@ -10,6 +11,7 @@ namespace Dressca.Web.Admin.Controllers;
 /// </summary>
 [Route("api/assets")]
 [ApiController]
+[Authorize]
 public class AssetsController : ControllerBase
 {
     private readonly AssetApplicationService service;
