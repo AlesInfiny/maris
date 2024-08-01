@@ -54,7 +54,7 @@ builder.Services.AddOpenApiDocument(config =>
 builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
 builder.Services.AddStaticFileAssetStore();
 builder.Services.AddDresscaApplicationCore();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserRepository, EfUserRepository>();
 builder.Services.AddTransient<AuthApplicationService>();
 builder.Services.AddDresscaDtoMapper();
 
