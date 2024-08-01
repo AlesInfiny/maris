@@ -23,7 +23,7 @@
     "@vue/eslint-config-airbnb-with-typescript": "^8.0.0",
     "axios": "^1.7.2",
     "pinia": "^2.2.0",
-    "vue": "^3.4.33"
+    "vue": "^3.4.35"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.13.4",
