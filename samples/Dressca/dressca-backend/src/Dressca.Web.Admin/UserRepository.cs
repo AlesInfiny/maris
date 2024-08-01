@@ -1,11 +1,11 @@
 ﻿using Dressca.ApplicationCore.Auth;
 
-namespace Dressca.Web.Admin.Auth;
+namespace Dressca.Web.Admin;
 
 /// <summary>
-/// ユーザーのセッションのHTTPContextによる実装クラス。
+/// ユーザーのレポジトリーのHTTPContextによる実装クラス。
 /// </summary>
-public class UserSession : IUserSession
+public class UserRepository : IUserRepository
 {
     private readonly IHttpContextAccessor httpContextAccessor;
 
@@ -13,7 +13,7 @@ public class UserSession : IUserSession
     /// コンストラクター。
     /// </summary>
     /// <param name="httpContextAccessor"></param>
-    public UserSession(IHttpContextAccessor httpContextAccessor)
+    public UserRepository(IHttpContextAccessor httpContextAccessor)
     {
         this.httpContextAccessor = httpContextAccessor;
     }
