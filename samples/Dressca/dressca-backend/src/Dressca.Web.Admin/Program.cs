@@ -1,10 +1,14 @@
 ﻿using System.Text.Json;
 using Dressca.ApplicationCore;
+using Dressca.ApplicationCore.ApplicationService;
+using Dressca.ApplicationCore.Auth;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
+using Dressca.Web.Admin;
 using Dressca.Web.Admin.Controllers;
 using Dressca.Web.Admin.HealthChecks;
 using Dressca.Web.Admin.Mapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -30,6 +34,8 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
     };
 });
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddOpenApiDocument(config =>
 {
     config.PostProcess = document =>
@@ -48,8 +54,16 @@ builder.Services.AddOpenApiDocument(config =>
 builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
 builder.Services.AddStaticFileAssetStore();
 builder.Services.AddDresscaApplicationCore();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<AuthApplicationService>();
 builder.Services.AddDresscaDtoMapper();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+    });
 
 if (builder.Environment.IsDevelopment())
 {
@@ -83,6 +97,8 @@ else
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

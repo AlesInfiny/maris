@@ -36,6 +36,7 @@ public static class ApplicationCoreServicesExtensions
         services.AddTransient<OrderApplicationService>();
         services.AddTransient<CatalogApplicationService>();
         services.AddTransient<AssetApplicationService>();
+        services.AddTransient<CatalogManagementApplicationService>();
 
         return services;
     }

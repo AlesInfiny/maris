@@ -41,7 +41,6 @@ public interface ICatalogRepository
     /// <returns>条件を満たすカタログアイテム数を返す非同期処理を表すタスク。</returns>
     Task<int> CountAsync(Expression<Func<CatalogItem, bool>> specification, CancellationToken cancellationToken = default);
 
-
     /// <summary>
     ///  指定した識別子のエンティティを取得します。
     /// </summary>

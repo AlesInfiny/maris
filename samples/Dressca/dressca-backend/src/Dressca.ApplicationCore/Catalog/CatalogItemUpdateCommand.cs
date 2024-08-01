@@ -9,7 +9,7 @@ public class CatalogItemUpdateCommand
     ///   <see cref="CatalogItemUpdateCommand"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="id">カタログアイテムID。</param>
-    /// <param name="name">商品名。</param>
+    /// <param name="name">アイテム名。</param>
     /// <param name="description">説明。</param>
     /// <param name="price">単価。</param>
     /// <param name="productCode">商品コード。</param>
@@ -33,17 +33,38 @@ public class CatalogItemUpdateCommand
         this.CatalogCategoryId = catalogCategoryId;
     }
 
+    /// <summary>
+    /// カタログアイテムID。
+    /// </summary>
     public long Id { get; }
 
+    /// <summary>
+    /// アイテム名。
+    /// </summary>
     public string Name { get; }
 
+    /// <summary>
+    /// 説明。
+    /// </summary>
     public string Description { get; }
 
+    /// <summary>
+    /// 単価。
+    /// </summary>
     public decimal Price { get; }
 
+    /// <summary>
+    /// 商品コード。
+    /// </summary>
     public string ProductCode { get; }
 
+    /// <summary>
+    /// カタログブランドID。
+    /// </summary>
     public long CatalogBrandId { get; }
 
+    /// <summary>
+    /// カタログカテゴリID。
+    /// </summary>
     public long CatalogCategoryId { get; }
 }

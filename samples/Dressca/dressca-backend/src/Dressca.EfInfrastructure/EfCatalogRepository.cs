@@ -74,5 +74,4 @@ internal class EfCatalogRepository : ICatalogRepository
         _ = await this.dbContext.SaveChangesAsync(cancellationToken);
         return;
     }
-
 }

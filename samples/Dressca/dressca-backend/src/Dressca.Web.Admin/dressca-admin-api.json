@@ -49,6 +49,46 @@
         }
       }
     },
+    "/api/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "ログインします。",
+        "operationId": "login",
+        "requestBody": {
+          "x-name": "postLoginRequest",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostLoginRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "ログアウトします。",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/catalog-brands": {
       "get": {
         "tags": [
@@ -324,6 +364,27 @@
           "instance": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "PostLoginRequest": {
+        "type": "object",
+        "description": "認証処理のリクエストデータを表します。",
+        "additionalProperties": false,
+        "required": [
+          "userName",
+          "password"
+        ],
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "ユーザー名。",
+            "minLength": 1
+          },
+          "password": {
+            "type": "string",
+            "description": "パスワード。",
+            "minLength": 1
           }
         }
       },
