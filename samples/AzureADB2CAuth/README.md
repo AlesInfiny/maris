@@ -118,11 +118,17 @@ auth-frontend
 
 ## サンプルで実現している認証フロー
 
-本サンプルでは、 Microsoft 認証ライブラリ（ MSAL ）の使用によって、 [OAuth 2.0 承認コードフロー](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/authorization-code-flow) を実現しています。
+本サンプルでは、 Microsoft 認証ライブラリ（ MSAL ）の使用によって、 [OAuth 2.0 承認コードフロー with PKCE](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce) を実現しています。
 
-なお、以下の処理は MSAL.js (JavaScript 用 Microsoft Authentication Library) によって行われます。
+なお、以下の処理はフロントエンドの MSAL.js (JavaScript 用 Microsoft Authentication Library) によって行われます。
 
-- state のリクエストへの設定、およびレスポンスの設定値の検証
+- code_verifier の生成・送信
+- code_challenge の生成・送信
+
+また、以下の処理はバックエンドの Microsoft.Identity.Web ライブラリによって行われます。
+
+- code_verifier の検証
+- code_challenge の検証
 
 ## 前提となる OSS ライブラリ
 
