@@ -1,112 +1,24 @@
-<script setup lang="ts">
-import { reactive, toRefs, onMounted, watch } from 'vue';
-import {
-  fetchCategoriesAndBrands,
-  fetchItems,
-} from '@/services/catalog/catalog-service';
-import { storeToRefs } from 'pinia';
-import { useCatalogStore } from '@/stores/catalog/catalog';
-import { LoadingSpinner } from '@dressca-frontend/common';
-import { currencyHelper } from '@dressca-frontend/common';
-import assetHelper from '@/shared/helpers/assetHelper';
-
-const catalogStore = useCatalogStore();
-const { getCategories, getBrands, getItems } = storeToRefs(catalogStore);
-
-const state = reactive({
-  selectedCategory: 0,
-  selectedBrand: 0,
-  showLoading: true,
-});
-
-const { selectedCategory, selectedBrand } = toRefs(state);
-const { toCurrencyJPY } = currencyHelper();
-const { getFirstAssetUrl } = assetHelper();
-
-onMounted(async () => {
-  state.showLoading = true;
-  fetchCategoriesAndBrands();
-  await fetchItems(selectedCategory.value, selectedBrand.value);
-  state.showLoading = false;
-});
-
-watch([selectedCategory, selectedBrand], async () => {
-  fetchItems(selectedCategory.value, selectedBrand.value);
-});
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="container mx-auto">
-    <LoadingSpinner :show="state.showLoading"></LoadingSpinner>
-    <div class="text-center font-medium text-gray-900 font-bold text-3xl m-8">
-      カタログアイテム管理
-    </div>
-    <div v-if="!state.showLoading">
-      <div class="flex justify-center">
-        <div class="grid lg:gap-24 grid-cols-1 lg:grid-cols-2 my-4 text-lg">
-          <div>
-            <label class="mr-2 font-bold">カテゴリ</label>
-            <select v-model="selectedCategory" class="w-48 border-2">
-              <option
-                v-for="category in getCategories"
-                :key="category.id"
-                :value="category.id"
-              >
-                {{ category.name }}
-              </option>
-            </select>
-          </div>
-          <div class="mt-2 lg:mt-0">
-            <label class="mr-2 font-bold">ブランド</label>
-            <select v-model="selectedBrand" class="w-48 border-2">
-              <option
-                v-for="brand in getBrands"
-                :key="brand.id"
-                :value="brand.id"
-              >
-                {{ brand.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="flex justify-center">
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:gap-6 lg:gap-6 mb-4"
-        >
-          <div v-for="item in getItems" :key="item.id">
-            <div
-              class="justify-center md:border-2 lg:border-2 p-2 h-80 w-240 mx-auto"
-            >
-              <img
-                class="h-[180px]"
-                :src="getFirstAssetUrl(item.assetCodes)"
-                alt="Sunset in the mountains"
-              />
-              <div class="w-full">
-                <p class="text-md mb-2 w-full">
-                  {{ catalogStore.getBrandName(item.catalogBrandId) }}
-                </p>
-                <p class="font-bold text-lg">
-                  {{ toCurrencyJPY(item.price) }}
-                </p>
-              </div>
-              <div class="mt-4 flex items-center justify-center gap-4">
-                <button
-                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-                >
-                  詳細
-                </button>
-                <button
-                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
-                >
-                  削除
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div>カタログ管理</div>
+    <table class="table-auto border-collapse border-slate-400">
+      <tr>
+        <th>メニュー</th>
+      </tr>
+      <tr>
+        <td>
+          <router-link to="catalog/items">カタログアイテム一覧</router-link>
+        </td>
+        <td>カタログアイテムの一覧を表示します。</td>
+      </tr>
+      <tr>
+        <td>
+          <router-link to="catalog/items/add">カタログアイテム追加</router-link>
+        </td>
+        <td>カタログにアイテムを追加します。</td>
+      </tr>
+    </table>
   </div>
 </template>

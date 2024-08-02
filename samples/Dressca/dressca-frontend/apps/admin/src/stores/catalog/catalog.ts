@@ -52,5 +52,9 @@ export const useCatalogStore = defineStore({
       return (id: number) =>
         state.brands.find((brand) => brand.id === id)?.name;
     },
+    getCategoryName: (state) => {
+      return (id: number) =>
+        state.categories.find((category) => category.id === id)?.name;
+    },
   },
 });

@@ -3,10 +3,7 @@ import { useRouter } from 'vue-router';
 import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { validationItems } from '@/validation/validation-items';
-import {
-  loginAsync,
-  logoutAsync,
-} from '@/services/authentication/authentication-service';
+import { loginAsync } from '@/services/authentication/authentication-service';
 import { EnvelopeIcon, KeyIcon } from '@heroicons/vue/24/solid';
 import { useRoutingStore } from '@/stores/routing/routing';
 
@@ -40,21 +37,12 @@ const login = () => {
   router.push({ name: routingStore.redirectFrom });
   routingStore.deleteRedirectFrom();
 };
-
-const logout = () => {
-  logoutAsync();
-  if (!routingStore.redirectFrom) {
-    router.push('/');
-    return;
-  }
-
-  router.push({ name: routingStore.redirectFrom });
-  routingStore.deleteRedirectFrom();
-};
 </script>
 
 <template>
   <div class="container mx-auto max-w-sm">
+    <div>ログイン</div>
+
     <form class="mt-8">
       <div class="form-group">
         <div class="flex justify-between">
@@ -91,16 +79,6 @@ const logout = () => {
           @click="login()"
         >
           ログイン
-        </button>
-      </div>
-      <div class="form-group mt-8">
-        <button
-          type="button"
-          class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:bg-blue-500"
-          :disabled="isInvalid()"
-          @click="logout()"
-        >
-          ログアウト
         </button>
       </div>
     </form>

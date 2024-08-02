@@ -1,33 +1,35 @@
-<script setup lang="ts">
-import { UserCircleIcon, Bars3Icon } from '@heroicons/vue/24/solid';
-</script>
+<script setup lang="ts"></script>
 <template>
-  <div class="flex flex-col h-screen justify-between">
-    <header>
-      <nav
-        aria-label="Jump links"
-        class="text-lg font-medium text-gray-900 py-5 ring-1 ring-gray-900 ring-opacity-5 shadow-sm"
-      >
-        <div class="mx-auto flex justify-between px-4 md:px-24 lg:px-24">
-          <div>
-            <router-link class="text-2xl" to="/">Dressca 管理</router-link>
-          </div>
-          <div class="flex justify-center items-center gap-4">
-            <UserCircleIcon class="h-8 w-8 text-blue-600" />
-            <Bars3Icon class="h-8 w-8 text-gray-900" />
-          </div>
-        </div>
-      </nav>
-    </header>
+  <header></header>
 
-    <main class="mb-auto">
-      <router-view />
-    </main>
+  <nav
+    id="default-sidebar"
+    class="fixed top-0 left-0 z-40 w-64W"
+    aria-label="Sidebar"
+  >
+    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+      <ul class="space-y-2 font-medium">
+        <li>
+          <router-link
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            to="/"
+          >
+            <span class="ms-3">Dressca 管理</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            to="/catalog"
+          >
+            <span class="flex-1 ms-3 whitespace-nowrap">カタログ管理</span>
+          </router-link>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-    <footer
-      class="w-full mx-auto border-t py-4 px-24 text-base bg-black text-gray-500"
-    >
-      <p>&copy; 2024 - Dressca - Privacy</p>
-    </footer>
-  </div>
+  <main class="flex mb-auto">
+    <router-view />
+  </main>
 </template>
