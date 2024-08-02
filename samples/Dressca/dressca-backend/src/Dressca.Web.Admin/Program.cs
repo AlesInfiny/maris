@@ -4,12 +4,12 @@ using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Auth;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
-using Dressca.Web.Admin;
 using Dressca.Web.Admin.Authorization;
 using Dressca.Web.Admin.Controllers;
 using Dressca.Web.Admin.HealthChecks;
 using Dressca.Web.Admin.Mapper;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using DummyAuthentication.Web;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -55,27 +55,27 @@ builder.Services.AddOpenApiDocument(config =>
 builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
 builder.Services.AddStaticFileAssetStore();
 builder.Services.AddDresscaApplicationCore();
-builder.Services.AddTransient<IUserRepository, EfUserRepository>();
 builder.Services.AddTransient<IUserSession, UserSession>();
-builder.Services.AddTransient<AuthApplicationService>();
+builder.Services.AddTransient<AuthorizationApplicationService>();
 builder.Services.AddDresscaDtoMapper();
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.Cookie.Name = "Dressca-Session-Id";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        options.SlidingExpiration = true;
-    });
 
 if (builder.Environment.IsDevelopment())
 {
+    // ローカル開発環境用の認証ハンドラーを登録します。
+    builder.Services.AddAuthentication("DummyAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, DummyAuthenticationHandler>("DummyAuthentication", null);
+    builder.Services.AddAuthorization();
+
     builder.Services.AddHttpLogging(logging =>
     {
         logging.LoggingFields = HttpLoggingFields.All;
         logging.RequestBodyLogLimit = 4096;
         logging.ResponseBodyLogLimit = 4096;
     });
+}
+else if (builder.Environment.IsProduction())
+{
+    // 本番環境用の認証ハンドラーを登録します。
 }
 
 builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, HealthCheckDescriptionProvider>());

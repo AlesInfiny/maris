@@ -16,7 +16,7 @@ namespace Dressca.Web.Admin.Controllers
     [Route("api/catalog-items")]
     [ApiController]
     [Produces("application/json")]
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin")]
     public class CatalogItemsController : ControllerBase
     {
         private readonly CatalogManagementApplicationService managementService;

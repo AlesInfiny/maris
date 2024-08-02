@@ -30,8 +30,8 @@ const isInvalid = () => {
 
 const routingStore = useRoutingStore();
 
-const login = (userName: string, password: string) => {
-  loginAsync(userName, password);
+const login = () => {
+  loginAsync();
   if (!routingStore.redirectFrom) {
     router.push('/');
     return;
@@ -88,7 +88,7 @@ const logout = () => {
           type="button"
           class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:bg-blue-500"
           :disabled="isInvalid()"
-          @click="login(userName, password)"
+          @click="login()"
         >
           ログイン
         </button>
@@ -98,7 +98,7 @@ const logout = () => {
           type="button"
           class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:bg-blue-500"
           :disabled="isInvalid()"
-          @click="logout"
+          @click="logout()"
         >
           ログアウト
         </button>

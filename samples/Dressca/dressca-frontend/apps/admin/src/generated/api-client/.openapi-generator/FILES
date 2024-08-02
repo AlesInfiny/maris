@@ -3,7 +3,6 @@
 .openapi-generator-ignore
 api.ts
 api/assets-api.ts
-api/auth-api.ts
 api/catalog-brands-api.ts
 api/catalog-categories-api.ts
 api/catalog-items-api.ts
@@ -19,6 +18,5 @@ models/catalog-item-response.ts
 models/index.ts
 models/paged-list-of-catalog-item-response.ts
 models/post-catalog-item-request.ts
-models/post-login-request.ts
 models/problem-details.ts
 models/put-catalog-item-request.ts
