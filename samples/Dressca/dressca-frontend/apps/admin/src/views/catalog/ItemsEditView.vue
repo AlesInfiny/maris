@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { onMounted, reactive, toRefs } from 'vue';
+import { onMounted, reactive } from 'vue';
 import {
   fetchItem,
   updateCatalogItem,
   deleteCatalogItem,
 } from '@/services/catalog/catalog-service';
-import type { CatalogItemResponse } from '@/generated/api-client/models/catalog-item-response';
 import assetHelper from '@/shared/helpers/assetHelper';
 
 const props = defineProps<{
@@ -73,7 +72,7 @@ onMounted(async () => {
         <label for="item-id" class="block font-bold mb-2">アイテムID</label>
         <input
           id="item-name"
-          v-model="state.id"
+          v-model.number="state.id"
           type="text"
           name="item-name"
           class="border border-gray-300 px-4 py-2 w-full"
@@ -102,8 +101,7 @@ onMounted(async () => {
         <label for="unit-price" class="block font-bold mb-2">単価</label>
         <input
           id="unit-price"
-          v-model="state.price"
-          type="number"
+          v-model.number="state.price"
           name="unit-price"
           class="border border-gray-300 px-4 py-2 w-full"
         />
@@ -123,7 +121,7 @@ onMounted(async () => {
         <label for="category" class="block font-bold mb-2">カテゴリ</label>
         <select
           id="category"
-          v-model="state.categoryId"
+          v-model.number="state.categoryId"
           name="category"
           class="border border-gray-300 px-4 py-2 w-full"
         >
@@ -136,7 +134,7 @@ onMounted(async () => {
         <label for="brand" class="block font-bold mb-2">ブランド</label>
         <select
           id="brand"
-          v-model="state.brandId"
+          v-model.number="state.brandId"
           name="brand"
           class="border border-gray-300 px-4 py-2 w-full"
         >
