@@ -88,7 +88,7 @@ const AddItem = async () => {
         <label for="brand" class="block font-bold mb-2">ブランド</label>
         <select
           id="brand"
-          v-model.number="state.categoryId"
+          v-model.number="state.brandId"
           name="brand"
           class="border border-gray-300 px-4 py-2 w-full"
         >

@@ -45,10 +45,12 @@ internal class EfCatalogRepository : ICatalogRepository
     }
 
     /// <inheritdoc/>
-    public Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default)
     {
-        var keys = new object[] { id };
-        return this.dbContext.CatalogItems.FindAsync(keys, cancellationToken).AsTask();
+        return await this.dbContext.CatalogItems
+            .Where(catalogItem => catalogItem.Id == id)
+            .Include(catalogItem => catalogItem.Assets)
+            .FirstOrDefaultAsync(cancellationToken);
     }
 
     /// <inheritdoc/>

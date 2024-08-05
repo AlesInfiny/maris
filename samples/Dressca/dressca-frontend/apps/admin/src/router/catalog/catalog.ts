@@ -15,6 +15,8 @@ export const catalogRoutes: RouteRecordRaw[] = [
     path: '/catalog/items/edit/:itemId',
     name: 'catalog/items/edit',
     component: () => import('@/views/catalog/ItemsEditView.vue'),
+    // デフォルトはstring型で、警告が出るのでキャストする
+    props: (route) => ({ itemId: Number(route.params.itemId) }),
   },
   {
     path: '/catalog/items/add',

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import {
   fetchCategoriesAndBrands,
   fetchItems,
@@ -9,6 +10,7 @@ import { useCatalogStore } from '@/stores/catalog/catalog';
 import { currencyHelper } from '@dressca-frontend/common';
 import assetHelper from '@/shared/helpers/assetHelper';
 
+const router = useRouter();
 const catalogStore = useCatalogStore();
 const { getItems } = storeToRefs(catalogStore);
 
@@ -19,6 +21,10 @@ onMounted(async () => {
   fetchCategoriesAndBrands();
   await fetchItems(0, 0);
 });
+
+const goEdit = (id: number) => {
+  router.push({ name: 'catalog/items/edit', params: { itemId: id } });
+};
 </script>
 
 <template>
@@ -63,6 +69,7 @@ onMounted(async () => {
           <td class="border px-4 py-2">
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              @click="goEdit(item.id)"
             >
               編集
             </button>
