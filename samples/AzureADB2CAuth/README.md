@@ -125,11 +125,6 @@ auth-frontend
 - code_verifier の生成・送信
 - code_challenge の生成・送信
 
-また、以下の処理はバックエンドの Microsoft.Identity.Web ライブラリによって行われます。
-
-- code_verifier の検証
-- code_challenge の検証
-
 ## 前提となる OSS ライブラリ
 
 本サンプルでは、バックエンド、フロントエンドアプリケーションそれぞれで OSS を使用しています。
