@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { CatalogItemResponse } from '../models';
+// @ts-ignore
 import type { PagedListOfCatalogItemResponse } from '../models';
 // @ts-ignore
 import type { PostCatalogItemRequest } from '../models';
@@ -55,6 +57,40 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
             }
 
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary 指定したIDのカタログアイテムを返します。
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getById: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getById', 'id', id)
+            const localVarPath = `/api/catalog-items/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -216,6 +252,19 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary 指定したIDのカタログアイテムを返します。
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getById(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CatalogItemResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getById(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CatalogItemsApi.getById']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary カタログアイテムを検索して返します。
          * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
          * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
@@ -278,6 +327,16 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
+         * @summary 指定したIDのカタログアイテムを返します。
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getById(id: number, options?: any): AxiosPromise<CatalogItemResponse> {
+            return localVarFp.getById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary カタログアイテムを検索して返します。
          * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
          * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
@@ -329,6 +388,18 @@ export class CatalogItemsApi extends BaseAPI {
      */
     public deleteCatalogItem(catalogItemId: number, options?: RawAxiosRequestConfig) {
         return CatalogItemsApiFp(this.configuration).deleteCatalogItem(catalogItemId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary 指定したIDのカタログアイテムを返します。
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CatalogItemsApi
+     */
+    public getById(id: number, options?: RawAxiosRequestConfig) {
+        return CatalogItemsApiFp(this.configuration).getById(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

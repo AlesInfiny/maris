@@ -97,6 +97,39 @@
         }
       }
     },
+    "/api/catalog-items/{id}": {
+      "get": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "指定したIDのカタログアイテムを返します。",
+        "operationId": "getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogItemResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/catalog-items": {
       "get": {
         "tags": [
@@ -369,48 +402,6 @@
           }
         }
       },
-      "PagedListOfCatalogItemResponse": {
-        "type": "object",
-        "description": "ページネーションした結果のリストを管理します。\n            ",
-        "additionalProperties": false,
-        "properties": {
-          "page": {
-            "type": "integer",
-            "description": "現在のページ番号を取得します。\n最初のページは 1 です。\n            ",
-            "format": "int32"
-          },
-          "totalPages": {
-            "type": "integer",
-            "description": "ページの総数を取得します。\n            ",
-            "format": "int32"
-          },
-          "pageSize": {
-            "type": "integer",
-            "description": "1 ページあたりの件数を取得します。\n            ",
-            "format": "int32"
-          },
-          "totalCount": {
-            "type": "integer",
-            "description": "アイテムの総数を取得します。\n            ",
-            "format": "int32"
-          },
-          "hasPrevious": {
-            "type": "boolean",
-            "description": "前のページが存在するかどうか示す値を取得します。\n            "
-          },
-          "hasNext": {
-            "type": "boolean",
-            "description": "次のページが存在するかどうか示す値を取得します。\n            "
-          },
-          "items": {
-            "type": "array",
-            "description": "検索結果のリストを取得します。\n            ",
-            "items": {
-              "$ref": "#/components/schemas/CatalogItemResponse"
-            }
-          }
-        }
-      },
       "CatalogItemResponse": {
         "type": "object",
         "description": "カタログアイテムのレスポンスデータを表します。\n            ",
@@ -465,6 +456,48 @@
             "description": "アセットコードの一覧を取得または設定します。\n            ",
             "items": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "PagedListOfCatalogItemResponse": {
+        "type": "object",
+        "description": "ページネーションした結果のリストを管理します。\n            ",
+        "additionalProperties": false,
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "現在のページ番号を取得します。\n最初のページは 1 です。\n            ",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "ページの総数を取得します。\n            ",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "1 ページあたりの件数を取得します。\n            ",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "アイテムの総数を取得します。\n            ",
+            "format": "int32"
+          },
+          "hasPrevious": {
+            "type": "boolean",
+            "description": "前のページが存在するかどうか示す値を取得します。\n            "
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "次のページが存在するかどうか示す値を取得します。\n            "
+          },
+          "items": {
+            "type": "array",
+            "description": "検索結果のリストを取得します。\n            ",
+            "items": {
+              "$ref": "#/components/schemas/CatalogItemResponse"
             }
           }
         }

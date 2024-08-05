@@ -44,6 +44,24 @@ namespace Dressca.Web.Admin.Controllers
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+
+        /// <summary>
+        /// 指定したIDのカタログアイテムを返します。
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>カタログアイテム。</returns>
+        /// <response code="200">成功。</response>
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(CatalogItemResponse), StatusCodes.Status200OK)]
+        [OpenApiOperation("getById")]
+        public async Task<IActionResult> GetByIdAsync(long id)
+        {
+            var item = await this.managementService.GetCatalogItemAsync(id);
+            var response = this.mapper.Convert(item);
+            return this.Ok(response);
+        }
+
+
         /// <summary>
         ///  カタログアイテムを検索して返します。
         /// </summary>

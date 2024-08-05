@@ -186,6 +186,25 @@ public class CatalogManagementApplicationService
     }
 
     /// <summary>
+    /// 指定したIdのカタログアイテムを取得します。
+    /// </summary>
+    /// <param name="catalogItemId">カタログアイテムID。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
+    /// <returns>カタログアイテム。</returns>
+    public async Task<CatalogItem?> GetCatalogItemAsync(long catalogItemId, CancellationToken cancellationToken = default)
+    {
+
+        CatalogItem? catalogItem;
+        using (var scope = TransactionScopeManager.CreateTransactionScope())
+        {
+            catalogItem = await this.catalogRepository.GetAsync(catalogItemId, cancellationToken);
+            scope.Complete();
+        }
+
+        return catalogItem;
+    }
+
+    /// <summary>
     /// フィルタリング用のカタログブランドリストを取得します。
     /// </summary>
     /// <param name="cancellationToken">キャンセルトークン。</param>
