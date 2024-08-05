@@ -66,7 +66,7 @@ export async function updateCatalogItem(
     productCode: productCode,
     catalogCategoryId: catalogCategoryId,
     catalogBrandId: catalogBrandId,
-  }
+  };
   try {
     await catalogItemsApi.putCatalogItem(putCatalogItemRequest);
   } catch (e) {

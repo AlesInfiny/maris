@@ -28,47 +28,48 @@ const goEdit = (id: number) => {
 </script>
 
 <template>
-  <div class="container mx-auto flex-col justify-center">
-    <div class="text-xl">カタログアイテム一覧</div>
-    <table
-      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 justify-center"
-    >
-      <thead
-        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-      >
+  <div
+    class="container mx-auto flex flex-col items-center justify-center gap-6"
+  >
+    <div class="text-xl font-bold">カタログアイテム一覧</div>
+    <table class="table-auto border-separate">
+      <thead class="bg-light-blue-50">
         <tr>
-          <th class="bg-gray-200 px-4 py-2">アイテムID</th>
-          <th class="bg-gray-200 px-4 py-2">画像</th>
-          <th class="bg-gray-200 px-4 py-2">アイテム名</th>
-          <th class="bg-gray-200 px-4 py-2">説明</th>
-          <th class="bg-gray-200 px-4 py-2">単価</th>
-          <th class="bg-gray-200 px-4 py-2">商品コード</th>
-          <th class="bg-gray-200 px-4 py-2">カテゴリ</th>
-          <th class="bg-gray-200 px-4 py-2">ブランド</th>
-          <th class="bg-gray-200 px-4 py-2">最終更新日時</th>
-          <th class="bg-gray-200 px-4 py-2">操作</th>
+          <th class="w-20">アイテムID</th>
+          <th class="w-60">画像</th>
+          <th>アイテム名</th>
+          <th>説明</th>
+          <th>単価</th>
+          <th>商品コード</th>
+          <th class="w-20">カテゴリ</th>
+          <th>ブランド</th>
+          <th>最終更新日時</th>
+          <th class="w-20">操作</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in getItems" :key="item.id">
-          <td class="border px-4 py-2">{{ item.id }}</td>
-          <td class="border px-4 py-2">
-            <img class="h-[100px]" :src="getFirstAssetUrl(item.assetCodes)" />
+          <td class="border">{{ item.id }}</td>
+          <td class="border">
+            <img
+              class="object-contain"
+              :src="getFirstAssetUrl(item.assetCodes)"
+            />
           </td>
-          <td class="border px-4 py-2">{{ item.name }}</td>
-          <td class="border px-4 py-2">{{ item.description }}</td>
-          <td class="border px-4 py-2">{{ toCurrencyJPY(item.price) }}</td>
-          <td class="border px-4 py-2">{{ item.productCode }}</td>
-          <td class="border px-4 py-2">
+          <td class="border">{{ item.name }}</td>
+          <td class="border">{{ item.description }}</td>
+          <td class="border">{{ toCurrencyJPY(item.price) }}</td>
+          <td class="border">{{ item.productCode }}</td>
+          <td class="border">
             {{ catalogStore.getCategoryName(item.catalogCategoryId) }}
           </td>
-          <td class="border px-4 py-2">
+          <td class="border">
             {{ catalogStore.getBrandName(item.catalogBrandId) }}
           </td>
-          <td class="border px-4 py-2">2024-08-02 15:00:00</td>
-          <td class="border px-4 py-2">
+          <td class="border">2024-08-02 15:00:00</td>
+          <td class="border text-center">
             <button
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              class="rounded bg-light-blue-600 hover:bg-light-blue-800 px-4 py-2 font-bold text-white"
               @click="goEdit(item.id)"
             >
               編集

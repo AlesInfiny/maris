@@ -25,6 +25,6 @@ app.config.errorHandler = (err: unknown, vm, info) => {
 app.use(pinia);
 app.use(router);
 
-// authenticationGuard(router);
+//authenticationGuard(router);
 
 app.mount('#app');

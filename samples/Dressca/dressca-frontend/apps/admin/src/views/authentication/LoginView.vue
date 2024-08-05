@@ -40,41 +40,43 @@ const login = () => {
 </script>
 
 <template>
-  <div class="container mx-auto max-w-sm">
-    <div>ログイン</div>
+  <div
+    class="container mx-auto flex flex-col items-center justify-center gap-6"
+  >
+    <div class="text-xl font-bold">ログイン</div>
 
     <form class="mt-8">
       <div class="form-group">
         <div class="flex justify-between">
-          <EnvelopeIcon class="h-8 w-8 text-blue-500 opacity-50" />
+          <EnvelopeIcon class="h-8 w-8 text-gray-900 opacity-50" />
           <input
             id="userName"
             v-model="userName"
             type="text"
-            placeholder="userName"
-            class="w-full px-4 py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
+            placeholder="ユーザー名"
+            class="border-b px-4 py-2 placeholder-gray-500 placeholder-opacity-50 focus:border-b-2 focus:border-gray-500 focus:outline-none"
           />
         </div>
-        <p class="text-sm text-red-500 px-8 py-2">{{ userNameError }}</p>
+        <p class="px-8 py-2 text-sm text-red-800">{{ userNameError }}</p>
       </div>
       <div class="form-group mt-4">
         <div class="flex justify-between">
-          <KeyIcon class="h-8 w-8 text-blue-500 opacity-50" />
+          <KeyIcon class="h-8 w-8 text-gray-900 opacity-50" />
           <input
             id="password"
             v-model="password"
             type="password"
-            placeholder="password"
-            class="w-full px-4 py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
+            placeholder="パスワード"
+            class="border-b px-4 py-2 placeholder-gray-500 placeholder-opacity-50 focus:border-b-2 focus:border-gray-500 focus:outline-none"
           />
         </div>
 
-        <p class="text-sm text-red-500 px-8 py-2">{{ passwordError }}</p>
+        <p class="px-8 py-2 text-sm text-red-800">{{ passwordError }}</p>
       </div>
       <div class="form-group mt-8">
         <button
           type="button"
-          class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:bg-blue-500"
+          class="hover:bg-blue-700 disabled:bg-light-blue-500 rounded bg-light-blue-800 px-4 py-2 font-bold text-white disabled:opacity-50"
           :disabled="isInvalid()"
           @click="login()"
         >

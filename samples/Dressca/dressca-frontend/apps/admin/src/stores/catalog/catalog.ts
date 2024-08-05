@@ -15,7 +15,7 @@ export const useCatalogStore = defineStore({
   state: () => ({
     categories: [] as CatalogCategoryResponse[],
     brands: [] as CatalogBrandResponse[],
-    catalogItemPage: {} as PagedListOfCatalogItemResponse
+    catalogItemPage: {} as PagedListOfCatalogItemResponse,
   }),
   actions: {
     async fetchCategories() {

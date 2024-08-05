@@ -1,6 +1,14 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
-import { postCatalogItem } from '@/services/catalog/catalog-service';
+import { reactive, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useCatalogStore } from '@/stores/catalog/catalog';
+import {
+  postCatalogItem,
+  fetchCategoriesAndBrands,
+} from '@/services/catalog/catalog-service';
+
+const catalogStore = useCatalogStore();
+const { getCategories, getBrands } = storeToRefs(catalogStore);
 
 const state = reactive({
   name: 'テスト用アイテム',
@@ -21,85 +29,96 @@ const AddItem = async () => {
     state.brandId,
   );
 };
+
+onMounted(async () => {
+  await fetchCategoriesAndBrands();
+});
 </script>
 
 <template>
-  <div class="container mx-auto flex-col justify-center">
-    <div class="text-xl">カタログアイテム追加</div>
+  <div
+    class="container mx-auto flex flex-col items-center justify-center gap-6"
+  >
+    <div class="text-xl font-bold">カタログアイテム追加</div>
     <form>
       <div class="mb-4">
-        <label for="item-name" class="block font-bold mb-2">アイテム名</label>
+        <label for="item-name" class="mb-2 block font-bold">アイテム名</label>
         <input
           id="item-name"
           v-model="state.name"
           type="text"
           name="item-name"
-          class="border border-gray-300 px-4 py-2 w-full"
+          class="w-full border border-gray-300 px-4 py-2"
         />
       </div>
       <div class="mb-4">
-        <label for="description" class="block font-bold mb-2">説明</label>
+        <label for="description" class="mb-2 block font-bold">説明</label>
         <textarea
           id="description"
           v-model="state.description"
           name="description"
-          class="border border-gray-300 px-4 py-2 w-full"
+          class="w-full border border-gray-300 px-4 py-2"
         ></textarea>
       </div>
       <div class="mb-4">
-        <label for="unit-price" class="block font-bold mb-2">単価</label>
+        <label for="unit-price" class="mb-2 block font-bold">単価</label>
         <input
           id="unit-price"
           v-model.number="state.price"
           type="text"
           name="unit-price"
-          class="border border-gray-300 px-4 py-2 w-full"
+          class="w-full border border-gray-300 px-4 py-2"
         />
       </div>
       <div class="mb-4">
-        <label for="product-code" class="block font-bold mb-2"
+        <label for="product-code" class="mb-2 block font-bold"
           >商品コード</label
         >
-        <select
+        <input
           id="product-code"
           v-model="state.productCode"
           name="product-code"
-          class="border border-gray-300 px-4 py-2 w-full"
-        >
-          <option value="TEST001">TEST001</option>
-          <option value="TEST002">TEST002</option>
-          <option value="TEST003">TEST003</option>
-        </select>
+          class="w-full border border-gray-300 px-4 py-2"
+        />
       </div>
       <div class="mb-4">
-        <label for="category" class="block font-bold mb-2">カテゴリ</label>
+        <label for="category" class="mb-2 block font-bold">カテゴリ</label>
         <select
-          id="category"
-          v-model.number="state.categoryId"
-          name="category"
-          class="border border-gray-300 px-4 py-2 w-full"
+          v-model="state.categoryId"
+          class="w-full border border-gray-300 px-4 py-2"
         >
-          <option value="1">カテゴリ1</option>
-          <option value="2">カテゴリ2</option>
-          <option value="3">カテゴリ3</option>
+          <option
+            v-for="category in getCategories.filter(
+              (category) => category.id !== 0,
+            )"
+            :key="category.id"
+            :value="category.id"
+          >
+            {{ category.name }}
+          </option>
         </select>
       </div>
+
       <div class="mb-4">
-        <label for="brand" class="block font-bold mb-2">ブランド</label>
+        <label for="brand" class="mb-2 block font-bold">ブランド</label>
         <select
           id="brand"
           v-model.number="state.brandId"
           name="brand"
-          class="border border-gray-300 px-4 py-2 w-full"
+          class="w-full border border-gray-300 px-4 py-2"
         >
-          <option value="1">ブランド1</option>
-          <option value="2">ブランド2</option>
-          <option value="3">ブランド3</option>
+          <option
+            v-for="brand in getBrands.filter((brand) => brand.id !== 0)"
+            :key="brand.id"
+            :value="brand.id"
+          >
+            {{ brand.name }}
+          </option>
         </select>
       </div>
       <button
         type="submit"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        class="bg-light-blue-600 hover:bg-light-blue-800 rounded px-4 py-2 font-bold text-white"
         @click="AddItem"
       >
         追加
