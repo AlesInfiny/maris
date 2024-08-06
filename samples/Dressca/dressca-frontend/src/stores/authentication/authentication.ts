@@ -3,16 +3,16 @@ import { defineStore } from 'pinia';
 export const useAuthenticationStore = defineStore({
   id: 'authentication',
   state: () => ({
-    _isAuthenticated: JSON.parse(
+    authenticationState: JSON.parse(
       sessionStorage.getItem('isAuthenticated') || 'false',
     ) as boolean,
   }),
   actions: {
     async signInAsync() {
-      this._isAuthenticated = true;
+      this.authenticationState = true;
       sessionStorage.setItem(
         'isAuthenticated',
-        JSON.stringify(this._isAuthenticated),
+        JSON.stringify(this.authenticationState),
       );
     },
   },
