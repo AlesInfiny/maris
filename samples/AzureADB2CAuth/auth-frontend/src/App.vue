@@ -20,6 +20,7 @@ async function updateServerTime() {
 
 onMounted(async () => {
   await fetchServerTime();
+  await authenticationService.fetchUser();
 });
 </script>
 

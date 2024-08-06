@@ -8,15 +8,28 @@ import {
 export const useAuthenticationStore = defineStore({
   id: 'authentication',
   state: () => ({
-    homeAccountId: '' as string,
+    homeAccountId: JSON.parse(
+      sessionStorage.getItem('homeAccountId') || '{}',
+    ) as string,
     accessToken: '' as string,
-    authenticated: false,
+    authenticated: JSON.parse(
+      sessionStorage.getItem('isAuthenticated') || 'false',
+    ) as boolean,
   }),
   actions: {
     async signIn() {
       const result = (await signInAzureADB2C()) as AuthenticationResult;
       this.homeAccountId = result.homeAccountId;
       this.authenticated = result.isAuthenticated;
+
+      sessionStorage.setItem(
+        'homeAccountId',
+        JSON.stringify(this.homeAccountId),
+      );
+      sessionStorage.setItem(
+        'isAuthenticated',
+        JSON.stringify(this.authenticated),
+      );
     },
     async getToken() {
       const result = (await getTokenAzureADB2C(
