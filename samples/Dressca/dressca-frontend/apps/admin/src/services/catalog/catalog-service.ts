@@ -35,12 +35,12 @@ export async function postCatalogItem(
   catalogBrandId: number,
 ) {
   const postCatalogItemInput: PostCatalogItemRequest = {
-    name: name,
-    description: description,
-    price: price,
-    productCode: productCode,
-    catalogCategoryId: catalogCategoryId,
-    catalogBrandId: catalogBrandId,
+    name,
+    description,
+    price,
+    productCode,
+    catalogCategoryId,
+    catalogBrandId,
   };
   try {
     await catalogItemsApi.postCatalogItem(postCatalogItemInput);
@@ -59,13 +59,13 @@ export async function updateCatalogItem(
   catalogBrandId: number,
 ) {
   const putCatalogItemRequest: PutCatalogItemRequest = {
-    id: id,
-    name: name,
-    description: description,
-    price: price,
-    productCode: productCode,
-    catalogCategoryId: catalogCategoryId,
-    catalogBrandId: catalogBrandId,
+    id,
+    name,
+    description,
+    price,
+    productCode,
+    catalogCategoryId,
+    catalogBrandId,
   };
   try {
     await catalogItemsApi.putCatalogItem(putCatalogItemRequest);

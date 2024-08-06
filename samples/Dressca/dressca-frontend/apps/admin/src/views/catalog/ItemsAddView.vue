@@ -118,7 +118,7 @@ onMounted(async () => {
       </div>
       <button
         type="submit"
-        class="bg-light-blue-600 hover:bg-light-blue-800 rounded px-4 py-2 font-bold text-white"
+        class="rounded bg-light-blue-600 px-4 py-2 font-bold text-white hover:bg-light-blue-800"
         @click="AddItem"
       >
         追加

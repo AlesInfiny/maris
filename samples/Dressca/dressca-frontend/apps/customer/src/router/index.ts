@@ -5,7 +5,7 @@ import { basketRoutes } from '@/router/basket/basket';
 import { orderingRoutes } from '@/router/ordering/ordering';
 import { errorRoutes } from '@/router/error/error';
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     ...authenticationRoutes,
@@ -15,5 +15,3 @@ const router = createRouter({
     ...errorRoutes,
   ],
 });
-
-export default router;

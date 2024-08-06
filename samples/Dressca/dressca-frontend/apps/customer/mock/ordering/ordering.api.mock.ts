@@ -1,9 +1,10 @@
-const base = 'api';
+import type { Connect } from 'vite';
 import type {
   OrderResponse,
   PostOrderRequest,
 } from '../../src/generated/api-client';
-import type { Connect } from 'vite';
+
+const base = 'api';
 
 // mock のため、注文データはidとorderDate以外固定値を返却する
 const order: OrderResponse = {
@@ -63,7 +64,9 @@ export const orderingApiMock = (middlewares: Connect.Server) => {
     }
 
     let body = '';
-    req.on('data', (chunk) => (body += chunk));
+    req.on('data', (chunk) => {
+      body += chunk;
+    });
     req.on('end', () => {
       if (req.method === 'POST') {
         const dto: PostOrderRequest = JSON.parse(body);
@@ -78,7 +81,6 @@ export const orderingApiMock = (middlewares: Connect.Server) => {
           Location: `${req.headers.origin}${req.originalUrl}/${id}`,
         });
         res.end();
-        return;
       }
     });
   });

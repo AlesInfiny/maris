@@ -69,7 +69,7 @@ const goEdit = (id: number) => {
           <td class="border">2024-08-02 15:00:00</td>
           <td class="border text-center">
             <button
-              class="rounded bg-light-blue-600 hover:bg-light-blue-800 px-4 py-2 font-bold text-white"
+              class="rounded bg-light-blue-600 px-4 py-2 font-bold text-white hover:bg-light-blue-800"
               @click="goEdit(item.id)"
             >
               編集

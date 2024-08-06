@@ -167,14 +167,14 @@ onMounted(async () => {
       </div>
       <button
         type="submit"
-        class="bg-red-800 rounded hover:bg-red-900 px-4 py-2 font-bold text-white"
+        class="rounded bg-red-800 px-4 py-2 font-bold text-white hover:bg-red-900"
         @click="deleteItem"
       >
         削除
       </button>
       <button
         type="submit"
-        class="rounded bg-light-blue-600 hover:bg-light-blue-800 px-4 py-2 font-bold text-white"
+        class="rounded bg-light-blue-600 px-4 py-2 font-bold text-white hover:bg-light-blue-800"
         @click="updateItem"
       >
         更新

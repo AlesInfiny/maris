@@ -1,10 +1,10 @@
 import './assets/base.css';
-import router from './router';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import { authenticationGuard } from '@/shared/authentication/authentication-guard';
+import router from './router';
 import App from './App.vue';
 import { worker } from '../mock/browser';
-import { authenticationGuard } from '@/shared/authentication/authentication-guard';
 
 if (import.meta.env.MODE === 'mock') {
   worker.start({
@@ -25,6 +25,6 @@ app.config.errorHandler = (err: unknown, vm, info) => {
 app.use(pinia);
 app.use(router);
 
-//authenticationGuard(router);
+// authenticationGuard(router);
 
 app.mount('#app');
