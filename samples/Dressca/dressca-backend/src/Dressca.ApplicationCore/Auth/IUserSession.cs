@@ -6,6 +6,12 @@
 public interface IUserSession
 {
     /// <summary>
+    /// ログイン中のユーザー名を取得します。
+    /// </summary>
+    /// <returns>ユーザー名。</returns>
+    public string LoginUserName();
+
+    /// <summary>
     /// ログイン中のユーザーのロールを取得します。
     /// </summary>
     /// <returns>ロールのリスト。</returns>

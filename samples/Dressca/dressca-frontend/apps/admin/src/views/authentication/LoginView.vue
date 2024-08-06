@@ -6,6 +6,8 @@ import { validationItems } from '@/validation/validation-items';
 import { loginAsync } from '@/services/authentication/authentication-service';
 import { EnvelopeIcon, KeyIcon } from '@heroicons/vue/24/solid';
 import { useRoutingStore } from '@/stores/routing/routing';
+import { showToast } from '@/services/notification/notificationService';
+import { errorHandler } from '@/shared/error-handler/error-handler';
 
 // フォーム固有のバリデーション定義
 const formSchema = yup.object({
@@ -27,8 +29,16 @@ const isInvalid = () => {
 
 const routingStore = useRoutingStore();
 
-const login = () => {
-  loginAsync();
+const login = async () => {
+
+  try{
+    await loginAsync();
+  }catch(error){
+    errorHandler(error,()=>{
+      showToast('ログインに失敗しました。')
+    })
+  }
+
   if (!routingStore.redirectFrom) {
     router.push('/');
     return;
@@ -43,9 +53,9 @@ const login = () => {
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
-    <div class="text-xl font-bold">ログイン</div>
+    <div class="text-3xl font-bold">ログイン</div>
 
-    <form class="mt-8">
+    <form class="mt-8 text-xl">
       <div class="form-group">
         <div class="flex justify-between">
           <EnvelopeIcon class="h-8 w-8 text-gray-900 opacity-50" />
@@ -54,6 +64,7 @@ const login = () => {
             v-model="userName"
             type="text"
             placeholder="ユーザー名"
+            autocomplete="username"
             class="border-b px-4 py-2 placeholder-gray-500 placeholder-opacity-50 focus:border-b-2 focus:border-gray-500 focus:outline-none"
           />
         </div>
@@ -67,6 +78,7 @@ const login = () => {
             v-model="password"
             type="password"
             placeholder="パスワード"
+            autocomplete="current-password"
             class="border-b px-4 py-2 placeholder-gray-500 placeholder-opacity-50 focus:border-b-2 focus:border-gray-500 focus:outline-none"
           />
         </div>

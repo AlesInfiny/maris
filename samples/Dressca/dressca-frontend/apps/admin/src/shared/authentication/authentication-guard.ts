@@ -6,18 +6,14 @@ export const authenticationGuard = (router: Router) => {
   const authenticationStore = useAuthenticationStore();
   const routingStore = useRoutingStore();
 
-  router.beforeEach((to, from) => {
+  router.beforeEach((to) => {
     const ignoreAuthPaths: (RouteRecordName | null | undefined)[] = [
+      '/',
       'authentication/login',
       'error',
     ];
     if (ignoreAuthPaths.includes(to.name)) {
       return true;
-    }
-
-    const authPaths: (RouteRecordName | null | undefined)[] = ['catalog'];
-    if (authPaths.includes(to.name) && !from.name) {
-      return { name: 'authentication/login' };
     }
 
     if (authenticationStore.isAuthenticated) {

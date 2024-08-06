@@ -39,8 +39,8 @@ const goEdit = (id: number) => {
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
-    <div class="text-xl font-bold">カタログアイテム一覧</div>
-    <table class="table-auto border-separate">
+    <div class="text-5xl font-bold">カタログアイテム一覧</div>
+    <table class="table-auto border-separate text-xl">
       <thead class="bg-light-blue-50">
         <tr>
           <th class="w-20">アイテムID</th>

@@ -7,6 +7,7 @@ api/catalog-brands-api.ts
 api/catalog-categories-api.ts
 api/catalog-items-api.ts
 api/health-checks-api.ts
+api/users-api.ts
 base.ts
 common.ts
 configuration.ts
@@ -20,3 +21,4 @@ models/paged-list-of-catalog-item-response.ts
 models/post-catalog-item-request.ts
 models/problem-details.ts
 models/put-catalog-item-request.ts
+models/user-response.ts

@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import NotificationToast from '@/components/NotificationToast.vue';
+import { storeToRefs } from 'pinia';
+import { useAuthenticationStore } from '@/stores/authentication/authentication';
+
+const authenticationStore = useAuthenticationStore();
+const { authenticationState, userName, userRole } = storeToRefs(authenticationStore);
+
 </script>
 <template>
   <div class="z-2">
@@ -11,20 +17,43 @@ import NotificationToast from '@/components/NotificationToast.vue';
         <ul class="font-bold">
           <li>
             <router-link
-              class="flex items-center p-4 text-gray-900 hover:bg-light-blue-800 hover:text-white"
+              class="flex text-3xl items-center p-4 text-gray-900 hover:bg-light-blue-800 hover:text-white"
               to="/"
             >
               <span>Dressca 管理</span>
             </router-link>
           </li>
-          <li>
-            <router-link
-              class="flex items-center p-4 text-gray-900 hover:bg-light-blue-800 hover:text-white"
-              to="/catalog"
-            >
-              <span>カタログ管理</span>
-            </router-link>
-          </li>
+
+          <div v-if="authenticationState">
+            <li>
+              <router-link
+                class="flex text-xl items-center p-4 text-gray-900 hover:bg-light-blue-800 hover:text-white"
+                to="/catalog"
+              >
+                <span>カタログ管理</span>
+              </router-link>
+           </li>
+          </div>
+
+          <div v-if="!authenticationState">
+            <li>
+              <router-link
+                class="flex text-xl items-center p-4 text-gray-900 hover:bg-light-blue-800 hover:text-white"
+                to="/authentication/login"
+              >
+                <span>ログイン</span>
+              </router-link>
+            </li>
+          </div>
+
+          <div v-if="authenticationState">
+            <li class="flex text-xl items-center p-4 text-gray-900">
+              <span>{{ userName }}</span>
+            </li>
+            <li class="flex text-xl items-center p-4 text-gray-900">
+              <span>{{ userRole }}</span>
+            </li>
+          </div>
         </ul>
       </div>
     </nav>

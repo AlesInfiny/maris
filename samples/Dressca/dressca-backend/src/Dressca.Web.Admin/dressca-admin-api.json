@@ -284,6 +284,26 @@
         }
       }
     },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "getLoginUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/health": {
       "get": {
         "tags": [
@@ -601,6 +621,29 @@
             "type": "integer",
             "description": "カタログブランドIDを取得または設定します。\n            ",
             "format": "int64"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "description": "ユーザー情報のレスポンスを表します。",
+        "additionalProperties": false,
+        "required": [
+          "userName",
+          "roles"
+        ],
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "ユーザー名を取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "roles": {
+            "type": "array",
+            "description": "ロールを取得または設定します。\n            ",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }

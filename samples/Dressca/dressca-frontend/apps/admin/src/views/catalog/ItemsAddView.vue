@@ -56,8 +56,8 @@ onMounted(async () => {
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
-    <div class="text-xl font-bold">カタログアイテム追加</div>
-    <form>
+    <div class="text-5xl font-bold">カタログアイテム追加</div>
+    <form class="text-xl">
       <div class="mb-4">
         <label for="item-name" class="mb-2 block font-bold">アイテム名</label>
         <input
@@ -99,9 +99,9 @@ onMounted(async () => {
         />
       </div>
       <div class="mb-4">
-        <label for="category" class="mb-2 block font-bold"
-          >カテゴリ
+        <label for="category" class="mb-2 block font-bold">カテゴリ</label>
           <select
+            id="category"
             v-model="state.categoryId"
             class="w-full border border-gray-300 px-4 py-2"
           >
@@ -115,7 +115,6 @@ onMounted(async () => {
               {{ category.name }}
             </option>
           </select>
-        </label>
       </div>
 
       <div class="mb-4">

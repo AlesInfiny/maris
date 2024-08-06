@@ -20,6 +20,12 @@ public class UserSession : IUserSession
     }
 
     /// <inheritdoc/>
+    public string LoginUserName()
+    {
+        return this.httpContextAccessor.HttpContext.User.Identity.Name;
+    }
+
+    /// <inheritdoc/>
     public IReadOnlyCollection<string> LoginUserRoles()
     {
         return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Role)

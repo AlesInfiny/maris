@@ -62,4 +62,9 @@ const catalogItemsApi = new apiClient.CatalogItemsApi(
   axiosInstance,
 );
 
-export { catalogBrandsApi, catalogCategoriesApi, catalogItemsApi };
+const UsersApi = new apiClient.UsersApi(
+  createConfig(),
+  '',
+  axiosInstance,
+);
+export { catalogBrandsApi, catalogCategoriesApi, catalogItemsApi, UsersApi };

@@ -21,6 +21,6 @@ app.use(router);
 
 app.use(errorHandlerPlugin);
 
-authenticationGuard(router);
+//authenticationGuard(router);
 
 app.mount('#app');

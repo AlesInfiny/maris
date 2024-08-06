@@ -5,3 +5,4 @@ export * from './paged-list-of-catalog-item-response';
 export * from './post-catalog-item-request';
 export * from './problem-details';
 export * from './put-catalog-item-request';
+export * from './user-response';
