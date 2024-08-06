@@ -1,12 +1,6 @@
 import type { CatalogBrandResponse } from '@/generated/api-client';
 import { HttpResponse, http } from 'msw';
 
-export const catalogBrandsHandlers = [
-  http.get('/api/catalog-brands', () => {
-    return HttpResponse.json(catalogBrands, { status: 200 });
-  }),
-];
-
 const catalogBrands: CatalogBrandResponse[] = [
   {
     id: 1,
@@ -20,4 +14,10 @@ const catalogBrands: CatalogBrandResponse[] = [
     id: 3,
     name: 'ノーブランド',
   },
+];
+
+export const catalogBrandsHandlers = [
+  http.get('/api/catalog-brands', () => {
+    return HttpResponse.json(catalogBrands, { status: 200 });
+  }),
 ];

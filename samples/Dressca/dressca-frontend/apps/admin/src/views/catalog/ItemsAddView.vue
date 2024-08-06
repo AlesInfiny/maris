@@ -82,21 +82,23 @@ onMounted(async () => {
         />
       </div>
       <div class="mb-4">
-        <label for="category" class="mb-2 block font-bold">カテゴリ</label>
-        <select
-          v-model="state.categoryId"
-          class="w-full border border-gray-300 px-4 py-2"
-        >
-          <option
-            v-for="category in getCategories.filter(
-              (category) => category.id !== 0,
-            )"
-            :key="category.id"
-            :value="category.id"
+        <label for="category" class="mb-2 block font-bold"
+          >カテゴリ
+          <select
+            v-model="state.categoryId"
+            class="w-full border border-gray-300 px-4 py-2"
           >
-            {{ category.name }}
-          </option>
-        </select>
+            <option
+              v-for="category in getCategories.filter(
+                (category) => category.id !== 0,
+              )"
+              :key="category.id"
+              :value="category.id"
+            >
+              {{ category.name }}
+            </option>
+          </select>
+        </label>
       </div>
 
       <div class="mb-4">

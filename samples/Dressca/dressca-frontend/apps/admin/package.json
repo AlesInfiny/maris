@@ -24,6 +24,7 @@
     "@dressca-frontend/common": "^1.0.0",
     "@heroicons/vue": "^2.1.4",
     "axios": "^1.7.2",
+    "msw": "^2.3.5",
     "pinia": "^2.1.7",
     "vee-validate": "^4.13.1",
     "vue": "^3.4.29",
@@ -34,5 +35,14 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.10.4",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "cypress": "^13.13.2",
+    "vite": "^5.3.5",
+    "vitest": "^2.0.5"
   }
 }

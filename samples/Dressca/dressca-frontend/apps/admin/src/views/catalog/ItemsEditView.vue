@@ -7,7 +7,7 @@ import {
   deleteCatalogItem,
   fetchCategoriesAndBrands,
 } from '@/services/catalog/catalog-service';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 
 const props = defineProps<{
@@ -18,7 +18,7 @@ const catalogStore = useCatalogStore();
 const { getCategories, getBrands } = storeToRefs(catalogStore);
 const { getFirstAssetUrl } = assetHelper();
 
-interface itemState {
+interface ItemState {
   id: number;
   name: string;
   description: string;
@@ -29,7 +29,7 @@ interface itemState {
   assetCodes: string[] | undefined;
 }
 
-const state: itemState = reactive({
+const state: ItemState = reactive({
   id: 0,
   name: '',
   description: '',
@@ -163,7 +163,11 @@ onMounted(async () => {
       </div>
       <div class="mb-4">
         <label for="item-id" class="mb-2 block font-bold">画像</label>
-        <img class="h-[100px]" :src="getFirstAssetUrl(state.assetCodes)" />
+        <img
+          class="h-[100px]"
+          :src="getFirstAssetUrl(state.assetCodes)"
+          :alt="state.name"
+        />
       </div>
       <button
         type="submit"

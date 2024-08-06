@@ -3,19 +3,16 @@ import { defineStore } from 'pinia';
 export const useAuthenticationStore = defineStore({
   id: 'authentication',
   state: () => ({
-    _isAuthenticated: false,
+    authenticationState: false,
   }),
   actions: {
-    async loginAsync() {
-      this._isAuthenticated = true;
-    },
-    async logoutAsync() {
-      this._isAuthenticated = false;
+    async signInAsync() {
+      this.authenticationState = true;
     },
   },
   getters: {
     isAuthenticated(state) {
-      return state._isAuthenticated;
+      return state.authenticationState;
     },
   },
 });

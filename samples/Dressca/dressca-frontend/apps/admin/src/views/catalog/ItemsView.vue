@@ -8,7 +8,7 @@ import {
 import { storeToRefs } from 'pinia';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { currencyHelper } from '@dressca-frontend/common';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 
 const router = useRouter();
 const catalogStore = useCatalogStore();
@@ -54,6 +54,7 @@ const goEdit = (id: number) => {
             <img
               class="object-contain"
               :src="getFirstAssetUrl(item.assetCodes)"
+              :alt="item.name"
             />
           </td>
           <td class="border">{{ item.name }}</td>
@@ -69,6 +70,7 @@ const goEdit = (id: number) => {
           <td class="border">2024-08-02 15:00:00</td>
           <td class="border text-center">
             <button
+              type="button"
               class="rounded bg-light-blue-600 px-4 py-2 font-bold text-white hover:bg-light-blue-800"
               @click="goEdit(item.id)"
             >

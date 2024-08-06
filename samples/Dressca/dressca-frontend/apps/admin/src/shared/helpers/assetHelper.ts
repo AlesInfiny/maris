@@ -1,20 +1,10 @@
-export default function () {
-  const getFirstAssetUrl = (assetCodes: string[] | undefined): string => {
-    const firstItem = getFirstItem(assetCodes);
-    return getAssetUrl(firstItem);
-  };
-
+export function assetHelper() {
   const getAssetUrl = (assetCode: string): string => {
     if (assetCode === '') {
       return `${import.meta.env.VITE_NO_ASSET_URL}`;
     }
 
     return `${import.meta.env.VITE_ASSET_URL}${assetCode}`;
-  };
-
-  return {
-    getFirstAssetUrl,
-    getAssetUrl,
   };
 
   function getFirstItem(assetCodes: string[] | undefined): string {
@@ -28,4 +18,14 @@ export default function () {
 
     return assetCodes[0];
   }
+
+  const getFirstAssetUrl = (assetCodes: string[] | undefined): string => {
+    const firstItem = getFirstItem(assetCodes);
+    return getAssetUrl(firstItem);
+  };
+
+  return {
+    getFirstAssetUrl,
+    getAssetUrl,
+  };
 }

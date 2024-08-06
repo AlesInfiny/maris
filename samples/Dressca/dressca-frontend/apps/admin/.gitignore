@@ -17,6 +17,9 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
+# External Library files
+mockServiceWorker.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
