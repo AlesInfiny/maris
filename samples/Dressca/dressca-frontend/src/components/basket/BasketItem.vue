@@ -4,8 +4,8 @@ import type { BasketItemResponse } from '@/generated/api-client/models/basket-it
 import { TrashIcon } from '@heroicons/vue/24/outline';
 import * as yup from 'yup';
 import { useField, useForm } from 'vee-validate';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 
 const props = defineProps<{
   item: BasketItemResponse;
@@ -49,6 +49,7 @@ const remove = () => {
     <div class="grid grid-cols-2">
       <img
         :src="getFirstAssetUrl(item.catalogItem?.assetCodes)"
+        :alt="item.catalogItem?.name"
         class="h-[150px] pointer-events-none"
       />
       <div class="ml-2">
@@ -63,13 +64,15 @@ const remove = () => {
         class="lg:col-span-2 grid place-items-end lg:flex lg:flex-row lg:items-center"
       >
         <div class="basis-3/5 mt-2 ml-2 mr-2 lg:pr-10 text-right">
-          <input
-            v-model.number="quantity"
-            type="number"
-            min="1"
-            max="999"
-            class="w-full px-4 py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
-          />
+          <label>
+            <input
+              v-model.number="quantity"
+              type="number"
+              min="1"
+              max="999"
+              class="w-full px-4 py-2 border-b focus:outline-none focus:border-b-2 focus:border-indigo-500 placeholder-gray-500 placeholder-opacity-50"
+            />
+          </label>
         </div>
         <div class="basis-2/5">
           <button

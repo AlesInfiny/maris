@@ -1,11 +1,12 @@
-const base = 'api';
 import * as url from 'url';
+import type { Connect } from 'vite';
 import type {
   CatalogCategoryResponse,
   CatalogBrandResponse,
   PagedListOfCatalogItemResponse,
 } from '../../src/generated/api-client';
-import type { Connect } from 'vite';
+
+const base = 'api';
 
 const categories: CatalogCategoryResponse[] = [
   {

@@ -5,13 +5,15 @@ import {
   removeItemFromBasket,
   updateItemInBasket,
 } from '@/services/basket/basket-service';
+import { showToast } from '@/services/notification/notificationService';
 import { useBasketStore } from '@/stores/basket/basket';
 import { useRouter } from 'vue-router';
 import BasketItem from '@/components/basket/BasketItem.vue';
 import Loading from '@/components/common/LoadingSpinner.vue';
-import currencyHelper from '@/shared/helpers/currencyHelper';
-import assetHelper from '@/shared/helpers/assetHelper';
+import { currencyHelper } from '@/shared/helpers/currencyHelper';
+import { assetHelper } from '@/shared/helpers/assetHelper';
 import { storeToRefs } from 'pinia';
+import { errorHandler } from '@/shared/error-handler/error-handler';
 
 const state = reactive({
   showLoading: true,
@@ -33,11 +35,24 @@ const goCatalog = () => {
 };
 
 const update = async (catalogItemId: number, newQuantity: number) => {
-  await updateItemInBasket(catalogItemId, newQuantity);
+  try {
+    await updateItemInBasket(catalogItemId, newQuantity);
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('数量の変更に失敗しました。');
+    });
+  }
 };
 
+// 削除に失敗した通知を出す
 const remove = async (catalogItemId: number) => {
-  await removeItemFromBasket(catalogItemId);
+  try {
+    await removeItemFromBasket(catalogItemId);
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('商品の削除に失敗しました。');
+    });
+  }
 };
 
 const order = () => {
@@ -49,7 +64,9 @@ onMounted(async () => {
   try {
     await fetchBasket();
   } catch (error) {
-    console.error(error);
+    errorHandler(error, () => {
+      showToast('カートの取得に失敗しました。');
+    });
   } finally {
     state.showLoading = false;
   }
@@ -71,6 +88,7 @@ onUnmounted(async () => {
         <div class="grid grid-cols-1 lg:grid-cols-3 mt-4 flex items-center">
           <img
             :src="getFirstAssetUrl(getAddedItem.catalogItem?.assetCodes)"
+            :alt="getAddedItem.catalogItem?.name"
             class="h-[150px] m-auto pointer-events-none"
           />
           <span class="text-center lg:text-left">{{
@@ -131,6 +149,7 @@ onUnmounted(async () => {
       <div class="flex justify-between">
         <button
           class="w-36 mt-4 ml-4 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+          type="submit"
           @click="goCatalog()"
         >
           買い物を続ける
@@ -138,6 +157,7 @@ onUnmounted(async () => {
         <span v-if="!isEmpty()">
           <button
             class="w-36 mt-4 mr-4 bg-orange-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
             @click="order()"
           >
             レジに進む

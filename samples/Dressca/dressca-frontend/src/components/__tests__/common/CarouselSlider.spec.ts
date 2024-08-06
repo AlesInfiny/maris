@@ -12,7 +12,7 @@ const items = [
 describe('CarouselSlider', () => {
   it('slotにコンテンツが挿入できる', () => {
     const wrapper = shallowMount(CarouselSlider, {
-      props: { items: items },
+      props: { items },
       slots: {
         default: '<div data-test="slotContent">slot content</div>',
       },
@@ -29,7 +29,7 @@ describe('CarouselSlider', () => {
 
   it('引数の配列が表示できる', () => {
     const wrapper = shallowMount(CarouselSlider, {
-      props: { items: items },
+      props: { items },
       slots: {
         default:
           '<template #default="{ item }" ><div data-test="slotContent">{{ item.name }}</div></template>',
@@ -58,7 +58,7 @@ describe('CarouselSlider', () => {
 
   it('右矢印をクリックすると表示要素が進む', async () => {
     const wrapper = shallowMount(CarouselSlider, {
-      props: { items: items },
+      props: { items },
       slots: {
         default:
           '<template #default="{ item }" ><div data-test="slotContent">{{ item.name }}</div></template>',
@@ -75,7 +75,7 @@ describe('CarouselSlider', () => {
 
   it('左矢印をクリックすると表示要素が戻る', async () => {
     const wrapper = shallowMount(CarouselSlider, {
-      props: { items: items },
+      props: { items },
       slots: {
         default:
           '<template #default="{ item }" ><div data-test="slotContent">{{ item.name }}</div></template>',
@@ -93,7 +93,7 @@ describe('CarouselSlider', () => {
   it('表示要素を左にスライドすると要素が進む', async () => {
     const wrapper = shallowMount(CarouselSlider, {
       attachTo: document.body,
-      props: { items: items },
+      props: { items },
       slots: {
         default:
           '<template #default="{ item }" ><div data-test="slotContent">{{ item.name }}</div></template>',
@@ -122,7 +122,7 @@ describe('CarouselSlider', () => {
   it('表示要素を右にスライドすると要素が進む', async () => {
     const wrapper = shallowMount(CarouselSlider, {
       attachTo: document.body,
-      props: { items: items },
+      props: { items },
       slots: {
         default:
           '<template #default="{ item }" ><div data-test="slotContent">{{ item.name }}</div></template>',
@@ -150,7 +150,7 @@ describe('CarouselSlider', () => {
 
   it('ページインジケーターをクリックするとそれが示す要素を表示する', async () => {
     const wrapper = shallowMount(CarouselSlider, {
-      props: { items: items },
+      props: { items },
       slots: {
         default:
           '<template #default="{ item }" ><div data-test="slotContent">{{ item.name }}</div></template>',

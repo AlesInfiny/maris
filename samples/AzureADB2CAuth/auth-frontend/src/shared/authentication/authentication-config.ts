@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   LogLevel,
   PublicClientApplication,
@@ -53,9 +54,8 @@ export const msalConfig = {
             return;
           case LogLevel.Warning:
             console.warn(message);
-            return;
+            break;
           default:
-            return;
         }
       },
       logLevel: LogLevel.Verbose,
