@@ -9,6 +9,8 @@ import { storeToRefs } from 'pinia';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { currencyHelper } from '@dressca-frontend/common';
 import { assetHelper } from '@/shared/helpers/assetHelper';
+import { errorHandler } from '@/shared/error-handler/error-handler';
+import { showToast } from '@/services/notification/notificationService';
 
 const router = useRouter();
 const catalogStore = useCatalogStore();
@@ -18,8 +20,14 @@ const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
 onMounted(async () => {
-  fetchCategoriesAndBrands();
-  await fetchItems(0, 0);
+  try{
+    await fetchCategoriesAndBrands();
+    await fetchItems(0, 0);
+  }catch(error){
+    errorHandler(error,()=>{
+      showToast('カタログアイテムの取得に失敗しました。')
+    })
+  }
 });
 
 const goEdit = (id: number) => {

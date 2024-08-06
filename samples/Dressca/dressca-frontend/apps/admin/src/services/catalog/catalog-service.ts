@@ -9,8 +9,8 @@ import { useCatalogStore } from '@/stores/catalog/catalog';
 const catalogStore = useCatalogStore();
 
 export async function fetchCategoriesAndBrands() {
-  catalogStore.fetchCategories();
-  catalogStore.fetchBrands();
+  await catalogStore.fetchCategories();
+  await catalogStore.fetchBrands();
 }
 
 export async function fetchItems(categoryId: number, brandsId: number) {
@@ -18,12 +18,8 @@ export async function fetchItems(categoryId: number, brandsId: number) {
 }
 
 export async function fetchItem(itemId: number): Promise<CatalogItemResponse> {
-  try {
     const itemResponse = await catalogItemsApi.getById(itemId);
     return itemResponse.data;
-  } catch (e) {
-    throw new Error('Failed to get catalogItem');
-  }
 }
 
 export async function postCatalogItem(
@@ -42,11 +38,7 @@ export async function postCatalogItem(
     catalogCategoryId,
     catalogBrandId,
   };
-  try {
-    await catalogItemsApi.postCatalogItem(postCatalogItemInput);
-  } catch (e) {
-    throw new Error('Failed to add');
-  }
+  await catalogItemsApi.postCatalogItem(postCatalogItemInput);
 }
 
 export async function updateCatalogItem(
@@ -67,17 +59,9 @@ export async function updateCatalogItem(
     catalogCategoryId,
     catalogBrandId,
   };
-  try {
-    await catalogItemsApi.putCatalogItem(putCatalogItemRequest);
-  } catch (e) {
-    throw new Error('Failed to update');
-  }
+  await catalogItemsApi.putCatalogItem(putCatalogItemRequest);
 }
 
 export async function deleteCatalogItem(id: number) {
-  try {
-    await catalogItemsApi.deleteCatalogItem(id);
-  } catch (e) {
-    throw new Error('Failed to update');
-  }
+  await catalogItemsApi.deleteCatalogItem(id);
 }

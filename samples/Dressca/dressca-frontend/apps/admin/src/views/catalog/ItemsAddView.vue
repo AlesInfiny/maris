@@ -6,6 +6,8 @@ import {
   postCatalogItem,
   fetchCategoriesAndBrands,
 } from '@/services/catalog/catalog-service';
+import { showToast } from '@/services/notification/notificationService';
+import { errorHandler } from '@/shared/error-handler/error-handler';
 
 const catalogStore = useCatalogStore();
 const { getCategories, getBrands } = storeToRefs(catalogStore);
@@ -20,6 +22,7 @@ const state = reactive({
 });
 
 const AddItem = async () => {
+  try{
   await postCatalogItem(
     state.name,
     state.description,
@@ -28,11 +31,25 @@ const AddItem = async () => {
     state.categoryId,
     state.brandId,
   );
+  }catch(error){
+    errorHandler(error, () => {
+      showToast('カタログアイテムの追加に失敗しました。');
+    });
+  }
 };
 
 onMounted(async () => {
-  await fetchCategoriesAndBrands();
-});
+  try{
+    await fetchCategoriesAndBrands();
+  }catch(error)
+  {
+    errorHandler(error,()=>{
+    showToast('カテゴリとブランド情報の取得に失敗しました。');
+    });
+  }
+  }
+);
+
 </script>
 
 <template>
