@@ -193,7 +193,6 @@ public class CatalogManagementApplicationService
     /// <returns>カタログアイテム。</returns>
     public async Task<CatalogItem?> GetCatalogItemAsync(long catalogItemId, CancellationToken cancellationToken = default)
     {
-
         CatalogItem? catalogItem;
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
