@@ -202,20 +202,4 @@ public class CatalogManagementApplicationService
 
         return catalogItem;
     }
-
-    /// <summary>
-    /// フィルタリング用のカタログブランドリストを取得します。
-    /// </summary>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>カタログブランドリストを返す非同期処理を表すタスク。</returns>
-    public Task<IReadOnlyList<CatalogBrand>> GetBrandsAsync(CancellationToken cancellationToken = default)
-        => this.brandRepository.GetAllAsync(cancellationToken);
-
-    /// <summary>
-    /// フィルタリング用のカタログカテゴリリストを取得します。
-    /// </summary>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>カタログカテゴリリストを返す非同期処理を表すタスク。</returns>
-    public Task<IReadOnlyList<CatalogCategory>> GetCategoriesAsync(CancellationToken cancellationToken = default)
-        => this.categoryRepository.GetAllAsync(cancellationToken);
 }
