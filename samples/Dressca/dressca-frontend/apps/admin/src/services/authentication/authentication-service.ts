@@ -6,6 +6,6 @@ export async function loginAsync() {
   authenticationStore.signInAsync();
 }
 
-export async function logoutAsync(){
+export async function logoutAsync() {
   authenticationStore.signOutAsync();
 }

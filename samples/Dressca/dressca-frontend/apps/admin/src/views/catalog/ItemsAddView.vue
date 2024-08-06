@@ -22,16 +22,16 @@ const state = reactive({
 });
 
 const AddItem = async () => {
-  try{
-  await postCatalogItem(
-    state.name,
-    state.description,
-    state.price,
-    state.productCode,
-    state.categoryId,
-    state.brandId,
-  );
-  }catch(error){
+  try {
+    await postCatalogItem(
+      state.name,
+      state.description,
+      state.price,
+      state.productCode,
+      state.categoryId,
+      state.brandId,
+    );
+  } catch (error) {
     errorHandler(error, () => {
       showToast('カタログアイテムの追加に失敗しました。');
     });
@@ -39,17 +39,14 @@ const AddItem = async () => {
 };
 
 onMounted(async () => {
-  try{
+  try {
     await fetchCategoriesAndBrands();
-  }catch(error)
-  {
-    errorHandler(error,()=>{
-    showToast('カテゴリとブランド情報の取得に失敗しました。');
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('カテゴリとブランド情報の取得に失敗しました。');
     });
   }
-  }
-);
-
+});
 </script>
 
 <template>
@@ -100,21 +97,21 @@ onMounted(async () => {
       </div>
       <div class="mb-4">
         <label for="category" class="mb-2 block font-bold">カテゴリ</label>
-          <select
-            id="category"
-            v-model="state.categoryId"
-            class="w-full border border-gray-300 px-4 py-2"
+        <select
+          id="category"
+          v-model="state.categoryId"
+          class="w-full border border-gray-300 px-4 py-2"
+        >
+          <option
+            v-for="category in getCategories.filter(
+              (category) => category.id !== 0,
+            )"
+            :key="category.id"
+            :value="category.id"
           >
-            <option
-              v-for="category in getCategories.filter(
-                (category) => category.id !== 0,
-              )"
-              :key="category.id"
-              :value="category.id"
-            >
-              {{ category.name }}
-            </option>
-          </select>
+            {{ category.name }}
+          </option>
+        </select>
       </div>
 
       <div class="mb-4">

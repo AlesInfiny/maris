@@ -6,5 +6,10 @@ import { errorRoutes } from './error/error';
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [...errorRoutes, ...homeRoutes, ...catalogRoutes, ...authenticationRoutes],
+  routes: [
+    ...errorRoutes,
+    ...homeRoutes,
+    ...catalogRoutes,
+    ...authenticationRoutes,
+  ],
 });

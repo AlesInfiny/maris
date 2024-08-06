@@ -12,7 +12,6 @@ import { useCatalogStore } from '@/stores/catalog/catalog';
 import { showToast } from '@/services/notification/notificationService';
 import { errorHandler } from '@/shared/error-handler/error-handler';
 
-
 const props = defineProps<{
   itemId: number;
 }>();
@@ -44,30 +43,30 @@ const state: ItemState = reactive({
 });
 
 const updateItem = async () => {
-  try{
+  try {
     await updateCatalogItem(
-    state.id,
-    state.name,
-    state.description,
-    state.price,
-    state.productCode,
-    state.categoryId,
-    state.brandId,
-  );
-  }catch(error){
-    errorHandler(error,()=>{
-      showToast('カタログアイテムの更新に失敗しました。')
+      state.id,
+      state.name,
+      state.description,
+      state.price,
+      state.productCode,
+      state.categoryId,
+      state.brandId,
+    );
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('カタログアイテムの更新に失敗しました。');
     });
   }
 };
 
 const deleteItem = async () => {
-  try{
+  try {
     await deleteCatalogItem(state.id);
-  }catch(error){
-    errorHandler(error,()=>{
-      showToast('カタログアイテムの削除に失敗しました。')
-    })
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('カタログアイテムの削除に失敗しました。');
+    });
   }
 };
 

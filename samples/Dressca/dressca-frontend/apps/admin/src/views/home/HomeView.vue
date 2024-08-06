@@ -18,7 +18,7 @@
           <td class="border bg-light-blue-50 text-3xl underline">
             <router-link to="catalog">カタログアイテム管理</router-link>
           </td>
-          <td class="border bg-light-blue-50 text-3xl ">
+          <td class="border bg-light-blue-50 text-3xl">
             カタログアイテムの一覧を表示します。
           </td>
         </tr>

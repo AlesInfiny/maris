@@ -30,13 +30,12 @@ const isInvalid = () => {
 const routingStore = useRoutingStore();
 
 const login = async () => {
-
-  try{
+  try {
     await loginAsync();
-  }catch(error){
-    errorHandler(error,()=>{
-      showToast('ログインに失敗しました。')
-    })
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('ログインに失敗しました。');
+    });
   }
 
   if (!routingStore.redirectFrom) {

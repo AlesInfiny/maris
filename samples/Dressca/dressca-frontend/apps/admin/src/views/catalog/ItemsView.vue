@@ -20,13 +20,13 @@ const { toCurrencyJPY } = currencyHelper();
 const { getFirstAssetUrl } = assetHelper();
 
 onMounted(async () => {
-  try{
+  try {
     await fetchCategoriesAndBrands();
     await fetchItems(0, 0);
-  }catch(error){
-    errorHandler(error,()=>{
-      showToast('カタログアイテムの取得に失敗しました。')
-    })
+  } catch (error) {
+    errorHandler(error, () => {
+      showToast('カタログアイテムの取得に失敗しました。');
+    });
   }
 });
 

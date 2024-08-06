@@ -4,8 +4,8 @@ import { storeToRefs } from 'pinia';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 
 const authenticationStore = useAuthenticationStore();
-const { authenticationState, userName, userRole } = storeToRefs(authenticationStore);
-
+const { authenticationState, userName, userRole } =
+  storeToRefs(authenticationStore);
 </script>
 <template>
   <div class="z-2">
@@ -17,7 +17,7 @@ const { authenticationState, userName, userRole } = storeToRefs(authenticationSt
         <ul class="font-bold">
           <li>
             <router-link
-              class="flex text-3xl items-center p-4 text-gray-900 hover:bg-light-blue-800 hover:text-white"
+              class="flex items-center p-4 text-3xl text-gray-900 hover:bg-light-blue-800 hover:text-white"
               to="/"
             >
               <span>Dressca 管理</span>
@@ -27,18 +27,18 @@ const { authenticationState, userName, userRole } = storeToRefs(authenticationSt
           <div v-if="authenticationState">
             <li>
               <router-link
-                class="flex text-xl items-center p-4 text-gray-900 hover:bg-light-blue-800 hover:text-white"
+                class="flex items-center p-4 text-xl text-gray-900 hover:bg-light-blue-800 hover:text-white"
                 to="/catalog"
               >
                 <span>カタログ管理</span>
               </router-link>
-           </li>
+            </li>
           </div>
 
           <div v-if="!authenticationState">
             <li>
               <router-link
-                class="flex text-xl items-center p-4 text-gray-900 hover:bg-light-blue-800 hover:text-white"
+                class="flex items-center p-4 text-xl text-gray-900 hover:bg-light-blue-800 hover:text-white"
                 to="/authentication/login"
               >
                 <span>ログイン</span>
@@ -47,10 +47,10 @@ const { authenticationState, userName, userRole } = storeToRefs(authenticationSt
           </div>
 
           <div v-if="authenticationState">
-            <li class="flex text-xl items-center p-4 text-gray-900">
+            <li class="flex items-center p-4 text-xl text-gray-900">
               <span>{{ userName }}</span>
             </li>
-            <li class="flex text-xl items-center p-4 text-gray-900">
+            <li class="flex items-center p-4 text-xl text-gray-900">
               <span>{{ userRole }}</span>
             </li>
           </div>

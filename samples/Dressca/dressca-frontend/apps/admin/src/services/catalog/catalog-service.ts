@@ -18,8 +18,8 @@ export async function fetchItems(categoryId: number, brandsId: number) {
 }
 
 export async function fetchItem(itemId: number): Promise<CatalogItemResponse> {
-    const itemResponse = await catalogItemsApi.getById(itemId);
-    return itemResponse.data;
+  const itemResponse = await catalogItemsApi.getById(itemId);
+  return itemResponse.data;
 }
 
 export async function postCatalogItem(

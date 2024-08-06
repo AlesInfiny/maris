@@ -36,21 +36,21 @@ watch(message, (newMessage) => {
   >
     <div
       v-if="state.show"
-      class="fixed inline-flex items-center w-5/6 inset-x-0 max-w-m mx-auto mt-2 p-4 text-gray-500 bg-red-500 rounded-lg shadow"
+      class="max-w-m bg-red-500 fixed inset-x-0 mx-auto mt-2 inline-flex w-5/6 items-center rounded-lg p-4 text-gray-500 shadow"
     >
       <div
-        class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg"
+        class="text-red-500 bg-red-100 inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg"
       >
-        <ExclamationCircleIcon class="w-5 h-5" />
+        <ExclamationCircleIcon class="h-5 w-5" />
         <span class="sr-only">Error icon</span>
       </div>
-      <div class="ms-3 text-white text-sm font-normal">{{ message }}</div>
+      <div class="ms-3 text-sm font-normal text-white">{{ message }}</div>
       <button
         type="button"
-        class="ms-auto -mx-1.5 -my-1.5 h-8 w-8 bg-red-100 rounded-lg focus:ring-2 focus:ring-gray-300 hover:bg-gray-100 inline-flex items-center justify-center"
+        class="bg-red-100 -mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-gray-300"
         @click="close"
       >
-        <XMarkIcon class="w-5 h-5" />
+        <XMarkIcon class="h-5 w-5" />
       </button>
     </div>
   </transition>

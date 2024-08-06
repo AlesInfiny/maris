@@ -9,5 +9,5 @@ export const handlers = [
   ...catalogBrandsHandlers,
   ...catalogCategoriesHandlers,
   ...assetsHandlers,
-  ...usersHandlers
+  ...usersHandlers,
 ];

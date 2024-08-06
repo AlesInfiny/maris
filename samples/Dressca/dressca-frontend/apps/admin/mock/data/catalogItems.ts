@@ -1,4 +1,7 @@
-import type { CatalogItemResponse, PagedListOfCatalogItemResponse } from "@/generated/api-client";
+import type {
+  CatalogItemResponse,
+  PagedListOfCatalogItemResponse,
+} from '@/generated/api-client';
 
 export const catalogItem: CatalogItemResponse = {
   id: 1,

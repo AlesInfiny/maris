@@ -15,9 +15,7 @@
         </th>
       </tr>
       <tr>
-        <td
-          class="border-slate-300 border bg-light-blue-50 text-3xl underline"
-        >
+        <td class="border-slate-300 border bg-light-blue-50 text-3xl underline">
           <router-link to="catalog/items">カタログアイテム一覧</router-link>
         </td>
         <td class="border-slate-300 border bg-light-blue-50 text-3xl">
@@ -25,9 +23,7 @@
         </td>
       </tr>
       <tr>
-        <td
-          class="border-slate-300 border bg-light-blue-50 text-3xl underline"
-        >
+        <td class="border-slate-300 border bg-light-blue-50 text-3xl underline">
           <router-link to="catalog/items/add">カタログアイテム追加</router-link>
         </td>
         <td class="border-slate-300 border bg-light-blue-50 text-3xl">

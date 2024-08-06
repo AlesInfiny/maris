@@ -9,13 +9,9 @@ export const catalogItemsHandlers = [
     return HttpResponse.json(catalogItem, { status: 200 });
   }),
   http.post('/api/catalog-items/add', () => {
-  return HttpResponse.json(
-    {},
-    { status:201 })
+    return HttpResponse.json({}, { status: 201 });
   }),
   http.delete('/api/catalog-items/edit/:itemId', () => {
-      return HttpResponse.json(
-        {},
-        { status:204 })
+    return HttpResponse.json({}, { status: 204 });
   }),
 ];
