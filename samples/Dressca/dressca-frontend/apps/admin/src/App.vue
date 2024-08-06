@@ -1,5 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import NotificationToast from '@/components/NotificationToast.vue';
+</script>
 <template>
+  <div class="z-2">
+    <NotificationToast />
+  </div>
   <div class="flex gap-16">
     <nav id="default-sidebar" class="mb-auto">
       <div class="overflow-y-auto bg-light-blue-50 px-3 py-4 text-white">
