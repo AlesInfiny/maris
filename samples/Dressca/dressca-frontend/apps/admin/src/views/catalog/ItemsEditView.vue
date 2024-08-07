@@ -221,7 +221,7 @@ onMounted(async () => {
 
       <button
         type="button"
-        class="rounded bg-light-blue-600 px-4 py-2 font-bold text-white hover:bg-light-blue-800"
+        class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800"
         @click="updateItem"
       >
         更新

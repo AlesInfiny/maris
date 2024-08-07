@@ -13,11 +13,11 @@ const { authenticationState, userName, userRole } =
   </div>
   <div class="flex gap-16">
     <nav id="default-sidebar" class="mb-auto">
-      <div class="overflow-y-auto bg-light-blue-50 px-3 py-4 text-white">
+      <div class="overflow-y-auto bg-blue-50 px-3 py-4 text-white">
         <ul class="font-bold">
           <li>
             <router-link
-              class="flex items-center p-4 text-3xl text-gray-900 hover:bg-light-blue-800 hover:text-white"
+              class="flex items-center p-4 text-3xl text-gray-900 hover:bg-blue-800 hover:text-white"
               to="/"
             >
               <span>Dressca 管理</span>
@@ -27,7 +27,7 @@ const { authenticationState, userName, userRole } =
           <div v-if="authenticationState">
             <li>
               <router-link
-                class="flex items-center p-4 text-xl text-gray-900 hover:bg-light-blue-800 hover:text-white"
+                class="flex items-center p-4 text-xl text-gray-900 hover:bg-blue-800 hover:text-white"
                 to="/catalog"
               >
                 <span>カタログ管理</span>
@@ -38,7 +38,7 @@ const { authenticationState, userName, userRole } =
           <div v-if="!authenticationState">
             <li>
               <router-link
-                class="flex items-center p-4 text-xl text-gray-900 hover:bg-light-blue-800 hover:text-white"
+                class="flex items-center p-4 text-xl text-gray-900 hover:bg-blue-800 hover:text-white"
                 to="/authentication/login"
               >
                 <span>ログイン</span>
