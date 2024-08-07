@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive ,ref} from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   fetchItem,
@@ -12,6 +12,7 @@ import { useCatalogStore } from '@/stores/catalog/catalog';
 import { showToast } from '@/services/notification/notificationService';
 import { errorHandler } from '@/shared/error-handler/error-handler';
 import ConfirmationModal from '@/components/ConfirmationModal.vue';
+import NotificationModal from '@/components/NotificationModal.vue';
 
 const props = defineProps<{
   itemId: number;
@@ -43,6 +44,13 @@ const state: ItemState = reactive({
   assetCodes: [],
 });
 
+const modalState = reactive(
+  {
+    showConfirmationModal: false,
+    showNotificationModal: false
+  }
+);
+
 const updateItem = async () => {
   try {
     await updateCatalogItem(
@@ -54,6 +62,7 @@ const updateItem = async () => {
       state.categoryId,
       state.brandId,
     );
+    modalState.showNotificationModal = true;
   } catch (error) {
     errorHandler(error, () => {
       showToast('カタログアイテムの更新に失敗しました。');
@@ -68,6 +77,8 @@ const deleteItem = async () => {
     errorHandler(error, () => {
       showToast('カタログアイテムの削除に失敗しました。');
     });
+  } finally{
+    modalState.showConfirmationModal = false;
   }
 };
 
@@ -84,19 +95,30 @@ onMounted(async () => {
   state.assetCodes = item.assetCodes;
 });
 
-const showModal = ref(false)
 </script>
 
 <template>
-  <button id="show-modal" @click="showModal = true">Show Modal</button>
-  <Teleport to="body">
-    <!-- use the modal component, pass in the prop -->
-    <ConfirmationModal :show="showModal" @close="showModal = false">
-      <template #header>
-        <h3>Custom Header</h3>
-      </template>
-    </ConfirmationModal>
-  </Teleport>
+      <button
+        type="button"
+        @click="modalState.showNotificationModal = true"
+      >
+        通知
+      </button>
+
+  <ConfirmationModal
+    :show="modalState.showConfirmationModal"
+    header="カタログアイテムを削除しますか？"
+    body="カタログアイテムを削除します。削除したアイテムは復元できません。"
+    @confirm="deleteItem"
+    @cancel="modalState.showConfirmationModal = false"
+  ></ConfirmationModal>
+
+  <NotificationModal
+    :show="modalState.showNotificationModal"
+    header="更新成功"
+    body="カタログアイテムを更新しました。"
+    @close="modalState.showNotificationModal = false"
+  ></NotificationModal>
 
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
@@ -197,14 +219,15 @@ const showModal = ref(false)
         />
       </div>
       <button
-        type="submit"
+        type="button"
         class="rounded bg-red-800 px-4 py-2 font-bold text-white hover:bg-red-900"
-        @click="deleteItem"
+        @click="modalState.showConfirmationModal = true"
       >
         削除
       </button>
+
       <button
-        type="submit"
+        type="button"
         class="rounded bg-light-blue-600 px-4 py-2 font-bold text-white hover:bg-light-blue-800"
         @click="updateItem"
       >

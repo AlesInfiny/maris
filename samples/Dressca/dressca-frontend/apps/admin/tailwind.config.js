@@ -9,6 +9,9 @@ export default {
       black: colors.black,
       white: colors.white,
       gray: colors.gray,
+      red: colors.red,
+      green: colors.green,
+      orange: colors.orange
     },
     extend:{
       // プロジェクト独自の色を追加できます。
@@ -19,16 +22,6 @@ export default {
           800: '#0066be',
           1000: '#00428c',
         },
-        'green':{
-          600:'#259d63',
-        },
-        'red':{
-          800:'#ec0000',
-          900:'#ce0000',
-        },
-        'orange':{
-          600:'#FB5B01',
-        }
     },
   },
   plugins: [],
