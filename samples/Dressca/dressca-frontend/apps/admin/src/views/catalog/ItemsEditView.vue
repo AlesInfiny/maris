@@ -98,13 +98,6 @@ onMounted(async () => {
 </script>
 
 <template>
-      <button
-        type="button"
-        @click="modalState.showNotificationModal = true"
-      >
-        通知
-      </button>
-
   <ConfirmationModal
     :show="modalState.showConfirmationModal"
     header="カタログアイテムを削除しますか？"

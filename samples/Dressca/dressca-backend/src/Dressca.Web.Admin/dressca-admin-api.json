@@ -289,10 +289,11 @@
         "tags": [
           "Users"
         ],
+        "summary": "ログイン中のユーザーの情報を取得します。",
         "operationId": "getLoginUser",
         "responses": {
           "200": {
-            "description": "",
+            "description": "ユーザーの情報。",
             "content": {
               "application/json": {
                 "schema": {
