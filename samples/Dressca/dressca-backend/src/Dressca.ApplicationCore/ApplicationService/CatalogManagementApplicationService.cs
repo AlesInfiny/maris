@@ -59,22 +59,28 @@ public class CatalogManagementApplicationService
         long catalogBrandId,
         long catalogCategoryId)
     {
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_AddItemToCatalogAsyncStart);
+
+        var catalogItem = new CatalogItem()
+        {
+            Name = name,
+            Description = description,
+            Price = price,
+            ProductCode = productCode,
+            CatalogBrandId = catalogBrandId,
+
+            CatalogCategoryId = catalogCategoryId,
+        };
+        CatalogItem catalogItemAdded;
+
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            var catalogItem = new CatalogItem()
-            {
-                Name = name,
-                Description = description,
-                Price = price,
-                ProductCode = productCode,
-                CatalogBrandId = catalogBrandId,
-
-                CatalogCategoryId = catalogCategoryId,
-            };
-            var catalogItemAdded = await this.catalogRepository.AddAsync(catalogItem);
+            catalogItemAdded = await this.catalogRepository.AddAsync(catalogItem);
             scope.Complete();
-            return catalogItemAdded;
         }
+
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_AddItemToCatalogAsyncEnd, catalogItemAdded.Id);
+        return catalogItemAdded;
     }
 
     /// <summary>
@@ -85,6 +91,8 @@ public class CatalogManagementApplicationService
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     public async Task DeleteItemFromCatalogAsync(long id, CancellationToken cancellationToken = default)
     {
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_DeleteItemFromCatalogAsyncStart, id);
+
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             var catalogItem = await this.catalogRepository.GetAsync(id, cancellationToken);
@@ -98,6 +106,8 @@ public class CatalogManagementApplicationService
             await this.catalogRepository.RemoveAsync(catalogItem, cancellationToken);
             scope.Complete();
         }
+
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_DeleteItemFromCatalogAsyncEnd, id);
     }
 
     /// <summary>
@@ -111,6 +121,8 @@ public class CatalogManagementApplicationService
         CatalogItemUpdateCommand command,
         CancellationToken cancellationToken = default)
     {
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncStart, command.Id);
+
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             var catalogItem = await this.catalogRepository.GetAsync(command.Id, cancellationToken);
@@ -147,6 +159,8 @@ public class CatalogManagementApplicationService
             await this.catalogRepository.UpdateAsync(catalogItem, cancellationToken);
             scope.Complete();
         }
+
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncStart, command.Id);
     }
 
     /// <summary>
@@ -160,7 +174,7 @@ public class CatalogManagementApplicationService
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
     public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
 
         IReadOnlyList<CatalogItem> itemsOnPage;
         int totalItems;
@@ -181,7 +195,7 @@ public class CatalogManagementApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsAsyncEnd, brandId, categoryId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemsAsyncEnd, brandId, categoryId);
         return (ItemsOnPage: itemsOnPage, TotalItems: totalItems);
     }
 
@@ -193,6 +207,7 @@ public class CatalogManagementApplicationService
     /// <returns>カタログアイテム。</returns>
     public async Task<CatalogItem?> GetCatalogItemAsync(long catalogItemId, CancellationToken cancellationToken = default)
     {
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemAsyncStart, catalogItemId);
         CatalogItem? catalogItem;
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
@@ -200,6 +215,7 @@ public class CatalogManagementApplicationService
             scope.Complete();
         }
 
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemAsyncEnd, catalogItemId);
         return catalogItem;
     }
 }
