@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive ,ref} from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   fetchItem,
@@ -11,6 +11,7 @@ import { assetHelper } from '@/shared/helpers/assetHelper';
 import { useCatalogStore } from '@/stores/catalog/catalog';
 import { showToast } from '@/services/notification/notificationService';
 import { errorHandler } from '@/shared/error-handler/error-handler';
+import ConfirmationModal from '@/components/ConfirmationModal.vue';
 
 const props = defineProps<{
   itemId: number;
@@ -82,9 +83,21 @@ onMounted(async () => {
   state.brandId = item.catalogBrandId;
   state.assetCodes = item.assetCodes;
 });
+
+const showModal = ref(false)
 </script>
 
 <template>
+  <button id="show-modal" @click="showModal = true">Show Modal</button>
+  <Teleport to="body">
+    <!-- use the modal component, pass in the prop -->
+    <ConfirmationModal :show="showModal" @close="showModal = false">
+      <template #header>
+        <h3>Custom Header</h3>
+      </template>
+    </ConfirmationModal>
+  </Teleport>
+
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
