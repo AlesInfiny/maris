@@ -13,13 +13,13 @@ namespace Dressca.Web.Admin.Controllers;
 [Produces("application/json")]
 public class UsersController : Controller
 {
-    private readonly AuthorizationDomainService authorizationService;
+    private readonly IAuthorizationDomainService authorizationService;
 
     /// <summary>
     /// コンストラクター。
     /// </summary>
     /// <param name="authorizationService">認可サービス。</param>
-    public UsersController(AuthorizationDomainService authorizationService)
+    public UsersController(IAuthorizationDomainService authorizationService)
     {
         this.authorizationService = authorizationService;
     }
