@@ -28,9 +28,9 @@ export interface UserResponse {
     'userName': string;
     /**
      * ロールを取得または設定します。             
-     * @type {Array<string>}
+     * @type {string}
      * @memberof UserResponse
      */
-    'roles': Array<string>;
+    'role': string;
 }
 

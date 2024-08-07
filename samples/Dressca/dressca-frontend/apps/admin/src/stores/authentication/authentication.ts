@@ -11,9 +11,9 @@ export const useAuthenticationStore = defineStore({
   actions: {
     async signInAsync() {
       const response = await UsersApi.getLoginUser();
-      const { userName, roles } = response.data;
+      const { userName, role } = response.data;
       this.userName = userName;
-      this.userRole = roles[0];
+      this.userRole = role;
       this.authenticationState = true;
     },
     async signOutAsync() {

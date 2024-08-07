@@ -17,5 +17,5 @@ public class UserResponse
     ///  ロールを取得または設定します。
     /// </summary>
     [Required]
-    public List<string> Roles { get; set; } = [];
+    public string Role { get; set; } = string.Empty;
 }

@@ -229,6 +229,9 @@
         "responses": {
           "201": {
             "description": "成功。"
+          },
+          "401": {
+            "description": ""
           }
         }
       },
@@ -253,6 +256,12 @@
         "responses": {
           "204": {
             "description": "成功。"
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
           }
         }
       }
@@ -280,6 +289,12 @@
         "responses": {
           "204": {
             "description": "成功。"
+          },
+          "401": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
           }
         }
       }
@@ -301,6 +316,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": ""
           }
         }
       }
@@ -631,7 +649,7 @@
         "additionalProperties": false,
         "required": [
           "userName",
-          "roles"
+          "role"
         ],
         "properties": {
           "userName": {
@@ -639,12 +657,10 @@
             "description": "ユーザー名を取得または設定します。\n            ",
             "minLength": 1
           },
-          "roles": {
-            "type": "array",
+          "role": {
+            "type": "string",
             "description": "ロールを取得または設定します。\n            ",
-            "items": {
-              "type": "string"
-            }
+            "minLength": 1
           }
         }
       }

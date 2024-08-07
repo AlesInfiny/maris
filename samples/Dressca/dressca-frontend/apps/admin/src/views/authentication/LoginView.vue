@@ -52,7 +52,7 @@ const login = async () => {
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
-    <div class="text-3xl font-bold">ログイン</div>
+    <div class="text-3xl font-bold p-8">ログイン</div>
 
     <form class="mt-8 text-xl">
       <div class="form-group">

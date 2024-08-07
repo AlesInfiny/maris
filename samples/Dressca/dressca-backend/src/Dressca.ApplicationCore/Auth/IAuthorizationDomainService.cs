@@ -12,10 +12,10 @@ public interface IAuthorizationDomainService
     public string GetLoginUserName();
 
     /// <summary>
-    /// ログイン中のユーザーのロールの一覧を取得します。
+    /// ログイン中のユーザーのロールを取得します。
     /// </summary>
     /// <returns>ログイン中のユーザーのロール。</returns>
-    public IReadOnlyCollection<string> GetLoginUserRoles();
+    public string GetLoginUserRole();
 
     /// <summary>
     /// ユーザーが特定のロールに属しているか確認します。

@@ -31,6 +31,7 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
+         * @summary ログイン中のユーザーの情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -70,6 +71,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary ログイン中のユーザーの情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -91,6 +93,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
+         * @summary ログイン中のユーザーの情報を取得します。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -109,6 +112,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
 export class UsersApi extends BaseAPI {
     /**
      * 
+     * @summary ログイン中のユーザーの情報を取得します。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi

@@ -3,7 +3,7 @@ import type { UserResponse } from '@/generated/api-client';
 
 const user: UserResponse = {
   userName: 'admin@example.com',
-  roles: ['Administrator'],
+  role: 'Admin',
 };
 
 export const usersHandlers = [

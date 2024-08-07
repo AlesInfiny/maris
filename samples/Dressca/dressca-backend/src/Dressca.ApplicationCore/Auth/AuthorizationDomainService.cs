@@ -28,9 +28,9 @@ public class AuthorizationDomainService : IAuthorizationDomainService
     }
 
     /// <inheritdoc/>
-    public IReadOnlyCollection<string> GetLoginUserRoles()
+    public string GetLoginUserRole()
     {
-        return this.session.LoginUserRoles();
+        return this.session.LoginUserRole();
     }
 
     /// <inheritdoc/>

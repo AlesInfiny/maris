@@ -73,7 +73,7 @@ onMounted(async () => {
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
-    <div class="text-5xl font-bold">カタログアイテム追加</div>
+    <div class="text-5xl font-bold p-8">カタログアイテム追加</div>
     <form class="text-xl">
       <div class="mb-4">
         <label for="item-name" class="mb-2 block font-bold">アイテム名</label>

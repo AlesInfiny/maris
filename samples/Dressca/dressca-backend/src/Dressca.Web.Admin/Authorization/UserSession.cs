@@ -22,22 +22,30 @@ public class UserSession : IUserSession
     /// <inheritdoc/>
     public string LoginUserName()
     {
-        return this.httpContextAccessor.HttpContext.User.Identity.Name;
+        if (this.httpContextAccessor.HttpContext != null)
+        {
+            return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name).First().Value;
+        }
+        return String.Empty;
     }
 
     /// <inheritdoc/>
-    public IReadOnlyCollection<string> LoginUserRoles()
+    public string LoginUserRole()
     {
-        return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Role)
-                    .Select(c => c.Value).ToList();
+        if (this.httpContextAccessor.HttpContext != null)
+        {
+            return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Role).First().Value;
+        }
+        return String.Empty;
     }
 
     /// <inheritdoc/>
     public bool IsInRole(string role)
     {
-        return this.httpContextAccessor.HttpContext.User.IsInRole(role);
+        if (this.httpContextAccessor.HttpContext != null)
+        {
+            return this.httpContextAccessor.HttpContext.User.IsInRole(role);
+        }
+        return false;
     }
-
 }
-
-

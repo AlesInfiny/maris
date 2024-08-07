@@ -1,5 +1,6 @@
 ﻿using Dressca.ApplicationCore.Auth;
 using Dressca.Web.Admin.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
@@ -30,13 +31,15 @@ public class UsersController : Controller
     /// <returns>ユーザーの情報。</returns>
     [HttpGet]
     [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [OpenApiOperation("getLoginUser")]
+    [Authorize]
     public IActionResult getLoginUser()
     {
         var response = new
         {
             UserName = this.authorizationService.GetLoginUserName(),
-            Roles = this.authorizationService.GetLoginUserRoles().ToList()
+            Role = this.authorizationService.GetLoginUserRole()
         };
         return this.Ok(response);
     }

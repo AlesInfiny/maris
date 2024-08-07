@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
+using Dressca.ApplicationCore.Auth;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Controllers.ApiModel;
@@ -16,11 +17,12 @@ namespace Dressca.Web.Admin.Controllers
     [Route("api/catalog-items")]
     [ApiController]
     [Produces("application/json")]
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class CatalogItemsController : ControllerBase
     {
         private readonly CatalogManagementApplicationService managementService;
         private readonly IObjectMapper<CatalogItem, CatalogItemResponse> mapper;
+        private readonly ILogger<CatalogItemsController> logger;
 
         /// <summary>
         ///  <see cref="CatalogItemsController"/> クラスの新しいインスタンスを初期化します。
@@ -28,20 +30,24 @@ namespace Dressca.Web.Admin.Controllers
         /// <param name="service">カタログアプリケーションサービス。</param>
         /// <param name="managementService">カタログ管理アプリケーションサービス。</param>
         /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
+        /// <param name="logger">ロガー。</param>
         /// <exception cref="ArgumentNullException">
         ///  <list type="bullet">
         ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
         ///   <item><paramref name="managementService"/> が <see langword="null"/> です。</item>
         ///   <item><paramref name="mapper"/> が <see langword="null"/> です。</item>
+        ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
         ///  </list>
         /// </exception>
         public CatalogItemsController(
             CatalogApplicationService service,
             CatalogManagementApplicationService managementService,
-            IObjectMapper<CatalogItem, CatalogItemResponse> mapper)
+            IObjectMapper<CatalogItem, CatalogItemResponse> mapper,
+            ILogger<CatalogItemsController> logger)
         {
             this.managementService = managementService ?? throw new ArgumentNullException(nameof(managementService));
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
 
@@ -99,18 +105,30 @@ namespace Dressca.Web.Admin.Controllers
         /// <response code="201">成功。</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [OpenApiOperation("postCatalogItem")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PostCatalogItemAsync(PostCatalogItemRequest postCatalogItemRequest)
         {
 
-            var catalogItem = await managementService.AddItemToCatalogAsync(
-                postCatalogItemRequest.Name,
-                postCatalogItemRequest.Description,
-                postCatalogItemRequest.Price,
-                postCatalogItemRequest.ProductCode,
-                postCatalogItemRequest.CatalogBrandId,
-                postCatalogItemRequest.CatalogCategoryId
-                );
+            CatalogItem catalogItem;
+
+            try
+            {
+                catalogItem = await managementService.AddItemToCatalogAsync(
+                    postCatalogItemRequest.Name,
+                    postCatalogItemRequest.Description,
+                    postCatalogItemRequest.Price,
+                    postCatalogItemRequest.ProductCode,
+                    postCatalogItemRequest.CatalogBrandId,
+                    postCatalogItemRequest.CatalogCategoryId
+                    );
+            }
+            catch (PermissionDeniedException ex)
+            {
+                this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
+                return Unauthorized();
+            }
 
             var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.PostCatalogItemAsync));
 
@@ -125,11 +143,26 @@ namespace Dressca.Web.Admin.Controllers
         /// <response code="204">成功。</response>
         [HttpDelete("{catalogItemId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [OpenApiOperation("deleteCatalogItem")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId)
         {
-
-            await managementService.DeleteItemFromCatalogAsync(catalogItemId);
+            try
+            {
+                await managementService.DeleteItemFromCatalogAsync(catalogItemId);
+            }
+            catch (PermissionDeniedException ex)
+            {
+                this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
+                return Unauthorized();
+            }
+            catch (CatalogItemNotExistingInRepositoryException ex)
+            {
+                this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
+                return this.NotFound();
+            }
             return this.NoContent();
         }
 
@@ -141,7 +174,10 @@ namespace Dressca.Web.Admin.Controllers
         /// <response code="204">成功。</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [OpenApiOperation("putCatalogItem")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutCatalogItemAsync(PutCatalogItemRequest putCatalogItemRequest)
         {
 
@@ -154,7 +190,20 @@ namespace Dressca.Web.Admin.Controllers
                 putCatalogItemRequest.CatalogBrandId,
                 putCatalogItemRequest.CatalogCategoryId);
 
-            await this.managementService.UpdateCatalogItemAsync(command);
+            try
+            {
+                await this.managementService.UpdateCatalogItemAsync(command);
+            }
+            catch (PermissionDeniedException ex)
+            {
+                this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
+                return Unauthorized();
+            }
+            catch (CatalogItemNotExistingInRepositoryException ex)
+            {
+                this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
+                return this.NotFound();
+            }
 
             return this.NoContent();
         }

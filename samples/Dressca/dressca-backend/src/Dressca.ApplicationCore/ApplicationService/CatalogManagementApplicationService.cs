@@ -56,6 +56,7 @@ public class CatalogManagementApplicationService
     /// <param name="catalogBrandId">カタログブランドID。</param>
     /// <param name="catalogCategoryId">カタログカテゴリID。</param>
     /// <returns>追加したカタログアイテムの情報を返す非同期処理を表すタスク。</returns>
+    /// <exception cref="PermissionDeniedException">追加権限がない場合。</exception>
     public async Task<CatalogItem> AddItemToCatalogAsync(
         string name,
         string description,
@@ -99,6 +100,8 @@ public class CatalogManagementApplicationService
     /// <param name="id">削除対象のカタログアイテムのID。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
+    /// <exception cref="PermissionDeniedException">削除権限がない場合。</exception>
+    /// <exception cref="CatalogItemNotExistingInRepositoryException">削除対象のカタログアイテムが存在しなかった場合。</exception>>
     public async Task DeleteItemFromCatalogAsync(long id, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_DeleteItemFromCatalogAsyncStart, id);
@@ -131,7 +134,8 @@ public class CatalogManagementApplicationService
     /// <param name="command">更新処理のファサードとなるコマンドオブジェクト。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
-    /// <exception cref="CatalogItemNotExistingInRepositoryException">更新対象のカタログアイテムが存在しなかった場合。</exception>
+    /// <exception cref="PermissionDeniedException">更新権限がない場合。</exception>
+    /// <exception cref="CatalogItemNotExistingInRepositoryException">更新対象のカタログアイテムが存在しなかった場合。</exception>>
     public async Task UpdateCatalogItemAsync(
         CatalogItemUpdateCommand command,
         CancellationToken cancellationToken = default)
