@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   fetchItem,
@@ -13,12 +13,14 @@ import { showToast } from '@/services/notification/notificationService';
 import { errorHandler } from '@/shared/error-handler/error-handler';
 import ConfirmationModal from '@/components/ConfirmationModal.vue';
 import NotificationModal from '@/components/NotificationModal.vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{
   itemId: number;
 }>();
 
 const catalogStore = useCatalogStore();
+const router = useRouter();
 const { getCategories, getBrands } = storeToRefs(catalogStore);
 const { getFirstAssetUrl } = assetHelper();
 
@@ -44,12 +46,11 @@ const state: ItemState = reactive({
   assetCodes: [],
 });
 
-const modalState = reactive(
-  {
-    showConfirmationModal: false,
-    showNotificationModal: false
-  }
-);
+const modalState = reactive({
+  showDeleteConfirm: false,
+  showDeleteNotice: false,
+  showUpdateNotice: false,
+});
 
 const updateItem = async () => {
   try {
@@ -62,7 +63,7 @@ const updateItem = async () => {
       state.categoryId,
       state.brandId,
     );
-    modalState.showNotificationModal = true;
+    modalState.showUpdateNotice = true;
   } catch (error) {
     errorHandler(error, () => {
       showToast('カタログアイテムの更新に失敗しました。');
@@ -70,15 +71,25 @@ const updateItem = async () => {
   }
 };
 
+const closeDeleteNotice = () => {
+  modalState.showDeleteNotice = false;
+  router.push({ name: '/catalog/items' });
+};
+
+const closeUpdateNotice = () => {
+  modalState.showUpdateNotice = false;
+};
+
 const deleteItem = async () => {
   try {
     await deleteCatalogItem(state.id);
+    modalState.showDeleteNotice = true;
   } catch (error) {
     errorHandler(error, () => {
       showToast('カタログアイテムの削除に失敗しました。');
     });
-  } finally{
-    modalState.showConfirmationModal = false;
+  } finally {
+    modalState.showDeleteConfirm = false;
   }
 };
 
@@ -94,23 +105,29 @@ onMounted(async () => {
   state.brandId = item.catalogBrandId;
   state.assetCodes = item.assetCodes;
 });
-
 </script>
 
 <template>
   <ConfirmationModal
-    :show="modalState.showConfirmationModal"
+    :show="modalState.showDeleteConfirm"
     header="カタログアイテムを削除しますか？"
     body="カタログアイテムを削除します。削除したアイテムは復元できません。"
     @confirm="deleteItem"
-    @cancel="modalState.showConfirmationModal = false"
+    @cancel="modalState.showDeleteConfirm = false"
   ></ConfirmationModal>
 
   <NotificationModal
-    :show="modalState.showNotificationModal"
+    :show="modalState.showDeleteNotice"
+    header="削除成功"
+    body="カタログアイテムを削除しました。"
+    @close="closeDeleteNotice"
+  ></NotificationModal>
+
+  <NotificationModal
+    :show="modalState.showUpdateNotice"
     header="更新成功"
     body="カタログアイテムを更新しました。"
-    @close="modalState.showNotificationModal = false"
+    @close="closeUpdateNotice"
   ></NotificationModal>
 
   <div
@@ -214,7 +231,7 @@ onMounted(async () => {
       <button
         type="button"
         class="rounded bg-red-800 px-4 py-2 font-bold text-white hover:bg-red-900"
-        @click="modalState.showConfirmationModal = true"
+        @click="modalState.showDeleteConfirm = true"
       >
         削除
       </button>

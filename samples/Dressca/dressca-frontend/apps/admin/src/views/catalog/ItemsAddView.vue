@@ -8,9 +8,16 @@ import {
 } from '@/services/catalog/catalog-service';
 import { showToast } from '@/services/notification/notificationService';
 import { errorHandler } from '@/shared/error-handler/error-handler';
+import NotificationModal from '@/components/NotificationModal.vue';
+import { useRouter } from 'vue-router';
 
 const catalogStore = useCatalogStore();
 const { getCategories, getBrands } = storeToRefs(catalogStore);
+const router = useRouter();
+
+const modalState = reactive({
+  showAddNotice: false,
+});
 
 const state = reactive({
   name: 'テスト用アイテム',
@@ -31,11 +38,17 @@ const AddItem = async () => {
       state.categoryId,
       state.brandId,
     );
+    modalState.showAddNotice = true;
   } catch (error) {
     errorHandler(error, () => {
       showToast('カタログアイテムの追加に失敗しました。');
     });
   }
+};
+
+const closeAddNotice = () => {
+  modalState.showAddNotice = false;
+  router.push({ name: '/catalog/items' });
 };
 
 onMounted(async () => {
@@ -50,6 +63,13 @@ onMounted(async () => {
 </script>
 
 <template>
+  <NotificationModal
+    :show="modalState.showAddNotice"
+    header="追加成功"
+    body="カタログアイテムを追加しました。"
+    @close="closeAddNotice"
+  ></NotificationModal>
+
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
@@ -132,7 +152,7 @@ onMounted(async () => {
         </select>
       </div>
       <button
-        type="submit"
+        type="button"
         class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800"
         @click="AddItem"
       >
