@@ -138,11 +138,12 @@ onMounted(async () => {
       <div class="mb-4">
         <label for="item-id" class="mb-2 block font-bold">アイテムID</label>
         <input
-          id="item-name"
+          id="item-id"
           v-model.number="state.id"
           type="text"
-          name="item-name"
+          name="item-id"
           class="w-full border border-gray-300 px-4 py-2"
+          disabled
         />
       </div>
       <div class="mb-4">
