@@ -162,6 +162,9 @@
   <data name="OrderNotFound" xml:space="preserve">
     <value>ID: {0} 、購入者 ID: {1} の注文が見つかりませんでした。</value>
   </data>
+  <data name="PermissionDenied" xml:space="preserve">
+    <value>{0} を実行する権限がありません。</value>
+  </data>
   <data name="PriceMustBeZeroOrHigher" xml:space="preserve">
     <value>単価は負の値に設定できません。</value>
   </data>

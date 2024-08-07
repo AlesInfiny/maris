@@ -196,6 +196,15 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   {0} を実行する権限がありません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PermissionDenied {
+            get {
+                return ResourceManager.GetString("PermissionDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   単価は負の値に設定できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string PriceMustBeZeroOrHigher {

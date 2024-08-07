@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Catalog;
+﻿using Dressca.ApplicationCore.Auth;
+using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
 
@@ -12,6 +13,7 @@ public class CatalogManagementApplicationService
     private readonly ICatalogRepository catalogRepository;
     private readonly ICatalogBrandRepository brandRepository;
     private readonly ICatalogCategoryRepository categoryRepository;
+    private readonly IAuthorizationDomainService authorizationDomainService;
     private readonly ILogger<CatalogManagementApplicationService> logger;
 
     /// <summary>
@@ -20,6 +22,7 @@ public class CatalogManagementApplicationService
     /// <param name="catalogRepository">カタログレポジトリ。</param>
     /// <param name="brandRepository">カタログブランドレポジトリ。</param>
     /// <param name="categoryRepository">カタログカテゴリレポジトリ。</param>
+    /// <param name="authorizationDomainService">認可ドメインサービス。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     /// <list type="bullet">
@@ -33,11 +36,13 @@ public class CatalogManagementApplicationService
     ICatalogRepository catalogRepository,
     ICatalogBrandRepository brandRepository,
     ICatalogCategoryRepository categoryRepository,
+    IAuthorizationDomainService authorizationDomainService,
     ILogger<CatalogManagementApplicationService> logger)
     {
         this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
         this.brandRepository = brandRepository ?? throw new ArgumentNullException(nameof(brandRepository));
         this.categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
+        this.authorizationDomainService = authorizationDomainService ?? throw new ArgumentNullException(nameof(authorizationDomainService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -60,6 +65,11 @@ public class CatalogManagementApplicationService
         long catalogCategoryId)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_AddItemToCatalogAsyncStart);
+
+        if (!this.authorizationDomainService.IsInRole("Admin"))
+        {
+            throw new PermissionDeniedException(nameof(this.AddItemToCatalogAsync));
+        }
 
         var catalogItem = new CatalogItem()
         {
@@ -93,6 +103,11 @@ public class CatalogManagementApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_DeleteItemFromCatalogAsyncStart, id);
 
+        if (!this.authorizationDomainService.IsInRole("Admin"))
+        {
+            throw new PermissionDeniedException(nameof(this.DeleteItemFromCatalogAsync));
+        }
+
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             var catalogItem = await this.catalogRepository.GetAsync(id, cancellationToken);
@@ -122,6 +137,11 @@ public class CatalogManagementApplicationService
         CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncStart, command.Id);
+
+        if (!this.authorizationDomainService.IsInRole("Admin"))
+        {
+            throw new PermissionDeniedException(nameof(this.UpdateCatalogItemAsync));
+        }
 
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {

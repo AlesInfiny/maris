@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.ApplicationService;
+﻿using Dressca.ApplicationCore.Auth;
 using Dressca.Web.Admin.Dto;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
@@ -13,13 +13,13 @@ namespace Dressca.Web.Admin.Controllers;
 [Produces("application/json")]
 public class UsersController : Controller
 {
-    private readonly AuthorizationApplicationService authorizationService;
+    private readonly AuthorizationDomainService authorizationService;
 
     /// <summary>
     /// コンストラクター。
     /// </summary>
     /// <param name="authorizationService">認可サービス。</param>
-    public UsersController(AuthorizationApplicationService authorizationService)
+    public UsersController(AuthorizationDomainService authorizationService)
     {
         this.authorizationService = authorizationService;
     }

@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Dressca.ApplicationCore.ApplicationService;
+using Dressca.ApplicationCore.Auth;
 using Dressca.ApplicationCore.Catalog;
 using Xunit.Abstractions;
 
@@ -9,16 +10,22 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
 {
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
+    private static CatalogItem AnyItem => It.IsAny<CatalogItem>();
+
     [Fact]
     public async Task AddItemToCatalogAsync_リポジトリのAddAsyncを一度だけ呼び出す()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        catalogRepositoryMock
+            .Setup(r => r.AddAsync(AnyItem, AnyToken)).Returns(Task.FromResult(CreateTestItem()));
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
-        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, authorizationServiceMock.Object, logger);
 
         // Assert
         await service.AddItemToCatalogAsync(
@@ -34,6 +41,34 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
     }
 
     [Fact]
+    public async Task AddItemToCatalogAsync_権限なし_PermissionDeniedExceptionが発生()
+    {
+        // Arrange
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        catalogRepositoryMock
+            .Setup(r => r.AddAsync(AnyItem, AnyToken)).Returns(Task.FromResult(CreateTestItem()));
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(false);
+
+        var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, authorizationServiceMock.Object, logger);
+
+        // Assert
+        var action = () => service.AddItemToCatalogAsync(
+            "テストアイテム",
+            "テスト用のアイテムです。",
+            123456,
+            "TEST001",
+            1,
+            1);
+
+        // Act
+        await Assert.ThrowsAsync<PermissionDeniedException>(action);
+    }
+
+    [Fact]
     public async Task DeleteItemFromCatalogAsync_対象のアイテムが存在_リポジトリのRemoveAsyncを1度だけ呼び出す()
     {
         // Arrange
@@ -45,9 +80,11 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .ReturnsAsync(targetItem);
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
-        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, authorizationServiceMock.Object, logger);
 
         // Act
         await service.DeleteItemFromCatalogAsync(targetId);
@@ -68,15 +105,42 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .ReturnsAsync(targetItem);
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
-        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, authorizationServiceMock.Object, logger);
 
         // Act
         var action = () => service.DeleteItemFromCatalogAsync(targetId);
 
         // Assert
         await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
+    }
+
+    [Fact]
+    public async Task DeleteItemFromCatalogAsync_権限なし_PermissionDeniedExceptionが発生()
+    {
+        // Arrange
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var targetId = 999;
+        var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
+        catalogRepositoryMock
+            .Setup(r => r.GetAsync(targetId, AnyToken))
+            .ReturnsAsync(targetItem);
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(false);
+
+        var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, authorizationServiceMock.Object, logger);
+
+        // Act
+        var action = () => service.DeleteItemFromCatalogAsync(targetId);
+
+        // Assert
+        await Assert.ThrowsAsync<PermissionDeniedException>(action);
     }
 
     [Fact]
@@ -102,8 +166,11 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
-        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, logger);
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
         var command = new CatalogItemUpdateCommand(
             targetId,
             "テストアイテム",
@@ -143,8 +210,10 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
-        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, logger);
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
         var command = new CatalogItemUpdateCommand(
             targetId,
             "テストアイテム",
@@ -184,8 +253,10 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
-        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, logger);
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
         var command = new CatalogItemUpdateCommand(
             targetId,
             "テストアイテム",
@@ -225,8 +296,10 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
-        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, logger);
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
         var command = new CatalogItemUpdateCommand(
             targetId,
             "テストアイテム",
@@ -244,14 +317,59 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
     }
 
     [Fact]
+    public async Task UpdateCatalogItemAsync_権限なし_PermissionDeniedExceptionが発生()
+    {
+        // Arrange
+        var targetId = 1;
+        var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
+        var targetBrandId = 1;
+        var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
+        var targetCategoryId = 999;
+        var targetCategory = CreateDefaultCategories().Where(category => category.Id == targetCategoryId).ToList().FirstOrDefault();
+
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        catalogRepositoryMock
+            .Setup(r => r.GetAsync(targetId, AnyToken))
+            .ReturnsAsync(targetItem);
+        var catalogBrandRepositoryMock = new Mock<ICatalogBrandRepository>();
+        catalogBrandRepositoryMock
+            .Setup(r => r.GetAsync(targetBrandId, AnyToken))
+            .ReturnsAsync(targetBrand);
+        var catalogCategoryRepositoryMock = new Mock<ICatalogCategoryRepository>();
+        catalogCategoryRepositoryMock
+            .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
+            .ReturnsAsync(targetCategory);
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(false);
+        var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
+        var command = new CatalogItemUpdateCommand(
+            targetId,
+            "テストアイテム",
+            "テスト用のアイテムです。",
+            123456,
+            "TEST001",
+            targetBrandId,
+            targetCategoryId);
+
+        // Act
+        var action = () => service.UpdateCatalogItemAsync(command);
+
+        // Assert
+        await Assert.ThrowsAsync<PermissionDeniedException>(action);
+    }
+
+    [Fact]
     public async Task GetCatalogItemsAsync_リポジトリのAddAsyncを一度だけ呼び出す()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var logger = this.CreateTestLogger<CatalogApplicationService>();
-        var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, logger);
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+        var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, authorizationServiceMock.Object, logger);
         const int skip = 1;
         const int take = 10;
 
@@ -271,8 +389,10 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var logger = this.CreateTestLogger<CatalogApplicationService>();
-        var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, logger);
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+        var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, authorizationServiceMock.Object, logger);
 
         // Act
         _ = await service.GetCatalogItemsAsync(0, 10, 1, 1);
@@ -281,6 +401,11 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogRepositoryMock.Verify(
             r => r.CountAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken),
             Times.Once);
+    }
+
+    private static CatalogItem CreateTestItem()
+    {
+        return new() { CatalogCategoryId = 1L, CatalogBrandId = 1L, Description = "テスト用アイテムです。", Name = "テスト用アイテム", Price = 23800m, ProductCode = "TEST001", Id = 9999L };
     }
 
     private static List<CatalogItem> CreateDefaultCatalog()
