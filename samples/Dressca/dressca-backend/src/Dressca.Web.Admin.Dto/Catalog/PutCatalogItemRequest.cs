@@ -11,6 +11,7 @@ public class PutCatalogItemRequest
     /// カタログアイテムID。
     /// </summary>
     [Required]
+    [Range(1L, long.MaxValue)]
     public long Id { get; set; }
 
     /// <summary>
@@ -31,6 +32,7 @@ public class PutCatalogItemRequest
     /// 単価を取得または設定します。
     /// </summary>
     [Required]
+    [RegularExpression(@"^[1-9]\d{0,15}$")]
     public long Price { get; set; }
 
     /// <summary>
@@ -38,17 +40,20 @@ public class PutCatalogItemRequest
     /// </summary>
     [Required]
     [StringLength(128)]
+    [RegularExpression(@"[a-zA-Z0-9]+")]
     public string ProductCode { get; set; } = string.Empty;
 
     /// <summary>
     ///  カタログカテゴリIDを取得または設定します。
     /// </summary>
     [Required]
+    [Range(1L, long.MaxValue)]
     public long CatalogCategoryId { get; set; }
 
     /// <summary>
     ///  カタログブランドIDを取得または設定します。
     /// </summary>
     [Required]
+    [Range(1L, long.MaxValue)]
     public long CatalogBrandId { get; set; }
 }
