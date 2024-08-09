@@ -3,11 +3,11 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <NoDefaultLaunchSettingsFile Condition="'$(ExcludeLaunchSettings)' == 'True'">True</NoDefaultLaunchSettingsFile>
-    <SpaRoot>..\..\..\dressca-frontend\apps\customer</SpaRoot>
+    <SpaRoot>..\..\..\dressca-frontend</SpaRoot>
     <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
     <!-- <SpaProxyServerUrl Condition="'$(RequiresHttps)' == 'True'">https://localhost:5002</SpaProxyServerUrl>
     <SpaProxyServerUrl Condition="'$(RequiresHttps)' != 'True'">http://localhost:5002</SpaProxyServerUrl> -->
-    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
+    <SpaProxyLaunchCommand>npm run dev:customer</SpaProxyLaunchCommand>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
