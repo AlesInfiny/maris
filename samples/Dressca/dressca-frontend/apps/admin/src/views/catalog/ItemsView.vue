@@ -39,7 +39,7 @@ const goEdit = (id: number) => {
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
-    <div class="text-5xl font-bold p-8">カタログアイテム一覧</div>
+    <div class="p-8 text-5xl font-bold">カタログアイテム一覧</div>
     <table class="table-auto border-separate text-xl">
       <thead class="bg-blue-50">
         <tr>
@@ -74,7 +74,7 @@ const goEdit = (id: number) => {
           <td class="border">
             {{ catalogStore.getBrandName(item.catalogBrandId) }}
           </td>
-            <td class="border text-center">
+          <td class="border text-center">
             <button
               type="button"
               class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800"
