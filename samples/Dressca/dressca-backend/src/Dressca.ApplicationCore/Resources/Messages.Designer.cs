@@ -79,6 +79,15 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   半角英数字を設定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ArgumentsMustBeAlphanumeric {
+            get {
+                return ResourceManager.GetString("ArgumentsMustBeAlphanumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   アセットコード: {0} のアセットが見つかりませんでした。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AssetNotFound {

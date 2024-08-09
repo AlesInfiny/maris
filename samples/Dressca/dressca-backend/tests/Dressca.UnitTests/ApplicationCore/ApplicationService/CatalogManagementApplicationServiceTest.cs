@@ -408,7 +408,11 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
     {
         // Arrange
         var targetId = 1;
+        var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        catalogRepositoryMock
+            .Setup(r => r.GetAsync(targetId, AnyToken))
+            .ReturnsAsync(targetItem);
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
         var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
