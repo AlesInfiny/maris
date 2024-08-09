@@ -415,11 +415,35 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, authorizationServiceMock.Object, logger);
+
         // Act
         _ = await service.GetCatalogItemAsync(targetId);
 
         // Assert
         catalogRepositoryMock.Verify(r => r.GetAsync(targetId, AnyToken), Times.Once);
+    }
+
+    [Fact]
+    public async Task GetCatalogItemAsync_対象のアイテムが存在しない_CatalogItemNotExistingInRepositoryExceptionが発生()
+    {
+        // Arrange
+        var targetId = 999;
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        catalogRepositoryMock
+            .Setup(r => r.GetAsync(targetId, AnyToken))
+            .Returns(Task.FromResult<CatalogItem?>(null));
+        var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
+        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+        var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
+        var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, authorizationServiceMock.Object, logger);
+
+        // Act
+        var action = () => service.GetCatalogItemAsync(targetId);
+
+        // Assert
+        await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
     }
 
     private static CatalogItem CreateTestItem()
