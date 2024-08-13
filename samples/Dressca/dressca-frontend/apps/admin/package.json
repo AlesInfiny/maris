@@ -23,6 +23,7 @@
   "dependencies": {
     "@dressca-frontend/common": "^1.0.0",
     "@heroicons/vue": "^2.1.4",
+    "@vee-validate/yup": "^4.13.2",
     "axios": "^1.7.2",
     "msw": "^2.3.5",
     "pinia": "^2.1.7",

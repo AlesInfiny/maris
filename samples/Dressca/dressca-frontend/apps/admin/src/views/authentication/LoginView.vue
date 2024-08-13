@@ -11,8 +11,8 @@ import { errorHandler } from '@/shared/error-handler/error-handler';
 
 // フォーム固有のバリデーション定義
 const formSchema = yup.object({
-  userName: validationItems.email.required(),
-  password: yup.string().required(),
+  userName: validationItems.email.required("ユーザー名は必須です。"),
+  password: yup.string().required("パスワードは必須です。"),
 });
 
 const router = useRouter();

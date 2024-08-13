@@ -14,10 +14,32 @@ import { errorHandler } from '@/shared/error-handler/error-handler';
 import ConfirmationModal from '@/components/ConfirmationModal.vue';
 import NotificationModal from '@/components/NotificationModal.vue';
 import { useRouter } from 'vue-router';
+import { useForm } from 'vee-validate';
+import { catalogItemSchema } from '@/validation/validation-items';
 
 const props = defineProps<{
   itemId: number;
 }>();
+
+
+const { errors, values, meta, defineField } = useForm({
+  validationSchema: catalogItemSchema,
+  initialValues: {
+    name: 'テスト用アイテム',
+    description: 'テスト用アイテムです。',
+    price: 1980,
+    productCode: 'T001'
+  },
+});
+
+const [name] = defineField('name');
+const [description] = defineField('description');
+const [price] = defineField('price');
+const [productCode] = defineField('productCode');
+
+const isInvalid = () => {
+  return !meta.value.valid;
+};
 
 const catalogStore = useCatalogStore();
 const router = useRouter();
@@ -26,10 +48,6 @@ const { getFirstAssetUrl } = assetHelper();
 
 interface ItemState {
   id: number;
-  name: string;
-  description: string;
-  price: number;
-  productCode: string;
   categoryId: number;
   brandId: number;
   assetCodes: string[] | undefined;
@@ -37,10 +55,6 @@ interface ItemState {
 
 const state: ItemState = reactive({
   id: 0,
-  name: '',
-  description: '',
-  price: 0,
-  productCode: '',
   categoryId: 0,
   brandId: 0,
   assetCodes: [],
@@ -56,10 +70,10 @@ const updateItem = async () => {
   try {
     await updateCatalogItem(
       state.id,
-      state.name,
-      state.description,
-      state.price,
-      state.productCode,
+      values.name,
+      values.description,
+      values.price,
+      values.productCode,
       state.categoryId,
       state.brandId,
     );
@@ -97,10 +111,10 @@ onMounted(async () => {
   await fetchCategoriesAndBrands();
   const item = await fetchItem(props.itemId);
   state.id = item.id;
-  state.name = item.name;
-  state.description = item.description;
-  state.price = item.price;
-  state.productCode = item.productCode;
+  values.name = item.name;
+  values.description = item.description;
+  values.price = item.price;
+  values.productCode = item.productCode;
   state.categoryId = item.catalogCategoryId;
   state.brandId = item.catalogBrandId;
   state.assetCodes = item.assetCodes;
@@ -150,29 +164,32 @@ onMounted(async () => {
         <label for="item-name" class="mb-2 block font-bold">アイテム名</label>
         <input
           id="item-name"
-          v-model="state.name"
+          v-model="name"
           type="text"
           name="item-name"
           class="w-full border border-gray-300 px-4 py-2"
         />
+        <p class="px-2 py-2 text-base text-red-800">{{ errors.name }}</p>
       </div>
       <div class="mb-4">
         <label for="description" class="mb-2 block font-bold">説明</label>
         <textarea
           id="description"
-          v-model="state.description"
+          v-model="description"
           name="description"
           class="w-full border border-gray-300 px-4 py-2"
         ></textarea>
+        <p class="px-2 py-2 text-base text-red-800">{{ errors.description }}</p>
       </div>
       <div class="mb-4">
         <label for="unit-price" class="mb-2 block font-bold">単価</label>
         <input
           id="unit-price"
-          v-model.number="state.price"
+          v-model.number="price"
           name="unit-price"
           class="w-full border border-gray-300 px-4 py-2"
         />
+        <p class="px-2 py-2 text-base text-red-800">{{ errors.price }}</p>
       </div>
       <div class="mb-4">
         <label for="product-code" class="mb-2 block font-bold"
@@ -180,10 +197,11 @@ onMounted(async () => {
         >
         <input
           id="product-code"
-          v-model="state.productCode"
+          v-model="productCode"
           name="product-code"
           class="w-full border border-gray-300 px-4 py-2"
         />
+        <p class="px-2 py-2 text-base text-red-800">{{ errors.productCode }}</p>
       </div>
       <div class="mb-4">
         <label for="category" class="mb-2 block font-bold">カテゴリ</label>
@@ -226,7 +244,7 @@ onMounted(async () => {
         <img
           class="h-[100px]"
           :src="getFirstAssetUrl(state.assetCodes)"
-          :alt="state.name"
+          :alt="values.name"
         />
       </div>
       <button
@@ -241,6 +259,7 @@ onMounted(async () => {
         type="button"
         class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800"
         @click="updateItem"
+        :disabled="isInvalid()"
       >
         更新
       </button>
