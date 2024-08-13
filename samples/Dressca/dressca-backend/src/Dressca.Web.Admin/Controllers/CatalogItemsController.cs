@@ -59,11 +59,22 @@ namespace Dressca.Web.Admin.Controllers
         /// <response code="200">成功。</response>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(CatalogItemResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [OpenApiOperation("getById")]
         public async Task<IActionResult> GetByIdAsync(long id)
         {
-            var item = await this.managementService.GetCatalogItemAsync(id);
-            var response = this.mapper.Convert(item);
+            CatalogItem? catalogItem;
+
+            try
+            {
+                catalogItem = await this.managementService.GetCatalogItemAsync(id);
+            }
+            catch (CatalogItemNotExistingInRepositoryException ex)
+            {
+                this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
+                return this.NotFound();
+            }
+            var response = this.mapper.Convert(catalogItem);
             return this.Ok(response);
         }
 

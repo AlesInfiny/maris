@@ -229,6 +229,7 @@ public class CatalogManagementApplicationService
     /// <param name="catalogItemId">カタログアイテムID。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログアイテム。</returns>
+    /// <exception cref="CatalogItemNotExistingInRepositoryException">取得対象のカタログアイテムが存在しなかった場合。</exception>
     public async Task<CatalogItem?> GetCatalogItemAsync(long catalogItemId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemAsyncStart, catalogItemId);
@@ -236,6 +237,12 @@ public class CatalogManagementApplicationService
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             catalogItem = await this.catalogRepository.GetAsync(catalogItemId, cancellationToken);
+            if (catalogItem == null)
+            {
+                this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [catalogItemId]);
+                throw new CatalogItemNotExistingInRepositoryException([catalogItemId]);
+            }
+
             scope.Complete();
         }
 

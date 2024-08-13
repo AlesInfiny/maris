@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Catalog;
@@ -41,12 +42,7 @@ public class CatalogItem
         [MemberNotNull(nameof(name))]
         init
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
-            }
-
-            this.name = value;
+            this.SetName(value);
         }
     }
 
@@ -61,12 +57,7 @@ public class CatalogItem
         [MemberNotNull(nameof(description))]
         init
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
-            }
-
-            this.description = value;
+            this.SetDescription(value);
         }
     }
 
@@ -79,15 +70,7 @@ public class CatalogItem
         get => this.price;
         init
         {
-            if (value < 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(value),
-                    actualValue: value,
-                    message: Messages.PriceMustBeZeroOrHigher);
-            }
-
-            this.price = value;
+            this.SetPrice(value);
         }
     }
 
@@ -104,15 +87,7 @@ public class CatalogItem
         get => this.productCode;
 
         [MemberNotNull(nameof(productCode))]
-        init
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
-            }
-
-            this.productCode = value;
-        }
+        init => this.SetProductCode(value);
     }
 
     /// <summary>
@@ -124,15 +99,7 @@ public class CatalogItem
         get => this.catalogCategoryId;
         init
         {
-            if (value <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(value),
-                    actualValue: value,
-                    message: Messages.CatalogCategoryIdMustBePositive);
-            }
-
-            this.catalogCategoryId = value;
+            this.SetCatalogCategoryId(value);
         }
     }
 
@@ -155,15 +122,7 @@ public class CatalogItem
         get => this.catalogBrandId;
         init
         {
-            if (value <= 0)
-            {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(value),
-                    actualValue: value,
-                    message: Messages.CatalogBrandIdMustBePositive);
-            }
-
-            this.catalogBrandId = value;
+            this.SetCatalogBrandId(value);
         }
     }
 
@@ -186,8 +145,14 @@ public class CatalogItem
     /// アイテム名を設定します。
     /// </summary>
     /// <param name="value">アイテム名に設定する値。</param>
+    [MemberNotNull(nameof(name))]
     public void SetName(string value)
     {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
+        }
+
         this.name = value;
     }
 
@@ -195,8 +160,15 @@ public class CatalogItem
     /// 説明を設定します。
     /// </summary>
     /// <param name="value">説明に設定する値。</param>
+    /// <exception cref="ArgumentException">説明が <see langword="null"/> または空の文字列です。</exception>
+    [MemberNotNull(nameof(description))]
     public void SetDescription(string value)
     {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
+        }
+
         this.description = value;
     }
 
@@ -204,8 +176,17 @@ public class CatalogItem
     /// 単価を設定します。
     /// </summary>
     /// <param name="value">単価に設定する値。</param>
+    /// <exception cref="ArgumentOutOfRangeException">単価は負の値に設定できません。</exception>
     public void SetPrice(decimal value)
     {
+        if (value < 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                paramName: nameof(value),
+                actualValue: value,
+                message: Messages.PriceMustBeZeroOrHigher);
+        }
+
         this.price = value;
     }
 
@@ -213,8 +194,15 @@ public class CatalogItem
     /// 商品コードを設定します。
     /// </summary>
     /// <param name="value">商品コードに設定する値。</param>
+    /// <exception cref="ArgumentException">商品コードは半角英数字で設定してください。</exception>
+    [MemberNotNull(nameof(productCode))]
     public void SetProductCode(string value)
     {
+        if (!Regex.IsMatch(value, @"^[a-zA-Z0-9]+$"))
+        {
+            throw new ArgumentException(Messages.ArgumentsMustBeAlphanumeric, nameof(value));
+        }
+
         this.productCode = value;
     }
 
@@ -222,8 +210,17 @@ public class CatalogItem
     /// カタログブランドIDを設定します。
     /// </summary>
     /// <param name="value">カタログブランドIDに設定する値。</param>
+    /// <exception cref="ArgumentOutOfRangeException">カタログブランド ID は 0 以下に設定できません。</exception>
     public void SetCatalogBrandId(long value)
     {
+        if (value <= 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                paramName: nameof(value),
+                actualValue: value,
+                message: Messages.CatalogBrandIdMustBePositive);
+        }
+
         this.catalogBrandId = value;
     }
 
@@ -231,8 +228,17 @@ public class CatalogItem
     /// カタログカテゴリIDを設定します。
     /// </summary>
     /// <param name="value">カタログカテゴリIDに設定する値。</param>
+    /// <exception cref="ArgumentOutOfRangeException">カタログカテゴリ ID は 0 以下に設定できません。</exception>
     public void SetCatalogCategoryId(long value)
     {
+        if (value <= 0)
+        {
+            throw new ArgumentOutOfRangeException(
+                paramName: nameof(value),
+                actualValue: value,
+                message: Messages.CatalogCategoryIdMustBePositive);
+        }
+
         this.catalogCategoryId = value;
     }
 }

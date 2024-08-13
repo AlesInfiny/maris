@@ -39,7 +39,7 @@ const goEdit = (id: number) => {
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
-    <div class="text-5xl font-bold p-8">カタログアイテム一覧</div>
+    <div class="p-8 text-5xl font-bold">カタログアイテム一覧</div>
     <table class="table-auto border-separate text-xl">
       <thead class="bg-blue-50">
         <tr>
@@ -51,7 +51,6 @@ const goEdit = (id: number) => {
           <th>商品コード</th>
           <th class="w-20">カテゴリ</th>
           <th>ブランド</th>
-          <th>最終更新日時</th>
           <th class="w-20">操作</th>
         </tr>
       </thead>
@@ -75,7 +74,6 @@ const goEdit = (id: number) => {
           <td class="border">
             {{ catalogStore.getBrandName(item.catalogBrandId) }}
           </td>
-          <td class="border">2024-08-02 15:00:00</td>
           <td class="border text-center">
             <button
               type="button"
