@@ -26,10 +26,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.1.4",
+    "@heroicons/vue": "^2.1.5",
     "@rushstack/eslint-patch": "^1.10.4",
-    "vite": "^5.4.0",
-    "vue": "^3.4.29"
+    "vite": "^5.3.5",
+    "vue": "^3.4.25"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
