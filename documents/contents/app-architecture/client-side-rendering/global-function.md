@@ -115,6 +115,8 @@ Local Storage と Session Storage で構成される Web Storage にデータを
 
 以下に、ストアの永続化方式の比較を示します。
 
+<!-- textlint-disable @textlint-ja/no-synonyms -->
+
 | 評価項目                    | インメモリ(デフォルト)           | Session Storage                           | Local Storage            |
 | --------------------------- | -------------------------------- | ----------------------------------------- | ------------------------ |
 |データ保存先                 | ブラウザメモリ                   | ブラウザキャッシュ一時領域ドメイン単位で保持 | ブラウザキャッシュ永続領域 ドメイン単位で保持  |
@@ -126,6 +128,8 @@ Local Storage と Session Storage で構成される Web Storage にデータを
 | CSRF脅威                    | 無                              | 有（他の方法で対策可能）                   | 有（他の方法で対策可能）                        |
 | XSS脅威                     | 有（対策可能）                   |  有（対策可能）                           | 有（対策可能）                                  |
 | サードパーティ JavaScript 読込 | 不可                             | 可能（悪意のあるライブラリ使用時）         |  可能（悪意のあるライブラリ使用時）            |
+
+<!-- textlint-enable @textlint-ja/no-synonyms -->
 
 ### セキュリティ上の脅威について {#security-threats}
 
