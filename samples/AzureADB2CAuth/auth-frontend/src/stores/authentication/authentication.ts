@@ -38,6 +38,15 @@ export const useAuthenticationStore = defineStore({
       this.accessToken = result.accessToken;
       this.homeAccountId = result.homeAccountId;
       this.authenticated = result.isAuthenticated;
+
+      sessionStorage.setItem(
+        'homeAccountId',
+        JSON.stringify(this.homeAccountId),
+      );
+      sessionStorage.setItem(
+        'isAuthenticated',
+        JSON.stringify(this.authenticated),
+      );
     },
   },
   getters: {
