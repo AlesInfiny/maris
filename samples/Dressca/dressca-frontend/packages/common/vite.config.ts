@@ -1,3 +1,4 @@
+/* eslint-disable import/no-default-export */
 import { fileURLToPath, URL } from 'url';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
