@@ -49,6 +49,7 @@ export async function updateCatalogItem(
   productCode: string,
   catalogCategoryId: number,
   catalogBrandId: number,
+  rowVersion: string
 ) {
   const putCatalogItemRequest: PutCatalogItemRequest = {
     id,
@@ -58,6 +59,7 @@ export async function updateCatalogItem(
     productCode,
     catalogCategoryId,
     catalogBrandId,
+    rowVersion
   };
   await catalogItemsApi.putCatalogItem(putCatalogItemRequest);
 }
