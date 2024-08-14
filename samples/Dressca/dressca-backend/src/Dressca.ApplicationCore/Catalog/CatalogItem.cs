@@ -19,6 +19,7 @@ public class CatalogItem
     private string productCode;
     private long catalogCategoryId;
     private long catalogBrandId;
+    private byte[] rowVersion = [];
 
     /// <summary>
     ///  <see cref="CatalogItem"/> クラスの新しいインスタンスを初期化します。
@@ -145,8 +146,17 @@ public class CatalogItem
     /// <summary>
     /// 楽観同時実行制御のための行バージョンを取得します。
     /// </summary>
+    /// <exception cref="InvalidOperationException"><see cref="RowVersion"/> が設定されていません。</exception>
     [Timestamp]
-    public byte[] RowVersion { get; set; }
+    public byte[] RowVersion
+    {
+        get => this.rowVersion ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.RowVersion)));
+
+        init
+        {
+            this.rowVersion = value;
+        }
+    }
 
     /// <summary>
     /// アイテム名を設定します。
