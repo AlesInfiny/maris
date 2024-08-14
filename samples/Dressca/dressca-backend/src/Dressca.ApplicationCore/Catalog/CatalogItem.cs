@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Dressca.ApplicationCore.Resources;
 
@@ -140,6 +141,12 @@ public class CatalogItem
     ///  カタログアイテムのアセットリストを取得します。
     /// </summary>
     public IReadOnlyCollection<CatalogItemAsset> Assets => this.assets.AsReadOnly();
+
+    /// <summary>
+    /// 楽観同時実行制御のための行バージョンを取得します。
+    /// </summary>
+    [Timestamp]
+    public byte[] RowVersion { get; set; }
 
     /// <summary>
     /// アイテム名を設定します。
