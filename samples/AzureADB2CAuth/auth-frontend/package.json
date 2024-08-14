@@ -21,7 +21,7 @@
     "@azure/msal-browser": "^3.20.0",
     "@heroicons/vue": "^2.1.5",
     "@vue/eslint-config-airbnb-with-typescript": "^8.0.0",
-    "axios": "^1.7.3",
+    "axios": "^1.7.4",
     "pinia": "^2.2.0",
     "vue": "^3.4.35"
   },
