@@ -18,7 +18,7 @@
     "openapi-client:generate": "openapi-generator-cli generate -g typescript-axios -i ./../auth-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
   },
   "dependencies": {
-    "@azure/msal-browser": "^3.20.0",
+    "@azure/msal-browser": "^3.21.0",
     "@heroicons/vue": "^2.1.5",
     "@vue/eslint-config-airbnb-with-typescript": "^8.0.0",
     "axios": "^1.7.3",
