@@ -62,5 +62,11 @@ export interface PutCatalogItemRequest {
      * @memberof PutCatalogItemRequest
      */
     'catalogBrandId': number;
+    /**
+     * 行バージョンを取得または設定します。
+     * @type {string}
+     * @memberof PutCatalogItemRequest
+     */
+    'rowVersion': string;
 }
 

@@ -68,5 +68,11 @@ export interface CatalogItemResponse {
      * @memberof CatalogItemResponse
      */
     'assetCodes'?: Array<string>;
+    /**
+     * 行バージョンを取得または設定します。
+     * @type {string}
+     * @memberof CatalogItemResponse
+     */
+    'rowVersion': string;
 }
 
