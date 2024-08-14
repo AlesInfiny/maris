@@ -199,7 +199,9 @@ namespace Dressca.Web.Admin.Controllers
                 putCatalogItemRequest.Price,
                 putCatalogItemRequest.ProductCode,
                 putCatalogItemRequest.CatalogBrandId,
-                putCatalogItemRequest.CatalogCategoryId);
+                putCatalogItemRequest.CatalogCategoryId,
+                putCatalogItemRequest.RowVersion
+                );
 
             try
             {

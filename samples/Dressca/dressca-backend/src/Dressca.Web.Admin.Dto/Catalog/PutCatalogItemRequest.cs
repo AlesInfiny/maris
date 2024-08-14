@@ -56,4 +56,10 @@ public class PutCatalogItemRequest
     [Required]
     [Range(1L, long.MaxValue)]
     public long CatalogBrandId { get; set; }
+
+    /// <summary>
+    /// 行バージョンを取得または設定します。
+    /// </summary>
+    [Required]
+    public byte[] RowVersion { get; set; } = [];
 }

@@ -52,4 +52,10 @@ public class CatalogItemResponse
     ///  アセットコードの一覧を取得または設定します。
     /// </summary>
     public IList<string> AssetCodes { get; set; } = [];
+
+    /// <summary>
+    /// 行バージョンを取得または設定します。
+    /// </summary>
+    [Required]
+    public byte[] RowVersion { get; set; } = [];
 }

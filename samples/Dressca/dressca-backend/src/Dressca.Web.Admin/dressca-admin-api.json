@@ -455,7 +455,8 @@
           "catalogBrandId",
           "id",
           "name",
-          "productCode"
+          "productCode",
+          "rowVersion"
         ],
         "properties": {
           "description": {
@@ -499,6 +500,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "rowVersion": {
+            "type": "string",
+            "description": "行バージョンを取得または設定します。",
+            "format": "byte",
+            "minLength": 1
           }
         }
       },
@@ -609,7 +616,8 @@
           "price",
           "productCode",
           "catalogCategoryId",
-          "catalogBrandId"
+          "catalogBrandId",
+          "rowVersion"
         ],
         "properties": {
           "id": {
@@ -657,6 +665,12 @@
             "format": "int64",
             "maximum": 9223372036854780000.0,
             "minimum": 1.0
+          },
+          "rowVersion": {
+            "type": "string",
+            "description": "行バージョンを取得または設定します。",
+            "format": "byte",
+            "minLength": 1
           }
         }
       },

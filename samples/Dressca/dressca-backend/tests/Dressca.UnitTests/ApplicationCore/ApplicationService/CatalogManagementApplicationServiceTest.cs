@@ -10,6 +10,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
 {
     private static CancellationToken AnyToken => It.IsAny<CancellationToken>();
 
+    private static byte[] AnyRowVersion => It.IsAny<byte[]>();
+
     private static CatalogItem AnyItem => It.IsAny<CatalogItem>();
 
     [Fact]
@@ -178,7 +180,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             123456,
             "TEST001",
             targetBrandId,
-            targetCategoryId);
+            targetCategoryId,
+            AnyRowVersion);
 
         // Act
         await service.UpdateCatalogItemAsync(command);
@@ -221,7 +224,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             123456,
             "TEST001",
             targetBrandId,
-            targetCategoryId);
+            targetCategoryId,
+            AnyRowVersion);
 
         // Act
         var action = () => service.UpdateCatalogItemAsync(command);
@@ -264,7 +268,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             123456,
             "TEST001",
             targetBrandId,
-            targetCategoryId);
+            targetCategoryId,
+            AnyRowVersion);
 
         // Act
         var action = () => service.UpdateCatalogItemAsync(command);
@@ -307,7 +312,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             123456,
             "TEST001",
             targetBrandId,
-            targetCategoryId);
+            targetCategoryId,
+            AnyRowVersion);
 
         // Act
         var action = () => service.UpdateCatalogItemAsync(command);
@@ -350,7 +356,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             123456,
             "TEST001",
             targetBrandId,
-            targetCategoryId);
+            targetCategoryId,
+            AnyRowVersion);
 
         // Act
         var action = () => service.UpdateCatalogItemAsync(command);

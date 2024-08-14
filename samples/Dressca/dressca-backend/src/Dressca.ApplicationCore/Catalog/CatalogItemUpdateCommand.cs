@@ -15,6 +15,7 @@ public class CatalogItemUpdateCommand
     /// <param name="productCode">商品コード。</param>
     /// <param name="catalogBrandId">カタログブランドID。</param>
     /// <param name="catalogCategoryId">カタログカテゴリID。</param>
+    /// <param name="rowVersion">行バージョン。</param>
     public CatalogItemUpdateCommand(
         long id,
         string name,
@@ -22,7 +23,8 @@ public class CatalogItemUpdateCommand
         decimal price,
         string productCode,
         long catalogBrandId,
-        long catalogCategoryId)
+        long catalogCategoryId,
+        byte[] rowVersion)
     {
         this.Id = id;
         this.Name = name;
@@ -31,6 +33,7 @@ public class CatalogItemUpdateCommand
         this.ProductCode = productCode;
         this.CatalogBrandId = catalogBrandId;
         this.CatalogCategoryId = catalogCategoryId;
+        this.RowVersion = rowVersion;
     }
 
     /// <summary>
@@ -67,4 +70,9 @@ public class CatalogItemUpdateCommand
     /// カタログカテゴリID。
     /// </summary>
     public long CatalogCategoryId { get; }
+
+    /// <summary>
+    /// 行バージョン。
+    /// </summary>
+    public byte[] RowVersion { get; }
 }
