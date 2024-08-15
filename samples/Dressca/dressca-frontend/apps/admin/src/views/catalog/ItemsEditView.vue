@@ -36,6 +36,7 @@ interface ItemState {
   categoryId: number;
   brandId: number;
   assetCodes: string[] | undefined;
+  rowVersion: string
 }
 
 const currentItemState: ItemState = reactive({
@@ -47,14 +48,7 @@ const currentItemState: ItemState = reactive({
   categoryId: 0,
   brandId: 0,
   assetCodes: [''],
-});
-
-const state = reactive({
-  id: 0,
-  categoryId: 0,
-  brandId: 0,
-  assetCodes: [],
-  rowVersion: '',
+  rowVersion: ''
 });
 
 const modalState = reactive({
@@ -75,6 +69,18 @@ const [productCode] = defineField('productCode');
 const isInvalid = () => {
   return !meta.value.valid;
 };
+
+const state:ItemState = reactive({
+  id: 0,
+  name: name,
+  description: description,
+  price: price,
+  productCode: productCode,
+  categoryId: 0,
+  brandId: 0,
+  assetCodes: [''],
+  rowVersion: '',
+});
 
 const updateItem = async () => {
   try {
@@ -145,6 +151,7 @@ onMounted(async () => {
   state.id = item.id;
   state.categoryId = item.catalogCategoryId;
   state.brandId = item.catalogBrandId;
+  state.assetCodes = item.assetCodes;
   state.rowVersion = item.rowVersion;
 });
 </script>
