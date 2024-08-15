@@ -37,21 +37,21 @@ const goAdd = () => {
 const goEdit = (id: number) => {
   router.push({ name: 'catalog/items/edit', params: { itemId: id } });
 };
-
 </script>
 
 <template>
-  <div
-    class="container mx-auto gap-6">
-    <div class="flex justify-center p-8 text-5xl font-bold">カタログアイテム一覧</div>
-    <div class="flex justify-end mx-2 my-8">
-    <button
-      type="button"
-      class="rounded bg-green-600 px-4 py-2 font-bold text-xl text-white hover:bg-green-800"
-      @click="goAdd"
-    >
-      アイテム追加
-    </button>
+  <div class="container mx-auto gap-6">
+    <div class="flex justify-center p-8 text-5xl font-bold">
+      カタログアイテム一覧
+    </div>
+    <div class="mx-2 my-8 flex justify-end">
+      <button
+        type="button"
+        class="rounded bg-green-600 px-4 py-2 text-xl font-bold text-white hover:bg-green-800"
+        @click="goAdd"
+      >
+        アイテム追加
+      </button>
     </div>
     <table class="table-auto border-separate text-xl">
       <thead class="bg-blue-50">

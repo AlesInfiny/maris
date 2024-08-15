@@ -58,11 +58,10 @@ const login = async () => {
   router.push({ name: routingStore.redirectFrom });
   routingStore.deleteRedirectFrom();
 };
-
 </script>
 
 <template>
-    <NotificationModal
+  <NotificationModal
     :show="modalState.showLoginNotice"
     header="ログイン成功"
     body="ログインしました。"
