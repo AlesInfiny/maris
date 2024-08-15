@@ -253,7 +253,7 @@ onMounted(async () => {
               id="category"
               v-model.number="currentItemState.categoryId"
               name="category"
-              class="w-full border border-gray-300 px-4 py-2"
+              class="w-full border border-gray-300 bg-gray-100 px-4 py-2"
               disabled
             >
               <option
@@ -273,7 +273,7 @@ onMounted(async () => {
               id="brand"
               v-model.number="currentItemState.brandId"
               name="brand"
-              class="w-full border border-gray-300 px-4 py-2"
+              class="w-full border border-gray-300 bg-gray-100 px-4 py-2"
               disabled
             >
               <option
