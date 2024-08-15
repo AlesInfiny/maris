@@ -158,8 +158,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
 
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         catalogRepositoryMock
-            .Setup(r => r.GetAsync(targetId, AnyToken))
-            .ReturnsAsync(targetItem);
+            .Setup(r => r.DoesEntityExistAsync(targetId, AnyToken))
+            .ReturnsAsync(true);
         var catalogBrandRepositoryMock = new Mock<ICatalogBrandRepository>();
         catalogBrandRepositoryMock
             .Setup(r => r.GetAsync(targetBrandId, AnyToken))
@@ -203,8 +203,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
 
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         catalogRepositoryMock
-            .Setup(r => r.GetAsync(targetId, AnyToken))
-            .ReturnsAsync(targetItem);
+            .Setup(r => r.DoesEntityExistAsync(targetId, AnyToken))
+            .ReturnsAsync(false);
         var catalogBrandRepositoryMock = new Mock<ICatalogBrandRepository>();
         catalogBrandRepositoryMock
             .Setup(r => r.GetAsync(targetBrandId, AnyToken))
@@ -247,8 +247,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
 
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         catalogRepositoryMock
-            .Setup(r => r.GetAsync(targetId, AnyToken))
-            .ReturnsAsync(targetItem);
+            .Setup(r => r.DoesEntityExistAsync(targetId, AnyToken))
+            .ReturnsAsync(true);
         var catalogBrandRepositoryMock = new Mock<ICatalogBrandRepository>();
         catalogBrandRepositoryMock
             .Setup(r => r.GetAsync(targetBrandId, AnyToken))
@@ -291,8 +291,8 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
 
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         catalogRepositoryMock
-            .Setup(r => r.GetAsync(targetId, AnyToken))
-            .ReturnsAsync(targetItem);
+            .Setup(r => r.DoesEntityExistAsync(targetId, AnyToken))
+            .ReturnsAsync(true);
         var catalogBrandRepositoryMock = new Mock<ICatalogBrandRepository>();
         catalogBrandRepositoryMock
             .Setup(r => r.GetAsync(targetBrandId, AnyToken))

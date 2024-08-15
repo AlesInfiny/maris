@@ -149,7 +149,7 @@ public class CatalogManagementApplicationService
             throw new PermissionDeniedException(nameof(this.UpdateCatalogItemAsync));
         }
 
-        if (!await this.catalogRepository.DoesEntityExist(command.Id, cancellationToken))
+        if (!await this.catalogRepository.DoesEntityExistAsync(command.Id, cancellationToken))
         {
             this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [command.Id]);
             throw new CatalogItemNotExistingInRepositoryException([command.Id]);
@@ -186,7 +186,7 @@ public class CatalogManagementApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncStart, command.Id);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncEnd, command.Id);
     }
 
     /// <summary>

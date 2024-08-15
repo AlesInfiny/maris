@@ -78,7 +78,7 @@ internal class EfCatalogRepository : ICatalogRepository
     }
 
     /// <inheritdoc/>
-    public async Task<bool> DoesEntityExist(long id, CancellationToken cancellationToken = default)
+    public async Task<bool> DoesEntityExistAsync(long id, CancellationToken cancellationToken = default)
     {
         return await this.dbContext.CatalogItems.AnyAsync(e => e.Id == id, cancellationToken);
     }

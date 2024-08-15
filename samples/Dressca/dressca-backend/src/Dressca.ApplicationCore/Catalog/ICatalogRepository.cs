@@ -79,5 +79,5 @@ public interface ICatalogRepository
     /// <param name="id">ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>指定した識別子のエンティティが存在するかどうか。</returns>
-    Task<bool> DoesEntityExist(long id, CancellationToken cancellationToken = default);
+    Task<bool> DoesEntityExistAsync(long id, CancellationToken cancellationToken = default);
 }
