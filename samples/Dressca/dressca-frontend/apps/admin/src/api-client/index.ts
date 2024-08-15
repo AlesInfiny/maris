@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
 import {
+  ConflictError,
   HttpError,
   NetworkError,
   ServerError,
@@ -37,7 +38,11 @@ axiosInstance.interceptors.response.use(
           new UnauthorizedError('Unauthorized Error', error),
         );
       }
-
+      if (error.response.status === 409) {
+        return Promise.reject(
+          new ConflictError('Conflict Error', error),
+        );
+      }
       return Promise.reject(new HttpError(error.message, error));
     }
     return Promise.reject(error);

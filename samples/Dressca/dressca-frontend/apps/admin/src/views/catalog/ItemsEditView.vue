@@ -16,6 +16,7 @@ import NotificationModal from '@/components/NotificationModal.vue';
 import { useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import { catalogItemSchema } from '@/validation/validation-items';
+import { ConflictError } from '@/shared/error-handler/custom-error';
 
 const props = defineProps<{
   itemId: number;
@@ -89,10 +90,15 @@ const updateItem = async () => {
     );
     modalState.showUpdateNotice = true;
   } catch (error) {
+    if (error instanceof ConflictError){
+      errorHandler(error, () => {
+      showToast('カタログアイテムの更新が競合しました。もう一度更新してください。');
+    });
+    } else {
     errorHandler(error, () => {
       showToast('カタログアイテムの更新に失敗しました。');
     });
-  }
+  }}
 };
 
 const closeDeleteNotice = () => {

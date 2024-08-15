@@ -261,10 +261,13 @@
             "description": "成功。"
           },
           "401": {
-            "description": ""
+            "description": "認可エラー。"
           },
           "404": {
-            "description": ""
+            "description": "対象のIDが存在しない。"
+          },
+          "409": {
+            "description": "更新の競合が発生。"
           }
         }
       }
