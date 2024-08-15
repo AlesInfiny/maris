@@ -36,7 +36,7 @@ interface ItemState {
   categoryId: number;
   brandId: number;
   assetCodes: string[] | undefined;
-  rowVersion: string
+  rowVersion: string;
 }
 
 const currentItemState: ItemState = reactive({
@@ -48,7 +48,7 @@ const currentItemState: ItemState = reactive({
   categoryId: 0,
   brandId: 0,
   assetCodes: [''],
-  rowVersion: ''
+  rowVersion: '',
 });
 
 const modalState = reactive({
@@ -70,12 +70,12 @@ const isInvalid = () => {
   return !meta.value.valid;
 };
 
-const state:ItemState = reactive({
+const state: ItemState = reactive({
   id: 0,
-  name: name,
-  description: description,
-  price: price,
-  productCode: productCode,
+  name,
+  description,
+  price,
+  productCode,
   categoryId: 0,
   brandId: 0,
   assetCodes: [''],
@@ -92,19 +92,22 @@ const updateItem = async () => {
       values.productCode,
       state.categoryId,
       state.brandId,
-      state.rowVersion
+      state.rowVersion,
     );
     modalState.showUpdateNotice = true;
   } catch (error) {
-    if (error instanceof ConflictError){
+    if (error instanceof ConflictError) {
       errorHandler(error, () => {
-      showToast('カタログアイテムの更新が競合しました。もう一度更新してください。');
-    });
+        showToast(
+          'カタログアイテムの更新が競合しました。もう一度更新してください。',
+        );
+      });
     } else {
-    errorHandler(error, () => {
-      showToast('カタログアイテムの更新に失敗しました。');
-    });
-  }}
+      errorHandler(error, () => {
+        showToast('カタログアイテムの更新に失敗しました。');
+      });
+    }
+  }
 };
 
 const closeDeleteNotice = () => {

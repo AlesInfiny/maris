@@ -12,7 +12,7 @@ export const catalogItem: CatalogItemResponse = {
   price: 1980,
   productCode: 'C000000001',
   assetCodes: [],
-  rowVersion: "byte"
+  rowVersion: 'byte',
 };
 
 export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
@@ -32,7 +32,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 1980,
       productCode: 'C000000001',
       assetCodes: [],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 2,
@@ -43,7 +43,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 4800,
       productCode: 'C000000002',
       assetCodes: ['4aed07c4ed5d45a5b97f11acedfbb601'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 3,
@@ -54,7 +54,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 49800,
       productCode: 'C000000003',
       assetCodes: ['082b37439ecc44919626ba00fc60ee85'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 4,
@@ -66,7 +66,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 2800,
       productCode: 'C000000004',
       assetCodes: ['f5f89954281747fa878129c29e1e0f83'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 5,
@@ -77,7 +77,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 18800,
       productCode: 'B000000001',
       assetCodes: ['a8291ef2e8e14869a7048e272915f33c'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 6,
@@ -88,7 +88,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 38000,
       productCode: 'B000000002',
       assetCodes: ['66237018c769478a90037bd877f5fba1'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 7,
@@ -100,7 +100,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 24800,
       productCode: 'B000000003',
       assetCodes: ['d136d4c81b86478990984dcafbf08244'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 8,
@@ -111,7 +111,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 2800,
       productCode: 'B000000004',
       assetCodes: ['47183f32f6584d7fb661f9216e11318b'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 9,
@@ -122,7 +122,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 258000,
       productCode: 'B000000005',
       assetCodes: ['cf151206efd344e1b86854f4aa49fdef'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 10,
@@ -133,7 +133,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 12800,
       productCode: 'S000000001',
       assetCodes: ['ab2e78eb7fe3408aadbf1e17a9945a8c'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
     {
       id: 11,
@@ -144,7 +144,7 @@ export const pagedListCatalogItem: PagedListOfCatalogItemResponse = {
       price: 23800,
       productCode: 'S000000002',
       assetCodes: ['0e557e96bc054f10bc91c27405a83e85'],
-      rowVersion: "byte"
+      rowVersion: 'byte',
     },
   ],
 };

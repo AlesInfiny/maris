@@ -39,9 +39,7 @@ axiosInstance.interceptors.response.use(
         );
       }
       if (error.response.status === 409) {
-        return Promise.reject(
-          new ConflictError('Conflict Error', error),
-        );
+        return Promise.reject(new ConflictError('Conflict Error', error));
       }
       return Promise.reject(new HttpError(error.message, error));
     }

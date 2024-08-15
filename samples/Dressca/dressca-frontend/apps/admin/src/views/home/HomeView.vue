@@ -16,10 +16,10 @@
       <tbody>
         <tr>
           <td class="border bg-blue-50 p-8 text-3xl underline">
-            <router-link to="catalog">カタログアイテム管理</router-link>
+            <router-link to="/catalog/items">カタログアイテム管理</router-link>
           </td>
           <td class="border bg-blue-50 p-8 text-3xl">
-            カタログアイテムの一覧を表示します。
+            カタログアイテムを閲覧・追加・編集・削除します。
           </td>
         </tr>
       </tbody>

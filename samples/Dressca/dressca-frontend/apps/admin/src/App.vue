@@ -28,9 +28,9 @@ const { authenticationState, userName, userRole } =
             <li>
               <router-link
                 class="flex items-center p-4 text-xl text-gray-900 hover:bg-blue-800 hover:text-white"
-                to="/catalog"
+                to="/catalog/items"
               >
-                <span>カタログ管理</span>
+                <span>カタログアイテム管理</span>
               </router-link>
             </li>
           </div>
