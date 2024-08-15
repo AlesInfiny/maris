@@ -76,4 +76,10 @@ internal class EfCatalogRepository : ICatalogRepository
         _ = await this.dbContext.SaveChangesAsync(cancellationToken);
         return;
     }
+
+    /// <inheritdoc/>
+    public async Task<bool> DoesEntityExist(long id, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.CatalogItems.AnyAsync(e => e.Id == id, cancellationToken);
+    }
 }

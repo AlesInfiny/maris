@@ -72,4 +72,12 @@ public interface ICatalogRepository
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>非同期処理を表すタスク。</returns>
     Task RemoveAsync(CatalogItem entity, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 指定した識別子のエンティティが存在するかどうか判定します。
+    /// </summary>
+    /// <param name="id">ID 。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
+    /// <returns>指定した識別子のエンティティが存在するかどうか。</returns>
+    Task<bool> DoesEntityExist(long id, CancellationToken cancellationToken = default);
 }

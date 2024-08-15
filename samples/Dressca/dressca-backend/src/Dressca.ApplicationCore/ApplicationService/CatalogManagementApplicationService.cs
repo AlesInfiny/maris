@@ -149,9 +149,7 @@ public class CatalogManagementApplicationService
             throw new PermissionDeniedException(nameof(this.UpdateCatalogItemAsync));
         }
 
-        var targetCatalogItem = await this.catalogRepository.GetAsync(command.Id, cancellationToken);
-
-        if (targetCatalogItem == null)
+        if (!await this.catalogRepository.DoesEntityExist(command.Id, cancellationToken))
         {
             this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [command.Id]);
             throw new CatalogItemNotExistingInRepositoryException([command.Id]);

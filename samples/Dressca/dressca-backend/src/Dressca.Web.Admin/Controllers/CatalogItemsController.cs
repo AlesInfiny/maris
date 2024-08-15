@@ -7,6 +7,7 @@ using Dressca.Web.Admin.Dto;
 using Dressca.Web.Admin.Dto.Catalog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NSwag.Annotations;
 
 namespace Dressca.Web.Admin.Controllers
@@ -183,10 +184,14 @@ namespace Dressca.Web.Admin.Controllers
         /// <param name="putCatalogItemRequest"></param>
         /// <returns>なし。</returns>
         /// <response code="204">成功。</response>
+        /// <response code="401">認可エラー。</response>
+        /// <response code="404">対象のIDが存在しない。</response>
+        /// <response code="409">更新の競合が発生。</response>
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [OpenApiOperation("putCatalogItem")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutCatalogItemAsync(PutCatalogItemRequest putCatalogItemRequest)
@@ -217,7 +222,11 @@ namespace Dressca.Web.Admin.Controllers
                 this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
                 return this.NotFound();
             }
-
+            catch (DbUpdateConcurrencyException ex)
+            {
+                this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
+                return this.Conflict();
+            }
             return this.NoContent();
         }
 
