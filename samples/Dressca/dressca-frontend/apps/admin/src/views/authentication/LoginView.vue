@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
@@ -8,6 +9,7 @@ import { EnvelopeIcon, KeyIcon } from '@heroicons/vue/24/solid';
 import { useRoutingStore } from '@/stores/routing/routing';
 import { showToast } from '@/services/notification/notificationService';
 import { errorHandler } from '@/shared/error-handler/error-handler';
+import NotificationModal from '@/components/NotificationModal.vue';
 
 // フォーム固有のバリデーション定義
 const formSchema = yup.object({
@@ -29,6 +31,14 @@ const isInvalid = () => {
 
 const routingStore = useRoutingStore();
 
+const modalState = reactive({
+  showLoginNotice: false,
+});
+
+const closeLoginNotice = () => {
+  modalState.showLoginNotice = false;
+};
+
 const login = async () => {
   try {
     await loginAsync();
@@ -38,6 +48,8 @@ const login = async () => {
     });
   }
 
+  modalState.showLoginNotice = true;
+
   if (!routingStore.redirectFrom) {
     router.push('/');
     return;
@@ -46,9 +58,17 @@ const login = async () => {
   router.push({ name: routingStore.redirectFrom });
   routingStore.deleteRedirectFrom();
 };
+
 </script>
 
 <template>
+    <NotificationModal
+    :show="modalState.showLoginNotice"
+    header="ログイン成功"
+    body="ログインしました。"
+    @close="closeLoginNotice"
+  ></NotificationModal>
+
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
