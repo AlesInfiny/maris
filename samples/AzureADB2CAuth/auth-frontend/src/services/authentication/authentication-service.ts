@@ -4,9 +4,7 @@ import { useUserStore } from '@/stores/user/user';
 export const authenticationService = {
   async signIn() {
     const authenticationStore = useAuthenticationStore();
-    if (!authenticationStore.isAuthenticated) {
-      await authenticationStore.signIn();
-    }
+    await authenticationStore.signIn();
 
     this.fetchUser();
   },
