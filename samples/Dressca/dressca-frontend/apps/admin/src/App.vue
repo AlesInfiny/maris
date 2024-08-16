@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { reactive } from 'vue';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 import { Bars3Icon } from '@heroicons/vue/24/solid';
+import { logoutAsync } from '@/services/authentication/authentication-service';
 
 const authenticationStore = useAuthenticationStore();
 const { authenticationState, userName, userRole } =
@@ -45,7 +46,7 @@ const state = reactive({
             <div v-if="!authenticationState">
             <router-link to="/authentication/login" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="login">ログイン</router-link></div>
             <div v-if="authenticationState">
-            <div class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="logout">ログアウト</div>
+            <div class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="logout" @click="logoutAsync">ログアウト</div>
             </div>
           </div>
           </div>
