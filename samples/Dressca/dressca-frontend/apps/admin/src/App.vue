@@ -1,63 +1,67 @@
 <script setup lang="ts">
 import NotificationToast from '@/components/NotificationToast.vue';
 import { storeToRefs } from 'pinia';
+import { reactive } from 'vue';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
+import { Bars3Icon } from '@heroicons/vue/24/solid';
 
 const authenticationStore = useAuthenticationStore();
 const { authenticationState, userName, userRole } =
   storeToRefs(authenticationStore);
+
+const state = reactive({
+  showMenu: false,
+});
+
 </script>
 <template>
   <div class="z-2">
     <NotificationToast />
   </div>
-  <div class="flex gap-16">
-    <nav id="default-sidebar" class="mb-auto">
-      <div class="overflow-y-auto bg-blue-50 px-3 py-4 text-white">
-        <ul class="font-bold">
-          <li>
-            <router-link
-              class="flex items-center p-4 text-3xl text-gray-900 hover:bg-blue-800 hover:text-white"
-              to="/"
-            >
-              <span>Dressca 管理</span>
-            </router-link>
-          </li>
-
-          <li>
-            <router-link
-              class="flex items-center p-4 text-xl text-gray-900 hover:bg-blue-800 hover:text-white"
-              to="/catalog/items"
-            >
-              <span>カタログアイテム管理</span>
-            </router-link>
-          </li>
-
-          <div v-if="!authenticationState">
-            <li>
-              <router-link
-                class="flex items-center p-4 text-xl text-gray-900 hover:bg-blue-800 hover:text-white"
-                to="/authentication/login"
-              >
-                <span>ログイン</span>
-              </router-link>
-            </li>
+<nav class="bg-gray-800">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+        <router-link to="/" class="flex flex-shrink-0 items-center font-medium text-xl text-white hover:bg-blue-800">Dressca 管理</router-link>
+        <div class="hidden sm:ml-6 sm:block">
+          <div class="flex space-x-4">
+            <router-link to="/catalog/items" class="rounded-md px-3 py-2 text-base font-medium text-white hover:bg-blue-800">カタログアイテム管理</router-link>
           </div>
-
-          <div v-if="authenticationState">
-            <li class="flex items-center p-4 text-xl text-gray-900">
-              <span>{{ userName }}</span>
-            </li>
-            <li class="flex items-center p-4 text-xl text-gray-900">
-              <span>{{ userRole }}</span>
-            </li>
-          </div>
-        </ul>
+        </div>
       </div>
-    </nav>
-
-    <main class="mb-auto">
+      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div class="relative rounded-full text-white">
+          <span class="absolute -inset-1.5"></span>
+          {{ userRole }}
+        </div>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div class="relative rounded-full text-white">
+            <span class="absolute -inset-1.5"></span>
+            {{ userName }}
+          </div>
+        <div class="relative ml-3">
+          <Bars3Icon class="text-white h-8 w-8 hover:bg-blue-800" @click="state.showMenu = !state.showMenu"></Bars3Icon>
+          <div v-if ="state.showMenu" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            <div v-if="!authenticationState">
+            <router-link to="/authentication/login" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="login">ログイン</router-link></div>
+            <div v-if="authenticationState">
+            <div class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="logout">ログアウト</div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+    <main class="mb-16 min-h-screen">
       <router-view />
     </main>
-  </div>
+
+    <footer
+      class="flex flex-col py-4 px-24 text-base bg-gray-900 text-white"
+    >
+      <p>&copy; 2024 - Dressca - Privacy</p>
+    </footer>
+
 </template>
