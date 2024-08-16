@@ -184,10 +184,10 @@ onMounted(async () => {
 
   <div class="container mx-auto gap-6">
     <div>
-      <div class="p-8 text-5xl font-bold">カタログアイテム編集</div>
+      <div class="p-8 text-5xl font-bold flex items-center justify-center">カタログアイテム編集</div>
     </div>
 
-    <div class="auto container flex gap-24">
+    <div class="auto container flex gap-24 justify-center">
       <div>
         <div class="m-8 text-4xl">変更前</div>
         <form class="text-xl">
