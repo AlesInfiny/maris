@@ -6,7 +6,7 @@ namespace Dressca.Web.Admin.Authorization;
 /// <summary>
 /// ユーザーのセッション情報。
 /// </summary>
-public class UserSession : IUserSession
+public class UserStore : IUserStore
 {
     private readonly IHttpContextAccessor httpContextAccessor;
 
@@ -14,7 +14,7 @@ public class UserSession : IUserSession
     /// コンストラクター。
     /// </summary>
     /// <param name="httpContextAccessor"></param>
-    public UserSession(IHttpContextAccessor httpContextAccessor)
+    public UserStore(IHttpContextAccessor httpContextAccessor)
     {
         this.httpContextAccessor = httpContextAccessor;
     }

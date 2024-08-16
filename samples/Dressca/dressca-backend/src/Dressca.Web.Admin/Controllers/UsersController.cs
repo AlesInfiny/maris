@@ -14,15 +14,15 @@ namespace Dressca.Web.Admin.Controllers;
 [Produces("application/json")]
 public class UsersController : Controller
 {
-    private readonly IAuthorizationDomainService authorizationService;
+    private readonly IUserStore userStore;
 
     /// <summary>
     /// コンストラクター。
     /// </summary>
-    /// <param name="authorizationService">認可サービス。</param>
-    public UsersController(IAuthorizationDomainService authorizationService)
+    /// <param name="userStore">ユーザー情報のストア。</param>
+    public UsersController(IUserStore userStore)
     {
-        this.authorizationService = authorizationService;
+        this.userStore = userStore;
     }
 
     /// <summary>
@@ -38,8 +38,8 @@ public class UsersController : Controller
     {
         var response = new
         {
-            UserName = this.authorizationService.GetLoginUserName(),
-            Role = this.authorizationService.GetLoginUserRole()
+            UserName = this.userStore.LoginUserName(),
+            Role = this.userStore.LoginUserRole()
         };
         return this.Ok(response);
     }

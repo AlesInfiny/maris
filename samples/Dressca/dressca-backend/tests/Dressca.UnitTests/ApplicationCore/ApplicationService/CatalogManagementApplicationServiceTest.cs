@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Auth;
+using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Xunit.Abstractions;
 
@@ -23,7 +24,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .Setup(r => r.AddAsync(AnyItem, AnyToken)).Returns(Task.FromResult(CreateTestItem()));
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
@@ -51,7 +52,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .Setup(r => r.AddAsync(AnyItem, AnyToken)).Returns(Task.FromResult(CreateTestItem()));
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(false);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
@@ -82,7 +83,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .ReturnsAsync(targetItem);
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
@@ -107,7 +108,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .ReturnsAsync(targetItem);
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
@@ -132,7 +133,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .ReturnsAsync(targetItem);
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(false);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
@@ -168,7 +169,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
@@ -213,7 +214,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
@@ -257,7 +258,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
@@ -301,7 +302,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
@@ -345,7 +346,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         catalogCategoryRepositoryMock
             .Setup(r => r.GetAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(targetCategory);
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(false);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
@@ -373,7 +374,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, authorizationServiceMock.Object, logger);
@@ -396,7 +397,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, authorizationServiceMock.Object, logger);
@@ -422,7 +423,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .ReturnsAsync(targetItem);
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, authorizationServiceMock.Object, logger);
@@ -445,7 +446,7 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             .Returns(Task.FromResult<CatalogItem?>(null));
         var catalogBrandRepository = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepository = Mock.Of<ICatalogCategoryRepository>();
-        var authorizationServiceMock = new Mock<IAuthorizationDomainService>();
+        var authorizationServiceMock = new Mock<IUserStore>();
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, authorizationServiceMock.Object, logger);

@@ -1,5 +1,5 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Auth;
+using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Controllers.ApiModel;

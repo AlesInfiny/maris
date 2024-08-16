@@ -1,7 +1,7 @@
 ﻿using Dressca.ApplicationCore.Resources;
 using Dressca.SystemCommon;
 
-namespace Dressca.ApplicationCore.Auth;
+namespace Dressca.ApplicationCore.Authorization;
 
 /// <summary>
 /// ユーザーにユースケースの実行権限がないことを表す業務例外クラスです。

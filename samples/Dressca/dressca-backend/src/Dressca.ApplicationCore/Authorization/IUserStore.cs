@@ -3,7 +3,7 @@
 /// <summary>
 ///  ユーザーのセッション情報のインターフェース。
 /// </summary>
-public interface IUserSession
+public interface IUserStore
 {
     /// <summary>
     /// ログイン中のユーザー名を取得します。

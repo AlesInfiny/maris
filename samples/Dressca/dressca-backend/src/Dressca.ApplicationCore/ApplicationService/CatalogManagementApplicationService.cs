@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Auth;
+using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
@@ -13,7 +14,7 @@ public class CatalogManagementApplicationService
     private readonly ICatalogRepository catalogRepository;
     private readonly ICatalogBrandRepository brandRepository;
     private readonly ICatalogCategoryRepository categoryRepository;
-    private readonly IAuthorizationDomainService authorizationDomainService;
+    private readonly IUserStore userStore;
     private readonly ILogger<CatalogManagementApplicationService> logger;
 
     /// <summary>
@@ -22,13 +23,14 @@ public class CatalogManagementApplicationService
     /// <param name="catalogRepository">カタログレポジトリ。</param>
     /// <param name="brandRepository">カタログブランドレポジトリ。</param>
     /// <param name="categoryRepository">カタログカテゴリレポジトリ。</param>
-    /// <param name="authorizationDomainService">認可ドメインサービス。</param>
+    /// <param name="userStore">ユーザー情報のストア。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     /// <list type="bullet">
     ///   <item><paramref name="catalogRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="brandRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="categoryRepository"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="userStore"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     /// </list>
     /// </exception>
@@ -36,13 +38,13 @@ public class CatalogManagementApplicationService
     ICatalogRepository catalogRepository,
     ICatalogBrandRepository brandRepository,
     ICatalogCategoryRepository categoryRepository,
-    IAuthorizationDomainService authorizationDomainService,
+    IUserStore userStore,
     ILogger<CatalogManagementApplicationService> logger)
     {
         this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
         this.brandRepository = brandRepository ?? throw new ArgumentNullException(nameof(brandRepository));
         this.categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
-        this.authorizationDomainService = authorizationDomainService ?? throw new ArgumentNullException(nameof(authorizationDomainService));
+        this.userStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -67,7 +69,7 @@ public class CatalogManagementApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_AddItemToCatalogAsyncStart);
 
-        if (!this.authorizationDomainService.IsInRole("Admin"))
+        if (!this.userStore.IsInRole("Admin"))
         {
             throw new PermissionDeniedException(nameof(this.AddItemToCatalogAsync));
         }
@@ -106,7 +108,7 @@ public class CatalogManagementApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_DeleteItemFromCatalogAsyncStart, id);
 
-        if (!this.authorizationDomainService.IsInRole("Admin"))
+        if (!this.userStore.IsInRole("Admin"))
         {
             throw new PermissionDeniedException(nameof(this.DeleteItemFromCatalogAsync));
         }
@@ -144,7 +146,7 @@ public class CatalogManagementApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncStart, command.Id);
 
-        if (!this.authorizationDomainService.IsInRole("Admin"))
+        if (!this.userStore.IsInRole("Admin"))
         {
             throw new PermissionDeniedException(nameof(this.UpdateCatalogItemAsync));
         }
@@ -162,7 +164,7 @@ public class CatalogManagementApplicationService
             throw new CatalogBrandNotExistingInRepositoryException([command.CatalogBrandId]);
         }
 
-        var catalogCategory = await this.categoryRepository.GetAsync(command.CatalogCategoryId);
+        var catalogCategory = await this.categoryRepository.GetAsync(command.CatalogCategoryId, cancellationToken);
         if (catalogCategory == null)
         {
             this.logger.LogInformation(Events.CatalogCategoryIdDoesNotExistInRepository, LogMessages.CatalogCategoryIdDoesNotExistInRepository, [command.CatalogCategoryId]);
