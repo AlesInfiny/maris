@@ -4,6 +4,7 @@ import {
   ConflictError,
   HttpError,
   NetworkError,
+  NotFoundError,
   ServerError,
   UnauthorizedError,
 } from '@/shared/error-handler/custom-error';
@@ -37,6 +38,9 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(
           new UnauthorizedError('Unauthorized Error', error),
         );
+      }
+      if (error.response.status === 404) {
+        return Promise.reject(new NotFoundError('NotFound Error', error));
       }
       if (error.response.status === 409) {
         return Promise.reject(new ConflictError('Conflict Error', error));

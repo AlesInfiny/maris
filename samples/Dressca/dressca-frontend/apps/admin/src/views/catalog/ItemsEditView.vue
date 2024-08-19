@@ -16,7 +16,11 @@ import NotificationModal from '@/components/NotificationModal.vue';
 import { useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import { catalogItemSchema } from '@/validation/validation-items';
-import { ConflictError } from '@/shared/error-handler/custom-error';
+import {
+  ConflictError,
+  NotFoundError,
+} from '@/shared/error-handler/custom-error';
+import type { CatalogItemResponse } from '@/generated/api-client';
 
 const props = defineProps<{
   itemId: number;
@@ -82,7 +86,71 @@ const state: ItemState = reactive({
   rowVersion: '',
 });
 
-const updateItem = async () => {
+const closeDeleteNotice = () => {
+  modalState.showDeleteNotice = false;
+  router.push({ name: '/catalog/items' });
+};
+
+const closeUpdateNotice = () => {
+  modalState.showUpdateNotice = false;
+};
+
+const setCurrentItemState = (item: CatalogItemResponse) => {
+  currentItemState.id = item.id;
+  currentItemState.name = item.name;
+  currentItemState.description = item.description;
+  currentItemState.price = item.price;
+  currentItemState.productCode = item.productCode;
+  currentItemState.categoryId = item.catalogCategoryId;
+  currentItemState.brandId = item.catalogBrandId;
+  currentItemState.assetCodes = item.assetCodes;
+};
+
+const initItemAsync = async (itemId: number) => {
+  await fetchCategoriesAndBrands();
+  const item = await fetchItem(itemId);
+  setCurrentItemState(item);
+  setValues({
+    name: item.name,
+    description: item.description,
+    price: item.price,
+    productCode: item.productCode,
+  });
+  state.id = item.id;
+  state.categoryId = item.catalogCategoryId;
+  state.brandId = item.catalogBrandId;
+  state.assetCodes = item.assetCodes;
+  state.rowVersion = item.rowVersion;
+};
+
+const reFetchItemAsync = async (itemId: number) => {
+  await fetchCategoriesAndBrands();
+  const item = await fetchItem(itemId);
+  setCurrentItemState(item);
+  state.rowVersion = item.rowVersion;
+};
+
+onMounted(async () => {
+  await initItemAsync(props.itemId);
+});
+
+const deleteItemAsync = async () => {
+  try {
+    await deleteCatalogItem(state.id);
+    modalState.showDeleteNotice = true;
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      showToast('更新対象のカタログアイテムが見つかりませんでした。');
+      router.push({ name: '/catalog/items' });
+    } else {
+      errorHandler(error, () => {
+        showToast('カタログアイテムの削除に失敗しました。');
+      });
+    }
+  }
+};
+
+const updateItemAsync = async () => {
   try {
     await updateCatalogItem(
       state.id,
@@ -94,69 +162,26 @@ const updateItem = async () => {
       state.brandId,
       state.rowVersion,
     );
+    initItemAsync(props.itemId);
     modalState.showUpdateNotice = true;
   } catch (error) {
-    if (error instanceof ConflictError) {
-      errorHandler(error, () => {
+    if (error instanceof NotFoundError) {
+      showToast('更新対象のカタログアイテムが見つかりませんでした。');
+      router.push({ name: '/catalog/items' });
+    } else if (error instanceof ConflictError) {
+      errorHandler(error, async () => {
         showToast(
           'カタログアイテムの更新が競合しました。もう一度更新してください。',
         );
+        await reFetchItemAsync(props.itemId);
       });
     } else {
-      errorHandler(error, () => {
+      errorHandler(error, async () => {
         showToast('カタログアイテムの更新に失敗しました。');
       });
     }
   }
 };
-
-const closeDeleteNotice = () => {
-  modalState.showDeleteNotice = false;
-  router.push({ name: '/catalog/items' });
-};
-
-const closeUpdateNotice = () => {
-  modalState.showUpdateNotice = false;
-};
-
-const deleteItem = async () => {
-  try {
-    await deleteCatalogItem(state.id);
-    modalState.showDeleteNotice = true;
-  } catch (error) {
-    errorHandler(error, () => {
-      showToast('カタログアイテムの削除に失敗しました。');
-    });
-  } finally {
-    modalState.showDeleteConfirm = false;
-  }
-};
-
-onMounted(async () => {
-  await fetchCategoriesAndBrands();
-  const item = await fetchItem(props.itemId);
-  currentItemState.id = item.id;
-  currentItemState.name = item.name;
-  currentItemState.description = item.description;
-  currentItemState.price = item.price;
-  currentItemState.productCode = item.productCode;
-  currentItemState.categoryId = item.catalogCategoryId;
-  currentItemState.brandId = item.catalogBrandId;
-  currentItemState.assetCodes = item.assetCodes;
-
-  setValues({
-    name: item.name,
-    description: item.description,
-    price: item.price,
-    productCode: item.productCode,
-  });
-
-  state.id = item.id;
-  state.categoryId = item.catalogCategoryId;
-  state.brandId = item.catalogBrandId;
-  state.assetCodes = item.assetCodes;
-  state.rowVersion = item.rowVersion;
-});
 </script>
 
 <template>
@@ -164,7 +189,7 @@ onMounted(async () => {
     :show="modalState.showDeleteConfirm"
     header="カタログアイテムを削除しますか？"
     body="カタログアイテムを削除します。削除したアイテムは復元できません。"
-    @confirm="deleteItem"
+    @confirm="deleteItemAsync"
     @cancel="modalState.showDeleteConfirm = false"
   ></ConfirmationModal>
 
@@ -418,7 +443,7 @@ onMounted(async () => {
               type="button"
               class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800 disabled:bg-blue-500 disabled:opacity-50"
               :disabled="isInvalid()"
-              @click="updateItem"
+              @click="updateItemAsync"
             >
               更新
             </button>

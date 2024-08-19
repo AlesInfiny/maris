@@ -5,22 +5,27 @@ import { authenticationGuard } from '@/shared/authentication/authentication-guar
 import { errorHandlerPlugin } from '@/shared/error-handler/error-handler-plugin';
 import { router } from './router';
 import App from './App.vue';
-import { worker } from '../mock/browser';
 
-if (import.meta.env.MODE === 'mock') {
-  worker.start({
+async function enableMocking(): Promise<ServiceWorkerRegistration | undefined> {
+  if (import.meta.env.MODE !== 'mock') {
+    return undefined;
+  }
+  const { worker } = await import('../mock/browser');
+  return worker.start({
     onUnhandledRequest: 'bypass',
   });
 }
 
-const app = createApp(App);
-const pinia = createPinia();
+enableMocking().then(() => {
+  const app = createApp(App);
+  const pinia = createPinia();
 
-app.use(pinia);
-app.use(router);
+  app.use(pinia);
+  app.use(router);
 
-app.use(errorHandlerPlugin);
+  app.use(errorHandlerPlugin);
 
-authenticationGuard(router);
+  authenticationGuard(router);
 
-app.mount('#app');
+  app.mount('#app');
+});
