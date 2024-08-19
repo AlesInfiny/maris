@@ -7,6 +7,7 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - 'samples/Dressca/dressca-frontend/*.*'
       - 'samples/Dressca/dressca-frontend/customer/**'
       - '.github/workflows/samples-dressca-frontend.ci.yml'
   workflow_dispatch:
