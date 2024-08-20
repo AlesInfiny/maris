@@ -237,39 +237,6 @@
             "description": ""
           }
         }
-      },
-      "put": {
-        "tags": [
-          "CatalogItems"
-        ],
-        "summary": "カタログアイテムの情報を更新します。",
-        "operationId": "putCatalogItem",
-        "requestBody": {
-          "x-name": "putCatalogItemRequest",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PutCatalogItemRequest"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "204": {
-            "description": "成功。"
-          },
-          "401": {
-            "description": "認可エラー。"
-          },
-          "404": {
-            "description": "対象のIDが存在しない。"
-          },
-          "409": {
-            "description": "更新の競合が発生。"
-          }
-        }
       }
     },
     "/api/catalog-items/{catalogItemId}": {
@@ -277,14 +244,14 @@
         "tags": [
           "CatalogItems"
         ],
-        "summary": "カタログから指定したカタログアイテム Id のアイテムを削除します。",
+        "summary": "カタログから指定したカタログアイテム ID のアイテムを削除します。",
         "operationId": "deleteCatalogItem",
         "parameters": [
           {
             "name": "catalogItemId",
             "in": "path",
             "required": true,
-            "description": "カタログアイテム Id 。",
+            "description": "カタログアイテム ID 。",
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -301,6 +268,53 @@
           },
           "404": {
             "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "指定したIDのカタログアイテムの情報を更新します。",
+        "operationId": "putCatalogItem",
+        "parameters": [
+          {
+            "name": "catalogItemId",
+            "in": "path",
+            "required": true,
+            "description": "カタログアイテムID。",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "putCatalogItemRequest",
+          "description": "更新するカタログアイテムの情報。",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutCatalogItemRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "204": {
+            "description": "成功。"
+          },
+          "401": {
+            "description": "認可エラー。"
+          },
+          "404": {
+            "description": "対象のIDが存在しない。"
+          },
+          "409": {
+            "description": "更新の競合が発生。"
           }
         }
       }
@@ -613,7 +627,6 @@
         "description": "カタログアイテムを変更する処理のリクエストデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
-          "id",
           "name",
           "description",
           "price",
@@ -623,13 +636,6 @@
           "rowVersion"
         ],
         "properties": {
-          "id": {
-            "type": "integer",
-            "description": "カタログアイテムID。",
-            "format": "int64",
-            "maximum": 9223372036854780000.0,
-            "minimum": 1.0
-          },
           "name": {
             "type": "string",
             "description": "アイテム名を取得または設定します。\n            ",

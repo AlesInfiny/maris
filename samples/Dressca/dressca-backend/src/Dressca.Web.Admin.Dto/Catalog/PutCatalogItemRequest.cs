@@ -6,14 +6,6 @@ namespace Dressca.Web.Admin.Dto.Catalog;
 /// </summary>
 public class PutCatalogItemRequest
 {
-
-    /// <summary>
-    /// カタログアイテムID。
-    /// </summary>
-    [Required]
-    [Range(1L, long.MaxValue)]
-    public long Id { get; set; }
-
     /// <summary>
     ///  アイテム名を取得または設定します。
     /// </summary>

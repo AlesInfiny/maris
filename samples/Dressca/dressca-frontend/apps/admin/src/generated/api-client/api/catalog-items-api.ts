@@ -39,8 +39,8 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
     return {
         /**
          * 
-         * @summary カタログから指定したカタログアイテム Id のアイテムを削除します。
-         * @param {number} catalogItemId カタログアイテム Id 。
+         * @summary カタログから指定したカタログアイテム ID のアイテムを削除します。
+         * @param {number} catalogItemId カタログアイテム ID 。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -193,15 +193,19 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary カタログアイテムの情報を更新します。
-         * @param {PutCatalogItemRequest} putCatalogItemRequest 
+         * @summary 指定したIDのカタログアイテムの情報を更新します。
+         * @param {number} catalogItemId カタログアイテムID。
+         * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putCatalogItem: async (putCatalogItemRequest: PutCatalogItemRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        putCatalogItem: async (catalogItemId: number, putCatalogItemRequest: PutCatalogItemRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'catalogItemId' is not null or undefined
+            assertParamExists('putCatalogItem', 'catalogItemId', catalogItemId)
             // verify required parameter 'putCatalogItemRequest' is not null or undefined
             assertParamExists('putCatalogItem', 'putCatalogItemRequest', putCatalogItemRequest)
-            const localVarPath = `/api/catalog-items`;
+            const localVarPath = `/api/catalog-items/{catalogItemId}`
+                .replace(`{${"catalogItemId"}}`, encodeURIComponent(String(catalogItemId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -239,8 +243,8 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary カタログから指定したカタログアイテム Id のアイテムを削除します。
-         * @param {number} catalogItemId カタログアイテム Id 。
+         * @summary カタログから指定したカタログアイテム ID のアイテムを削除します。
+         * @param {number} catalogItemId カタログアイテム ID 。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -294,13 +298,14 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary カタログアイテムの情報を更新します。
-         * @param {PutCatalogItemRequest} putCatalogItemRequest 
+         * @summary 指定したIDのカタログアイテムの情報を更新します。
+         * @param {number} catalogItemId カタログアイテムID。
+         * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async putCatalogItem(putCatalogItemRequest: PutCatalogItemRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.putCatalogItem(putCatalogItemRequest, options);
+        async putCatalogItem(catalogItemId: number, putCatalogItemRequest: PutCatalogItemRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.putCatalogItem(catalogItemId, putCatalogItemRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CatalogItemsApi.putCatalogItem']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -317,8 +322,8 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * 
-         * @summary カタログから指定したカタログアイテム Id のアイテムを削除します。
-         * @param {number} catalogItemId カタログアイテム Id 。
+         * @summary カタログから指定したカタログアイテム ID のアイテムを削除します。
+         * @param {number} catalogItemId カタログアイテム ID 。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -360,13 +365,14 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary カタログアイテムの情報を更新します。
-         * @param {PutCatalogItemRequest} putCatalogItemRequest 
+         * @summary 指定したIDのカタログアイテムの情報を更新します。
+         * @param {number} catalogItemId カタログアイテムID。
+         * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putCatalogItem(putCatalogItemRequest: PutCatalogItemRequest, options?: any): AxiosPromise<void> {
-            return localVarFp.putCatalogItem(putCatalogItemRequest, options).then((request) => request(axios, basePath));
+        putCatalogItem(catalogItemId: number, putCatalogItemRequest: PutCatalogItemRequest, options?: any): AxiosPromise<void> {
+            return localVarFp.putCatalogItem(catalogItemId, putCatalogItemRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -380,8 +386,8 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
 export class CatalogItemsApi extends BaseAPI {
     /**
      * 
-     * @summary カタログから指定したカタログアイテム Id のアイテムを削除します。
-     * @param {number} catalogItemId カタログアイテム Id 。
+     * @summary カタログから指定したカタログアイテム ID のアイテムを削除します。
+     * @param {number} catalogItemId カタログアイテム ID 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CatalogItemsApi
@@ -431,14 +437,15 @@ export class CatalogItemsApi extends BaseAPI {
 
     /**
      * 
-     * @summary カタログアイテムの情報を更新します。
-     * @param {PutCatalogItemRequest} putCatalogItemRequest 
+     * @summary 指定したIDのカタログアイテムの情報を更新します。
+     * @param {number} catalogItemId カタログアイテムID。
+     * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CatalogItemsApi
      */
-    public putCatalogItem(putCatalogItemRequest: PutCatalogItemRequest, options?: RawAxiosRequestConfig) {
-        return CatalogItemsApiFp(this.configuration).putCatalogItem(putCatalogItemRequest, options).then((request) => request(this.axios, this.basePath));
+    public putCatalogItem(catalogItemId: number, putCatalogItemRequest: PutCatalogItemRequest, options?: RawAxiosRequestConfig) {
+        return CatalogItemsApiFp(this.configuration).putCatalogItem(catalogItemId, putCatalogItemRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

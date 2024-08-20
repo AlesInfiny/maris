@@ -145,9 +145,9 @@ public class CatalogItemsController : ControllerBase
     }
 
     /// <summary>
-    ///  カタログから指定したカタログアイテム Id のアイテムを削除します。
+    ///  カタログから指定したカタログアイテム ID のアイテムを削除します。
     /// </summary>
-    /// <param name="catalogItemId">カタログアイテム Id 。</param>
+    /// <param name="catalogItemId">カタログアイテム ID 。</param>
     /// <returns>なし。</returns>
     /// <response code="204">成功。</response>
     [HttpDelete("{catalogItemId}")]
@@ -176,26 +176,27 @@ public class CatalogItemsController : ControllerBase
     }
 
     /// <summary>
-    ///  カタログアイテムの情報を更新します。
+    ///  指定したIDのカタログアイテムの情報を更新します。
     /// </summary>
-    /// <param name="putCatalogItemRequest"></param>
+    /// <param name="catalogItemId">カタログアイテムID。</param>
+    /// <param name="putCatalogItemRequest">更新するカタログアイテムの情報。</param>
     /// <returns>なし。</returns>
     /// <response code="204">成功。</response>
     /// <response code="401">認可エラー。</response>
     /// <response code="404">対象のIDが存在しない。</response>
     /// <response code="409">更新の競合が発生。</response>
-    [HttpPut]
+    [HttpPut("{catalogItemId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     [OpenApiOperation("putCatalogItem")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> PutCatalogItemAsync(PutCatalogItemRequest putCatalogItemRequest)
+    public async Task<IActionResult> PutCatalogItemAsync(long catalogItemId, PutCatalogItemRequest putCatalogItemRequest)
     {
 
         var command = new CatalogItemUpdateCommand(
-            putCatalogItemRequest.Id,
+            catalogItemId,
             putCatalogItemRequest.Name,
             putCatalogItemRequest.Description,
             putCatalogItemRequest.Price,

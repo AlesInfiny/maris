@@ -21,12 +21,6 @@
  */
 export interface PutCatalogItemRequest {
     /**
-     * カタログアイテムID。
-     * @type {number}
-     * @memberof PutCatalogItemRequest
-     */
-    'id': number;
-    /**
      * アイテム名を取得または設定します。             
      * @type {string}
      * @memberof PutCatalogItemRequest
