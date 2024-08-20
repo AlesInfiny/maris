@@ -19,7 +19,6 @@ import { catalogItemSchema } from '@/validation/validation-items';
 import {
   ConflictError,
   NotFoundError,
-UnauthorizedError,
 } from '@/shared/error-handler/custom-error';
 import type { CatalogItemResponse } from '@/generated/api-client';
 
@@ -140,12 +139,12 @@ const deleteItemAsync = async () => {
   try {
     await deleteCatalogItem(state.id);
     modalState.showDeleteNotice = true;
-  } catch (error) {d
+  } catch (error) {
     if (error instanceof NotFoundError) {
       errorHandler(error, () => {
-      showToast('更新対象のカタログアイテムが見つかりませんでした。');
-      router.push({ name: '/catalog/items' });
-      })
+        showToast('更新対象のカタログアイテムが見つかりませんでした。');
+        router.push({ name: '/catalog/items' });
+      });
     } else {
       errorHandler(error, () => {
         showToast('カタログアイテムの削除に失敗しました。');
