@@ -19,6 +19,7 @@ import { catalogItemSchema } from '@/validation/validation-items';
 import {
   ConflictError,
   NotFoundError,
+UnauthorizedError,
 } from '@/shared/error-handler/custom-error';
 import type { CatalogItemResponse } from '@/generated/api-client';
 
@@ -58,6 +59,7 @@ const currentItemState: ItemState = reactive({
 const modalState = reactive({
   showDeleteConfirm: false,
   showDeleteNotice: false,
+  showUpdateConfirm: false,
   showUpdateNotice: false,
 });
 
@@ -138,15 +140,19 @@ const deleteItemAsync = async () => {
   try {
     await deleteCatalogItem(state.id);
     modalState.showDeleteNotice = true;
-  } catch (error) {
+  } catch (error) {d
     if (error instanceof NotFoundError) {
+      errorHandler(error, () => {
       showToast('更新対象のカタログアイテムが見つかりませんでした。');
       router.push({ name: '/catalog/items' });
+      })
     } else {
       errorHandler(error, () => {
         showToast('カタログアイテムの削除に失敗しました。');
       });
     }
+  } finally {
+    modalState.showDeleteConfirm = false;
   }
 };
 
@@ -180,6 +186,8 @@ const updateItemAsync = async () => {
         showToast('カタログアイテムの更新に失敗しました。');
       });
     }
+  } finally {
+    modalState.showUpdateConfirm = false;
   }
 };
 </script>
@@ -199,6 +207,14 @@ const updateItemAsync = async () => {
     body="カタログアイテムを削除しました。"
     @close="closeDeleteNotice"
   ></NotificationModal>
+
+  <ConfirmationModal
+    :show="modalState.showUpdateConfirm"
+    header="カタログアイテムを更新しますか？"
+    body="カタログアイテムを更新します。更新したアイテムは元に戻せません。"
+    @confirm="updateItemAsync"
+    @cancel="modalState.showUpdateConfirm = false"
+  ></ConfirmationModal>
 
   <NotificationModal
     :show="modalState.showUpdateNotice"
@@ -443,7 +459,7 @@ const updateItemAsync = async () => {
               type="button"
               class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800 disabled:bg-blue-500 disabled:opacity-50"
               :disabled="isInvalid()"
-              @click="updateItemAsync"
+              @click="modalState.showUpdateConfirm = true"
             >
               更新
             </button>
