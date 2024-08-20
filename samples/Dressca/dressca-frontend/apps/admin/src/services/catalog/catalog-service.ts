@@ -52,7 +52,6 @@ export async function updateCatalogItem(
   rowVersion: string,
 ) {
   const putCatalogItemRequest: PutCatalogItemRequest = {
-    id,
     name,
     description,
     price,
@@ -61,7 +60,7 @@ export async function updateCatalogItem(
     catalogBrandId,
     rowVersion,
   };
-  await catalogItemsApi.putCatalogItem(putCatalogItemRequest);
+  await catalogItemsApi.putCatalogItem(id, putCatalogItemRequest);
 }
 
 export async function deleteCatalogItem(id: number) {

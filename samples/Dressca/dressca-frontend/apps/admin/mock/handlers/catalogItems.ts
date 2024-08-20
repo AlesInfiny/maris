@@ -27,7 +27,7 @@ export const catalogItemsHandlers = [
   http.delete('/api/catalog-items/:catalogItemId', () => {
     return new HttpResponse(null, { status: 204 });
   }),
-  http.put('/api/catalog-items', () => {
+  http.put('/api/catalog-items/:catalogItemId', () => {
     return new HttpResponse(null, { status: 204 });
   }),
 ];
