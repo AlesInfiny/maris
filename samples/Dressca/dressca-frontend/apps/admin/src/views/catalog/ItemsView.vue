@@ -35,7 +35,7 @@ const goAdd = () => {
 };
 
 const goEdit = (id: number) => {
-  router.push({ name: 'catalog/items/edit', params: { itemId: id } });
+  router.push({ name: 'catalog/items/edit', params: { itemId:id } });
 };
 </script>
 

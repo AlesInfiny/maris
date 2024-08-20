@@ -13,7 +13,7 @@ import { showToast } from '@/services/notification/notificationService';
 import { errorHandler } from '@/shared/error-handler/error-handler';
 import ConfirmationModal from '@/components/ConfirmationModal.vue';
 import NotificationModal from '@/components/NotificationModal.vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import { catalogItemSchema } from '@/validation/validation-items';
 import {
@@ -22,12 +22,11 @@ import {
 } from '@/shared/error-handler/custom-error';
 import type { CatalogItemResponse } from '@/generated/api-client';
 
-const props = defineProps<{
-  itemId: number;
-}>();
 
 const catalogStore = useCatalogStore();
 const router = useRouter();
+const route = useRoute()
+const id  = Number(route.params.itemId);
 const { getCategories, getBrands } = storeToRefs(catalogStore);
 const { getFirstAssetUrl } = assetHelper();
 
@@ -132,7 +131,7 @@ const reFetchItemAsync = async (itemId: number) => {
 };
 
 onMounted(async () => {
-  await initItemAsync(props.itemId);
+  await initItemAsync(id);
 });
 
 const deleteItemAsync = async () => {
@@ -167,7 +166,7 @@ const updateItemAsync = async () => {
       state.brandId,
       state.rowVersion,
     );
-    initItemAsync(props.itemId);
+    initItemAsync(id);
     modalState.showUpdateNotice = true;
   } catch (error) {
     if (error instanceof NotFoundError) {
@@ -178,7 +177,7 @@ const updateItemAsync = async () => {
         showToast(
           'カタログアイテムの更新が競合しました。もう一度更新してください。',
         );
-        await reFetchItemAsync(props.itemId);
+        await reFetchItemAsync(id);
       });
     } else {
       errorHandler(error, async () => {
