@@ -1,4 +1,4 @@
-import { useRouter } from 'vue-router';
+import { router } from '@/router';
 import { showToast } from '@/services/notification/notificationService';
 import { useRoutingStore } from '@/stores/routing/routing';
 import {
@@ -25,7 +25,6 @@ export function errorHandler(
       if (handlingUnauthorizedError) {
         handlingUnauthorizedError();
       } else {
-        const router = useRouter();
         const routingStore = useRoutingStore();
         routingStore.setRedirectFrom(router.currentRoute.value.path.slice(1));
         router.push({ name: 'authentication/login' });
