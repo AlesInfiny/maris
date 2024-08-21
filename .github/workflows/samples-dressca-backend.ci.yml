@@ -46,7 +46,7 @@ jobs:
           dotnet-version: '8.*'
 
       - name: NuGet パッケージの復元
-        run: dotnet restore
+        run: dotnet restore ${{ env.SOLUTION_FILE_NAME }}
 
       - id: application-build
         name: アプリケーションのビルド
