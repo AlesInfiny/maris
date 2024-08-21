@@ -9,7 +9,6 @@ import { EnvelopeIcon, KeyIcon } from '@heroicons/vue/24/solid';
 import { useRoutingStore } from '@/stores/routing/routing';
 import { showToast } from '@/services/notification/notificationService';
 import { errorHandler } from '@/shared/error-handler/error-handler';
-import NotificationModal from '@/components/NotificationModal.vue';
 
 // フォーム固有のバリデーション定義
 const formSchema = yup.object({
@@ -31,14 +30,6 @@ const isInvalid = () => {
 
 const routingStore = useRoutingStore();
 
-const modalState = reactive({
-  showLoginNotice: false,
-});
-
-const closeLoginNotice = () => {
-  modalState.showLoginNotice = false;
-};
-
 const login = async () => {
   try {
     await loginAsync();
@@ -47,8 +38,6 @@ const login = async () => {
       showToast('ログインに失敗しました。');
     });
   }
-
-  modalState.showLoginNotice = true;
 
   if (!routingStore.redirectFrom) {
     router.push('/');
@@ -61,13 +50,6 @@ const login = async () => {
 </script>
 
 <template>
-  <NotificationModal
-    :show="modalState.showLoginNotice"
-    header="ログイン成功"
-    body="ログインしました。"
-    @close="closeLoginNotice"
-  ></NotificationModal>
-
   <div
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
