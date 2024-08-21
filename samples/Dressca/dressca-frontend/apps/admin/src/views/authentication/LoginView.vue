@@ -55,7 +55,7 @@ const login = async () => {
     return;
   }
 
-  router.push({ name: routingStore.redirectFrom });
+  router.push({ path: routingStore.redirectFrom });
   routingStore.deleteRedirectFrom();
 };
 </script>
