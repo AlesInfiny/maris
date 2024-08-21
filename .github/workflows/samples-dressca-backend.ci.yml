@@ -13,6 +13,7 @@ on:
 
 env:
   WORKING_DIRECTORY: samples/Dressca/dressca-backend
+  SOLUTION_FILE_NAME: Dressca.Web.Customer.slnf
 
 defaults:
   run:
@@ -49,7 +50,7 @@ jobs:
 
       - id: application-build
         name: アプリケーションのビルド
-        run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
+        run: dotnet build ${{ env.SOLUTION_FILE_NAME }} --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
 
       - name: ビルド結果の表示
         shell: bash
@@ -91,7 +92,7 @@ jobs:
         continue-on-error: true
         run: |
           export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
-          dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+          dotnet test ${{ env.SOLUTION_FILE_NAME }} --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
 
       - id: create-test-result-report
         name: テスト結果ページの作成
