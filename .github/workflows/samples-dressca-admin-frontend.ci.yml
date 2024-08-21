@@ -1,7 +1,7 @@
 ---
 # cSpell:ignore typecheck
 
-name: dressca-frontend CI
+name: dressca-admin-frontend CI
 
 on:
   pull_request:
