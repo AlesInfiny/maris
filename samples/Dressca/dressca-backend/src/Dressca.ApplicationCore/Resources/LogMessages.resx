@@ -132,8 +132,44 @@
   <data name="CatalogApplicationService_GetCatalogItemsAsyncStart" xml:space="preserve">
     <value>カタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得します。</value>
   </data>
+  <data name="CatalogBrandIdDoesNotExistInRepository" xml:space="preserve">
+    <value>指定されたカタログブランド ID: [{CatalogBrandId}] のカタログブランドがリポジトリに存在しません。</value>
+  </data>
+  <data name="CatalogCategoryIdDoesNotExistInRepository" xml:space="preserve">
+    <value>指定されたカタログカテゴリ ID: [{CatalogCategoryId}] のカタログカテゴリがリポジトリに存在しません。</value>
+  </data>
   <data name="CatalogItemIdDoesNotExistInRepository" xml:space="preserve">
     <value>指定されたカタログアイテム ID: [{CatalogItemId}] のカタログアイテムがリポジトリに存在しません。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_AddItemToCatalogAsyncEnd" xml:space="preserve">
+    <value>カタログに カタログアイテムID: {CatalogItemId} のカタログアイテムを追加しました。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_AddItemToCatalogAsyncStart" xml:space="preserve">
+    <value>カタログにアイテムを追加します。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_DeleteItemFromCatalogAsyncEnd" xml:space="preserve">
+    <value>カタログアイテム ID: {CatalogItemId} のカタログアイテムを削除しました。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_DeleteItemFromCatalogAsyncStart" xml:space="preserve">
+    <value>カタログアイテム ID: {CatalogItemId} のカタログアイテムを削除します。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_GetCatalogItemAsyncEnd" xml:space="preserve">
+    <value>カタログアイテム ID: {CatalogItemId} のカタログアイテムを取得しました。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_GetCatalogItemAsyncStart" xml:space="preserve">
+    <value>カタログアイテム ID: {CatalogItemId} のカタログアイテムを取得します。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_GetCatalogItemsAsyncEnd" xml:space="preserve">
+    <value>カタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得しました。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_GetCatalogItemsAsyncStart" xml:space="preserve">
+    <value>カタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得します。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_UpdateCatalogItemAsyncEnd" xml:space="preserve">
+    <value>カタログアイテム ID: {CatalogItemId} のカタログアイテムを更新しました。</value>
+  </data>
+  <data name="CatalogManagementApplicationService_UpdateCatalogItemAsyncStart" xml:space="preserve">
+    <value>カタログアイテム ID: {CatalogItemId} のカタログアイテムを更新します。</value>
   </data>
   <data name="CreateNewBasket_UserBasketNotFound" xml:space="preserve">
     <value>購入者 ID: {BuyerId} の買い物かご情報が見つからなかったため新たに作成します。</value>

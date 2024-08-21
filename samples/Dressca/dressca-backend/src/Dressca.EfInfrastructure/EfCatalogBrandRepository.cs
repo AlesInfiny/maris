@@ -24,4 +24,11 @@ internal class EfCatalogBrandRepository : ICatalogBrandRepository
     /// <inheritdoc/>
     public async Task<IReadOnlyList<CatalogBrand>> GetAllAsync(CancellationToken cancellationToken = default)
         => await this.dbContext.CatalogBrands.ToListAsync(cancellationToken);
+
+    /// <inheritdoc/>
+    public Task<CatalogBrand?> GetAsync(long id, CancellationToken cancellationToken = default)
+    {
+        var keys = new object[] { id };
+        return this.dbContext.CatalogBrands.FindAsync(keys, cancellationToken).AsTask();
+    }
 }

@@ -1,0 +1,19 @@
+{
+  "solution": {
+    "path": "Dressca.sln",
+    "projects": [
+      "src\\Dressca.ApplicationCore\\Dressca.ApplicationCore.csproj",
+      "src\\Dressca.EfInfrastructure\\Dressca.EfInfrastructure.csproj",
+      "src\\Dressca.Store.Assets.StaticFiles\\Dressca.Store.Assets.StaticFiles.csproj",
+      "src\\Dressca.SystemCommon\\Dressca.SystemCommon.csproj",
+      "src\\Dressca.Web.Dto\\Dressca.Web.Dto.csproj",
+      "src\\Dressca.Web\\Dressca.Web.csproj",
+      "src\\Maris.Logging.Testing\\Maris.Logging.Testing.csproj",
+      "tests\\Dressca.IntegrationTest\\Dressca.IntegrationTest.csproj",
+      "tests\\Dressca.UnitTests.ApplicationCore\\Dressca.UnitTests.ApplicationCore.csproj",
+      "tests\\Dressca.UnitTests.SystemCommon\\Dressca.UnitTests.SystemCommon.csproj",
+      "tests\\Dressca.UnitTests.Web\\Dressca.UnitTests.Web.csproj",
+      "tests\\Maris.Logging.Testing.Tests\\Maris.Logging.Testing.Tests.csproj"
+    ]
+  }
+}

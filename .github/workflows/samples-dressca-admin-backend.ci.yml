@@ -1,7 +1,7 @@
 ---
 # cSpell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
 
-name: dressca-backend CI
+name: dressca-admin-backend CI
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ on:
 
 env:
   WORKING_DIRECTORY: samples/Dressca/dressca-backend
-  SOLUTION_FILE_NAME: Dressca.Web.Customer.slnf
+  SOLUTION_FILE_NAME: Dressca.Web.Admin.slnf
 
 defaults:
   run:
@@ -46,7 +46,7 @@ jobs:
           dotnet-version: '8.*'
 
       - name: NuGet パッケージの復元
-        run: dotnet restore
+        run: dotnet restore ${{ env.SOLUTION_FILE_NAME }}
 
       - id: application-build
         name: アプリケーションのビルド
@@ -73,7 +73,7 @@ jobs:
       - name: データベース接続文字列を取得(結合テスト用)
         id: get-connection-string
         env:
-          APPSETTINGS_FILEPATH: tests/Dressca.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
+          APPSETTINGS_FILEPATH: tests/Dressca.Web.Admin.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
         run: |
           connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
           echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
