@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web.Admin", "src\Dr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web.Admin.Dto", "src\Dressca.Web.Admin.Dto\Dressca.Web.Admin.Dto.csproj", "{113B29BD-62F6-440E-9FD4-6E2746853621}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web.Admin.IntegrationTest", "tests\Dressca.Web.Admin.IntegrationTest\Dressca.Web.Admin.IntegrationTest.csproj", "{CA319CB6-D240-4F90-9EE1-05F226E4A3C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,10 @@ Global
 		{113B29BD-62F6-440E-9FD4-6E2746853621}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{113B29BD-62F6-440E-9FD4-6E2746853621}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{113B29BD-62F6-440E-9FD4-6E2746853621}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA319CB6-D240-4F90-9EE1-05F226E4A3C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA319CB6-D240-4F90-9EE1-05F226E4A3C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA319CB6-D240-4F90-9EE1-05F226E4A3C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA319CB6-D240-4F90-9EE1-05F226E4A3C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +134,7 @@ Global
 		{C4E110CA-B933-4660-817A-57E22E413D4A} = {00E7327F-10DF-4937-AC61-FE2FCDCCA88B}
 		{6B74070F-2C0C-43E5-BF36-796F078E4CFB} = {16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}
 		{113B29BD-62F6-440E-9FD4-6E2746853621} = {16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}
+		{CA319CB6-D240-4F90-9EE1-05F226E4A3C2} = {00E7327F-10DF-4937-AC61-FE2FCDCCA88B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FD66EC1-E1D1-4664-9ACE-8026659FD708}

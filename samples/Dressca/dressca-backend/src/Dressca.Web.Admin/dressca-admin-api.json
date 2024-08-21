@@ -109,6 +109,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "ID。",
             "schema": {
               "type": "integer",
               "format": "int64"
