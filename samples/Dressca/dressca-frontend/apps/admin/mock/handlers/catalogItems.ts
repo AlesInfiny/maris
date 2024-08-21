@@ -28,6 +28,6 @@ export const catalogItemsHandlers = [
     return new HttpResponse(null, { status: 204 });
   }),
   http.put('/api/catalog-items/:catalogItemId', () => {
-    return new HttpResponse(null, { status: 204 });
+    return new HttpResponse(null, { status: 401 });
   }),
 ];

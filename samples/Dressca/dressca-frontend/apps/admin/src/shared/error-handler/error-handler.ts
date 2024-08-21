@@ -26,7 +26,7 @@ export function errorHandler(
         handlingUnauthorizedError();
       } else {
         const routingStore = useRoutingStore();
-        routingStore.setRedirectFrom(router.currentRoute.value.path);
+        routingStore.setRedirectFrom(router.currentRoute.value.fullPath);
         router.push({ name: 'authentication/login' });
         showToast('ログインしてください。');
       }

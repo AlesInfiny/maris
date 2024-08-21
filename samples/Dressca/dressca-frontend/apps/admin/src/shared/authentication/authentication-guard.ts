@@ -6,7 +6,7 @@ export const authenticationGuard = (router: Router) => {
   const authenticationStore = useAuthenticationStore();
   const routingStore = useRoutingStore();
 
-  router.beforeEach((to) => {
+  router.beforeEach((to => {
     const ignoreAuthPaths: (RouteRecordName | null | undefined)[] = [
       '/',
       'authentication/login',
@@ -20,7 +20,7 @@ export const authenticationGuard = (router: Router) => {
       return true;
     }
 
-    const redirectFromPath: string = to.name?.toString() ?? '';
+    const redirectFromPath: string = to.fullPath;
     routingStore.setRedirectFrom(redirectFromPath);
     return { name: 'authentication/login' };
   });

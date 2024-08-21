@@ -40,11 +40,10 @@ const login = async () => {
   }
 
   if (!routingStore.redirectFrom) {
-    router.push('/');
+    router.push({name:'home'});
     return;
   }
-
-  router.push({ path: routingStore.redirectFrom });
+  router.push({ path:routingStore.redirectFrom });
   routingStore.deleteRedirectFrom();
 };
 </script>
