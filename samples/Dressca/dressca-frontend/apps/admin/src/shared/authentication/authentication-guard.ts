@@ -6,9 +6,8 @@ export const authenticationGuard = (router: Router) => {
   const authenticationStore = useAuthenticationStore();
   const routingStore = useRoutingStore();
 
-  router.beforeEach((to => {
+  router.beforeEach((to) => {
     const ignoreAuthPaths: (RouteRecordName | null | undefined)[] = [
-      '/',
       'authentication/login',
       'error',
     ];

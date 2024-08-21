@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { useField, useForm } from 'vee-validate';
 import * as yup from 'yup';
@@ -40,10 +39,10 @@ const login = async () => {
   }
 
   if (!routingStore.redirectFrom) {
-    router.push({name:'home'});
+    router.push({ name: 'home' });
     return;
   }
-  router.push({ path:routingStore.redirectFrom });
+  router.push({ path: routingStore.redirectFrom });
   routingStore.deleteRedirectFrom();
 };
 </script>

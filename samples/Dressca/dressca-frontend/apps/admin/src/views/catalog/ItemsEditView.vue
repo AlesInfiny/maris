@@ -22,11 +22,10 @@ import {
 } from '@/shared/error-handler/custom-error';
 import type { CatalogItemResponse } from '@/generated/api-client';
 
-
 const catalogStore = useCatalogStore();
 const router = useRouter();
-const route = useRoute()
-const id  = Number(route.params.itemId);
+const route = useRoute();
+const id = Number(route.params.itemId);
 const { getCategories, getBrands } = storeToRefs(catalogStore);
 const { getFirstAssetUrl } = assetHelper();
 
