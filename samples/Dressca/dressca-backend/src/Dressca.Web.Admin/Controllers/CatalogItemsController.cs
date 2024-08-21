@@ -52,7 +52,7 @@ public class CatalogItemsController : ControllerBase
     /// <summary>
     /// 指定したIDのカタログアイテムを返します。
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="id">ID。</param>
     /// <returns>カタログアイテム。</returns>
     /// <response code="200">成功。</response>
     [HttpGet("{id}")]
