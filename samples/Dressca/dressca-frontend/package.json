@@ -1,61 +1,17 @@
 {
   "name": "dressca-frontend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "private": "true",
   "type": "module",
+  "private": "true",
   "scripts": {
-    "dev": "run-p dev:customer dev:admin --print-label",
-    "dev:customer": "npm run dev -w apps/customer",
-    "dev:admin": "npm run dev -w apps/admin",
-    "build-only:dev": "npm run build-only:dev --workspaces --if-present",
-    "lint": "npm run lint --workspaces --if-present",
-    "lint:ci": "npm run lint:ci --workspaces --if-present",
-    "typecheck": "vue-tsc --build --force --verbose",
-    "test:unit": "npm run test:unit --workspaces --if-present"
+    "lint:ci:customer": "npm run lint:ci -w customer",
+    "type-check:customer": "npm run type-check -w customer",
+    "build-only:dev:customer": "npm run build-only:dev -w customer",
+    "build:prod:customer": "npm run build:prod -w customer",
+    "test:unit:customer": "npm run test:unit -w customer",
+    "dev:customer": "npm run dev -w customer"
   },
   "workspaces": [
-    "apps/customer",
-    "apps/admin",
-    "packages/common"
-  ],
-  "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.13.4",
-    "@rushstack/eslint-patch": "^1.10.4",
-    "@tsconfig/node20": "^20.1.4",
-    "@types/jsdom": "^21.1.7",
-    "@types/node": "^22.1.0",
-    "@vitejs/plugin-vue": "^5.1.2",
-    "@vitejs/plugin-vue-jsx": "^4.0.0",
-    "@vue/eslint-config-airbnb-with-typescript": "^8.0.0",
-    "@vue/eslint-config-prettier": "^9.0.0",
-    "@vue/eslint-config-typescript": "^13.0.0",
-    "@vue/test-utils": "^2.4.6",
-    "@vue/tsconfig": "^0.5.1",
-    "autoprefixer": "^10.4.20",
-    "cypress": "^13.13.2",
-    "eslint": "^8.57.0",
-    "eslint-plugin-cypress": "^3.4.0",
-    "eslint-plugin-vue": "^9.27.0",
-    "jsdom": "^24.1.1",
-    "npm-run-all2": "^6.2.2",
-    "postcss": "^8.4.40",
-    "postcss-nesting": "^13.0.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.5",
-    "start-server-and-test": "^2.0.5",
-    "stylelint": "^16.8.1",
-    "stylelint-config-recommended-vue": "^1.5.0",
-    "stylelint-config-standard": "^36.0.1",
-    "stylelint-prettier": "^5.0.2",
-    "tailwindcss": "^3.4.7",
-    "typescript": "~5.4.5",
-    "vite": "^5.3.5",
-    "vitest": "^2.0.5",
-    "vue-tsc": "^2.0.29"
-  },
-  "dependencies": {
-    "msw": "^2.3.2"
-  }
+    "customer"
+  ]
 }
