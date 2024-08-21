@@ -4,8 +4,8 @@
   "type": "module",
   "private": "true",
   "scripts": {
-    "lint:ci:customer": "npm run lint:ci --workspaces --if-present",
-    "typecheck:customer": "npm run typecheck -w customer",
+    "lint:ci:customer": "npm run lint:ci -w customer",
+    "type-check:customer": "npm run type-check -w customer",
     "build-only:dev:customer": "npm run build-only:dev -w customer",
     "build:prod:customer": "npm run build:prod -w customer",
     "test:unit:customer": "npm run test:unit -w customer",

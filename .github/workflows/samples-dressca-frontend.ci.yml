@@ -53,9 +53,9 @@ jobs:
         name: lintの実行
         run: npm run lint:ci:customer >> /var/tmp/lint-result.txt 2>&1
 
-      - id: run-typecheck
+      - id: run-type-check
         name: TypeScript の型チェック
-        run: npm run typecheck:customer >> /var/tmp/typecheck-result.txt 2>&1
+        run: npm run type-check:customer >> /var/tmp/type-check-result.txt 2>&1
 
       - id: application-build
         name: アプリケーションのビルド
@@ -73,10 +73,10 @@ jobs:
           header: 'lintの結果 :pen:'
 
       - name: 型チェックの結果出力
-        if: ${{ success() || (failure() && steps.run-typecheck.conclusion == 'failure') }}
+        if: ${{ success() || (failure() && steps.run-type-check.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
         with:
-          body: /var/tmp/typecheck-result.txt
+          body: /var/tmp/type-check-result.txt
           header: '型チェックの結果 :pencil2:'
 
       - name: ビルドの結果出力

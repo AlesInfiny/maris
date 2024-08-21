@@ -12,7 +12,7 @@
     "test:unit": "vitest",
     "test:e2e": "start-server-and-test dev http://localhost:5173/ 'cypress open --e2e --browser chrome'",
     "test:e2e:ci": "start-server-and-test dev http://localhost:5173/ 'cypress run'",
-    "typecheck": "vue-tsc --build --force",
+    "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore && stylelint **/*.{vue,css} --fix",
     "lint:ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore && stylelint **/*.{vue,css}",
     "mock": "vite --mode mock",
