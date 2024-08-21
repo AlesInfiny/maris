@@ -8,6 +8,6 @@ const user: UserResponse = {
 
 export const usersHandlers = [
   http.get('/api/users', () => {
-    return HttpResponse.json(user, { status: 500 });
+    return HttpResponse.json(user, { status: 200 });
   }),
 ];

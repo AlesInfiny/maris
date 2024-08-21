@@ -90,7 +90,7 @@ const login = async () => {
           type="button"
           class="rounded bg-blue-800 px-4 py-2 font-bold text-white hover:bg-blue-700 disabled:bg-blue-500 disabled:opacity-50"
           :disabled="isInvalid()"
-          @click="login()"
+          @click="login"
         >
           ログイン
         </button>
