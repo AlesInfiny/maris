@@ -136,8 +136,8 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     private static CatalogItem CreateCatalogItem(long id)
     {
         var random = new Random();
-        long defaultCatalogCategoryId = random.NextInt64(1000L);
-        long defaultCatalogBrandId = random.NextInt64(1000L);
+        long defaultCatalogCategoryId = random.NextInt64(1L, 1000L);
+        long defaultCatalogBrandId = random.NextInt64(1L, 1000L);
         const string defaultDescription = "Description.";
         const string defaultName = "Name";
         const decimal defaultPrice = 100m;
