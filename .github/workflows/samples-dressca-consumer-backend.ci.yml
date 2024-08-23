@@ -1,7 +1,7 @@
 ---
 # cSpell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
 
-name: dressca-backend CI
+name: dressca-consumer-backend CI
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ on:
 
 env:
   WORKING_DIRECTORY: samples/Dressca/dressca-backend
-  SOLUTION_FILE_NAME: Dressca.Web.Customer.slnf
+  SOLUTION_FILE_NAME: Dressca.Web.Consumer.slnf
 
 defaults:
   run:
