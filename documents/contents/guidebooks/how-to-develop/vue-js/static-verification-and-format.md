@@ -8,6 +8,19 @@ description: Vue.js を用いた クライアントサイドアプリケーシ�
 # 静的コード分析とフォーマット {#top}
 
 静的コード分析とフォーマットには .editorconfig 、 ESLint 、 Stylelint 、および Prettier を使用します。
+これらの設定はアプリケーション間で共通するケースが多いため、プロジェクトのルートフォルダーに配置して共通化します。
+下記の手順を実行後の設定ファイルの配置例を示します。
+
+```terminal linenums="0"
+<project-name> ------ プロジェクトのルートフォルダー
+├ .editorconfig
+├ .eslintrc.cjs
+├ .stylelintrc.js
+├ .prettierrc.json
+└ <workspace-name> -- ワークスペースのルートフォルダー
+  ├ .eslintrc.cjs
+  └ .stylelintrc.js
+```
 
 ## .editorconfigの追加 {#add-editorconfig}
 
@@ -29,6 +42,7 @@ VSCode の推奨プラグインである [EditorConfig for Visual Studio Code :m
 ## Prettier {#prettier}
 
 Prettier は Vue.js のブランクプロジェクト作成時にオプションとしてインストールしているため、追加でインストールする必要はありません。
+ただし、ワークスペースのルートフォルダーに作成されているため、プロジェクトのルートフォルダーに移動します。
 
 ### Prettier の設定 {#settings-prettier}
 
@@ -55,7 +69,8 @@ ESLint は Vue.js のブランクプロジェクト作成時にオプション�
 
 ### ESLint の設定 {#settings-eslint}
 
-設定ファイル `./.eslintrc.cjs` で行います。このファイルはインストール時に自動的に追加されます。
+設定ファイル `./.eslintrc.cjs` で行います。このファイルはインストール時にワークスペースのルートフォルダーに自動的に追加されているので、
+プロジェクトのルートフォルダーにコピーします。
 
 既定の状態でも静的コード分析は可能ですが、 postCSS の設定ファイルなど、分析する必要のないファイルまで分析対象となってしまうため、以下のように ignorePatterns を追加します。
 
@@ -74,6 +89,18 @@ module.exports = {
   /* 中略 */
   ignorePatterns: ['postcss.config.js', 'tailwind.config.js'],
 }
+```
+
+ワークスペースのルートフォルダーの設定ファイルは、ルートフォルダーの設定ファイルを継承するように変更します。
+
+```javascript title=".eslintrc.cjs"
+/* eslint-env node */
+require('@rushstack/eslint-patch/modern-module-resolution');
+
+module.exports = {
+  root: true,
+  extends: '../.eslintrc.cjs',
+};
 ```
 
 その他の設定方法については [公式ドキュメント :material-open-in-new:](https://eslint.org/docs/latest/user-guide/configuring/){ target=_blank } を参照してください。
@@ -129,6 +156,16 @@ export default {
       customSyntax: 'postcss-html',
     },
   ],
+};
+```
+
+各ワークスペースでは、ルートフォルダーの設定ファイルを継承し、必要に応じて設定を追加します。
+
+```javascript title=".stylelintrc.js"
+import stylelintConfigBase from '../.stylelintrc.js'
+
+export default {
+  extends: stylelintConfigBase
 };
 ```
 
