@@ -4,14 +4,14 @@
   "type": "module",
   "private": "true",
   "scripts": {
-    "lint:ci:consumer": "npm run lint:ci -w consumer",
-    "type-check:consumer": "npm run type-check -w consumer",
-    "build-only:dev:consumer": "npm run build-only:dev -w consumer",
-    "build:prod:consumer": "npm run build:prod -w consumer",
-    "test:unit:consumer": "npm run test:unit -w consumer",
-    "dev:consumer": "npm run dev -w consumer"
+    "lint:ci:customer": "npm run lint:ci -w customer",
+    "type-check:customer": "npm run type-check -w customer",
+    "build-only:dev:customer": "npm run build-only:dev -w customer",
+    "build:prod:customer": "npm run build:prod -w customer",
+    "test:unit:customer": "npm run test:unit -w customer",
+    "dev:customer": "npm run dev -w customer"
   },
   "workspaces": [
-    "consumer"
+    "customer"
   ]
 }

@@ -37,7 +37,7 @@ jobs:
       - name: 現在のOpenAPI Generatorのバージョン取得
         id: get-current-openapi-generator-version
         run: |
-          echo "current-version=$(jq -r '.["generator-cli"].version' ./samples/Dressca/dressca-frontend/consumer/openapitools.json)" >> $GITHUB_OUTPUT
+          echo "current-version=$(jq -r '.["generator-cli"].version' ./samples/Dressca/dressca-frontend/customer/openapitools.json)" >> $GITHUB_OUTPUT
 
       - name: アップデート要否を判定
         id: check-version-update

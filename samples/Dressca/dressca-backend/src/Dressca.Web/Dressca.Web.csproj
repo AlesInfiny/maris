@@ -4,11 +4,11 @@
     <IsPackable>false</IsPackable>
     <NoDefaultLaunchSettingsFile Condition="'$(ExcludeLaunchSettings)' == 'True'">True</NoDefaultLaunchSettingsFile>
     <SpaRoot>..\..\..\dressca-frontend\</SpaRoot>
-    <SpaWorkspace>$(SpaRoot)consumer\</SpaWorkspace>
+    <SpaWorkspace>$(SpaRoot)customer\</SpaWorkspace>
     <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
     <!-- <SpaProxyServerUrl Condition="'$(RequiresHttps)' == 'True'">https://localhost:5002</SpaProxyServerUrl>
     <SpaProxyServerUrl Condition="'$(RequiresHttps)' != 'True'">http://localhost:5002</SpaProxyServerUrl> -->
-    <SpaProxyLaunchCommand>npm run dev:consumer</SpaProxyLaunchCommand>
+    <SpaProxyLaunchCommand>npm run dev:customer</SpaProxyLaunchCommand>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
@@ -90,7 +90,7 @@
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod:consumer" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod:customer" />
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>

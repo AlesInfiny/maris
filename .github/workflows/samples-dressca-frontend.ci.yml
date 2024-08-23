@@ -8,7 +8,7 @@ on:
     branches: [main]
     paths:
       - 'samples/Dressca/dressca-frontend/*.*'
-      - 'samples/Dressca/dressca-frontend/consumer/**'
+      - 'samples/Dressca/dressca-frontend/customer/**'
       - '.github/workflows/samples-dressca-frontend.ci.yml'
   workflow_dispatch:
 
@@ -51,19 +51,19 @@ jobs:
 
       - id: run-lint
         name: lintの実行
-        run: npm run lint:ci:consumer >> /var/tmp/lint-result.txt 2>&1
+        run: npm run lint:ci:customer >> /var/tmp/lint-result.txt 2>&1
 
       - id: run-type-check
         name: TypeScript の型チェック
-        run: npm run type-check:consumer >> /var/tmp/type-check-result.txt 2>&1
+        run: npm run type-check:customer >> /var/tmp/type-check-result.txt 2>&1
 
       - id: application-build
         name: アプリケーションのビルド
-        run: npm run build-only:dev:consumer >> /var/tmp/build-result.txt 2>&1
+        run: npm run build-only:dev:customer >> /var/tmp/build-result.txt 2>&1
 
       - id: run-unit-tests
         name: 単体テストの実行
-        run: npm run test:unit:consumer >> /var/tmp/unit-test-result.txt 2>&1
+        run: npm run test:unit:customer >> /var/tmp/unit-test-result.txt 2>&1
 
       - name: lintの結果出力
         if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
