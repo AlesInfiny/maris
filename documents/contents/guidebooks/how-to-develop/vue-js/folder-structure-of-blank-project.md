@@ -8,8 +8,8 @@ description: Vue.js を用いた クライアントサイドアプリケーシ�
 [ブランクプロジェクトの作成](./create-vuejs-blank-project.md) 時点でのフォルダー構造は以下のようになっています。
 
 ```terminal linenums="0"
-<project-name>
-├ package.json -------------- プロジェクトのメタデータ、依存関係、スクリプトなどを定義するファイル
+<root-project-name>
+├ package.json -------------- ルートプロジェクトのメタデータ、依存関係、スクリプトなどを定義するファイル
 ├ package-lock.json --------- npm によって自動生成される、パッケージの依存関係を記録するファイル
 └ <workspace-name>
   ├ cypress/ ---------------- cypress による End-to-End テスト用のフォルダー

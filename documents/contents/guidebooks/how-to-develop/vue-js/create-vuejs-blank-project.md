@@ -7,7 +7,7 @@ description: Vue.js を用いた クライアントサイドアプリケーシ�
 
 ## プロジェクトの初期化 {#init-npm-project}
 
-以下のコマンドを実行して、プロジェクトを初期化します。
+以下のコマンドを実行して、ルートプロジェクトを初期化します。
 
 ```terminal
 npm init -y
@@ -33,7 +33,7 @@ Wrote to ...\package.json:
 
 ## Vue.js およびオプションのインストール {#install-vue-js-and-options}
 
-以下のコマンドを実行し、任意のワークスペース名を指定して Vue.js をインストールします。
+以下のコマンドを実行し、任意のワークスペース名（プロジェクト名）を指定して Vue.js をインストールします。
 
 ```terminal
 npm init -w <workspace-name> vue@latest .
