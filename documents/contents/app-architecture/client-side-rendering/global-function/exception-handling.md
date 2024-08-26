@@ -1,6 +1,6 @@
 ---
-title: CSR 編
-description: クライアントサイドレンダリングを行う Web アプリケーションの アーキテクチャについて解説します。
+title: CSR 編 - 全体処理方式
+description: クライアントサイドレンダリング方式の アプリケーション全体で考慮すべき アーキテクチャについて、その実装方針を説明します。
 ---
 
 # 例外処理方針 {#top}
@@ -11,11 +11,23 @@ description: クライアントサイドレンダリングを行う Web アプ�
 
 例外は、業務例外とシステム例外の 2 種類に分けて考えます。
 
-業務例外は、業務フローで想定されるエラーを表す例外です。システム例外は、業務フロー上は想定されないシステムのエラーを表す例外です。
+- 業務例外：業務フローで想定されるエラーを表す例外です。
+- システム例外：業務フロー上は想定されないシステムのエラーを表す例外です。
 
 サーバーサイドアプリケーションでは、業務例外は独自に作成する例外クラスで表現します。システム例外は、原則として .NET が提供する例外クラスです。
 
-### サーバーサイド - クライアントサイド間の連携 {#server-and-client-side-error-handling}
+### 例外の捕捉 {#catch-exceptions-server-side}
+
+業務例外は、発生が予測できる箇所では `try-catch` を利用して捕捉し、適切なレスポンスを返却します。システム例外は原則として捕捉しません。
+
+捕捉されなかった業務例外、およびシステム例外は、グローバルエラーハンドラーである `ExceptionFilter` で捕捉します。
+
+### 例外の処理 {#error-handling-server-side}
+
+Web API は、最終的に HTTP ステータスコードやレスポンスボディをクライアントサイドへ返します。 API 内部で例外が発生した場合は、その旨をクライアントサイドへ伝える必要があります。
+ユーザーの入力や操作が原因で例外が発生した場合は 4xx 系のステータスコード、サーバーサイド側の想定外の事態で例外が発生した場合はステータスコード 500 を返します。
+
+### クライアントサイドへの例外の伝播フロー {#server-and-client-side-error-handling}
 
 サーバーサイドアプリケーションで発生するシステム例外や業務例外は、例外フィルターによって捕捉します。
 例外フィルターでは、ログ出力方針に従ってアプリケーションログを出力します。
@@ -27,8 +39,8 @@ description: クライアントサイドレンダリングを行う Web アプ�
 業務例外を例外フィルターで補足した場合は、 HTTP 400 のエラーレスポンスをクライアントサイドアプリケーションに返却します。
 クライアントサイドアプリケーションは、その画面内のメッセージ領域にエラーメッセージを表示します。
 
-![例外処理方針](../../images/app-architecture/client-side-rendering/exception-handling-policy-light.png){ loading=lazy }
-![例外処理方針](../../images/app-architecture/client-side-rendering/exception-handling-policy-dark.png#only-dark){ loading=lazy }
+![例外処理方針](../../../images/app-architecture/client-side-rendering/exception-handling-policy-light.png#only-light){ loading=lazy }
+![例外処理方針](../../../images/app-architecture/client-side-rendering/exception-handling-policy-dark.png#only-dark){ loading=lazy }
 
 ## クライアントサイドの例外処理方針 {#frontend-error-handling}
 
@@ -42,7 +54,7 @@ description: クライアントサイドレンダリングを行う Web アプ�
 業務例外は、業務フローで想定されるエラーを表す例外です。システム例外は、業務フロー上は想定されないシステムのエラーを表す例外です。
 API 通信においては、ステータスコードが 40x のエラーを業務例外、 50x のエラーをシステム例外として扱います。
 
-### 例外の捕捉 {#catch-exceptions}
+### 例外の捕捉 {#catch-exceptions-client-side}
 
 クライアントサイドで発生する例外には以下のようなものが考えられます。
 
@@ -61,7 +73,7 @@ API 通信においては、ステータスコードが 40x のエラーを業�
 
 HTTP 通信で発生する例外について、レスポンスやステータスコードを解析する場合は、 Axios の `axios.interceptors.response` が有効です。
 
-### 例外の処理 {#error-handling}
+### 例外の処理 {#error-handling-client-side}
 
 クライアントサイドの例外処理では、ユーザーが自身で対応できるか、という観点が重要になります。
 たとえばセッションタイムアウトになるといったような場合は、ユーザーが再度ログインすることで対処できます。
