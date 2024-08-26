@@ -7,7 +7,7 @@ description: Vue.js を用いた クライアントサイドアプリケーシ�
 
 [mono-repo](../../git/consider-repository-structure.md#about-mono-repo) 構成では、
 複数のフロントエンドアプリケーションのプロジェクトが 1 つのリポジトリに含まれます。
-[npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces) を用いることで、
+[npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces){ target=_blank } を用いることで、
 プロジェクトごとにワークスペースを作成し、管理できます。
 
 プロジェクトをまたがるワークスペースや、ワークスペースをまたがるプロジェクトを作成できますが、
