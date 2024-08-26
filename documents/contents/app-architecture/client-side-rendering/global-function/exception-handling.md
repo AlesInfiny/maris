@@ -3,22 +3,41 @@ title: CSR 編
 description: クライアントサイドレンダリングを行う Web アプリケーションの アーキテクチャについて解説します。
 ---
 
-# 全体処理方式 {#top}
+# 例外処理方針 {#top}
 
-クライアントサイドレンダリング方式のアプリケーション全体で考慮すべきアーキテクチャについて、その実装方針を説明します。
+## サーバーサイドの例外処理方針 {#server-side-error-handling}
 
-## 例外処理方針 {#exception-policy}
+### 例外の種類 {#exception-types-server-side}
 
-<!-- ## サーバーサイドの例外処理 -->
+例外は、業務例外とシステム例外の 2 種類に分けて考えます。
+
+業務例外は、業務フローで想定されるエラーを表す例外です。システム例外は、業務フロー上は想定されないシステムのエラーを表す例外です。
+
+サーバーサイドアプリケーションでは、業務例外は独自に作成する例外クラスで表現します。システム例外は、原則として .NET が提供する例外クラスです。
+
+### サーバーサイド - クライアントサイド間の連携 {#server-and-client-side-error-handling}
+
+サーバーサイドアプリケーションで発生するシステム例外や業務例外は、例外フィルターによって捕捉します。
+例外フィルターでは、ログ出力方針に従ってアプリケーションログを出力します。
+
+システム例外を例外フィルターで捕捉した場合は、 HTTP 500 のエラーレスポンスをクライアントサイドアプリケーションに返却します。
+クライアントサイドアプリケーションは、システムエラー画面に遷移し、 Sorry メッセージを出力します。
+クライアントサイドアプリケーション内で例外が発生した場合も、同様にシステムエラー画面に遷移します。
+
+業務例外を例外フィルターで補足した場合は、 HTTP 400 のエラーレスポンスをクライアントサイドアプリケーションに返却します。
+クライアントサイドアプリケーションは、その画面内のメッセージ領域にエラーメッセージを表示します。
+
+![例外処理方針](../../images/app-architecture/client-side-rendering/exception-handling-policy-light.png){ loading=lazy }
+![例外処理方針](../../images/app-architecture/client-side-rendering/exception-handling-policy-dark.png#only-dark){ loading=lazy }
 
 ## クライアントサイドの例外処理方針 {#frontend-error-handling}
 
 クライアントサイドは、ユーザーが操作する、ログの取得が難しいなど、サーバーサイドとは異なる特性があります。
 しかし例外処理方針としては、サーバーサイドと同様に正常なフローに復帰できるかどうかを最も重要な観点とし、そのためにどこで例外を捕捉しどのようにユーザーへ通知するかを検討します。
 
-### 例外の種類 {#exception-types}
+### 例外の種類 {#exception-types-client-side}
 
-クライアントサイドの例外は、業務例外とシステム例外の 2 種類に分けて考えます。
+クライアントサイドの例外は、サーバーサイドと同様、業務例外とシステム例外の 2 種類に分けて考えます。
 
 業務例外は、業務フローで想定されるエラーを表す例外です。システム例外は、業務フロー上は想定されないシステムのエラーを表す例外です。
 API 通信においては、ステータスコードが 40x のエラーを業務例外、 50x のエラーをシステム例外として扱います。
@@ -96,50 +115,3 @@ HTTP 通信で発生する例外について、レスポンスやステータス
     C->>B: エラー通知
     deactivate C
 ```
-
-## ログ出力方針 {#logging-policy}
-
-（今後追加予定）
-
-<!-- ### トランザクション管理 -->
-
-<!-- ## 入力値検査方針 {#validation-policy} -->
-
-<!-- ### セキュリティ対策 -->
-
-## ヘルスチェック機能の実装方針 {#health-check-implementation}
-
-AlesInfiny Maris OSS Edition では、 Web API を通じてシステムが正常稼働中か確認します。
-`Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用してヘルスチェック用の Web API を実装しています。
-
-実装方法の詳細については、[ヘルスチェック API の実装](../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
-また、ヘルスチェックの全体方針については、[ヘルスチェックの必要性](../overview/dotnet-application-processing-system/health-check-necessity.md) を参照してください。
-
-### API の仕様 {#api-specs}
-
-ヘルスチェック用の Web API にリクエストを送信すると、アプリケーションおよび関連するデータベース等の稼働状況が確認されます。
-
-アプリケーションとデータベース等の外部サービスが全て正常稼働している場合を正常状態とします。
-アプリケーションとデータベース等の外部サービスのいずれかに異常がある場合を異常状態とします。
-
-正常状態の場合は、 HTTP 200 のレスポンスを返却し、異常状態の場合は HTTP 503 のレスポンスを返却します。
-
-|      HealthStatus      | ステータスコード | レスポンスボディ |                   詳細                   |
-| ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
-| HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能             |
-| HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可/停止状態   |
-
-[`HealthStatus` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus){ target=_blank } をどのように使い分けるかについては、[HealthStatus の使い分け](../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。
-
-また、ロードバランサーによってはヘルスチェック実行時の HTTP メソッドが限られるため、 HTTP GET/HEAD メソッドに対応しています。
-
-### 検証ロジックの追加 {#add-health-check-logic}
-
-ヘルスチェック API は Web プロジェクトのアプリケーションとしての稼働状況と、データベース等の利用/依存しているサービスの稼働状況を取りまとめてレスポンスを返します。
-そのため、ヘルスチェック API 実行時に独自の検証ロジックを含める場合は、検証対象の外部サービスに依存するプロジェクトへ実装します。
-
-図のように、外部サービスのヘルスチェックロジックはプレゼンテーション層にあたる Web プロジェクトに直接実装しません。
-検証対象の外部サービスに対応するそれぞれのプロジェクトへ分割してロジックを追加し、 Web プロジェクトから参照するようにします。
-
-![検証ロジックの配置](../../images/app-architecture/client-side-rendering/add-health-check-logic-light.png#only-light){ loading=lazy }
-![検証ロジックの配置](../../images/app-architecture/client-side-rendering/add-health-check-logic-dark.png#only-dark){ loading=lazy }
