@@ -5,12 +5,8 @@ description: Vue.js を用いた クライアントサイドアプリケーシ�
 
 # ワークスペースの設定 {#top}
 
-[mono-repo](../../git/consider-repository-structure.md#about-mono-repo) 構成では、
-複数のフロントエンドアプリケーションのプロジェクトが 1 つのリポジトリに含まれます。
-[npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces){ target=_blank } を用いることで、
-プロジェクトごとにワークスペースを作成し、管理できます。
-プロジェクトをまたがるワークスペースや、ワークスペースをまたがるプロジェクトを作成できますが、
-原則としてワークスペースとプロジェクトが 1:1 で対応するようにします。
+[ブランクプロジェクトの作成](./create-vuejs-blank-project.md) で作成したルートプロジェクトとワークスペースについて、
+追加で必要な設定をします。
 
 ## ワークスペースの定義 {#definition-workspaces}
 

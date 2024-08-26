@@ -5,6 +5,19 @@ description: Vue.js を用いた クライアントサイドアプリケーシ�
 
 # ブランクプロジェクトの作成 {#top}
 
+下記の手順では、 Node.js のルートプロジェクトとワークスペースを作成し、作成したワークスペースに Vue.js のブランクプロジェクトを作成します。
+
+## プロジェクトの全体像 {#project-overview}
+
+[mono-repo](../../git/consider-repository-structure.md#about-mono-repo) 構成では、
+複数のフロントエンドアプリケーションのプロジェクトを 1 つのリポジトリで管理します。
+[npm workspaces](https://docs.npmjs.com/cli/v10/using-npm/workspaces){ target=_blank } を用いることで、
+プロジェクトごとにワークスペースを作成し、管理できます。
+プロジェクトをまたがるワークスペースや、ワークスペースをまたがるプロジェクトを作成できますが、
+原則としてワークスペースとプロジェクトが 1:1 で対応するようにします。
+
+![プロジェクトフォルダの構造](../../../images/guidebooks/how-to-develop/vue-js/project-folder-structure-light.png#only-light){ loading=lazy align=right }
+
 ## プロジェクトの初期化 {#init-npm-project}
 
 以下のコマンドを実行して、ルートプロジェクトを初期化します。
