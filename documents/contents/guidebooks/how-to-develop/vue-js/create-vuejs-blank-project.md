@@ -31,7 +31,7 @@ npm init -y
 ```terminal
 Wrote to ...\package.json:
 {
-  "name": "project-name",
+  "name": "root-project-name",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

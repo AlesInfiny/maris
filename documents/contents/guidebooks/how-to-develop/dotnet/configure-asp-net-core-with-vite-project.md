@@ -32,11 +32,11 @@ ASP.NET Core with Vite プロジェクトを実行したとき、適切なフロ
 
 ASP.NET Core with Vite プロジェクトのプロジェクトファイルを開き、 `#!xml <SpaRoot>` プロパティの値を変更します。
 上記の例のような配置の場合、 [AaaSubSystem.Web.csproj] から、フロントエンドアプリケーションを配置したルートフォルダー [frontend] に対する相対パスを設定します。
-続けて、`#!xml <SpaRootWorkspace>`  プロパティを追加し、プロジェクトフォルダー [workspace] に対する相対パスを設定します。
+続けて、`#!xml <SpaRootWorkspace>`  プロパティを追加し、プロジェクトフォルダー [workspace-name] に対する相対パスを設定します。
 
 ```xml title="ASP.NET Core with Vite プロジェクト ( AaaSubSystem.Web.csproj )"
 <SpaRoot>..\..\..\frontend\</SpaRoot>
-<SpaWorkspace>$(SpaRoot)workspace\</SpaWorkspace>
+<SpaWorkspace>$(SpaRoot)workspace-name\</SpaWorkspace>
 ```
 
 ### フロントエンドアプリケーションの参照削除 {#remove-frontend-folder-reference}
@@ -64,7 +64,7 @@ ASP.NET Core with Vite プロジェクトのプロジェクトファイルには
 設定箇所は ASP.NET Core with Vite プロジェクトのプロジェクトファイル内、 `#!xml <SpaProxyLaunchCommand>` プロパティです。
 
 ```xml title="フロントエンドアプリケーションの起動コマンドの設定例 ( AaaSubSystem.Web.csproj )"
-<SpaProxyLaunchCommand>npm run dev:workspace</SpaProxyLaunchCommand>
+<SpaProxyLaunchCommand>npm run dev:workspace-name</SpaProxyLaunchCommand>
 ```
 
 [^1]: フォルダー名は適宜変更してください。

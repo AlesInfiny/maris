@@ -57,12 +57,12 @@ CI パイプラインで使用するために、ルートプロジェクトの p
 ``` json title="package.json（ルート）"
 {
   "scripts": {
-    "lint:ci:consumer": "npm run lint:ci -w consumer",
-    "type-check:consumer": "npm run type-check -w consumer",
-    "build-only:dev:consumer": "npm run build-only:dev -w consumer",
-    "build:prod:consumer": "npm run build:prod -w consumer",
-    "test:unit:consumer": "npm run test:unit -w consumer",
-    "dev:consumer": "npm run dev -w consumer"
+    "lint:ci:workspace-name": "npm run lint:ci -w workspace-name",
+    "type-check:workspace-name": "npm run type-check -w workspace-name",
+    "build-only:dev:workspace-name": "npm run build-only:dev -w workspace-name",
+    "build:prod:workspace-name": "npm run build:prod -w workspace-name",
+    "test:unit:workspace-name": "npm run test:unit -w workspace-name",
+    "dev:workspace-name": "npm run dev -w workspace-name"
   },
 }
 ```

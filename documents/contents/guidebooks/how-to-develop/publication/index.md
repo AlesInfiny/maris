@@ -69,7 +69,7 @@ interface ImportMeta {
 ```json title="package.json（ルート）"
 {
   "scripts": {
-    "build:prod:sample": "run build:prod -w sample",
+    "build:prod:workspace-name": "run build:prod -w workspace-name",
   }
 }
 ```
@@ -117,8 +117,8 @@ app.Run();
 ```xml title="StartUp.csproj"
 <Project Sdk="Microsoft.NET.Sdk.Web">
  <PropertyGroup>
-   <SpaRoot>[ClientAppRoot]</SpaRoot>
-   <SpaWorkspace>$(SpaRoot)[WorkSpace]</SpaWorkspace>
+   <SpaRoot>..\..\..\frontend\</SpaRoot>
+   <SpaWorkspace>$(SpaRoot)workspace-name</SpaWorkspace>
  </PropertyGroup>
 
   ...
@@ -126,7 +126,7 @@ app.Run();
  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-   <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod:sample" />
+   <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod:workspace-name" />
 
    <!-- Include the newly-built files in the publish output -->
    <ItemGroup>
