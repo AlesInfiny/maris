@@ -35,8 +35,8 @@ nav:
           - 全体処理方式:
               - app-architecture/client-side-rendering/global-function/index.md
               - 例外処理方針: app-architecture/client-side-rendering/global-function/exception-handling.md
-              # - ログ出力方針: app-architecture/client-side-rendering/global-function/logging-policy.md
               - ヘルスチェック機能の実装方針: app-architecture/client-side-rendering/global-function/health-check-implementation.md
+              # - ログ出力方針: app-architecture/client-side-rendering/global-function/logging-policy.md
           - テスト方針:
               - app-architecture/client-side-rendering/test/index.md
               - バックエンドアプリケーションのテスト:
