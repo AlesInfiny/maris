@@ -7,19 +7,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'samples/Dressca/dressca-backend/*.*'
-      - 'samples/Dressca/dressca-backend/src/Dressca.ApplicationCore/**'
-      - 'samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure/**'
-      - 'samples/Dressca/dressca-backend/src/Dressca.Store.Assets.StaticFiles/**'
-      - 'samples/Dressca/dressca-backend/src/Dressca.SystemCommon/**'
-      - 'samples/Dressca/dressca-backend/src/Dressca.Web/**'
-      - 'samples/Dressca/dressca-backend/src/Dressca.Web.Dto/**'
-      - 'samples/Dressca/dressca-backend/src/Maris.Logging.Testing/**'
-      - 'samples/Dressca/dressca-backend/tests/Dressca.IntegrationTest/**'
-      - 'samples/Dressca/dressca-backend/tests/Dressca.UnitTests.ApplicationCore/**'
-      - 'samples/Dressca/dressca-backend/tests/Dressca.UnitTests.SystemCommon/**'
-      - 'samples/Dressca/dressca-backend/tests/Dressca.UnitTests.Web/**'
-      - 'samples/Dressca/dressca-backend/tests/Maris.Logging.Testing.Tests/**'
+      - 'samples/Dressca/dressca-backend/**'
       - '.github/workflows/samples-dressca-backend.ci.yml'
   workflow_dispatch:
 
