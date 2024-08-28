@@ -8,7 +8,7 @@ on:
     branches: [main]
     paths:
       - 'samples/Dressca/dressca-backend/**'
-      - '.github/workflows/samples-dressca-backend.ci.yml'
+      - '.github/workflows/samples-dressca-consumer-backend.ci.yml'
   workflow_dispatch:
 
 env:
