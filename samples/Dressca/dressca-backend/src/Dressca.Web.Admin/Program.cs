@@ -8,6 +8,7 @@ using Dressca.Web.Admin.Authorization;
 using Dressca.Web.Admin.Controllers;
 using Dressca.Web.Admin.HealthChecks;
 using Dressca.Web.Admin.Mapper;
+using Dressca.Web.Admin.Runtime;
 using DummyAuthentication.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -19,22 +20,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
-{
-    options.SuppressMapClientErrors = true;
-
-    // Bad Request となった場合の処理。
-    var builtInFactory = options.InvalidModelStateResponseFactory;
-    options.InvalidModelStateResponseFactory = context =>
+builder.Services
+    .AddControllers(options =>
     {
-        // エラーの原因をログに出力。
-        var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-        logger.LogInformation("HTTP 要求に誤りがあります。詳細情報: {0} 。", JsonSerializer.Serialize(context.ModelState));
+        options.Filters.Add<DbUpdateConcurrencyExceptionFilter>();
+    })
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.SuppressMapClientErrors = true;
 
-        // ASP.NET Core の既定の実装を使ってレスポンスを返却。
-        return builtInFactory(context);
-    };
-});
+        // Bad Request となった場合の処理。
+        var builtInFactory = options.InvalidModelStateResponseFactory;
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            // エラーの原因をログに出力。
+            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+            logger.LogInformation("HTTP 要求に誤りがあります。詳細情報: {0} 。", JsonSerializer.Serialize(context.ModelState));
+
+            // ASP.NET Core の既定の実装を使ってレスポンスを返却。
+            return builtInFactory(context);
+        };
+    });
 
 builder.Services.AddHttpContextAccessor();
 

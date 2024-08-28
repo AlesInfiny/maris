@@ -7,7 +7,6 @@ using Dressca.Web.Admin.Dto;
 using Dressca.Web.Admin.Dto.Catalog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NSwag.Annotations;
 
 namespace Dressca.Web.Admin.Controllers;
@@ -219,11 +218,6 @@ public class CatalogItemsController : ControllerBase
         {
             this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
             return this.NotFound();
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
-            return this.Conflict();
         }
         return this.NoContent();
     }

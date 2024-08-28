@@ -21,6 +21,11 @@ internal static class Events
     internal static readonly EventId CatalogItemNotExistingInRepository = new(1003, nameof(CatalogItemNotExistingInRepository));
 
     /// <summary>
+    ///  データベースの更新の競合が発生したことを示すイベントID。
+    /// </summary>
+    internal static readonly EventId DbUpdateConcurrencyOccured = new(1004, nameof(DbUpdateConcurrencyOccured));
+
+    /// <summary>
     /// デバッグ用のイベントID
     /// </summary>
     internal static readonly EventId DebugEvent = new(9999, nameof(DebugEvent));
