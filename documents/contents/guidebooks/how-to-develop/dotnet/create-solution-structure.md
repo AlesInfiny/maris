@@ -93,5 +93,6 @@ tests フォルダー内は、テストの目的にあわせてテストプロ�
 また、ソリューションフィルターを使用する場合は、単体機能確認のためのテストプロジェクトも業務単位で分割しましょう。
 
 ![ソリューションフィルター](../../../images/guidebooks/how-to-develop/dotnet/solution-filter-light.png#only-light){ loading=lazy }
+![ソリューションフィルター](../../../images/guidebooks/how-to-develop/dotnet/solution-filter-dark.png#only-dark){ loading=lazy }
 
 [^1]: プロダクションコードのみ XML コメントの記入を必須にする、といったルールの調整が良く行われます。
