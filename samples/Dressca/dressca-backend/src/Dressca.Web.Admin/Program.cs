@@ -10,6 +10,7 @@ using Dressca.Web.Admin.HealthChecks;
 using Dressca.Web.Admin.Mapper;
 using DummyAuthentication.Web;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -77,6 +78,9 @@ else if (builder.Environment.IsProduction())
 {
     // 本番環境用の認証ハンドラーを登録します。
 }
+
+builder.Services.AddSingleton<
+    IAuthorizationMiddlewareResultHandler, StatusCodeMapAuthorizationMiddlewareResultHandler>();
 
 builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, HealthCheckDescriptionProvider>());
 
