@@ -9,7 +9,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.TimeProvider.Testing" Version="8.8.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.0" />
-    <PackageVersion Include="Moq" Version="4.20.70" />
+    <PackageVersion Include="Moq" Version="4.20.71" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="xunit" Version="2.9.0" />
     <PackageVersion Include="xunit.abstractions" Version="2.0.3" />
