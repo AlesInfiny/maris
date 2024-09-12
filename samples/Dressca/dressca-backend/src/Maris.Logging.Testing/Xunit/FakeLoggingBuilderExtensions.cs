@@ -1,7 +1,7 @@
-﻿using Maris.Logging.Testing.Xunit;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 
-namespace Microsoft.Extensions.Logging;
+namespace Maris.Logging.Testing.Xunit;
 
 /// <summary>
 ///  <see cref="TestLoggerManager"/> で使用可能な <see cref="FakeLoggerProvider"/> を登録する処理を提供します。

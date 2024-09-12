@@ -1,6 +1,6 @@
-﻿using Maris.Logging.Testing.Xunit;
+﻿using Microsoft.Extensions.Logging;
 
-namespace Microsoft.Extensions.Logging;
+namespace Maris.Logging.Testing.Xunit;
 
 /// <summary>
 ///  Xunit で使用可能な <see cref="ILogger"/> を登録する処理を提供します。

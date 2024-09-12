@@ -1,0 +1,33 @@
+﻿using Dressca.ApplicationCore.Assets;
+using Dressca.Web.Consumer.Assets;
+
+namespace Dressca.UnitTests.Web.Consumer.Assets;
+
+public class AssetExtensionsTest
+{
+    [Fact]
+    public void GetContentType_アセットがnull_ArgumentNullExceptionが発生する()
+    {
+        // Arrange
+        Asset? asset = null;
+
+        // Act
+        var action = () => asset!.GetContentType();
+
+        // Assert
+        Assert.Throws<ArgumentNullException>("asset", action);
+    }
+
+    [Fact]
+    public void GetContentType_アセットタイプがPNG_imagepngを取得できる()
+    {
+        // Arrange
+        var asset = new Asset { AssetCode = "asset-code", AssetType = AssetTypes.Png };
+
+        // Act
+        var contentType = asset.GetContentType();
+
+        // Assert
+        Assert.Equal("image/png", contentType);
+    }
+}
