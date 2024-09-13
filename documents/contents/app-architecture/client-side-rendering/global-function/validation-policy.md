@@ -17,7 +17,7 @@ description: アプリケーション全体で考慮すべきアーキテクチ�
 入力値検証は VeeValidate と yup を利用します。
 
 サーバーサイドアプリケーションでは、誤った入力情報がシステムに投入されることを防止する目的に行います。
-入力値検証は ASP.NET Web API のモデル検証を利用します（ [ASP.NET Web API - ASP.NET 4.x でのモデルの検証 | Microsoft Learn](https://learn.microsoft.com/ja-jp/aspnet/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api) ）。
+入力値検証は .NET のモデル検証を利用します（ [ASP.NET Core MVC でのモデルの検証 | Microsoft Learn](https://learn.microsoft.com/ja-jp/aspnet/core/mvc/models/validation) ）。
 
 ## 項目間チェック {#cross-field-check}
 
@@ -30,7 +30,7 @@ description: アプリケーション全体で考慮すべきアーキテクチ�
 
 サーバーサイドアプリケーションでは、誤った入力情報がシステムに投入されることを防止する目的に行います。
 入力値検証はプレゼンテーション層の業務ロジック内で実装します。
-繰り返し使用するものは ASP.NET Web API のモデル検証を独自拡張して汎用化します。具体的には、 `System.ComponentModel.DataAnnotations.ValidationAttribute` の派生クラスを作成し、 `IsValid` メソッドをオーバーライドします。（ [カスタム属性 - ASP.NET Core MVC でのモデルの検証 | Microsoft Learn](https://learn.microsoft.com/ja-jp/aspnet/core/mvc/models/validation?view=aspnetcore-6.0#custom-attributes) ）
+繰り返し使用するものは .NET のモデル検証を独自拡張して汎用化します。具体的には、 `System.ComponentModel.DataAnnotations.ValidationAttribute` の派生クラスを作成し、 `IsValid` メソッドをオーバーライドします。（ [カスタム属性 - ASP.NET Core MVC でのモデルの検証 | Microsoft Learn](https://learn.microsoft.com/ja-jp/aspnet/core/mvc/models/validation?#custom-attributes) ）
 
 ### 複合チェック {#complex-check}
 
