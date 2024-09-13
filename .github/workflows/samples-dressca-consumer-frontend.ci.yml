@@ -9,7 +9,7 @@ on:
     paths:
       - 'samples/Dressca/dressca-frontend/*.*'
       - 'samples/Dressca/dressca-frontend/consumer/**'
-      - '.github/workflows/samples-dressca-frontend.ci.yml'
+      - '.github/workflows/samples-dressca-consumer-frontend.ci.yml'
   workflow_dispatch:
 
 defaults:
