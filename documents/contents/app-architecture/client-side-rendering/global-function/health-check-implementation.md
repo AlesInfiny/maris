@@ -27,7 +27,7 @@ AlesInfiny Maris OSS Edition では、 Web API を通じてシステムが正常
 
 [`HealthStatus` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus){ target=_blank } をどのように使い分けるかについては、[HealthStatus の使い分け](../../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。
 
-また、ロードバランサーによってはヘルスチェック実行時の HTTP メソッドが限られるため、 HTTP GET/HEAD メソッドに対応しています。
+また、監視側の仕様によってヘルスチェック実行時の HTTP メソッドに制限の入ることがあるため、 HTTP GET/HEAD メソッドいずれにも対応できるようにします。
 
 ## 検証ロジックの追加 {#add-health-check-logic}
 
