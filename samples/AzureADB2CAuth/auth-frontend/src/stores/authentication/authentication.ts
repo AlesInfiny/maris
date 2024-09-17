@@ -2,60 +2,41 @@ import { defineStore } from 'pinia';
 import {
   signInAzureADB2C,
   getTokenAzureADB2C,
-  type AuthenticationResult,
+  // type AuthenticationResult,
 } from '@/shared/authentication/authentication-adb2c';
 
 export const useAuthenticationStore = defineStore({
   id: 'authentication',
   state: () => ({
-    homeAccountId: JSON.parse(
-      sessionStorage.getItem('homeAccountId') || '{}',
-    ) as string,
-    accessToken: '' as string,
     authenticated: JSON.parse(
       sessionStorage.getItem('isAuthenticated') || 'false',
     ) as boolean,
   }),
   actions: {
     async signIn() {
-      const result = (await signInAzureADB2C()) as AuthenticationResult;
-      this.homeAccountId = result.homeAccountId;
-      this.authenticated = result.isAuthenticated;
+      const result = (await signInAzureADB2C());
+      this.authenticated = result;
 
-      sessionStorage.setItem(
-        'homeAccountId',
-        JSON.stringify(this.homeAccountId),
-      );
       sessionStorage.setItem(
         'isAuthenticated',
         JSON.stringify(this.authenticated),
       );
     },
     async getToken() {
-      const result = (await getTokenAzureADB2C(
-        this.homeAccountId,
-      )) as AuthenticationResult;
-      this.accessToken = result.accessToken;
-      this.homeAccountId = result.homeAccountId;
-      this.authenticated = result.isAuthenticated;
-
-      sessionStorage.setItem(
-        'homeAccountId',
-        JSON.stringify(this.homeAccountId),
-      );
-      sessionStorage.setItem(
-        'isAuthenticated',
-        JSON.stringify(this.authenticated),
-      );
+      try {
+        const result = (await getTokenAzureADB2C());
+        this.authenticated = true;
+      } catch (error) {
+        this.authenticated = false;
+      } finally {
+        sessionStorage.setItem(
+          'isAuthenticated',
+          JSON.stringify(this.authenticated),
+        );
+      }
     },
   },
   getters: {
-    getHomeAccountId(state) {
-      return state.homeAccountId;
-    },
-    getAccessToken(state) {
-      return state.accessToken;
-    },
     isAuthenticated(state) {
       return state.authenticated;
     },
