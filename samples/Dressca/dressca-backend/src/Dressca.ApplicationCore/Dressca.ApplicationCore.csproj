@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Dressca.UnitTests" />
+    <InternalsVisibleTo Include="Dressca.UnitTests.ApplicationCore" />
   </ItemGroup>
 
 </Project>

@@ -32,13 +32,21 @@ nav:
           - app-architecture/client-side-rendering/index.md
           - CSR アーキテクチャ概要: app-architecture/client-side-rendering/csr-architecture-overview.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
-          - 全体処理方式: app-architecture/client-side-rendering/global-function.md
+          - 全体処理方式:
+              - app-architecture/client-side-rendering/global-function/index.md
+              - 例外処理方針: app-architecture/client-side-rendering/global-function/exception-handling.md
+              - ヘルスチェック機能の実装方針: app-architecture/client-side-rendering/global-function/health-check-implementation.md
+              - ログ出力方針: app-architecture/client-side-rendering/global-function/logging-policy.md
+              - 入力値検査方針: app-architecture/client-side-rendering/global-function/validation-policy.md
           - テスト方針:
               - app-architecture/client-side-rendering/test/index.md
               - バックエンドアプリケーションのテスト:
                   - app-architecture/client-side-rendering/test/backend-application/index.md
                   - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md
                   # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
+      - アプリケーションセキュリティ編:
+          - app-architecture/security/index.md
+          - XSS （クロスサイトスクリプティング）: app-architecture/security/xss.md
       # - コンソールアプリケーション編:
           # - app-architecture/console-app/index.md
       # - クックブック:
@@ -70,6 +78,7 @@ nav:
               - 事前準備: guidebooks/how-to-develop/vue-js/preparation.md
               - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md
               - ブランクプロジェクトのフォルダー構造: guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
+              - ワークスペースの設定: guidebooks/how-to-develop/vue-js/setting-workspaces.md
               - プロジェクトの共通設定: guidebooks/how-to-develop/vue-js/project-settings.md
               - 開発に使用するパッケージ: guidebooks/how-to-develop/vue-js/optional-packages.md
               - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/vue-js/css.md
@@ -84,6 +93,9 @@ nav:
               - guidebooks/how-to-develop/cors/index.md
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
+      # - 規約:
+      #     - guidebooks/conventions/index.md
+          - コーディング規約: guidebooks/conventions/coding-conventions.md
       - マイグレーション:
           - guidebooks/migration/index.md
           - .NET Framework にとどまることのリスク:
