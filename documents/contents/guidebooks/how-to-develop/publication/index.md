@@ -112,7 +112,7 @@ app.Run();
 
 ### プロジェクトファイルの設定 {#project-file-settings}
 
-発行する際、最新のクライアントサイドのビルドファイルを含めるために、 Web アプリケーションのプロジェクトファイルに以下のような設定を追加します。以下のコード例は、クライアントサイドのパスを書き換えれば、そのまま csproj ファイルに追加して使用できます。ただし、 `npm install` と `npm run build:prod` のコマンドは、クライアントサイドのビルドに合わせて変更してください。
+発行する際、最新のクライアントサイドのビルドファイルを含めるために、 Web アプリケーションのプロジェクトファイルに以下のような設定を追加します。以下のコード例は、クライアントサイドのパスを書き換えれば、そのまま csproj ファイルに追加して使用できます。ただし、 `npm ci` と `npm run build:prod` のコマンドは、クライアントサイドのビルドに合わせて変更してください。
 
 ```xml title="StartUp.csproj"
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -125,7 +125,7 @@ app.Run();
 
  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-   <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+   <Exec WorkingDirectory="$(SpaRoot)" Command="npm ci" />
    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod:workspace-name" />
 
    <!-- Include the newly-built files in the publish output -->
