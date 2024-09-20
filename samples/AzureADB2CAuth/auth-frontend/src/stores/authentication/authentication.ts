@@ -6,7 +6,7 @@ export const useAuthenticationStore = defineStore({
     authenticated: false as boolean,
   }),
   actions: {
-    updateIsAuthenticated(isAuthenticated: boolean) {
+    updateAuthenticated(isAuthenticated: boolean) {
       this.authenticated = isAuthenticated;
     },
   },
