@@ -365,7 +365,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
       
 
       // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
-      if (await authenticationService.checkAuthenticationStatus()) {
+      if (await authenticationService.isAuthenticated()) {
         const token = await authenticationService.getTokenAzureADB2C();
         config.accessToken = token;
       }
