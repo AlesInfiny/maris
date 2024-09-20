@@ -337,8 +337,8 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     ```
 
 1. `npm run generate-client` を実行し、 Axios のクライアントコードを再生成します。
-1. `src\shared\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
-    - authentication-adb2c.ts
+1. `src\services\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
+    - authentication-services.ts
     - authentication-config.ts
 1. `src\store\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
     - authentication.ts
@@ -348,7 +348,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     ```ts
     import axios from "axios";
     import * as apiClient from "@/generated/api-client";
-    import { useAuthenticationStore } from "@/stores/authentication/authentication";
+    import { authenticationService } from '@/services/authentication/authentication-service';
 
     // その他のコードは省略
 
@@ -362,12 +362,11 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     }
 
     async function addTokenAsync(config: apiClient.Configuration) {
-      const store = useAuthenticationStore();
+      
 
       // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
-      if (store.isAuthenticated) {
-        await store.getToken();
-        const token = store.getAccessToken;
+      if (await authenticationService.checkAuthenticationStatus()) {
+        const token = await authenticationService.getTokenAzureADB2C();
         config.accessToken = token;
       }
     }
@@ -394,23 +393,6 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     }
     ```
 
-1. 認証機能を持つサービスを作成します。`src\services\authentication` フォルダーを作成し、 `authentication-service.ts` を作成します。
-
-    ```ts
-    import { useAuthenticationStore } from "@/stores/authentication/authentication";
-
-    export const authenticationService = {
-      async signIn() {
-        const authenticationStore = useAuthenticationStore();
-        await authenticationStore.signIn();
-        
-        if (authenticationStore.isAuthenticated) {
-          // サインインが成功した場合の処理をここに記述します。
-        } 
-      },
-    };
-    ```
-
 1. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
 
     ```ts
@@ -420,7 +402,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     const authenticationStore = useAuthenticationStore();
 
     const signIn = async () => {
-      await authenticationService.signIn();
+      await authenticationService.signInAzureADB2C();
     };
     </script>
     ```
