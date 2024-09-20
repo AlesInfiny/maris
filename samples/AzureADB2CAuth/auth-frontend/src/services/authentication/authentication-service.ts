@@ -18,11 +18,11 @@ export const authenticationService = {
     try {
       const response = await msalInstance.loginPopup(loginRequest);
       msalInstance.setActiveAccount(response.account);
-      authenticationStore.updateIsAuthenticated(true);
+      authenticationStore.updateAuthenticated(true);
       return true;
     } catch (error) {
       if (error instanceof BrowserAuthError) {
-        authenticationStore.updateIsAuthenticated(false);
+        authenticationStore.updateAuthenticated(false);
         return false;
       }
       throw error;
@@ -32,7 +32,7 @@ export const authenticationService = {
   async isAuthenticated(): Promise<boolean> {
     const result = msalInstance.getActiveAccount() !== null;
     const authenticationStore = useAuthenticationStore();
-    authenticationStore.updateIsAuthenticated(result);
+    authenticationStore.updateAuthenticated(result);
     return result;
   },
 
