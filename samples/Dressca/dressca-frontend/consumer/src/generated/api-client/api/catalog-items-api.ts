@@ -127,7 +127,7 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getByQuery(brandId?: number | null, categoryId?: number | null, page?: number, pageSize?: number, options?: any): AxiosPromise<PagedListOfCatalogItemResponse> {
+        getByQuery(brandId?: number | null, categoryId?: number | null, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<PagedListOfCatalogItemResponse> {
             return localVarFp.getByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(axios, basePath));
         },
     };
