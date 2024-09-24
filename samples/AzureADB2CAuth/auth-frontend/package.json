@@ -39,7 +39,7 @@
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
-    "eslint-plugin-cypress": "^3.4.0",
+    "eslint-plugin-cypress": "^3.5.0",
     "eslint-plugin-vue": "^9.27.0",
     "jsdom": "^24.1.1",
     "npm-run-all2": "^6.2.2",
