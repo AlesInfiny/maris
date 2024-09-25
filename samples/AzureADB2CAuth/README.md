@@ -31,8 +31,8 @@ Azure サブスクリプションを持っていない場合、 [無料アカウ
 
 - .NET 8
 - Node.js v20.10.0
-- Visual Studio 2022 17.9.3
-- Visual Studio Code 1.87.2
+- Visual Studio 2022 17.10.5
+- Visual Studio Code 1.93.1
 
 ## サンプルの構成
 
@@ -84,16 +84,13 @@ auth-frontend
 　 ├ generated ......................... 自動生成された Axios のコードが配置されるフォルダー
 　 ├ services
 　 │  ├ authentication
-　 │  │ └ authentication-service.ts ..... 認証（サインイン、トークン取得）を行うサービス
-　 │  ├ server-time
+　 │  │ ├ authentication-service.ts ..... 認証（サインイン、トークン取得）を行うサービス
+　 │  │ └ authentication-config.ts ...... 上のコードが使用する設定ファイル
+　 │  └ server-time
 　 │    └ server-time-service.ts ........ 認証の必要がない処理を行うサービス
-　 ├ shared
-　 │ └ authentication
-　 │ 　 ├ authentication-adb2c.ts ..... Azure AD B2C による認証（サインイン、トークン取得）を行う TypeScript ファイル
-　 │ 　 └ authentication-config.ts .... 上のコードが使用する設定ファイル
 　 └ stores
 　 　 ├ authentication
-　 　 │ └ authentication.ts ........... 認証の結果を保持するストア
+　 　 │ └ authentication.ts ............ 認証の状態を保持するストア
 　 　 ├ server-time
 　 　 │ └ server-time.ts ............... 認証の必要がない Web API 呼び出しの結果を保持するストア
 　 　 └ users

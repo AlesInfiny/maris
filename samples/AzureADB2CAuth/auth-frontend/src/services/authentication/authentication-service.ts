@@ -2,7 +2,6 @@ import {
   BrowserAuthError,
   InteractionRequiredAuthError,
 } from '@azure/msal-browser';
-import type { AccountFilter } from '@azure/msal-common';
 import {
   msalInstance,
   loginRequest,
@@ -37,11 +36,7 @@ export const authenticationService = {
   },
 
   async getTokenAzureADB2C() {
-    const accountFilter = {} as AccountFilter;
-    accountFilter.homeAccountId =
-      msalInstance.getActiveAccount()?.homeAccountId;
-
-    const account = msalInstance.getAccount(accountFilter);
+    const account = msalInstance.getActiveAccount();
 
     tokenRequest.account = account ?? undefined;
     try {
