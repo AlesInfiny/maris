@@ -6,6 +6,7 @@
 *[CD]: Continuous Delivery：継続的デリバリー。
 *[CI]: Continuous Integration：継続的インテグレーション。
 *[CORS]: Cross-Origin Resource Sharing：オリジン間リソース共有。
+*[CMS]: Contents Management System.
 *[CSR]: Client Side Rendering.
 *[DTO]: Data Transfer Object：データ転送に利用するだけのオブジェクト。
 *[EOL]: End Of Life：製品ライフサイクルの終了。
@@ -18,6 +19,7 @@
 *[NET MAUI]: .NET Multi-Platform App UI.
 *[OS]: Operating System.
 *[OSS]: Open Source Software.
+*[PKCE]: Proof Key for Code Exchange.
 *[RAM]: Random Access Memory：「メモリ」とも表現される。
 *[SaaS]: Software as a Service：ソフトウェアをネットワーク経由で利用できるサービス。
 *[SPA]: Single Page Application：単一ページアプリケーション。 CSR の実装方式。
@@ -26,4 +28,5 @@
 *[UI]: User Interface.
 *[UX]: User Experience.
 *[VS Code]: Visual Studio Code.
+*[XSS]: X-Site Scripting : クロスサイトスクリプティング。
 <!-- textlint-enable ja-technical-writing/sentence-length -->
