@@ -8,6 +8,7 @@
 *[CORS]: Cross-Origin Resource Sharing：オリジン間リソース共有。
 *[CMS]: Contents Management System.
 *[CSR]: Client Side Rendering.
+*[CSRF]: Cross-Site Request Forgery：クロスサイトリクエストフォージェリ。
 *[DTO]: Data Transfer Object：データ転送に利用するだけのオブジェクト。
 *[EOL]: End Of Life：製品ライフサイクルの終了。
 *[GB]: Gigabyte：記憶媒体の容量を表す単位。

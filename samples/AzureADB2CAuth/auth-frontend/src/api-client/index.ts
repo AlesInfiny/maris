@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as apiClient from '@/generated/api-client';
-import { useAuthenticationStore } from '@/stores/authentication/authentication';
+import { authenticationService } from '@/services/authentication/authentication-service';
 
 /** axios の共通の設定があればここに定義します。 */
 const axiosInstance = axios.create({
@@ -18,12 +18,9 @@ function createConfig(): apiClient.Configuration {
 }
 
 async function addTokenAsync(config: apiClient.Configuration): Promise<void> {
-  const store = useAuthenticationStore();
-
   // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
-  if (store.isAuthenticated) {
-    await store.getToken();
-    const token = store.getAccessToken;
+  if (await authenticationService.isAuthenticated()) {
+    const token = await authenticationService.getTokenAzureADB2C();
     // eslint-disable-next-line no-param-reassign
     config.accessToken = token;
   }
