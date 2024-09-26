@@ -86,6 +86,8 @@ auth-frontend
 　 │  ├ authentication
 　 │  │ ├ authentication-service.ts ..... 認証（サインイン、トークン取得）を行うサービス
 　 │  │ └ authentication-config.ts ...... 上のコードが使用する設定ファイル
+　 │  ├ user
+　 │  │ └ user-service.ts ............... 認証の必要がある処理を行うサービス
 　 │  └ server-time
 　 │    └ server-time-service.ts ........ 認証の必要がない処理を行うサービス
 　 └ stores
