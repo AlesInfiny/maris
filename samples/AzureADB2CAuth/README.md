@@ -31,8 +31,8 @@ Azure サブスクリプションを持っていない場合、 [無料アカウ
 
 - .NET 8
 - Node.js v20.10.0
-- Visual Studio 2022 17.9.3
-- Visual Studio Code 1.87.2
+- Visual Studio 2022 17.10.5
+- Visual Studio Code 1.93.1
 
 ## サンプルの構成
 
@@ -84,16 +84,15 @@ auth-frontend
 　 ├ generated ......................... 自動生成された Axios のコードが配置されるフォルダー
 　 ├ services
 　 │  ├ authentication
-　 │  │ └ authentication-service.ts ..... 認証（サインイン、トークン取得）を行うサービス
-　 │  ├ server-time
+　 │  │ ├ authentication-service.ts ..... 認証（サインイン、トークン取得）を行うサービス
+　 │  │ └ authentication-config.ts ...... 上のコードが使用する設定ファイル
+　 │  ├ user
+　 │  │ └ user-service.ts ............... 認証の必要がある処理を行うサービス
+　 │  └ server-time
 　 │    └ server-time-service.ts ........ 認証の必要がない処理を行うサービス
-　 ├ shared
-　 │ └ authentication
-　 │ 　 ├ authentication-adb2c.ts ..... Azure AD B2C による認証（サインイン、トークン取得）を行う TypeScript ファイル
-　 │ 　 └ authentication-config.ts .... 上のコードが使用する設定ファイル
 　 └ stores
 　 　 ├ authentication
-　 　 │ └ authentication.ts ........... 認証の結果を保持するストア
+　 　 │ └ authentication.ts ............ 認証の状態を保持するストア
 　 　 ├ server-time
 　 　 │ └ server-time.ts ............... 認証の必要がない Web API 呼び出しの結果を保持するストア
 　 　 └ users
@@ -337,8 +336,8 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     ```
 
 1. `npm run generate-client` を実行し、 Axios のクライアントコードを再生成します。
-1. `src\shared\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
-    - authentication-adb2c.ts
+1. `src\services\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
+    - authentication-services.ts
     - authentication-config.ts
 1. `src\store\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
     - authentication.ts
@@ -348,7 +347,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     ```ts
     import axios from "axios";
     import * as apiClient from "@/generated/api-client";
-    import { useAuthenticationStore } from "@/stores/authentication/authentication";
+    import { authenticationService } from '@/services/authentication/authentication-service';
 
     // その他のコードは省略
 
@@ -362,12 +361,11 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     }
 
     async function addTokenAsync(config: apiClient.Configuration) {
-      const store = useAuthenticationStore();
+      
 
       // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
-      if (store.isAuthenticated) {
-        await store.getToken();
-        const token = store.getAccessToken;
+      if (await authenticationService.isAuthenticated()) {
+        const token = await authenticationService.getTokenAzureADB2C();
         config.accessToken = token;
       }
     }
@@ -394,23 +392,6 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     }
     ```
 
-1. 認証機能を持つサービスを作成します。`src\services\authentication` フォルダーを作成し、 `authentication-service.ts` を作成します。
-
-    ```ts
-    import { useAuthenticationStore } from "@/stores/authentication/authentication";
-
-    export const authenticationService = {
-      async signIn() {
-        const authenticationStore = useAuthenticationStore();
-        await authenticationStore.signIn();
-        
-        if (authenticationStore.isAuthenticated) {
-          // サインインが成功した場合の処理をここに記述します。
-        } 
-      },
-    };
-    ```
-
 1. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
 
     ```ts
@@ -420,7 +401,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     const authenticationStore = useAuthenticationStore();
 
     const signIn = async () => {
-      await authenticationService.signIn();
+      await authenticationService.signInAzureADB2C();
     };
     </script>
     ```
