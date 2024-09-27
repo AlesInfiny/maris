@@ -46,6 +46,10 @@ Azure AD B2C によるユーザー認証の簡単な実装サンプルを提供�
 - バックエンド
     - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
 
+## 本サンプルを利用する際の検討事項 {#consideration}
+
+- [MSAL.js で提供される秘密情報のキャッシュ保存先](./azure-ad-b2c-consideration.md)
+
 ## ダウンロード {#download}
 
 サンプルアプリケーションと詳細な解説は以下からダウンロードできます。
