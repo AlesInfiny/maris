@@ -90,7 +90,7 @@ Vue.js アプリケーションのルートディレクトリから、以下の�
 
 ## Contributing
 
-AlesInfiny Maris OSS Edition への貢献をについては [CONTRIBUTING.md](/CONTRIBUTING.md) を参照してください。
+AlesInfiny Maris OSS Edition への貢献については [CONTRIBUTING.md](/CONTRIBUTING.md) を参照してください。
 
 ## Code of Conduct
 
