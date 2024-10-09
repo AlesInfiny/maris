@@ -132,7 +132,7 @@ export const HealthChecksApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        healthChecksApiHealthGET(options?: any): AxiosPromise<string> {
+        healthChecksApiHealthGET(options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.healthChecksApiHealthGET(options).then((request) => request(axios, basePath));
         },
         /**
@@ -140,7 +140,7 @@ export const HealthChecksApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        healthChecksApiHealthHEAD(options?: any): AxiosPromise<void> {
+        healthChecksApiHealthHEAD(options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.healthChecksApiHealthHEAD(options).then((request) => request(axios, basePath));
         },
     };

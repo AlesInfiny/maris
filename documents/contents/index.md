@@ -43,12 +43,12 @@ AlesInfiny Maris で構築した Web アプリケーションのサンプルを�
    コマンドプロンプトを開き、「dressca\\dressca-frontend」に移動して以下のコマンドを実行します。
 
     ```winbatch title="フロントエンドアプリケーションの実行に必要なパッケージのインストール"
-    npm install
+    npm ci
     ```
 
-    !!! info "npm install が失敗した場合"
-        `npm install` の途中でエラーや脆弱性情報以外の警告が出た場合、インストールに失敗している可能性があります。
-        その場合は、「dressca\\dressca-frontend\\node_modules」フォルダーを削除し、再度 `npm install` を実行してください。
+    !!! info "npm ci が失敗した場合"
+        `npm ci` の途中でエラーや脆弱性情報以外の警告が出た場合、インストールに失敗している可能性があります。
+        その場合は、「dressca\\dressca-frontend\\node_modules」フォルダーを削除し、再度 `npm ci` を実行してください。
 
 1. Visual Studio で「dressca\\dressca-backend\\Dressca.sln」を開き、ソリューションをビルドします。
 

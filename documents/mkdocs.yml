@@ -32,7 +32,13 @@ nav:
           - app-architecture/client-side-rendering/index.md
           - CSR アーキテクチャ概要: app-architecture/client-side-rendering/csr-architecture-overview.md
           - フロントエンドアーキテクチャ: app-architecture/client-side-rendering/frontend-architecture.md
-          - 全体処理方式: app-architecture/client-side-rendering/global-function.md
+          - 全体処理方式:
+              - app-architecture/client-side-rendering/global-function/index.md
+              - 例外処理方針: app-architecture/client-side-rendering/global-function/exception-handling.md
+              - ヘルスチェック機能の実装方針: app-architecture/client-side-rendering/global-function/health-check-implementation.md
+              - ログ出力方針: app-architecture/client-side-rendering/global-function/logging-policy.md
+              - ストア設計方針: app-architecture/client-side-rendering/global-function/store-design-policy.md
+              - 入力値検査方針: app-architecture/client-side-rendering/global-function/validation-policy.md
           - テスト方針:
               - app-architecture/client-side-rendering/test/index.md
               - バックエンドアプリケーションのテスト:
@@ -106,6 +112,7 @@ nav:
           - samples/console-app-with-di/index.md
       - Azure AD B2C による認証の利用:
           - samples/azure-ad-b2c/index.md
+          - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/azure-ad-b2c/azure-ad-b2c-consideration.md
   - AlesInfiny Maris OSS Edition について:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md

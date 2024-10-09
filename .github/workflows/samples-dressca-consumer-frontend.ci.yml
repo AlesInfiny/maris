@@ -1,5 +1,4 @@
 ---
-# cSpell:ignore typecheck
 
 name: dressca-consumer-frontend CI
 
@@ -9,7 +8,7 @@ on:
     paths:
       - 'samples/Dressca/dressca-frontend/*.*'
       - 'samples/Dressca/dressca-frontend/consumer/**'
-      - '.github/workflows/samples-dressca-frontend.ci.yml'
+      - '.github/workflows/samples-dressca-consumer-frontend.ci.yml'
   workflow_dispatch:
 
 defaults:
@@ -47,7 +46,7 @@ jobs:
 
       - name: node パッケージのインストール
         if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
-        run: npm install
+        run: npm ci
 
       - id: run-lint
         name: lintの実行

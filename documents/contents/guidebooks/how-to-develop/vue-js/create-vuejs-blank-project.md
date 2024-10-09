@@ -17,6 +17,7 @@ description: Vue.js を用いた クライアントサイドアプリケーシ�
 原則としてワークスペースとプロジェクトが 1:1 で対応するようにします。
 
 ![プロジェクトフォルダの構造](../../../images/guidebooks/how-to-develop/vue-js/project-folder-structure-light.png#only-light){ loading=lazy align=right }
+![プロジェクトフォルダの構造](../../../images/guidebooks/how-to-develop/vue-js/project-folder-structure-dark.png#only-dark){ loading=lazy align=right }
 
 ## プロジェクトの初期化 {#init-npm-project}
 
@@ -31,7 +32,7 @@ npm init -y
 ```terminal
 Wrote to ...\package.json:
 {
-  "name": "project-name",
+  "name": "root-project-name",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
