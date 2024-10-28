@@ -4,7 +4,7 @@ import { useAuthenticationStore } from '@/stores/authentication/authentication';
 import NotificationToast from './components/common/NotificationToast.vue';
 
 const authenticationStore = useAuthenticationStore();
-const isAuthenticated = () => {
+const isAuthenticated:string = () => {
   return authenticationStore.isAuthenticated;
 };
 </script>
