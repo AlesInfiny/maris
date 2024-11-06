@@ -66,17 +66,27 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
 ### VS Code のインストール {#install-vscode}
 
-1. 以下のサイトから、コンピューターの環境にあった VS Code のインストーラーをダウンロードします。
-
-    <https://code.visualstudio.com/>
+1. [こちらのサイト :material-open-in-new:](https://code.visualstudio.com/){ target=_blank } から、コンピューターの環境にあった Visual Studio Code(以下 VS Code) のインストーラーをダウンロードします。
 
 1. ダウンロードしたインストーラーを実行します。
+
 1. オプション設定は、ご利用の環境に応じて設定してインストールしてください。
+
 1. インストールが完了したら VS Code を起動します。
+
 1. 以下の拡張機能をインストールします。
 
-    - [Japanese Language Pack for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja)
-    - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar)[^2]
+    - [Japanese Language Pack for Visual Studio Code :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja){ target=_blank }
+
+        VS Code のユーザーインターフェースを日本語にローカライズする機能を提供します。
+
+    - [EditorConfig for VS Code :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig){ target=_blank }
+
+        アプリケーションのコーディングスタイルを維持する機能を提供します。
+
+    フロントエンドアプリケーションの開発に利用する VS Code の拡張機能は、以下を確認してください。
+
+    - [フロントエンドアプリケーション開発の事前準備](../vue-js/preparation.md#install-extensions)
 
 ### Git for Windows のインストール {#install-git-for-windows}
 
@@ -85,12 +95,12 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
     Git for Windows のインストール中に、既定のエディターを選択する必要があります。
     VS Code をインストールしている場合、 VS Code を既定のエディターとして設定できます。
 
-1. 以下のサイトから、コンピューターの環境にあった Git for Windows のインストーラーをダウンロードします。
-
-    <https://git-scm.com/>
+1. [こちらのサイト :material-open-in-new:](https://git-scm.com/){ target=_blank } から、コンピューターの環境にあった Git for Windows のインストーラーをダウンロードします。
 
 1. ダウンロードしたインストーラーを実行します。
+
 1. オプション設定は、ご利用の環境に応じて設定してインストールしてください。
+
 1. 以下のコマンドが実行できればインストールは完了です。
 
     ```ps1 title="Git for Windows のバージョン確認"
@@ -99,13 +109,13 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
 ### Node.js のインストール {#install-nodejs}
 
-1. 以下のサイトから、コンピューターの環境にあった Node.js のインストーラー [^3] をダウンロードします。
-
-    <https://nodejs.org/en/>
+1. [こちらのサイト :material-open-in-new:](https://nodejs.org/en/){ target=_blank } からインストーラー[^2]を取得します。
 
 1. ダウンロードしたインストーラーを実行します。
+
 1. オプション設定は、ご利用の環境に応じて設定してインストールしてください。
    npm のインストールと PATH の追加をするよう設定することを推奨します ( 既定値のままインストールすると npm のインストールと PATH の設定が行われます ) 。
+
 1. 以下のコマンドが実行できればインストールは完了です。
 
     ```ps1 title="Node.js と npm のバージョン確認"
@@ -130,7 +140,6 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 [^1]:
     .NET アプリケーションの開発を VS Code で行うことも可能ですが、 Visual Studio を用いたほうが生産性高く開発を進めることができます。
     また GUI ベースの開発ができるため、 Visual Studio のほうが初学者にとって扱いやすい環境です。
+
 [^2]:
-    Vue.js アプリケーションの開発に推奨されている拡張機能です。詳細は [公式ドキュメント :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/tooling#ide-support){ target=_blank }を参照してください。
-[^3]:
     Node.js のインストーラーは、原則 LTS 版を利用してください。
