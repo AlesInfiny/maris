@@ -30,7 +30,7 @@ Visual Studio Code を利用する場合、クライアントサイドアプリ�
 
 - [Prettier - Code formatter :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode){ target=_blank }
 
-     EditorConfigと連携して、統一したスタイルにコードを整形する機能を提供します。
+     EditorConfig と連携して、統一したスタイルにコードを整形する機能を提供します。
 
 - [language-postcss :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=cpylua.language-postcss){ target=_blank }
 
