@@ -109,7 +109,7 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
 ### Node.js のインストール {#install-nodejs}
 
-1. [こちらのサイト :material-open-in-new:](https://nodejs.org/en/){ target=_blank } からインストーラー[^2]を取得します。
+1. [こちらのサイト :material-open-in-new:](https://nodejs.org/en/){ target=_blank } からインストーラーを取得します。 Node.js のインストーラーは、原則最新の LTS 版を利用してください。
 
 1. ダウンロードしたインストーラーを実行します。
 
@@ -140,6 +140,3 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 [^1]:
     .NET アプリケーションの開発を VS Code で行うことも可能ですが、 Visual Studio を用いたほうが生産性高く開発を進めることができます。
     また GUI ベースの開発ができるため、 Visual Studio のほうが初学者にとって扱いやすい環境です。
-
-[^2]:
-    Node.js のインストーラーは、原則 LTS 版を利用してください。
