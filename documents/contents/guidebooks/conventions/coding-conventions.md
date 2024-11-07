@@ -26,21 +26,21 @@ AlesInfiny Maris OSS Edition （以下 AlesInfiny Maris ）では、一般に広
         [コードスタイルの規則 :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/fundamentals/code-analysis/style-rules/){ target=_blank }
 
     - StyleCopAnalyzers
-  
+
         [StyleCopAnalyzers 既定で適用されるルール :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md){ target=_blank }
 
 - Vue.js アプリケーション
-    - TypeScript
+    - [Airbnb JavaScript Style Guide :material-open-in-new:](https://github.com/airbnb/javascript){ target=_blank }
 
-        [Airbnb JavaScript Style Guide :material-open-in-new:](https://github.com/airbnb/javascript){ target=_blank }
+        Airbnb が GitHub 上に公開している JavaScript のスタイルガイドです。コードのフォーマットに対する規約および、バグを防止するための規約を定めています。あわせて、これらの規約に従うための ESLint の設定が公開されています。
 
-    - Vue.js
+    - [Vue.js スタイルガイド :material-open-in-new:](https://ja.vuejs.org/style-guide/){ target=_blank }
 
-        [Vue.js スタイルガイド :material-open-in-new:](https://ja.vuejs.org/style-guide/){ target=_blank }
+        Vue.js が公式に提供するスタイルガイドです。 JavaScript に対する規約ではカバーできない Vue 固有の記法について、エラーの発生やアンチパターンを避けるための規約を優先度別に定めています。 これらの規約への違反を検出するための ESLint のプラグインも公式に提供されています。
 
-    - CSS
+    - [CSS specifications :material-open-in-new:](https://www.w3.org/Style/CSS/current-work){ target=_blank }
 
-        [CSS specifications :material-open-in-new:](https://www.w3.org/Style/CSS/current-work){ target=_blank }
+        W3C が策定する CSS の標準仕様です。 Stylelint では、この標準仕様に従うための設定が公開されています。
 
 上記のコーディング規約は静的コード解析ツールによって自動的にチェックできるようにします。
 バックエンド側では Visual Studio でのコーディング中やビルド時に .NET コンパイラーによる自動チェックが行われます。
