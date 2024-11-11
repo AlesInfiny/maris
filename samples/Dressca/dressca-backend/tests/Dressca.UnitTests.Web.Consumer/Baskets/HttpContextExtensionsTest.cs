@@ -15,7 +15,7 @@ public class HttpContextExtensionsTest
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
 
         // Act
-        var buyerId = httpContextMock.Object.GetBuyerId();
+        var buyerId = HttpContextExtensions.GetBuyerId(httpContextMock.Object);
 
         // Assert
         Assert.True(Guid.TryParse(buyerId, out _));
@@ -34,7 +34,7 @@ public class HttpContextExtensionsTest
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
 
         // Act
-        var buyerId = httpContextMock.Object.GetBuyerId();
+        var buyerId = HttpContextExtensions.GetBuyerId(httpContextMock.Object);
 
         // Assert
         Assert.True(Guid.TryParse(buyerId, out _));
@@ -55,7 +55,7 @@ public class HttpContextExtensionsTest
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
 
         // Act
-        var buyerId = httpContextMock.Object.GetBuyerId();
+        var buyerId = HttpContextExtensions.GetBuyerId(httpContextMock.Object);
 
         // Assert
         Assert.True(Guid.TryParse(buyerId, out _));
@@ -74,7 +74,7 @@ public class HttpContextExtensionsTest
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
 
         // Act
-        var actual = httpContextMock.Object.GetBuyerId();
+        var actual = HttpContextExtensions.GetBuyerId(httpContextMock.Object);
 
         // Assert
         Assert.Equal(buyerId, actual);
@@ -90,7 +90,7 @@ public class HttpContextExtensionsTest
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
 
         // Act
-        httpContextMock.Object.SetBuyerId(buyerId);
+        HttpContextExtensions.SetBuyerId(httpContextMock.Object, buyerId);
 
         // Assert
         var item = Assert.Single(items, item => "Dressca-BuyerId".Equals(item.Key));
@@ -110,7 +110,7 @@ public class HttpContextExtensionsTest
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
 
         // Act
-        httpContextMock.Object.SetBuyerId(buyerId);
+        HttpContextExtensions.SetBuyerId(httpContextMock.Object, buyerId);
 
         // Assert
         var item = Assert.Single(items, item => "Dressca-BuyerId".Equals(item.Key));

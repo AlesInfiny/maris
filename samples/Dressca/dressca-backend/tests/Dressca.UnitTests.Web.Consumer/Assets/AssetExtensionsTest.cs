@@ -12,7 +12,7 @@ public class AssetExtensionsTest
         Asset? asset = null;
 
         // Act
-        var action = () => asset!.GetContentType();
+        var action = () => AssetExtensions.GetContentType(asset!);
 
         // Assert
         Assert.Throws<ArgumentNullException>("asset", action);
@@ -22,10 +22,10 @@ public class AssetExtensionsTest
     public void GetContentType_アセットタイプがPNG_imagepngを取得できる()
     {
         // Arrange
-        var asset = new Asset { AssetCode = "asset-code", AssetType = AssetTypes.Png };
+        Asset asset = new Asset { AssetCode = "asset-code", AssetType = AssetTypes.Png };
 
         // Act
-        var contentType = asset.GetContentType();
+        var contentType = AssetExtensions.GetContentType(asset);
 
         // Assert
         Assert.Equal("image/png", contentType);
