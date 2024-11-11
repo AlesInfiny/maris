@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Logging;
 
-namespace Maris.Logging.Testing.Xunit;
+namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 ///  <see cref="TestLoggerManager"/> で管理できる <see cref="ILogger"/> を登録する処理を提供します。
