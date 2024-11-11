@@ -1,7 +1,6 @@
-﻿using Dressca.Web.Consumer.Configuration;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
-namespace Dressca.Web.Configuration;
+namespace Dressca.Web.Consumer.Configuration;
 
 /// <summary>
 ///  <see cref="WebServerOptions"/> の部分クラスです。
