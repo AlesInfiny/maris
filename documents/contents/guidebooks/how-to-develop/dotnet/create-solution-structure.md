@@ -84,10 +84,15 @@ src フォルダーにどのようなプロジェクトを作成するかは、�
 tests フォルダー内は、テストの目的にあわせてテストプロジェクトを分割しましょう。
 単体機能確認、結合機能確認、性能確認などが、よくあるテストプロジェクトの分割単位です。
 
-プロジェクトの数が多くなりすぎると、単一のソリューションで開発を進めるのが困難になります。
-その場合は、[ソリューションフィルター](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/solution-filters#solution-filter-files) を用いて業務や機能の単位でプロジェクトをフィルタリングします。
-プロジェクトの総数が 30 以上のソリューションの場合、ソリューションフィルターの活用を検討しましょう。
+## ソリューションフィルターの活用 {#utilize-solution-filter}
+
+複数のアプリケーションを含む場合や、プロジェクトの数が多くなりすぎた場合は、単一のソリューションで開発を進めることが困難になります。
+その場合は、[ソリューションフィルター :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/solution-filters#solution-filter-files){ target=_blank } を用いて業務や機能、スタートアッププロジェクトの単位でプロジェクトをフィルタリングします。
+2 つ以上のアプリケーションを含む場合や、プロジェクトの総数が 30 以上のソリューションの場合は、ソリューションフィルターの活用を検討しましょう。
 プロジェクトを業務単位で分割しておくことで、ソリューションフィルターが効果的に活用できます。
-ソリューションフィルターを使用する場合は、単体機能確認のためのテストプロジェクトも業務単位で分割しましょう。
+また、ソリューションフィルターを使用する場合は、単体機能確認のためのテストプロジェクトも業務単位で分割しましょう。
+
+![ソリューションフィルター](../../../images/guidebooks/how-to-develop/dotnet/solution-filter-light.png#only-light){ loading=lazy }
+![ソリューションフィルター](../../../images/guidebooks/how-to-develop/dotnet/solution-filter-dark.png#only-dark){ loading=lazy }
 
 [^1]: プロダクションコードのみ XML コメントの記入を必須にする、といったルールの調整が良く行われます。

@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using Dressca.Web.Dto.Baskets;
-using Dressca.Web.Dto.Ordering;
+using Dressca.Web.Consumer.Dto.Baskets;
+using Dressca.Web.Consumer.Dto.Ordering;
 using Xunit;
 
 namespace Dressca.IntegrationTest;
