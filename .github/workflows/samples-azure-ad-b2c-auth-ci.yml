@@ -55,15 +55,15 @@ jobs:
 
       - id: run-lint
         name: lintの実行
-        run: npm run lint:ci >> /var/tmp/lint-result.txt 2>&1
+        run: npm run lint:ci:app >> /var/tmp/lint-result.txt 2>&1
 
       - id: run-type-check
         name: TypeScript の型チェック
-        run: npm run type-check >> /var/tmp/type-check-result.txt 2>&1
+        run: npm run type-check:app >> /var/tmp/type-check-result.txt 2>&1
 
       - id: application-build
         name: アプリケーションのビルド
-        run: npm run build-only:dev >> /var/tmp/build-result.txt 2>&1
+        run: npm run build-only:dev:app >> /var/tmp/build-result.txt 2>&1
 
       - name: lintの結果出力
         if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
