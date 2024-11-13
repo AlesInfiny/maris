@@ -6,11 +6,6 @@
 internal static class Events
 {
     /// <summary>
-    /// 業務例外が検出されたことを示すイベントID
-    /// </summary>
-    internal static readonly EventId BusinessExceptionHandled = new(1001, nameof(BusinessExceptionHandled));
-
-    /// <summary>
     /// クライアント側から不正なHTTPリクエストを受信したことを示すイベントID
     /// </summary>
     internal static readonly EventId ReceiveHttpBadRequest = new(1101, nameof(ReceiveHttpBadRequest));

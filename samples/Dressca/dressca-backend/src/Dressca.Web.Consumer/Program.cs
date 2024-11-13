@@ -10,7 +10,7 @@ using Dressca.Web.Consumer.Controllers;
 using Dressca.Web.Consumer.HealthChecks;
 using Dressca.Web.Consumer.Mapper;
 using Dressca.Web.Consumer.Resources;
-using Dressca.Web.Consumer.Runtime;
+using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
