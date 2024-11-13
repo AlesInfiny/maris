@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
-namespace Dressca.Web.Consumer.Controllers;
+namespace Dressca.Web.Controllers;
 
 /// <summary>
 ///  エラーの情報にアクセスする API コントローラーです。
@@ -14,12 +15,12 @@ public class ErrorController : ControllerBase
     /// <summary>
     ///  開発環境におけるエラー情報取得のためのルートパス ( /error-development ) 。
     /// </summary>
-    internal const string DevelopmentErrorRoute = "/error-development";
+    public const string DevelopmentErrorRoute = "/error-development";
 
     /// <summary>
     ///  実行環境におけるエラー情報取得のためのルートパス ( /error ) 。
     /// </summary>
-    internal const string ErrorRoute = "/error";
+    public const string ErrorRoute = "/error";
 
     /// <summary>
     ///  開発環境でのエラーレスポンスを取得します。
