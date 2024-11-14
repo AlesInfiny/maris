@@ -13,21 +13,33 @@ namespace Dressca.Web.Controllers;
 public class ErrorController : ControllerBase
 {
     /// <summary>
-    ///  開発環境におけるエラー情報取得のためのルートパス ( /error-development ) 。
+    ///  開発環境におけるエラー情報取得のためのルートパスのリテラル値 ( /error-development ) 。
     /// </summary>
-    public const string DevelopmentErrorRoute = "/error-development";
+    private const string DevelopMentErrorRouteLiteral = "/error-development";
 
     /// <summary>
-    ///  実行環境におけるエラー情報取得のためのルートパス ( /error ) 。
+    ///  実行環境におけるエラー情報取得のためのルートパスのリテラル値 ( /error ) 。
     /// </summary>
-    public const string ErrorRoute = "/error";
+    private const string ErrorRouteLiteral = "/error";
+
+    /// <summary>
+    ///  開発環境におけるエラー情報取得のためのルートパス（ /error-development ）を公開するためのプロパティ。。
+    ///  定数の公開を避けるためにプロパティ経由でアクセスする。
+    /// </summary>
+    public static string DevelopmentErrorRoute => DevelopMentErrorRouteLiteral;
+
+    /// <summary>
+    ///  実行環境におけるエラー情報取得のためのルートパス ( /error )を公開するためのプロパティ。
+    ///  定数の公開を避けるためにプロパティ経由でアクセスする。
+    /// </summary>
+    public static string ErrorRoute => ErrorRouteLiteral;
 
     /// <summary>
     ///  開発環境でのエラーレスポンスを取得します。
     /// </summary>
     /// <param name="hostEnvironment">環境の情報。</param>
     /// <returns>エラーの詳細情報。</returns>
-    [Route(DevelopmentErrorRoute)]
+    [Route(DevelopMentErrorRouteLiteral)]
     public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
     {
         if (!hostEnvironment.IsDevelopment())
@@ -45,6 +57,6 @@ public class ErrorController : ControllerBase
     ///  実行環境でのエラーレスポンスを取得します。
     /// </summary>
     /// <returns>エラーの情報。</returns>
-    [Route(ErrorRoute)]
+    [Route(ErrorRouteLiteral)]
     public IActionResult HandleError() => this.Problem();
 }
