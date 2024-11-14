@@ -130,7 +130,7 @@ Issue 提出後、内容に応じてメンテナーはラベル付けを行い�
 
 ### .NET アプリケーション、Vue.js アプリケーションの規約
 
-[AlesInfiny Maris OSS Edition のコーディング規約](hoge) をご覧ください。
+[AlesInfiny Maris OSS Edition のコーディング規約](/documents/contents/guidebooks/conventions/coding-conventions.md) をご覧ください。
 
 ### ドキュメントの規約
 
