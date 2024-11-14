@@ -48,7 +48,8 @@ AlesInfiny Maris で構築した Web アプリケーションのサンプルを�
 
     !!! info "npm ci が失敗した場合"
         `npm ci` の途中でエラーや脆弱性情報以外の警告が出た場合、インストールに失敗している可能性があります。
-        その場合は、「dressca\\dressca-frontend\\node_modules」フォルダーを削除し、再度 `npm ci` を実行してください。
+        その場合は、「dressca\\dressca-frontend\\node_modules」、
+        「dressca\\dressca-frontend\\consumer\\node_modules」フォルダーをそれぞれ削除し、再度 `npm ci` を実行してください。
 
 1. Visual Studio で「dressca\\dressca-backend\\Dressca.sln」を開き、ソリューションをビルドします。
 

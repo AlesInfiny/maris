@@ -37,6 +37,7 @@ nav:
               - 例外処理方針: app-architecture/client-side-rendering/global-function/exception-handling.md
               - ヘルスチェック機能の実装方針: app-architecture/client-side-rendering/global-function/health-check-implementation.md
               - ログ出力方針: app-architecture/client-side-rendering/global-function/logging-policy.md
+              - ストア設計方針: app-architecture/client-side-rendering/global-function/store-design-policy.md
               - 入力値検査方針: app-architecture/client-side-rendering/global-function/validation-policy.md
           - テスト方針:
               - app-architecture/client-side-rendering/test/index.md
@@ -94,8 +95,8 @@ nav:
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
       # - 規約:
-      #     - guidebooks/conventions/index.md
-          - コーディング規約: guidebooks/conventions/coding-conventions.md
+      #     - guidebooks/conventions/index.md このページができるまで、コーディング規約を一段上のメニューに配置している。
+      - コーディング規約: guidebooks/conventions/coding-conventions.md
       - マイグレーション:
           - guidebooks/migration/index.md
           - .NET Framework にとどまることのリスク:
@@ -111,6 +112,7 @@ nav:
           - samples/console-app-with-di/index.md
       - Azure AD B2C による認証の利用:
           - samples/azure-ad-b2c/index.md
+          - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/azure-ad-b2c/azure-ad-b2c-consideration.md
   - AlesInfiny Maris OSS Edition について:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
