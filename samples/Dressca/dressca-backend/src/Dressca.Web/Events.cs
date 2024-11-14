@@ -8,7 +8,7 @@ namespace Dressca.Web;
 internal static class Events
 {
     /// <summary>
-    /// 業務例外が検出されたことを示すイベントID
+    /// 業務例外が検出されたことを示すイベントIDです。
     /// </summary>
     internal static readonly EventId BusinessExceptionHandled = new(0001, nameof(BusinessExceptionHandled));
 }
