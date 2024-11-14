@@ -1,5 +1,5 @@
 ﻿using Dressca.SystemCommon;
-using Dressca.Web.Consumer.Runtime;
+using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Dressca.UnitTests.Web.Consumer.Runtime;
+namespace Dressca.UnitTests.Web.Runtime;
 
-public class BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
+public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
     [Fact]
     public void OnException_業務エラーの情報がActionResultの値に設定される()
@@ -39,7 +39,7 @@ public class BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper) : T
     }
 
     [Fact]
-    public void OnException_業務例外のスタックトレースがdetailに設定されていない()
+    public void OnException_業務例外のスタックトレースがdetailに設定されている()
     {
         // Arrange
         var filter = this.CreateFilter();
@@ -55,7 +55,7 @@ public class BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper) : T
         // Assert
         var result = Assert.IsType<BadRequestObjectResult>(context.Result);
         var value = Assert.IsType<ValidationProblemDetails>(result.Value);
-        Assert.Null(value.Detail);
+        Assert.Equal(context.Exception.ToString(), value.Detail);
     }
 
     [Fact]
@@ -77,7 +77,7 @@ public class BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper) : T
         var record = this.LogCollector.LatestRecord;
         Assert.Equal("業務エラーが発生しました。", record.Message);
         Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(1001, record.Id);
+        Assert.Equal(0001, record.Id);
         Assert.Same(context.Exception, record.Exception);
     }
 
@@ -94,11 +94,11 @@ public class BusinessExceptionFilterTest(ITestOutputHelper testOutputHelper) : T
         };
     }
 
-    private BusinessExceptionFilter CreateFilter()
+    private BusinessExceptionDevelopmentFilter CreateFilter()
     {
         var problemDetailsFactory = new TestProblemDetailsFactory();
-        var logger = this.CreateTestLogger<BusinessExceptionFilter>();
-        return new BusinessExceptionFilter(problemDetailsFactory, logger);
+        var logger = this.CreateTestLogger<BusinessExceptionDevelopmentFilter>();
+        return new BusinessExceptionDevelopmentFilter(problemDetailsFactory, logger);
     }
 
     private class TestProblemDetailsFactory : ProblemDetailsFactory

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dressca.Web.Consumer.Resources {
+namespace Dressca.Web.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Dressca.Web.Consumer.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Web.Consumer.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dressca.Web.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,11 @@ namespace Dressca.Web.Consumer.Resources {
         }
         
         /// <summary>
-        ///   アセットタイプ: {0} を Content-Type に変換できません。 に類似しているローカライズされた文字列を検索します。
+        ///   業務エラーが発生しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CannotConvertAssetTypeToContentType {
+        internal static string BusinessExceptionHandled {
             get {
-                return ResourceManager.GetString("CannotConvertAssetTypeToContentType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ヘルスチェック API の MethodInfo を取得できませんでした。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string HealthCheckMethodNotFound {
-            get {
-                return ResourceManager.GetString("HealthCheckMethodNotFound", resourceCulture);
+                return ResourceManager.GetString("BusinessExceptionHandled", resourceCulture);
             }
         }
     }
