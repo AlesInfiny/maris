@@ -43,6 +43,7 @@
     <ProjectReference Include="..\Dressca.Store.Assets.StaticFiles\Dressca.Store.Assets.StaticFiles.csproj" />
     <ProjectReference Include="..\Dressca.SystemCommon\Dressca.SystemCommon.csproj" />
     <ProjectReference Include="..\Dressca.Web.Consumer.Dto\Dressca.Web.Consumer.Dto.csproj" />
+    <ProjectReference Include="..\Dressca.Web\Dressca.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

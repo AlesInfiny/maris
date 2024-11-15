@@ -1,9 +1,10 @@
 ﻿using Dressca.SystemCommon;
-using Dressca.Web.Consumer.Resources;
+using Dressca.Web.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 
-namespace Dressca.Web.Consumer.Runtime;
+namespace Dressca.Web.Runtime;
 
 /// <summary>
 ///  <see cref="BusinessException"/> を HTTP 400 のレスポンスに変換する
