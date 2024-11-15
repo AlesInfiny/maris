@@ -194,7 +194,7 @@ vscode-textlint の拡張機能をインストールしていると、 [問題] 
 
 # 解析ルールが無効になる場所
 
-<!-- textlint-enabled @textlint-rule/require-header-id -->
+<!-- textlint-enable @textlint-rule/require-header-id -->
 ```
 
 詳細は以下を参照してください。
@@ -387,4 +387,4 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-<!-- textlint-enabled @textlint-rule/require-header-id -->
+<!-- textlint-enable @textlint-rule/require-header-id -->
