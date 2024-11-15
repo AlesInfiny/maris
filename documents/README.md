@@ -27,27 +27,31 @@ documents フォルダー配下のフォルダー、ファイルの配置は以�
 |               |                  |                       |                    | backend-application | バックエンドアプリのテスト方針                |
 |               |                  | console-app           |                    |                     | コンソールアプリケーション編                  |
 |               |                  | overview              |                    |                     | 概要編                                        |
+|               |                  | security              |                    |                     | アプリケーションセキュリティ編                |
 |               | assets           |                       |                    |                     | 共通資材（ロゴなど）                          |
 |               |                  | images                |                    |                     |                                               |
 |               | guidebooks       |                       |                    |                     | ガイドライン系ドキュメント                    |
-|               |                  | app-testing           |                    |                     | アプリケーションテスト（*）                   |
+|               |                  | app-testing           |                    |                     | アプリケーションテスト                        |
+|               |                  | conventions           |                    |                     | 規約                                          |
 |               |                  | git                   |                    |                     | Git リポジトリ構築ガイド                      |
 |               |                  | how-to-develop        |                    |                     | アプリケーション開発手順                      |
+|               |                  |                       | cors               |                     | CORS 環境の構築ガイド                         |
 |               |                  |                       | dotnet             |                     | .NET 編                                       |
 |               |                  |                       | local-environment  |                     | ローカル開発環境の構築                        |
 |               |                  |                       | publication        |                     | アプリケーションの発行手順                    |
 |               |                  |                       | vue-js             |                     | Vue.js 編                                     |
 |               |                  | migration             |                    |                     | マイグレーション                              |
 |               |                  |                       | dotnetfw-risk      |                     | .NET Frameworkにとどまることのリスク          |
-|               |                  |                       | from-dotnetfw      |                     | .NET Frameworkからの移行                      |
 |               |                  | modern-dev-process    |                    |                     | 開発プロセスのモダナイズ                      |
 |               | images           |                       |                    |                     | ページ固有の画像ファイル置き場                |
 |               |                  | about-maris           |                    |                     | mdファイルの配置フォルダーと構造をそろえる    |
 |               |                  |                       | hoge.png           |                     | 画像ファイルはsvgかpngにする                  |
-|               |                  |                       | animation.gif      |                     | gif アニメーションも利用可                             |
+|               |                  |                       | animation.gif      |                     | gif アニメーションも利用可                    |
 |               |                  | app-architecture      |                    |                     |                                               |
 |               |                  | guidebooks            |                    |                     |                                               |
 |               |                  |                       | app-testing        |                     |                                               |
+|               |                  |                       | conventions        |                     |                                               |
+|               |                  |                       | git                |                     |                                               |
 |               |                  |                       | how-to-develop     |                     |                                               |
 |               |                  |                       | migration          |                     |                                               |
 |               |                  |                       | modern-dev-process |                     |                                               |
@@ -64,7 +68,6 @@ documents フォルダー配下のフォルダー、ファイルの配置は以�
 | .gitignore    |                  |                       |                    |                     | mkdocs 用の gitignore                         |
 | mkdocs.yml    |                  |                       |                    |                     | mkdocs の設定ファイル                         |
 | README.md     |                  |                       |                    |                     | このドキュメント                              |
-|               |                  |                       |                    |                     |                                               |
 
 \*：詳細は [Mkdocs Materialの解説](https://squidfunk.github.io/mkdocs-material/customization/?h=theme#extending-the-theme) と [GitHub リポジトリ](https://github.com/squidfunk/mkdocs-material/tree/master/src/overrides) を参照。
 
