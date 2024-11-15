@@ -55,7 +55,7 @@ app.Run();
 
     <!-- textlint-disable ja-technical-writing/sentence-length -->
     `IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } や [`AddDbContextCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck){ target=_blank } にヘルスチェックロジックを渡すよう拡張メソッドを実装します。
-    <!-- textlint-enabled ja-technical-writing/sentence-length -->
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
 
     1. Entity Framework Core を利用したアプリケーションにおいてデータベースのヘルスチェックを行う場合
         - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) の参照を追加
@@ -159,7 +159,9 @@ app.Run();
 
 ### `IHealthCheck` インターフェース実装クラスを作成する方法 {#using-interface}
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 [`IHealthCheck` インターフェースを実装したクラスで、`CheckHealthAsync` メソッドをオーバーライドする :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks){ target=_blank }ことでヘルスチェックロジックを追加できます。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 1. `IHealthCheck` インターフェース実装クラスを作成
 
