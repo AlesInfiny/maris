@@ -22,7 +22,7 @@ AlesInfiny Maris OSS Edition は、以下の Web サイトを通じて最新バ�
 
 ドキュメント開発環境の構築手順は以下を参照してください。
 
-<https://github.com/AlesInfiny/maris/blob/main/documents/README.md#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E5%9F%B7%E7%AD%86%E7%92%B0%E5%A2%83%E3%81%AE%E6%A7%8B%E7%AF%89%E6%96%B9%E6%B3%95>
+- [ドキュメント執筆環境の構築方法](/documents/README.md#ドキュメント執筆環境の構築方法)
 
 ### サンプルアプリケーション、要件別サンプル開発環境
 
