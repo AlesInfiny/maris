@@ -155,22 +155,33 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     [ApiExplorerSettings(IgnoreApi = true)] // Open API 仕様書にこのコントローラーの情報を追加しないよう制御します。
     public class ErrorController : ControllerBase
     {
+
         /// <summary>
-        ///  開発環境におけるエラー情報取得のためのルートパス ( /error-development ) 。
+        ///  開発環境におけるエラー情報取得のためのルートパスのリテラル値 ( /error-development ) です。
         /// </summary>
-        internal const string DevelopmentErrorRoute = "/error-development"; // Program.cs または Startup.cs から参照するため internal にします。
-    
+        private const string DevelopMentErrorRouteLiteral = "/error-development";
+
         /// <summary>
-        ///  実行環境におけるエラー情報取得のためのルートパス ( /error ) 。
+        ///  実行環境におけるエラー情報取得のためのルートパスのリテラル値 ( /error ) です。
         /// </summary>
-        internal const string ErrorRoute = "/error"; // Program.cs または Startup.cs から参照するため internal にします。
-    
+        private const string ErrorRouteLiteral = "/error";
+
+        /// <summary>
+        ///  開発環境におけるエラー情報取得のためのルートパス（ /error-development ）を取得します。
+        /// </summary>
+        public static string DevelopmentErrorRoute => DevelopMentErrorRouteLiteral; // 別プロジェクトから定数を参照するため、プロパティを経由します。
+
+        /// <summary>
+        ///  実行環境におけるエラー情報取得のためのルートパス ( /error )を取得します。
+        /// </summary>
+        public static string ErrorRoute => ErrorRouteLiteral; // 別プロジェクトから定数を参照するため、プロパティを経由します。
+
         /// <summary>
         ///  開発環境でのエラーレスポンスを取得します。
         /// </summary>
         /// <param name="hostEnvironment">環境の情報。</param>
         /// <returns>エラーの詳細情報。</returns>
-        [Route(DevelopmentErrorRoute)]
+        [Route(DevelopMentErrorRouteLiteral)]
         public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
         {
             // 開発環境以外からのアクセスは HTTP 404 を返します。
@@ -178,18 +189,18 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
             {
                 return this.NotFound();
             }
-    
+
             var exceptionHandlerFeature = this.HttpContext.Features.Get<IExceptionHandlerFeature>();
             return this.Problem(
                 detail: exceptionHandlerFeature?.Error.StackTrace,
                 title: exceptionHandlerFeature?.Error.Message);
         }
-    
+
         /// <summary>
         ///  実行環境でのエラーレスポンスを取得します。
         /// </summary>
         /// <returns>エラーの情報。</returns>
-        [Route(ErrorRoute)]
+        [Route(ErrorRouteLiteral)]
         public IActionResult HandleError() => this.Problem();
     }
     ```
