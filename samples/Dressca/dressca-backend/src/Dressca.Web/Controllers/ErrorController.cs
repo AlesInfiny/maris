@@ -15,7 +15,7 @@ public class ErrorController : ControllerBase
     /// <summary>
     ///  開発環境におけるエラー情報取得のためのルートパスのリテラル値 ( /error-development ) です。
     /// </summary>
-    private const string DevelopMentErrorRouteLiteral = "/error-development";
+    private const string DevelopmentErrorRouteLiteral = "/error-development";
 
     /// <summary>
     ///  実行環境におけるエラー情報取得のためのルートパスのリテラル値 ( /error ) です。
@@ -25,7 +25,7 @@ public class ErrorController : ControllerBase
     /// <summary>
     ///  開発環境におけるエラー情報取得のためのルートパス（ /error-development ）を取得します。
     /// </summary>
-    public static string DevelopmentErrorRoute => DevelopMentErrorRouteLiteral;
+    public static string DevelopmentErrorRoute => DevelopmentErrorRouteLiteral;
 
     /// <summary>
     ///  実行環境におけるエラー情報取得のためのルートパス ( /error )を取得します。
@@ -37,7 +37,7 @@ public class ErrorController : ControllerBase
     /// </summary>
     /// <param name="hostEnvironment">環境の情報。</param>
     /// <returns>エラーの詳細情報。</returns>
-    [Route(DevelopMentErrorRouteLiteral)]
+    [Route(DevelopmentErrorRouteLiteral)]
     public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
     {
         if (!hostEnvironment.IsDevelopment())
