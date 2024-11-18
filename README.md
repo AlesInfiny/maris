@@ -22,7 +22,7 @@ AlesInfiny Maris OSS Edition は、以下の Web サイトを通じて最新バ�
 
 ドキュメント開発環境の構築手順は以下を参照してください。
 
-- [ドキュメント執筆環境の構築方法](/documents/README.md#ドキュメント執筆環境の構築方法)
+- [AlesInfiny Maris OSS Edition ドキュメントについて | ドキュメント執筆環境の構築方法](/documents/README.md#ドキュメント執筆環境の構築方法)
 
 ### サンプルアプリケーション、要件別サンプル開発環境
 
@@ -68,7 +68,7 @@ Vue.js アプリケーションのルートディレクトリから、以下の�
 ### ドキュメント
 
 ドキュメントの開発には Python と MkDocs を使用します。
-詳細は [こちら](/documents/README.md) を参照してください。
+詳細は [AlesInfiny Maris OSS Edition ドキュメントについて | 動作確認](/documents/README.md#動作確認) を参照してください。
 
 ただし、ローカル開発環境での実行では、サンプルアプリケーションのダウンロードリンクなど、一部が動作しません。
 
