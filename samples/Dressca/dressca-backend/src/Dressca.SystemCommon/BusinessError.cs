@@ -8,7 +8,7 @@ namespace Dressca.SystemCommon;
 /// </summary>
 public class BusinessError
 {
-    private readonly List<string> errorMessages = new();
+    private readonly List<string> errorMessages = [];
 
     /// <summary>
     ///  <see cref="BusinessError"/> クラスの新しいインスタンスを初期化します。

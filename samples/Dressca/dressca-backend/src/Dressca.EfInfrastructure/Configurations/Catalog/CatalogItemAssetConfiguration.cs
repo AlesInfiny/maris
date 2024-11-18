@@ -23,8 +23,8 @@ internal class CatalogItemAssetConfiguration : IEntityTypeConfiguration<CatalogI
             .OnDelete(DeleteBehavior.Cascade)
             .HasConstraintName("FK_CatalogItemAssets_CatalogItems");
 
-        builder.HasData(new CatalogItemAsset[]
-        {
+        builder.HasData(
+        [
             new() { AssetCode = "45c22ba3da064391baac91341067ffe9", CatalogItemId = 1L, Id = 1L },
             new() { AssetCode = "4aed07c4ed5d45a5b97f11acedfbb601", CatalogItemId = 2L, Id = 2L },
             new() { AssetCode = "082b37439ecc44919626ba00fc60ee85", CatalogItemId = 3L, Id = 3L },
@@ -36,6 +36,6 @@ internal class CatalogItemAssetConfiguration : IEntityTypeConfiguration<CatalogI
             new() { AssetCode = "cf151206efd344e1b86854f4aa49fdef", CatalogItemId = 9L, Id = 9L },
             new() { AssetCode = "ab2e78eb7fe3408aadbf1e17a9945a8c", CatalogItemId = 10L, Id = 10L },
             new() { AssetCode = "0e557e96bc054f10bc91c27405a83e85", CatalogItemId = 11L, Id = 11L },
-        });
+        ]);
     }
 }

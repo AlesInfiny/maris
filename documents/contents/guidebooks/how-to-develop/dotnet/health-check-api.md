@@ -42,7 +42,7 @@ app.Run();
 
 システム全体の対応性を確認するため、データベース等の関連する外部サービスのヘルスチェックを行う際はヘルスチェックロジックを追加します。
 
-[実装方針](../../../app-architecture/client-side-rendering/global-function.md#add-health-check-logic) で説明している通り、 `Program.cs` に直接ヘルスチェックロジックを追加しません。ヘルスチェック対象の外部サービスに依存する各プロジェクトへヘルスチェックロジックを配置します。
+[実装方針](../../../app-architecture/client-side-rendering/global-function/health-check-implementation.md#add-health-check-logic) で説明している通り、 `Program.cs` に直接ヘルスチェックロジックを追加しません。ヘルスチェック対象の外部サービスに依存する各プロジェクトへヘルスチェックロジックを配置します。
 
 プロジェクトごとにヘルスチェックロジックを分割する方法としては以下の 2 通りがあります。
 
@@ -55,7 +55,7 @@ app.Run();
 
     <!-- textlint-disable ja-technical-writing/sentence-length -->
     `IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } や [`AddDbContextCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck){ target=_blank } にヘルスチェックロジックを渡すよう拡張メソッドを実装します。
-    <!-- textlint-enabled ja-technical-writing/sentence-length -->
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
 
     1. Entity Framework Core を利用したアプリケーションにおいてデータベースのヘルスチェックを行う場合
         - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) の参照を追加
@@ -159,7 +159,9 @@ app.Run();
 
 ### `IHealthCheck` インターフェース実装クラスを作成する方法 {#using-interface}
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 [`IHealthCheck` インターフェースを実装したクラスで、`CheckHealthAsync` メソッドをオーバーライドする :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#create-health-checks){ target=_blank }ことでヘルスチェックロジックを追加できます。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 1. `IHealthCheck` インターフェース実装クラスを作成
 

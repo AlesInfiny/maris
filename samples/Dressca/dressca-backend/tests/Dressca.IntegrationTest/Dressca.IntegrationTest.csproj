@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Dressca.Web\Dressca.Web.csproj" />
+    <ProjectReference Include="..\..\src\Dressca.Web.Consumer\Dressca.Web.Consumer.csproj" />
   </ItemGroup>
 
 </Project>

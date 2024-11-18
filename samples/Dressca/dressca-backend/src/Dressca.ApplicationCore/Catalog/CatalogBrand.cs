@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Xml.Linq;
 using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Catalog;
@@ -10,7 +9,7 @@ namespace Dressca.ApplicationCore.Catalog;
 /// </summary>
 public class CatalogBrand
 {
-    private readonly List<CatalogItem> items = new();
+    private readonly List<CatalogItem> items = [];
     private string name;
 
     /// <summary>

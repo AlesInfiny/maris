@@ -18,11 +18,11 @@ internal class CatalogCategoryConfiguration : IEntityTypeConfiguration<CatalogCa
             .HasMaxLength(128)
             .IsRequired();
 
-        builder.HasData(new CatalogCategory[]
-        {
+        builder.HasData(
+        [
             new() { Name = "服", Id = 1L },
             new() { Name = "バッグ", Id = 2L },
             new() { Name = "シューズ", Id = 3L },
-        });
+        ]);
     }
 }

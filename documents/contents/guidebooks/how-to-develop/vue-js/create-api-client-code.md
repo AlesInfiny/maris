@@ -54,7 +54,7 @@ package.json の scripts セクションにタスクを追加します。
   "scripts": {
     "generate-client": "run-s openapi-client:clean openapi-client:generate --print-label",
     "openapi-client:clean": "node -e \"fs.promises.rm('./src/generated/api-client', {recursive: true, force: true})\"",
-    "openapi-client:generate": "openapi-generator-cli generate -g typescript-axios -i ./../dressca-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
+    "openapi-client:generate": "openapi-generator-cli generate -g typescript-axios -i ./../../dressca-backend/src/Dressca.Web/dressca-api.json --additional-properties=withSeparateModelsAndApi=true,modelPackage=models,apiPackage=api,supportsES6=true -o ./src/generated/api-client"
   }
 }
 ```

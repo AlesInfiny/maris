@@ -68,23 +68,5 @@ namespace Dressca.Web.Resources {
                 return ResourceManager.GetString("BusinessExceptionHandled", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   アセットタイプ: {0} を Content-Type に変換できません。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CannotConvertAssetTypeToContentType {
-            get {
-                return ResourceManager.GetString("CannotConvertAssetTypeToContentType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   ヘルスチェック API の MethodInfo を取得できませんでした。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string HealthCheckMethodNotFound {
-            get {
-                return ResourceManager.GetString("HealthCheckMethodNotFound", resourceCulture);
-            }
-        }
     }
 }

@@ -120,10 +120,4 @@
   <data name="BusinessExceptionHandled" xml:space="preserve">
     <value>業務エラーが発生しました。</value>
   </data>
-  <data name="CannotConvertAssetTypeToContentType" xml:space="preserve">
-    <value>アセットタイプ: {0} を Content-Type に変換できません。</value>
-  </data>
-  <data name="HealthCheckMethodNotFound" xml:space="preserve">
-    <value>ヘルスチェック API の MethodInfo を取得できませんでした。</value>
-  </data>
 </root>

@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.Catalog;
 /// </summary>
 public class CatalogCategory
 {
-    private readonly List<CatalogItem> items = new();
+    private readonly List<CatalogItem> items = [];
     private string name;
 
     /// <summary>
