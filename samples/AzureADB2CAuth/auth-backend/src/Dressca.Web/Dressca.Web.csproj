@@ -4,10 +4,11 @@
     <IsPackable>false</IsPackable>
     <NoDefaultLaunchSettingsFile Condition="'$(ExcludeLaunchSettings)' == 'True'">True</NoDefaultLaunchSettingsFile>
     <SpaRoot>..\..\..\auth-frontend\</SpaRoot>
+    <SpaWorkspace>$(SpaRoot)app\</SpaWorkspace>
     <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
     <!-- <SpaProxyServerUrl Condition="'$(RequiresHttps)' == 'True'">https://localhost:5002</SpaProxyServerUrl>
     <SpaProxyServerUrl Condition="'$(RequiresHttps)' != 'True'">http://localhost:5002</SpaProxyServerUrl> -->
-    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
+    <SpaProxyLaunchCommand>npm run dev:app</SpaProxyLaunchCommand>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 
@@ -57,11 +58,11 @@
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm ci" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod:app" />
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
-      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaWorkspace)dist\**; $$(SpaWorkspace)dist-server\**" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>wwwroot\%(RecursiveDir)%(FileName)%(Extension)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
