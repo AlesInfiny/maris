@@ -159,7 +159,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
         /// <summary>
         ///  開発環境におけるエラー情報取得のためのルートパスのリテラル値 ( /error-development ) です。
         /// </summary>
-        private const string DevelopMentErrorRouteLiteral = "/error-development";
+        private const string DevelopmentErrorRouteLiteral = "/error-development";
 
         /// <summary>
         ///  実行環境におけるエラー情報取得のためのルートパスのリテラル値 ( /error ) です。
@@ -169,7 +169,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
         /// <summary>
         ///  開発環境におけるエラー情報取得のためのルートパス（ /error-development ）を取得します。
         /// </summary>
-        public static string DevelopmentErrorRoute => DevelopMentErrorRouteLiteral; // 別プロジェクトから定数を参照するため、プロパティを経由します。
+        public static string DevelopmentErrorRoute => DevelopmentErrorRouteLiteral; // 別プロジェクトから定数を参照するため、プロパティを経由します。
 
         /// <summary>
         ///  実行環境におけるエラー情報取得のためのルートパス ( /error )を取得します。
@@ -181,7 +181,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
         /// </summary>
         /// <param name="hostEnvironment">環境の情報。</param>
         /// <returns>エラーの詳細情報。</returns>
-        [Route(DevelopMentErrorRouteLiteral)]
+        [Route(DevelopmentErrorRouteLiteral)]
         public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
         {
             // 開発環境以外からのアクセスは HTTP 404 を返します。
