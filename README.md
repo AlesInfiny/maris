@@ -26,11 +26,12 @@ AlesInfiny Maris OSS Edition は、以下の Web サイトを通じて最新バ�
 
 ### サンプルアプリケーション、要件別サンプル開発環境
 
-サンプルアプリケーションや要件別サンプルの開発環境は、 Visual Studio を推奨します。
-以下のワークロードが必要です。
+サンプルアプリケーションや要件別サンプルの開発環境は、 Visual Studio と VS Code を推奨します。
+バックエンドアプリケーションの開発には Visual Studio を、フロントエンドアプリケーションの開発には VS Code を使用します。
 
-- ASP.NET と Web 開発
-- .NET デスクトップ開発
+開発環境の構築手順は以下を参照してください。
+
+- [AlesInfiny Maris OSS Edition | ローカル開発環境の構築](https://maris.alesinfiny.org/guidebooks/how-to-develop/local-environment/)
 
 ## サンプルアプリケーションのテスト
 
