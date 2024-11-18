@@ -74,7 +74,7 @@ Vue.js アプリケーションのルートディレクトリから、以下の�
 
 ### サンプルアプリケーション(Dressca)
 
-サンプルアプリケーション (Dressca) の実行手順は [クイックスタート](https://maris.alesinfiny.org/#quick-start) を参照してください。
+サンプルアプリケーション (Dressca) の実行手順は [AlesInfiny Maris OSS Edition | クイックスタート](https://maris.alesinfiny.org/#quick-start) を参照してください。
 
 ### 要件別サンプル
 
@@ -106,6 +106,6 @@ BIPROGY 株式会社およびすべてのコントリビューターは、本リ
 詳細は [LICENSE-CODE.md](/LICENSE-CODE) を参照してください。
 
 このプロジェクトのライセンスは、 BIPROGY 株式会社の商標を使用する権利を付与するものではありません。
-詳細は [こちら](https://maris.alesinfiny.org/about-maris/trademarks/) を参照してください。
+詳細は [AlesInfiny Maris OSS Edition | 商標](https://maris.alesinfiny.org/about-maris/trademarks/) を参照してください。
 
 <!-- textlint-enable @textlint-rule/require-header-id -->
