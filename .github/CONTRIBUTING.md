@@ -149,6 +149,6 @@ npm run lint
 
 ## 行動規範
 
-[行動規範](/CODE_OF_CONDUCT.md) をご覧ください。
+[行動規範](/.github/CODE_OF_CONDUCT.md) をご覧ください。
 
 <!-- textlint-enabled @textlint-rule/require-header-id -->
