@@ -58,7 +58,9 @@ dotnet test
 Vue.js アプリケーションは、 Vitest でテストできます。
 Vue.js アプリケーションのルートディレクトリから、以下のようなコマンドを実行します。
 
-- `npm run test:unit:consumer`
+```plane
+npm run test:unit:consumer
+```
 
 `test:unit:consumer` の部分は、 package.json に定義されているスクリプト名と一致させます。
 実行するテストの対象によって、スクリプト名を変更してください。
