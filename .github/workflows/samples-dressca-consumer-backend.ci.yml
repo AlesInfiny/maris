@@ -1,5 +1,5 @@
 ---
-# cSpell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
+# cspell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes slnf targetdir
 
 name: dressca-consumer-backend CI
 

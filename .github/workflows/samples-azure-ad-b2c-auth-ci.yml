@@ -1,4 +1,5 @@
 ---
+# cspell:ignore danielpalme dorny nologo targetdir reporttypes
 
 name: azure-ad-b2c-auth-sample CI
 
