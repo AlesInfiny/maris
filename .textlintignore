@@ -1,1 +1,7 @@
+# dotnet アプリケーションのビルド成果物フォルダーは検査を除外
 samples/**/@(obj|bin)/**
+
+# Github の Issues や Pull requests のテンプレートファイルをテスト対象から除外
+
+.github/pull_request_template.md
+.github/ISSUE_TEMPLATE/*.md
