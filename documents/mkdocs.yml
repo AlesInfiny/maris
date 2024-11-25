@@ -135,6 +135,8 @@ theme:
   font:
     text: Noto Sans JP
     code: Source Code Pro
+  icon:
+    repo: fontawesome/brands/github
   language: ja
   logo: assets/maris-logo.png
   palette:
