@@ -7,6 +7,8 @@ copyright: "Copyright &copy; 2023 BIPROGY Inc. All rights reserved."
 site_author: "AlesInfiny Maris OSS Edition コミュニティ"
 site_description: "AlesInfiny Maris OSS Edition のポータルサイトです。"
 site_dir: build-artifacts
+repo_name: AlesInfiny/maris
+repo_url: https://github.com/AlesInfiny/maris
 
 # yamllint disable rule:comments-indentation
 nav:
