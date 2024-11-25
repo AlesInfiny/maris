@@ -9,6 +9,7 @@ site_description: "AlesInfiny Maris OSS Edition のポータルサイトです�
 site_dir: build-artifacts
 repo_name: AlesInfiny/maris
 repo_url: https://github.com/AlesInfiny/maris
+edit_uri: edit/main/documents/contents/
 
 # yamllint disable rule:comments-indentation
 nav:
@@ -126,6 +127,7 @@ theme:
   custom_dir: overrides
   favicon: assets/images/favicon.png
   features:
+    - content.action.view
     - content.code.annotate
     - navigation.indexes
     - navigation.instant
@@ -137,6 +139,7 @@ theme:
     code: Source Code Pro
   icon:
     repo: fontawesome/brands/github
+    view: material/eye
   language: ja
   logo: assets/maris-logo.png
   palette:
