@@ -135,7 +135,7 @@ public class CatalogItemsController : ControllerBase
         catch (PermissionDeniedException ex)
         {
             this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
-            return Unauthorized();
+            return NotFound();
         }
 
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.PostCatalogItemAsync));
@@ -164,7 +164,7 @@ public class CatalogItemsController : ControllerBase
         catch (PermissionDeniedException ex)
         {
             this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
-            return Unauthorized();
+            return NotFound();
         }
         catch (CatalogItemNotExistingInRepositoryException ex)
         {
@@ -212,7 +212,7 @@ public class CatalogItemsController : ControllerBase
         catch (PermissionDeniedException ex)
         {
             this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
-            return Unauthorized();
+            return NotFound();
         }
         catch (CatalogItemNotExistingInRepositoryException ex)
         {
