@@ -133,7 +133,7 @@ public class CatalogManagementApplicationService
     /// <summary>
     /// カタログアイテムを更新します。
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="id">カタログアイテム ID。</param>
     /// <param name="name">商品名。</param>
     /// <param name="description">説明。</param>
     /// <param name="price">単価。</param>
