@@ -54,8 +54,8 @@ public interface ICatalogRepository
     /// </summary>
     /// <param name="entity">エンティティ。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>非同期処理を表すタスク。</returns>
-    Task UpdateAsync(CatalogItem entity, CancellationToken cancellationToken = default);
+    /// <returns>更新されたアイテムの数を返す非同期処理を表すタスク。</returns>
+    Task<int> UpdateAsync(CatalogItem entity, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  エンティティを追加します。
@@ -70,8 +70,8 @@ public interface ICatalogRepository
     /// </summary>
     /// <param name="entity">エンティティ。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>非同期処理を表すタスク。</returns>
-    Task RemoveAsync(CatalogItem entity, CancellationToken cancellationToken = default);
+    /// <returns>削除されたアイテムの数を返す非同期処理を表すタスク。</returns>
+    Task<int> RemoveAsync(CatalogItem entity, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// 指定した識別子のエンティティが存在するかどうか判定します。

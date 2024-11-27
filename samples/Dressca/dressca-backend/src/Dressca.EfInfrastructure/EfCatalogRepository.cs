@@ -54,11 +54,10 @@ internal class EfCatalogRepository : ICatalogRepository
     }
 
     /// <inheritdoc/>
-    public async Task UpdateAsync(CatalogItem entity, CancellationToken cancellationToken = default)
+    public async Task<int> UpdateAsync(CatalogItem entity, CancellationToken cancellationToken = default)
     {
         this.dbContext.Update(entity);
-        _ = await this.dbContext.SaveChangesAsync(cancellationToken);
-        return;
+        return await this.dbContext.SaveChangesAsync(cancellationToken);
     }
 
     /// <inheritdoc/>
@@ -70,11 +69,10 @@ internal class EfCatalogRepository : ICatalogRepository
     }
 
     /// <inheritdoc/>
-    public async Task RemoveAsync(CatalogItem entity, CancellationToken cancellationToken = default)
+    public async Task<int> RemoveAsync(CatalogItem entity, CancellationToken cancellationToken = default)
     {
         this.dbContext.CatalogItems.Remove(entity);
-        _ = await this.dbContext.SaveChangesAsync(cancellationToken);
-        return;
+        return await this.dbContext.SaveChangesAsync(cancellationToken);
     }
 
     /// <inheritdoc/>
