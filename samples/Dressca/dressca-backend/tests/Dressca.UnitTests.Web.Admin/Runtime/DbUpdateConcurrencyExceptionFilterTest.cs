@@ -45,7 +45,7 @@ public class DbUpdateConcurrencyExceptionFilterTest(ITestOutputHelper testOutput
         var record = this.LogCollector.LatestRecord;
         Assert.Equal("データベースの更新が競合しました。", record.Message);
         Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(1004, record.Id);
+        Assert.Equal(1003, record.Id);
         Assert.Same(context.Exception, record.Exception);
     }
 

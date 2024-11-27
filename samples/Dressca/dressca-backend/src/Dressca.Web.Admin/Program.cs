@@ -5,10 +5,11 @@ using Dressca.ApplicationCore.Auth;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
 using Dressca.Web.Admin.Authorization;
-using Dressca.Web.Admin.Controllers;
 using Dressca.Web.Admin.HealthChecks;
 using Dressca.Web.Admin.Mapper;
 using Dressca.Web.Admin.Runtime;
+using Dressca.Web.Controllers;
+using Dressca.Web.Runtime;
 using DummyAuthentication.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,15 @@ builder.Services
     .AddControllers(options =>
     {
         options.Filters.Add<DbUpdateConcurrencyExceptionFilter>();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            options.Filters.Add<BusinessExceptionDevelopmentFilter>();
+        }
+        else
+        {
+            options.Filters.Add<BusinessExceptionFilter>();
+        }
     })
     .ConfigureApiBehaviorOptions(options =>
     {
