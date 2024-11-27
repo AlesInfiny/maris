@@ -133,7 +133,14 @@ public class CatalogManagementApplicationService
     /// <summary>
     /// カタログアイテムを更新します。
     /// </summary>
-    /// <param name="command">更新処理のファサードとなるコマンドオブジェクト。</param>
+    /// <param name="id"></param>
+    /// <param name="name">商品名。</param>
+    /// <param name="description">説明。</param>
+    /// <param name="price">単価。</param>
+    /// <param name="productCode">商品コード。</param>
+    /// <param name="catalogBrandId">カタログブランド ID。</param>
+    /// <param name="catalogCategoryId">カタログカテゴリ ID。</param>
+    /// <param name="rowVersion">行バージョン。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     /// <exception cref="PermissionDeniedException">更新権限がない場合。</exception>
@@ -141,46 +148,53 @@ public class CatalogManagementApplicationService
     /// <exception cref="CatalogBrandNotExistingInRepositoryException">更新対象のカタログブランドが存在しなかった場合。</exception>
     /// <exception cref="CatalogCategoryNotExistingInRepositoryException">更新対象のカタログカテゴリが存在しなかった場合。</exception>
     public async Task UpdateCatalogItemAsync(
-        CatalogItemUpdateCommand command,
-        CancellationToken cancellationToken = default)
+                long id,
+                string name,
+                string description,
+                decimal price,
+                string productCode,
+                long catalogBrandId,
+                long catalogCategoryId,
+                byte[] rowVersion,
+                CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncStart, command.Id);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncStart, id);
 
         if (!this.userStore.IsInRole("Admin"))
         {
             throw new PermissionDeniedException(nameof(this.UpdateCatalogItemAsync));
         }
 
-        if (!await this.catalogRepository.DoesEntityExistAsync(command.Id, cancellationToken))
+        if (!await this.catalogRepository.DoesEntityExistAsync(id, cancellationToken))
         {
-            this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [command.Id]);
-            throw new CatalogItemNotExistingInRepositoryException([command.Id]);
+            this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
+            throw new CatalogItemNotExistingInRepositoryException([id]);
         }
 
-        var catalogBrand = await this.brandRepository.GetAsync(command.CatalogBrandId, cancellationToken);
+        var catalogBrand = await this.brandRepository.GetAsync(catalogBrandId, cancellationToken);
         if (catalogBrand == null)
         {
-            this.logger.LogInformation(Events.CatalogBrandIdDoesNotExistInRepository, LogMessages.CatalogBrandIdDoesNotExistInRepository, [command.CatalogBrandId]);
-            throw new CatalogBrandNotExistingInRepositoryException([command.CatalogBrandId]);
+            this.logger.LogInformation(Events.CatalogBrandIdDoesNotExistInRepository, LogMessages.CatalogBrandIdDoesNotExistInRepository, [catalogBrandId]);
+            throw new CatalogBrandNotExistingInRepositoryException([catalogBrandId]);
         }
 
-        var catalogCategory = await this.categoryRepository.GetAsync(command.CatalogCategoryId, cancellationToken);
+        var catalogCategory = await this.categoryRepository.GetAsync(catalogCategoryId, cancellationToken);
         if (catalogCategory == null)
         {
-            this.logger.LogInformation(Events.CatalogCategoryIdDoesNotExistInRepository, LogMessages.CatalogCategoryIdDoesNotExistInRepository, [command.CatalogCategoryId]);
-            throw new CatalogCategoryNotExistingInRepositoryException([command.CatalogCategoryId]);
+            this.logger.LogInformation(Events.CatalogCategoryIdDoesNotExistInRepository, LogMessages.CatalogCategoryIdDoesNotExistInRepository, [catalogCategoryId]);
+            throw new CatalogCategoryNotExistingInRepositoryException([catalogCategoryId]);
         }
 
         var catalogItem = new CatalogItem()
         {
-            Id = command.Id,
-            Name = command.Name,
-            Description = command.Description,
-            Price = command.Price,
-            ProductCode = command.ProductCode,
-            CatalogBrandId = command.CatalogBrandId,
-            CatalogCategoryId = command.CatalogCategoryId,
-            RowVersion = command.RowVersion,
+            Id = id,
+            Name = name,
+            Description = description,
+            Price = price,
+            ProductCode = productCode,
+            CatalogBrandId = catalogBrandId,
+            CatalogCategoryId = catalogCategoryId,
+            RowVersion = rowVersion,
         };
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
@@ -188,7 +202,7 @@ public class CatalogManagementApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncEnd, command.Id);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncEnd, id);
     }
 
     /// <summary>

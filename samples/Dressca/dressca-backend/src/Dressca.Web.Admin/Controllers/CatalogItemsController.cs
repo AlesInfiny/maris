@@ -193,21 +193,17 @@ public class CatalogItemsController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> PutCatalogItemAsync(long catalogItemId, PutCatalogItemRequest putCatalogItemRequest)
     {
-
-        var command = new CatalogItemUpdateCommand(
-            catalogItemId,
-            putCatalogItemRequest.Name,
-            putCatalogItemRequest.Description,
-            putCatalogItemRequest.Price,
-            putCatalogItemRequest.ProductCode,
-            putCatalogItemRequest.CatalogBrandId,
-            putCatalogItemRequest.CatalogCategoryId,
-            putCatalogItemRequest.RowVersion
-            );
-
         try
         {
-            await this.managementService.UpdateCatalogItemAsync(command);
+            await this.managementService.UpdateCatalogItemAsync
+                (catalogItemId,
+                 putCatalogItemRequest.Name,
+                 putCatalogItemRequest.Description,
+                 putCatalogItemRequest.Price,
+                 putCatalogItemRequest.ProductCode,
+                 putCatalogItemRequest.CatalogBrandId,
+                 putCatalogItemRequest.CatalogCategoryId,
+                 putCatalogItemRequest.RowVersion);
         }
         catch (PermissionDeniedException ex)
         {

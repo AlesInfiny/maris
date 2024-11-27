@@ -174,7 +174,9 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
 
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
-        var command = new CatalogItemUpdateCommand(
+
+        // Act
+        await service.UpdateCatalogItemAsync(
             targetId,
             "テストアイテム",
             "テスト用のアイテムです。",
@@ -183,9 +185,6 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
-
-        // Act
-        await service.UpdateCatalogItemAsync(command);
 
         // Assert
         catalogRepositoryMock.Verify(r => r.UpdateAsync(It.IsAny<CatalogItem>(), AnyToken), Times.Once);
@@ -218,7 +217,9 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
-        var command = new CatalogItemUpdateCommand(
+
+        // Act
+        var action = () => service.UpdateCatalogItemAsync(
             targetId,
             "テストアイテム",
             "テスト用のアイテムです。",
@@ -227,9 +228,6 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
-
-        // Act
-        var action = () => service.UpdateCatalogItemAsync(command);
 
         // Assert
         await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
@@ -262,7 +260,9 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
-        var command = new CatalogItemUpdateCommand(
+
+        // Act
+        var action = () => service.UpdateCatalogItemAsync(
             targetId,
             "テストアイテム",
             "テスト用のアイテムです。",
@@ -271,9 +271,6 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
-
-        // Act
-        var action = () => service.UpdateCatalogItemAsync(command);
 
         // Assert
         await Assert.ThrowsAsync<CatalogBrandNotExistingInRepositoryException>(action);
@@ -306,7 +303,9 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
-        var command = new CatalogItemUpdateCommand(
+
+        // Act
+        var action = () => service.UpdateCatalogItemAsync(
             targetId,
             "テストアイテム",
             "テスト用のアイテムです。",
@@ -315,9 +314,6 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
-
-        // Act
-        var action = () => service.UpdateCatalogItemAsync(command);
 
         // Assert
         await Assert.ThrowsAsync<CatalogCategoryNotExistingInRepositoryException>(action);
@@ -350,7 +346,9 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
         authorizationServiceMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(false);
         var logger = this.CreateTestLogger<CatalogManagementApplicationService>();
         var service = new CatalogManagementApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, authorizationServiceMock.Object, logger);
-        var command = new CatalogItemUpdateCommand(
+
+        // Act
+        var action = () => service.UpdateCatalogItemAsync(
             targetId,
             "テストアイテム",
             "テスト用のアイテムです。",
@@ -359,9 +357,6 @@ public class CatalogManagementApplicationServiceTest(ITestOutputHelper testOutpu
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
-
-        // Act
-        var action = () => service.UpdateCatalogItemAsync(command);
 
         // Assert
         await Assert.ThrowsAsync<PermissionDeniedException>(action);
