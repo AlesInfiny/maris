@@ -27,7 +27,10 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 このツールを使用して変換した後、ビルドエラーや実行時エラーに手動で対応します。
 なお、 ASP.NET Web Forms はこのツールに対応していないため、手動でコードを書き直す必要があります。
 
-!!! .NET Upgrade Assistant について
+!!! note ".NET Upgrade Assistant について"
+
+    .NET Upgrade Assistant には、レガシーバージョンと最新バージョンの 2 種類があります。
+    .NET Framework サーバーサイド WCF アプリの変換にはレガシーバージョンのみ対応しています。
 
 ## 移行のハードル {#obstacles-to-migration}
 
