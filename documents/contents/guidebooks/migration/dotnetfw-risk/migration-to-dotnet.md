@@ -13,7 +13,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 ## 基本的な方針 {#basic-policy}
 
 .NET Framework と .NET の間には単純互換性がないため、基本的にはコードを書き直す必要があります。
-ただし、 2023 年 4 月現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
+ただし、 2024 年 11 月現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
 
 - .NET Framework Windows フォーム アプリ
 - .NET Framework WPF アプリ
@@ -26,6 +26,8 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 .NET Upgrade Assistant を使用すると、 .NET Framework のソリューションやプロジェクトが .NET 形式へ変換されます。
 このツールを使用して変換した後、ビルドエラーや実行時エラーに手動で対応します。
 なお、 ASP.NET Web Forms はこのツールに対応していないため、手動でコードを書き直す必要があります。
+
+!!! .NET Upgrade Assistant について
 
 ## 移行のハードル {#obstacles-to-migration}
 
@@ -64,9 +66,6 @@ description: .NET Framework にとどまり続けることで起こりうる リ
     - コードアクセスセキュリティ ( CAS )
 
     これらの影響を受けることは稀ですが、影響確認は必要です。
-    なお、 API レベルでの影響調査であれば、ツールを用いてある程度は自動的に実施可能です。
-
-    - [.NET Portability Analyzer](https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer)
 
 ### 短い製品ライフサイクルへの追従 {#adapt-to-short-product-life-cycles}
 

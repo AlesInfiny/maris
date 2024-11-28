@@ -34,28 +34,28 @@ RESTful API の Open API 仕様書を生成する Swagger のライブラリ「 
 
 ### ランタイムの進化に追従できない {#cannot-keep-up-with-runtime-evolution}
 
-暗号の利用モードの 1 つである AEM-GCM を C# で使用できる [System.Security.Cryptography.AesGcm クラス](https://learn.microsoft.com/ja-jp/dotnet/api/system.security.cryptography.aesgcm) は、 .NET Framework 4.8 では使用できません。
+暗号の利用モードの 1 つである AEM-GCM を C# で使用できる [System.Security.Cryptography.AesGcm クラス](https://learn.microsoft.com/ja-jp/dotnet/api/system.security.cryptography.aesgcm) は、 .NET Framework 4.8 以降では使用できません。
 これは .NET Standard 2.1 で追加されたため、 .NET Standard 2.0 の実装である .NET Framework 4.8 からは使用できないのです。
 すでに .NET Framework は .NET に新しく追加される API から取り残されつつあります。
 
 ### 新しい開発環境が使えない {#cannot-use-new-ide}
 
-2022 年 6 月現在最新 Visual Studio 2022 では、 .NET Framework 4.0 から 4.5.1 までの開発がサポートされません。
+2024 年 11 月現在、最新 Visual Studio 2022 では、 .NET Framework 4.6.2 より古いバージョンでの開発がサポートされません。
 よってこれらのバージョンを対象としたアプリケーションをビルドできません。
 今後、 Visual Studio でビルドできる .NET Framework のバージョンは減っていくことが考えられます。
 
 ### 言語バージョンが更新されないため、モダンなコーディングができない {#without-modern-coding}
 
-.NET Framework 4.8 に対応する C# のバージョンは 7.0 です。
-.NET Framework は 4.8 が最後のバージョンであるため、 C# バージョンは 7.0 に固定されます。
+.NET Framework 4.8.1 に対応する C# のバージョンは 7.3 です。
+.NET Framework は 4.8.1 が最後のバージョンであるため、 C# バージョンは 7.3 に固定されます。
 C# 8.0 以降追加された便利で生産性を上げてくれる記法は使用できません。
 また Web 等で公開されているコードサンプルをそのままでは利用できない可能性もどんどん高まっていきます。
 同じ言語でありながら、時代に取り残される可能性があります。
 
 ### 実行環境が制限される {#restriction-of-runtime}
 
-2022 年 6 月現在、 [Azure Web Apps](https://learn.microsoft.com/ja-JP/azure/app-service/) では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
-また、 Microsoft の公式 docker イメージである [.NET Framework Runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/) も、バージョンとして選択できるのは .NET Framework 3.5 と 4.8 のみです。
+2024 年 11 月現在、 [Azure Web Apps](https://learn.microsoft.com/ja-JP/azure/app-service/) では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
+また、 Microsoft の公式 docker イメージである [.NET Framework Runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/) も、バージョンとして選択できるのは .NET Framework 3.5, 4.8, 4.8.1 のみです。
 .NET Framework は、クラウド環境やコンテナー環境から徐々に締め出されつつあります。
 将来的に、クラウド環境やコンテナー環境で .NET Framework が使用できなくなる可能性は高いです。
 
@@ -92,7 +92,7 @@ C# 8.0 以降追加された便利で生産性を上げてくれる記法は使�
 ここまで説明したとおり、新しい機能や最新の技術は .NET にのみ追加され、.NET Framework は取り残されます。
 「[ランタイムの進化に追従できない](#cannot-keep-up-with-runtime-evolution)」 で解説した通り、暗号などのセキュリティに関連するものであっても、新しい機能は .NET Framework には追加されません。
 
-今後、.NET Standard ならびに .NET には、新たに定義されたプロトコルである HTTP/3 や Windows 11 の関連機能、新たな入力デバイスに対応する機能といった重要な新機能が追加されると予想されます。
+今後、 .NET には、新たに定義されたプロトコルである HTTP/3 や Windows 11 の関連機能、新たな入力デバイスに対応する機能といった重要な新機能が追加されると予想されます。
 しかし、.NET Framework ではそれらの機能は利用できません。
 
 また、.NET Framework で最もよく利用される ASP.NET Web Forms は、生産性の向上を重視したフレームワークであったため、優れた UI / UX を実現することは非常に困難です。
