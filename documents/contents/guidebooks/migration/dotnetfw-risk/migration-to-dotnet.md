@@ -15,6 +15,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 .NET Framework と .NET の間には単純互換性がないため、基本的にはコードを書き直す必要があります。
 ただし、 2024 年 11 月現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
 
+- .NET Framework ASP.NET アプリ
 - .NET Framework Windows フォーム アプリ
 - .NET Framework WPF アプリ
 - .NET Framework サーバーサイド WCF アプリ
@@ -25,12 +26,20 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 .NET Upgrade Assistant を使用すると、 .NET Framework のソリューションやプロジェクトが .NET 形式へ変換されます。
 このツールを使用して変換した後、ビルドエラーや実行時エラーに手動で対応します。
-なお、 ASP.NET Web Forms はこのツールに対応していないため、手動でコードを書き直す必要があります。
 
-!!! note ".NET Upgrade Assistant について"
+??? note "新旧 .NET Upgrade Assistant について（クリックで展開）"
 
-    .NET Upgrade Assistant には、レガシーバージョンと最新バージョンの 2 種類があります。
-    .NET Framework サーバーサイド WCF アプリの変換にはレガシーバージョンのみ対応しています。
+    .NET Upgrade Assistant には、レガシーバージョンと最新バージョンの 2 種類があり、まったく別のアプリケーションと言えるほどの違いがあります。
+    .NET Framework サーバーサイド WCF アプリにはレガシーバージョンのみ対応しています。
+    また、 ASP.NET Web Forms は最新バージョンのみ対応しています。
+
+    レガシーバージョンと最新バージョンの主な違いは以下のとおりです。
+
+    |                        | レガシーバージョン                      | 最新バージョン                                                                               |
+    | ---------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------- |
+    | アプリケーションの形態 | コマンドラインツール                    | Visual Studio 拡張機能                                                                       |
+    | 実行環境の前提         | .NET 7.0 Runtime （サポート切れ）が必要 | Visual Studio 2022 の最新版が必要                                                            |
+    | 実行可能な機能         | .NET Framework から .NET への変換       | 左記のほか、 .NET バージョンのメジャーアップデート対応、 .NET Core → .NET への対応などが追加 |
 
 ## 移行のハードル {#obstacles-to-migration}
 
