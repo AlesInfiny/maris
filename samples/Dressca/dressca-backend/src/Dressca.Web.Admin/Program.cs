@@ -23,15 +23,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddControllers(options =>
     {
-        options.Filters.Add<DbUpdateConcurrencyExceptionFilter>();
 
         if (builder.Environment.IsDevelopment())
         {
             options.Filters.Add<BusinessExceptionDevelopmentFilter>();
+            options.Filters.Add<DbUpdateConcurrencyExceptionDevelopmentFilter>();
         }
         else
         {
             options.Filters.Add<BusinessExceptionFilter>();
+            options.Filters.Add<DbUpdateConcurrencyExceptionFilter>();
         }
     })
     .ConfigureApiBehaviorOptions(options =>

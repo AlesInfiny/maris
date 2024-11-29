@@ -10,8 +10,9 @@ namespace Dressca.Web.Admin.Runtime;
 /// <summary>
 ///  <see cref="DbUpdateConcurrencyException"/> を HTTP 400 のレスポンスに変換する
 ///  <see cref="DbUpdateConcurrencyExceptionFilter"/> の実装クラスです。
+///  開発環境で利用することを想定しています。
 /// </summary>
-public class DbUpdateConcurrencyExceptionFilter : DbUpdateConcurrencyExceptionFilterBase
+public class DbUpdateConcurrencyExceptionDevelopmentFilter : DbUpdateConcurrencyExceptionFilterBase
 {
     private readonly ProblemDetailsFactory problemDetailsFactory;
 
@@ -26,18 +27,20 @@ public class DbUpdateConcurrencyExceptionFilter : DbUpdateConcurrencyExceptionFi
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    public DbUpdateConcurrencyExceptionFilter(ProblemDetailsFactory problemDetailsFactory,
-        ILogger<DbUpdateConcurrencyExceptionFilter> logger)
+    public DbUpdateConcurrencyExceptionDevelopmentFilter(ProblemDetailsFactory problemDetailsFactory,
+        ILogger<DbUpdateConcurrencyExceptionDevelopmentFilter> logger)
     : base(logger)
     => this.problemDetailsFactory = problemDetailsFactory ?? throw new ArgumentNullException(nameof(problemDetailsFactory));
 
     /// <inheritdoc/>
     protected override ProblemDetails CreateProblemDetails(ExceptionContext context)
     {
+        // 開発環境用のフィルターでは例外のスタックトレースも返却します。
         ArgumentNullException.ThrowIfNull(context);
         return this.problemDetailsFactory.CreateProblemDetails(
                 context.HttpContext,
                 statusCode: (int)HttpStatusCode.Conflict,
-                title: Messages.DbUpdateConcurrencyOccured);
+                title: Messages.DbUpdateConcurrencyOccured,
+                detail: context.Exception.ToString());
     }
 }

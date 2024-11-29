@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.Web.Admin.Runtime;
 
-public class DbUpdateConcurrencyExceptionFilterTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
+public class DbUpdateConcurrencyExceptionDevelopmentFilterTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
     [Fact]
     public void OnException_409Conflictが設定される()
@@ -30,7 +30,7 @@ public class DbUpdateConcurrencyExceptionFilterTest(ITestOutputHelper testOutput
     }
 
     [Fact]
-    public void OnException_例外のスタックトレースがdetailに設定されていない()
+    public void OnException_スタックトレースがdetailに設定されている()
     {
         // Arrange
         var filter = this.CreateFilter();
@@ -43,7 +43,7 @@ public class DbUpdateConcurrencyExceptionFilterTest(ITestOutputHelper testOutput
         // Assert
         var result = Assert.IsType<ConflictObjectResult>(context.Result);
         var value = Assert.IsType<ProblemDetails>(result.Value);
-        Assert.Null(value.Detail);
+        Assert.Equal(context.Exception.ToString(), value.Detail);
     }
 
     [Fact]
@@ -79,11 +79,11 @@ public class DbUpdateConcurrencyExceptionFilterTest(ITestOutputHelper testOutput
         };
     }
 
-    private DbUpdateConcurrencyExceptionFilter CreateFilter()
+    private DbUpdateConcurrencyExceptionDevelopmentFilter CreateFilter()
     {
         var problemDetailsFactory = new TestProblemDetailsFactory();
-        var logger = this.CreateTestLogger<DbUpdateConcurrencyExceptionFilter>();
-        return new DbUpdateConcurrencyExceptionFilter(problemDetailsFactory, logger);
+        var logger = this.CreateTestLogger<DbUpdateConcurrencyExceptionDevelopmentFilter>();
+        return new DbUpdateConcurrencyExceptionDevelopmentFilter(problemDetailsFactory, logger);
     }
 
     private class TestProblemDetailsFactory : ProblemDetailsFactory
