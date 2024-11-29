@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using Dressca.ApplicationCore;
-using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
@@ -71,9 +70,8 @@ builder.Services.AddOpenApiDocument(config =>
 
 builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
 builder.Services.AddStaticFileAssetStore();
-builder.Services.AddDresscaApplicationCore();
-builder.Services.AddTransient<CatalogManagementApplicationService>();
 builder.Services.AddTransient<IUserStore, UserStore>();
+builder.Services.AddDresscaApplicationCore();
 builder.Services.AddDresscaDtoMapper();
 
 if (builder.Environment.IsDevelopment())

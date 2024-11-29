@@ -1,7 +1,9 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
+using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Dressca.ApplicationCore;
 
@@ -36,6 +38,10 @@ public static class ApplicationCoreServicesExtensions
         services.AddTransient<OrderApplicationService>();
         services.AddTransient<CatalogApplicationService>();
         services.AddTransient<AssetApplicationService>();
+
+        // Default
+        // 該当する型のサービスが未登録の場合に、デフォルトで使用するサービスを追加します。
+        services.TryAddTransient<IUserStore, NotConnectedUserStore>();
 
         return services;
     }
