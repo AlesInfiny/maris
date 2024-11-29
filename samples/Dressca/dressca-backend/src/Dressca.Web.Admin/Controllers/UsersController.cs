@@ -31,7 +31,6 @@ public class UsersController : Controller
     /// <returns>ユーザーの情報。</returns>
     [HttpGet]
     [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [OpenApiOperation("getLoginUser")]
     [Authorize]
     public IActionResult getLoginUser()
