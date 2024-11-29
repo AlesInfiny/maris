@@ -20,29 +20,29 @@ namespace Dressca.Web.Admin.Controllers;
 [Authorize]
 public class CatalogItemsController : ControllerBase
 {
-    private readonly CatalogManagementApplicationService managementService;
+    private readonly CatalogApplicationService service;
     private readonly IObjectMapper<CatalogItem, CatalogItemResponse> mapper;
     private readonly ILogger<CatalogItemsController> logger;
 
     /// <summary>
     ///  <see cref="CatalogItemsController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="managementService">カタログ管理アプリケーションサービス。</param>
+    /// <param name="service">カタログアプリケーションサービス。</param>
     /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
-    ///   <item><paramref name="managementService"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="mapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
     public CatalogItemsController(
-        CatalogManagementApplicationService managementService,
+        CatalogApplicationService service,
         IObjectMapper<CatalogItem, CatalogItemResponse> mapper,
         ILogger<CatalogItemsController> logger)
     {
-        this.managementService = managementService ?? throw new ArgumentNullException(nameof(managementService));
+        this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -64,7 +64,7 @@ public class CatalogItemsController : ControllerBase
 
         try
         {
-            catalogItem = await this.managementService.GetCatalogItemAsync(id);
+            catalogItem = await this.service.GetCatalogItemByAdminAsync(id);
         }
         catch (CatalogItemNotExistingInRepositoryException ex)
         {
@@ -90,7 +90,7 @@ public class CatalogItemsController : ControllerBase
     public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
         var (catalogItems, totalCount) =
-            await this.managementService.GetCatalogItemsAsync(
+            await this.service.GetCatalogItemsAsync(
                 skip: query.GetSkipCount(),
                 take: query.PageSize,
                 brandId: query.BrandId,
@@ -123,7 +123,7 @@ public class CatalogItemsController : ControllerBase
 
         try
         {
-            catalogItem = await managementService.AddItemToCatalogAsync(
+            catalogItem = await service.AddItemToCatalogAsync(
                 postCatalogItemRequest.Name,
                 postCatalogItemRequest.Description,
                 postCatalogItemRequest.Price,
@@ -159,7 +159,7 @@ public class CatalogItemsController : ControllerBase
     {
         try
         {
-            await managementService.DeleteItemFromCatalogAsync(catalogItemId);
+            await service.DeleteItemFromCatalogAsync(catalogItemId);
         }
         catch (PermissionDeniedException ex)
         {
@@ -195,7 +195,7 @@ public class CatalogItemsController : ControllerBase
     {
         try
         {
-            await this.managementService.UpdateCatalogItemAsync
+            await this.service.UpdateCatalogItemAsync
                 (catalogItemId,
                  putCatalogItemRequest.Name,
                  putCatalogItemRequest.Description,
