@@ -1,4 +1,4 @@
-﻿namespace Dressca.ApplicationCore.Auth;
+﻿namespace Dressca.ApplicationCore.Authorization;
 
 /// <summary>
 ///  ユーザーのセッション情報のインターフェース。

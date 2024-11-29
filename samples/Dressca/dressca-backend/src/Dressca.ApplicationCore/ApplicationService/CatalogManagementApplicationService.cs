@@ -1,5 +1,4 @@
-﻿using Dressca.ApplicationCore.Auth;
-using Dressca.ApplicationCore.Authorization;
+﻿using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;

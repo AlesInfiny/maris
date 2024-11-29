@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Dressca.ApplicationCore;
 using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Auth;
+using Dressca.ApplicationCore.Authorization;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
 using Dressca.Web.Admin.Authorization;

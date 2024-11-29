@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Auth;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Xunit.Abstractions;
