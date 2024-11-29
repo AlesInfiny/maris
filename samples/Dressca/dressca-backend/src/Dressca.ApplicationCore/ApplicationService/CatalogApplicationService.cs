@@ -48,7 +48,7 @@ public class CatalogApplicationService
     }
 
     /// <summary>
-    ///  利用者がカタログ情報を取得します。
+    ///  カタログ情報を取得します。
     /// </summary>
     /// <param name="skip">読み飛ばす項目数。</param>
     /// <param name="take">最大取得項目数。</param>
@@ -118,7 +118,7 @@ public class CatalogApplicationService
         long catalogBrandId,
         long catalogCategoryId)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_AddItemToCatalogAsyncStart);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_AddItemToCatalogAsyncStart);
 
         if (!this.userStore.IsInRole("Admin"))
         {
@@ -143,7 +143,7 @@ public class CatalogApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_AddItemToCatalogAsyncEnd, catalogItemAdded.Id);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_AddItemToCatalogAsyncEnd, catalogItemAdded.Id);
         return catalogItemAdded;
     }
 
@@ -157,7 +157,7 @@ public class CatalogApplicationService
     /// <exception cref="CatalogItemNotExistingInRepositoryException">削除対象のカタログアイテムが存在しなかった場合。</exception>>
     public async Task DeleteItemFromCatalogAsync(long id, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_DeleteItemFromCatalogAsyncStart, id);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_DeleteItemFromCatalogAsyncStart, id);
 
         if (!this.userStore.IsInRole("Admin"))
         {
@@ -178,7 +178,7 @@ public class CatalogApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_DeleteItemFromCatalogAsyncEnd, id);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_DeleteItemFromCatalogAsyncEnd, id);
     }
 
     /// <summary>
@@ -209,7 +209,7 @@ public class CatalogApplicationService
                 byte[] rowVersion,
                 CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncStart, id);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_UpdateCatalogItemAsyncStart, id);
 
         if (!this.userStore.IsInRole("Admin"))
         {
@@ -253,7 +253,7 @@ public class CatalogApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_UpdateCatalogItemAsyncEnd, id);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_UpdateCatalogItemAsyncEnd, id);
     }
 
     /// <summary>
@@ -267,7 +267,7 @@ public class CatalogApplicationService
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
     public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsByAdminAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsByAdminAsyncStart, brandId, categoryId);
 
         if (!this.userStore.IsInRole("Admin"))
         {
@@ -293,7 +293,7 @@ public class CatalogApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemsAsyncEnd, brandId, categoryId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsByAdminAsyncEnd, brandId, categoryId);
         return (ItemsOnPage: itemsOnPage, TotalItems: totalItems);
     }
 
@@ -306,7 +306,7 @@ public class CatalogApplicationService
     /// <exception cref="CatalogItemNotExistingInRepositoryException">取得対象のカタログアイテムが存在しなかった場合。</exception>
     public async Task<CatalogItem?> GetCatalogItemByAdminAsync(long catalogItemId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemAsyncStart, catalogItemId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemByAdminAsyncStart, catalogItemId);
 
         if (!this.userStore.IsInRole("Admin"))
         {
@@ -326,7 +326,7 @@ public class CatalogApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogManagementApplicationService_GetCatalogItemAsyncEnd, catalogItemId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemByAdminAsyncEnd, catalogItemId);
         return catalogItem;
     }
 }

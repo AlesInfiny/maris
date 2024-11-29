@@ -88,6 +88,60 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   カタログに カタログアイテムID: {CatalogItemId} のカタログアイテムを追加しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_AddItemToCatalogAsyncEnd {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_AddItemToCatalogAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   カタログにアイテムを追加します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_AddItemToCatalogAsyncStart {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_AddItemToCatalogAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを削除しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_DeleteItemFromCatalogAsyncEnd {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_DeleteItemFromCatalogAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを削除します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_DeleteItemFromCatalogAsyncStart {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_DeleteItemFromCatalogAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   管理者がカタログアイテム ID: {CatalogItemId} のカタログアイテムを取得しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_GetCatalogItemByAdminAsyncEnd {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemByAdminAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   管理者がカタログアイテム ID: {CatalogItemId} のカタログアイテムを取得します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_GetCatalogItemByAdminAsyncStart {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemByAdminAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   カタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogApplicationService_GetCatalogItemsAsyncEnd {
@@ -102,6 +156,42 @@ namespace Dressca.ApplicationCore.Resources {
         internal static string CatalogApplicationService_GetCatalogItemsAsyncStart {
             get {
                 return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_GetCatalogItemsByAdminAsyncEnd {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsByAdminAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_GetCatalogItemsByAdminAsyncStart {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsByAdminAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを更新しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_UpdateCatalogItemAsyncEnd {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_UpdateCatalogItemAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを更新します。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogApplicationService_UpdateCatalogItemAsyncStart {
+            get {
+                return ResourceManager.GetString("CatalogApplicationService_UpdateCatalogItemAsyncStart", resourceCulture);
             }
         }
         
@@ -129,96 +219,6 @@ namespace Dressca.ApplicationCore.Resources {
         internal static string CatalogItemIdDoesNotExistInRepository {
             get {
                 return ResourceManager.GetString("CatalogItemIdDoesNotExistInRepository", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログに カタログアイテムID: {CatalogItemId} のカタログアイテムを追加しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_AddItemToCatalogAsyncEnd {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_AddItemToCatalogAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログにアイテムを追加します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_AddItemToCatalogAsyncStart {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_AddItemToCatalogAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを削除しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_DeleteItemFromCatalogAsyncEnd {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_DeleteItemFromCatalogAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを削除します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_DeleteItemFromCatalogAsyncStart {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_DeleteItemFromCatalogAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを取得しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_GetCatalogItemAsyncEnd {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_GetCatalogItemAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを取得します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_GetCatalogItemAsyncStart {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_GetCatalogItemAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_GetCatalogItemsAsyncEnd {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_GetCatalogItemsAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_GetCatalogItemsAsyncStart {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_GetCatalogItemsAsyncStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを更新しました。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_UpdateCatalogItemAsyncEnd {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_UpdateCatalogItemAsyncEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   カタログアイテム ID: {CatalogItemId} のカタログアイテムを更新します。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogManagementApplicationService_UpdateCatalogItemAsyncStart {
-            get {
-                return ResourceManager.GetString("CatalogManagementApplicationService_UpdateCatalogItemAsyncStart", resourceCulture);
             }
         }
         
