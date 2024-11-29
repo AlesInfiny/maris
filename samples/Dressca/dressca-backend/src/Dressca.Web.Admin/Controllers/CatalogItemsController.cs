@@ -54,9 +54,10 @@ public class CatalogItemsController : ControllerBase
     /// <param name="id">ID。</param>
     /// <returns>カタログアイテム。</returns>
     /// <response code="200">成功。</response>
+    /// <response code="404">指定した ID のアイテムがカタログに存在しない。</response>
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(CatalogItemResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getById")]
     public async Task<IActionResult> GetByIdAsync(long id)
     {
@@ -111,9 +112,10 @@ public class CatalogItemsController : ControllerBase
     /// </summary>
     /// <param name="postCatalogItemRequest"></param>
     /// <response code="201">成功。</response>
+    /// <response code="404">失敗。</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("postCatalogItem")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> PostCatalogItemAsync(PostCatalogItemRequest postCatalogItemRequest)
@@ -149,10 +151,10 @@ public class CatalogItemsController : ControllerBase
     /// <param name="catalogItemId">カタログアイテム ID 。</param>
     /// <returns>なし。</returns>
     /// <response code="204">成功。</response>
+    /// <response code="404">指定した ID のアイテムがカタログに存在しない。</response>
     [HttpDelete("{catalogItemId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteCatalogItem")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId)
@@ -181,14 +183,12 @@ public class CatalogItemsController : ControllerBase
     /// <param name="putCatalogItemRequest">更新するカタログアイテムの情報。</param>
     /// <returns>なし。</returns>
     /// <response code="204">成功。</response>
-    /// <response code="401">認可エラー。</response>
-    /// <response code="404">対象のIDが存在しない。</response>
+    /// <response code="404">指定した ID のアイテムがカタログに存在しない。</response>
     /// <response code="409">更新の競合が発生。</response>
     [HttpPut("{catalogItemId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [OpenApiOperation("putCatalogItem")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> PutCatalogItemAsync(long catalogItemId, PutCatalogItemRequest putCatalogItemRequest)

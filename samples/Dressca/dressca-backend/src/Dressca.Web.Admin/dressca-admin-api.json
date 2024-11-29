@@ -129,7 +129,14 @@
             }
           },
           "404": {
-            "description": ""
+            "description": "指定した ID のアイテムがカタログに存在しない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -234,8 +241,15 @@
           "201": {
             "description": "成功。"
           },
-          "401": {
-            "description": ""
+          "404": {
+            "description": "失敗。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -264,11 +278,15 @@
           "204": {
             "description": "成功。"
           },
-          "401": {
-            "description": ""
-          },
           "404": {
-            "description": ""
+            "description": "指定した ID のアイテムがカタログに存在しない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       },
@@ -308,14 +326,25 @@
           "204": {
             "description": "成功。"
           },
-          "401": {
-            "description": "認可エラー。"
-          },
           "404": {
-            "description": "対象のIDが存在しない。"
+            "description": "指定した ID のアイテムがカタログに存在しない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           },
           "409": {
-            "description": "更新の競合が発生。"
+            "description": "更新の競合が発生。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
