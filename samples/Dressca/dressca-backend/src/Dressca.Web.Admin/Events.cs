@@ -1,27 +1,27 @@
 ﻿namespace Dressca.Web.Admin;
 
 /// <summary>
-/// イベントIDを管理するクラスです。
+/// イベント ID を管理するクラスです。
 /// </summary>
 internal static class Events
 {
     /// <summary>
-    /// 試行した操作を実行する権限がないことを示すイベントID。
+    /// 試行した操作を実行する権限がないことを示すイベント ID です。
     /// </summary>
     internal static readonly EventId PermissionDenied = new(1001, nameof(PermissionDenied));
 
     /// <summary>
-    /// 指定したカタログアイテムがレポジトリに存在しないことを示すイベントID。
+    /// 指定したカタログアイテムがレポジトリに存在しないことを示すイベント ID です。
     /// </summary>
     internal static readonly EventId CatalogItemNotExistingInRepository = new(1002, nameof(CatalogItemNotExistingInRepository));
 
     /// <summary>
-    ///  データベースの更新の競合が発生したことを示すイベントID。
+    ///  データベースの更新の競合が発生したことを示すイベント ID です。
     /// </summary>
     internal static readonly EventId DbUpdateConcurrencyOccured = new(1003, nameof(DbUpdateConcurrencyOccured));
 
     /// <summary>
-    /// デバッグ用のイベントID
+    /// デバッグ用のイベント ID です。
     /// </summary>
     internal static readonly EventId DebugEvent = new(9999, nameof(DebugEvent));
 }
