@@ -59,7 +59,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 #### ASMX Web Services ( 廃止 ) {#asmx-web-services}
 
-- 移行先候補： ASP.NET Core Web API や Core WCF
+- 移行先候補： ASP.NET Core Web API, Core WCF, ASP.NET Core gRPC サービスなど
 - 移行方法：移行ツールは存在せず、手作業でのソースコード書き換えが必要
 
 #### Windows Communication Foundation (WCF) (廃止) {#wcf}
