@@ -57,8 +57,10 @@ app.Run();
     `IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } や [`AddDbContextCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck){ target=_blank } にヘルスチェックロジックを渡すよう拡張メソッドを実装します。
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
+    <!-- textlint-disable ja-technical-writing/sentence-length -->
+
     1. Entity Framework Core を利用したアプリケーションにおいてデータベースのヘルスチェックを行う場合
-        - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore) の参照を追加
+        - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore ){ target=_blank } の参照を追加
 
         ``` C# title="DbHealthChecksBuilderExtensions.cs" hl_lines="13 20-30"
         using Microsoft.EntityFrameworkCore;
@@ -95,6 +97,8 @@ app.Run();
             }
         }
         ```
+
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
 
     1. その他の外部サービスについてヘルスチェックを行う場合
 

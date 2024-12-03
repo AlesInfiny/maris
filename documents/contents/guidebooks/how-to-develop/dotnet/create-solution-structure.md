@@ -22,7 +22,7 @@ Git リポジトリの構築については、以下を参照してください�
 ### ソリューション構成と物理フォルダーの関係 {#solution-and-physical-folder-relationships}
 
 Visual Studio でソリューションを開いたとき、ソリューションエクスプローラーに表示される構造と、物理的なフォルダーの構造は一致しないことがあります。
-不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー](https://learn.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder)」の存在です。
+不一致を引き起こす最大の原因は、 Visual Studio の機能である「[ソリューションフォルダー :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/solutions-and-projects-in-visual-studio#solution-folder){ target=_blank }」の存在です。
 
 ソリューションフォルダーは、 Visual Studio のソリューションエクスプローラー内にのみ存在する仮想的なフォルダーです。
 AlesInfiny Maris OSS Edition では、ソリューションフォルダーと物理的なフォルダーを完全に一致させて管理することを推奨します。
@@ -30,7 +30,7 @@ AlesInfiny Maris OSS Edition では、ソリューションフォルダーと物
 
 ### ソリューションファイルの作成 {#create-solution-file}
 
-バックエンドアプリケーションを配置するフォルダー内に、 Visual Studio を利用して [空のソリューションファイルを作成](https://learn.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions) します。
+バックエンドアプリケーションを配置するフォルダー内に、 Visual Studio を利用して [空のソリューションファイルを作成 :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions){ target=_blank } します。
 ソリューションファイルの名前は、以下のいずれかのパターンに従って命名します。
 
 | #   | パターン                                   |
@@ -60,16 +60,20 @@ src フォルダーにはプロダクションコードを、 tests フォルダ
 この物理フォルダーと対応するように、 Visual Studio のソリューションエクスプローラー上で「src」ソリューションフォルダーと「tests」ソリューションフォルダーを作成します。
 この後作成するプロジェクトやソースコードは、 src ソリューションフォルダーまたは tests ソリューションフォルダーに物理フォルダーと同じように配置します。
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
 !!! note "プロダクションコードとテストコードのフォルダーを最初に分割する理由"
-    .NET アプリケーションの開発では、静的コード分析やコーディングルールの設定に [.editorconfig ファイル](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options) を用います。
+    .NET アプリケーションの開発では、静的コード分析やコーディングルールの設定に [.editorconfig ファイル :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/create-portable-custom-editor-options){ target=_blank } を用います。
     .editorconfig ファイルは、ファイルを配置したフォルダー以下すべてのファイルに対して、設定した値が影響を与えます。
     プロダクションコードとテストコードでは、通常コーディングルールの厳しさに濃淡をつけます[^1]。
     そのため、プロダクションコードを配置するフォルダーとテストコードを配置するフォルダーを最初に分類しておくことで、各コード向けの .editorconfig ファイルの適用が簡単になります。
 
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
     またフォルダー構造に基づく設定は、他にもいくつか存在します。
 
-    - [Directory.Build.props と Directory.Build.targets](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/customize-your-build#directorybuildprops-and-directorybuildtargets)
-    - [Central Package Management](https://devblogs.microsoft.com/nuget/introducing-central-package-management/)
+    - [Directory.Build.props と Directory.Build.targets :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/msbuild/customize-your-build#directorybuildprops-and-directorybuildtargets){ target=_blank }
+    - [Central Package Management :material-open-in-new:](https://devblogs.microsoft.com/nuget/introducing-central-package-management/){ target=_blank }
 
     プロダクションコードを配置するフォルダーとテストコードを配置するフォルダーの分割は、これらの機能を活用するためにも役立ちます。
 
