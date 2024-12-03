@@ -38,7 +38,11 @@ CSS ファイルを記述せずにデザインを実現する、ユーティリ�
 
 ### Tailwind CSS のインストール {#install-tailwind-css}
 
-[公式ドキュメント](https://tailwindcss.com/docs/installation/using-postcss) が推奨するとおり、 postCSS のプラグインとして Tailwind CSS 、 postCSS 、 autoprefixer をインストールします。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+[公式ドキュメント :material-open-in-new:](https://tailwindcss.com/docs/installation/using-postcss){ target=_blank } が推奨するとおり、 postCSS のプラグインとして Tailwind CSS 、 postCSS 、 autoprefixer をインストールします。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 > Installing Tailwind CSS as a PostCSS plugin is the most seamless way to integrate it with build tools like webpack, Rollup, Vite, and Parcel.
 
