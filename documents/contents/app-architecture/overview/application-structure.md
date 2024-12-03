@@ -28,7 +28,7 @@ Vue.js を用いた SPA の構成をとります。
 
 ## コンソールアプリケーション {#console-application}
 
-コンソールアプリケーションでは、汎用ホスト [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) を用いて構築します。データアクセスには Entity Framework Core を利用します。
+コンソールアプリケーションでは、汎用ホスト [Microsoft.Extensions.Hosting :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/){ target=_blank } を用いて構築します。データアクセスには Entity Framework Core を利用します。
 
 サンプルのダウンロードおよび解説については、 [コンソールアプリケーションで DI を利用する](../../samples/console-app-with-di/index.md) を参照してください。
 
@@ -46,7 +46,7 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
 ビルド時間が長すぎる場合や、開発者の PC スペックがソリューションの大きさに耐えられない場合は、ソリューションフィルターの機能を活用しましょう。
 1 ソリューションを保ちながら、プロジェクト単位でフィルター処理を行うことができます。
 
-[Visual Studio のフィルター処理済みソリューション - ソリューション フィルター ファイル](https://learn.microsoft.com/ja-jp/visualstudio/ide/filtered-solutions#solution-filter-files)
+[Visual Studio のフィルター処理済みソリューション - ソリューション フィルター ファイル :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/filtered-solutions#solution-filter-files){ target=_blank }
 
 ### プロジェクトの単位 {#unit-of-project}
 
@@ -67,7 +67,7 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
 
     各アーキテクチャの詳細は、以下を参照してください。
 
-    [一般的な Web アプリケーション アーキテクチャ](https://learn.microsoft.com/ja-jp/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)
+    [一般的な Web アプリケーション アーキテクチャ :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures){ target=_blank }
 
 1. アプリケーションアーキテクチャをプロジェクト構造に落とし込む
 

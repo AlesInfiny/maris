@@ -35,7 +35,12 @@ Web API は、最終的に HTTP ステータスコードやレスポンスボデ
 ユーザー自身の対応により正しい業務フローに復帰できるかどうかが重要です。
 ユーザーの入力や操作が原因で例外が発生した場合、つまりユーザー自身の対応によって正しい業務フローに復帰できる場合は HTTP 4xx 系のステータスコードを返します。
 
-一般的なリクエストエラーを示す HTTP 400 Bad Request を返却する場合は、 [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457.html) で定義された ProblemDetails にスローされた業務例外の詳細を含めます。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+一般的なリクエストエラーを示す HTTP 400 Bad Request を返却する場合は、 [RFC 9457 :material-open-in-new:](https://www.rfc-editor.org/rfc/rfc9457.html){ target=_blank }で定義された ProblemDetails にスローされた業務例外の詳細を含めます。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
 この処理は例外フィルターが行います。
 それ以外の特定の 4xx ステータスコード（ HTTP 404 Not Found など）は、 API コントローラーの業務ロジック内で明示的に返却します。
 
