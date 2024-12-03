@@ -12,8 +12,12 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 ## 基本的な方針 {#basic-policy}
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
 .NET Framework と .NET の間には単純互換性がないため、基本的にはコードを書き直す必要があります。
-ただし、 2024 年 11 月現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
+ただし、 2024 年 11 月現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview){ target=_blank }」という変換ツールが使用できます。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 - .NET Framework ASP.NET アプリ
 - .NET Framework Windows フォーム アプリ
