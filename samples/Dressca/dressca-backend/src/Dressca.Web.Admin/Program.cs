@@ -68,8 +68,8 @@ builder.Services.AddOpenApiDocument(config =>
     config.PostProcess = document =>
     {
         document.Info.Version = "1.0.0";
-        document.Info.Title = "Dressca Web API";
-        document.Info.Description = "Dressca の Web API 仕様";
+        document.Info.Title = "Dressca Admin Web API";
+        document.Info.Description = "Dressca Admin の Web API 仕様";
         document.Servers.Add(new()
         {
             Description = "ローカル開発用のサーバーです。",
