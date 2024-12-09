@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Dressca.Web.Admin.Runtime;
 
 /// <summary>
-///  <see cref="DbUpdateConcurrencyException"/> を HTTP 400 のレスポンスに変換する
+///  <see cref="DbUpdateConcurrencyException"/> を HTTP 409 のレスポンスに変換する
 ///  <see cref="DbUpdateConcurrencyExceptionFilter"/> の実装クラスです。
 ///  開発環境で利用することを想定しています。
 /// </summary>
