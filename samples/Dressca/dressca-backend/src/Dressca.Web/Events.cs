@@ -11,4 +11,9 @@ internal static class Events
     /// 業務例外が検出されたことを示すイベント ID です。
     /// </summary>
     internal static readonly EventId BusinessExceptionHandled = new(0001, nameof(BusinessExceptionHandled));
+
+    /// <summary>
+    ///  データベースの更新の競合が発生したことを示すイベント ID です。
+    /// </summary>
+    internal static readonly EventId DbUpdateConcurrencyOccurred = new(1001, nameof(DbUpdateConcurrencyOccurred));
 }

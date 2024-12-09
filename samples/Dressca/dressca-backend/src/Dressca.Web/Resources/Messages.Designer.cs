@@ -68,5 +68,14 @@ namespace Dressca.Web.Resources {
                 return ResourceManager.GetString("BusinessExceptionHandled", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   データベースの更新が競合しました。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DbUpdateConcurrencyOccurred {
+            get {
+                return ResourceManager.GetString("DbUpdateConcurrencyOccurred", resourceCulture);
+            }
+        }
     }
 }

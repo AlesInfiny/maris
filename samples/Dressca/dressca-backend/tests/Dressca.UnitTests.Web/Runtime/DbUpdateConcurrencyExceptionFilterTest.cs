@@ -1,4 +1,4 @@
-﻿using Dressca.Web.Admin.Runtime;
+﻿using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace Dressca.UnitTests.Web.Admin.Runtime;
+namespace Dressca.UnitTests.Web.Runtime;
 
 public class DbUpdateConcurrencyExceptionFilterTest(ITestOutputHelper testOutputHelper) : TestBase(testOutputHelper)
 {
@@ -62,7 +62,7 @@ public class DbUpdateConcurrencyExceptionFilterTest(ITestOutputHelper testOutput
         var record = this.LogCollector.LatestRecord;
         Assert.Equal("データベースの更新が競合しました。", record.Message);
         Assert.Equal(LogLevel.Information, record.Level);
-        Assert.Equal(1003, record.Id);
+        Assert.Equal(1001, record.Id);
         Assert.Same(context.Exception, record.Exception);
     }
 

@@ -1,11 +1,12 @@
 ﻿using System.Net;
-using Dressca.Web.Admin.Resources;
+using Dressca.Web.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
-namespace Dressca.Web.Admin.Runtime;
+namespace Dressca.Web.Runtime;
 
 /// <summary>
 ///  <see cref="DbUpdateConcurrencyException"/> を HTTP 409 のレスポンスに変換する

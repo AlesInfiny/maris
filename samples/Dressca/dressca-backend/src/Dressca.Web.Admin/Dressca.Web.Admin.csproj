@@ -34,30 +34,6 @@
     <ProjectReference Include="..\Dressca.Web.Admin.Dto\Dressca.Web.Admin.Dto.csproj" />
     <ProjectReference Include="..\Dressca.Web\Dressca.Web.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Compile Update="Resources\LogMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>LogMessages.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Resources\Messages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\LogMessages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>LogMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Messages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
     <Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration)" />
