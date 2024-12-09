@@ -4,6 +4,7 @@ using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Dto.Catalog;
 
 namespace Dressca.Web.Admin.Mapper;
+
 /// <summary>
 ///  <see cref="CatalogCategory"/> と <see cref="CatalogCategoryResponse"/> のマッパーです。
 /// </summary>

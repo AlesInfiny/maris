@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Dressca.Web.Admin.Dto.Catalog;
+
 /// <summary>
 ///  カタログカテゴリのレスポンスデータを表します。
 /// </summary>
@@ -18,4 +19,3 @@ public class CatalogCategoryResponse
     [Required]
     public string Name { get; set; } = string.Empty;
 }
-

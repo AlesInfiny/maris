@@ -18,7 +18,6 @@ public class StatusCodeMapAuthorizationMiddlewareResultHandler : IAuthorizationM
         AuthorizationPolicy policy,
         PolicyAuthorizationResult authorizeResult)
     {
-
         // 認可の結果がForbiddenの場合、 デフォルトのステータスコード403を404に詰め替えます。
         if (authorizeResult.Forbidden)
         {
@@ -27,6 +26,6 @@ public class StatusCodeMapAuthorizationMiddlewareResultHandler : IAuthorizationM
         }
 
         // デフォルトのハンドラーの実装にフォールバックします。
-        await defaultHandler.HandleAsync(next, context, policy, authorizeResult);
+        await this.defaultHandler.HandleAsync(next, context, policy, authorizeResult);
     }
 }

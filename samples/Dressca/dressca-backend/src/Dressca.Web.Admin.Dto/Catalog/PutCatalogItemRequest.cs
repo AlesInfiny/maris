@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Dressca.Web.Admin.Dto.Catalog;
+
 /// <summary>
 ///  カタログアイテムを変更する処理のリクエストデータを表します。
 /// </summary>

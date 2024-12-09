@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
 namespace Dressca.Web.Admin.Controllers;
+
 /// <summary>
 ///  <see cref="CatalogCategory"/> の情報にアクセスする API コントローラーです。
 /// </summary>

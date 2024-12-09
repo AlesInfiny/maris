@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Dressca.Web.Admin.Dto.Catalog;
+
 /// <summary>
 ///  カタログアイテムのレスポンスデータを表します。
 /// </summary>

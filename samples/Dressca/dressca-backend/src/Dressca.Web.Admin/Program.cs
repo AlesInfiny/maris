@@ -32,7 +32,6 @@ builder.Services.AddCors();
 builder.Services
     .AddControllers(options =>
     {
-
         if (builder.Environment.IsDevelopment())
         {
             options.Filters.Add<BusinessExceptionDevelopmentFilter>();
@@ -162,4 +161,6 @@ app.Run();
 /// <summary>
 /// 結合テストプロジェクトに公開するための部分クラス。
 /// </summary>
-public partial class Program { }
+public partial class Program
+{
+}

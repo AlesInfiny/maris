@@ -47,7 +47,6 @@ public class CatalogItemsController : ControllerBase
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-
     /// <summary>
     /// 指定したIDのカタログアイテムを返します。
     /// </summary>
@@ -72,10 +71,10 @@ public class CatalogItemsController : ControllerBase
             this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
             return this.NotFound();
         }
+
         var response = this.mapper.Convert(catalogItem);
         return this.Ok(response);
     }
-
 
     /// <summary>
     ///  カタログアイテムを検索して返します。
@@ -110,9 +109,10 @@ public class CatalogItemsController : ControllerBase
     /// <summary>
     ///  カタログにアイテムを追加します。
     /// </summary>
-    /// <param name="postCatalogItemRequest"></param>
+    /// <param name="postCatalogItemRequest">追加するアイテムの情報。</param>
     /// <response code="201">成功。</response>
     /// <response code="404">失敗。</response>
+    /// <returns>representing the asynchronous operation.</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
@@ -120,24 +120,22 @@ public class CatalogItemsController : ControllerBase
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> PostCatalogItemAsync(PostCatalogItemRequest postCatalogItemRequest)
     {
-
         CatalogItem catalogItem;
 
         try
         {
-            catalogItem = await service.AddItemToCatalogAsync(
+            catalogItem = await this.service.AddItemToCatalogAsync(
                 postCatalogItemRequest.Name,
                 postCatalogItemRequest.Description,
                 postCatalogItemRequest.Price,
                 postCatalogItemRequest.ProductCode,
                 postCatalogItemRequest.CatalogBrandId,
-                postCatalogItemRequest.CatalogCategoryId
-                );
+                postCatalogItemRequest.CatalogCategoryId);
         }
         catch (PermissionDeniedException ex)
         {
             this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
-            return NotFound();
+            return this.NotFound();
         }
 
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.PostCatalogItemAsync));
@@ -161,18 +159,19 @@ public class CatalogItemsController : ControllerBase
     {
         try
         {
-            await service.DeleteItemFromCatalogAsync(catalogItemId);
+            await this.service.DeleteItemFromCatalogAsync(catalogItemId);
         }
         catch (PermissionDeniedException ex)
         {
             this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
-            return NotFound();
+            return this.NotFound();
         }
         catch (CatalogItemNotExistingInRepositoryException ex)
         {
             this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
             return this.NotFound();
         }
+
         return this.NoContent();
     }
 
@@ -195,27 +194,27 @@ public class CatalogItemsController : ControllerBase
     {
         try
         {
-            await this.service.UpdateCatalogItemAsync
-                (catalogItemId,
-                 putCatalogItemRequest.Name,
-                 putCatalogItemRequest.Description,
-                 putCatalogItemRequest.Price,
-                 putCatalogItemRequest.ProductCode,
-                 putCatalogItemRequest.CatalogBrandId,
-                 putCatalogItemRequest.CatalogCategoryId,
-                 putCatalogItemRequest.RowVersion);
+            await this.service.UpdateCatalogItemAsync(
+                catalogItemId,
+                putCatalogItemRequest.Name,
+                putCatalogItemRequest.Description,
+                putCatalogItemRequest.Price,
+                putCatalogItemRequest.ProductCode,
+                putCatalogItemRequest.CatalogBrandId,
+                putCatalogItemRequest.CatalogCategoryId,
+                putCatalogItemRequest.RowVersion);
         }
         catch (PermissionDeniedException ex)
         {
             this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
-            return NotFound();
+            return this.NotFound();
         }
         catch (CatalogItemNotExistingInRepositoryException ex)
         {
             this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
             return this.NotFound();
         }
+
         return this.NoContent();
     }
-
 }

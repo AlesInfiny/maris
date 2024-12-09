@@ -49,5 +49,4 @@ public class PostCatalogItemRequest
     [Required]
     [Range(1L, long.MaxValue)]
     public long CatalogBrandId { get; set; }
-
 }

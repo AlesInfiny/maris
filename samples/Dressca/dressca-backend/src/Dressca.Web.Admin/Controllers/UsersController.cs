@@ -33,12 +33,12 @@ public class UsersController : Controller
     [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
     [OpenApiOperation("getLoginUser")]
     [Authorize]
-    public IActionResult getLoginUser()
+    public IActionResult GetLoginUser()
     {
         var response = new
         {
             UserName = this.userStore.LoginUserName(),
-            Role = this.userStore.LoginUserRole()
+            Role = this.userStore.LoginUserRole(),
         };
         return this.Ok(response);
     }

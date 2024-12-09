@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dressca.Web.Admin.Controllers.ApiModel;
+
 /// <summary>
 ///  カタログアイテムの検索クエリを表します。
 /// </summary>

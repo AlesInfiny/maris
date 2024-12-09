@@ -26,7 +26,8 @@ public class DbUpdateConcurrencyExceptionFilter : DbUpdateConcurrencyExceptionFi
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    public DbUpdateConcurrencyExceptionFilter(ProblemDetailsFactory problemDetailsFactory,
+    public DbUpdateConcurrencyExceptionFilter(
+        ProblemDetailsFactory problemDetailsFactory,
         ILogger<DbUpdateConcurrencyExceptionFilter> logger)
     : base(logger)
     => this.problemDetailsFactory = problemDetailsFactory ?? throw new ArgumentNullException(nameof(problemDetailsFactory));

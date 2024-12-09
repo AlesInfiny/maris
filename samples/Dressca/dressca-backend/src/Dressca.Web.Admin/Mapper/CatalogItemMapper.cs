@@ -29,7 +29,7 @@ public class CatalogItemMapper : IObjectMapper<CatalogItem, CatalogItemResponse>
             Price = value.Price,
             ProductCode = value.ProductCode,
             AssetCodes = value.Assets.Select(asset => asset.AssetCode).ToList(),
-            RowVersion = value.RowVersion
+            RowVersion = value.RowVersion,
         };
     }
 }

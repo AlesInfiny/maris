@@ -227,6 +227,7 @@
         "operationId": "postCatalogItem",
         "requestBody": {
           "x-name": "postCatalogItemRequest",
+          "description": "追加するアイテムの情報。",
           "content": {
             "application/json": {
               "schema": {

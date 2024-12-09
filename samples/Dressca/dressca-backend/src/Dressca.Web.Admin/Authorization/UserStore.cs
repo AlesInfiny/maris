@@ -11,9 +11,9 @@ public class UserStore : IUserStore
     private readonly IHttpContextAccessor httpContextAccessor;
 
     /// <summary>
-    /// コンストラクター。
+    ///   <see cref="UserStore"/>のインスタンスを初期化します。
     /// </summary>
-    /// <param name="httpContextAccessor"></param>
+    /// <param name="httpContextAccessor"><see cref="HttpContext"/>の情報にアクセスするためのクラス。</param>
     public UserStore(IHttpContextAccessor httpContextAccessor)
     {
         this.httpContextAccessor = httpContextAccessor;
@@ -26,6 +26,7 @@ public class UserStore : IUserStore
         {
             return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name).First().Value;
         }
+
         return string.Empty;
     }
 
@@ -36,6 +37,7 @@ public class UserStore : IUserStore
         {
             return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Role).First().Value;
         }
+
         return string.Empty;
     }
 
@@ -46,6 +48,7 @@ public class UserStore : IUserStore
         {
             return this.httpContextAccessor.HttpContext.User.IsInRole(role);
         }
+
         return false;
     }
 }

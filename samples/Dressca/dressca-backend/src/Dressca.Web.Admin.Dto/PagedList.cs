@@ -1,4 +1,5 @@
 ﻿namespace Dressca.Web.Admin.Dto;
+
 /// <summary>
 ///  ページネーションした結果のリストを管理します。
 /// </summary>
