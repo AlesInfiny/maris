@@ -122,7 +122,7 @@ public class CatalogApplicationService
 
         if (!this.userStore.IsInRole("Admin"))
         {
-            throw new PermissionDeniedException(nameof(this.AddItemToCatalogAsync));
+            throw new PermissionDeniedException();
         }
 
         var catalogItem = new CatalogItem()
@@ -160,7 +160,7 @@ public class CatalogApplicationService
 
         if (!this.userStore.IsInRole("Admin"))
         {
-            throw new PermissionDeniedException(nameof(this.DeleteItemFromCatalogAsync));
+            throw new PermissionDeniedException();
         }
 
         using (var scope = TransactionScopeManager.CreateTransactionScope())
@@ -212,7 +212,7 @@ public class CatalogApplicationService
 
         if (!this.userStore.IsInRole("Admin"))
         {
-            throw new PermissionDeniedException(nameof(this.UpdateCatalogItemAsync));
+            throw new PermissionDeniedException();
         }
 
         if (!await this.catalogRepository.DoesEntityExistAsync(id, cancellationToken))
@@ -270,7 +270,7 @@ public class CatalogApplicationService
 
         if (!this.userStore.IsInRole("Admin"))
         {
-            throw new PermissionDeniedException(nameof(this.AddItemToCatalogAsync));
+            throw new PermissionDeniedException();
         }
 
         IReadOnlyList<CatalogItem> itemsOnPage;
@@ -309,7 +309,7 @@ public class CatalogApplicationService
 
         if (!this.userStore.IsInRole("Admin"))
         {
-            throw new PermissionDeniedException(nameof(this.AddItemToCatalogAsync));
+            throw new PermissionDeniedException();
         }
 
         CatalogItem? catalogItem;
