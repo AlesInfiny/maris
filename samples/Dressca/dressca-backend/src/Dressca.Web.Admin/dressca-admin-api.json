@@ -631,7 +631,7 @@
             "description": "商品コードを取得または設定します。\n            ",
             "maxLength": 128,
             "minLength": 0,
-            "pattern": "[a-zA-Z0-9]+"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           "catalogCategoryId": {
             "type": "integer",
@@ -686,7 +686,7 @@
             "description": "商品コードを取得または設定します。\n            ",
             "maxLength": 128,
             "minLength": 0,
-            "pattern": "[a-zA-Z0-9]+"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           "catalogCategoryId": {
             "type": "integer",

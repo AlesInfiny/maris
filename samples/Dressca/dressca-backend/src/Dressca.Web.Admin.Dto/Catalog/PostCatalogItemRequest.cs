@@ -33,7 +33,7 @@ public class PostCatalogItemRequest
     /// </summary>
     [Required]
     [StringLength(128)]
-    [RegularExpression(@"[a-zA-Z0-9]+")]
+    [RegularExpression(@"^[a-zA-Z0-9]+$")]
     public string ProductCode { get; set; } = string.Empty;
 
     /// <summary>
