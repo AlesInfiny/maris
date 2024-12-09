@@ -17,7 +17,7 @@ description: アプリケーション全体で考慮すべきアーキテクチ�
 入力値検証は VeeValidate と yup を利用します。
 
 サーバーサイドアプリケーションでは、誤った入力情報がシステムに投入されることを防止する目的に行います。
-入力値検証は .NET のモデル検証を利用します（ [ASP.NET Core MVC でのモデルの検証 | Microsoft  :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/mvc/models/validation){ target=_blank } ）。
+入力値検証は .NET のモデル検証を利用します（ [ASP.NET Core MVC でのモデルの検証 | Microsoft Learn :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/mvc/models/validation){ target=_blank } ）。
 
 ## 項目間チェック {#cross-field-check}
 
