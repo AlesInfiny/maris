@@ -3,9 +3,11 @@ using Dressca.ApplicationCore;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
+using Dressca.Web.Admin;
 using Dressca.Web.Admin.Authorization;
 using Dressca.Web.Admin.HealthChecks;
 using Dressca.Web.Admin.Mapper;
+using Dressca.Web.Admin.Resources;
 using Dressca.Web.Configuration;
 using Dressca.Web.Controllers;
 using Dressca.Web.Runtime;
@@ -52,7 +54,7 @@ builder.Services
         {
             // エラーの原因をログに出力。
             var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
-            logger.LogInformation("HTTP 要求に誤りがあります。詳細情報: {0} 。", JsonSerializer.Serialize(context.ModelState));
+            logger.LogInformation(Events.ReceiveHttpBadRequest, LogMessages.ReceiveHttpBadRequest, JsonSerializer.Serialize(context.ModelState));
 
             // ASP.NET Core の既定の実装を使ってレスポンスを返却。
             return builtInFactory(context);
