@@ -26,9 +26,9 @@ internal class EfCatalogCategoryRepository : ICatalogCategoryRepository
         => await this.dbContext.CatalogCategories.ToListAsync(cancellationToken);
 
     /// <inheritdoc/>
-    public Task<CatalogCategory?> GetAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<CatalogCategory?> GetAsync(long id, CancellationToken cancellationToken = default)
     {
         var keys = new object[] { id };
-        return this.dbContext.CatalogCategories.FindAsync(keys, cancellationToken).AsTask();
+        return await this.dbContext.CatalogCategories.FindAsync(keys, cancellationToken);
     }
 }
