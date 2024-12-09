@@ -1,4 +1,5 @@
-﻿using Dressca.ApplicationCore.Authorization;
+﻿using System.Linq.Expressions;
+using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
@@ -277,18 +278,11 @@ public class CatalogApplicationService
         int totalItems;
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            itemsOnPage = await this.catalogRepository.FindAsync(
-                item =>
-                    (!brandId.HasValue || item.CatalogBrandId == brandId) &&
-                    (!categoryId.HasValue || item.CatalogCategoryId == categoryId),
-                skip,
-                take,
-                cancellationToken);
-            totalItems = await this.catalogRepository.CountAsync(
-                item =>
-                    (!brandId.HasValue || item.CatalogBrandId == brandId) &&
-                    (!categoryId.HasValue || item.CatalogCategoryId == categoryId),
-                cancellationToken);
+            Expression<Func<CatalogItem, bool>> specification = item =>
+                (!brandId.HasValue || item.CatalogBrandId == brandId) &&
+                (!categoryId.HasValue || item.CatalogCategoryId == categoryId);
+            itemsOnPage = await this.catalogRepository.FindAsync(specification, skip, take, cancellationToken);
+            totalItems = await this.catalogRepository.CountAsync(specification, cancellationToken);
             scope.Complete();
         }
 
