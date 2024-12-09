@@ -132,7 +132,6 @@ public class CatalogApplicationService
             Price = price,
             ProductCode = productCode,
             CatalogBrandId = catalogBrandId,
-
             CatalogCategoryId = catalogCategoryId,
         };
         CatalogItem catalogItemAdded;
