@@ -11,7 +11,7 @@ public class GetCatalogItemResponse
     ///  説明を取得または設定します。
     /// </summary>
     [Required]
-    public string Description { get; set; } = string.Empty;
+    public required string Description { get; set; }
 
     /// <summary>
     ///  単価を取得または設定します。
@@ -35,28 +35,28 @@ public class GetCatalogItemResponse
     ///  カタログアイテム Id を取得または設定します。
     /// </summary>
     [Required]
-    public long Id { get; set; }
+    public required long Id { get; set; }
 
     /// <summary>
     ///  商品名を取得または設定します。
     /// </summary>
     [Required]
-    public string Name { get; set; } = string.Empty;
+    public required string Name { get; set; }
 
     /// <summary>
     ///  商品コードを取得または設定します。
     /// </summary>
     [Required]
-    public string ProductCode { get; set; } = string.Empty;
+    public required string ProductCode { get; set; }
 
     /// <summary>
     ///  アセットコードの一覧を取得または設定します。
     /// </summary>
-    public IList<string> AssetCodes { get; set; } = [];
+    public required IList<string> AssetCodes { get; set; }
 
     /// <summary>
     /// 行バージョンを取得または設定します。
     /// </summary>
     [Required]
-    public byte[] RowVersion { get; set; } = [];
+    public required byte[] RowVersion { get; set; }
 }

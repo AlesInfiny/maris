@@ -11,11 +11,11 @@ public class GetLoginUserResponse
     ///  ユーザー名を取得または設定します。
     /// </summary>
     [Required]
-    public string UserName { get; set; } = string.Empty;
+    public required string UserName { get; set; }
 
     /// <summary>
     ///  ロールを取得または設定します。
     /// </summary>
     [Required]
-    public string Role { get; set; } = string.Empty;
+    public required string Role { get; set; }
 }

@@ -12,14 +12,14 @@ public class PutCatalogItemRequest
     /// </summary>
     [Required]
     [StringLength(256)]
-    public string Name { get; set; } = string.Empty;
+    public required string Name { get; set; }
 
     /// <summary>
     ///  説明を取得または設定します。
     /// </summary>
     [Required]
     [StringLength(1024)]
-    public string Description { get; set; } = string.Empty;
+    public required string Description { get; set; }
 
     /// <summary>
     /// 単価を取得または設定します。
@@ -34,7 +34,7 @@ public class PutCatalogItemRequest
     [Required]
     [StringLength(128)]
     [RegularExpression(@"^[a-zA-Z0-9]+$")]
-    public string ProductCode { get; set; } = string.Empty;
+    public required string ProductCode { get; set; }
 
     /// <summary>
     ///  カタログカテゴリIDを取得または設定します。
@@ -54,5 +54,5 @@ public class PutCatalogItemRequest
     /// 行バージョンを取得または設定します。
     /// </summary>
     [Required]
-    public byte[] RowVersion { get; set; } = [];
+    public required byte[] RowVersion { get; set; }
 }
