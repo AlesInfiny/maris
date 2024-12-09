@@ -1,9 +1,9 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
+using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Controllers.ApiModel;
-using Dressca.Web.Admin.Dto;
 using Dressca.Web.Admin.Dto.Catalog;
 using Dressca.Web.Controllers;
 using Microsoft.AspNetCore.Authorization;
