@@ -129,9 +129,9 @@ public class CatalogItemsController : ControllerBase
     ///  カタログにアイテムを追加します。
     /// </summary>
     /// <param name="postCatalogItemRequest">追加するアイテムの情報。</param>
+    /// <returns>なし。</returns>
     /// <response code="201">成功。</response>
     /// <response code="404">失敗。</response>
-    /// <returns>representing the asynchronous operation.</returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]

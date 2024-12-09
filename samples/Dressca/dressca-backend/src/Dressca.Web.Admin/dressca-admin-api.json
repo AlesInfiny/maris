@@ -216,6 +216,16 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "失敗。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       },
