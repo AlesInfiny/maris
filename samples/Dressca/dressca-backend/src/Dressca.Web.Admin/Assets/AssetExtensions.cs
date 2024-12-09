@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Assets;
+using Dressca.Web.Admin.Resources;
 
 namespace Dressca.Web.Admin.Assets;
 
@@ -24,7 +25,7 @@ public static class AssetExtensions
         return asset.AssetType switch
         {
             AssetTypes.Png => ContentTypes.ImagePng,
-            _ => throw new NotSupportedException(asset.AssetType),
+            _ => throw new NotSupportedException(string.Format(Messages.CannotConvertAssetTypeToContentType, asset.AssetType)),
         };
     }
 

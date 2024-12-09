@@ -21,6 +21,11 @@ internal static class Events
     internal static readonly EventId CatalogItemNotExistingInRepository = new(1003, nameof(CatalogItemNotExistingInRepository));
 
     /// <summary>
+    /// アセットが見つからなかったことを示すイベント ID です。
+    /// </summary>
+    internal static readonly EventId AssetNotFound = new(1004, nameof(AssetNotFound));
+
+    /// <summary>
     /// デバッグ用のイベント ID です。
     /// </summary>
     internal static readonly EventId DebugEvent = new(9999, nameof(DebugEvent));
