@@ -1,18 +1,18 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
-using Dressca.Web.Admin.Dto.Catalog;
+using Dressca.Web.Admin.Dto.CatalogItems;
 
 namespace Dressca.Web.Admin.Mapper;
 
 /// <summary>
-///  <see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパーです。
+///  <see cref="CatalogItem"/> と <see cref="GetCatalogItemResponse"/> のマッパーです。
 /// </summary>
-public class CatalogItemMapper : IObjectMapper<CatalogItem, CatalogItemResponse>
+public class CatalogItemMapper : IObjectMapper<CatalogItem, GetCatalogItemResponse>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull(nameof(value))]
-    public CatalogItemResponse? Convert(CatalogItem? value)
+    public GetCatalogItemResponse? Convert(CatalogItem? value)
     {
         if (value is null)
         {

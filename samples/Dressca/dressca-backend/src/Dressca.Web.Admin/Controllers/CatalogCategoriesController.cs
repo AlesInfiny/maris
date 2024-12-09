@@ -1,7 +1,7 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon.Mapper;
-using Dressca.Web.Admin.Dto.Catalog;
+using Dressca.Web.Admin.Dto.CatalogCategories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
@@ -18,13 +18,13 @@ namespace Dressca.Web.Admin.Controllers;
 public class CatalogCategoriesController : ControllerBase
 {
     private readonly CatalogApplicationService service;
-    private readonly IObjectMapper<CatalogCategory, CatalogCategoryResponse> mapper;
+    private readonly IObjectMapper<CatalogCategory, GetCatalogCategoriesResponse> mapper;
 
     /// <summary>
     ///  <see cref="CatalogCategoriesController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="service">カタログアプリケーションサービス。</param>
-    /// <param name="mapper"><see cref="CatalogCategory"/> と <see cref="CatalogCategoryResponse"/> のマッパー。</param>
+    /// <param name="mapper"><see cref="CatalogCategory"/> と <see cref="GetCatalogCategoriesResponse"/> のマッパー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
@@ -33,7 +33,7 @@ public class CatalogCategoriesController : ControllerBase
     /// </exception>
     public CatalogCategoriesController(
         CatalogApplicationService service,
-        IObjectMapper<CatalogCategory, CatalogCategoryResponse> mapper)
+        IObjectMapper<CatalogCategory, GetCatalogCategoriesResponse> mapper)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -45,7 +45,7 @@ public class CatalogCategoriesController : ControllerBase
     /// <returns>カタログカテゴリの一覧。</returns>
     /// <response code="200">成功。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<CatalogCategoryResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<GetCatalogCategoriesResponse>), StatusCodes.Status200OK)]
     [OpenApiOperation("getCatalogCategories")]
     public async Task<IActionResult> GetCatalogCategoriesAsync()
     {

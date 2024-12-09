@@ -4,7 +4,7 @@ using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Controllers.ApiModel;
-using Dressca.Web.Admin.Dto.Catalog;
+using Dressca.Web.Admin.Dto.CatalogItems;
 using Dressca.Web.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,14 +22,14 @@ namespace Dressca.Web.Admin.Controllers;
 public class CatalogItemsController : ControllerBase
 {
     private readonly CatalogApplicationService service;
-    private readonly IObjectMapper<CatalogItem, CatalogItemResponse> mapper;
+    private readonly IObjectMapper<CatalogItem, GetCatalogItemResponse> mapper;
     private readonly ILogger<CatalogItemsController> logger;
 
     /// <summary>
     ///  <see cref="CatalogItemsController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="service">カタログアプリケーションサービス。</param>
-    /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
+    /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="GetCatalogItemResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -40,7 +40,7 @@ public class CatalogItemsController : ControllerBase
     /// </exception>
     public CatalogItemsController(
         CatalogApplicationService service,
-        IObjectMapper<CatalogItem, CatalogItemResponse> mapper,
+        IObjectMapper<CatalogItem, GetCatalogItemResponse> mapper,
         ILogger<CatalogItemsController> logger)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
@@ -51,21 +51,21 @@ public class CatalogItemsController : ControllerBase
     /// <summary>
     /// 指定したIDのカタログアイテムを返します。
     /// </summary>
-    /// <param name="id">ID。</param>
+    /// <param name="catalogItemId">ID。</param>
     /// <returns>カタログアイテム。</returns>
     /// <response code="200">成功。</response>
     /// <response code="404">指定した ID のアイテムがカタログに存在しない。</response>
-    [HttpGet("{id}")]
-    [ProducesResponseType(typeof(CatalogItemResponse), StatusCodes.Status200OK)]
+    [HttpGet("{catalogItemId}")]
+    [ProducesResponseType(typeof(GetCatalogItemResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [OpenApiOperation("getById")]
-    public async Task<IActionResult> GetByIdAsync(long id)
+    [OpenApiOperation("getCatalogItem")]
+    public async Task<IActionResult> GetCatalogItemAsync(long catalogItemId)
     {
         CatalogItem? catalogItem;
 
         try
         {
-            catalogItem = await this.service.GetCatalogItemByAdminAsync(id);
+            catalogItem = await this.service.GetCatalogItemByAdminAsync(catalogItemId);
         }
         catch (PermissionDeniedException ex)
         {
@@ -91,7 +91,7 @@ public class CatalogItemsController : ControllerBase
     /// <response code="400">リクエストエラー。</response>
     /// <response code="404">失敗。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(PagedList<CatalogItemResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(PagedList<GetCatalogItemResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getByQuery")]
@@ -117,7 +117,7 @@ public class CatalogItemsController : ControllerBase
         var items = itemsAndCount.CatalogItems
             .Select(catalogItem => this.mapper.Convert(catalogItem))
             .ToList();
-        var returnValue = new PagedList<CatalogItemResponse>(
+        var returnValue = new PagedList<GetCatalogItemResponse>(
             items: items,
             totalCount: itemsAndCount.TotalCount,
             page: query.Page,

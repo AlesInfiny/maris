@@ -64,7 +64,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogBrandResponse"
+                    "$ref": "#/components/schemas/GetCatalogBrandsResponse"
                   }
                 }
               }
@@ -88,7 +88,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogCategoryResponse"
+                    "$ref": "#/components/schemas/GetCatalogCategoriesResponse"
                   }
                 }
               }
@@ -97,16 +97,16 @@
         }
       }
     },
-    "/api/catalog-items/{id}": {
+    "/api/catalog-items/{catalogItemId}": {
       "get": {
         "tags": [
           "CatalogItems"
         ],
         "summary": "指定したIDのカタログアイテムを返します。",
-        "operationId": "getById",
+        "operationId": "getCatalogItem",
         "parameters": [
           {
-            "name": "id",
+            "name": "catalogItemId",
             "in": "path",
             "required": true,
             "description": "ID。",
@@ -123,7 +123,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CatalogItemResponse"
+                  "$ref": "#/components/schemas/GetCatalogItemResponse"
                 }
               }
             }
@@ -139,133 +139,7 @@
             }
           }
         }
-      }
-    },
-    "/api/catalog-items": {
-      "get": {
-        "tags": [
-          "CatalogItems"
-        ],
-        "summary": "カタログアイテムを検索して返します。",
-        "operationId": "getByQuery",
-        "parameters": [
-          {
-            "name": "brandId",
-            "in": "query",
-            "description": "カタログブランド ID です。\n未設定の場合は全カタログブランドを対象にします。\n            ",
-            "schema": {
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
-            },
-            "x-position": 1
-          },
-          {
-            "name": "categoryId",
-            "in": "query",
-            "description": "カタログカテゴリ ID です。\n未設定の場合は全カタログカテゴリを対象にします。\n            ",
-            "schema": {
-              "type": "integer",
-              "format": "int64",
-              "nullable": true
-            },
-            "x-position": 2
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "ページ番号です。\n未設定の場合は 1 ページ目として扱います。\n1 以上の整数値を指定できます。\n            ",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "maximum": 2147483647.0,
-              "minimum": 1.0
-            },
-            "x-position": 3
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "1 ページに収めるアイテムの数です。\n未設定の場合は 20 個です。\n1 以上 50 以下の整数値を指定できます。\n            ",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "maximum": 50.0,
-              "minimum": 1.0
-            },
-            "x-position": 4
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功。",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedListOfCatalogItemResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "リクエストエラー。",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "失敗。",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
       },
-      "post": {
-        "tags": [
-          "CatalogItems"
-        ],
-        "summary": "カタログにアイテムを追加します。",
-        "operationId": "postCatalogItem",
-        "requestBody": {
-          "x-name": "postCatalogItemRequest",
-          "description": "追加するアイテムの情報。",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostCatalogItemRequest"
-              }
-            }
-          },
-          "required": true,
-          "x-position": 1
-        },
-        "responses": {
-          "201": {
-            "description": "成功。"
-          },
-          "404": {
-            "description": "失敗。",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/catalog-items/{catalogItemId}": {
       "delete": {
         "tags": [
           "CatalogItems"
@@ -360,6 +234,130 @@
         }
       }
     },
+    "/api/catalog-items": {
+      "get": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログアイテムを検索して返します。",
+        "operationId": "getByQuery",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "description": "カタログブランド ID です。\n未設定の場合は全カタログブランドを対象にします。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "カタログカテゴリ ID です。\n未設定の場合は全カタログカテゴリを対象にします。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "ページ番号です。\n未設定の場合は 1 ページ目として扱います。\n1 以上の整数値を指定できます。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 2147483647.0,
+              "minimum": 1.0
+            },
+            "x-position": 3
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "1 ページに収めるアイテムの数です。\n未設定の場合は 20 個です。\n1 以上 50 以下の整数値を指定できます。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 50.0,
+              "minimum": 1.0
+            },
+            "x-position": 4
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedListOfGetCatalogItemResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "失敗。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログにアイテムを追加します。",
+        "operationId": "postCatalogItem",
+        "requestBody": {
+          "x-name": "postCatalogItemRequest",
+          "description": "追加するアイテムの情報。",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCatalogItemRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "201": {
+            "description": "成功。"
+          },
+          "404": {
+            "description": "失敗。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/users": {
       "get": {
         "tags": [
@@ -373,7 +371,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserResponse"
+                  "$ref": "#/components/schemas/GetLoginUserResponse"
                 }
               }
             }
@@ -457,7 +455,7 @@
           }
         }
       },
-      "CatalogBrandResponse": {
+      "GetCatalogBrandsResponse": {
         "type": "object",
         "description": "カタログブランドのレスポンスデータを表します。\nカタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
         "additionalProperties": false,
@@ -478,7 +476,7 @@
           }
         }
       },
-      "CatalogCategoryResponse": {
+      "GetCatalogCategoriesResponse": {
         "type": "object",
         "description": "カタログカテゴリのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -499,7 +497,7 @@
           }
         }
       },
-      "CatalogItemResponse": {
+      "GetCatalogItemResponse": {
         "type": "object",
         "description": "カタログアイテムのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -564,7 +562,7 @@
           }
         }
       },
-      "PagedListOfCatalogItemResponse": {
+      "PagedListOfGetCatalogItemResponse": {
         "type": "object",
         "description": "ページネーションした結果のリストを管理します。\n            ",
         "additionalProperties": false,
@@ -601,7 +599,7 @@
             "type": "array",
             "description": "検索結果のリストを取得します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/CatalogItemResponse"
+              "$ref": "#/components/schemas/GetCatalogItemResponse"
             }
           }
         }
@@ -721,7 +719,7 @@
           }
         }
       },
-      "UserResponse": {
+      "GetLoginUserResponse": {
         "type": "object",
         "description": "ユーザー情報のレスポンスを表します。",
         "additionalProperties": false,

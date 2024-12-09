@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Dressca.Web.Admin.Dto;
+namespace Dressca.Web.Admin.Dto.Users;
 
 /// <summary>
 /// ユーザー情報のレスポンスを表します。
 /// </summary>
-public class UserResponse
+public class GetLoginUserResponse
 {
     /// <summary>
     ///  ユーザー名を取得または設定します。

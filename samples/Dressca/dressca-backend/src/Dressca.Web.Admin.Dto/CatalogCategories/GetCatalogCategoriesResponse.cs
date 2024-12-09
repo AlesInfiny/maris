@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Dressca.Web.Admin.Dto.Catalog;
+namespace Dressca.Web.Admin.Dto.CatalogCategories;
 
 /// <summary>
 ///  カタログカテゴリのレスポンスデータを表します。
 /// </summary>
-public class CatalogCategoryResponse
+public class GetCatalogCategoriesResponse
 {
     /// <summary>
     ///  カタログカテゴリ Id を取得または設定します。
