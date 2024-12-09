@@ -17,7 +17,7 @@ public class PermissionDeniedException : BusinessException
     /// </summary>
     /// <param name="operationName">実行を試みた操作の名称。</param>
     public PermissionDeniedException([CallerMemberName] string operationName = "")
-        : base(new BusinessError(ErrorCode, string.Format(Messages.PermissionDenied, string.Join(",", operationName))))
+        : base(new BusinessError(ErrorCode, string.Format(Messages.PermissionDenied, operationName)))
     {
     }
 }
