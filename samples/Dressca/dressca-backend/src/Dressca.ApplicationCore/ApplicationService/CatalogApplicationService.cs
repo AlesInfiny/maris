@@ -265,6 +265,7 @@ public class CatalogApplicationService
     /// <param name="categoryId">カタログカテゴリ Id 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
+    /// <exception cref="PermissionDeniedException">更新権限がない場合。</exception>
     public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsByAdminAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsByAdminAsyncStart, brandId, categoryId);
@@ -296,6 +297,7 @@ public class CatalogApplicationService
     /// <param name="catalogItemId">カタログアイテムID。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログアイテム。</returns>
+    /// <exception cref="PermissionDeniedException">更新権限がない場合。</exception>
     /// <exception cref="CatalogItemNotExistingInRepositoryException">取得対象のカタログアイテムが存在しなかった場合。</exception>
     public async Task<CatalogItem?> GetCatalogItemByAdminAsync(long catalogItemId, CancellationToken cancellationToken = default)
     {

@@ -67,6 +67,11 @@ public class CatalogItemsController : ControllerBase
         {
             catalogItem = await this.service.GetCatalogItemByAdminAsync(id);
         }
+        catch (PermissionDeniedException ex)
+        {
+            this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
+            return this.NotFound();
+        }
         catch (CatalogItemNotExistingInRepositoryException ex)
         {
             this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
@@ -84,24 +89,37 @@ public class CatalogItemsController : ControllerBase
     /// <param name="query">検索クエリ。</param>
     /// <response code="200">成功。</response>
     /// <response code="400">リクエストエラー。</response>
+    /// <response code="404">失敗。</response>
     [HttpGet]
     [ProducesResponseType(typeof(PagedList<CatalogItemResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getByQuery")]
     public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
-        var (catalogItems, totalCount) =
-            await this.service.GetCatalogItemsAsync(
+        (IReadOnlyList<CatalogItem> CatalogItems, int TotalCount) itemsAndCount;
+
+        try
+        {
+            itemsAndCount =
+            await this.service.GetCatalogItemsByAdminAsync(
                 skip: query.GetSkipCount(),
                 take: query.PageSize,
                 brandId: query.BrandId,
                 categoryId: query.CategoryId);
-        var items = catalogItems
+        }
+        catch (PermissionDeniedException ex)
+        {
+            this.logger.LogWarning(Events.PermissionDenied, ex, ex.Message);
+            return this.NotFound();
+        }
+
+        var items = itemsAndCount.CatalogItems
             .Select(catalogItem => this.mapper.Convert(catalogItem))
             .ToList();
         var returnValue = new PagedList<CatalogItemResponse>(
             items: items,
-            totalCount: totalCount,
+            totalCount: itemsAndCount.TotalCount,
             page: query.Page,
             pageSize: query.PageSize);
         return this.Ok(returnValue);
