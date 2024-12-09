@@ -1,14 +1,15 @@
 ﻿using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Dressca.Web.Admin.Authorization;
+namespace Dressca.Web.Authorization;
 
 /// <summary>
 /// 開発環境用の認証ハンドラーです。
 /// </summary>
-internal class DummyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+public class DummyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     /// <summary>
     ///  <see cref="DummyAuthenticationHandler"/> クラスの新しいインスタンスを初期化します。
