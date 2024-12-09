@@ -42,9 +42,9 @@ Azure AD B2C によるユーザー認証の簡単な実装サンプルを提供�
 他の OSS ライブラリについては、 [サンプルアプリケーションをダウンロード](#download) して確認してください。
 
 - フロントエンド
-    - [MSAL.js](https://www.npmjs.com/package/@azure/msal-browser)
+    - [MSAL.js :material-open-in-new:](https://www.npmjs.com/package/@azure/msal-browser){ target=_blank }
 - バックエンド
-    - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
+    - [Microsoft.Identity.Web :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Identity.Web){ target=_blank }
 
 ## 本サンプルを利用する際の検討事項 {#consideration}
 

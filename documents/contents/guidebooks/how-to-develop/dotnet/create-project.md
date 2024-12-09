@@ -64,7 +64,7 @@ description: バックエンドで動作する .NET アプリケーションの 
 
 ??? info "プロジェクトを作る前に必要な作業"
     ASP.NET Core with Vite のプロジェクトテンプレートは、 Visual Studio をインストールしただけでは利用できません。
-    [JohannDev.DotNet.Web.Spa.ProjectTemplates](https://www.nuget.org/packages/JohannDev.DotNet.Web.Spa.ProjectTemplates/) の NuGet パッケージを事前にインストールしてください。
+    [JohannDev.DotNet.Web.Spa.ProjectTemplates :material-open-in-new:](https://www.nuget.org/packages/JohannDev.DotNet.Web.Spa.ProjectTemplates/){ target=_blank } の NuGet パッケージを事前にインストールしてください。
 
 ??? info "【参考】 .NET CLI を用いて ASP.NET Core with Vite プロジェクトを作成する方法"
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。

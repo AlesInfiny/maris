@@ -51,12 +51,16 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 !!! note
 
-    .NET Standard は 2.1 が最後のバージョンであり、今後新たなバージョンは追加されないことが宣言されています（ [The future of .NET Standard - .NET Blog](https://devblogs.microsoft.com/dotnet/the-future-of-net-standard/) ）。
+    .NET Standard は 2.1 が最後のバージョンであり、今後新たなバージョンは追加されないことが宣言されています（ [The future of .NET Standard - .NET Blog :material-open-in-new:](https://devblogs.microsoft.com/dotnet/the-future-of-net-standard/){ target=_blank } ）。
     新しい API は今後 .NET だけに追加されます。
 
 ## .NET Framework の開発停止 {#stop-development-of-dotnetfw}
 
-2019 年 5 月、 Microsoft は .NET Framework の開発停止を宣言しました ( [.NET Core is Future of .NET](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net/) ) 。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+2019 年 5 月、 Microsoft は .NET Framework の開発停止を宣言しました ( [.NET Core is Future of .NET :material-open-in-new:](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net/){ target=_blank } ) 。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 この宣言では、次のことが明記されています。
 

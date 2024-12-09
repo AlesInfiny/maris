@@ -21,9 +21,9 @@ LocalDB は SQL Server の様々なエディションのインストーラーに
 
 !!! note "ローカル開発環境で使用する SQL Server のエディション"
     SQL Server LocalDB を利用すると、コンピューターリソースを節約しながら、データベースを用いた開発ができます。
-    しかし、いくつかの [機能制限](https://learn.microsoft.com/ja-jp/sql/database-engine/configure-windows/sql-server-express-localdb#restrictions) があります。
+    しかし、いくつかの [機能制限 :material-open-in-new:](https://learn.microsoft.com/ja-jp/sql/database-engine/configure-windows/sql-server-express-localdb#restrictions){ target=_blank } があります。
     これらの機能を用いて開発したい場合は、 SQL Server Developer Edition の利用を検討してください。
-    各エディションの比較については [こちら](https://learn.microsoft.com/ja-jp/sql/sql-server/editions-and-components-of-sql-server-2019) を参照してください。
+    各エディションの比較については [こちら :material-open-in-new:](https://learn.microsoft.com/ja-jp/sql/sql-server/editions-and-components-of-sql-server-2019){ target=_blank } を参照してください。
 
 LocalDB に直接アクセスする場合は、 Visual Studio の [SQL Server オブジェクト エクスプローラー] ウィンドウを利用してください。
-このウィンドウで機能不足の場合は、「 [SQL Server Management Studio](https://learn.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms) 」を別途インストールしてください。
+このウィンドウで機能不足の場合は、「 [SQL Server Management Studio :material-open-in-new:](https://learn.microsoft.com/ja-jp/sql/ssms/download-sql-server-management-studio-ssms){ target=_blank } 」を別途インストールしてください。
