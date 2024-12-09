@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit.Abstractions;
 
-namespace Dressca.UnitTests.Web;
+namespace Dressca.UnitTests.Web.Admin;
 
 public class TestBase
 {
