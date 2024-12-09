@@ -8,6 +8,7 @@ using Dressca.Web.Admin.Authorization;
 using Dressca.Web.Admin.HealthChecks;
 using Dressca.Web.Admin.Mapper;
 using Dressca.Web.Admin.Resources;
+using Dressca.Web.Authorization;
 using Dressca.Web.Configuration;
 using Dressca.Web.Controllers;
 using Dressca.Web.Runtime;
@@ -87,7 +88,7 @@ builder.Services.AddDresscaDtoMapper();
 if (builder.Environment.IsDevelopment())
 {
     // ローカル開発環境用の認証ハンドラーを登録します。
-    builder.Services.AddAuthentication("DummyAuthentication")
+    _ = builder.Services.AddAuthentication("DummyAuthentication")
     .AddScheme<AuthenticationSchemeOptions, DummyAuthenticationHandler>("DummyAuthentication", null);
     builder.Services.AddAuthorization();
 

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Policy;
+using Microsoft.AspNetCore.Http;
 
-namespace Dressca.Web.Admin.Authorization;
+namespace Dressca.Web.Authorization;
 
 /// <summary>
 /// 認可ミドルウェアのデフォルト動作を変更するカスタムハンドラー。
