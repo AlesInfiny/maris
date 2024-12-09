@@ -77,5 +77,14 @@ namespace Dressca.Web.Resources {
                 return ResourceManager.GetString("DbUpdateConcurrencyOccurred", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   ヘルスチェック API の MethodInfo を取得できませんでした。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string HealthCheckMethodNotFound {
+            get {
+                return ResourceManager.GetString("HealthCheckMethodNotFound", resourceCulture);
+            }
+        }
     }
 }

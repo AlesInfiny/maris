@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Dressca.Web.Admin.HealthChecks;
+namespace Dressca.Web.HealthChecks;
 
 /// <summary>
 ///  ヘルスチェック用に <see cref="IApiDescriptionProvider"/> を実装したクラス。
