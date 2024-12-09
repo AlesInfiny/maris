@@ -10,7 +10,7 @@ namespace Dressca.Web.Runtime;
 
 /// <summary>
 ///  <see cref="DbUpdateConcurrencyException"/> を HTTP 409 のレスポンスに変換する
-///  <see cref="DbUpdateConcurrencyExceptionFilter"/> の実装クラスです。
+///  <see cref="DbUpdateConcurrencyExceptionFilterBase"/> の実装クラスです。
 ///  開発環境で利用することを想定しています。
 /// </summary>
 public class DbUpdateConcurrencyExceptionDevelopmentFilter : DbUpdateConcurrencyExceptionFilterBase
@@ -18,7 +18,7 @@ public class DbUpdateConcurrencyExceptionDevelopmentFilter : DbUpdateConcurrency
     private readonly ProblemDetailsFactory problemDetailsFactory;
 
     /// <summary>
-    ///  <see cref="DbUpdateConcurrencyExceptionFilter"/> クラスの新しいインスタンスを初期化します。
+    ///  <see cref="DbUpdateConcurrencyExceptionDevelopmentFilter"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="problemDetailsFactory">>RFC準拠の問題詳細オブジェクトを構築するためのファクトリー。</param>
     /// <param name="logger">ロガー。</param>
