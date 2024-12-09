@@ -6,16 +6,16 @@ using Microsoft.Extensions.Options;
 namespace DummyAuthentication.Web;
 
 /// <summary>
-/// 開発環境用の認証ハンドラー。
+/// 開発環境用の認証ハンドラーです。
 /// </summary>
 internal class DummyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     /// <summary>
-    /// 
+    ///  <see cref="DummyAuthenticationHandler"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="options"></param>
-    /// <param name="logger"></param>
-    /// <param name="encoder"></param>
+    /// <param name="options">認証スキームのオプション。</param>
+    /// <param name="logger">ロガー。</param>
+    /// <param name="encoder">URLのエンコーダー。</param>
     public DummyAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder)
         : base(options, logger, encoder)
     {
