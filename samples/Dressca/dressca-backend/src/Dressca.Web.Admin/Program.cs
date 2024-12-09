@@ -10,7 +10,6 @@ using Dressca.Web.Admin.Runtime;
 using Dressca.Web.Configuration;
 using Dressca.Web.Controllers;
 using Dressca.Web.Runtime;
-using DummyAuthentication.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.HttpLogging;

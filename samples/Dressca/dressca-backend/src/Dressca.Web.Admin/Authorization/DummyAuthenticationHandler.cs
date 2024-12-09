@@ -3,7 +3,7 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 
-namespace DummyAuthentication.Web;
+namespace Dressca.Web.Admin.Authorization;
 
 /// <summary>
 /// 開発環境用の認証ハンドラーです。
