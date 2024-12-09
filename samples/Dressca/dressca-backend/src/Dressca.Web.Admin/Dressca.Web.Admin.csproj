@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
     <NoDefaultLaunchSettingsFile Condition="'$(ExcludeLaunchSettings)' == 'True'">True</NoDefaultLaunchSettingsFile>
-    <SpaRoot>..\..\..\dressca-frontend</SpaRoot>
+    <SpaRoot>..\..\..\dressca-frontend\</SpaRoot>
     <SpaWorkspace>$(SpaRoot)admin\</SpaWorkspace>
     <SpaProxyServerUrl>http://localhost:6173</SpaProxyServerUrl>
     <!-- <SpaProxyServerUrl Condition="'$(RequiresHttps)' == 'True'">https://localhost:5002</SpaProxyServerUrl>
