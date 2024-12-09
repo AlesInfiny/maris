@@ -1,9 +1,9 @@
-﻿namespace Dressca.Web.Admin.Controllers;
+﻿namespace Dressca.Web.Controllers;
 
 /// <summary>
 ///  アクション名を解決するヘルパーメソッドです。
 /// </summary>
-internal static class ActionNameHelper
+public static class ActionNameHelper
 {
     /// <summary>
     ///  非同期メソッドのアクション名を解決します。
@@ -14,7 +14,7 @@ internal static class ActionNameHelper
     /// <exception cref="ArgumentNullException">
     ///  <paramref name="asyncActionMethodName"/> が <see langword="null"/> です。
     /// </exception>
-    internal static string GetAsyncActionName(string asyncActionMethodName)
+    public static string GetAsyncActionName(string asyncActionMethodName)
     {
         ArgumentNullException.ThrowIfNull(asyncActionMethodName);
         const string asyncSuffix = "Async";

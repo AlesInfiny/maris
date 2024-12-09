@@ -5,6 +5,7 @@ using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Controllers.ApiModel;
 using Dressca.Web.Admin.Dto;
 using Dressca.Web.Admin.Dto.Catalog;
+using Dressca.Web.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
