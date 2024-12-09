@@ -26,7 +26,7 @@ public class UserStore : IUserStore
         {
             return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name).First().Value;
         }
-        return String.Empty;
+        return string.Empty;
     }
 
     /// <inheritdoc/>
@@ -36,7 +36,7 @@ public class UserStore : IUserStore
         {
             return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Role).First().Value;
         }
-        return String.Empty;
+        return string.Empty;
     }
 
     /// <inheritdoc/>
