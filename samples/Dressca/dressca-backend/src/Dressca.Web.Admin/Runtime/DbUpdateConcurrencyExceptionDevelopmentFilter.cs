@@ -40,7 +40,7 @@ public class DbUpdateConcurrencyExceptionDevelopmentFilter : DbUpdateConcurrency
         return this.problemDetailsFactory.CreateProblemDetails(
                 context.HttpContext,
                 statusCode: (int)HttpStatusCode.Conflict,
-                title: Messages.DbUpdateConcurrencyOccured,
+                title: Messages.DbUpdateConcurrencyOccurred,
                 detail: context.Exception.ToString());
     }
 }

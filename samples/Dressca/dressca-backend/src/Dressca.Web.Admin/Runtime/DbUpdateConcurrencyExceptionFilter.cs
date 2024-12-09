@@ -38,6 +38,6 @@ public class DbUpdateConcurrencyExceptionFilter : DbUpdateConcurrencyExceptionFi
         return this.problemDetailsFactory.CreateProblemDetails(
                 context.HttpContext,
                 statusCode: (int)HttpStatusCode.Conflict,
-                title: Messages.DbUpdateConcurrencyOccured);
+                title: Messages.DbUpdateConcurrencyOccurred);
     }
 }

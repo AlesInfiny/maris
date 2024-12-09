@@ -63,9 +63,9 @@ namespace Dressca.Web.Admin.Resources {
         /// <summary>
         ///   データベースの更新が競合しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string DbUpdateConcurrencyOccured {
+        internal static string DbUpdateConcurrencyOccurred {
             get {
-                return ResourceManager.GetString("DbUpdateConcurrencyOccured", resourceCulture);
+                return ResourceManager.GetString("DbUpdateConcurrencyOccurred", resourceCulture);
             }
         }
     }

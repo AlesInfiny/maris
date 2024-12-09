@@ -18,7 +18,7 @@ internal static class Events
     /// <summary>
     ///  データベースの更新の競合が発生したことを示すイベント ID です。
     /// </summary>
-    internal static readonly EventId DbUpdateConcurrencyOccured = new(1003, nameof(DbUpdateConcurrencyOccured));
+    internal static readonly EventId DbUpdateConcurrencyOccurred = new(1003, nameof(DbUpdateConcurrencyOccurred));
 
     /// <summary>
     /// デバッグ用のイベント ID です。

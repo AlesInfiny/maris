@@ -31,7 +31,7 @@ public abstract class DbUpdateConcurrencyExceptionFilterBase : IExceptionFilter
     {
         if (context.Exception is DbUpdateConcurrencyException dbUpdateConcurrencyEx)
         {
-            this.logger.LogInformation(Events.DbUpdateConcurrencyOccured, dbUpdateConcurrencyEx, LogMessages.DbUpdateConcurrencyOccured);
+            this.logger.LogInformation(Events.DbUpdateConcurrencyOccurred, dbUpdateConcurrencyEx, LogMessages.DbUpdateConcurrencyOccurred);
 
             var problemDetail = this.CreateProblemDetails(context);
             context.Result = new ConflictObjectResult(problemDetail);
