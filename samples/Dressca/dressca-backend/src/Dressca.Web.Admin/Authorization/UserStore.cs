@@ -4,10 +4,13 @@ using Dressca.ApplicationCore.Authorization;
 namespace Dressca.Web.Admin.Authorization;
 
 /// <summary>
-/// ユーザーのセッション情報。
+/// ユーザーのセッション情報を表すクラスです。
 /// </summary>
 public class UserStore : IUserStore
 {
+    /// <summary>
+    ///  <see cref="HttpContext"/>の情報にアクセスするためのクラス。
+    /// </summary>
     private readonly IHttpContextAccessor httpContextAccessor;
 
     /// <summary>
