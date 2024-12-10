@@ -26,7 +26,7 @@ public class PostCatalogItemRequest
     /// </summary>
     [Required]
     [RegularExpression(@"^[1-9]\d{0,15}$")]
-    public long Price { get; set; }
+    public required long Price { get; set; }
 
     /// <summary>
     ///  商品コードを取得または設定します。
@@ -41,12 +41,12 @@ public class PostCatalogItemRequest
     /// </summary>
     [Required]
     [Range(1L, long.MaxValue)]
-    public long CatalogCategoryId { get; set; }
+    public required long CatalogCategoryId { get; set; }
 
     /// <summary>
     ///  カタログブランドIDを取得または設定します。
     /// </summary>
     [Required]
     [Range(1L, long.MaxValue)]
-    public long CatalogBrandId { get; set; }
+    public required long CatalogBrandId { get; set; }
 }
