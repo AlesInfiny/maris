@@ -7,7 +7,7 @@ using NSwag.Annotations;
 namespace Dressca.Web.Admin.Controllers;
 
 /// <summary>
-/// ユーザーの情報にアクセスするコントローラー。
+/// ユーザーの情報にアクセスするコントローラーです。
 /// </summary>
 [Route("api/users")]
 [ApiController]
@@ -17,12 +17,17 @@ public class UsersController : Controller
     private readonly IUserStore userStore;
 
     /// <summary>
-    /// コンストラクター。
+    ///   <see cref="UsersController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="userStore">ユーザー情報のストア。</param>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="userStore"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
     public UsersController(IUserStore userStore)
     {
-        this.userStore = userStore;
+        this.userStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
     }
 
     /// <summary>
