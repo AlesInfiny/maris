@@ -18,92 +18,135 @@ public class CatalogItemTest
         Assert.NotNull(catalogItem);
     }
 
-    [Fact]
-    public void SetName_空文字_ArgumentExceptionが発生()
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("　")]
+    public void Constructor_Name_nullまたは空白文字_ArgumentExceptionが発生(string? name)
     {
-        // Arrange
-        var item = CreateTestItem();
-        var name = string.Empty;
+        // Arrange & Act
+        var action = () => new CatalogItem
+        {
+            CatalogCategoryId = 1L,
+            CatalogBrandId = 1L,
+            Description = "テスト用アイテムです。",
+            Name = name!,
+            Price = 23800m,
+            ProductCode = "TEST001",
+            Id = 9999L,
+        };
 
-        // Act
-        var action = () => item.SetName(name);
+        // Assert
+        Assert.Throws<ArgumentException>(action);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("　")]
+    public void Constructor_Description_nullまたは空白文字_ArgumentExceptionが発生(string? description)
+    {
+        // Arrange & Act
+        var action = () => new CatalogItem
+        {
+            CatalogCategoryId = 1L,
+            CatalogBrandId = 1L,
+            Description = description!,
+            Name = "テスト用アイテム",
+            Price = 23800m,
+            ProductCode = "TEST001",
+            Id = 9999L,
+        };
 
         // Assert
         Assert.Throws<ArgumentException>(action);
     }
 
     [Fact]
-    public void SetDescription_空文字_ArgumentExceptionが発生()
+    public void Constructor_Price_負の数_ArgumentOutOfRangeExceptionが発生()
     {
         // Arrange
-        var item = CreateTestItem();
-        var description = string.Empty;
+        var price = -100m;
 
         // Act
-        var action = () => item.SetDescription(description);
-
-        // Assert
-        Assert.Throws<ArgumentException>(action);
-    }
-
-    [Fact]
-    public void SetPrice_負の数_ArgumentOutOfRangeExceptionが発生()
-    {
-        // Arrange
-        var item = CreateTestItem();
-        var price = -1000;
-
-        // Act
-        var action = () => item.SetPrice(price);
+        var action = () => new CatalogItem
+        {
+            CatalogCategoryId = 1L,
+            CatalogBrandId = 1L,
+            Description = "テスト用アイテムです。",
+            Name = "テスト用アイテム",
+            Price = price,
+            ProductCode = "TEST001",
+            Id = 9999L,
+        };
 
         // Assert
         Assert.Throws<ArgumentOutOfRangeException>(action);
     }
 
     [Fact]
-    public void SetProductCode_半角英数字以外_ArgumentExceptionが発生()
+    public void Constructor_ProductCode_半角英数字以外_ArgumentExceptionが発生()
     {
         // Arrange
-        var item = CreateTestItem();
         var productCode = "商品コード";
 
         // Act
-        var action = () => item.SetProductCode(productCode);
+        var action = () => new CatalogItem
+        {
+            CatalogCategoryId = 1L,
+            CatalogBrandId = 1L,
+            Description = "テスト用アイテムです。",
+            Name = "テスト用アイテム",
+            Price = 23800m,
+            ProductCode = productCode,
+            Id = 9999L,
+        };
 
         // Assert
         Assert.Throws<ArgumentException>(action);
     }
 
     [Fact]
-    public void SetCatalogBrandId_負の数_ArgumentOutOfRangeExceptionが発生()
+    public void Constructor_CatalogCategoryId_負の数_ArgumentOutOfRangeExceptionが発生()
     {
         // Arrange
-        var item = CreateTestItem();
-        var catalogBrandId = -99;
+        var catalogCategoryId = -99L;
 
         // Act
-        var action = () => item.SetCatalogBrandId(catalogBrandId);
+        var action = () => new CatalogItem
+        {
+            CatalogCategoryId = catalogCategoryId,
+            CatalogBrandId = 1L,
+            Description = "テスト用アイテムです。",
+            Name = "テスト用アイテム",
+            Price = 23800m,
+            ProductCode = "TEST001",
+            Id = 9999L,
+        };
 
         // Assert
         Assert.Throws<ArgumentOutOfRangeException>(action);
     }
 
     [Fact]
-    public void SetCatalogCategoryId_負の数_ArgumentOutOfRangeExceptionが発生()
+    public void Constructor_CatalogBrandId_負の数_ArgumentOutOfRangeExceptionが発生()
     {
         // Arrange
-        var item = CreateTestItem();
-        var catalogCategoryId = -99;
+        var catalogBrandId = -99L;
 
         // Act
-        var action = () => item.SetCatalogCategoryId(catalogCategoryId);
+        var action = () => new CatalogItem
+        {
+            CatalogCategoryId = 1L,
+            CatalogBrandId = catalogBrandId,
+            Description = "テスト用アイテムです。",
+            Name = "テスト用アイテム",
+            Price = 23800m,
+            ProductCode = "TEST001",
+            Id = 9999L,
+        };
 
         // Assert
         Assert.Throws<ArgumentOutOfRangeException>(action);
-    }
-
-    private static CatalogItem CreateTestItem()
-    {
-        return new() { CatalogCategoryId = 1L, CatalogBrandId = 1L, Description = "テスト用アイテムです。", Name = "テスト用アイテム", Price = 23800m, ProductCode = "TEST001", Id = 9999L };
     }
 }
