@@ -8,50 +8,69 @@ namespace Dressca.Web.Admin.Authorization;
 /// </summary>
 public class UserStore : IUserStore
 {
-    /// <summary>
-    ///  <see cref="HttpContext"/>の情報にアクセスするためのクラス。
-    /// </summary>
     private readonly IHttpContextAccessor httpContextAccessor;
 
     /// <summary>
     ///   <see cref="UserStore"/>のインスタンスを初期化します。
     /// </summary>
     /// <param name="httpContextAccessor"><see cref="HttpContext"/>の情報にアクセスするためのクラス。</param>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="httpContextAccessor"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
     public UserStore(IHttpContextAccessor httpContextAccessor)
     {
-        this.httpContextAccessor = httpContextAccessor;
+        this.httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
     }
 
     /// <inheritdoc/>
-    public string LoginUserName()
+    public string LoginUserName
     {
-        if (this.httpContextAccessor.HttpContext != null)
+        get
         {
-            return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Name).First().Value;
-        }
+            if (this.IsAuthenticated())
+            {
+                return this.httpContextAccessor.HttpContext?.User.Identity?.Name ?? string.Empty;
+            }
 
-        return string.Empty;
+            return string.Empty;
+        }
     }
 
     /// <inheritdoc/>
-    public string LoginUserRole()
+    public string[] LoginUserRoles
     {
-        if (this.httpContextAccessor.HttpContext != null)
+        get
         {
-            return this.httpContextAccessor.HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Role).First().Value;
-        }
+            if (this.IsAuthenticated())
+            {
+                return this.httpContextAccessor.HttpContext?.User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToArray() ?? [];
+            }
 
-        return string.Empty;
+            return [];
+        }
     }
 
     /// <inheritdoc/>
     public bool IsInRole(string role)
     {
-        if (this.httpContextAccessor.HttpContext != null)
+        if (this.IsAuthenticated())
         {
-            return this.httpContextAccessor.HttpContext.User.IsInRole(role);
+            return this.httpContextAccessor.HttpContext?.User.IsInRole(role) ?? false;
         }
 
         return false;
+    }
+
+    /// <summary>
+    ///   ユーザーがログイン済みかどうかを表す真理値を取得します。
+    /// </summary>
+    /// <returns>ユーザーがログイン済みかどうかを表す真理値。
+    /// ログイン済みならば <see langword="true"/> 、そうでなければ <see langword="false"/> 。
+    /// </returns>
+    private bool IsAuthenticated()
+    {
+        return this.httpContextAccessor.HttpContext?.User.Identity?.IsAuthenticated ?? false;
     }
 }

@@ -6,15 +6,15 @@
 public class NotConnectedUserStore : IUserStore
 {
     /// <inheritdoc/>
-    public string LoginUserName()
+    public string LoginUserName
     {
-        return string.Empty;
+        get => string.Empty;
     }
 
     /// <inheritdoc/>
-    public string LoginUserRole()
+    public string[] LoginUserRoles
     {
-        return string.Empty;
+        get => [];
     }
 
     /// <inheritdoc/>

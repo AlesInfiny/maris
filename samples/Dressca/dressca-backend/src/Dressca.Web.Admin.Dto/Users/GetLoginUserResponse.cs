@@ -17,5 +17,5 @@ public class GetLoginUserResponse
     ///  ロールを取得または設定します。
     /// </summary>
     [Required]
-    public required string Role { get; set; }
+    public required string[] Roles { get; set; }
 }

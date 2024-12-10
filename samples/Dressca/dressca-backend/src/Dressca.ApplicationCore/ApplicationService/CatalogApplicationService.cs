@@ -3,6 +3,7 @@ using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
+using static Dressca.ApplicationCore.Authorization.Roles;
 
 namespace Dressca.ApplicationCore.ApplicationService;
 
@@ -121,7 +122,7 @@ public class CatalogApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_AddItemToCatalogAsyncStart);
 
-        if (!this.userStore.IsInRole("Admin"))
+        if (!this.userStore.IsInRole(Admin))
         {
             throw new PermissionDeniedException();
         }
@@ -159,7 +160,7 @@ public class CatalogApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_DeleteItemFromCatalogAsyncStart, id);
 
-        if (!this.userStore.IsInRole("Admin"))
+        if (!this.userStore.IsInRole(Admin))
         {
             throw new PermissionDeniedException();
         }
@@ -211,7 +212,7 @@ public class CatalogApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_UpdateCatalogItemAsyncStart, id);
 
-        if (!this.userStore.IsInRole("Admin"))
+        if (!this.userStore.IsInRole(Admin))
         {
             throw new PermissionDeniedException();
         }
@@ -270,7 +271,7 @@ public class CatalogApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsByAdminAsyncStart, brandId, categoryId);
 
-        if (!this.userStore.IsInRole("Admin"))
+        if (!this.userStore.IsInRole(Admin))
         {
             throw new PermissionDeniedException();
         }
@@ -303,7 +304,7 @@ public class CatalogApplicationService
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemByAdminAsyncStart, catalogItemId);
 
-        if (!this.userStore.IsInRole("Admin"))
+        if (!this.userStore.IsInRole(Admin))
         {
             throw new PermissionDeniedException();
         }

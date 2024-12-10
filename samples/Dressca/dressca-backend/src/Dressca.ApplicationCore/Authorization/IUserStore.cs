@@ -7,21 +7,21 @@ public interface IUserStore
 {
     /// <summary>
     /// ログイン中のユーザー名を取得します。
-    /// 未ログインの場合は空文字を返します。
+    /// 未接続または未ログインの場合は空文字を返します。
     /// </summary>
     /// <returns>ユーザー名。</returns>
-    public string LoginUserName();
+    public string LoginUserName { get; }
 
     /// <summary>
     /// ログイン中のユーザーのロールを取得します。
-    /// 未ログインの場合は空文字を返します。
+    /// 未接続または未ログインの場合は空の配列を返します。
     /// </summary>
     /// <returns>ロール。</returns>
-    public string LoginUserRole();
+    public string[] LoginUserRoles { get; }
 
     /// <summary>
     /// ログイン中のユーザーが指定したロールに属しているかどうか確認します。
-    /// 未ログインの場合はfalseを返します。
+    /// 未接続または未ログインの場合はfalseを返します。
     /// </summary>
     /// <param name="role">ロール。</param>
     /// <returns>ロールに属するかどうか。</returns>

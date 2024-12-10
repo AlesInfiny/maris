@@ -367,7 +367,7 @@
         "operationId": "getLoginUser",
         "responses": {
           "200": {
-            "description": "ユーザーの情報。",
+            "description": "成功。",
             "content": {
               "application/json": {
                 "schema": {
@@ -725,7 +725,7 @@
         "additionalProperties": false,
         "required": [
           "userName",
-          "role"
+          "roles"
         ],
         "properties": {
           "userName": {
@@ -733,10 +733,12 @@
             "description": "ユーザー名を取得または設定します。\n            ",
             "minLength": 1
           },
-          "role": {
-            "type": "string",
+          "roles": {
+            "type": "array",
             "description": "ロールを取得または設定します。\n            ",
-            "minLength": 1
+            "items": {
+              "type": "string"
+            }
           }
         }
       }

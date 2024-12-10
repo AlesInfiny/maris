@@ -33,18 +33,18 @@ public class UsersController : Controller
     /// <summary>
     /// ログイン中のユーザーの情報を取得します。
     /// </summary>
+    /// <response code="200">成功。</response>
     /// <returns>ユーザーの情報。</returns>
     [HttpGet]
     [ProducesResponseType(typeof(GetLoginUserResponse), StatusCodes.Status200OK)]
     [OpenApiOperation("getLoginUser")]
     [Authorize]
-    public IActionResult GetLoginUser()
+    public GetLoginUserResponse GetLoginUser()
     {
-        var response = new
+        return new GetLoginUserResponse
         {
-            UserName = this.userStore.LoginUserName(),
-            Role = this.userStore.LoginUserRole(),
+            UserName = this.userStore.LoginUserName,
+            Roles = this.userStore.LoginUserRoles,
         };
-        return this.Ok(response);
     }
 }

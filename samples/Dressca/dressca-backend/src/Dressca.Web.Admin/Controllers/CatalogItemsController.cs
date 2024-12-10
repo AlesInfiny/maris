@@ -136,7 +136,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("postCatalogItem")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = nameof(Admin))]
     public async Task<IActionResult> PostCatalogItemAsync(PostCatalogItemRequest postCatalogItemRequest)
     {
         CatalogItem catalogItem;
@@ -173,7 +173,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteCatalogItem")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = nameof(Admin))]
     public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId)
     {
         try
@@ -208,7 +208,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [OpenApiOperation("putCatalogItem")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = nameof(Admin))]
     public async Task<IActionResult> PutCatalogItemAsync(long catalogItemId, PutCatalogItemRequest putCatalogItemRequest)
     {
         try
