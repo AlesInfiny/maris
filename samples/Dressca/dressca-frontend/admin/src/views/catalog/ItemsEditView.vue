@@ -230,13 +230,20 @@ onMounted(async () => {
  */
 const deleteItemAsync = async () => {
   try {
-    await deleteCatalogItem(editingItemState.value.id);
+    await deleteCatalogItem(editingItemState.value.id, editingItemState.value.rowVersion);
     showDeleteNotice.value = true;
   } catch (error) {
     if (error instanceof NotFoundError) {
       customErrorHandler.handle(error, () => {
         showToast('更新対象のカタログアイテムが見つかりませんでした。');
         router.push({ name: '/catalog/items' });
+      });
+    } else if (error instanceof ConflictError) {
+      customErrorHandler.handle(error, async () => {
+        showToast(
+          'カタログアイテムの更新と削除が競合しました。もう一度削除してください。',
+        );
+        await reFetchItemAndInitRowVersionAsync(id);
       });
     } else {
       customErrorHandler.handle(error, () => {

@@ -41,10 +41,11 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
          * 
          * @summary カタログから指定したカタログアイテム ID のアイテムを削除します。
          * @param {number} catalogItemId カタログアイテム ID 。
+         * @param {string} [rowVersion] 行バージョン
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCatalogItem: async (catalogItemId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteCatalogItem: async (catalogItemId: number, rowVersion?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'catalogItemId' is not null or undefined
             assertParamExists('deleteCatalogItem', 'catalogItemId', catalogItemId)
             const localVarPath = `/api/catalog-items/{catalogItemId}`
@@ -59,6 +60,10 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
             const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (rowVersion !== undefined) {
+                localVarQueryParameter['rowVersion'] = rowVersion;
+            }
 
 
     
@@ -245,11 +250,12 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
          * 
          * @summary カタログから指定したカタログアイテム ID のアイテムを削除します。
          * @param {number} catalogItemId カタログアイテム ID 。
+         * @param {string} [rowVersion] 行バージョン
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteCatalogItem(catalogItemId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCatalogItem(catalogItemId, options);
+        async deleteCatalogItem(catalogItemId: number, rowVersion?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCatalogItem(catalogItemId, rowVersion, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CatalogItemsApi.deleteCatalogItem']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -324,11 +330,12 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
          * 
          * @summary カタログから指定したカタログアイテム ID のアイテムを削除します。
          * @param {number} catalogItemId カタログアイテム ID 。
+         * @param {string} [rowVersion] 行バージョン
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteCatalogItem(catalogItemId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.deleteCatalogItem(catalogItemId, options).then((request) => request(axios, basePath));
+        deleteCatalogItem(catalogItemId: number, rowVersion?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.deleteCatalogItem(catalogItemId, rowVersion, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -388,12 +395,13 @@ export class CatalogItemsApi extends BaseAPI {
      * 
      * @summary カタログから指定したカタログアイテム ID のアイテムを削除します。
      * @param {number} catalogItemId カタログアイテム ID 。
+     * @param {string} [rowVersion] 行バージョン
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CatalogItemsApi
      */
-    public deleteCatalogItem(catalogItemId: number, options?: RawAxiosRequestConfig) {
-        return CatalogItemsApiFp(this.configuration).deleteCatalogItem(catalogItemId, options).then((request) => request(this.axios, this.basePath));
+    public deleteCatalogItem(catalogItemId: number, rowVersion?: string, options?: RawAxiosRequestConfig) {
+        return CatalogItemsApiFp(this.configuration).deleteCatalogItem(catalogItemId, rowVersion, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

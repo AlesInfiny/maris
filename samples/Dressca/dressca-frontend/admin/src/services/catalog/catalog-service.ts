@@ -148,6 +148,6 @@ export async function updateCatalogItem(
  * 対象の ID を持つアイテムをカタログから削除します。
  * @param id アイテム ID 。
  */
-export async function deleteCatalogItem(id: number) {
-  await catalogItemsApi.deleteCatalogItem(id);
+export async function deleteCatalogItem(id: number, rowVersion:string) {
+  await catalogItemsApi.deleteCatalogItem(id,rowVersion);
 }
