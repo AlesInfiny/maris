@@ -65,36 +65,18 @@ internal class CatalogDomainService : ICatalogDomainService
     /// <inheritdoc/>
     public async Task<bool> ItemExistsAsync(long catalogItemId, CancellationToken cancellationToken = default)
     {
-        var item = await this.catalogRepository.GetAsync(catalogItemId, cancellationToken);
-        if (item == null)
-        {
-            return false;
-        }
-
-        return true;
+        return await this.catalogRepository.AnyAsync(catalogItemId, cancellationToken);
     }
 
     /// <inheritdoc/>
     public async Task<bool> BrandExistsAsync(long catalogBrandId, CancellationToken cancellationToken = default)
     {
-        var brand = await this.catalogBrandRepository.GetAsync(catalogBrandId, cancellationToken);
-        if (brand == null)
-        {
-            return false;
-        }
-
-        return true;
+        return await this.catalogBrandRepository.AnyAsync(catalogBrandId, cancellationToken);
     }
 
     /// <inheritdoc/>
     public async Task<bool> CategoryExistsAsync(long catalogCategoryId, CancellationToken cancellationToken = default)
     {
-        var category = await this.catalogCategoryRepository.GetAsync(catalogCategoryId, cancellationToken);
-        if (category == null)
-        {
-            return false;
-        }
-
-        return true;
+        return await this.catalogCategoryRepository.AnyAsync(catalogCategoryId, cancellationToken);
     }
 }

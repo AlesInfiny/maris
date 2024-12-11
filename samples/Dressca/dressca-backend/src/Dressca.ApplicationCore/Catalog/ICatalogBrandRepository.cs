@@ -19,4 +19,12 @@ public interface ICatalogBrandRepository
     /// <param name="cancellationToken">キャンセルトークン 。</param>
     /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
     Task<CatalogBrand?> GetAsync(long id, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    ///  対象の Id を持つエンティティが存在するかどうかを示す真理値を取得します。
+    /// </summary>
+    /// <param name="id">エンティティの Id。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
+    /// <returns>対象の Id を持つエンティティが存在するかどうか示す真理値を返す非同期処理を表すタスク。</returns>
+    Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default);
 }

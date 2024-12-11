@@ -91,4 +91,10 @@ internal class EfCatalogRepository : ICatalogRepository
             return await deleteContext.SaveChangesAsync(cancellationToken);
         }
     }
+
+    /// <inheritdoc/>
+    public async Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.CatalogItems.AnyAsync(catalogItem => catalogItem.Id == id, cancellationToken);
+    }
 }

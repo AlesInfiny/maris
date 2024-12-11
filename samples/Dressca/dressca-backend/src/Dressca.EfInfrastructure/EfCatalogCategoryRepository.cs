@@ -31,4 +31,10 @@ internal class EfCatalogCategoryRepository : ICatalogCategoryRepository
         var keys = new object[] { id };
         return await this.dbContext.CatalogCategories.FindAsync(keys, cancellationToken);
     }
+
+    /// <inheritdoc/>
+    public async Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.CatalogCategories.AnyAsync(catalogCategory => catalogCategory.Id == id, cancellationToken);
+    }
 }

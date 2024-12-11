@@ -31,4 +31,10 @@ internal class EfCatalogBrandRepository : ICatalogBrandRepository
         var keys = new object[] { id };
         return await this.dbContext.CatalogBrands.FindAsync(keys, cancellationToken);
     }
+
+    /// <inheritdoc/>
+    public async Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.CatalogBrands.AnyAsync(catalogBrand => catalogBrand.Id == id, cancellationToken);
+    }
 }
