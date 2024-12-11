@@ -17,7 +17,9 @@ import type {
  * UIの都合で、すべてのカテゴリを表すカテゴリの情報を追加します。
  * @returns カタログカテゴリの配列。
  */
-export async function fetchCategories(): Promise<GetCatalogCategoriesResponse[]> {
+export async function fetchCategories(): Promise<
+  GetCatalogCategoriesResponse[]
+> {
   const response = await catalogCategoriesApi.getCatalogCategories();
   const categories = response.data;
   categories.unshift({ id: 0, name: 'すべて' });
@@ -74,7 +76,9 @@ export async function fetchItems(
  * @param itemId アイテム ID。
  * @returns カタログアイテムの情報。
  */
-export async function fetchItem(itemId: number): Promise<GetCatalogItemResponse> {
+export async function fetchItem(
+  itemId: number,
+): Promise<GetCatalogItemResponse> {
   const itemResponse = await catalogItemsApi.getCatalogItem(itemId);
   return itemResponse.data;
 }

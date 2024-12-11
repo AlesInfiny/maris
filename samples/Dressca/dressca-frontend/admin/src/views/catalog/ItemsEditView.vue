@@ -97,7 +97,9 @@ const catalogBrands = ref<GetCatalogBrandsResponse[]>([{ id: 0, name: '' }]);
 /**
  * リアクティブなカタログカテゴリの状態です。
  */
-const catalogCategories = ref<GetCatalogCategoriesResponse[]>([{ id: 0, name: '' }]);
+const catalogCategories = ref<GetCatalogCategoriesResponse[]>([
+  { id: 0, name: '' },
+]);
 
 /**
  * 削除確認モーダルの開閉状態です。
