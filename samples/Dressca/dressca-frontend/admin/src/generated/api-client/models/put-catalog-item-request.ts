@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Dressca Admin Web API
+ * Dressca Admin の Web API 仕様
  *
  * The version of the OpenAPI document: 1.0.0
  * 

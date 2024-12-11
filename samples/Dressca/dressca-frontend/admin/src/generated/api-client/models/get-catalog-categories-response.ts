@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Dressca Admin Web API
+ * Dressca Admin の Web API 仕様
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -17,19 +17,19 @@
 /**
  * カタログカテゴリのレスポンスデータを表します。             
  * @export
- * @interface CatalogCategoryResponse
+ * @interface GetCatalogCategoriesResponse
  */
-export interface CatalogCategoryResponse {
+export interface GetCatalogCategoriesResponse {
     /**
      * カタログカテゴリ Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogCategoryResponse
+     * @memberof GetCatalogCategoriesResponse
      */
     'id': number;
     /**
      * カテゴリ名を取得または設定します。             
      * @type {string}
-     * @memberof CatalogCategoryResponse
+     * @memberof GetCatalogCategoriesResponse
      */
     'name': string;
 }

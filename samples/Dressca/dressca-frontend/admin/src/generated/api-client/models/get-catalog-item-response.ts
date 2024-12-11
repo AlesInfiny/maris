@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Dressca Admin Web API
+ * Dressca Admin の Web API 仕様
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -17,61 +17,61 @@
 /**
  * カタログアイテムのレスポンスデータを表します。             
  * @export
- * @interface CatalogItemResponse
+ * @interface GetCatalogItemResponse
  */
-export interface CatalogItemResponse {
+export interface GetCatalogItemResponse {
     /**
      * 説明を取得または設定します。             
      * @type {string}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'description': string;
     /**
      * 単価を取得または設定します。             
      * @type {number}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'price': number;
     /**
      * カタログカテゴリ Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'catalogCategoryId': number;
     /**
      * カタログブランド Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'catalogBrandId': number;
     /**
      * カタログアイテム Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'id': number;
     /**
      * 商品名を取得または設定します。             
      * @type {string}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'name': string;
     /**
      * 商品コードを取得または設定します。             
      * @type {string}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'productCode': string;
     /**
      * アセットコードの一覧を取得または設定します。             
      * @type {Array<string>}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'assetCodes'?: Array<string>;
     /**
      * 行バージョンを取得または設定します。
      * @type {string}
-     * @memberof CatalogItemResponse
+     * @memberof GetCatalogItemResponse
      */
     'rowVersion': string;
 }

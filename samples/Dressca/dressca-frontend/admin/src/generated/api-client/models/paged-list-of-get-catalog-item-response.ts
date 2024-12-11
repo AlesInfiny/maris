@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Dressca Admin Web API
+ * Dressca Admin の Web API 仕様
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -15,55 +15,55 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CatalogItemResponse } from './catalog-item-response';
+import type { GetCatalogItemResponse } from './get-catalog-item-response';
 
 /**
  * ページネーションした結果のリストを管理します。             
  * @export
- * @interface PagedListOfCatalogItemResponse
+ * @interface PagedListOfGetCatalogItemResponse
  */
-export interface PagedListOfCatalogItemResponse {
+export interface PagedListOfGetCatalogItemResponse {
     /**
      * 現在のページ番号を取得します。 最初のページは 1 です。             
      * @type {number}
-     * @memberof PagedListOfCatalogItemResponse
+     * @memberof PagedListOfGetCatalogItemResponse
      */
     'page'?: number;
     /**
      * ページの総数を取得します。             
      * @type {number}
-     * @memberof PagedListOfCatalogItemResponse
+     * @memberof PagedListOfGetCatalogItemResponse
      */
     'totalPages'?: number;
     /**
      * 1 ページあたりの件数を取得します。             
      * @type {number}
-     * @memberof PagedListOfCatalogItemResponse
+     * @memberof PagedListOfGetCatalogItemResponse
      */
     'pageSize'?: number;
     /**
      * アイテムの総数を取得します。             
      * @type {number}
-     * @memberof PagedListOfCatalogItemResponse
+     * @memberof PagedListOfGetCatalogItemResponse
      */
     'totalCount'?: number;
     /**
      * 前のページが存在するかどうか示す値を取得します。             
      * @type {boolean}
-     * @memberof PagedListOfCatalogItemResponse
+     * @memberof PagedListOfGetCatalogItemResponse
      */
     'hasPrevious'?: boolean;
     /**
      * 次のページが存在するかどうか示す値を取得します。             
      * @type {boolean}
-     * @memberof PagedListOfCatalogItemResponse
+     * @memberof PagedListOfGetCatalogItemResponse
      */
     'hasNext'?: boolean;
     /**
      * 検索結果のリストを取得します。             
-     * @type {Array<CatalogItemResponse>}
-     * @memberof PagedListOfCatalogItemResponse
+     * @type {Array<GetCatalogItemResponse>}
+     * @memberof PagedListOfGetCatalogItemResponse
      */
-    'items'?: Array<CatalogItemResponse>;
+    'items'?: Array<GetCatalogItemResponse>;
 }
 

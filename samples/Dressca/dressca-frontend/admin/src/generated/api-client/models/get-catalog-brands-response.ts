@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Dressca Admin Web API
+ * Dressca Admin の Web API 仕様
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -17,19 +17,19 @@
 /**
  * カタログブランドのレスポンスデータを表します。 カタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。             
  * @export
- * @interface CatalogBrandResponse
+ * @interface GetCatalogBrandsResponse
  */
-export interface CatalogBrandResponse {
+export interface GetCatalogBrandsResponse {
     /**
      * カタログブランド Id を取得または設定します。             
      * @type {number}
-     * @memberof CatalogBrandResponse
+     * @memberof GetCatalogBrandsResponse
      */
     'id': number;
     /**
      * ブランド名を取得または設定します。             
      * @type {string}
-     * @memberof CatalogBrandResponse
+     * @memberof GetCatalogBrandsResponse
      */
     'name': string;
 }

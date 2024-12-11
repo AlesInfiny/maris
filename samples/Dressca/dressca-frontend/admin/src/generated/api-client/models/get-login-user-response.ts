@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Dressca Admin Web API
+ * Dressca Admin の Web API 仕様
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -17,20 +17,20 @@
 /**
  * ユーザー情報のレスポンスを表します。
  * @export
- * @interface UserResponse
+ * @interface GetLoginUserResponse
  */
-export interface UserResponse {
+export interface GetLoginUserResponse {
     /**
      * ユーザー名を取得または設定します。             
      * @type {string}
-     * @memberof UserResponse
+     * @memberof GetLoginUserResponse
      */
     'userName': string;
     /**
      * ロールを取得または設定します。             
-     * @type {string}
-     * @memberof UserResponse
+     * @type {Array<string>}
+     * @memberof GetLoginUserResponse
      */
-    'role': string;
+    'roles': Array<string>;
 }
 
