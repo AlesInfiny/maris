@@ -100,7 +100,7 @@ public class CatalogItem
     ///  本来は存在するであろう在庫管理系のコンテキストで識別子として使用されるコードです。
     ///  買い物かごコンテキストとは CatalogItem.Id で連携するため、注意してください。
     /// </remarks>
-    /// <exception cref="ArgumentException">商品コードが <see langword="null"/> または空の文字列です。</exception>
+    /// <exception cref="ArgumentException">商品コードには半角英数字を設定してください。</exception>
     public required string ProductCode
     {
         get => this.productCode;
