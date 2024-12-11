@@ -134,6 +134,53 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     }
 
     [Fact]
+    public async Task AddItemToCatalogAsync_追加したアイテムの情報が返却される()
+    {
+        // Arrange
+        var targetBrandId = 1;
+        var targetCategoryId = 1;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
+        var targetItem = new CatalogItem
+        {
+            Name = targetName,
+            Description = targetDescription,
+            Price = targetPrice,
+            ProductCode = targetProductCode,
+            CatalogBrandId = targetBrandId,
+            CatalogCategoryId = targetCategoryId,
+        };
+
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        catalogRepositoryMock
+            .Setup(r => r.AddAsync(AnyItem, AnyToken)).Returns(Task.FromResult(targetItem));
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var userStoreMock = new Mock<IUserStore>();
+        userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+        var catalogDomainServiceMock = new Mock<ICatalogDomainService>();
+        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetBrandId, AnyToken)).ReturnsAsync(true);
+        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(true);
+
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
+        var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+
+        // Assert
+        var actual = await service.AddItemToCatalogAsync(
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
+            targetBrandId,
+            targetCategoryId);
+
+        // Act
+        Assert.Same(targetItem, actual);
+    }
+
+    [Fact]
     public async Task AddItemToCatalogAsync_権限なし_PermissionDeniedExceptionが発生()
     {
         // Arrange
