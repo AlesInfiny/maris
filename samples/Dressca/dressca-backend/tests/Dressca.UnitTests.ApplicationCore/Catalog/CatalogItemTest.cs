@@ -37,7 +37,8 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentException>("value", action);
+        var exception = Assert.Throws<ArgumentException>("value", action);
+        Assert.StartsWith("null または空の文字列を設定できません。", exception.Message);
     }
 
     [Theory]
@@ -59,7 +60,8 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentException>("value", action);
+        var exception = Assert.Throws<ArgumentException>("value", action);
+        Assert.StartsWith("null または空の文字列を設定できません。", exception.Message);
     }
 
     [Fact]
@@ -81,7 +83,8 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        Assert.StartsWith("単価は負の値に設定できません。", exception.Message);
     }
 
     [Fact]
@@ -103,7 +106,8 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentException>("value", action);
+        var exception = Assert.Throws<ArgumentException>("value", action);
+        Assert.StartsWith("半角英数字を設定してください。", exception.Message);
     }
 
     [Fact]
@@ -125,7 +129,8 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        Assert.StartsWith("カタログカテゴリ ID は 0 以下にできません。", exception.Message);
     }
 
     [Fact]
@@ -147,6 +152,7 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        Assert.StartsWith("カタログブランド ID は 0 以下にできません。", exception.Message);
     }
 }
