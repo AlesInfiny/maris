@@ -1,7 +1,7 @@
 ﻿using Dressca.ApplicationCore.Resources;
 using Dressca.SystemCommon;
 
-namespace Dressca.ApplicationCore.Catalog;
+namespace Dressca.ApplicationCore.ApplicationService;
 
 /// <summary>
 ///  リポジトリ内に指定のカタログブランドが存在しないことを表す業務例外クラスです。

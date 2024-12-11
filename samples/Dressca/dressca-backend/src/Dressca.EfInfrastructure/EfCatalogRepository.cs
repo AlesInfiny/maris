@@ -69,15 +69,20 @@ internal class EfCatalogRepository : ICatalogRepository
     }
 
     /// <inheritdoc/>
-    public async Task<int> RemoveAsync(CatalogItem entity, CancellationToken cancellationToken = default)
+    public async Task<int> RemoveAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default)
     {
-        this.dbContext.CatalogItems.Remove(entity);
+        var deleteTarget = new CatalogItem
+        {
+            Id = id,
+            Name = string.Empty,
+            Description = string.Empty,
+            Price = 0,
+            ProductCode = string.Empty,
+            CatalogBrandId = 0L,
+            CatalogCategoryId = 0L,
+            RowVersion = rowVersion,
+        };
+        this.dbContext.Entry(deleteTarget).State = EntityState.Deleted;
         return await this.dbContext.SaveChangesAsync(cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public async Task<bool> DoesEntityExistAsync(long id, CancellationToken cancellationToken = default)
-    {
-        return await this.dbContext.CatalogItems.AnyAsync(e => e.Id == id, cancellationToken);
     }
 }

@@ -14,6 +14,8 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
         var catalogItems = new List<CatalogItem>
         {
             CreateCatalogItem(1L),
@@ -24,7 +26,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
             .ReturnsAsync(catalogItems);
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
-        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
+        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
 
         // Act
         var (existsAll, items) = await domainService.ExistsAllAsync([1L, 2L]);
@@ -42,6 +44,8 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
         var catalogItems = new List<CatalogItem>
         {
             CreateCatalogItem(2L),
@@ -51,7 +55,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
             .ReturnsAsync(catalogItems);
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
-        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
+        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
 
         // Act
         var (existsAll, items) = await domainService.ExistsAllAsync([1L, 2L]);
@@ -66,6 +70,8 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
         var catalogItems = new List<CatalogItem>
         {
             CreateCatalogItem(2L),
@@ -75,7 +81,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
             .ReturnsAsync(catalogItems);
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
-        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
+        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
 
         // Act
         _ = await domainService.ExistsAllAsync([1L, 2L]);
@@ -93,13 +99,15 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
         var catalogItems = new List<CatalogItem>();
         catalogRepositoryMock
             .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
             .ReturnsAsync(catalogItems);
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
-        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
+        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
 
         // Act
         var (existsAll, items) = await domainService.ExistsAllAsync([1L]);
@@ -114,13 +122,15 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
         var catalogItems = new List<CatalogItem>();
         catalogRepositoryMock
             .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
             .ReturnsAsync(catalogItems);
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
-        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, logger);
+        var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
 
         // Act
         _ = await domainService.ExistsAllAsync([1L]);

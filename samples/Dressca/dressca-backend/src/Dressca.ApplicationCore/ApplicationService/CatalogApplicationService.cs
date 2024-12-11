@@ -15,6 +15,7 @@ public class CatalogApplicationService
     private readonly ICatalogBrandRepository brandRepository;
     private readonly ICatalogCategoryRepository categoryRepository;
     private readonly IUserStore userStore;
+    private readonly ICatalogDomainService catalogDomainService;
     private readonly ILogger<CatalogApplicationService> logger;
 
     /// <summary>
@@ -24,6 +25,7 @@ public class CatalogApplicationService
     /// <param name="brandRepository">ブランドリポジトリ。</param>
     /// <param name="categoryRepository">カテゴリリポジトリ。</param>
     /// <param name="userStore">ユーザーのセッション情報のストア。</param>
+    /// <param name="catalogDomainService">カタログドメインサービス。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -31,6 +33,7 @@ public class CatalogApplicationService
     ///   <item><paramref name="brandRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="categoryRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="userStore"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="catalogDomainService"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
@@ -39,12 +42,14 @@ public class CatalogApplicationService
         ICatalogBrandRepository brandRepository,
         ICatalogCategoryRepository categoryRepository,
         IUserStore userStore,
+        ICatalogDomainService catalogDomainService,
         ILogger<CatalogApplicationService> logger)
     {
         this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
         this.brandRepository = brandRepository ?? throw new ArgumentNullException(nameof(brandRepository));
         this.categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         this.userStore = userStore ?? throw new ArgumentNullException(nameof(userStore));
+        this.catalogDomainService = catalogDomainService ?? throw new ArgumentNullException(nameof(catalogDomainService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -109,21 +114,37 @@ public class CatalogApplicationService
     /// <param name="productCode">商品コード。</param>
     /// <param name="catalogBrandId">カタログブランドID。</param>
     /// <param name="catalogCategoryId">カタログカテゴリID。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>追加したカタログアイテムの情報を返す非同期処理を表すタスク。</returns>
     /// <exception cref="PermissionDeniedException">追加権限がない場合。</exception>
+    /// <exception cref="CatalogBrandNotExistingInRepositoryException">追加対象のカタログブランドが存在しなかった場合。</exception>
+    /// <exception cref="CatalogCategoryNotExistingInRepositoryException">追加対象のカタログカテゴリが存在しなかった場合。</exception>
     public async Task<CatalogItem> AddItemToCatalogAsync(
         string name,
         string description,
         decimal price,
         string productCode,
         long catalogBrandId,
-        long catalogCategoryId)
+        long catalogCategoryId,
+        CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_AddItemToCatalogAsyncStart);
 
         if (!this.userStore.IsInRole(Roles.Admin))
         {
             throw new PermissionDeniedException();
+        }
+
+        if (!await this.catalogDomainService.BrandExistsAsync(catalogBrandId, cancellationToken))
+        {
+            this.logger.LogInformation(Events.CatalogBrandIdDoesNotExistInRepository, LogMessages.CatalogBrandIdDoesNotExistInRepository, [catalogBrandId]);
+            throw new CatalogBrandNotExistingInRepositoryException([catalogBrandId]);
+        }
+
+        if (!await this.catalogDomainService.CategoryExistsAsync(catalogCategoryId, cancellationToken))
+        {
+            this.logger.LogInformation(Events.CatalogCategoryIdDoesNotExistInRepository, LogMessages.CatalogCategoryIdDoesNotExistInRepository, [catalogCategoryId]);
+            throw new CatalogCategoryNotExistingInRepositoryException([catalogCategoryId]);
         }
 
         var catalogItem = new CatalogItem()
@@ -139,7 +160,7 @@ public class CatalogApplicationService
 
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            catalogItemAdded = await this.catalogRepository.AddAsync(catalogItem);
+            catalogItemAdded = await this.catalogRepository.AddAsync(catalogItem, cancellationToken);
             scope.Complete();
         }
 
@@ -151,11 +172,12 @@ public class CatalogApplicationService
     /// カタログからアイテムを削除します。
     /// </summary>
     /// <param name="id">削除対象のカタログアイテムのID。</param>
+    /// <param name="rowVersion">削除対象のカタログアイテムの行バージョン。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     /// <exception cref="PermissionDeniedException">削除権限がない場合。</exception>
     /// <exception cref="CatalogItemNotExistingInRepositoryException">削除対象のカタログアイテムが存在しなかった場合。</exception>>
-    public async Task DeleteItemFromCatalogAsync(long id, CancellationToken cancellationToken = default)
+    public async Task DeleteItemFromCatalogAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_DeleteItemFromCatalogAsyncStart, id);
 
@@ -164,17 +186,15 @@ public class CatalogApplicationService
             throw new PermissionDeniedException();
         }
 
+        if (!await this.catalogDomainService.ItemExistsAsync(id, cancellationToken))
+        {
+            this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
+            throw new CatalogItemNotExistingInRepositoryException([id]);
+        }
+
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            var catalogItem = await this.catalogRepository.GetAsync(id, cancellationToken);
-
-            if (catalogItem == null)
-            {
-                this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
-                throw new CatalogItemNotExistingInRepositoryException([id]);
-            }
-
-            await this.catalogRepository.RemoveAsync(catalogItem, cancellationToken);
+            await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
             scope.Complete();
         }
 
@@ -216,21 +236,19 @@ public class CatalogApplicationService
             throw new PermissionDeniedException();
         }
 
-        if (!await this.catalogRepository.DoesEntityExistAsync(id, cancellationToken))
+        if (!await this.catalogDomainService.ItemExistsAsync(id, cancellationToken))
         {
             this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
             throw new CatalogItemNotExistingInRepositoryException([id]);
         }
 
-        var catalogBrand = await this.brandRepository.GetAsync(catalogBrandId, cancellationToken);
-        if (catalogBrand == null)
+        if (!await this.catalogDomainService.BrandExistsAsync(catalogBrandId, cancellationToken))
         {
             this.logger.LogInformation(Events.CatalogBrandIdDoesNotExistInRepository, LogMessages.CatalogBrandIdDoesNotExistInRepository, [catalogBrandId]);
             throw new CatalogBrandNotExistingInRepositoryException([catalogBrandId]);
         }
 
-        var catalogCategory = await this.categoryRepository.GetAsync(catalogCategoryId, cancellationToken);
-        if (catalogCategory == null)
+        if (!await this.catalogDomainService.CategoryExistsAsync(catalogCategoryId, cancellationToken))
         {
             this.logger.LogInformation(Events.CatalogCategoryIdDoesNotExistInRepository, LogMessages.CatalogCategoryIdDoesNotExistInRepository, [catalogCategoryId]);
             throw new CatalogCategoryNotExistingInRepositoryException([catalogCategoryId]);

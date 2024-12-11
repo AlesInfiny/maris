@@ -166,6 +166,7 @@ public class CatalogItemsController : ControllerBase
     ///  カタログから指定したカタログアイテム ID のアイテムを削除します。
     /// </summary>
     /// <param name="catalogItemId">カタログアイテム ID 。</param>
+    /// <param name="rowVersion">行バージョン</param>
     /// <returns>なし。</returns>
     /// <response code="204">成功。</response>
     /// <response code="404">指定した ID のアイテムがカタログに存在しない。</response>
@@ -174,11 +175,11 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteCatalogItem")]
     [Authorize(Roles = nameof(Admin))]
-    public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId)
+    public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId, [FromQuery] byte[] rowVersion)
     {
         try
         {
-            await this.service.DeleteItemFromCatalogAsync(catalogItemId);
+            await this.service.DeleteItemFromCatalogAsync(catalogItemId, rowVersion);
         }
         catch (PermissionDeniedException ex)
         {
