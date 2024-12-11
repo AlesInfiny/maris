@@ -23,6 +23,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import type { GetLoginUserResponse } from '../models';
+// @ts-ignore
+import type { ProblemDetails } from '../models';
 /**
  * UsersApi - axios parameter creator
  * @export
