@@ -54,11 +54,18 @@ public class CatalogItemsController : ControllerBase
     /// <param name="catalogItemId">ID。</param>
     /// <returns>カタログアイテム。</returns>
     /// <response code="200">成功。</response>
+    /// <response code="400">リクエストエラー。</response>
+    /// <response code="401">未認証。</response>
     /// <response code="404">指定した ID のアイテムがカタログに存在しない。</response>
+    /// <response code="500">サーバーエラー。</response>
     [HttpGet("{catalogItemId}")]
     [ProducesResponseType(typeof(GetCatalogItemResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getCatalogItem")]
+    [Authorize(Roles = nameof(Admin))]
     public async Task<IActionResult> GetCatalogItemAsync(long catalogItemId)
     {
         CatalogItem? catalogItem;
@@ -89,12 +96,17 @@ public class CatalogItemsController : ControllerBase
     /// <param name="query">検索クエリ。</param>
     /// <response code="200">成功。</response>
     /// <response code="400">リクエストエラー。</response>
+    /// <response code="401">未認証。</response>
     /// <response code="404">失敗。</response>
+    /// <response code="500">サーバーエラー。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(PagedList<GetCatalogItemResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedList<GetCatalogItemResponse>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getByQuery")]
+    [Authorize(Roles = nameof(Admin))]
     public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
         (IReadOnlyList<CatalogItem> CatalogItems, int TotalCount) itemsAndCount;
@@ -131,10 +143,16 @@ public class CatalogItemsController : ControllerBase
     /// <param name="postCatalogItemRequest">追加するアイテムの情報。</param>
     /// <returns>なし。</returns>
     /// <response code="201">成功。</response>
+    /// <response code="400">リクエストエラー。</response>
+    /// <response code="401">未認証。</response>
     /// <response code="404">失敗。</response>
+    /// <response code="500">サーバーエラー。</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("postCatalogItem")]
     [Authorize(Roles = nameof(Admin))]
     public async Task<IActionResult> PostCatalogItemAsync(PostCatalogItemRequest postCatalogItemRequest)
@@ -169,10 +187,18 @@ public class CatalogItemsController : ControllerBase
     /// <param name="rowVersion">行バージョン</param>
     /// <returns>なし。</returns>
     /// <response code="204">成功。</response>
+    /// <response code="400">リクエストエラー。</response>
+    /// <response code="401">未認証。</response>
     /// <response code="404">指定した ID のアイテムがカタログに存在しない。</response>
+    /// <response code="409">競合が発生。</response>
+    /// <response code="500">サーバーエラー。</response>
     [HttpDelete("{catalogItemId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteCatalogItem")]
     [Authorize(Roles = nameof(Admin))]
     public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId, [FromQuery] byte[] rowVersion)
@@ -202,12 +228,18 @@ public class CatalogItemsController : ControllerBase
     /// <param name="putCatalogItemRequest">更新するカタログアイテムの情報。</param>
     /// <returns>なし。</returns>
     /// <response code="204">成功。</response>
+    /// <response code="400">リクエストエラー。</response>
+    /// <response code="401">未認証。</response>
     /// <response code="404">指定した ID のアイテムがカタログに存在しない。</response>
-    /// <response code="409">更新の競合が発生。</response>
+    /// <response code="409">競合が発生。</response>
+    /// <response code="500">サーバーエラー。</response>
     [HttpPut("{catalogItemId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("putCatalogItem")]
     [Authorize(Roles = nameof(Admin))]
     public async Task<IActionResult> PutCatalogItemAsync(long catalogItemId, PutCatalogItemRequest putCatalogItemRequest)

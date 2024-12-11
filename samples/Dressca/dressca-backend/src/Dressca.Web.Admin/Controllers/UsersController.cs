@@ -34,9 +34,13 @@ public class UsersController : Controller
     /// ログイン中のユーザーの情報を取得します。
     /// </summary>
     /// <response code="200">成功。</response>
+    /// <response code="401">未認証。</response>
+    /// <response code="500">サーバーエラー。</response>
     /// <returns>ユーザーの情報。</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(GetLoginUserResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetLoginUserResponse))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getLoginUser")]
     [Authorize]
     public ActionResult<GetLoginUserResponse> GetLoginUser()

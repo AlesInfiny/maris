@@ -36,8 +36,28 @@
           "200": {
             "description": "成功。"
           },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "アセットコードに対応するアセットがない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
             "content": {
               "application/json": {
                 "schema": {
@@ -69,6 +89,26 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -90,6 +130,26 @@
                   "items": {
                     "$ref": "#/components/schemas/GetCatalogCategoriesResponse"
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -128,8 +188,38 @@
               }
             }
           },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "指定した ID のアイテムがカタログに存在しない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
             "content": {
               "application/json": {
                 "schema": {
@@ -173,8 +263,48 @@
           "204": {
             "description": "成功。"
           },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "指定した ID のアイテムがカタログに存在しない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "競合が発生。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
             "content": {
               "application/json": {
                 "schema": {
@@ -221,6 +351,26 @@
           "204": {
             "description": "成功。"
           },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "指定した ID のアイテムがカタログに存在しない。",
             "content": {
@@ -232,7 +382,17 @@
             }
           },
           "409": {
-            "description": "更新の競合が発生。",
+            "description": "競合が発生。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
             "content": {
               "application/json": {
                 "schema": {
@@ -320,8 +480,28 @@
               }
             }
           },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "失敗。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
             "content": {
               "application/json": {
                 "schema": {
@@ -355,8 +535,38 @@
           "201": {
             "description": "成功。"
           },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "404": {
             "description": "失敗。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
             "content": {
               "application/json": {
                 "schema": {
@@ -382,6 +592,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetLoginUserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }

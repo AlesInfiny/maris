@@ -43,10 +43,14 @@ public class AssetsController : ControllerBase
     /// <param name="assetCode">アセットコード。</param>
     /// <returns>アセットのファイル。</returns>
     /// <response code="200">成功。</response>
+    /// <response code="401">未認証。</response>
     /// <response code="404">アセットコードに対応するアセットがない。</response>
+    /// <response code="500">サーバーエラー。</response>
     [HttpGet("{assetCode}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("get")]
     public async Task<IActionResult> GetAsync(string assetCode)
     {

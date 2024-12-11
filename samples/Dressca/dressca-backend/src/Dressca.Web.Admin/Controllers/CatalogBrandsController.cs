@@ -44,8 +44,12 @@ public class CatalogBrandsController : ControllerBase
     /// </summary>
     /// <returns>カタログブランドの一覧。</returns>
     /// <response code="200">成功。</response>
+    /// <response code="401">未認証。</response>
+    /// <response code="500">サーバーエラー。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<GetCatalogBrandsResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<GetCatalogBrandsResponse>))]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ProblemDetails))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getCatalogBrands")]
     public async Task<IActionResult> GetCatalogBrandsAsync()
     {
