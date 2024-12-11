@@ -37,7 +37,7 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentException>(action);
+        Assert.Throws<ArgumentException>("value", action);
     }
 
     [Theory]
@@ -59,7 +59,7 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentException>(action);
+        Assert.Throws<ArgumentException>("value", action);
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>(action);
+        Assert.Throws<ArgumentOutOfRangeException>("value", action);
     }
 
     [Fact]
@@ -103,7 +103,7 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentException>(action);
+        Assert.Throws<ArgumentException>("value", action);
     }
 
     [Fact]
@@ -125,7 +125,7 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>(action);
+        Assert.Throws<ArgumentOutOfRangeException>("value", action);
     }
 
     [Fact]
@@ -147,6 +147,6 @@ public class CatalogItemTest
         };
 
         // Assert
-        Assert.Throws<ArgumentOutOfRangeException>(action);
+        Assert.Throws<ArgumentOutOfRangeException>("value", action);
     }
 }
