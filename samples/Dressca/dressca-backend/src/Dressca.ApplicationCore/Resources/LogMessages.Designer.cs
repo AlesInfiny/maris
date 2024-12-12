@@ -169,7 +169,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得します。 に類似しているローカライズされた文字列を検索します。
+        ///   管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogApplicationService_GetCatalogItemsByAdminAsyncStart {
             get {

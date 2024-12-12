@@ -148,7 +148,7 @@
     <value>カタログブランド ID は 0 以下にできません。</value>
   </data>
   <data name="CatalogCategoryIdDoesNotExist" xml:space="preserve">
-    <value>指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在ません。</value>
+    <value>指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在しません。</value>
   </data>
   <data name="CatalogCategoryIdMustBePositive" xml:space="preserve">
     <value>カタログカテゴリ ID は 0 以下にできません。</value>

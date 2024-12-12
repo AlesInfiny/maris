@@ -154,7 +154,7 @@
     <value>管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得しました。</value>
   </data>
   <data name="CatalogApplicationService_GetCatalogItemsByAdminAsyncStart" xml:space="preserve">
-    <value>管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得します。</value>
+    <value>管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得します。</value>
   </data>
   <data name="CatalogApplicationService_UpdateCatalogItemAsyncEnd" xml:space="preserve">
     <value>カタログアイテム ID: {CatalogItemId} のカタログアイテムを更新しました。</value>

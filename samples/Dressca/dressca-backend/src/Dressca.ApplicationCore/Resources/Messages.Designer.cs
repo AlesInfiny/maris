@@ -151,7 +151,7 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在ません。 に類似しているローカライズされた文字列を検索します。
+        ///   指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在しません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogCategoryIdDoesNotExist {
             get {
