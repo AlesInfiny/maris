@@ -243,8 +243,6 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var userStoreMock = new Mock<IUserStore>();
         var catalogDomainServiceMock = new Mock<ICatalogDomainService>();
         catalogDomainServiceMock.Setup(s => s.ItemExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
-        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
-        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
         userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
@@ -338,8 +336,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var catalogDomainServiceMock = new Mock<ICatalogDomainService>();
         catalogDomainServiceMock.Setup(s => s.ItemExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
-        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
-        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
+        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetBrandId, AnyToken)).ReturnsAsync(true);
+        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
 
@@ -386,8 +384,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var catalogDomainServiceMock = new Mock<ICatalogDomainService>();
         catalogDomainServiceMock.Setup(s => s.ItemExistsAsync(targetId, AnyToken)).ReturnsAsync(false);
-        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
-        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
+        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetBrandId, AnyToken)).ReturnsAsync(true);
+        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
 
@@ -434,8 +432,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var catalogDomainServiceMock = new Mock<ICatalogDomainService>();
         catalogDomainServiceMock.Setup(s => s.ItemExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
-        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetId, AnyToken)).ReturnsAsync(false);
-        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
+        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetBrandId, AnyToken)).ReturnsAsync(false);
+        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
 
@@ -481,8 +479,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var userStoreMock = new Mock<IUserStore>();
         var catalogDomainServiceMock = new Mock<ICatalogDomainService>();
         catalogDomainServiceMock.Setup(s => s.ItemExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
-        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetId, AnyToken)).ReturnsAsync(true);
-        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetId, AnyToken)).ReturnsAsync(false);
+        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetBrandId, AnyToken)).ReturnsAsync(true);
+        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(false);
         userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
