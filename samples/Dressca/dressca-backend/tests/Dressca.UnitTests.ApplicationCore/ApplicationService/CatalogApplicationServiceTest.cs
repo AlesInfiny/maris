@@ -228,6 +228,75 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     }
 
     [Fact]
+    public async Task AddItemToCatalogAsync_存在しないブランドを指定_CatalogBrandNotExistingInRepositoryExceptionが発生()
+    {
+        // Arrange
+        var targetBrandId = 999;
+        var targetCategoryId = 1;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
+
+        var catalogRepositoryMock = Mock.Of<ICatalogRepository>();
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var userStoreMock = new Mock<IUserStore>();
+        userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+        var catalogDomainServiceMock = new Mock<ICatalogDomainService>();
+        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetBrandId, AnyToken)).ReturnsAsync(false);
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
+        var service = new CatalogApplicationService(catalogRepositoryMock, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+
+        // Assert
+        var action = () => service.AddItemToCatalogAsync(
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
+            targetBrandId,
+            targetCategoryId);
+
+        // Act
+        await Assert.ThrowsAsync<CatalogBrandNotExistingInRepositoryException>(action);
+    }
+
+    [Fact]
+    public async Task AddItemToCatalogAsync_存在しないカテゴリを指定_CatalogCategoryNotExistingInRepositoryExceptionが発生()
+    {
+        // Arrange
+        var targetBrandId = 1;
+        var targetCategoryId = 999;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
+
+        var catalogRepositoryMock = Mock.Of<ICatalogRepository>();
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var userStoreMock = new Mock<IUserStore>();
+        userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+        var catalogDomainServiceMock = new Mock<ICatalogDomainService>();
+        catalogDomainServiceMock.Setup(s => s.BrandExistsAsync(targetBrandId, AnyToken)).ReturnsAsync(true);
+        catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(false);
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
+        var service = new CatalogApplicationService(catalogRepositoryMock, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+
+        // Assert
+        var action = () => service.AddItemToCatalogAsync(
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
+            targetBrandId,
+            targetCategoryId);
+
+        // Act
+        await Assert.ThrowsAsync<CatalogCategoryNotExistingInRepositoryException>(action);
+    }
+
+    [Fact]
     public async Task DeleteItemFromCatalogAsync_対象のアイテムが存在_リポジトリのRemoveAsyncを1度だけ呼び出す()
     {
         // Arrange
