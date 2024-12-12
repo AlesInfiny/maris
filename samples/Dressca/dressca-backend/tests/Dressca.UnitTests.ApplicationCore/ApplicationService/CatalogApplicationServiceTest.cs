@@ -28,11 +28,13 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStore, catalogDomainServiceMock, logger);
-        const int skip = 1;
-        const int take = 10;
+        var skip = 1;
+        var take = 10;
+        var targetBrandId = 1;
+        var targetCategoryId = 1;
 
         // Act
-        _ = await service.GetCatalogItemsAsync(skip, take, 1, 1);
+        _ = await service.GetCatalogItemsAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -51,9 +53,13 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStore, catalogDomainServiceMock, logger);
+        var skip = 1;
+        var take = 10;
+        var targetBrandId = 1;
+        var targetCategoryId = 1;
 
         // Act
-        _ = await service.GetCatalogItemsAsync(0, 10, 1, 1);
+        _ = await service.GetCatalogItemsAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -106,6 +112,11 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Arrange
         var targetBrandId = 1;
         var targetCategoryId = 1;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
+
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         catalogRepositoryMock
             .Setup(r => r.AddAsync(AnyItem, AnyToken)).Returns(Task.FromResult(CreateTestItem()));
@@ -122,12 +133,12 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
 
         // Assert
         await service.AddItemToCatalogAsync(
-            "テストアイテム",
-            "テスト用のアイテムです。",
-            123456,
-            "TEST001",
-            1,
-            1);
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
+            targetBrandId,
+            targetCategoryId);
 
         // Act
         catalogRepositoryMock.Verify(r => r.AddAsync(It.IsAny<CatalogItem>(), AnyToken), Times.Once);
@@ -184,6 +195,13 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task AddItemToCatalogAsync_権限なし_PermissionDeniedExceptionが発生()
     {
         // Arrange
+        var targetBrandId = 1;
+        var targetCategoryId = 1;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
+
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         catalogRepositoryMock
             .Setup(r => r.AddAsync(AnyItem, AnyToken)).Returns(Task.FromResult(CreateTestItem()));
@@ -198,12 +216,12 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
 
         // Assert
         var action = () => service.AddItemToCatalogAsync(
-            "テストアイテム",
-            "テスト用のアイテムです。",
-            123456,
-            "TEST001",
-            1,
-            1);
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
+            targetBrandId,
+            targetCategoryId);
 
         // Act
         await Assert.ThrowsAsync<PermissionDeniedException>(action);
@@ -297,6 +315,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     {
         // Arrange
         var targetId = 1;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var targetBrandId = 1;
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
@@ -324,10 +346,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Act
         await service.UpdateCatalogItemAsync(
             targetId,
-            "テストアイテム",
-            "テスト用のアイテムです。",
-            123456,
-            "TEST001",
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
@@ -341,6 +363,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     {
         // Arrange
         var targetId = 999;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var targetBrandId = 1;
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
@@ -368,10 +394,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Act
         var action = () => service.UpdateCatalogItemAsync(
             targetId,
-            "テストアイテム",
-            "テスト用のアイテムです。",
-            123456,
-            "TEST001",
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
@@ -385,6 +411,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     {
         // Arrange
         var targetId = 1;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var targetBrandId = 999;
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
@@ -412,10 +442,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Act
         var action = () => service.UpdateCatalogItemAsync(
             targetId,
-            "テストアイテム",
-            "テスト用のアイテムです。",
-            123456,
-            "TEST001",
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
@@ -429,6 +459,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     {
         // Arrange
         var targetId = 1;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var targetBrandId = 1;
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
@@ -456,10 +490,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Act
         var action = () => service.UpdateCatalogItemAsync(
             targetId,
-            "テストアイテム",
-            "テスト用のアイテムです。",
-            123456,
-            "TEST001",
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
@@ -473,6 +507,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     {
         // Arrange
         var targetId = 1;
+        var targetName = "テストアイテム";
+        var targetDescription = "テスト用のアイテムです。";
+        var targetPrice = 123456;
+        var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var targetBrandId = 1;
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
@@ -500,10 +538,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Act
         var action = () => service.UpdateCatalogItemAsync(
             targetId,
-            "テストアイテム",
-            "テスト用のアイテムです。",
-            123456,
-            "TEST001",
+            targetName,
+            targetDescription,
+            targetPrice,
+            targetProductCode,
             targetBrandId,
             targetCategoryId,
             AnyRowVersion);
@@ -524,11 +562,13 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
-        const int skip = 1;
-        const int take = 10;
+        var skip = 0;
+        var take = 10;
+        var targetBrandId = 1;
+        var targetCategoryId = 1;
 
         // Act
-        _ = await service.GetCatalogItemsByAdminAsync(skip, take, 1, 1);
+        _ = await service.GetCatalogItemsByAdminAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -548,9 +588,13 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
+        var skip = 0;
+        var take = 10;
+        var targetBrandId = 1;
+        var targetCategoryId = 1;
 
         // Act
-        _ = await service.GetCatalogItemsByAdminAsync(0, 10, 1, 1);
+        _ = await service.GetCatalogItemsByAdminAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -570,9 +614,13 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
+        var skip = 0;
+        var take = 10;
+        var targetBrandId = 1;
+        var targetCategoryId = 1;
 
         // Act
-        var action = () => service.GetCatalogItemsByAdminAsync(0, 10, 1, 1);
+        var action = () => service.GetCatalogItemsByAdminAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         await Assert.ThrowsAsync<PermissionDeniedException>(action);
