@@ -601,6 +601,37 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     }
 
     [Fact]
+    public async Task GetCatalogItemsByAdminAsync_ページネーションされたアイテムと総アイテム数が返却される()
+    {
+        // Arrange
+        var skip = 0;
+        var take = 10;
+        long? targetBrandId = 1;
+        long? targetCategoryId = 1L;
+        var targetItems = CreateDefaultCatalog().Where(
+            item => item.CatalogBrandId == targetBrandId && item.CatalogCategoryId == targetCategoryId).ToList();
+        var targetTotalItems = targetItems.Count;
+
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        catalogRepositoryMock.Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), skip, take, AnyToken)).ReturnsAsync(targetItems);
+        catalogRepositoryMock.Setup(r => r.CountAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken)).ReturnsAsync(targetTotalItems);
+        var catalogBrandRepositoryMock = new Mock<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = new Mock<ICatalogCategoryRepository>();
+        var userStoreMock = new Mock<IUserStore>();
+        userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+        var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
+        var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock, logger);
+
+        // Act
+        var (list, totalItems) = await service.GetCatalogItemsByAdminAsync(skip, take, targetBrandId, targetCategoryId);
+
+        // Assert
+        Assert.Equal(targetItems, list);
+        Assert.Equal(targetTotalItems, totalItems);
+    }
+
+    [Fact]
     public async Task GetCatalogItemsByAdminAsync_権限なし_PermissionDeniedExceptionが発生()
     {
         // Arrange
