@@ -175,7 +175,7 @@ public class CatalogItemsController : ControllerBase
             return this.NotFound();
         }
 
-        var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.PostCatalogItemAsync));
+        var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetCatalogItemAsync));
 
         return this.CreatedAtAction(actionName, new { catalogItemId = catalogItem.Id }, null);
     }
