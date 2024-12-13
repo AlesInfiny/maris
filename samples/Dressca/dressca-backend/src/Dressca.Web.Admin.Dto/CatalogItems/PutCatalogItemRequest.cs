@@ -22,7 +22,7 @@ public class PutCatalogItemRequest
     public required string Description { get; set; }
 
     /// <summary>
-    /// 単価を取得または設定します。
+    ///  単価を取得または設定します。
     /// </summary>
     [Required]
     [RegularExpression(@"^[1-9]\d{0,15}$")]
@@ -37,21 +37,21 @@ public class PutCatalogItemRequest
     public required string ProductCode { get; set; }
 
     /// <summary>
-    ///  カタログカテゴリIDを取得または設定します。
+    ///  カタログカテゴリ ID を取得または設定します。
     /// </summary>
     [Required]
     [Range(1L, long.MaxValue)]
     public required long CatalogCategoryId { get; set; }
 
     /// <summary>
-    ///  カタログブランドIDを取得または設定します。
+    ///  カタログブランド ID を取得または設定します。
     /// </summary>
     [Required]
     [Range(1L, long.MaxValue)]
     public required long CatalogBrandId { get; set; }
 
     /// <summary>
-    /// 行バージョンを取得または設定します。
+    ///  行バージョンを取得または設定します。
     /// </summary>
     [Required]
     public required byte[] RowVersion { get; set; }

@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Http;
 namespace Dressca.Web.Authorization;
 
 /// <summary>
-/// 認可ミドルウェアのデフォルト動作を変更するカスタムハンドラー。
-/// ステータスコードを変更します。
+///  認可ミドルウェアのデフォルト動作を変更するカスタムハンドラーです。
+///  デフォルト動作で返却されるステータスコードを変更します。
 /// </summary>
 public class StatusCodeMapAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
 {
@@ -19,7 +19,8 @@ public class StatusCodeMapAuthorizationMiddlewareResultHandler : IAuthorizationM
         AuthorizationPolicy policy,
         PolicyAuthorizationResult authorizeResult)
     {
-        // 認可の結果がForbiddenの場合、 デフォルトのステータスコード403を404に詰め替えます。
+        // 認可の結果が Forbidden の場合、認可の構造をクライアントに知られないように、
+        // デフォルトのステータスコード 403 を 404 に詰め替えます。
         if (authorizeResult.Forbidden)
         {
             context.Response.StatusCode = StatusCodes.Status404NotFound;

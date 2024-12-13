@@ -5,7 +5,7 @@ using Dressca.SystemCommon;
 namespace Dressca.ApplicationCore.Authorization;
 
 /// <summary>
-/// ユーザーにユースケースの実行権限がないことを表す業務例外クラスです。
+///  ユーザーにユースケースの実行権限がないことを表す業務例外クラスです。
 /// </summary>
 public class PermissionDeniedException : BusinessException
 {

@@ -11,10 +11,10 @@ public class CatalogBrandNotExistingInRepositoryException : BusinessException
     private const string ErrorCode = "CatalogBrandNotExistingInRepository";
 
     /// <summary>
-    ///  見つからなかったカタログブランド Id を指定して
-    ///  <see cref="CatalogItemNotExistingInRepositoryException"/> クラスの新しいインスタンスを初期化します。
+    ///  見つからなかったカタログブランド ID を指定して
+    ///  <see cref="CatalogBrandNotExistingInRepositoryException"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="catalogBrandIds">見つからなかったカタログブランド Id 。</param>
+    /// <param name="catalogBrandIds">見つからなかったカタログブランド ID 。</param>
     public CatalogBrandNotExistingInRepositoryException(IEnumerable<long> catalogBrandIds)
         : base(new BusinessError(ErrorCode, string.Format(Messages.CatalogBrandIdDoesNotExist, string.Join(",", catalogBrandIds))))
     {

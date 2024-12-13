@@ -8,7 +8,7 @@ namespace Dressca.Web.Admin.Dto.CatalogCategories;
 public class GetCatalogCategoriesResponse
 {
     /// <summary>
-    ///  カタログカテゴリ Id を取得または設定します。
+    ///  カタログカテゴリ ID を取得または設定します。
     /// </summary>
     [Required]
     public required long Id { get; set; }

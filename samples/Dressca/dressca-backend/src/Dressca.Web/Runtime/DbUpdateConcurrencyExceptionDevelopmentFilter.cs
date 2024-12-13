@@ -20,7 +20,7 @@ public class DbUpdateConcurrencyExceptionDevelopmentFilter : DbUpdateConcurrency
     /// <summary>
     ///  <see cref="DbUpdateConcurrencyExceptionDevelopmentFilter"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="problemDetailsFactory">>RFC準拠の問題詳細オブジェクトを構築するためのファクトリー。</param>
+    /// <param name="problemDetailsFactory">>RFC 準拠の問題詳細オブジェクトを構築するためのファクトリー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">

@@ -9,7 +9,7 @@ namespace Dressca.Web.Admin.Dto.CatalogBrands;
 public class GetCatalogBrandsResponse
 {
     /// <summary>
-    ///  カタログブランド Id を取得または設定します。
+    ///  カタログブランド ID を取得または設定します。
     /// </summary>
     [Required]
     public required long Id { get; set; }

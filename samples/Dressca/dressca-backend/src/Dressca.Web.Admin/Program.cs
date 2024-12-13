@@ -21,14 +21,14 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// アプリケーション設定ファイルの定義と型をバインドし、 DataAnnotation による検証を有効化する。
+// アプリケーション設定ファイルの定義と型をバインドし、 DataAnnotation による検証を有効化します。
 builder.Services
     .AddOptions<WebServerOptions>()
     .BindConfiguration(nameof(WebServerOptions))
     .ValidateDataAnnotations()
     .ValidateOnStart();
 
-// サービスコレクションに CORS を追加する。
+// サービスコレクションに CORS を追加します。
 builder.Services.AddCors();
 
 builder.Services
@@ -132,13 +132,13 @@ app.UseStaticFiles();
 
 var options = app.Services.GetRequiredService<IOptions<WebServerOptions>>();
 
-// アプリケーション設定にオリジンの記述がある場合のみ CORS ポリシーを追加する。
+// アプリケーション設定にオリジンの記述がある場合のみ CORS ポリシーを追加します。
 if (options.Value.AllowedOrigins.Length > 0)
 {
     app.UseCors(policy =>
     {
-        // Origins, Methods, Header, Credentials すべての設定が必要（設定しないと CORS が動作しない）
-        // レスポンスの Header を フロントエンド側 JavaScript で使用する場合、 WithExposedHeaders も必須
+        // Origins, Methods, Header, Credentials すべての設定が必要です。（設定しないと CORS が動作しません。）
+        // レスポンスの Header を フロントエンド側 JavaScript で使用する場合、 WithExposedHeaders も必須です。
         policy
             .WithOrigins(options.Value.AllowedOrigins)
             .WithMethods("POST", "GET", "OPTIONS", "HEAD", "DELETE", "PUT")
@@ -161,7 +161,7 @@ app.MapFallbackToFile("/index.html");
 app.Run();
 
 /// <summary>
-/// 結合テストプロジェクトに公開するための部分クラス。
+///  結合テストプロジェクトに公開するための部分クラスです。
 /// </summary>
 public partial class Program
 {

@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace Dressca.Web.HealthChecks;
 
 /// <summary>
-///  ヘルスチェック用に <see cref="IApiDescriptionProvider"/> を実装したクラス。
+///  ヘルスチェック用に <see cref="IApiDescriptionProvider"/> を実装したクラスです。
 /// </summary>
 public class HealthCheckDescriptionProvider : IApiDescriptionProvider
 {
     /// <summary>
-    ///  ヘルスチェックAPIの相対パス "api/health" 。
+    ///  ヘルスチェック API の相対パス "api/health" です。
     /// </summary>
     public static readonly string HealthCheckRelativePath = "api/health";
 

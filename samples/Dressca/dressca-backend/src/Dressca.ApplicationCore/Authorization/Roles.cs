@@ -6,7 +6,7 @@
 public static class Roles
 {
     /// <summary>
-    ///   管理者のロールを表す文字列です。
+    ///  管理者のロールを表す文字列です。
     /// </summary>
     public static readonly string Admin = "Admin";
 }

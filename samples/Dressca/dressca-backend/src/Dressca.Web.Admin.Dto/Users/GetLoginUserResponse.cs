@@ -3,7 +3,7 @@
 namespace Dressca.Web.Admin.Dto.Users;
 
 /// <summary>
-/// ユーザー情報のレスポンスを表します。
+///  ユーザー情報のレスポンスを表します。
 /// </summary>
 public class GetLoginUserResponse
 {

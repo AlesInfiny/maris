@@ -23,6 +23,8 @@ internal class CatalogDomainService : ICatalogDomainService
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="catalogRepository"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="catalogBrandRepository"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="catalogCategoryRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>

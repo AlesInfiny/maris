@@ -162,7 +162,7 @@
         "tags": [
           "CatalogItems"
         ],
-        "summary": "指定したIDのカタログアイテムを返します。",
+        "summary": "指定した ID のカタログアイテムを返します。",
         "operationId": "getCatalogItem",
         "parameters": [
           {
@@ -319,7 +319,7 @@
         "tags": [
           "CatalogItems"
         ],
-        "summary": "指定したIDのカタログアイテムの情報を更新します。",
+        "summary": "指定した ID のカタログアイテムの情報を更新します。",
         "operationId": "putCatalogItem",
         "parameters": [
           {
@@ -409,7 +409,7 @@
         "tags": [
           "CatalogItems"
         ],
-        "summary": "カタログアイテムを検索して返します。",
+        "summary": "カタログアイテムを検索して一覧を返します。",
         "operationId": "getByQuery",
         "parameters": [
           {
@@ -706,7 +706,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "カタログブランド Id を取得または設定します。\n            ",
+            "description": "カタログブランド ID を取得または設定します。\n            ",
             "format": "int64"
           },
           "name": {
@@ -727,7 +727,7 @@
         "properties": {
           "id": {
             "type": "integer",
-            "description": "カタログカテゴリ Id を取得または設定します。\n            ",
+            "description": "カタログカテゴリ ID を取得または設定します。\n            ",
             "format": "int64"
           },
           "name": {
@@ -764,17 +764,17 @@
           },
           "catalogCategoryId": {
             "type": "integer",
-            "description": "カタログカテゴリ Id を取得または設定します。\n            ",
+            "description": "カタログカテゴリ ID を取得または設定します。\n            ",
             "format": "int64"
           },
           "catalogBrandId": {
             "type": "integer",
-            "description": "カタログブランド Id を取得または設定します。\n            ",
+            "description": "カタログブランド ID を取得または設定します。\n            ",
             "format": "int64"
           },
           "id": {
             "type": "integer",
-            "description": "カタログアイテム Id を取得または設定します。\n            ",
+            "description": "カタログアイテム ID を取得または設定します。\n            ",
             "format": "int64"
           },
           "name": {
@@ -796,7 +796,7 @@
           },
           "rowVersion": {
             "type": "string",
-            "description": "行バージョンを取得または設定します。",
+            "description": "行バージョンを取得または設定します。\n            ",
             "format": "byte",
             "minLength": 1
           }
@@ -846,7 +846,7 @@
       },
       "PostCatalogItemRequest": {
         "type": "object",
-        "description": "カタログにアイテムを追加する処理のリクエストデータを表します。",
+        "description": "カタログにアイテムを追加する処理のリクエストデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "name",
@@ -884,14 +884,14 @@
           },
           "catalogCategoryId": {
             "type": "integer",
-            "description": "カタログカテゴリIDを取得または設定します。\n            ",
+            "description": "カタログカテゴリ ID を取得または設定します。\n            ",
             "format": "int64",
             "maximum": 9223372036854780000.0,
             "minimum": 1.0
           },
           "catalogBrandId": {
             "type": "integer",
-            "description": "カタログブランドIDを取得または設定します。\n            ",
+            "description": "カタログブランド ID を取得または設定します。\n            ",
             "format": "int64",
             "maximum": 9223372036854780000.0,
             "minimum": 1.0
@@ -926,7 +926,7 @@
           },
           "price": {
             "type": "integer",
-            "description": "単価を取得または設定します。",
+            "description": "単価を取得または設定します。\n            ",
             "format": "int64",
             "pattern": "^[1-9]\\d{0,15}$"
           },
@@ -939,21 +939,21 @@
           },
           "catalogCategoryId": {
             "type": "integer",
-            "description": "カタログカテゴリIDを取得または設定します。\n            ",
+            "description": "カタログカテゴリ ID を取得または設定します。\n            ",
             "format": "int64",
             "maximum": 9223372036854780000.0,
             "minimum": 1.0
           },
           "catalogBrandId": {
             "type": "integer",
-            "description": "カタログブランドIDを取得または設定します。\n            ",
+            "description": "カタログブランド ID を取得または設定します。\n            ",
             "format": "int64",
             "maximum": 9223372036854780000.0,
             "minimum": 1.0
           },
           "rowVersion": {
             "type": "string",
-            "description": "行バージョンを取得または設定します。",
+            "description": "行バージョンを取得または設定します。\n            ",
             "format": "byte",
             "minLength": 1
           }
@@ -961,7 +961,7 @@
       },
       "GetLoginUserResponse": {
         "type": "object",
-        "description": "ユーザー情報のレスポンスを表します。",
+        "description": "ユーザー情報のレスポンスを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "userName",

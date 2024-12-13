@@ -46,7 +46,7 @@ public interface ICatalogRepository
     /// </summary>
     /// <param name="id">ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン 。</param>
-    /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
+    /// <returns>カタログアイテムを返す非同期処理を表すタスク。</returns>
     Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -62,23 +62,23 @@ public interface ICatalogRepository
     /// </summary>
     /// <param name="entity">エンティティ。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>追加された注文情報を返す非同期処理を表すタスク。</returns>
+    /// <returns>追加されたカタログアイテムを返す非同期処理を表すタスク。</returns>
     Task<CatalogItem> AddAsync(CatalogItem entity, CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///  エンティティを削除します。
+    ///  指定した識別子と行バージョンを持つエンティティを削除します。
     /// </summary>
-    /// <param name="id">エンティティの Id。</param>
+    /// <param name="id">エンティティの ID 。</param>
     /// <param name="rowVersion">行バージョン。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>削除されたアイテムの数を返す非同期処理を表すタスク。</returns>
     Task<int> RemoveAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default);
 
     /// <summary>
-    ///  対象の Id を持つエンティティが存在するかどうかを示す真理値を取得します。
+    ///  指定した識別子を持つエンティティが存在するかどうかを示す真理値を取得します。
     /// </summary>
-    /// <param name="id">エンティティの Id。</param>
+    /// <param name="id">エンティティの ID。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
-    /// <returns>対象の Id を持つエンティティが存在するかどうか示す真理値を返す非同期処理を表すタスク。</returns>
+    /// <returns>指定した識別子を持つエンティティが存在するかどうか示す真理値を返す非同期処理を表すタスク。</returns>
     Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default);
 }

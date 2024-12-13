@@ -1,7 +1,7 @@
 ﻿namespace Dressca.ApplicationCore.Authorization;
 
 /// <summary>
-/// 未接続のユーザーのセッション情報です。
+///  未接続のユーザーのセッション情報です。
 /// </summary>
 public class NotConnectedUserStore : IUserStore
 {

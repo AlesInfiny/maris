@@ -171,7 +171,7 @@ public class CatalogApplicationService
     /// <summary>
     /// カタログからアイテムを削除します。
     /// </summary>
-    /// <param name="id">削除対象のカタログアイテムのID。</param>
+    /// <param name="id">削除対象のカタログアイテムの ID 。</param>
     /// <param name="rowVersion">削除対象のカタログアイテムの行バージョン。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
@@ -204,13 +204,13 @@ public class CatalogApplicationService
     /// <summary>
     /// カタログアイテムを更新します。
     /// </summary>
-    /// <param name="id">カタログアイテム ID。</param>
+    /// <param name="id">カタログアイテム ID 。</param>
     /// <param name="name">商品名。</param>
     /// <param name="description">説明。</param>
     /// <param name="price">単価。</param>
     /// <param name="productCode">商品コード。</param>
-    /// <param name="catalogBrandId">カタログブランド ID。</param>
-    /// <param name="catalogCategoryId">カタログカテゴリ ID。</param>
+    /// <param name="catalogBrandId">カタログブランド ID 。</param>
+    /// <param name="catalogCategoryId">カタログカテゴリ ID 。</param>
     /// <param name="rowVersion">行バージョン。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
@@ -279,8 +279,8 @@ public class CatalogApplicationService
     /// </summary>
     /// <param name="skip">読み飛ばす項目数。</param>
     /// <param name="take">最大取得項目数。</param>
-    /// <param name="brandId">カタログブランド Id 。</param>
-    /// <param name="categoryId">カタログカテゴリ Id 。</param>
+    /// <param name="brandId">カタログブランド ID 。</param>
+    /// <param name="categoryId">カタログカテゴリ ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
     /// <exception cref="PermissionDeniedException">更新権限がない場合。</exception>
@@ -310,9 +310,9 @@ public class CatalogApplicationService
     }
 
     /// <summary>
-    /// 指定したIdのカタログアイテムを取得します。
+    ///  管理者が指定したID のカタログアイテムを取得します。
     /// </summary>
-    /// <param name="catalogItemId">カタログアイテムID。</param>
+    /// <param name="catalogItemId">カタログアイテム ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログアイテム。</returns>
     /// <exception cref="PermissionDeniedException">更新権限がない場合。</exception>

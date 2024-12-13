@@ -3,7 +3,7 @@
 namespace Dressca.Web.Admin.Dto.CatalogItems;
 
 /// <summary>
-/// カタログにアイテムを追加する処理のリクエストデータを表します。
+///  カタログにアイテムを追加する処理のリクエストデータを表します。
 /// </summary>
 public class PostCatalogItemRequest
 {
@@ -37,14 +37,14 @@ public class PostCatalogItemRequest
     public required string ProductCode { get; set; }
 
     /// <summary>
-    ///  カタログカテゴリIDを取得または設定します。
+    ///  カタログカテゴリ ID を取得または設定します。
     /// </summary>
     [Required]
     [Range(1L, long.MaxValue)]
     public required long CatalogCategoryId { get; set; }
 
     /// <summary>
-    ///  カタログブランドIDを取得または設定します。
+    ///  カタログブランド ID を取得または設定します。
     /// </summary>
     [Required]
     [Range(1L, long.MaxValue)]

@@ -3,27 +3,27 @@
 namespace Dressca.ApplicationCore;
 
 /// <summary>
-/// イベントIDを管理するクラスです。
+/// イベント ID を管理するクラスです。
 /// </summary>
 internal class Events
 {
     /// <summary>
-    /// カタログIDがレポジトリ内に存在しないことを示すイベントID
+    /// カタログ ID がリポジトリ内に存在しないことを示すイベント ID
     /// </summary>
     internal static readonly EventId CatalogItemIdDoesNotExistInRepository = new(1001, nameof(CatalogItemIdDoesNotExistInRepository));
 
     /// <summary>
-    /// カタログブランドIDがリポジトリ内に存在しないことを示すイベントID
+    /// カタログブランド ID がリポジトリ内に存在しないことを示すイベント ID
     /// </summary>
     internal static readonly EventId CatalogBrandIdDoesNotExistInRepository = new(1002, nameof(CatalogBrandIdDoesNotExistInRepository));
 
     /// <summary>
-    /// カタログカテゴリIDがリポジトリ内に存在しないことを示すイベントID
+    /// カタログカテゴリ ID がリポジトリ内に存在しないことを示すイベント ID
     /// </summary>
     internal static readonly EventId CatalogCategoryIdDoesNotExistInRepository = new(1003, nameof(CatalogCategoryIdDoesNotExistInRepository));
 
     /// <summary>
-    /// デバッグ用のイベントID
+    /// デバッグ用のイベント ID
     /// </summary>
     internal static readonly EventId DebugEvent = new(9999, nameof(DebugEvent));
 }

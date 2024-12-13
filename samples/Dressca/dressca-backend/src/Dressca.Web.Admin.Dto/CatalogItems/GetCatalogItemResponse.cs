@@ -20,19 +20,19 @@ public class GetCatalogItemResponse
     public required decimal Price { get; set; }
 
     /// <summary>
-    ///  カタログカテゴリ Id を取得または設定します。
+    ///  カタログカテゴリ ID を取得または設定します。
     /// </summary>
     [Required]
     public required long CatalogCategoryId { get; set; }
 
     /// <summary>
-    ///  カタログブランド Id を取得または設定します。
+    ///  カタログブランド ID を取得または設定します。
     /// </summary>
     [Required]
     public required long CatalogBrandId { get; set; }
 
     /// <summary>
-    ///  カタログアイテム Id を取得または設定します。
+    ///  カタログアイテム ID を取得または設定します。
     /// </summary>
     [Required]
     public required long Id { get; set; }
@@ -55,7 +55,7 @@ public class GetCatalogItemResponse
     public required IList<string> AssetCodes { get; set; }
 
     /// <summary>
-    /// 行バージョンを取得または設定します。
+    ///  行バージョンを取得または設定します。
     /// </summary>
     [Required]
     public required byte[] RowVersion { get; set; }

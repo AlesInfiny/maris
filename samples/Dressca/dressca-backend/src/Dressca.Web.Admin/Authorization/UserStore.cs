@@ -4,14 +4,14 @@ using Dressca.ApplicationCore.Authorization;
 namespace Dressca.Web.Admin.Authorization;
 
 /// <summary>
-/// ユーザーのセッション情報を表すクラスです。
+///  ユーザーのセッション情報を表すクラスです。
 /// </summary>
 public class UserStore : IUserStore
 {
     private readonly IHttpContextAccessor httpContextAccessor;
 
     /// <summary>
-    ///   <see cref="UserStore"/>のインスタンスを初期化します。
+    ///  <see cref="UserStore"/>のインスタンスを初期化します。
     /// </summary>
     /// <param name="httpContextAccessor"><see cref="HttpContext"/>の情報にアクセスするためのクラス。</param>
     /// <exception cref="ArgumentNullException">
@@ -64,7 +64,7 @@ public class UserStore : IUserStore
     }
 
     /// <summary>
-    ///   ユーザーがログイン済みかどうかを表す真理値を取得します。
+    ///  ユーザーがログイン済みかどうかを表す真理値を取得します。
     /// </summary>
     /// <returns>ユーザーがログイン済みかどうかを表す真理値。
     /// ログイン済みならば <see langword="true"/> 、そうでなければ <see langword="false"/> 。

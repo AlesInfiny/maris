@@ -49,7 +49,7 @@ public class CatalogItemsController : ControllerBase
     }
 
     /// <summary>
-    /// 指定したIDのカタログアイテムを返します。
+    ///  指定した ID のカタログアイテムを返します。
     /// </summary>
     /// <param name="catalogItemId">ID。</param>
     /// <returns>カタログアイテム。</returns>
@@ -90,7 +90,7 @@ public class CatalogItemsController : ControllerBase
     }
 
     /// <summary>
-    ///  カタログアイテムを検索して返します。
+    ///  カタログアイテムを検索して一覧を返します。
     /// </summary>
     /// <returns>カタログアイテムの一覧。</returns>
     /// <param name="query">検索クエリ。</param>
@@ -222,7 +222,7 @@ public class CatalogItemsController : ControllerBase
     }
 
     /// <summary>
-    ///  指定したIDのカタログアイテムの情報を更新します。
+    ///  指定した ID のカタログアイテムの情報を更新します。
     /// </summary>
     /// <param name="catalogItemId">カタログアイテムID。</param>
     /// <param name="putCatalogItemRequest">更新するカタログアイテムの情報。</param>
