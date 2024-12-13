@@ -15,7 +15,7 @@
 
 
 /**
- * ユーザー情報のレスポンスを表します。
+ * ユーザー情報のレスポンスを表します。             
  * @export
  * @interface GetLoginUserResponse
  */

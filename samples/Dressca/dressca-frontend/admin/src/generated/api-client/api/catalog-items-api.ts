@@ -78,7 +78,7 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary カタログアイテムを検索して返します。
+         * @summary カタログアイテムを検索して一覧を返します。
          * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
          * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
          * @param {number} [page] ページ番号です。 未設定の場合は 1 ページ目として扱います。 1 以上の整数値を指定できます。             
@@ -128,7 +128,7 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 指定したIDのカタログアイテムを返します。
+         * @summary 指定した ID のカタログアイテムを返します。
          * @param {number} catalogItemId ID。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -198,7 +198,7 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @summary 指定したIDのカタログアイテムの情報を更新します。
+         * @summary 指定した ID のカタログアイテムの情報を更新します。
          * @param {number} catalogItemId カタログアイテムID。
          * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
          * @param {*} [options] Override http request option.
@@ -262,7 +262,7 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary カタログアイテムを検索して返します。
+         * @summary カタログアイテムを検索して一覧を返します。
          * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
          * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
          * @param {number} [page] ページ番号です。 未設定の場合は 1 ページ目として扱います。 1 以上の整数値を指定できます。             
@@ -278,7 +278,7 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 指定したIDのカタログアイテムを返します。
+         * @summary 指定した ID のカタログアイテムを返します。
          * @param {number} catalogItemId ID。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -304,7 +304,7 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary 指定したIDのカタログアイテムの情報を更新します。
+         * @summary 指定した ID のカタログアイテムの情報を更新します。
          * @param {number} catalogItemId カタログアイテムID。
          * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
          * @param {*} [options] Override http request option.
@@ -339,7 +339,7 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary カタログアイテムを検索して返します。
+         * @summary カタログアイテムを検索して一覧を返します。
          * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
          * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
          * @param {number} [page] ページ番号です。 未設定の場合は 1 ページ目として扱います。 1 以上の整数値を指定できます。             
@@ -352,7 +352,7 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 指定したIDのカタログアイテムを返します。
+         * @summary 指定した ID のカタログアイテムを返します。
          * @param {number} catalogItemId ID。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -372,7 +372,7 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
         },
         /**
          * 
-         * @summary 指定したIDのカタログアイテムの情報を更新します。
+         * @summary 指定した ID のカタログアイテムの情報を更新します。
          * @param {number} catalogItemId カタログアイテムID。
          * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
          * @param {*} [options] Override http request option.
@@ -406,7 +406,7 @@ export class CatalogItemsApi extends BaseAPI {
 
     /**
      * 
-     * @summary カタログアイテムを検索して返します。
+     * @summary カタログアイテムを検索して一覧を返します。
      * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
      * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
      * @param {number} [page] ページ番号です。 未設定の場合は 1 ページ目として扱います。 1 以上の整数値を指定できます。             
@@ -421,7 +421,7 @@ export class CatalogItemsApi extends BaseAPI {
 
     /**
      * 
-     * @summary 指定したIDのカタログアイテムを返します。
+     * @summary 指定した ID のカタログアイテムを返します。
      * @param {number} catalogItemId ID。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -445,7 +445,7 @@ export class CatalogItemsApi extends BaseAPI {
 
     /**
      * 
-     * @summary 指定したIDのカタログアイテムの情報を更新します。
+     * @summary 指定した ID のカタログアイテムの情報を更新します。
      * @param {number} catalogItemId カタログアイテムID。
      * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
      * @param {*} [options] Override http request option.

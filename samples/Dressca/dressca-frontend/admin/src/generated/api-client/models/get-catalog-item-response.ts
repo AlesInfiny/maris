@@ -33,19 +33,19 @@ export interface GetCatalogItemResponse {
      */
     'price': number;
     /**
-     * カタログカテゴリ Id を取得または設定します。             
+     * カタログカテゴリ ID を取得または設定します。             
      * @type {number}
      * @memberof GetCatalogItemResponse
      */
     'catalogCategoryId': number;
     /**
-     * カタログブランド Id を取得または設定します。             
+     * カタログブランド ID を取得または設定します。             
      * @type {number}
      * @memberof GetCatalogItemResponse
      */
     'catalogBrandId': number;
     /**
-     * カタログアイテム Id を取得または設定します。             
+     * カタログアイテム ID を取得または設定します。             
      * @type {number}
      * @memberof GetCatalogItemResponse
      */
@@ -69,7 +69,7 @@ export interface GetCatalogItemResponse {
      */
     'assetCodes'?: Array<string>;
     /**
-     * 行バージョンを取得または設定します。
+     * 行バージョンを取得または設定します。             
      * @type {string}
      * @memberof GetCatalogItemResponse
      */
