@@ -21,7 +21,7 @@ public interface IUserStore
 
     /// <summary>
     ///  ログイン中のユーザーが指定したロールに属しているかどうか確認します。
-    ///  未接続または未ログインの場合はfalseを返します。
+    ///  未接続または未ログインの場合は <see langword="false"/> を返します。
     /// </summary>
     /// <param name="role">ロール。</param>
     /// <returns>ロールに属するかどうか。</returns>
