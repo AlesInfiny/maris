@@ -22,9 +22,13 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 ### 有益な OSS 製品を採用できない {#cannot-apply-useful-oss}
 
-RESTful API の Open API 仕様書を生成する Swagger のライブラリ「 [Swashbuckle.AspNetCore.Swagger](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Swagger/) 」は、 .NET Framework 向けに提供されていません。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+RESTful API の Open API 仕様書を生成する Swagger のライブラリ「 [Swashbuckle.AspNetCore.Swagger :material-open-in-new:](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Swagger/){ target=_blank } 」は、 .NET Framework 向けに提供されていません。
 今後、 .NET 向けの有益な OSS 製品が出たとしても、それらが .NET Framework をサポートする可能性は低いでしょう。
 またすでに存在する OSS 製品の新しいバージョンが .NET Framework をサポートしなくなる可能性もあります。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 ### 多くのサードパーティ製品が EOL となり使用できない {#3rd-party-products-will-be-eol}
 
@@ -34,30 +38,38 @@ RESTful API の Open API 仕様書を生成する Swagger のライブラリ「 
 
 ### ランタイムの進化に追従できない {#cannot-keep-up-with-runtime-evolution}
 
-暗号の利用モードの 1 つである AEM-GCM を C# で使用できる [System.Security.Cryptography.AesGcm クラス](https://learn.microsoft.com/ja-jp/dotnet/api/system.security.cryptography.aesgcm) は、 .NET Framework 4.8 では使用できません。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+暗号の利用モードの 1 つである AEM-GCM を C# で使用できる [System.Security.Cryptography.AesGcm クラス :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/system.security.cryptography.aesgcm){ target=_blank } は、 .NET Framework 4.8 以降では使用できません。
 これは .NET Standard 2.1 で追加されたため、 .NET Standard 2.0 の実装である .NET Framework 4.8 からは使用できないのです。
 すでに .NET Framework は .NET に新しく追加される API から取り残されつつあります。
 
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
 ### 新しい開発環境が使えない {#cannot-use-new-ide}
 
-2022 年 6 月現在最新 Visual Studio 2022 では、 .NET Framework 4.0 から 4.5.1 までの開発がサポートされません。
+2024 年 11 月現在、最新 Visual Studio 2022 では、 .NET Framework 4.6.2 より古いバージョンでの開発がサポートされません。
 よってこれらのバージョンを対象としたアプリケーションをビルドできません。
 今後、 Visual Studio でビルドできる .NET Framework のバージョンは減っていくことが考えられます。
 
 ### 言語バージョンが更新されないため、モダンなコーディングができない {#without-modern-coding}
 
-.NET Framework 4.8 に対応する C# のバージョンは 7.0 です。
-.NET Framework は 4.8 が最後のバージョンであるため、 C# バージョンは 7.0 に固定されます。
+.NET Framework 4.8.1 に対応する C# のバージョンは 7.3 です。
+.NET Framework は 4.8.1 が最後のバージョンであるため、 C# バージョンは 7.3 に固定されます。
 C# 8.0 以降追加された便利で生産性を上げてくれる記法は使用できません。
 また Web 等で公開されているコードサンプルをそのままでは利用できない可能性もどんどん高まっていきます。
 同じ言語でありながら、時代に取り残される可能性があります。
 
 ### 実行環境が制限される {#restriction-of-runtime}
 
-2022 年 6 月現在、 [Azure Web Apps](https://learn.microsoft.com/ja-JP/azure/app-service/) では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
-また、 Microsoft の公式 docker イメージである [.NET Framework Runtime](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/) も、バージョンとして選択できるのは .NET Framework 3.5 と 4.8 のみです。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+2024 年 11 月現在、 [Azure Web Apps :material-open-in-new:](https://learn.microsoft.com/ja-JP/azure/app-service/){ target=_blank } では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
+また、 Microsoft の公式 docker イメージである [.NET Framework Runtime :material-open-in-new:](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/){ target=_blank } も、バージョンとして選択できるのは .NET Framework 3.5, 4.8, 4.8.1 のみです。
 .NET Framework は、クラウド環境やコンテナー環境から徐々に締め出されつつあります。
 将来的に、クラウド環境やコンテナー環境で .NET Framework が使用できなくなる可能性は高いです。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 ## 開発体制を構築することが困難になる {#difficult-to-establish-a-development-team}
 
@@ -74,10 +86,10 @@ C# 8.0 以降追加された便利で生産性を上げてくれる記法は使�
 
 かつて .NET Framework で構築された Azure のクラウドサービスは .NET へ移行されています。
 
-- [The Azure Cosmos DB Journey to .NET 6](https://devblogs.microsoft.com/dotnet/the-azure-cosmos-db-journey-to-net-6/)
-- [Azure Active Directory’s gateway is on .NET Core 3.1!](https://devblogs.microsoft.com/dotnet/azure-active-directorys-gateway-service-is-on-net-core-3-1/)
+- [The Azure Cosmos DB Journey to .NET 6 :material-open-in-new:](https://devblogs.microsoft.com/dotnet/the-azure-cosmos-db-journey-to-net-6/){ target=_blank }
+- [Azure Active Directory’s gateway is on .NET Core 3.1! :material-open-in-new:](https://devblogs.microsoft.com/dotnet/azure-active-directorys-gateway-service-is-on-net-core-3-1/){ target=_blank }
 
-また、無償の動画コンテンツ ( [.NET の公式チャンネル](https://www.youtube.com/c/dotNET) ) が存在しますが、 .NET Framework のコンテンツは存在しません。
+また、無償の動画コンテンツ ( [.NET の公式チャンネル :material-open-in-new:](https://www.youtube.com/c/dotNET){ target=_blank } ) が存在しますが、 .NET Framework のコンテンツは存在しません。
 
 このように、社外では .NET の技術者や技術者コミュニティーが拡大すると同時に、 .NET Framework のコミュニティーは縮小しています。
 最新の機能や技術はすべて .NET に追加されるため、技術者は .NET Framework ではなく .NET を学習するようになるでしょう。
@@ -92,7 +104,7 @@ C# 8.0 以降追加された便利で生産性を上げてくれる記法は使�
 ここまで説明したとおり、新しい機能や最新の技術は .NET にのみ追加され、.NET Framework は取り残されます。
 「[ランタイムの進化に追従できない](#cannot-keep-up-with-runtime-evolution)」 で解説した通り、暗号などのセキュリティに関連するものであっても、新しい機能は .NET Framework には追加されません。
 
-今後、.NET Standard ならびに .NET には、新たに定義されたプロトコルである HTTP/3 や Windows 11 の関連機能、新たな入力デバイスに対応する機能といった重要な新機能が追加されると予想されます。
+今後、 .NET には、新たに定義されたプロトコルである HTTP/3 や Windows 11 の関連機能、新たな入力デバイスに対応する機能といった重要な新機能が追加されると予想されます。
 しかし、.NET Framework ではそれらの機能は利用できません。
 
 また、.NET Framework で最もよく利用される ASP.NET Web Forms は、生産性の向上を重視したフレームワークであったため、優れた UI / UX を実現することは非常に困難です。
@@ -128,4 +140,4 @@ C# 8.0 以降追加された便利で生産性を上げてくれる記法は使�
     .NET Framework は、インストール後バージョンを固定できるようなものではなく、サーバー OS の更新時に新しいバージョンへと自動でアップデートされます。
     .NET Framework には強い後方互換性があるため、テストを再実施しなくても非互換が発生しないパターンが多かっただけといえるでしょう。
 
-[^1]: [Microsoft のクイックスタートガイド](https://learn.microsoft.com/ja-jp/azure/app-service/quickstart-dotnetcore?tabs=netframework48&pivots=development-environment-vs) では、 .NET Framework 3.5 が選択できることすら説明されていません。
+[^1]: [Microsoft のクイックスタートガイド :material-open-in-new:](https://learn.microsoft.com/ja-jp/azure/app-service/quickstart-dotnetcore?tabs=netframework48&pivots=development-environment-vs){ target=_blank } では、 .NET Framework 3.5 が選択できることすら説明されていません。

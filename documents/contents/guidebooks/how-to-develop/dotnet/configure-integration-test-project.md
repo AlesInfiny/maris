@@ -36,8 +36,12 @@ public partial class Program {}
 
 ### 基本のテスト {#basic}
 
-テストクラスに [`IClassFixture<TFixture>`](https://xunit.net/docs/shared-context#class-fixture) インターフェースを実装し、 [`WebApplicationFactory<TEntryPoint>`](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) のインスタンスをテストクラスから利用します。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+テストクラスに [`IClassFixture<TFixture>` :material-open-in-new:](https://xunit.net/docs/shared-context#class-fixture){ target=_blank } インターフェースを実装し、 [`WebApplicationFactory<TEntryPoint>` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1){ target=_blank }のインスタンスをテストクラスから利用します。
 `WebApplicationFactory<TEntryPoint>` はテスト対象アプリケーションの `TestServer` インスタンスを提供します。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 ``` C# hl_lines="2"
 public class BasicTests 

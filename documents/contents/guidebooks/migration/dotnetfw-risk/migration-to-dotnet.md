@@ -12,9 +12,14 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 ## 基本的な方針 {#basic-policy}
 
-.NET Framework と .NET の間には単純互換性がないため、基本的にはコードを書き直す必要があります。
-ただし、 2023 年 4 月現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview)」という変換ツールが使用できます。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
+.NET Framework と .NET の間には単純互換性がないため、基本的にはコードを書き直す必要があります。
+ただし、 2024 年 11 月現在、以下のアプリケーション形式については、 Microsoft から提供される「[.NET Upgrade Assistant :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview){ target=_blank }」という変換ツールが使用できます。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+
+- .NET Framework ASP.NET アプリ
 - .NET Framework Windows フォーム アプリ
 - .NET Framework WPF アプリ
 - .NET Framework サーバーサイド WCF アプリ
@@ -25,7 +30,20 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 .NET Upgrade Assistant を使用すると、 .NET Framework のソリューションやプロジェクトが .NET 形式へ変換されます。
 このツールを使用して変換した後、ビルドエラーや実行時エラーに手動で対応します。
-なお、 ASP.NET Web Forms はこのツールに対応していないため、手動でコードを書き直す必要があります。
+
+??? note "新旧 .NET Upgrade Assistant について（クリックで展開）"
+
+    .NET Upgrade Assistant には、レガシーバージョンと最新バージョンの 2 種類があり、まったく別のアプリケーションと言えるほどの違いがあります。
+    .NET Framework サーバーサイド WCF アプリにはレガシーバージョンのみ対応しています。
+    また、 ASP.NET Web Forms は最新バージョンのみ対応していますが、機能は限定されています。
+
+    レガシーバージョンと最新バージョンの主な違いは以下のとおりです。
+
+    |                        | レガシーバージョン                      | 最新バージョン                                                                               |
+    | ---------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------- |
+    | アプリケーションの形態 | コマンドラインツール                    | Visual Studio 拡張機能                                                                       |
+    | 実行環境の前提         | .NET 7.0 Runtime （サポート切れ）が必要 | Visual Studio 2022 の最新版が必要                                                            |
+    | 実行可能な機能         | .NET Framework から .NET への変換       | 左記のほか、 .NET バージョンのメジャーアップデート対応、 .NET Core → .NET への対応などが追加 |
 
 ## 移行のハードル {#obstacles-to-migration}
 
@@ -35,7 +53,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 #### ASP.NET Web Forms ( 廃止 ) {#aspnet-web-forms}
 
-- 移行先候補：ASP.NET Core MVC や SPA ( Vue.js, Blazor など )
+- 移行先候補： ASP.NET Core MVC や Blazor , SPA ( Vue.js など )
 - 移行方法：移行ツールは存在せず、手作業でのソースコード書き換えが必要
 
 !!! warning "画面設計の見直しも検討すべし"
@@ -45,12 +63,17 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 #### ASMX Web Services ( 廃止 ) {#asmx-web-services}
 
-- 移行先候補：ASP.NET Core Web API や Core WCF
+- 移行先候補： ASP.NET Core Web API, Core WCF, ASP.NET Core gRPC サービスなど
 - 移行方法：移行ツールは存在せず、手作業でのソースコード書き換えが必要
+
+#### Windows Communication Foundation (WCF) (廃止) {#wcf}
+
+- 移行先候補： Core WCF や ASP.NET Core gRPC サービス
+- 移行方法： Core WCF への移行には .NET Upgrade Assistant を使用可能。 ASP.NET Core gRPC サービスの場合、移行ツールは存在せず、手作業でのソースコード書き換えが必要
 
 #### DataSet / TableAdapter ( 廃止ではないが使いづらい ) {#dataset-table-adapter}
 
-- 移行先候補：Entity Framework Core
+- 移行先候補： Entity Framework Core
 - 移行方法：移行ツールは存在せず、手作業でのソースコード書き換えが必要
 
 ??? note "その他、廃止された機能 ( クリックで展開 )"
@@ -64,9 +87,6 @@ description: .NET Framework にとどまり続けることで起こりうる リ
     - コードアクセスセキュリティ ( CAS )
 
     これらの影響を受けることは稀ですが、影響確認は必要です。
-    なお、 API レベルでの影響調査であれば、ツールを用いてある程度は自動的に実施可能です。
-
-    - [.NET Portability Analyzer](https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer)
 
 ### 短い製品ライフサイクルへの追従 {#adapt-to-short-product-life-cycles}
 

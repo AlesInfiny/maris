@@ -15,9 +15,9 @@ ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力�
 
 以下の NuGet パッケージを ASP.NET Core Web API プロジェクトに追加します。
 
-- [NSwag.AspNetCore](https://www.nuget.org/packages/NSwag.AspNetCore)
-- [NSwag.MSBuild](https://www.nuget.org/packages/NSwag.MSBuild)
-- [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson)
+- [NSwag.AspNetCore :material-open-in-new:](https://www.nuget.org/packages/NSwag.AspNetCore){ target=_blank }
+- [NSwag.MSBuild :material-open-in-new:](https://www.nuget.org/packages/NSwag.MSBuild){ target=_blank }
+- [Microsoft.AspNetCore.Mvc.NewtonsoftJson :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson){ target=_blank }
 
 ### NSwag 構成ファイルの追加 {#add-nswag-json}
 
@@ -25,7 +25,7 @@ ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力�
 NSwag を用いた実装コードの生成は行わないため、 Open API 仕様書の生成に関する設定のみ実施してください。
 [nswag.json] の設定値の詳細は、以下を参照してください。
 
-- [NSwag Configuration Document](https://github.com/RicoSuter/NSwag/wiki/NSwag-Configuration-Document)
+- [NSwag Configuration Document :material-open-in-new:](https://github.com/RicoSuter/NSwag/wiki/NSwag-Configuration-Document){ target=_blank }
 
 ??? example "nswag.json の設定例"
     [nswag.json] の設定例を示します。
@@ -61,7 +61,7 @@ NSwag を用いた実装コードの生成は行わないため、 Open API 仕�
 Open API 仕様書のファイルがビルド時に生成されるようプロジェクトファイルを設定します。
 設定方法の詳細は、以下を参照してください。
 
-- [NSwag.MSBuild](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild)
+- [NSwag.MSBuild :material-open-in-new:](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild){ target=_blank }
 
 ??? example ".NET 8 の場合のプロジェクトファイル設定例"
     .NET 8 を使用するプロジェクトの場合、プロジェクトファイルには以下のように設定することで、 Open API 仕様書のファイルを出力できます。
@@ -85,7 +85,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 開発環境でのみ、 Open API v3 の仕様書をブラウザー経由で参照できるように設定します。
 設定方法の詳細は、以下を参照してください。
 
-- [AspNetCore Middleware](https://github.com/RicoSuter/NSwag/wiki/AspNetCore-Middleware)
+- [AspNetCore Middleware :material-open-in-new:](https://github.com/RicoSuter/NSwag/wiki/AspNetCore-Middleware){ target=_blank }
 
 ??? example "Web API 仕様書をブラウザーから確認できるようにする設定例"
 
@@ -123,8 +123,12 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 
 ### 未処理例外のエラー情報を返却するコントローラークラスの作成 {#create-error-controller}
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
 キャッチされなかった例外の情報を返却するために、エラー情報を取得できるコントローラーを追加します。
-エラーレスポンスは [RFC 9457](https://datatracker.ietf.org/doc/html/rfc9457) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc9457.html)) に従った形式で返却するようにしましょう。
+エラーレスポンスは [RFC 9457 :material-open-in-new:](https://datatracker.ietf.org/doc/html/rfc9457){ target=_blank } ([日本語訳付き :material-open-in-new:](https://tex2e.github.io/rfc-translater/html/rfc9457.html){ target=_blank }) に従った形式で返却するようにしましょう。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 本番環境ではアプリケーションの内部情報流出を防ぐため、スタックトレースを返却しないようにします。
 開発環境ではエラーの詳細を簡単に開発者が把握できるよう、スタックトレースをエラーレスポンスに含めることを検討しましょう。
@@ -132,7 +136,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 ??? example "システムエラーのエラー情報を返却するコントローラー実装例"
 
     システムエラーのエラー情報を返却するためには、未処理例外の情報を取得し、適切な形式に変換するコントローラー ( この例では `#!csharp ErrorController` ) を作成します。
-    このコントローラーは、 [RFC 9457](https://datatracker.ietf.org/doc/html/rfc9457) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc9457.html)) に従ったエラーレスポンスを返却するように実装しましょう。
+    このコントローラーは、 [RFC 9457 :material-open-in-new:](https://datatracker.ietf.org/doc/html/rfc9457){ target=_blank } ([日本語訳付き :material-open-in-new:](https://tex2e.github.io/rfc-translater/html/rfc9457.html){ target=_blank }) に従ったエラーレスポンスを返却するように実装しましょう。
     `#!csharp ControllerBase.Problem` メソッドを利用すると、 RFC 9457 に準拠したレスポンスを簡単に構築できます。
 
     開発環境で使用するアクションメソッドと、それ以外の環境で使用するアクションメソッドは分割して定義しましょう。
@@ -229,8 +233,12 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
 
 ### Web API コントローラーのエラーレスポンス形式の指定 {#set-error-response-type}
 
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
 Web API コントローラーが返却するエラーレスポンスの形式は `ProducesResponseType` 属性の `Type` パラメーターで明示的に指定します。
-`Type` パラメーターに `typeof(ProblemDetails)` を指定することで、[RFC 9457](https://datatracker.ietf.org/doc/html/rfc9457) ([日本語訳付き](https://tex2e.github.io/rfc-translater/html/rfc9457.html)) に従ったエラーレスポンスを返却します。
+`Type` パラメーターに `typeof(ProblemDetails)` を指定することで、[RFC 9457 :material-open-in-new:](https://datatracker.ietf.org/doc/html/rfc9457){ target=_blank } ([日本語訳付き :material-open-in-new:](https://tex2e.github.io/rfc-translater/html/rfc9457.html){ target=_blank }) に従ったエラーレスポンスを返却します。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 また、実際のレスポンス形式と Open API 定義書に記載のレスポンス形式の不一致を防ぐため、 `Program.cs` で `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定します。
 `SuppressMapClientErrors` の既定値は `false` であり、この場合エラーレスポンスの型を指定しない限りエラーは自動的に `ProblemDetails` にマッピングされ、 Open API 定義書にも反映されます。
@@ -341,7 +349,7 @@ Web API アプリケーションの入出力は、 HTTP 通信の形式になり
 ASP.NET Core Web API プロジェクトを作成した際、一緒に作成される [appsettings.json] および [appsettings.Development.json] ファイルに対してログレベルを設定します。
 ログレベルの設定方法については、以下を参照してください。
 
-- [.NET でのログの記録 - ログの構成](https://learn.microsoft.com/ja-JP/dotnet/core/extensions/logging#configure-logging)
+- [.NET でのログの記録 - ログの構成 :material-open-in-new:](https://learn.microsoft.com/ja-JP/dotnet/core/extensions/logging#configure-logging){ target=_blank }
 
 ログレベルは、本番環境向けの設定と開発環境向けの設定を別々に管理します。
 本番環境向けには原則 Information 以上のログのみを出力するように設定します。

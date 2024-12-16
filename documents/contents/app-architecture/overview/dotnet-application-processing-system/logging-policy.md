@@ -85,16 +85,16 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）で定義するロ
 以下の情報をログに含めます。
 
 - ログ出力日時
-- [ログのカテゴリ](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-category)
-- [ログレベル](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-level)
-- [イベントID](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-event-id)
-- [メッセージ](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-message-template)
-- [例外情報（スタックトレースなど）](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-exceptions)
-- [スコープ](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-scopes)
+- [ログのカテゴリ :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-category){ target=_blank }
+- [ログレベル :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-level){ target=_blank }
+- [イベントID :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-event-id){ target=_blank }
+- [メッセージ :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-message-template){ target=_blank }
+- [例外情報（スタックトレースなど） :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-exceptions){ target=_blank }
+- [スコープ :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/logging?tabs=command-line#log-scopes){ target=_blank }
 
 ## ロギングライブラリ {#logging-libraries}
 
-AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.logging.ilogger) インターフェースを使用します。
+AlesInfiny Maris では、ログ出力に [Microsoft.Extensions.Logging.ILogger :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.logging.ilogger){ target=_blank } インターフェースを使用します。
 ログプロバイダーは、アプリケーションの形態に合わせて適切なものを選択します。
 なお、構造化ログに対応したログプロバイダーの利用を推奨します。
 構造化ログについては以下を参照してください。

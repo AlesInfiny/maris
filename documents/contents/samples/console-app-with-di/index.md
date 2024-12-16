@@ -7,7 +7,7 @@ description: コンソールアプリケーションで DI を利用するため
 
 ## 概要 {#about-this-sample}
 
-コンソールアプリケーションでは、通常 [Microsoft.Extensions.DependencyInjection](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/) を用いた DI を利用できません。
+コンソールアプリケーションでは、通常 [Microsoft.Extensions.DependencyInjection :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection/){ target=_blank } を用いた DI を利用できません。
 DI を利用するためには、汎用ホストを用いてコンソールアプリケーションを構築しなければなりません。
 この実装は定型的なものが多いにも関わらず、デファクトスタンダードとなった OSS ライブラリは現在存在しません。
 
@@ -95,12 +95,12 @@ Maris.Samples.Cli.exe get-by-unit-price-range --minimum 2000 --maximum 3000
 他の OSS ライブラリについては、 [サンプルアプリケーションをダウンロード](#download) して確認してください。
 
 - コンソールアプリケーションのフレームワーク本体
-    - [CommandLineParser](https://www.nuget.org/packages/CommandLineParser/)
-    - [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/)
+    - [CommandLineParser :material-open-in-new:](https://www.nuget.org/packages/CommandLineParser/){ target=_blank }
+    - [Microsoft.Extensions.Hosting :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/){ target=_blank }
 
 - テストプロジェクト
-    - [Moq](https://www.nuget.org/packages/Moq/)
-    - [xunit](https://www.nuget.org/packages/xunit/)
+    - [Moq :material-open-in-new:](https://www.nuget.org/packages/Moq/){ target=_blank }
+    - [xunit :material-open-in-new:](https://www.nuget.org/packages/xunit/){ target=_blank }
 
 ## ダウンロード {#download}
 

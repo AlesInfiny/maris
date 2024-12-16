@@ -7,7 +7,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 <!-- cSpell:ignore dotnetfw -->
 
-2023 年 4 月現在、 .NET ランタイムには以下があります。
+2024 年 11 月現在、 .NET ランタイムには以下があります。
 
 - .NET Framework
     - Windows 上でのみ動作する
@@ -38,7 +38,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 .NET ( .NET Core ) や .NET Framework は、 .NET Standard の実装という位置づけになりました。
 
 その後 .NET Core は .NET と改称し、 Windows 、 Linux の他 macOS にも対応しました。
-2022 年現在は .NET 6.0 がリリースされています ( .NET 6.0 は、 .NET Standard 2.1 の実装です ) 。
+2024 年現在は .NET 8.0 がリリースされています ( .NET 8.0 は、 .NET Standard 2.1 の実装です ) 。
 このように、 .NET Framework と .NET は、どちらも .NET Standard の実装です。
 プログラミング言語として C# を使うものの、以下のように異なるものです。
 
@@ -49,18 +49,32 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 つまり、 .NET Framework と .NET の間に単純な互換性はありません。
 
+!!! note
+
+    .NET Standard は 2.1 が最後のバージョンであり、今後新たなバージョンは追加されないことが宣言されています（ [The future of .NET Standard - .NET Blog :material-open-in-new:](https://devblogs.microsoft.com/dotnet/the-future-of-net-standard/){ target=_blank } ）。
+    新しい API は今後 .NET だけに追加されます。
+
 ## .NET Framework の開発停止 {#stop-development-of-dotnetfw}
 
-2019 年 5 月、 Microsoft は .NET Framework の開発停止を宣言しました ( [.NET Core is Future of .NET](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net/) ) 。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+2019 年 5 月、 Microsoft は .NET Framework の開発停止を宣言しました ( [.NET Core is Future of .NET :material-open-in-new:](https://devblogs.microsoft.com/dotnet/net-core-is-the-future-of-net/){ target=_blank } ) 。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 この宣言では、次のことが明記されています。
 
 - 新しい .NET アプリケーションは .NET Core ( 現在では .NET ) ベースで開発すべきです。
 - 今後、将来的な投資はすべて .NET Core ( 現在では .NET ) に対して行われます。
 
-.NET Framework は 4.8 が最後のバージョンとなり、今後はバグ修正やセキュリティ修正のみが提供されます。
-実際に、 2021 年 11 月にリリースされた .NET 6.0 は .NET Standard 2.1 の実装であるのに対し、 .NET Framework 4.8 は、 .NET Standard 2.0 の実装です。
-.NET Framework 4.8 では .NET Standard 2.1 で定義されている API を使えません。
+.NET Framework は、 4.8.1 が最後のバージョンとなり、今後はバグ修正やセキュリティ修正のみが提供されます。
+
+!!! note
+
+    上の宣言の時点で .NET Framework の最新バージョンは 4.8 だったため、これが最後のバージョンになると目されていました。しかし、2022 年 8 月 9 日に .NET Framework 4.8.1 がリリースされたため、 2024 年現在、 .NET Framework の最新バージョンは 4.8.1 です。
+
+実際に、 2021 年 11 月にリリースされた .NET 6.0 は .NET Standard 2.1 の実装であったのに対し、 .NET Framework 4.8.1 は、 .NET Standard 2.0 の実装のままでした。
+.NET Framework 4.8.1 では .NET Standard 2.1 で定義されている API を使えません。
 
 また、上述の Microsoft の宣言により、これまで .NET Framework 向けにサードパーティ製品を提供していた企業も、投資先を .NET へ切り替えています。
 新製品は .NET 向けに提供され、 .NET Framework をサポートすることはないでしょう。
@@ -74,13 +88,14 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 | .NET Framework 3.5 SP1        | 2029 年 1 月 9 日                   |
 | .NET Framework 4.0 ～ 4.5.1   | 2016 年 1 月 12 日 ( サポート終了 ) |
 | .NET Framework 4.5.2 ～ 4.6.1 | 2022 年 4 月 26 日 ( サポート終了 ) |
-| .NET Framework 4.6.2          | OS のサポートライフサイクルに準拠   |
-| .NET Framework 4.7            | 同上                                |
+| .NET Framework 4.6.2          | 2027 年 1 月 12 日                  |
+| .NET Framework 4.7            | OS のサポートライフサイクルに準拠   |
 | .NET Framework 4.7.1          | 同上                                |
 | .NET Framework 4.7.2          | 同上                                |
 | .NET Framework 4.8            | 同上                                |
+| .NET Framework 4.8.1          | 同上                                |
 
-2022 年 6 月現在、すでに .NET Framework 4.6.1 以下の .NET Framework 4.x 系は Microsoft のサポートが終了しています。
+2024 年 11 月現在、すでに .NET Framework 4.6.1 以下の .NET Framework 4.x 系は Microsoft のサポートが終了しています。
 また、 .NET Framework 3.5 SP1 も OS のバージョンによらず、 2029 年 1 月 9 日にサポートが終了します。
 
 すべての .NET Framework がすぐにサポート停止される可能性は非常に低いです。
