@@ -197,4 +197,25 @@ public class CatalogItem
             this.rowVersion = value;
         }
     }
+
+    /// <summary>
+    ///  指定した ID と 行バージョンを持つ、削除用のカタログアイテムエンティティを生成します。
+    /// </summary>
+    /// <param name="id">カタログアイテム ID 。</param>
+    /// <param name="rowVersion">行バージョン。</param>
+    /// <returns>削除用のカタログアイテムエンティティ。</returns>
+    public static CatalogItem CreateCatalogItemToDelete(long id, byte[] rowVersion)
+    {
+        return new CatalogItem
+        {
+            Id = id,
+            Name = "削除用アイテム",
+            Description = "削除用アイテムです。",
+            Price = 0,
+            ProductCode = "DELETE",
+            CatalogBrandId = 1,
+            CatalogCategoryId = 1,
+            RowVersion = rowVersion,
+        };
+    }
 }

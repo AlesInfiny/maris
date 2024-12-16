@@ -56,11 +56,8 @@ internal class EfCatalogRepository : ICatalogRepository
     /// <inheritdoc/>
     public async Task<int> UpdateAsync(CatalogItem entity, CancellationToken cancellationToken = default)
     {
-        using (var updateContext = new DresscaDbContext())
-        {
-            updateContext.Entry(entity).State = EntityState.Modified;
-            return await updateContext.SaveChangesAsync(cancellationToken);
-        }
+        this.dbContext.CatalogItems.Entry(entity).State = EntityState.Modified;
+        return await this.dbContext.SaveChangesAsync(cancellationToken);
     }
 
     /// <inheritdoc/>
@@ -74,22 +71,9 @@ internal class EfCatalogRepository : ICatalogRepository
     /// <inheritdoc/>
     public async Task<int> RemoveAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default)
     {
-        using (var deleteContext = new DresscaDbContext())
-        {
-            var deleteTarget = new CatalogItem
-            {
-                Id = id,
-                Name = "削除用アイテム",
-                Description = "削除用アイテム",
-                Price = 0,
-                ProductCode = "DELETE",
-                CatalogBrandId = 3,
-                CatalogCategoryId = 3L,
-                RowVersion = rowVersion,
-            };
-            deleteContext.Entry(deleteTarget).State = EntityState.Deleted;
-            return await deleteContext.SaveChangesAsync(cancellationToken);
-        }
+        var deleteTarget = CatalogItem.CreateCatalogItemToDelete(id, rowVersion);
+        this.dbContext.CatalogItems.Entry(deleteTarget).State = EntityState.Deleted;
+        return await this.dbContext.SaveChangesAsync(cancellationToken);
     }
 
     /// <inheritdoc/>
