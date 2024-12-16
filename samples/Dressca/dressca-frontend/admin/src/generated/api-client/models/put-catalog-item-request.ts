@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Dressca Admin Web API
+ * Dressca Admin の Web API 仕様
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -33,7 +33,7 @@ export interface PutCatalogItemRequest {
      */
     'description': string;
     /**
-     * 単価を取得または設定します。
+     * 単価を取得または設定します。             
      * @type {number}
      * @memberof PutCatalogItemRequest
      */
@@ -45,19 +45,19 @@ export interface PutCatalogItemRequest {
      */
     'productCode': string;
     /**
-     * カタログカテゴリIDを取得または設定します。             
+     * カタログカテゴリ ID を取得または設定します。             
      * @type {number}
      * @memberof PutCatalogItemRequest
      */
     'catalogCategoryId': number;
     /**
-     * カタログブランドIDを取得または設定します。             
+     * カタログブランド ID を取得または設定します。             
      * @type {number}
      * @memberof PutCatalogItemRequest
      */
     'catalogBrandId': number;
     /**
-     * 行バージョンを取得または設定します。
+     * 行バージョンを取得または設定します。             
      * @type {string}
      * @memberof PutCatalogItemRequest
      */

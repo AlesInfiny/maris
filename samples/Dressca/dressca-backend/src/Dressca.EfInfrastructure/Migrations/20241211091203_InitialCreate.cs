@@ -3,10 +3,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Dressca.EfInfrastructure.Migrations
 {
+    /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -70,16 +74,16 @@ namespace Dressca.EfInfrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BuyerId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     OrderDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    ShipToFullName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
-                    ShipToPostalCode = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
-                    ShipToTodofuken = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
-                    ShipToShikuchoson = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
-                    ShipToAzanaAndOthers = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ConsumptionTaxRate = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     TotalItemsPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     DeliveryCharge = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     ConsumptionTax = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false)
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
+                    ShipToFullName = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
+                    ShipToAzanaAndOthers = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ShipToPostalCode = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false),
+                    ShipToShikuchoson = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    ShipToTodofuken = table.Column<string>(type: "nvarchar(16)", maxLength: 16, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,7 +123,8 @@ namespace Dressca.EfInfrastructure.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     ProductCode = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     CatalogCategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    CatalogBrandId = table.Column<long>(type: "bigint", nullable: false)
+                    CatalogBrandId = table.Column<long>(type: "bigint", nullable: false),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,12 +149,12 @@ namespace Dressca.EfInfrastructure.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderedCatalogItemId = table.Column<long>(type: "bigint", nullable: false),
-                    OrderedProductName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    OrderedProductCode = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<long>(type: "bigint", nullable: false)
+                    OrderId = table.Column<long>(type: "bigint", nullable: false),
+                    OrderedCatalogItemId = table.Column<long>(type: "bigint", nullable: false),
+                    OrderedProductCode = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    OrderedProductName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,7 +225,8 @@ namespace Dressca.EfInfrastructure.Migrations
                     { 11L, "47183f32f6584d7fb661f9216e11318b", "png" },
                     { 12L, "cf151206efd344e1b86854f4aa49fdef", "png" },
                     { 13L, "ab2e78eb7fe3408aadbf1e17a9945a8c", "png" },
-                    { 14L, "0e557e96bc054f10bc91c27405a83e85", "png" }
+                    { 14L, "0e557e96bc054f10bc91c27405a83e85", "png" },
+                    { 15L, "e622b0098808492cb883831c05486b58", "png" }
                 });
 
             migrationBuilder.InsertData(
@@ -320,6 +326,7 @@ namespace Dressca.EfInfrastructure.Migrations
                 column: "OrderId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

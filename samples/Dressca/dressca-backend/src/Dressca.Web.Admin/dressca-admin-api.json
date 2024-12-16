@@ -1,0 +1,987 @@
+{
+  "x-generator": "NSwag v14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Dressca Admin Web API",
+    "description": "Dressca Admin の Web API 仕様",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:6001",
+      "description": "ローカル開発用のサーバーです。"
+    }
+  ],
+  "paths": {
+    "/api/assets/{assetCode}": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "summary": "アセットを取得します。",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "assetCode",
+            "in": "path",
+            "required": true,
+            "description": "アセットコード。",
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。"
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "アセットコードに対応するアセットがない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/catalog-brands": {
+      "get": {
+        "tags": [
+          "CatalogBrands"
+        ],
+        "summary": "カタログブランドの一覧を取得します。",
+        "operationId": "getCatalogBrands",
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetCatalogBrandsResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/catalog-categories": {
+      "get": {
+        "tags": [
+          "CatalogCategories"
+        ],
+        "summary": "カタログカテゴリの一覧を取得します。",
+        "operationId": "getCatalogCategories",
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetCatalogCategoriesResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/catalog-items/{catalogItemId}": {
+      "get": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "指定した ID のカタログアイテムを返します。",
+        "operationId": "getCatalogItem",
+        "parameters": [
+          {
+            "name": "catalogItemId",
+            "in": "path",
+            "required": true,
+            "description": "ID。",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCatalogItemResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "指定した ID のアイテムがカタログに存在しない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログから指定したカタログアイテム ID のアイテムを削除します。",
+        "operationId": "deleteCatalogItem",
+        "parameters": [
+          {
+            "name": "catalogItemId",
+            "in": "path",
+            "required": true,
+            "description": "カタログアイテム ID 。",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "rowVersion",
+            "in": "query",
+            "description": "行バージョン",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "成功。"
+          },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "指定した ID のアイテムがカタログに存在しない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "競合が発生。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "指定した ID のカタログアイテムの情報を更新します。",
+        "operationId": "putCatalogItem",
+        "parameters": [
+          {
+            "name": "catalogItemId",
+            "in": "path",
+            "required": true,
+            "description": "カタログアイテムID。",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "putCatalogItemRequest",
+          "description": "更新するカタログアイテムの情報。",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutCatalogItemRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "204": {
+            "description": "成功。"
+          },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "指定した ID のアイテムがカタログに存在しない。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "競合が発生。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/catalog-items": {
+      "get": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログアイテムを検索して一覧を返します。",
+        "operationId": "getByQuery",
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "query",
+            "description": "カタログブランド ID です。\n未設定の場合は全カタログブランドを対象にします。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "カタログカテゴリ ID です。\n未設定の場合は全カタログカテゴリを対象にします。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "ページ番号です。\n未設定の場合は 1 ページ目として扱います。\n1 以上の整数値を指定できます。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 2147483647.0,
+              "minimum": 1.0
+            },
+            "x-position": 3
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "1 ページに収めるアイテムの数です。\n未設定の場合は 20 個です。\n1 以上 50 以下の整数値を指定できます。\n            ",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 50.0,
+              "minimum": 1.0
+            },
+            "x-position": 4
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedListOfGetCatalogItemResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "失敗。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CatalogItems"
+        ],
+        "summary": "カタログにアイテムを追加します。",
+        "operationId": "postCatalogItem",
+        "requestBody": {
+          "x-name": "postCatalogItemRequest",
+          "description": "追加するアイテムの情報。",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostCatalogItemRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "201": {
+            "description": "成功。"
+          },
+          "400": {
+            "description": "リクエストエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "失敗。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "ログイン中のユーザーの情報を取得します。",
+        "operationId": "getLoginUser",
+        "responses": {
+          "200": {
+            "description": "成功。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLoginUserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未認証。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "サーバーエラー。",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "HealthChecks_api/healthGET",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "HealthChecks"
+        ],
+        "operationId": "HealthChecks_api/healthHEAD",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "503": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": {
+          "nullable": true
+        },
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GetCatalogBrandsResponse": {
+        "type": "object",
+        "description": "カタログブランドのレスポンスデータを表します。\nカタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "カタログブランド ID を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "ブランド名を取得または設定します。\n            ",
+            "minLength": 1
+          }
+        }
+      },
+      "GetCatalogCategoriesResponse": {
+        "type": "object",
+        "description": "カタログカテゴリのレスポンスデータを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "カタログカテゴリ ID を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "カテゴリ名を取得または設定します。\n            ",
+            "minLength": 1
+          }
+        }
+      },
+      "GetCatalogItemResponse": {
+        "type": "object",
+        "description": "カタログアイテムのレスポンスデータを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "description",
+          "price",
+          "catalogCategoryId",
+          "catalogBrandId",
+          "id",
+          "name",
+          "productCode",
+          "rowVersion"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "説明を取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "price": {
+            "type": "number",
+            "description": "単価を取得または設定します。\n            ",
+            "format": "decimal"
+          },
+          "catalogCategoryId": {
+            "type": "integer",
+            "description": "カタログカテゴリ ID を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "catalogBrandId": {
+            "type": "integer",
+            "description": "カタログブランド ID を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "id": {
+            "type": "integer",
+            "description": "カタログアイテム ID を取得または設定します。\n            ",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "商品名を取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "productCode": {
+            "type": "string",
+            "description": "商品コードを取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "assetCodes": {
+            "type": "array",
+            "description": "アセットコードの一覧を取得または設定します。\n            ",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rowVersion": {
+            "type": "string",
+            "description": "行バージョンを取得または設定します。\n            ",
+            "format": "byte",
+            "minLength": 1
+          }
+        }
+      },
+      "PagedListOfGetCatalogItemResponse": {
+        "type": "object",
+        "description": "ページネーションした結果のリストを管理します。\n            ",
+        "additionalProperties": false,
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "現在のページ番号を取得します。\n最初のページは 1 です。\n            ",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "ページの総数を取得します。\n            ",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "1 ページあたりの件数を取得します。\n            ",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "アイテムの総数を取得します。\n            ",
+            "format": "int32"
+          },
+          "hasPrevious": {
+            "type": "boolean",
+            "description": "前のページが存在するかどうか示す値を取得します。\n            "
+          },
+          "hasNext": {
+            "type": "boolean",
+            "description": "次のページが存在するかどうか示す値を取得します。\n            "
+          },
+          "items": {
+            "type": "array",
+            "description": "検索結果のリストを取得します。\n            ",
+            "items": {
+              "$ref": "#/components/schemas/GetCatalogItemResponse"
+            }
+          }
+        }
+      },
+      "PostCatalogItemRequest": {
+        "type": "object",
+        "description": "カタログにアイテムを追加する処理のリクエストデータを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "description",
+          "price",
+          "productCode",
+          "catalogCategoryId",
+          "catalogBrandId"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "アイテム名を取得または設定します。\n            ",
+            "maxLength": 256,
+            "minLength": 0
+          },
+          "description": {
+            "type": "string",
+            "description": "説明を取得または設定します。\n            ",
+            "maxLength": 1024,
+            "minLength": 0
+          },
+          "price": {
+            "type": "integer",
+            "description": "単価を取得または設定します。",
+            "format": "int64",
+            "pattern": "^[1-9]\\d{0,15}$"
+          },
+          "productCode": {
+            "type": "string",
+            "description": "商品コードを取得または設定します。\n            ",
+            "maxLength": 128,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          "catalogCategoryId": {
+            "type": "integer",
+            "description": "カタログカテゴリ ID を取得または設定します。\n            ",
+            "format": "int64",
+            "maximum": 9223372036854780000.0,
+            "minimum": 1.0
+          },
+          "catalogBrandId": {
+            "type": "integer",
+            "description": "カタログブランド ID を取得または設定します。\n            ",
+            "format": "int64",
+            "maximum": 9223372036854780000.0,
+            "minimum": 1.0
+          }
+        }
+      },
+      "PutCatalogItemRequest": {
+        "type": "object",
+        "description": "カタログアイテムを変更する処理のリクエストデータを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "description",
+          "price",
+          "productCode",
+          "catalogCategoryId",
+          "catalogBrandId",
+          "rowVersion"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "アイテム名を取得または設定します。\n            ",
+            "maxLength": 256,
+            "minLength": 0
+          },
+          "description": {
+            "type": "string",
+            "description": "説明を取得または設定します。\n            ",
+            "maxLength": 1024,
+            "minLength": 0
+          },
+          "price": {
+            "type": "integer",
+            "description": "単価を取得または設定します。\n            ",
+            "format": "int64",
+            "pattern": "^[1-9]\\d{0,15}$"
+          },
+          "productCode": {
+            "type": "string",
+            "description": "商品コードを取得または設定します。\n            ",
+            "maxLength": 128,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9]+$"
+          },
+          "catalogCategoryId": {
+            "type": "integer",
+            "description": "カタログカテゴリ ID を取得または設定します。\n            ",
+            "format": "int64",
+            "maximum": 9223372036854780000.0,
+            "minimum": 1.0
+          },
+          "catalogBrandId": {
+            "type": "integer",
+            "description": "カタログブランド ID を取得または設定します。\n            ",
+            "format": "int64",
+            "maximum": 9223372036854780000.0,
+            "minimum": 1.0
+          },
+          "rowVersion": {
+            "type": "string",
+            "description": "行バージョンを取得または設定します。\n            ",
+            "format": "byte",
+            "minLength": 1
+          }
+        }
+      },
+      "GetLoginUserResponse": {
+        "type": "object",
+        "description": "ユーザー情報のレスポンスを表します。\n            ",
+        "additionalProperties": false,
+        "required": [
+          "userName",
+          "roles"
+        ],
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "ユーザー名を取得または設定します。\n            ",
+            "minLength": 1
+          },
+          "roles": {
+            "type": "array",
+            "description": "ロールを取得または設定します。\n            ",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

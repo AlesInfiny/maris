@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="StyleCop.Analyzers">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -20,6 +21,11 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Compile Update="Resources\LogMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LogMessages.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Messages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -28,6 +34,10 @@
   </ItemGroup>
   
   <ItemGroup>
+    <EmbeddedResource Update="Resources\LogMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>

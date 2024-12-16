@@ -43,4 +43,42 @@ internal class EfCatalogRepository : ICatalogRepository
 
         return await query.ToListAsync(cancellationToken);
     }
+
+    /// <inheritdoc/>
+    public async Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.CatalogItems
+            .Where(catalogItem => catalogItem.Id == id)
+            .Include(catalogItem => catalogItem.Assets)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<int> UpdateAsync(CatalogItem entity, CancellationToken cancellationToken = default)
+    {
+        this.dbContext.CatalogItems.Entry(entity).State = EntityState.Modified;
+        return await this.dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<CatalogItem> AddAsync(CatalogItem entity, CancellationToken cancellationToken = default)
+    {
+        this.dbContext.CatalogItems.Add(entity);
+        _ = await this.dbContext.SaveChangesAsync(cancellationToken);
+        return entity;
+    }
+
+    /// <inheritdoc/>
+    public async Task<int> RemoveAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default)
+    {
+        var deleteTarget = CatalogItem.CreateCatalogItemToDelete(id, rowVersion);
+        this.dbContext.CatalogItems.Entry(deleteTarget).State = EntityState.Deleted;
+        return await this.dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.CatalogItems.AnyAsync(catalogItem => catalogItem.Id == id, cancellationToken);
+    }
 }

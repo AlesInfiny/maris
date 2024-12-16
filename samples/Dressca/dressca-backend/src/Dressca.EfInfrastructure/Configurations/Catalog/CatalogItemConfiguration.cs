@@ -25,6 +25,8 @@ internal class CatalogItemConfiguration : IEntityTypeConfiguration<CatalogItem>
         builder.Property(catalogItem => catalogItem.ProductCode)
             .HasMaxLength(128)
             .IsRequired();
+        builder.Property(catalogItem => catalogItem.RowVersion)
+            .IsRowVersion();
         builder.HasOne(catalogItem => catalogItem.CatalogCategory)
             .WithMany(catalogCategory => catalogCategory.Items)
             .HasForeignKey(catalogItem => catalogItem.CatalogCategoryId)

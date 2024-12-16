@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Dressca Web API
- * Dressca の Web API 仕様
+ * Dressca Admin Web API
+ * Dressca Admin の Web API 仕様
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -15,7 +15,7 @@
 
 
 /**
- * カタログにアイテムを追加する処理のリクエストデータを表します。
+ * カタログにアイテムを追加する処理のリクエストデータを表します。             
  * @export
  * @interface PostCatalogItemRequest
  */
@@ -45,13 +45,13 @@ export interface PostCatalogItemRequest {
      */
     'productCode': string;
     /**
-     * カタログカテゴリIDを取得または設定します。             
+     * カタログカテゴリ ID を取得または設定します。             
      * @type {number}
      * @memberof PostCatalogItemRequest
      */
     'catalogCategoryId': number;
     /**
-     * カタログブランドIDを取得または設定します。             
+     * カタログブランド ID を取得または設定します。             
      * @type {number}
      * @memberof PostCatalogItemRequest
      */

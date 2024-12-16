@@ -79,6 +79,15 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   半角英数字を設定してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ArgumentsMustBeAlphanumeric {
+            get {
+                return ResourceManager.GetString("ArgumentsMustBeAlphanumeric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   アセットコード: {0} のアセットが見つかりませんでした。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AssetNotFound {
@@ -124,11 +133,29 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   指定されたカタログブランド ID: {0} のカタログブランドは存在しません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogBrandIdDoesNotExist {
+            get {
+                return ResourceManager.GetString("CatalogBrandIdDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   カタログブランド ID は 0 以下にできません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogBrandIdMustBePositive {
             get {
                 return ResourceManager.GetString("CatalogBrandIdMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在しません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogCategoryIdDoesNotExist {
+            get {
+                return ResourceManager.GetString("CatalogCategoryIdDoesNotExist", resourceCulture);
             }
         }
         
@@ -174,6 +201,15 @@ namespace Dressca.ApplicationCore.Resources {
         internal static string OrderNotFound {
             get {
                 return ResourceManager.GetString("OrderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} を実行する権限がありません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PermissionDenied {
+            get {
+                return ResourceManager.GetString("PermissionDenied", resourceCulture);
             }
         }
         
