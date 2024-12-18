@@ -67,6 +67,13 @@ updates:
       nswag-packages:
         patterns:
           - "NSwag*"
+    ignore:
+      - dependency-name: "Microsoft.AspNetCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.EntityFrameworkCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.Extensions*"
+        versions: ["9.*", "11.*"]
 
   - package-ecosystem: "nuget"
     directory: "/samples/ConsoleAppWithDI/solution"
@@ -87,6 +94,11 @@ updates:
       xunit-packages:
         patterns:
           - "xunit*"
+    ignore:
+      - dependency-name: "Microsoft.EntityFrameworkCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.Extensions*"
+        versions: ["9.*", "11.*"]
 
   - package-ecosystem: "npm"
     directory: "/samples/AzureADB2CAuth/auth-frontend"
@@ -122,3 +134,8 @@ updates:
       nswag-packages:
         patterns:
           - "NSwag*"
+    ignore:
+      - dependency-name: "Microsoft.AspNetCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.Extensions*"
+        versions: ["9.*", "11.*"]
