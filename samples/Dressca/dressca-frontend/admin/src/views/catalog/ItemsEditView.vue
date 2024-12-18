@@ -230,7 +230,10 @@ onMounted(async () => {
  */
 const deleteItemAsync = async () => {
   try {
-    await deleteCatalogItem(editingItemState.value.id, editingItemState.value.rowVersion);
+    await deleteCatalogItem(
+      editingItemState.value.id,
+      editingItemState.value.rowVersion,
+    );
     showDeleteNotice.value = true;
   } catch (error) {
     if (error instanceof NotFoundError) {
