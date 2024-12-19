@@ -1,8 +1,8 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Catalog;
+using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Controllers.ApiModel;
-using Dressca.Web.Consumer.Dto;
 using Dressca.Web.Consumer.Dto.Catalog;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
