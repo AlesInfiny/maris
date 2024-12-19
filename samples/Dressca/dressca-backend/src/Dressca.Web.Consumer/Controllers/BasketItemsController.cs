@@ -7,6 +7,7 @@ using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Baskets;
 using Dressca.Web.Consumer.Dto.Baskets;
 using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
