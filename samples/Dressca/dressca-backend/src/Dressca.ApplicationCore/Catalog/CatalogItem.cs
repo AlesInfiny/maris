@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Catalog;
@@ -17,6 +18,7 @@ public class CatalogItem
     private string productCode;
     private long catalogCategoryId;
     private long catalogBrandId;
+    private byte[] rowVersion = [];
 
     /// <summary>
     ///  <see cref="CatalogItem"/> クラスの新しいインスタンスを初期化します。
@@ -98,7 +100,7 @@ public class CatalogItem
     ///  本来は存在するであろう在庫管理系のコンテキストで識別子として使用されるコードです。
     ///  買い物かごコンテキストとは CatalogItem.Id で連携するため、注意してください。
     /// </remarks>
-    /// <exception cref="ArgumentException">商品コードが <see langword="null"/> または空の文字列です。</exception>
+    /// <exception cref="ArgumentException">商品コードには半角英数字を設定してください。</exception>
     public required string ProductCode
     {
         get => this.productCode;
@@ -106,9 +108,9 @@ public class CatalogItem
         [MemberNotNull(nameof(productCode))]
         init
         {
-            if (string.IsNullOrWhiteSpace(value))
+            if (!Regex.IsMatch(value, @"^[a-zA-Z0-9]+$"))
             {
-                throw new ArgumentException(Messages.ArgumentIsNullOrWhiteSpace, nameof(value));
+                throw new ArgumentException(Messages.ArgumentsMustBeAlphanumeric, nameof(value));
             }
 
             this.productCode = value;
@@ -181,4 +183,39 @@ public class CatalogItem
     ///  カタログアイテムのアセットリストを取得します。
     /// </summary>
     public IReadOnlyCollection<CatalogItemAsset> Assets => this.assets.AsReadOnly();
+
+    /// <summary>
+    /// 楽観同時実行制御のための行バージョンを取得します。
+    /// </summary>
+    /// <exception cref="InvalidOperationException"><see cref="RowVersion"/> が設定されていません。</exception>
+    public byte[] RowVersion
+    {
+        get => this.rowVersion ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.RowVersion)));
+
+        init
+        {
+            this.rowVersion = value;
+        }
+    }
+
+    /// <summary>
+    ///  指定した ID と 行バージョンを持つ、削除用のカタログアイテムエンティティを生成します。
+    /// </summary>
+    /// <param name="id">カタログアイテム ID 。</param>
+    /// <param name="rowVersion">行バージョン。</param>
+    /// <returns>削除用のカタログアイテムエンティティ。</returns>
+    public static CatalogItem CreateCatalogItemToDelete(long id, byte[] rowVersion)
+    {
+        return new CatalogItem
+        {
+            Id = id,
+            Name = "削除用アイテム",
+            Description = "削除用アイテムです。",
+            Price = 0,
+            ProductCode = "DELETE",
+            CatalogBrandId = 1,
+            CatalogCategoryId = 1,
+            RowVersion = rowVersion,
+        };
+    }
 }

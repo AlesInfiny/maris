@@ -1,0 +1,144 @@
+---
+# cSpell:ignore danielpalme dorny marocchino NOLOGO OPTOUT reporttypes targetdir
+
+name: dressca-admin-backend CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'samples/Dressca/dressca-backend/**'
+      - '.github/workflows/samples-dressca-admin-backend.ci.yml'
+  workflow_dispatch:
+
+env:
+  WORKING_DIRECTORY: samples/Dressca/dressca-backend
+  SOLUTION_FILE_NAME: Dressca.Web.Admin.slnf
+
+defaults:
+  run:
+    working-directory: samples/Dressca/dressca-backend
+
+jobs:
+  build:
+    name: バックエンドアプリケーションのビルド
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      BUILD_CONFIGURATION: Debug
+      BUILD_SUMMARY_FILE: BuildSummary.md
+      TEST_ENVIRONMENT: IntegrationTest
+    permissions:
+      checks: write
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: ブランチのチェックアウト
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: .NET SDK のセットアップ
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.*'
+
+      - name: NuGet パッケージの復元
+        run: dotnet restore ${{ env.SOLUTION_FILE_NAME }}
+
+      - id: application-build
+        name: アプリケーションのビルド
+        run: dotnet build ${{ env.SOLUTION_FILE_NAME }} --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
+
+      - name: ビルド結果の表示
+        shell: bash
+        if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
+        run: |
+          echo '# Build Result :gear:' >> $GITHUB_STEP_SUMMARY
+          cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
+
+      - name: SQL ServerのDockerイメージをプル(結合テスト用)
+        run: sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: SQL Serverのコンテナを起動(結合テスト用)
+        run: |
+          sudo docker run -e "ACCEPT_EULA=Y" \
+          -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
+          -p 1433:1433 --name sql1 \
+          --hostname sql1 \
+          -d mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: データベース接続文字列を取得(結合テスト用)
+        id: get-connection-string
+        env:
+          APPSETTINGS_FILEPATH: tests/Dressca.Web.Admin.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
+        run: |
+          connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
+          echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
+
+      - name: EF Core ツールのインストール(結合テスト用)
+        shell: bash
+        run: dotnet tool install --global dotnet-ef --version 8.*
+
+      - name: マイグレーション適用(結合テスト用)
+        working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
+        shell: bash
+        run: dotnet ef database update --connection ${{ steps.get-connection-string.outputs.CONNECTION_STRING }}
+
+      - id: run-tests
+        name: テストの実行
+        continue-on-error: true
+        run: |
+          export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
+          dotnet test ${{ env.SOLUTION_FILE_NAME }} --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+
+      - id: create-test-result-report
+        name: テスト結果ページの作成
+        uses: dorny/test-reporter@v1
+        if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+        with:
+          name: 'Test results'
+          path: '**/TestResults/*.trx'
+          path-replace-backslashes: 'true'
+          reporter: 'dotnet-trx'
+          only-summary: 'false'
+          list-suites: 'all'
+          list-tests: 'all'
+          max-annotations: '10'
+          fail-on-error: 'true'
+
+      - name: テスト結果のサマリー表示
+        shell: bash
+        if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+        run: |
+          echo '## Test Result :memo:' >> ${{ env.BUILD_SUMMARY_FILE }}
+          echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> ${{ env.BUILD_SUMMARY_FILE }}
+          echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> ${{ env.BUILD_SUMMARY_FILE }}
+          cat ${{ env.BUILD_SUMMARY_FILE }} >> $GITHUB_STEP_SUMMARY
+
+      - id: create-coverage-report
+        name: コードカバレッジレポートの解析と作成
+        uses: danielpalme/ReportGenerator-GitHub-Action@v5
+        if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+        with:
+          reports: '**/TestResults/*/coverage.cobertura.xml'
+          targetdir: '${{ env.WORKING_DIRECTORY }}/CoverageReport'
+          reporttypes: 'MarkdownSummaryGithub'
+
+      - name: コードカバレッジの結果表示
+        shell: bash
+        if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+        run: |
+          sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
+          sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
+          cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+          cat CoverageReport/SummaryGithub.md >> ${{ env.BUILD_SUMMARY_FILE }}
+
+      - name: ビルドサマリーをPull-requestに表示
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
+        with:
+          recreate: true
+          path: '${{ env.WORKING_DIRECTORY }}/${{ env.BUILD_SUMMARY_FILE }}'

@@ -123,6 +123,9 @@
   <data name="ArgumentIsNullOrWhiteSpace" xml:space="preserve">
     <value>null または空の文字列を設定できません。</value>
   </data>
+  <data name="ArgumentsMustBeAlphanumeric" xml:space="preserve">
+    <value>半角英数字を設定してください。</value>
+  </data>
   <data name="AssetNotFound" xml:space="preserve">
     <value>アセットコード: {0} のアセットが見つかりませんでした。</value>
   </data>
@@ -138,8 +141,14 @@
   <data name="Basket_ItemQuantity" xml:space="preserve">
     <value>カタログアイテム ID: {0}, 数量: {1} </value>
   </data>
+  <data name="CatalogBrandIdDoesNotExist" xml:space="preserve">
+    <value>指定されたカタログブランド ID: {0} のカタログブランドは存在しません。</value>
+  </data>
   <data name="CatalogBrandIdMustBePositive" xml:space="preserve">
     <value>カタログブランド ID は 0 以下にできません。</value>
+  </data>
+  <data name="CatalogCategoryIdDoesNotExist" xml:space="preserve">
+    <value>指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在しません。</value>
   </data>
   <data name="CatalogCategoryIdMustBePositive" xml:space="preserve">
     <value>カタログカテゴリ ID は 0 以下にできません。</value>
@@ -155,6 +164,9 @@
   </data>
   <data name="OrderNotFound" xml:space="preserve">
     <value>ID: {0} 、購入者 ID: {1} の注文が見つかりませんでした。</value>
+  </data>
+  <data name="PermissionDenied" xml:space="preserve">
+    <value>{0} を実行する権限がありません。</value>
   </data>
   <data name="PriceMustBeZeroOrHigher" xml:space="preserve">
     <value>単価は負の値に設定できません。</value>
