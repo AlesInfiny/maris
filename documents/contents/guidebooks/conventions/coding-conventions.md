@@ -44,7 +44,7 @@ AlesInfiny Maris OSS Edition （以下 AlesInfiny Maris ）では、一般に広
 
 上記のコーディング規約は静的コード解析ツールによって自動的にチェックできるようにします。
 バックエンド側では Visual Studio でのコーディング中やビルド時に .NET コンパイラーによる自動チェックが行われます。
-フロントエンド側では Prettier 、 ES Lint 、 StyleLint を利用してコーディング規約の自動チェックを行っています。
+フロントエンド側では Prettier 、 ES Lint 、 Stylelint を利用してコーディング規約の自動チェックを行っています。
 コーディング規約の内容および静的コード解析ツールの詳しい設定方法については、以下のページとサンプルアプリの実装を確認してください。
 
 - [静的コード解析用パッケージと設定ファイルの導入(.NET)](../how-to-develop/dotnet/project-settings.md#setup-static-code-testing)

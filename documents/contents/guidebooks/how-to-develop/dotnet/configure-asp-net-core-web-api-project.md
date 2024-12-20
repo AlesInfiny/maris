@@ -5,13 +5,13 @@ description: バックエンドで動作する .NET アプリケーションの 
 
 # ASP.NET Core Web API プロジェクトの構成 {#top}
 
-ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力設定と例外ハンドリングのための設定、ログ出力設定をします。
+ASP.NET Core Web API のプロジェクトには、 OpenAPI 仕様書の出力設定と例外ハンドリングのための設定、ログ出力設定をします。
 
-## Open API 仕様書の出力設定 {#open-api-specification-output-configuration}
+## OpenAPI 仕様書の出力設定 {#open-api-specification-output-configuration}
 
-ブラウザー上で確認できる Web API の仕様書と、クライアントコードを生成するための Open API 仕様書のファイル生成ができるようにプロジェクトを設定します。
+ブラウザー上で確認できる Web API の仕様書と、クライアントコードを生成するための OpenAPI 仕様書のファイル生成ができるようにプロジェクトを設定します。
 
-### Open API 出力用 NuGet パッケージの追加 {#add-nuget-package-for-generating-open-api}
+### OpenAPI 出力用 NuGet パッケージの追加 {#add-nuget-package-for-generating-open-api}
 
 以下の NuGet パッケージを ASP.NET Core Web API プロジェクトに追加します。
 
@@ -22,7 +22,7 @@ ASP.NET Core Web API のプロジェクトには、 Open API 仕様書の出力�
 ### NSwag 構成ファイルの追加 {#add-nswag-json}
 
 [nswag.json] ファイルをプロジェクトルートに追加します。
-NSwag を用いた実装コードの生成は行わないため、 Open API 仕様書の生成に関する設定のみ実施してください。
+NSwag を用いた実装コードの生成は行わないため、 OpenAPI 仕様書の生成に関する設定のみ実施してください。
 [nswag.json] の設定値の詳細は、以下を参照してください。
 
 - [NSwag Configuration Document :material-open-in-new:](https://github.com/RicoSuter/NSwag/wiki/NSwag-Configuration-Document){ target=_blank }
@@ -56,17 +56,17 @@ NSwag を用いた実装コードの生成は行わないため、 Open API 仕�
     }
     ```
 
-### Open API 仕様書ファイルの出力設定 {#setup-for-generate-open-api-specification-file}
+### OpenAPI 仕様書ファイルの出力設定 {#setup-for-generate-open-api-specification-file}
 
-Open API 仕様書のファイルがビルド時に生成されるようプロジェクトファイルを設定します。
+OpenAPI 仕様書のファイルがビルド時に生成されるようプロジェクトファイルを設定します。
 設定方法の詳細は、以下を参照してください。
 
 - [NSwag.MSBuild :material-open-in-new:](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild){ target=_blank }
 
 ??? example ".NET 8 の場合のプロジェクトファイル設定例"
-    .NET 8 を使用するプロジェクトの場合、プロジェクトファイルには以下のように設定することで、 Open API 仕様書のファイルを出力できます。
+    .NET 8 を使用するプロジェクトの場合、プロジェクトファイルには以下のように設定することで、 OpenAPI 仕様書のファイルを出力できます。
 
-    ```xml title="Open API 仕様書のファイルを出力する csproj の設定例"
+    ```xml title="OpenAPI 仕様書のファイルを出力する csproj の設定例"
     <Project Sdk="Microsoft.NET.Sdk.Web">
       <!-- 追加箇所以外は省略 -->
       <Target Name="NSwag" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
@@ -79,20 +79,20 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     </Project>
     ```
 
-### ブラウザーで Open API 仕様書を表示する設定 {#setup-for-generate-open-api-specification-gui}
+### ブラウザーで OpenAPI 仕様書を表示する設定 {#setup-for-generate-open-api-specification-gui}
 
 ブラウザー上で確認できる Web API の仕様書の出力設定を変更します。
-開発環境でのみ、 Open API v3 の仕様書をブラウザー経由で参照できるように設定します。
+開発環境でのみ、 OpenAPI v3 の仕様書をブラウザー経由で参照できるように設定します。
 設定方法の詳細は、以下を参照してください。
 
 - [AspNetCore Middleware :material-open-in-new:](https://github.com/RicoSuter/NSwag/wiki/AspNetCore-Middleware){ target=_blank }
 
 ??? example "Web API 仕様書をブラウザーから確認できるようにする設定例"
 
-    ブラウザーから Web API 仕様書を確認できるようにするためには、 Open API v3 仕様書の出力設定と、 Web UI の設定が必要です。
+    ブラウザーから Web API 仕様書を確認できるようにするためには、 OpenAPI v3 仕様書の出力設定と、 Web UI の設定が必要です。
     ASP.NET Core Web API プロジェクトの [Program.cs] または [Startup.cs] に、以下のように実装を加えてください。
 
-    ```csharp title="Open API v3 仕様書の出力設定 ( Program.cs )"
+    ```csharp title="OpenAPI v3 仕様書の出力設定 ( Program.cs )"
     builder.Services.AddOpenApiDocument(config =>
     {
         config.PostProcess = document =>
@@ -156,7 +156,7 @@ Open API 仕様書のファイルがビルド時に生成されるようプロ�
     ///  このコントローラーは、例外ハンドラーで例外を検知したときに呼び出されることを想定しています。
     /// </summary>
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = true)] // Open API 仕様書にこのコントローラーの情報を追加しないよう制御します。
+    [ApiExplorerSettings(IgnoreApi = true)] // OpenAPI 仕様書にこのコントローラーの情報を追加しないよう制御します。
     public class ErrorController : ControllerBase
     {
 
@@ -240,9 +240,9 @@ Web API コントローラーが返却するエラーレスポンスの形式は
 
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-また、実際のレスポンス形式と Open API 定義書に記載のレスポンス形式の不一致を防ぐため、 `Program.cs` で `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定します。
-`SuppressMapClientErrors` の既定値は `false` であり、この場合エラーレスポンスの型を指定しない限りエラーは自動的に `ProblemDetails` にマッピングされ、 Open API 定義書にも反映されます。
-しかし、この設定が有効になるのは Web API コントローラーの範囲であり、たとえば `Program.cs` でインジェクションした外部サービスの機能が自動的にエラーを返却する場合等は `ProblemDetails` の形式になりません。つまり、 Open API 定義書と実際に返されるエラーレスポンスの形式に差ができてしまいます。これを防ぐため、 `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定し、 `ProblemDetails` への自動的なマッピングを停止します。
+また、実際のレスポンス形式と OpenAPI 定義書に記載のレスポンス形式の不一致を防ぐため、 `Program.cs` で `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定します。
+`SuppressMapClientErrors` の既定値は `false` であり、この場合エラーレスポンスの型を指定しない限りエラーは自動的に `ProblemDetails` にマッピングされ、 OpenAPI 定義書にも反映されます。
+しかし、この設定が有効になるのは Web API コントローラーの範囲であり、たとえば `Program.cs` でインジェクションした外部サービスの機能が自動的にエラーを返却する場合等は `ProblemDetails` の形式になりません。つまり、 OpenAPI 定義書と実際に返されるエラーレスポンスの形式に差ができてしまいます。これを防ぐため、 `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定し、 `ProblemDetails` への自動的なマッピングを停止します。
 
 ??? example "エラーレスポンス形式の設定例"
     `ApiBehaviorOptions.SuppressMapClientErrors` を `true` に設定します。

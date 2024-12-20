@@ -36,7 +36,7 @@ CORS の仕組みの詳細は「 [オリジン間リソース共有 (CORS) - HTT
 ## バックエンドアプリケーション（ .NET ） {#backend}
 
 ASP.NET Core Web API アプリケーションでは、 `Program.cs` で CORS に関するポリシーを設定します。
-AlesInfiny Maris OSS Edition （以降『 AlesInfiny Maris 』）では、許可するオリジンの一覧をアプリケーション設定ファイル `appSettings.json` から取得します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、許可するオリジンの一覧をアプリケーション設定ファイル `appSettings.json` から取得します。
 
 ### 許可するオリジンの追加 {#appSettings-json}
 
