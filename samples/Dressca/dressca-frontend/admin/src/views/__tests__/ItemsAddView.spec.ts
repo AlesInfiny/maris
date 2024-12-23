@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { flushPromises, mount } from '@vue/test-utils';
 import { router } from '@/router';
 import { createPinia, setActivePinia } from 'pinia';
@@ -17,6 +17,7 @@ describe('アイテム追加画面のテスト', () => {
     expect(wrapper.html()).toContain('カタログアイテム追加');
     wrapper.find('button').trigger('click');
     await flushPromises();
+    await vi.waitUntil(() => wrapper.findAllComponents({ name: 'NotificationModal' })[0].isVisible())
     expect(wrapper.html()).toContain('カタログアイテムを追加しました。');
   });
 });

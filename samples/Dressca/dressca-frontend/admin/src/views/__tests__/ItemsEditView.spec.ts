@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { flushPromises, mount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 import { createCustomErrorHandler } from '@/shared/error-handler/custom-error-handler';
@@ -27,6 +27,7 @@ describe('アイテム編集画面_アイテム削除機能のテスト', () => 
     expect(
       wrapper.findAllComponents({ name: 'ConfirmationModal' })[0].isVisible(),
     ).toBeFalsy();
+    await vi.waitUntil(() => wrapper.findAllComponents({ name: 'NotificationModal' })[0].isVisible())
     expect(wrapper.html()).toContain('カタログアイテムを削除しました。');
     await wrapper
       .findAllComponents({ name: 'NotificationModal' })[0]
@@ -58,6 +59,7 @@ describe('アイテム編集画面_アイテム更新機能のテスト', () => 
       .findAll('button')[0]
       .trigger('click');
     await flushPromises();
+    await vi.waitUntil(() => wrapper.findAllComponents({ name: 'NotificationModal' })[1].isVisible())
     expect(
       wrapper.findAllComponents({ name: 'ConfirmationModal' })[1].isVisible(),
     ).toBeFalsy();
