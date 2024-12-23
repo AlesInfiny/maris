@@ -20,7 +20,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 ![.NET ランタイムの進化と統合](../../../images/guidebooks/migration/dotnetfw-risk/evolution-and-integration-of-dotnet-light.png#only-light){ loading=lazy }
 ![.NET ランタイムの進化と統合](../../../images/guidebooks/migration/dotnetfw-risk/evolution-and-integration-of-dotnet-dark.png#only-dark){ loading=lazy }
 
-## .NET Framework から.NETへ {#dotnetfw-to-dotnet}
+## .NET Framework から .NET へ {#dotnetfw-to-dotnet}
 
 .NET Framework と .NET は一見似ていますが、その成り立ちをたどると別の物であることが分かります。
 

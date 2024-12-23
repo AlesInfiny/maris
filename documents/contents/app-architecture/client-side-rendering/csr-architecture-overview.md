@@ -86,7 +86,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
     - [NSwag :material-open-in-new:](https://github.com/RicoSuter/NSwag){ target=_blank }
 
-          実装済みの Web API から Open API 仕様書を生成します。
+          実装済みの Web API から OpenAPI 仕様書を生成します。
 
     - [xUnit :material-open-in-new:](https://xunit.net/){ target=_blank }
 

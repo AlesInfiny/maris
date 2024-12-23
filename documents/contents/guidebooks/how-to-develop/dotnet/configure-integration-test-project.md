@@ -3,6 +3,8 @@ title: .NET 編
 description: バックエンドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
 
+<!-- cspell:ignore localdb mssqllocaldb -->
+
 # 結合テストプロジェクトの構成 {#top}
 
 ## 結合テストプロジェクトの設定 {#test-project-settings}

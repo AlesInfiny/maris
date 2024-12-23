@@ -24,7 +24,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
-RESTful API の Open API 仕様書を生成する Swagger のライブラリ「 [Swashbuckle.AspNetCore.Swagger :material-open-in-new:](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Swagger/){ target=_blank } 」は、 .NET Framework 向けに提供されていません。
+RESTful API の OpenAPI 仕様書を生成する Swagger のライブラリ「 [Swashbuckle.AspNetCore.Swagger :material-open-in-new:](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Swagger/){ target=_blank } 」は、 .NET Framework 向けに提供されていません。
 今後、 .NET 向けの有益な OSS 製品が出たとしても、それらが .NET Framework をサポートする可能性は低いでしょう。
 またすでに存在する OSS 製品の新しいバージョンが .NET Framework をサポートしなくなる可能性もあります。
 

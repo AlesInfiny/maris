@@ -39,7 +39,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 
 ### アプリケーション全体に対するプロジェクト設定 {#project-settings-for-overall}
 
-ソリューションファイルの配置されているフォルダーに、 「Directory.Build.props」 という名前のファイルを作成します。
+ソリューションファイルの配置されているフォルダーに、 「 Directory.Build.props 」という名前のファイルを作成します。
 ファイル名は、大文字/小文字まで一致するように作成してください。
 以下の設定が有効になるよう、 Directory.Build.props を設定します。
 
@@ -67,7 +67,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 
 ### プロダクションコード用のプロジェクト設定 {#project-settings-for-production}
 
-プロダクションコードを配置する src フォルダーに、「Directory.Build.props」 という名前のファイルを作成します。
+プロダクションコードを配置する src フォルダーに、「 Directory.Build.props 」という名前のファイルを作成します。
 ルートフォルダーに配置した Directory.Build.props ファイルを上書き設定できるよう、 `#!xml <import>` 要素を定義して、親フォルダーにある Directory.Build.props を読み込んでください。
 また以下の設定が有効になるように、プロジェクトファイルを設定します。
 
@@ -91,7 +91,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 
 ### テストコード用のプロジェクト設定 {#project-settings-for-test}
 
-テストコードを配置する tests フォルダーに、「Directory.Build.props」 という名前のファイルを作成します。
+テストコードを配置する tests フォルダーに、「 Directory.Build.props 」という名前のファイルを作成します。
 [プロダクションコード用のプロジェクト設定](#project-settings-for-production) でも解説した通り、ルートフォルダーに配置した Directory.Build.props ファイルを上書き設定できるよう、 `#!xml <import>` 要素の追加を推奨します。
 特に設定する項目がなければ、 tests フォルダーに Directory.Build.props ファイルを追加する必要ありません。
 
@@ -128,7 +128,7 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
 パッケージ集中管理の機能を利用するには、[アプリケーション全体に対するプロジェクト設定](#project-settings-for-overall) で解説した `ManagePackageVersionsCentrally` プロパティを有効にします。
 ルートフォルダーの Directory.Build.props ファイルに設定すれば、すべてのプロジェクトに対してこの設定を反映できます。
 
-続いて、ルートフォルダーに 「Directory.Packages.props」 という名前のファイルを作成します。
+続いて、ルートフォルダーに「 Directory.Packages.props 」という名前のファイルを作成します。
 ファイル名は、大文字/小文字まで一致するように作成してください。
 ソリューションをゼロから作成する場合は、以下のように `#!xml <Project>` 要素だけを定義します。
 

@@ -18,7 +18,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、ソース
 
 ブランチ運用方針は、プロジェクトの規模やチームの体制によって多種多様です。そのため適したブランチ運用をすることが、開発効率やコードの品質、可用性を高めることにつながります。
 代表的なブランチ戦略として、[git-flow :material-open-in-new:](https://nvie.com/posts/a-successful-git-branching-model/){ target=_blank }
- 、[GitHub Flow :material-open-in-new:](https://docs.github.com/ja/get-started/quickstart/github-flow){ target=_blank }などが挙げられます。
+ 、[GitHub Flow :material-open-in-new:](https://docs.github.com/ja/get-started/quickstart/github-flow){ target=_blank } などが挙げられます。
 これらをベースとして、以下のような視点でプロジェクトに適したブランチ戦略を定めましょう。
 
 <!-- textlint-enable ja-technical-writing/sentence-length -->

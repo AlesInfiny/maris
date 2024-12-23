@@ -113,7 +113,7 @@ nav:
       - samples/index.md
       - コンソールアプリケーションでの DI の利用:
           - samples/console-app-with-di/index.md
-      - Azure AD B2C による認証の利用:
+      - Azure Active Directory B2C による認証の利用:
           - samples/azure-ad-b2c/index.md
           - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/azure-ad-b2c/azure-ad-b2c-consideration.md
   - AlesInfiny Maris OSS Edition について:

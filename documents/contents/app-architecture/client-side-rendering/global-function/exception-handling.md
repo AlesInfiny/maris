@@ -3,6 +3,8 @@ title: CSR 編 - 全体処理方式
 description: アプリケーション全体で考慮すべきアーキテクチャについて、 その実装方針を説明します。
 ---
 
+<!-- cspell:ignore rgba -->
+
 # 例外処理方針 {#top}
 
 ここでは、サーバーサイド・クライアントサイドそれぞれのアプリケーションの例外処理方針を説明します。
@@ -37,7 +39,7 @@ Web API は、最終的に HTTP ステータスコードやレスポンスボデ
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
-一般的なリクエストエラーを示す HTTP 400 Bad Request を返却する場合は、 [RFC 9457 :material-open-in-new:](https://www.rfc-editor.org/rfc/rfc9457.html){ target=_blank }で定義された ProblemDetails にスローされた業務例外の詳細を含めます。
+一般的なリクエストエラーを示す HTTP 400 Bad Request を返却する場合は、 [RFC 9457 :material-open-in-new:](https://www.rfc-editor.org/rfc/rfc9457.html){ target=_blank } で定義された ProblemDetails にスローされた業務例外の詳細を含めます。
 
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 
