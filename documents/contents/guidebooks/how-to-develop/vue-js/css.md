@@ -60,7 +60,7 @@ npm install -D tailwindcss postcss autoprefixer postcss-nesting
 
 - [postcss-nesting :material-open-in-new:](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting){ target=_blank }
 
-    CSS Nesting の仕様に従って、スタイルルールを互いに入れ子にできる Postcss のプラグインです。
+    CSS Nesting の仕様に従って、スタイルルールを互いに入れ子にできる PostCSS のプラグインです。
 
 !!! info "ベンダープレフィクス"
     ベンダープレフィクスとは、ブラウザーのベンダーが独自の拡張機能を実装する際に、
