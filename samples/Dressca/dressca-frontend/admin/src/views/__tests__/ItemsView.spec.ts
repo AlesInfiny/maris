@@ -27,4 +27,13 @@ describe('アイテム一覧が表示できる', () => {
     // Assert
     expect(wrapper.html()).toContain('カタログアイテム一覧');
   });
+
+  it('アイテムが取得した個数分表示される', async () => {
+    // Arrange
+    const expectedItemCount = 11
+    // Act
+    const tableRows = wrapper.find('tbody').findAll('tr')
+    // Assert
+    expect(tableRows.length).toBe(expectedItemCount);
+  });
 });
