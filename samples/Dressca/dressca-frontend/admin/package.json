@@ -27,7 +27,7 @@
     "msw": "^2.7.0",
     "@vee-validate/yup": "^4.13.2",
     "pinia": "^2.2.5",
-    "vee-validate": "^4.14.4",
+    "vee-validate": "^4.15.0",
     "vitest": "^2.1.4",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5",
