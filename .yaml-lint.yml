@@ -5,10 +5,7 @@ yaml-files:
   - '*.yml'
   - '.yamllint'
 
-ignore:
-  - /third-party-licenses/
-
-ignore-from-file: .gitignore
+ignore-from-file: [.gitignore, .yamlignore]
 
 rules:
   braces: enable
