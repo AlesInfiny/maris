@@ -72,7 +72,7 @@ public class CatalogItemsController : ControllerBase
 
         try
         {
-            catalogItem = await this.service.GetCatalogItemByAdminAsync(catalogItemId);
+            catalogItem = await this.service.GetCatalogItemForAdminAsync(catalogItemId);
         }
         catch (PermissionDeniedException ex)
         {
@@ -114,7 +114,7 @@ public class CatalogItemsController : ControllerBase
         try
         {
             itemsAndCount =
-            await this.service.GetCatalogItemsByAdminAsync(
+            await this.service.GetCatalogItemsForAdminAsync(
                 skip: query.GetSkipCount(),
                 take: query.PageSize,
                 brandId: query.BrandId,

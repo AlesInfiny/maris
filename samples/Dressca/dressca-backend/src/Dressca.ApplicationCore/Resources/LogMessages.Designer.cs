@@ -126,18 +126,18 @@ namespace Dressca.ApplicationCore.Resources {
         /// <summary>
         ///   管理者がカタログアイテム ID: {CatalogItemId} のカタログアイテムを取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogApplicationService_GetCatalogItemByAdminAsyncEnd {
+        internal static string CatalogApplicationService_GetCatalogItemForAdminAsyncEnd {
             get {
-                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemByAdminAsyncEnd", resourceCulture);
+                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemForAdminAsyncEnd", resourceCulture);
             }
         }
         
         /// <summary>
         ///   管理者がカタログアイテム ID: {CatalogItemId} のカタログアイテムを取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogApplicationService_GetCatalogItemByAdminAsyncStart {
+        internal static string CatalogApplicationService_GetCatalogItemForAdminAsyncStart {
             get {
-                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemByAdminAsyncStart", resourceCulture);
+                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemForAdminAsyncStart", resourceCulture);
             }
         }
         
@@ -162,18 +162,18 @@ namespace Dressca.ApplicationCore.Resources {
         /// <summary>
         ///   管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogApplicationService_GetCatalogItemsByAdminAsyncEnd {
+        internal static string CatalogApplicationService_GetCatalogItemsForAdminAsyncEnd {
             get {
-                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsByAdminAsyncEnd", resourceCulture);
+                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsForAdminAsyncEnd", resourceCulture);
             }
         }
         
         /// <summary>
         ///   管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogApplicationService_GetCatalogItemsByAdminAsyncStart {
+        internal static string CatalogApplicationService_GetCatalogItemsForAdminAsyncStart {
             get {
-                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsByAdminAsyncStart", resourceCulture);
+                return ResourceManager.GetString("CatalogApplicationService_GetCatalogItemsForAdminAsyncStart", resourceCulture);
             }
         }
         
