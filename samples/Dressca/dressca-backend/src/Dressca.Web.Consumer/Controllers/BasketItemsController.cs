@@ -2,7 +2,6 @@
 using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
-using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Baskets;
 using Dressca.Web.Consumer.Dto.Baskets;
