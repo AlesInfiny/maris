@@ -99,7 +99,6 @@ jobs:
       BUILD_SUMMARY_FILE: BuildSummary.md
     permissions:
       checks: write
-      contents: read
     defaults:
       run:
         working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
