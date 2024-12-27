@@ -277,9 +277,9 @@ public class CatalogApplicationService
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
     /// <exception cref="PermissionDeniedException">取得権限がない場合。</exception>
-    public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsByAdminAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
+    public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsForAdminAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsByAdminAsyncStart, brandId, categoryId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsForAdminAsyncStart, brandId, categoryId);
 
         if (!this.userStore.IsInRole(Roles.Admin))
         {
@@ -298,7 +298,7 @@ public class CatalogApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsByAdminAsyncEnd, brandId, categoryId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsForAdminAsyncEnd, brandId, categoryId);
         return (ItemsOnPage: itemsOnPage, TotalItems: totalItems);
     }
 
@@ -310,9 +310,9 @@ public class CatalogApplicationService
     /// <returns>カタログアイテム。</returns>
     /// <exception cref="PermissionDeniedException">取得権限がない場合。</exception>
     /// <exception cref="CatalogItemNotExistingInRepositoryException">取得対象のカタログアイテムが存在しなかった場合。</exception>
-    public async Task<CatalogItem?> GetCatalogItemByAdminAsync(long catalogItemId, CancellationToken cancellationToken = default)
+    public async Task<CatalogItem?> GetCatalogItemForAdminAsync(long catalogItemId, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemByAdminAsyncStart, catalogItemId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemForAdminAsyncStart, catalogItemId);
 
         if (!this.userStore.IsInRole(Roles.Admin))
         {
@@ -332,7 +332,7 @@ public class CatalogApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemByAdminAsyncEnd, catalogItemId);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemForAdminAsyncEnd, catalogItemId);
         return catalogItem;
     }
 }

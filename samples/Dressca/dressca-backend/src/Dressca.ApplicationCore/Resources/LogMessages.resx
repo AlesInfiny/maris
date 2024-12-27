@@ -138,10 +138,10 @@
   <data name="CatalogApplicationService_DeleteItemFromCatalogAsyncStart" xml:space="preserve">
     <value>カタログアイテム ID: {CatalogItemId} のカタログアイテムを削除します。</value>
   </data>
-  <data name="CatalogApplicationService_GetCatalogItemByAdminAsyncEnd" xml:space="preserve">
+  <data name="CatalogApplicationService_GetCatalogItemForAdminAsyncEnd" xml:space="preserve">
     <value>管理者がカタログアイテム ID: {CatalogItemId} のカタログアイテムを取得しました。</value>
   </data>
-  <data name="CatalogApplicationService_GetCatalogItemByAdminAsyncStart" xml:space="preserve">
+  <data name="CatalogApplicationService_GetCatalogItemForAdminAsyncStart" xml:space="preserve">
     <value>管理者がカタログアイテム ID: {CatalogItemId} のカタログアイテムを取得します。</value>
   </data>
   <data name="CatalogApplicationService_GetCatalogItemsAsyncEnd" xml:space="preserve">
@@ -150,10 +150,10 @@
   <data name="CatalogApplicationService_GetCatalogItemsAsyncStart" xml:space="preserve">
     <value>カタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカテゴリ情報を取得します。</value>
   </data>
-  <data name="CatalogApplicationService_GetCatalogItemsByAdminAsyncEnd" xml:space="preserve">
+  <data name="CatalogApplicationService_GetCatalogItemsForAdminAsyncEnd" xml:space="preserve">
     <value>管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得しました。</value>
   </data>
-  <data name="CatalogApplicationService_GetCatalogItemsByAdminAsyncStart" xml:space="preserve">
+  <data name="CatalogApplicationService_GetCatalogItemsForAdminAsyncStart" xml:space="preserve">
     <value>管理者がカタログブランド ID: {CatalogBrandId} 、カタログカテゴリ ID: {CatalogCategoryId} のカタログ情報を取得します。</value>
   </data>
   <data name="CatalogApplicationService_UpdateCatalogItemAsyncEnd" xml:space="preserve">

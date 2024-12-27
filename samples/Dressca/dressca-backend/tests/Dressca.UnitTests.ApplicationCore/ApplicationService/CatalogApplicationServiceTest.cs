@@ -618,7 +618,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     }
 
     [Fact]
-    public async Task GetCatalogItemsByAdminAsync_リポジトリのFindAsyncを一度だけ呼び出す()
+    public async Task GetCatalogItemsForAdminAsync_リポジトリのFindAsyncを一度だけ呼び出す()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -635,7 +635,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var targetCategoryId = 1;
 
         // Act
-        _ = await service.GetCatalogItemsByAdminAsync(skip, take, targetBrandId, targetCategoryId);
+        _ = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -644,7 +644,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     }
 
     [Fact]
-    public async Task GetCatalogItemsByAdminAsync_リポジトリのCountAsyncを1回呼出す()
+    public async Task GetCatalogItemsForAdminAsync_リポジトリのCountAsyncを1回呼出す()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -661,7 +661,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var targetCategoryId = 1;
 
         // Act
-        _ = await service.GetCatalogItemsByAdminAsync(skip, take, targetBrandId, targetCategoryId);
+        _ = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -670,7 +670,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     }
 
     [Fact]
-    public async Task GetCatalogItemsByAdminAsync_ページネーションされたアイテムと総アイテム数が返却される()
+    public async Task GetCatalogItemsForAdminAsync_ページネーションされたアイテムと総アイテム数が返却される()
     {
         // Arrange
         var skip = 0;
@@ -693,7 +693,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock, logger);
 
         // Act
-        var (list, totalItems) = await service.GetCatalogItemsByAdminAsync(skip, take, targetBrandId, targetCategoryId);
+        var (list, totalItems) = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         Assert.Equal(targetItems, list);
@@ -701,7 +701,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     }
 
     [Fact]
-    public async Task GetCatalogItemsByAdminAsync_権限なし_PermissionDeniedExceptionが発生()
+    public async Task GetCatalogItemsForAdminAsync_権限なし_PermissionDeniedExceptionが発生()
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -718,14 +718,14 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var targetCategoryId = 1;
 
         // Act
-        var action = () => service.GetCatalogItemsByAdminAsync(skip, take, targetBrandId, targetCategoryId);
+        var action = () => service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId);
 
         // Assert
         await Assert.ThrowsAsync<PermissionDeniedException>(action);
     }
 
     [Fact]
-    public async Task GetCatalogItemByAdminAsync_リポジトリのGetAsyncを一度だけ呼び出す()
+    public async Task GetCatalogItemForAdminAsync_リポジトリのGetAsyncを一度だけ呼び出す()
     {
         // Arrange
         var targetId = 1;
@@ -743,14 +743,14 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
 
         // Act
-        _ = await service.GetCatalogItemByAdminAsync(targetId);
+        _ = await service.GetCatalogItemForAdminAsync(targetId);
 
         // Assert
         catalogRepositoryMock.Verify(r => r.GetAsync(targetId, AnyToken), Times.Once);
     }
 
     [Fact]
-    public async Task GetCatalogItemByAdminAsync_権限なし_PermissionDeniedExceptionが発生()
+    public async Task GetCatalogItemForAdminAsync_権限なし_PermissionDeniedExceptionが発生()
     {
         // Arrange
         var targetId = 1;
@@ -768,14 +768,14 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
 
         // Act
-        var action = () => service.GetCatalogItemByAdminAsync(targetId);
+        var action = () => service.GetCatalogItemForAdminAsync(targetId);
 
         // Assert
         await Assert.ThrowsAsync<PermissionDeniedException>(action);
     }
 
     [Fact]
-    public async Task GetCatalogItemByAdminAsync_対象のアイテムが存在しない_CatalogItemNotExistingInRepositoryExceptionが発生()
+    public async Task GetCatalogItemForAdminAsync_対象のアイテムが存在しない_CatalogItemNotExistingInRepositoryExceptionが発生()
     {
         // Arrange
         var targetId = 999;
@@ -792,7 +792,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
 
         // Act
-        var action = () => service.GetCatalogItemByAdminAsync(targetId);
+        var action = () => service.GetCatalogItemForAdminAsync(targetId);
 
         // Assert
         await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
