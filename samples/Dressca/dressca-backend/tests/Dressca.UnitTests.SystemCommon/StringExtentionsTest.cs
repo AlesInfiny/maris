@@ -2,6 +2,34 @@
 
 public class StringExtentionsTest
 {
+    [Theory]
+    [InlineData("\r\nLine1Line2", "Line1Line2")] // CRとLFを含む、先頭
+    [InlineData("Line1\rLine2", "Line1Line2")] // CRのみを含む、中間
+    [InlineData("Line1Line2\n", "Line1Line2")] // LFのみを含む、末尾
+    public void RemoveNewLines_改行文字があれば取り除かれる(string input, string expected)
+    {
+        // Arrange
+
+        // Act
+        var actual = input.RemoveNewLines();
+
+        // Assert
+        Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void RemoveNewLines_改行文字なし_変化なし()
+    {
+        // Arrange
+        var target = "Line1Line2";
+
+        // Act
+        var actual = target.RemoveNewLines();
+
+        // Assert
+        Assert.Equal(target, actual);
+    }
+
     [Fact]
     public void RemoveNewLines_null_ArgumentNullExceptionが発生する()
     {
@@ -15,18 +43,44 @@ public class StringExtentionsTest
         Assert.Throws<ArgumentNullException>("target", action);
     }
 
+    [Fact]
+    public void RemoveNewLines_空文字_変化なし()
+    {
+        // Arrange
+        var target = string.Empty;
+
+        // Act
+        var actual = target.RemoveNewLines();
+
+        // Assert
+        Assert.Equal(target, actual);
+    }
+
     [Theory]
-    [InlineData("Line1\r\nLine2", "Line1Line2")] // CRとLFを含む場合
-    [InlineData("Line1\rLine2", "Line1Line2")] // CRのみを含む場合
-    [InlineData("Line1\nLine2", "Line1Line2")] // LFのみを含む場合
-    [InlineData("", "")] // 空文字の場合
-    [InlineData("Line1Line2", "Line1Line2")] // 改行文字を含まない場合
-    public void RemoveNewLines_改行文字があれば取り除かれる(string input, string expected)
+    [InlineData(" ")]
+    [InlineData("　")]
+    public void RemoveNewLines_空白文字_変化なし(string target)
     {
         // Arrange
 
         // Act
-        var actual = input.RemoveNewLines();
+        var actual = target.RemoveNewLines();
+
+        // Assert
+        Assert.Equal(target, actual);
+    }
+
+    [Theory]
+    [InlineData("\r\n")]
+    [InlineData("\r")]
+    [InlineData("\n")]
+    public void RemoveNewLines_改行コードのみ_取り除かれて空文字になる(string target)
+    {
+        // Arrange
+        var expected = string.Empty;
+
+        // Act
+        var actual = target.RemoveNewLines();
 
         // Assert
         Assert.Equal(expected, actual);
