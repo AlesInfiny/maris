@@ -31,16 +31,16 @@ public class StringExtentionsTest
     }
 
     [Fact]
-    public void RemoveNewLines_null_ArgumentNullExceptionが発生する()
+    public void RemoveNewLines_null_nullを返却()
     {
         // Arrange
         string? target = null;
 
         // Act
-        var action = () => StringExtentions.RemoveNewLines(target);
+        var actual = target.RemoveNewLines();
 
         // Assert
-        Assert.Throws<ArgumentNullException>("target", action);
+        Assert.Null(actual);
     }
 
     [Fact]

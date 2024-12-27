@@ -1,4 +1,6 @@
-﻿namespace System;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace System;
 
 /// <summary>
 ///  <see cref="string"/> クラスの拡張メソッドを提供します。
@@ -10,12 +12,14 @@ public static class StringExtentions
     /// </summary>
     /// <param name="target">対象の文字列。</param>
     /// <returns>元の文字列から改行文字を取り除いた文字列。</returns>
-    /// <exception cref="ArgumentNullException">
-    ///  <paramref name="str"/> が <see langword="null"/> です。
-    /// </exception>
-    public static string RemoveNewLines(this string? target)
+    [return: NotNullIfNotNull(nameof(target))]
+    public static string? RemoveNewLines(this string? target)
     {
-        ArgumentNullException.ThrowIfNull(target);
+        if (target == null)
+        {
+            return null;
+        }
+
         return target.Replace("\n", string.Empty).Replace("\r", string.Empty);
     }
 }
