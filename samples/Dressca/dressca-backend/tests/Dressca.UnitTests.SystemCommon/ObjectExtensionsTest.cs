@@ -1,6 +1,4 @@
-﻿using Dressca.SystemCommon;
-
-namespace Dressca.UnitTests.SystemCommon;
+﻿namespace Dressca.UnitTests.SystemCommon;
 
 public class ObjectExtensionsTest
 {

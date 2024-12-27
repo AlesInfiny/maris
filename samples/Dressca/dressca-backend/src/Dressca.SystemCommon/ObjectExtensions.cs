@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace Dressca.SystemCommon;
+namespace System;
 
 /// <summary>
 ///  <see cref="object"/> クラスの拡張メソッドを提供します。
