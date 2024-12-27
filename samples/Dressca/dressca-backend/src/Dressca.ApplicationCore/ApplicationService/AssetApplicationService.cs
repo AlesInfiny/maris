@@ -46,7 +46,9 @@ public class AssetApplicationService
     /// </exception>
     public async Task<AssetStreamInfo> GetAssetStreamInfoAsync(string assetCode)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.AssetApplicationService_GetAssetStreamInfoStart, assetCode);
+        // ログインジェクションを防ぐために改行文字を取り除きます。
+        var sanitizedAssetCode = assetCode.RemoveNewlineCharacters();
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.AssetApplicationService_GetAssetStreamInfoStart, sanitizedAssetCode);
 
         Asset? asset;
         Stream? stream;
@@ -68,7 +70,7 @@ public class AssetApplicationService
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.AssetApplicationService_GetAssetStreamInfoEnd, assetCode);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.AssetApplicationService_GetAssetStreamInfoEnd, sanitizedAssetCode);
         return new(asset, stream);
     }
 
