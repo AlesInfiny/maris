@@ -3,6 +3,9 @@
 
 name: azure-ad-b2c-auth-sample CI
 
+permissions:
+  contents: read
+
 on:
   pull_request:
     branches: [main]
