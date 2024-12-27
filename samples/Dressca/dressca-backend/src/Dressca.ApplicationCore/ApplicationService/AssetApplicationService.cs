@@ -47,7 +47,7 @@ public class AssetApplicationService
     public async Task<AssetStreamInfo> GetAssetStreamInfoAsync(string assetCode)
     {
         // ログインジェクションを防ぐために改行文字を取り除きます。
-        var sanitizedAssetCode = assetCode.Replace(Environment.NewLine, string.Empty).Replace("\n", string.Empty).Replace("\r", string.Empty);
+        var sanitizedAssetCode = assetCode.RemoveNewLines();
         this.logger.LogDebug(Events.DebugEvent, LogMessages.AssetApplicationService_GetAssetStreamInfoStart, sanitizedAssetCode);
 
         Asset? asset;
