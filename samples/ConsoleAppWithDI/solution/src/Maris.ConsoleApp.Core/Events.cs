@@ -3,12 +3,12 @@
 namespace Maris.ConsoleApp.Core;
 
 /// <summary>
-/// イベントIDを管理するクラスです。
+///  イベント ID を管理するクラスです。
 /// </summary>
 internal class Events
 {
     /// <summary>
-    /// デバッグ用のイベントID
+    ///  デバッグ用のイベント ID
     /// </summary>
     internal static readonly EventId DebugEvent = new(9999, nameof(DebugEvent));
 }

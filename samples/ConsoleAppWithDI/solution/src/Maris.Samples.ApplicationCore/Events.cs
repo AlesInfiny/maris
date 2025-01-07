@@ -3,7 +3,7 @@
 namespace Maris.Samples.ApplicationCore;
 
 /// <summary>
-/// イベントIDを管理するクラスです。
+///  イベント ID を管理するクラスです。
 /// </summary>
 internal class Events
 {
