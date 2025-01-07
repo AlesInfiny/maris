@@ -7,7 +7,7 @@ using NSwag.Annotations;
 namespace Dressca.Web.Controllers;
 
 /// <summary>
-/// ユーザーに関連する情報にアクセスする API コントローラーです。
+///  ユーザーに関連する情報にアクセスする API コントローラーです。
 /// </summary>
 [Route("api/users")]
 [ApiController]
@@ -15,7 +15,7 @@ namespace Dressca.Web.Controllers;
 public class UsersController : ControllerBase
 {
     /// <summary>
-    /// 認証済みユーザーのユーザー情報を取得します。
+    ///  認証済みユーザーのユーザー情報を取得します。
     /// </summary>
     /// <returns>ユーザー情報。</returns>
     /// <response code="200">成功。</response>
