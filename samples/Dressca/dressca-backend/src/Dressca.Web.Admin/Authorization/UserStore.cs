@@ -67,7 +67,7 @@ public class UserStore : IUserStore
     ///  ユーザーがログイン済みかどうかを表す真理値を取得します。
     /// </summary>
     /// <returns>ユーザーがログイン済みかどうかを表す真理値。
-    /// ログイン済みならば <see langword="true"/> 、そうでなければ <see langword="false"/> 。
+    ///  ログイン済みならば <see langword="true"/> 、そうでなければ <see langword="false"/> 。
     /// </returns>
     private bool IsAuthenticated()
     {

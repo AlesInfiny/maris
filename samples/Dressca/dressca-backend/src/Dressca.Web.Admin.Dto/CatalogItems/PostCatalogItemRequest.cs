@@ -22,7 +22,7 @@ public class PostCatalogItemRequest
     public required string Description { get; set; }
 
     /// <summary>
-    /// 単価を取得または設定します。
+    ///  単価を取得または設定します。
     /// </summary>
     [Required]
     [RegularExpression(@"^[1-9]\d{0,15}$")]

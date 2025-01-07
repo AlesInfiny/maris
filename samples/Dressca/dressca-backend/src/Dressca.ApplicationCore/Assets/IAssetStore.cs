@@ -1,7 +1,7 @@
 ﻿namespace Dressca.ApplicationCore.Assets;
 
 /// <summary>
-///  アセットのストア。
+///  ファイルシステム上のアセット情報を取得する機能を提供します。
 /// </summary>
 public interface IAssetStore
 {

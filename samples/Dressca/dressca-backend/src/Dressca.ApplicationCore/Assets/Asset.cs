@@ -4,7 +4,7 @@ using Dressca.ApplicationCore.Resources;
 namespace Dressca.ApplicationCore.Assets;
 
 /// <summary>
-///  アセットエンティティ。
+///  アセットを表現するエンティティです。
 /// </summary>
 public class Asset
 {

@@ -1,7 +1,7 @@
 ﻿namespace Dressca.ApplicationCore.Assets;
 
 /// <summary>
-///  アセットリポジトリ。
+///  アセットの情報にアクセスするリポジトリです。
 /// </summary>
 public interface IAssetRepository
 {

@@ -1,7 +1,7 @@
 ﻿namespace Dressca.ApplicationCore.Catalog;
 
 /// <summary>
-///  カタログブランドリポジトリ。
+///  カタログカテゴリの情報にアクセスするリポジトリです。
 /// </summary>
 public interface ICatalogCategoryRepository
 {

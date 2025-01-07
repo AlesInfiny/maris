@@ -4,7 +4,7 @@ using Dressca.ApplicationCore.Catalog;
 namespace Dressca.ApplicationCore.Ordering;
 
 /// <summary>
-///  注文エンティティのファクトリー。
+///  注文エンティティを生成するファクトリーです。
 /// </summary>
 public interface IOrderFactory
 {
