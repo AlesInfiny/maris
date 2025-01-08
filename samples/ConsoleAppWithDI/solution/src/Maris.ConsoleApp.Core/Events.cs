@@ -8,7 +8,7 @@ namespace Maris.ConsoleApp.Core;
 internal class Events
 {
     /// <summary>
-    ///  デバッグ用のイベント ID
+    ///  デバッグ用のイベント ID 。
     /// </summary>
     internal static readonly EventId DebugEvent = new(9999, nameof(DebugEvent));
 }
