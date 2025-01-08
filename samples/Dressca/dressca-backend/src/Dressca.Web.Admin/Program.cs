@@ -90,7 +90,6 @@ if (builder.Environment.IsDevelopment())
     // ローカル開発環境用の認証ハンドラーを登録します。
     _ = builder.Services.AddAuthentication("DummyAuthentication")
     .AddScheme<AuthenticationSchemeOptions, DummyAuthenticationHandler>("DummyAuthentication", null);
-    builder.Services.AddAuthorization();
 
     builder.Services.AddHttpLogging(logging =>
     {
@@ -103,6 +102,9 @@ else if (builder.Environment.IsProduction())
 {
     // 本番環境用の認証ハンドラーを登録します。
 }
+
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(Policies.RequireAdminRole, policy => policy.RequireRole(Roles.Admin));
 
 builder.Services.AddSingleton<
     IAuthorizationMiddlewareResultHandler, StatusCodeMapAuthorizationMiddlewareResultHandler>();

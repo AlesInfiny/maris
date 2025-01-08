@@ -28,7 +28,7 @@ public class DummyAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         // ダミーのユーザー名とロール名を設定します。
         Claim[] claims = [
             new Claim(ClaimTypes.Name, "dummy_user"),
-            new Claim(ClaimTypes.Role, "Admin")
+            new Claim(ClaimTypes.Role, "ROLE_ADMIN")
         ];
         var identity = new ClaimsIdentity(claims, this.Scheme.Name);
         var principal = new ClaimsPrincipal(identity);
