@@ -532,7 +532,7 @@
       },
       "AccountResponse": {
         "type": "object",
-        "description": "会計情報のレスポンスデータを表します。。\n            ",
+        "description": "会計情報のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "consumptionTaxRate",
@@ -571,7 +571,7 @@
       },
       "BasketItemResponse": {
         "type": "object",
-        "description": "買い物かごのアイテムのレスポンスデータを表します\n            ",
+        "description": "買い物かごのアイテムのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "catalogItemId",
