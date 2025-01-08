@@ -33,7 +33,7 @@ export interface PostCatalogItemRequest {
      */
     'description': string;
     /**
-     * 単価を取得または設定します。
+     * 単価を取得または設定します。             
      * @type {number}
      * @memberof PostCatalogItemRequest
      */
