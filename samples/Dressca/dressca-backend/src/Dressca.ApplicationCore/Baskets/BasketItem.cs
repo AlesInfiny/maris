@@ -4,7 +4,7 @@ using Dressca.ApplicationCore.Resources;
 namespace Dressca.ApplicationCore.Baskets;
 
 /// <summary>
-///  買い物かごアイテムです。
+///  買い物かごアイテムを表現するエンティティです。
 /// </summary>
 public class BasketItem
 {

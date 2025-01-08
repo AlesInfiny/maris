@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 namespace Dressca.Web.Authorization;
 
 /// <summary>
-/// 開発環境用の認証ハンドラーです。
+///  開発環境用の認証ハンドラーです。
 /// </summary>
 public class DummyAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {

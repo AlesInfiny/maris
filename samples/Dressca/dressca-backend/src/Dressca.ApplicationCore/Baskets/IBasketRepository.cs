@@ -1,7 +1,7 @@
 ﻿namespace Dressca.ApplicationCore.Baskets;
 
 /// <summary>
-///  買い物かごリポジトリインターフェース。
+///  買い物かごの情報にアクセスするリポジトリです。
 /// </summary>
 public interface IBasketRepository
 {

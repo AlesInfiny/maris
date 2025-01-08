@@ -1,7 +1,7 @@
 ﻿namespace Dressca.ApplicationCore.Catalog;
 
 /// <summary>
-///  カタログドメインサービス。
+///  カタログに関するドメインサービスを提供します。
 /// </summary>
 public interface ICatalogDomainService
 {

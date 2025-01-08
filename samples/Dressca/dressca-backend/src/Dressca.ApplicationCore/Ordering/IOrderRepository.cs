@@ -1,7 +1,7 @@
 ﻿namespace Dressca.ApplicationCore.Ordering;
 
 /// <summary>
-///  注文リポジトリ。
+///  注文の情報にアクセスするリポジトリです。
 /// </summary>
 public interface IOrderRepository
 {

@@ -5,7 +5,7 @@ using NSwag.Annotations;
 namespace Dressca.Web.Controllers;
 
 /// <summary>
-/// サーバー時間に関する情報にアクセスする API コントローラーです。
+///  サーバー時間に関する情報にアクセスする API コントローラーです。
 /// </summary>
 [Route("api/servertime")]
 [ApiController]
@@ -16,7 +16,7 @@ public class ServerTimeController : ControllerBase
     private readonly TimeProvider timeProvider;
 
     /// <summary>
-    /// <see cref="ServerTimeController"/> の新しいインスタンスを作成します。
+    ///  <see cref="ServerTimeController"/> の新しいインスタンスを作成します。
     /// </summary>
     /// <param name="logger">ロガー。</param>
     public ServerTimeController(ILogger<ServerTimeController> logger)
@@ -25,7 +25,7 @@ public class ServerTimeController : ControllerBase
     }
 
     /// <summary>
-    /// <see cref="ServerTimeController"/> の新しいインスタンスを作成します。
+    ///  <see cref="ServerTimeController"/> の新しいインスタンスを作成します。
     /// </summary>
     /// <param name="logger">ロガー。</param>
     /// <param name="timeProvider">タイムプロバイダー。</param>
@@ -36,7 +36,7 @@ public class ServerTimeController : ControllerBase
     }
 
     /// <summary>
-    /// 認証不要で現在のサーバー時間を取得します。
+    ///  認証不要で現在のサーバー時間を取得します。
     /// </summary>
     /// <returns>サーバー時間。</returns>
     [HttpGet]

@@ -83,7 +83,7 @@ public class CatalogApplicationService
     }
 
     /// <summary>
-    /// フィルタリング用のカタログブランドリストを取得します。
+    ///  フィルタリング用のカタログブランドリストを取得します。
     /// </summary>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログブランドリストを返す非同期処理を表すタスク。</returns>
@@ -91,7 +91,7 @@ public class CatalogApplicationService
         => this.brandRepository.GetAllAsync(cancellationToken);
 
     /// <summary>
-    /// フィルタリング用のカタログカテゴリリストを取得します。
+    ///  フィルタリング用のカタログカテゴリリストを取得します。
     /// </summary>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログカテゴリリストを返す非同期処理を表すタスク。</returns>
@@ -99,7 +99,7 @@ public class CatalogApplicationService
         => this.categoryRepository.GetAllAsync(cancellationToken);
 
     /// <summary>
-    /// カタログにアイテムを追加します。
+    ///  カタログにアイテムを追加します。
     /// </summary>
     /// <param name="name">商品名。</param>
     /// <param name="description">説明。</param>
@@ -162,7 +162,7 @@ public class CatalogApplicationService
     }
 
     /// <summary>
-    /// カタログからアイテムを削除します。
+    ///  カタログからアイテムを削除します。
     /// </summary>
     /// <param name="id">削除対象のカタログアイテムの ID 。</param>
     /// <param name="rowVersion">削除対象のカタログアイテムの行バージョン。</param>
@@ -195,7 +195,7 @@ public class CatalogApplicationService
     }
 
     /// <summary>
-    /// カタログアイテムを更新します。
+    ///  カタログアイテムを更新します。
     /// </summary>
     /// <param name="id">カタログアイテム ID 。</param>
     /// <param name="name">商品名。</param>
@@ -303,7 +303,7 @@ public class CatalogApplicationService
     }
 
     /// <summary>
-    ///  管理者が指定したID のカタログアイテムを取得します。
+    ///  管理者が指定した ID のカタログアイテムを取得します。
     /// </summary>
     /// <param name="catalogItemId">カタログアイテム ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>

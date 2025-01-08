@@ -5,7 +5,7 @@ using Dressca.ApplicationCore.Resources;
 namespace Dressca.ApplicationCore.Ordering;
 
 /// <summary>
-///  注文エンティティ。
+///  注文を表現するエンティティです。
 /// </summary>
 public class Order
 {

@@ -75,7 +75,7 @@ public class CommandResult : ICommandResult
     public static ICommandResult CreateError(int exitCode) => new ErrorCommandResult(exitCode);
 
     /// <summary>
-    ///  警告終了を表す <see cref="CommandResult"/> 。
+    ///  警告終了を表す <see cref="CommandResult"/> です。
     /// </summary>
     private class WarningCommandResult : CommandResult
     {
@@ -104,7 +104,7 @@ public class CommandResult : ICommandResult
     }
 
     /// <summary>
-    ///  異常終了を表す <see cref="CommandResult"/> 。
+    ///  異常終了を表す <see cref="CommandResult"/> です。
     /// </summary>
     private class ErrorCommandResult : CommandResult
     {

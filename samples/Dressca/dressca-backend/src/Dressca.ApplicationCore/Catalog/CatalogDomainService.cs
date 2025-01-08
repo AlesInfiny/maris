@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 namespace Dressca.ApplicationCore.Catalog;
 
 /// <summary>
-///  カタログに関するドメインサービスを提供します。
+///  カタログに関するドメインサービスの実装です。
 /// </summary>
 internal class CatalogDomainService : ICatalogDomainService
 {

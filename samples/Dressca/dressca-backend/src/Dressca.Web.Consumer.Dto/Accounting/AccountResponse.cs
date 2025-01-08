@@ -3,7 +3,7 @@
 namespace Dressca.Web.Consumer.Dto.Accounting;
 
 /// <summary>
-///  会計情報のレスポンスデータを表します。。
+///  会計情報のレスポンスデータを表します。
 /// </summary>
 public class AccountResponse
 {

@@ -4,7 +4,7 @@ using Dressca.Web.Consumer.Dto.Catalog;
 namespace Dressca.Web.Consumer.Dto.Baskets;
 
 /// <summary>
-///  買い物かごのアイテムのレスポンスデータを表します
+///  買い物かごのアイテムのレスポンスデータを表します。
 /// </summary>
 public class BasketItemResponse
 {
