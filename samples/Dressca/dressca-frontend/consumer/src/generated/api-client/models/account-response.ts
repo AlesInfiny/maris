@@ -15,7 +15,7 @@
 
 
 /**
- * 会計情報のレスポンスデータを表します。。             
+ * 会計情報のレスポンスデータを表します。             
  * @export
  * @interface AccountResponse
  */

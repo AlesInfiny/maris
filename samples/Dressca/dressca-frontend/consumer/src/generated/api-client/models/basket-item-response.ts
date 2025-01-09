@@ -18,7 +18,7 @@
 import type { BasketItemResponseCatalogItem } from './basket-item-response-catalog-item';
 
 /**
- * 買い物かごのアイテムのレスポンスデータを表します             
+ * 買い物かごのアイテムのレスポンスデータを表します。             
  * @export
  * @interface BasketItemResponse
  */
