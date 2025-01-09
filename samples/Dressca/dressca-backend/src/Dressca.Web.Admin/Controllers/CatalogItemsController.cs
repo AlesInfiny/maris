@@ -3,6 +3,7 @@ using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
+using Dressca.Web.Admin.Authorization;
 using Dressca.Web.Admin.Controllers.ApiModel;
 using Dressca.Web.Admin.Dto.CatalogItems;
 using Dressca.Web.Controllers;
@@ -65,7 +66,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getCatalogItem")]
-    [Authorize(Roles = nameof(Admin))]
+    [Authorize(Policy = Policies.RequireAdminRole)]
     public async Task<IActionResult> GetCatalogItemAsync(long catalogItemId)
     {
         CatalogItem? catalogItem;
@@ -106,7 +107,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getByQuery")]
-    [Authorize(Roles = nameof(Admin))]
+    [Authorize(Policy = Policies.RequireAdminRole)]
     public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
         (IReadOnlyList<CatalogItem> CatalogItems, int TotalCount) itemsAndCount;
@@ -154,7 +155,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("postCatalogItem")]
-    [Authorize(Roles = nameof(Admin))]
+    [Authorize(Policy = Policies.RequireAdminRole)]
     public async Task<IActionResult> PostCatalogItemAsync(PostCatalogItemRequest postCatalogItemRequest)
     {
         CatalogItem catalogItem;
@@ -200,7 +201,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteCatalogItem")]
-    [Authorize(Roles = nameof(Admin))]
+    [Authorize(Policy = Policies.RequireAdminRole)]
     public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId, [FromQuery] byte[] rowVersion)
     {
         try
@@ -241,7 +242,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("putCatalogItem")]
-    [Authorize(Roles = nameof(Admin))]
+    [Authorize(Policy = Policies.RequireAdminRole)]
     public async Task<IActionResult> PutCatalogItemAsync(long catalogItemId, PutCatalogItemRequest putCatalogItemRequest)
     {
         try
