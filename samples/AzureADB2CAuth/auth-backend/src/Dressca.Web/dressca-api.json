@@ -68,7 +68,7 @@
     "schemas": {
       "ServerTimeResponse": {
         "type": "object",
-        "description": "サーバー時間のレスポンスデータを表します。",
+        "description": "サーバー時間のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "serverTime"
@@ -76,14 +76,14 @@
         "properties": {
           "serverTime": {
             "type": "string",
-            "description": "サーバー時間。",
+            "description": "サーバー時間を取得または設定します。\n            ",
             "minLength": 1
           }
         }
       },
       "UserResponse": {
         "type": "object",
-        "description": "ユーザー情報のレスポンスデータを表します。",
+        "description": "ユーザー情報のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "userId"
@@ -91,7 +91,7 @@
         "properties": {
           "userId": {
             "type": "string",
-            "description": "ユーザー ID を取得または設定します。",
+            "description": "ユーザー ID を取得または設定します。\n            ",
             "minLength": 1
           }
         }

@@ -871,7 +871,7 @@
           },
           "price": {
             "type": "integer",
-            "description": "単価を取得または設定します。",
+            "description": "単価を取得または設定します。\n            ",
             "format": "int64",
             "pattern": "^[1-9]\\d{0,15}$"
           },
