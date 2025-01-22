@@ -68,6 +68,70 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             Times.Once);
     }
 
+    [Fact]
+    public async Task GetBasketItemsAsync_購入者Idがnullまたは空白ではない_買い物かごリポジトリのGetWithBasketItemsAsyncを1度だけ呼び出す()
+    {
+        // Arrange
+        var dummyBuyerId = "dummyId";
+        var catalogItems = new List<CatalogItem>
+         {
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
+         };
+        var basket = new Basket { BuyerId = dummyBuyerId };
+
+        var basketRepo = new Mock<IBasketRepository>();
+        basketRepo
+            .Setup(r => r.AddAsync(It.IsAny<Basket>(), AnyToken))
+            .ReturnsAsync(basket);
+        var orderRepo = Mock.Of<IOrderRepository>();
+        var orderFactory = Mock.Of<IOrderFactory>();
+        var catalogRepo = new Mock<ICatalogRepository>();
+        catalogRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
+            .ReturnsAsync(catalogItems.AsReadOnly());
+        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var logger = this.CreateTestLogger<ShoppingApplicationService>();
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+
+        // Act
+        await service.GetBasketItemsAsync(dummyBuyerId);
+
+        // Assert
+        basketRepo.Verify(r => r.GetWithBasketItemsAsync(dummyBuyerId, AnyToken), Times.Once);
+    }
+
+    [Fact]
+    public async Task GetBasketItemsAsync_購入者Idに対応する買い物かごが存在しない_買い物かごリポジトリのAddAsyncを1度だけ呼び出す()
+    {
+        // Arrange
+        var dummyBuyerId = "dummyId";
+        var catalogItems = new List<CatalogItem>
+         {
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
+         };
+        var basket = new Basket { BuyerId = dummyBuyerId };
+
+        var basketRepo = new Mock<IBasketRepository>();
+        basketRepo
+            .Setup(r => r.AddAsync(It.IsAny<Basket>(), AnyToken))
+            .ReturnsAsync(basket);
+        var orderRepo = Mock.Of<IOrderRepository>();
+        var orderFactory = Mock.Of<IOrderFactory>();
+        var catalogRepo = new Mock<ICatalogRepository>();
+        catalogRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
+            .ReturnsAsync(catalogItems.AsReadOnly());
+        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var logger = this.CreateTestLogger<ShoppingApplicationService>();
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+
+        // Act
+        await service.GetBasketItemsAsync(dummyBuyerId);
+
+        // Assert
+        basketRepo.Verify(r => r.AddAsync(It.Is<Basket>(b => b.BuyerId == dummyBuyerId), AnyToken), Times.Once);
+    }
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]
