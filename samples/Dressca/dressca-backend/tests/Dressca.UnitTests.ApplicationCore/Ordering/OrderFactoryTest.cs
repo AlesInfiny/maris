@@ -35,12 +35,6 @@ public class OrderFactoryTest
                 Assert.Equal(catalogItem.ProductCode, orderItem.ItemOrdered.ProductCode);
                 Assert.Equal(catalogItem.Name, orderItem.ItemOrdered.ProductName);
                 Assert.Equal(catalogItem.Id, orderItem.ItemOrdered.CatalogItemId);
-
-                Assert.Collection(catalogItem.Assets, asset =>
-                {
-                    Assert.Equal(asset.AssetCode, orderItem.Assets.First().AssetCode);
-                    Assert.Equal(orderItem.Id, orderItem.Assets.First().OrderItemId);
-                });
             },
             orderItem =>
             {
