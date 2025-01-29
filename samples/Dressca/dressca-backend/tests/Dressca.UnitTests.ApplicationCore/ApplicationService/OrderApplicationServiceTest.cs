@@ -36,6 +36,31 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     }
 
     [Fact]
+    public async Task GetOrderAsync_注文リポジトリのFindAsyncを1度だけ呼び出す()
+    {
+        // Arrange
+        var orderId = 10L;
+        var buyerId = Guid.NewGuid().ToString("D");
+        var shipToAddress = CreateDefaultShipTo();
+        var orderItems = CreateDefaultOrderItems();
+        var order = new Order(orderItems) { BuyerId = buyerId, ShipToAddress = shipToAddress };
+        var orderRepositoryMock = new Mock<IOrderRepository>();
+        orderRepositoryMock
+            .Setup(r => r.FindAsync(orderId, AnyToken))
+            .ReturnsAsync(order);
+        var basketRepository = Mock.Of<IBasketRepository>();
+        var catalogRepository = Mock.Of<ICatalogRepository>();
+        var logger = this.CreateTestLogger<OrderApplicationService>();
+        var service = new OrderApplicationService(orderRepositoryMock.Object, logger);
+
+        // Act
+        var actual = await service.GetOrderAsync(orderId, buyerId);
+
+        // Assert
+        orderRepositoryMock.Verify(r => r.FindAsync(orderId, AnyToken), Times.Once);
+    }
+
+    [Fact]
     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが異なる_OrderNotFoundExceptionが発生する()
     {
         // Arrange
