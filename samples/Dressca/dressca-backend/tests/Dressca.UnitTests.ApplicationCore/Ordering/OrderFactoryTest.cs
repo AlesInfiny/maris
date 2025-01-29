@@ -49,7 +49,7 @@ public class OrderFactoryTest
     }
 
     [Fact]
-    public void CreateOrder_basketがnullの場合_ArgumentExceptionが発生する()
+    public void CreateOrder_basketがnullの場合_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var catalogItems = CreateDefaultCatalogItems();
@@ -60,11 +60,11 @@ public class OrderFactoryTest
         var action = () => factory.CreateOrder(null!, catalogItems, shipTo);
 
         // Assert
-        Assert.Throws<ArgumentNullException>(action);
+        Assert.Throws<ArgumentNullException>("basket", action);
     }
 
     [Fact]
-    public void CreateOrder_catalogItemsがnullの場合_ArgumentExceptionが発生する()
+    public void CreateOrder_catalogItemsがnullの場合_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var basket = new Basket() { BuyerId = "dummyId" };
@@ -76,11 +76,11 @@ public class OrderFactoryTest
         var action = () => factory.CreateOrder(basket, null!, shipTo);
 
         // Assert
-        Assert.Throws<ArgumentNullException>(action);
+        Assert.Throws<ArgumentNullException>("catalogItems", action);
     }
 
     [Fact]
-    public void CreateOrder_shipToAddressがnullの場合_ArgumentExceptionが発生する()
+    public void CreateOrder_shipToAddressがnullの場合_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var basket = new Basket() { BuyerId = "dummyId" };
@@ -92,7 +92,7 @@ public class OrderFactoryTest
         var action = () => factory.CreateOrder(basket, catalogItems, null!);
 
         // Assert
-        Assert.Throws<ArgumentNullException>(action);
+        Assert.Throws<ArgumentNullException>("shipToAddress", action);
     }
 
     private static Address CreateDefaultAddress()
