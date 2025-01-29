@@ -441,9 +441,17 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             It.Is<Basket>(b => b.Items.Count == 1), AnyToken),
             Times.Once);
         basketRepo.Verify(
-            r => r.UpdateAsync(
-            It.Is<Basket>(b => b.Items.ToList().Exists(item => (item.CatalogItemId == catalogItem.Id) && (item.Quantity == 5) && (item.UnitPrice == catalogItem.Price))), AnyToken),
-            Times.Once);
+           r => r.UpdateAsync(
+           It.Is<Basket>(b => b.Items.First().CatalogItemId == catalogItem.Id), AnyToken),
+           Times.Once);
+        basketRepo.Verify(
+           r => r.UpdateAsync(
+           It.Is<Basket>(b => b.Items.First().Quantity == 5), AnyToken),
+           Times.Once);
+        basketRepo.Verify(
+           r => r.UpdateAsync(
+           It.Is<Basket>(b => b.Items.First().UnitPrice == catalogItem.Price), AnyToken),
+           Times.Once);
     }
 
     [Theory]
@@ -657,6 +665,67 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Assert
         orderRepo.Verify(
             r => r.AddAsync(It.Is<Order>(o => o.ShipToAddress == shipTo), AnyToken),
+            Times.Once);
+    }
+
+    [Fact]
+    public async Task CheckoutAsync_買い物かごにアイテムが存在する_注文リポジトリのAddAsyncの引数に注文アイテムが正しく設定されている()
+    {
+        // Arrange
+        var dummyBuyerId = "dummyId";
+        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
+        dummyBasket.AddItem(10L, 1000);
+        var shipTo = CreateDefaultShipTo();
+        var catalogItems = new List<CatalogItem>
+         {
+             new() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L },
+         };
+        var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
+
+        var basketRepo = new Mock<IBasketRepository>();
+        basketRepo
+            .Setup(r => r.GetWithBasketItemsAsync(dummyBuyerId, AnyToken))
+            .ReturnsAsync(dummyBasket);
+        basketRepo
+            .Setup(r => r.RemoveAsync(dummyBasket, AnyToken))
+            .Returns(Task.CompletedTask);
+        var orderRepo = new Mock<IOrderRepository>();
+        orderRepo
+            .Setup(r => r.AddAsync(order, AnyToken))
+            .ReturnsAsync(order);
+        var orderFactory = new Mock<IOrderFactory>();
+        orderFactory
+            .Setup(f => f.CreateOrder(dummyBasket, catalogItems, shipTo))
+            .Returns(order);
+        var catalogRepo = new Mock<ICatalogRepository>();
+        catalogRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
+            .ReturnsAsync(catalogItems.AsReadOnly());
+        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var logger = this.CreateTestLogger<ShoppingApplicationService>();
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+
+        // Act
+        await service.CheckoutAsync(dummyBuyerId, shipTo);
+
+        // Assert
+        orderRepo.Verify(
+            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.Count == 1), AnyToken),
+            Times.Once);
+        orderRepo.Verify(
+            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().Quantity == 1), AnyToken),
+            Times.Once);
+        orderRepo.Verify(
+            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().UnitPrice == 1000m), AnyToken),
+            Times.Once);
+        orderRepo.Verify(
+            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.ProductName == "ダミー商品1"), AnyToken),
+            Times.Once);
+        orderRepo.Verify(
+            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.ProductCode == "C000000001"), AnyToken),
+            Times.Once);
+        orderRepo.Verify(
+            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.CatalogItemId == 1), AnyToken),
             Times.Once);
     }
 
