@@ -99,7 +99,7 @@ AlesInfiny Maris OSS Edition への貢献については [Contributing to AlesIn
 
 ## Code of Conduct
 
-AlesInfiny Maris OSS Edition に関わるすべての人は、 AlesInfiny Maris OSS Edition の [行動規範](/.github/CODE_OF_CONDUCT.md) に従うことを期待しています。
+AlesInfiny Maris OSS Edition に関わるすべての人は、 AlesInfiny Maris OSS Edition の [行動規範](https://github.com/AlesInfiny/.github/blob/main/CODE_OF_CONDUCT.md) に従うことを期待しています。
 これには、コードベース、課題追跡システム、チャットルーム、メーリングリストなど、すべてのコミュニケーションが含まれます。
 
 ## License
