@@ -85,7 +85,7 @@ jobs:
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
-        uses: danielpalme/ReportGenerator-GitHub-Action@c38c522d4b391c1b0da979cbb2e902c0a252a7dc  # v5.4.3
+        uses: danielpalme/ReportGenerator-GitHub-Action@f1927db1dbfc029b056583ee488832e939447fe6  # v5.4.4
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           reports: '**/TestResults/*/coverage.cobertura.xml'
