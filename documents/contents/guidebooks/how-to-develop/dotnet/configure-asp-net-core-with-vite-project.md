@@ -5,7 +5,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 # ASP.NET Core with Vite プロジェクトの構成 {#top}
 
-ASP.NET Core with Vite プロジェクトには、フロントエンドのアプリケーションとの連携に関する設定をします。
+ASP.NET Core with Vite プロジェクトには、フロントエンドアプリケーションとの連携に関する設定をします。
 
 ## ASP.NET Core Web API の設定 {#setup-asp-net-core-web-api}
 
