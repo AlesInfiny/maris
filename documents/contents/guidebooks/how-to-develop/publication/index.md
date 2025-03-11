@@ -76,7 +76,7 @@ interface ImportMeta {
 }
 ```
 
-## サーバーサイドの設定 {#server-side-settings}
+## バックエンドの設定 {#backend-settings}
 
 ### Program.cs の設定 {#program-cs-settings}
 
@@ -146,7 +146,7 @@ app.Run();
 
 ### アプリケーションの発行 {#publish-application}
 
-`dotnet publish` コマンドや Visual Studio などのツールを利用して、アプリケーションを発行します。 `publish` フォルダー直下にサーバーサイドのビルドアーティファクトと `wwwroot` フォルダーにフロントエンドの静的ファイル群が出力されます。発行したファイルをサーバーに配置し、アプリケーションを起動します。
+`dotnet publish` コマンドや Visual Studio などのツールを利用して、アプリケーションを発行します。 `publish` フォルダー直下にバックエンドのビルドアーティファクトと `wwwroot` フォルダーにフロントエンドの静的ファイル群が出力されます。発行したファイルをサーバーに配置し、アプリケーションを起動します。
 
 ![dotnet publish の出力ファイル](../../../images/guidebooks/how-to-develop/publication/published-folders-light.png#only-light){ loading=lazy }
 ![dotnet publish の出力ファイル](../../../images/guidebooks/how-to-develop/publication/published-folders-dark.png#only-dark){ loading=lazy }

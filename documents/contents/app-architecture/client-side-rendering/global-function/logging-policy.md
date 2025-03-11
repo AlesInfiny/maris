@@ -5,7 +5,7 @@ description: アプリケーション全体で考慮すべきアーキテクチ�
 
 # ログ出力方針 {#top}
 
-サーバーサイドアプリケーション（ .NET アプリケーション）のログ出力方針については、以下を参照してください。
+バックエンドアプリケーション（ .NET アプリケーション）のログ出力方針については、以下を参照してください。
 
 - [ログ出力方針](../../overview/dotnet-application-processing-system/logging-policy.md)
 
