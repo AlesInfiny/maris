@@ -1,11 +1,11 @@
 ---
 title: .NET 編
-description: バックエンドで動作する .NET アプリケーションの 開発手順を解説します。
+description: サーバーサイドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
 
 # ASP.NET Core with Vite プロジェクトの構成 {#top}
 
-ASP.NET Core with Vite プロジェクトには、フロントエンドのアプリケーションとの連携に関する設定をします。
+ASP.NET Core with Vite プロジェクトには、フロントエンドアプリケーションとの連携に関する設定をします。
 
 ## ASP.NET Core Web API の設定 {#setup-asp-net-core-web-api}
 

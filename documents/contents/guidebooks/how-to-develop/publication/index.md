@@ -12,7 +12,7 @@ description: .NET + Vue.js で構成されたアプリケーションの 発行�
 ![Web サーバーと AP サーバーを統合する構成](../../../images/guidebooks/how-to-develop/publication/integrated-server-constructure-light.png#only-light){ loading=lazy }
 ![Web サーバーと AP サーバーを統合する構成](../../../images/guidebooks/how-to-develop/publication/integrated-server-constructure-dark.png#only-dark){ loading=lazy }
 
-## クライアントサイドの設定 {#client-side-settings}
+## フロントエンドの設定 {#frontend-settings}
 
 ### API エンドポイントの設定 {#api-endpoint-settings}
 
@@ -76,7 +76,7 @@ interface ImportMeta {
 }
 ```
 
-## サーバーサイドの設定 {#server-side-settings}
+## バックエンドの設定 {#backend-settings}
 
 ### Program.cs の設定 {#program-cs-settings}
 
@@ -114,7 +114,7 @@ app.Run();
 
 ### プロジェクトファイルの設定 {#project-file-settings}
 
-発行する際、最新のクライアントサイドのビルドファイルを含めるために、 Web アプリケーションのプロジェクトファイルに以下のような設定を追加します。以下のコード例は、クライアントサイドのパスを書き換えれば、そのまま csproj ファイルに追加して使用できます。ただし、 `npm ci` と `npm run build:prod` のコマンドは、クライアントサイドのビルドに合わせて変更してください。
+発行する際、最新のフロントエンドのビルドファイルを含めるために、 Web アプリケーションのプロジェクトファイルに以下のような設定を追加します。以下のコード例は、フロントエンドのパスを書き換えれば、そのまま csproj ファイルに追加して使用できます。ただし、 `npm ci` と `npm run build:prod` のコマンドは、フロントエンドのビルドに合わせて変更してください。
 
 ```xml title="StartUp.csproj"
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -146,7 +146,7 @@ app.Run();
 
 ### アプリケーションの発行 {#publish-application}
 
-`dotnet publish` コマンドや Visual Studio などのツールを利用して、アプリケーションを発行します。 `publish` フォルダー直下にサーバーサイドのビルドアーティファクトと `wwwroot` フォルダーにクライアントサイドの静的ファイル群が出力されます。発行したファイルをサーバーに配置し、アプリケーションを起動します。
+`dotnet publish` コマンドや Visual Studio などのツールを利用して、アプリケーションを発行します。 `publish` フォルダー直下にバックエンドのビルドアーティファクトと `wwwroot` フォルダーにフロントエンドの静的ファイル群が出力されます。発行したファイルをサーバーに配置し、アプリケーションを起動します。
 
 ![dotnet publish の出力ファイル](../../../images/guidebooks/how-to-develop/publication/published-folders-light.png#only-light){ loading=lazy }
 ![dotnet publish の出力ファイル](../../../images/guidebooks/how-to-develop/publication/published-folders-dark.png#only-dark){ loading=lazy }

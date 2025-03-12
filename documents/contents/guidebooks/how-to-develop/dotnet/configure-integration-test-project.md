@@ -1,6 +1,6 @@
 ---
 title: .NET 編
-description: バックエンドで動作する .NET アプリケーションの 開発手順を解説します。
+description: サーバーサイドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
 
 <!-- cspell:ignore localdb mssqllocaldb -->
