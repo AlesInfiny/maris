@@ -1,6 +1,5 @@
 ﻿using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Logging;
-using Xunit.Abstractions;
 
 namespace Maris.Logging.Testing.Tests.Xunit;
 

@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Dressca.ApplicationCore.Catalog;
 using Microsoft.Extensions.Logging;
-using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.Catalog;
 

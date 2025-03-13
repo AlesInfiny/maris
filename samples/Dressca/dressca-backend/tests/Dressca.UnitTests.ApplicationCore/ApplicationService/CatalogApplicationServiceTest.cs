@@ -2,7 +2,6 @@
 using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
-using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.ApplicationService;
 

@@ -3,7 +3,6 @@ using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
-using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.ApplicationService;
 

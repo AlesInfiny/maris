@@ -1,6 +1,5 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Assets;
-using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.ApplicationService;
 
