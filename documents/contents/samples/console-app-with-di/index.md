@@ -22,64 +22,17 @@ DI を利用するためには、汎用ホストを用いてコンソールア�
 以下に実装サンプルを示します。
 実装サンプルの全体像は、 [サンプルアプリケーションをダウンロード](#download) して確認してください。
 
-```csharp title="パラメータークラスの実装例"
-using CommandLine;
-using Maris.ConsoleApp.Core;
+??? example "サンプルアプリケーションにおけるパラメータークラスの実装例"
 
-namespace Maris.Samples.Cli.Commands.GetProductsByUnitPriceRange;
+    ```csharp title="Parameter.cs"
+    https://github.com/AlesInfiny/maris/blob/main/samples/ConsoleAppWithDI/solution/src/Maris.Samples.Cli/Commands/GetProductsByUnitPriceRange/Parameter.cs
+    ```
 
-[Command("get-by-unit-price-range", typeof(Command))]
-internal class Parameter
-{
-    [Option("minimum", Required = false)]
-    public decimal? MinimumUnitPrice { get; set; }
+??? example "サンプルアプリケーションにおけるコマンドクラスの実装例"
 
-    [Option("maximum", Required = false)]
-    public decimal? MaximumUnitPrice { get; set; }
-}
-```
-
-```csharp title="コマンドクラスの実装例"
-using Maris.ConsoleApp.Core;
-using Maris.Samples.ApplicationCore;
-using Microsoft.Extensions.Logging;
-
-namespace Maris.Samples.Cli.Commands.GetProductsByUnitPriceRange;
-
-internal class Command : AsyncCommand<Parameter>
-{
-    private readonly ProductApplicationService service;
-    private readonly ILogger logger;
-    private readonly EventId Over10ProductsFoundInRange = new(1001, nameof(Over10ProductsFoundInRange));
-
-    public Command(ProductApplicationService service, ILogger<Command> logger)
-    {
-        this.service = service ?? throw new ArgumentNullException(nameof(service));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-
-    protected override async Task<ICommandResult> ExecuteAsync(
-        Parameter parameter, CancellationToken cancellationToken)
-    {
-        var products = await this.service.GetProductsByUnitPriceRangeAsync(
-            parameter.MinimumUnitPrice, parameter.MaximumUnitPrice, cancellationToken);
-        if (products.Count >= 10)
-        {
-            this.logger.LogWarning(Over10ProductsFoundInRange, $"単価が {parameter.MinimumUnitPrice} ～ " +
-                $"{parameter.MaximumUnitPrice} の商品情報が 10 件以上あります。" +
-                $"範囲を絞り込んでください。");
-            return CommandResult.CreateWarning(2);
-        }
-
-        foreach (var product in products)
-        {
-            Console.WriteLine($"{product.Id,3} : {product.Name} {product.UnitPrice,7}円");
-        }
-
-        return CommandResult.Success;
-    }
-}
-```
+    ```csharp title="Command.cs"
+    https://github.com/AlesInfiny/maris/blob/main/samples/ConsoleAppWithDI/solution/src/Maris.Samples.Cli/Commands/GetProductsByUnitPriceRange/Command.cs
+    ```
 
 ```winbatch title="コマンドラインからの実行例"
 Maris.Samples.Cli.exe get-by-unit-price-range --minimum 2000 --maximum 3000
