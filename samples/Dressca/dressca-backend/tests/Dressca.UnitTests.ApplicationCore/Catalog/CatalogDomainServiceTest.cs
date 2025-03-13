@@ -26,9 +26,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (existsAll, items) = await domainService.ExistsAllAsync([1L, 2L]);
+        var (existsAll, items) = await domainService.ExistsAllAsync([1L, 2L], cancellationToken);
 
         // Assert
         Assert.True(existsAll);
@@ -55,9 +56,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (existsAll, items) = await domainService.ExistsAllAsync([1L, 2L]);
+        var (existsAll, items) = await domainService.ExistsAllAsync([1L, 2L], cancellationToken);
 
         // Assert
         Assert.False(existsAll);
@@ -81,9 +83,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await domainService.ExistsAllAsync([1L, 2L]);
+        _ = await domainService.ExistsAllAsync([1L, 2L], cancellationToken);
 
         // Assert
         Assert.Equal(1, this.LogCollector.Count);
@@ -107,9 +110,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (existsAll, items) = await domainService.ExistsAllAsync([1L]);
+        var (existsAll, items) = await domainService.ExistsAllAsync([1L], cancellationToken);
 
         // Assert
         Assert.False(existsAll);
@@ -130,9 +134,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
 
         var logger = this.CreateTestLogger<CatalogDomainService>();
         var domainService = new CatalogDomainService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await domainService.ExistsAllAsync([1L]);
+        _ = await domainService.ExistsAllAsync([1L], cancellationToken);
 
         // Assert
         Assert.Equal(1, this.LogCollector.Count);
@@ -156,9 +161,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         catalogRepositoryMock
             .Setup(r => r.AnyAsync(targetItemId, AnyToken))
             .ReturnsAsync(true);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var result = await domainService.ItemExistsAsync(targetItemId);
+        var result = await domainService.ItemExistsAsync(targetItemId, cancellationToken);
 
         // Assert
         Assert.True(result);
@@ -178,9 +184,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         catalogRepositoryMock
             .Setup(r => r.AnyAsync(targetItemId, AnyToken))
             .ReturnsAsync(false);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var result = await domainService.ItemExistsAsync(targetItemId);
+        var result = await domainService.ItemExistsAsync(targetItemId, cancellationToken);
 
         // Assert
         Assert.False(result);
@@ -200,9 +207,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         catalogBrandRepositoryMock
             .Setup(r => r.AnyAsync(targetBrandId, AnyToken))
             .ReturnsAsync(true);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var result = await domainService.BrandExistsAsync(targetBrandId);
+        var result = await domainService.BrandExistsAsync(targetBrandId, cancellationToken);
 
         // Assert
         Assert.True(result);
@@ -222,9 +230,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         catalogBrandRepositoryMock
             .Setup(r => r.AnyAsync(targetBrandId, AnyToken))
             .ReturnsAsync(false);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var result = await domainService.BrandExistsAsync(targetBrandId);
+        var result = await domainService.BrandExistsAsync(targetBrandId, cancellationToken);
 
         // Assert
         Assert.False(result);
@@ -244,9 +253,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         catalogCategoryRepositoryMock
             .Setup(r => r.AnyAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(true);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var result = await domainService.CategoryExistsAsync(targetCategoryId);
+        var result = await domainService.CategoryExistsAsync(targetCategoryId, cancellationToken);
 
         // Assert
         Assert.True(result);
@@ -266,9 +276,10 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
         catalogCategoryRepositoryMock
             .Setup(r => r.AnyAsync(targetCategoryId, AnyToken))
             .ReturnsAsync(false);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var result = await domainService.CategoryExistsAsync(targetCategoryId);
+        var result = await domainService.CategoryExistsAsync(targetCategoryId, cancellationToken);
 
         // Assert
         Assert.False(result);

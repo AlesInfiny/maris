@@ -31,9 +31,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var take = 10;
         var targetBrandId = 1;
         var targetCategoryId = 1;
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await service.GetCatalogItemsAsync(skip, take, targetBrandId, targetCategoryId);
+        _ = await service.GetCatalogItemsAsync(skip, take, targetBrandId, targetCategoryId, cancellationToken);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -56,9 +57,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var take = 10;
         var targetBrandId = 1;
         var targetCategoryId = 1;
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await service.GetCatalogItemsAsync(skip, take, targetBrandId, targetCategoryId);
+        _ = await service.GetCatalogItemsAsync(skip, take, targetBrandId, targetCategoryId, cancellationToken);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -77,9 +79,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepository, catalogBrandRepositoryMock.Object, catalogCategoryRepository, userStore, catalogDomainServiceMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await service.GetBrandsAsync();
+        _ = await service.GetBrandsAsync(cancellationToken);
 
         // Assert
         catalogBrandRepositoryMock.Verify(r => r.GetAllAsync(AnyToken), Times.Once);
@@ -97,9 +100,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var logger = this.CreateTestLogger<CatalogApplicationService>();
 
         var service = new CatalogApplicationService(catalogRepository, catalogBrandRepository, catalogCategoryRepositoryMock.Object, userStore, catalogDomainServiceMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await service.GetCategoriesAsync();
+        _ = await service.GetCategoriesAsync(cancellationToken);
 
         // Assert
         catalogCategoryRepositoryMock.Verify(r => r.GetAllAsync(AnyToken), Times.Once);
@@ -129,6 +133,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
 
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Assert
         await service.AddItemToCatalogAsync(
@@ -137,7 +142,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
             targetPrice,
             targetProductCode,
             targetBrandId,
-            targetCategoryId);
+            targetCategoryId,
+            cancellationToken);
 
         // Act
         catalogRepositoryMock.Verify(r => r.AddAsync(It.IsAny<CatalogItem>(), AnyToken), Times.Once);
@@ -176,6 +182,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
 
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Assert
         var actual = await service.AddItemToCatalogAsync(
@@ -184,7 +191,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
             targetPrice,
             targetProductCode,
             targetBrandId,
-            targetCategoryId);
+            targetCategoryId,
+            cancellationToken);
 
         // Act
         Assert.Same(targetItem, actual);
@@ -314,9 +322,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.DeleteItemFromCatalogAsync(targetId, targetRowVersion);
+        await service.DeleteItemFromCatalogAsync(targetId, targetRowVersion, cancellationToken);
 
         // Assert
         catalogRepositoryMock.Verify(r => r.RemoveAsync(targetId, targetRowVersion, AnyToken), Times.Once);
@@ -408,6 +417,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
         await service.UpdateCatalogItemAsync(
@@ -418,7 +428,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
             targetProductCode,
             targetBrandId,
             targetCategoryId,
-            AnyRowVersion);
+            AnyRowVersion,
+            cancellationToken);
 
         // Assert
         catalogRepositoryMock.Verify(r => r.UpdateAsync(It.IsAny<CatalogItem>(), AnyToken), Times.Once);
@@ -632,9 +643,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var take = 10;
         var targetBrandId = 1;
         var targetCategoryId = 1;
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId);
+        _ = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId, cancellationToken);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -658,9 +670,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var take = 10;
         var targetBrandId = 1;
         var targetCategoryId = 1;
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId);
+        _ = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId, cancellationToken);
 
         // Assert
         catalogRepositoryMock.Verify(
@@ -690,9 +703,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (list, totalItems) = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId);
+        var (list, totalItems) = await service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId, cancellationToken);
 
         // Assert
         Assert.Equal(targetItems, list);
@@ -740,9 +754,10 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        _ = await service.GetCatalogItemForAdminAsync(targetId);
+        _ = await service.GetCatalogItemForAdminAsync(targetId, cancellationToken);
 
         // Assert
         catalogRepositoryMock.Verify(r => r.GetAsync(targetId, AnyToken), Times.Once);

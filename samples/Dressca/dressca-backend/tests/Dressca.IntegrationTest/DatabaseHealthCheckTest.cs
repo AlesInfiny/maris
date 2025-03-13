@@ -12,13 +12,14 @@ public class DatabaseHealthCheckTest(IntegrationTestWebApplicationFactory<Progra
     {
         // Arrange
         var client = this.factory.CreateClient();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var response = await client.GetAsync("api/health");
+        var response = await client.GetAsync("api/health", cancellationToken);
 
         // Assert
         response.EnsureSuccessStatusCode();
-        var healthCheckResult = await response.Content.ReadAsStringAsync();
+        var healthCheckResult = await response.Content.ReadAsStringAsync(cancellationToken);
         Assert.Equal("Healthy", healthCheckResult);
     }
 }

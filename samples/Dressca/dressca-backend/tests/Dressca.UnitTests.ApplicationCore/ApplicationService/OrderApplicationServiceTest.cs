@@ -26,9 +26,10 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
         var catalogRepository = Mock.Of<ICatalogRepository>();
         var logger = this.CreateTestLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepositoryMock.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var actual = await service.GetOrderAsync(orderId, buyerId);
+        var actual = await service.GetOrderAsync(orderId, buyerId, cancellationToken);
 
         // Assert
         Assert.Same(order, actual);
@@ -51,9 +52,10 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
         var catalogRepository = Mock.Of<ICatalogRepository>();
         var logger = this.CreateTestLogger<OrderApplicationService>();
         var service = new OrderApplicationService(orderRepositoryMock.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var actual = await service.GetOrderAsync(orderId, buyerId);
+        var actual = await service.GetOrderAsync(orderId, buyerId, cancellationToken);
 
         // Assert
         orderRepositoryMock.Verify(r => r.FindAsync(orderId, AnyToken), Times.Once);
