@@ -123,7 +123,7 @@ jobs:
         uses: danielpalme/ReportGenerator-GitHub-Action@f1927db1dbfc029b056583ee488832e939447fe6  # v5.4.4
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
-          reports: '**/TestResults/*/coverage.cobertura.xml'
+          reports: '**/TestResults/coverage.cobertura.xml'
           targetdir: '${{ env.WORKING_DIRECTORY }}/CoverageReport'
           reporttypes: 'MarkdownSummaryGithub'
 
