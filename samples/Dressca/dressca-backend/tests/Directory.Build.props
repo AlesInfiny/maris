@@ -9,4 +9,8 @@
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
 
+   <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
 </Project>

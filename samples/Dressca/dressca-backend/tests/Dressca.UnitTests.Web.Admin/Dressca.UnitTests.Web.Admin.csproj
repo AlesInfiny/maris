@@ -20,8 +20,4 @@
     <ProjectReference Include="..\..\src\Maris.Logging.Testing\Maris.Logging.Testing.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Using Include="Xunit" />
-  </ItemGroup>
-
 </Project>
