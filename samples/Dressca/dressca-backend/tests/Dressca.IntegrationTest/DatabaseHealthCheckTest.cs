@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Dressca.IntegrationTest;
+﻿namespace Dressca.IntegrationTest;
 
 public class DatabaseHealthCheckTest(IntegrationTestWebApplicationFactory<Program> factory)
     : IClassFixture<IntegrationTestWebApplicationFactory<Program>>
