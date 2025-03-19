@@ -92,7 +92,7 @@ jobs:
         continue-on-error: true
         run: |
           export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
-          dotnet test ${{ env.SOLUTION_FILE_NAME }} --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }}  --collect "XPlat Code Coverage"
+          dotnet test ${{ env.SOLUTION_FILE_NAME }} --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
 
       - id: create-test-result-report
         name: テスト結果ページの作成
@@ -123,7 +123,7 @@ jobs:
         uses: danielpalme/ReportGenerator-GitHub-Action@f1927db1dbfc029b056583ee488832e939447fe6  # v5.4.4
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
-          reports: '**/TestResults/*/coverage.cobertura.xml'
+          reports: '**/TestResults/coverage.cobertura.xml'
           targetdir: '${{ env.WORKING_DIRECTORY }}/CoverageReport'
           reporttypes: 'MarkdownSummaryGithub'
 

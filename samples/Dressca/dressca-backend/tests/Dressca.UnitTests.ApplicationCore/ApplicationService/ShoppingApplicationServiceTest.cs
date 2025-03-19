@@ -3,7 +3,6 @@ using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
-using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore.ApplicationService;
 
@@ -58,9 +57,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.GetBasketItemsAsync(dummyBuyerId);
+        await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
         catalogRepo.Verify(
@@ -92,9 +92,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.GetBasketItemsAsync(dummyBuyerId);
+        await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
         basketRepo.Verify(r => r.GetWithBasketItemsAsync(dummyBuyerId, AnyToken), Times.Once);
@@ -124,9 +125,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.GetBasketItemsAsync(dummyBuyerId);
+        await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
         basketRepo.Verify(r => r.AddAsync(It.Is<Basket>(b => b.BuyerId == dummyBuyerId), AnyToken), Times.Once);
@@ -238,9 +240,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync((true, catalogItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities, cancellationToken);
 
         // Assert
         basketRepo.Verify(
@@ -275,9 +278,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync((true, catalogItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities, cancellationToken);
 
         // Assert
         basketRepo.Verify(
@@ -311,9 +315,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync((true, catalogItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
+        await service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities, cancellationToken);
 
         // Assert
         basketRepo.Verify(
@@ -398,9 +403,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync((true, catalogItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.AddItemToBasketAsync(dummyBuyerId, 10L, 5);
+        await service.AddItemToBasketAsync(dummyBuyerId, 10L, 5, cancellationToken);
 
         // Assert
         basketRepo.Verify(
@@ -431,9 +437,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync((true, catalogItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.AddItemToBasketAsync(dummyBuyerId, 10L, 5);
+        await service.AddItemToBasketAsync(dummyBuyerId, 10L, 5, cancellationToken);
 
         // Assert
         basketRepo.Verify(
@@ -566,9 +573,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.CheckoutAsync(dummyBuyerId, shipTo);
+        await service.CheckoutAsync(dummyBuyerId, shipTo, cancellationToken);
 
         // Assert
         catalogRepo.Verify(
@@ -612,9 +620,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.CheckoutAsync(dummyBuyerId, shipTo);
+        await service.CheckoutAsync(dummyBuyerId, shipTo, cancellationToken);
 
         // Assert
         orderRepo.Verify(
@@ -658,9 +667,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.CheckoutAsync(dummyBuyerId, shipTo);
+        await service.CheckoutAsync(dummyBuyerId, shipTo, cancellationToken);
 
         // Assert
         orderRepo.Verify(
@@ -704,9 +714,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.CheckoutAsync(dummyBuyerId, shipTo);
+        await service.CheckoutAsync(dummyBuyerId, shipTo, cancellationToken);
 
         // Assert
         orderRepo.Verify(
@@ -765,9 +776,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var catalogDomainService = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.CheckoutAsync(dummyBuyerId, shipTo);
+        await service.CheckoutAsync(dummyBuyerId, shipTo, cancellationToken);
 
         // Assert
         basketRepo.Verify(
