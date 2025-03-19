@@ -3,7 +3,6 @@ using System.Text;
 using System.Text.Json;
 using Dressca.Web.Consumer.Dto.Baskets;
 using Dressca.Web.Consumer.Dto.Ordering;
-using Xunit;
 
 namespace Dressca.IntegrationTest;
 
@@ -21,9 +20,10 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         await this.factory.InitializeDatabaseAsync();
         var postBasketItemsRequest = CreateBasketItemsRequest();
         var postOrderRequestJson = JsonSerializer.Serialize(CreateDefaultPostOrderRequest());
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var postBasketItemResponse = await this.client.PostAsJsonAsync("api/basket-items", postBasketItemsRequest);
+        var postBasketItemResponse = await this.client.PostAsJsonAsync("api/basket-items", postBasketItemsRequest, cancellationToken);
         postBasketItemResponse.EnsureSuccessStatusCode();
 
         // API側でBuyerIdを特定できるように、Cookieを付加してリクエストする

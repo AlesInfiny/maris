@@ -7,7 +7,7 @@ public class OrderTest
 {
     public static TheoryData<List<OrderItem>?> EmptyOrderItems => new()
     {
-        null,
+        (List<OrderItem>?)null,
         new List<OrderItem>(),
     };
 

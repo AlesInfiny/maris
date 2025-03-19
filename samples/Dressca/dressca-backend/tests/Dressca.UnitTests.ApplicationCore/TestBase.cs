@@ -1,7 +1,6 @@
 ﻿using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
-using Xunit.Abstractions;
 
 namespace Dressca.UnitTests.ApplicationCore;
 
