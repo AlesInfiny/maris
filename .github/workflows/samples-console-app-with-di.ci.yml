@@ -42,16 +42,27 @@ jobs:
         with:
           dotnet-version: "8.*"
 
-      - id: application-build
-        name: アプリケーションのビルド
-        run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
-
-      - name: ビルド結果の表示
+      - name: アプリケーションのビルド
+        id: application-build
         shell: bash
-        if: ${{ success() || (failure() && steps.application-build.conclusion == 'failure') }}
+        continue-on-error: true
         run: |
           echo '## Build Result :gear:' >> $GITHUB_STEP_SUMMARY
-          cat build-result.txt | sed -n -e 's/^/> /p' >> $GITHUB_STEP_SUMMARY
+          dotnet build --nologo --configuration ${{ env.BUILD_CONFIGURATION }} --verbosity minimal > build-result.txt
+          echo ':heavy_check_mark: アプリケーションのビルドに成功しました。' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat build-result.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+    
+      - name: ビルド失敗時の結果表示
+        shell: bash
+        if: ${{ steps.application-build.outcome == 'failure' }}
+        run: |
+          echo ':x: アプリケーションのビルドに失敗しました。  ' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat build-result.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          exit 1
 
       - id: run-tests
         name: テストの実行
