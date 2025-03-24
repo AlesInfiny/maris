@@ -1,6 +1,6 @@
 ﻿namespace Maris.ConsoleApp.IntegrationTests.ScopeTests;
 
-internal enum Condition : inta
+internal enum Condition : int
 {
     Unknown = 0,
     Creating = 1,
