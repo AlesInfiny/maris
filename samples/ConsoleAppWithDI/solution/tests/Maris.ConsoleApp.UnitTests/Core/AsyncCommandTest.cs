@@ -92,7 +92,7 @@ public class AsyncCommandTest
 
         // Assert
         var ex = Assert.Throws<InvalidOperationException>(action);
-        Assert.Equal($"invalid コンソールアプリケーションの実行コンテキストに設定されているパラメーター {typeof(ParameterWithInterface)} のオブジェクトを、コマンドクラスの実装時に指定した型 {typeof(CommandParameter)} として取り扱うことができません。 dummy-command コマンドまたはそのパラメーターの実装を修正してください。", ex.Message);
+        Assert.Equal($"コンソールアプリケーションの実行コンテキストに設定されているパラメーター {typeof(ParameterWithInterface)} のオブジェクトを、コマンドクラスの実装時に指定した型 {typeof(CommandParameter)} として取り扱うことができません。 dummy-command コマンドまたはそのパラメーターの実装を修正してください。", ex.Message);
     }
 
     public class CommandParameter
