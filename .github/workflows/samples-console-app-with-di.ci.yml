@@ -52,7 +52,7 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat build-result.txt >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-    
+
       - name: ビルド失敗時の結果表示
         shell: bash
         if: ${{ steps.application-build.outcome == 'failure' }}
@@ -89,7 +89,7 @@ jobs:
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
-        uses: danielpalme/ReportGenerator-GitHub-Action@f1927db1dbfc029b056583ee488832e939447fe6 # v5.4.4
+        uses: danielpalme/ReportGenerator-GitHub-Action@f1927db1dbfc029b056583ee488832e939447fe6  # v5.4.4
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           reports: '**/TestResults/coverage.cobertura.xml'
