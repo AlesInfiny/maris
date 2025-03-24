@@ -16,6 +16,7 @@ internal class ConsoleAppHostedService : IHostedService
     private readonly ILogger logger;
     private readonly TimeProvider timeProvider;
     private long startTime;
+    private int exitCode;
 
     /// <summary>
     ///  <see cref="ConsoleAppHostedService"/> クラスの新しいインスタンスを初期化します。
@@ -82,17 +83,17 @@ internal class ConsoleAppHostedService : IHostedService
         try
         {
             var returnCode = await this.executor.ExecuteCommandAsync(cancellationToken);
-            this.SetExitCode(returnCode);
+            this.InternalSetExitCode(returnCode);
         }
         catch (InvalidParameterException ex)
         {
             this.logger.LogError(Events.InvalidParameterDetected, ex, LogMessages.CommandExecutorRaiseException, this.executor.CommandName);
-            this.SetExitCode(this.settings.DefaultValidationErrorExitCode);
+            this.InternalSetExitCode(this.settings.DefaultValidationErrorExitCode);
         }
         catch (Exception ex)
         {
             this.logger.LogError(Events.CommandExecutorRaiseException, ex, LogMessages.CommandExecutorRaiseException, this.executor.CommandName);
-            this.SetExitCode(this.settings.DefaultErrorExitCode);
+            this.InternalSetExitCode(this.settings.DefaultErrorExitCode);
         }
         finally
         {
@@ -112,8 +113,14 @@ internal class ConsoleAppHostedService : IHostedService
             Events.StopHostingService,
             LogMessages.StopHostingService,
             this.executor.CommandName,
-            Environment.ExitCode,
+            this.exitCode,
             this.timeProvider.GetElapsedTime(this.startTime).TotalMilliseconds);
         return Task.CompletedTask;
+    }
+
+    private void InternalSetExitCode(int exitCode)
+    {
+        this.exitCode = exitCode;
+        this.SetExitCode(exitCode);
     }
 }
