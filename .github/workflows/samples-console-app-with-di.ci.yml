@@ -30,7 +30,6 @@ jobs:
     permissions:
       checks: write
       contents: read
-      pull-requests: write
 
     steps:
       - name: ブランチのチェックアウト
@@ -99,11 +98,3 @@ jobs:
           sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
           sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
           cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
-          cat CoverageReport/SummaryGithub.md >> ${{ env.BUILD_SUMMARY_FILE }}
-
-      - name: ビルドサマリーをPull-requestに表示
-        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728  # v2.9.1
-        if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
-        with:
-          recreate: true
-          path: '${{ env.WORKING_DIRECTORY }}/${{ env.BUILD_SUMMARY_FILE }}'
