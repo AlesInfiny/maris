@@ -104,3 +104,7 @@ jobs:
           sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
           sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
           cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+
+      - name: 単体テスト結果の確認
+        if: ${{ steps.create-test-result-report.outputs.conclusion == 'failure' }}
+        run: exit 1
