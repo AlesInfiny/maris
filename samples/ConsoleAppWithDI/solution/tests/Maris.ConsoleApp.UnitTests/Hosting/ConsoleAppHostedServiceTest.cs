@@ -3,7 +3,6 @@ using Maris.ConsoleApp.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Time.Testing;
-using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
 
@@ -345,7 +344,7 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
         var cancellationToken = new CancellationToken(false);
-
+        //TestContext.Current.
         // Act
         await service.StopAsync(cancellationToken);
 

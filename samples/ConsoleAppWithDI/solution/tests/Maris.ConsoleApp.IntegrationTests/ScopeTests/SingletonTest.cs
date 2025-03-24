@@ -2,7 +2,6 @@
 using Maris.ConsoleApp.IntegrationTests.ScopeTests.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.IntegrationTests.ScopeTests;
 
