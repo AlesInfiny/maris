@@ -14,9 +14,10 @@ public class SingletonTest(ITestOutputHelper testOutputHelper) : TestBase(testOu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories
@@ -35,9 +36,10 @@ public class SingletonTest(ITestOutputHelper testOutputHelper) : TestBase(testOu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories
@@ -57,9 +59,10 @@ public class SingletonTest(ITestOutputHelper testOutputHelper) : TestBase(testOu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories
@@ -78,9 +81,10 @@ public class SingletonTest(ITestOutputHelper testOutputHelper) : TestBase(testOu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories
@@ -99,9 +103,10 @@ public class SingletonTest(ITestOutputHelper testOutputHelper) : TestBase(testOu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories

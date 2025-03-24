@@ -343,8 +343,8 @@ public class ConsoleAppHostedServiceTest(ITestOutputHelper testOutputHelper) : T
         var executor = new CommandExecutor(manager, commandExecutorLogger);
         var logger = this.CreateTestLogger<ConsoleAppHostedService>();
         var service = new ConsoleAppHostedService(lifetime, settings, executor, logger);
-        var cancellationToken = new CancellationToken(false);
-        //TestContext.Current.
+        var cancellationToken = TestContext.Current.CancellationToken;
+
         // Act
         await service.StopAsync(cancellationToken);
 
