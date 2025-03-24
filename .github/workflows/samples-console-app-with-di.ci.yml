@@ -65,9 +65,11 @@ jobs:
           exit 1
 
       - id: run-tests
-        name: テストの実行
+        name: 単体テストの実行
         continue-on-error: true
-        run: dotnet test --no-build --logger trx --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage"
+        run: |
+          echo '## Test Result :memo:' >> $GITHUB_STEP_SUMMARY
+          dotnet test --no-build --nologo --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
 
       - id: create-test-result-report
         name: テスト結果ページの作成
