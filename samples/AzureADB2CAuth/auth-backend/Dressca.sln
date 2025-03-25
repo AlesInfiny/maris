@@ -24,6 +24,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dressca.IntegrationTest", "tests\Dressca.IntegrationTest\Dressca.IntegrationTest.csproj", "{D299C61B-0FF5-4D53-947F-8639BFC4BD49}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A4862B43-6114-409B-AFE5-8485F4618852}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
