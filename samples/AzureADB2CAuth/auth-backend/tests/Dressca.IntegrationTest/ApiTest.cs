@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
-using Xunit;
 
 namespace Dressca.IntegrationTest;
 
