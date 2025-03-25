@@ -2,7 +2,6 @@
 using Maris.ConsoleApp.IntegrationTests.ScopeTests.Commands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.IntegrationTests.ScopeTests;
 
@@ -15,9 +14,10 @@ public class ScopedTest(ITestOutputHelper testOutputHelper) : TestBase(testOutpu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories
@@ -36,9 +36,10 @@ public class ScopedTest(ITestOutputHelper testOutputHelper) : TestBase(testOutpu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories
@@ -58,9 +59,10 @@ public class ScopedTest(ITestOutputHelper testOutputHelper) : TestBase(testOutpu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories
@@ -79,9 +81,10 @@ public class ScopedTest(ITestOutputHelper testOutputHelper) : TestBase(testOutpu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories
@@ -100,9 +103,10 @@ public class ScopedTest(ITestOutputHelper testOutputHelper) : TestBase(testOutpu
         // Arrange
         ObjectStateHistory.Clear();
         using var app = this.CreateHost();
+        var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await app.RunAsync();
+        await app.RunAsync(cancellationToken);
 
         // Assert
         var createHistories = ObjectStateHistory.Histories

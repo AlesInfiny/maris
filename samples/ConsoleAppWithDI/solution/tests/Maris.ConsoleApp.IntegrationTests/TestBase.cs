@@ -1,5 +1,4 @@
 ﻿using Maris.Logging.Testing.Xunit;
-using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.IntegrationTests;
 

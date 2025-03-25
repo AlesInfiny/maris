@@ -4,7 +4,6 @@ using Maris.ConsoleApp.Core;
 using Maris.ConsoleApp.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Xunit.Abstractions;
 
 namespace Maris.ConsoleApp.UnitTests.Hosting;
 

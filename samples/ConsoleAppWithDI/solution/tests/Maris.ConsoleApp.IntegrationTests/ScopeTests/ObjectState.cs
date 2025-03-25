@@ -3,7 +3,7 @@
 internal class ObjectState
 {
     private readonly TimeProvider timeProvider;
-    private DateTime createDate;
+    private readonly DateTime createDate;
 
     internal ObjectState(Guid objectId, Type objectType, Condition condition, TimeProvider timeProvider)
     {
