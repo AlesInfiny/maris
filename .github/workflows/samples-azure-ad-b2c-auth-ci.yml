@@ -96,7 +96,6 @@ jobs:
     env:
       DOTNET_NOLOGO: true
       BUILD_CONFIGURATION: Debug
-      BUILD_SUMMARY_FILE: BuildSummary.md
     permissions:
       checks: write
     defaults:
@@ -141,38 +140,32 @@ jobs:
         name: テストの実行
         continue-on-error: true
         run: |
-          dotnet test --no-build --nologo --logger "trx;LogFileName=integration-test.trx" --logger:"console;verbosity=minimal" --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --collect "XPlat Code Coverage" > integration-test-result.txt
+          echo '## Test Result :memo:' >> $GITHUB_STEP_SUMMARY
+          dotnet test --no-build --nologo --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
 
       - id: create-test-result-report
         name: テスト結果ページの作成
-        uses: dorny/test-reporter@6e6a65b7a0bd2c9197df7d0ae36ac5cee784230c  # v2.0.0
-        if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
+        uses: dorny/test-reporter@v2
         with:
-          name: 'バックエンドのテスト結果'
+          name: 'Test results'
           path: '**/TestResults/*.trx'
           path-replace-backslashes: 'true'
           reporter: 'dotnet-trx'
           only-summary: 'false'
-          list-suites: 'all'
-          list-tests: 'all'
+          use-actions-summary: 'true'
+          badge-title: 'tests'
+          list-suites: 'failed'
+          list-tests: 'failed'
           max-annotations: '10'
-          fail-on-error: 'true'
-
-      - name: テスト結果のサマリー表示
-        shell: bash
-        if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
-        run: |
-          echo '## Test Result :memo:' >> ${{ env.BUILD_SUMMARY_FILE }}
-          echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> ${{ env.BUILD_SUMMARY_FILE }}
-          echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> ${{ env.BUILD_SUMMARY_FILE }}
-          cat ${{ env.BUILD_SUMMARY_FILE }} >> $GITHUB_STEP_SUMMARY
+          fail-on-error: 'false'
+          fail-on-empty: 'true'
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
         uses: danielpalme/ReportGenerator-GitHub-Action@f1927db1dbfc029b056583ee488832e939447fe6  # v5.4.4
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
-          reports: '**/TestResults/*/coverage.cobertura.xml'
+          reports: '**/TestResults/coverage.cobertura.xml'
           targetdir: '${{ env.BACKEND_WORKING_DIRECTORY }}/CoverageReport'
           reporttypes: 'MarkdownSummaryGithub'
 
@@ -183,4 +176,7 @@ jobs:
           sed -i s/'# Summary'/'## Coverage :triangular_ruler:'/g CoverageReport/SummaryGithub.md
           sed -i -e '/^## Coverage$/d' CoverageReport/SummaryGithub.md
           cat CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
-          cat CoverageReport/SummaryGithub.md >> ${{ env.BUILD_SUMMARY_FILE }}
+
+      - name: 単体テスト結果の確認
+        if: ${{ steps.create-test-result-report.outputs.conclusion == 'failure' }}
+        run: exit 1

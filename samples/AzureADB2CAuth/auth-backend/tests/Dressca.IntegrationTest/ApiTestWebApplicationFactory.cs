@@ -72,5 +72,4 @@ public class ApiTestWebApplicationFactory<TProgram>
                 .AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
     }
-
 }
