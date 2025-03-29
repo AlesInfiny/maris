@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Maris.Logging.Testing" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
@@ -19,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Maris.ConsoleApp.Core\Maris.ConsoleApp.Core.csproj" />
     <ProjectReference Include="..\..\src\Maris.ConsoleApp.Hosting\Maris.ConsoleApp.Hosting.csproj" />
-    <ProjectReference Include="..\..\src\Maris.Logging.Testing\Maris.Logging.Testing.csproj" />
   </ItemGroup>
 
   <ItemGroup>
