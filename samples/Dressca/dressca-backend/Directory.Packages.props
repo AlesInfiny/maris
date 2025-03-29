@@ -1,5 +1,6 @@
 ﻿<Project>
   <ItemGroup>
+    <PackageVersion Include="Maris.Logging.Testing" Version="1.0.0-Beta3" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.12" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.12" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.12" />
