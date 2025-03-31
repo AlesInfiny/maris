@@ -1,4 +1,4 @@
-<!-- textlint-disable @textlint-rule/require-header-id -->
+﻿<!-- textlint-disable @textlint-rule/require-header-id -->
 <!-- markdownlint-disable-file CMD001 -->
 <!-- cSpell:ignore Validatable -->
 
@@ -30,9 +30,10 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 またテストプロジェクトでは、以下の OSS ライブラリを利用します。
 
 - [coverlet.collector](https://www.nuget.org/packages/coverlet.collector/)
+- [Maris.Logging.Testing](https://www.nuget.org/packages/Maris.Logging.Testing)
 - [Microsoft.Extensions.Logging](https://www.nuget.org/packages/Microsoft.Extensions.Logging/)
 - [Moq](https://www.nuget.org/packages/Moq/)
-- [xunit](https://www.nuget.org/packages/xunit/)
+- [xunit.v3](https://www.nuget.org/packages/xunit.v3)
 - [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
 
 ## サンプルの構成
@@ -44,9 +45,6 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
     - Maris.ConsoleApp.Hosting
     - Maris.ConsoleApp.UnitTests
     - Maris.ConsoleApp.IntegrationTests
-
-- テスト用の xUnit 拡張機能
-    - Maris.Logging.Testing
 
 - 利用例
     - Maris.Samples.Cli
@@ -74,7 +72,6 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 | src                                  |                                   |                                        |
 |                                      | Maris.ConsoleApp.Core             | フォルダーごと配置する                 |
 |                                      | Maris.ConsoleApp.Hosting          | フォルダーごと配置する                 |
-|                                      | Maris.Logging.Testing             | フォルダーごと配置する                 |
 |                                      | Directory.Build.props             |                                        |
 | tests                                |                                   |                                        |
 |                                      | Maris.ConsoleApp.IntegrationTests | フォルダーごと配置する                 |
@@ -90,7 +87,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 ### ソリューションへのファイル・プロジェクトの取り込み
 
 作成したソリューションを Visual Studio で開き、ソリューションファイルの直下に「src」ソリューションフォルダーと「tests」ソリューションフォルダーを作成します。
-「src」ソリューションフォルダーに「Maris.ConsoleApp.Core」・「Maris.ConsoleApp.Hosting」・「Maris.Logging.Testing」の各プロジェクトを追加します。
+「src」ソリューションフォルダーに「Maris.ConsoleApp.Core」・「Maris.ConsoleApp.Hosting」の各プロジェクトを追加します。
 また「tests」ソリューションフォルダーに「Maris.ConsoleApp.IntegrationTests」・「Maris.ConsoleApp.UnitTests」プロジェクトを追加します。
 
 ![各プロジェクト追加後のソリューション構造](readme-images/load-projects-to-solution.png)
