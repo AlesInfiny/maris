@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Maris.Logging.Testing" />
     <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
@@ -26,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dressca.ApplicationCore\Dressca.ApplicationCore.csproj" />
-    <ProjectReference Include="..\..\src\Maris.Logging.Testing\Maris.Logging.Testing.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,13 +9,11 @@
       "src\\Dressca.Web.Consumer.Dto\\Dressca.Web.Consumer.Dto.csproj",
       "src\\Dressca.Web.Consumer\\Dressca.Web.Consumer.csproj",
       "src\\Dressca.Web\\Dressca.Web.csproj",
-      "src\\Maris.Logging.Testing\\Maris.Logging.Testing.csproj",
       "tests\\Dressca.IntegrationTest\\Dressca.IntegrationTest.csproj",
       "tests\\Dressca.UnitTests.ApplicationCore\\Dressca.UnitTests.ApplicationCore.csproj",
       "tests\\Dressca.UnitTests.SystemCommon\\Dressca.UnitTests.SystemCommon.csproj",
       "tests\\Dressca.UnitTests.Web.Consumer\\Dressca.UnitTests.Web.Consumer.csproj",
       "tests\\Dressca.UnitTests.Web\\Dressca.UnitTests.Web.csproj",
-      "tests\\Maris.Logging.Testing.Tests\\Maris.Logging.Testing.Tests.csproj"
     ]
   }
 }

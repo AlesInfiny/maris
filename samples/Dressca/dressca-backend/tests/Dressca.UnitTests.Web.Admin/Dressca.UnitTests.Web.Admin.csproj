@@ -5,6 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Maris.Logging.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
     <PackageReference Include="Moq" />
@@ -21,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Dressca.Web.Admin\Dressca.Web.Admin.csproj" />
-    <ProjectReference Include="..\..\src\Maris.Logging.Testing\Maris.Logging.Testing.csproj" />
   </ItemGroup>
 
 </Project>
