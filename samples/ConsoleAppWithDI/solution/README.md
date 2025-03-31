@@ -608,7 +608,7 @@ flowchart TD
     Host[Maris.ConsoleApp.Hosting]
     Core[Maris.ConsoleApp.Core]
     UnitTests[Maris.ConsoleApp.UnitTests]
-    TestLib[Maris.Logging.Testing]
+    IntegTests[Maris.ConsoleApp.IntegrationTests]
     subgraph Your application
     Cli-->Biz
     Cli-->Infra
@@ -619,7 +619,8 @@ flowchart TD
     Host-->Core
     UnitTests-->Core
     UnitTests-->Host
-    UnitTests-->TestLib
+    IntegTests-->Core
+    IntegTests-->Host
     end
 ```
 
