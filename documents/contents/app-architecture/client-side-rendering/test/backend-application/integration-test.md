@@ -16,7 +16,7 @@ description: バックエンドアプリケーションのテスト方針につ�
 
 上記の目的を達成するため、 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では以下のテストフレームワークを用いて結合テストを行います。
 
-- [xUnit :material-open-in-new:](https://xunit.net/){ target=_blank }
+- [xUnit.v3 :material-open-in-new:](https://www.nuget.org/packages/xunit.v3){ target=_blank }
     - .NET のテストフレームワークです。
 - [Microsoft.AspNetCore.Mvc.Testing :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing){ target=_blank }
     - MVC アプリケーションの結合テスト用の機能を提供するパッケージです。
@@ -37,7 +37,7 @@ description: バックエンドアプリケーションのテスト方針につ�
 AlesInfiny Maris の CSR 方式のバックエンドアプリケーションは、 .NET を用いた Web API のアプリケーションです。
 結合テストでは、 Web API のリクエストを疑似的に再現し、アプリケーションの実行とレスポンスの検証します。
 Web API のリクエスト送信には、 Microsoft.AspNetCore.Mvc.Testing を活用します。
-テストフレームワークは xUnit を利用します。
+テストフレームワークは xUnit.v3 を利用します。
 
 データベースはテスト実行環境上の SQL Server を使用します。各テストケースの処理開始時に、そのテストで利用するデータベースを構築します。
 

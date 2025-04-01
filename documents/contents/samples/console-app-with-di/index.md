@@ -53,7 +53,7 @@ Maris.Samples.Cli.exe get-by-unit-price-range --minimum 2000 --maximum 3000
 
 - テストプロジェクト
     - [Moq :material-open-in-new:](https://www.nuget.org/packages/Moq/){ target=_blank }
-    - [xunit :material-open-in-new:](https://www.nuget.org/packages/xunit/){ target=_blank }
+    - [xunit.v3 :material-open-in-new:](https://www.nuget.org/packages/xunit.v3/){ target=_blank }
 
 ## ダウンロード {#download}
 
