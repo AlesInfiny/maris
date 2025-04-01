@@ -108,7 +108,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 
 - [UseMicrosoftTestingPlatformRunner :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#istestingplatformapplication){ target=_blank }
 
-    xunit.v3 を利用している場合、`UseMicrosoftTestingPlatformRunner` を有効化することで `IsTestingPlatformApplication` を有効にします。
+    xUnit v3 を利用している場合、`UseMicrosoftTestingPlatformRunner` を有効化することで `IsTestingPlatformApplication` を有効にします。
 
 特に設定する項目がなければ、 tests フォルダーに Directory.Build.props ファイルを追加する必要ありません。
 
