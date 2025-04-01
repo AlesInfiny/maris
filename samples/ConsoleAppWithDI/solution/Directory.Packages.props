@@ -1,7 +1,7 @@
 ﻿<Project>
   <ItemGroup>
     <PackageVersion Include="CommandLineParser" Version="2.9.1" />
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="8.10.0" />
+    <PackageVersion Include="Maris.Logging.Testing" Version="1.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="8.0.1" />
@@ -13,6 +13,5 @@
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.1" />
     <PackageVersion Include="xunit.v3" Version="2.0.0" />
-    <PackageVersion Include="xunit.v3.extensibility.core" Version="2.0.0" />
   </ItemGroup>
 </Project>

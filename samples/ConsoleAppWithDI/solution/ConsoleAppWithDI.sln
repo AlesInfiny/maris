@@ -38,8 +38,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maris.ConsoleApp.UnitTests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maris.ConsoleApp.IntegrationTests", "tests\Maris.ConsoleApp.IntegrationTests\Maris.ConsoleApp.IntegrationTests.csproj", "{0DF6783C-412B-4124-99DD-70385C577FAB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maris.Logging.Testing", "src\Maris.Logging.Testing\Maris.Logging.Testing.csproj", "{50A561E6-48A0-44B4-B966-917CBCBB98C9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,10 +72,6 @@ Global
 		{0DF6783C-412B-4124-99DD-70385C577FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DF6783C-412B-4124-99DD-70385C577FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DF6783C-412B-4124-99DD-70385C577FAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50A561E6-48A0-44B4-B966-917CBCBB98C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50A561E6-48A0-44B4-B966-917CBCBB98C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50A561E6-48A0-44B4-B966-917CBCBB98C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50A561E6-48A0-44B4-B966-917CBCBB98C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,7 +84,6 @@ Global
 		{8DC9AA0F-028F-4C73-98FD-46A31DBC174D} = {BECFFBEF-C7B6-4321-8086-18E7944C9B87}
 		{E3470347-A48E-4899-AFC9-1B6C4832FFC2} = {938E8E03-C54D-4234-A14A-4CE314992B08}
 		{0DF6783C-412B-4124-99DD-70385C577FAB} = {938E8E03-C54D-4234-A14A-4CE314992B08}
-		{50A561E6-48A0-44B4-B966-917CBCBB98C9} = {BECFFBEF-C7B6-4321-8086-18E7944C9B87}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FE1739D1-A22E-4749-94F3-20C3B0DFAEA7}
