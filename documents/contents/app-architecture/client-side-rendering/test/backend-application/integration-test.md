@@ -16,7 +16,7 @@ description: バックエンドアプリケーションのテスト方針につ�
 
 上記の目的を達成するため、 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では以下のテストフレームワークを用いて結合テストを行います。
 
-- [xUnit.v3 :material-open-in-new:](https://www.nuget.org/packages/xunit.v3){ target=_blank }
+- [xunit.v3 :material-open-in-new:](https://www.nuget.org/packages/xunit.v3){ target=_blank }
     - .NET のテストフレームワークです。
 - [Microsoft.AspNetCore.Mvc.Testing :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing){ target=_blank }
     - MVC アプリケーションの結合テスト用の機能を提供するパッケージです。
