@@ -80,12 +80,18 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 - 単体 / 結合 / E2E テストドライバー
 
+??? info "プロジェクトを作る前に必要な作業"
+    xUnit v3 の単体テストプロジェクトを作成するには、以下のコマンドでプロジェクトテンプレートを事前にインストールする必要があります。
+
+    ```winbatch title="プロジェクトテンプレートのインストールコマンド"
+    dotnet new install xunit.v3.templates
+    ```
+
 ??? info "【参考】 .NET CLI を用いて xUnit v3 テストプロジェクトを作成する方法"
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。
     プロジェクト名はフォルダー名と同名になります。
 
     ```winbatch title="xUnit v3 テストプロジェクトの作成コマンド"
-    dotnet new install xunit.v3.templates
     dotnet new xunit3
     ```
 
