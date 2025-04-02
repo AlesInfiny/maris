@@ -81,7 +81,8 @@ description: サーバーサイドで動作する .NET アプリケーション�
 - 単体 / 結合 / E2E テストドライバー
 
 ??? info "プロジェクトを作る前に必要な作業"
-    xUnit v3 の単体テストプロジェクトを作成するには、以下のコマンドでプロジェクトテンプレートを事前にインストールする必要があります。
+    xUnit v3 の単体テストプロジェクトを作成するには、事前にプロジェクトテンプレートをインストールする必要があります。
+    以下のコマンドで [xunit.v3.templates :material-open-in-new:](https://www.nuget.org/packages/xunit.v3.templates/){ target=_blank } をインストールできます。
 
     ```winbatch title="プロジェクトテンプレートのインストールコマンド"
     dotnet new install xunit.v3.templates
