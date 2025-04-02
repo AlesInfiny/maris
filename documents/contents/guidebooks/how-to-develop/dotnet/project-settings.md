@@ -136,7 +136,7 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
 
 また、 xUnit v3 の単体テストプロジェクトを作成した場合、 csproj ファイルから削除すべき設定は以下の通りです。
 
-```xml hl_lines="5 6 7 9" title="テストコード用の csproj ファイルから削除するべき設定値の例"
+```xml hl_lines="5 6 7 9 10 11" title="テストコード用の csproj ファイルから削除するべき設定値の例"
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -145,7 +145,9 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
 
 </Project>
 ```
