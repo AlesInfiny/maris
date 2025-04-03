@@ -9,11 +9,11 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 ## 結合テストプロジェクトの設定 {#test-project-settings}
 
-結合テスト用に xUnit のテストプロジェクトを作成し、以下を設定します。
+結合テスト用に xUnit v3 のテストプロジェクトを作成し、以下を設定します。
 
 - テスト対象プロジェクトを参照
 - 結合テストプロジェクト実行に必要な NuGet パッケージのインストール
-    - [xunit :material-open-in-new:](https://www.nuget.org/packages/xunit){ target=_blank }
+    - [xunit.v3 :material-open-in-new:](https://www.nuget.org/packages/xunit.v3){ target=_blank }
     - [xunit.runner.visualstudio :material-open-in-new:](https://www.nuget.org/packages/xunit.runner.visualstudio){ target=_blank }
     - [Microsoft.AspNetCore.Mvc.Testing :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing){ target=_blank }
 

@@ -74,18 +74,26 @@ description: サーバーサイドで動作する .NET アプリケーション�
     dotnet new vite
     ```
 
-### xUnit テストプロジェクト {#xunit}
+### xUnit v3 テストプロジェクト {#xunit}
 
 以下の用途で利用します。
 
 - 単体 / 結合 / E2E テストドライバー
 
-??? info "【参考】 .NET CLI を用いて xUnit テストプロジェクトを作成する方法"
+??? info "プロジェクトを作る前に必要な作業"
+    xUnit v3 の単体テストプロジェクトを作成するには、事前にプロジェクトテンプレートをインストールする必要があります。
+    以下のコマンドで [xunit.v3.templates :material-open-in-new:](https://www.nuget.org/packages/xunit.v3.templates/){ target=_blank } をインストールできます。
+
+    ```winbatch title="プロジェクトテンプレートのインストールコマンド"
+    dotnet new install xunit.v3.templates
+    ```
+
+??? info "【参考】 .NET CLI を用いて xUnit v3 テストプロジェクトを作成する方法"
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。
     プロジェクト名はフォルダー名と同名になります。
 
-    ```winbatch title="xUnit テストプロジェクトの作成コマンド"
-    dotnet new xunit
+    ```winbatch title="xUnit v3 テストプロジェクトの作成コマンド"
+    dotnet new xunit3
     ```
 
 ## プロジェクトの命名 {#project-naming-rule}

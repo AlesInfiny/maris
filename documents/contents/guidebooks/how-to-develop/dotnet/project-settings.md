@@ -93,6 +93,23 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 
 テストコードを配置する tests フォルダーに、「 Directory.Build.props 」という名前のファイルを作成します。
 [プロダクションコード用のプロジェクト設定](#project-settings-for-production) でも解説した通り、ルートフォルダーに配置した Directory.Build.props ファイルを上書き設定できるよう、 `#!xml <import>` 要素の追加を推奨します。
+
+!!! example "テストコード用の Directory.Build.props の設定例"
+
+    ```xml title="Directory.Build.props"
+    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/tests/Directory.Build.props
+    ```
+
+設定例のプロパティの詳細については以下を参照してください。
+
+- [TestingPlatformDotnetTestSupport :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#testingplatformdotnettestsupport){ target=_blank }
+
+    `TestingPlatformDotnetTestSupport` を有効化することで `dotnet test` コマンドで Microsoft Testing Platform が利用されます。
+
+- [UseMicrosoftTestingPlatformRunner :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#istestingplatformapplication){ target=_blank }
+
+    xUnit v3 を利用している場合、`UseMicrosoftTestingPlatformRunner` を有効化することで `IsTestingPlatformApplication` を有効にします。
+
 特に設定する項目がなければ、 tests フォルダーに Directory.Build.props ファイルを追加する必要ありません。
 
 ### プロジェクトファイルの設定値削除 {#delete-csproj-settings}
@@ -104,7 +121,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 例えば、コンソールアプリケーションのプロジェクトを作成した場合、 csproj ファイルから削除すべき設定は以下の通りです。
 csproj ファイルから設定を削除しても、 Directory.Build.props ファイルの設定が有効になります。
 
-```xml hl_lines="5 6 7" title="csproj ファイルから削除するべき設定値の例"
+```xml hl_lines="5 6 7" title="プロダクションコード用の csproj ファイルから削除するべき設定値の例"
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -113,6 +130,24 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+</Project>
+```
+
+また、 xUnit v3 の単体テストプロジェクトを作成した場合、 csproj ファイルから削除すべき設定は以下の通りです。
+
+```xml hl_lines="5 6 7 9 10 11" title="テストコード用の csproj ファイルから削除するべき設定値の例"
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
 
 </Project>
 ```

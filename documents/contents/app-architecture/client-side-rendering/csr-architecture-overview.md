@@ -88,7 +88,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
           実装済みの Web API から OpenAPI 仕様書を生成します。
 
-    - [xUnit :material-open-in-new:](https://xunit.net/){ target=_blank }
+    - [xUnit v3 :material-open-in-new:](https://xunit.net/){ target=_blank }
 
           .NET で利用可能なテストフレームワークです。
 

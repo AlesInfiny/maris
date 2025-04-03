@@ -12,10 +12,10 @@ description: バックエンドアプリケーションのテスト方針につ�
     主に以下のテストを実施します。
 
     - StyleCopAnalyzers を用いた、ソースコード内の潜在的な不具合を検出する静的テスト
-    - xUnit や Moq を用いた、クラスやメソッド単位で機能性を確認する動的テスト
+    - xUnit v3 や Moq を用いた、クラスやメソッド単位で機能性を確認する動的テスト
 
 1. [結合テスト ( ITa )](integration-test.md)
 
     主に以下のテストを実施します。
 
-    - xUnit や Microsoft.AspNetCore.Mvc.Testing を用いた、 Web API のコントローラーからデータベースまで一気通貫で機能性を確認する動的テスト
+    - xUnit v3 や Microsoft.AspNetCore.Mvc.Testing を用いた、 Web API のコントローラーからデータベースまで一気通貫で機能性を確認する動的テスト
