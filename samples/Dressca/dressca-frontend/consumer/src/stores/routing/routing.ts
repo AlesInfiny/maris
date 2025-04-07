@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 
-export const useRoutingStore = defineStore({
-  id: 'routing',
+export const useRoutingStore = defineStore('routing', {
   state: () => ({
     redirectFrom: null as null | string,
   }),
@@ -11,6 +10,11 @@ export const useRoutingStore = defineStore({
     },
     deleteRedirectFrom() {
       this.redirectFrom = null;
+    },
+  },
+  getters: {
+    getRedirectFrom(state) {
+      return state.redirectFrom;
     },
   },
 });
