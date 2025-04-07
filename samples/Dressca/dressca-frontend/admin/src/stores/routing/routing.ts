@@ -3,8 +3,7 @@ import { defineStore } from 'pinia';
 /**
  * ルーティング情報のストア。
  */
-export const useRoutingStore = defineStore({
-  id: 'routing',
+export const useRoutingStore = defineStore('routing', {
   state: () => ({
     redirectFrom: null as null | string,
   }),
@@ -21,6 +20,16 @@ export const useRoutingStore = defineStore({
      */
     deleteRedirectFrom() {
       this.redirectFrom = null;
+    },
+  },
+  getters: {
+    /**
+     * リダイレクト元の URL を取得します。
+     * @param state 状態。
+     * @returns リダイレクト元のURL。
+     */
+    getRedirectFrom(state) {
+      return state.redirectFrom;
     },
   },
 });
