@@ -72,7 +72,8 @@ public class CatalogApplicationService
         {
             Expression<Func<CatalogItem, bool>> specification = item =>
                 (!brandId.HasValue || item.CatalogBrandId == brandId) &&
-                (!categoryId.HasValue || item.CatalogCategoryId == categoryId);
+                (!categoryId.HasValue || item.CatalogCategoryId == categoryId) &&
+                (item.IsDeleted == false);
             itemsOnPage = await this.catalogRepository.FindAsync(specification, skip, take, cancellationToken);
             totalItems = await this.catalogRepository.CountAsync(specification, cancellationToken);
             scope.Complete();
@@ -148,6 +149,7 @@ public class CatalogApplicationService
             ProductCode = productCode,
             CatalogBrandId = catalogBrandId,
             CatalogCategoryId = catalogCategoryId,
+            IsDeleted = false,
         };
         CatalogItem catalogItemAdded;
 
@@ -179,15 +181,17 @@ public class CatalogApplicationService
             throw new PermissionDeniedException();
         }
 
-        if (!await this.catalogDomainService.ItemExistsAsync(id, cancellationToken))
-        {
-            this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
-            throw new CatalogItemNotExistingInRepositoryException([id]);
-        }
-
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
+            var itemToDelete = await this.catalogRepository.GetAsync(id, cancellationToken);
+
+            if (itemToDelete == null || itemToDelete.IsDeleted == true)
+            {
+                this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
+                throw new CatalogItemNotExistingInRepositoryException([id]);
+            }
+
+            await this.catalogRepository.RemoveAsync(itemToDelete, rowVersion, cancellationToken);
             scope.Complete();
         }
 
@@ -257,6 +261,7 @@ public class CatalogApplicationService
             CatalogBrandId = catalogBrandId,
             CatalogCategoryId = catalogCategoryId,
             RowVersion = rowVersion,
+            IsDeleted = false,
         };
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {

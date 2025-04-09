@@ -19,6 +19,7 @@ public class CatalogItem
     private long catalogCategoryId;
     private long catalogBrandId;
     private byte[] rowVersion = [];
+    private bool isDeleted;
 
     /// <summary>
     ///  <see cref="CatalogItem"/> クラスの新しいインスタンスを初期化します。
@@ -199,23 +200,37 @@ public class CatalogItem
     }
 
     /// <summary>
-    ///  指定した ID と 行バージョンを持つ、削除用のカタログアイテムエンティティを生成します。
+    ///  論理削除フラグを取得します。
     /// </summary>
-    /// <param name="id">カタログアイテム ID 。</param>
+    public required bool IsDeleted
+    {
+        get => this.isDeleted;
+
+        init
+        {
+            this.isDeleted = value;
+        }
+    }
+
+    /// <summary>
+    ///  指定した行バージョンを持つ、削除用のカタログアイテムエンティティを生成します。
+    /// </summary>
+    /// <param name="item">削除対象のカタログアイテム 。</param>
     /// <param name="rowVersion">行バージョン。</param>
     /// <returns>削除用のカタログアイテムエンティティ。</returns>
-    public static CatalogItem CreateCatalogItemToDelete(long id, byte[] rowVersion)
+    public static CatalogItem CreateCatalogItemToDelete(CatalogItem item, byte[] rowVersion)
     {
         return new CatalogItem
         {
-            Id = id,
-            Name = "削除用アイテム",
-            Description = "削除用アイテムです。",
-            Price = 0,
-            ProductCode = "DELETE",
-            CatalogBrandId = 1,
-            CatalogCategoryId = 1,
+            Id = item.Id,
+            Name = item.Name,
+            Description = item.Description,
+            Price = item.Price,
+            ProductCode = item.ProductCode,
+            CatalogBrandId = item.CatalogBrandId,
+            CatalogCategoryId = item.CatalogCategoryId,
             RowVersion = rowVersion,
+            IsDeleted = true,
         };
     }
 }

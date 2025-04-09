@@ -68,11 +68,11 @@ public interface ICatalogRepository
     /// <summary>
     ///  指定した識別子と行バージョンを持つエンティティを削除します。
     /// </summary>
-    /// <param name="id">エンティティの ID 。</param>
+    /// <param name="entity">エンティティ 。</param>
     /// <param name="rowVersion">行バージョン。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>削除されたアイテムの数を返す非同期処理を表すタスク。</returns>
-    Task<int> RemoveAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default);
+    Task<int> RemoveAsync(CatalogItem entity, byte[] rowVersion, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  指定した識別子を持つエンティティが存在するかどうかを示す真理値を取得します。
