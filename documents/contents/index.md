@@ -69,3 +69,11 @@ AlesInfiny Maris で構築した Web アプリケーションのサンプルを�
    いくつかプロンプト画面が立ち上がった後、ブラウザーが起動し、アプリケーションの実行が開始します。
 
     [![Dressca トップページ](images/dressca-top.png){ width="600" loading=lazy }](images/dressca-top.png)
+
+    !!! info "証明書のインストールを要求される場合"
+        アプリケーションの初回実行時に以下のような画面が表示される場合があります。
+        サンプルアプリケーションでは HTTPS 通信を使用する構成になっているため、どちらも「はい」をクリックして証明書をインストールしてください。
+        なお、証明書インストール後もアプリケーションへのアクセスをブラウザーに拒否される場合は、 Visual Studio や PC の再起動をお試しください。
+        再起動してもアクセスできない場合はブラウザーの設定をご確認ください。
+        ![ASP.NET Core SSL 証明書を信頼する](images/trust-aspnet-ssl-certificate.png)
+        ![localhost 証明書をインストールする](images/install-localhost-server-certificate.png){ width="350" loading=lazy }
