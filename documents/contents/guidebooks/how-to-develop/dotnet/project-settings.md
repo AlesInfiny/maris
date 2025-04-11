@@ -8,7 +8,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 ## .NET SDKの設定 {#dotnet-sdk-settings}
 
-AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、 global.json ファイルを用いて、ビルドに利用する .NET SDK のバージョンを設定します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、 global.json ファイルを用いて、 .NET CLI を実行する .NET SDK のバージョンを設定します。
 ソリューションファイルの配置されているフォルダーに、「global.json」という名前のファイルを作成します。
 ファイル名は、大文字/小文字まで一致するように作成してください。
 
