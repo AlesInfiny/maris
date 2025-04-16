@@ -88,6 +88,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、ソース
         gitGraph
             commit
             branch release
+            commit type: HIGHLIGHT id: "v0.1.0"
             checkout main
             commit
             branch developA
