@@ -12,7 +12,7 @@ public class CatalogItemTest
 
         // Act
         // コンストラクタのテストなので CreateDefaultCatalogItem は使わない
-        var catalogItem = new CatalogItem { CatalogCategoryId = 1L, CatalogBrandId = 2L, Description = "説明", Name = "商品名", Price = 100m, ProductCode = "C000000001" };
+        var catalogItem = new CatalogItem { CatalogCategoryId = 1L, CatalogBrandId = 2L, Description = "説明", Name = "商品名", Price = 100m, ProductCode = "C000000001", IsDeleted = false };
 
         // Assert
         Assert.NotNull(catalogItem);
@@ -34,6 +34,7 @@ public class CatalogItemTest
             Price = 23800m,
             ProductCode = "TEST001",
             Id = 9999L,
+            IsDeleted = false,
         };
 
         // Assert
@@ -57,6 +58,7 @@ public class CatalogItemTest
             Price = 23800m,
             ProductCode = "TEST001",
             Id = 9999L,
+            IsDeleted = false,
         };
 
         // Assert
@@ -80,6 +82,7 @@ public class CatalogItemTest
             Price = price,
             ProductCode = "TEST001",
             Id = 9999L,
+            IsDeleted = false,
         };
 
         // Assert
@@ -103,6 +106,7 @@ public class CatalogItemTest
             Price = 23800m,
             ProductCode = productCode,
             Id = 9999L,
+            IsDeleted = false,
         };
 
         // Assert
@@ -126,6 +130,7 @@ public class CatalogItemTest
             Price = 23800m,
             ProductCode = "TEST001",
             Id = 9999L,
+            IsDeleted = false,
         };
 
         // Assert
@@ -149,6 +154,7 @@ public class CatalogItemTest
             Price = 23800m,
             ProductCode = "TEST001",
             Id = 9999L,
+            IsDeleted = false,
         };
 
         // Assert
