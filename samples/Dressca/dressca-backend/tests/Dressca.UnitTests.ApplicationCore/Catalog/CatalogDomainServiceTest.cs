@@ -303,6 +303,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
             Price = defaultPrice,
             ProductCode = defaultProductCode,
             Id = id,
+            IsDeleted = false,
         };
     }
 }

@@ -68,7 +68,7 @@ public interface ICatalogRepository
     /// <summary>
     ///  指定した識別子と行バージョンを持つエンティティを削除します。
     /// </summary>
-    /// <param name="id">エンティティの ID 。</param>
+    /// <param name="id">Id 。</param>
     /// <param name="rowVersion">行バージョン。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>削除されたアイテムの数を返す非同期処理を表すタスク。</returns>

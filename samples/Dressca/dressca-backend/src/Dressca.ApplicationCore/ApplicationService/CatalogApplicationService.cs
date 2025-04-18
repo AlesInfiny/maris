@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Data;
+using System.Linq.Expressions;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Resources;
@@ -72,7 +73,8 @@ public class CatalogApplicationService
         {
             Expression<Func<CatalogItem, bool>> specification = item =>
                 (!brandId.HasValue || item.CatalogBrandId == brandId) &&
-                (!categoryId.HasValue || item.CatalogCategoryId == categoryId);
+                (!categoryId.HasValue || item.CatalogCategoryId == categoryId) &&
+                (item.IsDeleted == false);
             itemsOnPage = await this.catalogRepository.FindAsync(specification, skip, take, cancellationToken);
             totalItems = await this.catalogRepository.CountAsync(specification, cancellationToken);
             scope.Complete();
@@ -148,6 +150,7 @@ public class CatalogApplicationService
             ProductCode = productCode,
             CatalogBrandId = catalogBrandId,
             CatalogCategoryId = catalogCategoryId,
+            IsDeleted = false,
         };
         CatalogItem catalogItemAdded;
 
@@ -179,15 +182,23 @@ public class CatalogApplicationService
             throw new PermissionDeniedException();
         }
 
-        if (!await this.catalogDomainService.ItemExistsAsync(id, cancellationToken))
-        {
-            this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
-            throw new CatalogItemNotExistingInRepositoryException([id]);
-        }
-
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
+            var itemToDelete = await this.catalogRepository.GetAsync(id, cancellationToken);
+
+            if (itemToDelete == null || itemToDelete.IsDeleted == true)
+            {
+                this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
+                throw new CatalogItemNotExistingInRepositoryException([id]);
+            }
+
+            var deletedRows = await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
+            if (deletedRows == 0)
+            {
+                this.logger.LogInformation(Events.CatalogItemNotDeleted, LogMessages.CatalogItemNotDeleted, id);
+                throw new CatalogItemNotDeletedException(id);
+            }
+
             scope.Complete();
         }
 
@@ -205,6 +216,7 @@ public class CatalogApplicationService
     /// <param name="catalogBrandId">カタログブランド ID 。</param>
     /// <param name="catalogCategoryId">カタログカテゴリ ID 。</param>
     /// <param name="rowVersion">行バージョン。</param>
+    /// <param name="isDeleted">論理削除フラグ。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     /// <exception cref="PermissionDeniedException">更新権限がない場合。</exception>
@@ -220,6 +232,7 @@ public class CatalogApplicationService
                 long catalogBrandId,
                 long catalogCategoryId,
                 byte[] rowVersion,
+                bool isDeleted,
                 CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_UpdateCatalogItemAsyncStart, id);
@@ -257,6 +270,7 @@ public class CatalogApplicationService
             CatalogBrandId = catalogBrandId,
             CatalogCategoryId = catalogCategoryId,
             RowVersion = rowVersion,
+            IsDeleted = isDeleted,
         };
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {

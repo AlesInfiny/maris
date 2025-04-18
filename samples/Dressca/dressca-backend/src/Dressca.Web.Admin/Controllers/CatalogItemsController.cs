@@ -218,6 +218,11 @@ public class CatalogItemsController : ControllerBase
             this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
             return this.NotFound();
         }
+        catch (CatalogItemNotDeletedException ex)
+        {
+            this.logger.LogWarning(Events.CatalogItemNotDeleted, ex, ex.Message);
+            return this.Conflict();
+        }
 
         return this.NoContent();
     }
@@ -255,7 +260,8 @@ public class CatalogItemsController : ControllerBase
                 putCatalogItemRequest.ProductCode,
                 putCatalogItemRequest.CatalogBrandId,
                 putCatalogItemRequest.CatalogCategoryId,
-                putCatalogItemRequest.RowVersion);
+                putCatalogItemRequest.RowVersion,
+                putCatalogItemRequest.IsDeleted);
         }
         catch (PermissionDeniedException ex)
         {

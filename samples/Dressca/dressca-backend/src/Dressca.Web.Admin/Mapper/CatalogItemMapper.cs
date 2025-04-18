@@ -30,6 +30,7 @@ public class CatalogItemMapper : IObjectMapper<CatalogItem, GetCatalogItemRespon
             ProductCode = value.ProductCode,
             AssetCodes = value.Assets.Select(asset => asset.AssetCode).ToList(),
             RowVersion = value.RowVersion,
+            IsDeleted = value.IsDeleted,
         };
     }
 }
