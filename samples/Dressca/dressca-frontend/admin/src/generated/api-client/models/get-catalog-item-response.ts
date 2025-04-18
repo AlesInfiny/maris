@@ -74,5 +74,11 @@ export interface GetCatalogItemResponse {
      * @memberof GetCatalogItemResponse
      */
     'rowVersion': string;
+    /**
+     * 論理削除フラグを取得または設定します。             
+     * @type {boolean}
+     * @memberof GetCatalogItemResponse
+     */
+    'isDeleted': boolean;
 }
 

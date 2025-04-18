@@ -1,5 +1,5 @@
 {
-  "x-generator": "NSwag v14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "x-generator": "NSwag v14.3.0.0 (NJsonSchema v11.2.0.0 (Newtonsoft.Json v13.0.0.0))",
   "openapi": "3.0.0",
   "info": {
     "title": "Dressca Admin Web API",
@@ -749,7 +749,8 @@
           "id",
           "name",
           "productCode",
-          "rowVersion"
+          "rowVersion",
+          "isDeleted"
         ],
         "properties": {
           "description": {
@@ -799,6 +800,10 @@
             "description": "行バージョンを取得または設定します。\n            ",
             "format": "byte",
             "minLength": 1
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "論理削除フラグを取得または設定します。\n            "
           }
         }
       },
@@ -909,7 +914,8 @@
           "productCode",
           "catalogCategoryId",
           "catalogBrandId",
-          "rowVersion"
+          "rowVersion",
+          "isDeleted"
         ],
         "properties": {
           "name": {
@@ -956,6 +962,10 @@
             "description": "行バージョンを取得または設定します。\n            ",
             "format": "byte",
             "minLength": 1
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "論理削除フラグを取得または設定します。\n            "
           }
         }
       },

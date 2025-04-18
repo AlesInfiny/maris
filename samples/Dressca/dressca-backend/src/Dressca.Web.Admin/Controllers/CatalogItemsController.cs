@@ -255,7 +255,8 @@ public class CatalogItemsController : ControllerBase
                 putCatalogItemRequest.ProductCode,
                 putCatalogItemRequest.CatalogBrandId,
                 putCatalogItemRequest.CatalogCategoryId,
-                putCatalogItemRequest.RowVersion);
+                putCatalogItemRequest.RowVersion,
+                putCatalogItemRequest.IsDeleted);
         }
         catch (PermissionDeniedException ex)
         {

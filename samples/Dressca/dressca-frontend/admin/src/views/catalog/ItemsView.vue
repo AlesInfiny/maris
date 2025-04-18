@@ -41,6 +41,7 @@ const pagedListOfCatalogItem = ref<PagedListOfGetCatalogItemResponse>({
       name: '',
       productCode: '',
       rowVersion: '',
+      isDeleted: false,
     },
   ],
 });
@@ -113,11 +114,8 @@ const goToEditItem = (id: number) => {
       カタログアイテム一覧
     </div>
     <div class="mx-2 my-8 flex justify-end">
-      <button
-        type="button"
-        class="rounded bg-green-600 px-4 py-2 text-xl font-bold text-white hover:bg-green-800"
-        @click="goToAddItem"
-      >
+      <button type="button" class="rounded bg-green-600 px-4 py-2 text-xl font-bold text-white hover:bg-green-800"
+        @click="goToAddItem">
         アイテム追加
       </button>
     </div>
@@ -133,17 +131,15 @@ const goToEditItem = (id: number) => {
           <th class="w-20">カテゴリ</th>
           <th>ブランド</th>
           <th class="w-20">操作</th>
+          <th>アイテム状態</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in pagedListOfCatalogItem.items" :key="item.id">
+        <tr v-for="item in pagedListOfCatalogItem.items" :key="item.id"
+          :class="[item.isDeleted ? 'border bg-gray-500' : 'border']">
           <td class="border">{{ item.id }}</td>
           <td class="border">
-            <img
-              class="object-contain"
-              :src="getFirstAssetUrl(item.assetCodes)"
-              :alt="item.name"
-            />
+            <img class="object-contain" :src="getFirstAssetUrl(item.assetCodes)" :alt="item.name" />
           </td>
           <td class="border">{{ item.name }}</td>
           <td class="border">{{ item.description }}</td>
@@ -156,14 +152,12 @@ const goToEditItem = (id: number) => {
             {{ getBrandName(item.catalogBrandId) }}
           </td>
           <td class="border text-center">
-            <button
-              type="button"
-              class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800"
-              @click="goToEditItem(item.id)"
-            >
+            <button type="button" class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800"
+              @click="goToEditItem(item.id)">
               編集
             </button>
           </td>
+          <td class="border">{{ item.isDeleted ? '削除済み' : '' }}</td>
         </tr>
       </tbody>
     </table>
