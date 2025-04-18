@@ -310,11 +310,14 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var targetId = 1;
+        byte[] targetRowVersion = [255];
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         catalogRepositoryMock
             .Setup(r => r.GetAsync(targetId, AnyToken))
             .ReturnsAsync(targetItem);
-        byte[] targetRowVersion = [255];
+        catalogRepositoryMock
+            .Setup(r => r.RemoveAsync(targetId, targetRowVersion, AnyToken))
+            .ReturnsAsync(1);
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
         var userStoreMock = new Mock<IUserStore>();
@@ -357,6 +360,36 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
 
         // Assert
         await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
+    }
+
+    [Fact]
+    public async Task DeleteItemFromCatalogAsync_競合が発生_CatalogItemNotDeletedExceptionが発生()
+    {
+        // Arrange
+        var catalogRepositoryMock = new Mock<ICatalogRepository>();
+        var targetId = 1;
+        byte[] targetRowVersion = [255];
+        var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
+        catalogRepositoryMock
+            .Setup(r => r.GetAsync(targetId, AnyToken))
+            .ReturnsAsync(targetItem);
+        catalogRepositoryMock
+            .Setup(r => r.RemoveAsync(targetId, targetRowVersion, AnyToken))
+            .ReturnsAsync(0);
+        var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
+        var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
+        var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
+        var userStoreMock = new Mock<IUserStore>();
+        userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
+
+        var logger = this.CreateTestLogger<CatalogApplicationService>();
+        var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock, catalogCategoryRepositoryMock, userStoreMock.Object, catalogDomainServiceMock, logger);
+
+        // Act
+        var action = () => service.DeleteItemFromCatalogAsync(targetId, targetRowVersion);
+
+        // Assert
+        await Assert.ThrowsAsync<CatalogItemNotDeletedException>(action);
     }
 
     [Fact]
