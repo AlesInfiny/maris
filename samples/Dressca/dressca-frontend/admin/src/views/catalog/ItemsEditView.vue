@@ -320,16 +320,36 @@ const updateItemAsync = async () => {
 </script>
 
 <template>
-  <ConfirmationModal :show="showDeleteConfirm" header="カタログアイテムを削除しますか？" body="カタログアイテムを削除します。削除したアイテムは復元できません。"
-    @confirm="deleteItemAsync" @cancel="showDeleteConfirm = false"></ConfirmationModal>
+  <ConfirmationModal
+    :show="showDeleteConfirm"
+    header="カタログアイテムを削除しますか？"
+    body="カタログアイテムを削除します。削除したアイテムは復元できません。"
+    @confirm="deleteItemAsync"
+    @cancel="showDeleteConfirm = false"
+  ></ConfirmationModal>
 
-  <NotificationModal :show="showDeleteNotice" header="削除成功" body="カタログアイテムを削除しました。" @close="closeDeleteNotice">
+  <NotificationModal
+    :show="showDeleteNotice"
+    header="削除成功"
+    body="カタログアイテムを削除しました。"
+    @close="closeDeleteNotice"
+  >
   </NotificationModal>
 
-  <ConfirmationModal :show="showUpdateConfirm" header="カタログアイテムを更新しますか？" body="カタログアイテムを更新します。更新したアイテムは元に戻せません。"
-    @confirm="updateItemAsync" @cancel="showUpdateConfirm = false"></ConfirmationModal>
+  <ConfirmationModal
+    :show="showUpdateConfirm"
+    header="カタログアイテムを更新しますか？"
+    body="カタログアイテムを更新します。更新したアイテムは元に戻せません。"
+    @confirm="updateItemAsync"
+    @cancel="showUpdateConfirm = false"
+  ></ConfirmationModal>
 
-  <NotificationModal :show="showUpdateNotice" header="更新成功" body="カタログアイテムを更新しました。" @close="closeUpdateNotice">
+  <NotificationModal
+    :show="showUpdateNotice"
+    header="更新成功"
+    body="カタログアイテムを更新しました。"
+    @close="closeUpdateNotice"
+  >
   </NotificationModal>
 
   <LoadingSpinnerOverlay :show="showLoading"></LoadingSpinnerOverlay>
@@ -347,54 +367,105 @@ const updateItemAsync = async () => {
         <form class="text-xl">
           <div class="mb-6">
             <label for="item-id" class="mb-2 block font-bold">アイテムID</label>
-            <input id="item-id" v-model.number="currentItemState.id" type="text" name="item-id"
-              class="w-full border border-gray-300 px-4 py-2" disabled />
+            <input
+              id="item-id"
+              v-model.number="currentItemState.id"
+              type="text"
+              name="item-id"
+              class="w-full border border-gray-300 px-4 py-2"
+              disabled
+            />
           </div>
           <div class="mb-6">
-            <label for="item-name" class="mb-2 block font-bold">アイテム名</label>
-            <input id="item-name" v-model="currentItemState.name" type="text" name="item-name"
-              class="w-full border border-gray-300 px-4 py-2" disabled />
+            <label for="item-name" class="mb-2 block font-bold"
+              >アイテム名</label
+            >
+            <input
+              id="item-name"
+              v-model="currentItemState.name"
+              type="text"
+              name="item-name"
+              class="w-full border border-gray-300 px-4 py-2"
+              disabled
+            />
           </div>
           <div class="mb-6">
             <label for="description" class="mb-2 block font-bold">説明</label>
-            <textarea id="description" v-model="currentItemState.description" name="description"
-              class="w-full border border-gray-300 px-4 py-2" disabled></textarea>
+            <textarea
+              id="description"
+              v-model="currentItemState.description"
+              name="description"
+              class="w-full border border-gray-300 px-4 py-2"
+              disabled
+            ></textarea>
           </div>
           <div class="mb-6">
             <label for="unit-price" class="mb-2 block font-bold">単価</label>
-            <input id="unit-price" v-model.number="currentItemState.price" name="unit-price"
-              class="w-full border border-gray-300 px-4 py-2" disabled />
+            <input
+              id="unit-price"
+              v-model.number="currentItemState.price"
+              name="unit-price"
+              class="w-full border border-gray-300 px-4 py-2"
+              disabled
+            />
           </div>
           <div class="mb-6">
-            <label for="product-code" class="mb-2 block font-bold">商品コード</label>
-            <input id="product-code" v-model="currentItemState.productCode" name="product-code"
-              class="w-full border border-gray-300 px-4 py-2" disabled />
+            <label for="product-code" class="mb-2 block font-bold"
+              >商品コード</label
+            >
+            <input
+              id="product-code"
+              v-model="currentItemState.productCode"
+              name="product-code"
+              class="w-full border border-gray-300 px-4 py-2"
+              disabled
+            />
           </div>
           <div class="mb-4">
             <label for="category" class="mb-2 block font-bold">カテゴリ</label>
-            <select id="category" v-model.number="currentItemState.categoryId" name="category"
-              class="w-full border border-gray-300 bg-gray-100 px-4 py-2" disabled>
-              <option v-for="category in catalogCategories.filter(
-                (category) => category.id !== 0,
-              )" :key="category.id" :value="category.id">
+            <select
+              id="category"
+              v-model.number="currentItemState.categoryId"
+              name="category"
+              class="w-full border border-gray-300 bg-gray-100 px-4 py-2"
+              disabled
+            >
+              <option
+                v-for="category in catalogCategories.filter(
+                  (category) => category.id !== 0,
+                )"
+                :key="category.id"
+                :value="category.id"
+              >
                 {{ category.name }}
               </option>
             </select>
           </div>
           <div class="mb-4">
             <label for="brand" class="mb-2 block font-bold">ブランド</label>
-            <select id="brand" v-model.number="currentItemState.brandId" name="brand"
-              class="w-full border border-gray-300 bg-gray-100 px-4 py-2" disabled>
-              <option v-for="brand in catalogBrands.filter((brand) => brand.id !== 0)" :key="brand.id"
-                :value="brand.id">
+            <select
+              id="brand"
+              v-model.number="currentItemState.brandId"
+              name="brand"
+              class="w-full border border-gray-300 bg-gray-100 px-4 py-2"
+              disabled
+            >
+              <option
+                v-for="brand in catalogBrands.filter((brand) => brand.id !== 0)"
+                :key="brand.id"
+                :value="brand.id"
+              >
                 {{ brand.name }}
               </option>
             </select>
           </div>
           <div class="mb-4">
             <label for="item-id" class="mb-2 block font-bold">画像</label>
-            <img class="flex h-auto max-w-xs justify-center" :src="getFirstAssetUrl(currentItemState.assetCodes)"
-              :alt="currentItemState.name" />
+            <img
+              class="flex h-auto max-w-xs justify-center"
+              :src="getFirstAssetUrl(currentItemState.assetCodes)"
+              :alt="currentItemState.name"
+            />
           </div>
         </form>
       </div>
@@ -404,21 +475,38 @@ const updateItemAsync = async () => {
         <form class="text-xl">
           <div class="mb-6">
             <label for="item-id" class="mb-2 block font-bold">アイテムID</label>
-            <input id="item-id" v-model.number="editingItemState.id" type="text" name="item-id"
-              class="w-full border border-gray-300 px-4 py-2" disabled />
+            <input
+              id="item-id"
+              v-model.number="editingItemState.id"
+              type="text"
+              name="item-id"
+              class="w-full border border-gray-300 px-4 py-2"
+              disabled
+            />
           </div>
           <div class="mb-4">
-            <label for="item-name" class="mb-2 block font-bold">アイテム名</label>
-            <input id="item-name" v-model="itemName" type="text" name="item-name"
-              class="w-full border border-gray-300 px-4 py-2" />
+            <label for="item-name" class="mb-2 block font-bold"
+              >アイテム名</label
+            >
+            <input
+              id="item-name"
+              v-model="itemName"
+              type="text"
+              name="item-name"
+              class="w-full border border-gray-300 px-4 py-2"
+            />
             <p class="px-1 py-1 text-base text-red-800">
               {{ errors.itemName }}
             </p>
           </div>
           <div class="mb-4">
             <label for="description" class="mb-2 block font-bold">説明</label>
-            <textarea id="item-description" v-model="itemDescription" name="item-description"
-              class="w-full border border-gray-300 px-4 py-2"></textarea>
+            <textarea
+              id="item-description"
+              v-model="itemDescription"
+              name="item-description"
+              class="w-full border border-gray-300 px-4 py-2"
+            ></textarea>
             <p class="px-1 py-1 text-base text-red-800">
               {{ errors.itemDescription }}
             </p>
@@ -434,50 +522,80 @@ const updateItemAsync = async () => {
             <p class="px-1 py-1 text-base text-red-800">{{ errors.price }}</p>
           </div>
           <div class="mb-4">
-            <label for="product-code" class="mb-2 block font-bold">商品コード</label>
-            <input id="product-code" v-model="productCode" name="product-code"
-              class="w-full border border-gray-300 px-4 py-2" />
+            <label for="product-code" class="mb-2 block font-bold"
+              >商品コード</label
+            >
+            <input
+              id="product-code"
+              v-model="productCode"
+              name="product-code"
+              class="w-full border border-gray-300 px-4 py-2"
+            />
             <p class="px-1 py-1 text-base text-red-800">
               {{ errors.productCode }}
             </p>
           </div>
           <div class="mb-4">
             <label for="category" class="mb-2 block font-bold">カテゴリ</label>
-            <select id="category" v-model.number="editingItemState.categoryId" name="category"
-              class="w-full border border-gray-300 px-4 py-2">
-              <option v-for="category in catalogCategories.filter(
-                (category) => category.id !== 0,
-              )" :key="category.id" :value="category.id">
+            <select
+              id="category"
+              v-model.number="editingItemState.categoryId"
+              name="category"
+              class="w-full border border-gray-300 px-4 py-2"
+            >
+              <option
+                v-for="category in catalogCategories.filter(
+                  (category) => category.id !== 0,
+                )"
+                :key="category.id"
+                :value="category.id"
+              >
                 {{ category.name }}
               </option>
             </select>
           </div>
           <div class="mb-4">
             <label for="brand" class="mb-2 block font-bold">ブランド</label>
-            <select id="brand" v-model.number="editingItemState.brandId" name="brand"
-              class="w-full border border-gray-300 px-4 py-2">
-              <option v-for="brand in catalogBrands.filter((brand) => brand.id !== 0)" :key="brand.id"
-                :value="brand.id">
+            <select
+              id="brand"
+              v-model.number="editingItemState.brandId"
+              name="brand"
+              class="w-full border border-gray-300 px-4 py-2"
+            >
+              <option
+                v-for="brand in catalogBrands.filter((brand) => brand.id !== 0)"
+                :key="brand.id"
+                :value="brand.id"
+              >
                 {{ brand.name }}
               </option>
             </select>
           </div>
           <div class="mb-4">
             <label for="item-id" class="mb-2 block font-bold">画像</label>
-            <img class="flex h-auto max-w-xs justify-center" :src="getFirstAssetUrl(editingItemState.assetCodes)"
-              :alt="values.name" />
+            <img
+              class="flex h-auto max-w-xs justify-center"
+              :src="getFirstAssetUrl(editingItemState.assetCodes)"
+              :alt="values.name"
+            />
           </div>
           <div class="flex justify-end">
             <!-- サンプルアプリは必ず Admin ロールを持つユーザーとしてログインするようになっているので、削除ボタンが disable になることはありません。-->
-            <button type="button"
+            <button
+              type="button"
               class="rounded bg-red-800 px-4 py-2 font-bold text-white hover:bg-red-900 disabled:bg-red-500 disabled:opacity-50"
-              :disabled="!isInRole(Roles.ADMIN)" @click="showDeleteConfirm = true">
+              :disabled="!isInRole(Roles.ADMIN)"
+              @click="showDeleteConfirm = true"
+            >
               削除
             </button>
 
-            <button type="button"
+            <button
+              type="button"
               class="rounded bg-blue-600 px-4 py-2 font-bold text-white hover:bg-blue-800 disabled:bg-blue-500 disabled:opacity-50"
-              :disabled="isInvalid() || !isInRole(Roles.ADMIN)" @click="showUpdateConfirm = true">
+              :disabled="isInvalid() || !isInRole(Roles.ADMIN)"
+              @click="showUpdateConfirm = true"
+            >
               更新
             </button>
           </div>
