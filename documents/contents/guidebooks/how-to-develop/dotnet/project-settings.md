@@ -8,17 +8,22 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 ## .NET SDKの設定 {#dotnet-sdk-settings}
 
-AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、 global.json ファイルを用いて、ビルドに利用する .NET SDK のバージョンを設定します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、 global.json ファイルを用いて、 .NET CLI を実行する .NET SDK のバージョンを設定します。
 ソリューションファイルの配置されているフォルダーに、「global.json」という名前のファイルを作成します。
 ファイル名は、大文字/小文字まで一致するように作成してください。
 
-global.json ファイルには、ビルドに利用する .NET SDK のバージョンと、指定された .NET SDK バージョンが存在しない場合のロールフォワードポリシーを設定します。
+global.json ファイルには以下を設定します。
+
+- `version` : .NET CLI を実行する .NET SDK のバージョン
+- `allowPrerelease` : プレリリースバージョン（プレビューリリースなど）の利用を許容するか
+- `rollForward` : 指定された .NET SDK バージョンが存在しない場合のロールフォワードポリシー
 
 ```json title="global.json ファイル設定例"
 {
   "sdk": {
-    "rollForward": "latestMinor",
-    "version": "8.0.100"
+    "version": "8.0.100",
+    "allowPrerelease": false,
+    "rollForward": "latestMajor"
   }
 }
 ```
@@ -28,7 +33,7 @@ global.json ファイルには、ビルドに利用する .NET SDK のバージ�
 !!! note "rollForward の設定について"
     .NET SDK のバージョンが固定されていればいるほど環境差異は少なくなり、アプリケーションの安定化につながります。
     その反面、 .NET SDK のバージョン更新にあわせて、開発環境を更新する手間が発生します。
-    この例では、 .NET SDK のメジャーバージョンのみを固定し、最新のマイナーバージョンにロールフォワードする設定としています。
+    この例では、 .NET SDK のバージョンが見つからない場合、指定した `version` の値以上の、インストールされているものの中で最も高い .NET SDK にロールフォワードする設定としています。
     どの程度厳密に管理するかは、プロジェクトの特性に応じて決定してください。
 
 ## プロジェクトファイルの設定 {#csproj-settings}
@@ -226,7 +231,7 @@ dotnet_diagnostic.SA1600.severity=none
     | [SA1600 :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md){ target=_blank } | テストプロジェクトの XML ドキュメントは不要なため。                    |
 
 !!! tip "自動生成コードの静的コード解析"
-    Visual Studio や .NET CLI など、コード自動生成機能が生成したコードに対する静的コード解析は原則実施しません。
+    Visual Studio や .NET CLI など、コード自動生成機能が生成したコードに対する静的コード解析は原則実行しません。
     .editorconfig ファイルはフォルダー単位でのルール設定が可能であるため、自動生成するコードと自分で実装するコードのフォルダーを分割しておくことを推奨します。
     自動生成したコードを配置するフォルダーには、以下のようにすべての解析ルールを無効に設定した .editorconfig を配置します。
 
@@ -324,7 +329,7 @@ stylecop.json は、各プロジェクトのルートフォルダーにあるか
 Visual Studio のソリューションエクスプローラーを利用して、 stylecop.json ファイルの [ビルドアクション] プロパティを [C# アナライザー追加ファイル] に設定します。
 これにより、 StyleCop Analyzers の設定ファイルであることをコンパイラーに通知できます。
 
-ここまで解説した内容を実施すると、最終的にプロジェクトファイルの設定は以下のようになります。
+ここまで解説した手順に対応すると、最終的にプロジェクトファイルの設定は以下のようになります。
 
 ```xml title="プロジェクトファイルの設定例"
 <Project Sdk="Microsoft.NET.Sdk">

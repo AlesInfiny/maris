@@ -17,6 +17,7 @@ import type {
 } from '@/generated/api-client';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 import { Roles } from '@/shared/constants/roles';
+import { LoadingSpinnerOverlay } from '@/components/common/LoadingSpinnerOverlay';
 
 const router = useRouter();
 const customErrorHandler = useCustomErrorHandler();
@@ -28,7 +29,7 @@ const { errors, values, meta, defineField } = useForm({
   initialValues: {
     itemName: 'テスト用アイテム',
     itemDescription: 'テスト用アイテムです。',
-    price: 1980,
+    price: '1980',
     productCode: 'T001',
   },
 });
@@ -70,6 +71,11 @@ const catalogCategories = ref<GetCatalogCategoriesResponse[]>([
 const showAddNotice = ref(false);
 
 /**
+ * ローディングスピナーの表示の状態です。
+ */
+const showLoading = ref(true);
+
+/**
  * アイテムをカタログに追加します。
  * 追加に成功したら、成功を通知するモーダルを開きます。
  */
@@ -107,6 +113,7 @@ const closeAddNotice = () => {
  * それぞれの状態を更新します。
  */
 onMounted(async () => {
+  showLoading.value = true;
   try {
     [catalogCategories.value, catalogBrands.value] =
       await fetchCategoriesAndBrands();
@@ -114,6 +121,8 @@ onMounted(async () => {
     customErrorHandler.handle(error, () => {
       showToast('カテゴリとブランド情報の取得に失敗しました。');
     });
+  } finally {
+    showLoading.value = false;
   }
 });
 </script>
@@ -125,8 +134,9 @@ onMounted(async () => {
     body="カタログアイテムを追加しました。"
     @close="closeAddNotice"
   ></NotificationModal>
-
+  <LoadingSpinnerOverlay :show="showLoading"></LoadingSpinnerOverlay>
   <div
+    v-if="!showLoading"
     class="container mx-auto flex flex-col items-center justify-center gap-6"
   >
     <div class="p-8 text-5xl font-bold">カタログアイテム追加</div>
@@ -158,7 +168,7 @@ onMounted(async () => {
         <label for="unit-price" class="mb-2 block font-bold">単価</label>
         <input
           id="unit-price"
-          v-model.number="price"
+          v-model="price"
           type="text"
           name="unit-price"
           class="w-full border border-gray-300 px-4 py-2"

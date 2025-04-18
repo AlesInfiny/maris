@@ -26,6 +26,7 @@ import type {
 import { useCustomErrorHandler } from '@/shared/error-handler/use-custom-error-handler';
 import { useAuthenticationStore } from '@/stores/authentication/authentication';
 import { Roles } from '@/shared/constants/roles';
+import { LoadingSpinnerOverlay } from '@/components/common/LoadingSpinnerOverlay';
 
 const customErrorHandler = useCustomErrorHandler();
 const authenticationStore = useAuthenticationStore();
@@ -43,7 +44,7 @@ interface ItemState {
   id: number;
   name: string;
   description: string;
-  price: number;
+  price: string;
   productCode: string;
   categoryId: number;
   brandId: number;
@@ -72,7 +73,7 @@ const editingItemState = ref<ItemState>({
   id: 0,
   name: '',
   description: '',
-  price: 0,
+  price: '',
   productCode: '',
   categoryId: 0,
   brandId: 0,
@@ -88,7 +89,7 @@ const currentItemState = ref<ItemState>({
   id: 0,
   name: '',
   description: '',
-  price: 0,
+  price: '',
   productCode: '',
   categoryId: 0,
   brandId: 0,
@@ -130,6 +131,11 @@ const showUpdateConfirm = ref(false);
 const showUpdateNotice = ref(false);
 
 /**
+ * ローディングスピナーの表示の状態です。
+ */
+const showLoading = ref(true);
+
+/**
  * 削除通知モーダルを閉じます。
  * 表示する編集対象のアイテムがなくなるので、
  * アイテム一覧画面へ遷移します。
@@ -154,7 +160,7 @@ const setCurrentItemState = (item: GetCatalogItemResponse) => {
   currentItemState.value.id = item.id;
   currentItemState.value.name = item.name;
   currentItemState.value.description = item.description;
-  currentItemState.value.price = item.price;
+  currentItemState.value.price = item.price.toString();
   currentItemState.value.productCode = item.productCode;
   currentItemState.value.categoryId = item.catalogCategoryId;
   currentItemState.value.brandId = item.catalogBrandId;
@@ -232,7 +238,12 @@ const reFetchItemAndInitRowVersionAsync = async (itemId: number) => {
  *
  */
 onMounted(async () => {
-  await initItemAsync(id);
+  showLoading.value = true;
+  try {
+    await initItemAsync(id);
+  } finally {
+    showLoading.value = false;
+  }
 });
 
 /**
@@ -321,7 +332,9 @@ const updateItemAsync = async () => {
   <NotificationModal :show="showUpdateNotice" header="更新成功" body="カタログアイテムを更新しました。" @close="closeUpdateNotice">
   </NotificationModal>
 
-  <div class="container mx-auto gap-6">
+  <LoadingSpinnerOverlay :show="showLoading"></LoadingSpinnerOverlay>
+
+  <div v-if="!showLoading" class="container mx-auto gap-6">
     <div>
       <div class="flex items-center justify-center p-8 text-5xl font-bold">
         カタログアイテム編集
@@ -412,8 +425,12 @@ const updateItemAsync = async () => {
           </div>
           <div class="mb-4">
             <label for="unit-price" class="mb-2 block font-bold">単価</label>
-            <input id="unit-price" v-model.number="price" name="unit-price"
-              class="w-full border border-gray-300 px-4 py-2" />
+            <input
+              id="unit-price"
+              v-model="price"
+              name="unit-price"
+              class="w-full border border-gray-300 px-4 py-2"
+            />
             <p class="px-1 py-1 text-base text-red-800">{{ errors.price }}</p>
           </div>
           <div class="mb-4">

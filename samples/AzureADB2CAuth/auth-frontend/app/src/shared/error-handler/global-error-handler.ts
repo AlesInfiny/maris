@@ -1,7 +1,6 @@
 import type { App, ComponentPublicInstance } from 'vue';
-import { router } from '../../router';
 
-export const errorHandlerPlugin = {
+export const globalErrorHandler = {
   /* eslint no-param-reassign: 0 */
   install(app: App) {
     app.config.errorHandler = (
@@ -9,21 +8,20 @@ export const errorHandlerPlugin = {
       instance: ComponentPublicInstance | null,
       info: string,
     ) => {
-      // 本サンプルAPではログの出力とエラー画面への遷移を行っています。
+      // 本サンプルAPではコンソールへログの出力を行います。
       // APの要件によってはサーバーやログ収集ツールにログを送信し、エラーを握りつぶすこともあります。
       /* eslint no-console: 0 */
       console.log(err, instance, info);
-      router.replace({ name: 'error' });
     };
 
     // Vue.js 以外のエラー
-    // テストやデバッグ時にエラーの発生を検知するために利用する
+    // テストやデバッグ時にエラーの発生を検知するために利用します。
     window.addEventListener('error', (event) => {
       /* eslint no-console: 0 */
       console.log(event);
     });
 
-    // テストやデバッグ時に予期せぬ非同期エラーの発生を検知するために利用する
+    // テストやデバッグ時に予期せぬ非同期エラーの発生を検知するために利用します。
     window.addEventListener('unhandledrejection', (event) => {
       /* eslint no-console: 0 */
       console.log(event);
