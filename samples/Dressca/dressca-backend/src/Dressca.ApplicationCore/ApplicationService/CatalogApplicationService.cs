@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Data;
+using System.Linq.Expressions;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Resources;
@@ -191,7 +192,13 @@ public class CatalogApplicationService
                 throw new CatalogItemNotExistingInRepositoryException([id]);
             }
 
-            await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
+            var deletedRows = await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
+            if (deletedRows == 0)
+            {
+                this.logger.LogInformation(Events.CatalogItemNotDeleted, LogMessages.CatalogItemNotDeleted, id);
+                throw new CatalogItemNotDeletedException(id);
+            }
+
             scope.Complete();
         }
 

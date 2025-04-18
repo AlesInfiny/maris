@@ -218,6 +218,11 @@ public class CatalogItemsController : ControllerBase
             this.logger.LogWarning(Events.CatalogItemNotExistingInRepository, ex, ex.Message);
             return this.NotFound();
         }
+        catch (CatalogItemNotDeletedException ex)
+        {
+            this.logger.LogWarning(Events.CatalogItemNotDeleted, ex, ex.Message);
+            return this.Conflict();
+        }
 
         return this.NoContent();
     }
