@@ -19,7 +19,6 @@ public class CatalogItem
     private long catalogCategoryId;
     private long catalogBrandId;
     private byte[] rowVersion = [];
-    private bool isDeleted;
 
     /// <summary>
     ///  <see cref="CatalogItem"/> クラスの新しいインスタンスを初期化します。

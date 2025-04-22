@@ -88,6 +88,6 @@ internal class EfCatalogRepository : ICatalogRepository
     /// <inheritdoc/>
     public async Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default)
     {
-        return await this.dbContext.CatalogItems.AnyAsync(catalogItem => catalogItem.Id == id, cancellationToken);
+        return await this.dbContext.CatalogItems.AnyAsync(catalogItem => (catalogItem.Id == id) && (!catalogItem.IsDeleted), cancellationToken);
     }
 }

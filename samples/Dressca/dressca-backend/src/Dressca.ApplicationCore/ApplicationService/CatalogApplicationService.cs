@@ -182,18 +182,15 @@ public class CatalogApplicationService
             throw new PermissionDeniedException();
         }
 
+        if (!await this.catalogDomainService.ItemExistsAsync(id, cancellationToken))
+        {
+            this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
+            throw new CatalogItemNotExistingInRepositoryException([id]);
+        }
+
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
-            var itemToDelete = await this.catalogRepository.GetAsync(id, cancellationToken);
-
-            if (itemToDelete == null || itemToDelete.IsDeleted == true)
-            {
-                this.logger.LogInformation(Events.CatalogItemIdDoesNotExistInRepository, LogMessages.CatalogItemIdDoesNotExistInRepository, [id]);
-                throw new CatalogItemNotExistingInRepositoryException([id]);
-            }
-
             await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
-
             scope.Complete();
         }
 
