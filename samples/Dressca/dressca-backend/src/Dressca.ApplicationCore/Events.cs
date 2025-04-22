@@ -23,11 +23,6 @@ internal class Events
     internal static readonly EventId CatalogCategoryIdDoesNotExistInRepository = new(1003, nameof(CatalogCategoryIdDoesNotExistInRepository));
 
     /// <summary>
-    /// カタログアイテムの削除に失敗したことを示すイベント ID
-    /// </summary>
-    internal static readonly EventId CatalogItemNotDeleted = new(1004, nameof(CatalogItemNotDeleted));
-
-    /// <summary>
     /// デバッグ用のイベント ID
     /// </summary>
     internal static readonly EventId DebugEvent = new(9999, nameof(DebugEvent));

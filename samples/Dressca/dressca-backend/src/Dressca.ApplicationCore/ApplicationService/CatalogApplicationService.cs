@@ -192,12 +192,7 @@ public class CatalogApplicationService
                 throw new CatalogItemNotExistingInRepositoryException([id]);
             }
 
-            var deletedRows = await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
-            if (deletedRows == 0)
-            {
-                this.logger.LogInformation(Events.CatalogItemNotDeleted, LogMessages.CatalogItemNotDeleted, id);
-                throw new CatalogItemNotDeletedException(id);
-            }
+            await this.catalogRepository.RemoveAsync(id, rowVersion, cancellationToken);
 
             scope.Complete();
         }

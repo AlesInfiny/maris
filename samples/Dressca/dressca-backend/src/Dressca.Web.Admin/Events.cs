@@ -26,11 +26,6 @@ internal static class Events
     internal static readonly EventId AssetNotFound = new(1004, nameof(AssetNotFound));
 
     /// <summary>
-    /// カタログアイテムの削除に失敗したことを示すイベント ID です。
-    /// </summary>
-    internal static readonly EventId CatalogItemNotDeleted = new(1005, nameof(CatalogItemNotDeleted));
-
-    /// <summary>
     ///  デバッグ用のイベント ID です。
     /// </summary>
     internal static readonly EventId DebugEvent = new(9999, nameof(DebugEvent));

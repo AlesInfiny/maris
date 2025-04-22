@@ -223,15 +223,6 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   指定されたカタログアイテム ID: {CatalogItemId} のカタログアイテムを削除できませんでした。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogItemNotDeleted {
-            get {
-                return ResourceManager.GetString("CatalogItemNotDeleted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   購入者 ID: {BuyerId} の買い物かご情報が見つからなかったため新たに作成します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CreateNewBasket_UserBasketNotFound {

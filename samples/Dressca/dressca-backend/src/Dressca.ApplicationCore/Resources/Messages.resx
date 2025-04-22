@@ -162,9 +162,6 @@
   <data name="CatalogItemIdMustBePositive" xml:space="preserve">
     <value>カタログアイテム ID は 0 以下にできません。</value>
   </data>
-  <data name="CatalogItemNotDeleted" xml:space="preserve">
-    <value>カタログアイテム ID: {0} のカタログアイテムを削除できませんでした。</value>
-  </data>
   <data name="InvalidAssetType" xml:space="preserve">
     <value>アセットタイプ: {0} はサポートされていません。</value>
   </data>

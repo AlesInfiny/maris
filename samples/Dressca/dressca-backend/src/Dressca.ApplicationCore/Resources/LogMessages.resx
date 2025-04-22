@@ -171,9 +171,6 @@
   <data name="CatalogItemIdDoesNotExistInRepository" xml:space="preserve">
     <value>指定されたカタログアイテム ID: [{CatalogItemId}] のカタログアイテムがリポジトリに存在しません。</value>
   </data>
-  <data name="CatalogItemNotDeleted" xml:space="preserve">
-    <value>指定されたカタログアイテム ID: {CatalogItemId} のカタログアイテムを削除できませんでした。</value>
-  </data>
   <data name="CreateNewBasket_UserBasketNotFound" xml:space="preserve">
     <value>購入者 ID: {BuyerId} の買い物かご情報が見つからなかったため新たに作成します。</value>
   </data>

@@ -196,15 +196,6 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   カタログアイテム ID: {0} のカタログアイテムを削除できませんでした。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CatalogItemNotDeleted {
-            get {
-                return ResourceManager.GetString("CatalogItemNotDeleted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   アセットタイプ: {0} はサポートされていません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string InvalidAssetType {

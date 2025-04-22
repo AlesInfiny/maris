@@ -71,12 +71,18 @@ internal class EfCatalogRepository : ICatalogRepository
     /// <inheritdoc/>
     public async Task<int> RemoveAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default)
     {
-        return await this.dbContext.CatalogItems
+        var deletedRows = await this.dbContext.CatalogItems
             .Where(i => (i.Id == id) && (i.RowVersion == rowVersion))
             .ExecuteUpdateAsync(
-                setters => setters
-                .SetProperty(i => i.IsDeleted, true),
+                setters => setters.SetProperty(i => i.IsDeleted, true),
                 cancellationToken);
+
+        if (deletedRows == 0)
+        {
+            throw new DbUpdateConcurrencyException();
+        }
+
+        return deletedRows;
     }
 
     /// <inheritdoc/>
