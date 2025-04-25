@@ -150,7 +150,6 @@ public class CatalogApplicationService
             ProductCode = productCode,
             CatalogBrandId = catalogBrandId,
             CatalogCategoryId = catalogCategoryId,
-            IsDeleted = false,
         };
         CatalogItem catalogItemAdded;
 

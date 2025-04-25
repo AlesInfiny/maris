@@ -200,5 +200,5 @@ public class CatalogItem
     /// <summary>
     ///  論理削除フラグを取得します。
     /// </summary>
-    public required bool IsDeleted { get; init; }
+    public bool IsDeleted { get; init; } = false;
 }

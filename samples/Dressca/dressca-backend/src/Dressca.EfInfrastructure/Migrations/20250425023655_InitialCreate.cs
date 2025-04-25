@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -123,7 +124,8 @@ namespace Dressca.EfInfrastructure.Migrations
                     ProductCode = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     CatalogCategoryId = table.Column<long>(type: "bigint", nullable: false),
                     CatalogBrandId = table.Column<long>(type: "bigint", nullable: false),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -250,20 +252,20 @@ namespace Dressca.EfInfrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "CatalogItems",
-                columns: new[] { "Id", "CatalogBrandId", "CatalogCategoryId", "Description", "Name", "Price", "ProductCode" },
+                columns: new[] { "Id", "CatalogBrandId", "CatalogCategoryId", "Description", "IsDeleted", "Name", "Price", "ProductCode" },
                 values: new object[,]
                 {
-                    { 1L, 3L, 1L, "定番の無地ロングTシャツです。", "クルーネック Tシャツ - ブラック", 1980m, "C000000001" },
-                    { 2L, 2L, 1L, "暖かいのに着膨れしない起毛デニムです。", "裏起毛 スキニーデニム", 4800m, "C000000002" },
-                    { 3L, 1L, 1L, "あたたかく肌ざわりも良いウール100%のロングコートです。", "ウールコート", 49800m, "C000000003" },
-                    { 4L, 2L, 1L, "コットン100%の柔らかい着心地で、春先から夏、秋口まで万能に使いやすいです。", "無地 ボタンダウンシャツ", 2800m, "C000000004" },
-                    { 5L, 3L, 2L, "コンパクトサイズのバッグですが収納力は抜群です", "レザーハンドバッグ", 18800m, "B000000001" },
-                    { 6L, 2L, 2L, "エイジング加工したレザーを使用しています。", "ショルダーバッグ", 38000m, "B000000002" },
-                    { 7L, 3L, 2L, "春の季節にぴったりのトートバッグです。インナーポーチまたは単体でも使用可能なポーチ付。", "トートバッグ ポーチ付き", 24800m, "B000000003" },
-                    { 8L, 1L, 2L, "さらりと気軽に纏える、キュートなミニサイズショルダー。", "ショルダーバッグ", 2800m, "B000000004" },
-                    { 9L, 1L, 2L, "エレガントな雰囲気を放つキルティングデザインです。", "レザー チェーンショルダーバッグ", 258000m, "B000000005" },
-                    { 10L, 2L, 3L, "柔らかいソールは快適な履き心地で、ランニングに最適です。", "ランニングシューズ - ブルー", 12800m, "S000000001" },
-                    { 11L, 1L, 3L, "イタリアの職人が丁寧に手作業で作り上げた一品です。", "メダリオン ストレートチップ ドレスシューズ", 23800m, "S000000002" }
+                    { 1L, 3L, 1L, "定番の無地ロングTシャツです。", false, "クルーネック Tシャツ - ブラック", 1980m, "C000000001" },
+                    { 2L, 2L, 1L, "暖かいのに着膨れしない起毛デニムです。", false, "裏起毛 スキニーデニム", 4800m, "C000000002" },
+                    { 3L, 1L, 1L, "あたたかく肌ざわりも良いウール100%のロングコートです。", false, "ウールコート", 49800m, "C000000003" },
+                    { 4L, 2L, 1L, "コットン100%の柔らかい着心地で、春先から夏、秋口まで万能に使いやすいです。", false, "無地 ボタンダウンシャツ", 2800m, "C000000004" },
+                    { 5L, 3L, 2L, "コンパクトサイズのバッグですが収納力は抜群です", false, "レザーハンドバッグ", 18800m, "B000000001" },
+                    { 6L, 2L, 2L, "エイジング加工したレザーを使用しています。", false, "ショルダーバッグ", 38000m, "B000000002" },
+                    { 7L, 3L, 2L, "春の季節にぴったりのトートバッグです。インナーポーチまたは単体でも使用可能なポーチ付。", false, "トートバッグ ポーチ付き", 24800m, "B000000003" },
+                    { 8L, 1L, 2L, "さらりと気軽に纏える、キュートなミニサイズショルダー。", false, "ショルダーバッグ", 2800m, "B000000004" },
+                    { 9L, 1L, 2L, "エレガントな雰囲気を放つキルティングデザインです。", false, "レザー チェーンショルダーバッグ", 258000m, "B000000005" },
+                    { 10L, 2L, 3L, "柔らかいソールは快適な履き心地で、ランニングに最適です。", false, "ランニングシューズ - ブルー", 12800m, "S000000001" },
+                    { 11L, 1L, 3L, "イタリアの職人が丁寧に手作業で作り上げた一品です。", false, "メダリオン ストレートチップ ドレスシューズ", 23800m, "S000000002" }
                 });
 
             migrationBuilder.InsertData(
