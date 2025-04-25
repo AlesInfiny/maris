@@ -27,6 +27,8 @@ internal class CatalogItemConfiguration : IEntityTypeConfiguration<CatalogItem>
             .IsRequired();
         builder.Property(catalogItem => catalogItem.RowVersion)
             .IsRowVersion();
+        builder.Property(catalogItem => catalogItem.IsDeleted)
+            .IsRequired();
         builder.HasOne(catalogItem => catalogItem.CatalogCategory)
             .WithMany(catalogCategory => catalogCategory.Items)
             .HasForeignKey(catalogItem => catalogItem.CatalogCategoryId)

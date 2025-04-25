@@ -749,7 +749,8 @@
           "id",
           "name",
           "productCode",
-          "rowVersion"
+          "rowVersion",
+          "isDeleted"
         ],
         "properties": {
           "description": {
@@ -799,6 +800,10 @@
             "description": "行バージョンを取得または設定します。\n            ",
             "format": "byte",
             "minLength": 1
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "論理削除フラグを取得または設定します。\n            "
           }
         }
       },
@@ -909,7 +914,8 @@
           "productCode",
           "catalogCategoryId",
           "catalogBrandId",
-          "rowVersion"
+          "rowVersion",
+          "isDeleted"
         ],
         "properties": {
           "name": {
@@ -956,6 +962,10 @@
             "description": "行バージョンを取得または設定します。\n            ",
             "format": "byte",
             "minLength": 1
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "論理削除フラグを取得または設定します。\n            "
           }
         }
       },

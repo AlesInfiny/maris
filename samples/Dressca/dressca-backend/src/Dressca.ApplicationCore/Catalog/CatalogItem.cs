@@ -191,7 +191,6 @@ public class CatalogItem
     public byte[] RowVersion
     {
         get => this.rowVersion ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.RowVersion)));
-
         init
         {
             this.rowVersion = value;
@@ -199,23 +198,7 @@ public class CatalogItem
     }
 
     /// <summary>
-    ///  指定した ID と 行バージョンを持つ、削除用のカタログアイテムエンティティを生成します。
+    ///  論理削除フラグを取得します。
     /// </summary>
-    /// <param name="id">カタログアイテム ID 。</param>
-    /// <param name="rowVersion">行バージョン。</param>
-    /// <returns>削除用のカタログアイテムエンティティ。</returns>
-    public static CatalogItem CreateCatalogItemToDelete(long id, byte[] rowVersion)
-    {
-        return new CatalogItem
-        {
-            Id = id,
-            Name = "削除用アイテム",
-            Description = "削除用アイテムです。",
-            Price = 0,
-            ProductCode = "DELETE",
-            CatalogBrandId = 1,
-            CatalogCategoryId = 1,
-            RowVersion = rowVersion,
-        };
-    }
+    public bool IsDeleted { get; init; } = false;
 }

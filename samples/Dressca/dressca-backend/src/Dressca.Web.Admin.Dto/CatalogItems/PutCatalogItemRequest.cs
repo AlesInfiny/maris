@@ -55,4 +55,10 @@ public class PutCatalogItemRequest
     /// </summary>
     [Required]
     public required byte[] RowVersion { get; set; }
+
+    /// <summary>
+    ///  論理削除フラグを取得または設定します。
+    /// </summary>
+    [Required]
+    public required bool IsDeleted { get; set; }
 }

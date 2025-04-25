@@ -309,11 +309,14 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var targetId = 1;
+        byte[] targetRowVersion = [255];
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         catalogRepositoryMock
             .Setup(r => r.GetAsync(targetId, AnyToken))
             .ReturnsAsync(targetItem);
-        byte[] targetRowVersion = [255];
+        catalogRepositoryMock
+            .Setup(r => r.RemoveAsync(targetId, targetRowVersion, AnyToken))
+            .ReturnsAsync(1);
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
         var userStoreMock = new Mock<IUserStore>();
@@ -418,6 +421,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
+        var isDeleted = false;
 
         // Act
         await service.UpdateCatalogItemAsync(
@@ -429,6 +433,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
             targetBrandId,
             targetCategoryId,
             AnyRowVersion,
+            isDeleted,
             cancellationToken);
 
         // Assert
@@ -467,6 +472,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+        var isDeleted = false;
 
         // Act
         var action = () => service.UpdateCatalogItemAsync(
@@ -477,7 +483,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
             targetProductCode,
             targetBrandId,
             targetCategoryId,
-            AnyRowVersion);
+            AnyRowVersion,
+            isDeleted);
 
         // Assert
         await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
@@ -515,6 +522,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         catalogDomainServiceMock.Setup(s => s.CategoryExistsAsync(targetCategoryId, AnyToken)).ReturnsAsync(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+        var isDeleted = false;
 
         // Act
         var action = () => service.UpdateCatalogItemAsync(
@@ -525,7 +533,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
             targetProductCode,
             targetBrandId,
             targetCategoryId,
-            AnyRowVersion);
+            AnyRowVersion,
+            isDeleted);
 
         // Assert
         await Assert.ThrowsAsync<CatalogBrandNotExistingInRepositoryException>(action);
@@ -563,6 +572,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         userStoreMock.Setup(a => a.IsInRole(It.IsAny<string>())).Returns(true);
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock.Object, logger);
+        var isDeleted = false;
 
         // Act
         var action = () => service.UpdateCatalogItemAsync(
@@ -573,7 +583,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
             targetProductCode,
             targetBrandId,
             targetCategoryId,
-            AnyRowVersion);
+            AnyRowVersion,
+            isDeleted);
 
         // Assert
         await Assert.ThrowsAsync<CatalogCategoryNotExistingInRepositoryException>(action);
@@ -611,6 +622,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var catalogDomainServiceMock = Mock.Of<ICatalogDomainService>();
         var logger = this.CreateTestLogger<CatalogApplicationService>();
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepositoryMock.Object, catalogCategoryRepositoryMock.Object, userStoreMock.Object, catalogDomainServiceMock, logger);
+        var isDeleted = false;
 
         // Act
         var action = () => service.UpdateCatalogItemAsync(
@@ -621,7 +633,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
             targetProductCode,
             targetBrandId,
             targetCategoryId,
-            AnyRowVersion);
+            AnyRowVersion,
+            isDeleted);
 
         // Assert
         await Assert.ThrowsAsync<PermissionDeniedException>(action);

@@ -178,6 +178,15 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   カタログアイテム ID:{0} のカタログアイテムがリポジトリに存在しません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string CatalogItemIdDoesNotExistInRepository {
+            get {
+                return ResourceManager.GetString("CatalogItemIdDoesNotExistInRepository", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   カタログアイテム ID は 0 以下にできません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string CatalogItemIdMustBePositive {

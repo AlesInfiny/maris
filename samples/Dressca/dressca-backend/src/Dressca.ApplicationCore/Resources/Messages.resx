@@ -153,6 +153,9 @@
   <data name="CatalogCategoryIdMustBePositive" xml:space="preserve">
     <value>カタログカテゴリ ID は 0 以下にできません。</value>
   </data>
+  <data name="CatalogItemIdDoesNotExistInRepository" xml:space="preserve">
+    <value>カタログアイテム ID:{0} のカタログアイテムがリポジトリに存在しません。</value>
+  </data>
   <data name="CatalogItemIdDoesNotExistInBasket" xml:space="preserve">
     <value>カタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。</value>
   </data>

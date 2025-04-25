@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dressca.EfInfrastructure.Migrations
 {
     [DbContext(typeof(DresscaDbContext))]
-    [Migration("20241211091203_InitialCreate")]
+    [Migration("20250425023655_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -21,7 +21,7 @@ namespace Dressca.EfInfrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -276,6 +276,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(512)
@@ -312,6 +315,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 3L,
                             CatalogCategoryId = 1L,
                             Description = "定番の無地ロングTシャツです。",
+                            IsDeleted = false,
                             Name = "クルーネック Tシャツ - ブラック",
                             Price = 1980m,
                             ProductCode = "C000000001",
@@ -323,6 +327,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 2L,
                             CatalogCategoryId = 1L,
                             Description = "暖かいのに着膨れしない起毛デニムです。",
+                            IsDeleted = false,
                             Name = "裏起毛 スキニーデニム",
                             Price = 4800m,
                             ProductCode = "C000000002",
@@ -334,6 +339,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 1L,
                             CatalogCategoryId = 1L,
                             Description = "あたたかく肌ざわりも良いウール100%のロングコートです。",
+                            IsDeleted = false,
                             Name = "ウールコート",
                             Price = 49800m,
                             ProductCode = "C000000003",
@@ -345,6 +351,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 2L,
                             CatalogCategoryId = 1L,
                             Description = "コットン100%の柔らかい着心地で、春先から夏、秋口まで万能に使いやすいです。",
+                            IsDeleted = false,
                             Name = "無地 ボタンダウンシャツ",
                             Price = 2800m,
                             ProductCode = "C000000004",
@@ -356,6 +363,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 3L,
                             CatalogCategoryId = 2L,
                             Description = "コンパクトサイズのバッグですが収納力は抜群です",
+                            IsDeleted = false,
                             Name = "レザーハンドバッグ",
                             Price = 18800m,
                             ProductCode = "B000000001",
@@ -367,6 +375,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 2L,
                             CatalogCategoryId = 2L,
                             Description = "エイジング加工したレザーを使用しています。",
+                            IsDeleted = false,
                             Name = "ショルダーバッグ",
                             Price = 38000m,
                             ProductCode = "B000000002",
@@ -378,6 +387,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 3L,
                             CatalogCategoryId = 2L,
                             Description = "春の季節にぴったりのトートバッグです。インナーポーチまたは単体でも使用可能なポーチ付。",
+                            IsDeleted = false,
                             Name = "トートバッグ ポーチ付き",
                             Price = 24800m,
                             ProductCode = "B000000003",
@@ -389,6 +399,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 1L,
                             CatalogCategoryId = 2L,
                             Description = "さらりと気軽に纏える、キュートなミニサイズショルダー。",
+                            IsDeleted = false,
                             Name = "ショルダーバッグ",
                             Price = 2800m,
                             ProductCode = "B000000004",
@@ -400,6 +411,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 1L,
                             CatalogCategoryId = 2L,
                             Description = "エレガントな雰囲気を放つキルティングデザインです。",
+                            IsDeleted = false,
                             Name = "レザー チェーンショルダーバッグ",
                             Price = 258000m,
                             ProductCode = "B000000005",
@@ -411,6 +423,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 2L,
                             CatalogCategoryId = 3L,
                             Description = "柔らかいソールは快適な履き心地で、ランニングに最適です。",
+                            IsDeleted = false,
                             Name = "ランニングシューズ - ブルー",
                             Price = 12800m,
                             ProductCode = "S000000001",
@@ -422,6 +435,7 @@ namespace Dressca.EfInfrastructure.Migrations
                             CatalogBrandId = 1L,
                             CatalogCategoryId = 3L,
                             Description = "イタリアの職人が丁寧に手作業で作り上げた一品です。",
+                            IsDeleted = false,
                             Name = "メダリオン ストレートチップ ドレスシューズ",
                             Price = 23800m,
                             ProductCode = "S000000002",
