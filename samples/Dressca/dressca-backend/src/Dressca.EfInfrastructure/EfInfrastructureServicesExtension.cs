@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Dressca.EfInfrastructure;
 
@@ -38,7 +38,7 @@ public static class EfInfrastructureServicesExtension
     ///   <item><paramref name="configuration"/>　に接続文字列が定義されていません。</item>
     ///  </list>
     /// </exception>
-    public static IServiceCollection AddDresscaEfInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
+    public static IServiceCollection AddDresscaEfInfrastructure(this IServiceCollection services, IConfiguration configuration, IHostEnvironment env)
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configuration);
