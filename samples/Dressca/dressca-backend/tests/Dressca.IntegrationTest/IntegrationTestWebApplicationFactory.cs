@@ -60,14 +60,14 @@ public class IntegrationTestWebApplicationFactory<TProgram>
 
         if (!env.Equals(Environments.Development, StringComparison.OrdinalIgnoreCase))
         {
-            builder.ConfigureServices(services =>
+            builder.ConfigureServices((context, services) =>
             {
                 var config = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
                     .Build();
 
-                services.AddDresscaEfInfrastructure(config);
+                services.AddDresscaEfInfrastructure(config, context.HostingEnvironment);
                 this.connectionString = config.GetConnectionString("DresscaDbContext");
             });
         }

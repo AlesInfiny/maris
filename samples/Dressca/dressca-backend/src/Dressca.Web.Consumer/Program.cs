@@ -73,7 +73,7 @@ builder.Services.AddOpenApiDocument(config =>
     };
 });
 
-builder.Services.AddDresscaEfInfrastructure(builder.Configuration);
+builder.Services.AddDresscaEfInfrastructure(builder.Configuration, builder.Environment);
 
 builder.Services.AddStaticFileAssetStore();
 
