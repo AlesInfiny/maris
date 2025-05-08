@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 var builder = Host.CreateDefaultBuilder(args);
 builder.ConfigureServices((context, services) =>
 {
-    //コマンド内で利用するクラス群を DI コンテナーに登録
+    // コマンド内で利用するクラス群を DI コンテナーに登録
     services.AddScoped<ProductApplicationService>();
     services.AddScoped<IProductsRepository, ProductsRepository>();
 
