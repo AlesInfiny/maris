@@ -20,6 +20,6 @@
     <PackageVersion Include="xunit.v3" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556"/>
+    <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="All" />
   </ItemGroup>
 </Project>
