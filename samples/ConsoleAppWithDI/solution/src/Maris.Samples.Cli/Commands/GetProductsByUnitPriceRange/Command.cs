@@ -42,9 +42,9 @@ internal class Command : AsyncCommand<Parameter>
             parameter.MinimumUnitPrice, parameter.MaximumUnitPrice, cancellationToken);
         if (products.Count >= 10)
         {
-            this.logger.LogWarning(Events.Over10ProductsFoundInRange, $"単価が {parameter.MinimumUnitPrice} ～ " +
-                $"{parameter.MaximumUnitPrice} の商品情報が 10 件以上あります。" +
-                $"範囲を絞り込んでください。");
+            this.logger.LogWarning(
+                Events.Over10ProductsFoundInRange,
+                $"単価が {parameter.MinimumUnitPrice} ～ " + $"{parameter.MaximumUnitPrice} の商品情報が 10 件以上あります。" + $"範囲を絞り込んでください。");
             return CommandResult.CreateWarning(2);
         }
 

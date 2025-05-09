@@ -14,9 +14,16 @@ namespace Maris.Samples.Cli.Commands;
 /// </remarks>
 public class CommandResult : ICommandResult
 {
-    private static readonly int genericWarning = 1;
-    private static readonly int validationError = 10;
-    private static readonly int genericError = 99;
+    private static readonly int GenericWarningValue = 1;
+    private static readonly int ValidationErrorValue = 10;
+    private static readonly int GenericErrorValue = 99;
+
+    /// <summary>
+    ///  プロセスの終了コードを指定して
+    ///  <see cref="CommandResult"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="exitCode">プロセスの終了コード。</param>
+    protected CommandResult(int exitCode) => this.ExitCode = exitCode;
 
     /// <summary>
     ///  コマンドの成功を表す <see cref="ICommandResult"/> を取得します。
@@ -26,29 +33,22 @@ public class CommandResult : ICommandResult
     /// <summary>
     ///  汎用の警告終了を表す <see cref="ICommandResult"/> を取得します。
     /// </summary>
-    public static ICommandResult GenericWarning => CreateWarning(genericWarning);
+    public static ICommandResult GenericWarning => CreateWarning(GenericWarningValue);
 
     /// <summary>
     ///  起動パラメーターの入力値検証に失敗したことを表す <see cref="ICommandResult"/> を取得します。
     /// </summary>
-    public static ICommandResult ValidationError => CreateError(validationError);
+    public static ICommandResult ValidationError => CreateError(ValidationErrorValue);
 
     /// <summary>
     ///  汎用の異常終了を表す <see cref="ICommandResult"/> を取得します。
     /// </summary>
-    public static ICommandResult GenericError => CreateError(genericError);
+    public static ICommandResult GenericError => CreateError(GenericErrorValue);
 
     /// <summary>
     ///  プロセスの終了コードを取得します。
     /// </summary>
     public int ExitCode { get; }
-
-    /// <summary>
-    ///  プロセスの終了コードを指定して
-    ///  <see cref="CommandResult"/> クラスの新しいインスタンスを初期化します。
-    /// </summary>
-    /// <param name="exitCode">プロセスの終了コード。</param>
-    protected CommandResult(int exitCode) => this.ExitCode = exitCode;
 
     /// <summary>
     ///  警告終了を表す <see cref="ICommandResult"/> を取得します。
@@ -89,9 +89,10 @@ public class CommandResult : ICommandResult
         ///   <item><paramref name="exitCode"/> に 1 ～ 9 以外の値が指定されました。</item>
         ///  </list>
         /// </exception>
-        internal WarningCommandResult(int exitCode) : base(exitCode)
+        internal WarningCommandResult(int exitCode)
+            : base(exitCode)
         {
-            if (exitCode < 1 || 9 < exitCode)
+            if (exitCode < 1 || exitCode > 9)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(exitCode),
@@ -118,9 +119,10 @@ public class CommandResult : ICommandResult
         ///   <item><paramref name="exitCode"/> に 10 ～ 99 以外の値が指定されました。</item>
         ///  </list>
         /// </exception>
-        internal ErrorCommandResult(int exitCode) : base(exitCode)
+        internal ErrorCommandResult(int exitCode)
+            : base(exitCode)
         {
-            if (exitCode < 10 || 99 < exitCode)
+            if (exitCode < 10 || exitCode > 99)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(exitCode),

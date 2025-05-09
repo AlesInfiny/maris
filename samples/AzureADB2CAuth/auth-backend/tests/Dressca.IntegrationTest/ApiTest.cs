@@ -28,6 +28,7 @@ public class ApiTest(ApiTestWebApplicationFactory<Program> factory)
     {
         // Arrange
         var client = this.factory.CreateClient();
+
         // ログイン成功時に取得するJWTをヘッダーに追加
         var token = this.factory.CreateToken("testUser");
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -55,6 +56,7 @@ public class ApiTest(ApiTestWebApplicationFactory<Program> factory)
         // Assert
         response.EnsureSuccessStatusCode();
         var result = await response.Content.ReadAsStringAsync(cancellationToken);
+
         // "{"serverTime":"2024/04/12 13:32:59"}"
         Assert.StartsWith("{\"serverTime\":", result);
     }
