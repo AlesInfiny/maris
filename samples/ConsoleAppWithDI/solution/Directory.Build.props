@@ -7,8 +7,4 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
   </PropertyGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
-  </ItemGroup>
 </Project>
