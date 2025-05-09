@@ -246,17 +246,22 @@ dotnet_diagnostic.SA1600.severity=none
 
 ### StyleCop Analyzers {#stylecop-analyzers}
 
-![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-light.png#only-light){ loading=lazy align=right }
-![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-dark.png#only-dark){ loading=lazy align=right }
-
 複数の開発者で、一貫したコーディングスタイルを維持するために利用します。
 .editorconfig では統一しきれない細かなコーディングルールを定義する目的に使用します。
 
 #### StyleCop Analyzers のインストール {#install-stylecop-analyzers}
 
 StyleCop Analyzers は [NuGet パッケージ :material-open-in-new:](https://www.nuget.org/packages/StyleCop.Analyzers/){ target=_blank } として提供されています。
-StyleCop Analyzers を用いて静的コード解析したいプロジェクトから参照設定を行ってください。
-通常はすべてのプロジェクトから参照するように設定します。
+Directory.Package.props ファイルで StyleCop Analyzers のグローバルパッケージ参照の設定をしてください。
+
+```props title="StyleCop Analyzers のグローバルパッケージ参照設定例"
+<Project>
+  <!-- StyleCop Analyzers 関連の設定以外省略 -->
+  <ItemGroup>
+    <GlobalPackageReference Include="StyleCop.Analyzers" Version="x.x.x" PrivateAssets="All" />
+  </ItemGroup>
+</Project>
+```
 
 !!! warning "StyleCop Analyzers のバージョンに注意"
 
@@ -321,7 +326,27 @@ stylecop.json の設定方法については [公式ドキュメント :material
     }
     ```
 
-#### プロジェクトから stylecop.json を参照する {#reference-stylecop-json-from-project}
+#### グローバルパッケージ参照を使用しない場合 {#without-global-package-reference}
+
+.NET SDK 7.0.100.preview7 より前のバージョンでは、グローバルパッケージ参照を使用できません。
+以下に、グローバルパッケージ参照を使用しない場合の StyleCop Analyzers の設定方法を示します。
+
+![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-light.png#only-light){ loading=lazy align=right }
+![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-dark.png#only-dark){ loading=lazy align=right }
+
+まず、 Directory.Package.props ファイルで StyleCop Analyzers のパッケージ参照の設定をしてください。
+
+```props
+<Project>
+  <ItemGroup>
+    <!-- StyleCop Analyzers 関連の設定以外省略 -->
+    <PackageVersion Include="StyleCop.Analyzers" Version="x.x.x" />
+  </ItemGroup>
+</Project>
+```
+
+次に、 StyleCop Analyzers を用いて静的コード解析したいプロジェクトで、 NuGet パッケージの参照設定を行ってください。
+通常は、すべてのプロジェクトから参照するように設定します。
 
 stylecop.json は、各プロジェクトのルートフォルダーにあるかのように設定しなければなりません。
 同時にコーディングルールの管理負荷軽減のため、 stylecop.json を各プロジェクトに分散配置せず、ソリューション内にひとつだけ配置することが望まれます。
