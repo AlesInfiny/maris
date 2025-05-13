@@ -258,7 +258,7 @@ Directory.Package.props ファイルで StyleCop Analyzers のグローバルパ
 <Project>
   <!-- StyleCop Analyzers 関連の設定以外省略 -->
   <ItemGroup>
-    <GlobalPackageReference Include="StyleCop.Analyzers" Version="x.x.x" PrivateAssets="All" />
+    <GlobalPackageReference Include="StyleCop.Analyzers" Version="x.x.x" />
   </ItemGroup>
 </Project>
 ```
