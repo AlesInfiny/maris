@@ -326,50 +326,17 @@ stylecop.json の設定方法については [公式ドキュメント :material
     }
     ```
 
-#### グローバルパッケージ参照を使用しない場合 {#without-global-package-reference}
-
-.NET SDK 7.0.100.preview7 より前のバージョンでは、グローバルパッケージ参照を使用できません。
-以下に、グローバルパッケージ参照を使用しない場合の StyleCop Analyzers の設定方法を示します。
-
-![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-light.png#only-light){ loading=lazy align=right }
-![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-dark.png#only-dark){ loading=lazy align=right }
-
-まず、 Directory.Package.props ファイルで StyleCop Analyzers のパッケージ参照の設定をしてください。
-
-```props
-<Project>
-  <ItemGroup>
-    <!-- StyleCop Analyzers 関連の設定以外省略 -->
-    <PackageVersion Include="StyleCop.Analyzers" Version="x.x.x" />
-  </ItemGroup>
-</Project>
-```
-
-次に、 StyleCop Analyzers を用いて静的コード解析したいプロジェクトで、 NuGet パッケージの参照設定を行ってください。
-通常は、すべてのプロジェクトから参照するように設定します。
-
-stylecop.json は、各プロジェクトのルートフォルダーにあるかのように設定しなければなりません。
-同時にコーディングルールの管理負荷軽減のため、 stylecop.json を各プロジェクトに分散配置せず、ソリューション内にひとつだけ配置することが望まれます。
-これらを両立するため、各プロジェクトからは、ソリューションルートに配置した stylecop.json をリンクとしてプロジェクトに追加しましょう。
-Visual Studio のソリューションエクスプローラーを利用して、 stylecop.json ファイルの [ビルドアクション] プロパティを [C# アナライザー追加ファイル] に設定します。
+各プロジェクトからは、ソリューションルートに配置した stylecop.json をリンクとしてプロジェクトに追加しましょう。
 これにより、 StyleCop Analyzers の設定ファイルであることをコンパイラーに通知できます。
 
-ここまで解説した手順に対応すると、最終的にプロジェクトファイルの設定は以下のようになります。
+![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-light.png#only-light){ loading=lazy }
+![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-dark.png#only-dark){ loading=lazy }
 
 ```xml title="プロジェクトファイルの設定例"
 <Project Sdk="Microsoft.NET.Sdk">
-
   <!-- StyleCop Analyzers 関連の設定以外省略 -->
-
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 </Project>
 ```
