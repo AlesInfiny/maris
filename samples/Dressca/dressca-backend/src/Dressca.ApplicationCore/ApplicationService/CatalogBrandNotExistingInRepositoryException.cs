@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.ApplicationService;
 /// </summary>
 public class CatalogBrandNotExistingInRepositoryException : BusinessException
 {
-    private const string ErrorCode = "CatalogBrandNotExistingInRepository";
+    private const string ErrorCode = "catalogBrandNotFound";
 
     /// <summary>
     ///  見つからなかったカタログブランド ID を指定して

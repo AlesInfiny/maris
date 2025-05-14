@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.ApplicationService;
 /// </summary>
 public class CatalogCategoryNotExistingInRepositoryException : BusinessException
 {
-    private const string ErrorCode = "CatalogCategoryNotExistingInRepository";
+    private const string ErrorCode = "catalogCategoryNotFound";
 
     /// <summary>
     ///  見つからなかったカタログカテゴリ ID を指定して

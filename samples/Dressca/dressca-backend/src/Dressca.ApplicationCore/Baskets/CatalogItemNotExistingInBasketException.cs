@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.Baskets;
 /// </summary>
 public class CatalogItemNotExistingInBasketException : BusinessException
 {
-    private const string ErrorCode = "CatalogItemNotExistingInBasket";
+    private const string ErrorCode = "catalogItemIdDoesNotExistInBasket";
 
     /// <summary>
     ///  見つからなかったカタログアイテム Id を指定して

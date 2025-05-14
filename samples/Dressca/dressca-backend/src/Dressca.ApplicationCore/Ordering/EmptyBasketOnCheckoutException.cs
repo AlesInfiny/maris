@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.Ordering;
 /// </summary>
 public class EmptyBasketOnCheckoutException : BusinessException
 {
-    private const string ErrorCode = "EmptyBasketOnCheckout";
+    private const string ErrorCode = "basketIsEmptyOnCheckout";
 
     /// <summary>
     ///  <see cref="EmptyBasketOnCheckoutException"/> クラスの新しいインスタンスを初期化します。

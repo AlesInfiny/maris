@@ -9,7 +9,7 @@ namespace Dressca.ApplicationCore.Authorization;
 /// </summary>
 public class PermissionDeniedException : BusinessException
 {
-    private const string ErrorCode = "PermissionDenied";
+    private const string ErrorCode = "permissionDenied";
 
     /// <summary>
     ///  実行を試みた操作を指定して
