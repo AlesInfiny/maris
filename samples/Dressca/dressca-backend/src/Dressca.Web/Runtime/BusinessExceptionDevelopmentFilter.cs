@@ -4,6 +4,7 @@ using Dressca.Web.Resources;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
 namespace Dressca.Web.Runtime;
@@ -39,11 +40,20 @@ public class BusinessExceptionDevelopmentFilter : BusinessExceptionFilterBase
     {
         // 開発用のフィルターでは例外のスタックトレースも返却する。
         ArgumentNullException.ThrowIfNull(context);
-        return this.problemDetailsFactory.CreateValidationProblemDetails(
+        var problemDetails = this.problemDetailsFactory.CreateValidationProblemDetails(
                 context.HttpContext,
                 context.ModelState,
                 statusCode: (int)HttpStatusCode.BadRequest,
                 title: Messages.BusinessExceptionHandled,
                 detail: context.Exception.ToString());
+
+        if (context.Exception is BusinessException businessEx)
+        {
+            // 暫定の実装として、1つ目のBusinessErrorのexceptionIdとexceptionValuesを設定
+            problemDetails.Extensions.Add("exceptionId", businessEx.GetBusinessErrors.First().ErrorCode);
+            problemDetails.Extensions.Add("exceptionValues", businessEx.GetBusinessErrors.First().ErrorMessageValues);
+        }
+
+        return problemDetails;
     }
 }
