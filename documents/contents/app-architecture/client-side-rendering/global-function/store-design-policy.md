@@ -3,7 +3,7 @@ title: CSR 編 - 全体処理方式
 description: アプリケーション全体で考慮すべきアーキテクチャについて、 その実装方針を説明します。
 ---
 
-# ストア設計方針 {#store-design-policy}
+# ストア設計方針 {#top}
 
 ## 永続化方式 {#persistence}
 
