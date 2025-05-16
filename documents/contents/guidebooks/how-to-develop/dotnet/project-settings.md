@@ -326,8 +326,12 @@ stylecop.json の設定方法については [公式ドキュメント :material
     }
     ```
 
+stylecop.json は、各プロジェクトのルートフォルダーにあるかのように設定しなければなりません。
+同時にコーディングルールの管理負荷軽減のため、 stylecop.json を各プロジェクトに分散配置せず、ソリューション内にひとつだけ配置することが望まれます。
+
 各プロジェクトからは、ソリューションルートに配置した stylecop.json をリンクとしてプロジェクトに追加しましょう。
 これにより、 StyleCop Analyzers の設定ファイルであることをコンパイラーに通知できます。
+ここまで解説した手順に対応すると、最終的にプロジェクトファイルの設定は以下のようになります。
 
 ![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-light.png#only-light){ loading=lazy }
 ![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-dark.png#only-dark){ loading=lazy }
