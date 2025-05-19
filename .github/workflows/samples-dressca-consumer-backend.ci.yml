@@ -96,7 +96,7 @@ jobs:
 
       - id: create-test-result-report
         name: テスト結果ページの作成
-        uses: dorny/test-reporter@6e6a65b7a0bd2c9197df7d0ae36ac5cee784230c  # v2.0.0
+        uses: dorny/test-reporter@890a17cecf52a379fc869ab770a71657660be727  # v2.1.0
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           name: 'Test results'
