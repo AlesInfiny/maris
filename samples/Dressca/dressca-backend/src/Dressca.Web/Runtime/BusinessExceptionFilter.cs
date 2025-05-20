@@ -48,7 +48,7 @@ public class BusinessExceptionFilter : BusinessExceptionFilterBase
         {
             // 暫定の実装として、1つ目のBusinessErrorのexceptionIdとexceptionValuesを設定
             problemDetails.Extensions.Add("exceptionId", businessEx.GetBusinessErrors.First().ErrorCode);
-            problemDetails.Extensions.Add("exceptionValues", businessEx.GetBusinessErrors.First().ErrorMessageBuilders.First().ErrorMessageValues);
+            problemDetails.Extensions.Add("exceptionValues", businessEx.GetBusinessErrors.First().ErrorMessages.First().ErrorMessageValues);
         }
 
         return problemDetails;

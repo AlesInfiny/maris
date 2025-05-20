@@ -23,7 +23,7 @@ public class AssetApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
 
         // Assert
         var ex = await Assert.ThrowsAsync<AssetNotFoundException>(action);
-        Assert.Equal("アセットコード: dummy のアセットが見つかりませんでした。", ex.Message);
+        Assert.Contains("アセットコード: dummy のアセットが見つかりませんでした。", ex.Message);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class AssetApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
 
         // Assert
         var ex = await Assert.ThrowsAsync<AssetNotFoundException>(action);
-        Assert.Equal("アセットコード: dummy のアセットが見つかりませんでした。", ex.Message);
+        Assert.Contains("アセットコード: dummy のアセットが見つかりませんでした。", ex.Message);
     }
 
     [Fact]

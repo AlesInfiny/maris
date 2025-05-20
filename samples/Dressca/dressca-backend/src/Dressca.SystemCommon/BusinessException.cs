@@ -49,6 +49,11 @@ public class BusinessException : Exception
     public override string Message => $"{base.Message}{Environment.NewLine}{this.businessErrors}";
 
     /// <summary>
+    ///  この例外オブジェクトの保持する業務エラーの情報を取得します。
+    /// </summary>
+    public IEnumerable<BusinessError> GetBusinessErrors => this.businessErrors;
+
+    /// <summary>
     ///  この例外オブジェクトの保持するエラーコードとエラーメッセージのリストを取得します。
     /// </summary>
     /// <returns>エラーコードとエラーメッセージのリスト。</returns>
@@ -59,12 +64,10 @@ public class BusinessException : Exception
             var errorCode = businessError.ErrorCode;
             foreach (var errorMessage in businessError.ErrorMessages)
             {
-                yield return new(errorCode, errorMessage);
+                yield return new(errorCode, errorMessage.Message);
             }
         }
     }
-
-    public IEnumerable<BusinessError> GetBusinessErrors => this.businessErrors;
 
     /// <summary>
     ///  業務エラーを追加します。

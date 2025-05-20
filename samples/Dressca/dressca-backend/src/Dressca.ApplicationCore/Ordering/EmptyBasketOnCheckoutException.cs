@@ -14,7 +14,7 @@ public class EmptyBasketOnCheckoutException : BusinessException
     ///  <see cref="EmptyBasketOnCheckoutException"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     public EmptyBasketOnCheckoutException()
-        : base(new BusinessError(ErrorCode, new ErrorMessageBuilder(Messages.BasketIsEmptyOnCheckout)))
+        : base(new BusinessError(ErrorCode, new ErrorMessage(Messages.BasketIsEmptyOnCheckout)))
     {
     }
 }

@@ -24,7 +24,7 @@ public class BusinessErrorCollectionTest
         // Arrange
         var errors = new BusinessErrorCollection();
         string errorCode = "ERR_CODE";
-        string errorMessage = "ERROR_MESSAGE";
+        ErrorMessage errorMessage = new ErrorMessage("ERROR_MESSAGE");
         BusinessError newBusinessError = new BusinessError(errorCode, errorMessage);
 
         // Act
@@ -32,7 +32,7 @@ public class BusinessErrorCollectionTest
 
         // Assert
         var error = Assert.Single(errors, error => error.ErrorCode == errorCode);
-        Assert.Single(error.ErrorMessages, message => message == errorMessage);
+        Assert.Single(error.ErrorMessages, e => e.Message == errorMessage.Message);
     }
 
     [Fact]
@@ -41,8 +41,8 @@ public class BusinessErrorCollectionTest
         // Arrange
         var errors = new BusinessErrorCollection();
         string errorCode = "ERR_CODE";
-        string errorMessage1 = "ERROR_MESSAGE1";
-        string errorMessage2 = "ERROR_MESSAGE2";
+        ErrorMessage errorMessage1 = new ErrorMessage("ERROR_MESSAGE1");
+        ErrorMessage errorMessage2 = new ErrorMessage("ERROR_MESSAGE2");
         BusinessError businessError1 = new BusinessError(errorCode, errorMessage1);
         errors.AddOrMerge(businessError1);
         BusinessError businessError2 = new BusinessError(errorCode, errorMessage2);
@@ -54,8 +54,8 @@ public class BusinessErrorCollectionTest
         var error = Assert.Single(errors, error => error.ErrorCode == errorCode);
         Assert.Collection(
             error.ErrorMessages,
-            message => Assert.Equal(errorMessage1, message),
-            message => Assert.Equal(errorMessage2, message));
+            message => Assert.Equal(errorMessage1.Message, message.Message),
+            message => Assert.Equal(errorMessage2.Message, message.Message));
     }
 
     [Fact]
@@ -64,13 +64,13 @@ public class BusinessErrorCollectionTest
         // Arrange
         var errors = new BusinessErrorCollection();
         string errorCode1 = "ERR_CODE1";
-        string errorMessage1_1 = "ERROR_MESSAGE1-1";
-        string errorMessage1_2 = "ERROR_MESSAGE1-2";
+        ErrorMessage errorMessage1_1 = new ErrorMessage("ERROR_MESSAGE1-1");
+        ErrorMessage errorMessage1_2 = new ErrorMessage("ERROR_MESSAGE1-2");
         BusinessError businessError1 = new BusinessError(errorCode1, errorMessage1_1, errorMessage1_2);
         errors.AddOrMerge(businessError1);
         string errorCode2 = "ERR_CODE2";
-        string errorMessage2_1 = "ERROR_MESSAGE2-1";
-        string errorMessage2_2 = "ERROR_MESSAGE2-2";
+        ErrorMessage errorMessage2_1 = new ErrorMessage("ERROR_MESSAGE2-1");
+        ErrorMessage errorMessage2_2 = new ErrorMessage("ERROR_MESSAGE2-2");
         BusinessError businessError2 = new BusinessError(errorCode2, errorMessage2_1, errorMessage2_2);
         errors.AddOrMerge(businessError2);
 

@@ -17,7 +17,7 @@ public class OrderNotFoundException : BusinessException
     /// <param name="orderId">見つからなかった注文 Id 。</param>
     /// <param name="buyerId">見つからなかった購入者 Id 。</param>
     public OrderNotFoundException(long orderId, string buyerId)
-        : base(new BusinessError(ErrorCode, new ErrorMessageBuilder(string.Format(Messages.OrderNotFound, orderId, buyerId), [orderId.ToString(), buyerId])))
+        : base(new BusinessError(ErrorCode, new ErrorMessage(string.Format(Messages.OrderNotFound, orderId, buyerId), [orderId.ToString(), buyerId])))
     {
     }
 }

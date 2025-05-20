@@ -16,7 +16,7 @@ public class CatalogCategoryNotExistingInRepositoryException : BusinessException
     /// </summary>
     /// <param name="catalogCategoryIds">見つからなかったカタログカテゴリ Id 。</param>
     public CatalogCategoryNotExistingInRepositoryException(IEnumerable<long> catalogCategoryIds)
-        : base(new BusinessError(ErrorCode, new ErrorMessageBuilder(string.Format(Messages.CatalogCategoryIdDoesNotExist, string.Join(",", catalogCategoryIds)), [..catalogCategoryIds.Select(id => id.ToString())])))
+        : base(new BusinessError(ErrorCode, new ErrorMessage(string.Format(Messages.CatalogCategoryIdDoesNotExist, string.Join(",", catalogCategoryIds)), [..catalogCategoryIds.Select(id => id.ToString())])))
     {
     }
 }

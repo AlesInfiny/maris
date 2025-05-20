@@ -29,7 +29,7 @@ public class BusinessErrorTest
     {
         // Arrange
         string? errorCode = "ERR_CODE";
-        string[] errorMessages = ["ERR_MESSAGE1", "ERR_MESSAGE2"];
+        ErrorMessage[] errorMessages = [new ErrorMessage("ERR_MESSAGE1"), new ErrorMessage("ERR_MESSAGE2")];
 
         // Act
         var error = new BusinessError(errorCode, errorMessages);
@@ -43,16 +43,16 @@ public class BusinessErrorTest
     {
         // Arrange
         string? errorCode = "ERR_CODE";
-        string[] errorMessages = ["ERR_MESSAGE1", "ERR_MESSAGE2"];
+        ErrorMessage[] errorMessages = [new ErrorMessage("ERR_MESSAGE1"), new ErrorMessage("ERR_MESSAGE2")];
 
         // Act
         var error = new BusinessError(errorCode, errorMessages);
 
         // Assert
         Assert.Collection(
-            error.ErrorMessages,
-            errorMessage => Assert.Equal(errorMessages[0], errorMessage),
-            errorMessage => Assert.Equal(errorMessages[1], errorMessage));
+            error.ErrorMessages.Select(e => e.Message),
+            errorMessage => Assert.Equal(errorMessages[0].Message, errorMessage),
+            errorMessage => Assert.Equal(errorMessages[1].Message, errorMessage));
     }
 
     [Fact]
@@ -60,21 +60,21 @@ public class BusinessErrorTest
     {
         // Arrange
         var error = new BusinessError();
-        string? errorMessage = null;
+        ErrorMessage errorMessage = new ErrorMessage(null!);
 
         // Act
         error.AddErrorMessage(errorMessage);
 
         // Assert
-        Assert.Single(error.ErrorMessages, errorMessage => errorMessage == string.Empty);
+        Assert.Single(error.ErrorMessages, e => e.Message == string.Empty);
     }
 
     [Fact]
     public void AddErrorMessage_エラーメッセージを追加できる()
     {
         // Arrange
-        var error = new BusinessError("ERR_CODE", ["ERR_MESSAGE1"]);
-        string? errorMessage = "ERR_MESSAGE2";
+        var error = new BusinessError("ERR_CODE", new ErrorMessage("ERR_MESSAGE1"));
+        ErrorMessage errorMessage = new ErrorMessage("ERR_MESSAGE2");
 
         // Act
         error.AddErrorMessage(errorMessage);
@@ -82,8 +82,8 @@ public class BusinessErrorTest
         // Assert
         Assert.Collection(
             error.ErrorMessages,
-            errorMessage => Assert.Equal("ERR_MESSAGE1", errorMessage),
-            errorMessage => Assert.Equal("ERR_MESSAGE2", errorMessage));
+            e => Assert.Equal("ERR_MESSAGE1", e.Message),
+            e => Assert.Equal("ERR_MESSAGE2", e.Message));
     }
 
     [Fact]
@@ -103,7 +103,7 @@ public class BusinessErrorTest
     public void ToString_エラーコードがキーでエラーメッセージのリストが値のJSON形式に変換される()
     {
         // Arrange
-        var error = new BusinessError("ERR_CODE", "エラー1", "ERR_MESSAGE2");
+        var error = new BusinessError("ERR_CODE", new ErrorMessage("エラー1"), new ErrorMessage("ERR_MESSAGE2"));
 
         // Act
         var str = error.ToString();

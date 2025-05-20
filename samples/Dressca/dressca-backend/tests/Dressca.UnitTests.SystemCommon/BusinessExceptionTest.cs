@@ -9,7 +9,7 @@ public class BusinessExceptionTest
     {
         // Arrange
         string errorCode = "ERR_CODE";
-        string errorMessage = "ERROR_MESSAGE";
+        ErrorMessage errorMessage = new ErrorMessage("ERROR_MESSAGE");
         BusinessError businessError = new BusinessError(errorCode, errorMessage);
         var businessEx = new BusinessException(businessError);
 
@@ -40,9 +40,9 @@ public class BusinessExceptionTest
         // Arrange
         string errorCode1 = "ERR_CODE1";
         string errorCode2 = "ERR_CODE2";
-        string errorMessage1 = "ERROR_MESSAGE1";
-        string errorMessage2 = "ERROR_MESSAGE2";
-        string errorMessage3 = "ERROR_MESSAGE3";
+        ErrorMessage errorMessage1 = new ErrorMessage("ERROR_MESSAGE1");
+        ErrorMessage errorMessage2 = new ErrorMessage("ERROR_MESSAGE2");
+        ErrorMessage errorMessage3 = new ErrorMessage("ERROR_MESSAGE3");
         BusinessError businessError1 = new BusinessError(errorCode1, errorMessage1, errorMessage2);
         BusinessError businessError2 = new BusinessError(errorCode2, errorMessage3);
         var businessEx = new BusinessException(businessError1, businessError2);
@@ -56,17 +56,17 @@ public class BusinessExceptionTest
             error =>
             {
                 Assert.Equal(errorCode1, error.ErrorCode);
-                Assert.Equal(errorMessage1, error.ErrorMessage);
+                Assert.Equal(errorMessage1.Message, error.ErrorMessage);
             },
             error =>
             {
                 Assert.Equal(errorCode1, error.ErrorCode);
-                Assert.Equal(errorMessage2, error.ErrorMessage);
+                Assert.Equal(errorMessage2.Message, error.ErrorMessage);
             },
             error =>
             {
                 Assert.Equal(errorCode2, error.ErrorCode);
-                Assert.Equal(errorMessage3, error.ErrorMessage);
+                Assert.Equal(errorMessage3.Message, error.ErrorMessage);
             });
     }
 }
