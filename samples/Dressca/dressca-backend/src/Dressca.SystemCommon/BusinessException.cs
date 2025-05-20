@@ -64,6 +64,8 @@ public class BusinessException : Exception
         }
     }
 
+    public IEnumerable<BusinessError> GetBusinessErrors => this.businessErrors;
+
     /// <summary>
     ///  業務エラーを追加します。
     /// </summary>

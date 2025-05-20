@@ -8,13 +8,13 @@ namespace Dressca.SystemCommon;
 /// </summary>
 public class BusinessError
 {
-    private readonly List<string> errorMessages = [];
+    private List<ErrorMessageBuilder> errorMessageBuilders = [];
 
     /// <summary>
     ///  <see cref="BusinessError"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     public BusinessError()
-        : this(string.Empty)
+        : this(string.Empty, [new ErrorMessageBuilder(string.Empty)])
     {
     }
 
@@ -27,13 +27,11 @@ public class BusinessError
     ///  <see langword="null"/> を指定した場合は空の文字列 ("") として取り扱います。
     /// </param>
     /// <param name="errorMessages">エラーメッセージのリスト。</param>
-    public BusinessError(string? errorCode, params string[] errorMessages)
+    public BusinessError(string? errorCode, params ErrorMessageBuilder[] errorMessages)
     {
         this.ErrorCode = errorCode ?? string.Empty;
-        if (errorMessages is not null)
-        {
-            this.errorMessages.AddRange(errorMessages);
-        }
+
+        this.errorMessageBuilders.AddRange(errorMessages);
     }
 
     /// <summary>
@@ -42,30 +40,30 @@ public class BusinessError
     public string ErrorCode { get; private set; }
 
     /// <summary>
-    ///  エラーメッセージのリストを取得します。
+    ///  エラーメッセージの情報を取得します。
     /// </summary>
-    public IReadOnlyList<string> ErrorMessages => this.errorMessages.AsReadOnly();
+    public IReadOnlyList<ErrorMessageBuilder> ErrorMessageBuilders => this.errorMessageBuilders.AsReadOnly();
 
     /// <summary>
     ///  エラーメッセージを追加します。
     /// </summary>
     /// <param name="errorMessage">エラーメッセージ。</param>
-    public void AddErrorMessage(string? errorMessage)
-        => this.errorMessages.Add(errorMessage ?? string.Empty);
+    public void AddErrorMessage(ErrorMessageBuilder errorMessage)
+        => this.errorMessageBuilders.Add(errorMessage);
 
     /// <summary>
     ///  エラーメッセージのリストを追加します。
     /// </summary>
     /// <param name="errorMessages">エラーメッセージのリスト。</param>
-    public void AddErrorMessages(params string[] errorMessages)
-        => this.errorMessages.AddRange(errorMessages);
+    public void AddErrorMessages(params ErrorMessageBuilder[] errorMessages)
+    => this.errorMessageBuilders.AddRange(errorMessages);
 
     /// <inheritdoc/>
     public override string ToString()
     {
         Dictionary<string, string[]> data = new Dictionary<string, string[]>
         {
-            { this.ErrorCode, this.errorMessages.ToArray() },
+            { this.ErrorCode, this.errorMessageBuilders.Select(e => e.ErrorMessage).ToArray() },
         };
 
         return JsonSerializer.Serialize(data, DefaultJsonSerializerOptions.GetInstance());

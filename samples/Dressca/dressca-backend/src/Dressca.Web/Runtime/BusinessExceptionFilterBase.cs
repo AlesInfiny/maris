@@ -32,12 +32,6 @@ public abstract class BusinessExceptionFilterBase : IExceptionFilter
         if (context.Exception is BusinessException businessEx)
         {
             this.logger.LogInformation(Events.BusinessExceptionHandled, businessEx, Messages.BusinessExceptionHandled);
-            var errors = businessEx.GetBusinessErrors;
-
-            foreach (var error in errors)
-            {
-                context.ModelState.AddModelError(error.ErrorCode, string.Join(",", error.ErrorMessages));
-            }
 
             var validationProblem = this.CreateProblemDetails(context);
             context.Result = new BadRequestObjectResult(validationProblem);

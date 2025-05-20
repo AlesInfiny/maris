@@ -16,7 +16,7 @@ public class AssetNotFoundException : BusinessException
     /// </summary>
     /// <param name="assetCode">見つからなかった買い物かご Id 。</param>
     public AssetNotFoundException(string assetCode)
-        : base(new BusinessError(ErrorCode, string.Format(Messages.AssetNotFound, assetCode)))
+        : base(new BusinessError(ErrorCode, new ErrorMessageBuilder(string.Format(Messages.AssetNotFound, assetCode), [assetCode])))
     {
     }
 }
