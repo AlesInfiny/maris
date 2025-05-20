@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.Baskets;
 /// </summary>
 public class CatalogItemNotExistingInBasketException : BusinessException
 {
-    private const string ErrorCode = "catalogItemIdDoesNotExistInBasket";
+    private const string ExceptionId = "catalogItemIdDoesNotExistInBasket";
 
     /// <summary>
     ///  見つからなかったカタログアイテム Id を指定して
@@ -16,7 +16,7 @@ public class CatalogItemNotExistingInBasketException : BusinessException
     /// </summary>
     /// <param name="catalogItemIds">見つからなかったカタログアイテム Id 。</param>
     public CatalogItemNotExistingInBasketException(IEnumerable<long> catalogItemIds)
-        : base(new BusinessError(ErrorCode, new ErrorMessage(string.Format(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(",", catalogItemIds)), [..catalogItemIds.Select(id => id.ToString())])))
+        : base(new BusinessError(ExceptionId, new ErrorMessage(string.Format(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(",", catalogItemIds)), [..catalogItemIds.Select(id => id.ToString())])))
     {
     }
 }

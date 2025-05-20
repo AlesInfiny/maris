@@ -34,13 +34,13 @@ public class BusinessErrorCollection : IEnumerable<BusinessError>
     public void AddOrMerge(BusinessError newBusinessError)
     {
         ArgumentNullException.ThrowIfNull(newBusinessError);
-        if (this.businessErrors.TryGetValue(newBusinessError.ErrorCode, out var businessError))
+        if (this.businessErrors.TryGetValue(newBusinessError.ExceptionId, out var businessError))
         {
             businessError.AddErrorMessages([.. newBusinessError.ErrorMessages]);
         }
         else
         {
-            this.businessErrors.Add(newBusinessError.ErrorCode, newBusinessError);
+            this.businessErrors.Add(newBusinessError.ExceptionId, newBusinessError);
         }
     }
 

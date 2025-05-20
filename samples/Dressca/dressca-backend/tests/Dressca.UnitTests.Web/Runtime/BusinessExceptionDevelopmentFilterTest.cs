@@ -18,10 +18,10 @@ public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutput
     {
         // Arrange
         var filter = this.CreateFilter();
-        var errorCode = "ERR_CODE";
+        var exceptionId = "ERR_CODE";
         var errorMessage1 = new ErrorMessage("ERR_MESSAGE1");
         var errorMessage2 = new ErrorMessage("ERR_MESSAGE2");
-        var businessError = new BusinessError(errorCode, errorMessage1, errorMessage2);
+        var businessError = new BusinessError(exceptionId, errorMessage1, errorMessage2);
         var context = CreateExceptionContext(businessError);
 
         // Act
@@ -30,7 +30,7 @@ public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutput
         // Assert
         var result = Assert.IsType<BadRequestObjectResult>(context.Result);
         var value = Assert.IsType<ValidationProblemDetails>(result.Value);
-        var error = Assert.Single(value.Errors, error => errorCode.Equals(error.Key));
+        var error = Assert.Single(value.Errors, error => exceptionId.Equals(error.Key));
         Assert.Collection(
             error.Value,
             message => Assert.Equal(errorMessage1.Message, message),
@@ -42,10 +42,10 @@ public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutput
     {
         // Arrange
         var filter = this.CreateFilter();
-        var errorCode = "ERR_CODE";
+        var exceptionId = "ERR_CODE";
         var errorMessage1 = new ErrorMessage("ERR_MESSAGE1");
         var errorMessage2 = new ErrorMessage("ERR_MESSAGE2");
-        var businessError = new BusinessError(errorCode, errorMessage1, errorMessage2);
+        var businessError = new BusinessError(exceptionId, errorMessage1, errorMessage2);
         var context = CreateExceptionContext(businessError);
 
         // Act
@@ -62,10 +62,10 @@ public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutput
     {
         // Arrange
         var filter = this.CreateFilter();
-        var errorCode = "ERR_CODE";
+        var expectedExceptionId = "ERR_CODE";
         string[] errorMessageValues = ["1", "2"];
         var errorMessage = new ErrorMessage("ERR_MESSAGE", errorMessageValues);
-        var businessError = new BusinessError(errorCode, errorMessage);
+        var businessError = new BusinessError(expectedExceptionId, errorMessage);
         var context = CreateExceptionContext(businessError);
 
         // Act
@@ -75,7 +75,7 @@ public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutput
         var result = Assert.IsType<BadRequestObjectResult>(context.Result);
         var value = Assert.IsType<ValidationProblemDetails>(result.Value);
         var exceptionId = Assert.Single(value.Extensions, extension => extension.Key.Equals("exceptionId"));
-        Assert.Equal(errorCode, exceptionId.Value);
+        Assert.Equal(expectedExceptionId, exceptionId.Value);
         var exceptionValues = Assert.Single(value.Extensions, extension => extension.Key.Equals("exceptionValues"));
         Assert.Equal(errorMessageValues, exceptionValues.Value);
     }
@@ -85,10 +85,10 @@ public class BusinessExceptionDevelopmentFilterTest(ITestOutputHelper testOutput
     {
         // Arrange
         var filter = this.CreateFilter();
-        var errorCode = "ERR_CODE";
+        var exceptionId = "ERR_CODE";
         var errorMessage1 = new ErrorMessage("ERR_MESSAGE1");
         var errorMessage2 = new ErrorMessage("ERR_MESSAGE2");
-        var businessError = new BusinessError(errorCode, errorMessage1, errorMessage2);
+        var businessError = new BusinessError(exceptionId, errorMessage1, errorMessage2);
         var context = CreateExceptionContext(businessError);
 
         // Act

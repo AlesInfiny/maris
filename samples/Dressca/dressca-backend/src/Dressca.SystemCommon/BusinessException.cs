@@ -57,14 +57,14 @@ public class BusinessException : Exception
     ///  この例外オブジェクトの保持するエラーコードとエラーメッセージのリストを取得します。
     /// </summary>
     /// <returns>エラーコードとエラーメッセージのリスト。</returns>
-    public IEnumerable<(string ErrorCode, string ErrorMessage)> GetErrors()
+    public IEnumerable<(string ExceptionId, string ErrorMessage)> GetErrors()
     {
         foreach (var businessError in this.businessErrors)
         {
-            var errorCode = businessError.ErrorCode;
+            var exceptionId = businessError.ExceptionId;
             foreach (var errorMessage in businessError.ErrorMessages)
             {
-                yield return new(errorCode, errorMessage.Message);
+                yield return new(exceptionId, errorMessage.Message);
             }
         }
     }

@@ -22,14 +22,14 @@ public class BusinessError
     ///  エラーコードとエラーメッセージのリストを指定して
     ///  <see cref="BusinessError"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="errorCode">
+    /// <param name="exceptionId">
     ///  エラーコード。
     ///  <see langword="null"/> を指定した場合は空の文字列 ("") として取り扱います。
     /// </param>
     /// <param name="errorMessages">エラーメッセージのリスト。</param>
-    public BusinessError(string? errorCode, params ErrorMessage[] errorMessages)
+    public BusinessError(string? exceptionId, params ErrorMessage[] errorMessages)
     {
-        this.ErrorCode = errorCode ?? string.Empty;
+        this.ExceptionId = exceptionId ?? string.Empty;
 
         this.errorMessages.AddRange(errorMessages);
     }
@@ -37,7 +37,7 @@ public class BusinessError
     /// <summary>
     ///  エラーコードを取得します。
     /// </summary>
-    public string ErrorCode { get; private set; }
+    public string ExceptionId { get; private set; }
 
     /// <summary>
     ///  エラーメッセージの情報を取得します。
@@ -63,7 +63,7 @@ public class BusinessError
     {
         Dictionary<string, string[]> data = new Dictionary<string, string[]>
         {
-            { this.ErrorCode, this.errorMessages.Select(e => e.Message).ToArray() },
+            { this.ExceptionId, this.errorMessages.Select(e => e.Message).ToArray() },
         };
 
         return JsonSerializer.Serialize(data, DefaultJsonSerializerOptions.GetInstance());

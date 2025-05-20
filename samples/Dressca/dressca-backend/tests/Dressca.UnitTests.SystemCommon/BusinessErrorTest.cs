@@ -11,7 +11,7 @@ public class BusinessErrorTest
         var error = new BusinessError();
 
         // Assert
-        Assert.Equal(string.Empty, error.ErrorCode);
+        Assert.Equal(string.Empty, error.ExceptionId);
     }
 
     [Fact]
@@ -28,25 +28,25 @@ public class BusinessErrorTest
     public void Constructor_引数ありコンストラクターを使用するとエラーコードは指定した値になる()
     {
         // Arrange
-        string? errorCode = "ERR_CODE";
+        string? exceptionId = "ERR_CODE";
         ErrorMessage[] errorMessages = [new ErrorMessage("ERR_MESSAGE1"), new ErrorMessage("ERR_MESSAGE2")];
 
         // Act
-        var error = new BusinessError(errorCode, errorMessages);
+        var error = new BusinessError(exceptionId, errorMessages);
 
         // Assert
-        Assert.Equal(errorCode, error.ErrorCode);
+        Assert.Equal(exceptionId, error.ExceptionId);
     }
 
     [Fact]
     public void Constructor_引数ありコンストラクターを使用するとエラーメッセージリストは指定した値になる()
     {
         // Arrange
-        string? errorCode = "ERR_CODE";
+        string? exceptionId = "ERR_CODE";
         ErrorMessage[] errorMessages = [new ErrorMessage("ERR_MESSAGE1"), new ErrorMessage("ERR_MESSAGE2")];
 
         // Act
-        var error = new BusinessError(errorCode, errorMessages);
+        var error = new BusinessError(exceptionId, errorMessages);
 
         // Assert
         Assert.Collection(

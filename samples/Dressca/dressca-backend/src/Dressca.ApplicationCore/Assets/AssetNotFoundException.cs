@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.Assets;
 /// </summary>
 public class AssetNotFoundException : BusinessException
 {
-    private const string ErrorCode = "assetNotFound";
+    private const string ExceptionId = "assetNotFound";
 
     /// <summary>
     ///  見つからなかったアセットコードを指定して
@@ -16,7 +16,7 @@ public class AssetNotFoundException : BusinessException
     /// </summary>
     /// <param name="assetCode">見つからなかった買い物かご Id 。</param>
     public AssetNotFoundException(string assetCode)
-        : base(new BusinessError(ErrorCode, new ErrorMessage(string.Format(Messages.AssetNotFound, assetCode), [assetCode])))
+        : base(new BusinessError(ExceptionId, new ErrorMessage(string.Format(Messages.AssetNotFound, assetCode), [assetCode])))
     {
     }
 }
