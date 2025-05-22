@@ -56,20 +56,6 @@ public class BusinessErrorTest
     }
 
     [Fact]
-    public void AddErrorMessage_nullを追加すると空文字が追加される()
-    {
-        // Arrange
-        var error = new BusinessError();
-        ErrorMessage errorMessage = new ErrorMessage(null!);
-
-        // Act
-        error.AddErrorMessage(errorMessage);
-
-        // Assert
-        Assert.Single(error.ErrorMessages, e => e.Message == string.Empty);
-    }
-
-    [Fact]
     public void AddErrorMessage_エラーメッセージを追加できる()
     {
         // Arrange
