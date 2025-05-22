@@ -145,7 +145,7 @@ jobs:
 
       - id: create-test-result-report
         name: テスト結果ページの作成
-        uses: dorny/test-reporter@v2
+        uses: dorny/test-reporter@v2.1.0
         with:
           name: 'Test results'
           path: '**/TestResults/*.trx'

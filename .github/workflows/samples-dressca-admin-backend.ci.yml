@@ -96,7 +96,7 @@ jobs:
 
       - id: create-test-result-report
         name: テスト結果ページの作成
-        uses: dorny/test-reporter@6e6a65b7a0bd2c9197df7d0ae36ac5cee784230c  # v2.0.0
+        uses: dorny/test-reporter@890a17cecf52a379fc869ab770a71657660be727  # v2.1.0
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           name: 'Test results'
@@ -137,7 +137,7 @@ jobs:
           cat CoverageReport/SummaryGithub.md >> ${{ env.BUILD_SUMMARY_FILE }}
 
       - name: ビルドサマリーをPull-requestに表示
-        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728  # v2.9.1
+        uses: marocchino/sticky-pull-request-comment@67d0dec7b07ed060a405f9b2a64b8ab319fdd7db  # v2.9.2
         if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
         with:
           recreate: true
