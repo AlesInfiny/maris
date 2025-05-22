@@ -5,35 +5,28 @@
     /// </summary>
     public class ErrorMessage
     {
+        private string message;
+
         /// <summary>
-        ///  <see cref="SystemCommon.ErrorMessage"/> クラスの新しいインスタンスを初期化します。
+        ///  <see cref="ErrorMessage"/> クラスの新しいインスタンスを初期化します。
         /// </summary>
         /// <param name="errorMessage">エラーメッセージ。</param>
         /// <param name="errorMessageValues">エラーメッセージのプレースホルダーの値。</param>
-        public ErrorMessage(string errorMessage, params string[] errorMessageValues)
+        public ErrorMessage(string errorMessage, params object[] errorMessageValues)
         {
-            this.Message = errorMessage ?? string.Empty;
+            this.message = errorMessage ?? string.Empty;
             this.ErrorMessageValues = errorMessageValues;
-        }
-
-        /// <summary>
-        ///  <see cref="SystemCommon.ErrorMessage"/> クラスの新しいインスタンスを初期化します。
-        /// </summary>
-        /// <param name="errorMessage">エラーメッセージ。</param>
-        public ErrorMessage(string errorMessage)
-        {
-            this.Message = errorMessage ?? string.Empty;
         }
 
         /// <summary>
         ///  エラーメッセージを表す文字列を取得します。
         /// </summary>
-        public string Message { get; set; }
+        public string Message => string.Format(this.message, this.ErrorMessageValues);
 
         /// <summary>
         ///  エラーメッセージのプレースホルダーの値を取得します。
         /// </summary>
-        public string[]? ErrorMessageValues { get; set; }
+        public object[] ErrorMessageValues { get; private set; } = [];
 
         /// <inheritdoc/>
         public override string ToString()

@@ -16,7 +16,7 @@ public class CatalogBrandNotExistingInRepositoryException : BusinessException
     /// </summary>
     /// <param name="catalogBrandIds">見つからなかったカタログブランド ID 。</param>
     public CatalogBrandNotExistingInRepositoryException(IEnumerable<long> catalogBrandIds)
-        : base(new BusinessError(ExceptionId, new ErrorMessage(string.Format(Messages.CatalogBrandIdDoesNotExist, string.Join(",", catalogBrandIds)), [..catalogBrandIds.Select(id => id.ToString())])))
+        : base(new BusinessError(ExceptionId, new ErrorMessage(Messages.CatalogBrandIdDoesNotExist, string.Join(",", catalogBrandIds))))
     {
     }
 }
