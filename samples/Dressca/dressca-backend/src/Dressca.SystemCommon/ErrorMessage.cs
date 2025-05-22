@@ -1,37 +1,34 @@
-﻿namespace Dressca.SystemCommon
+﻿namespace Dressca.SystemCommon;
+
+/// <summary>
+///  エラーメッセージの情報を保持するクラスです。
+/// </summary>
+public class ErrorMessage
 {
     /// <summary>
-    ///  エラーメッセージの情報を保持するクラスです。
+    ///  <see cref="ErrorMessage"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    public class ErrorMessage
+    /// <param name="errorMessage">エラーメッセージ。</param>
+    /// <param name="errorMessageValues">エラーメッセージのプレースホルダーの値。</param>
+    public ErrorMessage(string errorMessage, params object[] errorMessageValues)
     {
-        private string message;
+        this.ErrorMessageValues = errorMessageValues;
+        this.Message = errorMessage is null ? string.Empty : string.Format(errorMessage, this.ErrorMessageValues);
+    }
 
-        /// <summary>
-        ///  <see cref="ErrorMessage"/> クラスの新しいインスタンスを初期化します。
-        /// </summary>
-        /// <param name="errorMessage">エラーメッセージ。</param>
-        /// <param name="errorMessageValues">エラーメッセージのプレースホルダーの値。</param>
-        public ErrorMessage(string errorMessage, params object[] errorMessageValues)
-        {
-            this.message = errorMessage ?? string.Empty;
-            this.ErrorMessageValues = errorMessageValues;
-        }
+    /// <summary>
+    ///  エラーメッセージを表す文字列を取得します。
+    /// </summary>
+    public string Message { get; private set; }
 
-        /// <summary>
-        ///  エラーメッセージを表す文字列を取得します。
-        /// </summary>
-        public string Message => string.Format(this.message, this.ErrorMessageValues);
+    /// <summary>
+    ///  エラーメッセージのプレースホルダーの値を取得します。
+    /// </summary>
+    public object[] ErrorMessageValues { get; private set; } = [];
 
-        /// <summary>
-        ///  エラーメッセージのプレースホルダーの値を取得します。
-        /// </summary>
-        public object[] ErrorMessageValues { get; private set; } = [];
-
-        /// <inheritdoc/>
-        public override string ToString()
-        {
-            return this.Message;
-        }
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        return this.Message;
     }
 }
