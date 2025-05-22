@@ -73,13 +73,15 @@ public class BasketItemsController : ControllerBase
     {
         var buyerId = this.HttpContext.GetBuyerId();
 
-        var (basket, catalogItems) = await this.service.GetBasketItemsAsync(buyerId);
+        var (basket, catalogItems, deletedCatalogItemIds) = await this.service.GetBasketItemsAsync(buyerId);
 
         var basketResponse = this.basketMapper.Convert(basket);
         foreach (var basketItem in basketResponse.BasketItems)
         {
             basketItem.CatalogItem = this.GetCatalogItemSummary(basketItem.CatalogItemId, catalogItems);
         }
+
+        basketResponse.DeletedItemIds = deletedCatalogItemIds;
 
         return this.Ok(basketResponse);
     }

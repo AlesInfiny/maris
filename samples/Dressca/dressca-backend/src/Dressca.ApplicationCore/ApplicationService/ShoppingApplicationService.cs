@@ -61,7 +61,7 @@ public class ShoppingApplicationService
     ///  BasketResult : <paramref name="buyerId"/> に対応する買い物かご。
     ///  CatalogItems : 買い物かごアイテムの一覧。
     /// </returns>
-    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
+    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems, List<long> DeletedItemIds)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_GetBasketItemsAsyncStart, buyerId);
 
@@ -75,8 +75,10 @@ public class ShoppingApplicationService
             scope.Complete();
         }
 
+        var deletedCatalogItemIds = catalogItems.Where(item => item.IsDeleted == true).Select(item => item.Id).ToList();
+
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_GetBasketItemsAsyncEnd, buyerId);
-        return (BasketResult: basket, CatalogItems: catalogItems);
+        return (BasketResult: basket, CatalogItems: catalogItems, DeletedItemIds: deletedCatalogItemIds);
     }
 
     /// <summary>
