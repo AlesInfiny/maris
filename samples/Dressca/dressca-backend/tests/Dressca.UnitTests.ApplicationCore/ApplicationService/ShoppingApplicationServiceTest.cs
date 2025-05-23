@@ -134,6 +134,45 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         basketRepo.Verify(r => r.AddAsync(It.Is<Basket>(b => b.BuyerId == dummyBuyerId), AnyToken), Times.Once);
     }
 
+    [Fact]
+    public async Task GetBasketItemsAsync_買い物かごアイテムに対応するカタログアイテムが削除されている_削除済みアイテムのIDが返却される()
+    {
+        // Arrange
+        var dummyBuyerId = "dummyId";
+        var deletedCatalogItem1 = new CatalogItem() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明1", Name = "ダミー商品1", Price = 1000m, ProductCode = "C000000001", Id = 10L, IsDeleted = true };
+        var deletedCatalogItem2 = new CatalogItem() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明2", Name = "ダミー商品2", Price = 1000m, ProductCode = "C000000002", Id = 11L, IsDeleted = true };
+        var existingCatalogItem = new CatalogItem() { CatalogCategoryId = 100L, CatalogBrandId = 110L, Description = "説明3", Name = "ダミー商品3", Price = 1000m, ProductCode = "C000000003", Id = 12L };
+        var catalogItems = new List<CatalogItem>
+         {
+             deletedCatalogItem1, deletedCatalogItem2, existingCatalogItem,
+         };
+        var basket = new Basket { BuyerId = dummyBuyerId };
+
+        var basketRepo = new Mock<IBasketRepository>();
+        basketRepo
+            .Setup(r => r.AddAsync(It.IsAny<Basket>(), AnyToken))
+            .ReturnsAsync(basket);
+        var orderRepo = Mock.Of<IOrderRepository>();
+        var orderFactory = Mock.Of<IOrderFactory>();
+        var catalogRepo = new Mock<ICatalogRepository>();
+        catalogRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
+            .ReturnsAsync(catalogItems.AsReadOnly());
+        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var logger = this.CreateTestLogger<ShoppingApplicationService>();
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var cancellationToken = TestContext.Current.CancellationToken;
+
+        // Act
+        var (basketResult, catalogItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
+
+        // Assert
+        Assert.Collection(
+            deletedItemIds,
+            id => Assert.Equal(deletedCatalogItem1.Id, id),
+            id => Assert.Equal(deletedCatalogItem2.Id, id));
+    }
+
     [Theory]
     [InlineData(null)]
     [InlineData("")]
