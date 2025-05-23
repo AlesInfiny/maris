@@ -28,7 +28,7 @@ public class ErrorMessage
     /// <summary>
     ///  エラーメッセージのプレースホルダーの値を取得します。
     /// </summary>
-    public object[] ErrorMessageValues { get; private set; } = [];
+    public object[] ErrorMessageValues { get; }
 
     /// <inheritdoc/>
     public override string ToString()
