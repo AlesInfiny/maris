@@ -530,6 +530,7 @@
           },
           "deletedItemIds": {
             "type": "array",
+            "description": "削除済みカタログアイテムの Id のリストを取得または設定します。\n            ",
             "items": {
               "type": "integer",
               "format": "int64"
