@@ -61,7 +61,7 @@ public class ShoppingApplicationService
     ///  BasketResult : <paramref name="buyerId"/> に対応する買い物かご。
     ///  CatalogItems : 買い物かごアイテムの一覧。
     /// </returns>
-    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems, List<long> DeletedItemIds)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
+    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems, IReadOnlyList<long> DeletedItemIds)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_GetBasketItemsAsyncStart, buyerId);
 
