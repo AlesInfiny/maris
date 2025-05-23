@@ -8,7 +8,7 @@ namespace Dressca.ApplicationCore.ApplicationService;
 /// </summary>
 public class CatalogBrandNotExistingInRepositoryException : BusinessException
 {
-    private const string ErrorCode = "CatalogBrandNotExistingInRepository";
+    private const string ExceptionId = "catalogBrandNotFound";
 
     /// <summary>
     ///  見つからなかったカタログブランド ID を指定して
@@ -16,7 +16,7 @@ public class CatalogBrandNotExistingInRepositoryException : BusinessException
     /// </summary>
     /// <param name="catalogBrandIds">見つからなかったカタログブランド ID 。</param>
     public CatalogBrandNotExistingInRepositoryException(IEnumerable<long> catalogBrandIds)
-        : base(new BusinessError(ErrorCode, string.Format(Messages.CatalogBrandIdDoesNotExist, string.Join(",", catalogBrandIds))))
+        : base(new BusinessError(ExceptionId, new ErrorMessage(Messages.CatalogBrandIdDoesNotExist, string.Join(",", catalogBrandIds))))
     {
     }
 }

@@ -8,9 +8,9 @@ public class BusinessExceptionTest
     public void ToString_業務エラーのリストが文字列化される()
     {
         // Arrange
-        string errorCode = "ERR_CODE";
-        string errorMessage = "ERROR_MESSAGE";
-        BusinessError businessError = new BusinessError(errorCode, errorMessage);
+        string exceptionId = "ERR_CODE";
+        ErrorMessage errorMessage = new ErrorMessage("ERROR_MESSAGE");
+        BusinessError businessError = new BusinessError(exceptionId, errorMessage);
         var businessEx = new BusinessException(businessError);
 
         // Act
@@ -38,13 +38,13 @@ public class BusinessExceptionTest
     public void GetErrors_エラーメッセージ単位で業務エラーの情報を取得できる()
     {
         // Arrange
-        string errorCode1 = "ERR_CODE1";
-        string errorCode2 = "ERR_CODE2";
-        string errorMessage1 = "ERROR_MESSAGE1";
-        string errorMessage2 = "ERROR_MESSAGE2";
-        string errorMessage3 = "ERROR_MESSAGE3";
-        BusinessError businessError1 = new BusinessError(errorCode1, errorMessage1, errorMessage2);
-        BusinessError businessError2 = new BusinessError(errorCode2, errorMessage3);
+        string exceptionId1 = "ERR_CODE1";
+        string exceptionId2 = "ERR_CODE2";
+        ErrorMessage errorMessage1 = new ErrorMessage("ERROR_MESSAGE1");
+        ErrorMessage errorMessage2 = new ErrorMessage("ERROR_MESSAGE2");
+        ErrorMessage errorMessage3 = new ErrorMessage("ERROR_MESSAGE3");
+        BusinessError businessError1 = new BusinessError(exceptionId1, errorMessage1, errorMessage2);
+        BusinessError businessError2 = new BusinessError(exceptionId2, errorMessage3);
         var businessEx = new BusinessException(businessError1, businessError2);
 
         // Act
@@ -55,18 +55,18 @@ public class BusinessExceptionTest
             errors,
             error =>
             {
-                Assert.Equal(errorCode1, error.ErrorCode);
-                Assert.Equal(errorMessage1, error.ErrorMessage);
+                Assert.Equal(exceptionId1, error.ExceptionId);
+                Assert.Equal(errorMessage1.Message, error.ErrorMessage);
             },
             error =>
             {
-                Assert.Equal(errorCode1, error.ErrorCode);
-                Assert.Equal(errorMessage2, error.ErrorMessage);
+                Assert.Equal(exceptionId1, error.ExceptionId);
+                Assert.Equal(errorMessage2.Message, error.ErrorMessage);
             },
             error =>
             {
-                Assert.Equal(errorCode2, error.ErrorCode);
-                Assert.Equal(errorMessage3, error.ErrorMessage);
+                Assert.Equal(exceptionId2, error.ExceptionId);
+                Assert.Equal(errorMessage3.Message, error.ErrorMessage);
             });
     }
 }
