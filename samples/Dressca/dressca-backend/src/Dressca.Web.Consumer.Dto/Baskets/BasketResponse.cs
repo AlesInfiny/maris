@@ -23,4 +23,9 @@ public class BasketResponse
     ///  買い物かごアイテムのリストを取得または設定します。
     /// </summary>
     public IList<BasketItemResponse> BasketItems { get; set; } = [];
+
+    /// <summary>
+    ///  削除済みカタログアイテムの Id のリストを取得または設定します。
+    /// </summary>
+    public IList<long> DeletedItemIds { get; set; } = [];
 }
