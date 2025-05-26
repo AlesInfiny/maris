@@ -23,7 +23,7 @@ public class ErrorMessage
     /// <summary>
     ///  エラーメッセージを表す文字列を取得します。
     /// </summary>
-    public string Message { get; private set; }
+    public string Message { get; }
 
     /// <summary>
     ///  エラーメッセージのプレースホルダーの値を取得します。
