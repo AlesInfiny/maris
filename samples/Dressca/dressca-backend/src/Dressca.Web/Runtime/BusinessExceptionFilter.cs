@@ -38,10 +38,19 @@ public class BusinessExceptionFilter : BusinessExceptionFilterBase
     protected override ProblemDetails CreateProblemDetails(ExceptionContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
-        return this.problemDetailsFactory.CreateValidationProblemDetails(
+        var problemDetails = this.problemDetailsFactory.CreateValidationProblemDetails(
                 context.HttpContext,
                 context.ModelState,
                 statusCode: (int)HttpStatusCode.BadRequest,
                 title: Messages.BusinessExceptionHandled);
+
+        if (context.Exception is BusinessException businessEx)
+        {
+            // 暫定の実装として、1つ目のBusinessErrorのexceptionIdとexceptionValuesを設定
+            problemDetails.Extensions.Add("exceptionId", businessEx.GetBusinessErrors.FirstOrDefault()?.ExceptionId ?? string.Empty);
+            problemDetails.Extensions.Add("exceptionValues", businessEx.GetBusinessErrors.FirstOrDefault()?.ErrorMessages.FirstOrDefault()?.ErrorMessageValues ?? []);
+        }
+
+        return problemDetails;
     }
 }

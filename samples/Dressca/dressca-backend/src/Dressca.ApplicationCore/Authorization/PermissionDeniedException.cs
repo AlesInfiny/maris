@@ -9,7 +9,7 @@ namespace Dressca.ApplicationCore.Authorization;
 /// </summary>
 public class PermissionDeniedException : BusinessException
 {
-    private const string ErrorCode = "PermissionDenied";
+    private const string ExceptionId = "permissionDenied";
 
     /// <summary>
     ///  実行を試みた操作を指定して
@@ -17,7 +17,7 @@ public class PermissionDeniedException : BusinessException
     /// </summary>
     /// <param name="operationName">実行を試みた操作の名称。</param>
     public PermissionDeniedException([CallerMemberName] string operationName = "")
-        : base(new BusinessError(ErrorCode, string.Format(Messages.PermissionDenied, operationName)))
+        : base(new BusinessError(ExceptionId, new ErrorMessage(Messages.PermissionDenied, operationName)))
     {
     }
 }
