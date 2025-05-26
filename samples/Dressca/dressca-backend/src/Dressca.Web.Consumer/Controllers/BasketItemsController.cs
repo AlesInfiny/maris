@@ -81,7 +81,7 @@ public class BasketItemsController : ControllerBase
             basketItem.CatalogItem = this.GetCatalogItemSummary(basketItem.CatalogItemId, catalogItems);
         }
 
-        basketResponse.DeletedItemIds = (IList<long>)deletedCatalogItemIds;
+        basketResponse.DeletedItemIds = deletedCatalogItemIds.ToList();
 
         return this.Ok(basketResponse);
     }
