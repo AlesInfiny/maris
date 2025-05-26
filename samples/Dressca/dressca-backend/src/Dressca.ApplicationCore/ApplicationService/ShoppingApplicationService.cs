@@ -60,6 +60,7 @@ public class ShoppingApplicationService
     /// <returns>
     ///  BasketResult : <paramref name="buyerId"/> に対応する買い物かご。
     ///  CatalogItems : 買い物かごアイテムの一覧。
+    ///  DeletedItemIds : 削除済みのカタログアイテム Id のリスト。
     /// </returns>
     public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems, IReadOnlyList<long> DeletedItemIds)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
     {
