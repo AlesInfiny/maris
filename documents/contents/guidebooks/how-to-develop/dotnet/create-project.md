@@ -126,7 +126,9 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 ## プロジェクト間の依存関係の設定 {#configure-project-reference}
 
+<!-- textlint-disable @textlint-ja/no-synonyms -->
 各プロジェクトを作成後、アーキテクチャに従ってプロジェクト間の依存関係を設定します。
 アーキテクチャごとのプロジェクトの依存関係の設定例は、[プロジェクトの単位](../../../app-architecture/overview/application-structure.md#unit-of-project) を参照してください。
 
 具体的な設定方法については、[プロジェクト内の参照を管理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/managing-references-in-a-project){ target=_blank } を参照してください。
+<!-- textlint-enable @textlint-ja/no-synonyms -->

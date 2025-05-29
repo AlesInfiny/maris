@@ -108,7 +108,6 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
     - [フロントエンドアプリケーション開発の事前準備](../vue-js/preparation.md#install-extensions)
 
-
 ### Git for Windows のインストール {#install-git-for-windows}
 
 !!!warning "Git for Windows インストールの前に"
