@@ -84,9 +84,30 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
         アプリケーションのコーディングスタイルを維持する機能を提供します。
 
+    - [Live Share :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare){ target=_blank }
+
+        複数人でソースコードを編集する機能を提供します。
+
+    - [Version Lens :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens){ target=_blank }
+
+        パッケージバージョンが最新かどうかを判定する機能を提供します。
+
+    - [GitLens :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens){ target=_blank }
+
+        Git の各種操作を利用しやすくする機能を提供します。
+
+    - [IntelliCode :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode){ target=_blank }
+
+        Java, TypeScript 等の入力補完機能を提供します。
+
+    - [Code Spell Checker :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker){ target=_blank }
+
+        ソースコードやドキュメントをスペルチェックする機能を提供します。
+
     フロントエンドアプリケーションの開発に利用する VS Code の拡張機能は、以下を確認してください。
 
     - [フロントエンドアプリケーション開発の事前準備](../vue-js/preparation.md#install-extensions)
+
 
 ### Git for Windows のインストール {#install-git-for-windows}
 
