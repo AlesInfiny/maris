@@ -36,3 +36,11 @@ Visual Studio Code を利用する場合、フロントエンドアプリケー�
 
     CSS で記述されたコードの可読性を向上させる機能を提供します。
     また、 Stylelint と連携することで、 CSS のコードのエラーを検出できます。
+
+- [htmltagwrap :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=bradgashler.htmltagwrap){ target=_blank }
+
+    選択部分を HTML タグで囲う機能を提供します。
+
+- [HTML CSS Support :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css){ target=_blank }
+
+    HTML で記述する際に CSS の定義を入力補完する機能を提供します。

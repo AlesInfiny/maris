@@ -123,3 +123,12 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
     ASP.NET Core Web API のプロジェクトを作成する場合は、 Web API の入出力インターフェースを管理する DTO を集めたプロジェクトを作りましょう。
     今後 Web API の呼び出し側を .NET のテクノロジーで開発する場合、 DTO を抜き出しておくことでコード共有できるようになり、開発が便利に進められます。
+
+## プロジェクト間の依存関係の設定 {#configure-project-reference}
+
+<!-- textlint-disable @textlint-ja/no-synonyms -->
+各プロジェクトを作成後、アーキテクチャに従ってプロジェクト間の依存関係を設定します。
+アーキテクチャごとのプロジェクトの依存関係の設定例は、[プロジェクトの単位](../../../app-architecture/overview/application-structure.md#unit-of-project) を参照してください。
+
+具体的な設定方法については、[プロジェクト内の参照を管理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/managing-references-in-a-project){ target=_blank } を参照してください。
+<!-- textlint-enable @textlint-ja/no-synonyms -->
