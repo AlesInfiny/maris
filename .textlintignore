@@ -1,5 +1,5 @@
-# SpotBugsで自動生成されるテキストファイルをテスト対象から除外
-samples/**/spotbugs*.txt
+# dotnet アプリケーションのビルド成果物フォルダーは検査を除外
+samples/**/@(obj|bin)/**
 
 # openapi-generator で自動生成されるファイルをテスト対象から除外
 **/src/generated/api-client/docs/*.md
