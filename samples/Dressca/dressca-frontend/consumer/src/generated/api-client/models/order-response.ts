@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BasketResponseAccount } from './basket-response-account';
+import type { AccountResponse } from './account-response';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { OrderItemResponse } from './order-item-response';
@@ -76,10 +76,10 @@ export interface OrderResponse {
     'azanaAndOthers': string;
     /**
      * 
-     * @type {BasketResponseAccount}
+     * @type {AccountResponse}
      * @memberof OrderResponse
      */
-    'account'?: BasketResponseAccount | null;
+    'account'?: AccountResponse | null;
     /**
      * 注文アイテムのリストを取得または設定します。             
      * @type {Array<OrderItemResponse>}
