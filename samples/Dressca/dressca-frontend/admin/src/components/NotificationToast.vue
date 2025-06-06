@@ -1,28 +1,40 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useNotificationStore } from '@/stores/notification/notification';
 import { ExclamationCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { ref, watch } from 'vue';
+import { watch } from 'vue';
+import { useEventBus } from '@vueuse/core';
+import { showToast } from '@/services/notification/notificationService';
+import { unhandledErrorEventKey } from '@/shared/events';
 
 /**
  * ユーザーにメッセージを通知するトーストです。
  */
-
-const state = ref({
-  show: false,
+const show = defineModel('show', {
+  type: Boolean,
+  required: true,
+  default: false,
+});
+const message = defineModel('message', {
+  type: String,
+  required: true,
+  default: '',
+});
+const timeout = defineModel('timeout', {
+  type: Number,
+  required: true,
+  default: 5000,
 });
 
-const notificationStore = useNotificationStore();
-const { message, timeout } = storeToRefs(notificationStore);
+const unhandledErrorEventBus = useEventBus(unhandledErrorEventKey);
+unhandledErrorEventBus.on((payload) => showToast(payload.message));
 
 const close = () => {
-  state.value.show = false;
-  notificationStore.clearMessage();
+  show.value = false;
+  message.value = '';
 };
 
 watch(message, (newMessage) => {
   if (newMessage !== '') {
-    state.value.show = true;
+    show.value = true;
     setTimeout(() => {
       close();
     }, timeout.value);
@@ -38,7 +50,7 @@ watch(message, (newMessage) => {
     leave-active-class="transition duration-300"
   >
     <div
-      v-if="state.show"
+      v-if="show"
       class="max-w-m fixed inset-x-0 mx-auto mt-2 inline-flex w-5/6 items-center rounded-lg bg-red-500 p-4 text-gray-500 shadow"
     >
       <div

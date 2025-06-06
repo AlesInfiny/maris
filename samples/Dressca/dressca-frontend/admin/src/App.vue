@@ -5,12 +5,26 @@ import { useAuthenticationStore } from '@/stores/authentication/authentication';
 import { Bars3Icon } from '@heroicons/vue/24/solid';
 import { logoutAsync } from '@/services/authentication/authentication-service';
 import { useRouter } from 'vue-router';
+import { router as importedRouter } from '@/router';
 import { ref } from 'vue';
+import { useNotificationStore } from '@/stores/notification/notification';
+import { useEventBus } from '@vueuse/core';
+import { showToast as showToastByService } from '@/services/notification/notificationService';
+import { unauthorizedErrorEventKey } from './shared/events';
 
-const router = useRouter();
 const authenticationStore = useAuthenticationStore();
 const { authenticationState, userName, userRoles } =
   storeToRefs(authenticationStore);
+
+const notificationStore = useNotificationStore();
+const { message, timeout } = storeToRefs(notificationStore);
+
+const router = useRouter();
+
+/**
+ * トーストの開閉状態です。
+ */
+const showToast = ref(false);
 
 /**
  * ログインメニューの開閉状態です。
@@ -25,10 +39,30 @@ const logout = async () => {
   showLoginMenu.value = !showLoginMenu.value;
   router.push({ name: 'authentication/login' });
 };
+
+const unauthorizedErrorEventBus = useEventBus(unauthorizedErrorEventKey);
+
+unauthorizedErrorEventBus.on((payload) => {
+  // 現在の画面情報をクエリパラメーターに保持してログイン画面にリダイレクトします。
+  // コンポーネント外に引き渡すので、 直接 import した router を使用します。
+  importedRouter.push({
+    name: 'authentication/login',
+    query: {
+      redirectName: importedRouter.currentRoute.value.name?.toString(),
+      redirectParams: JSON.stringify(importedRouter.currentRoute.value.params),
+      redirectQuery: JSON.stringify(importedRouter.currentRoute.value.query),
+    },
+  });
+  showToastByService(payload.details);
+});
 </script>
 <template>
-  <div class="z-2">
-    <NotificationToast />
+  <div class="z-20 fixed">
+    <NotificationToast
+      v-model:show="showToast"
+      v-model:message="message"
+      v-model:timeout="timeout"
+    />
   </div>
   <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
