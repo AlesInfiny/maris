@@ -42,15 +42,15 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 
 - コンソールアプリケーションの実行フレームワーク
 
-  - Maris.ConsoleApp.Core
-  - Maris.ConsoleApp.Hosting
-  - Maris.ConsoleApp.UnitTests
-  - Maris.ConsoleApp.IntegrationTests
+    - Maris.ConsoleApp.Core
+    - Maris.ConsoleApp.Hosting
+    - Maris.ConsoleApp.UnitTests
+    - Maris.ConsoleApp.IntegrationTests
 
 - 利用例
-  - Maris.Samples.Cli
-  - （Maris.Samples.ApplicationCore）※
-  - （Maris.Samples.InMemoryInfrastructure）※
+    - Maris.Samples.Cli
+    - （Maris.Samples.ApplicationCore）※
+    - （Maris.Samples.InMemoryInfrastructure）※
 
 ※：サンプルアプリケーションを実行するために、 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）の定義するアーキテクチャを簡略化して実装したサンプルです。
 コンソールアプリケーションの実行フレームワークと、本質的な関連はありません。
