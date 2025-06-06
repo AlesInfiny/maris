@@ -17,7 +17,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 本サンプルは以下の環境で動作確認を行っています。
 
 - .NET 8
-- Visual Studio 2022 17.13.5
+- Visual Studio 2022 17.14.4
 
 ## 前提となる OSS ライブラリ
 
@@ -41,6 +41,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 本サンプルは、コンソールアプリケーションの実装するためのフレームワークと、そのフレームワークの利用例で構成しています。
 
 - コンソールアプリケーションの実行フレームワーク
+
     - Maris.ConsoleApp.Core
     - Maris.ConsoleApp.Hosting
     - Maris.ConsoleApp.UnitTests
