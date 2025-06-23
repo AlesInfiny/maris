@@ -91,7 +91,7 @@ export default {
 content に、 Tailwind CSS を適用する対象ファイルのパス（ワイルドカード使用可）を設定します。
 
 ```javascript title="tailwind.config.js" hl_lines="3"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/admin/tailwind.config.js
+https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/tailwind.config.js
 ```
 
 `./src/assets/base.css` の最初の行に、以下のように Tailwind CSS の各コンポーネントの @tailwind ディレクティブを追加します。
@@ -113,7 +113,7 @@ PostCSS は Tailwind CSS と一緒にすでにインストール済みなので�
 設定ファイル `./postcss.config.cjs` を作成します。
 
 ```javascript title="postcss.config.cjs"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/admin/postcss.config.cjs
+https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/postcss.config.cjs
 ```
 
 プラグインとして Tailwind CSS 、 autoprefixer 、 postcss-nesting を使用することを宣言します。

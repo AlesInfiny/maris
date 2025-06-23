@@ -50,7 +50,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 ??? note "tsconfig.json の設定例"
 
     ``` json title="tsconfig.json"
-    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/admin/tsconfig.json
+    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/tsconfig.json
     ```
 
 ??? note "tsconfig.app.json の設定例"
@@ -95,7 +95,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 ??? note "tsconfig.vitest.json の設定例"
 
     ``` json title="tsconfig.vitest.json"
-    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/admin/tsconfig.vitest.json
+    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/tsconfig.vitest.json
     ```
 
 - `compilerOptions.noEmit`
