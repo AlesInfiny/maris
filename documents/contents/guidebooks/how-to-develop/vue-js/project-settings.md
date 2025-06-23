@@ -50,23 +50,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 ??? note "tsconfig.json の設定例"
 
     ``` json title="tsconfig.json"
-    {
-      "files": [],
-      "references": [
-        {
-          "path": "./tsconfig.node.json"
-        },
-        {
-          "path": "./tsconfig.app.json"
-        },
-        {
-          "path": "./tsconfig.vitest.json"
-        }
-      ],
-      "compilerOptions": {
-        "module": "NodeNext"
-      }
-    }
+    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/admin/tsconfig.json
     ```
 
 ??? note "tsconfig.app.json の設定例"
@@ -111,16 +95,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 ??? note "tsconfig.vitest.json の設定例"
 
     ``` json title="tsconfig.vitest.json"
-    {
-      "extends": "./tsconfig.app.json",
-      "exclude": [],
-      "compilerOptions": {
-        "composite": true,
-        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
-        "lib": [],
-        "types": ["node", "jsdom"],
-      }
-    }
+    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/admin/tsconfig.vitest.json
     ```
 
 - `compilerOptions.noEmit`

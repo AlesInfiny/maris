@@ -19,13 +19,7 @@ global.json ファイルには以下を設定します。
 - `rollForward` : 指定された .NET SDK バージョンが存在しない場合のロールフォワードポリシー
 
 ```json title="global.json ファイル設定例"
-{
-  "sdk": {
-    "version": "8.0.100",
-    "allowPrerelease": false,
-    "rollForward": "latestMajor"
-  }
-}
+https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/global.json
 ```
 
 設定値の詳細は、 [global.json の概要 :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/tools/global-json){ target=_blank } を参照してください。
@@ -82,16 +76,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 上記設定を有効にしたプロジェクトファイルの設定例を示します。
 
 ```xml title="プロダクションコード用の Directory.Build.props ファイル設定例"
-<Project>
-
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
-  
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NeutralLanguage>ja-JP</NeutralLanguage>
-  </PropertyGroup>
-
-</Project>
+https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Directory.Build.props
 ```
 
 ### テストコード用のプロジェクト設定 {#project-settings-for-test}
