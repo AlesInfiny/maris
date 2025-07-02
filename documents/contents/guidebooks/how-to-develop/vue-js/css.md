@@ -113,7 +113,7 @@ PostCSS は Tailwind CSS と一緒にすでにインストール済みなので�
 設定ファイル `./postcss.config.cjs` を作成します。
 
 ```javascript title="postcss.config.cjs"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/postcss.config.cjs
+https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/postcss.config.ts
 ```
 
 プラグインとして Tailwind CSS 、 autoprefixer 、 postcss-nesting を使用することを宣言します。
