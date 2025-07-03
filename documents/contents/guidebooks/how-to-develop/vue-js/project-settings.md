@@ -40,7 +40,6 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 なお、 `tsconfig.app.json` `tsconfig.node.json` には npm パッケージで提供されている `tsconfig` を継承するように設定されているため、継承元の設定値が存在します。
 `extends` に定義されている継承元ファイルを参照して実際の設定値を確認できます。
-また、 `references` で参照されているファイルでは `compilerOptions.composite` を `true` に設定する必要があります。
 
 ![tsconfigの継承関係](../../../images/guidebooks/how-to-develop/vue-js/vue-tsconfig-light.png#only-light){ loading=lazy }
 ![tsconfigの継承関係](../../../images/guidebooks/how-to-develop/vue-js/vue-tsconfig-dark.png#only-dark){ loading=lazy }
@@ -56,40 +55,13 @@ Project Reference 機能については [Project References :material-open-in-ne
 ??? note "tsconfig.app.json の設定例"
 
     ``` json title="tsconfig.app.json"
-    {
-      "extends": "@vue/tsconfig/tsconfig.dom.json",
-      "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "mock/**/*"],
-      "exclude": ["src/**/__tests__/*"],
-      "compilerOptions": {
-        "composite": true,
-        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-        "baseUrl": ".",
-        "paths": {
-        "@/*": ["./src/*"]
-        },
-      }
-    }
+    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/tsconfig.app.json
     ```
 
 ??? note "tsconfig.node.json の設定例"
 
-    AlesInfiny Maris サンプルアプリでは、フロントエンドアプリを mock モードでビルドする際のソースコードを `mock` フォルダー配下に含みます。
-    本来 tsconfig.node.json は設定ファイルとして読み込む対象を定義すべきですが、vite.config.ts の参照先で `mock` フォルダー内のファイルを参照している都合上、 `"mock/**/*"` を include の対象にしています。
-
-    ``` json title="tsconfig.node.json" hl_lines="4"
-    {
-      "extends": ["@tsconfig/node20/tsconfig.json"],
-      "include": ["vite.config.*", "vitest.config.*", "cypress.config.*",
-      "src/generated/api-client/**/*","mock/**/*","vite-plugins/*"],
-      "compilerOptions": {
-        "composite": true,
-        "noEmit": true,
-        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
-        "types": ["node"],
-      }
-    }
+    ``` json title="tsconfig.node.json"
+    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/tsconfig.node.json
     ```
 
 ??? note "tsconfig.vitest.json の設定例"
