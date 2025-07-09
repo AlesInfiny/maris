@@ -25,7 +25,7 @@ AlesInfiny Maris は、クリエイティブ・コモンズ表示 4.0 国際ラ�
 
 AlesInfiny Maris で構築した Web アプリケーションのサンプルを手元で動かしながら確認いただけます。
 
-1. 以下を参照し、開発環境を構築してください
+1. 以下を参照し、開発環境を構築してください。
 
     - 「[ローカル開発環境の構築](guidebooks/how-to-develop/local-environment/index.md)」
 
@@ -39,8 +39,21 @@ AlesInfiny Maris で構築した Web アプリケーションのサンプルを�
     !!! info "展開先のフォルダーについて"
         展開先のフォルダーは、浅い階層にすることを推奨します。
 
-1. フロントエンドアプリケーションを実行するためのモジュールを取得します。
-   コマンドプロンプトを開き、「dressca\\dressca-frontend」に移動して以下のコマンドを実行します。
+1. VS Code で「ファイルでワークスペースを開く」から、「dressca\\dressca-frontend\\dressca-frontend.code-workspace」を開き、必要な拡張機能をインストールします。
+「拡張機能」メニューから 「拡張機能のフィルター」>「推奨」>「ワークスペース推奨事項」にある拡張機能を全てインストールします。
+
+    !!! info "「このフォルダー内のファイルの作成者を信頼しますか？」ダイアログが表示される場合"
+        [![フォルダーを開いた際のダイアログ](images/trust-folder.png){ width="300" loading=lazy align=right }](images/trust-folder.png)
+
+        フォルダーを開いた際に、図のダイアログが表示される場合、
+        「親フォルダー 'dressca' 内の全てのファイルの作成者を信頼します」のチェックボックスにチェックを入れ、「はい、作成者を信頼します」を押下してください。
+
+    !!! info "拡張機能のインストールが失敗する場合"
+        拡張機能のインストール時にエラーが発生する場合には、
+        VS Code の再起動やローカルキャッシュのクリアを試してください。
+
+1. フロントエンドのアプリケーションを実行するためのモジュールを取得します。
+ VS Code のターミナルで、「dressca\\dressca-frontend」にいることを確認し、以下のコマンドを実行します。
 
     ```winbatch title="フロントエンドアプリケーションの実行に必要なパッケージのインストール"
     npm ci
@@ -49,7 +62,8 @@ AlesInfiny Maris で構築した Web アプリケーションのサンプルを�
     !!! info "npm ci が失敗した場合"
         `npm ci` の途中でエラーや脆弱性情報以外の警告が出た場合、インストールに失敗している可能性があります。
         その場合は、「dressca\\dressca-frontend\\node_modules」、
-        「dressca\\dressca-frontend\\consumer\\node_modules」フォルダーをそれぞれ削除し、再度 `npm ci` を実行してください。
+        「dressca\\dressca-frontend\\consumer\\node_modules」、
+        「dressca\\dressca-frontend\\admin\\node_modules」ディレクトリをそれぞれ削除し、再度 `npm ci` を実行してください。
 
 1. Visual Studio で「dressca\\dressca-backend\\Dressca.sln」を開き、ソリューションをビルドします。
 
