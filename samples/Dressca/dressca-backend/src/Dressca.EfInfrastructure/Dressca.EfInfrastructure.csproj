@@ -22,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore" VersionOverride="9.0.7" />
     <EmbeddedResource Update="Resources\Messages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
