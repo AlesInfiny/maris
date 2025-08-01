@@ -32,7 +32,7 @@ description: クライアントサイドレンダリングを行う Web アプ�
 ## メッセージの管理単位 {#management-unit}
 
 各メッセージの用途を明確にするため、前述したメッセージパターンごとにメッセージを管理します。
-AlesInfiny Maia OSS Edition における、メッセージパターンごとのメッセージ管理方針は以下の通りです。
+AlesInfiny Maris OSS Edition における、メッセージパターンごとのメッセージ管理方針は以下の通りです。
 
 - 処理メッセージ
 

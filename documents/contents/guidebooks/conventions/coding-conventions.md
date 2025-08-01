@@ -37,7 +37,7 @@ AlesInfiny Maris OSS Edition （以下 AlesInfiny Maris ）では、一般に広
         <!-- textlint-disable ja-technical-writing/sentence-length -->
         Vue.js ではこれらの規約への違反を検出するための ESLint のプラグイン [eslint-plugin-vue :material-open-in-new:](https://eslint.vuejs.org/){ target=_blank } を提供しており、 [Bundle Configurations :material-open-in-new:](https://eslint.vuejs.org/user-guide/#bundle-configurations-eslint-config-js){ target=_blank } としていくつかの定義済み構成が公開されています。
         <!-- textlint-enable ja-technical-writing/sentence-length -->
-        AlesInfiny Maia では、一般的に必須と考えられるルールに Vue.js コミュニティーの慣例に従ったルールを加えた構成である flat/recommended を使用します。
+        AlesInfiny Maris では、一般的に必須と考えられるルールに Vue.js コミュニティーの慣例に従ったルールを加えた構成である flat/recommended を使用します。
 
     - [typescript-eslint の推奨構成 :material-open-in-new:](https://typescript-eslint.io/users/configs/#recommended-configurations){ target=_blank }
 
