@@ -79,10 +79,6 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 
     Stylelint の .vue ファイル向け推奨設定（[インストール方法](static-verification-and-format.md#install-stylelint)）
 
-- [stylelint-prettier :material-open-in-new:](https://github.com/prettier/stylelint-prettier){ target=_blank }
-
-    Stylelint と Prettier の連携プラグイン（[インストール方法](static-verification-and-format.md#install-stylelint)）
-
 - [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
 
     CSS フレームワーク（[インストール方法](css.md#install-tailwind-css)）
@@ -94,3 +90,7 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 - [yup :material-open-in-new:](https://github.com/jquense/yup){ target=_blank }
 
     JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリ（[インストール方法](input-validation.md#install-packages)）
+
+- [Vue I18n :material-open-in-new:](https://vue-i18n.intlify.dev/){ target=_blank }
+
+    Vue.js アプリケーションでメッセージを外部ファイルで一元管理したり、多言語対応するためのライブラリ（[インストール方法](input-validation.md#install-packages)）

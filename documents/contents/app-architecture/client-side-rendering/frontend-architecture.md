@@ -184,8 +184,8 @@ src/
 !!! note "Vue Router の設定"
       Vue Router では URL のパスと対象のファイルを指定することで、ルーティングを設定します。以下は `https://xxxx.com/authentication/login` という URL に対して上記の `LoginView.vue` を設定している例です。
 
-      ``` TypeScript title="index.ts"
-      import { createRouter, createWebHistory } from "vue-router";
+      ```typescript title="index.ts"
+      import { createRouter, createWebHistory } from "vue-router"
 
       const router = createRouter({
          history: createWebHistory(import.meta.env.BASE_URL),
@@ -196,7 +196,7 @@ src/
                component: () => import('@/views/authentication/LoginView.vue'),
             },
          ],
-      });
+      })
       ```
 
 ### components フォルダー {#components-directory}
