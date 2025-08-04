@@ -1,0 +1,11 @@
+{
+  "inputSpec": "./../../dressca-backend/src/Dressca.Web.Admin/dressca-admin-api.json",
+  "generatorName": "typescript-axios",
+  "outputDir": "./src/generated/api-client",
+  "additionalProperties": {
+    "withSeparateModelsAndApi": "true",
+    "modelPackage": "models",
+    "apiPackage": "api",
+    "supportsES6": "true"
+  }
+}
