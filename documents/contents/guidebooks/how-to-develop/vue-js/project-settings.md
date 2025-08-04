@@ -158,7 +158,7 @@ npm run build
 
     コマンドやモードに応じて異なる設定を適用する場合、関数を export して設定します。
 
-    ```typescript title="vite.config.ts" hl_lines="6"
+    ```typescript title="vite.config.ts" hl_lines="1"
     export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
       if (command === 'serve') {
         return {
