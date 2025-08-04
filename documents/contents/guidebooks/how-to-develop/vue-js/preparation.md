@@ -13,7 +13,7 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 
 Visual Studio Code を利用する場合、フロントエンドアプリケーションの開発のために以下の拡張機能をインストールします。
 
-- [Vue - Official :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=Vue.volar){ target=_blank }
+- [Vue (Official) :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=Vue.volar){ target=_blank }
 
     Vue.js アプリケーションの開発に推奨されている拡張機能です。
     詳細は [公式ドキュメント :material-open-in-new:](https://ja.vuejs.org/guide/scaling-up/tooling#ide-support){ target=_blank }を参照してください。
@@ -30,7 +30,7 @@ Visual Studio Code を利用する場合、フロントエンドアプリケー�
 
 - [Prettier - Code formatter :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode){ target=_blank }
 
-     EditorConfig と連携して、統一したスタイルにコードを整形する機能を提供します。
+    EditorConfig と連携して、統一したスタイルにコードを整形する機能を提供します。
 
 - [language-postcss :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=cpylua.language-postcss){ target=_blank }
 

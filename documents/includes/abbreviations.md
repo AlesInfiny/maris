@@ -5,12 +5,14 @@
 *[API]: Application Programming Interface.
 *[CD]: Continuous Delivery：継続的デリバリー。
 *[CI]: Continuous Integration：継続的インテグレーション。
+*[CJS]: CommonJS
 *[CORS]: Cross-Origin Resource Sharing：オリジン間リソース共有。
 *[CMS]: Contents Management System.
 *[CSR]: Client Side Rendering.
 *[CSRF]: Cross-Site Request Forgery：クロスサイトリクエストフォージェリ。
 *[DTO]: Data Transfer Object：データ転送に利用するだけのオブジェクト。
 *[EOL]: End Of Life：製品ライフサイクルの終了。
+*[ESM]: ECMAScript Modules
 *[GB]: GigaByte：記憶媒体の容量を表す単位。
 *[GUI]: Graphical User Interface.
 *[HTML]: Hyper Text Markup Language.
