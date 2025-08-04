@@ -30,9 +30,9 @@ Azure サブスクリプションを持っていない場合、 [無料アカウ
 本サンプルは以下の環境で動作確認を行っています。
 
 - .NET 8
-- Node.js v22.16.0
-- Visual Studio 2022 17.14.4
-- Visual Studio Code 1.100.3
+- Node.js v22.17.1
+- Visual Studio 2022 17.14.10
+- Visual Studio Code 1.102.2
 
 ## サンプルの構成
 
