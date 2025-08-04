@@ -50,7 +50,7 @@ Visual Studio Code の推奨プラグインである [EditorConfig for Visual St
     そのため、意図せず同じリポジトリ内の別の .editorconfig を参照することがないように、ルートプロジェクトの .editorconfig には `root = true` を設定しておくとよいでしょう。
 
     ```text title="サンプルアプリケーションの .editorconfig" hl_lines="1"
-    https://github.com/AlesInfiny/maia/blob/main/samples/web-csr/dressca-frontend/.editorconfig
+    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/.editorconfig
     ```
 
 ## Prettier {#prettier}

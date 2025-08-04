@@ -57,17 +57,7 @@ package.json の scripts セクションにタスクを追加します。
 ワークスペースの直下に、設定ファイルを作成します。
 
 ```json title="openapisettings.json"
-{
-  "inputSpec": "./../../dressca-backend/api-docs/web-consumer/api-specification.json",
-  "generatorName": "typescript-axios",
-  "outputDir": "./src/generated/api-client",
-  "additionalProperties": {
-    "withSeparateModelsAndApi": "true",
-    "modelPackage": "models",
-    "apiPackage": "api",
-    "supportsES6": "true"
-  }
-}
+https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/openapisettings.json
 ```
 
 <!-- cspell:enable -->
@@ -76,7 +66,7 @@ package.json の scripts セクションにタスクを追加します。
 
 | キー                         | 設定値                                                      | 意味                                                |
 | ---------------------------- | ----------------------------------------------------------- | --------------------------------------------------- |
-| `"inputSpec"`                | `"./../../dressca-backend/api-docs/api-specification.json"` | 入力の API 仕様書を指定します。                     |
+| `"inputSpec"`                | `"./../../dressca-backend/src/Dressca.Web.Consumer/dressca-api.json"` | 入力の API 仕様書を指定します。                     |
 | `"generatorName"`            | `"typescript-axios"`                                        | 使用するジェネレーターを指定します。                |
 | `"outputDir"`                | `"./src/generated/api-client"`                              | 生成されたコードの出力先を設定します。              |
 | `"additionalProperties"`     | -                                                           | 使用するジェネレーターごとに固有の値[^2]をキー・バリュー形式で設定します。|
