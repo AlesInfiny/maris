@@ -30,9 +30,9 @@ Azure サブスクリプションを持っていない場合、 [無料アカウ
 本サンプルは以下の環境で動作確認を行っています。
 
 - .NET 8
-- Node.js v22.16.0
-- Visual Studio 2022 17.14.4
-- Visual Studio Code 1.100.3
+- Node.js v22.17.1
+- Visual Studio 2022 17.14.10
+- Visual Studio Code 1.102.3
 
 ## サンプルの構成
 
@@ -75,28 +75,31 @@ auth-backend
 
 ```text
 auth-frontend
-├ .env.dev ............................. Azure AD B2C への接続情報を記載する設定ファイル
-├ env.d.ts ............................. 環境変数の型定義をする TypeScript ファイル
-└ src
-　 ├ App.vue ........................... 画面。本サンプルでは画面は App.vue のみ。
-　 ├ api-client
-　 │ └ index.ts ....................... Web API 呼び出し時の共通処理を記述する TypeScript ファイル
-　 ├ generated ......................... 自動生成された Axios のコードが配置されるフォルダー
-　 ├ services
-　 │  ├ authentication
-　 │  │ ├ authentication-service.ts ..... 認証（サインイン、トークン取得）を行うサービス
-　 │  │ └ authentication-config.ts ...... 上のコードが使用する設定ファイル
-　 │  ├ user
-　 │  │ └ user-service.ts ............... 認証の必要がある処理を行うサービス
-　 │  └ server-time
-　 │    └ server-time-service.ts ........ 認証の必要がない処理を行うサービス
-　 └ stores
-　 　 ├ authentication
-　 　 │ └ authentication.ts ............ 認証の状態を保持するストア
-　 　 ├ server-time
-　 　 │ └ server-time.ts ............... 認証の必要がない Web API 呼び出しの結果を保持するストア
-　 　 └ users
-　 　 　 └ users.ts .................... 認証が必要な Web API 呼び出しの結果を保持するストア
+└ app
+  ├ .env.dev .............................. Azure AD B2C への接続情報を記載する設定ファイル
+  ├ env.d.ts .............................. 環境変数の型定義をする TypeScript ファイル
+  └ src
+  　 ├ App.vue ............................ 画面。本サンプルでは画面は App.vue のみ。
+  　 ├ api-client
+  　 │ ├ __tests__
+  　 │ │  └ api-client.spec.ts ............ Web API 呼び出しに関するテストを記述する TypeScript ファイル
+  　 │ └ index.ts ......................... Web API 呼び出し時の共通処理を記述する TypeScript ファイル
+  　 ├ generated .......................... 自動生成された Axios のコードが配置されるフォルダー
+  　 ├ services
+  　 │  ├ authentication
+  　 │  │ ├ authentication-service.ts ..... 認証（サインイン、トークン取得）を行うサービス
+  　 │  │ └ authentication-config.ts ...... 上のコードが使用する設定ファイル
+  　 │  ├ server-time
+  　 │  │ └ server-time-service.ts ........ 認証の必要がない処理を行うサービス
+  　 │  └ user
+  　 │    └ user-service.ts ............... 認証の必要がある処理を行うサービス
+  　 └ stores
+  　 　 ├ authentication
+  　 　 │ └ authentication.ts ............. 認証の状態を保持するストア
+  　 　 ├ server-time
+  　 　 │ └ server-time.ts ................ 認証の必要がない Web API 呼び出しの結果を保持するストア
+  　 　 └ user
+  　 　 　 └ user.ts ...................... 認証が必要な Web API 呼び出しの結果を保持するストア
 ```
 
 ## サンプルのシナリオ
@@ -251,7 +254,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
    - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
 1. ASP.NET Core Web API プロジェクトの Program.cs に Azure AD B2C の設定を追加します。
 
-    ```cs
+    ```csharp
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Identity.Web;
     using NSwag;
@@ -308,7 +311,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
 1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別のアクションメソッドにも付与できます。
 
-    ```cs
+    ```csharp
     using Microsoft.AspNetCore.Authorization;
 
     [Authorize]
@@ -320,11 +323,12 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
 ### フロントエンドアプリケーション
 
+1. VS Code で `auth-frontend` のフォルダーの `auth-frontend.code-workspace` ファイルを開きます。
 1. ターミナルで `npm install @azure/msal-browser` を実行し、フロントエンドアプリケーションに MSAL.js をインストールします。
 1. `auth-frontend\.env.dev` に記述した Azure AD B2C の設定をフロントエンドアプリケーションの `.env.dev` にコピーします。
 1. `env.d.ts` のインターフェースに、前の手順で `.env.dev` に追加したプロパティを追加します。
 
-    ```ts
+    ```typescript
     interface ImportMetaEnv {
       // 認証に関係のないプロパティは省略
       readonly VITE_ADB2C_USER_FLOW_SIGN_IN: string;
@@ -344,7 +348,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 1. 認証が成功したら、認証が必要な Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
     AlesInfiny Maris のサンプルアプリケーション Dressca の場合、 `src\api-client\index.ts` を編集します。
 
-    ```ts
+    ```typescript
     import axios from "axios";
     import * as apiClient from "@/generated/api-client";
     import { authenticationService } from '@/services/authentication/authentication-service';
@@ -394,7 +398,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
 1. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
 
-    ```ts
+    ```vue
     <script setup lang="ts">
     import { authenticationService } from '@/services/authentication/authentication-service';
     import { useAuthenticationStore } from '@/stores/authentication/authentication';
@@ -408,7 +412,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
 1. `ログイン` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッドが動作すれば `button` である必要はありません）。
 
-    ```html
+    ```vue
     <button v-if="!authenticationStore.isAuthenticated" @click="signIn()">ログイン</button>
     ```
 
@@ -424,7 +428,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
 1. 結合テスト用プロジェクトに `auth-backend\tests\Dressca.IntegrationTest\ApiTestWebApplicationFactory.cs` をコピーします。
 
-    ``` C# title="ApiTestWebApplicationFactory.cs"
+    ```csharp title="ApiTestWebApplicationFactory.cs"
     using System.Text;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
@@ -491,7 +495,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
 1. `IClassFixture<ApiTestWebApplicationFactory>` を実装するテストクラスを作成し、テストコードを追加します。 JWT をヘッダーに付与して API にリクエストを送信することで、認証済みの状態での API アクセスを再現できます。
 
-    ``` C#
+    ```csharp
     using System.Net;
     using System.Net.Http.Headers;
     using Xunit;
