@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ビルドアーティファクトのダウンロード
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: documents
 
@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ビルドアーティファクトのダウンロード
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: documents
 
