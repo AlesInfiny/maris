@@ -72,7 +72,7 @@ GitHub はソースコードの開発効率化にフォーカスしたツール�
 
 ### Azure DevOps {#azure-devops}
 
-<https://azure.microsoft.com/ja-jp/services/devops/>
+<https://azure.microsoft.com/ja-jp/products/devops/>
 
 もともと Team Foundation Server として開発が進められてきたチーム開発用製品を SaaS として提供したものです。
 Azure と名づけられていますが、アプリケーションの実行環境に制約はありません。
