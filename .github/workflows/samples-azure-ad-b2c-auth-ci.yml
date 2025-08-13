@@ -33,7 +33,7 @@ jobs:
         working-directory: ${{ env.FRONTEND_WORKING_DIRECTORY }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 1
 
@@ -111,7 +111,7 @@ jobs:
         working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
     steps:
       - name: ブランチのチェックアウト
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 1
 
