@@ -1,11 +1,12 @@
 # ServerTimeResponse
 
+サーバー時間のレスポンスデータを表します。             
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**serverTime** | **string** |  | [default to undefined]
+**serverTime** | **string** | サーバー時間を取得または設定します。              | [default to undefined]
 
 ## Example
 

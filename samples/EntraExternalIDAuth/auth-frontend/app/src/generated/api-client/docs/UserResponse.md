@@ -1,11 +1,12 @@
 # UserResponse
 
+ユーザー情報のレスポンスデータを表します。             
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **string** |  | [default to undefined]
+**userId** | **string** | ユーザー ID を取得または設定します。              | [default to undefined]
 
 ## Example
 

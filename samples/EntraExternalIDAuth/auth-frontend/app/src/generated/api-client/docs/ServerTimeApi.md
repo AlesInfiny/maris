@@ -1,15 +1,14 @@
 # ServerTimeApi
 
-All URIs are relative to *http://localhost:8080*
+All URIs are relative to *https://localhost:5001*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**getServerTime**](#getservertime) | **GET** /api/servertime | サーバーの現在時刻を取得します。|
+|[**getServerTime**](#getservertime) | **GET** /api/servertime | 認証不要で現在のサーバー時間を取得します。|
 
 # **getServerTime**
 > ServerTimeResponse getServerTime()
 
-サーバーの現在時刻を取得します。
 
 ### Example
 
@@ -46,7 +45,7 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-|**200** | 成功。 |  -  |
+|**200** | サーバー時間。 |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

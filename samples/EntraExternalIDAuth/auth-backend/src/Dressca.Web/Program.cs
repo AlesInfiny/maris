@@ -65,10 +65,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(
     options =>
     {
-        builder.Configuration.Bind("AzureAdB2C", options);
+        builder.Configuration.Bind("AzureAd", options);
         options.TokenValidationParameters.NameClaimType = "name";
     },
-    options => { builder.Configuration.Bind("AzureAdB2C", options); });
+    options => { builder.Configuration.Bind("AzureAd", options); });
 
 var app = builder.Build();
 
