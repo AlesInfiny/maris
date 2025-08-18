@@ -30,8 +30,8 @@ builder.Services.AddOpenApiDocument(config =>
     config.PostProcess = document =>
     {
         document.Info.Version = "1.0.0";
-        document.Info.Title = "Azure AD B2C ユーザー認証";
-        document.Info.Description = "Azure AD B2Cを利用したユーザー認証機能を提供するサンプルアプリケーションです。";
+        document.Info.Title = "Entra External ID ユーザー認証";
+        document.Info.Description = "Entra External IDを利用したユーザー認証機能を提供するサンプルアプリケーションです。";
         document.Servers.Add(new()
         {
             Description = "ローカル開発用のサーバーです。",
@@ -60,7 +60,7 @@ if (builder.Environment.IsDevelopment())
     });
 }
 
-// Azure AD B2C の設定をインジェクション
+// Entra External ID の設定をインジェクション
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(
     options =>
@@ -96,7 +96,7 @@ if (options.Value.AllowedOrigins.Length > 0)
     });
 }
 
-// Azure AD B2C での認証を有効にするために追加
+// Entra External ID での認証を有効にするために追加
 app.UseAuthentication();
 
 app.UseAuthorization();
