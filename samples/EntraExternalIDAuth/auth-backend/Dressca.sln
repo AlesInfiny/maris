@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDDA7443-77BD-4AF5-AA67-E8A1BAD201C2}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		global.json = global.json
+		stylecop.json = stylecop.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.props = src\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web", "src\Dressca.Web\Dressca.Web.csproj", "{795D8320-6227-418A-B970-D2E851EA9AB6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dressca.Web.Dto", "src\Dressca.Web.Dto\Dressca.Web.Dto.csproj", "{CAAA0815-902E-421D-A721-50DCCA839A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dressca.IntegrationTest", "tests\Dressca.IntegrationTest\Dressca.IntegrationTest.csproj", "{D299C61B-0FF5-4D53-947F-8639BFC4BD49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A4862B43-6114-409B-AFE5-8485F4618852}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{795D8320-6227-418A-B970-D2E851EA9AB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{795D8320-6227-418A-B970-D2E851EA9AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{795D8320-6227-418A-B970-D2E851EA9AB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{795D8320-6227-418A-B970-D2E851EA9AB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAAA0815-902E-421D-A721-50DCCA839A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAAA0815-902E-421D-A721-50DCCA839A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAAA0815-902E-421D-A721-50DCCA839A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAAA0815-902E-421D-A721-50DCCA839A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D299C61B-0FF5-4D53-947F-8639BFC4BD49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D299C61B-0FF5-4D53-947F-8639BFC4BD49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D299C61B-0FF5-4D53-947F-8639BFC4BD49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D299C61B-0FF5-4D53-947F-8639BFC4BD49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{795D8320-6227-418A-B970-D2E851EA9AB6} = {16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}
+		{CAAA0815-902E-421D-A721-50DCCA839A62} = {16A54A4D-8AEA-42B3-B8CF-D8C7650BB3C6}
+		{D299C61B-0FF5-4D53-947F-8639BFC4BD49} = {A4862B43-6114-409B-AFE5-8485F4618852}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8FD66EC1-E1D1-4664-9ACE-8026659FD708}
+	EndGlobalSection
+EndGlobal
