@@ -1,5 +1,5 @@
 {
-  "inputSpec": "./../../auth-backend/api-docs/api-specification.json",
+  "inputSpec": "./../../auth-backend/src/Dressca.Web/dressca-api.json",
   "generatorName": "typescript-axios",
   "outputDir": "./src/generated/api-client",
   "additionalProperties": {
