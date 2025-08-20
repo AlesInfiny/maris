@@ -55,7 +55,7 @@ AlesInfiny Maris で構築した Web アプリケーションのサンプルを�
 1. フロントエンドのアプリケーションを実行するためのモジュールを取得します。
  VS Code のターミナルで、「dressca\\dressca-frontend」にいることを確認し、以下のコマンドを実行します。
 
-    ```winbatch title="フロントエンドアプリケーションの実行に必要なパッケージのインストール"
+    ```shell title="フロントエンドアプリケーションの実行に必要なパッケージのインストール"
     npm ci
     ```
 
@@ -70,7 +70,7 @@ AlesInfiny Maris で構築した Web アプリケーションのサンプルを�
 1. データベースを構築します。
    コマンドプロンプトを開き、「dressca\\dressca-backend\\src\\Dressca.EfInfrastructure」に移動して以下のコマンドを実行します。
 
-    ```winbatch title="SQL Server のデータベース構築"
+    ```shell title="SQL Server のデータベース構築"
     dotnet ef database update
     ```
 

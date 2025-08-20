@@ -24,7 +24,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。
     プロジェクト名はフォルダー名と同名になります。
 
-    ```winbatch title="クラスライブラリプロジェクトの作成コマンド"
+    ```shell title="クラスライブラリプロジェクトの作成コマンド"
     dotnet new classlib
     ```
 
@@ -38,7 +38,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。
     プロジェクト名はフォルダー名と同名になります。
 
-    ```winbatch title="コンソールアプリケーションプロジェクトの作成コマンド"
+    ```shell title="コンソールアプリケーションプロジェクトの作成コマンド"
     dotnet new console
     ```
 
@@ -52,7 +52,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。
     プロジェクト名はフォルダー名と同名になります。
 
-    ```winbatch title="ASP.NET Core Web API プロジェクトの作成コマンド"
+    ```shell title="ASP.NET Core Web API プロジェクトの作成コマンド"
     dotnet new webapi
     ```
 
@@ -70,7 +70,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。
     プロジェクト名はフォルダー名と同名になります。
 
-    ```winbatch title="ASP.NET Core with Vite プロジェクトの作成コマンド"
+    ```shell title="ASP.NET Core with Vite プロジェクトの作成コマンド"
     dotnet new vite
     ```
 
@@ -84,7 +84,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
     xUnit v3 の単体テストプロジェクトを作成するには、事前にプロジェクトテンプレートをインストールする必要があります。
     以下のコマンドで [xunit.v3.templates :material-open-in-new:](https://www.nuget.org/packages/xunit.v3.templates/){ target=_blank } をインストールできます。
 
-    ```winbatch title="プロジェクトテンプレートのインストールコマンド"
+    ```shell title="プロジェクトテンプレートのインストールコマンド"
     dotnet new install xunit.v3.templates
     ```
 
@@ -92,7 +92,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。
     プロジェクト名はフォルダー名と同名になります。
 
-    ```winbatch title="xUnit v3 テストプロジェクトの作成コマンド"
+    ```shell title="xUnit v3 テストプロジェクトの作成コマンド"
     dotnet new xunit3
     ```
 

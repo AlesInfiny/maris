@@ -21,7 +21,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 テスト対象プロジェクトの `Program.cs` を部分クラス宣言を利用してテストプロジェクトに公開します。
 
-``` C# title="Program.cs" hl_lines="4"
+```csharp title="Program.cs" hl_lines="4"
 var builder = WebApplication.CreateBuilder(args);
 // ...
 app.Run();
@@ -45,7 +45,7 @@ public partial class Program {}
 
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-``` C# hl_lines="2"
+```csharp hl_lines="2"
 public class BasicTests 
     : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -89,7 +89,7 @@ public class BasicTests
 
 1. `WebApplicationFactory<TEntryPoint>` クラスを継承したクラスでテスト対象アプリケーションの構成を変更する。
 
-    ``` C# hl_lines="2"
+    ```csharp hl_lines="2"
     public class CustomWebApplicationFactory<TProgram>
         : WebApplicationFactory<TProgram> where TProgram : class
     {
@@ -121,7 +121,7 @@ public class BasicTests
 
     ??? example "appsettings.{env}.json の設定例"
 
-        ``` json title="appsettings.Development.json"
+        ```json title="appsettings.Development.json"
         {
             "Logging": {
                 "LogLevel": {
@@ -137,7 +137,7 @@ public class BasicTests
             }
         }
         ```
-        ``` json title="appsettings.IntegrationTest.json"
+        ```json title="appsettings.IntegrationTest.json"
         {
             "Logging": {
                 "LogLevel": {
@@ -155,7 +155,7 @@ public class BasicTests
 
 1. テストクラスで実装する `IClassFixture` インターフェースの型引数を `CustomWebApplicationFactory<Program>` とする。
 
-    ``` C# hl_lines="2"
+    ```csharp hl_lines="2"
     public class IndexPageTests
         : IClassFixture<CustomWebApplicationFactory<Program>>
     {

@@ -148,7 +148,7 @@ Axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=
 
 Vue.js プロジェクトのフォルダー構成は、ブランクプロジェクト作成時のデフォルトの構成を基に以下のように行います。なおこのフォルダー配下の構成については、コンポーネント設計方法に依存するため、各プロジェクトの方針に従います。
 
-``` text title="プロジェクトのフォルダー構成全体像" linenums="0"
+```text title="プロジェクトのフォルダー構成全体像" linenums="0"
 <project-name>
 ├─ cypress/ ------------------ cypress による E2E テストに関するファイルを格納します。
 ├─ public/ ------------------- メディアファイルや favicon など静的な資産を格納します。
@@ -171,7 +171,7 @@ Vue.js プロジェクトのフォルダー構成は、ブランクプロジェ�
 
 views フォルダーはルーティングで指定される vue ファイルを格納します。そのためこの下層のフォルダー構造はサイト構造を意識して作成することを推奨します。以下の例で Login.vue なら ```https://xxxx.com/authentication/login``` と設定します。
 
-``` text title="views フォルダー" linenums="0"
+```text title="views フォルダー" linenums="0"
 src/
 └─ views/
    ├─ authentication/
@@ -203,7 +203,7 @@ src/
 
 components フォルダーは主に、再利用性の高い vue コンポーネントファイルを格納します。さらにこの下層フォルダーはドメインで分割し、それを操作するコンポーネントを格納します。こうすることで再利用性を活かすために、どのドメインを対象にしたコンポーネントなのかを明確にします。また vue ファイルに限らずプロジェクト内で再利用性の高いもの（icon など）もこちらに格納します。
 
-``` text title="components フォルダー" linenums="0"
+```text title="components フォルダー" linenums="0"
 src/
 └─ components/
    ├─ authentication/
@@ -222,7 +222,7 @@ src/
 
       - [Atomic Design by Brad Frost :material-open-in-new:](https://atomicdesign.bradfrost.com/){ target=_blank }
 
-``` text title="components フォルダー by Atomic Design" linenums="0"
+```text title="components フォルダー by Atomic Design" linenums="0"
 src/
 └─ components/
    ├─ atoms-and-molecules/

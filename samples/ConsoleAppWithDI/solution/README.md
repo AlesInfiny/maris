@@ -143,7 +143,7 @@ Maris.Samples.Cli.csproj ファイルは、以下のようになります。
 起動パラメーターを受け取らないコマンドであっても、パラメーターを表すクラスの追加が必要です。
 このサンプルでは、コマンドラインから以下のように起動するコマンドを実装します。
 
-```winbatch
+```shell
 Maris.Samples.Cli.exe sample --loop-number 5
 ```
 
@@ -254,7 +254,7 @@ Visual Studio でアプリケーションをビルドして実行してくださ
 コマンドの起動パラメーターを何も設定していないと、以下のようにコマンドの利用方法を示すテキストが表示されます。
 登録した sample コマンドが、正しく認識されていることを確認できます。
 
-```plane
+```text
 Maris.Samples.Cli 1.0.0
 Copyright © 2023 BIPROGY Inc. All rights reserved.
 
@@ -271,7 +271,7 @@ ERROR(S):
 続いて起動パラメーターを指定して、作成したコマンドを実行してみます。
 ビルドした exe を直接実行する場合は、ビルドしたアプリケーションの出力されたフォルダーに移動し、以下のように実行します。
 
-```plane
+```text
 C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli\bin\Debug\net8.0>Maris.Samples.Cli.exe sample --loop-number 5
 info: Maris.ConsoleApp.Hosting.ServiceCollectionExtensions[0]
       起動パラメーター:sample --loop-number 5 のパースを行います。
@@ -296,7 +296,7 @@ info: Maris.ConsoleApp.Hosting.ConsoleAppHostedService[0]
 
 `dotnet run` を利用して実行する場合は、コンソールアプリケーションプロジェクトのルートフォルダーに移動して、以下のように実行します。
 
-```plane
+```text
 C:\MarisSamples.ConsoleApp\src\Maris.Samples.Cli>dotnet run sample --loop-number 5
 info: Maris.ConsoleApp.Hosting.ServiceCollectionExtensions[0]
       起動パラメーター:sample --loop-number 5 のパースを行います。
