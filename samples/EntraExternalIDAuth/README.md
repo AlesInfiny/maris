@@ -196,7 +196,7 @@ auth-frontend
 
 ```json
 {
-    "AzureAd": {
+    "EntraId": {
       "Instance": "https://[テナントサブドメイン].ciamlogin.com/",
       "TenantId": "[テナントID]",
       "ClientId": "[SampleWebAPI のクライアント ID]"
@@ -290,10 +290,10 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
         .AddMicrosoftIdentityWebApi(
         options =>
         {
-            builder.Configuration.Bind("AzureAd", options);
+            builder.Configuration.Bind("EntraId", options);
             options.TokenValidationParameters.NameClaimType = "name";
         },
-        options => { builder.Configuration.Bind("AzureAd", options); });
+        options => { builder.Configuration.Bind("EntraId", options); });
 
     var app = builder.Build(); // （既存のコード）
 
