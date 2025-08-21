@@ -25,3 +25,9 @@ runs:
       run: |
         cd samples/AzureADB2CAuth
         zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/azure-ad-b2c-auth.zip *
+
+    - name: entra-external-id-auth.zip の作成
+      shell: bash
+      run: |
+        cd samples/EntraExternalIDAuth
+        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/entra-external-id-auth.zip *
