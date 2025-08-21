@@ -145,7 +145,7 @@ auth-frontend
 
 ### Entra External ID テナントの作成
 
-1. [クイック スタート: Azure サブスクリプションを使用して外部テナントを作成する](https://learn.microsoft.com/ja-jp/entra/external-id/customers/quickstart-tenant-setup) に従って、[Microsoft Entra 管理センター](https://entra.microsoft.com/) にサインインし、 Entra External ID のテナントを作成します。
+1. [クイック スタート: Azure サブスクリプションを使用して外部テナントを作成する](https://learn.microsoft.com/ja-jp/entra/external-id/customers/quickstart-tenant-setup) に従って、[Microsoft Entra 管理センター](https://entra.microsoft.com/) にサインインし、 Entra External ID の外部テナントを作成します。
     - 「`テナントサブドメイン`」（ドメイン名から `.onmicrosoft.com` を除いた部分）をメモします。
 
 ### Entra External ID テナントを利用するアプリの登録（バックエンドアプリケーション）

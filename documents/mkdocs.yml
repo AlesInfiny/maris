@@ -120,6 +120,9 @@ nav:
       - Azure Active Directory B2C による認証の利用:
           - samples/azure-ad-b2c/index.md
           - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/azure-ad-b2c/azure-ad-b2c-consideration.md
+      - Entra External ID による認証の利用:
+          - samples/entra-external-id/index.md
+          - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/entra-external-id/entra-external-id-consideration.md
   - AlesInfiny Maris OSS Edition について:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
