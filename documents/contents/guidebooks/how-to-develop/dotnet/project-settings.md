@@ -239,7 +239,7 @@ dotnet_diagnostic.SA1600.severity=none
 StyleCop Analyzers は [NuGet パッケージ :material-open-in-new:](https://www.nuget.org/packages/StyleCop.Analyzers/){ target=_blank } として提供されています。
 Directory.Package.props ファイルで StyleCop Analyzers のグローバルパッケージ参照の設定をしてください。
 
-```props title="StyleCop Analyzers のグローバルパッケージ参照設定例"
+```xml title="StyleCop Analyzers のグローバルパッケージ参照設定例"
 <Project>
   <!-- StyleCop Analyzers 関連の設定以外省略 -->
   <ItemGroup>

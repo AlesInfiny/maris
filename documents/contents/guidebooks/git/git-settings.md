@@ -17,7 +17,7 @@ AlesInfiny Maris OSS Edition では、通常 Git のリモートリポジトリ�
     Git はチェックアウトする時、テキストファイルの改行コードを CRLF に自動変換することがあります。
     以下のコマンドを実行し、チェックアウト時の CRLF への自動変換を無効化し、コミット時は LF へ自動変換するように設定します。
 
-    ```bash
+    ```shell
     git config --local core.autocrlf input
     ```
 

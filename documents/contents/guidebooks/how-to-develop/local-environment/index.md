@@ -107,7 +107,7 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
 1. 以下のコマンドが実行できればインストールは完了です。
 
-    ```ps1 title="Git for Windows のバージョン確認"
+    ```shell title="Git for Windows のバージョン確認"
     git --version
     ```
 
@@ -122,7 +122,7 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
 1. 以下のコマンドが実行できればインストールは完了です。
 
-    ```ps1 title="Node.js と npm のバージョン確認"
+    ```shell title="Node.js と npm のバージョン確認"
     node --version
     npm --version
     ```
@@ -131,13 +131,13 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
 1. 以下のコマンドを実行します。
 
-    ```ps1 title="Entity Framework Core Tool のインストール"
+    ```shell title="Entity Framework Core Tool のインストール"
     dotnet tool install --global dotnet-ef
     ```
 
 1. 以下のコマンドが実行できればインストールは完了です。
 
-    ```ps1 title="Entity Framework Core Tool のバージョン確認"
+    ```shell title="Entity Framework Core Tool のバージョン確認"
     dotnet ef --version
     ```
 

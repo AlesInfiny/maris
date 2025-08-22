@@ -18,7 +18,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 ヘルスチェック API へのアクセスが非常に多くなる等の事情により、アプリケーションの活動性のみを確認したい場合は以下のように実装します。
 
-``` C# title="Program.cs" hl_lines="4 9"
+```csharp title="Program.cs" hl_lines="4 9"
 var builder = WebApplication.CreateBuilder(args);
 
 // ヘルスチェックサービスを追加する
@@ -62,7 +62,7 @@ app.Run();
     1. Entity Framework Core を利用したアプリケーションにおいてデータベースのヘルスチェックを行う場合
         - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore ){ target=_blank } の参照を追加
 
-        ``` C# title="DbHealthChecksBuilderExtensions.cs" hl_lines="13 20-30"
+        ```csharp title="DbHealthChecksBuilderExtensions.cs" hl_lines="13 20-30"
         using Microsoft.EntityFrameworkCore;
         using Microsoft.Extensions.DependencyInjection;
         using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -102,7 +102,7 @@ app.Run();
 
     1. その他の外部サービスについてヘルスチェックを行う場合
 
-        ``` C# title="SampleHealthChecksBuilderExtensions.cs" hl_lines="12 16-25"
+        ```csharp title="SampleHealthChecksBuilderExtensions.cs" hl_lines="12 16-25"
         using Microsoft.Extensions.DependencyInjection;
         using Microsoft.Extensions.Diagnostics.HealthChecks;
         
@@ -137,7 +137,7 @@ app.Run();
 
 1. `Program.cs` で作成したヘルスチェックロジックをまとめて登録する
 
-    ``` C# title="Program.cs" hl_lines="7-9"
+    ```csharp title="Program.cs" hl_lines="7-9"
     using SampleSystem.Infrastructure;
     using SampleSystem.XxxService;
 
@@ -169,7 +169,7 @@ app.Run();
 
 1. `IHealthCheck` インターフェース実装クラスを作成
 
-    ``` C# title="SampleHealthCheck.cs" hl_lines="9-18"
+    ```csharp title="SampleHealthCheck.cs" hl_lines="9-18"
     using Microsoft.Extensions.Diagnostics.HealthChecks;
 
     namespace SampleSystem.XxxService;
@@ -194,7 +194,7 @@ app.Run();
 
 1. `Program.cs` で作成したヘルスチェックロジックを登録する
 
-    ``` C# title="Program.cs" hl_lines="6-7"
+    ```csharp title="Program.cs" hl_lines="6-7"
     using SampleSystem.XxxService;
 
     var builder = WebApplication.CreateBuilder(args);
@@ -233,7 +233,7 @@ app.Run();
 !!! info "ヘルスチェック失敗時の `HealthStatus` を `Degraded` に指定する"
     ヘルスチェックサービス登録時、 `failureStatus` にヘルスチェック失敗時の `HealthStatus` を指定できます。
 
-    ``` C# title="Program.cs"
+    ```csharp title="Program.cs"
     builder.Services.AddHealthChecks()
         .AddCheck<SampleHealthCheck>(
         "Sample",

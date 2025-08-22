@@ -34,7 +34,7 @@ const axiosInstance = axios.create({
 
 本番用の環境変数ファイルを作成します。 `.env.production` や `.env.prod` など本番用と判断できる名前で env ファイルを作成します。前の手順で作成した `import.meta.env.API_ENDPOINT` に対応する値を設定します。
 
-```env title=".env.prod"
+```properties title=".env.prod"
 VITE_API_ENDPOINT=https://www.example.com
 ```
 

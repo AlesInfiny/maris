@@ -34,7 +34,7 @@ DI を利用するためには、汎用ホストを用いてコンソールア�
     https://github.com/AlesInfiny/maris/blob/main/samples/ConsoleAppWithDI/solution/src/Maris.Samples.Cli/Commands/GetProductsByUnitPriceRange/Command.cs
     ```
 
-```winbatch title="コマンドラインからの実行例"
+```shell title="コマンドラインからの実行例"
 Maris.Samples.Cli.exe get-by-unit-price-range --minimum 2000 --maximum 3000
 ```
 
