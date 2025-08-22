@@ -165,8 +165,9 @@ auth-frontend
 1. [委任されたアクセス許可 (スコープ) を追加する](https://learn.microsoft.com/ja-jp/entra/identity-platform/quickstart-web-api-dotnet-protect-app?tabs=aspnet-core#add-delegated-permissions-scopes) に従って、アプリにスコープを追加します。
     - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、本サンプルのシナリオでは作成するスコープは 1 つで良いです。
     - 追加したスコープの名前を、ここでは「 `api.read` 」とします。
-1. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleWebAPI 」を選択します。
-1. 「概要」ブレードに表示された「 `アプリケーション ID の URI` 」をメモします。
+1. 「API の公開」ブレードを選択し、「 `api.read` 」を選択します。
+1. スコープの編集画面で、「同意できるのはだれですか?」で「管理者とユーザー」を選択し、保存します。
+1. 表示されている「 `アプリケーション ID の URI` 」をメモします。
 
 ### Entra External ID テナントを利用するアプリの登録（フロントエンドアプリケーション）
 
@@ -179,7 +180,6 @@ auth-frontend
 1. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleSPA 」を選択します。
 1. 「認証」ブレードを選択し、「リダイレクト URI の追加」をクリックします。「シングルページアプリケーション」を選択し、リダイレクト URI に「 `http://localhost:5173` 」を設定します。
 1. [Web API にアクセスするためのアクセス許可を追加する](https://learn.microsoft.com/ja-jp/entra/identity-platform/quickstart-configure-app-access-web-apis#add-permissions-to-access-your-web-api) に従って、 SampleSPA に、前の手順で追加した SampleWebAPI のスコープ「 `api.read` 」へのアクセス許可を付与します。
-1. [管理者の同意を付与する (外部テナントのみ)](https://learn.microsoft.com/ja-jp/entra/identity-platform/quickstart-register-app#grant-admin-consent-external-tenants-only) に従って、 SampleSPA に管理者の同意を付与します。
 
 ### ユーザーフローの作成と割り当て
 
@@ -227,6 +227,9 @@ VITE_EXTERNAL_ID_APP_URI=[フロントエンドアプリケーションのベー
 1. 使用可能なメールアドレスを入力し、「次へ」をクリックします。
 1. 上の手順で入力したメールアドレス宛にアカウント確認コードが送信されるので、画面に入力して「次へ」をクリックします。
 1. 画面に新しいパスワード等の必要事項を入力し、「次へ」をクリックします。
+<!-- textlint-disable @textlint-ja/no-synonyms -->
+1. SampleSPA 、 SampleWebAPI からユーザーデータへのアクセス許可を要求されるので「承諾」をクリックします。
+<!-- textlint-enable @textlint-ja/no-synonyms -->
 1. サインインが成功し、画面上に「ユーザー ID 」が表示されれば成功です。以降は入力したメールアドレスとパスワードでサインインできるようになります。
 1. 画面上の「 `ログアウト` 」をクリックします。 Entra External ID のサインアウト画面がポップアップで表示されます。
 1. サインアウトするアカウントをクリックします。
@@ -496,8 +499,9 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     上記のコードで設定したテスト用の認証機能は、 `[Authorize]` または `[Authorize(AuthenticationSchemes = "Test")]` が付与された Web API にリクエストが送信される際に動作します。
 
 1. 結合テスト用プロジェクトの　`appsettings.IntegrationTest.json` に `auth-backend\tests\Dressca.IntegrationTest\appsettings.json` の内容をコピーします。
-
+<!-- textlint-disable @textlint-ja/no-synonyms -->
 1. `IClassFixture<ApiTestWebApplicationFactory>` を実装するテストクラスを作成し、テストコードを追加します。 JWT をヘッダーに付与して API にリクエストを送信することで、認証済みの状態での API アクセスを再現できます。
+<!-- textlint-enable @textlint-ja/no-synonyms -->
 
     ```csharp
     using System.Net;
