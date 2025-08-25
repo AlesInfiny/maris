@@ -62,7 +62,7 @@ auth-backend
 │ │ ├ Program.cs ................... Web API アプリケーションのエントリーポイント。 Entra External ID による認証を有効化している。
 │ │ └ Controllers
 │ │ 　 ├ ServerTimeController.cs ... 認証の必要がない Web API を配置しているコントローラー
-│ │ 　 └ UserController.cs ......... 認証が必要な Web API を配置しているコントローラー
+│ │ 　 └ UsersController.cs ......... 認証が必要な Web API を配置しているコントローラー
 │ └ Dressca.Web.Dto ................ Web API の戻り値の型を配置しているプロジェクト
 └ tests
   └ Dressca.IntegrationTest ........ 結合テストプロジェクト
@@ -314,12 +314,13 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
 1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別のアクションメソッドにも付与できます。
+本例では、 OrdersController.cs に対して設定した例を示します。
 
     ```csharp
     using Microsoft.AspNetCore.Authorization;
 
     [Authorize]
-    public class ExampleController : ControllerBase
+    public class OrdersController : ControllerBase
     {
        // 省略
     }
@@ -350,6 +351,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     - authentication.ts
 1. 認証が成功したら、認証が必要な Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
     AlesInfiny Maris のサンプルアプリケーション Dressca の場合、 `src\api-client\index.ts` を編集します。
+    本例では、 OrderApi アクセス時に Bearer トークンを付与する例を示します。
 
     ```typescript
     import axios from "axios";
@@ -368,34 +370,19 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     }
 
     async function addTokenAsync(config: apiClient.Configuration) {
-      
-
       // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
       if (await authenticationService.isAuthenticated()) {
-        const token = await authenticationService.getTokenAzureADB2C();
+        const token = await authenticationService.getTokenEntraExternalId();
         config.accessToken = token;
       }
     }
 
-    export async function getExampleApi(): Promise<apiClient.ExampleApi> {
+    export async function ordersApi(): Promise<apiClient.OrdersApi> {
       const config = createConfig();
-
       // 認証が必要な API では、addTokenAsync を呼び出します。
       await addTokenAsync(config);
-      const exampleApi = new apiClient.ExampleApi(config, '', axiosInstance);
-      return exampleApi;
-    }
-
-    export async function getServerTimeApi(): Promise<apiClient.ServerTimeApi> {
-      const config = createConfig();
-
-      // 認証が不要な API では、addTokenAsync は呼び出しません。
-      const serverTimeApi = new apiClient.ServerTimeApi(
-        config,
-        '',
-        axiosInstance
-      );
-      return serverTimeApi;
+      const orderApi = new apiClient.OrdersApi(config, '', axiosInstance);
+      return orderApi;
     }
     ```
 
@@ -408,7 +395,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     const authenticationStore = useAuthenticationStore()
 
     const signIn = async () => {
-      await authenticationService.signInAzureADB2C()
+      await authenticationService.signInEntraExternalId()
     }
     const signOut = async () => {
       await authenticationService.signOutEntraExternalId()
@@ -416,14 +403,46 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     </script>
     ```
 
+1. `LoginView.vue` は Entra External ID の LoginPopup ウィンドウに切り替わるため削除します。
+
+1. `authentication-guard.ts` はログインページではなく Entra External ID の LoginPopUp を表示させるように変更します。
+
+    ```typescript
+    import type { Router, RouteRecordName } from 'vue-router'
+    import { useAuthenticationStore } from '@/stores/authentication/authentication'
+
+    export const authenticationGuard = (router: Router) => {
+      router.beforeEach(async (to, from) => {
+        const authenticationStore = useAuthenticationStore()
+
+        const orderingPaths: (RouteRecordName | null | undefined)[] = [
+          'ordering/checkout',
+          'ordering/done',
+        ]
+        if (orderingPaths.includes(to.name) && !from.name) {
+          return { name: 'catalog' }
+        }
+
+        if (to.meta.requiresAuth && !authenticationStore.isAuthenticated) {
+          try {
+            await authenticationStore.signIn()
+          } catch (error) {
+            return false
+          }
+        }
+        return true
+      })
+    }
+    ```
+
+1. `router` フォルダーの `index.ts` から、 `authenticationRoutes` を削除します。
+
 1. `ログイン` 画面、 `ログアウト` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッド、 `signOut` メソッドが動作すれば `button` である必要はありません）。
 
     ```vue
     <button v-if="!authenticationStore.isAuthenticated" @click="signIn()">ログイン</button>
     <button v-if="authenticationStore.isAuthenticated" @click="signOut()">ログアウト</button>
     ```
-
-1. `npm install` を実行し、その他のパッケージをインストールします。
 
 ### テスト
 
