@@ -9,6 +9,8 @@ import {
   tokenRequest,
 } from '@/services/authentication/authentication-config'
 import { useAuthenticationStore } from '@/stores/authentication/authentication'
+import { storeToRefs } from 'pinia'
+import type { Ref } from 'vue'
 
 // IIFE 構文が行頭に来る場合、自動セミコロン挿入( ASI )の誤動作防止のため Prettier がセミコロンを挿入します。
 // https://prettier.io/docs/options#semicolons
@@ -30,11 +32,11 @@ export const authenticationService = {
     authenticationStore.updateAuthenticated(false)
   },
 
-  isAuthenticated(): boolean {
+  isAuthenticated(): Ref<boolean> {
     const result = msalInstance.getActiveAccount() !== null
     const authenticationStore = useAuthenticationStore()
     authenticationStore.updateAuthenticated(result)
-    return result
+    return storeToRefs(authenticationStore).authenticated
   },
 
   async getTokenEntraExternalId() {

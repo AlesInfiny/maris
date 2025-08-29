@@ -19,7 +19,7 @@ const { getUserId } = storeToRefs(userStore)
 const serverTimeStore = useServerTimeStore()
 const { getServerTime } = storeToRefs(serverTimeStore)
 const authenticationStore = useAuthenticationStore()
-const { isAuthenticated } = storeToRefs(authenticationStore)
+const isAuthenticated = authenticationService.isAuthenticated()
 const customErrorHandler = useCustomErrorHandler()
 
 const signIn = async () => {
