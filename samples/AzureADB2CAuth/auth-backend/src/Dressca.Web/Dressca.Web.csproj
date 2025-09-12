@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" VersionOverride="8.0.20" />
     <ProjectReference Include="..\Dressca.Web.Dto\Dressca.Web.Dto.csproj" />
   </ItemGroup>
 
