@@ -1,3 +1,5 @@
 node_modules/
 /.vs
 /samples/Dressca/dressca-backend/src/Dressca.Web/.config
+/samples/DresscaCMS/src/DresscaCMS.ApplicationCore/bin
+/samples/DresscaCMS/src/DresscaCMS.ApplicationCore/obj

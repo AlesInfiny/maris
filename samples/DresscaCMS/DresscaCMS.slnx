@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DresscaCMS.ApplicationCore/DresscaCMS.ApplicationCore.csproj" />
+    <Project Path="src/DresscaCMS.Web/DresscaCMS.Web.csproj" />
+  </Folder>
+</Solution>
