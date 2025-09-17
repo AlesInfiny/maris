@@ -3,3 +3,7 @@ node_modules/
 /samples/Dressca/dressca-backend/src/Dressca.Web/.config
 /samples/DresscaCMS/src/DresscaCMS.ApplicationCore/bin
 /samples/DresscaCMS/src/DresscaCMS.ApplicationCore/obj
+/samples/DresscaCMS/src/DresscaCMS.Web/bin/Debug/net9.0
+/samples/DresscaCMS/.vs
+/samples/DresscaCMS/src/DresscaCMS.Web/obj
+/samples/DresscaCMS/src/DresscaCMS.Web/DresscaCMS.Web.csproj.user

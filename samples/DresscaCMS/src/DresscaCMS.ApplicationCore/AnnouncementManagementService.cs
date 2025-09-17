@@ -19,7 +19,8 @@
                     PageSize = pageSize,
                     LastPageNumber = 1,
                     StartIndex = 0,
-                    EndIndex = 0
+                    EndIndex = 0,
+                    TotalCount = 0
                 };
             }
 
@@ -35,15 +36,7 @@
                             on a.Id equals ac.AnnouncementId
                         where !a.IsDeleted && ac.LanguageCode == "jp"
                         orderby a.PostDateTime descending
-                        select new AnnouncementEntity
-                        {
-                            Id = a.Id,
-                            Category = a.Category,
-                            DisplayPriority = a.DisplayPriority,
-                            PostDateTime = a.PostDateTime,
-                            ExpireDateTime = a.ExpireDateTime,
-                            Title = ac.Title
-                        };
+                        select new AnnouncementEntity(a.Id, a.Category,a.PostDateTime,a.ExpireDateTime,a.DisplayPriority,ac.Title);
             var pagedAnnouncements = query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -56,8 +49,10 @@
                 PageSize = pageSize,
                 LastPageNumber = lastPageNumber,
                 StartIndex = (pageNumber - 1) * pageSize + 1,
-                EndIndex = (pageNumber - 1) * pageSize + pagedAnnouncements.Count
+                EndIndex = (pageNumber - 1) * pageSize + pagedAnnouncements.Count,
+                TotalCount = totalAnnouncements
             };
         }
+
     }
 }

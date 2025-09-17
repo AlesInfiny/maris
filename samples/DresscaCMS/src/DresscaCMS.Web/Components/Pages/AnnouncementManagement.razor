@@ -1,5 +1,95 @@
-﻿<h3>AnnouncementManagement</h3>
+﻿@page "/announcements"
+@using DresscaCMS.ApplicationCore
+
+<h3>お知らせメッセージ一覧</h3>
+
+<FluentBreadcrumb>
+    <FluentBreadcrumbItem>
+        <FluentNavLink Href="/">TOP</FluentNavLink>
+        <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+    </FluentBreadcrumbItem>
+    <FluentBreadcrumbItem>
+        お知らせメッセージ管理
+        <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+    </FluentBreadcrumbItem>
+    <FluentBreadcrumbItem>
+        お知らせメッセージ一覧
+    </FluentBreadcrumbItem>
+</FluentBreadcrumb>
+
+@if (isLoading)
+{
+    <div class="loading-spinner">
+        <FluentProgressRing Width="60px" />
+    </div>
+}
+else
+{
+    @if (announcementEntities?.Count() == 0)
+    {
+        <p>登録されているお知らせメッセージはありません。</p>
+    }
+    else
+    {
+        <FluentStack Orientation="Orientation.Vertical">
+            <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="20">
+                <div>全 @totalCount 件中 @startIndex ～ @endIndex 件目を表示</div>
+                <div>
+                    <FluentButton IconStart="@(new Icons.Regular.Size12.ChevronLeft())"></FluentButton>
+                    <FluentButton IconStart="@(new Icons.Regular.Size12.ChevronRight())"></FluentButton>
+                </div>
+                <div>
+                    <FluentNavLink Href="/announcement/add">新規お知らせメッセージ作成</FluentNavLink>
+                </div>
+            </FluentStack>
+            <FluentDataGrid Items="@announcementEntities">
+                <TemplateColumn Title="タイトル">
+                    <a href="/announcements/@context.Id">@context.Title</a>
+                </TemplateColumn>
+                <TemplateColumn Title="掲載日">
+                    @context.PostDateTime.ToString("yyyy/MM/dd") ～ @context.ExpireDateTime?.ToString("yyyy/MM/dd")
+                </TemplateColumn>
+                <PropertyColumn Title="カテゴリー" Property="@(a => a.Category)" />
+                <PropertyColumn Title="表示優先度" Property="@(a => a.DisplayPriority)" />
+                <TemplateColumn Title="操作">
+                    <a href="/announcements/@context.Id/edit">編集</a> | <a href="/announcements/@context.Id/delete">削除</a>
+                </TemplateColumn>
+            </FluentDataGrid>
+            <FluentStack Orientation="Orientation.Horizontal">
+                @for (int i = 0; i < lastPageNumber; i++)
+                {
+                    var capturedPage = i + 1;
+                    <FluentButton>@capturedPage</FluentButton>
+                }
+            </FluentStack>
+        </FluentStack>
+    }
+}
 
 @code {
+    private IQueryable<AnnouncementEntity>? announcementEntities;
+    private int lastPageNumber;
+    private int totalCount;
+    private int startIndex;
+    private int endIndex;
+    private bool isLoading = true;
 
+    [SupplyParameterFromQuery]
+    public int? PageSize { get; set; }
+
+    [SupplyParameterFromQuery]
+    public int? PageNumber { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var announcementsDto = new AnnouncementManagementService().GetPagedAnnouncements(PageNumber, PageSize);
+        announcementEntities = announcementsDto.Announcements.AsQueryable();
+        lastPageNumber = announcementsDto.LastPageNumber;
+        totalCount = announcementsDto.TotalCount;
+        startIndex = announcementsDto.StartIndex;
+        endIndex = announcementsDto.EndIndex;
+        PageNumber = announcementsDto.PageNumber;
+        PageSize = announcementsDto.PageSize;
+        isLoading = false;
+    }
 }
