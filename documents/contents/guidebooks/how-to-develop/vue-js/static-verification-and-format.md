@@ -15,10 +15,11 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 <root-project-name> ------ ルートプロジェクト
 ├ .editorconfig
 ├ eslint.config.ts
+├ .prettierrc.js
 ├ .stylelintrc.js
-├ .prettierrc.json
 ├ tsconfig.json
 └ <workspace-name> ------- ワークスペース/プロジェクト
+  └ .prettierrc.js
   └ .stylelintrc.js
 ```
 
@@ -56,18 +57,46 @@ Visual Studio Code の推奨プラグインである [EditorConfig for Visual St
 ## Prettier {#prettier}
 
 Prettier は [ブランクプロジェクトの作成](./create-vuejs-blank-project.md) 時にオプションとしてインストールしているため、追加でインストールする必要はありません。
-ただし、設定ファイルがワークスペースの直下に作成されているため、ルートプロジェクトの直下に移動します。
+ただし、 mono-repo 構成で使用するための追加の設定をします。
 
 ### Prettier の設定 {#settings-prettier}
 
-設定ファイル prettierrc.json で行います。
+設定ファイルが prettierrc.json がワークスペースの直下に作成されているため、ルートプロジェクトの直下にコピーします。
+ワークスペース側で import するために、 prettierrc.js に拡張子を変更し、 JavaScript 形式に書き換えます。
 
-```json title=".prettierrc.json の設定例"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/.prettierrc.json
+```javascript title="ルートプロジェクトの .prettierrc.js の設定例"
+/**
+ * @see https://prettier.io/docs/configuration
+ * @type {import("prettier").Config}
+ */
+const config = {
+  $schema: 'https://json.schemastore.org/prettierrc',
+  semi: false,
+  singleQuote: true,
+  printWidth: 100,
+}
+
+export default config
+```
+
+ワークスペース直下の prettierrc.json についても同様に拡張子を変更し、 JavaScript 形式に書き換えます。
+
+```javascript title="ワークスペースの .prettierrc.js の設定例"
+import prettierConfigBase from '../.prettierrc.js'
+/**
+ * @see https://prettier.io/docs/configuration
+ * @type {import("prettier").Config}
+ */
+const config = {
+  ...prettierConfigBase,
+  // ワークスペースに固有の設定があれば、追加で設定します。
+}
+
+export default config
 ```
 
 既定の設定を上書きする場合は、設定値を記述します。
-全ての設定可能な値は [Options - Prettier :material-open-in-new:](https://prettier.io/docs/en/options.html){ target=_blank } を参照してください。また、設定方法は [Configuration File - Prettier :material-open-in-new:](https://prettier.io/docs/en/configuration.html){ target=_blank } を参照してください。
+全ての設定可能な値は [Options - Prettier :material-open-in-new:](https://prettier.io/docs/options.html){ target=_blank } を参照してください。また、設定方法は [Configuration File - Prettier :material-open-in-new:](https://prettier.io/docs/configuration.html){ target=_blank } を参照してください。
 
 一部の設定値は、既定で .editorconfig に記述している値が適用されます。したがって、.prettierrc.json では、 .editorconfig では設定できないもののみ設定すると良いでしょう。
 
@@ -77,7 +106,7 @@ https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/.
 npm run format
 ```
 
-Prettier がルートプロジェクトの設定ファイルを自動的に認識し、正常に実行できることを確認してください。
+Prettier が設定ファイルを認識し、フォーマット処理が正常に実行できることを確認してください。
 
 ## ESLint {#eslint}
 
@@ -102,7 +131,7 @@ npm run lint
 [コーディング規約](../../conventions/coding-conventions.md) に沿うように設定を追加・変更します。
 初期設定からの変更点をハイライトで示します。
 
-```typescript title="サンプルアプリケーションの eslint.config.ts" hl_lines="2 22-23 28 32 35-42 45-48 52-68 73 79-82"
+```typescript title="サンプルアプリケーションの eslint.config.ts" hl_lines="2 10-11 13-16 24-25 30 34 37-44 47-50 54-70 75 81-84 88-91"
 https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/eslint.config.ts
 ```
 
@@ -130,6 +159,16 @@ eslint.config.ts に、下記の設定を追加してください。
     },
   },
 },
+```
+
+.vue ファイルを探すルートディレクトリを変更するよう下記の設定を追加します。
+`configureVueProject()` の詳細は [Advanced Setup :material-open-in-new:](https://github.com/vuejs/eslint-config-typescript?tab=readme-ov-file#advanced-setup){ target=_blank } を参照してください。
+
+```typescript
+import { configureVueProject } from '@vue/eslint-config-typescript'
+configureVueProject({
+  rootDir: import.meta.dirname,
+})
 ```
 
 src フォルダーが eslint.config.ts の直下ではなくなるので、ワークスペース配下を検索するようにパスを修正します。
@@ -161,23 +200,6 @@ npm run lint
 ```
 
 ESLint がルートプロジェクトの設定ファイルを自動的に認識し、正常に実行できることを確認してください。
-
-!!! warning "ESLint の実行時にエラーが発生する場合の対処"
-
-      create-vue で作成されるデフォルトのアプリケーションには、 icons フォルダの配下の .vue ファイルのように、  `<script>` ブロックを持たない .vue ファイルが含まれます。
-      しかし、 `<script>` ブロックを持たない .vue ファイルに対して型情報を使用した Lint ルールの適用を試みると下記のようなエラーが発生します。
-      その場合は、該当する .vue ファイルに空の `<script>` ブロックを追加してください。
-
-      ```text linenums="0"
-      [eslint   ] Error: Error while loading rule '@typescript-eslint/await-thenable': You have used a rule which requires type information, but don't have parserOptions set to generate type information for this file. See https://typescript-eslint.io/getting-started/typed-linting for enabling linting with type information.
-      [eslint   ] Parser: vue-eslint-parser
-      [eslint   ] Note: detected a parser other than @typescript-eslint/parser. Make sure the parser is configured to forward "parserOptions.project" to @typescript-eslint/parser.
-      [eslint   ] Occurred while linting ...workspace-name\src\components\icons\IconCommunity.vue
-      ```
-
-      ```vue
-      <script setup lang="ts"></script>
-      ```
 
 #### 適用ルールの変更 {#change-applied-rules}
 
@@ -226,6 +248,23 @@ ESLint は eslint.config.ts の先頭から設定の内容をマージするの�
       },
     ],
   },
+},
+```
+
+TypeScript ファイルに対して JSDoc 形式のドキュメンテーションを強制します。
+ワークスペースの直下にいることを確認し、[eslint-plugin-jsdoc :material-open-in-new:](https://github.com/gajus/eslint-plugin-jsdoc){ target=_blank } をインストールします。
+
+```shell linenums="0"
+npm install -D eslint-plugin-jsdoc
+```
+
+eslint.config.ts に下記の設定を追加します。
+
+```typescript
+import jsdoc from 'eslint-plugin-jsdoc'
+{
+  ...jsdoc.configs['flat/recommended-typescript-error'],
+  files: ['**/*.ts'],
 },
 ```
 
@@ -292,7 +331,17 @@ Stylelint および、標準の設定や vue ファイルで使用する設定�
 ルートプロジェクトの直下に設定ファイル .stylelintrc.js を作成し、設定を記述します。
 
 ```javascript title=".stylelintrc.js"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/.stylelintrc.js
+export default {
+  extends: ['stylelint-config-standard', 'stylelint-config-recommended-vue'],
+  ignoreFiles: ['dist/**/*'],
+  overrides: [
+    {
+      files: ['**/*.vue'],
+      /** Vue ファイルの <style> ブロック内を Lint するための設定です。*/
+      customSyntax: 'postcss-html',
+    },
+  ],
+}
 ```
 
 各ワークスペースでは、ルートプロジェクトの設定ファイルを継承し、必要に応じて設定を追加します。
@@ -302,16 +351,12 @@ import stylelintConfigBase from '../.stylelintrc.js'
 
 export default {
   extends: stylelintConfigBase
-}
+};
 ```
 
 `extends`
 
 :   既存の構成を拡張します。
-
-`rules`
-
-:   使用するルールを宣言します。
 
 `ignoreFiles`
 
