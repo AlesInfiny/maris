@@ -71,12 +71,21 @@ updates:
           - "Microsoft.AspNetCore*"
           - "Microsoft.EntityFrameworkCore*"
           - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
       xunit-packages:
         patterns:
           - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
       nswag-packages:
         patterns:
           - "NSwag*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       - dependency-name: "Microsoft.AspNetCore*"
         versions: ["9.*", "11.*"]
@@ -101,9 +110,15 @@ updates:
         patterns:
           - "Microsoft.EntityFrameworkCore*"
           - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
       xunit-packages:
         patterns:
           - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       - dependency-name: "Microsoft.EntityFrameworkCore*"
         versions: ["9.*", "11.*"]
@@ -140,12 +155,21 @@ updates:
         patterns:
           - "Microsoft.AspNetCore*"
           - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
       xunit-packages:
         patterns:
           - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
       nswag-packages:
         patterns:
           - "NSwag*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       - dependency-name: "Microsoft.AspNetCore*"
         versions: ["9.*", "11.*"]
