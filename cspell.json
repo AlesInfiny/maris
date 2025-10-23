@@ -74,6 +74,7 @@
         "viewmodel",
         "Vetur",
         "vite",
+        "vueuse",
         "winbatch",
         "xunit"
     ]
