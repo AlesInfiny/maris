@@ -14,7 +14,6 @@ AlesInfiny Maris のアプリケーションを開発するコンピューター
 
 ### OS 要件 {#os-requirements}
 
-- Windows 10
 - Windows 11
 
 原則としてサポートされている最新の Windows クライアント OS を対象とします。
