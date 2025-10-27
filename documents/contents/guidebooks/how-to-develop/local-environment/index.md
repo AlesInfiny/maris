@@ -39,8 +39,8 @@ Web API アプリケーションやコンソールアプリケーションなど
 
 | 開発するアプリケーション | Visual Studio | VS Code |
 | ------------------------ | ------------- | ------- |
-| Vue.js アプリケーション  | ×            | 〇      |
-| .NET アプリケーション    | 〇            | △ [^1] |
+| Vue.js アプリケーション  | ×             | 〇      |
+| .NET アプリケーション    | 〇            | △ [^1]  |
 
 !!! info "AlesInfiny Maris の前提とする開発環境"
     AlesInfiny Maris の提供する情報は、原則として上記推奨環境についてのみ取り扱います。
@@ -112,7 +112,7 @@ AlesInfiny Maris の各ドキュメントは、本節に記載されている環
 
 ### Node.js のインストール {#install-nodejs}
 
-1. [こちらのサイト :material-open-in-new:](https://nodejs.org/en/){ target=_blank } からインストーラーを取得します。 Node.js のインストーラーは、原則最新の LTS 版を利用してください。
+1. [こちらのサイト :material-open-in-new:](https://nodejs.org/ja/){ target=_blank } からインストーラーを取得します。 Node.js のインストーラーは、原則最新の LTS 版を利用してください。
 
 1. ダウンロードしたインストーラーを実行します。
 

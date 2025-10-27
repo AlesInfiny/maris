@@ -22,11 +22,11 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
           JavaScript を拡張して静的型付にしたプログラミング言語です。
       
-    - [Vue.js :material-open-in-new:](https://v3.ja.vuejs.org/){ target=_blank }
+    - [Vue.js :material-open-in-new:](https://ja.vuejs.org/){ target=_blank }
 
           シンプルな設計で拡張性の高い JavaScript のフレームワークです。
       
-    - [Vite :material-open-in-new:](https://ja.vitejs.dev/){ target=_blank }
+    - [Vite :material-open-in-new:](https://ja.vite.dev/){ target=_blank }
 
           ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツールです。
       
@@ -42,7 +42,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
           Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアントです。
           
-    - [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
+    - [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/v4/){ target=_blank }
 
           Vue.js 用のリアルタイムバリデーションコンポーネントライブラリです。
           
