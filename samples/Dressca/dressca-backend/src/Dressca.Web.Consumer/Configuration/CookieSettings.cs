@@ -40,8 +40,6 @@ public class CookieSettings
     /// <returns>アプリケーション構成設定を元に作成した <see cref="CookieOptions"/> のインスタンス。</returns>
     public CookieOptions CreateCookieOptions(TimeProvider timeProvider)
     {
-        ArgumentNullException.ThrowIfNull(nameof(timeProvider));
-
         var options = new CookieOptions
         {
             SameSite = this.SameSite,
