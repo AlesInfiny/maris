@@ -4,8 +4,6 @@
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.0-rc.2.25502.107" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.0-rc.2.25502.107" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="10.0.0-rc.2.25502.107" />
-    <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="17.14.28" />
-    <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.14.28" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.0-rc.2.25502.107" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0-rc.2.25502.107" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.0-rc.2.25502.107" />
