@@ -13,7 +13,7 @@
       "tests\\Dressca.UnitTests.SystemCommon\\Dressca.UnitTests.SystemCommon.csproj",
       "tests\\Dressca.UnitTests.Web.Admin\\Dressca.UnitTests.Web.Admin.csproj",
       "tests\\Dressca.UnitTests.Web\\Dressca.UnitTests.Web.csproj",
-      "tests\\Dressca.Web.Admin.IntegrationTest\\Dressca.Web.Admin.IntegrationTest.csproj",
+      "tests\\Dressca.Web.Admin.IntegrationTest\\Dressca.Web.Admin.IntegrationTest.csproj"
     ]
   }
 }
