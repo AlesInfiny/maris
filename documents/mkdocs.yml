@@ -97,7 +97,7 @@ nav:
                   - エラーハンドラーの設定: guidebooks/how-to-develop/csr/vue-js/error-handler-settings.md
                   - モックモードの設定: guidebooks/how-to-develop/csr/vue-js/mock-mode-settings.md
                   - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/csr/vue-js/css.md
-              - ローカル環境の構築:
+              - ローカル開発環境の構築:
                   - guidebooks/how-to-develop/csr/local-environment/index.md
               - アプリケーションの発行:
                   - guidebooks/how-to-develop/csr/publication/index.md
