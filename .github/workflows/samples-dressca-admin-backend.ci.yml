@@ -29,7 +29,7 @@ jobs:
       BUILD_CONFIGURATION: Debug
       BUILD_SUMMARY_FILE: BuildSummary.md
       TEST_ENVIRONMENT: IntegrationTest
-      DOTNET_VERSION: '10.*'
+      DOTNET_VERSION: '10.0.0-rc.2.25502.107'
     permissions:
       checks: write
       contents: read
