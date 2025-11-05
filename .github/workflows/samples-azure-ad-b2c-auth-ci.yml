@@ -145,7 +145,7 @@ jobs:
         continue-on-error: true
         run: |
           echo '## Test Result :memo:' >> $GITHUB_STEP_SUMMARY
-          dotnet test --solution Dressca.sln --no-build --nologo --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
+          dotnet test --solution Dressca.sln --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
 
       - id: create-test-result-report
         name: テスト結果ページの作成
