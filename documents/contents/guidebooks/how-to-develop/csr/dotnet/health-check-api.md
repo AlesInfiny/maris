@@ -42,7 +42,7 @@ app.Run();
 
 システム全体の対応性を確認するため、データベース等の関連する外部サービスのヘルスチェックを行う際はヘルスチェックロジックを追加します。
 
-[実装方針](../../../app-architecture/client-side-rendering/global-function/health-check-implementation.md#add-health-check-logic) で説明している通り、 `Program.cs` に直接ヘルスチェックロジックを追加しません。ヘルスチェック対象の外部サービスに依存する各プロジェクトへヘルスチェックロジックを配置します。
+[実装方針](../../../../app-architecture/client-side-rendering/global-function/health-check-implementation.md#add-health-check-logic) で説明している通り、 `Program.cs` に直接ヘルスチェックロジックを追加しません。ヘルスチェック対象の外部サービスに依存する各プロジェクトへヘルスチェックロジックを配置します。
 
 プロジェクトごとにヘルスチェックロジックを分割する方法としては以下の 2 通りがあります。
 

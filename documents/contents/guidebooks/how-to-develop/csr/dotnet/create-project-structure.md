@@ -7,8 +7,8 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 ## プロジェクト内のフォルダー構造 {#folder-structure}
 
-![Application Core のフォルダー構造例](../../../images/guidebooks/how-to-develop/dotnet/application-core-folders-light.png#only-light){ loading=lazy align=right }
-![Application Core のフォルダー構造例](../../../images/guidebooks/how-to-develop/dotnet/application-core-folders-dark.png#only-dark){ loading=lazy align=right }
+![Application Core のフォルダー構造例](../../../../images/guidebooks/how-to-develop/csr/dotnet/application-core-folders-light.png#only-light){ loading=lazy align=right }
+![Application Core のフォルダー構造例](../../../../images/guidebooks/how-to-develop/csr/dotnet/application-core-folders-dark.png#only-dark){ loading=lazy align=right }
 
 各プロジェクトは、適切なフォルダー構造を作ってクラスファイルを整理します。
 プロジェクト内のフォルダーは、原則として業務で分割してから層やコンポーネントの種類で分割するようにします。

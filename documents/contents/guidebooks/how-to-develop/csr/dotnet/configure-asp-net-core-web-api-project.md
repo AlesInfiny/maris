@@ -383,7 +383,7 @@ ASP.NET Core Web API プロジェクトを作成した際、一緒に作成さ�
     [HTTP 通信ログ](#configure-http-communication-log)を記録するように設定した場合は、そのログが出力されるよう個別に設定を追加します。
     例のように、 `LogLevel` 要素に Microsoft.AspNetCore.HttpLogging のキーを追加し、 Information を設定します。
 
-    [ヘルスチェック](../../../app-architecture/client-side-rendering/global-function/health-check-implementation.md) 実行時のログを出力する場合も個別に設定を追加します。 例のように、 `LogLevel` 要素に Microsoft.Extensions.Diagnostics.HealthChecks のキーを追加し、Debug を設定しています。
+    [ヘルスチェック](../../../../app-architecture/client-side-rendering/global-function/health-check-implementation.md) 実行時のログを出力する場合も個別に設定を追加します。 例のように、 `LogLevel` 要素に Microsoft.Extensions.Diagnostics.HealthChecks のキーを追加し、Debug を設定しています。
 
     ```json title="appsettings.Development.json"
     {

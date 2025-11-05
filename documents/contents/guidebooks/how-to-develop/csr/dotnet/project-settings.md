@@ -171,8 +171,8 @@ Directory.Packages.props ファイルは、 NuGet を用いて外部のパッケ
 
 ### .editorconfig {#editorconfig}
 
-![.editorconfig ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/editorconfig-placement-light.png#only-light){ loading=lazy align=right }
-![.editorconfig ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/editorconfig-placement-dark.png#only-dark){ loading=lazy align=right }
+![.editorconfig ファイルの配置](../../../../images/guidebooks/how-to-develop/csr/dotnet/editorconfig-placement-light.png#only-light){ loading=lazy align=right }
+![.editorconfig ファイルの配置](../../../../images/guidebooks/how-to-develop/csr/dotnet/editorconfig-placement-dark.png#only-dark){ loading=lazy align=right }
 
 複数の開発者で、一貫したコーディングスタイルを維持するために利用します。
 また .NET 開発においては、静的コード解析ルールを調整するためにも利用します。
@@ -318,8 +318,8 @@ stylecop.json は、各プロジェクトのルートフォルダーにあるか
 これにより、 StyleCop Analyzers の設定ファイルであることをコンパイラーに通知できます。
 ここまで解説した手順に対応すると、最終的にプロジェクトファイルの設定は以下のようになります。
 
-![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-light.png#only-light){ loading=lazy }
-![stylecop.json ファイルの配置](../../../images/guidebooks/how-to-develop/dotnet/stylecop-json-placement-dark.png#only-dark){ loading=lazy }
+![stylecop.json ファイルの配置](../../../../images/guidebooks/how-to-develop/csr/dotnet/stylecop-json-placement-light.png#only-light){ loading=lazy }
+![stylecop.json ファイルの配置](../../../../images/guidebooks/how-to-develop/csr/dotnet/stylecop-json-placement-dark.png#only-dark){ loading=lazy }
 
 ```xml title="プロジェクトファイルの設定例"
 <Project Sdk="Microsoft.NET.Sdk">
@@ -352,8 +352,8 @@ stylecop.json は、各プロジェクトのルートフォルダーにあるか
 
 ## メッセージリソースの追加 {#add-message-resource}
 
-![メッセージリソースの配置](../../../images/guidebooks/how-to-develop/dotnet/resx-placement-light.png#only-light){ loading=lazy align=right }
-![メッセージリソースの配置](../../../images/guidebooks/how-to-develop/dotnet/resx-placement-dark.png#only-dark){ loading=lazy align=right }
+![メッセージリソースの配置](../../../../images/guidebooks/how-to-develop/csr/dotnet/resx-placement-light.png#only-light){ loading=lazy align=right }
+![メッセージリソースの配置](../../../../images/guidebooks/how-to-develop/csr/dotnet/resx-placement-dark.png#only-dark){ loading=lazy align=right }
 
 プロダクションコード用のプロジェクト内で使用するメッセージを管理するために、リソースファイルを追加しましょう。
 プロダクションコード用のプロジェクトに [Resources] フォルダーを追加し、その中に [Messages.resx] ファイルを追加します。

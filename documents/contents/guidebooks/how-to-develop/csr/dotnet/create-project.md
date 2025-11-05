@@ -108,8 +108,9 @@ description: サーバーサイドで動作する .NET アプリケーション�
 業務や機能で分割するほどプロジェクトが大きくない場合は、プロジェクト名にそれらを含めなくてもかまいません。
 
 ??? example "規模の小さなソリューションにおける構成例"
-    ![規模の小さなソリューションにおける構成](../../../images/guidebooks/how-to-develop/dotnet/project-structure-light.png#only-light){ loading=lazy }
-    ![規模の小さなソリューションにおける構成](../../../images/guidebooks/how-to-develop/dotnet/project-structure-dark.png#only-dark){ loading=lazy }
+
+    ![規模の小さなソリューションにおける構成](../../../../images/guidebooks/how-to-develop/csr/dotnet/project-structure-light.png#only-light){ loading=lazy }
+    ![規模の小さなソリューションにおける構成](../../../../images/guidebooks/how-to-develop/csr/dotnet/project-structure-dark.png#only-dark){ loading=lazy }
 
     規模の小さいソリューションにおけるクリーンアーキテクチャに則ったプロジェクトの配置と命名例を示します。
     まず、物理的なフォルダー配置と、ソリューション内の配置を揃えることで、何がどこにあるかをすぐに判断できるよう整理しています。
@@ -128,7 +129,7 @@ description: サーバーサイドで動作する .NET アプリケーション�
 
 <!-- textlint-disable @textlint-ja/no-synonyms -->
 各プロジェクトを作成後、アーキテクチャに従ってプロジェクト間の依存関係を設定します。
-アーキテクチャごとのプロジェクトの依存関係の設定例は、[プロジェクトの単位](../../../app-architecture/overview/application-structure.md#unit-of-project) を参照してください。
+アーキテクチャごとのプロジェクトの依存関係の設定例は、 [プロジェクトの単位](../../../../app-architecture/overview/application-structure.md#プロジェクトの単位-unit-of-project) を参照してください。
 
 具体的な設定方法については、[プロジェクト内の参照を管理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/managing-references-in-a-project){ target=_blank } を参照してください。
 <!-- textlint-enable @textlint-ja/no-synonyms -->

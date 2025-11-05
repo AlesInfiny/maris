@@ -10,13 +10,13 @@ description: サーバーサイドで動作する .NET アプリケーション�
 まずは Git リポジトリを構築しましょう。
 Git リポジトリの構築については、以下を参照してください。
 
-- [Git リポジトリ構築ガイド](../../git/index.md)
+- [Git リポジトリ構築ガイド](../../../git/index.md)
 
 ## ソリューションの作成 {#create-solution}
 
 作成した Git リポジトリ内に、ソリューションを作成していきます。
 原則としてソリューションはサブシステムごとに作成します。
-ソリューション全体構造の概要は「[アプリケーションアーキテクチャ概要編 - ソリューション構造](../../../app-architecture/overview/application-structure.md#solution-structure)」を参照してください。
+ソリューション全体構造の概要は「[アプリケーションアーキテクチャ概要編 - ソリューション構造](../../../../app-architecture/overview/application-structure.md#solution-structure)」を参照してください。
 本節では、単一のソリューション内の構造について、更に詳細に解説します。
 
 ### ソリューション構成と物理フォルダーの関係 {#solution-and-physical-folder-relationships}
@@ -50,8 +50,8 @@ AlesInfiny Maris OSS Edition では、ソリューションフォルダーと物
 
 ### ソリューションフォルダーと物理フォルダーの作成 {#create-solution-folder-and-physical-folder}
 
-![ソリューションの物理フォルダー構造](../../../images/guidebooks/how-to-develop/dotnet/solution-root-folders-light.png#only-light){ loading=lazy align=right }
-![ソリューションの物理フォルダー構造](../../../images/guidebooks/how-to-develop/dotnet/solution-root-folders-dark.png#only-dark){ loading=lazy align=right }
+![ソリューションの物理フォルダー構造](../../../../images/guidebooks/how-to-develop/csr/dotnet/solution-root-folders-light.png#only-light){ loading=lazy align=right }
+![ソリューションの物理フォルダー構造](../../../../images/guidebooks/how-to-develop/csr/dotnet/solution-root-folders-dark.png#only-dark){ loading=lazy align=right }
 
 ソリューション内は、本番環境に配置するソースコード ( 以降プロダクションコード ) と、テストに使用するソースコード ( 以降テストコード ) を分割して配置します。
 まずソリューションファイルを配置したフォルダーに「src」フォルダーと「tests」フォルダーを作成します。
@@ -84,7 +84,7 @@ src フォルダー、 tests フォルダーには、プロジェクトを格納
 これは通常プロジェクト名と一致します。
 
 src フォルダーにどのようなプロジェクトを作成するかは、採用するアーキテクチャや、業務の構造・規模にあわせて柔軟に検討します。
-詳細は「[アプリケーションアーキテクチャ概要編 - プロジェクトの単位](../../../app-architecture/overview/application-structure.md#unit-of-project)」を参照してください。
+詳細は「[アプリケーションアーキテクチャ概要編 - プロジェクトの単位](../../../../app-architecture/overview/application-structure.md#unit-of-project)」を参照してください。
 tests フォルダー内は、テストの目的にあわせてテストプロジェクトを分割しましょう。
 単体機能確認、結合機能確認、性能確認などが、よくあるテストプロジェクトの分割単位です。
 
@@ -96,7 +96,7 @@ tests フォルダー内は、テストの目的にあわせてテストプロ�
 プロジェクトを業務単位で分割しておくことで、ソリューションフィルターが効果的に活用できます。
 また、ソリューションフィルターを使用する場合は、単体機能確認のためのテストプロジェクトも業務単位で分割しましょう。
 
-![ソリューションフィルター](../../../images/guidebooks/how-to-develop/dotnet/solution-filter-light.png#only-light){ loading=lazy }
-![ソリューションフィルター](../../../images/guidebooks/how-to-develop/dotnet/solution-filter-dark.png#only-dark){ loading=lazy }
+![ソリューションフィルター](../../../../images/guidebooks/how-to-develop/csr/dotnet/solution-filter-light.png#only-light){ loading=lazy }
+![ソリューションフィルター](../../../../images/guidebooks/how-to-develop/csr/dotnet/solution-filter-dark.png#only-dark){ loading=lazy }
 
 [^1]: プロダクションコードのみ XML コメントの記入を必須にする、といったルールの調整が良く行われます。

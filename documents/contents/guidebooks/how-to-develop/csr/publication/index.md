@@ -9,8 +9,8 @@ description: .NET + Vue.js で構成されたアプリケーションの 発行�
 
 .NET + Vue.js のアプリケーションを発行する手順について解説します。なお、本手順は Web サーバーと AP サーバーを統合する構成を前提としています。
 
-![Web サーバーと AP サーバーを統合する構成](../../../images/guidebooks/how-to-develop/publication/integrated-server-constructure-light.png#only-light){ loading=lazy }
-![Web サーバーと AP サーバーを統合する構成](../../../images/guidebooks/how-to-develop/publication/integrated-server-constructure-dark.png#only-dark){ loading=lazy }
+![Web サーバーと AP サーバーを統合する構成](../../../../images/guidebooks/how-to-develop/csr/publication/integrated-server-constructure-light.png#only-light){ loading=lazy }
+![Web サーバーと AP サーバーを統合する構成](../../../../images/guidebooks/how-to-develop/csr/publication/integrated-server-constructure-dark.png#only-dark){ loading=lazy }
 
 ## フロントエンドの設定 {#frontend-settings}
 
@@ -148,5 +148,5 @@ app.Run();
 
 `dotnet publish` コマンドや Visual Studio などのツールを利用して、アプリケーションを発行します。 `publish` フォルダー直下にバックエンドのビルドアーティファクトと `wwwroot` フォルダーにフロントエンドの静的ファイル群が出力されます。発行したファイルをサーバーに配置し、アプリケーションを起動します。
 
-![dotnet publish の出力ファイル](../../../images/guidebooks/how-to-develop/publication/published-folders-light.png#only-light){ loading=lazy }
-![dotnet publish の出力ファイル](../../../images/guidebooks/how-to-develop/publication/published-folders-dark.png#only-dark){ loading=lazy }
+![dotnet publish の出力ファイル](../../../../images/guidebooks/how-to-develop/csr/publication/published-folders-light.png#only-light){ loading=lazy }
+![dotnet publish の出力ファイル](../../../../images/guidebooks/how-to-develop/csr/publication/published-folders-dark.png#only-dark){ loading=lazy }

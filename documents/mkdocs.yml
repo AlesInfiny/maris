@@ -67,40 +67,42 @@ nav:
           - Git の基本設定: guidebooks/git/git-settings.md
       - アプリケーション開発手順:
           - guidebooks/how-to-develop/index.md
-          - .NET 編:
-              - guidebooks/how-to-develop/dotnet/index.md
-              - 事前準備: guidebooks/how-to-develop/dotnet/preparation.md
-              - ソリューション構造の作成: guidebooks/how-to-develop/dotnet/create-solution-structure.md
-              - プロジェクトの作成: guidebooks/how-to-develop/dotnet/create-project.md
-              - プロジェクトの共通設定: guidebooks/how-to-develop/dotnet/project-settings.md
-              - プロジェクト構造の作成: guidebooks/how-to-develop/dotnet/create-project-structure.md
-              - ASP.NET Core Web API プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-web-api-project.md
-              - ASP.NET Core with Vite プロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-asp-net-core-with-vite-project.md
-              - 結合テストプロジェクトの構成: guidebooks/how-to-develop/dotnet/configure-integration-test-project.md
-              - ヘルスチェック API の実装: guidebooks/how-to-develop/dotnet/health-check-api.md
-          - Vue.js 編:
-              - guidebooks/how-to-develop/vue-js/index.md
-              - 事前準備: guidebooks/how-to-develop/vue-js/preparation.md
-              - ブランクプロジェクトの作成: guidebooks/how-to-develop/vue-js/create-vuejs-blank-project.md
-              - ブランクプロジェクトのフォルダー構造: guidebooks/how-to-develop/vue-js/folder-structure-of-blank-project.md
-              - ワークスペースの設定: guidebooks/how-to-develop/vue-js/setting-workspaces.md
-              - プロジェクトの共通設定: guidebooks/how-to-develop/vue-js/project-settings.md
-              - 開発に使用するパッケージ: guidebooks/how-to-develop/vue-js/optional-packages.md
-              - 静的コード分析とフォーマット: guidebooks/how-to-develop/vue-js/static-verification-and-format.md
-              - メッセージ管理機能の設定: guidebooks/how-to-develop/vue-js/message-management.md
-              - 入力値検証: guidebooks/how-to-develop/vue-js/input-validation.md
-              - Open API 仕様書からのクライアントコード生成: guidebooks/how-to-develop/vue-js/create-api-client-code.md
-              - カスタムエラーの設定: guidebooks/how-to-develop/vue-js/custom-error-settings.md
-              - イベントハンドリングの設定: guidebooks/how-to-develop/vue-js/event-handling-settings.md
-              - エラーハンドラーの設定: guidebooks/how-to-develop/vue-js/error-handler-settings.md
-              - モックモードの設定: guidebooks/how-to-develop/vue-js/mock-mode-settings.md
-              - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/vue-js/css.md
-          - ローカル開発環境の構築:
-              - guidebooks/how-to-develop/local-environment/index.md
-          - アプリケーションの発行:
-              - guidebooks/how-to-develop/publication/index.md
-          - CORS 環境の構築:
-              - guidebooks/how-to-develop/cors/index.md
+          - CSR 編:
+              - guidebooks/how-to-develop/csr/index.md
+              - .NET 編:
+                  - guidebooks/how-to-develop/csr/dotnet/index.md
+                  - 事前準備: guidebooks/how-to-develop/csr/dotnet/preparation.md
+                  - ソリューション構造の作成: guidebooks/how-to-develop/csr/dotnet/create-solution-structure.md
+                  - プロジェクトの作成: guidebooks/how-to-develop/csr/dotnet/create-project.md
+                  - プロジェクトの共通設定: guidebooks/how-to-develop/csr/dotnet/project-settings.md
+                  - プロジェクト構造の作成: guidebooks/how-to-develop/csr/dotnet/create-project-structure.md
+                  - ASP.NET Core Web API プロジェクトの構成: guidebooks/how-to-develop/csr/dotnet/configure-asp-net-core-web-api-project.md
+                  - ASP.NET Core with Vite プロジェクトの構成: guidebooks/how-to-develop/csr/dotnet/configure-asp-net-core-with-vite-project.md
+                  - 結合テストプロジェクトの構成: guidebooks/how-to-develop/csr/dotnet/configure-integration-test-project.md
+                  - ヘルスチェック API の実装: guidebooks/how-to-develop/csr/dotnet/health-check-api.md
+              - Vue.js 編:
+                  - guidebooks/how-to-develop/csr/vue-js/index.md
+                  - 事前準備: guidebooks/how-to-develop/csr/vue-js/preparation.md
+                  - ブランクプロジェクトの作成: guidebooks/how-to-develop/csr/vue-js/create-vuejs-blank-project.md
+                  - ブランクプロジェクトのフォルダー構造: guidebooks/how-to-develop/csr/vue-js/folder-structure-of-blank-project.md
+                  - ワークスペースの設定: guidebooks/how-to-develop/csr/vue-js/setting-workspaces.md
+                  - プロジェクトの共通設定: guidebooks/how-to-develop/csr/vue-js/project-settings.md
+                  - 開発に使用するパッケージ: guidebooks/how-to-develop/csr/vue-js/optional-packages.md
+                  - 静的コード分析とフォーマット: guidebooks/how-to-develop/csr/vue-js/static-verification-and-format.md
+                  - メッセージ管理機能の設定: guidebooks/how-to-develop/csr/vue-js/message-management.md
+                  - 入力値検証: guidebooks/how-to-develop/csr/vue-js/input-validation.md
+                  - Open API 仕様書からのクライアントコード生成: guidebooks/how-to-develop/csr/vue-js/create-api-client-code.md
+                  - カスタムエラーの設定: guidebooks/how-to-develop/csr/vue-js/custom-error-settings.md
+                  - イベントハンドリングの設定: guidebooks/how-to-develop/csr/vue-js/event-handling-settings.md
+                  - エラーハンドラーの設定: guidebooks/how-to-develop/csr/vue-js/error-handler-settings.md
+                  - モックモードの設定: guidebooks/how-to-develop/csr/vue-js/mock-mode-settings.md
+                  - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/csr/vue-js/css.md
+              - ローカル環境環境の構築:
+                  - guidebooks/how-to-develop/csr/local-environment/index.md
+              - アプリケーションの発行:
+                  - guidebooks/how-to-develop/csr/publication/index.md
+              - CORS 環境の構築:
+                  - guidebooks/how-to-develop/csr/cors/index.md
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
       # - 規約:

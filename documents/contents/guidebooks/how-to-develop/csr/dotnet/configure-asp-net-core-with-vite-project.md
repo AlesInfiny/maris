@@ -16,8 +16,8 @@ ASP.NET Core with Vite プロジェクトは、 ASP.NET Core Web API プロジ�
 
 ### フロントエンドアプリケーションのフォルダーをプロジェクト内から移動または削除する {#move-or-delete-client-app-folder}
 
-![フォルダー構造](../../../images/guidebooks/how-to-develop/dotnet/root-folders-light.png#only-light){ loading=lazy align=right }
-![フォルダー構造](../../../images/guidebooks/how-to-develop/dotnet/root-folders-dark.png#only-dark){ loading=lazy align=right }
+![フォルダー構造](../../../../images/guidebooks/how-to-develop/csr/dotnet/root-folders-light.png#only-light){ loading=lazy align=right }
+![フォルダー構造](../../../../images/guidebooks/how-to-develop/csr/dotnet/root-folders-dark.png#only-dark){ loading=lazy align=right }
 
 Vue.js などの JavaScript フレームワークを用いたフロントエンドアプリケーションは、バックエンドアプリケーションと階層構造の異なる場所に配置することを推奨します。
 ASP.NET Core with Vite プロジェクトを作成すると、プロジェクトルートにフロントエンドアプリケーションを配置するための [ClientApp] フォルダーが生成されます。
