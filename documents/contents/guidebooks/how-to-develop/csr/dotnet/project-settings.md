@@ -1,5 +1,5 @@
 ---
-title: .NET 編（ CSR 編）
+title: .NET 編（CSR 編）
 description: CSR アプリケーションの サーバーサイドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
 <!-- cSpell:ignore contentfiles buildtransitive -->
