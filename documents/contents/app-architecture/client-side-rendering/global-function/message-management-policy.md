@@ -140,4 +140,4 @@ locales/ -------------------------------------- メッセージ管理を行う�
    └ validationTextList_ja.json --------------- 入力値検証用のメッセージを格納する JSON ファイル（日本語）
 ```
 
-メッセージ管理方針に従った機能の実装方法などの詳細については、[こちら](../../../guidebooks/how-to-develop/vue-js/message-management.md) を確認してください。
+メッセージ管理方針に従った機能の実装方法などの詳細については、[こちら](../../../guidebooks/how-to-develop/csr/vue-js/message-management.md) を確認してください。

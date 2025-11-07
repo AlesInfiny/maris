@@ -55,5 +55,5 @@ AlesInfiny Maris OSS Edition （以下 AlesInfiny Maris ）では、一般に広
 フロントエンド側では Prettier 、 ESLint 、 Stylelint を利用してコーディング規約の自動チェックを行っています。
 コーディング規約の内容および静的コード解析ツールの詳しい設定方法については、以下のページとサンプルアプリの実装を確認してください。
 
-- [静的コード解析用パッケージと設定ファイルの導入 (.NET)](../how-to-develop/dotnet/project-settings.md#setup-static-code-testing)
-- [静的コード分析とフォーマット (Vue.js)](../how-to-develop/vue-js/static-verification-and-format.md)
+- [静的コード解析用パッケージと設定ファイルの導入 (.NET)](../how-to-develop/csr/dotnet/project-settings.md#setup-static-code-testing)
+- [静的コード分析とフォーマット (Vue.js)](../how-to-develop/csr/vue-js/static-verification-and-format.md)
