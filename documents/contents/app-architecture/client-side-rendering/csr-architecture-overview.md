@@ -7,7 +7,7 @@ description: クライアントサイドレンダリングを行う Web アプ�
 
 ## 技術スタック {#tech-stack}
 
-AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OSS を以下に示します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） CSR アプリケーションを構成する OSS を以下に示します。
 
 ![技術スタック](../../images/app-architecture/client-side-rendering/tech-stack-light.png#only-light){ loading=lazy }
 ![技術スタック](../../images/app-architecture/client-side-rendering/tech-stack-dark.png#only-dark){ loading=lazy }
@@ -112,6 +112,12 @@ AlesInfiny Maris のアプリケーションアーキテクチャは、クリー
 ## バックエンドの構造詳細 {#backend-structure}
 
 クライアントサイドレンダリング方式の Web アプリケーションにおける、各層とそれを構成するコンポーネントの役割について、それぞれ説明します。
+
+!!! warning "バックエンドアプリケーションのアーキテクチャについて"
+
+    本ドキュメントおよび CSR サンプルアプリケーションでは、バックエンドアプリケーションでドメイン駆動設計を採用しています。
+    しかし AlesInfiny Maris は、バックエンドアプリケーションのアーキテクチャをドメイン駆動設計に限定するものではありません。
+    アプリケーションの要件や特性に応じて、トランザクションスクリプト等、他のアプリケーションアーキテクチャを採用することも可能です。
 
 ### アプリケーションコア層 {#application-core}
 
