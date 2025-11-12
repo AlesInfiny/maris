@@ -25,6 +25,6 @@ description: AlesInfiny Maris OSS Edition を利用することで構築でき�
 ![アプリケーションアーキテクチャの選定フロー](../../images/app-architecture/overview/application-architecture-selection-flow-dark.png#only-dark){ loading=lazy }
 ![アプリケーションアーキテクチャの選定フロー](../../images/app-architecture/overview/application-architecture-selection-flow-light.png#only-light){ loading=lazy }
 
-中核の業務領域は、複雑な業務ロジックを持ちます。 そのため、複雑な業務ロジックの設計に適したドメイン駆動設計を採用します。
+中核の業務領域は、複雑な業務ロジックを持ちます。 そのため、複雑な業務ロジックの設計に適したドメインモデルを採用します。
 
 中核ではない業務領域は、比較的単純な業務ロジックを持つことが多いため、トランザクションスクリプトを採用します。
