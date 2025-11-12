@@ -1,29 +1,33 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.8 Chrome/140.0.7339.240 Electron/38.4.0 Safari/537.36" version="28.2.8">
   <diagram id="yeYiLk31pQ4xjtfxo7En" name="ページ1">
-    <mxGraphModel dx="1042" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="347" dy="209" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="7" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="3" target="5" edge="1">
+        <mxCell id="cFaSxOUyfqOolCta0fZO-9" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FFFFFF;" parent="1" source="cFaSxOUyfqOolCta0fZO-13" target="cFaSxOUyfqOolCta0fZO-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="8" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="3" target="4" edge="1">
+        <mxCell id="cFaSxOUyfqOolCta0fZO-10" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;Yes&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="cFaSxOUyfqOolCta0fZO-9" vertex="1" connectable="0">
+          <mxGeometry x="0.1637" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cFaSxOUyfqOolCta0fZO-11" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#FFFFFF;" parent="1" source="cFaSxOUyfqOolCta0fZO-13" target="cFaSxOUyfqOolCta0fZO-15" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="9" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="3" target="6" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="cFaSxOUyfqOolCta0fZO-12" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;No&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="cFaSxOUyfqOolCta0fZO-11" vertex="1" connectable="0">
+          <mxGeometry x="0.1637" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="3" value="業務領域の&lt;br&gt;カテゴリーは？" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="165" y="40" width="150" height="80" as="geometry" />
+        <mxCell id="cFaSxOUyfqOolCta0fZO-13" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;中核の業務領域か？&lt;/font&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="105" y="50" width="150" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="4" value="ドメインモデル設計" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="40" y="200" width="120" height="60" as="geometry" />
+        <mxCell id="cFaSxOUyfqOolCta0fZO-14" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;ドメインモデル設計&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="50" y="210" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="5" value="SaaSまたは&lt;br&gt;パッケージ適用" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="180" y="200" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="6" value="トランザクション&lt;br&gt;スクリプト" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="320" y="200" width="120" height="60" as="geometry" />
+        <mxCell id="cFaSxOUyfqOolCta0fZO-15" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;トランザクション&lt;br&gt;スクリプト&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#FFFFFF;" parent="1" vertex="1">
+          <mxGeometry x="190" y="210" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -6,7 +6,7 @@ description: AlesInfiny Maris OSS Edition を利用することで構築でき�
 # .NET アプリケーションのアーキテクチャ選定基準 {#top}
 
 一般に、システム化対象の業務は複数の業務領域で構成されます。
-業務領域には、「中核の業務領域」「一般的な業務領域」「補完的な業務領域」の 3 つのカテゴリーがあります。
+業務領域には、「中核の業務領域」とその他の領域があります。
 
 ![業務領域のカテゴリー](../../images/app-architecture/overview/business-domain-categories-dark.png#only-dark){ loading=lazy }
 ![業務領域のカテゴリー](../../images/app-architecture/overview/business-domain-categories-light.png#only-light){ loading=lazy }
@@ -27,6 +27,4 @@ description: AlesInfiny Maris OSS Edition を利用することで構築でき�
 
 中核の業務領域は、複雑な業務ロジックを持ちます。 そのため、複雑な業務ロジックの設計に適したドメイン駆動設計を採用します。
 
-一般的な業務領域は、多くの企業が共通して持つ業務領域であるため、独自に開発する必要性が薄いです。 よって、 SaaS やパッケージの適用を第一候補とするべきです。
-
-補完的な業務領域は、単純な業務ロジックのみを持つため、トランザクションスクリプトを採用します。
+中核ではない業務領域は、比較的単純な業務ロジックを持つことが多いため、トランザクションスクリプトを採用します。
