@@ -32,7 +32,7 @@ description: アプリケーション全体で考慮すべきアーキテクチ�
 入力値検証はプレゼンテーション層の業務ロジック内で実装します。
 繰り返し使用するものは .NET のモデル検証を独自拡張して汎用化します。具体的には、 `System.ComponentModel.DataAnnotations.ValidationAttribute` の派生クラスを作成し、 `IsValid` メソッドをオーバーライドします。（ [カスタム属性 - ASP.NET Core MVC でのモデルの検証 | Microsoft Learn :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/mvc/models/validation?#custom-attributes){ target=_blank } ）
 
-### 複合チェック {#complex-check}
+## 複合チェック {#complex-check}
 
 ID の重複チェック、注文数が在庫数以内であるかのチェックなど、システムの状態によって入力値が妥当かどうかが変わる入力値検証です。
 多くの場合、データストア内のデータと突き合わせて入力値の妥当性を確認します。
