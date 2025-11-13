@@ -11,9 +11,9 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）として推奨す
 
 !!! warning "バックエンドアプリケーションのアーキテクチャについて"
 
-    本章の内容は、一部ドメイン駆動設計を前提としています。
-    しかし AlesInfiny Maris は、バックエンドアプリケーションのアーキテクチャをドメイン駆動設計に限定するものではありません。
-    アプリケーションの要件や特性に応じて、トランザクションスクリプト等、他のアプリケーションアーキテクチャを採用することも可能です。
+    本章の内容は、一部ドメインモデルを前提としています。
+    しかし AlesInfiny Maris は、バックエンドアプリケーションのアーキテクチャをドメインモデルに限定するものではありません。
+    バックエンドアプリケーションのアーキテクチャ選定方針は [こちら](../../../../app-architecture/overview/dotnet-application-architecture-selection-guideline.md) を参照してください。
 
 1. [事前準備](./preparation.md)
 
