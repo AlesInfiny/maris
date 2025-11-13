@@ -9,6 +9,12 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）として推奨する設定や、共通的に使用する実装コードを中心に、ソリューションの初期構築に必要な情報を提供します。
 業務機能の開発方法については解説しません。
 
+!!! warning "バックエンドアプリケーションのアーキテクチャについて"
+
+    本章の内容は、一部ドメインモデルを前提としています。
+    しかし AlesInfiny Maris は、バックエンドアプリケーションのアーキテクチャをドメインモデルに限定するものではありません。
+    バックエンドアプリケーションのアーキテクチャ選定方針は [こちら](../../../../app-architecture/overview/dotnet-application-architecture-selection-guideline.md) を参照してください。
+
 1. [事前準備](./preparation.md)
 
     .NET アプリケーションの開発に必要なローカル開発環境の構築方法について解説します。
