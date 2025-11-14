@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/src/">
+    <File Path="src/Directory.Build.props" />
+    <Project Path="src/Maris.ConsoleApp.Core/Maris.ConsoleApp.Core.csproj" />
+    <Project Path="src/Maris.ConsoleApp.Hosting/Maris.ConsoleApp.Hosting.csproj" />
+    <Project Path="src/Maris.Samples.ApplicationCore/Maris.Samples.ApplicationCore.csproj" />
+    <Project Path="src/Maris.Samples.Cli/Maris.Samples.Cli.csproj" />
+    <Project Path="src/Maris.Samples.InMemoryInfrastructure/Maris.Samples.InMemoryInfrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests/.editorconfig" />
+    <File Path="tests/Directory.Build.props" />
+    <Project Path="tests/Maris.ConsoleApp.IntegrationTests/Maris.ConsoleApp.IntegrationTests.csproj" />
+    <Project Path="tests/Maris.ConsoleApp.UnitTests/Maris.ConsoleApp.UnitTests.csproj" />
+  </Folder>
+  <Folder Name="/ソリューション項目/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+    <File Path="stylecop.json" />
+  </Folder>
+</Solution>

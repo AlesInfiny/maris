@@ -1,0 +1,31 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="stylecop.json" />
+  </Folder>
+  <Folder Name="/src/">
+    <File Path="src/Directory.Build.props" />
+    <Project Path="src/Dressca.ApplicationCore/Dressca.ApplicationCore.csproj" />
+    <Project Path="src/Dressca.EfInfrastructure/Dressca.EfInfrastructure.csproj" />
+    <Project Path="src/Dressca.Store.Assets.StaticFiles/Dressca.Store.Assets.StaticFiles.csproj" />
+    <Project Path="src/Dressca.SystemCommon/Dressca.SystemCommon.csproj" />
+    <Project Path="src/Dressca.Web.Admin.Dto/Dressca.Web.Admin.Dto.csproj" />
+    <Project Path="src/Dressca.Web.Admin/Dressca.Web.Admin.csproj" />
+    <Project Path="src/Dressca.Web.Consumer.Dto/Dressca.Web.Consumer.Dto.csproj" />
+    <Project Path="src/Dressca.Web.Consumer/Dressca.Web.Consumer.csproj" />
+    <Project Path="src/Dressca.Web/Dressca.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests/Directory.Build.props" />
+    <Project Path="tests/Dressca.IntegrationTest/Dressca.IntegrationTest.csproj" />
+    <Project Path="tests/Dressca.UnitTests.ApplicationCore/Dressca.UnitTests.ApplicationCore.csproj" />
+    <Project Path="tests/Dressca.UnitTests.SystemCommon/Dressca.UnitTests.SystemCommon.csproj" />
+    <Project Path="tests/Dressca.UnitTests.Web.Admin/Dressca.UnitTests.Web.Admin.csproj" />
+    <Project Path="tests/Dressca.UnitTests.Web.Consumer/Dressca.UnitTests.Web.Consumer.csproj" />
+    <Project Path="tests/Dressca.UnitTests.Web/Dressca.UnitTests.Web.csproj" />
+    <Project Path="tests/Dressca.Web.Admin.IntegrationTest/Dressca.Web.Admin.IntegrationTest.csproj" />
+  </Folder>
+</Solution>
