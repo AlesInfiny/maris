@@ -16,8 +16,8 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 
 本サンプルは以下の環境で動作確認を行っています。
 
-- .NET 8
-- Visual Studio 2022 17.14.10
+- .NET 10
+- Visual Studio 2026 18.0.0
 
 ## 前提となる OSS ライブラリ
 
@@ -107,7 +107,7 @@ Visual Studio を用いてソリューションをビルドします。
 続いて必要なフレームワークの参照設定を行います。
 「Maris.ConsoleApp.Core」プロジェクト、「Maris.ConsoleApp.Hosting」プロジェクトを「Maris.Samples.Cli」プロジェクトから参照してください。
 また汎用ホスト上でアプリケーションを実行するため、「[Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)」 NuGet パッケージも参照に追加してください。
-バージョンは 8.x 系の最新バージョンの導入を推奨します。
+バージョンは 10.x 系の最新バージョンの導入を推奨します。
 
 最後に、 Directory.Build.props と重複している設定を Maris.Samples.Cli.csproj ファイルから削除します。
 `TargetFramework` 、 `ImplicitUsings` 、 `Nullable` は、ソリューションルートへ配置した Directory.Build.props に設定してあるため削除対象です。
