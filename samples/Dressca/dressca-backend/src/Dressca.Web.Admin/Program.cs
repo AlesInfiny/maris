@@ -161,10 +161,3 @@ app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
 app.MapFallbackToFile("/index.html");
 
 app.Run();
-
-/// <summary>
-///  結合テストプロジェクトに公開するための部分クラスです。
-/// </summary>
-public partial class Program
-{
-}

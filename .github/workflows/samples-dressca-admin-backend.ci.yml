@@ -43,7 +43,7 @@ jobs:
       - name: .NET SDK のセットアップ
         uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d  # v5.0.0
         with:
-          dotnet-version: '8.*'
+          dotnet-version: '10.*'
 
       - name: NuGet パッケージの復元
         run: dotnet restore ${{ env.SOLUTION_FILE_NAME }}
@@ -80,7 +80,7 @@ jobs:
 
       - name: EF Core ツールのインストール(結合テスト用)
         shell: bash
-        run: dotnet tool install --global dotnet-ef --version 8.*
+        run: dotnet tool install --global dotnet-ef --version 10.*
 
       - name: マイグレーション適用(結合テスト用)
         working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
@@ -92,7 +92,7 @@ jobs:
         continue-on-error: true
         run: |
           export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
-          dotnet test ${{ env.SOLUTION_FILE_NAME }} --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
+          dotnet test --solution ${{ env.SOLUTION_FILE_NAME }} --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
 
       - id: create-test-result-report
         name: テスト結果ページの作成

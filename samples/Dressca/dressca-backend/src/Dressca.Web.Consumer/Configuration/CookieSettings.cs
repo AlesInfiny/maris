@@ -38,9 +38,14 @@ public class CookieSettings
     /// </summary>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
     /// <returns>アプリケーション構成設定を元に作成した <see cref="CookieOptions"/> のインスタンス。</returns>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
     public CookieOptions CreateCookieOptions(TimeProvider timeProvider)
     {
-        ArgumentNullException.ThrowIfNull(nameof(timeProvider));
+        ArgumentNullException.ThrowIfNull(timeProvider);
 
         var options = new CookieOptions
         {

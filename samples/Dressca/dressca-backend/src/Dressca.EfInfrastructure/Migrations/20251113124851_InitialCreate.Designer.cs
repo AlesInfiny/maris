@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dressca.EfInfrastructure.Migrations
 {
     [DbContext(typeof(DresscaDbContext))]
-    [Migration("20250425023655_InitialCreate")]
+    [Migration("20251113124851_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -21,7 +21,7 @@ namespace Dressca.EfInfrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.12")
+                .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -565,7 +565,7 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,6)");
 
-                    b.ComplexProperty<Dictionary<string, object>>("ShipToAddress", "Dressca.ApplicationCore.Ordering.Order.ShipToAddress#ShipTo", b1 =>
+                    b.ComplexProperty(typeof(Dictionary<string, object>), "ShipToAddress", "Dressca.ApplicationCore.Ordering.Order.ShipToAddress#ShipTo", b1 =>
                         {
                             b1.IsRequired();
 
@@ -575,7 +575,7 @@ namespace Dressca.EfInfrastructure.Migrations
                                 .HasColumnType("nvarchar(64)")
                                 .HasColumnName("ShipToFullName");
 
-                            b1.ComplexProperty<Dictionary<string, object>>("Address", "Dressca.ApplicationCore.Ordering.Order.ShipToAddress#ShipTo.Address#Address", b2 =>
+                            b1.ComplexProperty(typeof(Dictionary<string, object>), "Address", "Dressca.ApplicationCore.Ordering.Order.ShipToAddress#ShipTo.Address#Address", b2 =>
                                 {
                                     b2.IsRequired();
 
@@ -627,7 +627,7 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,6)");
 
-                    b.ComplexProperty<Dictionary<string, object>>("ItemOrdered", "Dressca.ApplicationCore.Ordering.OrderItem.ItemOrdered#CatalogItemOrdered", b1 =>
+                    b.ComplexProperty(typeof(Dictionary<string, object>), "ItemOrdered", "Dressca.ApplicationCore.Ordering.OrderItem.ItemOrdered#CatalogItemOrdered", b1 =>
                         {
                             b1.IsRequired();
 
