@@ -24,7 +24,11 @@ Vue.js を用いた SPA の構成をとります。
 
 ## Web アプリケーション ( サーバーサイドレンダリング ) {#server-side-rendering}
 
-（今後追加予定）
+ビューエンジンとして Blazor を利用します。
+データアクセスには Entity Framework Core を利用します。
+
+![サーバーサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/server-side-rendering-maris-light.png#only-light){ loading=lazy }
+![サーバーサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/server-side-rendering-maris-dark.png#only-dark){ loading=lazy }
 
 ## コンソールアプリケーション {#console-application}
 
