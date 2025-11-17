@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "Dressca.sln",
+    "path": "Dressca.slnx",
     "projects": [
       "src\\Dressca.ApplicationCore\\Dressca.ApplicationCore.csproj",
       "src\\Dressca.EfInfrastructure\\Dressca.EfInfrastructure.csproj",
