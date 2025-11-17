@@ -25,7 +25,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 ### 書き換えが必要な .NET Framework の機能 {#dotnetfw-function-to-rewrite}
 
 以下の .NET Framework 機能は、.NET では廃止または非常に使用しづらいため、.NET の機能へ書き換える必要があります。
-なお、前述のとおり、どの機能においても移行法は手作業でのソースコード書き換えとなります。
+なお、前述のとおり、どの機能においても移行方法は手作業でのソースコード書き換えとなります。
 
 #### ASP.NET Web Forms ( 廃止 ) {#aspnet-web-forms}
 
