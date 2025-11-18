@@ -19,14 +19,12 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 
 ## テスト対象プロジェクトの設定 {#target-project-settings}
 
-テスト対象プロジェクトの `Program.cs` を部分クラス宣言を利用してテストプロジェクトに公開します。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
 
-```csharp title="Program.cs" hl_lines="4"
-var builder = WebApplication.CreateBuilder(args);
-// ...
-app.Run();
-public partial class Program {}
-```
+テスト対象プロジェクトの `Program.cs` を部分クラス宣言を利用してテストプロジェクトに公開します。
+.NET 10 以降では、[ソースジェネレーター :material-open-in-new:](https://learn.microsoft.com/ja-jp/shows/on-dotnet/c-source-generators){ target=_blank } によって `public partial class Program` 宣言が自動生成されるので、特別な設定は不要です。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 !!! note "internal メンバーをテストプロジェクトに公開する"
     テスト対象プロジェクトの internal メンバーをテストプロジェクトから参照可能にした場合にも `Program.cs` を公開できます。
