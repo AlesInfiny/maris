@@ -17,6 +17,7 @@ global.json ファイルには以下を設定します。
 - `version` : .NET CLI を実行する .NET SDK のバージョン
 - `allowPrerelease` : プレリリースバージョン（プレビューリリースなど）の利用を許容するか
 - `rollForward` : 指定された .NET SDK バージョンが存在しない場合のロールフォワードポリシー
+- `runner` : テストを検出・実行するテストランナー
 
 ```json title="global.json ファイル設定例"
 https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/global.json
@@ -29,6 +30,11 @@ https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/gl
     その反面、 .NET SDK のバージョン更新にあわせて、開発環境を更新する手間が発生します。
     この例では、 .NET SDK のバージョンが見つからない場合、指定した `version` の値以上の、インストールされているものの中で最も高い .NET SDK にロールフォワードする設定としています。
     どの程度厳密に管理するかは、プロジェクトの特性に応じて決定してください。
+
+!!! note "Microsoft.Testing.Platform について"
+    Microsoft.Testing.Platform （ MTP ）は、 .NET 10 以降でネイティブサポートされるようになったテストランナーです。
+    従来の Visual Studio Test Platform （ VSTest ）では .NET Framework との互換性を保つために対応が困難な、 .NET の機能の進化に追従することを目的に構築されました。
+    詳細は [Microsoft.Testing.Platform の概要:material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/testing/microsoft-testing-platform-intro){ target=_blank } を参照してください。
 
 ## プロジェクトファイルの設定 {#csproj-settings}
 
@@ -53,7 +59,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 <Project>
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
@@ -92,13 +98,13 @@ https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/sr
 
 設定例のプロパティの詳細については以下を参照してください。
 
-- [TestingPlatformDotnetTestSupport :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#testingplatformdotnettestsupport){ target=_blank }
+- [UseMicrosoftTestingPlatformRunner :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#usemicrosofttestingplatformrunner){ target=_blank }
 
-    `TestingPlatformDotnetTestSupport` を有効化することで `dotnet test` コマンドで Microsoft Testing Platform が利用されます。
+    <!-- textlint-disable ja-technical-writing/sentence-length -->
 
-- [UseMicrosoftTestingPlatformRunner :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#istestingplatformapplication){ target=_blank }
+    xUnit v3 を利用している場合、`UseMicrosoftTestingPlatformRunner` を有効化することで、[`IsTestingPlatformApplication`:material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#istestingplatformapplication){ target=_blank } を有効にします。
 
-    xUnit v3 を利用している場合、`UseMicrosoftTestingPlatformRunner` を有効化することで `IsTestingPlatformApplication` を有効にします。
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
 
 特に設定する項目がなければ、 tests フォルダーに Directory.Build.props ファイルを追加する必要ありません。
 
@@ -116,7 +122,7 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -131,7 +137,7 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
