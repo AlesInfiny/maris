@@ -19,7 +19,7 @@
         <mxCell id="4" value="アプリケーション" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#CCCCCC;strokeColor=#000000;fontColor=#333333;strokeWidth=2;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="360" y="40" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="5" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Blazor&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#85D2FF;strokeWidth=2;fontSize=14;" parent="1" vertex="1">
+        <mxCell id="5" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Blazor Server&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#85D2FF;strokeWidth=2;fontSize=14;" parent="1" vertex="1">
           <mxGeometry x="360" y="80" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="6" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;ASP.NET Core&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#85D2FF;strokeWidth=2;fontSize=14;" parent="1" vertex="1">
