@@ -98,7 +98,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） の CSR アプリ
 
 ## アプリケーションアーキテクチャ {#application-architecture}
 
-AlesInfiny Maris のアプリケーションアーキテクチャは、クリーンアーキテクチャに基づいています。 アーキテクチャの全体概要は以下の通りです。
+AlesInfiny Maris の CSR アプリケーションアーキテクチャは、クリーンアーキテクチャに基づいています。 アーキテクチャの全体概要は以下の通りです。
 
 ![アーキテクチャ概要](../../images/app-architecture/client-side-rendering/csr-architecture-light.png#only-light){ loading=lazy }
 ![アーキテクチャ概要](../../images/app-architecture/client-side-rendering/csr-architecture-dark.png#only-dark){ loading=lazy }

@@ -1,0 +1,78 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.0.3 Chrome/140.0.7339.249 Electron/38.7.0 Safari/537.36" version="29.0.3">
+  <diagram id="GfpLho8MLahyK_gQZUaU" name="ページ1">
+    <mxGraphModel dx="1042" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="25" value="xUnit v3" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="340" y="240" width="180" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="16" value="インフラストラクチャ層" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="625" y="10" width="260" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="21" value="Entity Framework Core" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="650" y="40" width="210" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="プレゼンテーション層" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="55" y="10" width="260" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="Blazor" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="80" y="40" width="210" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="2" value="ビュー（Razor / HTML）" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="105" y="70" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" source="3" target="2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#000000;" parent="1" source="3" target="4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="バインド変数・プロパティ" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="105" y="130" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="ビューモデル" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="105" y="190" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="APIコントローラー" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="105" y="270" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="APIモデル" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="105" y="320" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="13" value="アプリケーションコア層" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="340" y="10" width="260" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="14" value="アプリケーションサービス" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="70" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="15" value="リポジトリインターフェース" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="130" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="17" value="テーブルエンティティ" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="670" y="70" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="20" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="22" target="15" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="660" y="150" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="22" value="リポジトリ" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="670" y="130" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="24" value="テスト" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="370" y="265" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="27" value="テスト" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="570" y="265" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="28" value="StyleCopAnalyzers" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="540" y="240" width="180" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="29" value="静的コード解析" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="570" y="265" width="120" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
