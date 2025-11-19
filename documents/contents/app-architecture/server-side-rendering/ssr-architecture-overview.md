@@ -12,6 +12,28 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） の SSR アプリ
 ![技術スタック](../../images/app-architecture/server-side-rendering/tech-stack-light.png#only-light){ loading=lazy }
 ![技術スタック](../../images/app-architecture/server-side-rendering/tech-stack-dark.png#only-dark){ loading=lazy }
 
+??? note "利用ライブラリ"
+
+    - [ASP.NET Core :material-open-in-new:](https://dotnet.microsoft.com/ja-jp/learn/aspnet/what-is-aspnet-core){ target=_blank }
+
+        .NET で利用可能な Web 開発フレームワークです。
+
+    - [Blazor :material-open-in-new:](https://dotnet.microsoft.com/ja-jp/apps/aspnet/web-apps/blazor){ target=_blank }
+
+        ASP.NET Core を前提としたフロントエンド Web フレームワークです。
+
+    - [Entity Framework Core :material-open-in-new:](https://github.com/dotnet/efcore){ target=_blank }
+
+        .NET で利用可能な O/R マッパーです。
+
+    - [xUnit v3 :material-open-in-new:](https://xunit.net/){ target=_blank }
+
+        .NET で利用可能なテストフレームワークです。
+
+    - [StyleCopAnalyzers :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers){ target=_blank }
+
+        C# のコードを解析し、コーディングルールに則っているかを確認します。
+
 ## アプリケーションアーキテクチャ {#application-architecture}
 
 AlesInfiny Maris における SSR アプリケーションアーキテクチャの全体概要を以下に示します。
