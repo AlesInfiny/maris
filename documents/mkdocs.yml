@@ -50,6 +50,10 @@ nav:
                   - app-architecture/client-side-rendering/test/backend-application/index.md
                   - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md
                   # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
+      - サーバーサイドレンダリング編:
+          - 全体処理方式:
+              - app-architecture/server-side-rendering/global-function/index.md
+              - 例外処理方針: app-architecture/server-side-rendering/global-function/exception-handling.md
       - アプリケーションセキュリティ編:
           - app-architecture/security/index.md
           - XSS （クロスサイトスクリプティング）: app-architecture/security/xss.md
