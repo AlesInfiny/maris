@@ -50,6 +50,9 @@ nav:
                   - app-architecture/client-side-rendering/test/backend-application/index.md
                   - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md
                   # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
+      - サーバーサイドレンダリング編:
+          - app-architecture/server-side-rendering/index.md
+          - SSR アーキテクチャ概要: app-architecture/server-side-rendering/ssr-architecture-overview.md
       - アプリケーションセキュリティ編:
           - app-architecture/security/index.md
           - XSS （クロスサイトスクリプティング）: app-architecture/security/xss.md
