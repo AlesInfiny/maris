@@ -7,7 +7,7 @@ description: サーバーサイドレンダリングを行う Web アプリケ�
 
 ## 技術スタック {#tech-stack}
 
-AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris） の SSR アプリケーションの構成を以下に示します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） の SSR アプリケーションの構成を以下に示します。
 
 ![技術スタック](../../images/app-architecture/server-side-rendering/tech-stack-light.png#only-light){ loading=lazy }
 ![技術スタック](../../images/app-architecture/server-side-rendering/tech-stack-dark.png#only-dark){ loading=lazy }
