@@ -1,6 +1,6 @@
 ---
 title: アプリケーション 開発手順 SSR 編
-description: AlesInfiny Maris OSS Edition で開発可能な CSR アプリケーションの開発手順を示すガイドラインです。
+description: AlesInfiny Maris OSS Edition で開発可能な SSR アプリケーションの開発手順を示すガイドラインです。
 ---
 
 # アプリケーション開発手順 SSR 編 {#top}
