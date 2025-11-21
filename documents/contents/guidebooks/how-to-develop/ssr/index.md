@@ -5,7 +5,7 @@ description: AlesInfiny Maris OSS Edition で開発可能な SSR アプリケー
 
 # アプリケーション開発手順 SSR 編 {#top}
 
-AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能な SSR （クライアントサイドレンダリング）アプリケーションの開発手順を示すガイドラインです。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能な SSR （サーバーサイドレンダリング）アプリケーションの開発手順を示すガイドラインです。
 
 - [事前準備](./getting-started/index.md)
 - [ソリューション構造の作成](./solution-structure/index.md)
