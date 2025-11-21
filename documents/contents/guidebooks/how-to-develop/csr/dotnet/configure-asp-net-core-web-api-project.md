@@ -63,8 +63,8 @@ OpenAPI 仕様書のファイルがビルド時に生成されるようプロジ
 
 - [NSwag.MSBuild :material-open-in-new:](https://github.com/RicoSuter/NSwag/wiki/NSwag.MSBuild){ target=_blank }
 
-??? example ".NET 8 の場合のプロジェクトファイル設定例"
-    .NET 8 を使用するプロジェクトの場合、プロジェクトファイルには以下のように設定することで、 OpenAPI 仕様書のファイルを出力できます。
+??? example ".NET 10 の場合のプロジェクトファイル設定例"
+    .NET 10 を使用するプロジェクトの場合、プロジェクトファイルには以下のように設定することで、 OpenAPI 仕様書のファイルを出力できます。
 
     ```xml title="OpenAPI 仕様書のファイルを出力する csproj の設定例"
     <Project Sdk="Microsoft.NET.Sdk.Web">
