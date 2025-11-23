@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DresscaCMS.ApplicationCore\DresscaCMS.ApplicationCore.csproj" />
+  </ItemGroup>
+
 </Project>
