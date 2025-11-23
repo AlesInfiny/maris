@@ -1,6 +1,11 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/DresscaCMS.ApplicationCore/DresscaCMS.ApplicationCore.csproj" />
+    <Project Path="src/DresscaCMS.EfInfrastructure/DresscaCMS.EfInfrastructure.csproj" Id="59a962a0-297e-4b4a-8dcd-fb8b2ca91b29" />
     <Project Path="src/DresscaCMS.Web/DresscaCMS.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DresscaCMS.UnitTests.ApplicationCore/DresscaCMS.UnitTests.ApplicationCore.csproj" Id="4cbd3f93-e20c-4514-8735-ad70f76d4847" />
+    <Project Path="tests/DresscaCMS.UnitTests.Web/DresscaCMS.UnitTests.Web.csproj" Id="6a6b359b-3a4c-47c2-9bd8-18e20a44322e" />
   </Folder>
 </Solution>
