@@ -33,8 +33,10 @@ SSR アプリケーションでは、誤った入力情報がシステムに投�
 項目間チェックには通常 `EditForm` の `OnValidationRequested` イベントを使用します。
 詳細は [OnValidationRequested イベントを使用した手動検証 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/forms/validation?view=aspnetcore-10.0#manual-validation-using-the-onvalidationrequested-event){ target=_blank } を参照してください。
 
-ただし、繰り返し使用するものは独自の検証コンポーネントを作成して汎用化します。
-詳細は [検証コンポーネントを使用したビジネス ロジック検証 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/forms/validation?view=aspnetcore-10.0#business-logic-validation-with-a-validator-component){ target=_blank } を参照してください。
+ただし、繰り返し使用する項目間チェックには、 `CompareAttribute` を使用する（同値比較の場合）か、独自の検証コンポーネントを作成して汎用化します。
+
+`CompareAttribute` の詳細は [Microsoft の Web サイト :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.compareattribute) を参照してください。
+独自の検証コンポーネントの詳細は [検証コンポーネントを使用したビジネス ロジック検証 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/forms/validation?view=aspnetcore-10.0#business-logic-validation-with-a-validator-component){ target=_blank } を参照してください。
 
 ## 複合チェック {#complex-validation}
 
