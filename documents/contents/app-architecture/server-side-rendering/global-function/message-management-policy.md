@@ -5,4 +5,4 @@ description: SSR アプリケーション全体で考慮すべきアーキテク
 
 # メッセージ管理方針 {#top}
 
-SSR アプリケーションのメッセージ管理方針は、 [.NET アプリケーションの処理方式 > メッセージ管理方針](../../overview/dotnet-application-processing-system/message-management-policy.md) を参照してください。
+SSR アプリケーションのメッセージ管理方針は [.NET アプリケーションの処理方式 > メッセージ管理方針](../../overview/dotnet-application-processing-system/message-management-policy.md) を参照してください。
