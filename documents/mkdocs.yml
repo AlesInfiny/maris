@@ -51,9 +51,12 @@ nav:
                   - 結合テスト ( ITa ): app-architecture/client-side-rendering/test/backend-application/integration-test.md
                   # - 単体テスト ( UT0 ): app-architecture/client-side-rendering/test/backend-application/unit-test.md
       - サーバーサイドレンダリング編:
+          - app-architecture/server-side-rendering/index.md
+          - SSR アーキテクチャ概要: app-architecture/server-side-rendering/ssr-architecture-overview.md
           - 全体処理方式:
               - app-architecture/server-side-rendering/global-function/index.md
               - 例外処理方針: app-architecture/server-side-rendering/global-function/exception-handling.md
+              - ログ出力方針: app-architecture/server-side-rendering/global-function/logging-policy.md
       - アプリケーションセキュリティ編:
           - app-architecture/security/index.md
           - XSS （クロスサイトスクリプティング）: app-architecture/security/xss.md
@@ -108,6 +111,22 @@ nav:
                   - guidebooks/how-to-develop/csr/publication/index.md
               - CORS 環境の構築:
                   - guidebooks/how-to-develop/csr/cors/index.md
+          - SSR編:
+              - guidebooks/how-to-develop/ssr/index.md
+              - 事前準備: guidebooks/how-to-develop/ssr/getting-started.md
+              - ソリューション構造の作成: guidebooks/how-to-develop/ssr/solution-structure.md
+              - プロジェクトの作成: guidebooks/how-to-develop/ssr/create-project.md
+              - プロジェクトの共通設定: guidebooks/how-to-develop/ssr/common-configuration.md
+              - 開発に使用するパッケージ: guidebooks/how-to-develop/ssr/packages-used.md
+              - Fluent UI Blazor プロジェクトの構成: guidebooks/how-to-develop/ssr/fluentui-blazor-structure.md
+              - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/ssr/css-setup.md
+              - 入力値検証: guidebooks/how-to-develop/ssr/input-validation.md
+              # - 画面をまたがる情報の保持 guidebooks/how-to-develop/ssr/state-management.md
+              # - 集約エラーハンドラーの実装 guidebooks/how-to-develop/ssr/error-handling.md
+              # - 結合テストプロジェクトの構成 guidebooks/how-to-develop/ssr/integration-tests-setup.md
+              - ヘルスチェック API の実装: guidebooks/how-to-develop/ssr/health-checks.md
+              - ローカル開発環境の構築: guidebooks/how-to-develop/ssr/local-development.md
+
           # - アプリケーションテスト:
               # - guidebooks/app-testing/index.md
       # - 規約:
