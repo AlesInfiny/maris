@@ -12,3 +12,7 @@ description: SSR アプリケーション全体で考慮すべきアーキテク
 1. [ログ出力方針](./logging-policy.md)
 
     アプリケーションのログ出力方針を説明します。
+
+1. [メッセージ管理方針](./message-management-policy.md)
+
+    SSR アプリケーションのメッセージ管理方針を説明します。

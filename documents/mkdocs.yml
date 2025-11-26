@@ -57,6 +57,7 @@ nav:
               - app-architecture/server-side-rendering/global-function/index.md
               - 例外処理方針: app-architecture/server-side-rendering/global-function/exception-handling.md
               - ログ出力方針: app-architecture/server-side-rendering/global-function/logging-policy.md
+              - メッセージ管理方針: app-architecture/server-side-rendering/global-function/message-management-policy.md
       - アプリケーションセキュリティ編:
           - app-architecture/security/index.md
           - XSS （クロスサイトスクリプティング）: app-architecture/security/xss.md
