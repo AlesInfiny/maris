@@ -8,8 +8,8 @@
   <Folder Name="/tests/">
     <File Path="tests/.editorconfig" />
     <File Path="tests/Directory.Build.props" />
+    <Project Path="tests/DresscaCMS.IntegrationTest/DresscaCMS.IntegrationTest.csproj" Id="95cfddc1-8c72-4dd8-ab78-5299584cba07" />
     <Project Path="tests/DresscaCMS.UnitTests.ApplicationCore/DresscaCMS.UnitTests.ApplicationCore.csproj" Id="4cbd3f93-e20c-4514-8735-ad70f76d4847" />
-    <Project Path="tests/DresscaCMS.UnitTests.Web/DresscaCMS.UnitTests.Web.csproj" Id="6a6b359b-3a4c-47c2-9bd8-18e20a44322e" />
   </Folder>
   <Folder Name="/ソリューション項目/">
     <File Path=".editorconfig" />
