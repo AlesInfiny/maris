@@ -2,7 +2,6 @@
   <Folder Name="/src/">
     <File Path="src/Directory.Build.props" />
     <Project Path="src/DresscaCMS.ApplicationCore/DresscaCMS.ApplicationCore.csproj" />
-    <Project Path="src/DresscaCMS.EfInfrastructure/DresscaCMS.EfInfrastructure.csproj" Id="59a962a0-297e-4b4a-8dcd-fb8b2ca91b29" />
     <Project Path="src/DresscaCMS.Web/DresscaCMS.Web.csproj" />
   </Folder>
   <Folder Name="/tests/">
