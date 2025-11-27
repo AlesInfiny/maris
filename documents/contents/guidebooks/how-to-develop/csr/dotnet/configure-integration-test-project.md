@@ -17,23 +17,6 @@ description: CSR アプリケーションの サーバーサイドで動作す�
     - [xunit.runner.visualstudio :material-open-in-new:](https://www.nuget.org/packages/xunit.runner.visualstudio){ target=_blank }
     - [Microsoft.AspNetCore.Mvc.Testing :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing){ target=_blank }
 
-## テスト対象プロジェクトの設定 {#target-project-settings}
-
-テスト対象プロジェクトの `Program.cs` を部分クラス宣言を利用してテストプロジェクトに公開します。
-
-```csharp title="Program.cs" hl_lines="4"
-var builder = WebApplication.CreateBuilder(args);
-// ...
-app.Run();
-public partial class Program {}
-```
-
-!!! note "internal メンバーをテストプロジェクトに公開する"
-    テスト対象プロジェクトの internal メンバーをテストプロジェクトから参照可能にした場合にも `Program.cs` を公開できます。
-    詳細は以下を参照してください。
-
-    [既定の WebApplicationFactory を使用した基本的なテスト :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/test/integration-tests#basic-tests-with-the-default-webapplicationfactory){ target=_blank }
-
 ## テストコード作成 {#writing-test-codes}
 
 ### 基本のテスト {#basic}
