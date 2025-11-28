@@ -17,6 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DresscaCMS.ApplicationCore\DresscaCMS.ApplicationCore.csproj" />
+    <ProjectReference Include="..\DresscaCMS.Announcement\DresscaCMS.Announcement.csproj" />
   </ItemGroup>
 </Project>
