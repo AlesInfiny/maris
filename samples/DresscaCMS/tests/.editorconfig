@@ -1,0 +1,6 @@
+[*.cs]
+# Wrapping preferences
+dotnet_diagnostic.IDE0039.severity=none
+dotnet_diagnostic.SA0001.severity=none
+dotnet_diagnostic.SA1123.severity=none
+dotnet_diagnostic.SA1600.severity=none
