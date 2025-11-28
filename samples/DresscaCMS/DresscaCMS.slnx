@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/src/">
+    <File Path="src/Directory.Build.props" />
+    <Project Path="src/DresscaCMS.Announcement/DresscaCMS.Announcement.csproj" Id="8f2d9d30-ebd0-4f07-b746-c5d45a07aa4f" />
+    <Project Path="src/DresscaCMS.Web/DresscaCMS.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests/.editorconfig" />
+    <File Path="tests/Directory.Build.props" />
+    <Project Path="tests/DresscaCMS.IntegrationTest/DresscaCMS.IntegrationTest.csproj" Id="95cfddc1-8c72-4dd8-ab78-5299584cba07" />
+    <Project Path="tests/DresscaCMS.UnitTests.Announcement/DresscaCMS.UnitTests.Announcement.csproj" Id="defdba69-1654-4af0-98d5-238eb4044e99" />
+  </Folder>
+  <Folder Name="/ソリューション項目/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="stylecop.json" />
+  </Folder>
+</Solution>
