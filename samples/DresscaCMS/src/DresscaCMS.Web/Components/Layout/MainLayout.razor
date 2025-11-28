@@ -8,7 +8,14 @@
         <NavMenu />
         <FluentBodyContent Class="body-content">
             <div class="content">
+                <ErrorBoundary @ref="errorBoundary">
+                    <ChildContent>
                 @Body
+                    </ChildContent>
+                    <ErrorContent>
+                        <Error Exception="@context" />
+                    </ErrorContent>
+                </ErrorBoundary>
             </div>
         </FluentBodyContent>
     </FluentStack>
