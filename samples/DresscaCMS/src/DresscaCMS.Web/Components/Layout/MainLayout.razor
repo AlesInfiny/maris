@@ -10,7 +10,7 @@
             <div class="content">
                 <ErrorBoundary @ref="errorBoundary">
                     <ChildContent>
-                @Body
+                        @Body
                     </ChildContent>
                     <ErrorContent>
                         <Error Exception="@context" />
@@ -31,3 +31,12 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+@code {
+    private ErrorBoundary? errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        errorBoundary?.Recover();
+    }
+}
