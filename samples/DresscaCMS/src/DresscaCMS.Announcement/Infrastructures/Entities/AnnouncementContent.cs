@@ -24,9 +24,10 @@ public class AnnouncementContent
     public string Message { get; set; } = default!;
 
     [MaxLength(1024)]
-    public string? LinkUrl { get; set; }
+    public string? LinkedUrl { get; set; }
 
-    // Navigation properties
-    [ForeignKey(nameof(AnnouncementId))]
+    public byte[] RowVersion { get; set; } = [];
+
     public Announcement Announcement { get; set; } = default!;
+
 }

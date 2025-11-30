@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 public class AnnouncementContentHistory
@@ -23,9 +22,10 @@ public class AnnouncementContentHistory
     public string Message { get; set; } = default!;
 
     [MaxLength(1024)]
-    public string? LinkUrl { get; set; }
+    public string? LinkedUrl { get; set; }
+
+    public byte[] RowVersion { get; set; } = [];
 
     // Navigation properties
-    [ForeignKey(nameof(AnnouncementHistoryId))]
     public AnnouncementHistory AnnouncementHistory { get; set; } = default!;
 }

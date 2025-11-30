@@ -28,6 +28,8 @@ internal class AnnouncementConfiguration: IEntityTypeConfiguration<Entities.Anno
                 .IsRequired();
         builder.Property(e => e.IsDeleted)
                 .IsRequired();
+        builder.Property(e => e.RowVersion)
+                .IsRowVersion();
 
         // 1:N Announcement – AnnouncementContent
         builder.HasMany(e => e.Contents)

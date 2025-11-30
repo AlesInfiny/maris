@@ -50,6 +50,12 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.Property<DateTimeOffset>("PostDateTime")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
                     b.HasKey("Id");
 
                     b.ToTable("Announcement", (string)null);
@@ -69,7 +75,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
-                    b.Property<string>("LinkUrl")
+                    b.Property<string>("LinkedUrl")
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
@@ -77,6 +83,12 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         .IsRequired()
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -104,7 +116,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
-                    b.Property<string>("LinkUrl")
+                    b.Property<string>("LinkedUrl")
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
@@ -112,6 +124,12 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         .IsRequired()
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -157,6 +175,12 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
                     b.Property<DateTimeOffset>("PostDateTime")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 

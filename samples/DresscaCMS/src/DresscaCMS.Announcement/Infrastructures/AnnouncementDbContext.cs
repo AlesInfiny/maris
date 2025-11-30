@@ -4,10 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DresscaCMS.Announcement.Infrastructures;
 
+/// <summary>
+///  お知らせメッセージのデータベースにアクセスするための <see cref="DbContext" />を表します。
+/// </summary>
 internal class AnnouncementDbContext : DbContext
 {
     /// <summary>
-    ///  <see cref="DresscaDbContext" /> クラスの新しいインスタンスを初期化します。
+    ///  <see cref="AnnouncementDbContext" /> クラスの新しいインスタンスを初期化します。
     /// </summary>
     public AnnouncementDbContext()
     {
@@ -15,7 +18,7 @@ internal class AnnouncementDbContext : DbContext
 
     /// <summary>
     ///  オプションを指定して
-    ///  <see cref="DresscaDbContext" /> クラスの新しいインスタンスを初期化します。
+    ///  <see cref="AnnouncementDbContext" /> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="options">オプション。</param>
     public AnnouncementDbContext(DbContextOptions options)
@@ -23,12 +26,24 @@ internal class AnnouncementDbContext : DbContext
     {
     }
 
+    /// <summary>
+    ///  お知らせメッセージを取得します。
+    /// </summary>
     public DbSet<Entities.Announcement> Announcements { get; set; }
 
+    /// <summary>
+    ///  お知らせコンテンツを取得します。
+    /// </summary>
     public DbSet<AnnouncementContent> AnnouncementContents { get; set; }
 
+    /// <summary>
+    ///  お知らせメッセージ履歴を取得します。
+    /// </summary>
     public DbSet<AnnouncementHistory> AnnouncementHistories { get; set; }
 
+    /// <summary>
+    ///  お知らせコンテンツ履歴を取得します。
+    /// </summary>
     public DbSet<AnnouncementContentHistory> AnnouncementContentHistories { get; set; }
 
     /// <inheritdoc/>

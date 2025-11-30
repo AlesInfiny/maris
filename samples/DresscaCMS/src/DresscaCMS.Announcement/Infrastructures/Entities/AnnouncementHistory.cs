@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
@@ -10,6 +9,16 @@ public class AnnouncementHistory
 
     [Required]
     public Guid AnnouncementId { get; set; }
+
+    [Required]
+    [MaxLength(256)]
+    public string ChangedBy { get; set; } = default!;
+
+    [Required]
+    public DateTimeOffset CreatedAt { get; set; }
+
+    [Required]
+    public int OperationType { get; set; }
 
     [MaxLength(128)]
     public string? Category { get; set; }
@@ -22,22 +31,9 @@ public class AnnouncementHistory
     [Required]
     public int DisplayPriority { get; set; }
 
-    [Required]
-    public DateTimeOffset CreatedAt { get; set; }
-
-    [Required]
-    [MaxLength(256)]
-    public string ChangedBy { get; set; } = default!;
-
-    /// <summary>
-    /// 操作種別（追加・更新・削除など）
-    /// </summary>
-    [Required]
-    public int OperationType { get; set; }
-
-    // Navigation properties
-    [ForeignKey(nameof(AnnouncementId))]
-    public Announcement Announcement { get; set; } = default!;
-
     public ICollection<AnnouncementContentHistory> Contents { get; set; } = new List<AnnouncementContentHistory>();
+
+    public byte[] RowVersion { get; set; } = [];
+
+    public Announcement Announcement { get; set; } = default!;
 }

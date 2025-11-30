@@ -7,6 +7,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Configurations;
 internal class AnnouncementContentConfiguration : IEntityTypeConfiguration<AnnouncementContent>
 {
 
+    /// <inheritdoc/>
     public void Configure(EntityTypeBuilder<AnnouncementContent> builder)
     {
         ArgumentNullException.ThrowIfNull(builder);
@@ -19,22 +20,25 @@ internal class AnnouncementContentConfiguration : IEntityTypeConfiguration<Annou
             .IsRequired();
 
         builder.Property(e => e.AnnouncementId)
-                    .IsRequired();
+            .IsRequired();
 
         builder.Property(e => e.LanguageCode)
-                    .IsRequired()
-                    .HasMaxLength(8);
+            .IsRequired()
+            .HasMaxLength(8);
 
         builder.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(256);
+            .IsRequired()
+            .HasMaxLength(256);
 
         builder.Property(e => e.Message)
-                    .IsRequired()
-                    .HasMaxLength(512);
+            .IsRequired()
+            .HasMaxLength(512);
 
-        builder.Property(e => e.LinkUrl)
-                    .HasMaxLength(1024);
+        builder.Property(e => e.LinkedUrl)
+            .HasMaxLength(1024);
+
+        builder.Property(e => e.RowVersion)
+            .IsRowVersion();
 
         builder.HasData(
         [

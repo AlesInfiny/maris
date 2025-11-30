@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DresscaCMS.Announcement.Resources;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
@@ -27,8 +28,9 @@ public class Announcement
     [Required]
     public bool IsDeleted { get; set; }
 
-    // Navigation properties
     public ICollection<AnnouncementContent> Contents { get; set; } = new List<AnnouncementContent>();
 
     public ICollection<AnnouncementHistory> Histories { get; set; } = new List<AnnouncementHistory>();
+
+    public byte[] RowVersion { get; set; } = [];
 }

@@ -6,6 +6,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Configurations;
 
 internal class AnnouncementContentHistoryConfiguration : IEntityTypeConfiguration<AnnouncementContentHistory>
 {
+    /// <inheritdoc/>
     public void Configure(EntityTypeBuilder<AnnouncementContentHistory> builder)
     {
         ArgumentNullException.ThrowIfNull(builder);
@@ -32,8 +33,11 @@ internal class AnnouncementContentHistoryConfiguration : IEntityTypeConfiguratio
             .IsRequired()
             .HasMaxLength(512);
 
-        builder.Property(e => e.LinkUrl)
+        builder.Property(e => e.LinkedUrl)
             .HasMaxLength(1024);
+
+        builder.Property(e => e.RowVersion)
+            .IsRowVersion();
 
         builder.HasData(
         [

@@ -22,7 +22,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     DisplayPriority = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     ChangedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +39,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     LanguageCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Message = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    LinkUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true)
+                    LinkedUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,13 +59,14 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AnnouncementId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ChangedBy = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    OperationType = table.Column<int>(type: "int", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     PostDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     ExpireDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     DisplayPriority = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    ChangedBy = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    OperationType = table.Column<int>(type: "int", nullable: false)
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,7 +88,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     LanguageCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Message = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    LinkUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true)
+                    LinkedUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
                 },
                 constraints: table =>
                 {
