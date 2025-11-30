@@ -3,7 +3,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DresscaCMS.Announcement.Infrastructures.Configurations;
 
-internal class AnnouncementConfiguration: IEntityTypeConfiguration<Entities.Announcement>
+/// <summary>
+///  <see cref="Announcement"/> テーブルエンティティの構成を提供します。
+/// </summary>
+internal class AnnouncementConfiguration : IEntityTypeConfiguration<Entities.Announcement>
 {
     /// <inheritdoc/>
     public void Configure(EntityTypeBuilder<Entities.Announcement> builder)

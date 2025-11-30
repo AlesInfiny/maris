@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DresscaCMS.Announcement.Infrastructures.Configurations;
 
+/// <summary>
+///  <see cref="AnnouncementContentHistory"/> テーブルエンティティの構成を提供します。
+/// </summary>
 internal class AnnouncementContentHistoryConfiguration : IEntityTypeConfiguration<AnnouncementContentHistory>
 {
     /// <inheritdoc/>

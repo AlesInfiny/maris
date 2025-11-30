@@ -2,38 +2,78 @@
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
+/// <summary>
+///  お知らせ履歴のテーブルエンティティです。
+/// </summary>
 public class AnnouncementHistory
 {
+    /// <summary>
+    ///  お知らせメッセージ履歴 ID です。
+    /// </summary>
     [Key]
     public Guid Id { get; set; }
 
+    /// <summary>
+    ///  お知らせメッセージ ID です。
+    /// </summary>
     [Required]
     public Guid AnnouncementId { get; set; }
 
+    /// <summary>
+    ///  更新者のユーザー名を取得または設定します。
+    /// </summary>
     [Required]
     [MaxLength(256)]
     public string ChangedBy { get; set; } = default!;
 
+    /// <summary>
+    ///  このレコードが作成された日時（＝更新された日時）を取得または設定します。
+    /// </summary>
     [Required]
     public DateTimeOffset CreatedAt { get; set; }
 
+    /// <summary>
+    ///  変更の種類（作成、編集、削除）を取得または設定します。
+    /// </summary>
     [Required]
     public int OperationType { get; set; }
 
+    /// <summary>
+    ///  お知らせメッセージのカテゴリー（履歴）を取得または設定します。
+    /// </summary>
     [MaxLength(128)]
     public string? Category { get; set; }
 
+    /// <summary>
+    /// 掲載開始日時（履歴）を取得または設定します。
+    /// </summary>
     [Required]
     public DateTimeOffset PostDateTime { get; set; }
 
+    /// <summary>
+    ///  掲載終了日時（履歴）を取得または設定します。
+    /// </summary>
     public DateTimeOffset? ExpireDateTime { get; set; }
 
+    /// <summary>
+    ///  表示優先度（履歴）を取得または設定します。
+    /// </summary>
     [Required]
     public int DisplayPriority { get; set; }
 
-    public ICollection<AnnouncementContentHistory> Contents { get; set; } = new List<AnnouncementContentHistory>();
-
+    /// <summary>
+    ///  楽観同時実行制御カラムを取得または設定します。
+    /// </summary>
     public byte[] RowVersion { get; set; } = [];
 
-    public Announcement Announcement { get; set; } = default!;
+    /// <summary>
+    ///  お知らせコンテンツ履歴へのナビゲーションプロパティです。
+    /// </summary>
+    public ICollection<AnnouncementContentHistory> Contents { get; set; } = [];
+
+    /// <summary>
+    ///  お知らせメッセージへのナビゲーションプロパティです。
+    /// </summary>
+    [Required]
+    public Announcement Announcement { get; set; } = new Announcement();
 }

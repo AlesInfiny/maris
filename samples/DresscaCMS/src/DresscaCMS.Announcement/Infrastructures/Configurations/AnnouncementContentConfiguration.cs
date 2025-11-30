@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DresscaCMS.Announcement.Infrastructures.Configurations;
 
+/// <summary>
+/// <see cref="AnnouncementContent"/> テーブルエンティティの構成を提供します。
+/// </summary>
 internal class AnnouncementContentConfiguration : IEntityTypeConfiguration<AnnouncementContent>
 {
-
     /// <inheritdoc/>
     public void Configure(EntityTypeBuilder<AnnouncementContent> builder)
     {
