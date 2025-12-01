@@ -75,5 +75,5 @@ public class AnnouncementHistory
     ///  お知らせメッセージへのナビゲーションプロパティです。
     /// </summary>
     [Required]
-    public Announcement Announcement { get; set; } = new Announcement();
+    public Announcement Announcement { get; set; } = default!;
 }

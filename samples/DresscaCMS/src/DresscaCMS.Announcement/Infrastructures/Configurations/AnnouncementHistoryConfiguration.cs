@@ -54,8 +54,17 @@ internal class AnnouncementHistoryConfiguration : IEntityTypeConfiguration<Annou
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasData(
-        [
-
-        ]);
+            new AnnouncementHistory
+            {
+                Id = Guid.Parse("39999999-3333-3333-3333-333333333333"),
+                AnnouncementId = Guid.Parse("19999999-1111-1111-1111-111111111111"),
+                ChangedBy = "system",
+                CreatedAt = new DateTimeOffset(2011, 1, 21, 0, 0, 0, TimeSpan.Zero),
+                OperationType = 3,
+                Category = "一般",
+                PostDateTime = new DateTimeOffset(2018, 1, 21, 0, 0, 0, TimeSpan.Zero),
+                ExpireDateTime = new DateTimeOffset(2019, 1, 1, 21, 0, 0, TimeSpan.Zero),
+                DisplayPriority = 11,
+            });
     }
 }

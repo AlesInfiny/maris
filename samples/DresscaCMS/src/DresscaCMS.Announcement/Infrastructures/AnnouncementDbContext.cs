@@ -1,6 +1,7 @@
 ﻿using DresscaCMS.Announcement.Infrastructures.Configurations;
 using DresscaCMS.Announcement.Infrastructures.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace DresscaCMS.Announcement.Infrastructures;
 
@@ -54,6 +55,8 @@ internal class AnnouncementDbContext : DbContext
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Dressca.Cms.Announement;Integrated Security=True");
         }
+
+        optionsBuilder.EnableSensitiveDataLogging();
     }
 
     /// <inheritdoc/>
@@ -64,7 +67,7 @@ internal class AnnouncementDbContext : DbContext
 
         modelBuilder.ApplyConfiguration(new AnnouncementConfiguration());
         modelBuilder.ApplyConfiguration(new AnnouncementContentConfiguration());
-        modelBuilder.ApplyConfiguration(new AnnouncementContentHistoryConfiguration());
         modelBuilder.ApplyConfiguration(new AnnouncementHistoryConfiguration());
+        modelBuilder.ApplyConfiguration(new AnnouncementContentHistoryConfiguration());
     }
 }

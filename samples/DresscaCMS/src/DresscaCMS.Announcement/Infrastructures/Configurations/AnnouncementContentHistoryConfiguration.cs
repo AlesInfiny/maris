@@ -43,8 +43,14 @@ internal class AnnouncementContentHistoryConfiguration : IEntityTypeConfiguratio
             .IsRowVersion();
 
         builder.HasData(
-        [
-
-        ]);
+            new AnnouncementContentHistory
+            {
+                Id = Guid.Parse("49999999-4444-4444-4444-444444444444"),
+                AnnouncementHistoryId = Guid.Parse("39999999-3333-3333-3333-333333333333"),
+                LanguageCode = "ja",
+                Title = "お知らせ 削除済み",
+                Message = "内容 削除済み",
+                LinkedUrl = "https://maris.alesinfiny.org/",
+            });
     }
 }

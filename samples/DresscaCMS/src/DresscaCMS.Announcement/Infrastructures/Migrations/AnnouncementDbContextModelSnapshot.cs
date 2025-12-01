@@ -312,6 +312,18 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             RowVersion = new byte[0]
+                        },
+                        new
+                        {
+                            Id = new Guid("19999999-1111-1111-1111-111111111111"),
+                            Category = "一般",
+                            ChangedAt = new DateTimeOffset(new DateTime(2011, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2010, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 11,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2019, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsDeleted = true,
+                            PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            RowVersion = new byte[0]
                         });
                 });
 
@@ -565,6 +577,16 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Message = "内容 21",
                             RowVersion = new byte[0],
                             Title = "お知らせ 21"
+                        },
+                        new
+                        {
+                            Id = new Guid("29999999-2222-2222-2222-222222222222"),
+                            AnnouncementId = new Guid("19999999-1111-1111-1111-111111111111"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 削除済み",
+                            RowVersion = new byte[0],
+                            Title = "お知らせ 削除済み"
                         });
                 });
 
@@ -607,6 +629,18 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.HasIndex("AnnouncementHistoryId");
 
                     b.ToTable("AnnouncementContentHistory", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("49999999-4444-4444-4444-444444444444"),
+                            AnnouncementHistoryId = new Guid("39999999-3333-3333-3333-333333333333"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 削除済み",
+                            RowVersion = new byte[0],
+                            Title = "お知らせ 削除済み"
+                        });
                 });
 
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory", b =>
@@ -653,6 +687,21 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.HasIndex("AnnouncementId");
 
                     b.ToTable("AnnouncementHistory", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("39999999-3333-3333-3333-333333333333"),
+                            AnnouncementId = new Guid("19999999-1111-1111-1111-111111111111"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2011, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 11,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2019, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 3,
+                            PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            RowVersion = new byte[0]
+                        });
                 });
 
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent", b =>
