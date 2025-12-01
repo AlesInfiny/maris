@@ -6,7 +6,7 @@ description: SSR アプリケーション開発における 集約エラーハ�
 # 集約エラーハンドラーの実装 {#top}
 
 本章では、 SSR ベースの Blazor Server アプリケーションにおける集約エラーハンドラーの構成と実装手順を解説します。
-本章の手順を実施することで、 Blazor ランタイムおよび .NET ランタイム内のいずれでシステム例外が発生した場合であっても、同一のエラーページに遷移する機能が実装されます。
+本章の手順を実施することで、 本番環境で Blazor ランタイムおよび .NET ランタイム内でシステム例外が発生した場合、エラーページに遷移する機能が実装されます。
 
 システム例外の処理方針については、[全体処理方式 - 例外処理方針](../../../app-architecture/server-side-rendering/global-function/exception-handling.md) を参照してください。
 
@@ -44,7 +44,7 @@ MainLayout.razor を次のように修正し、エラー境界を導入します
 
 MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネントを追加します。
 
-```html title="ErrorBoundary を 設定した MainLayout.razor" hl_lines="5-12"
+```html title="MainLayout.razorの変更点（抜粋）" hl_lines="5-12"
     <FluentStack Class="main" Orientation="Orientation.Horizontal" Width="100%">
         <NavMenu />
         <FluentBodyContent Class="body-content">
@@ -108,22 +108,41 @@ MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネント
 
 ## エントリーポイントの設定 {#entrypoint-configuration}
 
-このセクションでは、`Program.cs` におけるサービス登録とミドルウェア構成を通じて、これまでのエラーコンポーネント／エラーページを有効にする方法を説明します。
+Razor Pages として追加した ServerError.cshtml を動作させるため、 エントリーポイントで Razor Pages 関連の設定をします。
+Program.cs を下記のように変更します。
 
-- サービス登録のスコア  
-    - Blazor Server 用のコンポーネント登録（`AddRazorComponents()` / `AddInteractiveServerComponents()` 等）  
-    - Razor Pages の有効化（`AddRazorPages()` など）と、`ServerError.cshtml` を利用できるようにする設定
-- ミドルウェアパイプラインの構成  
-    - 開発環境では開発者用例外ページ（Developer Exception Page）を使用する  
-    - 本番環境では `UseExceptionHandler("/ServerError")` を設定し、未処理例外時に `ServerError.cshtml` へフォールバックさせる  
-    - 必要に応じて `UseHsts()` や静的ファイルの提供設定を行う
-- ルーティングの構成  
-    - Blazor Server のルートマッピング  
-    - Razor Pages と Blazor コンポーネントの共存パターンの中で、`/ServerError` がどのように扱われるか
-- 開発環境のみで静的アセットをロードする設定など、環境によって振る舞いを変える部分の概要
+```csharp title="Program.cs の変更点（抜粋）" hl_lines="1 8 10-13 19 28"
+using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 
-このセクションには、`Program.cs` のうちエラーハンドリングに関連するサービス登録と `app.UseExceptionHandler("/ServerError")` 付近のコードスニペットを示します。
+// 中略
 
-```csharp
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents();
+builder.Services.AddFluentUIComponents();
+builder.Services.AddRazorPages(); // Razor Pages の機能一式を DI コンテナに登録します。
 
+if (builder.Environment.IsDevelopment())
+{
+    StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration); // 開発環境用に静的アセットの読み込みを構成します。
+}
+
+// 中略
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/ServerError", createScopeForErrors: true);　// エラーページのパスを変更します。
+
+    app.UseHsts();
+}
+
+// 中略
+
+app.MapStaticAssets();
+
+app.MapRazorPages(); // 追加した Razor Pages （ ServerError.cshtml ）をルーティングに登録します。
+
+app.MapRazorComponents<App>()
+    .AddInteractiveServerRenderMode();
+
+app.Run();
 ```
