@@ -1,6 +1,7 @@
 ﻿using DresscaCMS.Announcement.Infrastructures.Configurations;
 using DresscaCMS.Announcement.Infrastructures.Entities;
 using Microsoft.EntityFrameworkCore;
+
 namespace DresscaCMS.Announcement.Infrastructures;
 
 /// <summary>

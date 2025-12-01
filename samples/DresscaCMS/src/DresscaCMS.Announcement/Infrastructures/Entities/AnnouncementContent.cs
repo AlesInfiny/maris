@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
 /// <summary>
