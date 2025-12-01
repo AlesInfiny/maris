@@ -4,7 +4,7 @@ using DresscaCMS.Announcement.Resources;
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
 /// <summary>
-///  お知らせメッセージののテーブルエンティティです。
+///  お知らせメッセージのテーブルエンティティです。
 /// </summary>
 public class Announcement
 {
