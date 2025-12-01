@@ -10,7 +10,10 @@ builder.Services.AddRazorComponents()
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages();
 
-StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
+if (builder.Environment.IsDevelopment())
+{
+    StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
+}
 
 var app = builder.Build();
 
