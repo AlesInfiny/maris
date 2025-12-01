@@ -15,12 +15,11 @@ description: SSR アプリケーション開発における 集約エラーハ�
 本章では、次のような内容を実施します。
 
 - Blazor ランタイム内で発生した未ハンドル例外を表示するコンポーネント（ Error.razor ）を実装します。
-- Error.razor これを囲う `ErrorBoundary` をレイアウトに配置します。
+- Error.razor これを囲う `ErrorBoundary` をレイアウトします。
 - .NET ランタイム（ Blazor 起動前）で発生した例外を表示する Razor Pages ベースのエラーページ （ ServerError.cshtml ）を実装します。
 - エントリーポイント（ Program.cs ）で、上記のエラーハンドリングを有効にするための設定をします。
-- 開発環境と本番環境で、表示内容（スタックトレースの有無など）を切り替える方針
 
-[プロジェクトの作成](./create-project.md) で作成した Fluent Brazor Web アプリのテンプレートから変更すべき点は、以下の通りです。
+[プロジェクトの作成](./create-project.md) で作成した Fluent Blazor Web アプリのテンプレートから変更すべき点は、以下の通りです。
 
 ```text linenums="0"
 └ {ApplicationName}.Web
@@ -31,7 +30,8 @@ description: SSR アプリケーション開発における 集約エラーハ�
 │   ├ Error.razor ................... 修正します。
 │   └ Error.razor.css ............... 追加します。
 │ ├ _imports.razor .................. 変更します。
-│└ ServerError.cshtml ............... 追加します。
+│ └ Pages
+|   └ ServerError.cshtml ............... 追加します。
 └ Program.cs ........................ 変更します。
 ```
 
@@ -82,29 +82,102 @@ MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネント
 
 このセクションでは、 Blazor ランタイム内の未ハンドル例外をユーザーに表示するためのコンポーネント `Error.razor` の実装方針を説明します。
 
-- `ErrorBoundary` から渡される例外情報（`Exception`）を受け取るパラメーターの設計
-- `IWebHostEnvironment` などの環境情報を使用して、
-    - 開発環境ではスタックトレースなど詳細な情報を表示する
-    - 本番環境ではユーザー向けの汎用的なメッセージのみを表示する
-  といった表示制御を行う方針
-- Fluent UI Blazor のコンポーネントや CSS（`Error.razor.css`）を用いた、エラー画面のレイアウト・スタイルの概要
-- 例外が `null` の場合の挙動（何も表示しない、あるいは安全なデフォルトメッセージを表示するなど）の扱い
+スタックトレースの情報を含めます。
 
-このセクションには、`Error.razor` の主要部分（パラメーター定義、環境による表示切り替え、マークアップ構造）のコードスニペットを記載します。
+Error.razor を次のように変更します。
+
+`@pages` ブロックを次のように変更します。
+
+`@code` ブロックを次のように変更します。
+
+必要に応じて、 Error.razor.css でスタイルを変更します。
+下記に例を示します。
+
+!!! example "スタイルの設定例"
+
+    ```css title="Error.razor.css の設定例"
+    div.stack-trace-box {
+        margin-top: 30px;
+    }
+    ```
 
 ## エラーページの実装 {#server-error-page-implementation}
 
-このセクションでは、 Blazor ランタイムが起動する前に .NET ランタイム側で発生した例外を扱うための Razor Pages ベースのエラーページ `ServerError.cshtml` の実装について説明します。
+.NET ランタイム側で発生した例外を扱うためのエラーページを追加します。
+TODO なんかいろいろな理由があって、 Razor Pages（ .cshtml ）として実装します。
+両者を区別するため、 Razor コンポーネントを格納する Pages フォルダーとは異なる Pages フォルダーに作成してください。
 
-- `UseExceptionHandler` などによりルーティングされるエラーページとして `ServerError.cshtml` を用意する意図  
-    - アプリ全体で統一された「サーバーエラー画面」を SSR 側でも提供するため
-- ページの基本構造  
-    - ユーザー向けのメッセージ（例：「内部サーバーエラーが発生しました」）の表示  
-    - 必要であれば、問い合わせ先や再試行リンク（トップページへ戻るボタンなど）の配置
-- セキュリティ観点から、本番環境では詳細な例外情報を表示しない方針
-- デザイン面で `Error.razor` と統一感を持たせるための考え方（共通の色・文言・ロゴなど）
+下記にエラーページの実装例を示します。
 
-このセクションには、`ServerError.cshtml` の主要なマークアップと、必要に応じてレイアウトとの関連付け例をコードスニペットとして示します
+??? example "エラーページの設定例"
+
+    ```html title="サンプルアプリケーションの ServerError.cshtml"
+    @page "/ServerError"
+    @{
+        Layout = null;
+    }
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>内部サーバーエラー</title>
+        <meta name="robots" content="noindex" />
+        <style>
+            body {
+                margin: 0;
+                font-family: "Segoe UI", system-ui, sans-serif;
+                background: #f5f5f5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 600px;
+                box-sizing: border-box;
+                padding: 32px 40px;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            }
+
+            h1 {
+                margin: 0 0 16px;
+                font-size: 32px;
+                font-weight: 600;
+            }
+
+            p {
+                margin: 0 0 24px;
+                line-height: 1.6;
+            }
+
+            a { color: #004578; text-decoration: none; }
+            a:hover { text-decoration: underline; }
+
+            .footer {
+                font-size: 18px;
+                color: #666;
+                margin-top: 16px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>サーバーで問題が発生しています。</h1>
+            <p>
+                申し訳ありません。処理中に予期しないエラーが発生しました。<br />
+                時間をおいて再度アクセスしてください。問題が解決しない場合は、管理者へお問い合わせください。
+            </p>
+            <a href="/">トップへ戻る</a>
+            <div class="footer">&copy; @(DateTime.UtcNow.Year) Dressca CMS</div>
+        </div>
+    </body>
+    </html>
+    ```
 
 ## エントリーポイントの設定 {#entrypoint-configuration}
 
@@ -121,16 +194,16 @@ builder.Services.AddRazorComponents()
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages(); // Razor Pages の機能一式を DI コンテナに登録します。
 
-if (builder.Environment.IsDevelopment())
+if (builder.Environment.IsDevelopment()) // 開発環境用の設定です。
 {
-    StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration); // 開発環境用に静的アセットの読み込みを構成します。
+    StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration); // 静的アセットの読み込みを構成します。
 }
 
 // 中略
 
-if (!app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment()) // 本番環境用の設定です。
 {
-    app.UseExceptionHandler("/ServerError", createScopeForErrors: true);　// エラーページのパスを変更します。
+    app.UseExceptionHandler("/ServerError", createScopeForErrors: true);　// ServerError.cshtml のパスを設定します。
 
     app.UseHsts();
 }
