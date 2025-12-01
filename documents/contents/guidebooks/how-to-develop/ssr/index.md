@@ -16,7 +16,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能�
 - [CSS の設定と CSS フレームワークの適用](./css-setup.md)
 - [入力値検証](./input-validation.md)
 - 画面をまたがる情報の保持（後日追加予定）
-- 集約エラーハンドラーの実装（後日追加予定）
+- [集約エラーハンドラーの実装]（./centralized-error-handling.md）
 - 結合テストプロジェクトの構成（後日追加予定）
 - [ヘルスチェック API の実装](./health-checks.md)
 - [ローカル開発環境の構築](./local-development.md)
