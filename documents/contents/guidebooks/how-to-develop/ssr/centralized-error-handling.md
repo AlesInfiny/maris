@@ -37,16 +37,46 @@ description: SSR アプリケーション開発における 集約エラーハ�
 
 ## レイアウトの変更 {#layout-with-error-boundary-integration}
 
-このセクションでは、アプリケーション共通レイアウト（`MainLayout.razor`）を変更し、 Blazor ランタイム内の未ハンドル例外を集約して扱う方法を説明します。
+このセクションでは、アプリケーションの共通レイアウト（`MainLayout.razor`）を変更し、 Blazor ランタイム内の未ハンドル例外を集約して扱う方法を説明します。
 
-- `MainLayout.razor` 内の `@Body` を `ErrorBoundary` コンポーネントでラップする理由
-    - 画面ごとではなく「レイアウト単位」でエラー境界を設けることで、全ページ共通のエラー UX を実現するため
-- `ErrorBoundary` に対して `@ref` を設定し、コードビハインド側で参照を保持する実装方針
-    - 画面遷移やパラメーター変更時に `errorBoundary.Recover()` を呼び出し、エラー状態をクリアする処理の概要
-- エラー発生時に `Error` コンポーネント（`Error.razor`）を `ErrorContent` としてレンダリングする構成
-    - `ErrorBoundary` の `ErrorContent` から例外オブジェクトを `Error` コンポーネントに渡す流れ
+MainLayout.razor を次のように修正し、エラー境界を導入します。
+このことにより、子コンポーネントで発生した未処理例外をまとめてキャッチし、エラーページの表示やエラー後の回復処理を一元化します。
 
-このセクションには、`MainLayout.razor` の該当箇所のコードスニペット（`ErrorBoundary` の配置と `OnParametersSet` のオーバーライド）を示します。
+MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネントを追加します。
+
+```html title="ErrorBoundary を 設定した MainLayout.razor" hl_lines="5-12"
+    <FluentStack Class="main" Orientation="Orientation.Horizontal" Width="100%">
+        <NavMenu />
+        <FluentBodyContent Class="body-content">
+            <div class="content">
+                <ErrorBoundary @ref="errorBoundary">
+                    <ChildContent>
+                        @Body
+                    </ChildContent>
+                    <ErrorContent>
+                        <Error Exception="@context" />
+                    </ErrorContent>
+                </ErrorBoundary>
+            </div>
+        </FluentBodyContent>
+    </FluentStack>
+    <FluentFooter>
+```
+
+`@code` ブロックを追加します。
+
+```csharp title="MainLayout.razor に追加する @code ブロック"
+@code {
+    private ErrorBoundary? errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        errorBoundary?.Recover();
+    }
+}
+```
+
+`ErrorBoundary` コンポーネントの詳細については、[ASP.NET Core Blazor アプリのエラーを処理する - エラー境界 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-10.0#error-boundaries){ target=_blank }を参照してください。
 
 ## エラーコンポーネントの設定 {#blazor-error-component-implementation}
 
@@ -76,7 +106,7 @@ description: SSR アプリケーション開発における 集約エラーハ�
 
 このセクションには、`ServerError.cshtml` の主要なマークアップと、必要に応じてレイアウトとの関連付け例をコードスニペットとして示します
 
-## エントリーポイントの設定{#entrypoint-configuration}
+## エントリーポイントの設定 {#entrypoint-configuration}
 
 このセクションでは、`Program.cs` におけるサービス登録とミドルウェア構成を通じて、これまでのエラーコンポーネント／エラーページを有効にする方法を説明します。
 
