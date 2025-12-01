@@ -30,9 +30,11 @@
     [Parameter]
     public Exception? Exception { get; set; }
 
+    // ASP.NET Core では、 IWebHostEnvironment は常に登録されており、
+    // null になることはないため、 null 非許容にはしていません。
     [Inject]
-    private IWebHostEnvironment? Environment { get; set; }
+    private IWebHostEnvironment Environment { get; set; } = default!;
 
     [MemberNotNullWhen(true, nameof(this.Exception))]
-    private bool ShowStackTrace => (this.Environment?.IsDevelopment() ?? false) && this.Exception is not null;
+    private bool ShowStackTrace => this.Environment.IsDevelopment() && this.Exception is not null;
 }
