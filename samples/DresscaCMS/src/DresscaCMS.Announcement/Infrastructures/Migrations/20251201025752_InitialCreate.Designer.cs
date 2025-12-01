@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DresscaCMS.Announcement.Migrations
+namespace DresscaCMS.Announcement.Infrastructures.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    [Migration("20251201010226_InitialCreate")]
+    [Migration("20251201025752_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

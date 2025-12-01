@@ -52,7 +52,7 @@ internal class AnnouncementDbContext : DbContext
         ArgumentNullException.ThrowIfNull(optionsBuilder);
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Dressca.Cms.Announement;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Dressca.Cms.Announcement;Integrated Security=True");
         }
 
         optionsBuilder.EnableSensitiveDataLogging();
