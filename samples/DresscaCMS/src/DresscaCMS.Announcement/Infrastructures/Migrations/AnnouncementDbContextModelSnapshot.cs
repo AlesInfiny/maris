@@ -22,7 +22,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Annoucements", b =>
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Annoucement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,10 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Announcements", (string)null);
+                    b.ToTable("Announcement", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Announcement_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)");
+                        });
 
                     b.HasData(
                         new
@@ -105,7 +108,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 5,
+                            DisplayPriority = 1,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -116,7 +119,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "更新",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 6,
+                            DisplayPriority = 2,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -127,7 +130,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "更新",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 7,
+                            DisplayPriority = 3,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -138,7 +141,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "重要",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 8,
+                            DisplayPriority = 4,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -149,7 +152,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "重要",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 9,
+                            DisplayPriority = 1,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -160,7 +163,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 10,
+                            DisplayPriority = 3,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -171,7 +174,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 11,
+                            DisplayPriority = 2,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -182,7 +185,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 12,
+                            DisplayPriority = 4,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -193,7 +196,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 13,
+                            DisplayPriority = 1,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -204,7 +207,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "更新",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 14,
+                            DisplayPriority = 3,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -215,7 +218,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "更新",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 15,
+                            DisplayPriority = 2,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -226,7 +229,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 16,
+                            DisplayPriority = 4,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -237,7 +240,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "重要",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 17,
+                            DisplayPriority = 1,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 17, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -248,7 +251,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 18,
+                            DisplayPriority = 3,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -259,7 +262,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 19,
+                            DisplayPriority = 2,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -270,7 +273,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 20,
+                            DisplayPriority = 3,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 20, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -281,7 +284,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 21,
+                            DisplayPriority = 4,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
@@ -292,60 +295,14 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2011, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2010, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 11,
+                            DisplayPriority = 1,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2019, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = true,
                             PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContentHistory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AnnouncementHistoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LanguageCode")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("LinkedUrl")
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnnouncementHistoryId");
-
-                    b.ToTable("AnnouncementContentHistory", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("49999999-4444-4444-4444-444444444444"),
-                            AnnouncementHistoryId = new Guid("39999999-3333-3333-3333-333333333333"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 削除済み",
-                            Title = "お知らせ 削除済み"
-                        });
-                });
-
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContents", b =>
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -580,6 +537,52 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         });
                 });
 
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContentHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnnouncementHistoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LanguageCode")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<string>("LinkedUrl")
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnnouncementHistoryId");
+
+                    b.ToTable("AnnouncementContentHistory", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("49999999-4444-4444-4444-444444444444"),
+                            AnnouncementHistoryId = new Guid("39999999-3333-3333-3333-333333333333"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 削除済み",
+                            Title = "お知らせ 削除済み"
+                        });
+                });
+
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -617,7 +620,12 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
                     b.HasIndex("AnnouncementId");
 
-                    b.ToTable("AnnouncementHistory", (string)null);
+                    b.ToTable("AnnouncementHistory", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_AnnouncementHistory_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)");
+
+                            t.HasCheckConstraint("CK_AnnouncementHistory_OperationType", "[OperationType] IN (0, 1, 2,3)");
+                        });
 
                     b.HasData(
                         new
@@ -627,11 +635,22 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2011, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 11,
+                            DisplayPriority = 1,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2019, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             OperationType = 3,
                             PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
+                });
+
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent", b =>
+                {
+                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Annoucement", "Announcement")
+                        .WithMany("Contents")
+                        .HasForeignKey("AnnouncementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Announcement");
                 });
 
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContentHistory", b =>
@@ -645,20 +664,9 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.Navigation("AnnouncementHistory");
                 });
 
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContents", b =>
-                {
-                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Annoucements", "Announcement")
-                        .WithMany("Contents")
-                        .HasForeignKey("AnnouncementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Announcement");
-                });
-
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory", b =>
                 {
-                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Annoucements", "Announcement")
+                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Annoucement", "Announcement")
                         .WithMany("Histories")
                         .HasForeignKey("AnnouncementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -667,7 +675,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.Navigation("Announcement");
                 });
 
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Annoucements", b =>
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Annoucement", b =>
                 {
                     b.Navigation("Contents");
 
