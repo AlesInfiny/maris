@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DresscaCMS.Announcement.Resources;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
@@ -7,6 +8,9 @@ namespace DresscaCMS.Announcement.Infrastructures.Entities;
 /// </summary>
 public class AnnouncementContent
 {
+
+    private Announcement? announcement;
+
     /// <summary>
     ///  お知らせコンテンツ ID  を取得または設定します。
     /// </summary>
@@ -24,21 +28,21 @@ public class AnnouncementContent
     /// </summary>
     [Required]
     [MaxLength(8)]
-    public string LanguageCode { get; set; } = default!;
+    public string LanguageCode { get; set; } = string.Empty;
 
     /// <summary>
     ///  タイトルを取得または設定します。
     /// </summary>
     [Required]
     [MaxLength(256)]
-    public string Title { get; set; } = default!;
+    public string Title { get; set; } = string.Empty;
 
     /// <summary>
     ///  メッセージ本文を取得または設定します。
     /// </summary>
     [Required]
     [MaxLength(512)]
-    public string Message { get; set; } = default!;
+    public string Message { get; set; } = string.Empty!;
 
     /// <summary>
     ///  リンク先 URL を取得または設定します。
@@ -54,5 +58,11 @@ public class AnnouncementContent
     /// <summary>
     ///  お知らせメッセージへのナビゲーションプロパティです。
     /// </summary>
-    public Announcement Announcement { get; set; } = default!;
+    /// <exception cref="InvalidOperationException"><see cref="Announcement"/> が設定されていません。</exception>
+    /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
+    public Announcement Announcement
+    {
+        get => this.announcement ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Announcement)));
+        private set => this.announcement = value ?? throw new ArgumentNullException(nameof(value));
+    }
 }

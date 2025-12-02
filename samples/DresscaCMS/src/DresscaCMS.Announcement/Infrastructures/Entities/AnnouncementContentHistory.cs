@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DresscaCMS.Announcement.Resources;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
@@ -7,6 +8,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Entities;
 /// </summary>
 public class AnnouncementContentHistory
 {
+    private AnnouncementHistory? announcementHistory;
+
     /// <summary>
     ///  お知らせコンテンツ履歴 ID です。
     /// </summary>
@@ -24,21 +27,21 @@ public class AnnouncementContentHistory
     /// </summary>
     [Required]
     [MaxLength(8)]
-    public string LanguageCode { get; set; } = default!;
+    public string LanguageCode { get; set; } = string.Empty;
 
     /// <summary>
     ///  タイトル（履歴）を取得または設定します。
     /// </summary>
     [Required]
     [MaxLength(256)]
-    public string Title { get; set; } = default!;
+    public string Title { get; set; } = string.Empty;
 
     /// <summary>
     ///  メッセージ本文（履歴）を取得または設定します。
     /// </summary>
     [Required]
     [MaxLength(512)]
-    public string Message { get; set; } = default!;
+    public string Message { get; set; } = string.Empty;
 
     /// <summary>
     ///  リンク先 URL（履歴）を取得または設定します。
@@ -52,7 +55,12 @@ public class AnnouncementContentHistory
     public byte[] RowVersion { get; set; } = [];
 
     /// <summary>
-    ///  お知らせメッセージ履歴へのナビゲーションプロパティです。
+    ///  お知らせメッセー履歴へのナビゲーションプロパティです。
     /// </summary>
-    public AnnouncementHistory AnnouncementHistory { get; set; } = default!;
+    /// <exception cref="InvalidOperationException"><see cref="AnnouncementHistory"/> が設定されていません。</exception>
+    /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
+    public AnnouncementHistory AnnouncementHistory {
+        get => this.announcementHistory ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AnnouncementHistory)));
+        private set => this.announcementHistory = value ?? throw new ArgumentNullException(nameof(value));
+    }
 }

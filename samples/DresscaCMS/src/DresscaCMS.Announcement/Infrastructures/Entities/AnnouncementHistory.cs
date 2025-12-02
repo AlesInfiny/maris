@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DresscaCMS.Announcement.Resources;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
@@ -7,6 +8,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Entities;
 /// </summary>
 public class AnnouncementHistory
 {
+    private Announcement? announcement;
+
     /// <summary>
     ///  お知らせメッセージ履歴 ID です。
     /// </summary>
@@ -24,7 +27,7 @@ public class AnnouncementHistory
     /// </summary>
     [Required]
     [MaxLength(256)]
-    public string ChangedBy { get; set; } = default!;
+    public string ChangedBy { get; set; } = string.Empty;
 
     /// <summary>
     ///  このレコードが作成された日時（＝更新された日時）を取得または設定します。
@@ -74,6 +77,11 @@ public class AnnouncementHistory
     /// <summary>
     ///  お知らせメッセージへのナビゲーションプロパティです。
     /// </summary>
-    [Required]
-    public Announcement Announcement { get; set; } = default!;
+    /// <exception cref="InvalidOperationException"><see cref="Announcement"/> が設定されていません。</exception>
+    /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
+    public Announcement Announcement
+    {
+        get => this.announcement ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Announcement)));
+        private set => this.announcement = value ?? throw new ArgumentNullException(nameof(value));
+    }
 }

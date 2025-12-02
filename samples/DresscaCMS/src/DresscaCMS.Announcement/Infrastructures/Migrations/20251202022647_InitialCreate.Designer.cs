@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DresscaCMS.Announcement.Infrastructures.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    [Migration("20251201025752_InitialCreate")]
+    [Migration("20251202022647_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
