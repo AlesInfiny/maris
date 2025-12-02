@@ -54,8 +54,6 @@ internal class AnnouncementDbContext : DbContext
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Dressca.Cms.Announcement;Integrated Security=True");
         }
-
-        optionsBuilder.EnableSensitiveDataLogging();
     }
 
     /// <inheritdoc/>
