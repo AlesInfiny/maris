@@ -17,7 +17,11 @@ internal class AnnouncementHistoryConfiguration : IEntityTypeConfiguration<Annou
 
         builder.ToTable(
             "AnnouncementHistory",
-            table => table.HasCheckConstraint("CK_AnnouncementHistory_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)"));
+            table =>
+            {
+                table.HasCheckConstraint("CK_AnnouncementHistory_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)");
+                table.HasCheckConstraint("CK_AnnouncementHistory_OperationType", "[OperationType] IN (0, 1, 2,3)");
+            });
 
         builder.Property(e => e.Id)
             .IsRequired();
