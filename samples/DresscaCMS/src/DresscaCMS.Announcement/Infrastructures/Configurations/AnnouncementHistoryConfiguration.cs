@@ -16,8 +16,6 @@ internal class AnnouncementHistoryConfiguration : IEntityTypeConfiguration<Annou
 
         builder.ToTable("AnnouncementHistory");
 
-        builder.HasKey(e => e.Id);
-
         builder.Property(e => e.Id)
             .IsRequired();
 

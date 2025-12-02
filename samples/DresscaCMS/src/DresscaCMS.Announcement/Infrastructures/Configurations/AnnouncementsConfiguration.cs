@@ -15,20 +15,25 @@ internal class AnnouncementsConfiguration : IEntityTypeConfiguration<Entities.An
 
         // お知らせメッセージ
         builder.ToTable("Announcements");
+
         builder.HasKey(e => e.Id);
-        builder.Property(e => e.Id)
-                .IsRequired();
+
         builder.Property(e => e.Category)
                 .HasMaxLength(128);
+
         builder.Property(e => e.PostDateTime)
                 .IsRequired();
+
         builder.Property(e => e.ExpireDateTime);
         builder.Property(e => e.DisplayPriority)
                 .IsRequired();
+
         builder.Property(e => e.CreatedAt)
                 .IsRequired();
+
         builder.Property(e => e.ChangedAt)
                 .IsRequired();
+
         builder.Property(e => e.IsDeleted)
                 .IsRequired();
 

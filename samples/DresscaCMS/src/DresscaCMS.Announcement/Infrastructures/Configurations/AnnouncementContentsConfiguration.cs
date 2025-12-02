@@ -18,9 +18,6 @@ internal class AnnouncementContentsConfiguration : IEntityTypeConfiguration<Anno
 
         builder.HasKey(e => e.Id);
 
-        builder.Property(e => e.Id)
-            .IsRequired();
-
         builder.Property(e => e.AnnouncementId)
             .IsRequired();
 

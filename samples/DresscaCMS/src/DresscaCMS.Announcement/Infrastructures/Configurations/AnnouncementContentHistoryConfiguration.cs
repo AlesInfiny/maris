@@ -18,9 +18,6 @@ internal class AnnouncementContentHistoryConfiguration : IEntityTypeConfiguratio
 
         builder.HasKey(e => e.Id);
 
-        builder.Property(e => e.Id)
-            .IsRequired();
-
         builder.Property(e => e.AnnouncementHistoryId)
             .IsRequired();
 
