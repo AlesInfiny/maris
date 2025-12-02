@@ -54,7 +54,8 @@ public class AnnouncementContentHistory
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="AnnouncementHistory"/> が設定されていません。</exception>
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
-    public AnnouncementHistory AnnouncementHistory {
+    public AnnouncementHistory AnnouncementHistory
+    {
         get => this.announcementHistory ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.AnnouncementHistory)));
         private set => this.announcementHistory = value ?? throw new ArgumentNullException(nameof(value));
     }

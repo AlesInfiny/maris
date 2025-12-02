@@ -45,9 +45,6 @@ internal class AnnouncementHistoryConfiguration : IEntityTypeConfiguration<Annou
         builder.Property(e => e.DisplayPriority)
             .IsRequired();
 
-        builder.Property(e => e.RowVersion)
-            .IsRowVersion();
-
         builder.HasMany(e => e.Contents)
             .WithOne(c => c.AnnouncementHistory)
             .HasForeignKey(c => c.AnnouncementHistoryId)

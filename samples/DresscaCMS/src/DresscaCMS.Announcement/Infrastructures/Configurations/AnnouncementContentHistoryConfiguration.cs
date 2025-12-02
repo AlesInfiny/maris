@@ -39,9 +39,6 @@ internal class AnnouncementContentHistoryConfiguration : IEntityTypeConfiguratio
         builder.Property(e => e.LinkedUrl)
             .HasMaxLength(1024);
 
-        builder.Property(e => e.RowVersion)
-            .IsRowVersion();
-
         builder.HasData(
             new AnnouncementContentHistory
             {

@@ -8,7 +8,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Entities;
 /// </summary>
 public class AnnouncementHistory
 {
-    private Announcement? announcement;
+    private Annoucements? announcement;
 
     /// <summary>
     ///  お知らせメッセージ履歴 ID です。
@@ -74,7 +74,7 @@ public class AnnouncementHistory
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="Announcement"/> が設定されていません。</exception>
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
-    public Announcement Announcement
+    public Annoucements Announcement
     {
         get => this.announcement ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Announcement)));
         private set => this.announcement = value ?? throw new ArgumentNullException(nameof(value));
