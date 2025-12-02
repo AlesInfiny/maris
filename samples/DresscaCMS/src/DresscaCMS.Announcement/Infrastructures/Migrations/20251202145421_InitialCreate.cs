@@ -14,7 +14,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Announcement",
+                name: "Announcements",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -28,7 +28,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Announcement", x => x.Id);
+                    table.PrimaryKey("PK_Announcements", x => x.Id);
                     table.CheckConstraint("CK_Announcement_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)");
                 });
 
@@ -47,9 +47,9 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                 {
                     table.PrimaryKey("PK_AnnouncementContents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AnnouncementContents_Announcement_AnnouncementId",
+                        name: "FK_AnnouncementContents_Announcements_AnnouncementId",
                         column: x => x.AnnouncementId,
-                        principalTable: "Announcement",
+                        principalTable: "Announcements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -74,9 +74,9 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     table.CheckConstraint("CK_AnnouncementHistory_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)");
                     table.CheckConstraint("CK_AnnouncementHistory_OperationType", "[OperationType] IN (0, 1, 2,3)");
                     table.ForeignKey(
-                        name: "FK_AnnouncementHistory_Announcement_AnnouncementId",
+                        name: "FK_AnnouncementHistory_Announcements_AnnouncementId",
                         column: x => x.AnnouncementId,
-                        principalTable: "Announcement",
+                        principalTable: "Announcements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -104,7 +104,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Announcement",
+                table: "Announcements",
                 columns: new[] { "Id", "Category", "ChangedAt", "CreatedAt", "DisplayPriority", "ExpireDateTime", "IsDeleted", "PostDateTime" },
                 values: new object[,]
                 {
@@ -200,7 +200,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                 name: "AnnouncementHistory");
 
             migrationBuilder.DropTable(
-                name: "Announcement");
+                name: "Announcements");
         }
     }
 }

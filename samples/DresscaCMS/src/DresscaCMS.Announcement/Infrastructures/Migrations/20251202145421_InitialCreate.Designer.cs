@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DresscaCMS.Announcement.Infrastructures.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    [Migration("20251202144701_InitialCreate")]
+    [Migration("20251202145421_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -55,7 +55,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Announcement", null, t =>
+                    b.ToTable("Announcements", null, t =>
                         {
                             t.HasCheckConstraint("CK_Announcement_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)");
                         });

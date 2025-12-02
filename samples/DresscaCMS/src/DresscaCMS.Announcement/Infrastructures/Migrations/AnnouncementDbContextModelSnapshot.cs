@@ -52,7 +52,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Announcement", null, t =>
+                    b.ToTable("Announcements", null, t =>
                         {
                             t.HasCheckConstraint("CK_Announcement_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)");
                         });
