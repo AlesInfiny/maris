@@ -12,7 +12,7 @@ description: SSR アプリケーション開発における 集約エラーハ�
 
 ## 集約エラーハンドリングの全体像 {#overview}
 
-本章では、次のような内容を実施します。
+本章では、次の内容を実施します。
 
 - Blazor ランタイム内で発生した未ハンドル例外を表示するコンポーネント（ Error.razor ）を実装します。
 - Error.razor これを囲う `ErrorBoundary` をレイアウトします。
@@ -25,13 +25,13 @@ description: SSR アプリケーション開発における 集約エラーハ�
 └ {ApplicationName}.Web
 ├ Components
 │ ├ Layout
-│    └ MainLayout.razor　............ 修正します。
+│    └ MainLayout.razor　............ 変更します。
 │ └ Pages
-│   ├ Error.razor ................... 修正します。
+│   ├ Error.razor ................... 変更します。
 │   └ Error.razor.css ............... 追加します。
 │ ├ _imports.razor .................. 変更します。
 │ └ Pages
-|   └ ServerError.cshtml ............... 追加します。
+|   └ ServerError.cshtml ............ 追加します。
 └ Program.cs ........................ 変更します。
 ```
 
@@ -42,7 +42,7 @@ description: SSR アプリケーション開発における 集約エラーハ�
 MainLayout.razor を次のように修正し、エラー境界を導入します。
 このことにより、子コンポーネントで発生した未処理例外をまとめてキャッチし、エラーページの表示やエラー後の回復処理を一元化します。
 
-MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネントを追加します。
+- MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネントを追加します。
 
 ```html title="MainLayout.razorの変更点（抜粋）" hl_lines="5-12"
     <FluentStack Class="main" Orientation="Orientation.Horizontal" Width="100%">
@@ -63,7 +63,7 @@ MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネント
     <FluentFooter>
 ```
 
-`@code` ブロックを追加します。
+- `@code` ブロックを追加します。 `OnParametersSet()` のタイミングで `Recover()` 処理をすることで、エラー状態から通常の状態へ復旧するように仕込んでいます。
 
 ```csharp title="MainLayout.razor に追加する @code ブロック"
 @code {
@@ -80,20 +80,65 @@ MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネント
 
 ## エラーコンポーネントの設定 {#blazor-error-component-implementation}
 
-このセクションでは、 Blazor ランタイム内の未ハンドル例外をユーザーに表示するためのコンポーネント `Error.razor` の実装方針を説明します。
+このセクションでは、 Blazor ランタイム内の未ハンドル例外をユーザーに表示するためのコンポーネント Error.razor の実装方針を説明します。
+開発環境でのデバッグ効率を高めるため、 `Exception` のスタックトレースの情報を表示するように実装します。
 
-スタックトレースの情報を含めます。
+Error.razor を次のように変更してください。
 
-Error.razor を次のように変更します。
+- `@pages` ブロックを次のように変更します。下記の実装では、開発者が扱いやすいように、トップページへのリンク機能とスタックトレースの表示機能を実装しています。
 
-`@pages` ブロックを次のように変更します。
+```html title="Error.razorの変更点（抜粋）" hl_lines="3-27"
+@page "/Error"
+@using System.Diagnostics
+@using System.Diagnostics.CodeAnalysis
 
-`@code` ブロックを次のように変更します。
+<PageTitle>内部サーバーエラー</PageTitle>
 
-必要に応じて、 Error.razor.css でスタイルを変更します。
-下記に例を示します。
+<h1 class="text-danger">内部サーバーエラー</h1>
+<p>
+    申し訳ありません。処理中に予期しないエラーが発生しました。<br />
+    時間をおいて再度アクセスしてください。問題が解決しない場合は、管理者へお問い合わせください。
+</p>
 
-!!! example "スタイルの設定例"
+<div>
+    <FluentAnchor Href="/" Appearance="Appearance.Hypertext">トップページに戻る</FluentAnchor>
+</div>
+
+@if (this.ShowStackTrace)
+{
+    <div class="stack-trace-box">
+        <FluentCard>
+            <h3>スタックトレース</h3>
+            <pre>
+                @this.Exception.ToString()
+            </pre>
+        </FluentCard>
+    </div>
+}
+```
+
+- `@code` ブロックを次の内容で置き換えます。
+開発環境かつ例外の情報がある場合にのみ、スタックトレースを表示します。
+
+```csharp
+@code{
+    [Parameter]
+    public Exception? Exception { get; set; }
+
+    // ASP.NET Core では、 IWebHostEnvironment は常に登録されており、
+    // null になることはないため、 null 非許容にはしていません。
+    [Inject]
+    private IWebHostEnvironment Environment { get; set; } = default!;
+
+    [MemberNotNullWhen(true, nameof(this.Exception))]
+    private bool ShowStackTrace => this.Environment.IsDevelopment() && this.Exception is not null;
+}
+```
+
+必要に応じて、 Error.razor.css を作成してスタイルを変更します。
+下記に例を示します。こだわりがなければそのまま利用して構いません。
+
+??? example "スタイルの設定例"
 
     ```css title="Error.razor.css の設定例"
     div.stack-trace-box {
@@ -104,7 +149,7 @@ Error.razor を次のように変更します。
 ## エラーページの実装 {#server-error-page-implementation}
 
 .NET ランタイム側で発生した例外を扱うためのエラーページを追加します。
-TODO なんかいろいろな理由があって、 Razor Pages（ .cshtml ）として実装します。
+Blazor の起動前にエラーをキャッチする必要があるので、 Razor コンポーネントではなく、  Razor Pages（ .cshtml ）として実装します。
 両者を区別するため、 Razor コンポーネントを格納する Pages フォルダーとは異なる Pages フォルダーに作成してください。
 
 下記にエラーページの実装例を示します。
@@ -219,3 +264,26 @@ app.MapRazorComponents<App>()
 
 app.Run();
 ```
+
+## 動作確認 {#verification}
+
+### Blazor ランタイムの例外の確認 {#verify-blazor-exception}
+
+Home.razor に下記のようにわざと例外を発生させる `@code` ブロックを実装し、アプリケーションを起動します。
+
+```csharp
+@code {
+
+    protected override void OnParametersSet()
+    {
+
+        throw new Exception("エラーページの動作確認");
+    }
+}
+```
+
+アプリケーションの起動と同時に、 Error.razor のページが表示され、内部サーバーエラーを示すメッセージと、例外のスタックトレースが表示されることを確認してください。
+
+### .NET ランタイムの例外の確認 {#verify-dotnet-exception}
+
+ブラウザーのアドレスバーから /ServerError に遷移し、 エラー画面が表示されることを確認してください。
