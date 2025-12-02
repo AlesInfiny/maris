@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using DresscaCMS.Announcement.Resources;
+﻿using DresscaCMS.Announcement.Resources;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
 /// <summary>
 ///  お知らせコンテンツのテーブルエンティティです。
 /// </summary>
-public class AnnouncementContents
+public class AnnouncementContent
 {
-    private Annoucements? announcement;
+    private Annoucement? announcement;
 
     /// <summary>
     ///  お知らせコンテンツ ID  を取得または設定します。
@@ -45,7 +44,7 @@ public class AnnouncementContents
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="Announcement"/> が設定されていません。</exception>
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
-    public Annoucements Announcement
+    public Annoucement Announcement
     {
         get => this.announcement ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Announcement)));
         private set => this.announcement = value ?? throw new ArgumentNullException(nameof(value));

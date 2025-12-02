@@ -29,12 +29,12 @@ internal class AnnouncementDbContext : DbContext
     /// <summary>
     ///  お知らせメッセージを取得します。
     /// </summary>
-    public DbSet<Entities.Annoucements> Announcements { get; set; }
+    public DbSet<Entities.Annoucement> Announcements { get; set; }
 
     /// <summary>
     ///  お知らせコンテンツを取得します。
     /// </summary>
-    public DbSet<AnnouncementContents> AnnouncementContents { get; set; }
+    public DbSet<AnnouncementContent> AnnouncementContents { get; set; }
 
     /// <summary>
     ///  お知らせメッセージ履歴を取得します。
@@ -62,8 +62,8 @@ internal class AnnouncementDbContext : DbContext
         ArgumentNullException.ThrowIfNull(modelBuilder);
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new AnnouncementsConfiguration());
-        modelBuilder.ApplyConfiguration(new AnnouncementContentsConfiguration());
+        modelBuilder.ApplyConfiguration(new AnnouncementConfiguration());
+        modelBuilder.ApplyConfiguration(new AnnouncementContentConfiguration());
         modelBuilder.ApplyConfiguration(new AnnouncementHistoryConfiguration());
         modelBuilder.ApplyConfiguration(new AnnouncementContentHistoryConfiguration());
     }

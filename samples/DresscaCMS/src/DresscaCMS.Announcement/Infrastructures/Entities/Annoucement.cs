@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DresscaCMS.Announcement.ApplicationCore.Enumerations;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;
 
 /// <summary>
 ///  お知らせメッセージのテーブルエンティティです。
 /// </summary>
-public class Annoucements
+public class Annoucement
 {
     /// <summary>
     ///  お知らせメッセージ ID を取得または設定します。
@@ -30,7 +30,7 @@ public class Annoucements
     /// <summary>
     ///  表示優先度を取得または設定します。
     /// </summary>
-    public required int DisplayPriority { get; set; }
+    public required DisplayPriorityEnum DisplayPriority { get; set; }
 
     /// <summary>
     ///  レコード作成日時を取得または設定します。
@@ -50,7 +50,7 @@ public class Annoucements
     /// <summary>
     /// お知らせコンテンツを取得または設定します。
     /// </summary>
-    public ICollection<AnnouncementContents> Contents { get; set; } = [];
+    public ICollection<AnnouncementContent> Contents { get; set; } = [];
 
     /// <summary>
     ///  お知らせメッセージ履歴を取得または設定します。
