@@ -27,21 +27,21 @@ public class AnnouncementContents
     /// </summary>
     [Required]
     [MaxLength(8)]
-    public string LanguageCode { get; set; } = string.Empty;
+    public required string LanguageCode { get; set; }
 
     /// <summary>
     ///  タイトルを取得または設定します。
     /// </summary>
     [Required]
     [MaxLength(256)]
-    public string Title { get; set; } = string.Empty;
+    public required string Title { get; set; }
 
     /// <summary>
     ///  メッセージ本文を取得または設定します。
     /// </summary>
     [Required]
     [MaxLength(512)]
-    public string Message { get; set; } = string.Empty!;
+    public required string Message { get; set; }
 
     /// <summary>
     ///  リンク先 URL を取得または設定します。

@@ -27,21 +27,21 @@ public class AnnouncementContentHistory
     /// </summary>
     [Required]
     [MaxLength(8)]
-    public string LanguageCode { get; set; } = string.Empty;
+    public required string LanguageCode { get; set; }
 
     /// <summary>
     ///  タイトル（履歴）を取得または設定します。
     /// </summary>
     [Required]
     [MaxLength(256)]
-    public string Title { get; set; } = string.Empty;
+    public required string Title { get; set; }
 
     /// <summary>
     ///  メッセージ本文（履歴）を取得または設定します。
     /// </summary>
     [Required]
     [MaxLength(512)]
-    public string Message { get; set; } = string.Empty;
+    public required string Message { get; set; }
 
     /// <summary>
     ///  リンク先 URL（履歴）を取得または設定します。

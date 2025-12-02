@@ -27,7 +27,7 @@ public class AnnouncementHistory
     /// </summary>
     [Required]
     [MaxLength(256)]
-    public string ChangedBy { get; set; } = string.Empty;
+    public required string ChangedBy { get; set; }
 
     /// <summary>
     ///  このレコードが作成された日時（＝更新された日時）を取得または設定します。
