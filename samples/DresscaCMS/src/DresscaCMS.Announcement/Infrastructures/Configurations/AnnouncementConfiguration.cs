@@ -15,7 +15,9 @@ internal class AnnouncementConfiguration : IEntityTypeConfiguration<Entities.Ann
         ArgumentNullException.ThrowIfNull(builder);
 
         // お知らせメッセージ
-        builder.ToTable("Announcements");
+        builder.ToTable(
+           "Announcement",
+           table => table.HasCheckConstraint("CK_Announcement_DisplayPriority", "[DisplayPriority] IN (1, 2, 3, 4)"));
 
         builder.HasKey(e => e.Id);
 
