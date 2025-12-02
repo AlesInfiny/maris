@@ -14,7 +14,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Announcement",
+                name: "Announcements",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -24,16 +24,15 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     DisplayPriority = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     ChangedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Announcement", x => x.Id);
+                    table.PrimaryKey("PK_Announcements", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AnnouncementContent",
+                name: "AnnouncementContents",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -41,16 +40,15 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     LanguageCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Message = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    LinkedUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                    LinkedUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnnouncementContent", x => x.Id);
+                    table.PrimaryKey("PK_AnnouncementContents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AnnouncementContent_Announcement_AnnouncementId",
+                        name: "FK_AnnouncementContents_Announcements_AnnouncementId",
                         column: x => x.AnnouncementId,
-                        principalTable: "Announcement",
+                        principalTable: "Announcements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -67,16 +65,15 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     Category = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
                     PostDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     ExpireDateTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    DisplayPriority = table.Column<int>(type: "int", nullable: false),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                    DisplayPriority = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AnnouncementHistory", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AnnouncementHistory_Announcement_AnnouncementId",
+                        name: "FK_AnnouncementHistory_Announcements_AnnouncementId",
                         column: x => x.AnnouncementId,
-                        principalTable: "Announcement",
+                        principalTable: "Announcements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -90,8 +87,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     LanguageCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Message = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    LinkedUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
-                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false)
+                    LinkedUrl = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -105,7 +101,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Announcement",
+                table: "Announcements",
                 columns: new[] { "Id", "Category", "ChangedAt", "CreatedAt", "DisplayPriority", "ExpireDateTime", "IsDeleted", "PostDateTime" },
                 values: new object[,]
                 {
@@ -134,7 +130,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AnnouncementContent",
+                table: "AnnouncementContents",
                 columns: new[] { "Id", "AnnouncementId", "LanguageCode", "LinkedUrl", "Message", "Title" },
                 values: new object[,]
                 {
@@ -173,14 +169,14 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                 values: new object[] { new Guid("49999999-4444-4444-4444-444444444444"), new Guid("39999999-3333-3333-3333-333333333333"), "ja", "https://maris.alesinfiny.org/", "内容 削除済み", "お知らせ 削除済み" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AnnouncementContent_AnnouncementId",
-                table: "AnnouncementContent",
-                column: "AnnouncementId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AnnouncementContentHistory_AnnouncementHistoryId",
                 table: "AnnouncementContentHistory",
                 column: "AnnouncementHistoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnnouncementContents_AnnouncementId",
+                table: "AnnouncementContents",
+                column: "AnnouncementId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnnouncementHistory_AnnouncementId",
@@ -192,16 +188,16 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AnnouncementContent");
+                name: "AnnouncementContentHistory");
 
             migrationBuilder.DropTable(
-                name: "AnnouncementContentHistory");
+                name: "AnnouncementContents");
 
             migrationBuilder.DropTable(
                 name: "AnnouncementHistory");
 
             migrationBuilder.DropTable(
-                name: "Announcement");
+                name: "Announcements");
         }
     }
 }

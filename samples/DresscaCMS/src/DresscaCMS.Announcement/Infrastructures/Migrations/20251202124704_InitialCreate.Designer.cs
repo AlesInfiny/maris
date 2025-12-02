@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DresscaCMS.Announcement.Infrastructures.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    [Migration("20251202022647_InitialCreate")]
+    [Migration("20251202124704_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Announcement", b =>
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Annoucements", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,15 +53,9 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.Property<DateTimeOffset>("PostDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Announcement", (string)null);
+                    b.ToTable("Announcements", (string)null);
 
                     b.HasData(
                         new
@@ -73,8 +67,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 1,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -85,8 +78,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 2,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -97,8 +89,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 3,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -109,8 +100,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 4,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -121,8 +111,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 5,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -133,8 +122,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 6,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 6, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -145,8 +133,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 7,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 7, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -157,8 +144,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 8,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 8, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -169,8 +155,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 9,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 9, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -181,8 +166,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 10,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -193,8 +177,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 11,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 11, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -205,8 +188,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 12,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -217,8 +199,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 13,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -229,8 +210,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 14,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 14, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -241,8 +221,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 15,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -253,8 +232,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 16,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 16, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -265,8 +243,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 17,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 17, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -277,8 +254,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 18,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 18, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -289,8 +265,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 19,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -301,8 +276,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 20,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 20, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -313,8 +287,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 21,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         },
                         new
                         {
@@ -325,271 +298,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 11,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2019, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = true,
-                            PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
-                        });
-                });
-
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AnnouncementId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LanguageCode")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("LinkedUrl")
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnnouncementId");
-
-                    b.ToTable("AnnouncementContent", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222201"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111111"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 1",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 1"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222202"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111112"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 2",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 2"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222203"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111113"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 3",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 3"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222204"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111114"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 4",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 4"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222205"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111115"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 5",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 5"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222206"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111116"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 6",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 6"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222207"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111117"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 7",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 7"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222208"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111118"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 8",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 8"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222209"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111119"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 9",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 9"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222210"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111120"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 10",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 10"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222211"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111121"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 11",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 11"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222212"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111122"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 12",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 12"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222213"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111123"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 13",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 13"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222214"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111124"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 14",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 14"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222215"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111125"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 15",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 15"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222216"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111126"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 16",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 16"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222217"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111127"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 17",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 17"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222218"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111128"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 18",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 18"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222219"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111129"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 19",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 19"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222220"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111130"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 20",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 20"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2222-2222-2222-222222222221"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111131"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 21",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 21"
-                        },
-                        new
-                        {
-                            Id = new Guid("29999999-2222-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("19999999-1111-1111-1111-111111111111"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 削除済み",
-                            RowVersion = new byte[0],
-                            Title = "お知らせ 削除済み"
+                            PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
@@ -616,12 +325,6 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -641,7 +344,241 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 削除済み",
-                            RowVersion = new byte[0],
+                            Title = "お知らせ 削除済み"
+                        });
+                });
+
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContents", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AnnouncementId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LanguageCode")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<string>("LinkedUrl")
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnnouncementId");
+
+                    b.ToTable("AnnouncementContents", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222201"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 1",
+                            Title = "お知らせ 1"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222202"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111112"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 2",
+                            Title = "お知らせ 2"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222203"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111113"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 3",
+                            Title = "お知らせ 3"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222204"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111114"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 4",
+                            Title = "お知らせ 4"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222205"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111115"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 5",
+                            Title = "お知らせ 5"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222206"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111116"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 6",
+                            Title = "お知らせ 6"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222207"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111117"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 7",
+                            Title = "お知らせ 7"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222208"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111118"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 8",
+                            Title = "お知らせ 8"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222209"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111119"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 9",
+                            Title = "お知らせ 9"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222210"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111120"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 10",
+                            Title = "お知らせ 10"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222211"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111121"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 11",
+                            Title = "お知らせ 11"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222212"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111122"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 12",
+                            Title = "お知らせ 12"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222213"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111123"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 13",
+                            Title = "お知らせ 13"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222214"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111124"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 14",
+                            Title = "お知らせ 14"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222215"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111125"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 15",
+                            Title = "お知らせ 15"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222216"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111126"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 16",
+                            Title = "お知らせ 16"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222217"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111127"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 17",
+                            Title = "お知らせ 17"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222218"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111128"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 18",
+                            Title = "お知らせ 18"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222219"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111129"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 19",
+                            Title = "お知らせ 19"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222220"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111130"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 20",
+                            Title = "お知らせ 20"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222221"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111131"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 21",
+                            Title = "お知らせ 21"
+                        },
+                        new
+                        {
+                            Id = new Guid("29999999-2222-2222-2222-222222222222"),
+                            AnnouncementId = new Guid("19999999-1111-1111-1111-111111111111"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 削除済み",
                             Title = "お知らせ 削除済み"
                         });
                 });
@@ -679,12 +616,6 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.Property<DateTimeOffset>("PostDateTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AnnouncementId");
@@ -702,20 +633,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             DisplayPriority = 11,
                             ExpireDateTime = new DateTimeOffset(new DateTime(2019, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             OperationType = 3,
-                            PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RowVersion = new byte[0]
+                            PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
-                });
-
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent", b =>
-                {
-                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Announcement", "Announcement")
-                        .WithMany("Contents")
-                        .HasForeignKey("AnnouncementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Announcement");
                 });
 
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContentHistory", b =>
@@ -729,9 +648,20 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.Navigation("AnnouncementHistory");
                 });
 
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContents", b =>
+                {
+                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Annoucements", "Announcement")
+                        .WithMany("Contents")
+                        .HasForeignKey("AnnouncementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Announcement");
+                });
+
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory", b =>
                 {
-                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Announcement", "Announcement")
+                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Annoucements", "Announcement")
                         .WithMany("Histories")
                         .HasForeignKey("AnnouncementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -740,7 +670,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.Navigation("Announcement");
                 });
 
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Announcement", b =>
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Annoucements", b =>
                 {
                     b.Navigation("Contents");
 
