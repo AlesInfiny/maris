@@ -10,20 +10,17 @@ public class Annoucements
     /// <summary>
     ///  お知らせメッセージ ID を取得または設定します。
     /// </summary>
-    [Key]
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
 
     /// <summary>
     ///  お知らせメッセージのカテゴリーを取得または設定します。
     /// </summary>
-    [MaxLength(128)]
     public string? Category { get; set; }
 
     /// <summary>
     ///  掲載開始日時を取得または設定します。
     /// </summary>
-    [Required]
-    public DateTimeOffset PostDateTime { get; set; }
+    public required DateTimeOffset PostDateTime { get; set; }
 
     /// <summary>
     ///  掲載終了日時を取得または設定します。
@@ -33,26 +30,22 @@ public class Annoucements
     /// <summary>
     ///  表示優先度を取得または設定します。
     /// </summary>
-    [Required]
-    public int DisplayPriority { get; set; }
+    public required int DisplayPriority { get; set; }
 
     /// <summary>
     ///  レコード作成日時を取得または設定します。
     /// </summary>
-    [Required]
-    public DateTimeOffset CreatedAt { get; set; }
+    public required DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
     ///  レコード更新日時を取得または設定します。
     /// </summary>
-    [Required]
-    public DateTimeOffset ChangedAt { get; set; }
+    public required DateTimeOffset ChangedAt { get; set; }
 
     /// <summary>
     ///  論理削除フラグを取得または設定します。
     /// </summary>
-    [Required]
-    public bool IsDeleted { get; set; }
+    public required bool IsDeleted { get; set; }
 
     /// <summary>
     /// お知らせコンテンツを取得または設定します。

@@ -13,40 +13,31 @@ public class AnnouncementContents
     /// <summary>
     ///  お知らせコンテンツ ID  を取得または設定します。
     /// </summary>
-    [Key]
-    public Guid Id { get; set; }
+    public required Guid Id { get; set; }
 
     /// <summary>
     ///  お知らせ ID を取得または設定します。
     /// </summary>
-    [Required]
-    public Guid AnnouncementId { get; set; }
+    public required Guid AnnouncementId { get; set; }
 
     /// <summary>
     ///  言語コード（ "ja", "en" 等）を取得または設定します。
     /// </summary>
-    [Required]
-    [MaxLength(8)]
     public required string LanguageCode { get; set; }
 
     /// <summary>
     ///  タイトルを取得または設定します。
     /// </summary>
-    [Required]
-    [MaxLength(256)]
     public required string Title { get; set; }
 
     /// <summary>
     ///  メッセージ本文を取得または設定します。
     /// </summary>
-    [Required]
-    [MaxLength(512)]
     public required string Message { get; set; }
 
     /// <summary>
     ///  リンク先 URL を取得または設定します。
     /// </summary>
-    [MaxLength(1024)]
     public string? LinkedUrl { get; set; }
 
     /// <summary>

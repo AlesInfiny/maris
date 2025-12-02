@@ -13,40 +13,31 @@ public class AnnouncementContentHistory
     /// <summary>
     ///  お知らせコンテンツ履歴 ID です。
     /// </summary>
-    [Key]
     public Guid Id { get; set; }
 
     /// <summary>
     ///  お知らせメッセージ履歴 ID です。
     /// </summary>
-    [Required]
-    public Guid AnnouncementHistoryId { get; set; }
+    public required Guid AnnouncementHistoryId { get; set; }
 
     /// <summary>
     ///  言語コード（履歴）を取得または設定します。
     /// </summary>
-    [Required]
-    [MaxLength(8)]
     public required string LanguageCode { get; set; }
 
     /// <summary>
     ///  タイトル（履歴）を取得または設定します。
     /// </summary>
-    [Required]
-    [MaxLength(256)]
     public required string Title { get; set; }
 
     /// <summary>
     ///  メッセージ本文（履歴）を取得または設定します。
     /// </summary>
-    [Required]
-    [MaxLength(512)]
     public required string Message { get; set; }
 
     /// <summary>
     ///  リンク先 URL（履歴）を取得または設定します。
     /// </summary>
-    [MaxLength(1024)]
     public string? LinkedUrl { get; set; }
 
     /// <summary>
