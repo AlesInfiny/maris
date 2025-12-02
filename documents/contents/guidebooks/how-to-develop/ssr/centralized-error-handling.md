@@ -15,7 +15,7 @@ description: SSR アプリケーション開発における 集約エラーハ�
 本章では、次の内容を実施します。
 
 - Blazor ランタイム内で発生した未処理例外を表示するコンポーネント（ Error.razor ）を実装します。
-- Error.razor これを囲う `ErrorBoundary` をレイアウトします。
+- `ErrorBoundary` で `Error.razor` を囲むようにレイアウトします。
 - .NET ランタイム（ Blazor 起動前）で発生した例外を表示する Razor Pages ベースのエラーページ （ ServerError.cshtml ）を実装します。
 - エントリーポイント（ Program.cs ）で、上記のエラーハンドリングを有効にするための設定をします。
 
