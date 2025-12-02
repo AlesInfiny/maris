@@ -65,11 +65,6 @@ public class AnnouncementHistory
     public int DisplayPriority { get; set; }
 
     /// <summary>
-    ///  楽観同時実行制御カラムを取得または設定します。
-    /// </summary>
-    public byte[] RowVersion { get; set; } = [];
-
-    /// <summary>
     ///  お知らせコンテンツ履歴へのナビゲーションプロパティです。
     /// </summary>
     public ICollection<AnnouncementContentHistory> Contents { get; set; } = [];

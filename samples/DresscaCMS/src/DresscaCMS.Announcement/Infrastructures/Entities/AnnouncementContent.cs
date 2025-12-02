@@ -51,11 +51,6 @@ public class AnnouncementContent
     public string? LinkedUrl { get; set; }
 
     /// <summary>
-    ///  楽観同時実行制御カラムを取得または設定します。
-    /// </summary>
-    public byte[] RowVersion { get; set; } = [];
-
-    /// <summary>
     ///  お知らせメッセージへのナビゲーションプロパティです。
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="Announcement"/> が設定されていません。</exception>

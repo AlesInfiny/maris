@@ -55,11 +55,6 @@ public class Announcement
     public bool IsDeleted { get; set; }
 
     /// <summary>
-    ///  楽観同時実行制御カラムを取得または設定します。
-    /// </summary>
-    public byte[] RowVersion { get; set; } = [];
-
-    /// <summary>
     /// お知らせコンテンツを取得または設定します。
     /// </summary>
     public ICollection<AnnouncementContent> Contents { get; set; } = [];

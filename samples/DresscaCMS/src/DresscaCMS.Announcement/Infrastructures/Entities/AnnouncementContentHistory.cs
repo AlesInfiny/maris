@@ -50,11 +50,6 @@ public class AnnouncementContentHistory
     public string? LinkedUrl { get; set; }
 
     /// <summary>
-    ///  楽観同時実行制御カラムです。
-    /// </summary>
-    public byte[] RowVersion { get; set; } = [];
-
-    /// <summary>
     ///  お知らせメッセー履歴へのナビゲーションプロパティです。
     /// </summary>
     /// <exception cref="InvalidOperationException"><see cref="AnnouncementHistory"/> が設定されていません。</exception>
