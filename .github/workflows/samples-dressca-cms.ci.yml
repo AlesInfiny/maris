@@ -21,7 +21,7 @@ defaults:
 
 jobs:
   build:
-    name: バックエンドアプリケーションのビルド
+    name: DresscaCMSのビルド
     runs-on: ubuntu-latest
     env:
       DOTNET_NOLOGO: true
