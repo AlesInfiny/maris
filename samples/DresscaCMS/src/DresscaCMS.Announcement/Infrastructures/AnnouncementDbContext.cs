@@ -29,7 +29,7 @@ internal class AnnouncementDbContext : DbContext
     /// <summary>
     ///  お知らせメッセージを取得します。
     /// </summary>
-    public DbSet<Entities.Annoucement> Announcements { get; set; }
+    public DbSet<Entities.Announcement> Announcements { get; set; }
 
     /// <summary>
     ///  お知らせコンテンツを取得します。

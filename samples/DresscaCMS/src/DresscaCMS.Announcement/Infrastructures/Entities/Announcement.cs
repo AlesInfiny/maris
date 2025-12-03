@@ -5,7 +5,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Entities;
 /// <summary>
 ///  お知らせメッセージのテーブルエンティティです。
 /// </summary>
-public class Annoucement
+public class Announcement
 {
     /// <summary>
     ///  お知らせメッセージ ID を取得または設定します。
