@@ -271,7 +271,7 @@ app.Run();
 
 Home.razor に下記のようにわざと例外を発生させる `@code` ブロックを実装し、アプリケーションを起動します。
 
-```csharp
+```csharp title="例外を発生させる Home.razor"
 @code {
 
     protected override void OnParametersSet()
@@ -286,4 +286,21 @@ Home.razor に下記のようにわざと例外を発生させる `@code` ブロ
 
 ### .NET ランタイムの例外の確認 {#verify-dotnet-exception}
 
-ブラウザーのアドレスバーから /ServerError に遷移し、 エラー画面が表示されることを確認してください。
+NavMenu.razor に下記のようにわざと例外を発生させる `@code` ブロックを実装し、アプリケーションを起動します。
+
+```csharp title="例外を発生させる Home.razor" hl_lines="3-6"
+@code {
+
+    protected override void OnParametersSet()
+    {
+        throw new Exception("エラーページの動作確認");
+    }
+
+    private bool expanded = true;
+}
+```
+
+アプリケーションの起動と同時に、「 An unhandled exception occurred while processing the request. 」ともに詳細なエラー情報を示す画面に遷移することを確認して下さい。
+
+また、本番環境用のエラーページ ServerError.cshtml には、アドレスバーに直接 /ServerError を打ち込むことで遷移可能です。
+こちらのページはエラー発生時にユーザーが閲覧することを想定しているので、詳細なエラー情報を表示しません。
