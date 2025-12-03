@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DresscaCMS.Announcement.Infrastructures.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    [Migration("20251202145421_InitialCreate")]
+    [Migration("20251203022551_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Annoucement", b =>
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Announcement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -647,7 +647,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent", b =>
                 {
-                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Annoucement", "Announcement")
+                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Announcement", "Announcement")
                         .WithMany("Contents")
                         .HasForeignKey("AnnouncementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -669,7 +669,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
 
             modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory", b =>
                 {
-                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Annoucement", "Announcement")
+                    b.HasOne("DresscaCMS.Announcement.Infrastructures.Entities.Announcement", "Announcement")
                         .WithMany("Histories")
                         .HasForeignKey("AnnouncementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -678,7 +678,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.Navigation("Announcement");
                 });
 
-            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Annoucement", b =>
+            modelBuilder.Entity("DresscaCMS.Announcement.Infrastructures.Entities.Announcement", b =>
                 {
                     b.Navigation("Contents");
 
