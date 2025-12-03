@@ -117,24 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MSG03-001" xml:space="preserve">
-    <value>登録されているお知らせメッセージはありません。 </value>
-    <comment>お知らせメッセージが 1 件も存在しない場合 </comment>
+  <data name="AnnouncementsApplicationService_GetPagedAnnoucementeEnd" xml:space="preserve">
+    <value>ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得しました。</value>
   </data>
-  <data name="MSG03-002" xml:space="preserve">
-    <value>保存しました。 </value>
-    <comment>お知らせメッセージ保存成功時</comment>
-  </data>
-  <data name="MSG03-003" xml:space="preserve">
-    <value>ID {0} に一致するお知らせメッセージはありません。 </value>
-    <comment>ID に一致するお知らせメッセージが取得できなかった場合 </comment>
-  </data>
-  <data name="MSG03-004" xml:space="preserve">
-    <value>お知らせメッセージの言語が重複しています。 </value>
-    <comment>お知らせコンテンツの言語が重複している場合</comment>
-  </data>
-  <data name="MSG03-005" xml:space="preserve">
-    <value>お知らせメッセージは 1 件以上作成してください。 </value>
-    <comment>お知らせコンテンツが 1 件も登録されていない場合 </comment>
+  <data name="AnnouncementsApplicationService_GetPagedAnnouncementsStart" xml:space="preserve">
+    <value>ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得します。</value>
   </data>
 </root>
