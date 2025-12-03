@@ -59,5 +59,14 @@ namespace DresscaCMS.Announcement.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   {0} プロパティが初期化されていません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string PropertyNotInitialized {
+            get {
+                return ResourceManager.GetString("PropertyNotInitialized", resourceCulture);
+            }
+        }
     }
 }
