@@ -76,7 +76,7 @@ MainLayout.razor を次のように修正し、エラー境界を導入します
 }
 ```
 
-`ErrorBoundary` コンポーネントの詳細については、[ASP.NET Core Blazor アプリのエラーを処理する - エラー境界 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-10.0#error-boundaries){ target=_blank }を参照してください。
+`ErrorBoundary` コンポーネントの詳細については、[ASP.NET Core Blazor アプリのエラーを処理する - エラー境界 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/fundamentals/handle-errors#error-boundaries){ target=_blank }を参照してください。
 
 ## エラーコンポーネントの設定 {#blazor-error-component-implementation}
 
