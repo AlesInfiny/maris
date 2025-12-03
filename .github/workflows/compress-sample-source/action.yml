@@ -25,3 +25,9 @@ runs:
       run: |
         cd samples/AzureADB2CAuth
         zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/azure-ad-b2c-auth.zip *
+
+    - name: azure-cms.zip の作成
+      shell: bash
+      run: |
+        cd samples/DresscaCMS
+        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/azure-cms.zip *
