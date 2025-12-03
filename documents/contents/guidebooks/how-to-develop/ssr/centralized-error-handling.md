@@ -42,7 +42,7 @@ description: SSR アプリケーション開発における 集約エラーハ�
 MainLayout.razor を次のように修正し、エラー境界を導入します。
 このことにより、子コンポーネントで発生した未処理例外をまとめてキャッチし、エラーページの表示やエラー後の回復処理を一元化します。
 
-- MainLayout.razor の `@page` ブロックに ErrorBoundary コンポーネントを追加します。
+- MainLayout.razor のビューに ErrorBoundary コンポーネントを追加します。
 
 ```html title="MainLayout.razorの変更点（抜粋）" hl_lines="5-12"
     <FluentStack Class="main" Orientation="Orientation.Horizontal" Width="100%">
