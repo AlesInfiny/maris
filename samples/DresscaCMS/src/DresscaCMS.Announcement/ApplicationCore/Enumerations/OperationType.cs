@@ -3,7 +3,7 @@
     /// <summary>
     /// 操作種別を表す列挙型です。
     /// </summary>
-    public enum OperationTypeEnum
+    public enum OperationType
 {
     /// <summary>未定義です。</summary>
     None = 0,

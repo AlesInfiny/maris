@@ -33,7 +33,7 @@ public class AnnouncementHistory
     /// <summary>
     ///  変更の種類（作成、編集、削除）を取得または設定します。
     /// </summary>
-    public required OperationTypeEnum OperationType { get; set; }
+    public required OperationType OperationType { get; set; }
 
     /// <summary>
     ///  お知らせメッセージのカテゴリー（履歴）を取得または設定します。
@@ -53,7 +53,7 @@ public class AnnouncementHistory
     /// <summary>
     ///  表示優先度（履歴）を取得または設定します。
     /// </summary>
-    public required DisplayPriorityEnum DisplayPriority { get; set; }
+    public required DisplayPriority DisplayPriority { get; set; }
 
     /// <summary>
     ///  お知らせコンテンツ履歴へのナビゲーションプロパティです。

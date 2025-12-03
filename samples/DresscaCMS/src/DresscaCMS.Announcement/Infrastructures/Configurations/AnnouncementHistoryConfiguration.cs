@@ -62,11 +62,11 @@ internal class AnnouncementHistoryConfiguration : IEntityTypeConfiguration<Annou
                 AnnouncementId = Guid.Parse("19999999-1111-1111-1111-111111111111"),
                 ChangedBy = "system",
                 CreatedAt = new DateTimeOffset(2011, 1, 21, 0, 0, 0, TimeSpan.Zero),
-                OperationType = OperationTypeEnum.Delete,
+                OperationType = OperationType.Delete,
                 Category = "一般",
                 PostDateTime = new DateTimeOffset(2018, 1, 21, 0, 0, 0, TimeSpan.Zero),
                 ExpireDateTime = new DateTimeOffset(2019, 1, 1, 21, 0, 0, TimeSpan.Zero),
-                DisplayPriority = DisplayPriorityEnum.Critical,
+                DisplayPriority = DisplayPriority.Critical,
             });
     }
 }

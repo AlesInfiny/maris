@@ -3,7 +3,7 @@
 /// <summary>
 ///  お知らせメッセージの優先度を示す列挙型です。
 /// </summary>
-public enum DisplayPriorityEnum
+public enum DisplayPriority
 {
     /// <summary>緊急です。</summary>
     Critical = 1,

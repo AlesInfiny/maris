@@ -30,7 +30,7 @@ public class Annoucement
     /// <summary>
     ///  表示優先度を取得または設定します。
     /// </summary>
-    public required DisplayPriorityEnum DisplayPriority { get; set; }
+    public required DisplayPriority DisplayPriority { get; set; }
 
     /// <summary>
     ///  レコード作成日時を取得または設定します。
