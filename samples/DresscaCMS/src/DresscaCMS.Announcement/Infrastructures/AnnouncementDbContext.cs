@@ -7,7 +7,7 @@ namespace DresscaCMS.Announcement.Infrastructures;
 /// <summary>
 ///  お知らせメッセージのデータベースにアクセスするための <see cref="DbContext" />を表します。
 /// </summary>
-internal class AnnouncementDbContext : DbContext
+public class AnnouncementDbContext : DbContext
 {
     /// <summary>
     ///  <see cref="AnnouncementDbContext" /> クラスの新しいインスタンスを初期化します。

@@ -46,9 +46,9 @@
                         <FluentNavLink Href="/announcement/add" Class="nav-link">新規お知らせメッセージ作成</FluentNavLink>
                     </div>
                 </FluentStack>
-                <FluentDataGrid Items="@announcementEntities" AutoFit="false">
+                <FluentDataGrid Items="@announcementEntities" TGridItem="Announcement" AutoFit="false">
                     <TemplateColumn Title="タイトル" Width="400px">
-                        <a href="/announcements/@context.Id">@context.Title</a>
+                        <a href="/announcements/@context.Id">@context.Contents.</a>
                     </TemplateColumn>
                     <TemplateColumn Title="掲載日" Width="200px">
                         @context.PostDateTime.ToString("yyyy/MM/dd") ～ @context.ExpireDateTime?.ToString("yyyy/MM/dd")

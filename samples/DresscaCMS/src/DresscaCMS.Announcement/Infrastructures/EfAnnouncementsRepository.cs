@@ -6,7 +6,7 @@ namespace DresscaCMS.Announcement.Infrastructures;
 /// <summary>
 ///  お知らせメッセージの取得を行う EF Core リポジトリ実装です。
 /// </summary>
-internal class EfAnnouncementsRepository : IAnnouncementsRepository
+public class EfAnnouncementsRepository : IAnnouncementsRepository
 {
     private readonly AnnouncementDbContext dbContext;
 
