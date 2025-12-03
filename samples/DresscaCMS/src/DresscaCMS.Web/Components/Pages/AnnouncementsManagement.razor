@@ -1,7 +1,9 @@
 ﻿@page "/announcements"
-@using DresscaCMS.ApplicationCore
+@using DresscaCMS.Announcement
+@using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
+@using DresscaCMS.Announcement.Infrastructures.Entities
 @inject NavigationManager Navigation
-@inject AnnouncementManagementService AnnouncementManagementService
+@inject AnnouncementsApplicationService AnnouncementsService
 
 <h3>お知らせメッセージ一覧</h3>
 <FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
@@ -27,7 +29,7 @@
     }
     else
     {
-        @if (!announcementEntities?.Any())
+        @if (announcementEntities is null || !announcementEntities.Any())
         {
             <p>登録されているお知らせメッセージはありません。</p>
         }
@@ -113,8 +115,8 @@
     }
 </FluentStack>
 
-@code {
-    private IQueryable<AnnouncementEntity>? announcementEntities;
+    @code {
+    private IQueryable<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>? announcementEntities;
     private int lastPageNumber;
     private int totalCount;
     private int startIndex;
@@ -130,12 +132,12 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        var announcementsDto = await AnnouncementManagementService.GetPagedAnnouncementsAsync(PageNumber, PageSize);
+        var announcementsDto = await AnnouncementsService.GetPagedAnnouncementsAsync(PageNumber, PageSize);
         announcementEntities = announcementsDto.Announcements.AsQueryable();
         lastPageNumber = announcementsDto.LastPageNumber;
         totalCount = announcementsDto.TotalCount;
-        startIndex = announcementsDto.StartIndex;
-        endIndex = announcementsDto.EndIndex;
+        startIndex = announcementsDto.DisplayFrom;
+        endIndex = announcementsDto.DisplayTo;
         PageNumber = announcementsDto.PageNumber;
         PageSize = announcementsDto.PageSize;
         isLoading = false;
