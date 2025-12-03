@@ -7,8 +7,6 @@ namespace DresscaCMS.Announcement.Infrastructures.Entities;
 /// </summary>
 public class AnnouncementContent
 {
-    private Announcement? announcement;
-
     /// <summary>
     ///  お知らせコンテンツ ID  を取得または設定します。
     /// </summary>
@@ -46,7 +44,7 @@ public class AnnouncementContent
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
     public Announcement Announcement
     {
-        get => this.announcement ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Announcement)));
-        private set => this.announcement = value ?? throw new ArgumentNullException(nameof(value));
+        get => field ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.Announcement)));
+        private set => field = value ?? throw new ArgumentNullException(nameof(value));
     }
 }
