@@ -1,4 +1,4 @@
-﻿using DresscaCMS.Announcement.ApplicationCore.Enumerations;
+﻿using DresscaCMS.Announcement.ApplicationCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

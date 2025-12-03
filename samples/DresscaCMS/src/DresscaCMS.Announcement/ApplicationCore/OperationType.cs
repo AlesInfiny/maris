@@ -1,4 +1,4 @@
-﻿namespace DresscaCMS.Announcement.ApplicationCore.Enumerations;
+﻿namespace DresscaCMS.Announcement.ApplicationCore;
 
     /// <summary>
     /// 操作種別を表す列挙型です。

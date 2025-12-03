@@ -1,4 +1,4 @@
-﻿using DresscaCMS.Announcement.ApplicationCore.Enumerations;
+﻿using DresscaCMS.Announcement.ApplicationCore;
 using DresscaCMS.Announcement.Resources;
 
 namespace DresscaCMS.Announcement.Infrastructures.Entities;

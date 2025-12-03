@@ -1,4 +1,4 @@
-﻿namespace DresscaCMS.Announcement.ApplicationCore.Enumerations;
+﻿namespace DresscaCMS.Announcement.ApplicationCore;
 
 /// <summary>
 ///  お知らせメッセージの優先度を示す列挙型です。
