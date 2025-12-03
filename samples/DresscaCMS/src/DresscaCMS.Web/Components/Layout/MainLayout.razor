@@ -8,7 +8,14 @@
         <NavMenu />
         <FluentBodyContent Class="body-content">
             <div class="content">
-                @Body
+                <ErrorBoundary @ref="errorBoundary">
+                    <ChildContent>
+                        @Body
+                    </ChildContent>
+                    <ErrorContent>
+                        <Error Exception="@context" />
+                    </ErrorContent>
+                </ErrorBoundary>
             </div>
         </FluentBodyContent>
     </FluentStack>
@@ -24,3 +31,12 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+@code {
+    private ErrorBoundary? errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        errorBoundary?.Recover();
+    }
+}
