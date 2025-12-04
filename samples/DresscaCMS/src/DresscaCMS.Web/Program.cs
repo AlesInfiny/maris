@@ -1,5 +1,7 @@
-﻿using DresscaCMS.Web.Components;
+﻿using DresscaCMS.Authentication.Infrastructures;
+using DresscaCMS.Web.Components;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,10 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages();
+
+var connectionString = builder.Configuration.GetConnectionString("AuthenticationConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContextFactory<AuthenticationDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 if (builder.Environment.IsDevelopment())
 {
