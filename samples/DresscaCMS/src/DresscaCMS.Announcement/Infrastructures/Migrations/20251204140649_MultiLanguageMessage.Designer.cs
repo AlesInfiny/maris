@@ -4,6 +4,7 @@ using DresscaCMS.Announcement.Infrastructures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DresscaCMS.Announcement.Infrastructures.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    partial class AnnouncementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251204140649_MultiLanguageMessage")]
+    partial class MultiLanguageMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -299,28 +302,6 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             ExpireDateTime = new DateTimeOffset(new DateTime(2019, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = true,
                             PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = new Guid("11111111-2222-1111-1111-111111111111"),
-                            Category = "テスト",
-                            ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 4,
-                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
-                        },
-                        new
-                        {
-                            Id = new Guid("11111111-3333-1111-1111-111111111111"),
-                            Category = "テスト",
-                            ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            DisplayPriority = 4,
-                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            IsDeleted = false,
-                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
@@ -556,60 +537,6 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 削除済み",
                             Title = "お知らせ 削除済み"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2111-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-2222-1111-1111-111111111111"),
-                            LanguageCode = "en",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容",
-                            Title = "英語 English"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-2112-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-2222-1111-1111-111111111111"),
-                            LanguageCode = "es",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容",
-                            Title = "フランス語 français"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-3111-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
-                            LanguageCode = "ja",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容",
-                            Title = "日本語"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-3112-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
-                            LanguageCode = "en",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容",
-                            Title = "英語 English"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-3113-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
-                            LanguageCode = "zh",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容",
-                            Title = "フランス語 français"
-                        },
-                        new
-                        {
-                            Id = new Guid("22222222-3114-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
-                            LanguageCode = "es",
-                            LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容",
-                            Title = "スペイン語 español"
                         });
                 });
 
