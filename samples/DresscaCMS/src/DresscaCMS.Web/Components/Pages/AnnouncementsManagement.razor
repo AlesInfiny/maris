@@ -48,7 +48,7 @@
                 </FluentStack>
                 <FluentDataGrid Items="@announcementEntities" TGridItem="Announcement" AutoFit="false">
                     <TemplateColumn Title="タイトル" Width="400px">
-                        <a href="/announcements/@context.Id">@context.Contents.</a>
+                        <a href="/announcements/@context.Id">@context.Contents?.FirstOrDefault()</a>
                     </TemplateColumn>
                     <TemplateColumn Title="掲載日" Width="200px">
                         @context.PostDateTime.ToString("yyyy/MM/dd") ～ @context.ExpireDateTime?.ToString("yyyy/MM/dd")
