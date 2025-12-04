@@ -65,10 +65,10 @@ public class AnnouncementsApplicationService
         // 業務メイン処理
         // ------------------------------
 
-        // 総件数取得（論理削除されていないレコードのみ）
+        // 論理削除されていないレコードの件数を取得します。
         var totalCount = await this.announcementsRepository.CountNotDeletedAsync(cancellationToken);
 
-        // 総件数 0 件なら、お知らせメッセージの総件数に 0 を設定した戻り値を返してメソッドを終了する。
+        // 総件数 0 件なら、お知らせメッセージの総件数に 0 を設定した戻り値を返してメソッドを終了します。
         if (totalCount == 0)
         {
             return
@@ -96,10 +96,10 @@ public class AnnouncementsApplicationService
                             .OrderByDescending(a => a.PostDateTime)
                             .ToArray();
 
-        // 業務ルールの言語コード優先順に従ってタイトルを取得する。
+        // 業務ルールの言語コード優先順に従ってタイトルを取得します。
         // var announcementByLanguageCodePriority
 
-        // 表示開始件数・終了件数を計算
+        // 表示開始件数・終了件数を計算します。
         int displayFrom = ((validatedPageNumber - 1) * validatedPageSize) + 1;
         int displayTo = Math.Min(validatedPageNumber * validatedPageSize, totalCount);
 
