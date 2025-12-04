@@ -1,0 +1,40 @@
+﻿@page "/Error"
+@using System.Diagnostics
+@using System.Diagnostics.CodeAnalysis
+
+<PageTitle>内部サーバーエラー</PageTitle>
+
+<h1 class="text-danger">内部サーバーエラー</h1>
+<p>
+    申し訳ありません。処理中に予期しないエラーが発生しました。<br />
+    時間をおいて再度アクセスしてください。問題が解決しない場合は、管理者へお問い合わせください。
+</p>
+
+<div>
+    <FluentAnchor Href="/" Appearance="Appearance.Hypertext">トップページに戻る</FluentAnchor>
+</div>
+
+@if (this.ShowStackTrace)
+{
+    <div class="stack-trace-box">
+        <FluentCard>
+            <h3>スタックトレース</h3>
+            <pre>
+                @this.Exception.ToString()
+            </pre>
+        </FluentCard>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Exception? Exception { get; set; }
+
+    // ASP.NET Core では、 IWebHostEnvironment は常に登録されており、
+    // null になることはないため、 null 非許容にはしていません。
+    [Inject]
+    private IWebHostEnvironment Environment { get; set; } = default!;
+
+    [MemberNotNullWhen(true, nameof(this.Exception))]
+    private bool ShowStackTrace => this.Environment.IsDevelopment() && this.Exception is not null;
+}
