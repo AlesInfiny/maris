@@ -1,4 +1,5 @@
 ﻿using DresscaCMS.Announcement;
+using DresscaCMS.Authentication;
 using DresscaCMS.Web.Components;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.FluentUI.AspNetCore.Components;
@@ -14,6 +15,11 @@ builder.Services.AddInMemoryStateStore();
 
 // お知らせメッセージに関するサービス一式を登録
 builder.Services.AddAnnouncementsServices(
+    builder.Configuration,
+    builder.Environment);
+
+// 認証に関するサービス一式を登録
+builder.Services.AddAuthenticationServices(
     builder.Configuration,
     builder.Environment);
 
