@@ -92,36 +92,45 @@ public class AnnouncementsApplicationService
                             .OrderByDescending(a => a.PostDateTime)
                             .ToArray();
 
-        // 業務ルールの言語コード優先順に従ってタイトルを取得します。
-        var languagePriority = LanguagePriority.Distinct() // 重複を除く
-        .ToArray();
+        // 比較方法を明示（必要に応じて OrdinalIgnoreCase などに変更）
+        var comparer = StringComparer.Ordinal;
 
-        IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements = [.. sortedByPostDatetimeAnnouncements
-            .Select(a =>
+        // 言語コード → 優先順位（0,1,2,...）のマップを作成
+        var languageOrder = LanguagePriority
+            .Distinct(comparer)
+            .Select((code, index) => new { code, index })
+            .ToDictionary(x => x.code, x => x.index, comparer);
+
+        // Contains 用にキーだけの HashSet にしてもよい（なくても動く）
+        var priorityLanguages = new HashSet<string>(languageOrder.Keys, comparer);
+
+        IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements =
+        [
+            .. sortedByPostDatetimeAnnouncements.Select(a =>
+    {
+        var selectedContent = a.Contents?
+            .OrderBy(c =>
+                languageOrder.TryGetValue(c.LanguageCode, out var priority)
+                    ? priority
+                    : int.MaxValue) // 優先リストにない言語は最後に回す
+            .FirstOrDefault();
+
+        return new Infrastructures.Entities.Announcement
         {
-            // 優先リストに含まれるコンテンツを優先順位で選択
-            var selectedContent = a.Contents?
-                .Where(c => languagePriority.Contains(c.LanguageCode))
-                .OrderBy(c => Array.IndexOf(languagePriority, c.LanguageCode))
-                .FirstOrDefault()
-                ?? a.Contents?.FirstOrDefault(); // フォールバック
-
-            // 新しい Announcement を作成して Contents を選択済みの 1 件のみにする
-            return new Infrastructures.Entities.Announcement
-            {
-                Id = a.Id,
-                Category = a.Category,
-                PostDateTime = a.PostDateTime,
-                ExpireDateTime = a.ExpireDateTime,
-                DisplayPriority = a.DisplayPriority,
-                IsDeleted = a.IsDeleted,
-                CreatedAt = a.CreatedAt,
-                ChangedAt = a.ChangedAt,
-                Contents = selectedContent is null
-                    ? []
-                    : new List<Infrastructures.Entities.AnnouncementContent> { selectedContent },
-            };
-        })];
+            Id = a.Id,
+            Category = a.Category,
+            PostDateTime = a.PostDateTime,
+            ExpireDateTime = a.ExpireDateTime,
+            DisplayPriority = a.DisplayPriority,
+            IsDeleted = a.IsDeleted,
+            CreatedAt = a.CreatedAt,
+            ChangedAt = a.ChangedAt,
+            Contents = selectedContent is null
+                ? []
+                : new List<Infrastructures.Entities.AnnouncementContent> { selectedContent },
+        };
+    })
+        ];
 
         // 表示開始件数・終了件数を計算します。
         int displayFrom = ((validatedPageNumber - 1) * validatedPageSize) + 1;
