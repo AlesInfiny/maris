@@ -9,17 +9,13 @@ namespace DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
 /// </summary>
 public class AnnouncementsApplicationService
 {
+    private static readonly string[] LanguagePriority =
+        [
+            "ja", "en", "zh", "es", // 規定の優先順
+        ];
+
     private readonly IAnnouncementsRepository announcementsRepository;
     private readonly ILogger<AnnouncementsApplicationService> logger;
-
-    // 言語コードの優先順（業務ルールに合わせて調整してください）
-    // private static readonly string[] LanguagePriority =
-    // [
-    //    "ja-JP",
-    //    "ja",
-    //    "en-US",
-    //    "en",
-    // ];
 
     /// <summary>
     ///  <see cref="AnnouncementsApplicationService"/> クラスの新しいインスタンスを初期化します。
@@ -81,7 +77,7 @@ public class AnnouncementsApplicationService
         // 最後のページ番号を計算します。
         int lastPageNumber = (totalCount + validatedPageSize - 1) / validatedPageSize;
 
-        // pageNumber が最後のページより大きい場合は 1 ページ目に戻します。
+        // pageNumber が最後のページより大きい場合は 1 ページ目に戻ります。
         if (validatedPageNumber > lastPageNumber)
         {
             validatedPageNumber = 1;
@@ -97,7 +93,35 @@ public class AnnouncementsApplicationService
                             .ToArray();
 
         // 業務ルールの言語コード優先順に従ってタイトルを取得します。
-        // var announcementByLanguageCodePriority
+        var languagePriority = LanguagePriority.Distinct() // 重複を除く
+        .ToArray();
+
+        IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements = [.. sortedByPostDatetimeAnnouncements
+            .Select(a =>
+        {
+            // 優先リストに含まれるコンテンツを優先順位で選択
+            var selectedContent = a.Contents?
+                .Where(c => languagePriority.Contains(c.LanguageCode))
+                .OrderBy(c => Array.IndexOf(languagePriority, c.LanguageCode))
+                .FirstOrDefault()
+                ?? a.Contents?.FirstOrDefault(); // フォールバック
+
+            // 新しい Announcement を作成して Contents を選択済みの 1 件のみにする
+            return new Infrastructures.Entities.Announcement
+            {
+                Id = a.Id,
+                Category = a.Category,
+                PostDateTime = a.PostDateTime,
+                ExpireDateTime = a.ExpireDateTime,
+                DisplayPriority = a.DisplayPriority,
+                IsDeleted = a.IsDeleted,
+                CreatedAt = a.CreatedAt,
+                ChangedAt = a.ChangedAt,
+                Contents = selectedContent is null
+                    ? []
+                    : new List<Infrastructures.Entities.AnnouncementContent> { selectedContent },
+            };
+        })];
 
         // 表示開始件数・終了件数を計算します。
         int displayFrom = ((validatedPageNumber - 1) * validatedPageSize) + 1;
@@ -114,7 +138,7 @@ public class AnnouncementsApplicationService
             LastPageNumber = lastPageNumber,
             DisplayFrom = displayFrom,
             DisplayTo = displayTo,
-            Announcements = sortedByPostDatetimeAnnouncements,
+            Announcements = titleSelectedAnnouncements,
         };
 
         this.logger.LogInformation(
@@ -124,33 +148,4 @@ public class AnnouncementsApplicationService
 
         return result;
     }
-
-    ///// <summary>
-    ///// 業務ルールの言語コード優先順に従ってタイトルを選択します。
-    ///// Announcement → AnnouncementContents (LanguageCode, Title など) を想定した例です。
-    ///// </summary>
-    // private static string SelectTitleByLanguagePriority(Infrastructures.Entities.Announcement announcement)
-    // {
-    //    if (announcement.Contents is null || announcement.Contents.Count == 0)
-    //    {
-    //        return string.Empty;
-    //    }
-
-    // foreach (var lang in LanguagePriority)
-    //    {
-    //        var content = announcement.Contents
-    //            .FirstOrDefault(x => !x.IsDeleted && x.LanguageCode == lang);
-
-    // if (content is not null && !string.IsNullOrWhiteSpace(content.Title))
-    //        {
-    //            return content.Title;
-    //        }
-    //    }
-
-    // // 優先言語で見つからない場合は、最初の有効なタイトルを使用
-    //    var fallback = announcement.Contents
-    //        .FirstOrDefault(x => !x.IsDeleted && !string.IsNullOrWhiteSpace(x.Title));
-
-    // return fallback?.Title ?? string.Empty;
-    // }
 }
