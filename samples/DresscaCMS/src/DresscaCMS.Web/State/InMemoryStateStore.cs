@@ -4,16 +4,16 @@ using DresscaCMS.Web.Resources;
 namespace DresscaCMS.Web.State;
 
 /// <summary>
-///  揮発性のステートをインメモリで管理するためのインターフェースを表します。
+///  ステートをインメモリで管理するためのインターフェースを表します。
 /// </summary>
-internal class InMemoryConsumableStateStore : IConsumableStateStore
+internal class InMemoryStateStore : IStateStore
 {
     private readonly ConcurrentDictionary<string, object> store = new();
 
     /// <summary>
-    ///  <see cref="InMemoryConsumableStateStore"/> クラスの新しいインスタンスを初期化します。
+    ///  <see cref="InMemoryStateStore"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    public InMemoryConsumableStateStore()
+    public InMemoryStateStore()
     {
     }
 
@@ -25,7 +25,7 @@ internal class InMemoryConsumableStateStore : IConsumableStateStore
     }
 
     /// <inheritdoc/>
-    public Task<StateResult<T>> PeekAsync<T>(string key)
+    public Task<StateResult<T>> GetAsync<T>(string key)
     {
         if (this.store.TryGetValue(key, out var value))
         {

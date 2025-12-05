@@ -1,9 +1,9 @@
 ﻿namespace DresscaCMS.Web.State;
 
 /// <summary>
-///  揮発性のステートを管理するためのインターフェースを表します。
+///  ステートを管理するためのインターフェースを表します。
 /// </summary>
-public interface IConsumableStateStore
+public interface IStateStore
 {
     /// <summary>
     ///  このオブジェクトの保持しているすべてのステートを削除します。
@@ -22,7 +22,7 @@ public interface IConsumableStateStore
     ///   <item>保存されているステートを、 <typeparamref name="T"/> にキャストできません。</item>
     ///  </list>
     /// </exception>
-    Task<StateResult<T>> PeekAsync<T>(string key);
+    Task<StateResult<T>> GetAsync<T>(string key);
 
     /// <summary>
     ///  指定したキーのステートを取得し、削除します。

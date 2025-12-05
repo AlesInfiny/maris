@@ -2,7 +2,7 @@
 
 namespace DresscaCMS.UnitTests.Web.State;
 
-public class InMemoryConsumableStateStoreTest
+public class InMemoryStateStoreTest
 {
     [Fact]
     public async Task ClearAsync_全ての値が削除されること()
@@ -14,8 +14,8 @@ public class InMemoryConsumableStateStoreTest
 
         // Act
         await store.ClearAsync();
-        var result1 = await store.PeekAsync<int>("key1");
-        var result2 = await store.PeekAsync<int>("key2");
+        var result1 = await store.GetAsync<int>("key1");
+        var result2 = await store.GetAsync<int>("key2");
 
         // Assert
         Assert.False(result1.Found);
@@ -23,13 +23,13 @@ public class InMemoryConsumableStateStoreTest
     }
 
     [Fact]
-    public async Task PeekAsync_存在しないキーの場合NotFoundとなること()
+    public async Task GetAsync_存在しないキーの場合NotFoundとなること()
     {
         // Arrange
         var store = CreateStore();
 
         // Act
-        var result = await store.PeekAsync<string>("no-such-key");
+        var result = await store.GetAsync<string>("no-such-key");
 
         // Assert
         Assert.False(result.Found);
@@ -37,7 +37,7 @@ public class InMemoryConsumableStateStoreTest
     }
 
     [Fact]
-    public async Task PeekAsync_値が削除されずに取得できること()
+    public async Task GetAsync_値が削除されずに取得できること()
     {
         // Arrange
         var store = CreateStore();
@@ -46,8 +46,8 @@ public class InMemoryConsumableStateStoreTest
         await store.SetAsync(key, value);
 
         // Act
-        var result1 = await store.PeekAsync<int>(key);
-        var result2 = await store.PeekAsync<int>(key);
+        var result1 = await store.GetAsync<int>(key);
+        var result2 = await store.GetAsync<int>(key);
 
         // Assert
         Assert.True(result1.Found);
@@ -57,7 +57,7 @@ public class InMemoryConsumableStateStoreTest
     }
 
     [Fact]
-    public async Task PeekAsync_保存した型と異なる型で取得しようとした場合例外が発生すること()
+    public async Task GetAsync_保存した型と異なる型で取得しようとした場合例外が発生すること()
     {
         // Arrange
         var store = CreateStore();
@@ -67,7 +67,7 @@ public class InMemoryConsumableStateStoreTest
         // Act
         var action = async () =>
         {
-            await store.PeekAsync<string>(key);
+            await store.GetAsync<string>(key);
         };
 
         // Assert
@@ -100,7 +100,7 @@ public class InMemoryConsumableStateStoreTest
 
         // Act
         var popResult = await store.PopAsync<int>(key);
-        var peekResult = await store.PeekAsync<int>(key);
+        var peekResult = await store.GetAsync<int>(key);
 
         // Assert
         Assert.True(popResult.Found);
@@ -137,7 +137,7 @@ public class InMemoryConsumableStateStoreTest
 
         // Act
         var removed = await store.RemoveAsync(key);
-        var result = await store.PeekAsync<string>(key);
+        var result = await store.GetAsync<string>(key);
 
         // Assert
         Assert.True(removed);
@@ -168,7 +168,7 @@ public class InMemoryConsumableStateStoreTest
 
         // Act
         await store.SetAsync(key, value);
-        var result = await store.PeekAsync<string>(key);
+        var result = await store.GetAsync<string>(key);
 
         // Assert
         Assert.True(result.Found);
@@ -186,9 +186,9 @@ public class InMemoryConsumableStateStoreTest
 
         // Act
         await store.SetAsync(key, value1);
-        var result1 = await store.PeekAsync<string>(key);
+        var result1 = await store.GetAsync<string>(key);
         await store.SetAsync(key, value2);
-        var result2 = await store.PeekAsync<string>(key);
+        var result2 = await store.GetAsync<string>(key);
 
         // Assert
         Assert.True(result1.Found);
@@ -197,5 +197,5 @@ public class InMemoryConsumableStateStoreTest
         Assert.Equal(value2, result2.Value);
     }
 
-    private static InMemoryConsumableStateStore CreateStore() => new();
+    private static InMemoryStateStore CreateStore() => new();
 }
