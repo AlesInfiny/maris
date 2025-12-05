@@ -26,29 +26,15 @@ internal class InMemoryStateStore : IStateStore
 
     /// <inheritdoc/>
     public Task<StateResult<T>> GetAsync<T>(string key)
-    {
-        if (this.store.TryGetValue(key, out var value))
-        {
-            return Task.FromResult(StateResult<T>.FoundValue(ConvertTo<T>(key, value)));
-        }
-        else
-        {
-            return Task.FromResult(StateResult<T>.NotFound());
-        }
-    }
+        => this.store.TryGetValue(key, out var value) ?
+            Task.FromResult(StateResult<T>.FoundValue(ConvertTo<T>(key, value))) :
+            Task.FromResult(StateResult<T>.NotFound());
 
     /// <inheritdoc/>
     public Task<StateResult<T>> PopAsync<T>(string key)
-    {
-        if (this.store.TryRemove(key, out var value))
-        {
-            return Task.FromResult(StateResult<T>.FoundValue(ConvertTo<T>(key, value)));
-        }
-        else
-        {
-            return Task.FromResult(StateResult<T>.NotFound());
-        }
-    }
+        => this.store.TryRemove(key, out var value) ?
+            Task.FromResult(StateResult<T>.FoundValue(ConvertTo<T>(key, value))) :
+            Task.FromResult(StateResult<T>.NotFound());
 
     /// <inheritdoc/>
     public Task<bool> RemoveAsync(string key)
