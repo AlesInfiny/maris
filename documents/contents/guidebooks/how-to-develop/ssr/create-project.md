@@ -5,7 +5,7 @@ description: SSR アプリケーション開発における プロジェクト�
 
 # プロジェクトの作成 {#top}
 
-<!-- cSpell:ignore blazorwasm fluentblazor fluentblazorwasm-->
+<!-- cSpell:ignore fluentblazor -->
 
 ## プロジェクトテンプレートの選択 {#select-project-template}
 
@@ -20,6 +20,8 @@ description: SSR アプリケーション開発における プロジェクト�
 
 以下の用途で利用します。
 
+- サーバー側で HTML をレンダリングする Web アプリケーション
+
 ??? info "【参考】 .NET CLI を用いて Blazor Web アプリ プロジェクトを作成する方法"
     プロジェクトを作成するフォルダーに移動して、以下のコマンドを利用します。
     プロジェクト名はフォルダー名と同名になります。
@@ -28,13 +30,11 @@ description: SSR アプリケーション開発における プロジェクト�
     dotnet new blazor
     ```
 
-    ```shell title="Blazor WebAssembly を使用した Blazor Web アプリプロジェクトの作成コマンド"
-    dotnet new blazorwasm
-    ```
-
 ### Fluent Blazor Web アプリ {#fluent-blazor-web-app}
 
-以下の用途で利用します。
+Blazor Web アプリの利用用途に加えて、以下の用途で利用します。
+
+- UI コンポーネントとして [Fluent UI Blazor :material-open-in-new:](https://www.fluentui-blazor.net/){ target=_blank } コンポーネントを用いた Web アプリケーション
 
 ??? info "プロジェクトを作る前に必要な作業"
     Fluent Blazor Web アプリのプロジェクトを作成するには、事前にプロジェクトテンプレートをインストールする必要があります。
@@ -51,11 +51,6 @@ description: SSR アプリケーション開発における プロジェクト�
     ```shell title="対話型 SSR を使用した Fluent Blazor Web アプリプロジェクトの作成コマンド"
     dotnet new fluentblazor
     ```
-
-    ```shell title="Blazor WebAssembly を使用した Fluent Blazor Web アプリプロジェクトの作成コマンド"
-    dotnet new fluentblazorwasm
-    ```
-
 <!-- textlint-enable @textlint-ja/no-synonyms -->
 
 ### ASP.NET Core Web API {#web-api}
