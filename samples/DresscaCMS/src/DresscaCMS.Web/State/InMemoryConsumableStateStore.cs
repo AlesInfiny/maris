@@ -6,14 +6,14 @@ namespace DresscaCMS.Web.State;
 /// <summary>
 ///  揮発性のステートをインメモリで管理するためのインターフェースを表します。
 /// </summary>
-public class InMemoryConsumableStateStore : IConsumableStateStore
+internal class InMemoryConsumableStateStore : IConsumableStateStore
 {
     private readonly ConcurrentDictionary<string, object> store = new();
 
     /// <summary>
     ///  <see cref="InMemoryConsumableStateStore"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    internal InMemoryConsumableStateStore()
+    public InMemoryConsumableStateStore()
     {
     }
 
