@@ -9,6 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages();
+builder.Services.AddInMemoryConsumableStateStore();
 
 if (builder.Environment.IsDevelopment())
 {
