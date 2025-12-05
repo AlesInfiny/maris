@@ -149,12 +149,22 @@ Error.razor を次のように変更してください。
 ## エラーページの実装 {#server-error-page-implementation}
 
 .NET ランタイム側で発生した例外を扱うためのエラーページを追加します。
-Blazor の起動前にエラーをキャッチする必要があるので、 Razor コンポーネントではなく、  Razor Pages（ .cshtml ）として実装します。
-両者を区別するため、 Razor コンポーネントを格納する Pages フォルダーとは異なる Pages フォルダーに作成してください。
+Blazor の起動前にエラーをキャッチする必要があるので、 Razor Components ではなく、  Razor Pages（ .cshtml ）として実装します。 Razor Pages のファイルは、 Razor Components を格納する Pages フォルダーとは異なるプロジェクトルート直下の Pages フォルダー内に必ず作成してください。
 
-???+ note "コラム：Razor Pages と Razor コンポーネント"
+!!! warning "注意：Razor Pages と Razor Components"
 
-    なにがちがうの～
+    Razor Pages はページ指向のアーキテクチャーを採用している一方で、Razor Components はコンポーネント指向のアーキテクチャーを採用しています。そのため、 Razor Pages では、 1つの URL に対して 1つのページ（ .cshtml ）が対応することが想定されています。よって、 Razor Pages を用いる場合、 URL に紐づくファイル名およびパスは Pages フォルダ配下のフォルダー階層によって決定されるので、異なる場所に配置しないよう注意してください。Razor Pages についての詳細な解説は、[Razor ASP.NET Core のページのアーキテクチャと概念 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/razor-pages){ target=_blank }を参照してください。
+
+
+    ```text linenums="0"
+    ├ {ApplicationName}.Web
+    ├ Components
+    │ ├ Pages
+    │ │ │ Error.razor
+    │ │ └ ServerError.cshtml --- NG
+    ├ Pages
+    └   └ ServerError.cshtml --- OK
+    ```
 
 
 下記にエラーページの実装例を示します。
