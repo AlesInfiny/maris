@@ -61,8 +61,6 @@ Blazor Web アプリの利用用途に加えて、以下の用途で利用しま
 
 [xUnit v3 テストプロジェクト](../csr/dotnet/create-project.md#xunit) を参照してください。
 
-## プロジェクトの命名 {#project-naming-rule}
-
 ## プロジェクト間の依存関係の設定 {#configure-project-reference}
 
 <!-- textlint-disable @textlint-ja/no-synonyms -->
