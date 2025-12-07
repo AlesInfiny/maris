@@ -101,8 +101,7 @@ public class AnnouncementsApplicationService
             .Select((code, index) => new { code, index })
             .ToDictionary(x => x.code, x => x.index, comparer);
 
-        // Contains 用にキーだけの HashSet にしてもよい（なくても動く）
-        var priorityLanguages = new HashSet<string>(languageOrder.Keys, comparer);
+
 
         IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements =
         [
