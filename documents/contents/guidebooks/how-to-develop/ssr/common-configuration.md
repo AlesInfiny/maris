@@ -12,4 +12,4 @@ C# プロジェクトファイル（ csproj ）に対して共通して行うべ
 1. [プロジェクトファイルの設定](../csr/dotnet/project-settings.md#csproj-settings)
 1. [パッケージ集中管理の導入](../csr/dotnet/project-settings.md#setup-central-package-management)
 1. [静的コード解析用パッケージと設定ファイルの導入](../csr/dotnet/project-settings.md#setup-static-code-testing)
-1. [メッセージリソースの追加](../csr/dotnet/project-settings.md#メッセージリソースの追加-add-message-resource)
+1. [メッセージリソースの追加](../csr/dotnet/project-settings.md#add-message-resource)

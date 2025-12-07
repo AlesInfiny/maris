@@ -15,4 +15,4 @@ description: SSR アプリケーション開発に必要な事前準備を解説
 
 ### SQL Server を使用する場合 {#sql-server}
 
-[.NET アプリケーションの開発に必要なソフトウェアの追加インストール - SQL Server を使用する場合](../csr/dotnet/preparation.md#sql-server-を使用する場合-sql-server) を参照してください。
+[.NET アプリケーションの開発に必要なソフトウェアの追加インストール - SQL Server を使用する場合](../csr/dotnet/preparation.md#sql-server) を参照してください。
