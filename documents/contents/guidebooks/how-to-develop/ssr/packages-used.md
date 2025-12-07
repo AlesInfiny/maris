@@ -13,7 +13,7 @@ description: SSR アプリケーション開発で使用する パッケージ�
 
 - [Microsoft.FluentUI.AspNetCore.Components :material-open-in-new:](https://www.nuget.org/packages/Microsoft.FluentUI.AspNetCore.Components){ target=_blank }
 
-    .NET のテストプロジェクトをビルドするためのパッケージです。[プロジェクトの作成 - Fluent Blazor Web アプリ](../csr/dotnet/create-project.md#xunit) でプロジェクトを作成すると、自動でインストールされます。
+    Blazor で Fluent UI コンポーネントを使用するためのパッケージです。[プロジェクトの作成 - Fluent Blazor Web アプリ](./create-project.md#fluent-blazor-web-app) でプロジェクトを作成すると、自動でインストールされます。
 
 - [Microsoft.FluentUI.AspNetCore.Components.Icons:material-open-in-new:](https://www.nuget.org/packages/Microsoft.FluentUI.AspNetCore.Components.Icons){ target=_blank }
 
