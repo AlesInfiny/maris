@@ -9,11 +9,6 @@ namespace DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
 /// </summary>
 public class AnnouncementsApplicationService
 {
-    private static readonly string[] LanguagePriority =
-        [
-            "ja", "en", "zh", "es", // 規定の優先順
-        ];
-
     private readonly IAnnouncementsRepository announcementsRepository;
     private readonly ILogger<AnnouncementsApplicationService> logger;
 
@@ -92,14 +87,8 @@ public class AnnouncementsApplicationService
                             .OrderByDescending(a => a.PostDateTime)
                             .ToArray();
 
-        // 比較方法を明示（必要に応じて OrdinalIgnoreCase などに変更）
-        var comparer = StringComparer.Ordinal;
-
-        // 言語コード → 優先順位（0,1,2,...）のマップを作成
-        var languageOrder = LanguagePriority
-            .Distinct(comparer)
-            .Select((code, index) => new { code, index })
-            .ToDictionary(x => x.code, x => x.index, comparer);
+        // 言語コードごとのタイトル掲載の優先順位を取得します。
+        var languageOrder = LanguagePriorityProvider.GetLanguageOrderMap();
 
         IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements =
             sortedByPostDatetimeAnnouncements
