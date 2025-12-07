@@ -36,7 +36,8 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
         var query = this.dbContext.Announcements
             .Where(a => !a.IsDeleted)
             .Where(a => a.Contents.Any())
-            .Include(a => a.Contents);
+            .Include(a => a.Contents)
+            .OrderBy(a => a.PostDateTime);
 
         var announcements = await query
             .Skip((pageNumber - 1) * pageSize)
