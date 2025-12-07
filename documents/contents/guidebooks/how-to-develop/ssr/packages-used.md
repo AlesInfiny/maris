@@ -11,7 +11,7 @@ description: SSR アプリケーション開発で使用する パッケージ�
 
 以下のパッケージはブランクプロジェクト作成時にインストールされます。
 
-- [Microsoft.FluentUI.AspNetCore.Components :material-open-in-new:](https://www.nuget.org/packages/Microsoft.NET.Test.Sdk){ target=_blank }
+- [Microsoft.FluentUI.AspNetCore.Components :material-open-in-new:](https://www.nuget.org/packages/Microsoft.FluentUI.AspNetCore.Components){ target=_blank }
 
     .NET のテストプロジェクトをビルドするためのパッケージです。[プロジェクトの作成 - Fluent Blazor Web アプリ](../csr/dotnet/create-project.md#xunit) でプロジェクトを作成すると、自動でインストールされます。
 
