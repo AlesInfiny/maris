@@ -102,32 +102,32 @@ public class AnnouncementsApplicationService
             .ToDictionary(x => x.code, x => x.index, comparer);
 
         IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements =
-        [
-            .. sortedByPostDatetimeAnnouncements.Select(a =>
-    {
-        var selectedContent = a.Contents?
-            .OrderBy(c =>
-                languageOrder.TryGetValue(c.LanguageCode, out var priority)
-                    ? priority
-                    : int.MaxValue) // 優先リストにない言語は最後に回す
-            .FirstOrDefault();
+            sortedByPostDatetimeAnnouncements
+                .Select(a =>
+                {
+                    var selectedContent = a.Contents?
+                        .OrderBy(c =>
+                            languageOrder.TryGetValue(c.LanguageCode, out var priority)
+                                ? priority
+                                : int.MaxValue)
+                        .FirstOrDefault();
 
-        return new Infrastructures.Entities.Announcement
-        {
-            Id = a.Id,
-            Category = a.Category,
-            PostDateTime = a.PostDateTime,
-            ExpireDateTime = a.ExpireDateTime,
-            DisplayPriority = a.DisplayPriority,
-            IsDeleted = a.IsDeleted,
-            CreatedAt = a.CreatedAt,
-            ChangedAt = a.ChangedAt,
-            Contents = selectedContent is null
-                ? []
-                : new List<Infrastructures.Entities.AnnouncementContent> { selectedContent },
-        };
-    })
-        ];
+                    return new Infrastructures.Entities.Announcement
+                    {
+                        Id = a.Id,
+                        Category = a.Category,
+                        PostDateTime = a.PostDateTime,
+                        ExpireDateTime = a.ExpireDateTime,
+                        DisplayPriority = a.DisplayPriority,
+                        IsDeleted = a.IsDeleted,
+                        CreatedAt = a.CreatedAt,
+                        ChangedAt = a.ChangedAt,
+                        Contents = selectedContent is null
+                            ? Array.Empty<Infrastructures.Entities.AnnouncementContent>()
+                            : new List<Infrastructures.Entities.AnnouncementContent> { selectedContent },
+                    };
+                })
+                .ToArray();
 
         // 表示開始件数・終了件数を計算します。
         int displayFrom = ((validatedPageNumber - 1) * validatedPageSize) + 1;
