@@ -1,42 +1,42 @@
 ﻿namespace DresscaCMS.Announcement.ApplicationCore;
 
 /// <summary>
-/// ページングされたお知らせ情報の取得結果を表します。
+/// 　お知らせメッセージ管理画面表示インタラクションの実行結果を表します。
 /// </summary>
 public sealed record GetPagedAnnouncementsResult
 {
     /// <summary>
-    /// 現在のページ番号。
+    /// ページ番号です。
     /// </summary>
     public int PageNumber { get; init; }
 
     /// <summary>
-    /// 1ページあたりの件数。
+    /// 1ページあたりの表示件数です。
     /// </summary>
     public int PageSize { get; init; }
 
     /// <summary>
-    /// 総件数。
+    /// お知らせメッセージの総件数です。
     /// </summary>
     public int TotalCount { get; init; }
 
     /// <summary>
-    /// 画面表示用 DTO のリスト。
+    /// お知らせメッセージのリストです。
     /// </summary>
     public IReadOnlyCollection<Infrastructures.Entities.Announcement> Announcements { get; init; } = [];
 
     /// <summary>
-    /// 最終ページ番号。
+    /// 最後のページ番号です。
     /// </summary>
     public int LastPageNumber { get; init; }
 
     /// <summary>
-    /// 表示範囲の開始インデックス。
+    /// 表示するお知らせメッセージの開始件数です。
     /// </summary>
     public int DisplayFrom { get; init; }
 
     /// <summary>
-    /// 表示範囲の終了インデックス。
+    /// 表示するお知らせメッセージの終了件数です。
     /// </summary>
     public int DisplayTo { get; init; }
 }
