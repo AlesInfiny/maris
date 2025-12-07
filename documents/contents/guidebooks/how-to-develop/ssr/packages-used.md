@@ -7,7 +7,7 @@ description: SSR アプリケーション開発で使用する パッケージ�
 
 <!-- cSpell:ignore bunit -->
 
-## ブランクプロジェクト作成時にインストールされるパッケージ {#optional-packages}
+## ブランクプロジェクト作成時にインストールされるパッケージ {#packages-installed-on-blank-project}
 
 以下のパッケージはブランクプロジェクト作成時にインストールされます。
 
