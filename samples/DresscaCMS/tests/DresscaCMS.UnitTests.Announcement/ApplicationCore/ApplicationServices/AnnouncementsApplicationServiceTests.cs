@@ -289,7 +289,7 @@ public class AnnouncementsApplicationServiceTests
 
         this.mockRepository.Setup(x => x.CountNotDeletedAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(1);
-        object findByPageNumberAndPageSizeSetup = this.mockRepository.Setup(x => x.FindByPageNumberAndPageSizeAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
+        this.mockRepository.Setup(x => x.FindByPageNumberAndPageSizeAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(announcements);
 
         // Act
