@@ -1,4 +1,5 @@
-﻿using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
+﻿using System.Linq;
+using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DresscaCMS.Announcement.Infrastructures;
@@ -37,7 +38,7 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
             .Where(a => !a.IsDeleted)
             .Where(a => a.Contents.Any())
             .Include(a => a.Contents)
-            .OrderBy(a => a.PostDateTime);
+            .OrderByDescending(a => a.PostDateTime);
 
         var announcements = await query
             .Skip((pageNumber - 1) * pageSize)
