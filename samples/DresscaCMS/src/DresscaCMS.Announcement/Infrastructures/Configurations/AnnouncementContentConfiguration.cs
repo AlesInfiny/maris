@@ -63,7 +63,7 @@ internal class AnnouncementContentConfiguration : IEntityTypeConfiguration<Annou
             new AnnouncementContent { Id = Guid.Parse("22222222-2112-2222-2222-222222222222"), AnnouncementId = Guid.Parse("11111111-2222-1111-1111-111111111111"), LanguageCode = "es", Title = "フランス語 français", Message = "内容", LinkedUrl = "https://maris.alesinfiny.org/" },
             new AnnouncementContent { Id = Guid.Parse("22222222-3111-2222-2222-222222222222"), AnnouncementId = Guid.Parse("11111111-3333-1111-1111-111111111111"), LanguageCode = "ja", Title = "日本語", Message = "内容", LinkedUrl = "https://maris.alesinfiny.org/" },
             new AnnouncementContent { Id = Guid.Parse("22222222-3112-2222-2222-222222222222"), AnnouncementId = Guid.Parse("11111111-3333-1111-1111-111111111111"), LanguageCode = "en", Title = "英語 English", Message = "内容", LinkedUrl = "https://maris.alesinfiny.org/" },
-            new AnnouncementContent { Id = Guid.Parse("22222222-3113-2222-2222-222222222222"), AnnouncementId = Guid.Parse("11111111-3333-1111-1111-111111111111"), LanguageCode = "zh", Title = "フランス語 français", Message = "内容", LinkedUrl = "https://maris.alesinfiny.org/" },
+            new AnnouncementContent { Id = Guid.Parse("22222222-3113-2222-2222-222222222222"), AnnouncementId = Guid.Parse("11111111-3333-1111-1111-111111111111"), LanguageCode = "zh", Title = "中国語 中文", Message = "内容", LinkedUrl = "https://maris.alesinfiny.org/" },
             new AnnouncementContent { Id = Guid.Parse("22222222-3114-2222-2222-222222222222"), AnnouncementId = Guid.Parse("11111111-3333-1111-1111-111111111111"), LanguageCode = "es", Title = "スペイン語 español", Message = "内容", LinkedUrl = "https://maris.alesinfiny.org/" });
     }
 }
