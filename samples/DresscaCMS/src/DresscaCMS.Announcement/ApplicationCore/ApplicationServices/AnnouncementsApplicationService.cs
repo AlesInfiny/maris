@@ -137,7 +137,7 @@ public class AnnouncementsApplicationService
         };
 
         this.logger.LogInformation(
-            LogMessages.AnnouncementsApplicationService_GetPagedAnnoucementeEnd,
+            LogMessages.AnnouncementsApplicationService_GetPagedAnnouncementsEnd,
             result.PageNumber,
             result.PageSize);
 
