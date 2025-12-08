@@ -29,12 +29,6 @@ description: SSR アプリケーション開発で使用する パッケージ�
 
 なお、特定のパッケージをインストールすることで推移的にインストールされるパッケージは記載を省略しています。
 
-!!! info "implicit-using"
-    .NET 6 以降では、プロジェクトで使用する SDK の種類に応じて、自動的に `global using`が追加されます。
-    たとえば `<Project Sdk="Microsoft.NET.Sdk.Web">` が宣言されている場合、`Microsoft.Extensions.DependencyInjection` が追加されます。
-    よって、 明示的に都度 `using` を宣言することなく、 DI コンテナに関するライブラリを参照できます。
-    詳細は [暗黙的な using ディレクティブ :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/overview#implicit-using-directives){ target=_blank }を参照してください。
-
 ## 追加でインストールするパッケージ {#additional-packages}
 
 以下のパッケージは別途インストールが必要です。
