@@ -53,10 +53,6 @@ Blazor Web アプリの利用用途に加えて、以下の用途で利用しま
     ```
 <!-- textlint-enable @textlint-ja/no-synonyms -->
 
-### ASP.NET Core Web API {#web-api}
-
-[ASP.NET Core Web API](../csr/dotnet/create-project.md#web-api) を参照してください。
-
 ### xUnit v3 テストプロジェクト {#xunit}
 
 [xUnit v3 テストプロジェクト](../csr/dotnet/create-project.md#xunit) を参照してください。
