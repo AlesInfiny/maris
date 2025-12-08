@@ -63,9 +63,9 @@ namespace DresscaCMS.Announcement.Resources {
         /// <summary>
         ///   ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string AnnouncementsApplicationService_GetPagedAnnoucementeEnd {
+        internal static string AnnouncementsApplicationService_GetPagedAnnouncementsEnd {
             get {
-                return ResourceManager.GetString("AnnouncementsApplicationService_GetPagedAnnoucementeEnd", resourceCulture);
+                return ResourceManager.GetString("AnnouncementsApplicationService_GetPagedAnnouncementsEnd", resourceCulture);
             }
         }
         
