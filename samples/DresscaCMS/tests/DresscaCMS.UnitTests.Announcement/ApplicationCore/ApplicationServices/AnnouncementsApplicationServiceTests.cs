@@ -328,11 +328,6 @@ public class AnnouncementsApplicationServiceTests
 
         // Assert
         var logs = this.loggerManager.LogCollector.GetSnapshot();
-
-        // ログが2件記録されていることを確認
-        Assert.Equal(2, logs.Count);
-
-        // Assert.Collection でログの順序と内容を検証
         Assert.Collection(
             logs,
             firstLog =>
