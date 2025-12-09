@@ -1,4 +1,5 @@
-﻿using DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
+﻿using DresscaCMS.Announcement;
+using DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
 using DresscaCMS.Announcement.Infrastructures;
 using DresscaCMS.Web.Components;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
@@ -12,12 +13,10 @@ builder.Services.AddRazorComponents()
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages();
 
-// Announcement モジュールの EF Core インフラストラクチャを登録
-builder.Services.AddAnnouncementsEfInfrastructure(
+// お知らせメッセージに関するサービス一式を登録
+builder.Services.AddAnnouncementsServices(
     configuration: builder.Configuration,
     env: builder.Environment);
-
-builder.Services.AddScoped<AnnouncementsApplicationService>();
 
 if (builder.Environment.IsDevelopment())
 {
