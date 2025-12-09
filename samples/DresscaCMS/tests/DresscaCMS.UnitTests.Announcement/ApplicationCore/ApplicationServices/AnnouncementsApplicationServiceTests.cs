@@ -103,31 +103,61 @@ public class AnnouncementsApplicationServiceTests
     }
 
     [Fact]
-    public async Task GetPagedAnnouncementsAsync_正常なケース_正しい結果を返す()
+    public async Task GetPagedAnnouncementsAsync_複数件_リポジトリの順序通り()
     {
         // Arrange
         var now = DateTimeOffset.Now;
+        var announcementId1 = Guid.NewGuid();
+        var announcementId2 = Guid.NewGuid();
+        var contentId1 = Guid.NewGuid();
+        var contentId2 = Guid.NewGuid();
+
         var announcements = new List<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>
         {
+            // 1件目: 日本語コンテンツを持つお知らせメッセージ
             new DresscaCMS.Announcement.Infrastructures.Entities.Announcement
             {
-                Id = Guid.NewGuid(),
-                Category = "Category1",
-                PostDateTime = now,
+                Id = announcementId1,
+                Category = "重要",
+                PostDateTime = now.AddDays(-1),
                 ExpireDateTime = now.AddDays(7),
                 DisplayPriority = DisplayPriority.High,
                 IsDeleted = false,
-                CreatedAt = now,
-                ChangedAt = now,
+                CreatedAt = now.AddDays(-2),
+                ChangedAt = now.AddDays(-1),
                 Contents = new List<AnnouncementContent>
                 {
                     new()
                     {
-                        Id = Guid.NewGuid(),
-                        AnnouncementId = Guid.NewGuid(),
+                        Id = contentId1,
+                        AnnouncementId = announcementId1,
                         LanguageCode = "ja",
-                        Title = "日本語タイトル",
-                        Message = "日本語本文",
+                        Title = "日本語タイトル1",
+                        Message = "日本語本文1",
+                    },
+                },
+            },
+
+            // 2件目: 英語コンテンツを持つお知らせメッセージ
+            new DresscaCMS.Announcement.Infrastructures.Entities.Announcement
+            {
+                Id = announcementId2,
+                Category = "一般",
+                PostDateTime = now.AddDays(-2),
+                ExpireDateTime = now.AddDays(14),
+                DisplayPriority = DisplayPriority.Medium,
+                IsDeleted = false,
+                CreatedAt = now.AddDays(-3),
+                ChangedAt = now.AddDays(-2),
+                Contents = new List<AnnouncementContent>
+                {
+                    new()
+                    {
+                        Id = contentId2,
+                        AnnouncementId = announcementId2,
+                        LanguageCode = "en",
+                        Title = "English Title",
+                        Message = "English Body",
                     },
                 },
             },
@@ -145,10 +175,33 @@ public class AnnouncementsApplicationServiceTests
         Assert.Equal(2, result.PageNumber);
         Assert.Equal(20, result.PageSize);
         Assert.Equal(45, result.TotalCount);
-        Assert.Equal(3, result.LastPageNumber);
-        Assert.Equal(21, result.DisplayFrom);
-        Assert.Equal(40, result.DisplayTo);
-        Assert.Single(result.Announcements);
+        Assert.Equal(3, result.LastPageNumber); // 45 ÷ 20 = 2.25 → 3ページ
+        Assert.Equal(21, result.DisplayFrom);   // (2-1)*20 + 1 = 21
+        Assert.Equal(40, result.DisplayTo);     // Min(2*20, 45) = 40
+        Assert.Collection(
+            result.Announcements,
+            firstAnnouncement =>
+            {
+                Assert.Equal(announcementId1, firstAnnouncement.Id);
+                Assert.Equal("重要", firstAnnouncement.Category);
+                Assert.Equal(now.AddDays(-1), firstAnnouncement.PostDateTime);
+                Assert.Equal(now.AddDays(7), firstAnnouncement.ExpireDateTime);
+                Assert.Equal(DisplayPriority.High, firstAnnouncement.DisplayPriority);
+                Assert.False(firstAnnouncement.IsDeleted);
+                Assert.Equal(now.AddDays(-2), firstAnnouncement.CreatedAt);
+                Assert.Equal(now.AddDays(-1), firstAnnouncement.ChangedAt);
+            },
+            secondAnnouncement =>
+            {
+                Assert.Equal(announcementId2, secondAnnouncement.Id);
+                Assert.Equal("一般", secondAnnouncement.Category);
+                Assert.Equal(now.AddDays(-2), secondAnnouncement.PostDateTime);
+                Assert.Equal(now.AddDays(14), secondAnnouncement.ExpireDateTime);
+                Assert.Equal(DisplayPriority.Medium, secondAnnouncement.DisplayPriority);
+                Assert.False(secondAnnouncement.IsDeleted);
+                Assert.Equal(now.AddDays(-3), secondAnnouncement.CreatedAt);
+                Assert.Equal(now.AddDays(-2), secondAnnouncement.ChangedAt);
+            });
     }
 
     [Fact]
