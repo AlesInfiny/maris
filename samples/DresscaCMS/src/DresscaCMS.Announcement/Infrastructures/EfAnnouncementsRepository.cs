@@ -7,7 +7,7 @@ namespace DresscaCMS.Announcement.Infrastructures;
 /// <summary>
 ///  お知らせメッセージの取得を行う EF Core リポジトリ実装です。
 /// </summary>
-public class EfAnnouncementsRepository : IAnnouncementsRepository
+internal class EfAnnouncementsRepository : IAnnouncementsRepository
 {
     private readonly IDbContextFactory<AnnouncementDbContext> dbContextFactory;
 
@@ -19,7 +19,7 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
     /// <exception cref="ArgumentNullException">
     ///   <paramref name="dbContextFactory"/> が <see langword="null" />です。
     /// </exception>
-    public EfAnnouncementsRepository(IDbContextFactory<AnnouncementDbContext> dbContextFactory)
+    internal EfAnnouncementsRepository(IDbContextFactory<AnnouncementDbContext> dbContextFactory)
         => this.dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
 
     /// <summary>
