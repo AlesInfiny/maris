@@ -205,7 +205,7 @@ public class AnnouncementsApplicationServiceTests
         var result = await this.service.GetPagedAnnouncementsAsync(1, 20, TestContext.Current.CancellationToken);
 
         // Assert
-        var announcement = result.Announcements.First();
+        var announcement = Assert.Single(result.Announcements);
         Assert.Single(announcement.Contents);
         Assert.Equal("ja", announcement.Contents.First().LanguageCode);
         Assert.Equal("日本語タイトル", announcement.Contents.First().Title);
