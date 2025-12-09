@@ -32,7 +32,7 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
     public async Task<IReadOnlyCollection<Entities.Announcement>> FindByPageNumberAndPageSizeAsync(
       int pageNumber,
       int pageSize,
-      CancellationToken cancellationToken = default)
+      CancellationToken cancellationToken)
     {
         var query = this.dbContext.Announcements
             .Where(a => !a.IsDeleted)
@@ -53,7 +53,7 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
     /// </summary>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    public async Task<int> CountNotDeletedAsync(CancellationToken cancellationToken = default)
+    public async Task<int> CountNotDeletedAsync(CancellationToken cancellationToken)
     {
         return await this.dbContext.Announcements
             .Where(x => !x.IsDeleted)

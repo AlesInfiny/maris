@@ -14,7 +14,7 @@ public interface IAnnouncementsRepository
     /// <returns>
     ///  指定したページ番号とページサイズに基づいて取得されたお知らせメッセージのコレクションを非同期で返します。
     /// </returns>
-    Task<IReadOnlyCollection<Infrastructures.Entities.Announcement>> FindByPageNumberAndPageSizeAsync(int pageNumber, int pageSize, CancellationToken cancellationToken = default);
+    Task<IReadOnlyCollection<Infrastructures.Entities.Announcement>> FindByPageNumberAndPageSizeAsync(int pageNumber, int pageSize, CancellationToken cancellationToken);
 
     /// <summary>
     ///  お知らせメッセージの総件数を取得します。（論理削除されていないものに限る）
