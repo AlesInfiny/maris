@@ -131,35 +131,39 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        var announcementsDto = await AnnouncementsService.GetPagedAnnouncementsAsync(PageNumber, PageSize);
-        announcementEntities = announcementsDto.Announcements.AsQueryable();
-        lastPageNumber = announcementsDto.LastPageNumber;
-        totalCount = announcementsDto.TotalCount;
-        startIndex = announcementsDto.DisplayFrom;
-        endIndex = announcementsDto.DisplayTo;
-        PageNumber = announcementsDto.PageNumber;
-        PageSize = announcementsDto.PageSize;
-        isLoading = false;
+        try
+        {
+            this.isLoading = true;
+            var announcementsDto = await AnnouncementsService.GetPagedAnnouncementsAsync(PageNumber, PageSize);
+            announcementEntities = announcementsDto.Announcements.AsQueryable();
+            lastPageNumber = announcementsDto.LastPageNumber;
+            totalCount = announcementsDto.TotalCount;
+            startIndex = announcementsDto.DisplayFrom;
+            endIndex = announcementsDto.DisplayTo;
+            PageNumber = announcementsDto.PageNumber;
+            PageSize = announcementsDto.PageSize;
+        }
+        finally
+        {
+            this.isLoading = false;
+        }
     }
 
     private async Task OnPreviousButtonClickAsync()
     {
         PageNumber--;
-        isLoading = true;
         Navigation.NavigateTo($"/announcements?pageNumber={PageNumber}&pageSize={PageSize}");
     }
 
     private async Task OnNextButtonClickAsync()
     {
         PageNumber++;
-        isLoading = true;
         Navigation.NavigateTo($"/announcements?pageNumber={PageNumber}&pageSize={PageSize}");
     }
 
     private async Task OnPageButtonClickAsync(int pageNumber)
     {
         PageNumber = pageNumber;
-        isLoading = true;
         Navigation.NavigateTo($"/announcements?pageNumber={PageNumber}&pageSize={PageSize}");
     }
 }
