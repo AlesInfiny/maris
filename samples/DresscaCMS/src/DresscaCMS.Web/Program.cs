@@ -11,6 +11,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages();
+builder.Services.AddInMemoryStateStore();
 
 // Announcement モジュールの EF Core インフラストラクチャを登録
 builder.Services.AddAnnouncementsEfInfrastructure(
