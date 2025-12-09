@@ -61,44 +61,170 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
 
     サブシステムを業務的な観点で機能に分割します。
 
-1. アプリケーションアーキテクチャの検討
+1. アプリケーションの設計手法の検討
 
-    アプリケーションの内部構造をどのように整理していくか検討します。
-    典型的なアプリケーションの内部構造には以下のような種類があります。
+    アプリケーションの設計手法には、大きく分けてドメインモデルとトランザクションスクリプトがあります。
+    ドメインモデルは、複雑な業務を扱うための設計手法です。
+    業務ロジックとデータを一体化し、事業活動を表現したオブジェクトを中心にシステムを構成します。
+    トランザクションスクリプトは、簡単な業務を扱うための設計手法です。
+    リクエストを処理する手順の中に、業務ロジックを埋め込みます。
 
-    - レイヤードアーキテクチャ
-    - クリーンアーキテクチャ
+1. アプリケーションの論理構造を定める
 
-    各アーキテクチャの詳細は、以下を参照してください。
+    アプリケーションの保守性を高める目的に、サブシステム内をさらに細かく層に構造化します。
+    AlesInfiny Maris では、クリーンアーキテクチャを用いて構造化することを推奨します。
 
-    [一般的な Web アプリケーション アーキテクチャ :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures){ target=_blank }
+    - Web / Web API アプリケーション
 
-1. アプリケーションアーキテクチャをプロジェクト構造に落とし込む
-
-    定めたアプリケーションアーキテクチャをプロジェクト構造に落とし込みます。
-    アプリケーションアーキテクチャの定める各コンポーネントをどのようにプロジェクトとして構成するか定めます。
-    .NET のプロジェクト間には、循環参照[^1] の設定ができません。
-    アプリケーションアーキテクチャを適切に表現できるプロジェクト構造を検討してください。
-
-    最も基本的な構造は、以下の通りです。
-
-    - クライアントサイドレンダリング
-
-    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture-light.png#only-light){ loading=lazy }
-    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/application-architecture-dark.png#only-dark){ loading=lazy }
+      ```mermaid
+      block
+      columns 2
+        presentation["プレゼンテーション層"]:2
+        space:2
+        infrastructure["インフラストラクチャ層"] tests["単体テスト"]
+        space:2
+        applicationCore["アプリケーションコア層"]:2
+  
+        presentation --> infrastructure
+        infrastructure --> applicationCore
+        tests --> applicationCore
+      ```
 
     - コンソールアプリケーション
 
-    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/console-application-architecture-light.png#only-light){ loading=lazy }
-    ![代表的なアプリケーションアーキテクチャ](../../images/app-architecture/overview/console-application-architecture-dark.png#only-dark){ loading=lazy }
+      ```mermaid
+      block
+      columns 2
+        entryPoint["エントリーポイント"]:2
+        space:2
+        infrastructure["インフラストラクチャ層"] tests["単体テスト"]
+        space:2
+        applicationCore["アプリケーションコア層"]:2
+  
+        entryPoint --> infrastructure
+        infrastructure --> applicationCore
+        tests --> applicationCore
+      ```
 
-1. 業務 / 機能をプロジェクト構造に当てはめる
+    各層の役割については、以下を参照してください。
 
+    - [CSR アーキテクチャ概要 - アプリケーションアーキテクチャ](../client-side-rendering/csr-architecture-overview.md#application-architecture)
+    - [SSR アーキテクチャ概要 - アプリケーションアーキテクチャ](../server-side-rendering/ssr-architecture-overview.md#backend-structure)
+
+    アプリケーションの設計手法にあわせて、プロジェクトの構造を定めます。
+
+    なお .NET のプロジェクト間には、循環参照[^1] の設定ができません。
+    アプリケーションアーキテクチャを適切に表現できるプロジェクト構造を検討してください。
+
+1. アプリケーションアーキテクチャをプロジェクト構造に落とし込む
+
+    ここまでに定めた設計手法とアプリケーションの論理構造をもとに、プロジェクトの構造を定めます。
     プロジェクトは原則として業務 / 機能で分割してから、層で分割します。
+    また設計手法にあわせて、プロジェクトの粒度を検討します。
     アプリケーションをマイクロサービス化しないのであれば、エントリーポイントのプロジェクトは 1 プロジェクトとすることを推奨します。
 
-    ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-light.png#only-light){ loading=lazy }
-    ![レイヤードアーキテクチャのプロジェクト分割例](../../images/app-architecture/overview/application-architecture-and-functions-dark.png#only-dark){ loading=lazy }
+    ドメインモデルで設計を進める場合、複雑になりがちな業務ロジックを、うまくモデル化してアプリケーション内に表現することが重要です。
+    そのため、業務ロジックの核となるアプリケーションコア層の独立性を保ち、業務ロジックの変更に耐えやすい形を整えます。
+    一方トランザクションスクリプトで設計を進める場合、保守性より初期構築のコスト低減が重視されます。
+    そのため、テスト容易性を担保しつつ、作成する物の量ができる限り少なくなる構造をとります。
+    Web アプリケーションにおけるプロジェクト分割の例を示します。
+
+    - ドメインモデルを採用する場合
+
+      ```mermaid
+      block
+      columns 4
+        block:webProject:4
+          columns 1
+          webProjectLabel["Maris.Web.csproj"]
+          presentation["プレゼンテーション層"]
+        end
+        space:4
+        block:infrastructureFuncAProject
+          columns 1
+          funcAInfraProjectLabel["Maris.FuncA.Infrastructure.csproj"]
+          infrastructureA["インフラストラクチャ層(FuncA)"]
+        end
+        block:testFuncAProject
+          columns 1
+          testFuncAProjectLabel["Maris.FuncA.UnitTests.csproj"]
+          testsA["単体テスト(FuncA)"]
+        end
+        block:infrastructureFuncBProject
+          columns 1
+          funcBInfraProjectLabel["Maris.FuncB.Infrastructure.csproj"]
+          infrastructureB["インフラストラクチャ層(FuncB)"]
+        end
+        block:testFuncBProject
+          columns 1
+          testFuncBProjectLabel["Maris.FuncB.UnitTests.csproj"]
+          testsB["単体テスト(FuncB)"]
+        end
+        space:4
+        block:applicationCoreFuncAProject:2
+          columns 1
+          funcAApplicationCoreProjectLabel["Maris.FuncA.ApplicationCore.csproj"]
+          applicationCoreA["アプリケーションコア層(FuncA)"]
+        end
+        block:applicationCoreFuncBProject:2
+          columns 1
+          funcBApplicationCoreProjectLabel["Maris.FuncB.ApplicationCore.csproj"]
+          applicationCoreB["アプリケーションコア層(FuncB)"]
+        end
+
+        webProject --> infrastructureFuncAProject
+        webProject --> infrastructureFuncBProject
+        infrastructureFuncAProject --> applicationCoreFuncAProject
+        infrastructureFuncBProject --> applicationCoreFuncBProject
+        testFuncAProject --> applicationCoreFuncAProject
+        testFuncBProject --> applicationCoreFuncBProject
+
+        classDef projectNameLabel stroke-width:0px,fill:transparent
+        class webProjectLabel,funcAInfraProjectLabel,funcBInfraProjectLabel,testFuncAProjectLabel,testFuncBProjectLabel,funcAApplicationCoreProjectLabel,funcBApplicationCoreProjectLabel projectNameLabel
+      ```
+
+    - トランザクションスクリプトを採用する場合
+
+      ```mermaid
+      block
+      columns 4
+        block:testFuncAProject
+          columns 1
+          testFuncAProjectLabel["Maris.UnitTests.FuncA.csproj"]
+          testsA["単体テスト(FuncA)"]
+        end
+        block:webProject:2
+          columns 1
+          webProjectLabel["Maris.Web.csproj"]
+          presentation["プレゼンテーション層"]
+        end
+        block:testFuncBProject
+          columns 1
+          testFuncBProjectLabel["Maris.UnitTests.FuncB.csproj"]
+          testsB["単体テスト(FuncB)"]
+        end
+        space:4
+        block:FuncAProject:2
+          columns 1
+          funcAProjectLabel["Maris.FuncA.csproj"]
+          infrastructureA["インフラストラクチャ層(FuncA)"]
+          applicationCoreA["アプリケーションコア層(FuncA)"]
+        end
+        block:FuncBProject:2
+          columns 1
+          funcBProjectLabel["Maris.FuncB.csproj"]
+          infrastructureB["インフラストラクチャ層(FuncB)"]
+          applicationCoreB["アプリケーションコア層(FuncB)"]
+        end
+
+        webProject --> FuncAProject
+        webProject --> FuncBProject
+        testFuncAProject --> FuncAProject
+        testFuncBProject --> FuncBProject
+
+        classDef projectNameLabel stroke-width:0px,fill:transparent
+        class testFuncAProjectLabel,testFuncBProjectLabel,webProjectLabel,funcAProjectLabel,funcBProjectLabel projectNameLabel
+      ```
 
 [^1]:
     プロジェクト同士がお互いに参照しあう構造のことを言います。
