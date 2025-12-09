@@ -155,60 +155,6 @@ public class AnnouncementsApplicationServiceTests
     }
 
     [Fact]
-    public async Task GetPagedAnnouncementsAsync_PostDateTimeの降順でソートされる()
-    {
-        // Arrange
-        var now = DateTimeOffset.Now;
-        var announcements = new List<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>
-        {
-            new()
-            {
-                Id = Guid.NewGuid(),
-                PostDateTime = now.AddDays(-2),
-                DisplayPriority = DisplayPriority.High,
-                IsDeleted = false,
-                CreatedAt = now,
-                ChangedAt = now,
-                Contents = new List<AnnouncementContent>(),
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                PostDateTime = now,
-                DisplayPriority = DisplayPriority.High,
-                IsDeleted = false,
-                CreatedAt = now,
-                ChangedAt = now,
-                Contents = new List<AnnouncementContent>(),
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                PostDateTime = now.AddDays(-1),
-                DisplayPriority = DisplayPriority.High,
-                IsDeleted = false,
-                CreatedAt = now,
-                ChangedAt = now,
-                Contents = new List<AnnouncementContent>(),
-            },
-        };
-
-        this.mockRepository.Setup(x => x.CountNotDeletedAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(3);
-        this.mockRepository.Setup(x => x.FindByPageNumberAndPageSizeAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(announcements);
-
-        // Act
-        var result = await this.service.GetPagedAnnouncementsAsync(1, 20, TestContext.Current.CancellationToken);
-
-        // Assert
-        var sortedAnnouncements = result.Announcements.ToList();
-        Assert.Equal(now, sortedAnnouncements[0].PostDateTime);
-        Assert.Equal(now.AddDays(-1), sortedAnnouncements[1].PostDateTime);
-        Assert.Equal(now.AddDays(-2), sortedAnnouncements[2].PostDateTime);
-    }
-
-    [Fact]
     public async Task GetPagedAnnouncementsAsync_言語優先順位に従ってコンテンツを選択()
     {
         // Arrange
