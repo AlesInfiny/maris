@@ -1,6 +1,4 @@
 ﻿using DresscaCMS.Announcement;
-using DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
-using DresscaCMS.Announcement.Infrastructures;
 using DresscaCMS.Web.Components;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.FluentUI.AspNetCore.Components;
@@ -15,8 +13,8 @@ builder.Services.AddRazorPages();
 
 // お知らせメッセージに関するサービス一式を登録
 builder.Services.AddAnnouncementsServices(
-    configuration: builder.Configuration,
-    env: builder.Environment);
+    builder.Configuration,
+    builder.Environment);
 
 if (builder.Environment.IsDevelopment())
 {
