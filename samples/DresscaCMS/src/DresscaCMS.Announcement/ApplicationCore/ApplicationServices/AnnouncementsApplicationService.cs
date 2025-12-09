@@ -82,16 +82,11 @@ public class AnnouncementsApplicationService
         var announcements = await this.announcementsRepository
             .FindByPageNumberAndPageSizeAsync(validatedPageNumber, validatedPageSize, cancellationToken);
 
-        // 掲載開始日時の降順でソートする
-        var sortedByPostDatetimeAnnouncements = announcements
-                            .OrderByDescending(a => a.PostDateTime)
-                            .ToArray();
-
         // 言語コードごとのタイトル掲載の優先順位を取得します。
         var languageOrder = LanguagePriorityProvider.GetLanguageOrderMap();
 
         IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements =
-            sortedByPostDatetimeAnnouncements
+            announcements
                 .Select(a =>
                 {
                     var selectedContent = a.Contents?
