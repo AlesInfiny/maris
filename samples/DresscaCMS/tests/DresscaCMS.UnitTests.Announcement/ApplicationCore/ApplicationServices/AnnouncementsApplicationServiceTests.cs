@@ -2,6 +2,7 @@
 using DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
 using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
 using DresscaCMS.Announcement.Infrastructures.Entities;
+using Maris.Logging.Testing.Xunit;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -13,16 +14,16 @@ namespace DresscaCMS.UnitTests.Announcement.ApplicationCore.ApplicationServices;
 public class AnnouncementsApplicationServiceTests
 {
     private readonly Mock<IAnnouncementsRepository> mockRepository;
-    private readonly Mock<ILogger<AnnouncementsApplicationService>> mockLogger;
+    private readonly TestLoggerManager loggerManager;
     private readonly AnnouncementsApplicationService service;
 
-    public AnnouncementsApplicationServiceTests()
+    public AnnouncementsApplicationServiceTests(ITestOutputHelper testOutputHelper)
     {
         this.mockRepository = new Mock<IAnnouncementsRepository>();
-        this.mockLogger = new Mock<ILogger<AnnouncementsApplicationService>>();
+        this.loggerManager = new TestLoggerManager(testOutputHelper);
         this.service = new AnnouncementsApplicationService(
             this.mockRepository.Object,
-            this.mockLogger.Object);
+            this.loggerManager.CreateLogger<AnnouncementsApplicationService>());
     }
 
     [Fact]
@@ -314,7 +315,7 @@ public class AnnouncementsApplicationServiceTests
     }
 
     [Fact]
-    public async Task GetPagedAnnouncementsAsync_ログが正しく記録される()
+    public async Task GetPagedAnnouncementsAsync_開始ログと終了ログが正しく記録される()
     {
         // Arrange
         this.mockRepository.Setup(x => x.CountNotDeletedAsync(It.IsAny<CancellationToken>()))
@@ -326,13 +327,25 @@ public class AnnouncementsApplicationServiceTests
         await this.service.GetPagedAnnouncementsAsync(1, 20, TestContext.Current.CancellationToken);
 
         // Assert
-        this.mockLogger.Verify(
-            x => x.Log(
-                LogLevel.Information,
-                It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((v, t) => true),
-                It.IsAny<Exception>(),
-                It.Is<Func<It.IsAnyType, Exception?, string>>((v, t) => true)),
-            Times.Exactly(2)); // 開始と終了の2回
+        var logs = this.loggerManager.LogCollector.GetSnapshot();
+
+        // ログが2件記録されていることを確認
+        Assert.Equal(2, logs.Count);
+
+        // Assert.Collection でログの順序と内容を検証
+        Assert.Collection(
+            logs,
+            firstLog =>
+            {
+                Assert.Equal(LogLevel.Information, firstLog.Level);
+                Assert.Equal("DresscaCMS.Announcement.ApplicationCore.ApplicationServices.AnnouncementsApplicationService", firstLog.Category);
+                Assert.Equal("ページ番号: 1 、ページサイズ: 20 のお知らせメッセージを取得します。", firstLog.Message);
+            },
+            secondLog =>
+            {
+                Assert.Equal(LogLevel.Information, secondLog.Level);
+                Assert.Equal("DresscaCMS.Announcement.ApplicationCore.ApplicationServices.AnnouncementsApplicationService", secondLog.Category);
+                Assert.Equal("ページ番号: 1 、ページサイズ: 20 のお知らせメッセージを取得しました。", secondLog.Message);
+            });
     }
 }
