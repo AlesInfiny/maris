@@ -109,7 +109,7 @@ AlesInfiny Maris では、 1 サブシステム 1 ソリューションを基本
     各層の役割については、以下を参照してください。
 
     - [CSR アーキテクチャ概要 - アプリケーションアーキテクチャ](../client-side-rendering/csr-architecture-overview.md#application-architecture)
-    - [SSR アーキテクチャ概要 - アプリケーションアーキテクチャ](../server-side-rendering/ssr-architecture-overview.md#backend-structure)
+    - [SSR アーキテクチャ概要 - アプリケーションアーキテクチャ](../server-side-rendering/ssr-architecture-overview.md#application-architecture)
 
     アプリケーションの設計手法にあわせて、プロジェクトの構造を定めます。
 
