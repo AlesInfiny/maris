@@ -95,7 +95,7 @@ public class AnnouncementsApplicationServiceTests
             .ReturnsAsync(new List<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>());
 
         // Act
-        var result = await this.service.GetPagedAnnouncementsAsync(10, 20, TestContext.Current.CancellationToken); // 10ページ目を要求
+        var result = await this.service.GetPagedAnnouncementsAsync(4, 20, TestContext.Current.CancellationToken); // 10ページ目を要求
 
         // Assert
         Assert.Equal(1, result.PageNumber);
