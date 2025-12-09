@@ -34,7 +34,7 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
       int pageSize,
       CancellationToken cancellationToken)
     {
-        using var dbContext = this.dbContextFactory.CreateDbContext();
+        await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         var query = dbContext.Announcements
             .Where(a => !a.IsDeleted)
@@ -57,7 +57,7 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task<int> CountNotDeletedAsync(CancellationToken cancellationToken)
     {
-        using var dbContext = this.dbContextFactory.CreateDbContext();
+        await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         return await dbContext.Announcements
             .Where(x => !x.IsDeleted)
