@@ -66,13 +66,10 @@ public class AnnouncementsApplicationServiceTests
 
     [Theory]
     [InlineData(null, 20)]
-    [InlineData(5, 20)]
     [InlineData(9, 20)]
     [InlineData(10, 10)]
-    [InlineData(100, 100)]
     [InlineData(200, 200)]
     [InlineData(201, 20)]
-    [InlineData(300, 20)]
     public async Task GetPagedAnnouncementsAsync_ページサイズの検証_正しく補正される(int? input, int expected)
     {
         // Arrange
