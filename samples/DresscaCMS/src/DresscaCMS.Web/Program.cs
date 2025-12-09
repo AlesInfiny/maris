@@ -1,9 +1,7 @@
 ﻿using DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
-using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
 using DresscaCMS.Announcement.Infrastructures;
 using DresscaCMS.Web.Components;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,16 +12,12 @@ builder.Services.AddRazorComponents()
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContextFactory<AnnouncementDbContext>(options =>
-{
-    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Dressca.Cms.Announcement;Integrated Security=True", providerOptions =>
-    {
-        providerOptions.EnableRetryOnFailure();
-    });
-});
+// Announcement モジュールの EF Core インフラストラクチャを登録
+builder.Services.AddAnnouncementsEfInfrastructure(
+    configuration: builder.Configuration,
+    env: builder.Environment);
 
 builder.Services.AddScoped<AnnouncementsApplicationService>();
-builder.Services.AddScoped<IAnnouncementsRepository, EfAnnouncementsRepository>();
 
 if (builder.Environment.IsDevelopment())
 {

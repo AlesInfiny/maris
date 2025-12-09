@@ -1,6 +1,7 @@
 ﻿<Project>
   <ItemGroup>
     <PackageVersion Include="bunit" Version="2.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.13.1" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.13.1" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />

@@ -9,18 +9,18 @@ namespace DresscaCMS.Announcement.Infrastructures;
 /// </summary>
 public class EfAnnouncementsRepository : IAnnouncementsRepository
 {
-    private readonly AnnouncementDbContext dbContext;
+    private readonly IDbContextFactory<AnnouncementDbContext> dbContextFactory;
 
     /// <summary>
-    ///  データアクセスに使用する <see cref="AnnouncementDbContext"/> を指定して
+    ///  データアクセスに使用する <see cref="IDbContextFactory{AnnouncementDbContext}"/> を指定して
     ///  <see cref="EfAnnouncementsRepository"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="dbContext">データアクセスに使用する <see cref="AnnouncementDbContext"/> オブジェクト。</param>
+    /// <param name="dbContextFactory">データアクセスに使用する <see cref="IDbContextFactory{AnnouncementDbContext}"/> オブジェクト。</param>
     /// <exception cref="ArgumentNullException">
-    ///   <paramref name="dbContext"/> が <see langword="null" />です。
+    ///   <paramref name="dbContextFactory"/> が <see langword="null" />です。
     /// </exception>
-    public EfAnnouncementsRepository(AnnouncementDbContext dbContext)
-        => this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+    public EfAnnouncementsRepository(IDbContextFactory<AnnouncementDbContext> dbContextFactory)
+        => this.dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
 
     /// <summary>
     ///  ページ番号とページサイズを指定して、論理削除されていないお知らせメッセージを取得します。
@@ -34,7 +34,9 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
       int pageSize,
       CancellationToken cancellationToken)
     {
-        var query = this.dbContext.Announcements
+        await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        var query = dbContext.Announcements
             .Where(a => !a.IsDeleted)
             .Where(a => a.Contents.Any())
             .Include(a => a.Contents)
@@ -55,7 +57,9 @@ public class EfAnnouncementsRepository : IAnnouncementsRepository
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public async Task<int> CountNotDeletedAsync(CancellationToken cancellationToken)
     {
-        return await this.dbContext.Announcements
+        await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        return await dbContext.Announcements
             .Where(x => !x.IsDeleted)
             .CountAsync(cancellationToken);
     }

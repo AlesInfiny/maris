@@ -120,4 +120,7 @@
   <data name="PropertyNotInitialized" xml:space="preserve">
     <value>{0} プロパティが初期化されていません。</value>
   </data>
+  <data name="NotFoundConnectionString" xml:space="preserve">
+    <value>{0} 接続文字列を構成から取得できません。</value>
+  </data>
 </root>
