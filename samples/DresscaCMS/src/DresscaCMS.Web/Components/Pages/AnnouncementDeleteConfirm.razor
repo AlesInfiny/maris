@@ -1,0 +1,198 @@
+@page "/announcements/{Id:guid}/delete"
+@using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
+@using DresscaCMS.Announcement.Infrastructures.Entities
+@using DresscaCMS.Web.State
+@inject NavigationManager Navigation
+@inject AnnouncementsApplicationService AnnouncementsService
+@inject IStateStore StateStore
+
+<h3>お知らせメッセージ削除確認画面</h3>
+
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
+    <FluentBreadcrumb>
+        <FluentBreadcrumbItem>
+            <FluentNavLink Href="/">TOP</FluentNavLink>
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            <FluentNavLink Href="/announcements">お知らせメッセージ一覧</FluentNavLink>
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            お知らせメッセージ削除確認
+        </FluentBreadcrumbItem>
+    </FluentBreadcrumb>
+
+    @if (isLoading)
+    {
+        <div class="loading-spinner">
+            <FluentProgressRing Width="60px" />
+        </div>
+    }
+    else if (announcement is null)
+    {
+        <p>お知らせメッセージが見つかりませんでした。</p>
+    }
+    else
+    {
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
+            <FluentCard>
+                <h4>このお知らせメッセージを削除してもよいですか？</h4>
+                
+                <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                    <div>
+                        <strong>掲載日時：</strong> @announcement.PostDateTime.ToString("yyyy-MM-dd HH:mm") ～ @(announcement.ExpireDateTime?.ToString("yyyy-MM-dd HH:mm") ?? "")
+                    </div>
+                    <div>
+                        <strong>カテゴリー：</strong> @(announcement.Category ?? "なし")
+                    </div>
+                    <div>
+                        <strong>表示優先度：</strong> @GetDisplayPriorityText(announcement.DisplayPriority)
+                    </div>
+                </FluentStack>
+
+                @foreach (var content in announcement.Contents)
+                {
+                    <FluentCard Style="margin-top: 15px;">
+                        <h5>@content.LanguageCode</h5>
+                        <div><strong>タイトル：</strong> @content.Title</div>
+                        <div><strong>表示メッセージ：</strong> @content.Message</div>
+                        @if (!string.IsNullOrEmpty(content.LinkedUrl))
+                        {
+                            <div><strong>リンク先 URL：</strong> <a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a></div>
+                        }
+                    </FluentCard>
+                }
+            </FluentCard>
+
+            <FluentCard>
+                <h4>アクション</h4>
+                <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10">
+                    <FluentButton Appearance="Appearance.Accent" OnClick="OnDeleteButtonClickAsync">お知らせメッセージの削除</FluentButton>
+                    <FluentButton Appearance="Appearance.Neutral" OnClick="OnCancelButtonClick">お知らせメッセージ管理画面に戻る</FluentButton>
+                </FluentStack>
+            </FluentCard>
+
+            @if (announcement.Histories.Any())
+            {
+                <FluentCard>
+                    <h4>お知らせメッセージ更新履歴</h4>
+                    @foreach (var history in announcement.Histories)
+                    {
+                        <FluentAccordion>
+                            <FluentAccordionItem>
+                                <HeadingTemplate>
+                                    @history.CreatedAt.ToString("yyyy/MM/dd HH:mm") @GetOperationTypeText(history.OperationType) ユーザー@history.ChangedBy
+                                </HeadingTemplate>
+                                <ChildContent>
+                                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                                        <div>
+                                            @history.PostDateTime.ToString("yyyy/MM/dd HH:mm") ～ @(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm") ?? "")
+                                        </div>
+                                        <div>@(history.Category ?? "なし")</div>
+                                        <div>@GetDisplayPriorityText(history.DisplayPriority)</div>
+                                        
+                                        @foreach (var content in history.Contents)
+                                        {
+                                            <FluentCard Style="margin-top: 10px;">
+                                                <div><strong>@content.LanguageCode</strong></div>
+                                                <div>@content.Title</div>
+                                                <div>@content.Message</div>
+                                                @if (!string.IsNullOrEmpty(content.LinkedUrl))
+                                                {
+                                                    <div><a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a></div>
+                                                }
+                                            </FluentCard>
+                                        }
+                                    </FluentStack>
+                                </ChildContent>
+                            </FluentAccordionItem>
+                        </FluentAccordion>
+                    }
+                </FluentCard>
+            }
+        </FluentStack>
+    }
+</FluentStack>
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private Announcement? announcement;
+    private bool isLoading = true;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            isLoading = true;
+            var result = await AnnouncementsService.GetAnnouncementAndHistoriesByIdAsync(Id);
+            announcement = result.Announcement;
+
+            if (announcement == null)
+            {
+                Navigation.NavigateTo("/NotFound");
+            }
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task OnDeleteButtonClickAsync()
+    {
+        if (announcement == null)
+        {
+            return;
+        }
+
+        try
+        {
+            // TODO: 実際のユーザー名を取得する
+            string changedBy = "admin";
+
+            await AnnouncementsService.DeleteAnnouncementAndContentAsync(announcement, changedBy);
+
+            // 削除完了画面への引継ぎ情報をStateStoreに保存
+            await StateStore.SetAsync("deleted-announcement", announcement);
+
+            Navigation.NavigateTo("/announcements/delete-complete");
+        }
+        catch (Exception ex)
+        {
+            // エラー時はお知らせメッセージ管理画面へ遷移
+            Console.WriteLine($"削除エラー: {ex.Message}");
+            Navigation.NavigateTo("/announcements");
+        }
+    }
+
+    private void OnCancelButtonClick()
+    {
+        Navigation.NavigateTo("/announcements");
+    }
+
+    private string GetDisplayPriorityText(DresscaCMS.Announcement.ApplicationCore.DisplayPriority priority)
+    {
+        return priority switch
+        {
+            DresscaCMS.Announcement.ApplicationCore.DisplayPriority.Critical => "緊急",
+            DresscaCMS.Announcement.ApplicationCore.DisplayPriority.High => "高",
+            DresscaCMS.Announcement.ApplicationCore.DisplayPriority.Medium => "中",
+            DresscaCMS.Announcement.ApplicationCore.DisplayPriority.Low => "低",
+            _ => "不明"
+        };
+    }
+
+    private string GetOperationTypeText(DresscaCMS.Announcement.ApplicationCore.OperationType operationType)
+    {
+        return operationType switch
+        {
+            DresscaCMS.Announcement.ApplicationCore.OperationType.Create => "作成",
+            DresscaCMS.Announcement.ApplicationCore.OperationType.Update => "更新",
+            DresscaCMS.Announcement.ApplicationCore.OperationType.Delete => "削除",
+            _ => "不明"
+        };
+    }
+}

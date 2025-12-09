@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DresscaCMS.Announcement.ApplicationCore;
 using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,5 +63,80 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
         return await dbContext.Announcements
             .Where(x => !x.IsDeleted)
             .CountAsync(cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<Entities.Announcement?> FindByIdWithContentsAndHistoriesAsync(
+        Guid announcementId,
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        var announcement = await dbContext.Announcements
+            .Where(a => a.Id == announcementId && !a.IsDeleted)
+            .Include(a => a.Contents)
+            .Include(a => a.Histories.OrderByDescending(h => h.CreatedAt))
+                .ThenInclude(h => h.Contents)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (announcement == null)
+        {
+            return null;
+        }
+
+        // 言語コード → 優先順位（0,1,2,...）のマップを作成
+        var languageOrder = LanguagePriorityProvider.GetLanguageOrderMap();
+
+        // お知らせコンテンツを言語優先順でソート
+        announcement.Contents = announcement.Contents
+            .OrderBy(c => languageOrder.TryGetValue(c.LanguageCode, out var priority) ? priority : int.MaxValue)
+            .ToList();
+
+        // 履歴のコンテンツも言語優先順でソート
+        foreach (var history in announcement.Histories)
+        {
+            history.Contents = history.Contents
+                .OrderBy(c => languageOrder.TryGetValue(c.LanguageCode, out var priority) ? priority : int.MaxValue)
+                .ToList();
+        }
+
+        return announcement;
+    }
+
+    /// <inheritdoc/>
+    public async Task<int> UpdateAnnouncementAsync(
+        Entities.Announcement announcement,
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        dbContext.Announcements.Update(announcement);
+        return await dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<int> DeleteAnnouncementContentsAsync(
+        Guid announcementId,
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        var contents = await dbContext.AnnouncementContents
+            .Where(c => c.AnnouncementId == announcementId)
+            .ToListAsync(cancellationToken);
+
+        dbContext.AnnouncementContents.RemoveRange(contents);
+        return await dbContext.SaveChangesAsync(cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task CreateAnnouncementHistoryAsync(
+        Entities.AnnouncementHistory history,
+        CancellationToken cancellationToken)
+    {
+        await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        await dbContext.AnnouncementHistories.AddAsync(history, cancellationToken);
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }

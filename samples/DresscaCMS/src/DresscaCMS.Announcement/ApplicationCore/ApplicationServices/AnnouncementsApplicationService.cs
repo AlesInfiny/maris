@@ -82,18 +82,23 @@ public class AnnouncementsApplicationService
         var announcements = await this.announcementsRepository
             .FindByPageNumberAndPageSizeAsync(validatedPageNumber, validatedPageSize, cancellationToken);
 
-        // 言語コードごとのタイトル掲載の優先順位を取得します。
+        // 掲載開始日時の降順でソートする
+        var sortedByPostDatetimeAnnouncements = announcements
+                            .OrderByDescending(a => a.PostDateTime)
+                            .ToArray();
+
+        // 言語コード → 優先順位（0,1,2,...）のマップを作成
         var languageOrder = LanguagePriorityProvider.GetLanguageOrderMap();
 
         IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements =
-            announcements
+            sortedByPostDatetimeAnnouncements
                 .Select(a =>
                 {
                     var selectedContent = a.Contents?
                         .OrderBy(c =>
                             languageOrder.TryGetValue(c.LanguageCode, out var priority)
                                 ? priority
-                                : int.MaxValue)
+                                : int.MaxValue) // 優先リストにない言語は最後に回す
                         .FirstOrDefault();
 
                     return new Infrastructures.Entities.Announcement
@@ -107,7 +112,7 @@ public class AnnouncementsApplicationService
                         CreatedAt = a.CreatedAt,
                         ChangedAt = a.ChangedAt,
                         Contents = selectedContent is null
-                            ? Array.Empty<Infrastructures.Entities.AnnouncementContent>()
+                            ? new List<Infrastructures.Entities.AnnouncementContent>()
                             : new List<Infrastructures.Entities.AnnouncementContent> { selectedContent },
                     };
                 })
@@ -137,5 +142,108 @@ public class AnnouncementsApplicationService
             result.PageSize);
 
         return result;
+    }
+
+    /// <summary>
+    ///  指定された ID のお知らせメッセージを、コンテンツおよび履歴と共に取得します。
+    /// </summary>
+    /// <param name="announcementId">お知らせメッセージ ID。</param>
+    /// <param name="cancellationToken">キャンセル用トークン。</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public async Task<GetAnnouncementAndHistoriesResult> GetAnnouncementAndHistoriesByIdAsync(
+        Guid announcementId,
+        CancellationToken cancellationToken = default)
+    {
+        // ------------------------------
+        // 業務開始処理
+        // ------------------------------
+        this.logger.LogInformation(
+            "お知らせメッセージ ID: {announcementId} のお知らせメッセージと履歴を取得します。",
+            announcementId);
+
+        // ------------------------------
+        // 業務メイン処理
+        // ------------------------------
+        var announcement = await this.announcementsRepository
+            .FindByIdWithContentsAndHistoriesAsync(announcementId, cancellationToken);
+
+        // ------------------------------
+        // 業務終了処理
+        // ------------------------------
+        this.logger.LogInformation(
+            "お知らせメッセージ ID: {announcementId} のお知らせメッセージと履歴を取得しました。",
+            announcementId);
+
+        return new GetAnnouncementAndHistoriesResult
+        {
+            Announcement = announcement,
+        };
+    }
+
+    /// <summary>
+    ///  お知らせメッセージとお知らせコンテンツを削除します。
+    /// </summary>
+    /// <param name="announcement">削除するお知らせメッセージ。</param>
+    /// <param name="changedBy">変更者のユーザー名。</param>
+    /// <param name="cancellationToken">キャンセル用トークン。</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public async Task DeleteAnnouncementAndContentAsync(
+        Infrastructures.Entities.Announcement announcement,
+        string changedBy,
+        CancellationToken cancellationToken = default)
+    {
+        // ------------------------------
+        // 業務開始処理
+        // ------------------------------
+        ArgumentNullException.ThrowIfNull(announcement);
+        ArgumentException.ThrowIfNullOrWhiteSpace(changedBy);
+
+        this.logger.LogInformation(
+            "お知らせメッセージ ID: {announcementId} を削除します。",
+            announcement.Id);
+
+        // ------------------------------
+        // 業務メイン処理
+        // ------------------------------
+
+        // お知らせメッセージを論理削除
+        announcement.IsDeleted = true;
+        announcement.ChangedAt = DateTimeOffset.Now;
+
+        var updateCount = await this.announcementsRepository
+            .UpdateAnnouncementAsync(announcement, cancellationToken);
+
+        if (updateCount == 0)
+        {
+            throw new InvalidOperationException("お知らせメッセージの削除に失敗しました。");
+        }
+
+        // お知らせコンテンツを削除
+        await this.announcementsRepository
+            .DeleteAnnouncementContentsAsync(announcement.Id, cancellationToken);
+
+        // お知らせメッセージ履歴を作成
+        var history = new Infrastructures.Entities.AnnouncementHistory
+        {
+            Id = Guid.NewGuid(),
+            AnnouncementId = announcement.Id,
+            ChangedBy = changedBy,
+            CreatedAt = DateTimeOffset.Now,
+            OperationType = OperationType.Delete,
+            Category = announcement.Category,
+            PostDateTime = announcement.PostDateTime,
+            ExpireDateTime = announcement.ExpireDateTime,
+            DisplayPriority = announcement.DisplayPriority,
+        };
+
+        await this.announcementsRepository
+            .CreateAnnouncementHistoryAsync(history, cancellationToken);
+
+        // ------------------------------
+        // 業務終了処理
+        // ------------------------------
+        this.logger.LogInformation(
+            "お知らせメッセージ ID: {announcementId} を削除しました。",
+            announcement.Id);
     }
 }

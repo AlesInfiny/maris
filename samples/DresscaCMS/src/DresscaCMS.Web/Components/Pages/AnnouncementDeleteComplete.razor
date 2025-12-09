@@ -1,0 +1,107 @@
+@page "/announcements/delete-complete"
+@using DresscaCMS.Announcement.Infrastructures.Entities
+@using DresscaCMS.Web.State
+@inject NavigationManager Navigation
+@inject IStateStore StateStore
+
+<h3>お知らせメッセージ削除完了画面</h3>
+
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
+    <FluentBreadcrumb>
+        <FluentBreadcrumbItem>
+            <FluentNavLink Href="/">TOP</FluentNavLink>
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            <FluentNavLink Href="/announcements">お知らせメッセージ一覧</FluentNavLink>
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            お知らせメッセージ削除完了
+        </FluentBreadcrumbItem>
+    </FluentBreadcrumb>
+
+    @if (deletedAnnouncement is null)
+    {
+        <p>削除されたお知らせメッセージの情報が取得できませんでした。</p>
+        <FluentButton Appearance="Appearance.Accent" OnClick="OnBackToListClick">
+            お知らせメッセージ管理画面に戻る
+        </FluentButton>
+    }
+    else
+    {
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
+            <FluentMessageBar Intent="MessageIntent.Success">
+                お知らせメッセージを削除しました。
+            </FluentMessageBar>
+
+            <FluentCard>
+                <h4>削除したお知らせメッセージ</h4>
+                
+                <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                    <div>
+                        <strong>掲載日時：</strong> @deletedAnnouncement.PostDateTime.ToString("yyyy-MM-dd HH:mm") ～ @(deletedAnnouncement.ExpireDateTime?.ToString("yyyy-MM-dd HH:mm") ?? "")
+                    </div>
+                    <div>
+                        <strong>カテゴリー：</strong> @(deletedAnnouncement.Category ?? "なし")
+                    </div>
+                    <div>
+                        <strong>表示優先度：</strong> @GetDisplayPriorityText(deletedAnnouncement.DisplayPriority)
+                    </div>
+                </FluentStack>
+
+                @foreach (var content in deletedAnnouncement.Contents)
+                {
+                    <FluentCard Style="margin-top: 15px;">
+                        <h5>@content.LanguageCode</h5>
+                        <div><strong>タイトル：</strong> @content.Title</div>
+                        <div><strong>表示メッセージ：</strong> @content.Message</div>
+                        @if (!string.IsNullOrEmpty(content.LinkedUrl))
+                        {
+                            <div><strong>リンク先 URL：</strong> <a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a></div>
+                        }
+                    </FluentCard>
+                }
+            </FluentCard>
+
+            <FluentButton Appearance="Appearance.Accent" OnClick="OnBackToListClick">
+                お知らせメッセージ管理画面に戻る
+            </FluentButton>
+        </FluentStack>
+    }
+</FluentStack>
+
+@code {
+    private Announcement? deletedAnnouncement;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await StateStore.PopAsync<Announcement>("deleted-announcement");
+        
+        if (!result.Found || result.Value == null)
+        {
+            // 引継ぎ情報がない場合はお知らせメッセージ管理画面へ遷移
+            Navigation.NavigateTo("/announcements");
+            return;
+        }
+
+        deletedAnnouncement = result.Value;
+    }
+
+    private void OnBackToListClick()
+    {
+        Navigation.NavigateTo("/announcements");
+    }
+
+    private string GetDisplayPriorityText(DresscaCMS.Announcement.ApplicationCore.DisplayPriority priority)
+    {
+        return priority switch
+        {
+            DresscaCMS.Announcement.ApplicationCore.DisplayPriority.Critical => "緊急",
+            DresscaCMS.Announcement.ApplicationCore.DisplayPriority.High => "高",
+            DresscaCMS.Announcement.ApplicationCore.DisplayPriority.Medium => "中",
+            DresscaCMS.Announcement.ApplicationCore.DisplayPriority.Low => "低",
+            _ => "不明"
+        };
+    }
+}
