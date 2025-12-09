@@ -19,7 +19,7 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
     /// <exception cref="ArgumentNullException">
     ///   <paramref name="dbContextFactory"/> が <see langword="null" />です。
     /// </exception>
-    internal EfAnnouncementsRepository(IDbContextFactory<AnnouncementDbContext> dbContextFactory)
+    public EfAnnouncementsRepository(IDbContextFactory<AnnouncementDbContext> dbContextFactory)
         => this.dbContextFactory = dbContextFactory ?? throw new ArgumentNullException(nameof(dbContextFactory));
 
     /// <summary>
