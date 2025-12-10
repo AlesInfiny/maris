@@ -56,7 +56,7 @@
                     </TemplateColumn>
                     <PropertyColumn Title="カテゴリー" Property="@(a => a.Category)" />
                     <TemplateColumn Title="表示優先度" Width="120px" Align="Align.Center">
-                        @context.DisplayPriority.ToDisplayName()
+                        @context.DisplayPriority.GetDisplayName()
                     </TemplateColumn>
                     <TemplateColumn Title="操作" Width="120px" Align="Align.Center">
                         <a href="/announcements/@context.Id/edit">編集</a> | <a href="/announcements/@context.Id/delete">削除</a>
