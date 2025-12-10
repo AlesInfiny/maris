@@ -59,7 +59,7 @@ internal class InMemoryStateStore : IStateStore
     /// <returns>変換後の値。</returns>
     /// <exception cref="InvalidCastException">
     ///  <list type="bullet">
-    ///   <paramref name="value"/> を <typeparamref name="T"/> に変換できません。
+    ///   <item><paramref name="value"/> を <typeparamref name="T"/> に変換できません。</item>
     ///  </list>
     /// </exception>
     private static T ConvertTo<T>(string key, object value)
