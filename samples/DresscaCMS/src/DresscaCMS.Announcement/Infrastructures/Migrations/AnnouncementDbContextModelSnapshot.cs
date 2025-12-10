@@ -600,7 +600,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             LanguageCode = "zh",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
-                            Title = "フランス語 français"
+                            Title = "中国語 中文"
                         },
                         new
                         {
