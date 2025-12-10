@@ -1,5 +1,6 @@
 ﻿@page "/announcements"
 @using DresscaCMS.Announcement
+@using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Announcement.Infrastructures.Entities
 @inject NavigationManager Navigation
@@ -54,7 +55,9 @@
                         @context.PostDateTime.ToString("yyyy/MM/dd") ～ @context.ExpireDateTime?.ToString("yyyy/MM/dd")
                     </TemplateColumn>
                     <PropertyColumn Title="カテゴリー" Property="@(a => a.Category)" />
-                    <PropertyColumn Title="表示優先度" Property="@(a => a.DisplayPriority)" Width="120px" Align="Align.Center" />
+                    <TemplateColumn Title="表示優先度" Width="120px" Align="Align.Center">
+                        @context.DisplayPriority.ToDisplayName()
+                    </TemplateColumn>
                     <TemplateColumn Title="操作" Width="120px" Align="Align.Center">
                         <a href="/announcements/@context.Id/edit">編集</a> | <a href="/announcements/@context.Id/delete">削除</a>
                     </TemplateColumn>
