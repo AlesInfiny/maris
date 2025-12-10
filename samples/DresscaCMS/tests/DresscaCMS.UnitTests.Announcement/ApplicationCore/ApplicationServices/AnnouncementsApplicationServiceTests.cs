@@ -313,34 +313,4 @@ public class AnnouncementsApplicationServiceTests
         Assert.Equal(81, result.DisplayFrom); // (5-1)*20 + 1 = 81
         Assert.Equal(95, result.DisplayTo);   // Min(5*20, 95) = 95
     }
-
-    [Fact]
-    public async Task GetPagedAnnouncementsAsync_開始ログと終了ログが正しく記録される()
-    {
-        // Arrange
-        this.mockRepository.Setup(x => x.CountNotDeletedAsync(It.IsAny<CancellationToken>()))
-            .ReturnsAsync(10);
-        this.mockRepository.Setup(x => x.FindByPageNumberAndPageSizeAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(new List<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>());
-
-        // Act
-        await this.service.GetPagedAnnouncementsAsync(1, 20, TestContext.Current.CancellationToken);
-
-        // Assert
-        var logs = this.loggerManager.LogCollector.GetSnapshot();
-        Assert.Collection(
-            logs,
-            firstLog =>
-            {
-                Assert.Equal(LogLevel.Information, firstLog.Level);
-                Assert.Equal("DresscaCMS.Announcement.ApplicationCore.ApplicationServices.AnnouncementsApplicationService", firstLog.Category);
-                Assert.Equal("ページ番号: 1 、ページサイズ: 20 のお知らせメッセージを取得します。", firstLog.Message);
-            },
-            secondLog =>
-            {
-                Assert.Equal(LogLevel.Information, secondLog.Level);
-                Assert.Equal("DresscaCMS.Announcement.ApplicationCore.ApplicationServices.AnnouncementsApplicationService", secondLog.Category);
-                Assert.Equal("ページ番号: 1 、ページサイズ: 20 のお知らせメッセージを取得しました。", secondLog.Message);
-            });
-    }
 }

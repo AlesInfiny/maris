@@ -47,7 +47,7 @@ public class AnnouncementsApplicationService
         // 1ページあたりの件数が未指定か、10未満または201以上の場合は20件を設定します。
         var validatedPageSize = (pageSize is >= 10 and <= 200) ? pageSize.Value : 20;
 
-        this.logger.LogInformation(
+        this.logger.LogDebug(
             LogMessages.AnnouncementsApplicationService_GetPagedAnnouncementsStart,
             validatedPageNumber,
             validatedPageSize);
@@ -131,7 +131,7 @@ public class AnnouncementsApplicationService
             Announcements = titleSelectedAnnouncements,
         };
 
-        this.logger.LogInformation(
+        this.logger.LogDebug(
             LogMessages.AnnouncementsApplicationService_GetPagedAnnouncementsEnd,
             result.PageNumber,
             result.PageSize);
