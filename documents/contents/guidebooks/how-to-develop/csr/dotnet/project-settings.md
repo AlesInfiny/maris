@@ -49,6 +49,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 以下の設定が有効になるよう、 Directory.Build.props を設定します。
 
 - [ImplicitUsings オプション :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/msbuild-props#implicitusings){ target=_blank }
+    - プロジェクトで使用する SDK の種類に応じて、自動的に `global using` を追加します。
 - [Nullable オプション :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/compiler-options/language#nullable){ target=_blank }
 - [ManagePackageVersionsCentrally オプション :material-open-in-new:](https://devblogs.microsoft.com/nuget/introducing-central-package-management/#enabling-central-package-management){ target=_blank }
 
@@ -69,6 +70,15 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 ```
 
 著作権表記など、全プロジェクトに対して有効にしたい設定がある場合は、上記に加えて設定してください。
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+
+??? note "ImplicitUsings オプションについて"
+    たとえばプロジェクトで使用する SDK の種類として `<Project Sdk="Microsoft.NET.Sdk.Web">` が宣言されている場合、`Microsoft.Extensions.DependencyInjection` が自動的に追加されます。
+    よって、 明示的に都度 `using` を宣言することなく、 DI コンテナに関するライブラリを参照できます。
+    詳細は [暗黙的な using ディレクティブ :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/project-sdk/overview#implicit-using-directives){ target=_blank }を参照してください。
+
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 ### プロダクションコード用のプロジェクト設定 {#project-settings-for-production}
 

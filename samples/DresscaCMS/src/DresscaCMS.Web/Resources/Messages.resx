@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="StoredObjectCannotCastTo" xml:space="preserve">
+    <value>キー {0} のオブジェクトは {1} です。指定された型 {2} にキャストできません。</value>
+  </data>
 </root>

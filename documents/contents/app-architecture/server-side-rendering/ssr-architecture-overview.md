@@ -41,7 +41,7 @@ AlesInfiny Maris における SSR アプリケーションアーキテクチャ�
 ![アプリケーションアーキテクチャ](../../images/app-architecture/server-side-rendering/ssr-architecture-light.png#only-light){ loading=lazy }
 ![アプリケーションアーキテクチャ](../../images/app-architecture/server-side-rendering/ssr-architecture-dark.png#only-dark){ loading=lazy }
 
-## アーキテクチャの構造詳細 {#backend-structure}
+## 構造の詳細 {#backend-structure}
 
 サーバーサイドレンダリング方式の Web アプリケーションにおける、各層とそれを構成するコンポーネントの役割について、それぞれ説明します。
 

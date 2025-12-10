@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages();
+builder.Services.AddInMemoryStateStore();
 
 // お知らせメッセージに関するサービス一式を登録
 builder.Services.AddAnnouncementsServices(
