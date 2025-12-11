@@ -120,6 +120,8 @@
 
     @code {
 
+
+
     private IQueryable<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>? announcementEntities;
     private int lastPageNumber;
     private int totalCount;
@@ -127,8 +129,10 @@
     private int endIndex;
     private bool isLoading = true;
 
-    private int pageSize = 20;
-    private int pageNumber = 1;
+    private int pageSize;
+    private int defaultPageSize = 20;
+    private int pageNumber;
+    private int defaultPageNumber = 1;
 
     [SupplyParameterFromQuery]
     public string? PageSize { get; set; }
@@ -141,6 +145,11 @@
         try
         {
             this.isLoading = true;
+
+            // クエリパラメータからページサイズとページ番号を取得します。int 型に変換できない場合、デフォルト値にフォールバックします。
+            pageSize = int.TryParse(PageSize, out var parsedPageSize) ? parsedPageSize : defaultPageSize;
+            pageNumber = int.TryParse(PageNumber, out var parsedPageNumber) ? parsedPageNumber : defaultPageNumber;
+
             var announcementsDto = await AnnouncementsService.GetPagedAnnouncementsAsync(pageNumber, pageSize);
             announcementEntities = announcementsDto.Announcements.AsQueryable();
             lastPageNumber = announcementsDto.LastPageNumber;
