@@ -2,6 +2,7 @@
 
 @using System.ComponentModel.DataAnnotations
 @using DresscaCMS.Authentication.Infrastructures.Entities
+@using DresscaCMS.Web.Components.Account.Shared
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Identity
@@ -13,57 +14,38 @@
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
 
-<PageTitle>Log in</PageTitle>
+<PageTitle>ログイン</PageTitle>
 
-<h1>Log in</h1>
+<h1>ログイン</h1>
 <div class="row">
     <div class="col-lg-6">
         <section>
             <StatusMessage Message="@errorMessage" />
             <EditForm EditContext="editContext" method="post" OnSubmit="LoginUser" FormName="login">
                 <DataAnnotationsValidator />
-                <h2>Use a local account to log in.</h2>
+                <h2>ログインします。</h2>
                 <hr />
                 <ValidationSummary class="text-danger" role="alert" />
                 <div class="form-floating mb-3">
                     <InputText @bind-Value="Input.Email" id="Input.Email" class="form-control" autocomplete="username webauthn" aria-required="true" placeholder="name@example.com" />
-                    <label for="Input.Email" class="form-label">Email</label>
+                    <label for="Input.Email" class="form-label">メールアドレス</label>
                     <ValidationMessage For="() => Input.Email" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
                     <InputText type="password" @bind-Value="Input.Password" id="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <label for="Input.Password" class="form-label">Password</label>
+                    <label for="Input.Password" class="form-label">パスワード</label>
                     <ValidationMessage For="() => Input.Password" class="text-danger" />
                 </div>
                 <div class="checkbox mb-3">
                     <label class="form-label">
                         <InputCheckbox @bind-Value="Input.RememberMe" class="darker-border-checkbox form-check-input" />
-                        Remember me
+                        ログイン状態を保持する
                     </label>
                 </div>
                 <div>
-                    <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <hr />
-                <hr />
-                <div>
-                    <p>
-                        <a href="Account/ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a href="@(NavigationManager.GetUriWithQueryParameters("Account/Register", new Dictionary<string, object?> { ["ReturnUrl"] = ReturnUrl }))">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a href="Account/ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
+                    <button type="submit" class="w-100 btn btn-lg btn-primary">ログイン</button>
                 </div>
             </EditForm>
-        </section>
-    </div>
-    <div class="col-lg-4 col-lg-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
         </section>
     </div>
 </div>
@@ -86,76 +68,45 @@
         Input ??= new();
 
         editContext = new EditContext(Input);
-
-        // if (HttpMethods.IsGet(HttpContext.Request.Method))
-        // {
-        //     Clear the existing external cookie to ensure a clean login process
-        //     await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-        // }
     }
 
     public async Task LoginUser()
     {
-        // if (!string.IsNullOrEmpty(Input.Passkey?.Error))
-        // {
-        //     errorMessage = $"Error: {Input.Passkey.Error}";
-        //     return;
-        // }
 
         SignInResult result;
-        // if (!string.IsNullOrEmpty(Input.Passkey?.CredentialJson))
-        // {
-        //     When performing passkey sign-in, don't perform form validation.
-        //     result = await SignInManager.PasskeySignInAsync(Input.Passkey.CredentialJson);
-        // }
-        // else
-        // {
-            // If doing a password sign-in, validate the form.
+
             if (!editContext.Validate())
             {
                 return;
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+            // アカウントロックアウトに対してログイン失敗をカウントしません
+            // パスワード失敗でアカウントロックアウトを有効にするには、lockoutOnFailure: true に設定してください
             result = await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-        //}
 
         if (result.Succeeded)
         {
-            Logger.LogInformation("User logged in.");
+            Logger.LogInformation("ユーザーがログインしました。");
             RedirectManager.RedirectTo(ReturnUrl);
-        }
-        // else if (result.RequiresTwoFactor)
-        // {
-        //     RedirectManager.RedirectTo(
-        //         "Account/LoginWith2fa",
-        //         new() { ["returnUrl"] = ReturnUrl, ["rememberMe"] = Input.RememberMe });
-        // }
-        else if (result.IsLockedOut)
-        {
-            Logger.LogWarning("User account locked out.");
-            RedirectManager.RedirectTo("Account/Lockout");
         }
         else
         {
-            errorMessage = "Error: Invalid login attempt.";
+            errorMessage = "エラー: ログイン試行が無効です。";
         }
     }
 
     private sealed class InputModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "メールアドレスを入力してください。")]
+        [EmailAddress(ErrorMessage = "有効なメールアドレスを入力してください。")]
         public string Email { get; set; } = "";
 
-        [Required]
+        [Required(ErrorMessage = "パスワードを入力してください。")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = "";
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "ログイン状態を保持する")]
         public bool RememberMe { get; set; }
 
-        // public PasskeyInputModel? Passkey { get; set; }
     }
 }
