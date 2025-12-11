@@ -132,7 +132,7 @@
     private int pageSize;
     private readonly int defaultPageSize = 20;
     private int pageNumber;
-    private int defaultPageNumber = 1;
+    private readonly int defaultPageNumber = 1;
 
     [SupplyParameterFromQuery]
     public string? PageSize { get; set; }
