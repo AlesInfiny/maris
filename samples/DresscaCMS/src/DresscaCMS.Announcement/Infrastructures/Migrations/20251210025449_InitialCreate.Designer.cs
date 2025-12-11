@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DresscaCMS.Announcement.Infrastructures.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    [Migration("20251203022551_InitialCreate")]
+    [Migration("20251210025449_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -302,6 +302,28 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             ExpireDateTime = new DateTimeOffset(new DateTime(2019, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = true,
                             PostDateTime = new DateTimeOffset(new DateTime(2018, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-2222-1111-1111-111111111111"),
+                            Category = "テスト",
+                            ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2100, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsDeleted = false,
+                            PostDateTime = new DateTimeOffset(new DateTime(2030, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("11111111-3333-1111-1111-111111111111"),
+                            Category = "テスト",
+                            ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2100, 1, 1, 21, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsDeleted = false,
+                            PostDateTime = new DateTimeOffset(new DateTime(2030, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
                         });
                 });
 
@@ -497,28 +519,28 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         {
                             Id = new Guid("22222222-2222-2222-2222-222222222218"),
                             AnnouncementId = new Guid("11111111-1111-1111-1111-111111111128"),
-                            LanguageCode = "ja",
+                            LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 18",
-                            Title = "お知らせ 18"
+                            Message = "Detalles 18",
+                            Title = "Anuncio 18"
                         },
                         new
                         {
                             Id = new Guid("22222222-2222-2222-2222-222222222219"),
                             AnnouncementId = new Guid("11111111-1111-1111-1111-111111111129"),
-                            LanguageCode = "ja",
+                            LanguageCode = "zh",
                             LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 19",
-                            Title = "お知らせ 19"
+                            Message = "详情 19",
+                            Title = "公告 19"
                         },
                         new
                         {
                             Id = new Guid("22222222-2222-2222-2222-222222222220"),
                             AnnouncementId = new Guid("11111111-1111-1111-1111-111111111130"),
-                            LanguageCode = "ja",
+                            LanguageCode = "en",
                             LinkedUrl = "https://maris.alesinfiny.org/",
-                            Message = "内容 20",
-                            Title = "お知らせ 20"
+                            Message = "Details 20",
+                            Title = "Notice 20"
                         },
                         new
                         {
@@ -537,6 +559,60 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 削除済み",
                             Title = "お知らせ 削除済み"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2111-2222-2222-222222222222"),
+                            AnnouncementId = new Guid("11111111-2222-1111-1111-111111111111"),
+                            LanguageCode = "en",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "英語 English"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2112-2222-2222-222222222222"),
+                            AnnouncementId = new Guid("11111111-2222-1111-1111-111111111111"),
+                            LanguageCode = "es",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "フランス語 français"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-3111-2222-2222-222222222222"),
+                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "日本語"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-3112-2222-2222-222222222222"),
+                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            LanguageCode = "en",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "英語 English"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-3113-2222-2222-222222222222"),
+                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            LanguageCode = "zh",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "中国語 中文"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-3114-2222-2222-222222222222"),
+                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            LanguageCode = "es",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "スペイン語 español"
                         });
                 });
 

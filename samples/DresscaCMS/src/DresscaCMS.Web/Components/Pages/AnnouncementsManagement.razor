@@ -1,0 +1,185 @@
+﻿@page "/announcements"
+@using DresscaCMS.Announcement
+@using DresscaCMS.Announcement.ApplicationCore
+@using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
+@using DresscaCMS.Announcement.Infrastructures.Entities
+@inject NavigationManager Navigation
+@inject AnnouncementsApplicationService AnnouncementsService
+
+<h3>お知らせメッセージ一覧</h3>
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
+    <FluentBreadcrumb>
+        <FluentBreadcrumbItem>
+            <FluentNavLink Href="/">TOP</FluentNavLink>
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            お知らせメッセージ管理
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            お知らせメッセージ一覧
+        </FluentBreadcrumbItem>
+    </FluentBreadcrumb>
+
+    @if (isLoading)
+    {
+        <div class="loading-spinner">
+            <FluentProgressRing Width="60px" />
+        </div>
+    }
+    else
+    {
+        @if (announcementEntities is null || !announcementEntities.Any())
+        {
+            <p>登録されているお知らせメッセージはありません。</p>
+        }
+        else
+        {
+            <FluentStack Orientation="Orientation.Vertical">
+                <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="20">
+                    <div>全 @totalCount 件中 @startIndex ～ @endIndex 件目を表示</div>
+                    <div>
+                        <FluentButton IconEnd="@(new Icons.Regular.Size12.ChevronLeft())" Disabled="@(pageNumber == 1)" OnClick="@OnPreviousButtonClickAsync" />
+                        <FluentButton IconEnd="@(new Icons.Regular.Size12.ChevronRight())" Disabled="@(pageNumber == lastPageNumber)" OnClick="@OnNextButtonClickAsync" />
+                    </div>
+                    <div>
+                        <FluentNavLink Href="/announcement/add" Class="nav-link">新規お知らせメッセージ作成</FluentNavLink>
+                    </div>
+                </FluentStack>
+                <FluentDataGrid Items="@announcementEntities" TGridItem="Announcement" AutoFit="false">
+                    <TemplateColumn Title="タイトル" Width="400px">
+                        <a href="/announcements/@context.Id">@context.Contents.FirstOrDefault()?.Title</a>
+                    </TemplateColumn>
+                    <TemplateColumn Title="掲載日" Width="200px">
+                        @context.PostDateTime.ToString("yyyy/MM/dd") ～ @context.ExpireDateTime?.ToString("yyyy/MM/dd")
+                    </TemplateColumn>
+                    <PropertyColumn Title="カテゴリー" Property="@(a => a.Category)" />
+                    <TemplateColumn Title="表示優先度" Width="120px" Align="Align.Center">
+                        @context.DisplayPriority.GetDisplayName()
+                    </TemplateColumn>
+                    <TemplateColumn Title="操作" Width="120px" Align="Align.Center">
+                        <a href="/announcements/@context.Id/edit">編集</a> | <a href="/announcements/@context.Id/delete">削除</a>
+                    </TemplateColumn>
+                </FluentDataGrid>
+                <FluentStack Orientation="Orientation.Horizontal">
+                    @{
+                        // ページ番号の範囲を計算
+                        var pageButtons = new List<int>();
+                        int current = pageNumber;
+                        int last = lastPageNumber;
+                        bool showBeforeEllipsis = false;
+                        bool showAfterEllipsis = false;
+
+                        // 最初のページ
+                        pageButtons.Add(1);
+
+                        // 前方省略判定
+                        showBeforeEllipsis = current - 3 >= 2;
+
+                        // 前後2ページ分
+                        for (int i = Math.Max(2, current - 2); i <= Math.Min(last - 1, current + 2); i++)
+                        {
+                            if (i != 1 && i != last)
+                            {
+                                pageButtons.Add(i);
+                            }
+                        }
+
+                        // 後方省略判定
+                        showAfterEllipsis = current + 3 < last - 1;
+
+                        // 最後のページ
+                        if (last > 1)
+                        {
+                            pageButtons.Add(last);
+                        }
+
+                        // ボタン描画
+                        for (int i = 0; i < pageButtons.Count; i++)
+                        {
+                            if (showBeforeEllipsis && i == 1)
+                            {
+                                <span class="pagination-ellipsis">...</span>
+                            }
+
+                            var pageButton = pageButtons[i];
+                            <FluentButton Disabled="@(pageButton == current)" OnClick="@(async () => await OnPageButtonClickAsync(pageButton))" Class="pagination-btn">@pageButton</FluentButton>
+
+                            if (showAfterEllipsis && i == pageButtons.Count - 2)
+                            {
+                                <span class="pagination-ellipsis">...</span>
+                            }
+                        }
+                    }
+                </FluentStack>
+            </FluentStack>
+        }
+    }
+</FluentStack>
+
+    @code {
+
+
+
+    private IQueryable<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>? announcementEntities;
+    private int lastPageNumber;
+    private int totalCount;
+    private int startIndex;
+    private int endIndex;
+    private bool isLoading = true;
+
+    private int pageSize;
+    private readonly int defaultPageSize = 20;
+    private int pageNumber;
+    private readonly int defaultPageNumber = 1;
+
+    [SupplyParameterFromQuery]
+    public string? PageSize { get; set; }
+
+    [SupplyParameterFromQuery]
+    public string? PageNumber { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            this.isLoading = true;
+
+            // クエリパラメータからページサイズとページ番号を取得します。int 型に変換できない場合、デフォルト値にフォールバックします。
+            pageSize = int.TryParse(PageSize, out var parsedPageSize) ? parsedPageSize : defaultPageSize;
+            pageNumber = int.TryParse(PageNumber, out var parsedPageNumber) ? parsedPageNumber : defaultPageNumber;
+
+            var announcementsDto = await AnnouncementsService.GetPagedAnnouncementsAsync(pageNumber, pageSize);
+            announcementEntities = announcementsDto.Announcements.AsQueryable();
+            lastPageNumber = announcementsDto.LastPageNumber;
+            totalCount = announcementsDto.TotalCount;
+            startIndex = announcementsDto.DisplayFrom;
+            endIndex = announcementsDto.DisplayTo;
+            pageNumber = announcementsDto.PageNumber;
+            pageSize = announcementsDto.PageSize;
+        }
+        finally
+        {
+            this.isLoading = false;
+        }
+    }
+
+    private async Task OnPreviousButtonClickAsync()
+    {
+        pageNumber--;
+        Navigation.NavigateTo($"/announcements?pageNumber={pageNumber}&pageSize={pageSize}");
+    }
+
+    private async Task OnNextButtonClickAsync()
+    {
+        pageNumber++;
+        Navigation.NavigateTo($"/announcements?pageNumber={pageNumber}&pageSize={pageSize}");
+    }
+
+    private async Task OnPageButtonClickAsync(int pageNumber)
+    {
+        this.pageNumber = pageNumber;
+        Navigation.NavigateTo($"/announcements?pageNumber={this.pageNumber}&pageSize={this.pageSize}");
+    }
+}

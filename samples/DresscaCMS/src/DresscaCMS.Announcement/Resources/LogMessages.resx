@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PropertyNotInitialized" xml:space="preserve">
-    <value>{0} プロパティが初期化されていません。</value>
+  <data name="AnnouncementsApplicationService_GetPagedAnnouncementsEnd" xml:space="preserve">
+    <value>ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得しました。</value>
   </data>
-  <data name="NotFoundConnectionString" xml:space="preserve">
-    <value>{0} 接続文字列を構成から取得できません。</value>
+  <data name="AnnouncementsApplicationService_GetPagedAnnouncementsStart" xml:space="preserve">
+    <value>ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得します。</value>
   </data>
 </root>

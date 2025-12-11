@@ -22,14 +22,14 @@ namespace DresscaCMS.Announcement.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Messages {
+    internal class LogMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Messages() {
+        internal LogMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace DresscaCMS.Announcement.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DresscaCMS.Announcement.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DresscaCMS.Announcement.Resources.LogMessages", typeof(LogMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace DresscaCMS.Announcement.Resources {
         }
         
         /// <summary>
-        ///   {0} 接続文字列を構成から取得できません。 に類似しているローカライズされた文字列を検索します。
+        ///   ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string NotFoundConnectionString {
+        internal static string AnnouncementsApplicationService_GetPagedAnnouncementsEnd {
             get {
-                return ResourceManager.GetString("NotFoundConnectionString", resourceCulture);
+                return ResourceManager.GetString("AnnouncementsApplicationService_GetPagedAnnouncementsEnd", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   {0} プロパティが初期化されていません。 に類似しているローカライズされた文字列を検索します。
+        ///   ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得します。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string PropertyNotInitialized {
+        internal static string AnnouncementsApplicationService_GetPagedAnnouncementsStart {
             get {
-                return ResourceManager.GetString("PropertyNotInitialized", resourceCulture);
+                return ResourceManager.GetString("AnnouncementsApplicationService_GetPagedAnnouncementsStart", resourceCulture);
             }
         }
     }
