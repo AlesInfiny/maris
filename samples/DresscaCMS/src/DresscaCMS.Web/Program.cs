@@ -1,6 +1,9 @@
 ﻿using DresscaCMS.Announcement;
 using DresscaCMS.Authentication;
+using DresscaCMS.Authentication.Infrastructures;
 using DresscaCMS.Web.Components;
+using DresscaCMS.Web.Components.Account;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Microsoft.FluentUI.AspNetCore.Components;
 
@@ -28,9 +31,18 @@ if (builder.Environment.IsDevelopment())
     StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 }
 
+// Blazor に依存した認証に関するサービスを登録
+builder.Services.AddCascadingAuthenticationState();
+builder.Services.AddScoped<IdentityRedirectManager>();
+builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    await AuthenticationDbContextSeed.SeedAsync(app.Services);
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/ServerError", createScopeForErrors: true);
@@ -50,5 +62,7 @@ app.MapRazorPages();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+app.MapAdditionalIdentityEndpoints();
 
 app.Run();

@@ -60,6 +60,14 @@ public static class AuthenticationServiceCollectionExtensions
                 }
             });
 
+            // Cookie ベースの認証を設定します。
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+            .AddIdentityCookies();
+
             // ASP.NET Core Identity を登録します。
             services.AddIdentityCore<ApplicationUser>(options =>
             {
