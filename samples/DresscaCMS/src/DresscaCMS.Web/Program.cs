@@ -5,6 +5,7 @@ using DresscaCMS.Web.Components;
 using DresscaCMS.Web.Components.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,14 @@ builder.Services.AddAuthenticationServices(
 if (builder.Environment.IsDevelopment())
 {
     StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
+    builder.Services.AddHttpLogging(logging =>
+    {
+        // どのデータをどのくらいの量出力するか設定。
+        // 適宜設定値は変更する。
+        logging.LoggingFields = HttpLoggingFields.All;
+        logging.RequestBodyLogLimit = 4096;
+        logging.ResponseBodyLogLimit = 4096;
+    });
 }
 
 // Blazor に依存した認証に関するサービスを登録
@@ -40,6 +49,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    // HTTP 通信ログを有効にする。
+    app.UseHttpLogging();
     await AuthenticationDbContextSeed.SeedAsync(app.Services);
 }
 
