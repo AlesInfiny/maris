@@ -166,7 +166,7 @@ public class AnnouncementsApplicationService
         // 引数チェック
         ArgumentNullException.ThrowIfNull(announcement);
         ArgumentNullException.ThrowIfNull(contents);
-        
+
         if (string.IsNullOrWhiteSpace(userName))
         {
             throw new ArgumentException("ユーザー名が null または空文字列です。", nameof(userName));
@@ -315,7 +315,7 @@ public class AnnouncementsApplicationService
         // ------------------------------
         // 業務メイン処理
         // ------------------------------
-        
+
         // お知らせメッセージ、お知らせコンテンツ、更新履歴を取得
         var result = await this.announcementsRepository.FindByAnnouncementWithContentAsync(
             announcementId,
@@ -367,7 +367,7 @@ public class AnnouncementsApplicationService
         // 引数チェック
         ArgumentNullException.ThrowIfNull(announcement);
         ArgumentNullException.ThrowIfNull(contents);
-        
+
         if (string.IsNullOrWhiteSpace(userName))
         {
             throw new ArgumentException("ユーザー名が null または空文字列です。", nameof(userName));

@@ -78,7 +78,7 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
 
         // ID を生成
         announcement.Id = Guid.NewGuid();
-        
+
         // タイムスタンプを設定
         var now = DateTimeOffset.UtcNow;
         announcement.CreatedAt = now;

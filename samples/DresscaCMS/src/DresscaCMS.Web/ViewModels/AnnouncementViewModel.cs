@@ -1,0 +1,106 @@
+﻿using System.ComponentModel.DataAnnotations;
+using DresscaCMS.Announcement.ApplicationCore;
+
+namespace DresscaCMS.Web.ViewModels;
+
+/// <summary>
+/// お知らせメッセージ登録画面・編集画面においてお知らせメッセージ部分の入力値を保持するビューモデルです。
+/// </summary>
+public class AnnouncementViewModel
+{
+    /// <summary>
+    /// お知らせメッセージ ID を取得または設定します。
+    /// </summary>
+    public Guid Id { get; set; } = Guid.Empty;
+
+    /// <summary>
+    /// 掲載開始日時（日付部分）を取得または設定します。
+    /// </summary>
+    [Required(ErrorMessage = "掲載開始日時を入力してください。")]
+    public DateTime? PostDate { get; set; }
+
+    /// <summary>
+    /// 掲載開始日時（時刻部分）を取得または設定します。
+    /// </summary>
+    public DateTime? PostTime { get; set; }
+
+    /// <summary>
+    /// 掲載終了日時（日付部分）を取得または設定します。
+    /// </summary>
+    public DateTime? ExpireDate { get; set; }
+
+    /// <summary>
+    /// 掲載終了日時（時刻部分）を取得または設定します。
+    /// </summary>
+    public DateTime? ExpireTime { get; set; }
+
+    /// <summary>
+    /// カテゴリーを取得または設定します。
+    /// </summary>
+    [StringLength(128, ErrorMessage = "カテゴリーは128文字以下で入力してください。")]
+    public string? Category { get; set; }
+
+    /// <summary>
+    /// 表示優先度を取得または設定します。
+    /// </summary>
+    [Required(ErrorMessage = "表示優先度を選択してください。")]
+    public DisplayPriority DisplayPriority { get; set; } = DisplayPriority.Medium;
+
+    /// <summary>
+    /// 掲載開始日時を DateTimeOffset 型で取得します。
+    /// </summary>
+    public DateTimeOffset? GetPostDateTime()
+    {
+        if (PostDate == null)
+        {
+            return null;
+        }
+
+        var date = PostDate.Value.Date;
+        var time = PostTime?.TimeOfDay ?? TimeSpan.Zero;
+        return new DateTimeOffset(date.Add(time), TimeSpan.FromHours(9));
+    }
+
+    /// <summary>
+    /// 掲載終了日時を DateTimeOffset 型で取得します。
+    /// </summary>
+    public DateTimeOffset? GetExpireDateTime()
+    {
+        if (ExpireDate == null)
+        {
+            return null;
+        }
+
+        var date = ExpireDate.Value.Date;
+        var time = ExpireTime?.TimeOfDay ?? TimeSpan.Zero;
+        return new DateTimeOffset(date.Add(time), TimeSpan.FromHours(9));
+    }
+
+    /// <summary>
+    /// 掲載開始日時を設定します。
+    /// </summary>
+    /// <param name="dateTime">設定する日時。</param>
+    public void SetPostDateTime(DateTimeOffset dateTime)
+    {
+        PostDate = dateTime.DateTime.Date;
+        PostTime = dateTime.DateTime;
+    }
+
+    /// <summary>
+    /// 掲載終了日時を設定します。
+    /// </summary>
+    /// <param name="dateTime">設定する日時。</param>
+    public void SetExpireDateTime(DateTimeOffset? dateTime)
+    {
+        if (dateTime.HasValue)
+        {
+            ExpireDate = dateTime.Value.DateTime.Date;
+            ExpireTime = dateTime.Value.DateTime;
+        }
+        else
+        {
+            ExpireDate = null;
+            ExpireTime = null;
+        }
+    }
+}

@@ -44,7 +44,7 @@
                         <FluentButton IconEnd="@(new Icons.Regular.Size12.ChevronRight())" Disabled="@(pageNumber == lastPageNumber)" OnClick="@OnNextButtonClickAsync" />
                     </div>
                     <div>
-                        <FluentNavLink Href="/announcement/add" Class="nav-link">新規お知らせメッセージ作成</FluentNavLink>
+                        <FluentNavLink Href="/announcements/create" Class="nav-link">新規お知らせメッセージ作成</FluentNavLink>
                     </div>
                 </FluentStack>
                 <FluentDataGrid Items="@announcementEntities" TGridItem="Announcement" AutoFit="false">
