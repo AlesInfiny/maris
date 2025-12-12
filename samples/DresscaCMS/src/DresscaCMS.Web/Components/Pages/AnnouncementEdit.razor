@@ -1,4 +1,4 @@
-@page "/announcements/{AnnouncementId:guid}/edit"
+ï»¿@page "/announcements/{AnnouncementId:guid}/edit"
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.ViewModels
@@ -8,7 +8,7 @@
 @inject AnnouncementsApplicationService AnnouncementsService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
-<h3>‚¨’m‚ç‚¹ƒƒbƒZ[ƒW•ÒW</h3>
+<h3>ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç·¨é›†</h3>
 
 <FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
     <FluentBreadcrumb>
@@ -17,15 +17,15 @@
             <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
         </FluentBreadcrumbItem>
         <FluentBreadcrumbItem>
-            ‚¨’m‚ç‚¹ƒƒbƒZ[ƒWŠÇ—
+            ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç®¡ç†
             <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
         </FluentBreadcrumbItem>
         <FluentBreadcrumbItem>
-            <FluentNavLink Href="/announcements">‚¨’m‚ç‚¹ƒƒbƒZ[ƒWˆê——</FluentNavLink>
+            <FluentNavLink Href="/announcements">ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ä¸€è¦§</FluentNavLink>
             <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
         </FluentBreadcrumbItem>
         <FluentBreadcrumbItem>
-            ‚¨’m‚ç‚¹ƒƒbƒZ[ƒW•ÒW
+            ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç·¨é›†
         </FluentBreadcrumbItem>
     </FluentBreadcrumb>
 
@@ -37,66 +37,66 @@
     }
     else if (announcementModel == null)
     {
-        <p>‚¨’m‚ç‚¹ƒƒbƒZ[ƒW‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B</p>
+        <p>ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚</p>
     }
     else
     {
         <EditForm Model="@announcementModel" OnValidSubmit="@OnSaveButtonClickAsync" FormName="AnnouncementEditForm">
             <DataAnnotationsValidator />
 
-            @* ‚¨’m‚ç‚¹ƒƒbƒZ[ƒW•ÒWEƒwƒbƒ_[•” *@
+            @* ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç·¨é›†ãƒ»ãƒ˜ãƒƒãƒ€ãƒ¼éƒ¨ *@
             <FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
                 <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="20">
                     <FluentStack Orientation="Orientation.Vertical">
-                        <FluentLabel>ŒfÚŠJn“úi“ú•tj<span class="required">*</span></FluentLabel>
+                        <FluentLabel>æ²è¼‰é–‹å§‹æ—¥æ™‚ï¼ˆæ—¥ä»˜ï¼‰<span class="required">*</span></FluentLabel>
                         <FluentDatePicker @bind-Value="@announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
                         <ValidationMessage For="@(() => announcementModel.PostDate)" />
                     </FluentStack>
                     <FluentStack Orientation="Orientation.Vertical">
-                        <FluentLabel>ŒfÚŠJn“úij</FluentLabel>
+                        <FluentLabel>æ²è¼‰é–‹å§‹æ—¥æ™‚ï¼ˆæ™‚åˆ»ï¼‰</FluentLabel>
                         <FluentTimePicker @bind-Value="@announcementModel.PostTime" />
                     </FluentStack>
                 </FluentStack>
 
                 <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="20">
                     <FluentStack Orientation="Orientation.Vertical">
-                        <FluentLabel>ŒfÚI—¹“úi“ú•tj</FluentLabel>
+                        <FluentLabel>æ²è¼‰çµ‚äº†æ—¥æ™‚ï¼ˆæ—¥ä»˜ï¼‰</FluentLabel>
                         <FluentDatePicker @bind-Value="@announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
                     </FluentStack>
                     <FluentStack Orientation="Orientation.Vertical">
-                        <FluentLabel>ŒfÚI—¹“úij</FluentLabel>
+                        <FluentLabel>æ²è¼‰çµ‚äº†æ—¥æ™‚ï¼ˆæ™‚åˆ»ï¼‰</FluentLabel>
                         <FluentTimePicker @bind-Value="@announcementModel.ExpireTime" />
                     </FluentStack>
                 </FluentStack>
 
                 <FluentStack Orientation="Orientation.Vertical">
-                    <FluentLabel>ƒJƒeƒSƒŠ[</FluentLabel>
+                    <FluentLabel>ã‚«ãƒ†ã‚´ãƒªãƒ¼</FluentLabel>
                     <FluentTextField @bind-Value="@announcementModel.Category" Maxlength="128" Style="width: 400px;" />
                     <ValidationMessage For="@(() => announcementModel.Category)" />
                 </FluentStack>
 
                 <FluentStack Orientation="Orientation.Vertical">
-                    <FluentLabel>•\¦—Dæ“x<span class="required">*</span></FluentLabel>
+                    <FluentLabel>è¡¨ç¤ºå„ªå…ˆåº¦<span class="required">*</span></FluentLabel>
                     <InputSelect @bind-Value="@announcementModel.DisplayPriority" class="fluent-select" style="width: 200px;">
-                        <option value="@DisplayPriority.Critical">‹Ù‹}</option>
-                        <option value="@DisplayPriority.High">‚</option>
-                        <option value="@DisplayPriority.Medium">’†</option>
-                        <option value="@DisplayPriority.Low">’á</option>
+                        <option value="@DisplayPriority.Critical">ç·Šæ€¥</option>
+                        <option value="@DisplayPriority.High">é«˜</option>
+                        <option value="@DisplayPriority.Medium">ä¸­</option>
+                        <option value="@DisplayPriority.Low">ä½</option>
                     </InputSelect>
                     <ValidationMessage For="@(() => announcementModel.DisplayPriority)" />
                 </FluentStack>
             </FluentStack>
 
-            @* ‚¨’m‚ç‚¹ƒƒbƒZ[ƒW•ÒWE‚¨’m‚ç‚¹ƒRƒ“ƒeƒ“ƒcƒAƒNƒVƒ‡ƒ“•” *@
+            @* ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç·¨é›†ãƒ»ãŠçŸ¥ã‚‰ã›ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚¢ã‚¯ã‚·ãƒ§ãƒ³éƒ¨ *@
             <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10" Style="margin-top: 30px;">
-                <FluentButton Appearance="Appearance.Accent" OnClick="@OnAddLanguageButtonClickAsync">•Ê‚ÌŒ¾Œê‚ğ’Ç‰Á</FluentButton>
+                <FluentButton Appearance="Appearance.Accent" OnClick="@OnAddLanguageButtonClick">åˆ¥ã®è¨€èªã‚’è¿½åŠ </FluentButton>
             </FluentStack>
 
-            @* ‚¨’m‚ç‚¹ƒƒbƒZ[ƒW•ÒWE‚¨’m‚ç‚¹ƒRƒ“ƒeƒ“ƒc•” *@
+            @* ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç·¨é›†ãƒ»ãŠçŸ¥ã‚‰ã›ã‚³ãƒ³ãƒ†ãƒ³ãƒ„éƒ¨ *@
             <FluentStack Orientation="Orientation.Vertical" VerticalGap="20" Style="margin-top: 20px;">
                 @if (!contentModels.Any())
                 {
-                    <p>“o˜^‚³‚ê‚Ä‚¢‚é‚¨’m‚ç‚¹ƒƒbƒZ[ƒW‚Í‚ ‚è‚Ü‚¹‚ñB</p>
+                    <p>ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚</p>
                 }
                 else
                 {
@@ -105,37 +105,37 @@
                         <FluentCard Style="padding: 20px;">
                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
                                 <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
-                                    <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => OnDeleteContentButtonClickAsync(content.Id))">
+                                    <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => OnDeleteContentButtonClick(content.Id))">
                                         <FluentIcon Value="@(new Icons.Regular.Size20.Delete())" Color="@Color.Error" />
-                                        íœ
+                                        å‰Šé™¤
                                     </FluentButton>
                                 </FluentStack>
 
                                 <FluentStack Orientation="Orientation.Vertical">
-                                    <FluentLabel>Œ¾Œê<span class="required">*</span></FluentLabel>
+                                    <FluentLabel>è¨€èª<span class="required">*</span></FluentLabel>
                                     <InputSelect @bind-Value="@content.LanguageCode" class="fluent-select" style="width: 200px;">
-                                        <option value="ja">“ú–{Œê</option>
-                                        <option value="en">‰pŒê</option>
-                                        <option value="zh">’†‘Œê</option>
-                                        <option value="es">ƒXƒyƒCƒ“Œê</option>
+                                        <option value="ja">æ—¥æœ¬èª</option>
+                                        <option value="en">è‹±èª</option>
+                                        <option value="zh">ä¸­å›½èª</option>
+                                        <option value="es">ã‚¹ãƒšã‚¤ãƒ³èª</option>
                                     </InputSelect>
                                     <ValidationMessage For="@(() => content.LanguageCode)" />
                                 </FluentStack>
 
                                 <FluentStack Orientation="Orientation.Vertical">
-                                    <FluentLabel>ƒ^ƒCƒgƒ‹<span class="required">*</span></FluentLabel>
+                                    <FluentLabel>ã‚¿ã‚¤ãƒˆãƒ«<span class="required">*</span></FluentLabel>
                                     <FluentTextField @bind-Value="@content.Title" Maxlength="256" Style="width: 100%;" />
                                     <ValidationMessage For="@(() => content.Title)" />
                                 </FluentStack>
 
                                 <FluentStack Orientation="Orientation.Vertical">
-                                    <FluentLabel>ƒƒbƒZ[ƒW<span class="required">*</span></FluentLabel>
+                                    <FluentLabel>ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸<span class="required">*</span></FluentLabel>
                                     <FluentTextArea @bind-Value="@content.Message" Maxlength="512" Rows="5" Style="width: 100%;" />
                                     <ValidationMessage For="@(() => content.Message)" />
                                 </FluentStack>
 
                                 <FluentStack Orientation="Orientation.Vertical">
-                                    <FluentLabel>ƒŠƒ“ƒNæURL</FluentLabel>
+                                    <FluentLabel>ãƒªãƒ³ã‚¯å…ˆURL</FluentLabel>
                                     <FluentTextField @bind-Value="@content.LinkedUrl" Maxlength="1024" Placeholder="https://www.example.com" Style="width: 100%;" />
                                     <ValidationMessage For="@(() => content.LinkedUrl)" />
                                 </FluentStack>
@@ -145,7 +145,7 @@
                 }
             </FluentStack>
 
-            @* ‚¨’m‚ç‚¹ƒƒbƒZ[ƒW•ÒWEƒAƒNƒVƒ‡ƒ“•” *@
+            @* ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç·¨é›†ãƒ»ã‚¢ã‚¯ã‚·ãƒ§ãƒ³éƒ¨ *@
             <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-top: 30px;">
                 @if (!string.IsNullOrEmpty(businessErrorMessage))
                 {
@@ -174,44 +174,44 @@
                         {
                             <FluentProgressRing Width="20px" />
                         }
-                        ‚¨’m‚ç‚¹ƒƒbƒZ[ƒW‚Ì•Û‘¶
+                        ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ä¿å­˜
                     </FluentButton>
                     <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToDeleteConfirmAsync">
-                        ‚¨’m‚ç‚¹ƒƒbƒZ[ƒW‚Ìíœ
+                        ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å‰Šé™¤
                     </FluentButton>
                     <FluentButton Appearance="Appearance.Neutral" OnClick="@OnBackToListButtonClickAsync">
-                        ‚¨’m‚ç‚¹ƒƒbƒZ[ƒWŠÇ—‰æ–Ê‚Ö–ß‚é
+                        ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç®¡ç†ç”»é¢ã¸æˆ»ã‚‹
                     </FluentButton>
                 </FluentStack>
             </FluentStack>
         </EditForm>
 
-        @* ‚¨’m‚ç‚¹ƒƒbƒZ[ƒW•ÒWEXV—š—ğ•” *@
+        @* ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç·¨é›†ãƒ»æ›´æ–°å±¥æ­´éƒ¨ *@
         @if (histories.Any())
         {
             <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-top: 40px;">
-                <h4>XV—š—ğ</h4>
+                <h4>æ›´æ–°å±¥æ­´</h4>
                 @foreach (var history in histories)
                 {
                     <FluentAccordion>
                         <FluentAccordionItem Heading="@GetHistoryHeading(history)">
                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
-                                <div><strong>ŒfÚŠJn“úF</strong>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss")</div>
-                                <div><strong>ŒfÚI—¹“úF</strong>@(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
-                                <div><strong>ƒJƒeƒSƒŠ[F</strong>@(history.Category ?? "")</div>
-                                <div><strong>•\¦—Dæ“xF</strong>@history.DisplayPriority.GetDisplayName()</div>
+                                <div><strong>æ²è¼‰é–‹å§‹æ—¥æ™‚ï¼š</strong>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss")</div>
+                                <div><strong>æ²è¼‰çµ‚äº†æ—¥æ™‚ï¼š</strong>@(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
+                                <div><strong>ã‚«ãƒ†ã‚´ãƒªãƒ¼ï¼š</strong>@(history.Category ?? "")</div>
+                                <div><strong>è¡¨ç¤ºå„ªå…ˆåº¦ï¼š</strong>@history.DisplayPriority.GetDisplayName()</div>
 
                                 @if (history.Contents.Any())
                                 {
-                                    <h5 style="margin-top: 15px;">Œ¾Œê•ÊƒRƒ“ƒeƒ“ƒc</h5>
+                                    <h5 style="margin-top: 15px;">è¨€èªåˆ¥ã‚³ãƒ³ãƒ†ãƒ³ãƒ„</h5>
                                     @foreach (var contentHistory in history.Contents)
                                     {
                                         <FluentCard Style="padding: 15px; margin-top: 10px;">
                                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
-                                                <div><strong>Œ¾ŒêF</strong>@GetLanguageName(contentHistory.LanguageCode)</div>
-                                                <div><strong>ƒ^ƒCƒgƒ‹F</strong>@contentHistory.Title</div>
-                                                <div><strong>ƒƒbƒZ[ƒWF</strong>@contentHistory.Message</div>
-                                                <div><strong>ƒŠƒ“ƒNæURLF</strong>@(contentHistory.LinkedUrl ?? "")</div>
+                                                <div><strong>è¨€èªï¼š</strong>@GetLanguageName(contentHistory.LanguageCode)</div>
+                                                <div><strong>ã‚¿ã‚¤ãƒˆãƒ«ï¼š</strong>@contentHistory.Title</div>
+                                                <div><strong>ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ï¼š</strong>@contentHistory.Message</div>
+                                                <div><strong>ãƒªãƒ³ã‚¯å…ˆURLï¼š</strong>@(contentHistory.LinkedUrl ?? "")</div>
                                             </FluentStack>
                                         </FluentCard>
                                     }
@@ -246,7 +246,7 @@
     }
 
     /// <summary>
-    /// ‚¨’m‚ç‚¹ƒƒbƒZ[ƒWƒf[ƒ^‚ğ“Ç‚İ‚Ş
+    /// ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
     /// </summary>
     private async Task LoadAnnouncementDataAsync()
     {
@@ -262,7 +262,7 @@
                 return;
             }
 
-            // AnnouncementViewModel ‚Ö‚Ì•ÏŠ·
+            // AnnouncementViewModel ã¸ã®å¤‰æ›
             announcementModel = new AnnouncementViewModel
             {
                 Id = result.Announcement.Id,
@@ -272,7 +272,7 @@
             announcementModel.SetPostDateTime(result.Announcement.PostDateTime);
             announcementModel.SetExpireDateTime(result.Announcement.ExpireDateTime);
 
-            // AnnouncementContentViewModel ‚Ö‚Ì•ÏŠ·
+            // AnnouncementContentViewModel ã¸ã®å¤‰æ›
             contentModels = result.Contents.Select(c =>
             {
                 var displayOrder = Array.IndexOf(languagePriority, c.LanguageCode);
@@ -288,7 +288,7 @@
                 };
             }).ToList();
 
-            // —š—ğƒf[ƒ^‚Ìİ’è
+            // å±¥æ­´ãƒ‡ãƒ¼ã‚¿ã®è¨­å®š
             histories = result.Histories.ToList();
         }
         finally
@@ -298,35 +298,34 @@
     }
 
     /// <summary>
-    /// •Ê‚ÌŒ¾Œê‚ğ’Ç‰Áƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚Ìˆ—
+    /// åˆ¥ã®è¨€èªã‚’è¿½åŠ ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯æ™‚ã®å‡¦ç†
     /// </summary>
-    private void OnAddLanguageButtonClickAsync()
+    private void OnAddLanguageButtonClick()
     {
         var nextLanguage = GetNextLanguageCode();
         AddContentWithLanguage(nextLanguage);
     }
 
     /// <summary>
-    /// Ÿ‚É’Ç‰Á‚·‚×‚«Œ¾ŒêƒR[ƒh‚ğæ“¾
+    /// æ¬¡ã«è¿½åŠ ã™ã¹ãè¨€èªã‚³ãƒ¼ãƒ‰ã‚’å–å¾—
     /// </summary>
     private string GetNextLanguageCode()
     {
         var existingLanguages = contentModels.Select(c => c.LanguageCode).ToHashSet();
 
-        foreach (var lang in languagePriority)
+        var lang = languagePriority.FirstOrDefault(l => !existingLanguages.Contains(l));
+
+        if(lang != null)
         {
-            if (!existingLanguages.Contains(lang))
-            {
-                return lang;
-            }
+            return lang;
         }
 
-        // ‘S‚Ä‚ÌŒ¾Œê‚ª’Ç‰ÁÏ‚İ‚Ìê‡‚Í“ú–{Œê‚ğ•Ô‚·
+        // å…¨ã¦ã®è¨€èªãŒè¿½åŠ æ¸ˆã¿ã®å ´åˆã¯æ—¥æœ¬èªã‚’è¿”ã™
         return "ja";
     }
 
     /// <summary>
-    /// w’è‚³‚ê‚½Œ¾ŒêƒR[ƒh‚ÅƒRƒ“ƒeƒ“ƒc‚ğ’Ç‰Á
+    /// æŒ‡å®šã•ã‚ŒãŸè¨€èªã‚³ãƒ¼ãƒ‰ã§ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’è¿½åŠ 
     /// </summary>
     private void AddContentWithLanguage(string languageCode)
     {
@@ -348,9 +347,9 @@
     }
 
     /// <summary>
-    /// ƒRƒ“ƒeƒ“ƒcíœƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚Ìˆ—
+    /// ã‚³ãƒ³ãƒ†ãƒ³ãƒ„å‰Šé™¤ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯æ™‚ã®å‡¦ç†
     /// </summary>
-    private void OnDeleteContentButtonClickAsync(Guid contentId)
+    private void OnDeleteContentButtonClick(Guid contentId)
     {
         var content = contentModels.FirstOrDefault(c => c.Id == contentId);
         if (content != null)
@@ -360,7 +359,7 @@
     }
 
     /// <summary>
-    /// •Û‘¶ƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚Ìˆ—
+    /// ä¿å­˜ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯æ™‚ã®å‡¦ç†
     /// </summary>
     private async Task OnSaveButtonClickAsync(EditContext editContext)
     {
@@ -368,7 +367,7 @@
         correlationErrorMessage = null;
         successMessage = null;
 
-        // ‘ŠŠÖƒ`ƒFƒbƒN
+        // ç›¸é–¢ãƒã‚§ãƒƒã‚¯
         if (!ValidateCorrelation())
         {
             return;
@@ -377,11 +376,11 @@
         isSubmitting = true;
         try
         {
-            // ƒrƒ…[ƒ‚ƒfƒ‹‚©‚çƒGƒ“ƒeƒBƒeƒB‚Ö‚Ì•ÏŠ·
+            // ãƒ“ãƒ¥ãƒ¼ãƒ¢ãƒ‡ãƒ«ã‹ã‚‰ã‚¨ãƒ³ãƒ†ã‚£ãƒ†ã‚£ã¸ã®å¤‰æ›
             var postDateTime = announcementModel!.GetPostDateTime();
             if (!postDateTime.HasValue)
             {
-                correlationErrorMessage = "ŒfÚŠJn“ú‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B";
+                correlationErrorMessage = "æ²è¼‰é–‹å§‹æ—¥æ™‚ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚";
                 return;
             }
 
@@ -407,19 +406,19 @@
                 LinkedUrl = string.IsNullOrWhiteSpace(c.LinkedUrl) ? null : c.LinkedUrl
             }).ToList();
 
-            // ƒƒOƒCƒ“’†‚Ìƒ†[ƒU[–¼‚ğæ“¾
+            // ãƒ­ã‚°ã‚¤ãƒ³ä¸­ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼åã‚’å–å¾—
             var userName = await AuthenticationStateProvider.GetCurrentUserNameAsync();
 
-            // ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒT[ƒrƒX‚ğŒÄ‚Ño‚µ
+            // ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚µãƒ¼ãƒ“ã‚¹ã‚’å‘¼ã³å‡ºã—
             await AnnouncementsService.UpdateAnnouncementAndContentAsync(
                 announcement,
                 contents,
                 userName);
 
-            // ¬Œ÷ƒƒbƒZ[ƒW•\¦
-            successMessage = "‚¨’m‚ç‚¹ƒƒbƒZ[ƒW‚ğ•Û‘¶‚µ‚Ü‚µ‚½B";
+            // æˆåŠŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤º
+            successMessage = "ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ä¿å­˜ã—ã¾ã—ãŸã€‚";
 
-            // ƒf[ƒ^‚ğÄ“Ç‚İ‚İ
+            // ãƒ‡ãƒ¼ã‚¿ã‚’å†èª­ã¿è¾¼ã¿
             await LoadAnnouncementDataAsync();
         }
         finally
@@ -429,32 +428,32 @@
     }
 
     /// <summary>
-    /// ‘ŠŠÖƒ`ƒFƒbƒN‚ğÀs
+    /// ç›¸é–¢ãƒã‚§ãƒƒã‚¯ã‚’å®Ÿè¡Œ
     /// </summary>
     private bool ValidateCorrelation()
     {
-        // ŒfÚI—¹“ú‚ªŒfÚŠJn“ú‚æ‚è‘O‚©ƒ`ƒFƒbƒN
+        // æ²è¼‰çµ‚äº†æ—¥æ™‚ãŒæ²è¼‰é–‹å§‹æ—¥æ™‚ã‚ˆã‚Šå‰ã‹ãƒã‚§ãƒƒã‚¯
         var postDateTime = announcementModel?.GetPostDateTime();
         var expireDateTime = announcementModel?.GetExpireDateTime();
 
         if ((postDateTime.HasValue && expireDateTime.HasValue) && (postDateTime.Value > expireDateTime.Value))
         {
-            correlationErrorMessage = "ŒfÚI—¹“ú‚ÍŒfÚŠJn“úˆÈ~‚Éİ’è‚µ‚Ä‚­‚¾‚³‚¢B";
+            correlationErrorMessage = "æ²è¼‰çµ‚äº†æ—¥æ™‚ã¯æ²è¼‰é–‹å§‹æ—¥æ™‚ä»¥é™ã«è¨­å®šã—ã¦ãã ã•ã„ã€‚";
             return false;
         }
 
-        // ‚¨’m‚ç‚¹ƒRƒ“ƒeƒ“ƒc‚ª1ŒˆÈã‚ ‚é‚©ƒ`ƒFƒbƒN
+        // ãŠçŸ¥ã‚‰ã›ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ãŒ1ä»¶ä»¥ä¸Šã‚ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
         if (!contentModels.Any())
         {
-            correlationErrorMessage = "‚¨’m‚ç‚¹ƒƒbƒZ[ƒW‚Í1ŒˆÈãì¬‚µ‚Ä‚­‚¾‚³‚¢B";
+            correlationErrorMessage = "ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯1ä»¶ä»¥ä¸Šä½œæˆã—ã¦ãã ã•ã„ã€‚";
             return false;
         }
 
-        // Œ¾ŒêƒR[ƒh‚Ìd•¡ƒ`ƒFƒbƒN
+        // è¨€èªã‚³ãƒ¼ãƒ‰ã®é‡è¤‡ãƒã‚§ãƒƒã‚¯
         var languageCodes = contentModels.Select(c => c.LanguageCode).ToList();
         if (languageCodes.Count != languageCodes.Distinct().Count())
         {
-            correlationErrorMessage = "‚¨’m‚ç‚¹ƒƒbƒZ[ƒW‚ÌŒ¾Œê‚ªd•¡‚µ‚Ä‚¢‚Ü‚·B";
+            correlationErrorMessage = "ãŠçŸ¥ã‚‰ã›ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®è¨€èªãŒé‡è¤‡ã—ã¦ã„ã¾ã™ã€‚";
             return false;
         }
 
@@ -462,7 +461,7 @@
     }
 
     /// <summary>
-    /// ˆê——‚Ö–ß‚éƒ{ƒ^ƒ“ƒNƒŠƒbƒN‚Ìˆ—
+    /// ä¸€è¦§ã¸æˆ»ã‚‹ãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯æ™‚ã®å‡¦ç†
     /// </summary>
     private void OnBackToListButtonClickAsync()
     {
@@ -470,7 +469,7 @@
     }
 
     /// <summary>
-    /// íœŠm”F‰æ–Ê‚Ö‘JˆÚ
+    /// å‰Šé™¤ç¢ºèªç”»é¢ã¸é·ç§»
     /// </summary>
     private void OnNavigateToDeleteConfirmAsync()
     {
@@ -478,32 +477,32 @@
     }
 
     /// <summary>
-    /// —š—ğ‚Ìƒwƒbƒ_[•¶š—ñ‚ğæ“¾
+    /// å±¥æ­´ã®ãƒ˜ãƒƒãƒ€ãƒ¼æ–‡å­—åˆ—ã‚’å–å¾—
     /// </summary>
     private string GetHistoryHeading(DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory history)
     {
         var operationType = history.OperationType switch
         {
-            OperationType.Create => "ì¬",
-            OperationType.Update => "XV",
-            OperationType.Delete => "íœ",
-            _ => "•s–¾"
+            OperationType.Create => "ä½œæˆ",
+            OperationType.Update => "æ›´æ–°",
+            OperationType.Delete => "å‰Šé™¤",
+            _ => "ä¸æ˜"
         };
 
         return $"{history.CreatedAt:yyyy/MM/dd HH:mm:ss} - {operationType} - {history.ChangedBy}";
     }
 
     /// <summary>
-    /// Œ¾ŒêƒR[ƒh‚©‚çŒ¾Œê–¼‚ğæ“¾
+    /// è¨€èªã‚³ãƒ¼ãƒ‰ã‹ã‚‰è¨€èªåã‚’å–å¾—
     /// </summary>
     private string GetLanguageName(string languageCode)
     {
         return languageCode switch
         {
-            "ja" => "“ú–{Œê",
-            "en" => "‰pŒê",
-            "zh" => "’†‘Œê",
-            "es" => "ƒXƒyƒCƒ“Œê",
+            "ja" => "æ—¥æœ¬èª",
+            "en" => "è‹±èª",
+            "zh" => "ä¸­å›½èª",
+            "es" => "ã‚¹ãƒšã‚¤ãƒ³èª",
             _ => languageCode
         };
     }

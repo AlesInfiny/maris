@@ -258,18 +258,18 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツ更新履歴を作成
-            foreach (var content in contents)
+            var contentHistories = contents.Select(content => new Infrastructures.Entities.AnnouncementContentHistory
             {
-                var contentHistory = new Infrastructures.Entities.AnnouncementContentHistory
-                {
-                    Id = Guid.NewGuid(),
-                    AnnouncementHistoryId = history.Id,
-                    LanguageCode = content.LanguageCode,
-                    Title = content.Title,
-                    Message = content.Message,
-                    LinkedUrl = content.LinkedUrl,
-                };
+                Id = Guid.NewGuid(),
+                AnnouncementHistoryId = history.Id,
+                LanguageCode = content.LanguageCode,
+                Title = content.Title,
+                Message = content.Message,
+                LinkedUrl = content.LinkedUrl,
+            });
 
+            foreach (var contentHistory in contentHistories)
+            {
                 await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
                     contentHistory,
                     cancellationToken);
@@ -485,18 +485,18 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツ更新履歴を作成
-            foreach (var content in contents)
+            var contentHistories = contents.Select(content => new Infrastructures.Entities.AnnouncementContentHistory
             {
-                var contentHistory = new Infrastructures.Entities.AnnouncementContentHistory
-                {
-                    Id = Guid.NewGuid(),
-                    AnnouncementHistoryId = history.Id,
-                    LanguageCode = content.LanguageCode,
-                    Title = content.Title,
-                    Message = content.Message,
-                    LinkedUrl = content.LinkedUrl,
-                };
+                Id = Guid.NewGuid(),
+                AnnouncementHistoryId = history.Id,
+                LanguageCode = content.LanguageCode,
+                Title = content.Title,
+                Message = content.Message,
+                LinkedUrl = content.LinkedUrl,
+            });
 
+            foreach (var contentHistory in contentHistories)
+            {
                 await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
                     contentHistory,
                     cancellationToken);
@@ -613,18 +613,18 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツ削除履歴を作成
-            foreach (var content in contents)
+            var contentHistories = contents.Select(content => new Infrastructures.Entities.AnnouncementContentHistory
             {
-                var contentHistory = new Infrastructures.Entities.AnnouncementContentHistory
-                {
-                    Id = Guid.NewGuid(),
-                    AnnouncementHistoryId = history.Id,
-                    LanguageCode = content.LanguageCode,
-                    Title = content.Title,
-                    Message = content.Message,
-                    LinkedUrl = content.LinkedUrl,
-                };
+                Id = Guid.NewGuid(),
+                AnnouncementHistoryId = history.Id,
+                LanguageCode = content.LanguageCode,
+                Title = content.Title,
+                Message = content.Message,
+                LinkedUrl = content.LinkedUrl,
+            });
 
+            foreach (var contentHistory in contentHistories)
+            {
                 await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
                     contentHistory,
                     cancellationToken);
