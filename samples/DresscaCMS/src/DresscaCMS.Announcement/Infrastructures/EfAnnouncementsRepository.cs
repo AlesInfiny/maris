@@ -167,13 +167,17 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
         // 言語コードの優先順位を取得
         var languageOrder = ApplicationCore.LanguagePriorityProvider.GetLanguageOrderMap();
 
-        // お知らせコンテンツを取得（言語コードの優先順でソート）
-        var contents = await dbContext.AnnouncementContents
+        // お知らせコンテンツを取得（まずデータベースから取得してからクライアント側でソート）
+        var contentsFromDb = await dbContext.AnnouncementContents
             .Where(c => c.AnnouncementId == announcementId)
-            .OrderBy(c => languageOrder.ContainsKey(c.LanguageCode) 
-                ? languageOrder[c.LanguageCode] 
-                : int.MaxValue)
             .ToListAsync(cancellationToken);
+
+        // クライアント側で言語コードの優先順にソート
+        var contents = contentsFromDb
+            .OrderBy(c => languageOrder.ContainsKey(c.LanguageCode)
+                ? languageOrder[c.LanguageCode]
+                : int.MaxValue)
+            .ToList();
 
         // お知らせメッセージ更新履歴を取得（作成日時の降順）
         var histories = await dbContext.AnnouncementHistories
@@ -182,7 +186,7 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
             .OrderByDescending(h => h.CreatedAt)
             .ToListAsync(cancellationToken);
 
-        // 各履歴のコンテンツを言語コードの優先順でソート
+        // 各履歴のコンテンツを言語コードの優先順でソート（クライアント側）
         foreach (var history in histories)
         {
             history.Contents = history.Contents
