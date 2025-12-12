@@ -52,7 +52,7 @@ internal sealed class IdentityRevalidatingAuthenticationStateProvider(
     /// <param name="userManager">アプリケーションユーザーマネージャー。</param>
     /// <param name="principal">検証するクレームプリンシパル。</param>
     /// <returns>
-    /// セキュリティスタンプが一致する場合は<c>true</c>、
+    /// セキュリティスタンプが一致する場合は <see langword="true" /> 、
     /// ユーザーが存在しない場合は<c>false</c>、
     /// セキュリティスタンプがサポートされていない場合は<c>true</c>を返すタスク。
     /// </returns>
