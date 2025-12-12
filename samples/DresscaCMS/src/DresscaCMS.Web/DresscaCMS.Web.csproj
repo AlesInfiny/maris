@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DresscaCMS.Announcement\DresscaCMS.Announcement.csproj" />
+    <ProjectReference Include="..\DresscaCMS.Authentication\DresscaCMS.Authentication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

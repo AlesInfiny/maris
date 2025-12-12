@@ -1,0 +1,4 @@
+[*.cs]
+# 自動生成コードに対する不要な警告を抑止します。
+dotnet_diagnostic.CS1591.severity = none
+dotnet_analyzer_diagnostic.severity = none
