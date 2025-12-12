@@ -1,0 +1,105 @@
+﻿@page "/Account/Login"
+@attribute [AllowAnonymous]
+@attribute [ExcludeFromInteractiveRouting]
+
+@using System.ComponentModel.DataAnnotations
+@using DresscaCMS.Authentication.Infrastructures.Entities
+@using DresscaCMS.Web.Components.Account.Shared
+@using Microsoft.AspNetCore.Identity
+@using DresscaCMS.Web.Components.Account
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject ILogger<Login> Logger
+@inject NavigationManager NavigationManager
+@inject IdentityRedirectManager RedirectManager
+
+<PageTitle>ログイン</PageTitle>
+
+<h1>ログイン</h1>
+<div class="row">
+    <div class="col-lg-6">
+        <section>
+            <div>
+                @errorMessage
+            </div>
+            <EditForm EditContext="editContext" method="post" OnSubmit="LoginUser" FormName="login">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" role="alert" />
+                <div class="form-floating mb-3">
+                    <InputText @bind-Value="Input.Email" id="input-email" class="form-control" autocomplete="username webauthn" aria-required="true" placeholder="name@example.com" />
+                    <label for="input-email" class="form-label">メールアドレス</label>
+                    <ValidationMessage For="() => Input.Email" class="text-danger" />
+                </div>
+                <div class="form-floating mb-3">
+                    <InputText type="password" @bind-Value="Input.Password" id="input-password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label for="input-password" class="form-label">パスワード</label>
+                    <ValidationMessage For="() => Input.Password" class="text-danger" />
+                </div>
+                <div class="checkbox mb-3">
+                    <label class="form-label">
+                        <InputCheckbox @bind-Value="Input.RememberMe" class="darker-border-checkbox form-check-input" />
+                        ログイン状態を保持する
+                    </label>
+                </div>
+                <div>
+                    <button type="submit" class="w-100 btn btn-lg btn-primary">ログイン</button>
+                </div>
+            </EditForm>
+        </section>
+    </div>
+</div>
+
+@code {
+    private string? errorMessage;
+    private EditContext editContext = default!;
+
+
+    [SupplyParameterFromForm]
+    private InputModel Input { get; set; } = default!;
+
+    [SupplyParameterFromQuery]
+    private string? ReturnUrl { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Input ??= new();
+
+        editContext = new EditContext(Input);
+    }
+
+    public async Task LoginUser()
+    {
+        if (!editContext.Validate())
+        {
+            return;
+        }
+
+        // アカウントロックアウトに対してログイン失敗をカウントしません
+        // パスワード失敗でアカウントロックアウトを有効にするには、lockoutOnFailure: true に設定してください
+        var result = await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+        if (result.Succeeded)
+        {
+            Logger.LogInformation("ユーザーがログインしました。");
+            RedirectManager.RedirectTo(ReturnUrl);
+        }
+        else
+        {
+            errorMessage = "エラー: ログイン試行が無効です。";
+        }
+    }
+
+    private sealed class InputModel
+    {
+        [Required(ErrorMessage = "メールアドレスを入力してください。")]
+        [EmailAddress(ErrorMessage = "有効なメールアドレスを入力してください。")]
+        public string Email { get; set; } = "";
+
+        [Required(ErrorMessage = "パスワードを入力してください。")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; } = "";
+
+        [Display(Name = "ログイン状態を保持する")]
+        public bool RememberMe { get; set; }
+
+    }
+}
