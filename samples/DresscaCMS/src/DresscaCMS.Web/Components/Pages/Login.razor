@@ -73,14 +73,14 @@
 
         SignInResult result;
 
-            if (!editContext.Validate())
-            {
-                return;
-            }
+        if (!editContext.Validate())
+        {
+            return;
+        }
 
-            // アカウントロックアウトに対してログイン失敗をカウントしません
-            // パスワード失敗でアカウントロックアウトを有効にするには、lockoutOnFailure: true に設定してください
-            result = await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+        // アカウントロックアウトに対してログイン失敗をカウントしません
+        // パスワード失敗でアカウントロックアウトを有効にするには、lockoutOnFailure: true に設定してください
+        result = await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
         if (result.Succeeded)
         {
