@@ -70,9 +70,6 @@
 
     public async Task LoginUser()
     {
-
-        SignInResult result;
-
         if (!editContext.Validate())
         {
             return;
@@ -80,8 +77,7 @@
 
         // アカウントロックアウトに対してログイン失敗をカウントしません
         // パスワード失敗でアカウントロックアウトを有効にするには、lockoutOnFailure: true に設定してください
-        result = await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-
+        var result = await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
         if (result.Succeeded)
         {
             Logger.LogInformation("ユーザーがログインしました。");
