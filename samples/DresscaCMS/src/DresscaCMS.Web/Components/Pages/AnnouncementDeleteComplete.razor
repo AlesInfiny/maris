@@ -1,6 +1,7 @@
 @page "/announcements/{AnnouncementId:guid}/delete-complete"
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Web.State
+@using DresscaCMS.Web.ViewModels
 @inject NavigationManager Navigation
 @inject IStateStore StateStore
 
@@ -208,15 +209,5 @@
     private void OnNavigateToListAsync()
     {
         Navigation.NavigateTo("/announcements");
-    }
-
-    /// <summary>
-    /// 削除されたお知らせメッセージの状態を表すクラス
-    /// </summary>
-    public class DeletedAnnouncementState
-    {
-        public required DresscaCMS.Announcement.Infrastructures.Entities.Announcement Announcement { get; set; }
-        public required List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent> Contents { get; set; }
-        public required List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> Histories { get; set; }
     }
 }

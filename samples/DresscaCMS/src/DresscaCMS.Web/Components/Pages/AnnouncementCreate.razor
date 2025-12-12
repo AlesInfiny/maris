@@ -63,10 +63,10 @@
             <FluentStack Orientation="Orientation.Vertical">
                 <FluentLabel>ï\é¶óDêÊìx<span class="required">*</span></FluentLabel>
                 <InputSelect @bind-Value="@announcementModel.DisplayPriority" class="fluent-select" style="width: 200px;">
-                    <option value="@((int)DisplayPriority.Critical)">ãŸã}</option>
-                    <option value="@((int)DisplayPriority.High)">çÇ</option>
-                    <option value="@((int)DisplayPriority.Medium)">íÜ</option>
-                    <option value="@((int)DisplayPriority.Low)">í·</option>
+                    <option value="@DisplayPriority.Critical">ãŸã}</option>
+                    <option value="@DisplayPriority.High">çÇ</option>
+                    <option value="@DisplayPriority.Medium">íÜ</option>
+                    <option value="@DisplayPriority.Low">í·</option>
                 </InputSelect>
                 <ValidationMessage For="@(() => announcementModel.DisplayPriority)" />
             </FluentStack>

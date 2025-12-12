@@ -52,7 +52,15 @@ public static class AnnouncementServiceCollectionExtensions
             {
                 options.UseSqlServer(connectionString, providerOptions =>
                 {
-                    providerOptions.EnableRetryOnFailure();
+                    // TransactionScope を使用するため、開発環境では再試行戦略を無効化します。
+                    // 本番環境では接続の再試行のみを有効化します。
+                    if (!env.IsDevelopment())
+                    {
+                        providerOptions.EnableRetryOnFailure(
+                            maxRetryCount: 5,
+                            maxRetryDelay: TimeSpan.FromSeconds(30),
+                            errorNumbersToAdd: null);
+                    }
                 });
 
                 if (env.IsDevelopment())

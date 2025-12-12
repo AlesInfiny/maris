@@ -2,6 +2,7 @@
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.State
+@using DresscaCMS.Web.ViewModels
 @inject NavigationManager Navigation
 @inject AnnouncementsApplicationService AnnouncementsService
 @inject IStateStore StateStore
@@ -223,9 +224,9 @@
 
             // íœŠ®—¹‰æ–Ê‚Ö‚ÌˆøŒp‚¬î•ñ‚ğ•Û‘¶
             var stateKey = $"DeletedAnnouncement_{AnnouncementId}";
-            var state = new
+            var state = new DeletedAnnouncementState
             {
-                Announcement = announcement,
+                Announcement = announcement!,
                 Contents = contents,
                 Histories = histories
             };
