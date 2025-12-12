@@ -2,8 +2,10 @@
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.ViewModels
+@using Microsoft.AspNetCore.Components.Authorization
 @inject NavigationManager Navigation
 @inject AnnouncementsApplicationService AnnouncementsService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h3>お知らせメッセージ編集</h3>
 
@@ -404,8 +406,8 @@
                 LinkedUrl = string.IsNullOrWhiteSpace(c.LinkedUrl) ? null : c.LinkedUrl
             }).ToList();
 
-            // TODO: ログインユーザー名の取得実装
-            var userName = "システムユーザー";
+            // ログイン中のユーザー名を取得
+            var userName = await GetCurrentUserNameAsync();
 
             // アプリケーションサービスを呼び出し
             await AnnouncementsService.UpdateAnnouncementAndContentAsync(
@@ -512,5 +514,22 @@
             "es" => "スペイン語",
             _ => languageCode
         };
+    }
+
+    /// <summary>
+    /// 現在ログイン中のユーザー名を取得します。
+    /// </summary>
+    /// <returns>ユーザー名。取得できない場合は "不明なユーザー"。</returns>
+    private async Task<string> GetCurrentUserNameAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            return user.Identity.Name ?? "不明なユーザー";
+        }
+        
+        return "不明なユーザー";
     }
 }
