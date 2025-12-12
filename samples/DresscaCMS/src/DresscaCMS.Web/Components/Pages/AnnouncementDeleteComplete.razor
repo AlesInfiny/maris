@@ -1,12 +1,10 @@
-@page "/announcements/{AnnouncementId:guid}/delete-confirm"
+@page "/announcements/{AnnouncementId:guid}/delete-complete"
 @using DresscaCMS.Announcement.ApplicationCore
-@using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.State
 @inject NavigationManager Navigation
-@inject AnnouncementsApplicationService AnnouncementsService
 @inject IStateStore StateStore
 
-<h3>お知らせメッセージ削除確認</h3>
+<h3>お知らせメッセージ削除完了</h3>
 
 <FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
     <FluentBreadcrumb>
@@ -23,27 +21,23 @@
             <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
         </FluentBreadcrumbItem>
         <FluentBreadcrumbItem>
-            お知らせメッセージ削除確認
+            お知らせメッセージ削除完了
         </FluentBreadcrumbItem>
     </FluentBreadcrumb>
 
-    @if (isLoading)
+    @if (announcement == null || contents == null)
     {
         <div class="loading-spinner">
             <FluentProgressRing Width="60px" />
         </div>
     }
-    else if (announcement == null)
-    {
-        <p>お知らせメッセージが見つかりませんでした。</p>
-    }
     else
     {
-        <FluentMessageBar Intent="MessageIntent.Warning" Style="margin-bottom: 20px;">
-            このお知らせメッセージを削除してもよろしいですか？この操作は取り消せません。
+        <FluentMessageBar Intent="MessageIntent.Success" Style="margin-bottom: 20px;">
+            お知らせメッセージを削除しました。
         </FluentMessageBar>
 
-        @* お知らせメッセージ削除確認・基本情報部 *@
+        @* お知らせメッセージ削除完了・基本情報部 *@
         <FluentCard Style="padding: 20px; margin-bottom: 20px;">
             <h4>基本情報</h4>
             <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
@@ -62,7 +56,7 @@
             </FluentStack>
         </FluentCard>
 
-        @* お知らせメッセージ削除確認・お知らせコンテンツ部 *@
+        @* お知らせメッセージ削除完了・お知らせコンテンツ部 *@
         <h4>お知らせコンテンツ</h4>
         <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-bottom: 20px;">
             @foreach (var content in contents.OrderBy(c => GetLanguageOrder(c.LanguageCode)))
@@ -93,33 +87,14 @@
             }
         </FluentStack>
 
-        @* お知らせメッセージ削除確認・アクション部 *@
-        <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
-            @if (!string.IsNullOrEmpty(errorMessage))
-            {
-                <FluentMessageBar Intent="MessageIntent.Error">
-                    @errorMessage
-                </FluentMessageBar>
-            }
-
-            <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10">
-                <FluentButton Appearance="Appearance.Accent" OnClick="@OnDeleteButtonClickAsync" Disabled="@isDeleting">
-                    @if (isDeleting)
-                    {
-                        <FluentProgressRing Width="20px" />
-                    }
-                    お知らせメッセージ削除
-                </FluentButton>
-                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToEditAsync">
-                    お知らせメッセージ編集画面へのリンク
-                </FluentButton>
-                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToListAsync">
-                    お知らせメッセージ管理画面へのリンク
-                </FluentButton>
-            </FluentStack>
+        @* お知らせメッセージ削除完了・アクション部 *@
+        <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10">
+            <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToListAsync">
+                お知らせメッセージ管理画面へのリンク
+            </FluentButton>
         </FluentStack>
 
-        @* お知らせメッセージ削除確認・更新履歴部 *@
+        @* お知らせメッセージ削除完了・更新履歴部 *@
         @if (histories.Any())
         {
             <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-top: 40px;">
@@ -165,92 +140,26 @@
     private DresscaCMS.Announcement.Infrastructures.Entities.Announcement? announcement;
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent> contents = new();
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
-    private string? errorMessage;
-    private bool isDeleting = false;
-    private bool isLoading = true;
 
     private readonly string[] languagePriority = ["ja", "en", "zh", "es"];
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadAnnouncementDataAsync();
-    }
+        // 削除確認画面からの引継ぎ情報を取得
+        var stateKey = $"DeletedAnnouncement_{AnnouncementId}";
+        var result = await StateStore.PopAsync<DeletedAnnouncementState>(stateKey);
 
-    /// <summary>
-    /// お知らせメッセージデータを読み込む
-    /// </summary>
-    private async Task LoadAnnouncementDataAsync()
-    {
-        isLoading = true;
-        try
+        if (!result.Found || result.Value == null)
         {
-            var result = await AnnouncementsService.GetAnnouncementAndHistoriesByIdAsync(AnnouncementId);
-
-            if (result == null)
-            {
-                // Not Found
-                announcement = null;
-                return;
-            }
-
-            announcement = result.Announcement;
-            contents = result.Contents.ToList();
-            histories = result.Histories.ToList();
-        }
-        finally
-        {
-            isLoading = false;
-        }
-    }
-
-    /// <summary>
-    /// 削除ボタンクリック時の処理
-    /// </summary>
-    private async Task OnDeleteButtonClickAsync()
-    {
-        errorMessage = null;
-        isDeleting = true;
-
-        try
-        {
-            // TODO: ログインユーザー名の取得実装
-            var userName = "システムユーザー";
-
-            // アプリケーションサービスを呼び出し
-            await AnnouncementsService.DeleteAnnouncementAndContentAsync(
-                AnnouncementId,
-                userName);
-
-            // 削除完了画面への引継ぎ情報を保存
-            var stateKey = $"DeletedAnnouncement_{AnnouncementId}";
-            var state = new
-            {
-                Announcement = announcement,
-                Contents = contents,
-                Histories = histories
-            };
-            await StateStore.SetAsync(stateKey, state);
-
-            // 削除完了画面へ遷移
-            Navigation.NavigateTo($"/announcements/{AnnouncementId}/delete-complete");
-        }
-        catch (InvalidOperationException)
-        {
-            // 更新の競合などの業務エラー
-            errorMessage = "お知らせメッセージがすでに削除されています。";
-            // お知らせメッセージ管理画面へ遷移
-            await Task.Delay(2000); // エラーメッセージを表示してから遷移
+            // 引継ぎ情報がない場合は一覧画面へ遷移
             Navigation.NavigateTo("/announcements");
+            return;
         }
-        catch (Exception ex)
-        {
-            errorMessage = "お知らせメッセージの削除中にエラーが発生しました。";
-            // TODO: ログ出力
-        }
-        finally
-        {
-            isDeleting = false;
-        }
+
+        var state = result.Value;
+        announcement = state.Announcement;
+        contents = state.Contents;
+        histories = state.Histories;
     }
 
     /// <summary>
@@ -294,18 +203,20 @@
     }
 
     /// <summary>
-    /// 編集画面へ遷移
-    /// </summary>
-    private void OnNavigateToEditAsync()
-    {
-        Navigation.NavigateTo($"/announcements/{AnnouncementId}/edit");
-    }
-
-    /// <summary>
     /// 一覧画面へ遷移
     /// </summary>
     private void OnNavigateToListAsync()
     {
         Navigation.NavigateTo("/announcements");
+    }
+
+    /// <summary>
+    /// 削除されたお知らせメッセージの状態を表すクラス
+    /// </summary>
+    public class DeletedAnnouncementState
+    {
+        public required DresscaCMS.Announcement.Infrastructures.Entities.Announcement Announcement { get; set; }
+        public required List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent> Contents { get; set; }
+        public required List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> Histories { get; set; }
     }
 }
