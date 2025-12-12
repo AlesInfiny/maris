@@ -1,0 +1,299 @@
+@page "/announcements/{AnnouncementId:guid}/delete-confirm"
+@using DresscaCMS.Announcement.ApplicationCore
+@using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
+@inject NavigationManager Navigation
+@inject AnnouncementsApplicationService AnnouncementsService
+
+<h3>お知らせメッセージ削除確認</h3>
+
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
+    <FluentBreadcrumb>
+        <FluentBreadcrumbItem>
+            <FluentNavLink Href="/">TOP</FluentNavLink>
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            お知らせメッセージ管理
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            <FluentNavLink Href="/announcements">お知らせメッセージ一覧</FluentNavLink>
+            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+        </FluentBreadcrumbItem>
+        <FluentBreadcrumbItem>
+            お知らせメッセージ削除確認
+        </FluentBreadcrumbItem>
+    </FluentBreadcrumb>
+
+    @if (isLoading)
+    {
+        <div class="loading-spinner">
+            <FluentProgressRing Width="60px" />
+        </div>
+    }
+    else if (announcement == null)
+    {
+        <p>お知らせメッセージが見つかりませんでした。</p>
+    }
+    else
+    {
+        <FluentMessageBar Intent="MessageIntent.Warning" Style="margin-bottom: 20px;">
+            このお知らせメッセージを削除してもよろしいですか？この操作は取り消せません。
+        </FluentMessageBar>
+
+        @* お知らせメッセージ削除確認・基本情報部 *@
+        <FluentCard Style="padding: 20px; margin-bottom: 20px;">
+            <h4>基本情報</h4>
+            <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                <div>
+                    <strong>掲載日時：</strong>
+                    @announcement.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss") ～ @(announcement.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")
+                </div>
+                <div>
+                    <strong>カテゴリー：</strong>
+                    @(announcement.Category ?? "")
+                </div>
+                <div>
+                    <strong>表示優先度：</strong>
+                    @announcement.DisplayPriority.GetDisplayName()
+                </div>
+            </FluentStack>
+        </FluentCard>
+
+        @* お知らせメッセージ削除確認・お知らせコンテンツ部 *@
+        <h4>お知らせコンテンツ</h4>
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-bottom: 20px;">
+            @foreach (var content in contents.OrderBy(c => GetLanguageOrder(c.LanguageCode)))
+            {
+                <FluentCard Style="padding: 20px;">
+                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                        <div>
+                            <strong>言語：</strong>
+                            @GetLanguageName(content.LanguageCode)
+                        </div>
+                        <div>
+                            <strong>タイトル：</strong>
+                            @content.Title
+                        </div>
+                        <div>
+                            <strong>表示メッセージ：</strong>
+                            @content.Message
+                        </div>
+                        @if (!string.IsNullOrEmpty(content.LinkedUrl))
+                        {
+                            <div>
+                                <strong>リンク先URL：</strong>
+                                <a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a>
+                            </div>
+                        }
+                    </FluentStack>
+                </FluentCard>
+            }
+        </FluentStack>
+
+        @* お知らせメッセージ削除確認・アクション部 *@
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <FluentMessageBar Intent="MessageIntent.Error">
+                    @errorMessage
+                </FluentMessageBar>
+            }
+
+            <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10">
+                <FluentButton Appearance="Appearance.Accent" OnClick="@OnDeleteButtonClickAsync" Disabled="@isDeleting">
+                    @if (isDeleting)
+                    {
+                        <FluentProgressRing Width="20px" />
+                    }
+                    お知らせメッセージ削除
+                </FluentButton>
+                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToEditAsync">
+                    お知らせメッセージ編集画面へのリンク
+                </FluentButton>
+                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToListAsync">
+                    お知らせメッセージ管理画面へのリンク
+                </FluentButton>
+            </FluentStack>
+        </FluentStack>
+
+        @* お知らせメッセージ削除確認・更新履歴部 *@
+        @if (histories.Any())
+        {
+            <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-top: 40px;">
+                <h4>更新履歴</h4>
+                @foreach (var history in histories)
+                {
+                    <FluentAccordion>
+                        <FluentAccordionItem Heading="@GetHistoryHeading(history)">
+                            <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                                <div><strong>掲載開始日時：</strong>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss")</div>
+                                <div><strong>掲載終了日時：</strong>@(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
+                                <div><strong>カテゴリー：</strong>@(history.Category ?? "")</div>
+                                <div><strong>表示優先度：</strong>@history.DisplayPriority.GetDisplayName()</div>
+
+                                @if (history.Contents.Any())
+                                {
+                                    <h5 style="margin-top: 15px;">言語別コンテンツ</h5>
+                                    @foreach (var contentHistory in history.Contents)
+                                    {
+                                        <FluentCard Style="padding: 15px; margin-top: 10px;">
+                                            <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
+                                                <div><strong>言語：</strong>@GetLanguageName(contentHistory.LanguageCode)</div>
+                                                <div><strong>タイトル：</strong>@contentHistory.Title</div>
+                                                <div><strong>メッセージ：</strong>@contentHistory.Message</div>
+                                                <div><strong>リンク先URL：</strong>@(contentHistory.LinkedUrl ?? "")</div>
+                                            </FluentStack>
+                                        </FluentCard>
+                                    }
+                                }
+                            </FluentStack>
+                        </FluentAccordionItem>
+                    </FluentAccordion>
+                }
+            </FluentStack>
+        }
+    }
+</FluentStack>
+
+@code {
+    [Parameter]
+    public Guid AnnouncementId { get; set; }
+
+    private DresscaCMS.Announcement.Infrastructures.Entities.Announcement? announcement;
+    private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent> contents = new();
+    private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
+    private string? errorMessage;
+    private bool isDeleting = false;
+    private bool isLoading = true;
+
+    private readonly string[] languagePriority = ["ja", "en", "zh", "es"];
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAnnouncementDataAsync();
+    }
+
+    /// <summary>
+    /// お知らせメッセージデータを読み込む
+    /// </summary>
+    private async Task LoadAnnouncementDataAsync()
+    {
+        isLoading = true;
+        try
+        {
+            var result = await AnnouncementsService.GetAnnouncementAndHistoriesByIdAsync(AnnouncementId);
+
+            if (result == null)
+            {
+                // Not Found
+                announcement = null;
+                return;
+            }
+
+            announcement = result.Announcement;
+            contents = result.Contents.ToList();
+            histories = result.Histories.ToList();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    /// <summary>
+    /// 削除ボタンクリック時の処理
+    /// </summary>
+    private async Task OnDeleteButtonClickAsync()
+    {
+        errorMessage = null;
+        isDeleting = true;
+
+        try
+        {
+            // TODO: ログインユーザー名の取得実装
+            var userName = "システムユーザー";
+
+            // アプリケーションサービスを呼び出し
+            await AnnouncementsService.DeleteAnnouncementAndContentAsync(
+                AnnouncementId,
+                userName);
+
+            // 削除完了画面へ遷移
+            Navigation.NavigateTo($"/announcements/{AnnouncementId}/delete-complete");
+        }
+        catch (InvalidOperationException)
+        {
+            // 更新の競合などの業務エラー
+            errorMessage = "お知らせメッセージがすでに削除されています。";
+            // お知らせメッセージ管理画面へ遷移
+            await Task.Delay(2000); // エラーメッセージを表示してから遷移
+            Navigation.NavigateTo("/announcements");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "お知らせメッセージの削除中にエラーが発生しました。";
+            // TODO: ログ出力
+        }
+        finally
+        {
+            isDeleting = false;
+        }
+    }
+
+    /// <summary>
+    /// 履歴のヘッダー文字列を取得
+    /// </summary>
+    private string GetHistoryHeading(DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory history)
+    {
+        var operationType = history.OperationType switch
+        {
+            OperationType.Create => "作成",
+            OperationType.Update => "更新",
+            OperationType.Delete => "削除",
+            _ => "不明"
+        };
+
+        return $"{history.CreatedAt:yyyy/MM/dd HH:mm:ss} - {operationType} - {history.ChangedBy}";
+    }
+
+    /// <summary>
+    /// 言語コードから言語名を取得
+    /// </summary>
+    private string GetLanguageName(string languageCode)
+    {
+        return languageCode switch
+        {
+            "ja" => "日本語",
+            "en" => "英語",
+            "zh" => "中国語",
+            "es" => "スペイン語",
+            _ => languageCode
+        };
+    }
+
+    /// <summary>
+    /// 言語コードの表示順序を取得
+    /// </summary>
+    private int GetLanguageOrder(string languageCode)
+    {
+        var index = Array.IndexOf(languagePriority, languageCode);
+        return index == -1 ? int.MaxValue : index;
+    }
+
+    /// <summary>
+    /// 編集画面へ遷移
+    /// </summary>
+    private void OnNavigateToEditAsync()
+    {
+        Navigation.NavigateTo($"/announcements/{AnnouncementId}/edit");
+    }
+
+    /// <summary>
+    /// 一覧画面へ遷移
+    /// </summary>
+    private void OnNavigateToListAsync()
+    {
+        Navigation.NavigateTo("/announcements");
+    }
+}
