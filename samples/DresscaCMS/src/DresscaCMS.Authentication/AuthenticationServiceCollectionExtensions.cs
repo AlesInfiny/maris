@@ -71,7 +71,11 @@ public static class AuthenticationServiceCollectionExtensions
             // ASP.NET Core Identity を登録します。
             services.AddIdentityCore<ApplicationUser>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = true;
+                if (!env.IsDevelopment())
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                }
+
                 options.Stores.SchemaVersion = IdentitySchemaVersions.Version3;
             })
             .AddEntityFrameworkStores<AuthenticationDbContext>()
