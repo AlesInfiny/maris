@@ -238,19 +238,6 @@
             // 削除完了画面へ遷移
             Navigation.NavigateTo($"/announcements/{AnnouncementId}/delete-complete");
         }
-        catch (InvalidOperationException)
-        {
-            // 更新の競合などの業務エラー
-            errorMessage = "お知らせメッセージがすでに削除されています。";
-            // お知らせメッセージ管理画面へ遷移
-            await Task.Delay(2000); // エラーメッセージを表示してから遷移
-            Navigation.NavigateTo("/announcements");
-        }
-        catch (Exception ex)
-        {
-            errorMessage = "お知らせメッセージの削除中にエラーが発生しました。";
-            // TODO: ログ出力
-        }
         finally
         {
             isDeleting = false;

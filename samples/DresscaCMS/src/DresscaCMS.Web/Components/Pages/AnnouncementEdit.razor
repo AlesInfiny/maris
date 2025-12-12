@@ -422,15 +422,6 @@
             // データを再読み込み
             await LoadAnnouncementDataAsync();
         }
-        catch (ArgumentException ex)
-        {
-            businessErrorMessage = ex.Message;
-        }
-        catch (Exception ex)
-        {
-            businessErrorMessage = "お知らせメッセージの保存中にエラーが発生しました。";
-            // TODO: ログ出力
-        }
         finally
         {
             isSubmitting = false;
@@ -446,7 +437,7 @@
         var postDateTime = announcementModel?.GetPostDateTime();
         var expireDateTime = announcementModel?.GetExpireDateTime();
 
-        if (postDateTime.HasValue && expireDateTime.HasValue && postDateTime.Value > expireDateTime.Value)
+        if ((postDateTime.HasValue && expireDateTime.HasValue) && (postDateTime.Value > expireDateTime.Value))
         {
             correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
             return false;

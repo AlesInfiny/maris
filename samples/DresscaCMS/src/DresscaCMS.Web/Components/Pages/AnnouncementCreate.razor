@@ -300,15 +300,6 @@
             // 成功したら編集画面へ遷移
             Navigation.NavigateTo($"/announcements/{createdId}/edit");
         }
-        catch (ArgumentException ex)
-        {
-            businessErrorMessage = ex.Message;
-        }
-        catch (Exception ex)
-        {
-            businessErrorMessage = "お知らせメッセージの登録中にエラーが発生しました。";
-            // TODO: ログ出力
-        }
         finally
         {
             isSubmitting = false;

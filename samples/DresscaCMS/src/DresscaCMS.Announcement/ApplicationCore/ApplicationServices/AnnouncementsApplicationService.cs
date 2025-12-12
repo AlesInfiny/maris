@@ -356,14 +356,6 @@ public class AnnouncementsApplicationService
         string userName,
         CancellationToken cancellationToken = default)
     {
-        // ------------------------------
-        // 業務開始処理
-        // ------------------------------
-        this.logger.LogDebug(
-            "お知らせメッセージとお知らせコンテンツの更新を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName}",
-            announcement?.Id,
-            userName);
-
         // 引数チェック
         ArgumentNullException.ThrowIfNull(announcement);
         ArgumentNullException.ThrowIfNull(contents);
@@ -372,6 +364,14 @@ public class AnnouncementsApplicationService
         {
             throw new ArgumentException("ユーザー名が null または空文字列です。", nameof(userName));
         }
+
+        // ------------------------------
+        // 業務開始処理
+        // ------------------------------
+        this.logger.LogDebug(
+            "お知らせメッセージとお知らせコンテンツの更新を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName}",
+            announcement.Id,
+            userName);
 
         // 入力値の検証（プレゼンテーション層での単項目チェック、相関チェックと同じチェック）
         if (announcement.PostDateTime == default)
