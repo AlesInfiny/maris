@@ -42,7 +42,7 @@ internal sealed class IdentityRedirectManager(NavigationManager navigationManage
     {
         uri ??= string.Empty;
 
-        // Prevent open redirects.
+        // オープンリダイレクトを防ぐために、相対URIでない場合は基準相対パスに変換します。
         if (!Uri.IsWellFormedUriString(uri, UriKind.Relative))
         {
             uri = navigationManager.ToBaseRelativePath(uri);

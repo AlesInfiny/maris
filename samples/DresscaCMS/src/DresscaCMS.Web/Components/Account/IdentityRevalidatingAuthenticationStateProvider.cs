@@ -40,7 +40,7 @@ internal sealed class IdentityRevalidatingAuthenticationStateProvider(
     protected override async Task<bool> ValidateAuthenticationStateAsync(
         AuthenticationState authenticationState, CancellationToken cancellationToken)
     {
-        // Get the user manager from a new scope to ensure it fetches fresh data
+        // 最新のデータを取得するために、新しいスコープからユーザーマネージャーを取得します。
         await using var scope = scopeFactory.CreateAsyncScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         return await this.ValidateSecurityStampAsync(userManager, authenticationState.User);
