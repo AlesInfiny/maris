@@ -1,0 +1,15 @@
+.required {
+    color: var(--error);
+    margin-left: 4px;
+}
+
+.bread-crumb-separator {
+    margin: 0 8px;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}

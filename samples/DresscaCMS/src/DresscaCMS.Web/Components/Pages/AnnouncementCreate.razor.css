@@ -1,0 +1,8 @@
+.required {
+    color: var(--error);
+    margin-left: 4px;
+}
+
+.bread-crumb-separator {
+    margin: 0 8px;
+}
