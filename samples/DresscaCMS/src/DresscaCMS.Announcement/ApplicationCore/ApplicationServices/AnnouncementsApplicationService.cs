@@ -459,12 +459,10 @@ public class AnnouncementsApplicationService
             }
 
             // 削除するコンテンツ
-            foreach (var existingContent in existingContents.Where(c => !newContentIds.Contains(c.Id)))
-            {
-                await this.announcementsRepository.DeleteAnnouncementContentAsync(
-                    existingContent.Id,
-                    cancellationToken);
-            }
+            var removeContentIds = existingContents.Where(c => !newContentIds.Contains(c.Id)).Select(c => c.Id).ToHashSet();
+            await this.announcementsRepository.DeleteAnnouncementContentsAsync(
+                removeContentIds,
+                cancellationToken);
 
             // お知らせメッセージ更新履歴を作成
             var history = new Infrastructures.Entities.AnnouncementHistory
@@ -587,12 +585,9 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツを物理削除
-            foreach (var content in contents)
-            {
-                await this.announcementsRepository.DeleteAnnouncementContentAsync(
-                    content.Id,
-                    cancellationToken);
-            }
+            await this.announcementsRepository.DeleteAnnouncementContentsAsync(
+                contents.Select(c => c.Id),
+                cancellationToken);
 
             // お知らせメッセージ削除履歴を作成
             var history = new Infrastructures.Entities.AnnouncementHistory

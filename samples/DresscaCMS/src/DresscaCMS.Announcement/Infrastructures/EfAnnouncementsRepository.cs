@@ -190,8 +190,8 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
         foreach (var history in histories)
         {
             history.Contents = history.Contents
-                .OrderBy(c => languageOrder.ContainsKey(c.LanguageCode) 
-                    ? languageOrder[c.LanguageCode] 
+                .OrderBy(c => languageOrder.ContainsKey(c.LanguageCode)
+                    ? languageOrder[c.LanguageCode]
                     : int.MaxValue)
                 .ToList();
         }
@@ -288,23 +288,16 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
     /// <summary>
     ///  お知らせコンテンツを削除します。
     /// </summary>
-    /// <param name="contentId">削除するお知らせコンテンツの ID。</param>
+    /// <param name="contentIds">削除するお知らせコンテンツの ID リスト。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>非同期処理を表すタスク。</returns>
-    public async Task DeleteAnnouncementContentAsync(
-        Guid contentId,
+    public async Task DeleteAnnouncementContentsAsync(
+        IEnumerable<Guid> contentIds,
         CancellationToken cancellationToken)
     {
         await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
-
-        var content = await dbContext.AnnouncementContents
-            .Where(c => c.Id == contentId)
-            .FirstOrDefaultAsync(cancellationToken);
-
-        if (content != null)
-        {
-            dbContext.AnnouncementContents.Remove(content);
-            await dbContext.SaveChangesAsync(cancellationToken);
-        }
+        await dbContext.AnnouncementContents
+            .Where(c => contentIds.Contains(c.Id))
+            .ExecuteDeleteAsync(cancellationToken);
     }
 }

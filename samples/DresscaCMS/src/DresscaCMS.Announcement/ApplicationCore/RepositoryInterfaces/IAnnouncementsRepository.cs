@@ -106,10 +106,10 @@ public interface IAnnouncementsRepository
     /// <summary>
     ///  お知らせコンテンツを削除します。
     /// </summary>
-    /// <param name="contentId">削除するお知らせコンテンツの ID。</param>
+    /// <param name="contentIds">削除するお知らせコンテンツの ID リスト。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>非同期処理を表すタスク。</returns>
-    Task DeleteAnnouncementContentAsync(
-        Guid contentId,
+    Task DeleteAnnouncementContentsAsync(
+        IEnumerable<Guid> contentIds,
         CancellationToken cancellationToken);
 }
