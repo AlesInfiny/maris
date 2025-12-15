@@ -114,10 +114,10 @@
                     }
                     お知らせメッセージ削除
                 </FluentButton>
-                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToEditAsync">
+                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToEdit">
                     お知らせメッセージ編集画面へのリンク
                 </FluentButton>
-                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToListAsync">
+                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToList">
                     お知らせメッセージ管理画面へのリンク
                 </FluentButton>
             </FluentStack>
@@ -277,7 +277,7 @@
     /// <summary>
     /// 編集画面へ遷移
     /// </summary>
-    private void OnNavigateToEditAsync()
+    private void OnNavigateToEdit()
     {
         Navigation.NavigateTo($"/announcements/{AnnouncementId}/edit");
     }
@@ -285,7 +285,7 @@
     /// <summary>
     /// 一覧画面へ遷移
     /// </summary>
-    private void OnNavigateToListAsync()
+    private void OnNavigateToList()
     {
         Navigation.NavigateTo("/announcements");
     }
