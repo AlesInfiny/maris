@@ -251,7 +251,7 @@
 
         // 相関チェック
         var offsetMinutes = await this.GetOffsetAsync();
-        if (this.ValidateCorrelation(offsetMinutes))
+        if (!this.ValidateCorrelation(offsetMinutes))
         {
             return;
         }
