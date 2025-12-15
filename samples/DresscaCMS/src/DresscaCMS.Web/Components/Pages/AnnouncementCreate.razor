@@ -202,16 +202,10 @@
     private Language GetNextLanguageCode()
     {
         var existingLanguages = contentModels.Select(c => c.LanguageCode).ToHashSet();
-
         var lang = languagePriority.FirstOrDefault(l => !existingLanguages.Contains(l.Code));
 
-        if (lang != null)
-        {
-            return lang;
-        }
-
         // 全ての言語が追加済みの場合は日本語を返す
-        return Language.Japanese;
+        return lang ?? Language.Japanese;
     }
 
     /// <summary>
