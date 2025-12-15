@@ -11,11 +11,9 @@ public static class AuthenticationStateProviderExtensions
     ///  現在ログイン中のユーザー名を取得します。
     /// </summary>
     /// <param name="authenticationStateProvider">認証状態プロバイダー。</param>
-    /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>ユーザー名。取得できない場合は "不明なユーザー"。</returns>
     public static async Task<string> GetCurrentUserNameAsync(
-        this AuthenticationStateProvider authenticationStateProvider,
-        CancellationToken cancellationToken = default)
+        this AuthenticationStateProvider authenticationStateProvider)
     {
         ArgumentNullException.ThrowIfNull(authenticationStateProvider);
 
