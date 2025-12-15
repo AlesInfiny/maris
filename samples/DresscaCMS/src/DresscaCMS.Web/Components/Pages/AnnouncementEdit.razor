@@ -275,7 +275,7 @@
             // AnnouncementContentViewModel への変換
             contentModels = result.Contents.Select(c =>
             {
-                var displayOrder = this.languagePriority.IndexOf(c.LanguageCode);
+                var displayOrder = this.languagePriority.IndexOf(Language.GetLanguageFrom(c.LanguageCode));
                 return new AnnouncementContentViewModel
                 {
                     Id = c.Id,
@@ -302,18 +302,18 @@
     /// </summary>
     private void OnAddLanguageButtonClick()
     {
-        var nextLanguage = GetNextLanguageCode();
+        var nextLanguage = GetNextLanguage();
         AddContentWithLanguage(nextLanguage);
     }
 
     /// <summary>
     /// 次に追加すべき言語コードを取得
     /// </summary>
-    private string GetNextLanguageCode()
+    private Language GetNextLanguage()
     {
         var existingLanguages = contentModels.Select(c => c.LanguageCode).ToHashSet();
 
-        var lang = languagePriority.FirstOrDefault(l => !existingLanguages.Contains(l));
+        var lang = languagePriority.FirstOrDefault(l => !existingLanguages.Contains(l.Code));
 
         if (lang != null)
         {
@@ -321,15 +321,15 @@
         }
 
         // 全ての言語が追加済みの場合は日本語を返す
-        return "ja";
+        return Language.Japanese;
     }
 
     /// <summary>
     /// 指定された言語コードでコンテンツを追加
     /// </summary>
-    private void AddContentWithLanguage(string languageCode)
+    private void AddContentWithLanguage(Language language)
     {
-        var displayOrder = languagePriority.IndexOf(languageCode);
+        var displayOrder = languagePriority.IndexOf(language);
         if (displayOrder == -1)
         {
             displayOrder = int.MaxValue;
@@ -339,7 +339,7 @@
         {
             Id = Guid.Empty,
             AnnouncementId = AnnouncementId,
-            LanguageCode = languageCode,
+            LanguageCode = language.Code,
             DisplayOrder = displayOrder
         };
 

@@ -60,7 +60,7 @@
         @* お知らせメッセージ削除完了・お知らせコンテンツ部 *@
         <h4>お知らせコンテンツ</h4>
         <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-bottom: 20px;">
-            @foreach (var content in contents.OrderBy(c => GetLanguageOrder(c.LanguageCode)))
+            @foreach (var content in contents.OrderBy(c => GetLanguageOrder(Language.GetLanguageFrom(c.LanguageCode))))
             {
                 <FluentCard Style="padding: 20px;">
                     <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
@@ -197,9 +197,9 @@
     /// <summary>
     /// 言語コードの表示順序を取得
     /// </summary>
-    private int GetLanguageOrder(string languageCode)
+    private int GetLanguageOrder(Language language)
     {
-        var index = languagePriority.IndexOf(languageCode);
+        var index = languagePriority.IndexOf(language);
         return index == -1 ? int.MaxValue : index;
     }
 

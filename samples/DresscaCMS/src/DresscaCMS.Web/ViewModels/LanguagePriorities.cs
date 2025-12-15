@@ -5,9 +5,9 @@ namespace DresscaCMS.Web.ViewModels;
 /// <summary>
 ///  言語の優先順位を表すリストを提供します。
 /// </summary>
-public class LanguagePriorities : IList<string>
+public class LanguagePriorities : IList<Language>
 {
-    private readonly List<string> languages = ["ja", "en", "zh", "es"];
+    private readonly List<Language> languages = [Language.Japanese, Language.English, Language.Chinese, Language.Spanish];
 
     /// <inheritdoc/>
     public int Count => this.languages.Count;
@@ -16,35 +16,35 @@ public class LanguagePriorities : IList<string>
     public bool IsReadOnly => true;
 
     /// <inheritdoc/>
-    public string this[int index]
+    public Language this[int index]
     {
         get => this.languages[index];
         set => throw new NotSupportedException();
     }
 
     /// <inheritdoc/>
-    public void Add(string item) => throw new NotSupportedException();
+    public void Add(Language item) => throw new NotSupportedException();
 
     /// <inheritdoc/>
     public void Clear() => throw new NotSupportedException();
 
     /// <inheritdoc/>
-    public bool Contains(string item) => this.languages.Contains(item);
+    public bool Contains(Language item) => this.languages.Contains(item);
 
     /// <inheritdoc/>
-    public void CopyTo(string[] array, int arrayIndex) => this.languages.CopyTo(array, arrayIndex);
+    public void CopyTo(Language[] array, int arrayIndex) => this.languages.CopyTo(array, arrayIndex);
 
     /// <inheritdoc/>
-    public IEnumerator<string> GetEnumerator() => this.languages.GetEnumerator();
+    public IEnumerator<Language> GetEnumerator() => this.languages.GetEnumerator();
 
     /// <inheritdoc/>
-    public int IndexOf(string item) => this.languages.IndexOf(item);
+    public int IndexOf(Language item) => this.languages.IndexOf(item);
 
     /// <inheritdoc/>
-    public void Insert(int index, string item) => throw new NotSupportedException();
+    public void Insert(int index, Language item) => throw new NotSupportedException();
 
     /// <inheritdoc/>
-    public bool Remove(string item) => throw new NotSupportedException();
+    public bool Remove(Language item) => throw new NotSupportedException();
 
     /// <inheritdoc/>
     public void RemoveAt(int index) => throw new NotSupportedException();
