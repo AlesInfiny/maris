@@ -64,11 +64,10 @@ public class AnnouncementsApplicationService
         // 総件数 0 件なら、お知らせメッセージの総件数に 0 を設定した戻り値を返してメソッドを終了します。
         if (totalCount == 0)
         {
-            return
-                new GetPagedAnnouncementsResult
-                {
-                    TotalCount = 0,
-                };
+            return new GetPagedAnnouncementsResult
+            {
+                TotalCount = 0,
+            };
         }
 
         // 最後のページ番号を計算します。
@@ -486,15 +485,17 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツ更新履歴を作成
-            var contentHistories = contents.Select(content => new AnnouncementContentHistory
-            {
-                Id = Guid.NewGuid(),
-                AnnouncementHistoryId = history.Id,
-                LanguageCode = content.LanguageCode,
-                Title = content.Title,
-                Message = content.Message,
-                LinkedUrl = content.LinkedUrl,
-            });
+            var contentHistories = contents
+                .Select(content
+                    => new AnnouncementContentHistory
+                    {
+                        Id = Guid.NewGuid(),
+                        AnnouncementHistoryId = history.Id,
+                        LanguageCode = content.LanguageCode,
+                        Title = content.Title,
+                        Message = content.Message,
+                        LinkedUrl = content.LinkedUrl,
+                    });
 
             foreach (var contentHistory in contentHistories)
             {
@@ -611,15 +612,17 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツ削除履歴を作成
-            var contentHistories = contents.Select(content => new AnnouncementContentHistory
-            {
-                Id = Guid.NewGuid(),
-                AnnouncementHistoryId = history.Id,
-                LanguageCode = content.LanguageCode,
-                Title = content.Title,
-                Message = content.Message,
-                LinkedUrl = content.LinkedUrl,
-            });
+            var contentHistories = contents
+                .Select(content
+                    => new AnnouncementContentHistory
+                    {
+                        Id = Guid.NewGuid(),
+                        AnnouncementHistoryId = history.Id,
+                        LanguageCode = content.LanguageCode,
+                        Title = content.Title,
+                        Message = content.Message,
+                        LinkedUrl = content.LinkedUrl,
+                    });
 
             foreach (var contentHistory in contentHistories)
             {
