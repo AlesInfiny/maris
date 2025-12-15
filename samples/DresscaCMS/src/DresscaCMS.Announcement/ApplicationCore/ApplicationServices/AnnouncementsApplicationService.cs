@@ -83,18 +83,12 @@ public class AnnouncementsApplicationService
         var announcements = await this.announcementsRepository
             .FindByPageNumberAndPageSizeAsync(validatedPageNumber, validatedPageSize, cancellationToken);
 
-        // 言語コードごとのタイトル掲載の優先順位を取得します。
-        var languageOrder = LanguagePriorityProvider.GetLanguageOrderMap();
-
         IReadOnlyCollection<Infrastructures.Entities.Announcement> titleSelectedAnnouncements =
             announcements
                 .Select(a =>
                 {
                     var selectedContent = a.Contents?
-                        .OrderBy(c =>
-                            languageOrder.TryGetValue(c.LanguageCode, out var priority)
-                                ? priority
-                                : int.MaxValue)
+                        .OrderBy(c => LanguagePriorityProvider.GetLanguageOrder(c.LanguageCode))
                         .FirstOrDefault();
 
                     return new Infrastructures.Entities.Announcement

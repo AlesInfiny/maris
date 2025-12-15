@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DresscaCMS.Announcement.ApplicationCore;
 using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -164,9 +165,6 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
             return null;
         }
 
-        // 言語コードの優先順位を取得
-        var languageOrder = ApplicationCore.LanguagePriorityProvider.GetLanguageOrderMap();
-
         // お知らせコンテンツを取得（まずデータベースから取得してからクライアント側でソート）
         var contentsFromDb = await dbContext.AnnouncementContents
             .Where(c => c.AnnouncementId == announcementId)
@@ -174,9 +172,7 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
 
         // クライアント側で言語コードの優先順にソート
         var contents = contentsFromDb
-            .OrderBy(c => languageOrder.ContainsKey(c.LanguageCode)
-                ? languageOrder[c.LanguageCode]
-                : int.MaxValue)
+            .OrderBy(c => LanguagePriorityProvider.GetLanguageOrder(c.LanguageCode))
             .ToList();
 
         // お知らせメッセージ更新履歴を取得（作成日時の降順）
@@ -190,9 +186,7 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
         foreach (var history in histories)
         {
             history.Contents = history.Contents
-                .OrderBy(c => languageOrder.ContainsKey(c.LanguageCode)
-                    ? languageOrder[c.LanguageCode]
-                    : int.MaxValue)
+                .OrderBy(c => LanguagePriorityProvider.GetLanguageOrder(c.LanguageCode))
                 .ToList();
         }
 
