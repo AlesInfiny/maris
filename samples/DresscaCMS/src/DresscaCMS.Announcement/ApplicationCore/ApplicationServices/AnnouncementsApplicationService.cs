@@ -1,5 +1,6 @@
 ﻿using System.Transactions;
 using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
+using DresscaCMS.Announcement.Infrastructures.Entities;
 using DresscaCMS.Announcement.Resources;
 using Microsoft.Extensions.Logging;
 
@@ -108,8 +109,8 @@ public class AnnouncementsApplicationService
                         CreatedAt = a.CreatedAt,
                         ChangedAt = a.ChangedAt,
                         Contents = selectedContent is null
-                            ? Array.Empty<Infrastructures.Entities.AnnouncementContent>()
-                            : new List<Infrastructures.Entities.AnnouncementContent> { selectedContent },
+                            ? Array.Empty<AnnouncementContent>()
+                            : new List<AnnouncementContent> { selectedContent },
                     };
                 })
                 .ToArray();
@@ -152,7 +153,7 @@ public class AnnouncementsApplicationService
     /// <exception cref="ArgumentException">入力値の検証エラーがあります。</exception>
     public async Task<Guid> CreateAnnouncementAndContentAsync(
         Infrastructures.Entities.Announcement announcement,
-        IReadOnlyCollection<Infrastructures.Entities.AnnouncementContent> contents,
+        IReadOnlyCollection<AnnouncementContent> contents,
         string userName,
         CancellationToken cancellationToken = default)
     {
@@ -240,7 +241,7 @@ public class AnnouncementsApplicationService
             }
 
             // お知らせメッセージ更新履歴を作成
-            var history = new Infrastructures.Entities.AnnouncementHistory
+            var history = new AnnouncementHistory
             {
                 Id = Guid.NewGuid(),
                 AnnouncementId = announcementId,
@@ -258,15 +259,17 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツ更新履歴を作成
-            var contentHistories = contents.Select(content => new Infrastructures.Entities.AnnouncementContentHistory
-            {
-                Id = Guid.NewGuid(),
-                AnnouncementHistoryId = history.Id,
-                LanguageCode = content.LanguageCode,
-                Title = content.Title,
-                Message = content.Message,
-                LinkedUrl = content.LinkedUrl,
-            });
+            var contentHistories = contents
+                .Select(content
+                    => new AnnouncementContentHistory
+                    {
+                        Id = Guid.NewGuid(),
+                        AnnouncementHistoryId = history.Id,
+                        LanguageCode = content.LanguageCode,
+                        Title = content.Title,
+                        Message = content.Message,
+                        LinkedUrl = content.LinkedUrl,
+                    });
 
             foreach (var contentHistory in contentHistories)
             {
@@ -352,7 +355,7 @@ public class AnnouncementsApplicationService
     /// <exception cref="ArgumentException">入力値の検証エラーがあります。</exception>
     public async Task UpdateAnnouncementAndContentAsync(
         Infrastructures.Entities.Announcement announcement,
-        IReadOnlyCollection<Infrastructures.Entities.AnnouncementContent> contents,
+        IReadOnlyCollection<AnnouncementContent> contents,
         string userName,
         CancellationToken cancellationToken = default)
     {
@@ -465,7 +468,7 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせメッセージ更新履歴を作成
-            var history = new Infrastructures.Entities.AnnouncementHistory
+            var history = new AnnouncementHistory
             {
                 Id = Guid.NewGuid(),
                 AnnouncementId = announcement.Id,
@@ -483,7 +486,7 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツ更新履歴を作成
-            var contentHistories = contents.Select(content => new Infrastructures.Entities.AnnouncementContentHistory
+            var contentHistories = contents.Select(content => new AnnouncementContentHistory
             {
                 Id = Guid.NewGuid(),
                 AnnouncementHistoryId = history.Id,
@@ -590,7 +593,7 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせメッセージ削除履歴を作成
-            var history = new Infrastructures.Entities.AnnouncementHistory
+            var history = new AnnouncementHistory
             {
                 Id = Guid.NewGuid(),
                 AnnouncementId = announcementId,
@@ -608,7 +611,7 @@ public class AnnouncementsApplicationService
                 cancellationToken);
 
             // お知らせコンテンツ削除履歴を作成
-            var contentHistories = contents.Select(content => new Infrastructures.Entities.AnnouncementContentHistory
+            var contentHistories = contents.Select(content => new AnnouncementContentHistory
             {
                 Id = Guid.NewGuid(),
                 AnnouncementHistoryId = history.Id,
