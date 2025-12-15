@@ -173,13 +173,13 @@
     [Parameter]
     public Guid AnnouncementId { get; set; }
 
+    private readonly LanguagePriorities languagePriority = new();
     private DresscaCMS.Announcement.Infrastructures.Entities.Announcement? announcement;
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent> contents = new();
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
     private string? errorMessage;
     private bool isDeleting = false;
     private bool isLoading = true;
-    private readonly LanguagePriorities languagePriority = new();
 
     protected override async Task OnInitializedAsync()
     {
