@@ -174,8 +174,8 @@
 </FluentStack>
 
 @code {
-    private AnnouncementViewModel announcementModel = new();
-    private List<AnnouncementContentViewModel> contentModels = new();
+    private readonly AnnouncementViewModel announcementModel = new();
+    private readonly List<AnnouncementContentViewModel> contentModels = new();
     private string? businessErrorMessage;
     private string? correlationErrorMessage;
     private bool isSubmitting = false;
