@@ -176,10 +176,10 @@
 @code {
     private readonly AnnouncementViewModel announcementModel = new();
     private readonly List<AnnouncementContentViewModel> contentModels = new();
+    private readonly LanguagePriorities languagePriority = new();
     private string? businessErrorMessage;
     private string? correlationErrorMessage;
     private bool isSubmitting = false;
-    private LanguagePriorities languagePriority = new();
 
     protected override void OnInitialized()
     {
