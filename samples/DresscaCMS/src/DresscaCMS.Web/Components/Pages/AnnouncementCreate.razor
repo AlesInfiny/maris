@@ -165,7 +165,7 @@
                     }
                     お知らせメッセージの登録
                 </FluentButton>
-                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnBackToListButtonClickAsync">
+                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnBackToListButtonClick">
                     お知らせメッセージ管理画面へ戻る
                 </FluentButton>
             </FluentStack>
@@ -351,7 +351,7 @@
     /// <summary>
     /// 一覧へ戻るボタンクリック時の処理
     /// </summary>
-    private void OnBackToListButtonClickAsync()
+    private void OnBackToListButtonClick()
     {
         Navigation.NavigateTo("/announcements");
     }
