@@ -7,6 +7,7 @@
 @inject NavigationManager Navigation
 @inject AnnouncementsApplicationService AnnouncementsService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JS
 
 <h3>お知らせメッセージ編集</h3>
 
@@ -225,7 +226,7 @@
     }
 </FluentStack>
 
-@code {
+    @code {
     [Parameter]
     public Guid AnnouncementId { get; set; }
 
@@ -315,7 +316,7 @@
 
         var lang = languagePriority.FirstOrDefault(l => !existingLanguages.Contains(l));
 
-        if(lang != null)
+        if (lang != null)
         {
             return lang;
         }
@@ -368,7 +369,8 @@
         successMessage = null;
 
         // 相関チェック
-        if (!ValidateCorrelation())
+        var offsetMinutes = await this.GetOffsetAsync();
+        if (!this.ValidateCorrelation(offsetMinutes))
         {
             return;
         }
@@ -377,7 +379,7 @@
         try
         {
             // ビューモデルからエンティティへの変換
-            var postDateTime = announcementModel!.GetPostDateTime();
+            var postDateTime = announcementModel!.GetPostDateTime(offsetMinutes);
             if (!postDateTime.HasValue)
             {
                 correlationErrorMessage = "掲載開始日時を入力してください。";
@@ -389,7 +391,7 @@
                 Id = announcementModel.Id,
                 Category = announcementModel.Category,
                 PostDateTime = postDateTime.Value,
-                ExpireDateTime = announcementModel.GetExpireDateTime(),
+                ExpireDateTime = announcementModel.GetExpireDateTime(offsetMinutes),
                 DisplayPriority = announcementModel.DisplayPriority,
                 CreatedAt = DateTimeOffset.UtcNow,
                 ChangedAt = DateTimeOffset.UtcNow,
@@ -430,11 +432,13 @@
     /// <summary>
     /// 相関チェックを実行
     /// </summary>
-    private bool ValidateCorrelation()
+    /// <param name="offsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
+    /// <returns>相関チェック結果。true: 成功、false: 失敗。</returns>
+    private bool ValidateCorrelation(long offsetMinutes)
     {
         // 掲載終了日時が掲載開始日時より前かチェック
-        var postDateTime = announcementModel?.GetPostDateTime();
-        var expireDateTime = announcementModel?.GetExpireDateTime();
+        var postDateTime = announcementModel?.GetPostDateTime(offsetMinutes);
+        var expireDateTime = announcementModel?.GetExpireDateTime(offsetMinutes);
 
         if ((postDateTime.HasValue && expireDateTime.HasValue) && (postDateTime.Value > expireDateTime.Value))
         {
@@ -505,5 +509,15 @@
             "es" => "スペイン語",
             _ => languageCode
         };
+    }
+
+    /// <summary>
+    ///  現在のタイムゾーンにおけるオフセットを取得します。
+    /// </summary>
+    /// <returns>オフセット (分) 。</returns>
+    private async Task<int> GetOffsetAsync()
+    {
+        // ViewModelに現在のブラウザーのタイムゾーンオフセットを設定
+        return await JS.InvokeAsync<int>("timezoneHelper.getTimezoneOffset");
     }
 }

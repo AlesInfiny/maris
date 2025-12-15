@@ -49,31 +49,33 @@ public class AnnouncementViewModel
     /// <summary>
     /// 掲載開始日時を DateTimeOffset 型で取得します。
     /// </summary>
-    public DateTimeOffset? GetPostDateTime()
+    /// <param name="timezoneOffsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
+    public DateTimeOffset? GetPostDateTime(long timezoneOffsetMinutes)
     {
-        if (PostDate == null)
+        if (this.PostDate == null)
         {
             return null;
         }
 
-        var date = PostDate.Value.Date;
-        var time = PostTime?.TimeOfDay ?? TimeSpan.Zero;
-        return new DateTimeOffset(date.Add(time), TimeSpan.FromHours(9));
+        var date = this.PostDate.Value.Date;
+        var time = this.PostTime?.TimeOfDay ?? TimeSpan.Zero;
+        return new DateTimeOffset(date.Add(time), TimeSpan.FromMinutes(timezoneOffsetMinutes));
     }
 
     /// <summary>
     /// 掲載終了日時を DateTimeOffset 型で取得します。
     /// </summary>
-    public DateTimeOffset? GetExpireDateTime()
+    /// <param name="timezoneOffsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
+    public DateTimeOffset? GetExpireDateTime(long timezoneOffsetMinutes)
     {
-        if (ExpireDate == null)
+        if (this.ExpireDate == null)
         {
             return null;
         }
 
-        var date = ExpireDate.Value.Date;
-        var time = ExpireTime?.TimeOfDay ?? TimeSpan.Zero;
-        return new DateTimeOffset(date.Add(time), TimeSpan.FromHours(9));
+        var date = this.ExpireDate.Value.Date;
+        var time = this.ExpireTime?.TimeOfDay ?? TimeSpan.Zero;
+        return new DateTimeOffset(date.Add(time), TimeSpan.FromMinutes(timezoneOffsetMinutes));
     }
 
     /// <summary>
