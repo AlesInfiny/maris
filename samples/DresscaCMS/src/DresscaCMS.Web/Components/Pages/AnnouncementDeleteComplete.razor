@@ -90,7 +90,7 @@
 
         @* お知らせメッセージ削除完了・アクション部 *@
         <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10">
-            <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToListAsync">
+            <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToList">
                 お知らせメッセージ管理画面へのリンク
             </FluentButton>
         </FluentStack>
@@ -197,7 +197,7 @@
     /// <summary>
     /// 一覧画面へ遷移
     /// </summary>
-    private void OnNavigateToListAsync()
+    private void OnNavigateToList()
     {
         Navigation.NavigateTo("/announcements");
     }
