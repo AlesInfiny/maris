@@ -70,6 +70,7 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 
 app.MapRazorPages();
+app.UseAuthorization();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
