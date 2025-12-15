@@ -184,7 +184,7 @@
                         }
                         お知らせメッセージの保存
                     </FluentButton>
-                    <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToDeleteConfirmAsync">
+                    <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToDeleteConfirm">
                         お知らせメッセージの削除
                     </FluentButton>
                     <FluentButton Appearance="Appearance.Neutral" OnClick="@OnBackToListButtonClick">
@@ -481,7 +481,7 @@
     /// <summary>
     /// 削除確認画面へ遷移
     /// </summary>
-    private void OnNavigateToDeleteConfirmAsync()
+    private void OnNavigateToDeleteConfirm()
     {
         Navigation.NavigateTo($"/announcements/{AnnouncementId}/delete-confirm");
     }
