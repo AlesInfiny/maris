@@ -172,8 +172,7 @@
     private string? businessErrorMessage;
     private string? correlationErrorMessage;
     private bool isSubmitting = false;
-
-    private readonly string[] languagePriority = ["ja", "en", "zh", "es"];
+    private LanguagePriorities languagePriority = new();
 
     protected override void OnInitialized()
     {
@@ -213,7 +212,7 @@
     /// </summary>
     private void AddContentWithLanguage(string languageCode)
     {
-        var displayOrder = Array.IndexOf(languagePriority, languageCode);
+        var displayOrder = languagePriority.IndexOf(languageCode);
         if (displayOrder == -1)
         {
             displayOrder = int.MaxValue;

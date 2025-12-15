@@ -172,8 +172,7 @@
     private string? errorMessage;
     private bool isDeleting = false;
     private bool isLoading = true;
-
-    private readonly string[] languagePriority = ["ja", "en", "zh", "es"];
+    private LanguagePriorities languagePriority = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -280,7 +279,7 @@
     /// </summary>
     private int GetLanguageOrder(string languageCode)
     {
-        var index = Array.IndexOf(languagePriority, languageCode);
+        var index = languagePriority.IndexOf(languageCode);
         return index == -1 ? int.MaxValue : index;
     }
 

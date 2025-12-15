@@ -135,14 +135,14 @@
 </FluentStack>
 
 @code {
+
     [Parameter]
     public Guid AnnouncementId { get; set; }
 
     private DresscaCMS.Announcement.Infrastructures.Entities.Announcement? announcement;
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent> contents = new();
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
-
-    private readonly string[] languagePriority = ["ja", "en", "zh", "es"];
+    private LanguagePriorities languagePriority = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -199,7 +199,7 @@
     /// </summary>
     private int GetLanguageOrder(string languageCode)
     {
-        var index = Array.IndexOf(languagePriority, languageCode);
+        var index = languagePriority.IndexOf(languageCode);
         return index == -1 ? int.MaxValue : index;
     }
 

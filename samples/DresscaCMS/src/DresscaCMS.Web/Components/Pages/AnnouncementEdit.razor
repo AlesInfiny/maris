@@ -238,8 +238,7 @@
     private string? successMessage;
     private bool isSubmitting = false;
     private bool isLoading = true;
-
-    private readonly string[] languagePriority = ["ja", "en", "zh", "es"];
+    private readonly LanguagePriorities languagePriority = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -276,7 +275,7 @@
             // AnnouncementContentViewModel への変換
             contentModels = result.Contents.Select(c =>
             {
-                var displayOrder = Array.IndexOf(languagePriority, c.LanguageCode);
+                var displayOrder = this.languagePriority.IndexOf(c.LanguageCode);
                 return new AnnouncementContentViewModel
                 {
                     Id = c.Id,
@@ -330,7 +329,7 @@
     /// </summary>
     private void AddContentWithLanguage(string languageCode)
     {
-        var displayOrder = Array.IndexOf(languagePriority, languageCode);
+        var displayOrder = languagePriority.IndexOf(languageCode);
         if (displayOrder == -1)
         {
             displayOrder = int.MaxValue;
