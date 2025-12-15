@@ -89,7 +89,14 @@
                         {
                             <div>
                                 <strong>リンク先URL：</strong>
-                                <a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a>
+                                @if (content.LinkedUrl.StartsWith("http"))
+                                {
+                                    <a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a>
+                                }
+                                else
+                                {
+                                    <span>@content.LinkedUrl</span>
+                                }
                             </div>
                         }
                     </FluentStack>
