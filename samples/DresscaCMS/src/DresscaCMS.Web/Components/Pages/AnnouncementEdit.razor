@@ -440,7 +440,7 @@
         var postDateTime = announcementModel?.GetPostDateTime(offsetMinutes);
         var expireDateTime = announcementModel?.GetExpireDateTime(offsetMinutes);
 
-        if ((postDateTime.HasValue && expireDateTime.HasValue) && (postDateTime.Value > expireDateTime.Value))
+        if (postDateTime.HasValue && expireDateTime.HasValue && postDateTime.Value > expireDateTime.Value)
         {
             correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
             return false;
