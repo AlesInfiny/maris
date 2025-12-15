@@ -179,7 +179,7 @@
     private string? errorMessage;
     private bool isDeleting = false;
     private bool isLoading = true;
-    private LanguagePriorities languagePriority = new();
+    private readonly LanguagePriorities languagePriority = new();
 
     protected override async Task OnInitializedAsync()
     {
