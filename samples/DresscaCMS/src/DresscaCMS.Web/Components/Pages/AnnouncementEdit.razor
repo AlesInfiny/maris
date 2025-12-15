@@ -115,10 +115,17 @@
                                 <FluentStack Orientation="Orientation.Vertical">
                                     <FluentLabel>言語<span class="required">*</span></FluentLabel>
                                     <InputSelect @bind-Value="@content.LanguageCode" class="fluent-select" style="width: 200px;">
-                                        <option value="ja">日本語</option>
-                                        <option value="en">英語</option>
-                                        <option value="zh">中国語</option>
-                                        <option value="es">スペイン語</option>
+                                        @foreach (var language in languagePriority)
+                                        {
+                                            if (language.Code == content.LanguageCode)
+                                            {
+                                                <option value="@language.Code" selected>@language.DisplayName</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@language.Code">@language.DisplayName</option>
+                                            }
+                                        }
                                     </InputSelect>
                                     <ValidationMessage For="@(() => content.LanguageCode)" />
                                 </FluentStack>
@@ -499,16 +506,7 @@
     /// 言語コードから言語名を取得
     /// </summary>
     private string GetLanguageName(string languageCode)
-    {
-        return languageCode switch
-        {
-            "ja" => "日本語",
-            "en" => "英語",
-            "zh" => "中国語",
-            "es" => "スペイン語",
-            _ => languageCode
-        };
-    }
+        => Language.GetLanguageFrom(languageCode).DisplayName;
 
     /// <summary>
     ///  現在のタイムゾーンにおけるオフセットを取得します。

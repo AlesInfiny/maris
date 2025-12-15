@@ -263,16 +263,7 @@
     /// 言語コードから言語名を取得
     /// </summary>
     private string GetLanguageName(string languageCode)
-    {
-        return languageCode switch
-        {
-            "ja" => "日本語",
-            "en" => "英語",
-            "zh" => "中国語",
-            "es" => "スペイン語",
-            _ => languageCode
-        };
-    }
+        => Language.GetLanguageFrom(languageCode).DisplayName;
 
     /// <summary>
     /// 言語コードの表示順序を取得
