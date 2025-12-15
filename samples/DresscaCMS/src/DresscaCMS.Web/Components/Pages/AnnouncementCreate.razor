@@ -94,7 +94,7 @@
                     <FluentCard Style="padding: 20px;">
                         <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
                             <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
-                                <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => OnDeleteContentButtonClickAsync(content.Id))">
+                                <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => OnDeleteContentButtonClick(content.Id))">
                                     <FluentIcon Value="@(new Icons.Regular.Size20.Delete())" Color="@Color.Error" />
                                     削除
                                 </FluentButton>
@@ -232,7 +232,7 @@
     /// <summary>
     /// コンテンツ削除ボタンクリック時の処理
     /// </summary>
-    private void OnDeleteContentButtonClickAsync(Guid contentId)
+    private void OnDeleteContentButtonClick(Guid contentId)
     {
         var content = contentModels.FirstOrDefault(c => c.Id == contentId);
         if (content != null)
