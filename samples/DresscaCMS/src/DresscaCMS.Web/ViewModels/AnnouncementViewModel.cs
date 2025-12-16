@@ -50,11 +50,11 @@ public class AnnouncementViewModel
     /// 掲載開始日時を DateTimeOffset 型で取得します。
     /// </summary>
     /// <param name="timezoneOffsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
-    public DateTimeOffset? GetPostDateTime(long timezoneOffsetMinutes)
+    public DateTimeOffset GetPostDateTime(long timezoneOffsetMinutes)
     {
         if (this.PostDate == null)
         {
-            return null;
+            throw new InvalidOperationException("掲載開始日時は必須です。");
         }
 
         var date = this.PostDate.Value.Date;

@@ -260,18 +260,11 @@
         try
         {
             // ビューモデルからエンティティへの変換
-            var postDateTime = announcementModel.GetPostDateTime(offsetMinutes);
-            if (!postDateTime.HasValue)
-            {
-                correlationErrorMessage = "掲載開始日時を入力してください。";
-                return;
-            }
-
             var announcement = new DresscaCMS.Announcement.Infrastructures.Entities.Announcement
             {
                 Id = Guid.NewGuid(),
                 Category = announcementModel.Category,
-                PostDateTime = postDateTime.Value,
+                PostDateTime = announcementModel.GetPostDateTime(offsetMinutes),
                 ExpireDateTime = announcementModel.GetExpireDateTime(offsetMinutes),
                 DisplayPriority = announcementModel.DisplayPriority,
                 CreatedAt = DateTimeOffset.UtcNow,
@@ -318,7 +311,7 @@
         var postDateTime = announcementModel.GetPostDateTime(offsetMinutes);
         var expireDateTime = announcementModel.GetExpireDateTime(offsetMinutes);
 
-        if (postDateTime.HasValue && expireDateTime.HasValue && postDateTime.Value > expireDateTime.Value)
+        if (expireDateTime.HasValue && postDateTime > expireDateTime.Value)
         {
             correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
             return false;

@@ -4,6 +4,7 @@
 @using DresscaCMS.Web.ViewModels
 @using DresscaCMS.Web.Extensions
 @using Microsoft.AspNetCore.Components.Authorization
+@using System.Diagnostics.CodeAnalysis
 @inject NavigationManager Navigation
 @inject AnnouncementsApplicationService AnnouncementsService
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -379,18 +380,11 @@
         try
         {
             // ビューモデルからエンティティへの変換
-            var postDateTime = announcementModel!.GetPostDateTime(offsetMinutes);
-            if (!postDateTime.HasValue)
-            {
-                correlationErrorMessage = "掲載開始日時を入力してください。";
-                return;
-            }
-
             var announcement = new DresscaCMS.Announcement.Infrastructures.Entities.Announcement
             {
                 Id = announcementModel.Id,
                 Category = announcementModel.Category,
-                PostDateTime = postDateTime.Value,
+                PostDateTime = announcementModel!.GetPostDateTime(offsetMinutes),
                 ExpireDateTime = announcementModel.GetExpireDateTime(offsetMinutes),
                 DisplayPriority = announcementModel.DisplayPriority,
                 CreatedAt = DateTimeOffset.UtcNow,
@@ -434,13 +428,19 @@
     /// </summary>
     /// <param name="offsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
     /// <returns>相関チェック結果。true: 成功、false: 失敗。</returns>
+    [MemberNotNull(nameof(announcementModel))]
     private bool ValidateCorrelation(long offsetMinutes)
     {
-        // 掲載終了日時が掲載開始日時より前かチェック
-        var postDateTime = announcementModel?.GetPostDateTime(offsetMinutes);
-        var expireDateTime = announcementModel?.GetExpireDateTime(offsetMinutes);
+        if (announcementModel is null)
+        {
+            throw new InvalidOperationException("お知らせ情報が取得できていない状態で保存処理が呼び出されました。");
+        }
 
-        if (postDateTime.HasValue && expireDateTime.HasValue && postDateTime.Value > expireDateTime.Value)
+        // 掲載終了日時が掲載開始日時より前かチェック
+        var postDateTime = announcementModel.GetPostDateTime(offsetMinutes);
+        var expireDateTime = announcementModel.GetExpireDateTime(offsetMinutes);
+
+        if (expireDateTime.HasValue && postDateTime > expireDateTime.Value)
         {
             correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
             return false;
