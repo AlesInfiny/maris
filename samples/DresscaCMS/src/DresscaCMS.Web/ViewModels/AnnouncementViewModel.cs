@@ -50,6 +50,7 @@ public class AnnouncementViewModel
     /// 掲載開始日時を DateTimeOffset 型で取得します。
     /// </summary>
     /// <param name="timezoneOffsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
+    /// <returns>掲載開始日時。</returns>
     public DateTimeOffset GetPostDateTime(long timezoneOffsetMinutes)
     {
         if (this.PostDate == null)
@@ -66,6 +67,7 @@ public class AnnouncementViewModel
     /// 掲載終了日時を DateTimeOffset 型で取得します。
     /// </summary>
     /// <param name="timezoneOffsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
+    /// <returns>掲載終了日時。</returns>
     public DateTimeOffset? GetExpireDateTime(long timezoneOffsetMinutes)
     {
         if (this.ExpireDate == null)
@@ -84,8 +86,8 @@ public class AnnouncementViewModel
     /// <param name="dateTime">設定する日時。</param>
     public void SetPostDateTime(DateTimeOffset dateTime)
     {
-        PostDate = dateTime.DateTime.Date;
-        PostTime = dateTime.DateTime;
+        this.PostDate = dateTime.DateTime.Date;
+        this.PostTime = dateTime.DateTime;
     }
 
     /// <summary>
@@ -96,13 +98,13 @@ public class AnnouncementViewModel
     {
         if (dateTime.HasValue)
         {
-            ExpireDate = dateTime.Value.DateTime.Date;
-            ExpireTime = dateTime.Value.DateTime;
+            this.ExpireDate = dateTime.Value.DateTime.Date;
+            this.ExpireTime = dateTime.Value.DateTime;
         }
         else
         {
-            ExpireDate = null;
-            ExpireTime = null;
+            this.ExpireDate = null;
+            this.ExpireTime = null;
         }
     }
 }

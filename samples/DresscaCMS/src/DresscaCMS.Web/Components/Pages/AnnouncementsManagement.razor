@@ -24,7 +24,7 @@
         </FluentBreadcrumbItem>
     </FluentBreadcrumb>
 
-    @if (isLoading)
+    @if (this.isLoading)
     {
         <div class="loading-spinner">
             <FluentProgressRing Width="60px" />
@@ -32,7 +32,7 @@
     }
     else
     {
-        @if (announcementEntities is null || !announcementEntities.Any())
+        @if (this.announcementEntities is null || !this.announcementEntities.Any())
         {
             <p>登録されているお知らせメッセージはありません。</p>
         }
@@ -40,16 +40,16 @@
         {
             <FluentStack Orientation="Orientation.Vertical">
                 <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="20">
-                    <div>全 @totalCount 件中 @startIndex ～ @endIndex 件目を表示</div>
+                    <div>全 @this.totalCount 件中 @this.startIndex ～ @this.endIndex 件目を表示</div>
                     <div>
-                        <FluentButton IconEnd="@(new Icons.Regular.Size12.ChevronLeft())" Disabled="@(pageNumber == 1)" OnClick="@OnPreviousButtonClickAsync" />
-                        <FluentButton IconEnd="@(new Icons.Regular.Size12.ChevronRight())" Disabled="@(pageNumber == lastPageNumber)" OnClick="@OnNextButtonClickAsync" />
+                        <FluentButton IconEnd="@(new Icons.Regular.Size12.ChevronLeft())" Disabled="@(this.pageNumber == 1)" OnClick="@OnPreviousButtonClickAsync" />
+                        <FluentButton IconEnd="@(new Icons.Regular.Size12.ChevronRight())" Disabled="@(this.pageNumber == this.lastPageNumber)" OnClick="@OnNextButtonClickAsync" />
                     </div>
                     <div>
                         <FluentNavLink Href="/announcements/create" Class="nav-link">新規お知らせメッセージ作成</FluentNavLink>
                     </div>
                 </FluentStack>
-                <FluentDataGrid Items="@announcementEntities" TGridItem="Announcement" AutoFit="false">
+                <FluentDataGrid Items="@this.announcementEntities" TGridItem="Announcement" AutoFit="false">
                     <TemplateColumn Title="タイトル" Width="400px">
                         <a href="/announcements/@context.Id/edit">@context.Contents.FirstOrDefault()?.Title</a>
                     </TemplateColumn>
@@ -68,8 +68,8 @@
                     @{
                         // ページ番号の範囲を計算
                         var pageButtons = new List<int>();
-                        int current = pageNumber;
-                        int last = lastPageNumber;
+                        int current = this.pageNumber;
+                        int last = this.lastPageNumber;
                         bool showBeforeEllipsis = false;
                         bool showAfterEllipsis = false;
 
@@ -120,10 +120,7 @@
     }
 </FluentStack>
 
-    @code {
-
-
-
+@code {
     private IQueryable<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>? announcementEntities;
     private int lastPageNumber;
     private int totalCount;
@@ -149,17 +146,17 @@
             this.isLoading = true;
 
             // クエリパラメータからページサイズとページ番号を取得します。int 型に変換できない場合、デフォルト値にフォールバックします。
-            pageSize = int.TryParse(PageSize, out var parsedPageSize) ? parsedPageSize : defaultPageSize;
-            pageNumber = int.TryParse(PageNumber, out var parsedPageNumber) ? parsedPageNumber : defaultPageNumber;
+            this.pageSize = int.TryParse(this.PageSize, out var parsedPageSize) ? parsedPageSize : this.defaultPageSize;
+            this.pageNumber = int.TryParse(this.PageNumber, out var parsedPageNumber) ? parsedPageNumber : this.defaultPageNumber;
 
-            var announcementsDto = await AnnouncementsService.GetPagedAnnouncementsAsync(pageNumber, pageSize);
-            announcementEntities = announcementsDto.Announcements.AsQueryable();
-            lastPageNumber = announcementsDto.LastPageNumber;
-            totalCount = announcementsDto.TotalCount;
-            startIndex = announcementsDto.DisplayFrom;
-            endIndex = announcementsDto.DisplayTo;
-            pageNumber = announcementsDto.PageNumber;
-            pageSize = announcementsDto.PageSize;
+            var announcementsDto = await this.AnnouncementsService.GetPagedAnnouncementsAsync(this.pageNumber, this.pageSize);
+            this.announcementEntities = announcementsDto.Announcements.AsQueryable();
+            this.lastPageNumber = announcementsDto.LastPageNumber;
+            this.totalCount = announcementsDto.TotalCount;
+            this.startIndex = announcementsDto.DisplayFrom;
+            this.endIndex = announcementsDto.DisplayTo;
+            this.pageNumber = announcementsDto.PageNumber;
+            this.pageSize = announcementsDto.PageSize;
         }
         finally
         {
@@ -169,19 +166,19 @@
 
     private async Task OnPreviousButtonClickAsync()
     {
-        pageNumber--;
-        NavigationManager.NavigateTo($"/announcements?pageNumber={pageNumber}&pageSize={pageSize}");
+        this.pageNumber--;
+        this.NavigationManager.NavigateTo($"/announcements?pageNumber={this.pageNumber}&pageSize={this.pageSize}");
     }
 
     private async Task OnNextButtonClickAsync()
     {
-        pageNumber++;
-        NavigationManager.NavigateTo($"/announcements?pageNumber={pageNumber}&pageSize={pageSize}");
+        this.pageNumber++;
+        this.NavigationManager.NavigateTo($"/announcements?pageNumber={this.pageNumber}&pageSize={this.pageSize}");
     }
 
     private async Task OnPageButtonClickAsync(int pageNumber)
     {
         this.pageNumber = pageNumber;
-        NavigationManager.NavigateTo($"/announcements?pageNumber={this.pageNumber}&pageSize={this.pageSize}");
+        this.NavigationManager.NavigateTo($"/announcements?pageNumber={this.pageNumber}&pageSize={this.pageSize}");
     }
 }

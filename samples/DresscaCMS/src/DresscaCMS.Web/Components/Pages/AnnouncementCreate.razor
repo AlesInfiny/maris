@@ -39,63 +39,63 @@
             <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="20">
                 <FluentStack Orientation="Orientation.Vertical">
                     <FluentLabel>掲載開始日時（日付）<span class="required">*</span></FluentLabel>
-                    <FluentDatePicker @bind-Value="@announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
-                    <ValidationMessage For="@(() => announcementModel.PostDate)" />
+                    <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
+                    <ValidationMessage For="@(() => this.announcementModel.PostDate)" />
                 </FluentStack>
                 <FluentStack Orientation="Orientation.Vertical">
                     <FluentLabel>掲載開始日時（時刻）</FluentLabel>
-                    <FluentTimePicker @bind-Value="@announcementModel.PostTime" />
+                    <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" />
                 </FluentStack>
             </FluentStack>
 
             <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="20">
                 <FluentStack Orientation="Orientation.Vertical">
                     <FluentLabel>掲載終了日時（日付）</FluentLabel>
-                    <FluentDatePicker @bind-Value="@announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
+                    <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
                 </FluentStack>
                 <FluentStack Orientation="Orientation.Vertical">
                     <FluentLabel>掲載終了日時（時刻）</FluentLabel>
-                    <FluentTimePicker @bind-Value="@announcementModel.ExpireTime" />
+                    <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" />
                 </FluentStack>
             </FluentStack>
 
             <FluentStack Orientation="Orientation.Vertical">
                 <FluentLabel>カテゴリー</FluentLabel>
-                <FluentTextField @bind-Value="@announcementModel.Category" Maxlength="128" Style="width: 400px;" />
-                <ValidationMessage For="@(() => announcementModel.Category)" />
+                <FluentTextField @bind-Value="@this.announcementModel.Category" Maxlength="128" Style="width: 400px;" />
+                <ValidationMessage For="@(() => this.announcementModel.Category)" />
             </FluentStack>
 
             <FluentStack Orientation="Orientation.Vertical">
                 <FluentLabel>表示優先度<span class="required">*</span></FluentLabel>
-                <InputSelect @bind-Value="@announcementModel.DisplayPriority" class="fluent-select" style="width: 200px;">
+                <InputSelect @bind-Value="@this.announcementModel.DisplayPriority" class="fluent-select" style="width: 200px;">
                     <option value="@DisplayPriority.Critical">緊急</option>
                     <option value="@DisplayPriority.High">高</option>
                     <option value="@DisplayPriority.Medium">中</option>
                     <option value="@DisplayPriority.Low">低</option>
                 </InputSelect>
-                <ValidationMessage For="@(() => announcementModel.DisplayPriority)" />
+                <ValidationMessage For="@(() => this.announcementModel.DisplayPriority)" />
             </FluentStack>
         </FluentStack>
 
         @* お知らせメッセージ登録・お知らせコンテンツアクション部 *@
         <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10" Style="margin-top: 30px;">
-            <FluentButton Appearance="Appearance.Accent" OnClick="@OnAddLanguageButtonClick">別の言語を追加</FluentButton>
+            <FluentButton Appearance="Appearance.Accent" OnClick="@this.OnAddLanguageButtonClick">別の言語を追加</FluentButton>
         </FluentStack>
 
         @* お知らせメッセージ登録・お知らせコンテンツ部 *@
         <FluentStack Orientation="Orientation.Vertical" VerticalGap="20" Style="margin-top: 20px;">
-            @if (!contentModels.Any())
+            @if (!this.contentModels.Any())
             {
                 <p>登録されているお知らせメッセージはありません。</p>
             }
             else
             {
-                @foreach (var content in contentModels.OrderBy(c => c.DisplayOrder))
+                @foreach (var content in this.contentModels.OrderBy(c => c.DisplayOrder))
                 {
                     <FluentCard Style="padding: 20px;">
                         <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
                             <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
-                                <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => OnDeleteContentButtonClick(content.Id))">
+                                <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => this.OnDeleteContentButtonClick(content.Id))">
                                     <FluentIcon Value="@(new Icons.Regular.Size20.Delete())" Color="@Color.Error" />
                                     削除
                                 </FluentButton>
@@ -104,7 +104,7 @@
                             <FluentStack Orientation="Orientation.Vertical">
                                 <FluentLabel>言語<span class="required">*</span></FluentLabel>
                                 <InputSelect @bind-Value="@content.LanguageCode" class="fluent-select" style="width: 200px;">
-                                    @foreach (var language in languagePriority)
+                                    @foreach (var language in this.languagePriorities)
                                     {
                                         if (language.Code == content.LanguageCode)
                                         {
@@ -144,29 +144,29 @@
 
         @* お知らせメッセージ登録・アクション部 *@
         <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-top: 30px;">
-            @if (!string.IsNullOrEmpty(businessErrorMessage))
+            @if (!string.IsNullOrEmpty(this.businessErrorMessage))
             {
                 <FluentMessageBar Intent="MessageIntent.Error">
-                    @businessErrorMessage
+                    @this.businessErrorMessage
                 </FluentMessageBar>
             }
 
-            @if (!string.IsNullOrEmpty(correlationErrorMessage))
+            @if (!string.IsNullOrEmpty(this.correlationErrorMessage))
             {
                 <FluentMessageBar Intent="MessageIntent.Error">
-                    @correlationErrorMessage
+                    @this.correlationErrorMessage
                 </FluentMessageBar>
             }
 
             <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10">
-                <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@isSubmitting">
-                    @if (isSubmitting)
+                <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
+                    @if (this.isSubmitting)
                     {
                         <FluentProgressRing Width="20px" />
                     }
                     お知らせメッセージの登録
                 </FluentButton>
-                <FluentButton Appearance="Appearance.Neutral" OnClick="@OnBackToListButtonClick">
+                <FluentButton Appearance="Appearance.Neutral" OnClick="@this.OnBackToListButtonClick">
                     お知らせメッセージ管理画面へ戻る
                 </FluentButton>
             </FluentStack>
@@ -177,15 +177,16 @@
 @code {
     private readonly AnnouncementViewModel announcementModel = new();
     private readonly List<AnnouncementContentViewModel> contentModels = new();
-    private readonly LanguagePriorities languagePriority = new();
+    private readonly LanguagePriorities languagePriorities = new();
     private string? businessErrorMessage;
     private string? correlationErrorMessage;
     private bool isSubmitting = false;
 
+    /// <inheritdoc/>
     protected override void OnInitialized()
     {
         // 初期表示時に日本語のコンテンツを1件追加
-        AddContentWithLanguage(Language.Japanese);
+        this.AddContentWithLanguage(Language.Japanese);
     }
 
     /// <summary>
@@ -193,8 +194,7 @@
     /// </summary>
     private void OnAddLanguageButtonClick()
     {
-        var nextLanguage = GetNextLanguageCode();
-        AddContentWithLanguage(nextLanguage);
+        this.AddContentWithLanguage(this.GetNextLanguageCode());
     }
 
     /// <summary>
@@ -202,8 +202,8 @@
     /// </summary>
     private Language GetNextLanguageCode()
     {
-        var existingLanguages = contentModels.Select(c => c.LanguageCode).ToHashSet();
-        var lang = languagePriority.FirstOrDefault(l => !existingLanguages.Contains(l.Code));
+        var existingLanguages = this.contentModels.Select(c => c.LanguageCode).ToHashSet();
+        var lang = this.languagePriorities.FirstOrDefault(l => !existingLanguages.Contains(l.Code));
 
         // 全ての言語が追加済みの場合は日本語を返す
         return lang ?? Language.Japanese;
@@ -214,20 +214,14 @@
     /// </summary>
     private void AddContentWithLanguage(Language language)
     {
-        var displayOrder = languagePriority.IndexOf(language);
-        if (displayOrder == -1)
-        {
-            displayOrder = int.MaxValue;
-        }
-
         var newContent = new AnnouncementContentViewModel
         {
             Id = Guid.NewGuid(),
             LanguageCode = language.Code,
-            DisplayOrder = displayOrder
+            DisplayOrder = this.languagePriorities.GetDisplayOrder(language)
         };
 
-        contentModels.Add(newContent);
+        this.contentModels.Add(newContent);
     }
 
     /// <summary>
@@ -235,10 +229,10 @@
     /// </summary>
     private void OnDeleteContentButtonClick(Guid contentId)
     {
-        var content = contentModels.FirstOrDefault(c => c.Id == contentId);
+        var content = this.contentModels.FirstOrDefault(c => c.Id == contentId);
         if (content != null)
         {
-            contentModels.Remove(content);
+            this.contentModels.Remove(content);
         }
     }
 
@@ -247,8 +241,8 @@
     /// </summary>
     private async Task OnRegisterButtonClickAsync(EditContext editContext)
     {
-        businessErrorMessage = null;
-        correlationErrorMessage = null;
+        this.businessErrorMessage = null;
+        this.correlationErrorMessage = null;
 
         // 相関チェック
         var offsetMinutes = await this.GetOffsetAsync();
@@ -257,23 +251,23 @@
             return;
         }
 
-        isSubmitting = true;
+        this.isSubmitting = true;
         try
         {
             // ビューモデルからエンティティへの変換
             var announcement = new DresscaCMS.Announcement.Infrastructures.Entities.Announcement
             {
                 Id = Guid.NewGuid(),
-                Category = announcementModel.Category,
-                PostDateTime = announcementModel.GetPostDateTime(offsetMinutes),
-                ExpireDateTime = announcementModel.GetExpireDateTime(offsetMinutes),
-                DisplayPriority = announcementModel.DisplayPriority,
+                Category = this.announcementModel.Category,
+                PostDateTime = this.announcementModel.GetPostDateTime(offsetMinutes),
+                ExpireDateTime = this.announcementModel.GetExpireDateTime(offsetMinutes),
+                DisplayPriority = this.announcementModel.DisplayPriority,
                 CreatedAt = DateTimeOffset.UtcNow,
                 ChangedAt = DateTimeOffset.UtcNow,
-                IsDeleted = false
+                IsDeleted = false,
             };
 
-            var contents = contentModels.Select(c => new DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent
+            var contents = this.contentModels.Select(c => new DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent
             {
                 Id = Guid.NewGuid(),
                 AnnouncementId = announcement.Id,
@@ -284,20 +278,20 @@
             }).ToList();
 
             // ログイン中のユーザー名を取得
-            var userName = await AuthenticationStateProvider.GetCurrentUserNameAsync();
+            var userName = await this.AuthenticationStateProvider.GetCurrentUserNameAsync();
 
             // アプリケーションサービスを呼び出し
-            var createdId = await AnnouncementsService.CreateAnnouncementAndContentAsync(
+            var createdId = await this.AnnouncementsService.CreateAnnouncementAndContentAsync(
                 announcement,
                 contents,
                 userName);
 
             // 成功したら編集画面へ遷移
-            NavigationManager.NavigateTo($"/announcements/{createdId}/edit");
+            this.NavigationManager.NavigateTo($"/announcements/{createdId}/edit");
         }
         finally
         {
-            isSubmitting = false;
+            this.isSubmitting = false;
         }
     }
 
@@ -309,27 +303,27 @@
     private bool ValidateCorrelation(long offsetMinutes)
     {
         // 掲載終了日時が掲載開始日時より前かチェック
-        var postDateTime = announcementModel.GetPostDateTime(offsetMinutes);
-        var expireDateTime = announcementModel.GetExpireDateTime(offsetMinutes);
+        var postDateTime = this.announcementModel.GetPostDateTime(offsetMinutes);
+        var expireDateTime = this.announcementModel.GetExpireDateTime(offsetMinutes);
 
         if (expireDateTime.HasValue && postDateTime > expireDateTime.Value)
         {
-            correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
+            this.correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
             return false;
         }
 
         // お知らせコンテンツが1件以上あるかチェック
-        if (!contentModels.Any())
+        if (!this.contentModels.Any())
         {
-            correlationErrorMessage = "お知らせメッセージは1件以上作成してください。";
+            this.correlationErrorMessage = "お知らせメッセージは1件以上作成してください。";
             return false;
         }
 
         // 言語コードの重複チェック
-        var languageCodes = contentModels.Select(c => c.LanguageCode).ToList();
+        var languageCodes = this.contentModels.Select(c => c.LanguageCode).ToList();
         if (languageCodes.Count != languageCodes.Distinct().Count())
         {
-            correlationErrorMessage = "お知らせメッセージの言語が重複しています。";
+            this.correlationErrorMessage = "お知らせメッセージの言語が重複しています。";
             return false;
         }
 
@@ -341,7 +335,7 @@
     /// </summary>
     private void OnBackToListButtonClick()
     {
-        NavigationManager.NavigateTo("/announcements");
+        this.NavigationManager.NavigateTo("/announcements");
     }
 
     /// <summary>
@@ -351,6 +345,6 @@
     private async Task<int> GetOffsetAsync()
     {
         // ViewModelに現在のブラウザーのタイムゾーンオフセットを設定
-        return await JS.InvokeAsync<int>("timezoneHelper.getTimezoneOffset");
+        return await this.JS.InvokeAsync<int>("timezoneHelper.getTimezoneOffset");
     }
 }

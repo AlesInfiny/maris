@@ -8,22 +8,38 @@ public class Language
     /// <summary>
     ///  英語。
     /// </summary>
-    public static readonly Language English = new Language("en", "英語");
+    public static readonly Language English = new("en", "英語");
 
     /// <summary>
     ///  日本語。
     /// </summary>
-    public static readonly Language Japanese = new Language("ja", "日本語");
+    public static readonly Language Japanese = new("ja", "日本語");
 
     /// <summary>
     ///  中国語。
     /// </summary>
-    public static readonly Language Chinese = new Language("zh", "中国語");
+    public static readonly Language Chinese = new("zh", "中国語");
 
     /// <summary>
     ///  スペイン語。
     /// </summary>
-    public static readonly Language Spanish = new Language("es", "スペイン語");
+    public static readonly Language Spanish = new("es", "スペイン語");
+
+    private Language(string code, string displayName)
+    {
+        this.Code = code;
+        this.DisplayName = displayName;
+    }
+
+    /// <summary>
+    ///  言語コードを取得します。（例: "ja", "en" 等）
+    /// </summary>
+    public string Code { get; private init; }
+
+    /// <summary>
+    ///  表示名を取得します。（例: "日本語", "英語" 等）
+    /// </summary>
+    public string DisplayName { get; private init; }
 
     /// <summary>
     ///  指定した言語コードから <see cref="Language"/> オブジェクトを取得します。
@@ -46,22 +62,6 @@ public class Language
             _ => throw new ArgumentException("Unsupported language code.", nameof(code)),
         };
     }
-
-    private Language(string code, string displayName)
-    {
-        this.Code = code;
-        this.DisplayName = displayName;
-    }
-
-    /// <summary>
-    ///  言語コードを取得します。（例: "ja", "en" 等）
-    /// </summary>
-    public string Code { get; private init; }
-
-    /// <summary>
-    ///  表示名を取得します。（例: "日本語", "英語" 等）
-    /// </summary>
-    public string DisplayName { get; private init; }
 
     /// <summary>
     ///  言語コードで等価性を比較します。

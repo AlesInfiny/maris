@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="@Assets["DresscaCMS.Web.styles.css"]" />
     <ImportMap />
     <link rel="icon" type="image/png" href="favicon.png" />
-    <HeadOutlet @rendermode="@PageRenderMode" />
+    <HeadOutlet @rendermode="@this.PageRenderMode" />
 </head>
 
 <body>
-    <Routes @rendermode="@PageRenderMode" />
+    <Routes @rendermode="@this.PageRenderMode" />
     <ReconnectModal />
     <script src="@Assets["_framework/blazor.web.js"]"></script>
     <script src="timezone.js"></script>
@@ -28,5 +28,5 @@
 
     private IComponentRenderMode? PageRenderMode
         // ExcludeFromInteractiveRoutingAttribute を指定した場合のみ false を返します。
-        => HttpContext.AcceptsInteractiveRouting() ? InteractiveServer : null;
+        => this.HttpContext.AcceptsInteractiveRouting() ? InteractiveServer : null;
 }

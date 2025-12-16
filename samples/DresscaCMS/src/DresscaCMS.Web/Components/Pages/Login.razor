@@ -10,7 +10,6 @@
 
 @inject IdentityRedirectManager RedirectManager
 @inject ILogger<Login> Logger
-@inject NavigationManager NavigationManager
 @inject SignInManager<ApplicationUser> SignInManager
 
 <PageTitle>ログイン</PageTitle>
@@ -20,24 +19,24 @@
     <div class="col-lg-6">
         <section>
             <div>
-                @errorMessage
+                @this.errorMessage
             </div>
-            <EditForm EditContext="editContext" method="post" OnSubmit="LoginUser" FormName="login">
+            <EditForm EditContext="this.editContext" method="post" OnSubmit="this.LoginUser" FormName="login">
                 <DataAnnotationsValidator />
                 <ValidationSummary class="text-danger" role="alert" />
                 <div class="form-floating mb-3">
-                    <InputText @bind-Value="Input.Email" id="input-email" class="form-control" autocomplete="username webauthn" aria-required="true" placeholder="name@example.com" />
+                    <InputText @bind-Value="this.Input.Email" id="input-email" class="form-control" autocomplete="username webauthn" aria-required="true" placeholder="name@example.com" />
                     <label for="input-email" class="form-label">メールアドレス</label>
-                    <ValidationMessage For="() => Input.Email" class="text-danger" />
+                    <ValidationMessage For="() => this.Input.Email" class="text-danger" />
                 </div>
                 <div class="form-floating mb-3">
-                    <InputText type="password" @bind-Value="Input.Password" id="input-password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <InputText type="password" @bind-Value="this.Input.Password" id="input-password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
                     <label for="input-password" class="form-label">パスワード</label>
-                    <ValidationMessage For="() => Input.Password" class="text-danger" />
+                    <ValidationMessage For="() => this.Input.Password" class="text-danger" />
                 </div>
                 <div class="checkbox mb-3">
                     <label class="form-label">
-                        <InputCheckbox @bind-Value="Input.RememberMe" class="darker-border-checkbox form-check-input" />
+                        <InputCheckbox @bind-Value="this.Input.RememberMe" class="darker-border-checkbox form-check-input" />
                         ログイン状態を保持する
                     </label>
                 </div>
@@ -62,29 +61,28 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Input ??= new();
-
-        editContext = new EditContext(Input);
+        this.Input ??= new();
+        this.editContext = new EditContext(this.Input);
     }
 
     public async Task LoginUser()
     {
-        if (!editContext.Validate())
+        if (!this.editContext.Validate())
         {
             return;
         }
 
         // アカウントロックアウトに対してログイン失敗をカウントしません
         // パスワード失敗でアカウントロックアウトを有効にするには、lockoutOnFailure: true に設定してください
-        var result = await SignInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+        var result = await this.SignInManager.PasswordSignInAsync(this.Input.Email, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
         if (result.Succeeded)
         {
-            Logger.LogInformation("ユーザーがログインしました。");
-            RedirectManager.RedirectTo(ReturnUrl);
+            this.Logger.LogInformation("ユーザーがログインしました。");
+            this.RedirectManager.RedirectTo(this.ReturnUrl);
         }
         else
         {
-            errorMessage = "エラー: ログイン試行が無効です。";
+            this.errorMessage = "エラー: ログイン試行が無効です。";
         }
     }
 
@@ -100,6 +98,5 @@
 
         [Display(Name = "ログイン状態を保持する")]
         public bool RememberMe { get; set; }
-
     }
 }
