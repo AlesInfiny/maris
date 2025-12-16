@@ -1,14 +1,15 @@
 ﻿@page "/announcements/{AnnouncementId:guid}/edit"
+
+@using System.Diagnostics.CodeAnalysis
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
-@using DresscaCMS.Web.ViewModels
 @using DresscaCMS.Web.Extensions
 @using Microsoft.AspNetCore.Components.Authorization
-@using System.Diagnostics.CodeAnalysis
-@inject NavigationManager Navigation
+
 @inject AnnouncementsApplicationService AnnouncementsService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime JS
+@inject NavigationManager NavigationManager
 
 <h3>お知らせメッセージ編集</h3>
 
@@ -469,7 +470,7 @@
     /// </summary>
     private void OnBackToListButtonClick()
     {
-        Navigation.NavigateTo("/announcements");
+        NavigationManager.NavigateTo("/announcements");
     }
 
     /// <summary>
@@ -477,7 +478,7 @@
     /// </summary>
     private void OnNavigateToDeleteConfirm()
     {
-        Navigation.NavigateTo($"/announcements/{AnnouncementId}/delete-confirm");
+        NavigationManager.NavigateTo($"/announcements/{AnnouncementId}/delete-confirm");
     }
 
     /// <summary>

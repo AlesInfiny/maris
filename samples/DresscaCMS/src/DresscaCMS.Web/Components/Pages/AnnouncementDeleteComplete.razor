@@ -1,9 +1,10 @@
 ﻿@page "/announcements/{AnnouncementId:guid}/delete-complete"
+
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Web.State
-@using DresscaCMS.Web.ViewModels
-@inject NavigationManager Navigation
+
 @inject IStateStore StateStore
+@inject NavigationManager NavigationManager
 
 <h3>お知らせメッセージ削除完了</h3>
 
@@ -160,7 +161,7 @@
         if (!result.Found || result.Value == null)
         {
             // 引継ぎ情報がない場合は一覧画面へ遷移
-            Navigation.NavigateTo("/announcements");
+            NavigationManager.NavigateTo("/announcements");
             return;
         }
 
@@ -206,6 +207,6 @@
     /// </summary>
     private void OnNavigateToList()
     {
-        Navigation.NavigateTo("/announcements");
+        NavigationManager.NavigateTo("/announcements");
     }
 }

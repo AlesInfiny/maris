@@ -4,8 +4,9 @@
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Announcement.Infrastructures.Entities
-@inject NavigationManager Navigation
+
 @inject AnnouncementsApplicationService AnnouncementsService
+@inject NavigationManager NavigationManager
 
 <h3>お知らせメッセージ一覧</h3>
 <FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
@@ -169,18 +170,18 @@
     private async Task OnPreviousButtonClickAsync()
     {
         pageNumber--;
-        Navigation.NavigateTo($"/announcements?pageNumber={pageNumber}&pageSize={pageSize}");
+        NavigationManager.NavigateTo($"/announcements?pageNumber={pageNumber}&pageSize={pageSize}");
     }
 
     private async Task OnNextButtonClickAsync()
     {
         pageNumber++;
-        Navigation.NavigateTo($"/announcements?pageNumber={pageNumber}&pageSize={pageSize}");
+        NavigationManager.NavigateTo($"/announcements?pageNumber={pageNumber}&pageSize={pageSize}");
     }
 
     private async Task OnPageButtonClickAsync(int pageNumber)
     {
         this.pageNumber = pageNumber;
-        Navigation.NavigateTo($"/announcements?pageNumber={this.pageNumber}&pageSize={this.pageSize}");
+        NavigationManager.NavigateTo($"/announcements?pageNumber={this.pageNumber}&pageSize={this.pageSize}");
     }
 }

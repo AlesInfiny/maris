@@ -4,14 +4,14 @@
 
 @using System.ComponentModel.DataAnnotations
 @using DresscaCMS.Authentication.Infrastructures.Entities
+@using DresscaCMS.Web.Components.Account
 @using DresscaCMS.Web.Components.Account.Shared
 @using Microsoft.AspNetCore.Identity
-@using DresscaCMS.Web.Components.Account
 
-@inject SignInManager<ApplicationUser> SignInManager
+@inject IdentityRedirectManager RedirectManager
 @inject ILogger<Login> Logger
 @inject NavigationManager NavigationManager
-@inject IdentityRedirectManager RedirectManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 <PageTitle>ログイン</PageTitle>
 

@@ -1,13 +1,14 @@
 ﻿@page "/announcements/create"
+
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
-@using DresscaCMS.Web.ViewModels
 @using DresscaCMS.Web.Extensions
 @using Microsoft.AspNetCore.Components.Authorization
-@inject NavigationManager Navigation
+
 @inject AnnouncementsApplicationService AnnouncementsService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime JS
+@inject NavigationManager NavigationManager
 
 <h3>お知らせメッセージ登録</h3>
 
@@ -292,7 +293,7 @@
                 userName);
 
             // 成功したら編集画面へ遷移
-            Navigation.NavigateTo($"/announcements/{createdId}/edit");
+            NavigationManager.NavigateTo($"/announcements/{createdId}/edit");
         }
         finally
         {
@@ -340,7 +341,7 @@
     /// </summary>
     private void OnBackToListButtonClick()
     {
-        Navigation.NavigateTo("/announcements");
+        NavigationManager.NavigateTo("/announcements");
     }
 
     /// <summary>
