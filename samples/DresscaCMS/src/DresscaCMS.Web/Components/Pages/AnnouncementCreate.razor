@@ -31,7 +31,7 @@
         </FluentBreadcrumbItem>
     </FluentBreadcrumb>
 
-    <EditForm Model="@announcementModel" OnValidSubmit="@OnRegisterButtonClickAsync" FormName="AnnouncementCreateForm">
+    <EditForm Model="@this.announcementModel" OnValidSubmit="@OnRegisterButtonClickAsync" FormName="AnnouncementCreateForm">
         <DataAnnotationsValidator />
 
         @* お知らせメッセージ登録・ヘッダー部 *@
