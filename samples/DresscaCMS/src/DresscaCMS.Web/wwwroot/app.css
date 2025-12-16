@@ -217,3 +217,8 @@ table {
         vertical-align: middle;
         border-bottom: calc(var(--stroke-width) * 1px) solid var(--neutral-stroke-divider-rest);
     }
+
+/* FluentValidationSummary */
+ul.validation-errors li.validation-message {
+    color: var(--error);
+}
