@@ -1,4 +1,5 @@
 ﻿using DresscaCMS.Announcement;
+using DresscaCMS.Announcement.Infrastructures;
 using DresscaCMS.Authentication;
 using DresscaCMS.Authentication.Infrastructures;
 using DresscaCMS.Web.Components;
@@ -46,7 +47,9 @@ builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
 // ヘルスチェックサービスを追加する
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddAnnouncementDbContextCheck("AnnoucementDatabaseHealthCheck")
+    .AddAuthenticationDbContextCheck("AuthenticationDatabaseHealthCheck");
 
 var app = builder.Build();
 
