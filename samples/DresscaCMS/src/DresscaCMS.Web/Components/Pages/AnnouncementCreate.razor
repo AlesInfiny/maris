@@ -36,7 +36,7 @@
                 </FluentBreadcrumb>
             </FluentGridItem>
             <FluentGridItem xs="12">
-                <FluentCard>
+                <div class="container">
                     <h4>基本情報</h4>
                     @* お知らせメッセージ登録・ヘッダー部 *@
                     <FluentGrid Spacing="10">
@@ -81,12 +81,12 @@
                             </FluentStack>
                         </FluentGridItem>
                     </FluentGrid>
-                </FluentCard>
+                </div>
             </FluentGridItem>
             <FluentGridItem xs="9">
-                <FluentStack Orientation="Orientation.Vertical">
-                    @* お知らせメッセージ登録・お知らせコンテンツアクション部 *@
-                    <FluentCard>
+                <div class="container">
+                    <FluentStack Orientation="Orientation.Vertical">
+                        @* お知らせメッセージ登録・お知らせコンテンツアクション部 *@
                         <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="20" VerticalAlignment="VerticalAlignment.Top">
                             <h4>お知らせメッセージ</h4>
                             <FluentButton Appearance="Appearance.Accent" OnClick="@this.OnAddLanguageButtonClick">別の言語を追加</FluentButton>
@@ -147,12 +147,12 @@
                                 </FluentCard>
                             }
                         }
-                    </FluentCard>
-                </FluentStack>
+                    </FluentStack>
+                </div>
             </FluentGridItem>
             <FluentGridItem xs="3">
                 @* お知らせメッセージ登録・アクション部 *@
-                <FluentCard>
+                <div class="container">
                     <FluentStack Orientation="Orientation.Vertical">
                         <h4>アクション</h4>
                         @if (!string.IsNullOrEmpty(this.businessErrorMessage))
@@ -180,7 +180,7 @@
                             </div>
                         </FluentStack>
                     </FluentStack>
-                </FluentCard>
+                </div>
             </FluentGridItem>
         </FluentGrid>
     </EditForm>

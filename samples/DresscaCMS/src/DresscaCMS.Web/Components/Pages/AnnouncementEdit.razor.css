@@ -13,3 +13,13 @@
     align-items: center;
     min-height: 200px;
 }
+
+.container {
+    border: solid 1px #808080;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.spacer{
+    margin-top:15px;
+}
