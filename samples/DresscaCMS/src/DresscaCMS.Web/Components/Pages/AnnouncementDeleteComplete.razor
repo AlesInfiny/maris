@@ -6,141 +6,148 @@
 @inject IStateStore StateStore
 @inject NavigationManager NavigationManager
 
-<h3>お知らせメッセージ削除完了</h3>
+<h3>お知らせメッセージ削除完了画面</h3>
 
-<FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
-    <FluentBreadcrumb>
-        <FluentBreadcrumbItem>
-            <FluentNavLink Href="/">TOP</FluentNavLink>
-            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
-        </FluentBreadcrumbItem>
-        <FluentBreadcrumbItem>
-            お知らせメッセージ管理
-            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
-        </FluentBreadcrumbItem>
-        <FluentBreadcrumbItem>
-            <FluentNavLink Href="/announcements">お知らせメッセージ一覧</FluentNavLink>
-            <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
-        </FluentBreadcrumbItem>
-        <FluentBreadcrumbItem>
-            お知らせメッセージ削除完了
-        </FluentBreadcrumbItem>
-    </FluentBreadcrumb>
+<FluentGrid>
+    <FluentGridItem xs="12">
+        <FluentBreadcrumb>
+            <FluentBreadcrumbItem>
+                <FluentNavLink Href="/">TOP</FluentNavLink>
+                <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+            </FluentBreadcrumbItem>
+            <FluentBreadcrumbItem>
+                お知らせメッセージ管理
+                <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+            </FluentBreadcrumbItem>
+            <FluentBreadcrumbItem>
+                <FluentNavLink Href="/announcements">お知らせメッセージ一覧</FluentNavLink>
+                <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+            </FluentBreadcrumbItem>
+            <FluentBreadcrumbItem>
+                お知らせメッセージ削除完了
+            </FluentBreadcrumbItem>
+        </FluentBreadcrumb>
+    </FluentGridItem>
+</FluentGrid>
 
-    @if (this.announcement == null || this.contents == null)
-    {
-        <div class="loading-spinner">
-            <FluentProgressRing Width="60px" />
-        </div>
-    }
-    else
-    {
-        <FluentMessageBar Intent="MessageIntent.Success" Style="margin-bottom: 20px;">
-            お知らせメッセージを削除しました。
-        </FluentMessageBar>
-
-        @* お知らせメッセージ削除完了・基本情報部 *@
-        <FluentCard Style="padding: 20px; margin-bottom: 20px;">
-            <h4>基本情報</h4>
-            <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
-                <div>
-                    <strong>掲載日時：</strong>
-                    @this.announcement.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss") ～ @(this.announcement.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")
-                </div>
-                <div>
-                    <strong>カテゴリー：</strong>
-                    @(this.announcement.Category ?? "")
-                </div>
-                <div>
-                    <strong>表示優先度：</strong>
-                    @this.announcement.DisplayPriority.GetDisplayName()
-                </div>
-            </FluentStack>
-        </FluentCard>
-
-        @* お知らせメッセージ削除完了・お知らせコンテンツ部 *@
-        <h4>お知らせコンテンツ</h4>
-        <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-bottom: 20px;">
-            @foreach (var content in this.contents.OrderBy(c => this.languagePriorities.GetDisplayOrder(Language.GetLanguageFrom(c.LanguageCode))))
-            {
-                <FluentCard Style="padding: 20px;">
-                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
-                        <div>
-                            <strong>言語：</strong>
-                            @this.GetLanguageName(content.LanguageCode)
-                        </div>
-                        <div>
-                            <strong>タイトル：</strong>
-                            @content.Title
-                        </div>
-                        <div>
-                            <strong>表示メッセージ：</strong>
-                            @content.Message
-                        </div>
-                        @if (!string.IsNullOrEmpty(content.LinkedUrl))
-                        {
-                            <div>
-                                <strong>リンク先URL：</strong>
-                                @if (content.LinkedUrl.StartsWith("http"))
-                                {
-                                    <a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a>
-                                }
-                                else
-                                {
-                                    <span>@content.LinkedUrl</span>
-                                }
-                            </div>
-                        }
-                    </FluentStack>
-                </FluentCard>
-            }
-        </FluentStack>
-
-        @* お知らせメッセージ削除完了・アクション部 *@
-        <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10">
-            <FluentButton Appearance="Appearance.Neutral" OnClick="@OnNavigateToList">
-                お知らせメッセージ管理画面へのリンク
-            </FluentButton>
-        </FluentStack>
-
-        @* お知らせメッセージ削除完了・更新履歴部 *@
-        @if (this.histories.Any())
-        {
-            <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-top: 40px;">
-                <h4>更新履歴</h4>
-                @foreach (var history in this.histories)
-                {
-                    <FluentAccordion>
-                        <FluentAccordionItem Heading="@this.GetHistoryHeading(history)">
+@if (this.announcement == null || this.contents == null)
+{
+    <div class="loading-spinner">
+        <FluentProgressRing Width="60px" />
+    </div>
+}
+else
+{
+    <FluentGrid>
+        <FluentGridItem xs="9">
+            <div class="container">
+                <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                    <p>お知らせメッセージを削除しました。</p>
+                    <div>
+                        掲載日時：
+                        @this.announcement.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss") ～ @(this.announcement.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")
+                    </div>
+                    <div>
+                        カテゴリー：
+                        @(this.announcement.Category ?? "")
+                    </div>
+                    <div>
+                        表示優先度：
+                        @this.announcement.DisplayPriority.GetDisplayName()
+                    </div>
+                </FluentStack>
+                @* お知らせメッセージ削除完了・お知らせコンテンツ部 *@
+                <FluentStack Orientation="Orientation.Vertical" VerticalGap="15" Style="margin-top:10px;">
+                    @foreach (var content in this.contents.OrderBy(c => this.languagePriorities.GetDisplayOrder(Language.GetLanguageFrom(c.LanguageCode))))
+                    {
+                        <FluentCard Style="padding: 20px;">
                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
-                                <div><strong>掲載開始日時：</strong>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss")</div>
-                                <div><strong>掲載終了日時：</strong>@(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
-                                <div><strong>カテゴリー：</strong>@(history.Category ?? "")</div>
-                                <div><strong>表示優先度：</strong>@history.DisplayPriority.GetDisplayName()</div>
-
-                                @if (history.Contents.Any())
+                                <div>
+                                    <strong>言語：</strong>
+                                    @this.GetLanguageName(content.LanguageCode)
+                                </div>
+                                <div>
+                                    <strong>タイトル：</strong>
+                                    @content.Title
+                                </div>
+                                <div>
+                                    <strong>表示メッセージ：</strong>
+                                    @content.Message
+                                </div>
+                                @if (!string.IsNullOrEmpty(content.LinkedUrl))
                                 {
-                                    <h5 style="margin-top: 15px;">言語別コンテンツ</h5>
-                                    @foreach (var contentHistory in history.Contents)
-                                    {
-                                        <FluentCard Style="padding: 15px; margin-top: 10px;">
-                                            <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
-                                                <div><strong>言語：</strong>@this.GetLanguageName(contentHistory.LanguageCode)</div>
-                                                <div><strong>タイトル：</strong>@contentHistory.Title</div>
-                                                <div><strong>メッセージ：</strong>@contentHistory.Message</div>
-                                                <div><strong>リンク先URL：</strong>@(contentHistory.LinkedUrl ?? "")</div>
-                                            </FluentStack>
-                                        </FluentCard>
-                                    }
+                                    <div>
+                                        <strong>リンク先URL：</strong>
+                                        @if (content.LinkedUrl.StartsWith("http"))
+                                        {
+                                            <a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a>
+                                        }
+                                        else
+                                        {
+                                            <span>@content.LinkedUrl</span>
+                                        }
+                                    </div>
                                 }
                             </FluentStack>
-                        </FluentAccordionItem>
-                    </FluentAccordion>
+                        </FluentCard>
+                    }
+                </FluentStack>
+            </div>
+        </FluentGridItem>
+        <FluentGridItem xs="3">
+            <FluentStack Orientation="Orientation.Vertical">
+                <div class="container">
+                    <h4>アクション</h4>
+                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="10" HorizontalAlignment="HorizontalAlignment.Center">
+                        <FluentNavLink Href="/announcements">お知らせメッセージ管理画面に戻る</FluentNavLink>
+                    </FluentStack>
+                </div>
+                @if (this.histories.Any())
+                {
+                    <div class="container">
+                        @foreach (var history in this.histories)
+                        {
+                            <FluentAccordion>
+                                <FluentAccordionItem Heading="@this.GetHistoryHeading(history)">
+                                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                                        <div>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm") - @(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm") ?? "")</div>
+                                        <div>@(history.Category ?? "")</div>
+                                        <div>@history.DisplayPriority.GetDisplayName()</div>
+
+                                        @if (history.Contents.Any())
+                                        {
+                                            <h5 style="margin-top: 15px;">言語別コンテンツ</h5>
+                                            var contentHistories = history.Contents.ToList();
+                                            <div class="border"> </div>
+                                            @for (int i = 0; i < history.Contents.Count; i++)
+                                            {
+                                                var contentHistory = contentHistories[i];
+
+                                                <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
+                                                    <div>@this.GetLanguageName(contentHistory.LanguageCode)</div>
+                                                    <div>@contentHistory.Title</div>
+                                                    <div>@contentHistory.Message</div>
+                                                    @if (!string.IsNullOrEmpty(contentHistory.LinkedUrl))
+                                                    {
+                                                        <div>@contentHistory.LinkedUrl</div>
+                                                    }
+                                                </FluentStack>
+                                                if (i < contentHistories.Count - 1)
+                                                {
+                                                    <div class="border"> </div>
+                                                }
+                                            }
+                                        }
+                                    </FluentStack>
+                                </FluentAccordionItem>
+                            </FluentAccordion>
+                        }
+                    </div>
                 }
             </FluentStack>
-        }
-    }
-</FluentStack>
+        </FluentGridItem>
+    </FluentGrid>
+}
 
 @code {
 
