@@ -43,7 +43,7 @@ Razor コンポーネントごとに CSS ファイルを紐づけて、 その C
 
 ![Visual Studio 上でのスコープ付き CSS ファイルの表示](../../../images/guidebooks/how-to-develop/ssr/blazor-css-isolation-vs.png){ width="300" loading=lazy }
 
-スコープ付き CSS ファイルは、ビルド時に CSS セレクターが書き換えられ、コンポーネントの HTML 要素に b-xxxxxxxxxx のようなスコープ属性名が自動付与されます。そして、それに一致する形で CSS も b-xxxxxxxxx 付きのセレクターに変更されます。
+スコープ付き CSS ファイルは、ビルド時に CSS セレクターが書き換えられ、コンポーネントの HTML 要素に b-xxxxxxxxxx のようなスコープ属性名が自動付与されます。そして、それに一致する形で CSS も b-xxxxxxxxxx 付きのセレクターに変更されます。
 この仕組みにより、スコープ付き CSS ファイルの実装時に同じ名称のセレクターを使用しても、スタイルの衝突を気にする必要がありません。
 
 詳細については [ASP.NET Core Blazor の CSS の分離 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/components/css-isolation){ target=_blank } を参照してください。
