@@ -68,31 +68,28 @@
                 <FluentStack Orientation="Orientation.Horizontal">
                     @{
                         // ページ番号の範囲を計算
-                        var pageButtons = new List<int>();
                         int current = this.pageNumber;
                         int last = this.lastPageNumber;
-                        bool showBeforeEllipsis = false;
-                        bool showAfterEllipsis = false;
 
-                        // 最初のページ
-                        pageButtons.Add(1);
+                        // 最初のページは常に表示
+                        var pageButtons = new List<int> { 1 };
 
-                        // 前方省略判定
-                        showBeforeEllipsis = current - 3 >= 2;
+                        // 前方省略判定: 現在のページから3ページ以上離れている場合
+                        bool showBeforeEllipsis = current - 3 > 1;
 
-                        // 前後2ページ分
-                        for (int i = Math.Max(2, current - 2); i <= Math.Min(last - 1, current + 2); i++)
+                        // 前後2ページ分を計算
+                        int startPage = Math.Max(2, current - 2);
+                        int endPage = Math.Min(last - 1, current + 2);
+
+                        for (int i = startPage; i <= endPage; i++)
                         {
-                            if (i != 1 && i != last)
-                            {
-                                pageButtons.Add(i);
-                            }
+                            pageButtons.Add(i);
                         }
 
-                        // 後方省略判定
-                        showAfterEllipsis = current + 3 < last - 1;
+                        // 後方省略判定: 現在のページから3ページ以上離れている場合
+                        bool showAfterEllipsis = current + 3 < last;
 
-                        // 最後のページ
+                        // 最後のページは常に表示（ページが2ページ以上ある場合）
                         if (last > 1)
                         {
                             pageButtons.Add(last);
@@ -101,15 +98,18 @@
                         // ボタン描画
                         for (int i = 0; i < pageButtons.Count; i++)
                         {
-                            if (showBeforeEllipsis && i == 1)
+                            var pageButton = pageButtons[i];
+                            
+                            // 前方省略記号を表示（最初のページと次のページの間に隔たりがある場合のみ、1回だけ）
+                            if (i == 1 && showBeforeEllipsis && pageButtons[i] - pageButtons[0] > 1)
                             {
                                 <span class="pagination-ellipsis">...</span>
                             }
 
-                            var pageButton = pageButtons[i];
                             <FluentButton Disabled="@(pageButton == current)" OnClick="@(async () => await OnPageButtonClickAsync(pageButton))" Class="pagination-btn">@pageButton</FluentButton>
 
-                            if (showAfterEllipsis && i == pageButtons.Count - 2)
+                            // 後方省略記号を表示（現在のページ付近と最後のページの間に隔たりがある場合のみ、1回だけ）
+                            if (i == pageButtons.Count - 2 && showAfterEllipsis && pageButtons[pageButtons.Count - 1] - pageButtons[i] > 1)
                             {
                                 <span class="pagination-ellipsis">...</span>
                             }
