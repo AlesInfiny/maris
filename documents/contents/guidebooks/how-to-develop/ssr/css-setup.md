@@ -5,7 +5,7 @@ description: SSR アプリケーション開発における CSS の設定と CSS
 
 # CSS の設定と CSS フレームワークの適用 {#top}
 
-AlesInfiny Maris OSS Edition は、特定の CSS フレームワークやコンポーネントライブラリーに依存していません。サンプルアプリケーションでは [Fluent UI Blazor](https://github.com/microsoft/fluentui-blazor){ target_blank } を使用していますが、実際の開発プロジェクトでは、プロジェクトの特性に応じた技術を選定してください。
+AlesInfiny Maris OSS Edition は、特定の CSS フレームワークやコンポーネントライブラリーに依存していません。サンプルアプリケーションでは [Fluent UI Blazor :material-open-in-new:](https://github.com/microsoft/fluentui-blazor){ target=_blank } を使用していますが、プロジェクトの特性に応じた技術を選定してください。
 
 ## Fluent UI Blazor {#fluent-ui-blazor}
 
@@ -14,7 +14,7 @@ Fluent UI Blazor は、 Microsoft が開発・提供する Fluent Design System�
 [プロジェクトの作成](./create-project.md) において、 Fluent Blazor Web アプリのテンプレートを使用して作成したプロジェクトには、既定で Fluent UI Blazor を使用するための設定が組み込まれています。
 
 そのため、追加で設定することなく Fluent UI Blazor の UI コンポーネントを使用できます。
-使用できるコンポーネントの一覧については、[デモおよびドキュメント](https://www.fluentui-blazor.net/){ target_blank }を参照してください。
+使用できるコンポーネントの一覧については、[デモおよびドキュメント :material-open-in-new:](https://www.fluentui-blazor.net/){ target=_blank }を参照してください。
 
 !!! info "CSS のバンドルと参照"
 
