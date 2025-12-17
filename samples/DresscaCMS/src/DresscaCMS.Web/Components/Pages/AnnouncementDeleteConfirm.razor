@@ -154,12 +154,12 @@ else
                                                 {
                                                     var contentHistory = contentHistoryList[i];
                                                     <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
-                                                        <div><strong>言語：</strong>@this.GetLanguageName(contentHistory.LanguageCode)</div>
-                                                        <div><strong>タイトル：</strong>@contentHistory.Title</div>
-                                                        <div><strong>メッセージ：</strong>@contentHistory.Message</div>
+                                                        <div>@this.GetLanguageName(contentHistory.LanguageCode)</div>
+                                                        <div>@contentHistory.Title</div>
+                                                        <div>@contentHistory.Message</div>
                                                         @if (!string.IsNullOrEmpty(contentHistory.LinkedUrl))
                                                         {
-                                                            <div><strong>リンク先URL：</strong>@contentHistory.LinkedUrl</div>
+                                                            <div>@contentHistory.LinkedUrl</div>
                                                         }
                                                     </FluentStack>
                                                     if (i < contentHistoryList.Count - 1)

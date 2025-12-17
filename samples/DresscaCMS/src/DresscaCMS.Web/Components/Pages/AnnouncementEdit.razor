@@ -188,13 +188,6 @@
                                     </FluentMessageBar>
                                 }
 
-                                @if (!string.IsNullOrEmpty(this.successMessage))
-                                {
-                                    <FluentMessageBar Intent="MessageIntent.Success">
-                                        @this.successMessage
-                                    </FluentMessageBar>
-                                }
-
                                 <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center" VerticalGap="30">
                                     <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
                                         @if (this.isSubmitting)
@@ -203,6 +196,13 @@
                                         }
                                         お知らせメッセージの保存
                                     </FluentButton>
+                                    @if (!string.IsNullOrEmpty(this.successMessage))
+                                    {
+                                        <FluentMessageBar Intent="MessageIntent.Success">
+                                            @this.successMessage
+                                        </FluentMessageBar>
+                                    }
+
                                     <FluentNavLink Href="@($"/announcements/{this.announcementModel.Id}/delete-confirm")" Class="nav-link">お知らせメッセージの削除</FluentNavLink>
                                     <FluentNavLink Href="/announcements" Class="nav-link">お知らせメッセージ管理画面へ戻る</FluentNavLink>
                                 </FluentStack>
@@ -220,24 +220,30 @@
                                     <FluentAccordion>
                                         <FluentAccordionItem Heading="@this.GetHistoryHeading(history)">
                                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
-                                                <div><strong>掲載開始日時：</strong>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss")</div>
-                                                <div><strong>掲載終了日時：</strong>@(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
-                                                <div><strong>カテゴリー：</strong>@(history.Category ?? "")</div>
-                                                <div><strong>表示優先度：</strong>@history.DisplayPriority.GetDisplayName()</div>
+                                                <div>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss") - @(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
+                                                <div>@(history.Category ?? "")</div>
+                                                <div>@history.DisplayPriority.GetDisplayName()</div>
 
                                                 @if (history.Contents.Any())
                                                 {
-                                                    <h5 style="margin-top: 15px;">言語別コンテンツ</h5>
-                                                    @foreach (var contentHistory in history.Contents)
+                                                    var contentHistoryList = history.Contents.ToList();
+                                                    <div class="border"> </div>
+                                                    for (int i = 0; i < contentHistoryList.Count; i++)
                                                     {
-                                                        <FluentCard Style="padding: 15px; margin-top: 10px;">
-                                                            <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
-                                                                <div><strong>言語：</strong>@this.GetLanguageName(contentHistory.LanguageCode)</div>
-                                                                <div><strong>タイトル：</strong>@contentHistory.Title</div>
-                                                                <div><strong>メッセージ：</strong>@contentHistory.Message</div>
-                                                                <div><strong>リンク先URL：</strong>@(contentHistory.LinkedUrl ?? "")</div>
-                                                            </FluentStack>
-                                                        </FluentCard>
+                                                        var contentHistory = contentHistoryList[i];
+                                                        <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
+                                                            <div>@this.GetLanguageName(contentHistory.LanguageCode)</div>
+                                                            <div>@contentHistory.Title</div>
+                                                            <div>@contentHistory.Message</div>
+                                                            @if (!string.IsNullOrEmpty(contentHistory.LinkedUrl))
+                                                            {
+                                                                <div>@contentHistory.LinkedUrl</div>
+                                                            }
+                                                        </FluentStack>
+                                                        if (i < contentHistoryList.Count - 1)
+                                                        {
+                                                            <div class="border"> </div>
+                                                        }
                                                     }
                                                 }
                                             </FluentStack>

@@ -23,3 +23,8 @@
 .spacer{
     margin-top:15px;
 }
+
+.border {
+    border-top: solid 1px #808080 !important;
+    width: 100% !important;
+}
