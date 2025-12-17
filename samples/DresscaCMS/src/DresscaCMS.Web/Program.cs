@@ -1,4 +1,5 @@
 ﻿using DresscaCMS.Announcement;
+using DresscaCMS.Announcement.Infrastructures;
 using DresscaCMS.Authentication;
 using DresscaCMS.Authentication.Infrastructures;
 using DresscaCMS.Web.Components;
@@ -68,6 +69,11 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
+// ヘルスチェックサービスを追加する
+builder.Services.AddHealthChecks()
+    .AddAnnouncementDbContextCheck("AnnoucementDatabaseHealthCheck")
+    .AddAuthenticationDbContextCheck("AuthenticationDatabaseHealthCheck");
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -101,5 +107,8 @@ app.MapRazorComponents<App>()
 
 // HTTP レスポンスヘッダーにセキュリティ関連の設定を追加するミドルウェアを使用
 app.UseSecuritySettings();
+
+// ヘルスチェック API のエンドポイントをマッピングする
+app.MapHealthChecks("/health");
 
 app.Run();
