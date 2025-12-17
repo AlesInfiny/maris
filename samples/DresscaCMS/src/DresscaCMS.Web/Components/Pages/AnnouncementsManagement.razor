@@ -51,13 +51,13 @@
                     </div>
                 </FluentStack>
                 <FluentDataGrid Items="@this.announcementEntities" TGridItem="Announcement" AutoFit="false">
-                    <TemplateColumn Title="タイトル" Width="400px">
+                    <TemplateColumn Title="タイトル" MinWidth="400px">
                         <a href="/announcements/@context.Id/edit">@context.Contents.FirstOrDefault()?.Title</a>
                     </TemplateColumn>
                     <TemplateColumn Title="掲載日" Width="200px">
                         @context.PostDateTime.ToString("yyyy/MM/dd") ～ @context.ExpireDateTime?.ToString("yyyy/MM/dd")
                     </TemplateColumn>
-                    <PropertyColumn Title="カテゴリー" Property="@(a => a.Category)" />
+                    <PropertyColumn Title="カテゴリー" Property="@(a => a.Category)" MinWidth="120px" />
                     <TemplateColumn Title="表示優先度" Width="120px" Align="Align.Center">
                         @context.DisplayPriority.GetDisplayName()
                     </TemplateColumn>
