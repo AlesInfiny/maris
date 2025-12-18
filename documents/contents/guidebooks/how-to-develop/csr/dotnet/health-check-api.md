@@ -249,7 +249,7 @@ app.Run();
 
 !!! info "ヘルスチェック成功時のログ出力例"
 
-    下記の例は、アプリケーションとデータベースの 2か所についてヘルスチェックを実行した際のログ出力です。
+    下記の例は、アプリケーションとデータベースの 2 か所についてヘルスチェックを実行した際のログ出力です。
     うまく出力されない場合、 appsettings.Development.json の `LogLevel` 要素に Microsoft.Extensions.Diagnostics.HealthChecks のキーが追加されているか確認してください。
 
     ```shell linenums="0"
