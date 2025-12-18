@@ -60,7 +60,7 @@
                                     <FluentStack Orientation="Orientation.Vertical">
                                         <FluentLabel>掲載開始日時（日付）<span class="required">*</span></FluentLabel>
                                         <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
-                                        <ValidationMessage For="@(() => this.announcementModel.PostDate)" />
+                                        <FluentValidationMessage For="@(() => this.announcementModel.PostDate)" />
                                     </FluentStack>
                                     <FluentStack Orientation="Orientation.Vertical">
                                         <FluentLabel>掲載開始日時（時刻）</FluentLabel>
@@ -69,7 +69,7 @@
                                     <FluentStack Orientation="Orientation.Vertical">
                                         <FluentLabel>掲載終了日時（日付）</FluentLabel>
                                         <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
-                                        <ValidationMessage For="@(() => this.announcementModel.ExpireDate)" />
+                                        <FluentValidationMessage For="@(() => this.announcementModel.ExpireDate)" />
                                     </FluentStack>
                                     <FluentStack Orientation="Orientation.Vertical">
                                         <FluentLabel>掲載終了日時（時刻）</FluentLabel>
@@ -81,7 +81,7 @@
                                 <FluentStack Orientation="Orientation.Vertical">
                                     <FluentLabel>カテゴリー</FluentLabel>
                                     <FluentTextField @bind-Value="@this.announcementModel.Category" Maxlength="128" Style="width:100%;" />
-                                    <ValidationMessage For="@(() => this.announcementModel.Category)" />
+                                    <FluentValidationMessage For="@(() => this.announcementModel.Category)" />
                                 </FluentStack>
                             </FluentGridItem>
                             <FluentGridItem xs="3">
@@ -93,7 +93,7 @@
                                         <option value="@DisplayPriority.Medium">中</option>
                                         <option value="@DisplayPriority.Low">低</option>
                                     </InputSelect>
-                                    <ValidationMessage For="@(() => this.announcementModel.DisplayPriority)" />
+                                    <FluentValidationMessage For="@(() => this.announcementModel.DisplayPriority)" />
                                 </FluentStack>
                             </FluentGridItem>
                         </FluentGrid>
@@ -140,25 +140,25 @@
                                                         }
                                                     }
                                                 </InputSelect>
-                                                <ValidationMessage For="@(() => content.LanguageCode)" />
+                                                <FluentValidationMessage For="@(() => content.LanguageCode)" />
                                             </FluentStack>
 
                                             <FluentStack Orientation="Orientation.Vertical">
                                                 <FluentLabel>タイトル<span class="required">*</span></FluentLabel>
                                                 <FluentTextField @bind-Value="@content.Title" Maxlength="256" Style="width: 100%;" />
-                                                <ValidationMessage For="@(() => content.Title)" />
+                                                <FluentValidationMessage For="@(() => content.Title)" />
                                             </FluentStack>
 
                                             <FluentStack Orientation="Orientation.Vertical">
                                                 <FluentLabel>メッセージ<span class="required">*</span></FluentLabel>
                                                 <FluentTextArea @bind-Value="@content.Message" Maxlength="512" Rows="5" Style="width: 100%;" />
-                                                <ValidationMessage For="@(() => content.Message)" />
+                                                <FluentValidationMessage For="@(() => content.Message)" />
                                             </FluentStack>
 
                                             <FluentStack Orientation="Orientation.Vertical">
                                                 <FluentLabel>リンク先URL</FluentLabel>
                                                 <FluentTextField @bind-Value="@content.LinkedUrl" Maxlength="1024" Placeholder="https://www.example.com" Style="width: 100%;" />
-                                                <ValidationMessage For="@(() => content.LinkedUrl)" />
+                                                <FluentValidationMessage For="@(() => content.LinkedUrl)" />
                                             </FluentStack>
                                         </FluentStack>
                                     </FluentCard>
