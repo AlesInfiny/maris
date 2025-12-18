@@ -239,3 +239,26 @@ app.Run();
         "Sample",
         failureStatus: HealthStatus.Degraded);
     ```
+
+## ヘルスチェック API の動作確認 {#confirmation}
+
+アプリケーションを起動し、[基本的な実装方法](#basic) で Program.cs に設定したヘルスチェック API のエンドポイントへアクセスします。
+アプリケーションおよびチェック対象のサービスが正常に動作していれば、ブラウザーに Healthy の文字列が表示されます。
+
+加えて、 Microsoft.Extensions.Diagnostics.HealthChecks カテゴリーから、ヘルスチェックの実行を示すログがコンソールに出力されていることを確認してください。
+
+!!! info "ヘルスチェック成功時のログ出力例"
+
+    下記の例は、アプリケーションとデータベースの 2か所についてヘルスチェックを実行した際のログ出力です。
+    うまく出力されない場合、 appsettings.Development.json の `LogLevel` 要素に Microsoft.Extensions.Diagnostics.HealthChecks のキーが追加されているか確認してください。
+
+    ```shell linenums="0"
+    dbug: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[100]
+        Running health checks
+    dbug: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[102]
+        Running health check DresscaDatabaseHealthCheck
+    dbug: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[103]
+        Health check DresscaDatabaseHealthCheck with status Healthy completed after 2.6024ms with message '(null)'
+    dbug: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[101]
+        Health check processing with combined status Healthy completed after 3.1703ms
+    ```
