@@ -27,6 +27,9 @@ builder.Services.AddAuthenticationServices(
     builder.Configuration,
     builder.Environment);
 
+// 入れ子になったオブジェクトのバリデーションをサポートするためのサービスを登録
+builder.Services.AddValidation();
+
 if (builder.Environment.IsDevelopment())
 {
     StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);

@@ -4,9 +4,10 @@ using DresscaCMS.Announcement.ApplicationCore;
 namespace DresscaCMS.Web.ViewModels;
 
 /// <summary>
-/// お知らせメッセージ登録画面・編集画面においてお知らせメッセージ部分の入力値を保持するビューモデルです。
+/// お知らせメッセージ登録画面においてお知らせメッセージ部分の入力値を保持するビューモデルです。
 /// </summary>
-public class AnnouncementViewModel
+[ValidatableType]
+public class AnnouncementCreateViewModel
 {
     /// <summary>
     /// お知らせメッセージ ID を取得または設定します。
@@ -45,6 +46,11 @@ public class AnnouncementViewModel
     /// </summary>
     [Required(ErrorMessage = "表示優先度を選択してください。")]
     public DisplayPriority DisplayPriority { get; set; } = DisplayPriority.Medium;
+
+    /// <summary>
+    /// お知らせコンテンツ部分の入力値を保持するビューモデルを取得または設定します。
+    /// </summary>
+    public List<AnnouncementContentCreateViewModel> AnnouncementContents { get; set; } = new();
 
     /// <summary>
     /// 掲載開始日時を DateTimeOffset 型で取得します。
