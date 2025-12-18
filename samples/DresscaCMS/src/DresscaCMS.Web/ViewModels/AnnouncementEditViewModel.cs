@@ -10,6 +10,17 @@ namespace DresscaCMS.Web.ViewModels;
 public class AnnouncementEditViewModel
 {
     /// <summary>
+    /// このビューモデルが初期化済みであるかどうかを示します。
+    /// </summary>
+    public bool Initialized
+    {
+        get
+        {
+            return !this.Id.Equals(Guid.Empty);
+        }
+    }
+
+    /// <summary>
     /// お知らせメッセージ ID を取得または設定します。
     /// </summary>
     public Guid Id { get; set; } = Guid.Empty;

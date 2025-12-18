@@ -13,7 +13,7 @@
 <h3>お知らせメッセージ登録</h3>
 
 <FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
-    <EditForm Model="@this.announcementModel" OnValidSubmit="@OnRegisterButtonClickAsync" FormName="AnnouncementCreateForm">
+    <EditForm EditContext="this.editContext" OnSubmit="@OnRegisterButtonClickAsync" FormName="AnnouncementCreateForm">
         <DataAnnotationsValidator />
         <FluentGrid>
             <FluentGridItem xs="12">
@@ -155,18 +155,7 @@
                 <div class="container">
                     <FluentStack Orientation="Orientation.Vertical">
                         <h4>アクション</h4>
-                        @if (!string.IsNullOrEmpty(this.businessErrorMessage))
-                        {
-                            <FluentMessageBar Intent="MessageIntent.Error">
-                                @this.businessErrorMessage
-                            </FluentMessageBar>
-                        }
-                        @if (!string.IsNullOrEmpty(this.correlationErrorMessage))
-                        {
-                            <FluentMessageBar Intent="MessageIntent.Error">
-                                @this.correlationErrorMessage
-                            </FluentMessageBar>
-                        }
+                        <FluentValidationSummary Model="@this.announcementModel" />
                         <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
                             <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
                                 @if (this.isSubmitting)
@@ -189,13 +178,16 @@
 @code {
     private readonly AnnouncementCreateViewModel announcementModel = new();
     private readonly LanguagePriorities languagePriorities = new();
-    private string? businessErrorMessage;
-    private string? correlationErrorMessage;
     private bool isSubmitting = false;
+    private ValidationMessageStore messageStore = default!;
+    private EditContext editContext = default!;
 
     /// <inheritdoc/>
     protected override void OnInitialized()
     {
+        this.editContext = new EditContext(this.announcementModel);
+        this.messageStore = new ValidationMessageStore(this.editContext);
+
         // 初期表示時に日本語のコンテンツを1件追加
         this.AddContentWithLanguage(Language.Japanese);
     }
@@ -252,8 +244,7 @@
     /// </summary>
     private async Task OnRegisterButtonClickAsync(EditContext editContext)
     {
-        this.businessErrorMessage = null;
-        this.correlationErrorMessage = null;
+        this.messageStore.Clear();
 
         // 相関チェック
         var offsetMinutes = await this.GetOffsetAsync();
@@ -319,14 +310,20 @@
 
         if (expireDateTime.HasValue && postDateTime > expireDateTime.Value)
         {
-            this.correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
+            this.messageStore.Add(
+                new FieldIdentifier(this.editContext.Model, string.Empty),
+                "掲載終了日時は掲載開始日時以降に設定してください。");
+            this.editContext.NotifyValidationStateChanged();
             return false;
         }
 
         // お知らせコンテンツが1件以上あるかチェック
         if (!this.announcementModel.AnnouncementContents.Any())
         {
-            this.correlationErrorMessage = "お知らせメッセージは1件以上作成してください。";
+            this.messageStore.Add(
+                new FieldIdentifier(this.editContext.Model, string.Empty),
+                "お知らせメッセージは1件以上作成してください。");
+            this.editContext.NotifyValidationStateChanged();
             return false;
         }
 
@@ -334,7 +331,10 @@
         var languageCodes = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToList();
         if (languageCodes.Count != languageCodes.Distinct().Count())
         {
-            this.correlationErrorMessage = "お知らせメッセージの言語が重複しています。";
+            this.messageStore.Add(
+                new FieldIdentifier(this.editContext.Model, string.Empty),
+                "お知らせメッセージの言語が重複しています。");
+            this.editContext.NotifyValidationStateChanged();
             return false;
         }
 

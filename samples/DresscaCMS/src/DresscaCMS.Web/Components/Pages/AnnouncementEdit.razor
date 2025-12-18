@@ -41,13 +41,13 @@
             <FluentProgressRing Width="60px" />
         </div>
     }
-    else if (this.announcementModel == null)
+    else if (!this.announcementModel.Initialized)
     {
         <p>お知らせメッセージが見つかりませんでした。</p>
     }
     else
     {
-        <EditForm Model="@announcementModel" OnValidSubmit="@this.OnSaveButtonClickAsync" FormName="AnnouncementEditForm">
+        <EditForm EditContext="this.editContext" OnSubmit="@OnSaveButtonClickAsync" FormName="AnnouncementEditForm">
             <DataAnnotationsValidator />
             <FluentGrid>
                 <FluentGridItem xs="12">
@@ -174,20 +174,7 @@
                             <h4>アクション</h4>
                             @* お知らせメッセージ編集・アクション部 *@
                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
-                                @if (!string.IsNullOrEmpty(this.businessErrorMessage))
-                                {
-                                    <FluentMessageBar Intent="MessageIntent.Error">
-                                        @this.businessErrorMessage
-                                    </FluentMessageBar>
-                                }
-
-                                @if (!string.IsNullOrEmpty(this.correlationErrorMessage))
-                                {
-                                    <FluentMessageBar Intent="MessageIntent.Error">
-                                        @this.correlationErrorMessage
-                                    </FluentMessageBar>
-                                }
-
+                                <FluentValidationSummary Model="@this.announcementModel" />
                                 <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center" VerticalGap="30">
                                     <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
                                         @if (this.isSubmitting)
@@ -262,18 +249,20 @@
     [Parameter]
     public Guid AnnouncementId { get; set; }
 
-    private AnnouncementEditViewModel? announcementModel;
+    private AnnouncementEditViewModel announcementModel = new ();
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
-    private string? businessErrorMessage;
-    private string? correlationErrorMessage;
     private string? successMessage;
     private bool isSubmitting = false;
     private bool isLoading = true;
     private readonly LanguagePriorities languagePriorities = new();
+    private ValidationMessageStore messageStore = default!;
+    private EditContext editContext = default!;
 
     protected override async Task OnInitializedAsync()
     {
         await this.LoadAnnouncementDataAsync();
+        this.editContext = new EditContext(this.announcementModel);
+        this.messageStore = new ValidationMessageStore(this.editContext);
     }
 
     /// <summary>
@@ -289,7 +278,6 @@
             if (result == null)
             {
                 // Not Found
-                this.announcementModel = null;
                 return;
             }
 
@@ -339,11 +327,6 @@
     /// </summary>
     private Language GetNextLanguage()
     {
-        if(this.announcementModel is null)
-        {
-            throw new InvalidOperationException("お知らせ情報が取得できていない状態で GetNextLanguage が呼び出されました。");
-        }
-
         var existingLanguages = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToHashSet();
         var lang = this.languagePriorities.FirstOrDefault(l => !existingLanguages.Contains(l.Code));
 
@@ -356,11 +339,6 @@
     /// </summary>
     private void AddContentWithLanguage(Language language)
     {
-        if (this.announcementModel is null)
-        {
-            throw new InvalidOperationException("お知らせ情報が取得できていない状態で AddContentWithLanguage が呼び出されました。");
-        }
-
         var newContent = new AnnouncementContentEditViewModel
         {
             Id = Guid.Empty,
@@ -377,11 +355,6 @@
     /// </summary>
     private void OnDeleteContentButtonClick(Guid contentId)
     {
-        if (this.announcementModel is null)
-        {
-            throw new InvalidOperationException("お知らせ情報が取得できていない状態で OnDeleteContentButtonClick が呼び出されました。");
-        }
-
         var content = this.announcementModel.AnnouncementContents.FirstOrDefault(c => c.Id == contentId);
         if (content != null)
         {
@@ -394,8 +367,7 @@
     /// </summary>
     private async Task OnSaveButtonClickAsync(EditContext editContext)
     {
-        this.businessErrorMessage = null;
-        this.correlationErrorMessage = null;
+        this.messageStore.Clear();
         this.successMessage = null;
 
         // 相関チェック
@@ -473,14 +445,20 @@
 
         if (expireDateTime.HasValue && postDateTime > expireDateTime.Value)
         {
-            this.correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
+            this.messageStore.Add(
+                new FieldIdentifier(this.editContext.Model, string.Empty),
+                "掲載終了日時は掲載開始日時以降に設定してください。");
+            this.editContext.NotifyValidationStateChanged();
             return false;
         }
 
         // お知らせコンテンツが1件以上あるかチェック
         if (!this.announcementModel.AnnouncementContents.Any())
         {
-            this.correlationErrorMessage = "お知らせメッセージは1件以上作成してください。";
+            this.messageStore.Add(
+                new FieldIdentifier(this.editContext.Model, string.Empty),
+                "お知らせメッセージは1件以上作成してください。");
+            this.editContext.NotifyValidationStateChanged();
             return false;
         }
 
@@ -488,7 +466,9 @@
         var languageCodes = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToList();
         if (languageCodes.Count != languageCodes.Distinct().Count())
         {
-            this.correlationErrorMessage = "お知らせメッセージの言語が重複しています。";
+            this.messageStore.Add(
+                new FieldIdentifier(this.editContext.Model, string.Empty),
+                "お知らせメッセージの言語が重複しています。");
             return false;
         }
 
