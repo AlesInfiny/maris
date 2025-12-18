@@ -48,7 +48,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuth
 
 // ヘルスチェックサービスを追加する
 builder.Services.AddHealthChecks()
-    .AddAnnouncementDbContextCheck("AnnoucementDatabaseHealthCheck")
+    .AddAnnouncementDbContextCheck("AnnouncementDatabaseHealthCheck")
     .AddAuthenticationDbContextCheck("AuthenticationDatabaseHealthCheck");
 
 var app = builder.Build();
