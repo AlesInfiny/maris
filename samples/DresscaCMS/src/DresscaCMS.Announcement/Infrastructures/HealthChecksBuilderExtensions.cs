@@ -42,7 +42,7 @@ public static class HealthChecksBuilderExtensions
                 catch (Exception ex)
                 {
                     var loggerFactory = builder.Services.BuildServiceProvider().GetRequiredService<ILoggerFactory>();
-                    var logger = loggerFactory.CreateLogger("DresscaCMS.Announcement.EfInfrastructure.HealthChecksBuilderExtensions");
+                    var logger = loggerFactory.CreateLogger("DresscaCMS.Announcement.Infrastructures.HealthChecksBuilderExtensions");
                     logger.Log(
                         eventId: Events.FailedDatabaseHealthCheck,
                         logLevel: logLevel,
