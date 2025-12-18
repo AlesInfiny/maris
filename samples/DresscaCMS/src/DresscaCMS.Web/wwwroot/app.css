@@ -148,6 +148,10 @@ code {
     color: #c02d76;
 }
 
+.validation-message {
+    color: #BC2F32;
+}
+
 @media (max-width: 600px) {
     .header-gutters {
         margin: 0.5rem 3rem 0.5rem 1.5rem !important;
