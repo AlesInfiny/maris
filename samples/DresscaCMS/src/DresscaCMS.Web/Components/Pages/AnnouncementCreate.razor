@@ -3,6 +3,7 @@
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.Extensions
+@using Maris.ComponentModel
 @using Microsoft.AspNetCore.Components.Authorization
 
 @inject AnnouncementsApplicationService AnnouncementsService
@@ -72,10 +73,10 @@
                             <FluentStack Orientation="Orientation.Vertical">
                                 <FluentLabel>表示優先度<span class="required">*</span></FluentLabel>
                                 <InputSelect @bind-Value="@this.announcementModel.DisplayPriority" class="fluent-select" style="min-width:100px;box-sizing: border-box;">
-                                    <option value="@DisplayPriority.Critical">緊急</option>
-                                    <option value="@DisplayPriority.High">高</option>
-                                    <option value="@DisplayPriority.Medium">中</option>
-                                    <option value="@DisplayPriority.Low">低</option>
+                                    <option value="@DisplayPriority.Critical">@DisplayPriority.Critical.GetDisplayName()</option>
+                                    <option value="@DisplayPriority.High">@DisplayPriority.High.GetDisplayName()</option>
+                                    <option value="@DisplayPriority.Medium">@DisplayPriority.Medium.GetDisplayName()</option>
+                                    <option value="@DisplayPriority.Low">@DisplayPriority.Low.GetDisplayName()</option>
                                 </InputSelect>
                                 <ValidationMessage For="@(() => this.announcementModel.DisplayPriority)" />
                             </FluentStack>
