@@ -1,0 +1,13 @@
+.required {
+    color: var(--error);
+    margin-left: 4px;
+}
+
+.bread-crumb-separator {
+    margin: 0 8px;
+}
+
+.container {
+    border: solid 1px #808080;
+    padding: 10px;
+}

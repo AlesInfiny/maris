@@ -1,0 +1,30 @@
+.required {
+    color: var(--error);
+    margin-left: 4px;
+}
+
+.bread-crumb-separator {
+    margin: 0 8px;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.container {
+    border: solid 1px #808080;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.spacer{
+    margin-top:15px;
+}
+
+.border {
+    border-top: solid 1px #808080 !important;
+    width: 100% !important;
+}

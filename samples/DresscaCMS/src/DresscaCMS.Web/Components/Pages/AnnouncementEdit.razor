@@ -1,0 +1,531 @@
+﻿@page "/announcements/{AnnouncementId:guid}/edit"
+
+@using System.Diagnostics.CodeAnalysis
+@using DresscaCMS.Announcement.ApplicationCore
+@using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
+@using DresscaCMS.Web.Extensions
+@using Microsoft.AspNetCore.Components.Authorization
+
+@inject AnnouncementsApplicationService AnnouncementsService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+
+<h3>お知らせメッセージ編集</h3>
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
+    <FluentGrid>
+        <FluentGridItem xs="12">
+            <FluentBreadcrumb>
+                <FluentBreadcrumbItem>
+                    <FluentNavLink Href="/">TOP</FluentNavLink>
+                    <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+                </FluentBreadcrumbItem>
+                <FluentBreadcrumbItem>
+                    お知らせメッセージ管理
+                    <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+                </FluentBreadcrumbItem>
+                <FluentBreadcrumbItem>
+                    <FluentNavLink Href="/announcements">お知らせメッセージ一覧</FluentNavLink>
+                    <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+                </FluentBreadcrumbItem>
+                <FluentBreadcrumbItem>
+                    お知らせメッセージ編集
+                </FluentBreadcrumbItem>
+            </FluentBreadcrumb>
+        </FluentGridItem>
+    </FluentGrid>
+
+    @if (this.isLoading)
+    {
+        <div class="loading-spinner">
+            <FluentProgressRing Width="60px" />
+        </div>
+    }
+    else if (this.announcementModel == null)
+    {
+        <p>お知らせメッセージが見つかりませんでした。</p>
+    }
+    else
+    {
+        <EditForm Model="@announcementModel" OnValidSubmit="@this.OnSaveButtonClickAsync" FormName="AnnouncementEditForm">
+            <DataAnnotationsValidator />
+            <FluentGrid>
+                <FluentGridItem xs="12">
+                    <div class="container">
+                        <h4>基本情報</h4>
+                        @* お知らせメッセージ編集・ヘッダー部 *@
+                        <FluentGrid Spacing="10">
+                            <FluentGridItem xs="6">
+                                <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="20">
+                                    <FluentStack Orientation="Orientation.Vertical">
+                                        <FluentLabel>掲載開始日時（日付）<span class="required">*</span></FluentLabel>
+                                        <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
+                                        <ValidationMessage For="@(() => this.announcementModel.PostDate)" />
+                                    </FluentStack>
+                                    <FluentStack Orientation="Orientation.Vertical">
+                                        <FluentLabel>掲載開始日時（時刻）</FluentLabel>
+                                        <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" />
+                                    </FluentStack>
+                                    <FluentStack Orientation="Orientation.Vertical">
+                                        <FluentLabel>掲載終了日時（日付）</FluentLabel>
+                                        <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
+                                        <ValidationMessage For="@(() => this.announcementModel.ExpireDate)" />
+                                    </FluentStack>
+                                    <FluentStack Orientation="Orientation.Vertical">
+                                        <FluentLabel>掲載終了日時（時刻）</FluentLabel>
+                                        <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" />
+                                    </FluentStack>
+                                </FluentStack>
+                            </FluentGridItem>
+                            <FluentGridItem xs="3">
+                                <FluentStack Orientation="Orientation.Vertical">
+                                    <FluentLabel>カテゴリー</FluentLabel>
+                                    <FluentTextField @bind-Value="@this.announcementModel.Category" Maxlength="128" Style="width:100%;" />
+                                    <ValidationMessage For="@(() => this.announcementModel.Category)" />
+                                </FluentStack>
+                            </FluentGridItem>
+                            <FluentGridItem xs="3">
+                                <FluentStack Orientation="Orientation.Vertical">
+                                    <FluentLabel>表示優先度<span class="required">*</span></FluentLabel>
+                                    <InputSelect @bind-Value="@this.announcementModel.DisplayPriority" class="fluent-select" style="min-width:100px;box-sizing: border-box;">
+                                        <option value="@DisplayPriority.Critical">緊急</option>
+                                        <option value="@DisplayPriority.High">高</option>
+                                        <option value="@DisplayPriority.Medium">中</option>
+                                        <option value="@DisplayPriority.Low">低</option>
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => this.announcementModel.DisplayPriority)" />
+                                </FluentStack>
+                            </FluentGridItem>
+                        </FluentGrid>
+                    </div>
+                </FluentGridItem>
+                <FluentGridItem xs="9">
+                    @* お知らせメッセージ登録・お知らせコンテンツアクション部 *@
+                    <div class="container">
+                        <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="10">
+                            <h4>お知らせメッセージ</h4>
+                            <FluentButton Appearance="Appearance.Accent" OnClick="@this.OnAddLanguageButtonClick">別の言語を追加</FluentButton>
+                        </FluentStack>
+                        @* お知らせメッセージ編集・お知らせコンテンツ部 *@
+                        <FluentStack Orientation="Orientation.Vertical" VerticalGap="20" Style="margin-top: 20px;">
+                            @if (!this.contentModels.Any())
+                            {
+                                <p>登録されているお知らせメッセージはありません。</p>
+                            }
+                            else
+                            {
+                                @foreach (var content in this.contentModels.OrderBy(c => c.DisplayOrder))
+                                {
+                                    <FluentCard Style="padding: 20px;">
+                                        <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
+                                            <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
+                                                <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => this.OnDeleteContentButtonClick(content.Id))">
+                                                    <FluentIcon Value="@(new Icons.Regular.Size20.Delete())" Color="@Color.Error" />
+                                                    削除
+                                                </FluentButton>
+                                            </FluentStack>
+
+                                            <FluentStack Orientation="Orientation.Vertical">
+                                                <FluentLabel>言語<span class="required">*</span></FluentLabel>
+                                                <InputSelect @bind-Value="@content.LanguageCode" class="fluent-select" style="width: 200px;">
+                                                    @foreach (var language in this.languagePriorities)
+                                                    {
+                                                        if (language.Code == content.LanguageCode)
+                                                        {
+                                                            <option value="@language.Code" selected>@language.DisplayName</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@language.Code">@language.DisplayName</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                                <ValidationMessage For="@(() => content.LanguageCode)" />
+                                            </FluentStack>
+
+                                            <FluentStack Orientation="Orientation.Vertical">
+                                                <FluentLabel>タイトル<span class="required">*</span></FluentLabel>
+                                                <FluentTextField @bind-Value="@content.Title" Maxlength="256" Style="width: 100%;" />
+                                                <ValidationMessage For="@(() => content.Title)" />
+                                            </FluentStack>
+
+                                            <FluentStack Orientation="Orientation.Vertical">
+                                                <FluentLabel>メッセージ<span class="required">*</span></FluentLabel>
+                                                <FluentTextArea @bind-Value="@content.Message" Maxlength="512" Rows="5" Style="width: 100%;" />
+                                                <ValidationMessage For="@(() => content.Message)" />
+                                            </FluentStack>
+
+                                            <FluentStack Orientation="Orientation.Vertical">
+                                                <FluentLabel>リンク先URL</FluentLabel>
+                                                <FluentTextField @bind-Value="@content.LinkedUrl" Maxlength="1024" Placeholder="https://www.example.com" Style="width: 100%;" />
+                                                <ValidationMessage For="@(() => content.LinkedUrl)" />
+                                            </FluentStack>
+                                        </FluentStack>
+                                    </FluentCard>
+                                }
+                            }
+                        </FluentStack>
+                    </div>
+                </FluentGridItem>
+
+                <FluentGridItem xs="3">
+                    <div class="container">
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <h4>アクション</h4>
+                            @* お知らせメッセージ編集・アクション部 *@
+                            <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
+                                @if (!string.IsNullOrEmpty(this.businessErrorMessage))
+                                {
+                                    <FluentMessageBar Intent="MessageIntent.Error">
+                                        @this.businessErrorMessage
+                                    </FluentMessageBar>
+                                }
+
+                                @if (!string.IsNullOrEmpty(this.correlationErrorMessage))
+                                {
+                                    <FluentMessageBar Intent="MessageIntent.Error">
+                                        @this.correlationErrorMessage
+                                    </FluentMessageBar>
+                                }
+
+                                <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center" VerticalGap="30">
+                                    <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
+                                        @if (this.isSubmitting)
+                                        {
+                                            <FluentProgressRing Width="20px" />
+                                        }
+                                        お知らせメッセージの保存
+                                    </FluentButton>
+                                    @if (!string.IsNullOrEmpty(this.successMessage))
+                                    {
+                                        <FluentMessageBar Intent="MessageIntent.Success">
+                                            @this.successMessage
+                                        </FluentMessageBar>
+                                    }
+
+                                    <FluentNavLink Href="@($"/announcements/{this.announcementModel.Id}/delete-confirm")" Class="nav-link">お知らせメッセージの削除</FluentNavLink>
+                                    <FluentNavLink Href="/announcements" Class="nav-link">お知らせメッセージ管理画面へ戻る</FluentNavLink>
+                                </FluentStack>
+                            </FluentStack>
+                        </FluentStack>
+                    </div>
+                    @if (this.histories.Any())
+                    {
+                        <div class="container spacer">
+                            @* お知らせメッセージ編集・更新履歴部 *@
+                            <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
+                                <h5>お知らせメッセージ更新履歴</h5>
+                                @foreach (var history in this.histories)
+                                {
+                                    <FluentAccordion>
+                                        <FluentAccordionItem Heading="@this.GetHistoryHeading(history)">
+                                            <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
+                                                <div>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss") - @(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
+                                                <div>@(history.Category ?? "")</div>
+                                                <div>@history.DisplayPriority.GetDisplayName()</div>
+
+                                                @if (history.Contents.Any())
+                                                {
+                                                    var contentHistoryList = history.Contents.ToList();
+                                                    <div class="border"> </div>
+                                                    for (int i = 0; i < contentHistoryList.Count; i++)
+                                                    {
+                                                        var contentHistory = contentHistoryList[i];
+                                                        <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
+                                                            <div>@this.GetLanguageName(contentHistory.LanguageCode)</div>
+                                                            <div>@contentHistory.Title</div>
+                                                            <div>@contentHistory.Message</div>
+                                                            @if (!string.IsNullOrEmpty(contentHistory.LinkedUrl))
+                                                            {
+                                                                <div>@contentHistory.LinkedUrl</div>
+                                                            }
+                                                        </FluentStack>
+                                                        if (i < contentHistoryList.Count - 1)
+                                                        {
+                                                            <div class="border"> </div>
+                                                        }
+                                                    }
+                                                }
+                                            </FluentStack>
+                                        </FluentAccordionItem>
+                                    </FluentAccordion>
+                                }
+                            </FluentStack>
+                        </div>
+                    }
+                </FluentGridItem>
+            </FluentGrid>
+        </EditForm>
+    }
+</FluentStack>
+@code {
+    [Parameter]
+    public Guid AnnouncementId { get; set; }
+
+    private AnnouncementViewModel? announcementModel;
+    private List<AnnouncementContentViewModel> contentModels = new();
+    private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
+    private string? businessErrorMessage;
+    private string? correlationErrorMessage;
+    private string? successMessage;
+    private bool isSubmitting = false;
+    private bool isLoading = true;
+    private readonly LanguagePriorities languagePriorities = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await this.LoadAnnouncementDataAsync();
+    }
+
+    /// <summary>
+    /// お知らせメッセージデータを読み込む
+    /// </summary>
+    private async Task LoadAnnouncementDataAsync()
+    {
+        this.isLoading = true;
+        try
+        {
+            var result = await this.AnnouncementsService.GetAnnouncementAndHistoriesByIdAsync(this.AnnouncementId);
+
+            if (result == null)
+            {
+                // Not Found
+                this.announcementModel = null;
+                return;
+            }
+
+            // AnnouncementViewModel への変換
+            this.announcementModel = new AnnouncementViewModel
+            {
+                Id = result.Announcement.Id,
+                Category = result.Announcement.Category,
+                DisplayPriority = result.Announcement.DisplayPriority
+            };
+            this.announcementModel.SetPostDateTime(result.Announcement.PostDateTime);
+            this.announcementModel.SetExpireDateTime(result.Announcement.ExpireDateTime);
+
+            // AnnouncementContentViewModel への変換
+            this.contentModels = result.Contents
+                .Select(c => new AnnouncementContentViewModel
+                {
+                    Id = c.Id,
+                    AnnouncementId = c.AnnouncementId,
+                    LanguageCode = c.LanguageCode,
+                    Title = c.Title,
+                    Message = c.Message,
+                    LinkedUrl = c.LinkedUrl,
+                    DisplayOrder = this.languagePriorities.GetDisplayOrder(Language.GetLanguageFrom(c.LanguageCode)),
+                })
+                .ToList();
+
+            // 履歴データの設定
+            this.histories = result.Histories.ToList();
+        }
+        finally
+        {
+            this.isLoading = false;
+        }
+    }
+
+    /// <summary>
+    /// 別の言語を追加ボタンクリック時の処理
+    /// </summary>
+    private void OnAddLanguageButtonClick()
+    {
+        this.AddContentWithLanguage(this.GetNextLanguage());
+    }
+
+    /// <summary>
+    /// 次に追加すべき言語コードを取得
+    /// </summary>
+    private Language GetNextLanguage()
+    {
+        var existingLanguages = this.contentModels.Select(c => c.LanguageCode).ToHashSet();
+        var lang = this.languagePriorities.FirstOrDefault(l => !existingLanguages.Contains(l.Code));
+
+        // 全ての言語が追加済みの場合は日本語を返す
+        return lang ?? Language.Japanese;
+    }
+
+    /// <summary>
+    /// 指定された言語コードでコンテンツを追加
+    /// </summary>
+    private void AddContentWithLanguage(Language language)
+    {
+        var newContent = new AnnouncementContentViewModel
+        {
+            Id = Guid.Empty,
+            AnnouncementId = this.AnnouncementId,
+            LanguageCode = language.Code,
+            DisplayOrder = this.languagePriorities.GetDisplayOrder(language),
+        };
+
+        this.contentModels.Add(newContent);
+    }
+
+    /// <summary>
+    /// コンテンツ削除ボタンクリック時の処理
+    /// </summary>
+    private void OnDeleteContentButtonClick(Guid contentId)
+    {
+        var content = this.contentModels.FirstOrDefault(c => c.Id == contentId);
+        if (content != null)
+        {
+            this.contentModels.Remove(content);
+        }
+    }
+
+    /// <summary>
+    /// 保存ボタンクリック時の処理
+    /// </summary>
+    private async Task OnSaveButtonClickAsync(EditContext editContext)
+    {
+        this.businessErrorMessage = null;
+        this.correlationErrorMessage = null;
+        this.successMessage = null;
+
+        // 相関チェック
+        var offsetMinutes = await this.GetOffsetAsync();
+        if (!this.ValidateCorrelation(offsetMinutes))
+        {
+            return;
+        }
+
+        this.isSubmitting = true;
+        try
+        {
+            // ビューモデルからエンティティへの変換
+            var announcement = new DresscaCMS.Announcement.Infrastructures.Entities.Announcement
+            {
+                Id = this.announcementModel.Id,
+                Category = this.announcementModel.Category,
+                PostDateTime = this.announcementModel!.GetPostDateTime(offsetMinutes),
+                ExpireDateTime = this.announcementModel.GetExpireDateTime(offsetMinutes),
+                DisplayPriority = this.announcementModel.DisplayPriority,
+                CreatedAt = DateTimeOffset.UtcNow,
+                ChangedAt = DateTimeOffset.UtcNow,
+                IsDeleted = false
+            };
+
+            var contents = this.contentModels
+                .Select(c => new DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent
+                {
+                    Id = c.Id,
+                    AnnouncementId = this.AnnouncementId,
+                    LanguageCode = c.LanguageCode,
+                    Title = c.Title,
+                    Message = c.Message,
+                    LinkedUrl = string.IsNullOrWhiteSpace(c.LinkedUrl) ? null : c.LinkedUrl
+                })
+                .ToList();
+
+            // ログイン中のユーザー名を取得
+            var userName = await this.AuthenticationStateProvider.GetCurrentUserNameAsync();
+
+            // アプリケーションサービスを呼び出し
+            await this.AnnouncementsService.UpdateAnnouncementAndContentAsync(
+                announcement,
+                contents,
+                userName);
+
+            // 成功メッセージ表示
+            this.successMessage = "お知らせメッセージを保存しました。";
+
+            // データを再読み込み
+            await this.LoadAnnouncementDataAsync();
+        }
+        finally
+        {
+            this.isSubmitting = false;
+        }
+    }
+
+    /// <summary>
+    /// 相関チェックを実行
+    /// </summary>
+    /// <param name="offsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
+    /// <returns>相関チェック結果。true: 成功、false: 失敗。</returns>
+    [MemberNotNull(nameof(this.announcementModel))]
+    private bool ValidateCorrelation(long offsetMinutes)
+    {
+        if (this.announcementModel is null)
+        {
+            throw new InvalidOperationException("お知らせ情報が取得できていない状態で保存処理が呼び出されました。");
+        }
+
+        // 掲載終了日時が掲載開始日時より前かチェック
+        var postDateTime = this.announcementModel.GetPostDateTime(offsetMinutes);
+        var expireDateTime = this.announcementModel.GetExpireDateTime(offsetMinutes);
+
+        if (expireDateTime.HasValue && postDateTime > expireDateTime.Value)
+        {
+            this.correlationErrorMessage = "掲載終了日時は掲載開始日時以降に設定してください。";
+            return false;
+        }
+
+        // お知らせコンテンツが1件以上あるかチェック
+        if (!this.contentModels.Any())
+        {
+            this.correlationErrorMessage = "お知らせメッセージは1件以上作成してください。";
+            return false;
+        }
+
+        // 言語コードの重複チェック
+        var languageCodes = this.contentModels.Select(c => c.LanguageCode).ToList();
+        if (languageCodes.Count != languageCodes.Distinct().Count())
+        {
+            this.correlationErrorMessage = "お知らせメッセージの言語が重複しています。";
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// 一覧へ戻るボタンクリック時の処理
+    /// </summary>
+    private void OnBackToListButtonClick()
+    {
+        this.NavigationManager.NavigateTo("/announcements");
+    }
+
+    /// <summary>
+    /// 削除確認画面へ遷移
+    /// </summary>
+    private void OnNavigateToDeleteConfirm()
+    {
+        this.NavigationManager.NavigateTo($"/announcements/{this.AnnouncementId}/delete-confirm");
+    }
+
+    /// <summary>
+    /// 履歴のヘッダー文字列を取得
+    /// </summary>
+    private string GetHistoryHeading(DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory history)
+    {
+        var operationType = history.OperationType switch
+        {
+            OperationType.Create => "作成",
+            OperationType.Update => "更新",
+            OperationType.Delete => "削除",
+            _ => "不明"
+        };
+
+        return $"{history.CreatedAt:yyyy/MM/dd HH:mm:ss} - {operationType} - {history.ChangedBy}";
+    }
+
+    /// <summary>
+    /// 言語コードから言語名を取得
+    /// </summary>
+    private string GetLanguageName(string languageCode)
+        => Language.GetLanguageFrom(languageCode).DisplayName;
+
+    /// <summary>
+    ///  現在のタイムゾーンにおけるオフセットを取得します。
+    /// </summary>
+    /// <returns>オフセット (分) 。</returns>
+    private async Task<int> GetOffsetAsync()
+    {
+        // ViewModelに現在のブラウザーのタイムゾーンオフセットを設定
+        return await this.JS.InvokeAsync<int>("timezoneHelper.getTimezoneOffset");
+    }
+}
