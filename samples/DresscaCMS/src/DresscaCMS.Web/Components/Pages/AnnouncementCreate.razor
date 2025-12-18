@@ -91,13 +91,13 @@
                             <h4>お知らせメッセージ</h4>
                             <FluentButton Appearance="Appearance.Accent" OnClick="@this.OnAddLanguageButtonClick">別の言語を追加</FluentButton>
                         </FluentStack>
-                        @if (!this.announcementModel.AnnoucementContents.Any())
+                        @if (!this.announcementModel.AnnouncementContents.Any())
                         {
                             <p>登録されているお知らせメッセージはありません。</p>
                         }
                         else
                         {
-                            @foreach (var content in this.announcementModel.AnnoucementContents.OrderBy(c => c.DisplayOrder))
+                            @foreach (var content in this.announcementModel.AnnouncementContents.OrderBy(c => c.DisplayOrder))
                             {
                                 <FluentCard Style="padding: 20px;">
                                     <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
@@ -213,7 +213,7 @@
     /// </summary>
     private Language GetNextLanguageCode()
     {
-        var existingLanguages = this.announcementModel.AnnoucementContents.Select(c => c.LanguageCode).ToHashSet();
+        var existingLanguages = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToHashSet();
         var lang = this.languagePriorities.FirstOrDefault(l => !existingLanguages.Contains(l.Code));
 
         // 全ての言語が追加済みの場合は日本語を返す
@@ -232,7 +232,7 @@
             DisplayOrder = this.languagePriorities.GetDisplayOrder(language)
         };
 
-        this.announcementModel.AnnoucementContents.Add(newContent);
+        this.announcementModel.AnnouncementContents.Add(newContent);
     }
 
     /// <summary>
@@ -240,10 +240,10 @@
     /// </summary>
     private void OnDeleteContentButtonClick(Guid contentId)
     {
-        var content = this.announcementModel.AnnoucementContents.FirstOrDefault(c => c.Id == contentId);
+        var content = this.announcementModel.AnnouncementContents.FirstOrDefault(c => c.Id == contentId);
         if (content != null)
         {
-            this.announcementModel.AnnoucementContents.Remove(content);
+            this.announcementModel.AnnouncementContents.Remove(content);
         }
     }
 
@@ -278,7 +278,7 @@
                 IsDeleted = false,
             };
 
-            var contents = this.announcementModel.AnnoucementContents.Select(c => new DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent
+            var contents = this.announcementModel.AnnouncementContents.Select(c => new DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent
             {
                 Id = Guid.NewGuid(),
                 AnnouncementId = announcement.Id,
@@ -324,14 +324,14 @@
         }
 
         // お知らせコンテンツが1件以上あるかチェック
-        if (!this.announcementModel.AnnoucementContents.Any())
+        if (!this.announcementModel.AnnouncementContents.Any())
         {
             this.correlationErrorMessage = "お知らせメッセージは1件以上作成してください。";
             return false;
         }
 
         // 言語コードの重複チェック
-        var languageCodes = this.announcementModel.AnnoucementContents.Select(c => c.LanguageCode).ToList();
+        var languageCodes = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToList();
         if (languageCodes.Count != languageCodes.Distinct().Count())
         {
             this.correlationErrorMessage = "お知らせメッセージの言語が重複しています。";

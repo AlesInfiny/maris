@@ -50,7 +50,7 @@ public class AnnouncementCreateViewModel
     /// <summary>
     /// お知らせコンテンツ部分の入力値を保持するビューモデルを取得または設定します。
     /// </summary>
-    public List<AnnouncementContentCreateViewModel> AnnoucementContents { get; set; } = new();
+    public List<AnnouncementContentCreateViewModel> AnnouncementContents { get; set; } = new();
 
     /// <summary>
     /// 掲載開始日時を DateTimeOffset 型で取得します。
