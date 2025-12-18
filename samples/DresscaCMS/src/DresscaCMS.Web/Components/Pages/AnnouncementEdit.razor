@@ -108,13 +108,13 @@
                         </FluentStack>
                         @* お知らせメッセージ編集・お知らせコンテンツ部 *@
                         <FluentStack Orientation="Orientation.Vertical" VerticalGap="20" Style="margin-top: 20px;">
-                            @if (!this.contentModels.Any())
+                            @if (!this.announcementModel.AnnouncementContents.Any())
                             {
                                 <p>登録されているお知らせメッセージはありません。</p>
                             }
                             else
                             {
-                                @foreach (var content in this.contentModels.OrderBy(c => c.DisplayOrder))
+                                @foreach (var content in this.announcementModel.AnnouncementContents.OrderBy(c => c.DisplayOrder))
                                 {
                                     <FluentCard Style="padding: 20px;">
                                         <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
@@ -262,8 +262,7 @@
     [Parameter]
     public Guid AnnouncementId { get; set; }
 
-    private AnnouncementViewModel? announcementModel;
-    private List<AnnouncementContentViewModel> contentModels = new();
+    private AnnouncementEditViewModel? announcementModel;
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
     private string? businessErrorMessage;
     private string? correlationErrorMessage;
@@ -295,7 +294,7 @@
             }
 
             // AnnouncementViewModel への変換
-            this.announcementModel = new AnnouncementViewModel
+            this.announcementModel = new AnnouncementEditViewModel
             {
                 Id = result.Announcement.Id,
                 Category = result.Announcement.Category,
@@ -305,8 +304,8 @@
             this.announcementModel.SetExpireDateTime(result.Announcement.ExpireDateTime);
 
             // AnnouncementContentViewModel への変換
-            this.contentModels = result.Contents
-                .Select(c => new AnnouncementContentViewModel
+            this.announcementModel.AnnouncementContents = result.Contents
+                .Select(c => new AnnouncementContentEditViewModel
                 {
                     Id = c.Id,
                     AnnouncementId = c.AnnouncementId,
@@ -340,7 +339,12 @@
     /// </summary>
     private Language GetNextLanguage()
     {
-        var existingLanguages = this.contentModels.Select(c => c.LanguageCode).ToHashSet();
+        if(this.announcementModel is null)
+        {
+            throw new InvalidOperationException("お知らせ情報が取得できていない状態で GetNextLanguage が呼び出されました。");
+        }
+
+        var existingLanguages = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToHashSet();
         var lang = this.languagePriorities.FirstOrDefault(l => !existingLanguages.Contains(l.Code));
 
         // 全ての言語が追加済みの場合は日本語を返す
@@ -352,7 +356,12 @@
     /// </summary>
     private void AddContentWithLanguage(Language language)
     {
-        var newContent = new AnnouncementContentViewModel
+        if (this.announcementModel is null)
+        {
+            throw new InvalidOperationException("お知らせ情報が取得できていない状態で AddContentWithLanguage が呼び出されました。");
+        }
+
+        var newContent = new AnnouncementContentEditViewModel
         {
             Id = Guid.Empty,
             AnnouncementId = this.AnnouncementId,
@@ -360,7 +369,7 @@
             DisplayOrder = this.languagePriorities.GetDisplayOrder(language),
         };
 
-        this.contentModels.Add(newContent);
+        this.announcementModel.AnnouncementContents.Add(newContent);
     }
 
     /// <summary>
@@ -368,10 +377,15 @@
     /// </summary>
     private void OnDeleteContentButtonClick(Guid contentId)
     {
-        var content = this.contentModels.FirstOrDefault(c => c.Id == contentId);
+        if (this.announcementModel is null)
+        {
+            throw new InvalidOperationException("お知らせ情報が取得できていない状態で OnDeleteContentButtonClick が呼び出されました。");
+        }
+
+        var content = this.announcementModel.AnnouncementContents.FirstOrDefault(c => c.Id == contentId);
         if (content != null)
         {
-            this.contentModels.Remove(content);
+            this.announcementModel.AnnouncementContents.Remove(content);
         }
     }
 
@@ -407,7 +421,7 @@
                 IsDeleted = false
             };
 
-            var contents = this.contentModels
+            var contents = this.announcementModel.AnnouncementContents
                 .Select(c => new DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent
                 {
                     Id = c.Id,
@@ -464,14 +478,14 @@
         }
 
         // お知らせコンテンツが1件以上あるかチェック
-        if (!this.contentModels.Any())
+        if (!this.announcementModel.AnnouncementContents.Any())
         {
             this.correlationErrorMessage = "お知らせメッセージは1件以上作成してください。";
             return false;
         }
 
         // 言語コードの重複チェック
-        var languageCodes = this.contentModels.Select(c => c.LanguageCode).ToList();
+        var languageCodes = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToList();
         if (languageCodes.Count != languageCodes.Distinct().Count())
         {
             this.correlationErrorMessage = "お知らせメッセージの言語が重複しています。";

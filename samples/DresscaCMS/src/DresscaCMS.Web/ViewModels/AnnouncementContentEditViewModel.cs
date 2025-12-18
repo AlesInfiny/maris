@@ -3,9 +3,9 @@
 namespace DresscaCMS.Web.ViewModels;
 
 /// <summary>
-/// お知らせメッセージ登録画面・編集画面においてお知らせコンテンツ部分の入力値を保持するビューモデルです。
+/// お知らせメッセージ編集画面においてお知らせコンテンツ部分の入力値を保持するビューモデルです。
 /// </summary>
-public class AnnouncementContentViewModel
+public class AnnouncementContentEditViewModel
 {
     /// <summary>
     /// お知らせコンテンツ ID を取得または設定します。
