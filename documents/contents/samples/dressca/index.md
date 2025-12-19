@@ -54,7 +54,7 @@ Dressca は、 ASP.NET Core Web API を用いて構築されたバックエン�
         「dressca\\dressca-frontend\\consumer\\node_modules」、
         「dressca\\dressca-frontend\\admin\\node_modules」ディレクトリをそれぞれ削除し、再度 `npm ci` を実行してください。
 
-1. Visual Studio で「dressca\\dressca-backend\\Dressca.sln」を開き、ソリューションをビルドします。
+1. Visual Studio で「dressca\\dressca-backend\\Dressca.slnx」を開き、ソリューションをビルドします。
 
 1. データベースを構築します。
    コマンドプロンプトを開き、「dressca\\dressca-backend\\src\\Dressca.EfInfrastructure」に移動して以下のコマンドを実行します。
