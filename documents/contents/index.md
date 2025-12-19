@@ -21,21 +21,22 @@ AlesInfiny Maris は、クリエイティブ・コモンズ表示 4.0 国際ラ�
 商用のエンタープライズシステム開発から個人開発の小規模なシステムまで、ライセンスの条項に従う限り、個人、商用とも無料で使用できます。
 ライセンスについての詳細は「[利用規約 - ライセンス](about-maris/terms.md#license)」を参照してください。
 
-## サンプルアプリケーションのダウンロード {#id}
+## サンプルアプリケーションのダウンロード {#download-sample-applications}
 
-AlesInfiny Maris で構築した Web アプリケーションのサンプルを手元で動かしながら確認いただけます。
+AlesInfiny Maris が提供するアーキテクチャや開発ガイドを、実際に動作する Web アプリケーションを通じて体験できます。
+各サンプルは、実案件を想定した構成・技術選定をもとに実装されており、 AlesInfiny Maris の考え方を具体的に理解できます。
 
-### CSR アプリケーション {#id}
+### CSR アプリケーション {#csr-sample-application}
 
-CSR アーキテクチャに従って実装されたサンプルアプリケーションです。
-[Dressca - クイックスタート](./samples/dressca/index.md#quick-start) からダウンロードできます。
+CSR アーキテクチャに従って実装したサンプルアプリケーションです。
+[Dressca - クイックスタート](./samples/dressca/index.md#quick-start) からダウンロードし、ローカル環境で実際に動作を確認してください。
 
 [![Dressca トップページ](./images/samples/dressca-top.png){ width="500" loading=lazy }](./images/samples/dressca-top.png)
 [![Dressca 管理 トップページ](./images/samples/dressca-admin-top.png){ width="500" loading=lazy }](./images/samples/dressca-admin-top.png)
 
-### SSR アプリケーション {#id}
+### SSR アプリケーション {#ssr-sample-application}
 
-SSR アーキテクチャに従って実装されたサンプルアプリケーションです。
-[Dressca-CMS - クイックスタート](./samples/dressca-cms/index.md#quick-start) からダウンロードできます。
+SSR アーキテクチャに従って実装したサンプルアプリケーションです。
+[Dressca-CMS - クイックスタート](./samples/dressca-cms/index.md#quick-start) からダウンロードし、ローカル環境で実際に動作を確認してください。
 
 [![Dressca-CMS トップページ](./images/samples/dressca-cms-announcements.png){ width="800" loading=lazy }](./images/samples/dressca-cms-announcements.png){ align=center }
