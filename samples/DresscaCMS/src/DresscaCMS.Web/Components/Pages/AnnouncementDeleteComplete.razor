@@ -183,17 +183,7 @@ else
     /// 履歴のヘッダー文字列を取得
     /// </summary>
     private string GetHistoryHeading(DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory history)
-    {
-        var operationType = history.OperationType switch
-        {
-            OperationType.Create => "作成",
-            OperationType.Update => "更新",
-            OperationType.Delete => "削除",
-            _ => "不明"
-        };
-
-        return $"{history.CreatedAt:yyyy/MM/dd HH:mm:ss} - {operationType} - {history.ChangedBy}";
-    }
+        => $"{history.CreatedAt:yyyy/MM/dd HH:mm:ss} - {history.OperationType.GetDisplayName()} - {history.ChangedBy}";
 
     /// <summary>
     /// 言語コードから言語名を取得
