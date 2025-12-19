@@ -247,6 +247,11 @@
     {
         this.messageStore.Clear();
 
+        if (!this.editContext.Validate())
+        {
+            return;
+        }
+
         // 相関チェック
         var offsetMinutes = await this.GetOffsetAsync();
         if (!this.ValidateCorrelation(offsetMinutes))
