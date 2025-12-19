@@ -5,8 +5,8 @@
   "private": "true",
   "packageManager": "npm@11.6.1",
   "engines": {
-    "node": "^20.19.0 || >=22.12.0",
-    "npm": ">=10.9.3"
+    "node": "^20.19.0 || >=22.12.0 || >=24.12.0",
+    "npm": ">=11.6.1"
   },
   "scripts": {
     "format:root": "prettier --write ./*.{js,ts,json,yaml}",
