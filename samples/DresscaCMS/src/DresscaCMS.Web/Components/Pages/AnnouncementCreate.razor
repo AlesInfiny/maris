@@ -97,7 +97,7 @@
                         {
                             @foreach (var content in this.announcementModel.AnnouncementContents.OrderBy(c => c.DisplayOrder))
                             {
-                                <FluentCard Style="padding: 20px;">
+                                <FluentCard>
                                     <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
                                         <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
                                             <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => this.OnDeleteContentButtonClick(content.Id))">
@@ -107,23 +107,14 @@
                                         </FluentStack>
                                         <FluentStack Orientation="Orientation.Vertical">
                                             <FluentLabel>言語<span class="required">*</span></FluentLabel>
-                                            <FluentSelect @bind-Value="content.LanguageCode" Items="languagePriorities" OptionValue="@(p => p.Code)" OptionText="@(p => p.DisplayName)" />
+                                            <FluentSelect @bind-Value="content.LanguageCode" Items="languagePriorities" OptionValue="@(p => p.Code)" OptionText="@(p => p.DisplayName)" Position="SelectPosition.Below" />
                                             <FluentValidationMessage For="@(() => content.LanguageCode)" />
-                                        </FluentStack>
-
-                                        <FluentStack Orientation="Orientation.Vertical">
                                             <FluentLabel>タイトル<span class="required">*</span></FluentLabel>
                                             <FluentTextField @bind-Value="@content.Title" Maxlength="256" Style="width: 100%;" />
                                             <FluentValidationMessage For="@(() => content.Title)" />
-                                        </FluentStack>
-
-                                        <FluentStack Orientation="Orientation.Vertical">
                                             <FluentLabel>メッセージ<span class="required">*</span></FluentLabel>
                                             <FluentTextArea @bind-Value="@content.Message" Maxlength="512" Rows="5" Style="width: 100%;" />
                                             <FluentValidationMessage For="@(() => content.Message)" />
-                                        </FluentStack>
-
-                                        <FluentStack Orientation="Orientation.Vertical">
                                             <FluentLabel>リンク先URL</FluentLabel>
                                             <FluentTextField @bind-Value="@content.LinkedUrl" Maxlength="1024" Placeholder="https://www.example.com" Style="width: 100%;" />
                                             <FluentValidationMessage For="@(() => content.LinkedUrl)" />
