@@ -185,7 +185,7 @@
                                     <FluentAccordion>
                                         <FluentAccordionItem Heading="@this.GetHistoryHeading(history)">
                                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
-                                                <div>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss") - @(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
+                                                <div>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm") - @(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm") ?? "")</div>
                                                 <div>@(history.Category ?? "")</div>
                                                 <div>@history.DisplayPriority.GetDisplayName()</div>
 
@@ -478,7 +478,7 @@
     /// 履歴のヘッダー文字列を取得
     /// </summary>
     private string GetHistoryHeading(DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory history)
-        => $"{history.CreatedAt:yyyy/MM/dd HH:mm:ss} - {history.OperationType.GetDisplayName()} - {history.ChangedBy}";
+        => $"{history.CreatedAt:yyyy/MM/dd HH:mm} - {history.OperationType.GetDisplayName()} - {history.ChangedBy}";
 
     /// <summary>
     /// 言語コードから言語名を取得
