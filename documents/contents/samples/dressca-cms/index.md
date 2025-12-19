@@ -38,3 +38,11 @@ description: AlesInfiny Maris OSS Edition の提供するサンプルの 解説�
 
 1. Visual Studio で ++ctrl+f5++ を押下し、アプリケーションを実行します。
    いくつかプロンプト画面が立ち上がった後、ブラウザーが起動し、アプリケーションの実行が開始します。
+
+1. ログイン画面が表示されたら、開発環境用に設定されているメールアドレスとパスワードを入力して「ログイン」ボタンを押下してください。メールアドレスは [user@example.com] 、パスワードは [P@ssw0rd1] です。
+
+    [![Dressca-CMS ログイン画面](../../images/samples/dressca-cms-login.png){ width="600" loading=lazy }](../../images/samples/dressca-cms-login.png)
+
+1. ログインに成功したら、トップ画面に遷移します。左メニューから「お知らせメッセージ管理」を押下してください。お知らせメッセージ管理画面が表示されます。
+
+     [![Dressca-CMS お知らせメッセージ管理画面](../../images/samples/dressca-cms-announcements.png){ width="800" loading=lazy }](../../images/samples/dressca-cms-announcements.png)
