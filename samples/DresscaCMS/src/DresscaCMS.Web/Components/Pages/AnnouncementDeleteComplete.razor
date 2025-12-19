@@ -46,7 +46,7 @@ else
                     <p>お知らせメッセージを削除しました。</p>
                     <div>
                         掲載日時：
-                        @this.announcement.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss") ～ @(this.announcement.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")
+                        @this.announcement.PostDateTime.ToString("yyyy/MM/dd HH:mm") ～ @(this.announcement.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm") ?? "")
                     </div>
                     <div>
                         カテゴリー：

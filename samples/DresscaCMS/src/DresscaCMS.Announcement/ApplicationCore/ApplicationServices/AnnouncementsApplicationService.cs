@@ -239,7 +239,7 @@ public class AnnouncementsApplicationService
                 Id = Guid.NewGuid(),
                 AnnouncementId = announcementId,
                 ChangedBy = userName,
-                CreatedAt = DateTimeOffset.UtcNow,
+                CreatedAt = DateTimeOffset.Now,
                 OperationType = OperationType.Create,
                 Category = announcement.Category,
                 PostDateTime = announcement.PostDateTime,
@@ -466,7 +466,7 @@ public class AnnouncementsApplicationService
                 Id = Guid.NewGuid(),
                 AnnouncementId = announcement.Id,
                 ChangedBy = userName,
-                CreatedAt = DateTimeOffset.UtcNow,
+                CreatedAt = DateTimeOffset.Now,
                 OperationType = OperationType.Update,
                 Category = announcement.Category,
                 PostDateTime = announcement.PostDateTime,
@@ -576,7 +576,7 @@ public class AnnouncementsApplicationService
 
             // お知らせメッセージを論理削除
             announcement.IsDeleted = true;
-            announcement.ChangedAt = DateTimeOffset.UtcNow;
+            announcement.ChangedAt = DateTimeOffset.Now;
 
             await this.announcementsRepository.UpdateAnnouncementAsync(
                 announcement,

@@ -208,7 +208,7 @@
                                     <FluentAccordion>
                                         <FluentAccordionItem Heading="@this.GetHistoryHeading(history)">
                                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
-                                                <div>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm:ss") - @(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm:ss") ?? "")</div>
+                                                <div>@history.PostDateTime.ToString("yyyy/MM/dd HH:mm") - @(history.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm") ?? "")</div>
                                                 <div>@(history.Category ?? "")</div>
                                                 <div>@history.DisplayPriority.GetDisplayName()</div>
 
