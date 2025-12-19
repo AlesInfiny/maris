@@ -72,13 +72,10 @@
                         <FluentGridItem xs="3">
                             <FluentStack Orientation="Orientation.Vertical">
                                 <FluentLabel>表示優先度<span class="required">*</span></FluentLabel>
-                                <InputSelect @bind-Value="@this.announcementModel.DisplayPriority" class="fluent-select" style="min-width:100px;box-sizing: border-box;">
-                                    <option value="@DisplayPriority.Critical">@DisplayPriority.Critical.GetDisplayName()</option>
-                                    <option value="@DisplayPriority.High">@DisplayPriority.High.GetDisplayName()</option>
-                                    <option value="@DisplayPriority.Medium">@DisplayPriority.Medium.GetDisplayName()</option>
-                                    <option value="@DisplayPriority.Low">@DisplayPriority.Low.GetDisplayName()</option>
-                                </InputSelect>
-                                <FluentValidationMessage For="@(() => this.announcementModel.DisplayPriority)" />
+                                <FluentSelect @bind-SelectedOption="@this.announcementModel.DisplayPriority"
+                                              Items="@(Enum.GetValues<DisplayPriority>())"
+                                              OptionValue="@(p => ((int)p).ToString())"
+                                              OptionText="@(p => p.GetDisplayName())" />
                             </FluentStack>
                         </FluentGridItem>
                     </FluentGrid>
@@ -100,7 +97,7 @@
                         {
                             @foreach (var content in this.announcementModel.AnnouncementContents.OrderBy(c => c.DisplayOrder))
                             {
-                                <FluentCard Style="padding: 20px;">
+                                <FluentCard AreaRestricted="false">
                                     <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
                                         <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
                                             <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => this.OnDeleteContentButtonClick(content.Id))">
@@ -108,38 +105,16 @@
                                                 削除
                                             </FluentButton>
                                         </FluentStack>
-
                                         <FluentStack Orientation="Orientation.Vertical">
                                             <FluentLabel>言語<span class="required">*</span></FluentLabel>
-                                            <InputSelect @bind-Value="@content.LanguageCode" class="fluent-select" style="width: 200px;">
-                                                @foreach (var language in this.languagePriorities)
-                                                {
-                                                    if (language.Code == content.LanguageCode)
-                                                    {
-                                                        <option value="@language.Code" selected>@language.DisplayName</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@language.Code">@language.DisplayName</option>
-                                                    }
-                                                }
-                                            </InputSelect>
+                                            <FluentSelect @bind-Value="content.LanguageCode" Items="languagePriorities" OptionValue="@(p => p.Code)" OptionText="@(p => p.DisplayName)" />
                                             <FluentValidationMessage For="@(() => content.LanguageCode)" />
-                                        </FluentStack>
-
-                                        <FluentStack Orientation="Orientation.Vertical">
                                             <FluentLabel>タイトル<span class="required">*</span></FluentLabel>
                                             <FluentTextField @bind-Value="@content.Title" Maxlength="256" Style="width: 100%;" />
                                             <FluentValidationMessage For="@(() => content.Title)" />
-                                        </FluentStack>
-
-                                        <FluentStack Orientation="Orientation.Vertical">
                                             <FluentLabel>メッセージ<span class="required">*</span></FluentLabel>
                                             <FluentTextArea @bind-Value="@content.Message" Maxlength="512" Rows="5" Style="width: 100%;" />
                                             <FluentValidationMessage For="@(() => content.Message)" />
-                                        </FluentStack>
-
-                                        <FluentStack Orientation="Orientation.Vertical">
                                             <FluentLabel>リンク先URL</FluentLabel>
                                             <FluentTextField @bind-Value="@content.LinkedUrl" Maxlength="1024" Placeholder="https://www.example.com" Style="width: 100%;" />
                                             <FluentValidationMessage For="@(() => content.LinkedUrl)" />
