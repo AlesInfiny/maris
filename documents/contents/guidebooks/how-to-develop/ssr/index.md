@@ -20,3 +20,5 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能�
 - 結合テストプロジェクトの構成（後日追加予定）
 - [ヘルスチェック API の実装](./health-checks.md)
 - [ローカル開発環境の構築](./local-development.md)
+
+これらのアプリケーション開発手順に従って実装したサンプルアプリケーションは、[Dressca-CMS - クイックスタート](../../../samples/dressca-cms/index.md#quick-start) からダウンロードして実行できます。
