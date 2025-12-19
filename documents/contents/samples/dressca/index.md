@@ -59,7 +59,7 @@ description: AlesInfiny Maris OSS Edition の提供するサンプルの 解説�
 1. Visual Studio で実行するプロジェクトを選択します。
    ソリューションのプロパティを開き、 [Dressca.Web.Consumer] プロジェクトをスタートアッププロジェクトに設定します。
 
-    [![Dressca.Web.Consumer プロジェクトをスタートアッププロジェクトに設定](images/select-startup-project.png){ width="600" loading=lazy }](images/select-startup-project.png)
+    [![Dressca.Web.Consumer プロジェクトをスタートアッププロジェクトに設定](../../images/samples/select-startup-project.png){ width="600" loading=lazy }](../../images/samples/select-startup-project.png)
 
 1. Visual Studio で ++ctrl+f5++ を押下し、アプリケーションを実行します。
    いくつかプロンプト画面が立ち上がった後、ブラウザーが起動し、アプリケーションの実行が開始します。
