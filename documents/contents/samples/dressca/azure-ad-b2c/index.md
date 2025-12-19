@@ -54,4 +54,4 @@ Azure Active Directory B2C （以降、 Azure AD B2C ） によるユーザー�
 
 サンプルアプリケーションと詳細な解説は以下からダウンロードできます。
 
-- [サンプルアプリケーションのダウンロード](../downloads/azure-ad-b2c-auth.zip)
+- [サンプルアプリケーションのダウンロード](../../downloads/azure-ad-b2c-auth.zip)
