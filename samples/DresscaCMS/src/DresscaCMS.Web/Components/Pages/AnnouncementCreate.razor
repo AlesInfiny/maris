@@ -4,6 +4,7 @@
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.Extensions
 @using Maris.ComponentModel
+@using Maris.Core
 @using Microsoft.AspNetCore.Components.Authorization
 
 @inject AnnouncementsApplicationService AnnouncementsService
@@ -218,7 +219,7 @@
     /// <summary>
     /// 登録ボタンクリック時の処理
     /// </summary>
-    private async Task OnRegisterButtonClickAsync(EditContext editContext)
+    private async Task OnRegisterButtonClickAsync()
     {
         this.messageStore.Clear();
 
@@ -271,6 +272,18 @@
 
             // 成功したら編集画面へ遷移
             this.NavigationManager.NavigateTo($"/announcements/{createdId}/edit");
+        }
+        catch (BusinessException businessEx)
+        {
+            // ビジネス例外発生時はメッセージを表示
+            foreach (var error in businessEx.GetErrors())
+            {
+                this.messageStore.Add(
+                    new FieldIdentifier(this.editContext.Model, string.Empty),
+                    error.ErrorMessage);
+            }
+
+            this.editContext.NotifyValidationStateChanged();
         }
         finally
         {

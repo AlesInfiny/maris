@@ -5,6 +5,7 @@
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.Extensions
 @using Maris.ComponentModel
+@using Maris.Core
 @using Microsoft.AspNetCore.Components.Authorization
 
 @inject AnnouncementsApplicationService AnnouncementsService
@@ -343,7 +344,7 @@
     /// <summary>
     /// 保存ボタンクリック時の処理
     /// </summary>
-    private async Task OnSaveButtonClickAsync(EditContext editContext)
+    private async Task OnSaveButtonClickAsync()
     {
         this.messageStore.Clear();
         this.successMessage = null;
@@ -402,6 +403,18 @@
 
             // データを再読み込み
             await this.LoadAnnouncementDataAsync();
+        }
+        catch (BusinessException businessEx)
+        {
+            // ビジネス例外発生時はメッセージを表示
+            foreach (var error in businessEx.GetErrors())
+            {
+                this.messageStore.Add(
+                    new FieldIdentifier(this.editContext.Model, string.Empty),
+                    error.ErrorMessage);
+            }
+
+            this.editContext.NotifyValidationStateChanged();
         }
         finally
         {
