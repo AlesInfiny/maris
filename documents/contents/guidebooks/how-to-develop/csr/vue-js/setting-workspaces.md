@@ -27,12 +27,9 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 
 ## ルートプロジェクトの設定 {#setting-route-project}
 
-ルートプロジェクトの package.json に `"type": "module"`と`"private": "true"`を追加します。
-CJS 形式のファイルを正しく読み込むために、 `"type": "module"` は設定が必須です。
-`"private": "true"`は、誤ってルートプロジェクトが公開されることを防ぐため、設定を推奨します。
-また、 CI 時の Node.js や npm のバージョンを設定するために、`"engines"` を追加します。
+CI 時の Node.js や npm のバージョンを設定するために、ルートプロジェクトの package.json に `"engines"` を追加し、適切なバージョンを設定してください。特別な理由がなければ、[ブランクプロジェクトの作成](./create-vuejs-blank-project.md) で作成したワークスペース直下の package.json の `"engines"` に初期設定されているバージョンを指定します。 Node.js の LTS バージョンの情報については、 [Node.js リリース :material-open-in-new:](https://nodejs.org/ja/about/previous-releases){ target=_blank } を参照してください。
 
-```json title="package.json（ルート）" hl_lines="6 7"
+```json title="package.json（ルート）" hl_lines="8-11"
 {
   "name": "project-name",
   "version": "1.0.0",
