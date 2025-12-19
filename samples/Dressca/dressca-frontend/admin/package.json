@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "type": "module",
   "engines": {
-    "node": "^20.19.0 || >=22.12.0",
-    "npm": ">=^11.6.1"
+    "node": "^20.19.0 || >=22.12.0 || >=24.12.0",
+    "npm": ">=11.6.1"
   },
   "scripts": {
     "dev": "vite --mode dev",
@@ -21,8 +21,8 @@
     "type-check": "vue-tsc --build",
     "lint": "run-s eslint stylelint format --print-label",
     "lint:ci": "run-p eslint:ci format:ci stylelint:ci --print-label",
-    "eslint": "eslint . --fix",
-    "eslint:ci": "eslint .",
+    "eslint": "eslint . --fix --cache",
+    "eslint:ci": "eslint . --cache",
     "stylelint": "stylelint **/*.{vue,css} --fix",
     "stylelint:ci": "stylelint **/*.{vue,css}",
     "format": "prettier --write .",
@@ -52,7 +52,7 @@
     "@openapitools/openapi-generator-cli": "2.24.0",
     "@pinia/testing": "1.0.2",
     "@tailwindcss/vite": "4.1.14",
-    "@tsconfig/node22": "22.0.2",
+    "@tsconfig/node24": "^24.0.3",
     "@types/jsdom": "27.0.0",
     "@types/node": "24.7.0",
     "@vitejs/plugin-vue": "6.0.1",
