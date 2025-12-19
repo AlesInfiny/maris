@@ -89,10 +89,10 @@
                                 <FluentStack Orientation="Orientation.Vertical">
                                     <FluentLabel>表示優先度<span class="required">*</span></FluentLabel>
                                     <FluentSelect TOption="string" @bind-Value="@this.DisplayPriorityValue" Class="fluent-select">
-                                        <FluentOption Value="1">@DisplayPriority.Critical.GetDisplayName()</FluentOption>
-                                        <FluentOption Value="2">@DisplayPriority.High.GetDisplayName()</FluentOption>
-                                        <FluentOption Value="3">@DisplayPriority.Medium.GetDisplayName()</FluentOption>
-                                        <FluentOption Value="4">@DisplayPriority.Low.GetDisplayName()</FluentOption>
+                                        <FluentOption Value="@(((int)DisplayPriority.Critical).ToString())">@DisplayPriority.Critical.GetDisplayName()</FluentOption>
+                                        <FluentOption Value="@(((int)DisplayPriority.High).ToString())">@DisplayPriority.High.GetDisplayName()</FluentOption>
+                                        <FluentOption Value="@(((int)DisplayPriority.Medium).ToString())">@DisplayPriority.Medium.GetDisplayName()</FluentOption>
+                                        <FluentOption Value="@(((int)DisplayPriority.Low).ToString())">@DisplayPriority.Low.GetDisplayName()</FluentOption>
                                     </FluentSelect>
                                     <FluentValidationMessage For="@(() => this.announcementModel.DisplayPriority)" />
                                 </FluentStack>
