@@ -7,6 +7,8 @@
 @inject IStateStore StateStore
 @inject NavigationManager NavigationManager
 
+<PageTitle>Dressca-CMS - お知らせメッセージ削除完了</PageTitle>
+
 <div>
     <h3>お知らせメッセージ削除完了</h3>
     <FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
@@ -161,9 +163,6 @@
     /// <inheritdoc/>
     protected override async Task OnInitializedAsync()
     {
-
-        await Task.Delay(1000);
-
         // 削除確認画面からの引継ぎ情報を取得
         var stateKey = $"DeletedAnnouncement_{this.AnnouncementId}";
         var result = await this.StateStore.PopAsync<DeletedAnnouncementState>(stateKey);
