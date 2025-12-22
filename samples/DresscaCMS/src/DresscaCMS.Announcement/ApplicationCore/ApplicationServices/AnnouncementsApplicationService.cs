@@ -322,7 +322,7 @@ public class AnnouncementsApplicationService
         // 業務開始処理
         // ------------------------------
         this.logger.LogDebug(
-            LogMessages.AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncStart,
+            LogMessages.AnnouncementsApplicationService_UpdateAnnouncementAndContentAsyncStart,
             announcement.Id,
             userName);
 
