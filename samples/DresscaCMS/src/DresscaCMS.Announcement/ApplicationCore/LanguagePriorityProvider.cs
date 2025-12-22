@@ -9,23 +9,26 @@ public static class LanguagePriorityProvider
     ///  言語コードの優先順位を定義します。
     ///  配列の先頭から順に優先度が高くなります。
     /// </summary>
-    private static readonly string[] DefaultLanguagePriority =
+    private static readonly LanguageOrder[] DefaultLanguagePriorities =
         [
-            "ja", // 日本語
-            "en", // 英語
-            "zh", // 中国語
-            "es", // スペイン語
+            new("ja", 0), // 日本語
+            new("en", 1), // 英語
+            new("zh", 2), // 中国語
+            new("es", 3), // スペイン語
         ];
 
     /// <summary>
-    ///  言語コードから優先順位へのマッピングを取得します。
+    ///  指定した言語コードの優先順位を取得します。
+    ///  存在しない場合は int.MaxValue を返します。
     /// </summary>
-    /// <returns>言語コード → 優先順位のディクショナリ。</returns>
-    public static IReadOnlyDictionary<string, int> GetLanguageOrderMap()
+    /// <param name="code">言語コード。</param>
+    /// <returns>優先順位。</returns>
+    public static int GetLanguageOrder(string code)
     {
-        return DefaultLanguagePriority
-            .Distinct(StringComparer.Ordinal)
-            .Select((code, index) => new { code, index })
-            .ToDictionary(x => x.code, x => x.index);
+        var languageOrder = DefaultLanguagePriorities
+            .FirstOrDefault(lo => string.Equals(lo.Code, code, StringComparison.OrdinalIgnoreCase));
+        return languageOrder is not null ? languageOrder.Order : int.MaxValue;
     }
+
+    private record LanguageOrder(string Code, int Order);
 }
