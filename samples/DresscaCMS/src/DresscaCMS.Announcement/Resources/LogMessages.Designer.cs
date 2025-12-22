@@ -144,18 +144,18 @@ namespace DresscaCMS.Announcement.Resources {
         /// <summary>
         ///   お知らせメッセージとお知らせコンテンツの更新が完了しました。お知らせメッセージ ID: {AnnouncementId} に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncEnd {
+        internal static string AnnouncementsApplicationService_UpdateAnnouncementAndContentAsyncEnd {
             get {
-                return ResourceManager.GetString("AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncEnd", resourceCulture);
+                return ResourceManager.GetString("AnnouncementsApplicationService_UpdateAnnouncementAndContentAsyncEnd", resourceCulture);
             }
         }
         
         /// <summary>
         ///   お知らせメッセージとお知らせコンテンツの更新を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName} に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncStart {
+        internal static string AnnouncementsApplicationService_UpdateAnnouncementAndContentAsyncStart {
             get {
-                return ResourceManager.GetString("AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncStart", resourceCulture);
+                return ResourceManager.GetString("AnnouncementsApplicationService_UpdateAnnouncementAndContentAsyncStart", resourceCulture);
             }
         }
     }
