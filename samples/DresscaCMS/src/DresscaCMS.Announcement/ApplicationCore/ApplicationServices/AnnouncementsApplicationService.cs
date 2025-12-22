@@ -180,78 +180,68 @@ public class AnnouncementsApplicationService
             transactionOptions,
             TransactionScopeAsyncFlowOption.Enabled);
 
-        try
+        // お知らせメッセージを登録
+        var announcementId = await this.announcementsRepository.CreateAnnouncementAsync(
+            announcement,
+            cancellationToken);
+
+        // お知らせコンテンツを登録
+        foreach (var content in contents)
         {
-            // お知らせメッセージを登録
-            var announcementId = await this.announcementsRepository.CreateAnnouncementAsync(
-                announcement,
+            content.AnnouncementId = announcementId;
+            await this.announcementsRepository.CreateAnnouncementContentAsync(
+                content,
                 cancellationToken);
-
-            // お知らせコンテンツを登録
-            foreach (var content in contents)
-            {
-                content.AnnouncementId = announcementId;
-                await this.announcementsRepository.CreateAnnouncementContentAsync(
-                    content,
-                    cancellationToken);
-            }
-
-            // お知らせメッセージ更新履歴を作成
-            var history = new AnnouncementHistory
-            {
-                Id = Guid.NewGuid(),
-                AnnouncementId = announcementId,
-                ChangedBy = userName,
-                CreatedAt = DateTimeOffset.Now,
-                OperationType = OperationType.Create,
-                Category = announcement.Category,
-                PostDateTime = announcement.PostDateTime,
-                ExpireDateTime = announcement.ExpireDateTime,
-                DisplayPriority = announcement.DisplayPriority,
-            };
-
-            await this.announcementsRepository.CreateAnnouncementHistoryAsync(
-                history,
-                cancellationToken);
-
-            // お知らせコンテンツ更新履歴を作成
-            var contentHistories = contents
-                .Select(content
-                    => new AnnouncementContentHistory
-                    {
-                        Id = Guid.NewGuid(),
-                        AnnouncementHistoryId = history.Id,
-                        LanguageCode = content.LanguageCode,
-                        Title = content.Title,
-                        Message = content.Message,
-                        LinkedUrl = content.LinkedUrl,
-                    });
-
-            foreach (var contentHistory in contentHistories)
-            {
-                await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
-                    contentHistory,
-                    cancellationToken);
-            }
-
-            scope.Complete();
-
-            // ------------------------------
-            // 業務終了処理
-            // ------------------------------
-            this.logger.LogDebug(
-                "お知らせメッセージとお知らせコンテンツの登録が完了しました。お知らせメッセージ ID: {AnnouncementId}",
-                announcementId);
-
-            return announcementId;
         }
-        catch (Exception ex)
+
+        // お知らせメッセージ更新履歴を作成
+        var history = new AnnouncementHistory
         {
-            this.logger.LogError(
-                ex,
-                "お知らせメッセージとお知らせコンテンツの登録中にエラーが発生しました。");
-            throw;
+            Id = Guid.NewGuid(),
+            AnnouncementId = announcementId,
+            ChangedBy = userName,
+            CreatedAt = DateTimeOffset.Now,
+            OperationType = OperationType.Create,
+            Category = announcement.Category,
+            PostDateTime = announcement.PostDateTime,
+            ExpireDateTime = announcement.ExpireDateTime,
+            DisplayPriority = announcement.DisplayPriority,
+        };
+
+        await this.announcementsRepository.CreateAnnouncementHistoryAsync(
+            history,
+            cancellationToken);
+
+        // お知らせコンテンツ更新履歴を作成
+        var contentHistories = contents
+            .Select(content
+                => new AnnouncementContentHistory
+                {
+                    Id = Guid.NewGuid(),
+                    AnnouncementHistoryId = history.Id,
+                    LanguageCode = content.LanguageCode,
+                    Title = content.Title,
+                    Message = content.Message,
+                    LinkedUrl = content.LinkedUrl,
+                });
+
+        foreach (var contentHistory in contentHistories)
+        {
+            await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
+                contentHistory,
+                cancellationToken);
         }
+
+        scope.Complete();
+
+        // ------------------------------
+        // 業務終了処理
+        // ------------------------------
+        this.logger.LogDebug(
+            "お知らせメッセージとお知らせコンテンツの登録が完了しました。お知らせメッセージ ID: {AnnouncementId}",
+            announcementId);
+
+        return announcementId;
     }
 
     /// <summary>
