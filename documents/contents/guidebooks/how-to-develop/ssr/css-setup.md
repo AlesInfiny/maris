@@ -18,10 +18,11 @@ Fluent UI Blazor は、 Microsoft が開発・提供する Fluent Design System�
 
 !!! info "CSS のバンドルと参照"
 
-    Fluent UI Blazor のデザインに用いられる CSS ファイルは、 ビルド時に次のようなパスにバンドルされて出力されます（Sample\obj\Debug\netxx.x\scopedcss\bundle\Sample.styles.css）。
-    Fluent Blazor Web アプリのテンプレートでは、このバンドル後 CSS ファイルを読み込むように App.razor に設定が追加されています。
-    ```html title="App.razor"
-    <link rel="stylesheet" href="@Assets["Sample.styles.css"]" />
+    Blazor Web アプリケーションでは、 [CSS の分離](#css-isolation) により、各コンポーネントに分離された CSS が、ビルド時には 1 つの CSS ファイルとしてバンドルされて出力されます。
+    たとえばプロジェクト名を AaaSubSystem にしてプロジェクトを作成し、 Debug 構成でビルドした場合、バンドル後の CSS ファイルは AaaSubSystem\obj\Debug\netxx.x\scopedcss\bundle\AaaSubSystem.styles.css に出力されます。
+    Fluent Blazor Web アプリのテンプレートでは、この CSS ファイルを読み込むように App.razor に設定が追加されています。
+    ```html title="プロジェクト名を AaaSubSystem に設定した App.razor のテンプレート"
+    <link rel="stylesheet" href="@Assets["AaaSubSystem.styles.css"]" />
     ```
 
 ## CSS の分離 {#css-isolation}
