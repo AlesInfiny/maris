@@ -1,6 +1,11 @@
-.required {
-    color: var(--error);
-    margin-left: 4px;
+::deep .card-with-action {
+    position: relative;
+}
+
+::deep .card-action-button {
+    position: absolute;
+    top: calc(var(--design-unit) * 5px);
+    right: calc(var(--design-unit) * 5px);
 }
 
 .bread-crumb-separator {
@@ -14,17 +19,6 @@
     min-height: 200px;
 }
 
-.container {
-    border: solid 1px #808080;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
 .spacer{
     margin-top:15px;
-}
-
-.border {
-    border-top: solid 1px #808080 !important;
-    width: 100% !important;
 }
