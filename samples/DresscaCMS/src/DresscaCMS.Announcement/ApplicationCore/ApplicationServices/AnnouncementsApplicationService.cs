@@ -168,16 +168,6 @@ public class AnnouncementsApplicationService
         ArgumentNullException.ThrowIfNull(announcement);
         ArgumentNullException.ThrowIfNull(contents);
 
-        if (string.IsNullOrWhiteSpace(userName))
-        {
-            throw new ArgumentException("ユーザー名が null または空文字列です。", nameof(userName));
-        }
-
-        if (announcement.ExpireDateTime.HasValue && announcement.PostDateTime > announcement.ExpireDateTime.Value)
-        {
-            throw new ArgumentException("掲載終了日時は掲載開始日時以降に設定してください。", nameof(announcement));
-        }
-
         var businessErrors = new BusinessErrorCollection();
         if (!contents.Any())
         {
@@ -364,8 +354,17 @@ public class AnnouncementsApplicationService
             announcement.Id,
             userName);
 
-        var languageCodes = contents.Select(c => c.LanguageCode).ToList();
         var businessErrors = new BusinessErrorCollection();
+        if (!contents.Any())
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage("お知らせメッセージは 1 件以上作成してください。")));
+        }
+
+        // 言語コードの重複チェック
+        var languageCodes = contents.Select(c => c.LanguageCode).ToList();
         if (languageCodes.Count != languageCodes.Distinct().Count())
         {
             businessErrors.AddOrMerge(
