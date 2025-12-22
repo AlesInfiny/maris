@@ -137,7 +137,7 @@
                                 <FluentStack Orientation="Orientation.Vertical">
                                     <FluentStack Orientation="Orientation.Horizontal">
                                         <h4>アクション</h4>
-                                        @if (this.IsSubmitting)
+                                        @if (this.isSubmitting)
                                         {
                                             <FluentProgressRing Width="20px" />
                                         }
@@ -146,7 +146,7 @@
                                     <FluentValidationSummary Model="@this.announcementModel" />
                                     <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
                                         <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center" VerticalGap="30">
-                                            <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.IsSubmitting">
+                                            <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
                                                 お知らせメッセージの保存
                                             </FluentButton>
                                             @if (!string.IsNullOrEmpty(this.successMessage))
@@ -218,23 +218,15 @@
     private AnnouncementEditViewModel announcementModel = new();
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
     private bool isLoading = true;
+    private bool isSubmitting;
     private string? successMessage;
-    private readonly LanguagePriorities languagePriorities = new();
     private ValidationMessageStore messageStore = default!;
     private EditContext editContext = default!;
+    private readonly LanguagePriorities languagePriorities = new();
 
     [Parameter]
     public Guid AnnouncementId { get; set; }
 
-    private bool IsSubmitting
-    {
-        get;
-        set
-        {
-            field = value;
-            this.StateHasChanged();
-        }
-    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -345,7 +337,8 @@
     /// </summary>
     private async Task OnSaveButtonClickAsync(EditContext editContext)
     {
-        this.IsSubmitting = true;
+        this.isSubmitting = true;
+        this.StateHasChanged();
         try
         {
             this.messageStore.Clear();
@@ -405,7 +398,8 @@
         }
         finally
         {
-            this.IsSubmitting = false;
+            this.isSubmitting = false;
+            this.StateHasChanged();
         }
     }
 

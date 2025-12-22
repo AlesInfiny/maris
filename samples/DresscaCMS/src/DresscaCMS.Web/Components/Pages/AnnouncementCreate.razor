@@ -123,14 +123,14 @@
                         <FluentStack Orientation="Orientation.Vertical">
                             <FluentStack Orientation="Orientation.Horizontal">
                                 <h4>アクション</h4>
-                                @if (this.IsSubmitting)
+                                @if (this.isSubmitting)
                                 {
                                     <FluentProgressRing Width="20px" />
                                 }
                             </FluentStack>
                             <FluentValidationSummary Model="@this.announcementModel" />
                             <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center" VerticalGap="30">
-                                <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.IsSubmitting">
+                                <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
                                     お知らせメッセージの登録
                                 </FluentButton>
                                 <FluentAnchor Href="/announcements" Appearance="Appearance.Hypertext">お知らせメッセージ管理画面へ戻る</FluentAnchor>
@@ -144,20 +144,12 @@
 </div>
 
 @code {
+
     private ValidationMessageStore messageStore = default!;
     private EditContext editContext = default!;
+    private bool isSubmitting;
     private readonly AnnouncementCreateViewModel announcementModel = new();
     private readonly LanguagePriorities languagePriorities = new();
-
-    private bool IsSubmitting
-    {
-        get;
-        set
-        {
-            field = value;
-            this.StateHasChanged();
-        }
-    }
 
     /// <inheritdoc />
     protected override void OnInitialized()
@@ -221,7 +213,8 @@
     /// </summary>
     private async Task OnRegisterButtonClickAsync(EditContext editContext)
     {
-        this.IsSubmitting = true;
+        this.isSubmitting = true;
+        this.StateHasChanged();
         try
         {
             this.messageStore.Clear();
@@ -275,7 +268,8 @@
         }
         finally
         {
-            this.IsSubmitting = false;
+            this.isSubmitting = false;
+            this.StateHasChanged();
         }
     }
 

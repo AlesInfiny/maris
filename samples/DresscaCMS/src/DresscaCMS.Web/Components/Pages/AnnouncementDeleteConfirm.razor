@@ -108,7 +108,7 @@
                         <FluentStack Orientation="Orientation.Vertical">
                             <FluentStack Orientation="Orientation.Horizontal">
                                 <h4>アクション</h4>
-                                @if (this.IsSubmitting)
+                                @if (this.isSubmitting)
                                 {
                                     <FluentProgressRing Width="20px" />
                                 }
@@ -122,7 +122,7 @@
                                 }
                             </FluentStack>
                             <FluentStack Orientation="Orientation.Vertical" VerticalGap="30" HorizontalAlignment="HorizontalAlignment.Center">
-                                <FluentButton Appearance="Appearance.Accent" OnClick="@this.OnDeleteButtonClickAsync" Disabled="@this.IsSubmitting">
+                                <FluentButton Appearance="Appearance.Accent" OnClick="@this.OnDeleteButtonClickAsync" Disabled="@this.isSubmitting">
                                     お知らせメッセージ削除
                                 </FluentButton>
                                 <FluentAnchor Href="@($"/announcements/{this.announcement.Id}/edit")" Appearance="Appearance.Hypertext">お知らせメッセージの編集</FluentAnchor>
@@ -183,25 +183,17 @@
 
 @code {
 
-    private readonly LanguagePriorities languagePriorities = new();
     private DresscaCMS.Announcement.Infrastructures.Entities.Announcement? announcement;
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent> contents = new();
     private List<DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementHistory> histories = new();
     private string? errorMessage;
     private bool isLoading = true;
+    private bool isSubmitting;
+    private readonly LanguagePriorities languagePriorities = new();
 
     [Parameter]
     public Guid AnnouncementId { get; set; }
 
-    private bool IsSubmitting
-    {
-        get;
-        set
-        {
-            field = value;
-            this.StateHasChanged();
-        }
-    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -240,7 +232,8 @@
     private async Task OnDeleteButtonClickAsync()
     {
         this.errorMessage = null;
-        this.IsSubmitting = true;
+        this.isSubmitting = true;
+        this.StateHasChanged();
         try
         {
             // ログイン中のユーザー名を取得
@@ -266,7 +259,8 @@
         }
         finally
         {
-            this.IsSubmitting = false;
+            this.isSubmitting = false;
+            this.StateHasChanged();
         }
     }
 

@@ -29,7 +29,7 @@
             </FluentBreadcrumbItem>
         </FluentBreadcrumb>
 
-        @if (this.IsLoading)
+        @if (this.isLoading)
         {
             <div class="loading-spinner">
                 <FluentProgressRing Width="60px" />
@@ -136,6 +136,7 @@
     private int totalCount;
     private int startIndex;
     private int endIndex;
+    private bool isLoading;
 
     private int actualPageSize;
     private int actualPageNumber;
@@ -148,22 +149,13 @@
     [SupplyParameterFromQuery]
     public string? PageNumber { get; set; }
 
-    private bool IsLoading
-    {
-        get;
-        set
-        {
-            field = value;
-            this.StateHasChanged();
-        }
-    } = true;
 
     protected override async Task OnParametersSetAsync()
     {
         try
         {
-            this.IsLoading = true;
-
+            this.isLoading = true;
+            await Task.Delay(1000); // ローディングスピナーを表示するためのわずかな遅延
             // クエリパラメータからページサイズとページ番号を取得します。int 型に変換できない場合、デフォルト値にフォールバックします。
             this.actualPageSize = int.TryParse(this.PageSize, out var parsedPageSize) ? parsedPageSize : this.defaultPageSize;
             this.actualPageNumber = int.TryParse(this.PageNumber, out var parsedPageNumber) ? parsedPageNumber : this.defaultPageNumber;
@@ -179,7 +171,7 @@
         }
         finally
         {
-            this.IsLoading = false;
+            this.isLoading = false;
         }
     }
 
