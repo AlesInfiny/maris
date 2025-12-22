@@ -12,11 +12,7 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\Dressca.SystemCommon\Dressca.SystemCommon.csproj" />
-  </ItemGroup>
-  
+    
   <ItemGroup>
     <Compile Update="Resources\LogMessages.Designer.cs">
       <DesignTime>True</DesignTime>
