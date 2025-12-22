@@ -422,7 +422,7 @@ public class AnnouncementsApplicationService
         // 業務終了処理
         // ------------------------------
         this.logger.LogDebug(
-            LogMessages.AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncEnd,
+            LogMessages.AnnouncementsApplicationService_UpdateAnnouncementAndContentAsyncEnd,
             announcement.Id);
     }
 
