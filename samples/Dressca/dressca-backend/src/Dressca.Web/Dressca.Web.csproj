@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Maris.Core" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
 
