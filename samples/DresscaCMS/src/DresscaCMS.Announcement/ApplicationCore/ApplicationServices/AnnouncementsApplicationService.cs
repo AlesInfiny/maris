@@ -506,7 +506,7 @@ public class AnnouncementsApplicationService
             Id = Guid.NewGuid(),
             AnnouncementId = announcementId,
             ChangedBy = userName,
-            CreatedAt = DateTimeOffset.UtcNow,
+            CreatedAt = DateTimeOffset.Now,
             OperationType = OperationType.Delete,
             Category = announcement.Category,
             PostDateTime = announcement.PostDateTime,
