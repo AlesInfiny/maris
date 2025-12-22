@@ -18,6 +18,8 @@ Vue.js を用いた SPA の構成をとります。
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-light.png#only-light){ loading=lazy }
 ![クライアントサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/client-side-rendering-maris-dark.png#only-dark){ loading=lazy }
 
+サンプルのダウンロードおよび解説については、 [Dressca](../../samples/dressca/index.md) を参照してください。
+
 !!! note ""
 
     上の図で使用している OSS 製品名およびロゴのクレジット情報は [こちら](../../about-maris/credits.md) を参照してください。
@@ -30,11 +32,13 @@ Vue.js を用いた SPA の構成をとります。
 ![サーバーサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/server-side-rendering-maris-light.png#only-light){ loading=lazy }
 ![サーバーサイドレンダリング アプリケーションスタック](../../images/app-architecture/overview/server-side-rendering-maris-dark.png#only-dark){ loading=lazy }
 
+サンプルのダウンロードおよび解説については、 [Dressca-CMS](../../samples/dressca-cms/index.md) を参照してください。
+
 ## コンソールアプリケーション {#console-application}
 
 コンソールアプリケーションでは、汎用ホスト [Microsoft.Extensions.Hosting :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/){ target=_blank } を用いて構築します。データアクセスには Entity Framework Core を利用します。
 
-サンプルのダウンロードおよび解説については、 [コンソールアプリケーションで DI を利用する](../../samples/console-app-with-di/index.md) を参照してください。
+サンプルのダウンロードおよび解説については、 [コンソールアプリケーションで DI を利用する](../../samples/requirement-based/console-app-with-di.md) を参照してください。
 
 ![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-light.png#only-light){ loading=lazy }
 ![コンソールアプリケーション アプリケーションスタック](../../images/app-architecture/overview/console-application-maris-dark.png#only-dark){ loading=lazy }

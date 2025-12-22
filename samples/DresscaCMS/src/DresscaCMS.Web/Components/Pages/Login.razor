@@ -12,27 +12,29 @@
 @inject ILogger<Login> Logger
 @inject SignInManager<ApplicationUser> SignInManager
 
-<PageTitle>ログイン</PageTitle>
+<PageTitle>Dressca-CMS - ログイン</PageTitle>
 
-<h3>ログイン</h3>
-<EditForm EditContext="this.editContext" method="post" OnSubmit="this.LoginUser" FormName="login">
-    <DataAnnotationsValidator />
-    <FluentStack Orientation="Orientation.Vertical">
-        <FluentTextField @bind-Value="this.Input.Email" Name="Input.Email" Autocomplete="username webauthn" Placeholder="name@example.com">
-            メールアドレス
-            <RequiredMark />
-        </FluentTextField>
-        <FluentValidationMessage For="() => this.Input.Email" />
-        <FluentTextField TextFieldType="TextFieldType.Password" @bind-Value="this.Input.Password" Name="Input.Password" Autocomplete="current-password">
-            パスワード
-            <RequiredMark />
-        </FluentTextField>
-        <FluentValidationMessage For="() => this.Input.Password" />
-        <FluentCheckbox @bind-Value="this.Input.RememberMe" Name="Input.RememberMe" Label="ログイン状態を保持する" />
-        <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">ログイン</FluentButton>
-        <FluentValidationSummary Model="this.editContext.Model" />
-    </FluentStack>
-</EditForm>
+<div>
+    <h3>ログイン</h3>
+    <EditForm EditContext="this.editContext" method="post" OnSubmit="this.LoginUser" FormName="login">
+        <DataAnnotationsValidator />
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
+            <FluentStack Orientation="Orientation.Vertical">
+                <FluentInputLabel Label="メールアドレス" Required="true" />
+                <FluentTextField @bind-Value="this.Input.Email" Name="Input.Email" Autocomplete="username webauthn" Placeholder="name@example.com" Style="width: 300px;" />
+                <FluentValidationMessage For="() => this.Input.Email" />
+            </FluentStack>
+            <FluentStack Orientation="Orientation.Vertical">
+                <FluentInputLabel Label="パスワード" Required="true" />
+                <FluentTextField TextFieldType="TextFieldType.Password" @bind-Value="this.Input.Password" Name="Input.Password" Style="width: 300px;" />
+                <FluentValidationMessage For="() => this.Input.Password" />
+            </FluentStack>
+            <FluentCheckbox @bind-Value="this.Input.RememberMe" Name="Input.RememberMe" Label="ログイン状態を保持する" />
+            <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">ログイン</FluentButton>
+            <FluentValidationSummary Model="this.editContext.Model" />
+        </FluentStack>
+    </EditForm>
+</div>
 
 @code {
 

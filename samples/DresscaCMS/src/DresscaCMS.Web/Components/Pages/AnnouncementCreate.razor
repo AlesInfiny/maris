@@ -12,154 +12,147 @@
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 
-<h3>お知らせメッセージ登録</h3>
+<PageTitle>Dressca-CMS - お知らせメッセージ登録</PageTitle>
 
-<FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
-    <EditForm EditContext="this.editContext" OnSubmit="@OnRegisterButtonClickAsync" FormName="AnnouncementCreateForm">
-        <DataAnnotationsValidator />
-        <FluentGrid>
-            <FluentGridItem xs="12">
-                <FluentBreadcrumb>
-                    <FluentBreadcrumbItem>
-                        <FluentNavLink Href="/">TOP</FluentNavLink>
-                        <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
-                    </FluentBreadcrumbItem>
-                    <FluentBreadcrumbItem>
-                        お知らせメッセージ管理
-                        <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
-                    </FluentBreadcrumbItem>
-                    <FluentBreadcrumbItem>
-                        <FluentNavLink Href="/announcements">お知らせメッセージ一覧</FluentNavLink>
-                        <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
-                    </FluentBreadcrumbItem>
-                    <FluentBreadcrumbItem>
-                        お知らせメッセージ登録
-                    </FluentBreadcrumbItem>
-                </FluentBreadcrumb>
-            </FluentGridItem>
-            <FluentGridItem xs="12">
-                <div class="container">
+<div>
+    <h3>お知らせメッセージ登録</h3>
+
+    <FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
+        <FluentBreadcrumb>
+            <FluentBreadcrumbItem>
+                <FluentAnchor Href="/" Appearance="Appearance.Hypertext">TOP</FluentAnchor>
+                <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+            </FluentBreadcrumbItem>
+            <FluentBreadcrumbItem>
+                お知らせメッセージ管理
+                <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+            </FluentBreadcrumbItem>
+            <FluentBreadcrumbItem>
+                <FluentAnchor Href="/announcements" Appearance="Appearance.Hypertext">お知らせメッセージ一覧</FluentAnchor>
+                <FluentIcon Value="@(new Icons.Regular.Size20.ChevronRight())" Color="@Color.Neutral" Slot="separator" Class="bread-crumb-separator" />
+            </FluentBreadcrumbItem>
+            <FluentBreadcrumbItem>
+                お知らせメッセージ登録
+            </FluentBreadcrumbItem>
+        </FluentBreadcrumb>
+
+        <EditForm EditContext="this.editContext" OnSubmit="@OnRegisterButtonClickAsync" FormName="AnnouncementCreateForm">
+            <DataAnnotationsValidator />
+            <FluentStack Orientation="Orientation.Vertical">
+
+                <FluentCard AreaRestricted="false">
                     <h4>基本情報</h4>
                     @* お知らせメッセージ登録・ヘッダー部 *@
-                    <FluentGrid Spacing="10">
-                        <FluentGridItem xs="6">
-                            <FluentStack Orientation="Orientation.Horizontal">
-                                <FluentStack Orientation="Orientation.Vertical">
-                                    <FluentLabel>掲載開始日時（日付）<span class="required">*</span></FluentLabel>
-                                    <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
-                                    <FluentValidationMessage For="@(() => this.announcementModel.PostDate)" />
-                                </FluentStack>
-                                <FluentStack Orientation="Orientation.Vertical">
-                                    <FluentLabel>掲載開始日時（時刻）</FluentLabel>
-                                    <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" />
-                                </FluentStack>
-                                <FluentStack Orientation="Orientation.Vertical">
-                                    <FluentLabel>掲載終了日時（日付）</FluentLabel>
-                                    <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
-                                </FluentStack>
-                                <FluentStack Orientation="Orientation.Vertical">
-                                    <FluentLabel>掲載終了日時（時刻）</FluentLabel>
-                                    <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" />
-                                </FluentStack>
-                            </FluentStack>
-                        </FluentGridItem>
-                        <FluentGridItem xs="3">
-                            <FluentStack Orientation="Orientation.Vertical">
-                                <FluentLabel>カテゴリー</FluentLabel>
-                                <FluentTextField @bind-Value="@this.announcementModel.Category" Maxlength="128" Style="width:100%;" />
-                                <FluentValidationMessage For="@(() => this.announcementModel.Category)" />
-                            </FluentStack>
-                        </FluentGridItem>
-                        <FluentGridItem xs="3">
-                            <FluentStack Orientation="Orientation.Vertical">
-                                <FluentLabel>表示優先度<span class="required">*</span></FluentLabel>
-                                <FluentSelect @bind-SelectedOption="@this.announcementModel.DisplayPriority"
-                                              Items="@(Enum.GetValues<DisplayPriority>())"
-                                              OptionValue="@(p => ((int)p).ToString())"
-                                              OptionText="@(p => p.GetDisplayName())" />
-                            </FluentStack>
-                        </FluentGridItem>
-                    </FluentGrid>
-                </div>
-            </FluentGridItem>
-            <FluentGridItem xs="9">
-                <div class="container">
-                    <FluentStack Orientation="Orientation.Vertical">
-                        @* お知らせメッセージ登録・お知らせコンテンツアクション部 *@
-                        <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="20" VerticalAlignment="VerticalAlignment.Top">
-                            <h4>お知らせメッセージ</h4>
-                            <FluentButton Appearance="Appearance.Accent" OnClick="@this.OnAddLanguageButtonClick">別の言語を追加</FluentButton>
+                    <FluentStack Orientation="Orientation.Horizontal">
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <FluentInputLabel Label="掲載開始日時（日付）" Required="true" />
+                            <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
+                            <FluentValidationMessage For="@(() => this.announcementModel.PostDate)" />
                         </FluentStack>
-                        @if (!this.announcementModel.AnnouncementContents.Any())
-                        {
-                            <p>登録されているお知らせメッセージはありません。</p>
-                        }
-                        else
-                        {
-                            @foreach (var content in this.announcementModel.AnnouncementContents.OrderBy(c => c.DisplayOrder))
-                            {
-                                <FluentCard AreaRestricted="false">
-                                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
-                                        <FluentStack Orientation="Orientation.Horizontal" HorizontalAlignment="HorizontalAlignment.End">
-                                            <FluentButton Appearance="Appearance.Lightweight" OnClick="@(() => this.OnDeleteContentButtonClick(content.Id))">
-                                                <FluentIcon Value="@(new Icons.Regular.Size20.Delete())" Color="@Color.Error" />
-                                                削除
-                                            </FluentButton>
-                                        </FluentStack>
-                                        <FluentStack Orientation="Orientation.Vertical">
-                                            <FluentLabel>言語<span class="required">*</span></FluentLabel>
-                                            <FluentSelect @bind-Value="content.LanguageCode" Items="languagePriorities" OptionValue="@(p => p.Code)" OptionText="@(p => p.DisplayName)" />
-                                            <FluentValidationMessage For="@(() => content.LanguageCode)" />
-                                            <FluentLabel>タイトル<span class="required">*</span></FluentLabel>
-                                            <FluentTextField @bind-Value="@content.Title" Maxlength="256" Style="width: 100%;" />
-                                            <FluentValidationMessage For="@(() => content.Title)" />
-                                            <FluentLabel>メッセージ<span class="required">*</span></FluentLabel>
-                                            <FluentTextArea @bind-Value="@content.Message" Maxlength="512" Rows="5" Style="width: 100%;" />
-                                            <FluentValidationMessage For="@(() => content.Message)" />
-                                            <FluentLabel>リンク先URL</FluentLabel>
-                                            <FluentTextField @bind-Value="@content.LinkedUrl" Maxlength="1024" Placeholder="https://www.example.com" Style="width: 100%;" />
-                                            <FluentValidationMessage For="@(() => content.LinkedUrl)" />
-                                        </FluentStack>
-                                    </FluentStack>
-                                </FluentCard>
-                            }
-                        }
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <FluentInputLabel Label="掲載開始日時（時刻）" />
+                            <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" />
+                        </FluentStack>
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <FluentInputLabel Label="掲載終了日時（日付）" />
+                            <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
+                        </FluentStack>
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <FluentInputLabel Label="掲載終了日時（時刻）" />
+                            <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" />
+                        </FluentStack>
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <FluentInputLabel Label="カテゴリー" />
+                            <FluentTextField @bind-Value="@this.announcementModel.Category" Maxlength="128" Style="width: 200px;" />
+                            <FluentValidationMessage For="@(() => this.announcementModel.Category)" />
+                        </FluentStack>
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <FluentInputLabel Label="表示優先度" Required="true" />
+                            <FluentSelect @bind-SelectedOption="@this.announcementModel.DisplayPriority"
+                                          Items="@(Enum.GetValues<DisplayPriority>())"
+                                          OptionValue="@(p => ((int)p).ToString())"
+                                          OptionText="@(p => p.GetDisplayName())"
+                                          Width="100px" />
+                            <FluentValidationMessage For="@(() => this.announcementModel.DisplayPriority)" />
+                        </FluentStack>
                     </FluentStack>
-                </div>
-            </FluentGridItem>
-            <FluentGridItem xs="3">
-                @* お知らせメッセージ登録・アクション部 *@
-                <div class="container">
-                    <FluentStack Orientation="Orientation.Vertical">
-                        <h4>アクション</h4>
-                        <FluentValidationSummary Model="@this.announcementModel" />
-                        <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center">
-                            <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
+                </FluentCard>
+                <FluentStack Orientation="Orientation.Horizontal">
+                    <FluentCard AreaRestricted="false">
+                        <FluentStack Orientation="Orientation.Vertical">
+                            @* お知らせメッセージ登録・お知らせコンテンツアクション部 *@
+                            <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="20" VerticalAlignment="VerticalAlignment.Top">
+                                <h4>お知らせメッセージ</h4>
+                                <FluentButton Appearance="Appearance.Accent" OnClick="@this.OnAddLanguageButtonClick">別の言語を追加</FluentButton>
+                            </FluentStack>
+                            @if (!this.announcementModel.AnnouncementContents.Any())
+                            {
+                                <p>登録されているお知らせメッセージはありません。</p>
+                            }
+                            else
+                            {
+                                @foreach (var content in this.announcementModel.AnnouncementContents.OrderBy(c => c.DisplayOrder))
+                                {
+                                    <FluentCard AreaRestricted="false" Class="card-with-action">
+                                        <FluentButton Appearance="Appearance.Outline" OnClick="@(() => this.OnDeleteContentButtonClick(content.Id))" Class="card-action-button">
+                                            <FluentIcon Value="@(new Icons.Regular.Size20.Delete())" Color="@Color.Error" Slot="start" />
+                                            削除
+                                        </FluentButton>
+                                        <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
+                                            <FluentStack Orientation="Orientation.Vertical">
+                                                <FluentInputLabel Label="言語" Required="true" />
+                                                <FluentSelect @bind-Value="content.LanguageCode" Items="languagePriorities" OptionValue="@(p => p.Code)" OptionText="@(p => p.DisplayName)" />
+                                                <FluentValidationMessage For="@(() => content.LanguageCode)" />
+                                                <FluentInputLabel Label="タイトル" Required="true" />
+                                                <FluentTextField @bind-Value="@content.Title" Maxlength="256" Style="width: 100%;" />
+                                                <FluentValidationMessage For="@(() => content.Title)" />
+                                                <FluentInputLabel Label="メッセージ" Required="true" />
+                                                <FluentTextArea @bind-Value="@content.Message" Maxlength="512" Rows="3" Style="width: 100%;" />
+                                                <FluentValidationMessage For="@(() => content.Message)" />
+                                                <FluentInputLabel Label="リンク先URL" />
+                                                <FluentTextField @bind-Value="@content.LinkedUrl" Maxlength="1024" Placeholder="https://www.example.com" Style="width: 100%;" />
+                                                <FluentValidationMessage For="@(() => content.LinkedUrl)" />
+                                            </FluentStack>
+                                        </FluentStack>
+                                    </FluentCard>
+                                }
+                            }
+                        </FluentStack>
+                    </FluentCard>
+                    @* お知らせメッセージ登録・アクション部 *@
+                    <FluentCard Width="400px">
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <FluentStack Orientation="Orientation.Horizontal">
+                                <h4>アクション</h4>
                                 @if (this.isSubmitting)
                                 {
                                     <FluentProgressRing Width="20px" />
                                 }
-                                お知らせメッセージの登録
-                            </FluentButton>
-                            <div style="margin-top:60px;">
-                                <FluentNavLink Href="/announcements" Class="nav-link">お知らせメッセージ管理画面へ戻る</FluentNavLink>
-                            </div>
+                            </FluentStack>
+                            <FluentValidationSummary Model="@this.announcementModel" />
+                            <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.Center" VerticalGap="30">
+                                <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent" Disabled="@this.isSubmitting">
+                                    お知らせメッセージの登録
+                                </FluentButton>
+                                <FluentAnchor Href="/announcements" Appearance="Appearance.Hypertext">お知らせメッセージ管理画面へ戻る</FluentAnchor>
+                            </FluentStack>
                         </FluentStack>
-                    </FluentStack>
-                </div>
-            </FluentGridItem>
-        </FluentGrid>
-    </EditForm>
-</FluentStack>
+                    </FluentCard>
+                </FluentStack>
+            </FluentStack>
+        </EditForm>
+    </FluentStack>
+</div>
 
 @code {
-    private readonly AnnouncementCreateViewModel announcementModel = new();
-    private readonly LanguagePriorities languagePriorities = new();
-    private bool isSubmitting = false;
+
     private ValidationMessageStore messageStore = default!;
     private EditContext editContext = default!;
+    private bool isSubmitting;
+    private readonly AnnouncementCreateViewModel announcementModel = new();
+    private readonly LanguagePriorities languagePriorities = new();
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     protected override void OnInitialized()
     {
         this.editContext = new EditContext(this.announcementModel);
@@ -221,23 +214,24 @@
     /// </summary>
     private async Task OnRegisterButtonClickAsync()
     {
-        this.messageStore.Clear();
-
-        if (!this.editContext.Validate())
-        {
-            return;
-        }
-
-        // 相関チェック
-        var offsetMinutes = await this.GetOffsetAsync();
-        if (!this.ValidateCorrelation(offsetMinutes))
-        {
-            return;
-        }
-
         this.isSubmitting = true;
+        this.StateHasChanged();
         try
         {
+            this.messageStore.Clear();
+
+            if (!this.editContext.Validate())
+            {
+                return;
+            }
+
+            // 相関チェック
+            var offsetMinutes = await this.GetOffsetAsync();
+            if (!this.ValidateCorrelation(offsetMinutes))
+            {
+                return;
+            }
+
             // ビューモデルからエンティティへの変換
             var announcement = new DresscaCMS.Announcement.Infrastructures.Entities.Announcement
             {
@@ -288,6 +282,7 @@
         finally
         {
             this.isSubmitting = false;
+            this.StateHasChanged();
         }
     }
 

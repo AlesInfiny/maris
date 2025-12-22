@@ -4,29 +4,25 @@
 @using System.Diagnostics
 @using System.Diagnostics.CodeAnalysis
 
-<PageTitle>内部サーバーエラー</PageTitle>
-
-<h1 class="text-danger">内部サーバーエラー</h1>
-<p>
-    申し訳ありません。処理中に予期しないエラーが発生しました。<br />
-    時間をおいて再度アクセスしてください。問題が解決しない場合は、管理者へお問い合わせください。
-</p>
+<PageTitle>Dressca-CMS - 内部サーバーエラー</PageTitle>
 
 <div>
-    <FluentAnchor Href="/" Appearance="Appearance.Hypertext">トップページに戻る</FluentAnchor>
+    <h3>内部サーバーエラー</h3>
+    <FluentStack Orientation="Orientation.Vertical" VerticalGap="30">
+        <div>
+            申し訳ありません。処理中に予期しないエラーが発生しました。<br />
+            時間をおいて再度アクセスしてください。問題が解決しない場合は、管理者へお問い合わせください。
+        </div>
+        <FluentAnchor Href="/" Appearance="Appearance.Hypertext">トップページに戻る</FluentAnchor>
+        @if (this.ShowStackTrace)
+        {
+            <FluentCard>
+                <h4>スタックトレース</h4>
+                <pre>@this.Exception.ToString()</pre>
+            </FluentCard>
+        }
+    </FluentStack>
 </div>
-
-@if (this.ShowStackTrace)
-{
-    <div class="stack-trace-box">
-        <FluentCard>
-            <h3>スタックトレース</h3>
-            <pre>
-                @this.Exception.ToString()
-            </pre>
-        </FluentCard>
-    </div>
-}
 
 @code {
     [Parameter]

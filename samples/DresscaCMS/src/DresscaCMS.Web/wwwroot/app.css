@@ -34,7 +34,9 @@ body {
 .content {
     padding: 0.5rem 1.5rem;
     align-self: stretch !important;
-    width: min(1500px, 100%) !important;
+    width: 100% !important;
+    min-width: 1300px;
+    max-width: 1550px;
 }
 
 .manage {
