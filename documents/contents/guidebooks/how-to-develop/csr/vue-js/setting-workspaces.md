@@ -64,6 +64,8 @@ Node.js の LTS バージョンの情報については、 [Node.js リリース
 }
 ```
 
+設定ができたら、ルートプロジェクトの直下で `npm install` を行い、 package-lock.json が更新されることと、 `"engines"` のバージョンに関する警告が出力されないことを確認してください。
+
 ## スクリプトの登録 {#register-npm-scripts}
 
 ルートプロジェクトの package.json にスクリプトを登録します。
