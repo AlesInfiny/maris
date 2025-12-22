@@ -166,43 +166,6 @@ public class AnnouncementsApplicationService
             throw new ArgumentException("ユーザー名が null または空文字列です。", nameof(userName));
         }
 
-        // 入力値の検証（プレゼンテーション層での単項目チェック、相関チェックと同じチェック）
-        if (announcement.PostDateTime == default)
-        {
-            throw new ArgumentException("掲載開始日時が設定されていません。", nameof(announcement));
-        }
-
-        if (announcement.ExpireDateTime.HasValue && announcement.PostDateTime > announcement.ExpireDateTime.Value)
-        {
-            throw new ArgumentException("掲載終了日時は掲載開始日時以降に設定してください。", nameof(announcement));
-        }
-
-        if (!contents.Any())
-        {
-            throw new ArgumentException("お知らせメッセージは 1 件以上作成してください。", nameof(contents));
-        }
-
-        // 言語コードの重複チェック
-        var languageCodes = contents.Select(c => c.LanguageCode).ToList();
-        if (languageCodes.Count != languageCodes.Distinct().Count())
-        {
-            throw new ArgumentException("お知らせメッセージの言語が重複しています。", nameof(contents));
-        }
-
-        // 各コンテンツの必須項目チェック
-        foreach (var content in contents)
-        {
-            if (string.IsNullOrWhiteSpace(content.Title))
-            {
-                throw new ArgumentException("タイトルを入力してください。", nameof(contents));
-            }
-
-            if (string.IsNullOrWhiteSpace(content.Message))
-            {
-                throw new ArgumentException("メッセージを入力してください。", nameof(contents));
-            }
-        }
-
         // ------------------------------
         // 業務メイン処理
         // ------------------------------
@@ -369,43 +332,6 @@ public class AnnouncementsApplicationService
             announcement.Id,
             userName);
 
-        // 入力値の検証（プレゼンテーション層での単項目チェック、相関チェックと同じチェック）
-        if (announcement.PostDateTime == default)
-        {
-            throw new ArgumentException("掲載開始日時が設定されていません。", nameof(announcement));
-        }
-
-        if (announcement.ExpireDateTime.HasValue && announcement.PostDateTime > announcement.ExpireDateTime.Value)
-        {
-            throw new ArgumentException("掲載終了日時は掲載開始日時以降に設定してください。", nameof(announcement));
-        }
-
-        if (!contents.Any())
-        {
-            throw new ArgumentException("お知らせメッセージは 1 件以上作成してください。", nameof(contents));
-        }
-
-        // 言語コードの重複チェック
-        var languageCodes = contents.Select(c => c.LanguageCode).ToList();
-        if (languageCodes.Count != languageCodes.Distinct().Count())
-        {
-            throw new ArgumentException("お知らせメッセージの言語が重複しています。", nameof(contents));
-        }
-
-        // 各コンテンツの必須項目チェック
-        foreach (var content in contents)
-        {
-            if (string.IsNullOrWhiteSpace(content.Title))
-            {
-                throw new ArgumentException("タイトルを入力してください。", nameof(contents));
-            }
-
-            if (string.IsNullOrWhiteSpace(content.Message))
-            {
-                throw new ArgumentException("メッセージを入力してください。", nameof(contents));
-            }
-        }
-
         // ------------------------------
         // 業務メイン処理
         // ------------------------------
@@ -420,101 +346,90 @@ public class AnnouncementsApplicationService
             transactionOptions,
             TransactionScopeAsyncFlowOption.Enabled);
 
-        try
+        // お知らせメッセージを更新
+        await this.announcementsRepository.UpdateAnnouncementAsync(
+            announcement,
+            cancellationToken);
+
+        // 変更前のお知らせコンテンツを取得
+        var existingContents = await this.announcementsRepository
+            .FindAnnouncementContentsByAnnouncementIdAsync(
+                announcement.Id,
+                cancellationToken);
+
+        // お知らせコンテンツを更新
+        var existingContentIds = existingContents.Select(c => c.Id).ToHashSet();
+        var newContentIds = contents.Select(c => c.Id).ToHashSet();
+
+        // 新規追加するコンテンツ
+        foreach (var content in contents.Where(c => c.Id == Guid.Empty || !existingContentIds.Contains(c.Id)))
         {
-            // お知らせメッセージを更新
-            await this.announcementsRepository.UpdateAnnouncementAsync(
-                announcement,
+            content.AnnouncementId = announcement.Id;
+            await this.announcementsRepository.CreateAnnouncementContentAsync(
+                content,
                 cancellationToken);
-
-            // 変更前のお知らせコンテンツを取得
-            var existingContents = await this.announcementsRepository
-                .FindAnnouncementContentsByAnnouncementIdAsync(
-                    announcement.Id,
-                    cancellationToken);
-
-            // お知らせコンテンツを更新
-            var existingContentIds = existingContents.Select(c => c.Id).ToHashSet();
-            var newContentIds = contents.Select(c => c.Id).ToHashSet();
-
-            // 新規追加するコンテンツ
-            foreach (var content in contents.Where(c => c.Id == Guid.Empty || !existingContentIds.Contains(c.Id)))
-            {
-                content.AnnouncementId = announcement.Id;
-                await this.announcementsRepository.CreateAnnouncementContentAsync(
-                    content,
-                    cancellationToken);
-            }
-
-            // 更新するコンテンツ
-            foreach (var content in contents.Where(c => c.Id != Guid.Empty && existingContentIds.Contains(c.Id)))
-            {
-                await this.announcementsRepository.UpdateAnnouncementContentAsync(
-                    content,
-                    cancellationToken);
-            }
-
-            // 削除するコンテンツ
-            var removeContentIds = existingContents.Where(c => !newContentIds.Contains(c.Id)).Select(c => c.Id).ToHashSet();
-            await this.announcementsRepository.DeleteAnnouncementContentsAsync(
-                removeContentIds,
-                cancellationToken);
-
-            // お知らせメッセージ更新履歴を作成
-            var history = new AnnouncementHistory
-            {
-                Id = Guid.NewGuid(),
-                AnnouncementId = announcement.Id,
-                ChangedBy = userName,
-                CreatedAt = DateTimeOffset.Now,
-                OperationType = OperationType.Update,
-                Category = announcement.Category,
-                PostDateTime = announcement.PostDateTime,
-                ExpireDateTime = announcement.ExpireDateTime,
-                DisplayPriority = announcement.DisplayPriority,
-            };
-
-            await this.announcementsRepository.CreateAnnouncementHistoryAsync(
-                history,
-                cancellationToken);
-
-            // お知らせコンテンツ更新履歴を作成
-            var contentHistories = contents
-                .Select(content
-                    => new AnnouncementContentHistory
-                    {
-                        Id = Guid.NewGuid(),
-                        AnnouncementHistoryId = history.Id,
-                        LanguageCode = content.LanguageCode,
-                        Title = content.Title,
-                        Message = content.Message,
-                        LinkedUrl = content.LinkedUrl,
-                    });
-
-            foreach (var contentHistory in contentHistories)
-            {
-                await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
-                    contentHistory,
-                    cancellationToken);
-            }
-
-            scope.Complete();
-
-            // ------------------------------
-            // 業務終了処理
-            // ------------------------------
-            this.logger.LogDebug(
-                "お知らせメッセージとお知らせコンテンツの更新が完了しました。お知らせメッセージ ID: {AnnouncementId}",
-                announcement.Id);
         }
-        catch (Exception ex)
+
+        // 更新するコンテンツ
+        foreach (var content in contents.Where(c => c.Id != Guid.Empty && existingContentIds.Contains(c.Id)))
         {
-            this.logger.LogError(
-                ex,
-                "お知らせメッセージとお知らせコンテンツの更新中にエラーが発生しました。お知らせメッセージ ID: {AnnouncementId}",
-                announcement.Id);
-            throw;
+            await this.announcementsRepository.UpdateAnnouncementContentAsync(
+                content,
+                cancellationToken);
         }
+
+        // 削除するコンテンツ
+        var removeContentIds = existingContents.Where(c => !newContentIds.Contains(c.Id)).Select(c => c.Id).ToHashSet();
+        await this.announcementsRepository.DeleteAnnouncementContentsAsync(
+            removeContentIds,
+            cancellationToken);
+
+        // お知らせメッセージ更新履歴を作成
+        var history = new AnnouncementHistory
+        {
+            Id = Guid.NewGuid(),
+            AnnouncementId = announcement.Id,
+            ChangedBy = userName,
+            CreatedAt = DateTimeOffset.Now,
+            OperationType = OperationType.Update,
+            Category = announcement.Category,
+            PostDateTime = announcement.PostDateTime,
+            ExpireDateTime = announcement.ExpireDateTime,
+            DisplayPriority = announcement.DisplayPriority,
+        };
+
+        await this.announcementsRepository.CreateAnnouncementHistoryAsync(
+            history,
+            cancellationToken);
+
+        // お知らせコンテンツ更新履歴を作成
+        var contentHistories = contents
+            .Select(content
+                => new AnnouncementContentHistory
+                {
+                    Id = Guid.NewGuid(),
+                    AnnouncementHistoryId = history.Id,
+                    LanguageCode = content.LanguageCode,
+                    Title = content.Title,
+                    Message = content.Message,
+                    LinkedUrl = content.LinkedUrl,
+                });
+
+        foreach (var contentHistory in contentHistories)
+        {
+            await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
+                contentHistory,
+                cancellationToken);
+        }
+
+        scope.Complete();
+
+        // ------------------------------
+        // 業務終了処理
+        // ------------------------------
+        this.logger.LogDebug(
+            "お知らせメッセージとお知らせコンテンツの更新が完了しました。お知らせメッセージ ID: {AnnouncementId}",
+            announcement.Id);
     }
 
     /// <summary>
@@ -559,88 +474,77 @@ public class AnnouncementsApplicationService
             transactionOptions,
             TransactionScopeAsyncFlowOption.Enabled);
 
-        try
+        // お知らせメッセージとコンテンツを取得（削除前の情報を履歴に残すため）
+        var announcementData = await this.announcementsRepository.FindByAnnouncementWithContentAsync(
+            announcementId,
+            cancellationToken);
+
+        if (announcementData == null)
         {
-            // お知らせメッセージとコンテンツを取得（削除前の情報を履歴に残すため）
-            var announcementData = await this.announcementsRepository.FindByAnnouncementWithContentAsync(
-                announcementId,
-                cancellationToken);
-
-            if (announcementData == null)
-            {
-                throw new InvalidOperationException($"お知らせメッセージが見つかりません。ID: {announcementId}");
-            }
-
-            var announcement = announcementData.Announcement;
-            var contents = announcementData.Contents;
-
-            // お知らせメッセージを論理削除
-            announcement.IsDeleted = true;
-            announcement.ChangedAt = DateTimeOffset.Now;
-
-            await this.announcementsRepository.UpdateAnnouncementAsync(
-                announcement,
-                cancellationToken);
-
-            // お知らせコンテンツを物理削除
-            await this.announcementsRepository.DeleteAnnouncementContentsAsync(
-                contents.Select(c => c.Id),
-                cancellationToken);
-
-            // お知らせメッセージ削除履歴を作成
-            var history = new AnnouncementHistory
-            {
-                Id = Guid.NewGuid(),
-                AnnouncementId = announcementId,
-                ChangedBy = userName,
-                CreatedAt = DateTimeOffset.UtcNow,
-                OperationType = OperationType.Delete,
-                Category = announcement.Category,
-                PostDateTime = announcement.PostDateTime,
-                ExpireDateTime = announcement.ExpireDateTime,
-                DisplayPriority = announcement.DisplayPriority,
-            };
-
-            await this.announcementsRepository.CreateAnnouncementHistoryAsync(
-                history,
-                cancellationToken);
-
-            // お知らせコンテンツ削除履歴を作成
-            var contentHistories = contents
-                .Select(content
-                    => new AnnouncementContentHistory
-                    {
-                        Id = Guid.NewGuid(),
-                        AnnouncementHistoryId = history.Id,
-                        LanguageCode = content.LanguageCode,
-                        Title = content.Title,
-                        Message = content.Message,
-                        LinkedUrl = content.LinkedUrl,
-                    });
-
-            foreach (var contentHistory in contentHistories)
-            {
-                await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
-                    contentHistory,
-                    cancellationToken);
-            }
-
-            scope.Complete();
-
-            // ------------------------------
-            // 業務終了処理
-            // ------------------------------
-            this.logger.LogDebug(
-                "お知らせメッセージとお知らせコンテンツの削除が完了しました。お知らせメッセージ ID: {AnnouncementId}",
-                announcementId);
+            throw new InvalidOperationException($"お知らせメッセージが見つかりません。ID: {announcementId}");
         }
-        catch (Exception ex)
+
+        var announcement = announcementData.Announcement;
+        var contents = announcementData.Contents;
+
+        // お知らせメッセージを論理削除
+        announcement.IsDeleted = true;
+        announcement.ChangedAt = DateTimeOffset.Now;
+
+        await this.announcementsRepository.UpdateAnnouncementAsync(
+            announcement,
+            cancellationToken);
+
+        // お知らせコンテンツを物理削除
+        await this.announcementsRepository.DeleteAnnouncementContentsAsync(
+            contents.Select(c => c.Id),
+            cancellationToken);
+
+        // お知らせメッセージ削除履歴を作成
+        var history = new AnnouncementHistory
         {
-            this.logger.LogError(
-                ex,
-                "お知らせメッセージとお知らせコンテンツの削除中にエラーが発生しました。お知らせメッセージ ID: {AnnouncementId}",
-                announcementId);
-            throw;
+            Id = Guid.NewGuid(),
+            AnnouncementId = announcementId,
+            ChangedBy = userName,
+            CreatedAt = DateTimeOffset.UtcNow,
+            OperationType = OperationType.Delete,
+            Category = announcement.Category,
+            PostDateTime = announcement.PostDateTime,
+            ExpireDateTime = announcement.ExpireDateTime,
+            DisplayPriority = announcement.DisplayPriority,
+        };
+
+        await this.announcementsRepository.CreateAnnouncementHistoryAsync(
+            history,
+            cancellationToken);
+
+        // お知らせコンテンツ削除履歴を作成
+        var contentHistories = contents
+            .Select(content
+                => new AnnouncementContentHistory
+                {
+                    Id = Guid.NewGuid(),
+                    AnnouncementHistoryId = history.Id,
+                    LanguageCode = content.LanguageCode,
+                    Title = content.Title,
+                    Message = content.Message,
+                    LinkedUrl = content.LinkedUrl,
+                });
+
+        foreach (var contentHistory in contentHistories)
+        {
+            await this.announcementsRepository.CreateAnnouncementContentHistoryAsync(
+                contentHistory,
+                cancellationToken);
         }
+
+        scope.Complete();
+
+        // ------------------------------
+        // 業務終了処理
+        // ------------------------------
+        this.logger.LogDebug(
+            "お知らせメッセージとお知らせコンテンツの削除が完了しました。お知らせメッセージ ID: {AnnouncementId}",
+            announcementId);
     }
 }
