@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using DresscaCMS.Authentication.Infrastructures;
 using DresscaCMS.Authentication.Infrastructures.Entities;
+using DresscaCMS.Authentication.Resources;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +42,7 @@ public static class AuthenticationServiceCollectionExtensions
             if (string.IsNullOrWhiteSpace(connectionString))
             {
                 throw new ArgumentException(
-                    message: $"接続文字列 '{ConnectionStringName}' が見つかりません。",
+                    message: string.Format(Messages.NotFoundConnectionString, ConnectionStringName),
                     paramName: nameof(configuration));
             }
 
