@@ -205,7 +205,7 @@ public class AnnouncementsApplicationService
 
         if (businessErrors.Count > 0)
         {
-            throw new BusinessException(businessErrors.ToArray());
+            throw new BusinessException(businessErrors);
         }
 
         // 各コンテンツの必須項目チェック
@@ -426,7 +426,7 @@ public class AnnouncementsApplicationService
 
         if (businessErrors.Count > 0)
         {
-            throw new BusinessException(businessErrors.ToArray());
+            throw new BusinessException(businessErrors);
         }
 
         // 各コンテンツの必須項目チェック
