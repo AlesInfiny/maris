@@ -61,6 +61,69 @@ namespace DresscaCMS.Announcement.Resources {
         }
         
         /// <summary>
+        ///   お知らせメッセージが見つかりませんでした。お知らせメッセージ ID: {AnnouncementId} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationService_AnnouncementNotFound {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationService_AnnouncementNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージとお知らせコンテンツの登録が完了しました。お知らせメッセージ ID: {AnnouncementId} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationService_CreateAnnouncementAndContentAsyncEnd {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationService_CreateAnnouncementAndContentAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージとお知らせコンテンツの登録を開始します。ユーザー名: {UserName} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationService_CreateAnnouncementAndContentAsyncStart {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationService_CreateAnnouncementAndContentAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージとお知らせコンテンツの削除が完了しました。お知らせメッセージ ID: {AnnouncementId} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationService_DeleteAnnouncementAndContentAsyncEnd {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationService_DeleteAnnouncementAndContentAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージとお知らせコンテンツの削除を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationService_DeleteAnnouncementAndContentAsyncStart {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationService_DeleteAnnouncementAndContentAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージと更新履歴の取得が完了しました。お知らせメッセージ ID: {AnnouncementId} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationService_GetAnnouncementAndHistoriesByIdAsyncEnd {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationService_GetAnnouncementAndHistoriesByIdAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージと更新履歴の取得を開始します。お知らせメッセージ ID: {AnnouncementId} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationService_GetAnnouncementAndHistoriesByIdAsyncStart {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationService_GetAnnouncementAndHistoriesByIdAsyncStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string AnnouncementsApplicationService_GetPagedAnnouncementsEnd {
@@ -75,6 +138,24 @@ namespace DresscaCMS.Announcement.Resources {
         internal static string AnnouncementsApplicationService_GetPagedAnnouncementsStart {
             get {
                 return ResourceManager.GetString("AnnouncementsApplicationService_GetPagedAnnouncementsStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージとお知らせコンテンツの更新が完了しました。お知らせメッセージ ID: {AnnouncementId} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncEnd {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージとお知らせコンテンツの更新を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncStart {
+            get {
+                return ResourceManager.GetString("AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncStart", resourceCulture);
             }
         }
     }

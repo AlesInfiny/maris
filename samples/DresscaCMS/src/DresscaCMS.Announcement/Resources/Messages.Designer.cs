@@ -61,11 +61,29 @@ namespace DresscaCMS.Announcement.Resources {
         }
         
         /// <summary>
+        ///   お知らせメッセージが見つかりません。お知らせメッセージID: {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string NotFoundAnnouncement {
+            get {
+                return ResourceManager.GetString("NotFoundAnnouncement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   {0} 接続文字列を構成から取得できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string NotFoundConnectionString {
             get {
                 return ResourceManager.GetString("NotFoundConnectionString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   {0} が null または空文字列です。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ParameterIsNullOrEmpty {
+            get {
+                return ResourceManager.GetString("ParameterIsNullOrEmpty", resourceCulture);
             }
         }
         

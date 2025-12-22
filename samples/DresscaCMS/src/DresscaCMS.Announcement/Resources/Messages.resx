@@ -123,4 +123,10 @@
   <data name="NotFoundConnectionString" xml:space="preserve">
     <value>{0} 接続文字列を構成から取得できません。</value>
   </data>
+  <data name="ParameterIsNullOrEmpty" xml:space="preserve">
+    <value>{0} が null または空文字列です。</value>
+  </data>
+  <data name="NotFoundAnnouncement" xml:space="preserve">
+    <value>お知らせメッセージが見つかりません。お知らせメッセージID: {0}</value>
+  </data>
 </root>
