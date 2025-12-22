@@ -184,7 +184,7 @@ public class AnnouncementsApplicationService
 
         // 言語コードの重複チェック
         var languageCodes = contents.Select(c => c.LanguageCode).ToList();
-        if (languageCodes.Count != languageCodes.Distinct().Count())
+        if (languageCodes.Count != languageCodes.ToHashSet().Count)
         {
             businessErrors.AddOrMerge(
                 new BusinessError(
@@ -370,7 +370,7 @@ public class AnnouncementsApplicationService
 
         // 言語コードの重複チェック
         var languageCodes = contents.Select(c => c.LanguageCode).ToList();
-        if (languageCodes.Count != languageCodes.Distinct().Count())
+        if (languageCodes.Count != languageCodes.ToHashSet().Count)
         {
             businessErrors.AddOrMerge(
                 new BusinessError(
