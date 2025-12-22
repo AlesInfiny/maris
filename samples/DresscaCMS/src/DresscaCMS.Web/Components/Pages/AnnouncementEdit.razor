@@ -445,26 +445,6 @@
             return false;
         }
 
-        // お知らせコンテンツが1件以上あるかチェック
-        if (!this.announcementModel.AnnouncementContents.Any())
-        {
-            this.messageStore.Add(
-                new FieldIdentifier(this.editContext.Model, string.Empty),
-                "お知らせメッセージは1件以上作成してください。");
-            this.editContext.NotifyValidationStateChanged();
-            return false;
-        }
-
-        // 言語コードの重複チェック
-        var languageCodes = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToList();
-        if (languageCodes.Count != languageCodes.Distinct().Count())
-        {
-            this.messageStore.Add(
-                new FieldIdentifier(this.editContext.Model, string.Empty),
-                "お知らせメッセージの言語が重複しています。");
-            return false;
-        }
-
         return true;
     }
 
