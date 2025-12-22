@@ -11,6 +11,7 @@
 @inject AnnouncementsApplicationService AnnouncementsService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime JS
+@inject ILogger<AnnouncementEdit> Logger
 @inject NavigationManager NavigationManager
 
 <PageTitle>Dressca-CMS - お知らせメッセージ編集</PageTitle>
@@ -399,6 +400,8 @@
         }
         catch (BusinessException businessEx)
         {
+            this.Logger.LogDebug(businessEx, "お知らせメッセージとお知らせコンテンツの更新に失敗しました。");
+
             // ビジネス例外発生時はメッセージを表示
             foreach (var error in businessEx.GetErrors())
             {
