@@ -43,11 +43,11 @@ Information レベル以上のログを出力するように設定しましょ�
 
 ```json title="appsettings.json の設定例" hl_lines="6"
 {
-"Logging": {
+  "Logging": {
     "LogLevel": {
-    "Default": "Information",
-    "Microsoft.AspNetCore": "Warning",
-    "AaaSubSystem": "Information"
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "AaaSubSystem": "Information"
     }
   },
 }
@@ -60,14 +60,14 @@ Information レベル以上のログを出力するように設定しましょ�
 
 ```json title="appsettings.Development.json の設定例" hl_lines="5-9"
 {
-"Logging": {
+  "Logging": {
     "LogLevel": {
-    "Default": "Information",
-    "Microsoft.AspNetCore": "Warning",
-    "Microsoft.AspNetCore.HttpLogging": "Warning",
-    "Microsoft.AspNetCore.SignalR": "Information",
-    "Microsoft.AspNetCore.Http.Connections": "Information",
-    "AaaSubSystem": "Debug"
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "Microsoft.AspNetCore.HttpLogging": "Warning",
+      "Microsoft.AspNetCore.SignalR": "Information",
+      "Microsoft.AspNetCore.Http.Connections": "Information",
+      "AaaSubSystem": "Debug"
     }
   },
 }
