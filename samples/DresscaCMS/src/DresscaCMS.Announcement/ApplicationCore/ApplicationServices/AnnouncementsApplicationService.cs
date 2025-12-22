@@ -168,6 +168,11 @@ public class AnnouncementsApplicationService
         ArgumentNullException.ThrowIfNull(announcement);
         ArgumentNullException.ThrowIfNull(contents);
 
+        if (string.IsNullOrWhiteSpace(userName))
+        {
+            throw new ArgumentException("ユーザー名が null または空文字列です。", nameof(userName));
+        }
+
         var businessErrors = new BusinessErrorCollection();
         if (!contents.Any())
         {
