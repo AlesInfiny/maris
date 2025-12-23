@@ -129,4 +129,10 @@
   <data name="NotFoundAnnouncement" xml:space="preserve">
     <value>お知らせメッセージが見つかりません。お知らせメッセージID: {0}</value>
   </data>
+  <data name="NoAnnouncementMessages" xml:space="preserve">
+    <value>お知らせメッセージは 1 件以上作成してください。</value>
+  </data>
+  <data name="DuplicatedLanguageCode" xml:space="preserve">
+    <value>お知らせメッセージの言語が重複しています。</value>
+  </data>
 </root>

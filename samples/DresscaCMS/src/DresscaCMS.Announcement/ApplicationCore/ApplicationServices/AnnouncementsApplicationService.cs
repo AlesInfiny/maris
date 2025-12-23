@@ -181,7 +181,7 @@ public class AnnouncementsApplicationService
             businessErrors.AddOrMerge(
                 new BusinessError(
                     "ArgumentIsNotValid",
-                    new ErrorMessage("お知らせメッセージは 1 件以上作成してください。")));
+                    new ErrorMessage(Messages.NoAnnouncementMessages)));
         }
 
         // 言語コードの重複チェック
@@ -191,7 +191,7 @@ public class AnnouncementsApplicationService
             businessErrors.AddOrMerge(
                 new BusinessError(
                     "ArgumentIsNotValid",
-                    new ErrorMessage("お知らせメッセージの言語が重複しています。")));
+                    new ErrorMessage(Messages.DuplicatedLanguageCode)));
         }
 
         if (businessErrors.Count > 0)
@@ -369,7 +369,7 @@ public class AnnouncementsApplicationService
             businessErrors.AddOrMerge(
                 new BusinessError(
                     "ArgumentIsNotValid",
-                    new ErrorMessage("お知らせメッセージは 1 件以上作成してください。")));
+                    new ErrorMessage(Messages.NoAnnouncementMessages)));
         }
 
         // 言語コードの重複チェック
@@ -379,7 +379,7 @@ public class AnnouncementsApplicationService
             businessErrors.AddOrMerge(
                 new BusinessError(
                     "ArgumentIsNotValid",
-                    new ErrorMessage("お知らせメッセージの言語が重複しています。")));
+                    new ErrorMessage(Messages.DuplicatedLanguageCode)));
         }
 
         if (businessErrors.Count > 0)

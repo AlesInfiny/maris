@@ -61,6 +61,24 @@ namespace DresscaCMS.Announcement.Resources {
         }
         
         /// <summary>
+        ///   お知らせメッセージの言語が重複しています。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DuplicatedLanguageCode {
+            get {
+                return ResourceManager.GetString("DuplicatedLanguageCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   お知らせメッセージは 1 件以上作成してください。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string NoAnnouncementMessages {
+            get {
+                return ResourceManager.GetString("NoAnnouncementMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   お知らせメッセージが見つかりません。お知らせメッセージID: {0} に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string NotFoundAnnouncement {
