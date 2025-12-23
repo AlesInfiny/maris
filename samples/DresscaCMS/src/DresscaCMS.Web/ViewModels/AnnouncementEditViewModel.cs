@@ -56,6 +56,7 @@ public class AnnouncementEditViewModel
     /// 表示優先度を取得または設定します。
     /// </summary>
     [Required(ErrorMessage = "表示優先度を選択してください。")]
+    [EnumDataType(typeof(DisplayPriority), ErrorMessage = "表示優先度の値が不正です。")]
     public DisplayPriority DisplayPriority { get; set; } = DisplayPriority.Medium;
 
     /// <summary>
