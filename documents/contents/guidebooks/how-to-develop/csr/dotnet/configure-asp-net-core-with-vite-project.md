@@ -67,5 +67,22 @@ ASP.NET Core with Vite プロジェクトのプロジェクトファイルには
 <SpaProxyLaunchCommand>npm run dev:workspace-name</SpaProxyLaunchCommand>
 ```
 
+??? info "CI 環境での npm パッケージのインストール"
+
+    本プロジェクトのデフォルト設定では、Debug ビルド時に npm パッケージのインストール（ `npm ci` ）が実行されます。
+    CI 環境で Debug ビルドを実行する場合など、フロントエンドの依存関係を別ジョブで管理している、または npm パッケージのインストールが不要なケースでは、環境変数を指定することでこの処理をスキップして構いません。
+    以下の例では、`SKIP_SPA_NODE_RESTORE` 環境変数が `true` の場合に、npm パッケージのインストールを行わないように設定しています。
+
+    ```xml title="csproj ファイルの設定例" hl_lines="5"
+    <Target Name="DebugEnsureNodeEnv"
+            BeforeTargets="Build"
+            Condition=" '$(Configuration)' == 'Debug'
+                        And !Exists('$(SpaRoot)node_modules')
+                        And '$(SKIP_SPA_NODE_RESTORE)' != 'true' ">
+        <!-- 中略 -->
+        <Exec WorkingDirectory="$(SpaRoot)" Command="npm ci" />
+    </Target>
+    ```
+
 [^1]: フォルダー名は適宜変更してください。
       フロントエンドアプリケーションを別途ゼロから開発する場合は、 [ClientApp] フォルダーを削除してしまってもかまいません。

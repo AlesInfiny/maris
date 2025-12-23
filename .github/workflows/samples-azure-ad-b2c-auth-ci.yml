@@ -100,6 +100,7 @@ jobs:
     env:
       DOTNET_NOLOGO: true
       BUILD_CONFIGURATION: Debug
+      SKIP_SPA_NODE_RESTORE: true
     permissions:
       checks: write
     defaults:
