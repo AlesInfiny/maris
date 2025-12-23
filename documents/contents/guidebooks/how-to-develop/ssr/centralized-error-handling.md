@@ -113,7 +113,7 @@ Blazor の起動前にエラーをキャッチする必要があるので、 Raz
 
 下記にエラーページの実装例を示します。
 
-??? example "エラーページの設定例"
+??? example "エラーページの実装例"
 
     ```html title="サンプルアプリケーションの ServerError.cshtml"
     @page "/ServerError"
@@ -261,8 +261,7 @@ NavMenu.razor に下記のようにわざと例外を発生させる `@code` ブ
 ```
 
 アプリケーションの起動と同時に、「 An unhandled exception occurred while processing the request. 」ともに詳細なエラー情報を示す画面に遷移することを確認して下さい。
+確認ができたら、確認用に追加したコードは削除してください。
 
 また、本番環境用のエラーページ ServerError.cshtml には、アドレスバーに直接 /ServerError を打ち込むことで遷移可能です。
 こちらのページはエラー発生時にユーザーが閲覧することを想定しているので、詳細なエラー情報を表示しません。
-
-確認ができたら、確認用に追加したコードは削除してください。
