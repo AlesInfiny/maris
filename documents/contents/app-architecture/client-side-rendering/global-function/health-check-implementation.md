@@ -20,10 +20,10 @@ AlesInfiny Maris OSS Edition では、 Web API を通じてシステムが正常
 
 正常状態の場合は、 HTTP 200 のレスポンスを返却し、異常状態の場合は HTTP 503 のレスポンスを返却します。
 
-|      HealthStatus      | ステータスコード | レスポンスボディ |                   詳細                   |
-| ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
-| HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能             |
-| HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可/停止状態   |
+| HealthStatus           | ステータスコード | レスポンスボディ | 詳細                                  |
+| ---------------------- | ---------------- | ---------------- | ------------------------------------- |
+| HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能          |
+| HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可/停止状態 |
 
 [`HealthStatus` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus){ target=_blank } をどのように使い分けるかについては、[HealthStatus の使い分け](../../../guidebooks/how-to-develop/csr/dotnet/health-check-api.md#health-status) を参照してください。
 

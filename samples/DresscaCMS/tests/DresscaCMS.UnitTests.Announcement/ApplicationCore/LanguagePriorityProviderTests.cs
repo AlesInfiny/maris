@@ -7,17 +7,30 @@ namespace DresscaCMS.UnitTests.Announcement;
 /// </summary>
 public class LanguagePriorityProviderTests
 {
-    [Fact]
-    public void GetLanguageOrderMap_デフォルトの優先順位を返す()
+    [Theory]
+    [InlineData("ja", 0)]
+    [InlineData("en", 1)]
+    [InlineData("zh", 2)]
+    [InlineData("es", 3)]
+    public void GetLanguageOrder_指定した言語コードに応じた優先順位を返す(string code, int expectedOrder)
     {
         // Act
-        var result = LanguagePriorityProvider.GetLanguageOrderMap();
+        var result = LanguagePriorityProvider.GetLanguageOrder(code);
 
         // Assert
-        Assert.Equal(4, result.Count);
-        Assert.Equal(0, result["ja"]);
-        Assert.Equal(1, result["en"]);
-        Assert.Equal(2, result["zh"]);
-        Assert.Equal(3, result["es"]);
+        Assert.Equal(expectedOrder, result);
+    }
+
+    [Fact]
+    public void GetLanguageOrder_存在しない言語コードの場合はMaxValueを返す()
+    {
+        // Arrange
+        var code = "fr"; // フランス語（存在しない言語コード）
+
+        // Act
+        var result = LanguagePriorityProvider.GetLanguageOrder(code);
+
+        // Assert
+        Assert.Equal(int.MaxValue, result);
     }
 }

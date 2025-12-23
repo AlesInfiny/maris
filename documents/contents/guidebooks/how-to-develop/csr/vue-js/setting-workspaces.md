@@ -27,11 +27,11 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 
 ## ルートプロジェクトの設定 {#setting-route-project}
 
-ルートプロジェクトの package.json に `"type": "module"`と`"private": "true"`を追加します。
-CJS 形式のファイルを正しく読み込むために、 `"type": "module"` は設定が必須です。
-`"private": "true"`は、誤ってルートプロジェクトが公開されることを防ぐため、設定を推奨します。
+CI 時の Node.js や npm のバージョンを設定するために、ルートプロジェクトの package.json に `"engines"` を追加し、適切なバージョンを設定してください。
+特別な理由がなければ、最新の LTS バージョンを指定します。
+Node.js の LTS バージョンの情報については、 [Node.js リリース :material-open-in-new:](https://nodejs.org/ja/about/previous-releases){ target=_blank } を参照してください。
 
-```json title="package.json（ルート）" hl_lines="6 7"
+```json title="package.json（ルート）" hl_lines="8-11"
 {
   "name": "project-name",
   "version": "1.0.0",
@@ -39,6 +39,10 @@ CJS 形式のファイルを正しく読み込むために、 `"type": "module"`
   "main": "index.js",
   "type": "module",
   "private": "true",
+  "engines": {
+    "node": "^x.x.x",
+    "npm": ">=y.y.y"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -47,6 +51,20 @@ CJS 形式のファイルを正しく読み込むために、 `"type": "module"`
   "license": "ISC"
 }
 ```
+
+あわせて、[ブランクプロジェクトの作成](./create-vuejs-blank-project.md) で作成したワークスペース直下の package.json の `"engines"` に初期設定されているバージョンも、ルートプロジェクトと同じバージョンに設定してください。
+
+```json title="package.json（ワークスペース）" hl_lines="3-6"
+{
+  "name": "workspace-name",
+  "engines": {
+    "node": "^x.x.x",
+    "npm": ">=y.y.y"
+  },
+}
+```
+
+設定ができたら、ルートプロジェクトの直下で `npm install` を行い、 package-lock.json が更新されることと、 `"engines"` のバージョンに関する警告が出力されないことを確認してください。
 
 ## スクリプトの登録 {#register-npm-scripts}
 

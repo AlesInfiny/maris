@@ -33,8 +33,8 @@ AlesInfiny Maris OSS Edition では、ソリューションフォルダーと物
 バックエンドアプリケーションを配置するフォルダー内に、 Visual Studio を利用して [空のソリューションファイルを作成 :material-open-in-new:](https://learn.microsoft.com/ja-jp/visualstudio/ide/creating-solutions-and-projects#create-empty-solutions){ target=_blank } します。
 ソリューションファイルの名前は、以下のいずれかのパターンに従って命名します。
 
-| #   | パターン                                   |
-| --- | ------------------------------------------ |
+| #   | パターン                                    |
+| --- | ------------------------------------------- |
 | 1   | *会社名*.*システム名*.*サブシステム名*.slnx |
 | 2   | *システム名*.*サブシステム名*.slnx          |
 | 3   | *サブシステム名*.slnx                       |

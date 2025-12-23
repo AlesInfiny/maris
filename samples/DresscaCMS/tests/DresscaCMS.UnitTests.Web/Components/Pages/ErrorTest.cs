@@ -20,15 +20,13 @@ public class ErrorTest : BunitContext
             parameters => parameters.Add(p => p.Exception, exception));
 
         // Assert
-        var stackTraceBox = renderedComponent.Find("div.stack-trace-box");
+        var stackTraceBox = renderedComponent.Find("fluent-card");
         stackTraceBox.MarkupMatches(
             """
-            <div class="stack-trace-box">
-              <fluent-card>
-                <h3 >スタックトレース</h3>
-                <pre >System.InvalidOperationException: Test exception</pre>
-              </fluent-card>
-            </div>
+            <fluent-card>
+              <h4>スタックトレース</h4>
+              <pre >System.InvalidOperationException: Test exception</pre>
+            </fluent-card>
             """);
     }
 
@@ -44,7 +42,7 @@ public class ErrorTest : BunitContext
             parameters => parameters.Add(p => p.Exception, exception));
 
         // Assert
-        Assert.Empty(renderedComponent.FindAll("div.stack-trace-box"));
+        Assert.Empty(renderedComponent.FindAll("fluent-card"));
     }
 
     [Fact]
@@ -57,7 +55,7 @@ public class ErrorTest : BunitContext
         var renderedComponent = this.Render<Error>();
 
         // Assert
-        Assert.Empty(renderedComponent.FindAll("div.stack-trace-box"));
+        Assert.Empty(renderedComponent.FindAll("fluent-card"));
     }
 
     private void SetupEnvironment(string environment)

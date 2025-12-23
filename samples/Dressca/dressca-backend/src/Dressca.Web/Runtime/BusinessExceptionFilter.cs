@@ -1,6 +1,6 @@
 ﻿using System.Net;
-using Dressca.SystemCommon;
 using Dressca.Web.Resources;
+using Maris.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -47,8 +47,8 @@ public class BusinessExceptionFilter : BusinessExceptionFilterBase
         if (context.Exception is BusinessException businessEx)
         {
             // 暫定の実装として、1つ目のBusinessErrorのexceptionIdとexceptionValuesを設定
-            problemDetails.Extensions.Add("exceptionId", businessEx.GetBusinessErrors.FirstOrDefault()?.ExceptionId ?? string.Empty);
-            problemDetails.Extensions.Add("exceptionValues", businessEx.GetBusinessErrors.FirstOrDefault()?.ErrorMessages.FirstOrDefault()?.ErrorMessageValues ?? []);
+            problemDetails.Extensions.Add("exceptionId", businessEx.BusinessErrors.FirstOrDefault()?.ExceptionId ?? string.Empty);
+            problemDetails.Extensions.Add("exceptionValues", businessEx.BusinessErrors.FirstOrDefault()?.ErrorMessages.FirstOrDefault()?.ErrorMessageValues ?? []);
         }
 
         return problemDetails;

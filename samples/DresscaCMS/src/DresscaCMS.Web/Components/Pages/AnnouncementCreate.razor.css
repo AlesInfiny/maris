@@ -1,0 +1,13 @@
+::deep .card-with-action {
+    position: relative;
+}
+
+::deep .card-action-button {
+    position: absolute;
+    top: calc(var(--design-unit) * 5px);
+    right: calc(var(--design-unit) * 5px);
+}
+
+.bread-crumb-separator {
+    margin: 0 8px;
+}

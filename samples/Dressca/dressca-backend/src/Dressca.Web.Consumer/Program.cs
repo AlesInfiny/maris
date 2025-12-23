@@ -2,7 +2,6 @@
 using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
-using Dressca.SystemCommon.Text.Json;
 using Dressca.Web.Consumer;
 using Dressca.Web.Consumer.Baskets;
 using Dressca.Web.Consumer.Configuration;
@@ -11,6 +10,7 @@ using Dressca.Web.Consumer.Resources;
 using Dressca.Web.Controllers;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Runtime;
+using Maris.Core.Text.Json;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;

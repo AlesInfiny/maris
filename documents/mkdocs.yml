@@ -124,7 +124,7 @@ nav:
               - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/ssr/css-setup.md
               - 入力値検証: guidebooks/how-to-develop/ssr/input-validation.md
               # - 画面をまたがる情報の保持 guidebooks/how-to-develop/ssr/state-management.md
-              # - 集約エラーハンドラーの実装 guidebooks/how-to-develop/ssr/error-handling.md
+              - 集約エラーハンドラーの実装: guidebooks/how-to-develop/ssr/centralized-error-handling.md
               # - 結合テストプロジェクトの構成 guidebooks/how-to-develop/ssr/integration-tests-setup.md
               - ヘルスチェック API の実装: guidebooks/how-to-develop/ssr/health-checks.md
               - ローカル開発環境の構築: guidebooks/how-to-develop/ssr/local-development.md
@@ -145,11 +145,19 @@ nav:
                   # - guidebooks/modern-dev-process/index.md
   - サンプル解説:
       - samples/index.md
-      - コンソールアプリケーションでの DI の利用:
-          - samples/console-app-with-di/index.md
-      - Azure Active Directory B2C による認証の利用:
-          - samples/azure-ad-b2c/index.md
-          - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/azure-ad-b2c/azure-ad-b2c-consideration.md
+      - CSR アプリケーション:
+          - samples/dressca/index.md # Dresscaのクイックスタート
+          # - Dresscaの解説: samples/dressca/explanation.md refs サンプルアプリケーション（Dressca）解説のドキュメントを作成する #9
+          - Azure Active Directory B2C による認証の利用:
+              - samples/dressca/azure-ad-b2c/index.md
+              - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/dressca/azure-ad-b2c/azure-ad-b2c-consideration.md
+          # - Microsoft Entra External ID による認証の利用:
+      - SSR アプリケーション:
+          - samples/dressca-cms/index.md # Dressca-CMS のクイックスタート
+          # - Dressa-CMSの解説: samples/dressca-cms/explanation.md
+      - 要件別サンプル:
+          - samples/requirement-based/index.md
+          - コンソールアプリケーションでの DI の利用: samples/requirement-based/console-app-with-di.md
   - AlesInfiny Maris OSS Edition について:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
