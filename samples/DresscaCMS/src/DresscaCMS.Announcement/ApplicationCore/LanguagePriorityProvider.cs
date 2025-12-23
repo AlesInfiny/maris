@@ -1,4 +1,6 @@
-﻿namespace DresscaCMS.Announcement.ApplicationCore;
+﻿using System.Linq;
+
+namespace DresscaCMS.Announcement.ApplicationCore;
 
 /// <summary>
 ///  言語の優先順位を提供する静的クラスです。
@@ -28,6 +30,27 @@ public static class LanguagePriorityProvider
         var languageOrder = DefaultLanguagePriorities
             .FirstOrDefault(lo => string.Equals(lo.Code, code, StringComparison.OrdinalIgnoreCase));
         return languageOrder is not null ? languageOrder.Order : int.MaxValue;
+    }
+
+    /// <summary>
+    /// 指定した言語コードのすべてがサポートされているかどうかを判定します。
+    /// </summary>
+    /// <param name="codes">言語コードのコレクション。</param>
+    /// <returns>すべてサポートされている場合は <see langword="true"/> 。そうでなければ <see langword="false"/> 。</returns>
+    public static bool AreAllSupportedLanguages(IEnumerable<string> codes)
+    {
+        return codes.All(IsSupportedLanguage);
+    }
+
+    /// <summary>
+    /// 指定した言語コードがサポートされているかどうかを判定します。
+    /// </summary>
+    /// <param name="code">言語コード。</param>
+    /// <returns>サポートされている場合は <see langword="true"/> 。そうでなければ <see langword="false"/> 。</returns>
+    public static bool IsSupportedLanguage(string code)
+    {
+        return DefaultLanguagePriorities
+            .Any(lo => string.Equals(lo.Code, code, StringComparison.OrdinalIgnoreCase));
     }
 
     private record LanguageOrder(string Code, int Order);

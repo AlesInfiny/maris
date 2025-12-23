@@ -184,8 +184,17 @@ public class AnnouncementsApplicationService
                     new ErrorMessage(Messages.NoAnnouncementMessages)));
         }
 
-        // 言語コードの重複チェック
+        // 不正な言語コードのチェック
         var languageCodes = contents.Select(c => c.LanguageCode).ToList();
+        if (!LanguagePriorityProvider.AreAllSupportedLanguages(languageCodes))
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage(Messages.ContainsInvalidLanguageCode)));
+        }
+
+        // 言語コードの重複チェック
         if (languageCodes.Count != languageCodes.ToHashSet().Count)
         {
             businessErrors.AddOrMerge(
@@ -372,8 +381,18 @@ public class AnnouncementsApplicationService
                     new ErrorMessage(Messages.NoAnnouncementMessages)));
         }
 
-        // 言語コードの重複チェック
         var languageCodes = contents.Select(c => c.LanguageCode).ToList();
+
+        // 不正な言語コードのチェック
+        if (!LanguagePriorityProvider.AreAllSupportedLanguages(languageCodes))
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage(Messages.ContainsInvalidLanguageCode)));
+        }
+
+        // 言語コードの重複チェック
         if (languageCodes.Count != languageCodes.ToHashSet().Count)
         {
             businessErrors.AddOrMerge(

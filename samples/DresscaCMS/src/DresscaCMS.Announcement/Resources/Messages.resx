@@ -135,4 +135,7 @@
   <data name="DuplicatedLanguageCode" xml:space="preserve">
     <value>お知らせコンテンツの言語が重複しています。</value>
   </data>
+  <data name="ContainsInvalidLanguageCode" xml:space="preserve">
+    <value>お知らせメッセージに不正な言語コードが含まれています。</value>
+  </data>
 </root>
