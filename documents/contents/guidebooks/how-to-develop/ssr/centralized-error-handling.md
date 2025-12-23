@@ -83,68 +83,13 @@ MainLayout.razor を次のように修正し、エラー境界を導入します
 このセクションでは、 Blazor ランタイム内の未処理例外をユーザーに表示するためのコンポーネント Error.razor の実装方針を説明します。
 開発環境でのデバッグ効率を高めるため、 `Exception` のスタックトレースの情報を表示するように実装します。
 
-Error.razor を次のように変更してください。
-
-- ビューを次のように変更します。下記の実装では、開発者が扱いやすいように、トップページへのリンク機能とスタックトレースの表示機能を実装しています。
-
-```html title="Error.razorの変更点（抜粋）" hl_lines="3-27"
-@page "/Error"
-@using System.Diagnostics
-@using System.Diagnostics.CodeAnalysis
-
-<PageTitle>内部サーバーエラー</PageTitle>
-
-<h1 class="text-danger">内部サーバーエラー</h1>
-<p>
-    申し訳ありません。処理中に予期しないエラーが発生しました。<br />
-    時間をおいて再度アクセスしてください。問題が解決しない場合は、管理者へお問い合わせください。
-</p>
-
-<div>
-    <FluentAnchor Href="/" Appearance="Appearance.Hypertext">トップページに戻る</FluentAnchor>
-</div>
-
-@if (this.ShowStackTrace)
-{
-    <div class="stack-trace-box">
-        <FluentCard>
-            <h3>スタックトレース</h3>
-            <pre>
-                @this.Exception.ToString()
-            </pre>
-        </FluentCard>
-    </div>
-}
-```
-
-- `@code` ブロックを次の内容で置き換えます。
+Error.razor の実装例を下記に示します。
+開発者が扱いやすいように、トップページへのリンク機能とスタックトレースの表示機能を実装しています。
 開発環境かつ例外の情報がある場合にのみ、スタックトレースを表示します。
 
-```csharp
-@code{
-    [Parameter]
-    public Exception? Exception { get; set; }
-
-    // ASP.NET Core では、 IWebHostEnvironment は常に登録されており、
-    // null になることはないため、 null 非許容にはしていません。
-    [Inject]
-    private IWebHostEnvironment Environment { get; set; } = default!;
-
-    [MemberNotNullWhen(true, nameof(this.Exception))]
-    private bool ShowStackTrace => this.Environment.IsDevelopment() && this.Exception is not null;
-}
+```csharp title="サンプルアプリケーションの Error.razor"
+https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Components/Pages/Error.razor
 ```
-
-必要に応じて、 Error.razor.css を作成してスタイルを変更します。
-下記に例を示します。こだわりがなければそのまま利用して構いません。
-
-??? example "スタイルの設定例"
-
-    ```css title="Error.razor.css の設定例"
-    div.stack-trace-box {
-        margin-top: 30px;
-    }
-    ```
 
 ## エラーページの実装 {#server-error-page-implementation}
 
@@ -297,6 +242,7 @@ Home.razor に下記のようにわざと例外を発生させる `@code` ブロ
 ```
 
 アプリケーションの起動と同時に、 Error.razor のページが表示され、内部サーバーエラーを示すメッセージと、例外のスタックトレースが表示されることを確認してください。
+確認ができたら、確認用に追加したコードは削除してください。
 
 ### .NET ランタイムの例外の確認 {#verify-dotnet-exception}
 
@@ -318,3 +264,5 @@ NavMenu.razor に下記のようにわざと例外を発生させる `@code` ブ
 
 また、本番環境用のエラーページ ServerError.cshtml には、アドレスバーに直接 /ServerError を打ち込むことで遷移可能です。
 こちらのページはエラー発生時にユーザーが閲覧することを想定しているので、詳細なエラー情報を表示しません。
+
+確認ができたら、確認用に追加したコードは削除してください。
