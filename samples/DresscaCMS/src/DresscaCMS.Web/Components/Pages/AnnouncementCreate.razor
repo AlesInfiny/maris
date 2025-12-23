@@ -52,15 +52,15 @@
                             <FluentValidationMessage For="@(() => this.announcementModel.PostDate)" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@(Messages.PostDateTime + "（時刻）")" Required="true" />
+                            <FluentInputLabel Label="@(Messages.PostDateTime + "（時刻）")" />
                             <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（日付）")" Required="true" />
+                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（日付）")" />
                             <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（時刻）")" Required="true" />
+                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（時刻）")" />
                             <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
