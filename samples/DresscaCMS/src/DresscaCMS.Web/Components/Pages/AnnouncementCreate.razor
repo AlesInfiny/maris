@@ -4,11 +4,13 @@
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.Extensions
 @using Maris.ComponentModel
+@using Maris.Core
 @using Microsoft.AspNetCore.Components.Authorization
 
 @inject AnnouncementsApplicationService AnnouncementsService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime JS
+@inject ILogger<AnnouncementCreate> Logger
 @inject NavigationManager NavigationManager
 
 <PageTitle>Dressca-CMS - お知らせメッセージ登録</PageTitle>
@@ -211,7 +213,7 @@
     /// <summary>
     /// 登録ボタンクリック時の処理
     /// </summary>
-    private async Task OnRegisterButtonClickAsync(EditContext editContext)
+    private async Task OnRegisterButtonClickAsync()
     {
         this.isSubmitting = true;
         this.StateHasChanged();
@@ -266,6 +268,20 @@
             // 成功したら編集画面へ遷移
             this.NavigationManager.NavigateTo($"/announcements/{createdId}/edit");
         }
+        catch (BusinessException businessEx)
+        {
+            this.Logger.LogDebug(businessEx, "お知らせメッセージの登録に失敗しました。");
+
+            // ビジネス例外発生時はメッセージを表示
+            foreach (var error in businessEx.GetErrors())
+            {
+                this.messageStore.Add(
+                    new FieldIdentifier(this.editContext.Model, string.Empty),
+                    error.ErrorMessage);
+            }
+
+            this.editContext.NotifyValidationStateChanged();
+        }
         finally
         {
             this.isSubmitting = false;
@@ -289,27 +305,6 @@
             this.messageStore.Add(
                 new FieldIdentifier(this.editContext.Model, string.Empty),
                 "掲載終了日時は掲載開始日時以降に設定してください。");
-            this.editContext.NotifyValidationStateChanged();
-            return false;
-        }
-
-        // お知らせコンテンツが1件以上あるかチェック
-        if (!this.announcementModel.AnnouncementContents.Any())
-        {
-            this.messageStore.Add(
-                new FieldIdentifier(this.editContext.Model, string.Empty),
-                "お知らせメッセージは1件以上作成してください。");
-            this.editContext.NotifyValidationStateChanged();
-            return false;
-        }
-
-        // 言語コードの重複チェック
-        var languageCodes = this.announcementModel.AnnouncementContents.Select(c => c.LanguageCode).ToList();
-        if (languageCodes.Count != languageCodes.Distinct().Count())
-        {
-            this.messageStore.Add(
-                new FieldIdentifier(this.editContext.Model, string.Empty),
-                "お知らせメッセージの言語が重複しています。");
             this.editContext.NotifyValidationStateChanged();
             return false;
         }

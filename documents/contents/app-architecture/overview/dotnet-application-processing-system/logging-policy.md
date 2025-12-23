@@ -68,7 +68,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）で定義するロ
 
 システムの実行環境にあわせて、適切なレベルのログを出力するように構成します。
 
-| ログレベル   |      本番環境      |     テスト環境     |  ローカル開発環境  |
+| ログレベル  |      本番環境      |     テスト環境     |  ローカル開発環境  |
 | ----------- | :----------------: | :----------------: | :----------------: |
 | Critical    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | Error       | :white_check_mark: | :white_check_mark: | :white_check_mark: |
