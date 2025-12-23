@@ -117,22 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PropertyNotInitialized" xml:space="preserve">
-    <value>{0} プロパティが初期化されていません。</value>
-  </data>
   <data name="NotFoundConnectionString" xml:space="preserve">
     <value>{0} 接続文字列を構成から取得できません。</value>
-  </data>
-  <data name="ParameterIsNullOrEmpty" xml:space="preserve">
-    <value>{0} が null または空文字列です。</value>
-  </data>
-  <data name="NotFoundAnnouncement" xml:space="preserve">
-    <value>お知らせメッセージが見つかりません。お知らせメッセージID: {0}</value>
-  </data>
-  <data name="NoAnnouncementMessages" xml:space="preserve">
-    <value>お知らせコンテンツは 1 件以上作成してください。</value>
-  </data>
-  <data name="DuplicatedLanguageCode" xml:space="preserve">
-    <value>お知らせコンテンツの言語が重複しています。</value>
   </data>
 </root>
