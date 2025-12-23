@@ -2,6 +2,7 @@
 using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
 using DresscaCMS.Announcement.Infrastructures.Entities;
 using DresscaCMS.Announcement.Resources;
+using Maris.Core;
 using Microsoft.Extensions.Logging;
 
 namespace DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
@@ -144,6 +145,12 @@ public class AnnouncementsApplicationService
     /// <returns>作成したお知らせメッセージの ID。</returns>
     /// <exception cref="ArgumentNullException">引数が null または空文字列です。</exception>
     /// <exception cref="ArgumentException">入力値の検証エラーがあります。</exception>
+    /// <exception cref="BusinessException">
+    ///  <list type="bullet">
+    ///   <item>お知らせメッセージは 1 件以上作成してください。</item>
+    ///   <item>お知らせメッセージの言語が重複しています。</item>
+    ///  </list>
+    /// </exception>
     public async Task<Guid> CreateAnnouncementAndContentAsync(
         Infrastructures.Entities.Announcement announcement,
         IReadOnlyCollection<AnnouncementContent> contents,
@@ -164,6 +171,30 @@ public class AnnouncementsApplicationService
         if (string.IsNullOrWhiteSpace(userName))
         {
             throw new ArgumentException("ユーザー名が null または空文字列です。", nameof(userName));
+        }
+
+        var businessErrors = new BusinessErrorCollection();
+        if (!contents.Any())
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage("お知らせメッセージは 1 件以上作成してください。")));
+        }
+
+        // 言語コードの重複チェック
+        var languageCodes = contents.Select(c => c.LanguageCode).ToList();
+        if (languageCodes.Count != languageCodes.ToHashSet().Count)
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage("お知らせメッセージの言語が重複しています。")));
+        }
+
+        if (businessErrors.Count > 0)
+        {
+            throw new BusinessException(businessErrors);
         }
 
         // ------------------------------
@@ -299,6 +330,12 @@ public class AnnouncementsApplicationService
     /// <returns>非同期処理を表すタスク。</returns>
     /// <exception cref="ArgumentNullException">引数が null または空文字列です。</exception>
     /// <exception cref="ArgumentException">入力値の検証エラーがあります。</exception>
+    /// <exception cref="BusinessException">
+    ///  <list type="bullet">
+    ///   <item>お知らせメッセージは 1 件以上作成してください。</item>
+    ///   <item>お知らせメッセージの言語が重複しています。</item>
+    ///  </list>
+    /// </exception>
     public async Task UpdateAnnouncementAndContentAsync(
         Infrastructures.Entities.Announcement announcement,
         IReadOnlyCollection<AnnouncementContent> contents,
@@ -321,6 +358,30 @@ public class AnnouncementsApplicationService
             "お知らせメッセージとお知らせコンテンツの更新を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName}",
             announcement.Id,
             userName);
+
+        var businessErrors = new BusinessErrorCollection();
+        if (!contents.Any())
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage("お知らせメッセージは 1 件以上作成してください。")));
+        }
+
+        // 言語コードの重複チェック
+        var languageCodes = contents.Select(c => c.LanguageCode).ToList();
+        if (languageCodes.Count != languageCodes.ToHashSet().Count)
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage("お知らせメッセージの言語が重複しています。")));
+        }
+
+        if (businessErrors.Count > 0)
+        {
+            throw new BusinessException(businessErrors);
+        }
 
         // ------------------------------
         // 業務メイン処理
