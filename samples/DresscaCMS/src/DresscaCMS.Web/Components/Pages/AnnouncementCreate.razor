@@ -3,6 +3,7 @@
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.Extensions
+@using DresscaCMS.Web.Resources
 @using Maris.ComponentModel
 @using Maris.Core
 @using Microsoft.AspNetCore.Components.Authorization
@@ -46,29 +47,29 @@
                     @* お知らせメッセージ登録・ヘッダー部 *@
                     <FluentStack Orientation="Orientation.Horizontal">
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="掲載開始日時（日付）" Required="true" />
+                            <FluentInputLabel Label="@(Messages.PostDateTime + "（日付）")" Required="true" />
                             <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
                             <FluentValidationMessage For="@(() => this.announcementModel.PostDate)" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="掲載開始日時（時刻）" />
+                            <FluentInputLabel Label="@(Messages.PostDateTime + "（時刻）")" Required="true" />
                             <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="掲載終了日時（日付）" />
+                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（日付）")" Required="true" />
                             <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="掲載終了日時（時刻）" />
+                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（時刻）")" Required="true" />
                             <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="カテゴリー" />
+                            <FluentInputLabel Label="@Messages.Category" />
                             <FluentTextField @bind-Value="@this.announcementModel.Category" Maxlength="128" Style="width: 200px;" />
                             <FluentValidationMessage For="@(() => this.announcementModel.Category)" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="表示優先度" Required="true" />
+                            <FluentInputLabel Label="@Messages.DisplayPriority" Required="true" />
                             <FluentSelect @bind-SelectedOption="@this.announcementModel.DisplayPriority"
                                           Items="@(Enum.GetValues<DisplayPriority>())"
                                           OptionValue="@(p => ((int)p).ToString())"
@@ -101,16 +102,16 @@
                                         </FluentButton>
                                         <FluentStack Orientation="Orientation.Vertical" VerticalGap="15">
                                             <FluentStack Orientation="Orientation.Vertical">
-                                                <FluentInputLabel Label="言語" Required="true" />
+                                                <FluentInputLabel Label="@Messages.Language" Required="true" />
                                                 <FluentSelect @bind-Value="content.LanguageCode" Items="languagePriorities" OptionValue="@(p => p.Code)" OptionText="@(p => p.DisplayName)" />
                                                 <FluentValidationMessage For="@(() => content.LanguageCode)" />
-                                                <FluentInputLabel Label="タイトル" Required="true" />
+                                                <FluentInputLabel Label="@Messages.Title" Required="true" />
                                                 <FluentTextField @bind-Value="@content.Title" Maxlength="256" Style="width: 100%;" />
                                                 <FluentValidationMessage For="@(() => content.Title)" />
-                                                <FluentInputLabel Label="メッセージ" Required="true" />
+                                                <FluentInputLabel Label="@Messages.Message" Required="true" />
                                                 <FluentTextArea @bind-Value="@content.Message" Maxlength="512" Rows="3" Style="width: 100%;" />
                                                 <FluentValidationMessage For="@(() => content.Message)" />
-                                                <FluentInputLabel Label="リンク先URL" />
+                                                <FluentInputLabel Label="@Messages.LinkedUrl" />
                                                 <FluentTextField @bind-Value="@content.LinkedUrl" Maxlength="1024" Placeholder="https://www.example.com" Style="width: 100%;" />
                                                 <FluentValidationMessage For="@(() => content.LinkedUrl)" />
                                             </FluentStack>
@@ -270,7 +271,7 @@
         }
         catch (BusinessException businessEx)
         {
-            this.Logger.LogDebug(businessEx, "お知らせメッセージの登録に失敗しました。");
+            this.Logger.LogDebug(businessEx, Messages.CreateAnnouncementFailed);
 
             // ビジネス例外発生時はメッセージを表示
             foreach (var error in businessEx.GetErrors())
@@ -304,7 +305,7 @@
         {
             this.messageStore.Add(
                 new FieldIdentifier(this.editContext.Model, string.Empty),
-                "掲載終了日時は掲載開始日時以降に設定してください。");
+                string.Format(Messages.ToBeAfterDate, Messages.ExpireDateTime, Messages.PostDateTime));
             this.editContext.NotifyValidationStateChanged();
             return false;
         }

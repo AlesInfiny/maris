@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using DresscaCMS.Web.Resources;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace DresscaCMS.Web.Extensions;
 
@@ -22,9 +23,9 @@ public static class AuthenticationStateProviderExtensions
 
         if (user.Identity?.IsAuthenticated == true)
         {
-            return user.Identity.Name ?? "不明なユーザー";
+            return user.Identity.Name ?? Messages.UnknownUser;
         }
 
-        return "不明なユーザー";
+        return Messages.UnknownUser;
     }
 }

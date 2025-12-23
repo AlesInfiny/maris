@@ -117,7 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AnnouncementSaved" xml:space="preserve">
+    <value>お知らせメッセージを保存しました。</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>カテゴリー</value>
+  </data>
+  <data name="Chinese" xml:space="preserve">
+    <value>中国語</value>
+  </data>
+  <data name="CreateAnnouncementFailed" xml:space="preserve">
+    <value>お知らせメッセージの登録に失敗しました。</value>
+  </data>
+  <data name="DisplayPriority" xml:space="preserve">
+    <value>表示優先度</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>メールアドレス</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>英語</value>
+  </data>
+  <data name="EnterEmailFormat" xml:space="preserve">
+    <value>有効なメールアドレスを入力してください。</value>
+  </data>
+  <data name="EnterUrlFormat" xml:space="preserve">
+    <value>{0}はURLの形式で入力してください。</value>
+  </data>
+  <data name="ExpireDateTime" xml:space="preserve">
+    <value>掲載終了日時</value>
+  </data>
+  <data name="InvalidEnumValue" xml:space="preserve">
+    <value>{0}の値が不正です。</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="LinkedUrl" xml:space="preserve">
+    <value>リンク先URL</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>ログイン</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>ログイン試行が無効です。</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>メッセージ</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>パスワード</value>
+  </data>
+  <data name="PostDateTime" xml:space="preserve">
+    <value>掲載開始日時</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>ログイン状態を保持する</value>
+  </data>
+  <data name="RequiredToInput" xml:space="preserve">
+    <value>{0}を入力してください。</value>
+  </data>
+  <data name="RequiredToSelect" xml:space="preserve">
+    <value>{0}を選択してください。</value>
+  </data>
+  <data name="SaveAnnouncementFailed" xml:space="preserve">
+    <value>お知らせメッセージとお知らせコンテンツの更新に失敗しました。</value>
+  </data>
+  <data name="SaveWasCalledBeforeTheAnnouncementCouldBeRetrieved" xml:space="preserve">
+    <value>お知らせメッセージが取得できていない状態で保存処理が呼び出されました。</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>スペイン語</value>
+  </data>
   <data name="StoredObjectCannotCastTo" xml:space="preserve">
     <value>キー {0} のオブジェクトは {1} です。指定された型 {2} にキャストできません。</value>
+  </data>
+  <data name="StringLengthIsOver" xml:space="preserve">
+    <value>{0}は{1}文字以下で入力してください。</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>タイトル</value>
+  </data>
+  <data name="ToBeAfterDate" xml:space="preserve">
+    <value>{0}は{1}以降に設定してください</value>
+  </data>
+  <data name="UnknownUser" xml:space="preserve">
+    <value>不明なユーザー</value>
+  </data>
+  <data name="UnsupportedLanguageCode" xml:space="preserve">
+    <value>指定された言語コード:{0} はサポートされていません。</value>
+  </data>
+  <data name="UserLogin" xml:space="preserve">
+    <value>ユーザーがログインしました。</value>
   </data>
 </root>
