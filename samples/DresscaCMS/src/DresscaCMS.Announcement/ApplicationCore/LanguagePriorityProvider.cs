@@ -30,5 +30,34 @@ public static class LanguagePriorityProvider
         return languageOrder is not null ? languageOrder.Order : int.MaxValue;
     }
 
+    /// <summary>
+    /// 指定した言語コードのすべてがサポートされているかどうかを判定します。
+    /// </summary>
+    /// <param name="codes">言語コードのコレクション。</param>
+    /// <returns>すべてサポートされている場合は <see langword="true"/> 。そうでなければ <see langword="false"/> 。</returns>
+    public static bool AreAllSupportedLanguages(IEnumerable<string> codes)
+    {
+        foreach (var code in codes)
+        {
+            if (!IsSupportedLanguage(code))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// 指定した言語コードがサポートされているかどうかを判定します。
+    /// </summary>
+    /// <param name="code">言語コード。</param>
+    /// <returns>サポートされている場合は <see langword="true"/> 。そうでなければ <see langword="false"/> 。</returns>
+    public static bool IsSupportedLanguage(string code)
+    {
+        return DefaultLanguagePriorities
+            .Any(lo => string.Equals(lo.Code, code, StringComparison.OrdinalIgnoreCase));
+    }
+
     private record LanguageOrder(string Code, int Order);
 }

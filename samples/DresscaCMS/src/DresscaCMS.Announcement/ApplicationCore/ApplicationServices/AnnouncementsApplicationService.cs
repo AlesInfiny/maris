@@ -192,6 +192,15 @@ public class AnnouncementsApplicationService
                     new ErrorMessage("お知らせメッセージの言語が重複しています。")));
         }
 
+        // 不正な言語コードのチェック
+        if (!LanguagePriorityProvider.AreAllSupportedLanguages(languageCodes))
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage(Messages.ContainsInvalidLanguageCode)));
+        }
+
         if (businessErrors.Count > 0)
         {
             throw new BusinessException(businessErrors);
