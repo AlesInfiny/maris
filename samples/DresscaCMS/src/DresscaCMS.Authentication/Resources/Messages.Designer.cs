@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DresscaCMS.Announcement.Resources {
+namespace DresscaCMS.Authentication.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DresscaCMS.Announcement.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DresscaCMS.Announcement.Resources.Messages", typeof(Messages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DresscaCMS.Authentication.Resources.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,67 +61,11 @@ namespace DresscaCMS.Announcement.Resources {
         }
         
         /// <summary>
-        ///   お知らせコンテンツの言語が重複しています。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string DuplicatedLanguageCode {
-            get {
-                return ResourceManager.GetString("DuplicatedLanguageCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   お知らせコンテンツは 1 件以上作成してください。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string NoAnnouncementMessages {
-            get {
-                return ResourceManager.GetString("NoAnnouncementMessages", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   お知らせメッセージが見つかりません。お知らせメッセージID: {0} に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string NotFoundAnnouncement {
-            get {
-                return ResourceManager.GetString("NotFoundAnnouncement", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   お知らせメッセージに不正な言語コードが含まれています。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ContainsInvalidLanguageCode
-        {
-            get
-            {
-                return ResourceManager.GetString("ContainsInvalidLanguageCode", resourceCulture);
-            }
-        }
-
-        /// <summary>
         ///   {0} 接続文字列を構成から取得できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string NotFoundConnectionString {
             get {
                 return ResourceManager.GetString("NotFoundConnectionString", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} が null または空文字列です。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string ParameterIsNullOrEmpty {
-            get {
-                return ResourceManager.GetString("ParameterIsNullOrEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   {0} プロパティが初期化されていません。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string PropertyNotInitialized {
-            get {
-                return ResourceManager.GetString("PropertyNotInitialized", resourceCulture);
             }
         }
     }

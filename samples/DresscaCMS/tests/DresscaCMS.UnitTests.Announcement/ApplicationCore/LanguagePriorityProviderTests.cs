@@ -33,4 +33,30 @@ public class LanguagePriorityProviderTests
         // Assert
         Assert.Equal(int.MaxValue, result);
     }
+
+    [Fact]
+    public void IsSupportedLanguage_不正な言語コードが含まれる場合はfalseを返す()
+    {
+        // Arrange
+        var codes = new[] { "ja", "en", "fr" }; // "fr" はサポートされていない言語コード
+
+        // Act
+        var result = LanguagePriorityProvider.AreAllSupportedLanguages(codes);
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void IsSupportedLanguage_すべての言語コードがサポートされている場合はtrueを返す()
+    {
+        // Arrange
+        var codes = new[] { "ja", "en", "zh" };
+
+        // Act
+        var result = LanguagePriorityProvider.AreAllSupportedLanguages(codes);
+
+        // Assert
+        Assert.True(result);
+    }
 }
