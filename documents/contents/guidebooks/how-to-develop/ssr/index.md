@@ -12,7 +12,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能�
 - [プロジェクトの作成](./create-project.md)
 - [プロジェクトの共通設定](./common-configuration.md)
 - [開発に使用するパッケージ](./packages-used.md)
-- [Fluent UI Blazor プロジェクトの構成](./fluentui-blazor-structure.md)
+- [Blazor Web アプリプロジェクトの構成](./blazor-web-application-structure.md)
 - [CSS の設定と CSS フレームワークの適用](./css-setup.md)
 - [入力値検証](./input-validation.md)
 - 画面をまたがる情報の保持（後日追加予定）
