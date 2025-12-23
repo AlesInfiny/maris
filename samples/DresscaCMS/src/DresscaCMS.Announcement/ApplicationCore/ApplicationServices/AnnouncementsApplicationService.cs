@@ -184,23 +184,23 @@ public class AnnouncementsApplicationService
                     new ErrorMessage(Messages.NoAnnouncementMessages)));
         }
 
-        // 言語コードの重複チェック
-        var languageCodes = contents.Select(c => c.LanguageCode).ToList();
-        if (languageCodes.Count != languageCodes.ToHashSet().Count)
-        {
-            businessErrors.AddOrMerge(
-                new BusinessError(
-                    "ArgumentIsNotValid",
-                    new ErrorMessage(Messages.DuplicatedLanguageCode)));
-        }
-
         // 不正な言語コードのチェック
+        var languageCodes = contents.Select(c => c.LanguageCode).ToList();
         if (!LanguagePriorityProvider.AreAllSupportedLanguages(languageCodes))
         {
             businessErrors.AddOrMerge(
                 new BusinessError(
                     "ArgumentIsNotValid",
                     new ErrorMessage(Messages.ContainsInvalidLanguageCode)));
+        }
+
+        // 言語コードの重複チェック
+        if (languageCodes.Count != languageCodes.ToHashSet().Count)
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage(Messages.DuplicatedLanguageCode)));
         }
 
         if (businessErrors.Count > 0)
@@ -381,15 +381,7 @@ public class AnnouncementsApplicationService
                     new ErrorMessage(Messages.NoAnnouncementMessages)));
         }
 
-        // 言語コードの重複チェック
         var languageCodes = contents.Select(c => c.LanguageCode).ToList();
-        if (languageCodes.Count != languageCodes.ToHashSet().Count)
-        {
-            businessErrors.AddOrMerge(
-                new BusinessError(
-                    "ArgumentIsNotValid",
-                    new ErrorMessage(Messages.DuplicatedLanguageCode)));
-        }
 
         // 不正な言語コードのチェック
         if (!LanguagePriorityProvider.AreAllSupportedLanguages(languageCodes))
@@ -398,6 +390,15 @@ public class AnnouncementsApplicationService
                 new BusinessError(
                     "ArgumentIsNotValid",
                     new ErrorMessage(Messages.ContainsInvalidLanguageCode)));
+        }
+
+        // 言語コードの重複チェック
+        if (languageCodes.Count != languageCodes.ToHashSet().Count)
+        {
+            businessErrors.AddOrMerge(
+                new BusinessError(
+                    "ArgumentIsNotValid",
+                    new ErrorMessage(Messages.DuplicatedLanguageCode)));
         }
 
         if (businessErrors.Count > 0)
