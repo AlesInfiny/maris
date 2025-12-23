@@ -29,6 +29,7 @@ jobs:
       BUILD_CONFIGURATION: Debug
       BUILD_SUMMARY_FILE: BuildSummary.md
       TEST_ENVIRONMENT: IntegrationTest
+      SKIP_SPA_NODE_RESTORE: true
     permissions:
       checks: write
       contents: read
