@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DresscaCMS.Web.Resources;
 
 namespace DresscaCMS.Web.ViewModels;
 
@@ -20,28 +21,32 @@ public class AnnouncementContentCreateViewModel
     /// <summary>
     /// 言語コードを取得または設定します。
     /// </summary>
-    [Required(ErrorMessage = "言語を選択してください。")]
+    [Display(Name = "言語")]
+    [Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.RequiredToSelect))]
     public string LanguageCode { get; set; } = "ja";
 
     /// <summary>
     /// タイトルを取得または設定します。
     /// </summary>
-    [Required(ErrorMessage = "タイトルを入力してください。")]
-    [StringLength(256, ErrorMessage = "タイトルは256文字以下で入力してください。")]
+    [Display(Name = "タイトル")]
+    [Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.RequiredToInput))]
+    [StringLength(256, ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.StringLengthIsOver))]
     public string Title { get; set; } = string.Empty;
 
     /// <summary>
     /// メッセージを取得または設定します。
     /// </summary>
-    [Required(ErrorMessage = "メッセージを入力してください。")]
-    [StringLength(512, ErrorMessage = "メッセージは512文字以下で入力してください。")]
+    [Display(Name = "メッセージ")]
+    [Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.RequiredToInput))]
+    [StringLength(512, ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.StringLengthIsOver))]
     public string Message { get; set; } = string.Empty;
 
     /// <summary>
     /// リンク先 URL を取得または設定します。
     /// </summary>
-    [Url(ErrorMessage = "リンク先URLはURL の形式で入力してください。")]
-    [StringLength(1024, ErrorMessage = "リンク先URLは1024文字以下で入力してください。")]
+    [Display(Name = "リンク先URL")]
+    [Url(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.EnterUrlFormat))]
+    [StringLength(1024, ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.StringLengthIsOver))]
     public string? LinkedUrl { get; set; }
 
     /// <summary>

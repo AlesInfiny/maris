@@ -3,6 +3,7 @@
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Web.Extensions
+@using DresscaCMS.Web.Resources
 @using DresscaCMS.Web.State
 @using Maris.ComponentModel
 @using Microsoft.AspNetCore.Components.Authorization
@@ -57,11 +58,11 @@
                             @this.announcement.PostDateTime.ToString("yyyy/MM/dd HH:mm") ～ @(this.announcement.ExpireDateTime?.ToString("yyyy/MM/dd HH:mm") ?? "掲載終了日 未設定")
                         </div>
                         <div>
-                            カテゴリー：
+                            @Messages.Category：
                             @(this.announcement.Category ?? "カテゴリー未設定")
                         </div>
                         <div>
-                            表示優先度：
+                            @Messages.DisplayPriority：
                             @this.announcement.DisplayPriority.GetDisplayName()
                         </div>
                     </FluentStack>
@@ -72,21 +73,21 @@
                             <FluentCard Style="padding: 20px;">
                                 <FluentStack Orientation="Orientation.Vertical" VerticalGap="10">
                                     <div>
-                                        <strong>言語：</strong>
+                                        <strong>@Messages.Language：</strong>
                                         @this.GetLanguageName(content.LanguageCode)
                                     </div>
                                     <div>
-                                        <strong>タイトル：</strong>
+                                        <strong>@Messages.Title：</strong>
                                         @content.Title
                                     </div>
                                     <div>
-                                        <strong>表示メッセージ：</strong>
+                                        <strong>@Messages.Message：</strong>
                                         @content.Message
                                     </div>
                                     @if (!string.IsNullOrEmpty(content.LinkedUrl))
                                     {
                                         <div>
-                                            <strong>リンク先URL：</strong>
+                                            <strong>@Messages.LinkedUrl：</strong>
                                             @if (content.LinkedUrl.StartsWith("http"))
                                             {
                                                 <a href="@content.LinkedUrl" target="_blank">@content.LinkedUrl</a>

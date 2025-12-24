@@ -1,4 +1,6 @@
-﻿namespace DresscaCMS.Web.ViewModels;
+﻿using DresscaCMS.Web.Resources;
+
+namespace DresscaCMS.Web.ViewModels;
 
 /// <summary>
 ///  言語を表します。
@@ -8,22 +10,22 @@ public class Language
     /// <summary>
     ///  英語。
     /// </summary>
-    public static readonly Language English = new("en", "英語");
+    public static readonly Language English = new("en", Messages.English);
 
     /// <summary>
     ///  日本語。
     /// </summary>
-    public static readonly Language Japanese = new("ja", "日本語");
+    public static readonly Language Japanese = new("ja", Messages.Japanese);
 
     /// <summary>
     ///  中国語。
     /// </summary>
-    public static readonly Language Chinese = new("zh", "中国語");
+    public static readonly Language Chinese = new("zh", Messages.Chinese);
 
     /// <summary>
     ///  スペイン語。
     /// </summary>
-    public static readonly Language Spanish = new("es", "スペイン語");
+    public static readonly Language Spanish = new("es", Messages.Spanish);
 
     private Language(string code, string displayName)
     {
@@ -59,7 +61,7 @@ public class Language
             "ja" => Japanese,
             "zh" => Chinese,
             "es" => Spanish,
-            _ => throw new ArgumentException("Unsupported language code.", nameof(code)),
+            _ => throw new ArgumentException(string.Format(Messages.UnsupportedLanguageCode, code), nameof(code)),
         };
     }
 

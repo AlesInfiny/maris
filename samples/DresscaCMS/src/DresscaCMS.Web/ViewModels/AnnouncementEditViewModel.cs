@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using DresscaCMS.Announcement.ApplicationCore;
+using DresscaCMS.Web.Resources;
 
 namespace DresscaCMS.Web.ViewModels;
 
@@ -28,7 +29,8 @@ public class AnnouncementEditViewModel
     /// <summary>
     /// 掲載開始日時（日付部分）を取得または設定します。
     /// </summary>
-    [Required(ErrorMessage = "掲載開始日時を入力してください。")]
+    [Display(Name = "掲載開始日時")]
+    [Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.RequiredToInput))]
     public DateTime? PostDate { get; set; }
 
     /// <summary>
@@ -49,14 +51,16 @@ public class AnnouncementEditViewModel
     /// <summary>
     /// カテゴリーを取得または設定します。
     /// </summary>
-    [StringLength(128, ErrorMessage = "カテゴリーは128文字以下で入力してください。")]
+    [Display(Name = "カテゴリー")]
+    [StringLength(128, ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.StringLengthIsOver))]
     public string? Category { get; set; }
 
     /// <summary>
     /// 表示優先度を取得または設定します。
     /// </summary>
-    [Required(ErrorMessage = "表示優先度を選択してください。")]
-    [EnumDataType(typeof(DisplayPriority), ErrorMessage = "表示優先度の値が不正です。")]
+    [Display(Name = "表示優先度")]
+    [Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.RequiredToSelect))]
+    [EnumDataType(typeof(DisplayPriority), ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.InvalidEnumValue))]
     public DisplayPriority DisplayPriority { get; set; } = DisplayPriority.Medium;
 
     /// <summary>
@@ -73,7 +77,7 @@ public class AnnouncementEditViewModel
     {
         if (this.PostDate == null)
         {
-            throw new InvalidOperationException("掲載開始日時は必須です。");
+            throw new InvalidOperationException(string.Format(Messages.RequiredToInput, Messages.PostDateTime));
         }
 
         var date = this.PostDate.Value.Date;

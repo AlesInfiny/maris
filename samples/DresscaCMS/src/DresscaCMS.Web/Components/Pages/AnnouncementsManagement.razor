@@ -4,6 +4,7 @@
 @using DresscaCMS.Announcement.ApplicationCore
 @using DresscaCMS.Announcement.ApplicationCore.ApplicationServices
 @using DresscaCMS.Announcement.Infrastructures.Entities
+@using DresscaCMS.Web.Resources
 @using Maris.ComponentModel
 
 @inject AnnouncementsApplicationService AnnouncementsService
@@ -56,14 +57,14 @@
                         </div>
                     </FluentStack>
                     <FluentDataGrid Items="@this.announcementEntities" TGridItem="Announcement" AutoFit="false">
-                        <TemplateColumn Title="タイトル" MinWidth="400px">
+                        <TemplateColumn Title="@Messages.Title" MinWidth="400px">
                             <FluentAnchor Href="@($"/announcements/{context.Id}/edit")" Appearance="Appearance.Hypertext">@context.Contents.FirstOrDefault()?.Title</FluentAnchor>
                         </TemplateColumn>
                         <TemplateColumn Title="掲載日" Width="200px">
                             @context.PostDateTime.ToString("yyyy/MM/dd") ～ @(context.ExpireDateTime?.ToString("yyyy/MM/dd") ?? "未設定")
                         </TemplateColumn>
-                        <PropertyColumn Title="カテゴリー" Property="@(a => a.Category)" MinWidth="120px" />
-                        <TemplateColumn Title="表示優先度" Width="120px" Align="Align.Center">
+                        <PropertyColumn Title="@Messages.Category" Property="@(a => a.Category)" MinWidth="120px" />
+                        <TemplateColumn Title="@Messages.DisplayPriority" Width="120px" Align="Align.Center">
                             @context.DisplayPriority.GetDisplayName()
                         </TemplateColumn>
                         <TemplateColumn Title="操作" Width="120px" Align="Align.Center">
