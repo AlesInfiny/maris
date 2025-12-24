@@ -313,7 +313,7 @@ namespace DresscaCMS.Web.Resources {
         }
         
         /// <summary>
-        ///   {0}は{1}以降に設定してください に類似しているローカライズされた文字列を検索します。
+        ///   {0}は{1}以降に設定してください。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ToBeAfterDate {
             get {

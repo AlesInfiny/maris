@@ -202,7 +202,7 @@
     <value>タイトル</value>
   </data>
   <data name="ToBeAfterDate" xml:space="preserve">
-    <value>{0}は{1}以降に設定してください</value>
+    <value>{0}は{1}以降に設定してください。</value>
   </data>
   <data name="UnknownUser" xml:space="preserve">
     <value>不明なユーザー</value>
