@@ -123,7 +123,7 @@ nav:
               - Blazor Web アプリプロジェクトの構成: guidebooks/how-to-develop/ssr/blazor-web-application-structure.md
               - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/ssr/css-setup.md
               # - 入力値検証: guidebooks/how-to-develop/ssr/input-validation.md
-              # - 画面をまたがる情報の保持 guidebooks/how-to-develop/ssr/state-management.md
+              # - 画面をまたがる情報の保持: guidebooks/how-to-develop/ssr/state-management.md
               - 集約エラーハンドラーの実装: guidebooks/how-to-develop/ssr/centralized-error-handling.md
               # - 結合テストプロジェクトの構成 guidebooks/how-to-develop/ssr/integration-tests-setup.md
               # - ヘルスチェック API の実装: guidebooks/how-to-develop/ssr/health-checks.md
