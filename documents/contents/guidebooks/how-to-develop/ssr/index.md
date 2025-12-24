@@ -14,11 +14,11 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能�
 - [開発に使用するパッケージ](./packages-used.md)
 - [Blazor Web アプリプロジェクトの構成](./blazor-web-application-structure.md)
 - [CSS の設定と CSS フレームワークの適用](./css-setup.md)
-- [入力値検証](./input-validation.md)
+- 入力値検証（後日追加予定）
 - 画面をまたがる情報の保持（後日追加予定）
 - [集約エラーハンドラーの実装](./centralized-error-handling.md)
 - 結合テストプロジェクトの構成（後日追加予定）
-- [ヘルスチェック API の実装](./health-checks.md)
+- ヘルスチェック API の実装（後日追加予定）
 - [ローカル開発環境の構築](./local-development.md)
 
 これらのアプリケーション開発手順に従って実装したサンプルアプリケーションは、[Dressca-CMS - クイックスタート](../../../samples/dressca-cms/index.md#quick-start) からダウンロードして実行できます。
