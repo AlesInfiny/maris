@@ -175,3 +175,43 @@ updates:
         versions: ["9.*", "11.*"]
       - dependency-name: "Microsoft.Extensions*"
         versions: ["9.*", "11.*"]
+
+  - package-ecosystem: "nuget"
+    directory: "/samples/DresscaCMS"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "nuget-dressca-cms"
+    labels:
+      - "target: Dressca-CMS"
+      - "nuget"
+      - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.AspNetCore*"
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
+      fluentui-packages:
+        patterns:
+          - "Microsoft.FluentUI*"
+        update-types:
+          - "minor"
+          - "patch"
+      xunit-packages:
+        patterns:
+          - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "Microsoft.AspNetCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.EntityFrameworkCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.Extensions*"
+        versions: ["9.*", "11.*"]
