@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dressca.EfInfrastructure.Migrations
 {
     [DbContext(typeof(DresscaDbContext))]
-    [Migration("20251224032704_InitialCreate")]
+    [Migration("20251224035720_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
