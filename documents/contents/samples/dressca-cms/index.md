@@ -33,7 +33,7 @@ Dressca-CMS は、 ASP.NET Core Blazor をベースとした CMS システムで
    コマンドプロンプトを開き、「dressca-cms」に移動して以下のコマンドを実行します。
 
     ```powershell linenums="0" title="SQL Server のデータベース構築"
-    dotnet ef database update --projext .\src\DresscaCMS.Announcement\
+    dotnet ef database update --project .\src\DresscaCMS.Announcement\
     dotnet ef database update --project .\src\DresscaCMS.Authentication\
     ```
 
