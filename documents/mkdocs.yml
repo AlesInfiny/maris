@@ -125,7 +125,7 @@ nav:
               # - 入力値検証: guidebooks/how-to-develop/ssr/input-validation.md
               # - 画面をまたがる情報の保持: guidebooks/how-to-develop/ssr/state-management.md
               - 集約エラーハンドラーの実装: guidebooks/how-to-develop/ssr/centralized-error-handling.md
-              # - 結合テストプロジェクトの構成 guidebooks/how-to-develop/ssr/integration-tests-setup.md
+              # - 結合テストプロジェクトの構成: guidebooks/how-to-develop/ssr/integration-tests-setup.md
               # - ヘルスチェック API の実装: guidebooks/how-to-develop/ssr/health-checks.md
               - ローカル開発環境の構築: guidebooks/how-to-develop/ssr/local-development.md
 
