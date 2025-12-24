@@ -248,7 +248,7 @@ Home.razor に下記のようにわざと例外を発生させる `@code` ブロ
 
 NavMenu.razor に下記のようにわざと例外を発生させる `@code` ブロックを実装し、アプリケーションを起動します。
 
-```csharp title="例外を発生させる Home.razor" hl_lines="3-6"
+```csharp title="例外を発生させる NavMenu.razor" hl_lines="3-6"
 @code {
 
     protected override void OnParametersSet()
