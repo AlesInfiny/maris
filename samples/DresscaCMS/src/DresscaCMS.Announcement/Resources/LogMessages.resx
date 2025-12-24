@@ -132,22 +132,22 @@
   <data name="AnnouncementsApplicationService_AnnouncementNotFound" xml:space="preserve">
     <value>お知らせメッセージが見つかりませんでした。お知らせメッセージ ID: {AnnouncementId}</value>
   </data>
-  <data name="AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncStart" xml:space="preserve">
-    <value>お知らせメッセージとお知らせコンテンツの更新を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName}</value>
-  </data>
   <data name="AnnouncementsApplicationService_GetPagedAnnouncementsEnd" xml:space="preserve">
     <value>ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得しました。</value>
   </data>
   <data name="AnnouncementsApplicationService_GetPagedAnnouncementsStart" xml:space="preserve">
     <value>ページ番号: {pageNumber} 、ページサイズ: {pageSize} のお知らせメッセージを取得します。</value>
   </data>
-  <data name="AnnouncementsApplicationservice_UpdateAnnouncementAndContentAsyncEnd" xml:space="preserve">
-    <value>お知らせメッセージとお知らせコンテンツの更新が完了しました。お知らせメッセージ ID: {AnnouncementId}</value>
-  </data>
   <data name="AnnouncementsApplicationService_DeleteAnnouncementAndContentAsyncStart" xml:space="preserve">
     <value>お知らせメッセージとお知らせコンテンツの削除を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName}</value>
   </data>
   <data name="AnnouncementsApplicationService_DeleteAnnouncementAndContentAsyncEnd" xml:space="preserve">
     <value>お知らせメッセージとお知らせコンテンツの削除が完了しました。お知らせメッセージ ID: {AnnouncementId}</value>
+  </data>
+  <data name="AnnouncementsApplicationService_UpdateAnnouncementAndContentAsyncEnd" xml:space="preserve">
+    <value>お知らせメッセージとお知らせコンテンツの更新が完了しました。お知らせメッセージ ID: {AnnouncementId}</value>
+  </data>
+  <data name="AnnouncementsApplicationService_UpdateAnnouncementAndContentAsyncStart" xml:space="preserve">
+    <value>お知らせメッセージとお知らせコンテンツの更新を開始します。お知らせメッセージ ID: {AnnouncementId}, ユーザー名: {UserName}</value>
   </data>
 </root>
