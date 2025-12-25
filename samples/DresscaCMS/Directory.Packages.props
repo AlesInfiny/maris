@@ -1,6 +1,6 @@
 ﻿<Project>
   <ItemGroup>
-    <PackageVersion Include="bunit" Version="2.1.1" />
+    <PackageVersion Include="bunit" Version="2.4.2" />
     <PackageVersion Include="Maris.ComponentModel.Annotations" Version="2.1.0" />
     <PackageVersion Include="Maris.Core" Version="2.1.0" />
     <PackageVersion Include="Maris.Logging.Testing" Version="2.1.0" />
