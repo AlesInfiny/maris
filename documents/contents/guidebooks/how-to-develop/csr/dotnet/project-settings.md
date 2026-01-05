@@ -143,7 +143,7 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
 また、 xUnit v3 の単体テストプロジェクトを作成した場合、 csproj ファイルから削除すべき設定は以下の通りです。
 これらの設定はテストコード用の Directory.Build.props にて設定済みのため、削除して構いません。
 
-```xml hl_lines="4-8 15-17"title="テストコード用の csproj ファイルから削除するべき設定値の例"
+```xml hl_lines="4-8 15-17" title="テストコード用の csproj ファイルから削除するべき設定値の例"
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
