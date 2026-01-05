@@ -376,7 +376,7 @@ stylecop.json は、各プロジェクトのルートフォルダーにあるか
 例外メッセージやログメッセージなど、プロジェクト内で使用するメッセージは、すべてこのリソースファイルに集約して管理します。
 
 リソースファイルの作成は、 Visual Studio を用いるのが最も簡単です。
-詳細な手順は「 [.NET アプリ用のリソース ファイルを作成する :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files){ target=_blank } 」を参照してください。
+詳細な手順は「 [.NET アプリ用のリソース ファイルを作成する :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files){ target=_blank }」を参照してください。
 
 Visual Studio を用いてリソースファイルを作成すると、リソースファイルに定義したメッセージを取得するコードが自動生成されます。
 
