@@ -4,7 +4,7 @@
     "vitest.explorer",
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
+    "prettier.prettier-vscode",
     "stylelint.vscode-stylelint",
     "ms-vsliveshare.vsliveshare",
     "pflannery.vscode-versionlens",

@@ -28,7 +28,7 @@ Visual Studio Code を利用する場合、フロントエンドアプリケー�
     CSS のコード品質を向上させるための拡張機能です。
     リアルタイムでのコードのエラーを検出する機能を提供します。
 
-- [Prettier - Code formatter :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode){ target=_blank }
+- [Prettier - Code formatter :material-open-in-new:](https://marketplace.visualstudio.com/items?itemName=prettier.prettier-vscode){ target=_blank }
 
     EditorConfig と連携して、統一したスタイルにコードを整形する機能を提供します。
 
