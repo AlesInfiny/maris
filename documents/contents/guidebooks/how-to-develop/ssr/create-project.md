@@ -65,7 +65,7 @@ Visual Studio で Blazor Web アプリおよび Fluent Blazor Web アプリプ�
 AlesInfiny Maris では以下のように設定しています。
 
 - フレームワーク
-  
+
     その時点で最新の長期的サポートバージョンを選択
 
 - 認証の種類
