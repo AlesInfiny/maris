@@ -573,7 +573,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
-                            Title = "フランス語 français"
+                            Title = "スペイン語 español"
                         },
                         new
                         {
@@ -650,6 +650,249 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.HasData(
                         new
                         {
+                            Id = new Guid("44444444-4444-4444-4444-444444444401"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333301"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 1",
+                            Title = "お知らせ 1"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444402"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333302"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 2",
+                            Title = "お知らせ 2"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444403"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333303"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 3",
+                            Title = "お知らせ 3"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444404"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333304"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 4",
+                            Title = "お知らせ 4"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444405"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333305"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 5",
+                            Title = "お知らせ 5"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444406"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333306"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 6",
+                            Title = "お知らせ 6"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444407"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333307"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 7",
+                            Title = "お知らせ 7"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444408"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333308"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 8",
+                            Title = "お知らせ 8"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444409"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333309"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 9",
+                            Title = "お知らせ 9"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444410"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333310"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 10",
+                            Title = "お知らせ 10"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444411"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333311"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 11",
+                            Title = "お知らせ 11"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444412"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333312"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 12",
+                            Title = "お知らせ 12"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444413"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333313"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 13",
+                            Title = "お知らせ 13"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444414"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333314"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 14",
+                            Title = "お知らせ 14"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444415"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333315"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 15",
+                            Title = "お知らせ 15"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444416"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333316"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 16",
+                            Title = "お知らせ 16"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444417"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333317"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 17",
+                            Title = "お知らせ 17"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444418"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333318"),
+                            LanguageCode = "es",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "Detalles 18",
+                            Title = "Anuncio 18"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444419"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333319"),
+                            LanguageCode = "zh",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "详情 19",
+                            Title = "公告 19"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444420"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333320"),
+                            LanguageCode = "en",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "Details 20",
+                            Title = "Notice 20"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444421"),
+                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333321"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容 21",
+                            Title = "お知らせ 21"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444422"),
+                            AnnouncementHistoryId = new Guid("33333333-4444-3333-3333-333333333301"),
+                            LanguageCode = "en",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "英語 English"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444423"),
+                            AnnouncementHistoryId = new Guid("33333333-4444-3333-3333-333333333301"),
+                            LanguageCode = "es",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "スペイン語 español"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444424"),
+                            AnnouncementHistoryId = new Guid("33333333-5555-3333-3333-333333333301"),
+                            LanguageCode = "ja",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "日本語"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444425"),
+                            AnnouncementHistoryId = new Guid("33333333-5555-3333-3333-333333333301"),
+                            LanguageCode = "en",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "英語 English"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444426"),
+                            AnnouncementHistoryId = new Guid("33333333-5555-3333-3333-333333333301"),
+                            LanguageCode = "zh",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "中国語 中文"
+                        },
+                        new
+                        {
+                            Id = new Guid("44444444-4444-4444-4444-444444444427"),
+                            AnnouncementHistoryId = new Guid("33333333-5555-3333-3333-333333333301"),
+                            LanguageCode = "es",
+                            LinkedUrl = "https://maris.alesinfiny.org/",
+                            Message = "内容",
+                            Title = "スペイン語 español"
+                        },
+                        new
+                        {
                             Id = new Guid("49999999-4444-4444-4444-444444444444"),
                             AnnouncementHistoryId = new Guid("39999999-3333-3333-3333-333333333333"),
                             LanguageCode = "ja",
@@ -704,6 +947,282 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         });
 
                     b.HasData(
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333301"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 1,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333302"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111112"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 2,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333303"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111113"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 3,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333304"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111114"),
+                            Category = "イベント",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333305"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111115"),
+                            Category = "イベント",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 1,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333306"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111116"),
+                            Category = "更新",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 2,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333307"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111117"),
+                            Category = "更新",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 3,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333308"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111118"),
+                            Category = "重要",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333309"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111119"),
+                            Category = "重要",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 1,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333310"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111120"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 3,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333311"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111121"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 2,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333312"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111122"),
+                            Category = "イベント",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333313"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111123"),
+                            Category = "イベント",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 1,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333314"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111124"),
+                            Category = "更新",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 3,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333315"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111125"),
+                            Category = "更新",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 2,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333316"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111126"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333317"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111127"),
+                            Category = "重要",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 1,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333318"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111128"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 3,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333319"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111129"),
+                            Category = "イベント",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 2,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333320"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111130"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 3,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333321"),
+                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111131"),
+                            Category = "一般",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-4444-3333-3333-333333333301"),
+                            AnnouncementId = new Guid("11111111-2222-1111-1111-111111111111"),
+                            Category = "テスト",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-5555-3333-3333-333333333301"),
+                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            Category = "テスト",
+                            ChangedBy = "system",
+                            CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            DisplayPriority = 4,
+                            ExpireDateTime = new DateTimeOffset(new DateTime(2026, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            OperationType = 1,
+                            PostDateTime = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        },
                         new
                         {
                             Id = new Guid("39999999-3333-3333-3333-333333333333"),
