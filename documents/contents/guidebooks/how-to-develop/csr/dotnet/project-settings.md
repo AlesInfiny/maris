@@ -185,7 +185,7 @@ Directory.Packages.props ファイルは、 NuGet を用いて外部のパッケ
 
     xunit テストプロジェクトや Fluent Blazor Web アプリプロジェクト等のプロジェクトテンプレートは、ソリューションに追加した時点で外部パッケージを参照しています。
     これらの外部パッケージを Directory.Packages.props に定義する必要があります。
-    [中央パッケージ管理 | Microsoft Learn :material-open-in-new:](https://learn.microsoft.com/ja-jp/nuget/consume-packages/Central-Package-Management#enabling-central-package-management){ target=_blank } に記載の手順で、 `csproj` ファイルに記載された外部パッケージを Directory.Packages.props へ移動してください。
+    [中央パッケージ管理 | Microsoft Learn :material-open-in-new:](https://learn.microsoft.com/ja-jp/nuget/consume-packages/Central-Package-Management#enabling-central-package-management){ target=_blank } に記載の手順で、 `csproj` ファイルに記載された外部パッケージを Directory.Packages.props へ転記してください。
 
 ## 静的コード解析用パッケージと設定ファイルの導入 {#setup-static-code-testing}
 
