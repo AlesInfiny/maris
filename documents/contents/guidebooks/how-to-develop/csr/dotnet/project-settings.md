@@ -181,6 +181,12 @@ csproj ファイルから設定を削除しても、 Directory.Build.props フ�
 開発に Visual Studio を利用している場合は、ソリューションを開きなおして、パッケージ集中管理の機能を有効化してください。
 Directory.Packages.props ファイルは、 NuGet を用いて外部のパッケージを参照したとき、自動的に設定が書きこまれます。
 
+!!! note "プロジェクトテンプレートがデフォルトで外部パッケージを参照している場合の対応"
+
+    xunit テストプロジェクトや Fluent Blazor Web アプリプロジェクト等のプロジェクトテンプレートは、ソリューションに追加した時点で外部パッケージを参照しています。
+    これらの外部パッケージを Directory.Packages.props に定義する必要があります。
+    [中央パッケージ管理 | Microsoft Learn :material-open-in-new:](https://learn.microsoft.com/ja-jp/nuget/consume-packages/Central-Package-Management#enabling-central-package-management){ target=_blank } に記載の手順で、 `csproj` ファイルに記載された外部パッケージを Directory.Packages.props へ移動してください。
+
 ## 静的コード解析用パッケージと設定ファイルの導入 {#setup-static-code-testing}
 
 コードの品質を一定以上に保つため、静的コード解析ツールを導入します。
