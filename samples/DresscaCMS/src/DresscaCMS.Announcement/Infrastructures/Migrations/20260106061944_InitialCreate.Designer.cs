@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DresscaCMS.Announcement.Infrastructures.Migrations
+namespace DresscaCMS.Announcement.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    [Migration("20260105082557_UpdateAnnouncementHistorySeedData")]
-    partial class UpdateAnnouncementHistorySeedData
+    [Migration("20260106061944_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -576,7 +576,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
-                            Title = "フランス語 français"
+                            Title = "スペイン語 español"
                         },
                         new
                         {
@@ -856,7 +856,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
-                            Title = "フランス語 français"
+                            Title = "スペイン語 español"
                         },
                         new
                         {
