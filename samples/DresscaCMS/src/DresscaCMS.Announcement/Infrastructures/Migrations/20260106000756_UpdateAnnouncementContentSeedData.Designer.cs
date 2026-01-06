@@ -4,6 +4,7 @@ using DresscaCMS.Announcement.Infrastructures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DresscaCMS.Announcement.Infrastructures.Migrations
 {
     [DbContext(typeof(AnnouncementDbContext))]
-    partial class AnnouncementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260106000756_UpdateAnnouncementContentSeedData")]
+    partial class UpdateAnnouncementContentSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
