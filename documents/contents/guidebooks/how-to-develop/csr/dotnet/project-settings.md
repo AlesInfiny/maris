@@ -379,9 +379,10 @@ stylecop.json は、各プロジェクトのルートフォルダーにあるか
 詳細な手順は「 [.NET アプリ用のリソース ファイルを作成する :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/extensions/create-resource-files){ target=_blank }」を参照してください。
 
 Visual Studio を用いてリソースファイルを作成すると、リソースファイルに定義したメッセージを取得するコードが自動生成されます。
-また Visual Studio の GUI 上で、リソースの公開範囲を指定できます。
-リソースの公開範囲は `#!csharp internal` にすることを推奨します。
-同じメッセージが複数のプロジェクトで使われる場合も、プロジェクトごとにリソースを管理しましょう。
+
+Visual Studio の GUI 上で、リソースの公開範囲を指定できます。
+リソースの公開範囲は原則として `#!csharp internal` にすることを推奨します。
+ただし、`#!csharp ValidationAttribute` や `#!csharp DisplayAttribute` でリソース名を指定する場合は、公開範囲を `#!csharp public` にする必要があります。
 
 !!! note "同じメッセージが複数のプロジェクトで必要になるパターン"
     同じようなメッセージが複数のプロジェクトで必要になった場合は、そのメッセージを使用する処理を共通処理として抽出できないか検討しましょう。
