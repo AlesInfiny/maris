@@ -51,51 +51,48 @@ Blazor Web アプリの利用用途に加えて、以下の用途で利用しま
     ```shell title="対話型 SSR を使用した Fluent Blazor Web アプリプロジェクトの作成コマンド"
     dotnet new fluentblazor
     ```
+
+??? info "Visual Studio でプロジェクトを作成する際の追加情報の設定"
+
+    Visual Studio で Blazor Web アプリおよび Fluent Blazor Web アプリプロジェクトを作成する場合、追加情報の設定を求められます。
+    AlesInfiny Maris では以下のように設定しています。
+
+    - フレームワーク
+
+        その時点で最新の長期的サポートバージョンを選択
+
+    - 認証の種類
+
+        「なし」を選択
+
+    - HTTPS 用の構成
+
+        チェックする
+
+    - 対話型レンダリングモード
+
+        「サーバー」を選択
+
+        SSR アプリケーションの開発では原則として「サーバー」を選択します。
+
+    - インタラクティビティの場所
+
+        「グローバル」を選択
+
+        SSR アプリケーションでは原則として「グローバル」を選択します。
+
+    - その他のオプション
+
+        「サンプルページを含める」にチェック
+
+        ヘッダー・フッター・ナビゲーション・サンプルページが追加されます。
+        画面の構造を細かく制御したい場合はチェックを外してください。
+
 <!-- textlint-enable @textlint-ja/no-synonyms -->
 
 ### xUnit v3 テストプロジェクト {#xunit}
 
 [xUnit v3 テストプロジェクト](../csr/dotnet/create-project.md#xunit) を参照してください。
-
-## プロジェクト作成時の追加情報の設定 {#project-additional-information}
-
-<!-- textlint-disable @textlint-ja/no-synonyms -->
-
-Visual Studio で Blazor Web アプリおよび Fluent Blazor Web アプリプロジェクトを作成する場合、追加情報の設定を求められます。
-AlesInfiny Maris では以下のように設定しています。
-
-- フレームワーク
-
-    その時点で最新の長期的サポートバージョンを選択
-
-- 認証の種類
-
-    「なし」を選択
-
-- HTTPS 用の構成
-
-    チェックする
-
-- 対話型レンダリングモード
-
-    「サーバー」を選択
-
-    SSR アプリケーションの開発では原則として「サーバー」を選択します。
-
-- インタラクティビティの場所
-
-    「グローバル」を選択
-
-    SSR アプリケーションでは原則として「グローバル」を選択します。
-
-- その他のオプション
-
-    「サンプルページを含める」にチェック
-
-    ヘッダー・フッター・ナビゲーション・サンプルページが追加されます。
-    画面の構造を細かく制御したい場合はチェックを外してください。
-
-<!-- textlint-enable @textlint-ja/no-synonyms -->
 
 ## プロジェクト間の依存関係の設定 {#configure-project-reference}
 
