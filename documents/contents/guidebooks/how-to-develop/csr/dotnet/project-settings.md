@@ -183,7 +183,7 @@ Directory.Packages.props ファイルは、 NuGet を用いて外部のパッケ
 
 !!! note "プロジェクトテンプレートがデフォルトで外部パッケージを参照している場合の対応"
 
-    xunit テストプロジェクトや Fluent Blazor Web アプリプロジェクト等のプロジェクトテンプレートは、ソリューションに追加した時点で外部パッケージを参照しています。
+    xUnit v3 テストプロジェクトや Fluent Blazor Web アプリプロジェクト等のプロジェクトテンプレートは、ソリューションに追加した時点で外部パッケージを参照しています。
     これらの外部パッケージを Directory.Packages.props に定義する必要があります。
     [中央パッケージ管理 | Microsoft Learn :material-open-in-new:](https://learn.microsoft.com/ja-jp/nuget/consume-packages/Central-Package-Management#enabling-central-package-management){ target=_blank } に記載の手順で、 `csproj` ファイルに記載された外部パッケージを Directory.Packages.props へ転記してください。
     その後、ソリューションのリビルドが成功することを確認してください。
