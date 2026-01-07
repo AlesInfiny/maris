@@ -4,7 +4,7 @@
     <PackageVersion Include="Maris.ComponentModel.Annotations" Version="2.1.0" />
     <PackageVersion Include="Maris.Core" Version="2.1.0" />
     <PackageVersion Include="Maris.Logging.Testing" Version="2.1.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity" Version="2.3.8" />
     <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.13.2" />
