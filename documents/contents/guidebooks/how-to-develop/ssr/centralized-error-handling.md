@@ -188,7 +188,7 @@ Blazor の起動前にエラーをキャッチする必要があるので、 Raz
 Razor Pages として追加した ServerError.cshtml を動作させるため、 エントリーポイントで Razor Pages 関連の設定をします。
 Program.cs を下記のように変更します。
 
-```csharp title="Program.cs の変更点（抜粋）" hl_lines="1 8 10-13 19 28"
+```csharp title="Program.cs の変更点（抜粋）" hl_lines="1 8 14 23"
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 
 // 中略
@@ -197,11 +197,6 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages(); // Razor Pages の機能一式を DI コンテナに登録します。
-
-if (builder.Environment.IsDevelopment()) // 開発環境用の設定です。
-{
-    StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration); // 静的アセットの読み込みを構成します。
-}
 
 // 中略
 
