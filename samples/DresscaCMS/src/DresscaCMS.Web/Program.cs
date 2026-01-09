@@ -32,7 +32,6 @@ builder.Services.AddValidation();
 
 if (builder.Environment.IsDevelopment())
 {
-    StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
     builder.Services.AddHttpLogging(logging =>
     {
         // どのデータをどのくらいの量出力するか設定。
