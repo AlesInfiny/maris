@@ -188,7 +188,7 @@ Blazor の起動前にエラーをキャッチする必要があるので、 Raz
 Razor Pages として追加した ServerError.cshtml を動作させるため、 エントリーポイントで Razor Pages 関連の設定をします。
 Program.cs を下記のように変更します。
 
-```csharp title="Program.cs の変更点（抜粋）" hl_lines="1 8 10-13 19 28"
+```csharp title="Program.cs の変更点（抜粋）" hl_lines="1 8 14 23"
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 
 // 中略
@@ -197,11 +197,6 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddFluentUIComponents();
 builder.Services.AddRazorPages(); // Razor Pages の機能一式を DI コンテナに登録します。
-
-if (builder.Environment.IsDevelopment()) // 開発環境用の設定です。
-{
-    StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration); // 静的アセットの読み込みを構成します。
-}
 
 // 中略
 
@@ -260,8 +255,19 @@ NavMenu.razor に下記のようにわざと例外を発生させる `@code` ブ
 }
 ```
 
-アプリケーションの起動と同時に、「 An unhandled exception occurred while processing the request. 」ともに詳細なエラー情報を示す画面に遷移することを確認して下さい。
-確認ができたら、確認用に追加したコードは削除してください。
+Production 環境での動作を確認するために、プロジェクトファイルの直下でターミナルを開き、下記のコマンドを用いて Release 構成でビルドし、 Production 環境でアプリケーションを立ち上げます。
 
-また、本番環境用のエラーページ ServerError.cshtml には、アドレスバーに直接 /ServerError を打ち込むことで遷移可能です。
-こちらのページはエラー発生時にユーザーが閲覧することを想定しているので、詳細なエラー情報を表示しません。
+```powershell title="プロジェクト名を AaaSubSystem.Web に設定した場合の例"  linenums="0"
+src\AaaSubSystem.Web> dotnet publish -c Release
+src\AaaSubSystem.Web> dotnet .\bin\Release\net10.0\publish\AaaSubSystem.Web.dll --environment Production
+```
+
+アプリケーションの起動に成功すると、下記のようなログが出力されるので、表示された URL にアクセスします。
+
+```powershell linenums="0"
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5000
+```
+
+アクセス直後、[エラーページの実装](#server-error-page-implementation) で追加した、 ServerError.cshtml に遷移することを確認してください。
+確認ができたら、 NavMenu.razor へ追加した確認用のコードは削除してください。
