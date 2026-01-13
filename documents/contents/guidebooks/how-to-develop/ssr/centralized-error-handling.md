@@ -10,6 +10,10 @@ description: SSR アプリケーション開発における 集約エラーハ�
 
 システム例外の処理方針については、[全体処理方式 - 例外処理方針](../../../app-architecture/server-side-rendering/global-function/exception-handling.md) を参照してください。
 
+!!! warning "実施前の注意点"
+
+    本章の手順を実施する前に、Debug ビルド、 Release ビルドの構成でそれぞれアプリケーションを起動し、それぞれアプリケーションが正常に起動することを確認してください。本章にはあえてエラーを発生させて、エラーが発生した場合の挙動を確認する手順が含まれるためです。
+
 ## 集約エラーハンドリングの全体像 {#overview}
 
 本章では、次の内容を実施します。
@@ -223,9 +227,9 @@ app.Run();
 
 ### Blazor ランタイムの例外の確認 {#verify-blazor-exception}
 
-Home.razor に下記のようにわざと例外を発生させる `@code` ブロックを実装し、アプリケーションを起動します。
+App.razor に下記のようにわざと例外を発生させる `@code` ブロックを実装し、アプリケーションを起動します。
 
-```csharp title="例外を発生させる Home.razor"
+```csharp title="例外を発生させる App.razor"
 @code {
 
     protected override void OnParametersSet()
