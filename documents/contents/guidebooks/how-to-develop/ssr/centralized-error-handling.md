@@ -227,9 +227,9 @@ app.Run();
 
 ### Blazor ランタイムの例外の確認 {#verify-blazor-exception}
 
-App.razor に下記のようにわざと例外を発生させる `@code` ブロックを実装し、アプリケーションを起動します。
+Home.razor に下記のようにわざと例外を発生させる `@code` ブロックを実装し、アプリケーションを起動します。
 
-```csharp title="例外を発生させる App.razor"
+```csharp title="例外を発生させる Home.razor"
 @code {
 
     protected override void OnParametersSet()
