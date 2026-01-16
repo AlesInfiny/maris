@@ -41,7 +41,7 @@ Node.js の LTS バージョンの情報については、 [Node.js リリース
   "private": "true",
   "engines": {
     "node": "^x.x.x",
-    "npm": ">=y.y.y"
+    "npm": "^y.y.y"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -59,7 +59,7 @@ Node.js の LTS バージョンの情報については、 [Node.js リリース
   "name": "workspace-name",
   "engines": {
     "node": "^x.x.x",
-    "npm": ">=y.y.y"
+    "npm": "^y.y.y"
   },
 }
 ```
