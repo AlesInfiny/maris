@@ -33,7 +33,7 @@ NSwag を用いた実装コードの生成は行わないため、 OpenAPI 仕�
 
     ```json title="nswag.json"
     {
-      "runtime": "Net80",
+      "runtime": "Net100",
       "defaultVariables": null,
       "documentGenerator": {
         "aspNetCoreToOpenApi": {
@@ -70,7 +70,7 @@ OpenAPI 仕様書のファイルがビルド時に生成されるようプロジ
     <Project Sdk="Microsoft.NET.Sdk.Web">
       <!-- 追加箇所以外は省略 -->
       <Target Name="NSwag" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Debug'">
-        <Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net80) run nswag.json /variables:Configuration=$(Configuration)" />
+        <Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net100) run nswag.json /variables:Configuration=$(Configuration)" />
       </Target>
 
       <PropertyGroup>
