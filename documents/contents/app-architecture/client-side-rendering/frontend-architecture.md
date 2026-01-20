@@ -104,10 +104,10 @@ Pinia における Store は、 State・Getter・Action という 3 つの要素
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-light.png#only-light){ loading=lazy }
 ![Pinia のアーキテクチャ](../../images/app-architecture/client-side-rendering/pinia-architecture-dark.png#only-dark){ loading=lazy }
 
-| 要素 | 説明 |
-| --- | --- |
-| State | Store で管理するデータそのもの。 |
-| Getter | State の値や State から算出した結果を返すもの。 |
+| 要素   | 説明                                                                                                                                                                                 |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| State  | Store で管理するデータそのもの。                                                                                                                                                     |
+| Getter | State の値や State から算出した結果を返すもの。                                                                                                                                      |
 | Action | Store で管理しているデータである State に対して変更を行うもの。また API の呼び出しや API のレスポンスのハンドリングを行うもの。原則として、 State の変更を伴わない処理を持たせない。 |
 
 Store は State をグローバルなシングルトンとして管理します。そのため本来 State は直接取得・更新ができますが、 Getter と Action を通じてアクセスするルールを設けて State の参照・更新を制御し、データの一貫性を持つことが重要です。
@@ -148,7 +148,7 @@ Axios : [github :material-open-in-new:](https://github.com/axios/axios){ target=
 
 Vue.js プロジェクトのフォルダー構成は、ブランクプロジェクト作成時のデフォルトの構成を基に以下のように行います。なおこのフォルダー配下の構成については、コンポーネント設計方法に依存するため、各プロジェクトの方針に従います。
 
-``` text title="プロジェクトのフォルダー構成全体像" linenums="0"
+```text title="プロジェクトのフォルダー構成全体像" linenums="0"
 <project-name>
 ├─ cypress/ ------------------ cypress による E2E テストに関するファイルを格納します。
 ├─ public/ ------------------- メディアファイルや favicon など静的な資産を格納します。
@@ -171,7 +171,7 @@ Vue.js プロジェクトのフォルダー構成は、ブランクプロジェ�
 
 views フォルダーはルーティングで指定される vue ファイルを格納します。そのためこの下層のフォルダー構造はサイト構造を意識して作成することを推奨します。以下の例で Login.vue なら ```https://xxxx.com/authentication/login``` と設定します。
 
-``` text title="views フォルダー" linenums="0"
+```text title="views フォルダー" linenums="0"
 src/
 └─ views/
    ├─ authentication/
@@ -203,7 +203,7 @@ src/
 
 components フォルダーは主に、再利用性の高い vue コンポーネントファイルを格納します。さらにこの下層フォルダーはドメインで分割し、それを操作するコンポーネントを格納します。こうすることで再利用性を活かすために、どのドメインを対象にしたコンポーネントなのかを明確にします。また vue ファイルに限らずプロジェクト内で再利用性の高いもの（icon など）もこちらに格納します。
 
-``` text title="components フォルダー" linenums="0"
+```text title="components フォルダー" linenums="0"
 src/
 └─ components/
    ├─ authentication/
@@ -222,7 +222,7 @@ src/
 
       - [Atomic Design by Brad Frost :material-open-in-new:](https://atomicdesign.bradfrost.com/){ target=_blank }
 
-``` text title="components フォルダー by Atomic Design" linenums="0"
+```text title="components フォルダー by Atomic Design" linenums="0"
 src/
 └─ components/
    ├─ atoms-and-molecules/

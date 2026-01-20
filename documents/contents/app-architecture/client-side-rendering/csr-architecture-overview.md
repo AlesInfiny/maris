@@ -7,7 +7,7 @@ description: クライアントサイドレンダリングを行う Web アプ�
 
 ## 技術スタック {#tech-stack}
 
-AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OSS を以下に示します。
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） の CSR アプリケーションを構成する OSS を以下に示します。
 
 ![技術スタック](../../images/app-architecture/client-side-rendering/tech-stack-light.png#only-light){ loading=lazy }
 ![技術スタック](../../images/app-architecture/client-side-rendering/tech-stack-dark.png#only-dark){ loading=lazy }
@@ -22,11 +22,11 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
           JavaScript を拡張して静的型付にしたプログラミング言語です。
       
-    - [Vue.js :material-open-in-new:](https://v3.ja.vuejs.org/){ target=_blank }
+    - [Vue.js :material-open-in-new:](https://ja.vuejs.org/){ target=_blank }
 
           シンプルな設計で拡張性の高い JavaScript のフレームワークです。
       
-    - [Vite :material-open-in-new:](https://ja.vitejs.dev/){ target=_blank }
+    - [Vite :material-open-in-new:](https://ja.vite.dev/){ target=_blank }
 
           ES modules を利用してプロジェクトの高速な起動・更新を実現するフロントエンドビルドツールです。
       
@@ -42,7 +42,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
           Vue.js で非同期通信を行うためのプロミスベースの HTTP クライアントです。
           
-    - [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/){ target=_blank }
+    - [VeeValidate :material-open-in-new:](https://vee-validate.logaretm.com/v4/){ target=_blank }
 
           Vue.js 用のリアルタイムバリデーションコンポーネントライブラリです。
           
@@ -98,7 +98,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）を構成する OS
 
 ## アプリケーションアーキテクチャ {#application-architecture}
 
-AlesInfiny Maris のアプリケーションアーキテクチャは、クリーンアーキテクチャに基づいています。 アーキテクチャの全体概要は以下の通りです。
+AlesInfiny Maris の CSR アプリケーションアーキテクチャは、クリーンアーキテクチャに基づいています。 アーキテクチャの全体概要は以下の通りです。
 
 ![アーキテクチャ概要](../../images/app-architecture/client-side-rendering/csr-architecture-light.png#only-light){ loading=lazy }
 ![アーキテクチャ概要](../../images/app-architecture/client-side-rendering/csr-architecture-dark.png#only-dark){ loading=lazy }
@@ -112,6 +112,12 @@ AlesInfiny Maris のアプリケーションアーキテクチャは、クリー
 ## バックエンドの構造詳細 {#backend-structure}
 
 クライアントサイドレンダリング方式の Web アプリケーションにおける、各層とそれを構成するコンポーネントの役割について、それぞれ説明します。
+
+!!! warning "バックエンドアプリケーションのアーキテクチャについて"
+
+    本ドキュメントおよび CSR サンプルアプリケーションでは、バックエンドアプリケーションでドメインモデルを採用しています。
+    しかし AlesInfiny Maris は、バックエンドアプリケーションのアーキテクチャをドメインモデルに限定するものではありません。
+    バックエンドアプリケーションのアーキテクチャ選定方針は [こちら](../overview/dotnet-application-architecture-selection-guideline.md) を参照してください。
 
 ### アプリケーションコア層 {#application-core}
 

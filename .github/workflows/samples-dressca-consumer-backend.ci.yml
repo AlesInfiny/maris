@@ -29,6 +29,7 @@ jobs:
       BUILD_CONFIGURATION: Debug
       BUILD_SUMMARY_FILE: BuildSummary.md
       TEST_ENVIRONMENT: IntegrationTest
+      SKIP_SPA_NODE_RESTORE: true
     permissions:
       checks: write
       contents: read
@@ -36,14 +37,14 @@ jobs:
 
     steps:
       - name: ブランチのチェックアウト
-        uses: actions/checkout@v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
         with:
           fetch-depth: 1
 
       - name: .NET SDK のセットアップ
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@2016bd2012dba4e32de620c46fe006a3ac9f0602  # v5.0.1
         with:
-          dotnet-version: '8.*'
+          dotnet-version: '10.*'
 
       - name: NuGet パッケージの復元
         run: dotnet restore ${{ env.SOLUTION_FILE_NAME }}
@@ -80,7 +81,7 @@ jobs:
 
       - name: EF Core ツールのインストール(結合テスト用)
         shell: bash
-        run: dotnet tool install --global dotnet-ef --version 8.*
+        run: dotnet tool install --global dotnet-ef --version 10.*
 
       - name: マイグレーション適用(結合テスト用)
         working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
@@ -92,11 +93,11 @@ jobs:
         continue-on-error: true
         run: |
           export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
-          dotnet test ${{ env.SOLUTION_FILE_NAME }} --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
+          dotnet test --solution ${{ env.SOLUTION_FILE_NAME }} --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
 
       - id: create-test-result-report
         name: テスト結果ページの作成
-        uses: dorny/test-reporter@dc3a92680fcc15842eef52e8c4606ea7ce6bd3f3  # v2.1.1
+        uses: dorny/test-reporter@fe45e9537387dac839af0d33ba56eed8e24189e8  # v2.3.0
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           name: 'Test results'
@@ -120,7 +121,7 @@ jobs:
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
-        uses: danielpalme/ReportGenerator-GitHub-Action@c1dd332d00304c5aa5d506aab698a5224a8fa24e  # v5.4.11
+        uses: danielpalme/ReportGenerator-GitHub-Action@ee0ae774f6d3afedcbd1683c1ab21b83670bdf8e  # v5.5.1
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           reports: '**/TestResults/coverage.cobertura.xml'

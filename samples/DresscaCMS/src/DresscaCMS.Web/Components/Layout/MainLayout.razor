@@ -1,0 +1,40 @@
+﻿@inherits LayoutComponentBase
+
+<FluentLayout>
+    <FluentHeader>
+        DresscaCMS
+    </FluentHeader>
+    <FluentStack Class="main" Orientation="Orientation.Horizontal" Width="1850">
+        <NavMenu />
+        <FluentBodyContent Class="body-content">
+            <div class="content">
+                <ErrorBoundary @ref="errorBoundary">
+                    <ChildContent>
+                        @Body
+                    </ChildContent>
+                    <ErrorContent>
+                        <Error Exception="@context" />
+                    </ErrorContent>
+                </ErrorBoundary>
+            </div>
+        </FluentBodyContent>
+    </FluentStack>
+    <FluentFooter>
+        <p>©2025 Dressca All rights reserved.</p>
+    </FluentFooter>
+</FluentLayout>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
+
+@code {
+    private ErrorBoundary? errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        errorBoundary?.Recover();
+    }
+}

@@ -12,19 +12,26 @@ runs:
       shell: bash
       run: |
         cd samples/Dressca
-        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/dressca.zip *
+        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/dressca.zip .
 
     - name: console-app-with-di.zip の作成
       shell: bash
       run: |
         cd samples/ConsoleAppWithDI
-        zip -r  ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/console-app-with-di.zip *
+        zip -r  ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/console-app-with-di.zip .
 
     - name: azure-ad-b2c-auth.zip の作成
       shell: bash
       run: |
         cd samples/AzureADB2CAuth
-        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/azure-ad-b2c-auth.zip *
+        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/azure-ad-b2c-auth.zip .
+
+    - name: dressca-cms.zip の作成
+      shell: bash
+      run: |
+        cd samples/DresscaCMS
+        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/dressca-cms.zip .
+
 
     - name: entra-external-id-auth.zip の作成
       shell: bash

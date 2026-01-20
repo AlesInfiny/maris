@@ -1,0 +1,139 @@
+---
+title: SSR 編
+description: サーバーサイドレンダリングを行う Web アプリケーションの アーキテクチャについて解説します。
+---
+
+# SSR アーキテクチャ概要 {#top}
+
+## 技術スタック {#tech-stack}
+
+AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） の SSR アプリケーションの構成を以下に示します。
+
+![技術スタック](../../images/app-architecture/server-side-rendering/tech-stack-light.png#only-light){ loading=lazy }
+![技術スタック](../../images/app-architecture/server-side-rendering/tech-stack-dark.png#only-dark){ loading=lazy }
+
+??? note "利用ライブラリ"
+
+    - [ASP.NET Core :material-open-in-new:](https://dotnet.microsoft.com/ja-jp/learn/aspnet/what-is-aspnet-core){ target=_blank }
+
+        .NET で利用可能な Web 開発フレームワークです。
+
+    - [Blazor :material-open-in-new:](https://dotnet.microsoft.com/ja-jp/apps/aspnet/web-apps/blazor){ target=_blank }
+
+        ASP.NET Core を前提としたフロントエンド Web フレームワークです。
+
+    - [Entity Framework Core :material-open-in-new:](https://github.com/dotnet/efcore){ target=_blank }
+
+        .NET で利用可能な O/R マッパーです。
+
+    - [xUnit v3 :material-open-in-new:](https://xunit.net/){ target=_blank }
+
+        .NET で利用可能なテストフレームワークです。
+
+    - [StyleCopAnalyzers :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers){ target=_blank }
+
+        C# のコードを解析し、コーディングルールに則っているかを確認します。
+
+## アプリケーションアーキテクチャ {#application-architecture}
+
+AlesInfiny Maris における SSR アプリケーションアーキテクチャの全体概要を以下に示します。
+
+![アプリケーションアーキテクチャ](../../images/app-architecture/server-side-rendering/ssr-architecture-light.png#only-light){ loading=lazy }
+![アプリケーションアーキテクチャ](../../images/app-architecture/server-side-rendering/ssr-architecture-dark.png#only-dark){ loading=lazy }
+
+## 構造の詳細 {#backend-structure}
+
+サーバーサイドレンダリング方式の Web アプリケーションにおける、各層とそれを構成するコンポーネントの役割について、それぞれ説明します。
+
+!!! warning "SSR アプリケーションのアーキテクチャについて"
+
+    本ドキュメントおよび SSR サンプルアプリケーションでは、トランザクションスクリプトを採用しています。
+    しかし AlesInfiny Maris は、アプリケーションのアーキテクチャをトランザクションスクリプトに限定するものではありません。
+    アプリケーションのアーキテクチャ選定方針は [こちら](../overview/dotnet-application-architecture-selection-guideline.md) を参照してください。
+
+### プレゼンテーション層 {#presentation}
+
+プレゼンテーション層は、ユーザーインターフェースを提供する層です。
+ユーザーからの入力を受け、アプリケーションコア層に処理を依頼します。
+アプリケーションコア層からの処理結果に応じて、ユーザーに情報を表示します。
+
+#### ビュー {#view}
+
+ビューは、ユーザーに情報を表示する役割を担います。ビューには UI の構造やスタイルを定義します。
+Razor コンポーネントの HTML 部分がビューに相当します。
+ビューでは以下を行います。
+
+- プレゼンテーションロジックの結果を HTML に表示する
+- 入力チェックやアプリケーションサービスの呼び出し等、プレゼンテーションロジックが実行できるように入力フォームを構築する
+- HTML の要素に対して、 CSS を適用する
+
+#### ビューモデル {#view-model}
+
+ブラウザーからのイベントを受け、プレゼンテーションロジックを実行します。
+ビューモデルでは以下を行います。
+
+- レンダリングに必要な処理
+- 入力チェック（項目間チェック）
+- アプリケーションサービスの呼び出しを通じたデータの取得・更新
+- 業務エラーをハンドリングして、エラーメッセージをビューに設定する
+
+ビューとビューモデルの間のデータのやり取りには、バインド変数またはバインドプロパティを使用します。
+
+### アプリケーションコア層 {#application-core}
+
+アプリケーションコア層は、ビジネスロジックを実装する層です。
+トランザクション管理を含む、すべてのビジネスロジックをここに実装します。
+
+#### アプリケーションサービス {#application-service}
+
+アプリケーションサービスは、アプリケーションコア層の中で、ユースケースレベルのビジネスロジックを実装する役割を担います。
+アプリケーションサービスでは以下を行います。
+
+- データベーストランザクションの管理
+- ビジネスロジック(計算処理、繰り返し、条件分岐など)の実行
+- リポジトリインターフェースを介したデータアクセス
+
+アプリケーションサービスの引数や戻り値では、複雑度に応じて以下を使用します（下に行くほど複雑になります）。
+
+- 引数・戻り値
+- 複数の引数・複数戻り値
+- `record`
+- 引数クラス・戻り値クラス
+
+ビジネスロジックは手続き型で実装します。
+他のアプリケーションサービスとビジネスロジックを共有しません。
+
+#### リポジトリインターフェース {#repository-interface}
+
+リポジトリインターフェースは、アプリケーションコア層の中で、データアクセスを抽象化する役割を担います。
+リポジトリインターフェースは、アプリケーションサービスから利用されます。
+これにより、アプリケーションサービスのテスト容易性を確保します。
+
+実装クラスであるリポジトリは、インフラストラクチャ層に実装します。
+アプリケーションサービスには、 DI コンテナーからリポジトリを注入します。
+
+### インフラストラクチャ層 {#infrastructure}
+
+インフラストラクチャ層は、データベースや外部システムとの接続を管理する層です。
+データベースへの接続、外部システムと通信を担当します。
+原則としてインフラストラクチャ層にビジネスロジックを実装しないようにします。
+
+インフラストラクチャ層では、 Entity Framework Core （以降、 EF Core と記載）を使用します。
+EF Core のツールを使用して、作成したテーブルエンティティのコードからデータベースを生成します (Code First) 。
+
+#### リポジトリ {#repository}
+
+リポジトリは、インフラストラクチャ層の中で、データアクセスを実装する役割を担います。
+リポジトリは、リポジトリインターフェースを実装します。
+リポジトリでは以下を行います。
+
+- データベースへの接続
+- データベースからのデータの取得
+- データベースへのデータの登録・更新・削除
+
+#### テーブルエンティティ {#table-entity}
+
+テーブルエンティティはデータベースのテーブルに対応するデータ構造を表現するクラスです。
+1 つのテーブルエンティティオブジェクトがテーブルの 1 レコードに対応します。
+
+原則として、 1 つの C# コードファイル（ `*.cs` ）に 1 つのエンティティクラスを定義します。

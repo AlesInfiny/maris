@@ -29,30 +29,23 @@ jobs:
         working-directory: ${{ env.FRONTEND_WORKING_DIRECTORY }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
         with:
           fetch-depth: 1
 
       - name: Use Node.js Use Node.js LTS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f  # v6.1.0
         with:
           node-version: lts/*
           # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-      - uses: actions/cache@v4
-        id: node_modules_cache_id
-        env:
-          cache-name: cache-node-modules-azure-ad-b2c-auth-frontend
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-
-      - name: node パッケージのキャッシュ確認
-        run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+          cache: npm
 
       - name: node パッケージのインストール
-        if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
         run: npm ci
+
+      - id: run-format-root
+        name: ルート直下の format の実行
+        run: npm run format:ci:root >> /var/tmp/format-root-result.txt 2>&1
 
       - id: run-lint
         name: lintの実行
@@ -68,6 +61,12 @@ jobs:
       - id: run-unit-tests
         name: 単体テストの実行
         run: npm run test:unit:app >> /var/tmp/unit-test-result.txt 2>&1
+      - name: formatの結果出力
+        if: ${{ success() || (failure() && steps.run-format-root.conclusion == 'failure') }}
+        uses: ./.github/workflows/file-to-summary
+        with:
+          body: /var/tmp/format-root-result.txt
+          header: 'formatの結果 :pen:'
       - name: lintの結果出力
         if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
@@ -101,6 +100,7 @@ jobs:
     env:
       DOTNET_NOLOGO: true
       BUILD_CONFIGURATION: Debug
+      SKIP_SPA_NODE_RESTORE: true
     permissions:
       checks: write
     defaults:
@@ -108,14 +108,14 @@ jobs:
         working-directory: ${{ env.BACKEND_WORKING_DIRECTORY }}
     steps:
       - name: ブランチのチェックアウト
-        uses: actions/checkout@v5
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
         with:
           fetch-depth: 1
 
       - name: .NET SDK のセットアップ
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@2016bd2012dba4e32de620c46fe006a3ac9f0602  # v5.0.1
         with:
-          dotnet-version: '8.*'
+          dotnet-version: '10.*'
 
       - name: NuGet パッケージの復元
         run: dotnet restore
@@ -146,11 +146,11 @@ jobs:
         continue-on-error: true
         run: |
           echo '## Test Result :memo:' >> $GITHUB_STEP_SUMMARY
-          dotnet test --no-build --nologo --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} -- --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
+          dotnet test --solution Dressca.slnx --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
 
       - id: create-test-result-report
         name: テスト結果ページの作成
-        uses: dorny/test-reporter@v2.1.1
+        uses: dorny/test-reporter@fe45e9537387dac839af0d33ba56eed8e24189e8  # v2.3.0
         with:
           name: 'Test results'
           path: '**/TestResults/*.trx'
@@ -167,7 +167,7 @@ jobs:
 
       - id: create-coverage-report
         name: コードカバレッジレポートの解析と作成
-        uses: danielpalme/ReportGenerator-GitHub-Action@c1dd332d00304c5aa5d506aab698a5224a8fa24e  # v5.4.11
+        uses: danielpalme/ReportGenerator-GitHub-Action@ee0ae774f6d3afedcbd1683c1ab21b83670bdf8e  # v5.5.1
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         with:
           reports: '**/TestResults/coverage.cobertura.xml'

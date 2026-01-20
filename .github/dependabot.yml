@@ -1,9 +1,13 @@
 version: 2
 updates:
   - package-ecosystem: "github-actions"
-    directory: "/.github/workflows"
+    directories:
+      - "/.github/workflows"
+      - "/.github/workflows/**/action.yml"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
     commit-message:
       prefix: "github-actions"
     labels:
@@ -14,6 +18,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
     open-pull-requests-limit: 10
     commit-message:
       prefix: "python"
@@ -25,6 +31,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 7
     open-pull-requests-limit: 10
     commit-message:
       prefix: "npm-root"
@@ -36,7 +44,9 @@ updates:
     directory: "/samples/Dressca/dressca-frontend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 20
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 60
     commit-message:
       prefix: "npm-dressca-frontend"
     labels:
@@ -61,12 +71,27 @@ updates:
           - "Microsoft.AspNetCore*"
           - "Microsoft.EntityFrameworkCore*"
           - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
       xunit-packages:
         patterns:
           - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
       nswag-packages:
         patterns:
           - "NSwag*"
+        update-types:
+          - "minor"
+          - "patch"
+      maris-packages:
+        patterns:
+          - "Maris*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       - dependency-name: "Microsoft.AspNetCore*"
         versions: ["9.*", "11.*"]
@@ -91,9 +116,21 @@ updates:
         patterns:
           - "Microsoft.EntityFrameworkCore*"
           - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
       xunit-packages:
         patterns:
           - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
+      maris-packages:
+        patterns:
+          - "Maris*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       - dependency-name: "Microsoft.EntityFrameworkCore*"
         versions: ["9.*", "11.*"]
@@ -104,7 +141,9 @@ updates:
     directory: "/samples/AzureADB2CAuth/auth-frontend"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 20
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 40
     commit-message:
       prefix: "npm-azure-ad-b2c-frontend"
     labels:
@@ -128,14 +167,75 @@ updates:
         patterns:
           - "Microsoft.AspNetCore*"
           - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
       xunit-packages:
         patterns:
           - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
       nswag-packages:
         patterns:
           - "NSwag*"
+        update-types:
+          - "minor"
+          - "patch"
+      maris-packages:
+        patterns:
+          - "Maris*"
+        update-types:
+          - "minor"
+          - "patch"
     ignore:
       - dependency-name: "Microsoft.AspNetCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.Extensions*"
+        versions: ["9.*", "11.*"]
+
+  - package-ecosystem: "nuget"
+    directory: "/samples/DresscaCMS"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "nuget-dressca-cms"
+    labels:
+      - "target: Dressca-CMS"
+      - "nuget"
+      - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.AspNetCore*"
+          - "Microsoft.EntityFrameworkCore*"
+          - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
+      fluentui-packages:
+        patterns:
+          - "Microsoft.FluentUI*"
+        update-types:
+          - "minor"
+          - "patch"
+      xunit-packages:
+        patterns:
+          - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
+      maris-packages:
+        patterns:
+          - "Maris*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "Microsoft.AspNetCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.EntityFrameworkCore*"
         versions: ["9.*", "11.*"]
       - dependency-name: "Microsoft.Extensions*"
         versions: ["9.*", "11.*"]

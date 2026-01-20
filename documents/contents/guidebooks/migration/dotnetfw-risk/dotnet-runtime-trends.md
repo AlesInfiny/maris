@@ -38,7 +38,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 .NET ( .NET Core ) や .NET Framework は、 .NET Standard の実装という位置づけになりました。
 
 その後 .NET Core は .NET と改称し、 Windows 、 Linux の他 macOS にも対応しました。
-2024 年現在は .NET 8.0 がリリースされています ( .NET 8.0 は、 .NET Standard 2.1 の実装です ) 。
+2025 年現在は .NET 10.0 がリリースされています ( .NET 10.0 は、 .NET Standard 2.1 の実装です ) 。
 このように、 .NET Framework と .NET は、どちらも .NET Standard の実装です。
 プログラミング言語として C# を使うものの、以下のように異なるものです。
 

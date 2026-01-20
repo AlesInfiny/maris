@@ -1,0 +1,98 @@
+﻿@page "/Account/Login"
+@attribute [AllowAnonymous]
+@attribute [ExcludeFromInteractiveRouting]
+
+@using System.ComponentModel.DataAnnotations
+@using DresscaCMS.Authentication.Infrastructures.Entities
+@using DresscaCMS.Web.Components.Account
+@using DresscaCMS.Web.Components.Account.Shared
+@using DresscaCMS.Web.Resources
+@using Microsoft.AspNetCore.Identity
+
+@inject IdentityRedirectManager RedirectManager
+@inject ILogger<Login> Logger
+@inject SignInManager<ApplicationUser> SignInManager
+
+<PageTitle>Dressca-CMS - @Messages.Login</PageTitle>
+
+<div>
+    <h3>@Messages.Login</h3>
+    <EditForm EditContext="this.editContext" method="post" OnSubmit="this.LoginUser" FormName="login">
+        <DataAnnotationsValidator />
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
+            <FluentStack Orientation="Orientation.Vertical">
+                <FluentInputLabel Label="@Messages.Email" Required="true" />
+                <FluentTextField @bind-Value="this.Input.Email" Name="Input.Email" Autocomplete="username webauthn" Placeholder="name@example.com" Style="width: 300px;" />
+                <FluentValidationMessage For="() => this.Input.Email" />
+            </FluentStack>
+            <FluentStack Orientation="Orientation.Vertical">
+                <FluentInputLabel Label="@Messages.Password" Required="true" />
+                <FluentTextField TextFieldType="TextFieldType.Password" @bind-Value="this.Input.Password" Name="Input.Password" Style="width: 300px;" />
+                <FluentValidationMessage For="() => this.Input.Password" />
+            </FluentStack>
+            <FluentCheckbox @bind-Value="this.Input.RememberMe" Name="Input.RememberMe" Label="@Messages.RememberMe" />
+            <FluentButton Type="ButtonType.Submit" Appearance="Appearance.Accent">@Messages.Login</FluentButton>
+            <FluentValidationSummary Model="this.editContext.Model" />
+        </FluentStack>
+    </EditForm>
+</div>
+
+@code {
+
+    private EditContext editContext = default!;
+    private ValidationMessageStore messageStore = default!;
+
+    [SupplyParameterFromForm]
+    private InputModel Input { get; set; } = default!;
+
+    [SupplyParameterFromQuery]
+    private string? ReturnUrl { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.Input ??= new();
+        this.editContext = new EditContext(this.Input);
+        this.messageStore = new ValidationMessageStore(this.editContext);
+    }
+
+    public async Task LoginUser()
+    {
+        this.messageStore.Clear();
+        if (!this.editContext.Validate())
+        {
+            return;
+        }
+
+        // アカウントロックアウトに対してログイン失敗をカウントしません
+        // パスワード失敗でアカウントロックアウトを有効にするには、lockoutOnFailure: true に設定してください
+        var result = await this.SignInManager.PasswordSignInAsync(this.Input.Email, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+        if (result.Succeeded)
+        {
+            this.Logger.LogInformation(Messages.UserLogin);
+            this.RedirectManager.RedirectTo(this.ReturnUrl);
+        }
+        else
+        {
+            this.messageStore.Add(
+                new FieldIdentifier(this.editContext.Model, string.Empty),
+                Messages.LoginFailed);
+            this.editContext.NotifyValidationStateChanged();
+        }
+    }
+
+    private sealed class InputModel
+    {
+        [Display(ResourceType = typeof(Messages), Name = nameof(Messages.Email))]
+        [Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.RequiredToInput))]
+        [EmailAddress(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.EnterEmailFormat))]
+        public string Email { get; set; } = string.Empty;
+
+        [Display(ResourceType = typeof(Messages), Name = nameof(Messages.Password))]
+        [Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = nameof(Messages.RequiredToInput))]
+        [DataType(DataType.Password)]
+        public string Password { get; set; } = string.Empty;
+
+        [Display(ResourceType = typeof(Messages), Name = nameof(Messages.RememberMe))]
+        public bool RememberMe { get; set; }
+    }
+}

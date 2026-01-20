@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Dressca.ApplicationCore.Resources;
-using Dressca.SystemCommon;
+using Maris.Core;
 
 namespace Dressca.ApplicationCore.Authorization;
 

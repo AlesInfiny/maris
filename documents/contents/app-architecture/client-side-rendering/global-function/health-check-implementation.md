@@ -8,7 +8,7 @@ description: アプリケーション全体で考慮すべきアーキテクチ�
 AlesInfiny Maris OSS Edition では、 Web API を通じてシステムが正常稼働中か確認します。
 `Microsoft.Extensions.Diagnostics.HealthChecks` の機能を利用してヘルスチェック用の Web API を実装しています。
 
-実装方法の詳細については、[ヘルスチェック API の実装](../../../guidebooks/how-to-develop/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
+実装方法の詳細については、[ヘルスチェック API の実装](../../../guidebooks/how-to-develop/csr/dotnet/health-check-api.md) およびサンプルアプリケーションを参照してください。
 また、ヘルスチェックの全体方針については、[ヘルスチェックの必要性](../../overview/dotnet-application-processing-system/health-check-necessity.md) を参照してください。
 
 ## API の仕様 {#api-specs}
@@ -20,12 +20,12 @@ AlesInfiny Maris OSS Edition では、 Web API を通じてシステムが正常
 
 正常状態の場合は、 HTTP 200 のレスポンスを返却し、異常状態の場合は HTTP 503 のレスポンスを返却します。
 
-|      HealthStatus      | ステータスコード | レスポンスボディ |                   詳細                   |
-| ---------------------- | ---------------- | ---------------- | ---------------------------------------- |
-| HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能             |
-| HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可/停止状態   |
+| HealthStatus           | ステータスコード | レスポンスボディ | 詳細                                  |
+| ---------------------- | ---------------- | ---------------- | ------------------------------------- |
+| HealthStatus.Healthy   | 200              | Healthy          | サーバーがリクエスト受付可能          |
+| HealthStatus.Unhealthy | 503              | Unhealthy        | サーバーがリクエスト受付不可/停止状態 |
 
-[`HealthStatus` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus){ target=_blank } をどのように使い分けるかについては、[HealthStatus の使い分け](../../../guidebooks/how-to-develop/dotnet/health-check-api.md#health-status) を参照してください。
+[`HealthStatus` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.diagnostics.healthchecks.healthstatus){ target=_blank } をどのように使い分けるかについては、[HealthStatus の使い分け](../../../guidebooks/how-to-develop/csr/dotnet/health-check-api.md#health-status) を参照してください。
 
 また、監視側の仕様によってヘルスチェック実行時の HTTP メソッドに制限の入ることがあるため、 HTTP GET/HEAD メソッドいずれにも対応できるようにします。
 
