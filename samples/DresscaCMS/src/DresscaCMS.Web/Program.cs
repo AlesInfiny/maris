@@ -4,11 +4,26 @@ using DresscaCMS.Authentication.Infrastructures;
 using DresscaCMS.Web.Components;
 using DresscaCMS.Web.Components.Account;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+const long MaxRequestBodySizeBytes = 3L * 1024L * 1024L;
+
+// Kestrel サーバーのリクエストボディサイズの上限を設定
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = MaxRequestBodySizeBytes;
+});
+
+// フォームオプションのリクエストボディサイズの上限を設定
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = MaxRequestBodySizeBytes;
+    options.BufferBodyLengthLimit = MaxRequestBodySizeBytes;
+});
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -48,6 +63,16 @@ builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
 var app = builder.Build();
+
+app.Use((context, next) =>
+{
+    // コンテンツタイプを誤認識しないよう、HTTPレスポンスヘッダに「X-Content-Type-Options: nosniff」の設定を追加
+    context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+
+    // クリックジャッキング攻撃への対策として、HTTP レスポンスヘッダに、「X-FRAME-OPTIONS」を「DENY」に設定
+    context.Response.Headers["X-Frame-Options"] = "DENY";
+    return next();
+});
 
 if (app.Environment.IsDevelopment())
 {
