@@ -10,19 +10,20 @@ using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-const long MaxRequestBodySizeBytes = 3L * 1024L * 1024L;
+var maxRequestBodySizeBytes = builder.Configuration.GetValue<long?>("MaxRequestBodySizeBytes")
+    ?? (3L * 1024L * 1024L);
 
 // Kestrel サーバーのリクエストボディサイズの上限を設定
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.Limits.MaxRequestBodySize = MaxRequestBodySizeBytes;
+    options.Limits.MaxRequestBodySize = maxRequestBodySizeBytes;
 });
 
 // フォームオプションのリクエストボディサイズの上限を設定
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = MaxRequestBodySizeBytes;
-    options.BufferBodyLengthLimit = MaxRequestBodySizeBytes;
+    options.MultipartBodyLengthLimit = maxRequestBodySizeBytes;
+    options.BufferBodyLengthLimit = maxRequestBodySizeBytes;
 });
 
 // Add services to the container.
