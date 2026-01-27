@@ -10,21 +10,23 @@ using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var maxRequestBodySizeBytes = builder.Configuration.GetValue<long?>("MaxRequestBodySizeBytes")
-    ?? (3L * 1024L * 1024L);
+var maxRequestBodySizeBytes = builder.Configuration.GetValue<long?>("MaxRequestBodySizeBytes");
 
-// Kestrel サーバーのリクエストボディサイズの上限を設定
-builder.WebHost.ConfigureKestrel(options =>
+if (maxRequestBodySizeBytes.HasValue)
 {
-    options.Limits.MaxRequestBodySize = maxRequestBodySizeBytes;
-});
+    // Kestrel サーバーのリクエストボディサイズの上限を設定
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.Limits.MaxRequestBodySize = maxRequestBodySizeBytes;
+    });
 
-// フォームオプションのリクエストボディサイズの上限を設定
-builder.Services.Configure<FormOptions>(options =>
-{
-    options.MultipartBodyLengthLimit = maxRequestBodySizeBytes;
-    options.BufferBodyLengthLimit = maxRequestBodySizeBytes;
-});
+    // フォームオプションのリクエストボディサイズの上限を設定
+    builder.Services.Configure<FormOptions>(options =>
+    {
+        options.MultipartBodyLengthLimit = maxRequestBodySizeBytes.Value;
+        options.BufferBodyLengthLimit = maxRequestBodySizeBytes.Value;
+    });
+}
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
