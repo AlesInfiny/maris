@@ -5,13 +5,14 @@ import pluginVue from 'eslint-plugin-vue'
 import pluginVitest from '@vitest/eslint-plugin'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import pluginCypress from 'eslint-plugin-cypress/flat'
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import { configureVueProject } from '@vue/eslint-config-typescript'
+import jsdoc from 'eslint-plugin-jsdoc'
 
-// To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
-// import { configureVueProject } from '@vue/eslint-config-typescript'
-// configureVueProject({ scriptLangs: ['ts', 'tsx'] })
-// More info at https://github.com/vuejs/eslint-config-typescript/#advanced-setup
+configureVueProject({
+  // mono-repo 用に、 .vue ファイルを探すルートディレクトリをデフォルト値 `process.cwd()` から変更します。
+  rootDir: import.meta.dirname,
+})
 
 export default defineConfigWithVueTs(
   // Lint 対象外とするファイルパスを列挙します。
@@ -73,14 +74,12 @@ export default defineConfigWithVueTs(
     files: ['**/src/**/__tests__/**/*'],
   },
 
-  // Cypress 用のテストスイートに対して、Cypress 推奨の Lint ルールを適用します。
+  // TypeScript ファイルに対して JSDoc 形式のドキュメンテーションを強制します。
   {
-    ...pluginCypress.configs.recommended,
-    files: [
-      '**/cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
-      '**/cypress/support/**/*.{js,ts,jsx,tsx}',
-    ],
+    ...jsdoc.configs['flat/recommended-typescript-error'],
+    files: ['**/*.ts'],
   },
+
   // コードのフォーマットは Prettier で実行するので、 ESLint のフォーマットルールは無効化します。
   skipFormatting,
 )

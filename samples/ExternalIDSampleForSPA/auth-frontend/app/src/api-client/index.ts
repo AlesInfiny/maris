@@ -7,7 +7,7 @@ import {
   ServerError,
   UnauthorizedError,
   UnknownError,
-} from '@/shared/custom-errors'
+} from '@/shared/error-handler/custom-error'
 
 /** axios の共通の設定があればここに定義します。 */
 export const axiosInstance = axios.create({
@@ -38,29 +38,45 @@ axiosInstance.interceptors.response.use(
   },
 )
 
-/** api-client の共通の Configuration があればここに定義します。 */
+/**
+ * api-client の共通の Configuration を生成します。
+ * 共通の Configuration があればここに定義してください。
+ * @returns 新しい Configuration インスタンス
+ */
 function createConfig(): apiClient.Configuration {
   const config = new apiClient.Configuration()
   return config
 }
 
-async function addTokenAsync(config: apiClient.Configuration): Promise<void> {
-  // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
-  if (authenticationService.isAuthenticated()) {
-    const token = await authenticationService.getTokenEntraExternalId()
+/**
+ * 認証済みの場合、アクセストークンを取得して Configuration に設定します。
+ * @param config 新しい Configuration インスタンス
+ */
+async function addToken(config: apiClient.Configuration): Promise<void> {
+  const { isAuthenticated, getToken } = authenticationService()
+  if (isAuthenticated()) {
+    const token = await getToken()
     config.accessToken = token
   }
 }
 
+/**
+ * ユーザー API のクライアントを生成します。
+ * @returns UsersApi インスタンス
+ */
 export async function getUsersApi(): Promise<apiClient.UsersApi> {
   const config = createConfig()
 
-  // UsersApi は認証が必要な API なので、addTokenAsync を呼び出します。
-  await addTokenAsync(config)
+  // UsersApi は認証が必要な API なので、addToken を呼び出します。
+  await addToken(config)
   const userApi = new apiClient.UsersApi(config, '', axiosInstance)
   return userApi
 }
 
+/**
+ * サーバー時刻 API のクライアントを生成します。
+ * @returns ServerTimeApi インスタンス
+ */
 export function getServerTimeApi(): apiClient.ServerTimeApi {
   const config = createConfig()
   const serverTimeApi = new apiClient.ServerTimeApi(config, '', axiosInstance)

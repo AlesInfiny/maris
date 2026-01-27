@@ -1,12 +1,14 @@
-/* eslint-disable no-console */
 import { LogLevel, PublicClientApplication, type SilentRequest } from '@azure/msal-browser'
+import { useLogger } from '@/composables/use-logger'
+
+const logger = useLogger()
 
 export const msalConfig = {
   auth: {
     clientId: import.meta.env.VITE_EXTERNAL_ID_APP_CLIENT_ID,
     authority: import.meta.env.VITE_EXTERNAL_ID_AUTHORITY_DOMAIN,
     redirectUri: import.meta.env.VITE_EXTERNAL_ID_REDIRECT_URI,
-    postLogoutRedirectUri: import.meta.env.VITE_EXTERNAL_ID_POST_LOGOUT_REDIRECT_URI,
+    postLogoutRedirectUri: import.meta.env.VITE_EXTERNAL_ID_LOGOUT_URI,
   },
   cache: {
     cacheLocation: 'sessionStorage',
@@ -20,16 +22,16 @@ export const msalConfig = {
         }
         switch (level) {
           case LogLevel.Error:
-            console.error(message)
+            logger.error(message)
             return
           case LogLevel.Info:
-            console.info(message)
+            logger.info(message)
             return
           case LogLevel.Verbose:
-            console.debug(message)
+            logger.debug(message)
             return
           case LogLevel.Warning:
-            console.warn(message)
+            logger.warn(message)
             break
           default:
         }
@@ -40,7 +42,7 @@ export const msalConfig = {
 }
 
 export const apiConfig = {
-  scopes: import.meta.env.VITE_EXTERNAL_ID_SCOPE.split(','),
+  scopes: import.meta.env.VITE_EXTERNAL_ID_SCOPE?.split(',') ?? [],
 }
 
 export const msalInstance = new PublicClientApplication(msalConfig)
