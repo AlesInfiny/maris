@@ -1,27 +1,24 @@
 <!-- textlint-disable @textlint-rule/require-header-id -->
 <!-- markdownlint-disable-file CMD001 -->
-<!-- cSpell:ignore onmicrosoft signupsignin -->
+<!-- cspell:ignore onmicrosoft signupsignin -->
 
 # Microsoft Entra External ID による認証サンプル
 
 ## このサンプルについて
 
-Microsoft Entra External ID （以降、 Entra External ID ）によるユーザー認証の簡単な実装サンプルを提供します。
+本サンプルは、クライアントサイドレンダリングのシングルページアプリケーション（SPA）において、 Microsoft Entra External ID を利用したユーザー認証を実装するためのコード例を提供します。
 
-本サンプルは、クライアントサイドレンダリングアプリケーションにおいて Entra External ID を利用する場合のコード例として利用できます。
+あわせて本ドキュメントでは、以下について説明します。
 
-<!-- textlint-disable ja-technical-writing/sentence-length -->
-
-また、 SPA アプリケーション（ AlesInfiny Maris OSS Edition（以降、 AlesInfiny Maris ） のアーキテクチャに準拠したアプリケーション）に本サンプルのファイルやコードをコピーすることで、 Entra External ID による認証機能を組み込むことができます。
-
-<!-- textlint-enable ja-technical-writing/sentence-length -->
+- 本サンプルの動作確認手順
+- AlesInfiny Maris OSS Edition のサンプルアプリケーションである Dressca への組み込み手順
 
 ## 前提
 
 本サンプルを動作させるためには、以下が必要です。
 
 - Azure サブスクリプション
-- サブスクリプションに対してテナント作成者、アプリケーション開発者以上のロールが割り当てられている Azure アカウント
+- サブスクリプション内、またはサブスクリプション内のリソース グループ内で共同作成者以上のロールが割り当てられている Azure アカウント
 
 Azure サブスクリプションを持っていない場合、 [無料アカウントを作成](https://azure.microsoft.com/ja-jp/free) できます。
 
@@ -29,10 +26,10 @@ Azure サブスクリプションを持っていない場合、 [無料アカウ
 
 本サンプルは以下の環境で動作確認を行っています。
 
-- .NET 8
-- Node.js v22.17.1
-- Visual Studio 2022 17.14.10
-- Visual Studio Code 1.102.3
+- .NET 10
+- Node.js v24.13.0
+- Visual Studio 2026 18.2.1
+- Visual Studio Code 1.108.1
 
 ## サンプルの構成
 
@@ -55,7 +52,7 @@ Azure サブスクリプションを持っていない場合、 [無料アカウ
 
 ```text
 auth-backend
-├ Dressca.sln
+├ Dressca.slnx
 ├ src
 │ ├ Dressca.Web
 │ │ ├ appsettings.json ............. Entra External ID への接続情報を記載する設定ファイル
@@ -110,10 +107,11 @@ auth-frontend
 本サンプルのシナリオは以下の通りです。
 
 1. サンプルを起動すると、ブラウザーに SPA のトップ画面が表示されます。
-1. 現在時刻を取得する Web API が認証機能なしで呼び出され、トップ画面に表示されます。
+1. 現在時刻を取得する Web API が認証情報なしで正常に呼び出され、トップ画面に表示されます。
+1. ユーザー固有の ID （JWT における sub の値）を取得する Web API が認証情報なしで呼び出され、未認証によるエラーのアラートが表示されます。
 1. トップ画面の「 `ログイン` 」をクリックすると、 Entra External ID の `サインイン` 画面がポップアップで表示されます。
 1. `サインイン` または `サインアップ` が成功すると、ポップアップが閉じます。
-1. 成功した認証情報に基づき、ユーザー固有の ID （JWT における sub の値）を取得する Web API が呼び出され、トップ画面に結果が表示されます。
+1. 成功した認証情報に基づき、再度ユーザー固有の ID （JWT における sub の値）を取得する Web API が呼び出され、トップ画面に結果が表示されます。
 1. トップ画面の「`更新`」をクリックすると、現在時刻を再度取得します。本 Web API は、引き続き認証機能なしで呼び出されます。
 1. トップ画面の「`ログアウト`」をクリックすると、 Entra External ID の `サインアウト` 画面がポップアップで表示されます。
 1. `サインアウト` が成功すると、ポップアップが閉じます。
@@ -131,15 +129,15 @@ auth-frontend
 
 本サンプルでは、バックエンド、フロントエンドアプリケーションそれぞれで OSS を使用しています。
 
-- バックエンドアプリケーション
+1. バックエンドアプリケーション
     - [Microsoft.Identity.Web](https://www.nuget.org/packages/Microsoft.Identity.Web)
     - [Microsoft.AspNetCore.Authentication.JwtBearer](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.JwtBearer) （※テストプロジェクトで利用）
-- フロントエンドアプリケーション
+1. フロントエンドアプリケーション
     - [MSAL.js](https://www.npmjs.com/package/@azure/msal-browser)
 
 その他の使用 OSS は、 AlesInfiny Maris のサンプルアプリケーションに準じます。
 
-## サンプルの動作方法
+## サンプルの動作確認手順
 
 本サンプルをローカルマシンで動作させるには、事前に Entra External ID のテナントを作成し、アプリケーションを登録する作業が必要です。
 
@@ -165,21 +163,21 @@ auth-frontend
 1. [委任されたアクセス許可 (スコープ) を追加する](https://learn.microsoft.com/ja-jp/entra/identity-platform/quickstart-web-api-dotnet-protect-app?tabs=aspnet-core#add-delegated-permissions-scopes) に従って、アプリにスコープを追加します。
     - チュートリアルの手順では読み取りと書き込み 2 つのスコープを作成していますが、本サンプルのシナリオでは作成するスコープは 1 つで良いです。
     - 追加したスコープの名前を、ここでは「 `api.read` 」とします。
-1. 「API の公開」ブレードを選択し、「 `api.read` 」を選択します。
-1. スコープの編集画面で、「同意できるのはだれですか?」で「管理者とユーザー」を選択し、保存します。
-1. 表示されている「 `アプリケーション ID の URI` 」をメモします。
+1. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleWebAPI 」を選択します。
+1. 「概要」ブレードに表示された「 `アプリケーション ID の URI` 」をメモします。
 
 ### Entra External ID テナントを利用するアプリの登録（フロントエンドアプリケーション）
 
 1. [アプリケーションを Microsoft Entra ID に登録する](https://learn.microsoft.com/ja-jp/entra/identity-platform/quickstart-register-app) に従って、フロントエンドアプリケーション用のアプリを Entra External ID に登録します。
     - 登録したアプリの名前を、ここでは「 `SampleSPA` 」とします。
-  　<!-- textlint-disable @textlint-ja/no-synonyms -->
+    <!-- textlint-disable @textlint-ja/no-synonyms -->
     - サポートされているアカウントの種類を、「この組織ディレクトリのみに含まれるアカウント」とします。
     <!-- textlint-enable @textlint-ja/no-synonyms -->
     - 登録したアプリの `クライアント ID` （アプリケーション ID ）をメモします。
 1. 「アプリの登録」ブレードを選択し、「すべてのアプリケーション」から「 SampleSPA 」を選択します。
 1. 「認証」ブレードを選択し、「リダイレクト URI の追加」をクリックします。「シングルページアプリケーション」を選択し、リダイレクト URI に「 `http://localhost:5173` 」を設定します。
 1. [Web API にアクセスするためのアクセス許可を追加する](https://learn.microsoft.com/ja-jp/entra/identity-platform/quickstart-configure-app-access-web-apis#add-permissions-to-access-your-web-api) に従って、 SampleSPA に、前の手順で追加した SampleWebAPI のスコープ「 `api.read` 」へのアクセス許可を付与します。
+1. [管理者の同意を付与する (外部テナントのみ)](https://learn.microsoft.com/ja-jp/entra/identity-platform/quickstart-register-app#grant-admin-consent-external-tenants-only) に従って、 SampleSPA に管理者の同意を付与します。
 
 ### ユーザーフローの作成と割り当て
 
@@ -194,15 +192,15 @@ auth-frontend
 1. `auth-backend\src\Dressca.Web\appsettings.json` を開きます。
 1. 以下のように設定情報を記入します（以下の例では Entra External ID の設定以外は省略しています）。
 
-```json
-{
-    "EntraId": {
-      "Instance": "https://[テナントサブドメイン].ciamlogin.com/",
-      "TenantId": "[テナントID]",
-      "ClientId": "[SampleWebAPI のクライアント ID]"
-    }
-}
-```
+   ```json
+   {
+       "EntraId": {
+         "Instance": "https://[テナントサブドメイン].ciamlogin.com/",
+         "TenantId": "[テナントID]",
+         "ClientId": "[SampleWebAPI のクライアント ID]"
+       }
+   }
+   ```
 
 #### フロントエンドアプリケーションの設定
 
@@ -218,18 +216,15 @@ VITE_EXTERNAL_ID_APP_URI=[フロントエンドアプリケーションのベー
 
 ### 動作確認
 
-1. ターミナルで `auth-frontend` のフォルダーへ移動し、 `npm install` を実行します。
-1. Visual Studio で `auth-backend\Dressca.sln` を開きます。
+1. ターミナルで `auth-frontend` のフォルダーへ移動し、 `npm ci` を実行します。
+1. Visual Studio で `auth-backend\Dressca.slnx` を開きます。
 1. `Dressca.Web` を右クリックし「スタートアッププロジェクトに設定」を選択します。
 1. ソリューションをデバッグなしで開始します。ブラウザーが起動し、しばらく待つと SPA の初期画面が表示されます。
-1. 画面上の「 `ログイン` 」をクリックします。 Entra External ID のサインイン画面がポップアップで表示されます。
+1. 画面の「 `ログイン` 」をクリックします。 Entra External ID のサインイン画面がポップアップで表示されます。
 1. 「アカウントをお持ちでない場合、作成できます」リンクをクリックします。
 1. 使用可能なメールアドレスを入力し、「次へ」をクリックします。
 1. 上の手順で入力したメールアドレス宛にアカウント確認コードが送信されるので、画面に入力して「次へ」をクリックします。
 1. 画面に新しいパスワード等の必要事項を入力し、「次へ」をクリックします。
-<!-- textlint-disable @textlint-ja/no-synonyms -->
-1. SampleSPA 、 SampleWebAPI からユーザーデータへのアクセス許可を要求されるので「承諾」をクリックします。
-<!-- textlint-enable @textlint-ja/no-synonyms -->
 1. サインインが成功し、画面上に「ユーザー ID 」が表示されれば成功です。以降は入力したメールアドレスとパスワードでサインインできるようになります。
 1. 画面上の「 `ログアウト` 」をクリックします。 Entra External ID のサインアウト画面がポップアップで表示されます。
 1. サインアウトするアカウントをクリックします。
@@ -247,10 +242,10 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
 ※[設定情報の記入](#設定情報の記入) 前でもテストを実行できます。
 
-## アプリケーションへの認証機能の組み込み
+## Dressca アプリケーションへの認証機能の組み込み手順
 
-本サンプルのコードを既存のアプリケーションへコピーすることで、 Entra External ID の認証機能を組み込むことができます。
-なお、対象のアプリケーションは AlesInfiny Maris のクライアントサイドレンダリングアプリケーションです。
+本サンプルのコード例を既存のアプリケーションへコピーすることで、 Entra External ID の認証機能を組み込むことができます。
+本章ではそのコード例を AlesInfiny Maris OSS Edition のサンプルアプリケーションである Dressca に組み込む方法を、具体的な手順として説明します。
 
 ### バックエンドアプリケーション
 
@@ -305,15 +300,15 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
     app.UseAuthorization();
     ```
 
-    ※ `app.UseAuthentication` および `app.UserAuthorization` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order) に従ってください。
+    ※ `app.UseAuthentication` および `app.UserAuthorization` の呼び出し位置は、[ミドルウェアの順序](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/#middleware-order) に従ってください。
 
     <!-- textlint-disable ja-technical-writing/sentence-length -->
 
-1. [バックエンドアプリケーションの設定](#バックエンドアプリケーションの設定) を参照し、 `auth-backend\src\Dressca.Web\appsettings.json` に記述した Entra External ID の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
+2. [バックエンドアプリケーションの設定](#バックエンドアプリケーションの設定) を参照し、 `auth-backend\src\Dressca.Web\appsettings.json` に記述した Entra External ID の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別のアクションメソッドにも付与できます。
+3. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別のアクションメソッドにも付与できます。
 本例では、 OrdersController.cs に対して設定した例を示します。
 
     ```csharp
@@ -329,7 +324,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 ### フロントエンドアプリケーション
 
 1. VS Code で `auth-frontend` のフォルダーの `auth-frontend.code-workspace` ファイルを開きます。
-1. ターミナルで `npm install @azure/msal-browser` を実行し、フロントエンドアプリケーションに MSAL.js をインストールします。
+1. ターミナルで `cd ../consumer` 、 `npm install @azure/msal-browser` を順に実行し、フロントエンドアプリケーションに MSAL.js をインストールします。
 1. `auth-frontend\.env.dev` に記述した Entra External ID の設定をフロントエンドアプリケーションの `.env.dev` にコピーします。
 1. `env.d.ts` のインターフェースに、前の手順で `.env.dev` に追加したプロパティを追加します。
 
@@ -340,109 +335,153 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
       readonly VITE_EXTERNAL_ID_SCOPE: string
       readonly VITE_EXTERNAL_ID_APP_CLIENT_ID: string
       readonly VITE_EXTERNAL_ID_REDIRECT_URI: string
-      readonly VITE_EXTERNAL_ID_POST_LOGOUT_REDIRECT_URI: string
+      readonly VITE_EXTERNAL_ID_LOGOUT_REDIRECT_URI: string
     }
     ```
 
 1. `npm run generate-client` を実行し、 Axios のクライアントコードを再生成します。
-1. `src\services\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
+1. `src\services\authentication` フォルダーを作成し、サンプルの以下のコードをコピー・差し替えします。
     - authentication-services.ts
     - authentication-config.ts
-1. `src\store\authentication` フォルダーを作成し、サンプルの以下のコードをコピーします。
-    - authentication.ts
+1. `src\store\authentication` フォルダーの `authentication.ts` を本サンプルのコードに差し替えます。
 1. 認証が成功したら、認証が必要な Web API リクエストヘッダーに Bearer トークンを付与する必要があります。
-    AlesInfiny Maris のサンプルアプリケーション Dressca の場合、 `src\api-client\index.ts` を編集します。
     本例では、 OrderApi アクセス時に Bearer トークンを付与する例を示します。
+    `src\api-client\index.ts` を以下のように編集します。
 
     ```typescript
-    import axios from "axios";
-    import * as apiClient from "@/generated/api-client";
-    import { authenticationService } from '@/services/authentication/authentication-service';
-
     // その他のコードは省略
-
-    /** api-client の共通の Configuration があればここに定義します。 */
-    function createConfig(): apiClient.Configuration {
-      const config = new apiClient.Configuration({
-        basePath: import.meta.env.VITE_AXIOS_BASE_ENDPOINT_ORIGIN,
-      });
-
-      return config;
-    }
-
-    async function addTokenAsync(config: apiClient.Configuration) {
+    async function addToken(config: apiClient.Configuration) {
       // 認証済みの場合、アクセストークンを取得して Configuration に設定します。
       if (await authenticationService.isAuthenticated()) {
-        const token = await authenticationService.getTokenEntraExternalId();
-        config.accessToken = token;
+        const token = await authenticationService.getTokenEntraExternalId()
+        config.accessToken = token
       }
     }
 
-    export async function ordersApi(): Promise<apiClient.OrdersApi> {
-      const config = createConfig();
-      // 認証が必要な API では、addTokenAsync を呼び出します。
-      await addTokenAsync(config);
-      const orderApi = new apiClient.OrdersApi(config, '', axiosInstance);
-      return orderApi;
+    async function ordersApi() {
+      const config = createConfig()
+      // 認証が必要な API では、addToken を呼び出します。
+      await addToken(config)
+      const ordersApi = new apiClient.OrdersApi(config, '', axiosInstance)
+      return ordersApi
     }
     ```
 
-1. `ログイン` 画面へのリンクを含む Vue ファイルの `<script>` セクションにコードを追加します。
-
-    ```vue
-    <script setup lang="ts">
-    import { authenticationService } from '@/services/authentication/authentication-service'
-    import { useAuthenticationStore } from '@/stores/authentication/authentication'
-    const authenticationStore = useAuthenticationStore()
-
-    const signIn = async () => {
-      await authenticationService.signInEntraExternalId()
-    }
-    const signOut = async () => {
-      await authenticationService.signOutEntraExternalId()
-    }
-    </script>
-    ```
-
-1. `LoginView.vue` は Entra External ID の LoginPopup ウィンドウに切り替わるため削除します。
-
-1. `authentication-guard.ts` はログインページではなく Entra External ID の LoginPopUp を表示させるように変更します。
+1. `src\App.vue` に対して、 `<script>` セクションに以下のコードを追加します。
 
     ```typescript
-    import type { Router, RouteRecordName } from 'vue-router'
-    import { useAuthenticationStore } from '@/stores/authentication/authentication'
+    const { signIn, signOut, isAuthenticated } = authenticationService()
 
-    export const authenticationGuard = (router: Router) => {
-      router.beforeEach(async (to, from) => {
-        const authenticationStore = useAuthenticationStore()
-
-        const orderingPaths: (RouteRecordName | null | undefined)[] = [
-          'ordering/checkout',
-          'ordering/done',
-        ]
-        if (orderingPaths.includes(to.name) && !from.name) {
-          return { name: 'catalog' }
+    const signInButtonClicked = async () => {
+      try {
+        await signIn()
+      } catch (error) {
+        // ポップアップ画面をユーザーが×ボタンで閉じると、 BrowserAuthError が発生します。
+        if (error instanceof BrowserAuthError) {
+          // 認証途中でポップアップを閉じることはよくあるユースケースなので、ユーザーには特に通知しません。
+          customErrorHandler.handle(error, () => {
+            console.info('ユーザーが認証処理を中断しました。')
+          })
+        } else {
+          customErrorHandler.handle(error, () => {
+            window.alert('Microsoft Entra External Id での認証に失敗しました。')
+          })
         }
+      }
+    }
 
-        if (to.meta.requiresAuth && !authenticationStore.isAuthenticated) {
-          try {
-            await authenticationStore.signIn()
-          } catch (error) {
-            return false
-          }
+    const signOutButtonClicked = async () => {
+      try {
+        await signOut()
+      } catch (error) {
+        // ポップアップ画面をユーザーが×ボタンで閉じると、 BrowserAuthError が発生します。
+        if (error instanceof BrowserAuthError) {
+          // 認証途中でポップアップを閉じることはよくあるユースケースなので、ユーザーには特に通知しません。
+          customErrorHandler.handle(error, () => {
+            console.info('ユーザーが認証処理を中断しました。')
+          })
+        } else {
+          customErrorHandler.handle(error, () => {
+            window.alert('Microsoft Entra External Id での認証に失敗しました。')
+          })
         }
-        return true
-      })
+      }
     }
     ```
 
-1. `router` フォルダーの `index.ts` から、 `authenticationRoutes` を削除します。
+1. `src\App.vue` に対して、 `<template>` セクションのボタンを以下のように差し替えます。
 
-1. `ログイン` 画面、 `ログアウト` 画面へのリンクを以下のように記述します（クリック時に `signIn` メソッド、 `signOut` メソッドが動作すれば `button` である必要はありません）。
+   ```html
+    <header>
+      <nav
+        aria-label="Jump links"
+        class="py-5 text-lg font-medium text-gray-900 shadow-xs ring-1 ring-gray-900/5"
+      >
+        <div class="mx-auto flex justify-between px-4 md:px-24 lg:px-24">
+          <div>
+            <router-link class="text-2xl" to="/"> Dressca </router-link>
+          </div>
+          <div class="flex gap-5 sm:gap-5 lg:gap-12">
+            <router-link to="/basket">
+              <ShoppingCartIcon class="h-8 w-8 text-amber-600" />
+            </router-link>
+            <button v-if="!isAuthenticated()" @click="signInButtonClicked">ログイン</button>
+            <button v-if="isAuthenticated()" @click="signOutButtonClicked">ログアウト</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+   ```
+  
+1. `src\views\authentication\LoginView.vue` は Entra External ID の LoginPopup ウィンドウに切り替わるため削除します。
+1. `src\shared\authentication\authentication-guard.ts` はログインページではなく Entra External ID の LoginPopUp を表示させるように変更します。
 
-    ```vue
-    <button v-if="!authenticationStore.isAuthenticated" @click="signIn()">ログイン</button>
-    <button v-if="authenticationStore.isAuthenticated" @click="signOut()">ログアウト</button>
+    ```typescript
+    if (to.meta.requiresAuth && !authenticationStore.isAuthenticated) {
+      try {
+        await authenticationService().signIn()
+      } catch {
+        return false
+      }
+    }
+    ```
+
+1. `src\router\index.ts` から、 `authenticationRoutes` を削除します。
+
+1. BrowserAuthError が発生した場合は、エラーページに遷移させないように `src\shared\error-handler\custom-error-handler.ts` に以下を追加します。
+
+    ```typescript
+    export function useCustomErrorHandler(): handleErrorAsyncFunction {
+    const { t } = i18n.global
+    const handleErrorAsync = async (
+      error: unknown,
+      callback: MaybeAsyncFunction<void>,
+      handlingHttpError: MaybeAsyncUnaryFunction<HttpError, void> | null = null,
+      handlingUnauthorizedError: MaybeAsyncFunction<void> | null = null,
+      handlingNetworkError: MaybeAsyncFunction<void> | null = null,
+      handlingServerError: MaybeAsyncFunction<void> | null = null,
+    ) => {
+      const logger = useLogger()
+      const unhandledErrorEventBus = useEventBus(unhandledErrorEventKey)
+      const unauthorizedErrorEventBus = useEventBus(unauthorizedErrorEventKey)
+      // ハンドリングできるエラーの場合はコールバックを実行します。
+      if (error instanceof BrowserAuthError) {
+        await callback()
+        return
+      }
+      if (error instanceof CustomErrorBase) {
+        logger.error(JSON.stringify(error.toJSON()))
+        await callback()
+        if (error instanceof HttpError) {
+          // 業務処理で発生した HttpError を処理します。
+          if (handlingHttpError) {
+            await handlingHttpError(error)
+          }
+          // その他のコードは省略
+          ...
+        }
+      }
+    }
     ```
 
 ### テスト
@@ -563,7 +602,7 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
 ### フロントエンドアプリケーションの参照記事
 
-- [Entra External ID を利用した SPA アプリケーションサンプル](https://github.com/Azure-Samples/ms-identity-ciam-javascript-tutorial/tree/main/2-Authorization/0-call-api-vanillajs)
+- [Microsoft Entra External ID を利用した SPA アプリケーションサンプル](https://learn.microsoft.com/ja-jp/entra/identity-platform/quickstart-single-page-app-sign-in?tabs=javascript-workforce%2Cjavascript-external&pivots=external)
 
 ### バックエンドアプリケーションの参照記事
 
