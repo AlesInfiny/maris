@@ -105,6 +105,12 @@ app.Use((context, next) =>
 
         // レガシーブラウザー向けのクリックジャッキング攻撃への対策として、HTTP レスポンスヘッダに、「X-FRAME-OPTIONS」を「DENY」に設定
         context.Response.Headers["X-Frame-Options"] = "DENY";
+
+        // XSS 対策として CSP script-src に self と許可対象のスクリプトのハッシュを設定
+        // Flash や Java Applet 実行防止のため object-src を none に設定
+        // <base href="..."> を悪用したスクリプト読み替え防止のため、 base-uri を self に設定
+        context.Response.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-hashes' 'sha256-VUrsgkvPA65JbtK4HbBbKVwN4qdze6TLZhRpfrSnZXI='; object-src 'none'; base-uri 'self';";
+
         return Task.CompletedTask;
     });
 
