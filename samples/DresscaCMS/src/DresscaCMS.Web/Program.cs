@@ -92,8 +92,9 @@ app.MapStaticAssets();
 app.MapRazorPages();
 app.UseAuthorization();
 
+// クリックジャッキング攻撃への対策として、 CSP frame-ancestors を設定
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode(o => o.ContentSecurityFrameAncestorsPolicy = "'none'");
 
 app.Use((context, next) =>
 {
@@ -104,10 +105,6 @@ app.Use((context, next) =>
 
         // レガシーブラウザー向けのクリックジャッキング攻撃への対策として、HTTP レスポンスヘッダに、「X-FRAME-OPTIONS」を「DENY」に設定
         context.Response.Headers["X-Frame-Options"] = "DENY";
-
-        // クリックジャッキング攻撃への対策として、 CSP frame-ancestors を設定
-        context.Response.Headers.Remove("Content-Security-Policy");
-        context.Response.Headers.Append("Content-Security-Policy","frame-ancestors 'none'");
         return Task.CompletedTask;
     });
 
