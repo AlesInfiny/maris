@@ -25,6 +25,10 @@ description: アプリケーションセキュリティを 担保するための
 
 - アプリケーション外から取得した値（クライアントからの入力値、データベースから取得した値など）を画面に出力する際は文字列をプレーンテキスト化することで HTML や JavaScript として解釈させない
 
+!!! warning "アプリケーションを設計する上での注意事項"
+
+    CMS ライクな機能を提供する場合など、エンドユーザーに HTML を直接入力させたい場面があるかもしれません。その場合も、たとえば画面上には HTML のタグや属性を選択肢として表示し、選択された値に応じて画面を構成するなどして、入力値を直接画面に出力することは極力避けてください。
+
 ### CSR アプリケーション {#csr-application}
 
 フロントエンドを Vue.js で構築する場合、 XSS 対策として以下の方針をとります。
@@ -67,10 +71,45 @@ description: アプリケーションセキュリティを 担保するための
     <div v-html="アプリケーション外から取得した値"></div>
     ```
 
-!!! warning "アプリケーションを設計する上での注意事項"
-
-    CMS ライクな機能を提供する場合など、エンドユーザーに HTML を直接入力させたい場面があるかもしれません。その場合も、たとえば画面上には HTML のタグや属性を選択肢として表示し、選択された値に応じて画面を構成するなどして、入力値を直接画面に出力することは極力避けてください。
-
 ### SSR アプリケーション {#ssr-application}
 
-（今後追加予定）
+Blazor Web アプリにおいて、 XSS 対策として以下の方針をとります。
+
+- HTML の属性や属性値にユーザー入力値を直接使用しない
+
+    通常 Blazor Web アプリでは、バインド変数またはバインドプロパティ（ `@userInput` のように `@` を使用して HTML 上に値を出力する方式）を使用すれば、値が自動的に HTML エスケープされます。
+    これは HTML の属性値に対しても同様ですが、 Blazor は「値を出力した結果、 HTML の要素自体が危険な意味を持つようになるか」までは判断しません。
+
+    <!-- textlint-disable ja-technical-writing/sentence-length -->
+    例えば、`<a href="@userInput">link</a>` という Blazor のコードがあったとして `@userInput` に `javascript:alert('xss')` という値が入力された場合、 HTML エスケープされたとしても、クリックすると JavaScript が実行されます。
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
+
+    そこで、 AlesInfiny Maris では、原則として HTML の属性や属性値へのユーザー入力値の直接使用を禁止します。
+    業務仕様上どうしても入力が必要な場合は、入力値が有害な値でないことを検証します。
+
+    ```razor title="XSS に対して脆弱なコード例（属性）"
+    <a href="@userInput">脆弱なコード</a>
+    <div @attributes="attrs">脆弱なコード</div>
+    ```
+
+- ユーザー入力値に対して `MarkupString` を使用しない
+
+    前述のとおり、通常 Blazor Web アプリでは、バインド変数またはバインドプロパティを使用すれば、値が自動的に HTML エスケープされます。
+    しかし、 [MarkupString :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.components.markupstring){ target=_blank } を使用すると、値は HTML として出力されます。
+
+    そこで、 AlesInfiny Maris では、原則として `MarkupString` の使用を禁止します。
+    業務仕様上どうしても `MarkupString` が必要な場合は入力値が有害な値でないことを検証しますが、本当にユーザーの入力値を HTML として出力する必要があるのか、業務要件の見直しを推奨します。
+
+    ```razor title="XSS に対して脆弱なコード例（ MarkupString 使用）①"
+    <div>
+    @((MarkupString)userInput)
+    </div>
+    ```
+
+    ```razor title="XSS に対して脆弱なコード例（ MarkupString 使用）②"
+    <div>@danger</div>
+
+    @code {
+        MarkupString? danger = model.UserInput as MarkupString?;
+    }
+    ```
