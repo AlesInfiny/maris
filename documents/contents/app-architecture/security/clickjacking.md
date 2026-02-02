@@ -100,7 +100,7 @@ AlesInfiny Maris では、`frame-ancestors` および `X-Frame-Options` を以�
 
 - SSR アプリケーション：
 
-    `Program.cs` で設定します。
+    Web アプリケーションプロジェクトの `Program.cs` で設定します。
 
     ??? example "`Program.cs` での HTTP レスポンスヘッダー設定例"
 
