@@ -33,8 +33,8 @@ runs:
         zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/dressca-cms.zip .
 
 
-    - name: entra-external-id-auth.zip の作成
+    - name: external-id-sample-for-spa.zip の作成
       shell: bash
       run: |
-        cd samples/EntraExternalIDAuth
-        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/entra-external-id-auth.zip *
+        cd samples/EntraExternalIDSampleForSPA
+        zip -r ${GITHUB_WORKSPACE}/${{ inputs.compressed-source-path }}/external-id-sample-for-spa.zip *

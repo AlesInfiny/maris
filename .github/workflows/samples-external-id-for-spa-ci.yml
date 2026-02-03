@@ -1,7 +1,7 @@
 ---
 # cspell:ignore danielpalme dorny nologo targetdir reporttypes
 
-name: entra-external-id-auth-sample CI
+name: entra-external-id-sample-for-spa CI
 
 permissions:
   contents: read
@@ -10,13 +10,13 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'samples/EntraExternalIDAuth/**'
-      - '.github/workflows/samples-entra-external-id-auth-ci.yml'
+      - 'samples/EntraExternalIDSampleForSPA/**'
+      - '.github/workflows/samples-entra-external-id-for-spa-ci.yml'
   workflow_dispatch:
 
 env:
-  BACKEND_WORKING_DIRECTORY: samples/EntraExternalIDAuth/auth-backend
-  FRONTEND_WORKING_DIRECTORY: samples/EntraExternalIDAuth/auth-frontend
+  BACKEND_WORKING_DIRECTORY: samples/EntraExternalIDSampleForSPA/auth-backend
+  FRONTEND_WORKING_DIRECTORY: samples/EntraExternalIDSampleForSPA/auth-frontend
 
 jobs:
   build-frontend:
