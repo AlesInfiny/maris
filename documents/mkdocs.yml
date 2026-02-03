@@ -151,9 +151,7 @@ nav:
           - Azure Active Directory B2C による認証の利用:
               - samples/dressca/azure-ad-b2c/index.md
               - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/dressca/azure-ad-b2c/azure-ad-b2c-consideration.md
-          - Microsoft Entra External ID による認証の利用:
-              - samples/entra-external-id/index.md
-              - MSAL.js で提供される秘密情報のキャッシュ保存先: samples/entra-external-id/entra-external-id-consideration.md
+        #   - Microsoft Entra External ID による認証の利用: samples/entra-external-id-sample-for-spa/index.md
       - SSR アプリケーション:
           - samples/dressca-cms/index.md # Dressca-CMS のクイックスタート
           # - Dressa-CMSの解説: samples/dressca-cms/explanation.md

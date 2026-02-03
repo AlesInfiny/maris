@@ -304,11 +304,11 @@ Visual Studio で本サンプルのソリューションを開き、 `テスト�
 
     <!-- textlint-disable ja-technical-writing/sentence-length -->
 
-2. [バックエンドアプリケーションの設定](#バックエンドアプリケーションの設定) を参照し、 `auth-backend\src\Dressca.Web\appsettings.json` に記述した Entra External ID の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
+1. [バックエンドアプリケーションの設定](#バックエンドアプリケーションの設定) を参照し、 `auth-backend\src\Dressca.Web\appsettings.json` に記述した Entra External ID の設定を ASP.NET Core Web API プロジェクトの `appsettings.json` へコピーします。
 
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-3. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別のアクションメソッドにも付与できます。
+1. 認証を必要とする Web API に `[Authorize]` 属性を付与します。 `[Authorize]` 属性は Web API Controller クラスにも、個別のアクションメソッドにも付与できます。
 本例では、 OrdersController.cs に対して設定した例を示します。
 
     ```csharp
