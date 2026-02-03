@@ -7,11 +7,12 @@ permissions:
   contents: read
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'samples/EntraExternalIDSampleForSPA/**'
-      - '.github/workflows/samples-entra-external-id-for-spa-ci.yml'
+  push:
+  # pull_request:
+  #   branches: [main]
+  #   paths:
+  #     - 'samples/EntraExternalIDSampleForSPA/**'
+  #     - '.github/workflows/samples-entra-external-id-for-spa-ci.yml'
   workflow_dispatch:
 
 env:
