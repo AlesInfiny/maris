@@ -7,17 +7,16 @@ permissions:
   contents: read
 
 on:
-  push:
-  # pull_request:
-  #   branches: [main]
-  #   paths:
-  #     - 'samples/EntraExternalIDSampleForSPA/**'
-  #     - '.github/workflows/samples-entra-external-id-for-spa-ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'samples/EntraExternalIDSampleForSPA/**'
+      - '.github/workflows/samples-entra-external-id-for-spa-ci.yml'
   workflow_dispatch:
 
 env:
-  BACKEND_WORKING_DIRECTORY: samples/EntraExternalIDSampleForSPA/auth-backend
-  FRONTEND_WORKING_DIRECTORY: samples/EntraExternalIDSampleForSPA/auth-frontend
+  BACKEND_WORKING_DIRECTORY: samples/ExternalIDSampleForSPA/auth-backend
+  FRONTEND_WORKING_DIRECTORY: samples/ExternalIDSampleForSPA/auth-frontend
 
 jobs:
   build-frontend:
@@ -59,15 +58,18 @@ jobs:
       - id: application-build
         name: アプリケーションのビルド
         run: npm run build-only:dev:app >> /var/tmp/build-result.txt 2>&1
+
       - id: run-unit-tests
         name: 単体テストの実行
         run: npm run test:unit:app >> /var/tmp/unit-test-result.txt 2>&1
+
       - name: formatの結果出力
         if: ${{ success() || (failure() && steps.run-format-root.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
         with:
           body: /var/tmp/format-root-result.txt
           header: 'formatの結果 :pen:'
+
       - name: lintの結果出力
         if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
