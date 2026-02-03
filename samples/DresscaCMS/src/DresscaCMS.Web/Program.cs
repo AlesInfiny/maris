@@ -3,6 +3,7 @@ using DresscaCMS.Authentication;
 using DresscaCMS.Authentication.Infrastructures;
 using DresscaCMS.Web.Components;
 using DresscaCMS.Web.Components.Account;
+using DresscaCMS.Web.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpLogging;
@@ -10,8 +11,7 @@ using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var maxRequestBodySizeBytes = builder.Configuration.GetValue<long?>("MaxRequestBodySizeBytes");
-
+var maxRequestBodySizeBytes = builder.Configuration.GetValue<long?>("MaxRequestSize:MaxRequestBodySizeBytes");
 if (maxRequestBodySizeBytes.HasValue)
 {
     // Kestrel サーバーのリクエストボディサイズの上限を設定
@@ -19,12 +19,15 @@ if (maxRequestBodySizeBytes.HasValue)
     {
         options.Limits.MaxRequestBodySize = maxRequestBodySizeBytes;
     });
+}
 
-    // フォームオプションのリクエストボディサイズの上限を設定
+var multipartBodyLengthLimit = builder.Configuration.GetValue<long?>("MaxRequestSize:MultipartBodyLengthLimit");
+if (multipartBodyLengthLimit.HasValue)
+{
+    // フォームオプションのマルチパートボディサイズの上限を設定
     builder.Services.Configure<FormOptions>(options =>
     {
-        options.MultipartBodyLengthLimit = maxRequestBodySizeBytes.Value;
-        options.BufferBodyLengthLimit = maxRequestBodySizeBytes.Value;
+        options.MultipartBodyLengthLimit = multipartBodyLengthLimit.Value;
     });
 }
 
@@ -96,20 +99,7 @@ app.UseAuthorization();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode(o => o.ContentSecurityFrameAncestorsPolicy = "'none'");
 
-app.Use((context, next) =>
-{
-    context.Response.OnStarting(() =>
-    {
-        // コンテンツタイプを誤認識しないよう、HTTPレスポンスヘッダに「X-Content-Type-Options: nosniff」の設定を追加
-        context.Response.Headers["X-Content-Type-Options"] = "nosniff";
-
-        // レガシーブラウザー向けのクリックジャッキング攻撃への対策として、HTTP レスポンスヘッダに、「X-FRAME-OPTIONS」を「DENY」に設定
-        context.Response.Headers["X-Frame-Options"] = "DENY";
-
-        return Task.CompletedTask;
-    });
-
-    return next();
-});
+// HTTP レスポンスヘッダーにセキュリティ関連の設定を追加するミドルウェアを使用
+app.UseSecuritySettings();
 
 app.Run();
