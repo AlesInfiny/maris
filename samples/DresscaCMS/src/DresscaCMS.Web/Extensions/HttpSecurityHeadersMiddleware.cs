@@ -3,21 +3,21 @@
 /// <summary>
 /// HTTP レスポンスヘッダーにセキュリティ関連の設定を追加するミドルウェアです。
 /// </summary>
-public class SecuritySettingsMiddleware
+public class HttpSecurityHeadersMiddleware
 {
     private readonly RequestDelegate next;
 
     /// <summary>
-    /// <see cref="SecuritySettingsMiddleware"/> クラスの新しいインスタンスを生成します。
+    /// <see cref="HttpSecurityHeadersMiddleware"/> クラスの新しいインスタンスを生成します。
     /// </summary>
     /// <param name="next">HTTP 要求を処理できる delegate</param>
-    public SecuritySettingsMiddleware(RequestDelegate next)
+    public HttpSecurityHeadersMiddleware(RequestDelegate next)
     {
         this.next = next;
     }
 
     /// <summary>
-    /// <see cref="SecuritySettingsMiddleware"/> のメイン ロジックを実行します。
+    /// <see cref="HttpSecurityHeadersMiddleware"/> のメイン ロジックを実行します。
     /// </summary>
     /// <param name="context">HTTP コンテキスト</param>
     /// <returns>パイプラインの次の処理</returns>
