@@ -22,7 +22,3 @@ description: アプリケーションセキュリティを 担保するための
 1. [XSS （クロスサイトスクリプティング）](./xss.md)
 
     XSS 攻撃への AlesInfiny Maris での対策を説明します。
-
-1. [クリックジャッキング](./clickjacking.md)
-
-    クリックジャッキング攻撃への AlesInfiny Maris での対策を説明します。
