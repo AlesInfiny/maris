@@ -8,6 +8,7 @@ using Dressca.Web.Consumer.Configuration;
 using Dressca.Web.Consumer.Mapper;
 using Dressca.Web.Consumer.Resources;
 using Dressca.Web.Controllers;
+using Dressca.Web.Extensions;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Runtime;
 using Maris.Core.Text.Json;
@@ -139,5 +140,7 @@ app.MapControllers();
 app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
 
 app.MapFallbackToFile("/index.html");
+
+app.UseSecuritySettings();
 
 app.Run();

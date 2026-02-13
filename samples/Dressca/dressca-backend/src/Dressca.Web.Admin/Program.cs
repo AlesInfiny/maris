@@ -10,6 +10,7 @@ using Dressca.Web.Admin.Resources;
 using Dressca.Web.Authorization;
 using Dressca.Web.Configuration;
 using Dressca.Web.Controllers;
+using Dressca.Web.Extensions;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.Authentication;
@@ -153,6 +154,8 @@ if (options.Value.AllowedOrigins.Length > 0)
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseSecuritySettings();
 
 app.MapControllers();
 
