@@ -1,0 +1,11 @@
+{
+  "inputSpec": "./../../auth-backend/src/Dressca.Web/dressca-api.json",
+  "generatorName": "typescript-axios",
+  "outputDir": "./src/generated/api-client",
+  "additionalProperties": {
+    "withSeparateModelsAndApi": "true",
+    "modelPackage": "models",
+    "apiPackage": "api",
+    "supportsES6": "true"
+  }
+}
