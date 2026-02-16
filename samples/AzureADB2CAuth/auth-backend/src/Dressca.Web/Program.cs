@@ -1,4 +1,5 @@
 ﻿using Dressca.Web.Configuration;
+using Dressca.Web.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.Options;
@@ -104,5 +105,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
+
+app.UseSecuritySettings();
 
 app.Run();
