@@ -113,6 +113,8 @@ else
 
 app.UseHttpsRedirection();
 
+app.UseSecuritySettings();
+
 app.UseStaticFiles();
 
 var options = app.Services.GetRequiredService<IOptions<WebServerOptions>>();
@@ -140,7 +142,5 @@ app.MapControllers();
 app.MapHealthChecks(HealthCheckDescriptionProvider.HealthCheckRelativePath);
 
 app.MapFallbackToFile("/index.html");
-
-app.UseSecuritySettings();
 
 app.Run();

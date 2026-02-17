@@ -131,6 +131,8 @@ else
 
 app.UseHttpsRedirection();
 
+app.UseSecuritySettings();
+
 app.UseStaticFiles();
 
 var options = app.Services.GetRequiredService<IOptions<WebServerOptions>>();
@@ -154,8 +156,6 @@ if (options.Value.AllowedOrigins.Length > 0)
 app.UseAuthentication();
 
 app.UseAuthorization();
-
-app.UseSecuritySettings();
 
 app.MapControllers();
 
