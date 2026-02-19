@@ -3,12 +3,33 @@ using DresscaCMS.Authentication;
 using DresscaCMS.Authentication.Infrastructures;
 using DresscaCMS.Web.Components;
 using DresscaCMS.Web.Components.Account;
+using DresscaCMS.Web.Extensions;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Hosting.StaticWebAssets;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var maxRequestBodySizeBytes = builder.Configuration.GetValue<long?>("MaxRequestSize:MaxRequestBodySizeBytes");
+if (maxRequestBodySizeBytes.HasValue)
+{
+    // Kestrel サーバーのリクエストボディサイズの上限を設定
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.Limits.MaxRequestBodySize = maxRequestBodySizeBytes;
+    });
+}
+
+var multipartBodyLengthLimit = builder.Configuration.GetValue<long?>("MaxRequestSize:MultipartBodyLengthLimit");
+if (multipartBodyLengthLimit.HasValue)
+{
+    // フォームオプションのマルチパートボディサイズの上限を設定
+    builder.Services.Configure<FormOptions>(options =>
+    {
+        options.MultipartBodyLengthLimit = multipartBodyLengthLimit.Value;
+    });
+}
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
@@ -74,7 +95,11 @@ app.MapStaticAssets();
 app.MapRazorPages();
 app.UseAuthorization();
 
+// クリックジャッキング攻撃への対策として、 CSP frame-ancestors を設定
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode(o => o.ContentSecurityFrameAncestorsPolicy = "'none'");
+
+// HTTP レスポンスヘッダーにセキュリティ関連の設定を追加するミドルウェアを使用
+app.UseSecuritySettings();
 
 app.Run();

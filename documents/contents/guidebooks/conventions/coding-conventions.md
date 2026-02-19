@@ -57,3 +57,5 @@ AlesInfiny Maris OSS Edition （以下 AlesInfiny Maris ）では、一般に広
 
 - [静的コード解析用パッケージと設定ファイルの導入 (.NET)](../how-to-develop/csr/dotnet/project-settings.md#setup-static-code-testing)
 - [静的コード分析とフォーマット (Vue.js)](../how-to-develop/csr/vue-js/static-verification-and-format.md)
+
+なお、セキュアコーディングに関するルールは [こちら](../../app-architecture/security/index.md) を参照してください。
