@@ -105,12 +105,12 @@ AlesInfiny Maris では、`frame-ancestors` および `X-Frame-Options` を以�
 
     ??? example "`Program.cs` での HTTP レスポンスヘッダー設定例"
 
-        ```C# title="Program.cs" hl_lines="98-100"
+        ```C# title="Program.cs" hl_lines="98-103"
         https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Program.cs
         ```
 
-        ```C# title="HttpSecurityHeadersMiddleware.cs" hl_lines=""
-        
+        ```C# title="HttpSecurityHeadersMiddleware.cs" hl_lines="31-32"
+        https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddleware.cs
         ```
 
 ### 制限変更の場合 {#when-to-change-restrictions}
