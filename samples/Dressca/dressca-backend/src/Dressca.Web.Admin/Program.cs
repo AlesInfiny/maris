@@ -10,6 +10,7 @@ using Dressca.Web.Admin.Resources;
 using Dressca.Web.Authorization;
 using Dressca.Web.Configuration;
 using Dressca.Web.Controllers;
+using Dressca.Web.Extensions;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.Authentication;
@@ -129,6 +130,8 @@ else
 }
 
 app.UseHttpsRedirection();
+
+app.UseSecuritySettings();
 
 app.UseStaticFiles();
 

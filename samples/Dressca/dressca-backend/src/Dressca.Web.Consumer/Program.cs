@@ -8,6 +8,7 @@ using Dressca.Web.Consumer.Configuration;
 using Dressca.Web.Consumer.Mapper;
 using Dressca.Web.Consumer.Resources;
 using Dressca.Web.Controllers;
+using Dressca.Web.Extensions;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Runtime;
 using Maris.Core.Text.Json;
@@ -111,6 +112,8 @@ else
 }
 
 app.UseHttpsRedirection();
+
+app.UseSecuritySettings();
 
 app.UseStaticFiles();
 
