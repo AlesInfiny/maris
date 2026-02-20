@@ -132,12 +132,12 @@ AlesInfiny Maris では、`frame-ancestors` および `X-Frame-Options` を以�
         https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddleware.cs
         ```
 
-### 制限変更の場合 {#when-to-change-restrictions}
+## 制限変更の方法 {#how-to-change-restrictions}
 
 前述のとおり、 AlesInfiny Maris ではクリックジャッキング対策としてデフォルトでフレーム内表示をすべて禁止する方針を採用しています。
 ただし、業務要件上正当な理由で `<iframe>` 要素等の埋め込みが必要となる場合に限り、以下のような制限の変更を検討します。
 
-#### 同一オリジン内での埋め込みが必要な場合 {#self-origin-iframe}
+### 同一オリジン内での埋め込みが必要な場合 {#self-origin-iframe}
 
 - 同一オリジン内において、複数の Web リソースをフレーム要素等で構成する設計が採用されている場合
 - 同一オリジン内の別パスに配置されたコンテンツを、フレーム要素等を用いて表示する必要がある場合
@@ -149,7 +149,7 @@ AlesInfiny Maris では、`frame-ancestors` および `X-Frame-Options` を以�
 | Content-Security-Policy | `frame-ancestors 'self';` |
 | X-Frame-Options         | `SAMEORIGIN`              |
 
-#### 特定の外部オリジンからの埋め込みが必要な場合 {#specific-external-origin}
+### 特定の外部オリジンからの埋め込みが必要な場合 {#specific-external-origin}
 
 - 信頼境界内にある特定の外部オリジンから、フレーム要素等を用いた表示を許可する必要がある場合
 - 信頼された別オリジンの Web リソースと、画面統合する設計が採用されている場合
