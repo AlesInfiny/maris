@@ -50,3 +50,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）として推奨す
 1. [ヘルスチェック API の実装](./health-check-api.md)
 
     ヘルスチェック API を実装する方法について解説します。
+
+1. [セキュリティの設定](./security-settings.md)
+
+    セキュリティの設定について解説します。
