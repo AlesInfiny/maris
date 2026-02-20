@@ -94,14 +94,33 @@ AlesInfiny Maris では、方針のとおり `X-Frame-Options: DENY` を設定�
 
 AlesInfiny Maris では、`frame-ancestors` および `X-Frame-Options` を以下の方法で設定します。
 
-- CSR アプリケーション：
+- **CSR アプリケーション**
 
-    SPA アプリケーションを最初にダウンロードする際のレスポンスヘッダーに設定します。設定はアプリケーションを配置する Web サーバーで行います。
+    SPA アプリケーションを配信する Web サーバーにおいて、すべてのレスポンスに対して当該ヘッダーを付与します。
 
-- SSR アプリケーション：
+    ただし、 AlesInfiny Maris では、 Web API 側においても `Program.cs` にて API レスポンスヘッダーへ同様のヘッダーを付与します。
+    Web API は通常フレーム埋め込みの対象とはなりませんが、以下の理由により設定します。
+
+    - セキュリティ設定の統一（標準化）
+    - 将来的な構成変更時の安全性確保
+    - セキュリティ監査対応の容易化
+
+    なお、 コードが冗長化することを避けるため、一部処理を別クラスに切り出しています。
+
+    ??? example "`Program.cs` での HTTP レスポンスヘッダー設定例"
+
+        ```C# title="HttpSecurityHeadersMiddleware.cs" hl_lines="33-34 36-37"
+        https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddleware.cs
+        ```
+
+        ```C# title="Program.cs (Dressca.Web.Consumer)" hl_lines="116"
+        https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Dressca.Web.Consumer/Program.cs
+        ```
+
+- **SSR アプリケーション**
 
     Web アプリケーションプロジェクトの `Program.cs` で設定します。
-    なお、 AlesInfiny Maris では、コードが冗長化することを避けるため、一部処理を別クラスに切り出しています。
+    なお、 コードが冗長化することを避けるため、一部処理を別クラスに切り出しています。
 
     ??? example "`Program.cs` での HTTP レスポンスヘッダー設定例"
 
