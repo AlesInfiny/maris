@@ -90,6 +90,7 @@ nav:
                   - ASP.NET Core with Vite プロジェクトの構成: guidebooks/how-to-develop/csr/dotnet/configure-asp-net-core-with-vite-project.md
                   - 結合テストプロジェクトの構成: guidebooks/how-to-develop/csr/dotnet/configure-integration-test-project.md
                   - ヘルスチェック API の実装: guidebooks/how-to-develop/csr/dotnet/health-check-api.md
+                  - セキュリティの設定: guidebooks/how-to-develop/csr/dotnet/security-settings.md
               - Vue.js 編:
                   - guidebooks/how-to-develop/csr/vue-js/index.md
                   - 事前準備: guidebooks/how-to-develop/csr/vue-js/preparation.md
