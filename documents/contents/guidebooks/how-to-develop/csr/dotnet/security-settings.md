@@ -10,7 +10,7 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 - [MIME スニッフィング :material-open-in-new:](https://developer.mozilla.org/ja/docs/Web/HTTP/Guides/MIME_types#mime_%E3%82%B9%E3%83%8B%E3%83%83%E3%83%95%E3%82%A3%E3%83%B3%E3%82%B0){ target=_blank } の防止
 - クリックジャッキングの防止（詳細は [こちら](../../../../app-architecture/security/clickjacking.md) を参照）
 
-`Program.cs` が冗長になることを防止するため、ミドルウェアを作成します。
+`Program.cs` が冗長になることを防止するため、ミドルウェア [^1] を作成します。
 
 ??? example "セキュリティ設定を HTTP レスポンスヘッダーに設定するミドルウェア"
 
@@ -48,3 +48,5 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 HTTP レスポンスヘッダーが以下のように設定されます。
 
 ![セキュリティ設定後の HTTP レスポンスヘッダー](../../../../images/guidebooks/how-to-develop/csr/dotnet/security-header.png)
+
+[^1]: ここで言う「ミドルウェア」は、 ASP.NET Core のミドルウェアを指します。 ASP.NET Core のミドルウェアとは、リクエストとレスポンスを処理するために、アプリのパイプラインに組み込まれたソフトウェアのことです（ [詳細 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/){target=blank} ）。

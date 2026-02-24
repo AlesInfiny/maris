@@ -10,7 +10,7 @@ description: AlesInfiny Maris OSS Edition で開発可能な SSR アプリケー
 - [MIME スニッフィング :material-open-in-new:](https://developer.mozilla.org/ja/docs/Web/HTTP/Guides/MIME_types#mime_%E3%82%B9%E3%83%8B%E3%83%83%E3%83%95%E3%82%A3%E3%83%B3%E3%82%B0){ target=_blank } の防止
 - クリックジャッキングの防止（詳細は [こちら](../../../app-architecture/security/clickjacking.md) を参照）
 
-`Program.cs` が冗長になることを防止するため、ミドルウェアを作成します。
+`Program.cs` が冗長になることを防止するため、ミドルウェア [^1] を作成します。
 
 ??? example "セキュリティ設定を HTTP レスポンスヘッダーに設定するミドルウェア"
 
@@ -53,3 +53,5 @@ HTTP レスポンスヘッダーが以下のように設定されます。
 
     上の「 Program.cs の実装」に示すとおり、 Blazor Web アプリでは `frame-ancestors 'none'` の設定を、対話型サーバー側レンダリング（対話型 SSR ）を構成する `AddInteractiveServerRenderMode` メソッド内で行います。
     Blazor Web アプリでは応答ヘッダーの `Content-Security-Policy` に既定で `frame-ancestors 'self'` が設定されますが、 `AddInteractiveServerRenderMode` 内で設定を変更することにより、この設定を無効にできます。
+
+[^1]: ここで言う「ミドルウェア」は、 ASP.NET Core のミドルウェアを指します。 ASP.NET Core のミドルウェアとは、リクエストとレスポンスを処理するために、アプリのパイプラインに組み込まれたソフトウェアのことです（ [詳細 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/fundamentals/middleware/){target=blank} ）。
