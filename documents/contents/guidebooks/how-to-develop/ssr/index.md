@@ -13,6 +13,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） で開発可能�
 - [プロジェクトの共通設定](./common-configuration.md)
 - [開発に使用するパッケージ](./packages-used.md)
 - [Blazor Web アプリプロジェクトの構成](./blazor-web-application-structure.md)
+- [セキュリティの設定](./security-settings.md)
 - [CSS の設定と CSS フレームワークの適用](./css-setup.md)
 - [集約エラーハンドラーの実装](./centralized-error-handling.md)
 - [ローカル開発環境の構築](./local-development.md)

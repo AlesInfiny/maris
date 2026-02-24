@@ -88,6 +88,7 @@ nav:
                   - プロジェクトの共通設定: guidebooks/how-to-develop/csr/dotnet/project-settings.md
                   - プロジェクト構造の作成: guidebooks/how-to-develop/csr/dotnet/create-project-structure.md
                   - ASP.NET Core Web API プロジェクトの構成: guidebooks/how-to-develop/csr/dotnet/configure-asp-net-core-web-api-project.md
+                  - セキュリティの設定: guidebooks/how-to-develop/csr/dotnet/security-settings.md
                   - ASP.NET Core with Vite プロジェクトの構成: guidebooks/how-to-develop/csr/dotnet/configure-asp-net-core-with-vite-project.md
                   - 結合テストプロジェクトの構成: guidebooks/how-to-develop/csr/dotnet/configure-integration-test-project.md
                   - ヘルスチェック API の実装: guidebooks/how-to-develop/csr/dotnet/health-check-api.md
@@ -122,6 +123,7 @@ nav:
               - プロジェクトの共通設定: guidebooks/how-to-develop/ssr/common-configuration.md
               - 開発に使用するパッケージ: guidebooks/how-to-develop/ssr/packages-used.md
               - Blazor Web アプリプロジェクトの構成: guidebooks/how-to-develop/ssr/blazor-web-application-structure.md
+              - セキュリティの設定: guidebooks/how-to-develop/ssr/security-settings.md
               - CSS の設定と CSS フレームワークの適用: guidebooks/how-to-develop/ssr/css-setup.md
               # - 入力値検証: guidebooks/how-to-develop/ssr/input-validation.md
               # - 画面をまたがる情報の保持: guidebooks/how-to-develop/ssr/state-management.md
