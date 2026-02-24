@@ -14,11 +14,11 @@ description: AlesInfiny Maris OSS Edition で開発可能な SSR アプリケー
 
 ??? example "セキュリティ設定を HTTP レスポンスヘッダーに設定するミドルウェア"
 
-    ```cs title="HttpSecurityHeadersMiddleware.cs"
+    ```csharp title="HttpSecurityHeadersMiddleware.cs"
     https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddleware.cs
     ```
 
-    ```cs title="HttpSecurityHeadersMiddlewareExtensions.cs"
+    ```csharp title="HttpSecurityHeadersMiddlewareExtensions.cs"
     https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddlewareExtensions.cs
     ```
 
@@ -26,7 +26,7 @@ description: AlesInfiny Maris OSS Edition で開発可能な SSR アプリケー
 
 ??? example "Program.cs の実装"
 
-    ```cs title="Program.cs" hl_lines="9-11 13-14"
+    ```csharp title="Program.cs" hl_lines="9-11 13-14"
     using DresscaCMS.Web.Extensions; // その他の using は省略
 
     var builder = WebApplication.CreateBuilder(args);
@@ -44,3 +44,12 @@ description: AlesInfiny Maris OSS Edition で開発可能な SSR アプリケー
 
     app.Run();
     ```
+
+HTTP レスポンスヘッダーが以下のように設定されます。
+
+![セキュリティ設定後の HTTP レスポンスヘッダー](../../../images/guidebooks/how-to-develop/ssr/security-header.png)
+
+??? info "Blazor Web アプリでのクリックジャッキング対策について"
+
+    上の「 Program.cs の実装」に示すとおり、 Blazor Web アプリでは `frame-ancestors 'none'` の設定を、対話型サーバー側レンダリング（対話型 SSR ）を構成する `AddInteractiveServerRenderMode` メソッド内で行います。
+    Blazor Web アプリでは応答ヘッダーの `Content-Security-Policy` に既定で `frame-ancestors 'self'` が設定されますが、 `AddInteractiveServerRenderMode` 内で設定を変更することにより、この設定を無効にできます。

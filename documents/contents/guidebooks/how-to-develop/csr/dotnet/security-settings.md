@@ -14,11 +14,11 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 
 ??? example "セキュリティ設定を HTTP レスポンスヘッダーに設定するミドルウェア"
 
-    ```cs title="HttpSecurityHeadersMiddleware.cs"
+    ```csharp title="HttpSecurityHeadersMiddleware.cs"
     https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddleware.cs
     ```
 
-    ```cs title="HttpSecurityHeadersMiddlewareExtensions.cs"
+    ```csharp title="HttpSecurityHeadersMiddlewareExtensions.cs"
     https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddlewareExtensions.cs
     ```
 
@@ -26,7 +26,7 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 
 ??? example "Program.cs での呼び出し"
 
-    ```cs title="Program.cs" hl_lines="9-10"
+    ```csharp title="Program.cs" hl_lines="9-10"
     using Dressca.Web.Extensions; // その他の using は省略
 
     var builder = WebApplication.CreateBuilder(args);
@@ -44,3 +44,7 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 
     app.Run();
     ```
+
+HTTP レスポンスヘッダーが以下のように設定されます。
+
+![セキュリティ設定後の HTTP レスポンスヘッダー](../../../../images/guidebooks/how-to-develop/csr/dotnet/security-header.png)

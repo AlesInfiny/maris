@@ -39,6 +39,10 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）として推奨す
 
     Web API を提供するプロジェクトに対して行う設定を解説します。
 
+1. [セキュリティの設定](./security-settings.md)
+
+    セキュリティの設定について解説します。
+
 1. [ASP.NET Core with Vite プロジェクトの構成](./configure-asp-net-core-with-vite-project.md)
 
     SPA アプリケーションの開発で使用する ASP.NET Core with Vite プロジェクトの設定を解説します。
@@ -50,7 +54,3 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）として推奨す
 1. [ヘルスチェック API の実装](./health-check-api.md)
 
     ヘルスチェック API を実装する方法について解説します。
-
-1. [セキュリティの設定](./security-settings.md)
-
-    セキュリティの設定について解説します。
