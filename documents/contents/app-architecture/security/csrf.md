@@ -35,7 +35,9 @@ CSR アプリケーションと SSR アプリケーションで対策が異な�
 同一オリジンポリシーでは、異なるオリジンの Web サイトに対し「リクエストを送ることはできるが、その結果の読み取りはできない」ことを規定しています。
 つまり、結果の読み取りができないだけでリクエスト自体は送られてしまい、データの改ざんといった処理が実行されてしまう危険性があることを表しています。
 
-そのため AlesInfiny Maris OSS Edition では、異なるオリジンに配置された悪意のある Web サイトからの「データを更新するリクエストを事前にブロックする」ことで CSRF 攻撃に対策します。
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+そのため AlesInfiny Maris OSS Edition （以下 AlesInfiny Maris）では、異なるオリジンに配置された悪意のある Web サイトからの「データを更新するリクエストを事前にブロックする」ことで CSRF 攻撃に対策します。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
 
 上記に基づき、原則として以下の方針をとります。
 
@@ -76,22 +78,15 @@ Cookie に属性が設定されていない場合ブラウザー側で `SameSite
 
 ??? info "その他の CSRF 対策の方法"
 
-    Open Web Application Security Project (OWASP) では、 CSRF 対策のベストプラクティスとして上記以外の方法も提唱しています。
-    詳細は [こちら :material-open-in-new:](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html){ target=_blank } を参照してください。
-    
-    以下にいくつかの方法を示します。
+    [後述](#ssr-application) のとおり、Open Web Application Security Project (OWASP) では、 CSRF 対策のベストプラクティスとして上記以外の方法も提唱しています。
 
-    - CSRF トークンの付与
-
-        フロントエンドアプリケーションがリクエストを発行する際に、バックエンドアプリケーションでそのリクエスト内のトークンの存在と有効性を検証することで、正しいクライアントからのリクエストであることを保証する方法です。
-        実装方法については、[Microsoft 公式 Web サイトの説明 :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/security/anti-request-forgery#javascript-ajax-and-spas){ target=_blank } を参照してください。
-
+    - CSRF トークンの付与（ [後述](#ssr-application) ）
     - カスタムヘッダーの付与
-
+    
         固有のヘッダーを付与することで、全てのリクエストがクロスオリジンのプリフライトリクエストの対象となります。
         これにより、固有のヘッダーが存在しないオリジンからのリクエストはブロックされます。
-    
-    AlesInfiny Maris OSS Edition での対策に加えてこれらの方法を導入することで、多段階のより厳重な CSRF 対策を実現できます。
+
+    AlesInfiny Maris での対策に加えてこれらの方法を導入することで、多段階のより厳重な CSRF 対策を実現できます。
     セキュリティ要件やビジネスニーズに応じてこれらの対策を追加で実装するかを検討してください。
 
 #### CSR アプリケーションの実装 {#csr-application-programming}
@@ -124,13 +119,28 @@ Cookie に属性が設定されていない場合ブラウザー側で `SameSite
 
 ### SSR アプリケーションでの対策 {#ssr-application}
 
+Open Web Application Security Project (OWASP) では、 CSRF 対策のベストプラクティスとして Origin ヘッダーの検証以外の方法も提唱しています。
+詳細は [こちら :material-open-in-new:](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html){ target=_blank } を参照してください。
+
+SSR アプリケーションでは、 OWASP が提唱する方法のうち、 CSRF トークンの付与を使用します。
+
+- CSRF トークンの付与
+
+    フロントエンドアプリケーションがリクエストを発行する際に、バックエンドアプリケーションでそのリクエスト内のトークンの存在と有効性を検証することで、正しいクライアントからのリクエストであることを保証する方法です。
+
+これは、 Blazor が CSRF トークンの付与・検証を実現する機能を提供しており、それを利用することにより最小限のコードで CSRF 対策を実現できるためです。
+
+#### SSR アプリケーションの実装 {#ssr-application-programming}
+
 SSR アプリケーションでは、 Blazor が提供する Antiforgery サービスを使用します。
-これにより、最小限のコードで CSRF 対策を実現できます。
-なお、 Antiforgery サービスで実現できる対策は CSRF トークンを使用した方式となります。
 
 Blazor Web アプリでは `Program.cs` 上で `AppRazorComponent` が呼び出されると、自動的に Antiforgery サービスが追加されます。
 Antiforgery ミドルウェアを有効化するには、 [`UseAntiforgery` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.builder.antiforgeryapplicationbuilderextensions.useantiforgery){ target=_blank } を呼び出す必要があります。
-`UseAntiforgery` の呼び出しは、 `UseAuthentication` と `UseAuthorization` の間に置く必要があります。
+
+`UseAntiforgery` の呼び出しは、 Visual Studio のプロジェクトテンプレートを使用して Blazor Web アプリを作成した場合、既定で `Program.cs` に追加されます。
+
+なお、`UseAntiforgery` の呼び出しは、 `UseAuthentication` と `UseAuthorization` の間に置く必要があります。
+後から `UseAuthentication` や `UseAuthorization` を追加する場合は、呼び出し位置に注意してください。
 
 ```csharp title="Program.cs での Antiforgery 有効化" hl_lines="14"
 var builder = WebApplication.CreateBuilder(args);
@@ -151,4 +161,50 @@ app.UseAntiforgery();
 app.UseAuthorization();
 
 app.Run();
+```
+
+<!-- textlint-disable ja-technical-writing/sentence-length -->
+Antiforgery サービスおよびミドルウェアを有効にした状態で、 [`EditForm` に基づく入力フォーム :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/forms){ target=_blank } を使用すれば、 Antiforgery トークンの生成と検証が自動的に行われます。
+<!-- textlint-enable ja-technical-writing/sentence-length -->
+追加のコードは必要ありません。
+
+```razor title="Antiforgery が既定で有効な EditForm" hl_lines="5-13"
+@page "/starship-2"
+@using System.ComponentModel.DataAnnotations
+@inject ILogger<Starship2> Logger
+
+<EditForm Model="Model" OnValidSubmit="Submit" FormName="Starship2">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>
+        Identifier: 
+        <InputText @bind-Value="Model!.Id" />
+    </label>
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private Starship? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+    private void Submit() => Logger.LogInformation("Id = {Id}", Model?.Id);
+
+    public class Starship
+    {
+        [Required]
+        [StringLength(10, ErrorMessage = "Id is too long.")]
+        public string? Id { get; set; }
+    }
+}
+```
+
+なお、 `EditForm` ではなく `form` タグを使用する場合は、`<form>` ～ `</form>` 内に `<AntiforgeryToken />` タグを含める必要があります。
+
+```html title="form タグを使用する場合の Antiforgery 有効化" hl_lines="2"
+<form method="post" @onsubmit="Submit" @formname="starshipForm">
+    <AntiforgeryToken />
+    <input id="send" type="submit" value="Send" />
+</form>
 ```
