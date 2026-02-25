@@ -115,11 +115,11 @@ Cookie に属性が設定されていない場合ブラウザー側で `SameSite
 
 - Cookie の属性付与
 
-    `appSettings.json` の設定値をもとに Cookie の属性を付与します。
+    アプリケーション構成設定の値をもとに Cookie の属性を付与します。
 
 ### SSR アプリケーションでの対策 {#ssr-application}
 
-Open Web Application Security Project (OWASP) では、 CSRF 対策のベストプラクティスとして Origin ヘッダーの検証以外の方法も提唱しています。
+OWASP では、 CSRF 対策のベストプラクティスとして Origin ヘッダーの検証以外の方法も提唱しています。
 詳細は [こちら :material-open-in-new:](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html){ target=_blank } を参照してください。
 
 SSR アプリケーションでは、 OWASP が提唱する方法のうち、 CSRF トークンの付与を使用します。
