@@ -80,3 +80,23 @@ Dressca は、 ASP.NET Core Web API を用いて構築されたバックエン�
         サンプルアプリケーションは SSL 環境で実行する構成になっているため、どちらも「はい」をクリックして証明書をインストールしてください。
         なお、証明書インストール後もアプリケーションへのアクセスをブラウザーに拒否される場合は、 Visual Studio や PC の再起動をお試しください。
         再起動してもアクセスできない場合はブラウザーの設定をご確認ください。
+
+## 管理者向けアプリケーションの起動 {#start-admin-application}
+
+1. 上記の[クイックスタート](#quick-start) に従って、 SQL Server のデータベース構築までの手順を実施します。
+
+1. Visual Studio で実行するプロジェクトを選択します。
+   ソリューションのプロパティを開き、 [Dressca.Web.Admin] プロジェクトをスタートアッププロジェクトに設定します。
+
+    [![Dressca.Web.Admin プロジェクトをスタートアッププロジェクトに設定](../../images/samples/select-startup-project-admin.png){ width="600" loading=lazy }](../../images/samples/select-startup-project-admin.png)
+
+1. Visual Studio で ++ctrl+f5++ を押下し、アプリケーションを実行します。
+   いくつかプロンプト画面が立ち上がった後、ブラウザーが起動し、アプリケーションの実行が開始します。
+
+    [![Dressca Admin ログイン画面](../../images/samples/dressca-admin-login.png){ width="600" loading=lazy }](../../images/samples/dressca-admin-login.png)
+
+1. ログイン画面が表示されたら、ログインフォームにそれぞれ [メールアドレス形式の文字列] と [任意の1文字以上の文字列] を入力し、「ログイン」ボタンを押下してください。
+
+1. ホーム画面へ遷移し、メニュー一覧が表示されることを確認してください。
+
+    [![Dressca Admin ホーム画面](../../images/samples/dressca-admin-home.png){ width="600" loading=lazy }](../../images/samples/dressca-admin-home.png)
