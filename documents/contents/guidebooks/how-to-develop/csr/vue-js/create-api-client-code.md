@@ -86,7 +86,7 @@ npm run generate-client
 `"outputDir"` に定義した出力先へ、クライアントコード、ドキュメント、設定ファイル等が生成されます。
 
 このとき、ドキュメントが不要な場合は、生成された設定ファイル .openapi-generator-ignore の指示に従って docs/*.md を追加し、ドキュメントの生成を無効化してください。
-AlesInfiny Maia では、ドキュメントの生成を無効化しています。
+AlesInfiny Maris では、ドキュメントの生成を無効化しています。
 
 ```text title="サンプルアプリケーションの .openapi-generator-ignore "hl_lines="2"
 # For example, you can ignore all files in a docs folder with the file extension .md:
