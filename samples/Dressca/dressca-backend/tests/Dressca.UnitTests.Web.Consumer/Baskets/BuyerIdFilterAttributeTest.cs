@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Dressca.Web.Configuration;
 using Dressca.Web.Consumer.Baskets;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -25,7 +26,7 @@ public class BuyerIdFilterAttributeTest
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
         var expectedDateTime = testCookieCreatedDateTime.AddDays(1);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, new WebServerOptions());
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, new WebServerOptions(), new CookiePolicyOptions());
 
         // Act
         filter.OnActionExecuted(context);
@@ -36,7 +37,7 @@ public class BuyerIdFilterAttributeTest
     }
 
     [Fact]
-    public void 構成ファイルに設定があるとき構成ファイルの内容がCookieに設定される()
+    public void 構成ファイルに設定があるとき構成ファイルのDomainとExpiredDaysがCookieに設定される()
     {
         // Arrange
         var buyerIdCookieName = "Dressca-Bid";
@@ -52,14 +53,11 @@ public class BuyerIdFilterAttributeTest
         {
             CookieSettings = new CookieSettings
             {
-                HttpOnly = false,
-                Secure = false,
-                SameSite = SameSiteMode.Lax,
                 ExpiredDays = 10,
                 Domain = "example.com",
             },
         };
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, options);
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, options, new CookiePolicyOptions());
 
         // Act
         filter.OnActionExecuted(context);
@@ -67,9 +65,6 @@ public class BuyerIdFilterAttributeTest
 
         // Assert
         Assert.Contains(formattedExpectedDateTime, setCookieString);
-        Assert.DoesNotContain("Secure", setCookieString, StringComparison.InvariantCultureIgnoreCase);
-        Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.InvariantCultureIgnoreCase);
-        Assert.Contains("Lax", setCookieString, StringComparison.InvariantCultureIgnoreCase);
         Assert.Contains("example.com", setCookieString);
     }
 }

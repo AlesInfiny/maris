@@ -23,14 +23,16 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private readonly string buyerIdCookieName;
     private readonly TimeProvider timeProvider;
     private readonly WebServerOptions options;
+    private readonly CookiePolicyOptions cookiePolicyOptions;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="options">構成オプションに設定された Cookie の設定。</param>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
-    public BuyerIdFilterAttribute(IOptions<WebServerOptions> options, string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System, options.Value)
+    /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
+    public BuyerIdFilterAttribute(IOptions<WebServerOptions> options, IOptions<CookiePolicyOptions> cookiePolicyOptions, string buyerIdCookieName = DefaultBuyerIdCookieName)
+        : this(buyerIdCookieName, TimeProvider.System, options.Value, cookiePolicyOptions.Value)
     {
     }
 
@@ -41,18 +43,21 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
     /// <param name="options">構成オプション。</param>
+    /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
-    ///   <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
-    ///   <paramref name="timeProvider"/> が <see langword="null"/> です。
-    ///   <paramref name="options"/> が <see langword="null"/> です。
+    ///   <item><paramref name="buyerIdCookieName"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="options"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="cookiePolicyOptions"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions options)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions options, CookiePolicyOptions cookiePolicyOptions)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
         this.options = options ?? throw new ArgumentNullException(nameof(options));
+        this.cookiePolicyOptions = cookiePolicyOptions ?? throw new ArgumentNullException(nameof(cookiePolicyOptions));
     }
 
     /// <inheritdoc/>
@@ -81,7 +86,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            this.options.CookieSettings.CreateCookieOptions(this.timeProvider));
+            this.options.CookieSettings.CreateCookieOptions(this.timeProvider, this.cookiePolicyOptions));
 
         base.OnActionExecuted(context);
     }

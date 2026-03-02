@@ -12,21 +12,6 @@ namespace Dressca.Web.Configuration;
 public class CookieSettings
 {
     /// <summary>
-    ///  Cookie の SameSite 属性を取得または設定します。
-    /// </summary>
-    public SameSiteMode SameSite { get; set; } = SameSiteMode.Strict;
-
-    /// <summary>
-    ///  Cookie の HttpOnly 属性を取得または設定します。
-    /// </summary>
-    public bool HttpOnly { get; set; } = true;
-
-    /// <summary>
-    ///  Cookie の Secure 属性を取得または設定します。
-    /// </summary>
-    public bool Secure { get; set; } = true;
-
-    /// <summary>
     ///  Cookie の Expires に設定する日数を取得または設定します。
     /// </summary>
     [Range(1, 100)]
@@ -72,20 +57,20 @@ public class CookieSettings
 
         var options = new CookieOptions
         {
-            SameSite = cookiePolicyOptions?.MinimumSameSitePolicy ?? SameSiteMode.Unspecified,
-            HttpOnly = cookiePolicyOptions?.HttpOnly == HttpOnlyPolicy.Always,
-            Secure = cookiePolicyOptions?.Secure == CookieSecurePolicy.Always,
+            SameSite = SameSiteMode.Strict,
+            HttpOnly = true,
+            Secure = true,
             Expires = timeProvider.GetLocalNow().AddDays(this.ExpiredDays),
         };
-
-        if (cookiePolicyOptions is not null)
-        {
-            ApplyCookiePolicy(options, cookiePolicyOptions);
-        }
 
         if (!string.IsNullOrEmpty(this.Domain))
         {
             options.Domain = this.Domain;
+        }
+
+        if (cookiePolicyOptions is not null)
+        {
+            ApplyCookiePolicy(options, cookiePolicyOptions);
         }
 
         return options;

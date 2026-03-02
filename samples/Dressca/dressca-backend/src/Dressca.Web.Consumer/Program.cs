@@ -34,6 +34,7 @@ builder.Services.AddCors();
 builder.Services.AddOptions<CookiePolicyOptions>()
     .Configure<IOptions<WebServerOptions>>((cookiePolicy, webServerOptions) =>
     {
+        // アプリケーション全体の Cookie ポリシーを定義する。
         cookiePolicy.HttpOnly = HttpOnlyPolicy.Always;
         cookiePolicy.Secure = CookieSecurePolicy.Always;
 
@@ -149,7 +150,7 @@ if (options.Value.AllowedOrigins.Length > 0)
     });
 }
 
-// DI に登録された CookiePolicyOptions を使用
+// DI に登録された CookiePolicyOptions を有効化する。
 app.UseCookiePolicy();
 
 app.UseAuthorization();
