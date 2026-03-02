@@ -51,49 +51,13 @@ public class BuyerIdFilterAttributeTest
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
         var options = new WebServerOptions
         {
-            CookieSettings = new CookieSettings
+            ApplicationCookieSettings = new List<ApplicationCookieSetting>
             {
-                ExpiredDays = 10,
-                Domain = "example.com",
-            },
-        };
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, options, new CookiePolicyOptions());
-
-        // Act
-        filter.OnActionExecuted(context);
-        var setCookieString = httpContext.Response.Headers.SetCookie.ToString();
-
-        // Assert
-        Assert.Contains(formattedExpectedDateTime, setCookieString);
-        Assert.Contains("example.com", setCookieString);
-    }
-
-    [Fact]
-    public void Cookie名ごとの設定があるときCookie名ごとのDomainとExpiredDaysが優先される()
-    {
-        // Arrange
-        var buyerIdCookieName = "Dressca-Bid";
-        var httpContext = new DefaultHttpContext();
-        var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-        var context = new ActionExecutedContext(actionContext, [], Mock.Of<Controller>());
-        var fakeTimeProvider = new FakeTimeProvider();
-        var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
-        fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
-        var expectedDateTime = testCookieCreatedDateTime.AddDays(7);
-        var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
-        var options = new WebServerOptions
-        {
-            CookieSettings = new CookieSettings
-            {
-                ExpiredDays = 10,
-                Domain = "example.com",
-                ApplicationCookieSettings = new Dictionary<string, ApplicationCookieSetting>
+                new ApplicationCookieSetting
                 {
-                    [buyerIdCookieName] = new ApplicationCookieSetting
-                    {
-                        ExpiredDays = 7,
-                        Domain = "localhost",
-                    },
+                    CookieName = buyerIdCookieName,
+                    ExpiredDays = 10,
+                    Domain = "example.com",
                 },
             },
         };
@@ -105,6 +69,6 @@ public class BuyerIdFilterAttributeTest
 
         // Assert
         Assert.Contains(formattedExpectedDateTime, setCookieString);
-        Assert.Contains("localhost", setCookieString);
+        Assert.Contains("example.com", setCookieString);
     }
 }

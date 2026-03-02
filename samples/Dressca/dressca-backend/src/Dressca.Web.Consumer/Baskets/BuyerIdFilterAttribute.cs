@@ -86,7 +86,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            this.options.CookieSettings.CreateCookieOptions(this.buyerIdCookieName, this.timeProvider, this.cookiePolicyOptions));
+            this.options.CreateCookieOptions(this.buyerIdCookieName, this.timeProvider, this.cookiePolicyOptions));
 
         base.OnActionExecuted(context);
     }

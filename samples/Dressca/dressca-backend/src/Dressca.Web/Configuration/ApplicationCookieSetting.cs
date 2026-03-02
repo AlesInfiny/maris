@@ -8,6 +8,11 @@ namespace Dressca.Web.Configuration;
 public class ApplicationCookieSetting
 {
     /// <summary>
+    /// Cookie の名前を取得または設定します。
+    /// </summary>
+    public string CookieName { get; set; } = string.Empty;
+
+    /// <summary>
     ///  Cookie の Expires に設定する日数を取得または設定します。
     /// </summary>
     [Range(1, 100)]
