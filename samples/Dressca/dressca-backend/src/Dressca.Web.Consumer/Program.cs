@@ -15,6 +15,7 @@ using Maris.Core.Text.Json;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
@@ -26,6 +27,41 @@ builder.Services
     .BindConfiguration(nameof(WebServerOptions))
     .ValidateDataAnnotations()
     .ValidateOnStart();
+
+builder.Services.PostConfigure<WebServerOptions>(options =>
+{
+    var cookieSettingsSection = builder.Configuration.GetSection($"{nameof(WebServerOptions)}:{nameof(WebServerOptions.CookieSettings)}");
+    if (!cookieSettingsSection.Exists())
+    {
+        return;
+    }
+
+    var applicationCookieSettingsSection = cookieSettingsSection.GetSection(nameof(CookieSettings.ApplicationCookieSettings));
+    if (!applicationCookieSettingsSection.Exists())
+    {
+        return;
+    }
+
+    options.CookieSettings.ApplicationCookieSettings.Clear();
+
+    foreach (var child in applicationCookieSettingsSection.GetChildren())
+    {
+        // appsettings.json に配列で定義されているケース: [{"Key":"Dressca-Bid","Value":{...}}]
+        var key = child.GetValue<string>("Key");
+        if (!string.IsNullOrEmpty(key))
+        {
+            var value = new ApplicationCookieSetting();
+            child.GetSection("Value").Bind(value);
+            options.CookieSettings.ApplicationCookieSettings[key] = value;
+            continue;
+        }
+
+        // appsettings.json にオブジェクトとして定義されているケース: {"Dressca-Bid":{...}}
+        var valueFromObject = new ApplicationCookieSetting();
+        child.Bind(valueFromObject);
+        options.CookieSettings.ApplicationCookieSettings[child.Key] = valueFromObject;
+    }
+});
 
 // サービスコレクションに CORS を追加する。
 builder.Services.AddCors();

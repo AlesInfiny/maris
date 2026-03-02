@@ -23,6 +23,13 @@ public class CookieSettings
     public string? Domain { get; set; }
 
     /// <summary>
+    /// アプリケーションで使用する Cookie 設定のディクショナリを取得または設定します。
+    /// </summary>
+    [ValidateObjectMembers]
+    [ValidateEnumeratedItems]
+    public IDictionary<string, ApplicationCookieSetting> ApplicationCookieSettings { get; set; } = new Dictionary<string, ApplicationCookieSetting>();
+
+    /// <summary>
     ///  アプリケーション構成設定を元に <see cref="CookieOptions"/> を作成します。
     ///  必要に応じて <see cref="CookiePolicyOptions"/> によるポリシーを反映します。
     /// </summary>
@@ -37,6 +44,58 @@ public class CookieSettings
     public CookieOptions CreateCookieOptions(TimeProvider timeProvider, IOptions<CookiePolicyOptions>? cookiePolicyOptions)
     {
         return this.CreateCookieOptions(timeProvider, cookiePolicyOptions?.Value);
+    }
+
+    /// <summary>
+    ///  アプリケーション構成設定を元に <see cref="CookieOptions"/> を作成します。
+    ///  必要に応じて <see cref="CookiePolicyOptions"/> によるポリシーを反映します。
+    /// </summary>
+    /// <param name="cookieName">Cookie 名。</param>
+    /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
+    /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
+    /// <returns>アプリケーション構成設定を元に作成した <see cref="CookieOptions"/> のインスタンス。</returns>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="cookieName"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
+    public CookieOptions CreateCookieOptions(string cookieName, TimeProvider timeProvider, CookiePolicyOptions? cookiePolicyOptions)
+    {
+        ArgumentNullException.ThrowIfNull(cookieName);
+        ArgumentNullException.ThrowIfNull(timeProvider);
+
+        var expiredDays = this.ExpiredDays;
+        var domain = this.Domain;
+
+        if (this.ApplicationCookieSettings.TryGetValue(cookieName, out var cookieSettings))
+        {
+            expiredDays = cookieSettings.ExpiredDays;
+            if (!string.IsNullOrEmpty(cookieSettings.Domain))
+            {
+                domain = cookieSettings.Domain;
+            }
+        }
+
+        var options = new CookieOptions
+        {
+            SameSite = SameSiteMode.Strict,
+            HttpOnly = true,
+            Secure = true,
+            Expires = timeProvider.GetLocalNow().AddDays(expiredDays),
+        };
+
+        if (!string.IsNullOrEmpty(domain))
+        {
+            options.Domain = domain;
+        }
+
+        if (cookiePolicyOptions is not null)
+        {
+            ApplyCookiePolicy(options, cookiePolicyOptions);
+        }
+
+        return options;
     }
 
     /// <summary>
