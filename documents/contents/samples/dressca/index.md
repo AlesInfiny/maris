@@ -10,9 +10,9 @@ description: AlesInfiny Maris OSS Edition の提供するサンプルの 解説�
 Dressca は、 ASP.NET Core Web API を用いて構築されたバックエンドアプリケーションと、 Vue.js ベースのフロントエンドアプリケーションから構成される Web アプリケーションです。
 クライアントサイドで HTML をレンダリングすることで、快適で高品質なユーザー体験を実現しています。
 バックエンドとフロントエンドは、 OpenAPI により公開された API 仕様を介して連携しています。
-サンプルアプリケーションでは、 EC サイト利用者向けと管理者向けの 2 種類の機能を実装しています。
+サンプルアプリケーションでは、 EC サイト利用者向けアプリケーション（以下、 Consumer）と管理者向けアプリケーション（以下、 Admin）の 2 種類のアプリケーションを実装しています。
 
-## クイックスタート {#quick-start}
+## アプリケーション起動の準備 {#application-startup-preparation}
 
 1. 以下を参照し、開発環境を構築してください。
 
@@ -63,6 +63,10 @@ Dressca は、 ASP.NET Core Web API を用いて構築されたバックエン�
     dotnet ef database update
     ```
 
+1. アプリケーション起動の準備は完了です。[Consumer アプリケーションの起動](#start-consumer-application)、[Admin アプリケーションの起動](#admin-アプリケーションの起動-start-admin-application) を参照し、アプリケーションを起動してください。
+
+## Consumer アプリケーションの起動 {#start-consumer-application}
+
 1. Visual Studio で実行するプロジェクトを選択します。
    ソリューションのプロパティを開き、 [Dressca.Web.Consumer] プロジェクトをスタートアッププロジェクトに設定します。
 
@@ -81,16 +85,18 @@ Dressca は、 ASP.NET Core Web API を用いて構築されたバックエン�
         なお、証明書インストール後もアプリケーションへのアクセスをブラウザーに拒否される場合は、 Visual Studio や PC の再起動をお試しください。
         再起動してもアクセスできない場合はブラウザーの設定をご確認ください。
 
-### EC サイト利用者向けアプリケーションの機能 {#consumer-application}
+1. サンプルアプリケーションに実装された機能を確認できます。[Consumer アプリケーションの機能](#consumer-application-features) を参照してください。
 
-サンプルアプリケーションに実装された機能を確認する手順を示します。
+### Consumer アプリケーションの機能 {#consumer-application-features}
+
+Consumer アプリケーションに実装された機能の確認手順を示します。
 
 #### カタログアイテムを注文する {#order-catalog-item}
 
 ![カタログアイテム注文の画面遷移図](../../images/samples/screen-flow-order-light.png#only-light){ width="600" loading=lazy }
 ![カタログアイテム注文の画面遷移図](../../images/samples/screen-flow-order-light.png#only-dark){ width="600" loading=lazy }
 
-1. 上記の [クイックスタート](#quick-start) に従って、 EC サイト利用者向けアプリケーションを実行します。
+1. 上記の [Consumer アプリケーションの起動](#start-consumer-application) に従って、 Consumer アプリケーションを実行します。
 
 1. 任意のアイテムについて、「買い物かごに入れる」ボタンを押下します。買い物かご画面に遷移し、選択したアイテムが買い物かごに入っていることを確認してください。
 
@@ -98,9 +104,7 @@ Dressca は、 ASP.NET Core Web API を用いて構築されたバックエン�
 
 1. 注文確認画面へ遷移します。「注文を確定する」ボタンを押下し、注文完了画面へ遷移することを確認してください。
 
-## 管理者向けアプリケーションの起動 {#start-admin-application}
-
-1. 上記の [クイックスタート](#quick-start) に従って、 SQL Server のデータベース構築までの手順を実行します。
+## Admin アプリケーションの起動 {#start-admin-application}
 
 1. Visual Studio で実行するプロジェクトを選択します。
    ソリューションのプロパティを開き、 [Dressca.Web.Admin] プロジェクトをスタートアッププロジェクトに設定します。
@@ -117,3 +121,9 @@ Dressca は、 ASP.NET Core Web API を用いて構築されたバックエン�
 1. ホーム画面へ遷移し、メニューが表示されることを確認してください。
 
     [![Dressca Admin ホーム画面](../../images/samples/dressca-admin-home.png){ width="600" loading=lazy }](../../images/samples/dressca-admin-home.png)
+
+1. サンプルアプリケーションに実装された機能を確認できます。[Admin アプリケーションの機能](#admin-application-features) を参照してください。
+
+### Admin アプリケーションの機能 {#admin-application-features}
+
+Admin アプリケーションに実装された機能の確認手順を示します。
