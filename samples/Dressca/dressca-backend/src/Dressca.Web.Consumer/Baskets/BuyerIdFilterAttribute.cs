@@ -1,4 +1,4 @@
-﻿using Dressca.Web.Consumer.Configuration;
+﻿using Dressca.Web.Configuration;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 

@@ -15,6 +15,7 @@ using Dressca.Web.HealthChecks;
 using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -150,6 +151,24 @@ if (options.Value.AllowedOrigins.Length > 0)
             .AllowAnyHeader()
             .AllowCredentials()
             .WithExposedHeaders("Location");
+    });
+
+    // CORS を構成する場合、 SameSite=None, Secure, HttpOnly の Cookie ポリシーを設定する。
+    app.UseCookiePolicy(new CookiePolicyOptions
+    {
+        MinimumSameSitePolicy = SameSiteMode.None,
+        HttpOnly = HttpOnlyPolicy.Always,
+        Secure = CookieSecurePolicy.Always,
+    });
+}
+else
+{
+    // CORS を構成しない場合、 SameSite=Strict, Secure, HttpOnly の Cookie ポリシーを設定する。
+    app.UseCookiePolicy(new CookiePolicyOptions
+    {
+        MinimumSameSitePolicy = SameSiteMode.Strict,
+        HttpOnly = HttpOnlyPolicy.Always,
+        Secure = CookieSecurePolicy.Always,
     });
 }
 

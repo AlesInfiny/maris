@@ -2,9 +2,9 @@
 using Dressca.ApplicationCore;
 using Dressca.EfInfrastructure;
 using Dressca.Store.Assets.StaticFiles;
+using Dressca.Web.Configuration;
 using Dressca.Web.Consumer;
 using Dressca.Web.Consumer.Baskets;
-using Dressca.Web.Consumer.Configuration;
 using Dressca.Web.Consumer.Mapper;
 using Dressca.Web.Consumer.Resources;
 using Dressca.Web.Controllers;
@@ -12,6 +12,7 @@ using Dressca.Web.Extensions;
 using Dressca.Web.HealthChecks;
 using Dressca.Web.Runtime;
 using Maris.Core.Text.Json;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -28,6 +29,19 @@ builder.Services
 
 // サービスコレクションに CORS を追加する。
 builder.Services.AddCors();
+
+// CookiePolicy を DI に登録（他のコードから IOptions<CookiePolicyOptions> で取得可能にする）
+builder.Services.AddOptions<CookiePolicyOptions>()
+    .Configure<IOptions<WebServerOptions>>((cookiePolicy, webServerOptions) =>
+    {
+        cookiePolicy.HttpOnly = HttpOnlyPolicy.Always;
+        cookiePolicy.Secure = CookieSecurePolicy.Always;
+
+        cookiePolicy.MinimumSameSitePolicy =
+            webServerOptions.Value.AllowedOrigins.Length > 0
+                ? SameSiteMode.None
+                : SameSiteMode.Strict;
+    });
 
 builder.Services
     .AddControllers(options =>
@@ -134,6 +148,9 @@ if (options.Value.AllowedOrigins.Length > 0)
             .WithExposedHeaders("Location");
     });
 }
+
+// DI に登録された CookiePolicyOptions を使用
+app.UseCookiePolicy();
 
 app.UseAuthorization();
 

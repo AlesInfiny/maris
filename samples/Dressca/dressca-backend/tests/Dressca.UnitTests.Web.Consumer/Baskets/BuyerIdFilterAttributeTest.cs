@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
+using Dressca.Web.Configuration;
 using Dressca.Web.Consumer.Baskets;
-using Dressca.Web.Consumer.Configuration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
