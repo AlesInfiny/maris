@@ -33,6 +33,20 @@ builder.Services
 // サービスコレクションに CORS を追加します。
 builder.Services.AddCors();
 
+// CookiePolicy を DI に登録（他のコードから IOptions<CookiePolicyOptions> で取得可能にする）
+builder.Services.AddOptions<CookiePolicyOptions>()
+    .Configure<IOptions<WebServerOptions>>((cookiePolicy, webServerOptions) =>
+    {
+        // アプリケーション全体の Cookie ポリシーを定義する。
+        cookiePolicy.HttpOnly = HttpOnlyPolicy.Always;
+        cookiePolicy.Secure = CookieSecurePolicy.Always;
+
+        cookiePolicy.MinimumSameSitePolicy =
+            webServerOptions.Value.AllowedOrigins.Length > 0
+                ? SameSiteMode.None
+                : SameSiteMode.Strict;
+    });
+
 builder.Services
     .AddControllers(options =>
     {
