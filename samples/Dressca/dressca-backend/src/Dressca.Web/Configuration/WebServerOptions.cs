@@ -16,7 +16,7 @@ public class WebServerOptions
     public WebServerOptions()
     {
         this.AllowedOrigins = [];
-        this.ApplicationCookieSettings = new List<ApplicationCookieSetting>();
+        this.CookieSettings = new List<CookieSetting>();
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class WebServerOptions
     /// アプリケーションで使用する Cookie の設定を取得または設定します。
     /// </summary>
     [ValidateEnumeratedItems]
-    public IList<ApplicationCookieSetting> ApplicationCookieSettings { get; set; }
+    public IList<CookieSetting> CookieSettings { get; set; }
 
     /// <summary>
     /// アプリケーション構成設定を元に <see cref="CookieOptions"/> を作成します。
@@ -56,7 +56,7 @@ public class WebServerOptions
         };
         ApplyCookiePolicy(options, cookiePolicyOptions);
 
-        var cookieSetting = this.ApplicationCookieSettings.Where(c => c.CookieName == cookieName).FirstOrDefault();
+        var cookieSetting = this.CookieSettings.Where(c => c.CookieName == cookieName).FirstOrDefault();
 
         if (cookieSetting != null)
         {

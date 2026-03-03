@@ -5,7 +5,7 @@ namespace Dressca.Web.Configuration;
 /// <summary>
 /// アプリケーションで使用する Cookie の設定を表すクラスです。
 /// </summary>
-public class ApplicationCookieSetting
+public class CookieSetting
 {
     /// <summary>
     /// Cookie の名前を取得または設定します。

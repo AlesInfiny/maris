@@ -51,9 +51,9 @@ public class BuyerIdFilterAttributeTest
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
         var options = new WebServerOptions
         {
-            ApplicationCookieSettings = new List<ApplicationCookieSetting>
+            CookieSettings = new List<CookieSetting>
             {
-                new ApplicationCookieSetting
+                new CookieSetting
                 {
                     CookieName = buyerIdCookieName,
                     ExpiredDays = 10,

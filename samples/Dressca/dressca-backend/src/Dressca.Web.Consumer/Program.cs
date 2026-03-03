@@ -15,7 +15,6 @@ using Maris.Core.Text.Json;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
