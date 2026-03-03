@@ -166,27 +166,12 @@ if (options.Value.AllowedOrigins.Length > 0)
             .AllowCredentials()
             .WithExposedHeaders("Location");
     });
-
-    // CORS を構成する場合、 SameSite=None, Secure, HttpOnly の Cookie ポリシーを設定する。
-    app.UseCookiePolicy(new CookiePolicyOptions
-    {
-        MinimumSameSitePolicy = SameSiteMode.None,
-        HttpOnly = HttpOnlyPolicy.Always,
-        Secure = CookieSecurePolicy.Always,
-    });
-}
-else
-{
-    // CORS を構成しない場合、 SameSite=Strict, Secure, HttpOnly の Cookie ポリシーを設定する。
-    app.UseCookiePolicy(new CookiePolicyOptions
-    {
-        MinimumSameSitePolicy = SameSiteMode.Strict,
-        HttpOnly = HttpOnlyPolicy.Always,
-        Secure = CookieSecurePolicy.Always,
-    });
 }
 
 app.UseAuthentication();
+
+// DI に登録された CookiePolicyOptions を有効化する。
+app.UseCookiePolicy();
 
 app.UseAuthorization();
 
