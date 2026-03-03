@@ -49,7 +49,7 @@ public class BuyerIdFilterAttributeTest
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
         var expectedDateTime = testCookieCreatedDateTime.AddDays(10);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
-        var options = new WebServerOptions
+        var webServerOptions = new WebServerOptions
         {
             CookieSettings = new List<CookieSetting>
             {
@@ -61,14 +61,24 @@ public class BuyerIdFilterAttributeTest
                 },
             },
         };
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, options, new CookiePolicyOptions());
+        CookiePolicyOptions cookieOptions = new CookiePolicyOptions
+        {
+            Secure = CookieSecurePolicy.None,
+            HttpOnly = Microsoft.AspNetCore.CookiePolicy.HttpOnlyPolicy.None,
+            MinimumSameSitePolicy = SameSiteMode.Lax,
+        };
+
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, webServerOptions, cookieOptions);
 
         // Act
         filter.OnActionExecuted(context);
         var setCookieString = httpContext.Response.Headers.SetCookie.ToString();
 
         // Assert
-        Assert.Contains(formattedExpectedDateTime, setCookieString);
+        Assert.Contains(formattedExpectedDateTime, setCookieString, StringComparison.CurrentCultureIgnoreCase);
         Assert.Contains("example.com", setCookieString);
+        Assert.DoesNotContain("Secure", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.Contains("SameSite=Lax", setCookieString, StringComparison.CurrentCultureIgnoreCase);
     }
 }
