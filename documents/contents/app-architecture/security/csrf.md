@@ -115,7 +115,7 @@ Cookie に属性が設定されていない場合ブラウザー側で `SameSite
 
 - Cookie の属性付与
 
-    アプリケーション構成設定の値をもとに Cookie の属性を付与します。
+    Program.cs で Cookie の属性を付与します。
 
 ### SSR アプリケーションでの対策 {#ssr-application}
 
