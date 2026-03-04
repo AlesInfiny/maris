@@ -62,7 +62,7 @@ public class WebServerOptions
         {
             options.Expires = timeProvider.GetUtcNow().AddDays(cookieSetting.ExpiredDays);
 
-            if (!string.IsNullOrEmpty(cookieSetting.Domain))
+            if (!string.IsNullOrWhiteSpace(cookieSetting.Domain))
             {
                 options.Domain = cookieSetting.Domain;
             }
@@ -114,7 +114,7 @@ public class WebServerOptions
             SameSiteMode.None => 0,
             SameSiteMode.Lax => 1,
             SameSiteMode.Strict => 2,
-            _ => -1,
+            _ => throw new NotSupportedException(),
         };
     }
 }
