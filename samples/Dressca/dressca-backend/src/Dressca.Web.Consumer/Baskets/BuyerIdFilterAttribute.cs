@@ -22,17 +22,17 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
     private readonly TimeProvider timeProvider;
-    private readonly WebServerOptions options;
+    private readonly WebServerOptions webServerOptions;
     private readonly CookiePolicyOptions cookiePolicyOptions;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="options">構成オプションに設定された Cookie の設定。</param>
-    /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
+    /// <param name="webServerOptions">構成オプションに設定された Cookie の設定。</param>
     /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
-    public BuyerIdFilterAttribute(IOptions<WebServerOptions> options, IOptions<CookiePolicyOptions> cookiePolicyOptions, string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System, options.Value, cookiePolicyOptions.Value)
+    /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
+    public BuyerIdFilterAttribute(IOptions<WebServerOptions> webServerOptions, IOptions<CookiePolicyOptions> cookiePolicyOptions, string buyerIdCookieName = DefaultBuyerIdCookieName)
+        : this(buyerIdCookieName, TimeProvider.System, webServerOptions.Value, cookiePolicyOptions.Value)
     {
     }
 
@@ -42,21 +42,21 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
-    /// <param name="options">構成オプション。</param>
+    /// <param name="webServerOptions">構成オプション。</param>
     /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="buyerIdCookieName"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="options"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="webServerOptions"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="cookiePolicyOptions"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions options, CookiePolicyOptions cookiePolicyOptions)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions webServerOptions, CookiePolicyOptions cookiePolicyOptions)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
-        this.options = options ?? throw new ArgumentNullException(nameof(options));
+        this.webServerOptions = webServerOptions ?? throw new ArgumentNullException(nameof(webServerOptions));
         this.cookiePolicyOptions = cookiePolicyOptions ?? throw new ArgumentNullException(nameof(cookiePolicyOptions));
     }
 
@@ -86,7 +86,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            this.options.CreateCookieOptions(this.buyerIdCookieName, this.timeProvider, this.cookiePolicyOptions));
+            this.webServerOptions.CreateCookieOptions(this.buyerIdCookieName, this.timeProvider, this.cookiePolicyOptions));
 
         base.OnActionExecuted(context);
     }

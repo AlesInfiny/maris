@@ -14,7 +14,7 @@ namespace Dressca.UnitTests.Web.Consumer.Baskets;
 public class BuyerIdFilterAttributeTest
 {
     [Fact]
-    public void 構成ファイルに設定がないときCookieの有効期限は1日間()
+    public void 構成ファイルに設定がないときはCookieの各属性に既定値が設定される()
     {
         // Arrange
         var buyerIdCookieName = "Dressca-Bid";
@@ -34,6 +34,10 @@ public class BuyerIdFilterAttributeTest
 
         // Assert
         Assert.Contains(formattedExpectedDateTime, setCookieString);
+        Assert.DoesNotContain("Domain", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.DoesNotContain("Secure", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.DoesNotContain("SameSite", setCookieString, StringComparison.CurrentCultureIgnoreCase);
     }
 
     [Fact]
