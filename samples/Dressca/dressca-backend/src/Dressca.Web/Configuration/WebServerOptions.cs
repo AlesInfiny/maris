@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Dressca.Web.Resources;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -64,7 +65,7 @@ public class WebServerOptions
 
             if (!string.IsNullOrWhiteSpace(cookieSetting.Domain))
             {
-                options.Domain = cookieSetting.Domain;
+                options.Domain = cookieSetting.Domain.Trim();
             }
         }
 
@@ -114,7 +115,7 @@ public class WebServerOptions
             SameSiteMode.None => 0,
             SameSiteMode.Lax => 1,
             SameSiteMode.Strict => 2,
-            _ => throw new NotSupportedException(),
+            _ => throw new NotSupportedException(string.Format(Messages.CookieSameSiteModeIsInvalid, mode)),
         };
     }
 }

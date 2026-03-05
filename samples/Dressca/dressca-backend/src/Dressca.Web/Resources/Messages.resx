@@ -120,6 +120,9 @@
   <data name="BusinessExceptionHandled" xml:space="preserve">
     <value>業務エラーが発生しました。</value>
   </data>
+  <data name="CookieSameSiteModeIsInvalid" xml:space="preserve">
+    <value>SameSiteMode: {0} はサポートされていません。</value>
+  </data>
   <data name="DbUpdateConcurrencyOccurred" xml:space="preserve">
     <value>データベースの更新が競合しました。</value>
   </data>
