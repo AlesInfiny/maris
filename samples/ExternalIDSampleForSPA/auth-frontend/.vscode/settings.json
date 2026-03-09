@@ -12,7 +12,6 @@
   "editor.formatOnType": true,
   "css.validate": false,
 
-
   "editor.guides.bracketPairs": true,
   "editor.bracketPairColorization.enabled": true,
   "cSpell.words": [
