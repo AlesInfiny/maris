@@ -10,6 +10,7 @@ using Dressca.Web.Consumer.Resources;
 using Dressca.Web.Controllers;
 using Dressca.Web.Extensions;
 using Dressca.Web.HealthChecks;
+using Dressca.Web.Http;
 using Dressca.Web.Runtime;
 using Maris.Core.Text.Json;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -26,6 +27,8 @@ builder.Services
     .BindConfiguration(nameof(WebServerOptions))
     .ValidateDataAnnotations()
     .ValidateOnStart();
+
+builder.Services.AddSingleton<ApplicationCookieBuilder>();
 
 // サービスコレクションに CORS を追加する。
 builder.Services.AddCors();

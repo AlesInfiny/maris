@@ -12,6 +12,7 @@ using Dressca.Web.Configuration;
 using Dressca.Web.Controllers;
 using Dressca.Web.Extensions;
 using Dressca.Web.HealthChecks;
+using Dressca.Web.Http;
 using Dressca.Web.Runtime;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -29,6 +30,8 @@ builder.Services
     .BindConfiguration(nameof(WebServerOptions))
     .ValidateDataAnnotations()
     .ValidateOnStart();
+
+builder.Services.AddSingleton<ApplicationCookieBuilder>();
 
 // サービスコレクションに CORS を追加します。
 builder.Services.AddCors();

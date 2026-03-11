@@ -1,4 +1,4 @@
-﻿using Dressca.Web.Configuration;
+﻿using Dressca.Web.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 
@@ -22,17 +22,17 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
     private readonly TimeProvider timeProvider;
-    private readonly WebServerOptions webServerOptions;
+    private readonly ApplicationCookieBuilder applicationCookieBuilder;
     private readonly CookiePolicyOptions cookiePolicyOptions;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="webServerOptions">構成オプションに設定された Cookie の設定。</param>
+    /// <param name="applicationCookieBuilder">アプリケーションの Cookie 設定を作成するビルダー。</param>
     /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
-    public BuyerIdFilterAttribute(IOptions<WebServerOptions> webServerOptions, IOptions<CookiePolicyOptions> cookiePolicyOptions, string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System, webServerOptions.Value, cookiePolicyOptions.Value)
+    public BuyerIdFilterAttribute(ApplicationCookieBuilder applicationCookieBuilder, IOptions<CookiePolicyOptions> cookiePolicyOptions, string buyerIdCookieName = DefaultBuyerIdCookieName)
+        : this(buyerIdCookieName, TimeProvider.System, applicationCookieBuilder, cookiePolicyOptions.Value)
     {
     }
 
@@ -42,21 +42,21 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
-    /// <param name="webServerOptions">構成オプション。</param>
+    /// <param name="applicationCookieBuilder">アプリケーションの Cookie 設定を作成するビルダー。</param>
     /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="buyerIdCookieName"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="webServerOptions"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="applicationCookieBuilder"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="cookiePolicyOptions"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions webServerOptions, CookiePolicyOptions cookiePolicyOptions)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, ApplicationCookieBuilder applicationCookieBuilder, CookiePolicyOptions cookiePolicyOptions)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
         this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
-        this.webServerOptions = webServerOptions ?? throw new ArgumentNullException(nameof(webServerOptions));
+        this.applicationCookieBuilder = applicationCookieBuilder ?? throw new ArgumentNullException(nameof(applicationCookieBuilder));
         this.cookiePolicyOptions = cookiePolicyOptions ?? throw new ArgumentNullException(nameof(cookiePolicyOptions));
     }
 
@@ -86,7 +86,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            this.webServerOptions.CreateCookieOptions(this.buyerIdCookieName, this.timeProvider, this.cookiePolicyOptions));
+            this.applicationCookieBuilder.CreateCookieOptions(this.buyerIdCookieName, this.timeProvider, this.cookiePolicyOptions, context.HttpContext));
 
         base.OnActionExecuted(context);
     }

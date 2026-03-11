@@ -1,12 +1,14 @@
 ﻿using System.Globalization;
 using Dressca.Web.Configuration;
 using Dressca.Web.Consumer.Baskets;
+using Dressca.Web.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Time.Testing;
 
 namespace Dressca.UnitTests.Web.Consumer.Baskets;
@@ -26,7 +28,9 @@ public class BuyerIdFilterAttributeTest
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
         var expectedDateTime = testCookieCreatedDateTime.AddDays(1);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, new WebServerOptions(), new CookiePolicyOptions());
+
+        var applicationCookieBuilder = new ApplicationCookieBuilder(Options.Create(new WebServerOptions()));
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, applicationCookieBuilder, new CookiePolicyOptions());
 
         // Act
         filter.OnActionExecuted(context);
@@ -53,6 +57,7 @@ public class BuyerIdFilterAttributeTest
         fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
         var expectedDateTime = testCookieCreatedDateTime.AddDays(10);
         var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
+
         var webServerOptions = new WebServerOptions
         {
             CookieSettings = new List<CookieSetting>
@@ -65,6 +70,7 @@ public class BuyerIdFilterAttributeTest
                 },
             },
         };
+        var applicationCookieBuilder = new ApplicationCookieBuilder(Options.Create(webServerOptions));
         CookiePolicyOptions cookieOptions = new CookiePolicyOptions
         {
             Secure = CookieSecurePolicy.None,
@@ -72,7 +78,7 @@ public class BuyerIdFilterAttributeTest
             MinimumSameSitePolicy = SameSiteMode.Lax,
         };
 
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, webServerOptions, cookieOptions);
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, applicationCookieBuilder, cookieOptions);
 
         // Act
         filter.OnActionExecuted(context);
