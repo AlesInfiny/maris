@@ -36,6 +36,14 @@ public class ApplicationCookieBuilder
     /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <param name="context">HTTP コンテキスト。</param>
     /// <returns>アプリケーション構成設定およびプログラムで設定した CookiePolicy を元に作成した <see cref="CookieOptions"/> のインスタンス。</returns>
+    /// <exception cref="ArgumentNullException">
+    ///  <list type="bullet">
+    ///   <item><paramref name="cookieName"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="cookiePolicyOptions"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="context"/> が <see langword="null"/> です。</item>
+    ///  </list>
+    /// </exception>
     public CookieOptions CreateCookieOptions(string cookieName, TimeProvider timeProvider, CookiePolicyOptions cookiePolicyOptions, HttpContext context)
     {
         ArgumentNullException.ThrowIfNull(cookieName);
