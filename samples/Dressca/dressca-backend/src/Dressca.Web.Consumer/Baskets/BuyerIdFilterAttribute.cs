@@ -21,7 +21,6 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
 {
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
-    private readonly TimeProvider timeProvider;
     private readonly ApplicationCookieBuilder applicationCookieBuilder;
     private readonly CookiePolicyOptions cookiePolicyOptions;
 
@@ -32,7 +31,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
     public BuyerIdFilterAttribute(ApplicationCookieBuilder applicationCookieBuilder, IOptions<CookiePolicyOptions> cookiePolicyOptions, string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System, applicationCookieBuilder, cookiePolicyOptions.Value)
+        : this(buyerIdCookieName, applicationCookieBuilder, cookiePolicyOptions.Value)
     {
     }
 
@@ -41,21 +40,18 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     ///  単体テスト用に<see cref="TimeProvider"/> を受け取ることができます。
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
-    /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
     /// <param name="applicationCookieBuilder">アプリケーションの Cookie 設定を作成するビルダー。</param>
     /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="buyerIdCookieName"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="timeProvider"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="applicationCookieBuilder"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="cookiePolicyOptions"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, ApplicationCookieBuilder applicationCookieBuilder, CookiePolicyOptions cookiePolicyOptions)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, ApplicationCookieBuilder applicationCookieBuilder, CookiePolicyOptions cookiePolicyOptions)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
-        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
         this.applicationCookieBuilder = applicationCookieBuilder ?? throw new ArgumentNullException(nameof(applicationCookieBuilder));
         this.cookiePolicyOptions = cookiePolicyOptions ?? throw new ArgumentNullException(nameof(cookiePolicyOptions));
     }
@@ -86,7 +82,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            this.applicationCookieBuilder.CreateCookieOptions(this.buyerIdCookieName, this.timeProvider, this.cookiePolicyOptions, context.HttpContext));
+            this.applicationCookieBuilder.CreateCookieOptions(this.buyerIdCookieName, this.cookiePolicyOptions, context.HttpContext));
 
         base.OnActionExecuted(context);
     }

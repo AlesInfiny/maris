@@ -46,7 +46,6 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         // Arrange
         await this.factory.InitializeDatabaseAsync();
         var postBasketItemsRequest = CreateBasketItemsRequest();
-        var postOrderRequestJson = JsonSerializer.Serialize(CreateDefaultPostOrderRequest());
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act

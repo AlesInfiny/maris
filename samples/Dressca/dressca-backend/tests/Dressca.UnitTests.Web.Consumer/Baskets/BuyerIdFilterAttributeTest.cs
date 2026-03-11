@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Dressca.Web.Configuration;
+﻿using Dressca.Web.Configuration;
 using Dressca.Web.Consumer.Baskets;
 using Dressca.Web.Http;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Time.Testing;
 
 namespace Dressca.UnitTests.Web.Consumer.Baskets;
 
@@ -23,21 +21,17 @@ public class BuyerIdFilterAttributeTest
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new ActionExecutedContext(actionContext, [], Mock.Of<Controller>());
-        var fakeTimeProvider = new FakeTimeProvider();
-        var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
-        fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
-        var expectedDateTime = testCookieCreatedDateTime.AddDays(1);
-        var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
 
         var applicationCookieBuilder = new ApplicationCookieBuilder(Options.Create(new WebServerOptions()));
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, applicationCookieBuilder, new CookiePolicyOptions());
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, applicationCookieBuilder, new CookiePolicyOptions());
+        var expectedMaxAge = TimeSpan.FromDays(1);
 
         // Act
         filter.OnActionExecuted(context);
         var setCookieString = httpContext.Response.Headers.SetCookie.ToString();
 
         // Assert
-        Assert.Contains(formattedExpectedDateTime, setCookieString);
+        Assert.Contains($"Max-Age={expectedMaxAge.TotalSeconds}", setCookieString, StringComparison.CurrentCultureIgnoreCase);
         Assert.DoesNotContain("Domain", setCookieString, StringComparison.CurrentCultureIgnoreCase);
         Assert.DoesNotContain("Secure", setCookieString, StringComparison.CurrentCultureIgnoreCase);
         Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.CurrentCultureIgnoreCase);
@@ -52,11 +46,8 @@ public class BuyerIdFilterAttributeTest
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new ActionExecutedContext(actionContext, [], Mock.Of<Controller>());
-        var fakeTimeProvider = new FakeTimeProvider();
         var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
-        fakeTimeProvider.SetUtcNow(testCookieCreatedDateTime);
-        var expectedDateTime = testCookieCreatedDateTime.AddDays(10);
-        var formattedExpectedDateTime = expectedDateTime.ToString("ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture);
+        var expectedMaxAge = TimeSpan.FromDays(10);
 
         var webServerOptions = new WebServerOptions
         {
@@ -67,6 +58,7 @@ public class BuyerIdFilterAttributeTest
                     CookieName = buyerIdCookieName,
                     ExpiredDays = 10,
                     Domain = "example.com",
+                    Path = "/api",
                 },
             },
         };
@@ -78,15 +70,16 @@ public class BuyerIdFilterAttributeTest
             MinimumSameSitePolicy = SameSiteMode.Lax,
         };
 
-        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, fakeTimeProvider, applicationCookieBuilder, cookieOptions);
+        var filter = new BuyerIdFilterAttribute(buyerIdCookieName, applicationCookieBuilder, cookieOptions);
 
         // Act
         filter.OnActionExecuted(context);
         var setCookieString = httpContext.Response.Headers.SetCookie.ToString();
 
         // Assert
-        Assert.Contains(formattedExpectedDateTime, setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.Contains("example.com", setCookieString);
+        Assert.Contains($"Max-Age={expectedMaxAge.TotalSeconds}", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.Contains("example.com", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.Contains("Path=/api", setCookieString, StringComparison.CurrentCultureIgnoreCase);
         Assert.DoesNotContain("Secure", setCookieString, StringComparison.CurrentCultureIgnoreCase);
         Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.CurrentCultureIgnoreCase);
         Assert.Contains("SameSite=Lax", setCookieString, StringComparison.CurrentCultureIgnoreCase);
