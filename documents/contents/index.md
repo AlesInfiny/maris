@@ -29,7 +29,7 @@ AlesInfiny Maris が提供するアーキテクチャや開発ガイドを、実
 ### CSR アプリケーション {#csr-sample-application}
 
 CSR アーキテクチャに従って実装したサンプルアプリケーションです。
-[Dressca - クイックスタート](./samples/dressca/index.md#quick-start) からダウンロードし、ローカル環境で実際に動作を確認してください。
+[Dressca](./samples/dressca/index.md) からダウンロードし、ローカル環境で実際に動作を確認してください。
 
 [![Dressca トップページ](./images/samples/dressca-top.png){ width="500" loading=lazy }](./images/samples/dressca-top.png)
 [![Dressca 管理 トップページ](./images/samples/dressca-admin-top.png){ width="500" loading=lazy }](./images/samples/dressca-admin-top.png)
