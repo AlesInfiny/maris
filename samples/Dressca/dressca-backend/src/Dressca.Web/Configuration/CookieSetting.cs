@@ -22,4 +22,9 @@ public class CookieSetting
     ///  Cookie の Domain に設定するドメインを取得または設定します。
     /// </summary>
     public string? Domain { get; set; }
+
+    /// <summary>
+    /// Cookie の Path に設定するパスを取得または設定します。
+    /// </summary>
+    public string? Path { get; set; }
 }

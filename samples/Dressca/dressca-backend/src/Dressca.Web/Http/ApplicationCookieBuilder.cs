@@ -69,6 +69,11 @@ public class ApplicationCookieBuilder
             {
                 cookieBuilder.Domain = cookieSetting.Domain.Trim();
             }
+
+            if (!string.IsNullOrWhiteSpace(cookieSetting.Path))
+            {
+                cookieBuilder.Path = cookieSetting.Path.Trim();
+            }
         }
 
         return cookieBuilder.Build(context);
