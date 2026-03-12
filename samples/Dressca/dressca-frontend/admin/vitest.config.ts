@@ -8,7 +8,7 @@ export default defineConfig((configEnv) =>
     defineConfig({
       test: {
         environment: 'jsdom',
-        exclude: [...configDefaults.exclude, 'e2e/*', '**/cypress/**', '**/dist/**'],
+        exclude: [...configDefaults.exclude, 'e2e/*'],
         root: fileURLToPath(new URL('./', import.meta.url)),
         setupFiles: ['./vitest.setup.ts'],
         coverage: {
