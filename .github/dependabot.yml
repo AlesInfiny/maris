@@ -250,7 +250,7 @@ updates:
     commit-message:
       prefix: "npm-external-id-frontend"
     labels:
-      - "target: EntraID External ID"
+      - "target: Entra ID External ID"
       - "npm"
       - "dependencies"
 
@@ -262,7 +262,7 @@ updates:
     commit-message:
       prefix: "nuget-external-id-backend"
     labels:
-      - "target: EntraID External ID"
+      - "target: Entra ID External ID"
       - "nuget"
       - "dependencies"
     groups:
