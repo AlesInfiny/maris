@@ -151,6 +151,20 @@ updates:
       - "npm"
       - "dependencies"
 
+  - package-ecosystem: "npm"
+    directory: "/samples/ExternalIDSampleForSPA/auth-frontend"
+    schedule:
+      interval: "daily"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 40
+    commit-message:
+      prefix: "npm-external-id-frontend"
+    labels:
+      - "target: EntraID External ID"
+      - "npm"
+      - "dependencies"
+
   - package-ecosystem: "nuget"
     directory: "samples/AzureADB2CAuth/auth-backend"
     schedule:
