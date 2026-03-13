@@ -253,3 +253,46 @@ updates:
       - "target: EntraID External ID"
       - "npm"
       - "dependencies"
+
+  - package-ecosystem: "nuget"
+    directory: "/samples/ExternalIDSampleForSPA/auth-backend"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "nuget-external-id-backend"
+    labels:
+      - "target: EntraID External ID"
+      - "nuget"
+      - "dependencies"
+    groups:
+      dotnet-packages:
+        patterns:
+          - "Microsoft.AspNetCore*"
+          - "Microsoft.Extensions*"
+        update-types:
+          - "minor"
+          - "patch"
+      xunit-packages:
+        patterns:
+          - "xunit*"
+        update-types:
+          - "minor"
+          - "patch"
+      nswag-packages:
+        patterns:
+          - "NSwag*"
+        update-types:
+          - "minor"
+          - "patch"
+      maris-packages:
+        patterns:
+          - "Maris*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "Microsoft.AspNetCore*"
+        versions: ["9.*", "11.*"]
+      - dependency-name: "Microsoft.Extensions*"
+        versions: ["9.*", "11.*"]
