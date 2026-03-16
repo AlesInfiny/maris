@@ -55,7 +55,7 @@
     "@types/jsdom": "27.0.0",
     "@types/node": "25.0.2",
     "@vitejs/plugin-vue": "6.0.4",
-    "@vitejs/plugin-vue-jsx": "5.1.2",
+    "@vitejs/plugin-vue-jsx": "5.1.4",
     "@vitest/coverage-v8": "4.0.18",
     "@vitest/eslint-plugin": "1.6.10",
     "@vue/eslint-config-prettier": "10.2.0",
