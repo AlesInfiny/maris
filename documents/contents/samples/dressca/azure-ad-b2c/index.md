@@ -5,6 +5,15 @@ description: Azure AD B2C による認証を利用するためのサンプルと
 
 # Azure Active Directory B2C による認証を利用する {#top}
 
+!!! warning "本サンプルサポート終了のお知らせ"
+
+    Azure Active Directory B2C の販売（新規購入）は、 2025 年 5 月 1 日をもって終了しています。
+    また、[Microsoft の公開情報 :material-open-in-new:](https://learn.microsoft.com/ja-jp/azure/active-directory-b2c/faq?tabs=app-reg-ga){ target=_blank } では、サポート継続期間は **2030 年 5 月** までとなっています。
+
+    これに伴い、 **本サンプルについても 2026 年 12 月 31 日** をもってサポートを終了し、今後の機能追加やメンテナンスは予定していません。
+    Azure Active Directory B2C を利用した認証の新規導入を考えている場合には、現在推奨されている Microsoft Entra External ID への移行を検討してください。
+    AlesInfiny Maris OSS Edition で提供している Microsoft Entra External ID のサンプルについては、[こちら](../external-id-sample-for-spa/index.md) を参照してください。
+
 ## 概要 {#about-this-sample}
 
 Azure Active Directory B2C （以降、 Azure AD B2C ） によるユーザー認証の簡単な実装サンプルを提供します。
