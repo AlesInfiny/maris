@@ -1,6 +1,6 @@
 ---
-title: Azure AD B2C を 利用した ユーザー認証
-description: Azure AD B2C による認証を利用するためのサンプルと、 その使い方を解説します。
+title: Microsoft Entra External ID を利用して ユーザーを認証する
+description: Microsoft Entra External ID による認証を 利用するためのサンプルと、その使い方を解説します。
 ---
 
 # MSAL.js で提供される秘密情報のキャッシュ保存先 {#top}
@@ -22,10 +22,10 @@ MSAL のインスタンス化に使用する構成オブジェクトをもとに
 ```typescript title="authentication-config.ts" hl_lines="9"
 export const msalConfig = {
   auth: {
-    clientId: import.meta.env.VITE_ADB2C_APP_CLIENT_ID,
-    authority: b2cPolicies.authorities.signUpSignIn.authority,
-    knownAuthorities: [b2cPolicies.authorityDomain],
-    redirectUri: import.meta.env.VITE_ADB2C_APP_URI,
+    clientId: import.meta.env.VITE_EXTERNAL_ID_APP_CLIENT_ID,
+    authority: import.meta.env.VITE_EXTERNAL_ID_AUTHORITY_DOMAIN,
+    redirectUri: import.meta.env.VITE_EXTERNAL_ID_REDIRECT_URI,
+    postLogoutRedirectUri: import.meta.env.VITE_EXTERNAL_ID_LOGOUT_URI,
   },
   cache: {
     cacheLocation: 'sessionStorage',
@@ -43,7 +43,7 @@ export const msalConfig = {
 | `localStorage`   | [Web Storage API :material-open-in-new:](https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API){ target=_blank } が提供する Local Storage に保存する   |
 | `memoryStorage`  | ブラウザーのインメモリに保存する                                                                                                                               |
 
-キャッシュストレージの保存先の違いによる影響に関しては、 [ストアの永続化方式](../../../app-architecture/client-side-rendering/global-function/store-design-policy.md) で詳細を確認してください。
+キャッシュストレージの保存先の違いによる影響に関しては、 [Store の永続化方式](../../../app-architecture/client-side-rendering/global-function/store-design-policy.md) で詳細を確認してください。
 
 !!! Danger "Local Storage を利用する際の危険性"
 
