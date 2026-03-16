@@ -104,8 +104,8 @@ Cookie に属性が設定されていない場合ブラウザー側で `SameSite
     - クロスオリジンで構成されている場合
 
         アプリケーションがクロスオリジンで構成されている場合、バックエンドアプリケーションはフロントエンドアプリケーションのオリジンからのリクエストは許可するよう設定する必要があります。
-        そのため、 Spring Security を利用してフロントエンドアプリケーションのオリジンからのリクエストを許可するよう CORS の設定を変更します。
-        実装方法については、[こちら](../../guidebooks/how-to-develop/csr/cors/index.md) を参照してください。
+        そのため、フロントエンドアプリケーションのオリジンからのリクエストを許可するよう Program.cs で CORS の設定を変更します。
+        実装方法については、[こちら](../../guidebooks/how-to-develop/csr/cors/index.md#program-cs) を参照してください。
 
     - 同一オリジンで構成されている場合
 
@@ -116,6 +116,38 @@ Cookie に属性が設定されていない場合ブラウザー側で `SameSite
 - Cookie の属性付与
 
     Program.cs で Cookie の属性を付与します。
+
+    ??? note "Program.cs での Cookie 属性の設定例"
+
+        ```C# title="Program.cs" hl_lines="10 11 14-17"
+        var builder = WebApplication.CreateBuilder(args);
+
+        // 省略
+        
+        // CookiePolicy を DI に登録（他のコードから IOptions<CookiePolicyOptions> で取得可能にする）
+        builder.Services.AddOptions<CookiePolicyOptions>()
+            .Configure<IOptions<WebServerOptions>>((cookiePolicy, webServerOptions) =>
+        {
+            // アプリケーション全体の Cookie ポリシーを定義する。
+            cookiePolicy.HttpOnly = HttpOnlyPolicy.Always;
+            cookiePolicy.Secure = CookieSecurePolicy.Always;
+
+            // CORS を構成する場合は SameSite=None, シングルオリジンの場合は SameSite=Strictを設定する。
+            cookiePolicy.MinimumSameSitePolicy =
+                webServerOptions.Value.AllowedOrigins.Length > 0
+                    ? SameSiteMode.None
+                    : SameSiteMode.Strict;
+        });
+
+        // 省略
+
+        var app = builder.Build();
+
+        // 省略
+
+        // DI に登録された CookiePolicyOptions を有効化する。
+        app.UseCookiePolicy();
+        ```
 
 ### SSR アプリケーションでの対策 {#ssr-application}
 
