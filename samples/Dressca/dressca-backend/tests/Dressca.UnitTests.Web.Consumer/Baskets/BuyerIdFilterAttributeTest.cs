@@ -31,11 +31,11 @@ public class BuyerIdFilterAttributeTest
         var setCookieString = httpContext.Response.Headers.SetCookie.ToString();
 
         // Assert
-        Assert.Contains($"Max-Age={expectedMaxAge.TotalSeconds}", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.DoesNotContain("Domain", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.DoesNotContain("Secure", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.DoesNotContain("SameSite", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.Contains($"Max-Age={expectedMaxAge.TotalSeconds}", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("Domain", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("Secure", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("SameSite", setCookieString, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
@@ -76,11 +76,11 @@ public class BuyerIdFilterAttributeTest
         var setCookieString = httpContext.Response.Headers.SetCookie.ToString();
 
         // Assert
-        Assert.Contains($"Max-Age={expectedMaxAge.TotalSeconds}", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.Contains("example.com", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.Contains("Path=/api", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.DoesNotContain("Secure", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.CurrentCultureIgnoreCase);
-        Assert.Contains("SameSite=Lax", setCookieString, StringComparison.CurrentCultureIgnoreCase);
+        Assert.Contains($"Max-Age={expectedMaxAge.TotalSeconds}", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("example.com", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Path=/api", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("Secure", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("HttpOnly", setCookieString, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("SameSite=Lax", setCookieString, StringComparison.OrdinalIgnoreCase);
     }
 }
