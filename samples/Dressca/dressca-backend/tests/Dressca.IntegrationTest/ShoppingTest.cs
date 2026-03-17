@@ -58,7 +58,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         Assert.Contains("HttpOnly", setCookieHeader, StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Secure", setCookieHeader, StringComparison.OrdinalIgnoreCase);
 
-        // Dressca.Web.Consumer の appSettings.Development.json でオリジンを複数設定している＝クロスオリジンを想定しているため、SameSite=None が設定される
+        // Dressca.Web.Consumer の appSettings.Development.json でオリジンを1つ以上設定している＝クロスオリジンを想定しているため、SameSite=None が設定される
         Assert.Contains("SameSite=None", setCookieHeader, StringComparison.OrdinalIgnoreCase);
     }
 

@@ -1,4 +1,5 @@
 ﻿using Dressca.Web.Configuration;
+using Dressca.Web.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
@@ -44,9 +45,13 @@ public class ApplicationCookieBuilder
     /// </exception>
     public CookieOptions CreateCookieOptions(string cookieName, CookiePolicyOptions cookiePolicyOptions, HttpContext context)
     {
-        ArgumentNullException.ThrowIfNull(cookieName);
         ArgumentNullException.ThrowIfNull(cookiePolicyOptions);
         ArgumentNullException.ThrowIfNull(context);
+
+        if (string.IsNullOrWhiteSpace(cookieName))
+        {
+            throw new ArgumentException(Messages.InvalidCookieName, nameof(cookieName));
+        }
 
         var cookieBuilder = new CookieBuilder
         {

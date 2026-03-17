@@ -70,15 +70,6 @@ namespace Dressca.Web.Resources {
         }
         
         /// <summary>
-        ///   SameSiteMode: {0} はサポートされていません。 に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        internal static string CookieSameSiteModeIsInvalid {
-            get {
-                return ResourceManager.GetString("CookieSameSiteModeIsInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   データベースの更新が競合しました。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string DbUpdateConcurrencyOccurred {
@@ -93,6 +84,15 @@ namespace Dressca.Web.Resources {
         internal static string HealthCheckMethodNotFound {
             get {
                 return ResourceManager.GetString("HealthCheckMethodNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cookie 名は null や空文字にすることはできません。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string InvalidCookieName {
+            get {
+                return ResourceManager.GetString("InvalidCookieName", resourceCulture);
             }
         }
     }

@@ -171,10 +171,10 @@ if (options.Value.AllowedOrigins.Length > 0)
     });
 }
 
-app.UseAuthentication();
-
 // DI に登録された CookiePolicyOptions を有効化する。
 app.UseCookiePolicy();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
