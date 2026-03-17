@@ -16,56 +16,38 @@
 
 /**
  * カタログアイテムを変更する処理のリクエストデータを表します。             
- * @export
- * @interface PutCatalogItemRequest
  */
 export interface PutCatalogItemRequest {
     /**
      * アイテム名を取得または設定します。             
-     * @type {string}
-     * @memberof PutCatalogItemRequest
      */
     'name': string;
     /**
      * 説明を取得または設定します。             
-     * @type {string}
-     * @memberof PutCatalogItemRequest
      */
     'description': string;
     /**
      * 単価を取得または設定します。             
-     * @type {number}
-     * @memberof PutCatalogItemRequest
      */
     'price': number;
     /**
      * 商品コードを取得または設定します。             
-     * @type {string}
-     * @memberof PutCatalogItemRequest
      */
     'productCode': string;
     /**
      * カタログカテゴリ ID を取得または設定します。             
-     * @type {number}
-     * @memberof PutCatalogItemRequest
      */
     'catalogCategoryId': number;
     /**
      * カタログブランド ID を取得または設定します。             
-     * @type {number}
-     * @memberof PutCatalogItemRequest
      */
     'catalogBrandId': number;
     /**
      * 行バージョンを取得または設定します。             
-     * @type {string}
-     * @memberof PutCatalogItemRequest
      */
     'rowVersion': string;
     /**
      * 論理削除フラグを取得または設定します。             
-     * @type {boolean}
-     * @memberof PutCatalogItemRequest
      */
     'isDeleted': boolean;
 }
