@@ -55,11 +55,11 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         // Assert
         Assert.True(postBasketItemResponse.Headers.TryGetValues("Set-Cookie", out var setCookieHeaders));
         var setCookieHeader = Assert.Single(setCookieHeaders);
-        Assert.Contains("HttpOnly", setCookieHeader, StringComparison.CurrentCultureIgnoreCase);
-        Assert.Contains("Secure", setCookieHeader, StringComparison.CurrentCultureIgnoreCase);
+        Assert.Contains("HttpOnly", setCookieHeader, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Secure", setCookieHeader, StringComparison.OrdinalIgnoreCase);
 
         // Dressca.Web.Consumer の appSettings.Development.json でオリジンを複数設定している＝クロスオリジンを想定しているため、SameSite=None が設定される
-        Assert.Contains("SameSite=None", setCookieHeader, StringComparison.CurrentCultureIgnoreCase);
+        Assert.Contains("SameSite=None", setCookieHeader, StringComparison.OrdinalIgnoreCase);
     }
 
     private static async Task<OrderResponse?> DeserializeOrderResponseAsync(HttpResponseMessage getOrderResponse)
