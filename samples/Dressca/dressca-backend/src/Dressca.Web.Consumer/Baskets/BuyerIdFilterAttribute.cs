@@ -36,8 +36,8 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
     }
 
     /// <summary>
-    ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインタンスを初期化します。
-    ///  単体テスト用に<see cref="TimeProvider"/> を受け取ることができます。
+    ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
+    ///  単体テストなど内部利用向けのコンストラクターです。
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
     /// <param name="applicationCookieBuilder">アプリケーションの Cookie 設定を作成するビルダー。</param>
