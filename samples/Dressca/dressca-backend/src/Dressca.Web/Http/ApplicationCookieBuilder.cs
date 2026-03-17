@@ -30,7 +30,7 @@ public class ApplicationCookieBuilder
     }
 
     /// <summary>
-    /// アプリケーション構成設定およびプログラムで設定した CookiePolicy を元に <see cref="CookieBuilder"/> を作成します。
+    /// アプリケーション構成設定およびプログラムで設定した CookiePolicy を元に <see cref="CookieOptions"/> を作成します。
     /// </summary>
     /// <param name="cookieName">Cookie の名前。</param>
     /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
