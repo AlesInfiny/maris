@@ -46,7 +46,6 @@ public class BuyerIdFilterAttributeTest
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new ActionExecutedContext(actionContext, [], Mock.Of<Controller>());
-        var testCookieCreatedDateTime = new DateTimeOffset(2024, 4, 1, 00, 00, 00, TimeSpan.Zero);
         var expectedMaxAge = TimeSpan.FromDays(10);
 
         var webServerOptions = new WebServerOptions
