@@ -16,20 +16,14 @@
 
 /**
  * カタログブランドのレスポンスデータを表します。 カタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。             
- * @export
- * @interface CatalogBrandResponse
  */
 export interface CatalogBrandResponse {
     /**
      * カタログブランド Id を取得または設定します。             
-     * @type {number}
-     * @memberof CatalogBrandResponse
      */
     'id': number;
     /**
      * ブランド名を取得または設定します。             
-     * @type {string}
-     * @memberof CatalogBrandResponse
      */
     'name': string;
 }

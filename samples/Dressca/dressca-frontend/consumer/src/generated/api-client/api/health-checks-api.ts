@@ -18,12 +18,11 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 /**
  * HealthChecksApi - axios parameter creator
- * @export
  */
 export const HealthChecksApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -45,8 +44,8 @@ export const HealthChecksApiAxiosParamCreator = function (configuration?: Config
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -75,7 +74,6 @@ export const HealthChecksApiAxiosParamCreator = function (configuration?: Config
             const localVarQueryParameter = {} as any;
 
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -90,7 +88,6 @@ export const HealthChecksApiAxiosParamCreator = function (configuration?: Config
 
 /**
  * HealthChecksApi - functional programming interface
- * @export
  */
 export const HealthChecksApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = HealthChecksApiAxiosParamCreator(configuration)
@@ -122,7 +119,6 @@ export const HealthChecksApiFp = function(configuration?: Configuration) {
 
 /**
  * HealthChecksApi - factory interface
- * @export
  */
 export const HealthChecksApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = HealthChecksApiFp(configuration)
@@ -148,16 +144,12 @@ export const HealthChecksApiFactory = function (configuration?: Configuration, b
 
 /**
  * HealthChecksApi - object-oriented interface
- * @export
- * @class HealthChecksApi
- * @extends {BaseAPI}
  */
 export class HealthChecksApi extends BaseAPI {
     /**
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof HealthChecksApi
      */
     public healthChecksApiHealthGET(options?: RawAxiosRequestConfig) {
         return HealthChecksApiFp(this.configuration).healthChecksApiHealthGET(options).then((request) => request(this.axios, this.basePath));
@@ -167,7 +159,6 @@ export class HealthChecksApi extends BaseAPI {
      * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof HealthChecksApi
      */
     public healthChecksApiHealthHEAD(options?: RawAxiosRequestConfig) {
         return HealthChecksApiFp(this.configuration).healthChecksApiHealthHEAD(options).then((request) => request(this.axios, this.basePath));

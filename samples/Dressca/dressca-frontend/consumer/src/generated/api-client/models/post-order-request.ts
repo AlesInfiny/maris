@@ -16,38 +16,26 @@
 
 /**
  * 注文を行う処理のリクエストデータを表します。             
- * @export
- * @interface PostOrderRequest
  */
 export interface PostOrderRequest {
     /**
      * 注文者の氏名を取得または設定します。             
-     * @type {string}
-     * @memberof PostOrderRequest
      */
     'fullName': string;
     /**
      * 郵便番号を取得または設定します。             
-     * @type {string}
-     * @memberof PostOrderRequest
      */
     'postalCode': string;
     /**
      * 都道府県を取得または設定します。             
-     * @type {string}
-     * @memberof PostOrderRequest
      */
     'todofuken': string;
     /**
      * 市区町村を取得または設定します。             
-     * @type {string}
-     * @memberof PostOrderRequest
      */
     'shikuchoson': string;
     /**
      * 字／番地／建物名／部屋番号を取得または設定します。             
-     * @type {string}
-     * @memberof PostOrderRequest
      */
     'azanaAndOthers': string;
 }

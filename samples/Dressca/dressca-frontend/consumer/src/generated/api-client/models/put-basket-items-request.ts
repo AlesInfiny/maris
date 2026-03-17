@@ -16,20 +16,14 @@
 
 /**
  * 買い物かごのカタログアイテム数量を変更する処理のリクエストデータを表します。             
- * @export
- * @interface PutBasketItemsRequest
  */
 export interface PutBasketItemsRequest {
     /**
      * カタログアイテム Id を取得または設定します。 1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。             
-     * @type {number}
-     * @memberof PutBasketItemsRequest
      */
     'catalogItemId': number;
     /**
      * 数量を取得または設定します。 0 以上の値を設定してください。             
-     * @type {number}
-     * @memberof PutBasketItemsRequest
      */
     'quantity': number;
 }
