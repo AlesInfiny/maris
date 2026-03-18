@@ -2,10 +2,6 @@
   "name": "app",
   "version": "0.0.0",
   "type": "module",
-  "engines": {
-    "node": "^24.13.0",
-    "npm": "^11.6.2"
-  },
   "scripts": {
     "dev": "vite --mode dev",
     "mock": "vite --mode mock",
@@ -61,5 +57,9 @@
     "workerDirectory": [
       "public"
     ]
+  },
+  "engines": {
+    "node": "^24.14.0",
+    "npm": "^11.9.0"
   }
 }
