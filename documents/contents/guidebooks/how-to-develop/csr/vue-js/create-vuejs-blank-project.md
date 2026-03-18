@@ -103,19 +103,20 @@ T  Vue.js - The Progressive JavaScript Framework
 以下の実験的機能は、インストールが必須ではありません。
 
 ```text
-◆  Select experimental features to include in your project: (↑/↓ to
-navigate, space to select, a to toggle all, enter to confirm)
-│  ◻ Oxlint
-│  ◻ Replace Prettier with Oxfmt
-│  ◻ Vite 8 (beta)
+*  Select experimental features to include in your project: (↑/↓ to navigate, space to select, a to toggle all, enter to
+confirm)
+|  [ ] Oxlint
+|  [ ] Replace Prettier with Oxfmt
+|  [ ] Vite 8 (beta)
+—
 ```
 
 サンプルコードの生成をスキップするか選択します。
 どちらを選択しても構いませんが、本ページ以降のガイドでは、 No を選択しサンプルコードを生成したことを前提として説明します。
 
 ```text
-◆  Skip all example code and start with a blank Vue project?
-│  ○ Yes / ● No
+*  Skip all example code and start with a blank Vue project?
+|    Yes / > No
 ```
 
 プロジェクトの作成が完了すると以下のように Git コマンドを実行して構成管理するよう勧められますが、ここでのコマンド実行は不要です。
