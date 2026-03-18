@@ -38,7 +38,7 @@ Node.js の LTS バージョンの情報については、 [Node.js リリース
   "description": "",
   "main": "index.js",
   "type": "module",
-  "private": "true",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

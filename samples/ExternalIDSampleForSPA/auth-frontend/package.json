@@ -2,7 +2,7 @@
   "name": "auth-frontend",
   "version": "1.0.0",
   "type": "module",
-  "private": "true",
+  "private": true,
   "scripts": {
     "format:root": "prettier --write ./*.{js,ts,json,yaml}",
     "format:ci:root": "prettier --check ./*.{js,ts,json,yaml}",
