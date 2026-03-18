@@ -2,10 +2,6 @@
   "name": "app",
   "version": "0.0.0",
   "type": "module",
-  "engines": {
-    "node": "^24.13.0",
-    "npm": "^11.6.2"
-  },
   "scripts": {
     "dev": "vite --mode dev",
     "mock": "vite --mode mock",
@@ -31,11 +27,6 @@
     "pinia": "3.0.4",
     "vue": "3.5.30"
   },
-  "msw": {
-    "workerDirectory": [
-      "public"
-    ]
-  },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "2.30.2",
     "@pinia/testing": "1.0.3",
@@ -46,11 +37,11 @@
     "@vitejs/plugin-vue-jsx": "5.1.4",
     "@vitest/coverage-v8": "4.0.18",
     "@vitest/eslint-plugin": "1.6.10",
-    "@vue/eslint-config-prettier": "10.2.0",
     "@vue/eslint-config-typescript": "14.7.0",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.9.0",
     "eslint": "9.39.2",
+    "eslint-config-prettier": "10.1.8",
     "eslint-plugin-jsdoc": "62.7.1",
     "eslint-plugin-vue": "10.8.0",
     "jiti": "2.6.1",
@@ -63,5 +54,14 @@
     "vite-plugin-vue-devtools": "8.0.7",
     "vitest": "4.0.18",
     "vue-tsc": "3.2.5"
+  },
+  "engines": {
+    "node": "^24.14.0",
+    "npm": "^11.9.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
