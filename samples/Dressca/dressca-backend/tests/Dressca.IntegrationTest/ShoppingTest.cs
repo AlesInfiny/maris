@@ -40,6 +40,28 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         Assert.Equal(postBasketItemsRequest.CatalogItemId, orderItemResponse.ItemOrdered.Id);
     }
 
+    [Fact]
+    public async Task Programで設定したCookieの設定がBuyerIdのCookieに反映されている()
+    {
+        // Arrange
+        await this.factory.InitializeDatabaseAsync();
+        var postBasketItemsRequest = CreateBasketItemsRequest();
+        var cancellationToken = TestContext.Current.CancellationToken;
+
+        // Act
+        var postBasketItemResponse = await this.client.PostAsJsonAsync("api/basket-items", postBasketItemsRequest, cancellationToken);
+        postBasketItemResponse.EnsureSuccessStatusCode();
+
+        // Assert
+        Assert.True(postBasketItemResponse.Headers.TryGetValues("Set-Cookie", out var setCookieHeaders));
+        var setCookieHeader = Assert.Single(setCookieHeaders);
+        Assert.Contains("HttpOnly", setCookieHeader, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Secure", setCookieHeader, StringComparison.OrdinalIgnoreCase);
+
+        // Dressca.Web.Consumer の appSettings.Development.json でオリジンを1つ以上設定している＝クロスオリジンを想定しているため、SameSite=None が設定される
+        Assert.Contains("SameSite=None", setCookieHeader, StringComparison.OrdinalIgnoreCase);
+    }
+
     private static async Task<OrderResponse?> DeserializeOrderResponseAsync(HttpResponseMessage getOrderResponse)
     {
         var orderResponseJson = await getOrderResponse.Content.ReadAsStringAsync();

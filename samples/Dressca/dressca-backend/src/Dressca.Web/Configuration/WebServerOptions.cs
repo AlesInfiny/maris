@@ -13,7 +13,7 @@ public class WebServerOptions
     public WebServerOptions()
     {
         this.AllowedOrigins = [];
-        this.CookieSettings = new CookieSettings();
+        this.CookieSettings = new List<CookieSetting>();
     }
 
     /// <summary>
@@ -22,8 +22,8 @@ public class WebServerOptions
     public string[] AllowedOrigins { get; set; }
 
     /// <summary>
-    ///  Cookie に設定するオプションを取得または設定します。
+    /// アプリケーションで使用する Cookie の設定を取得または設定します。
     /// </summary>
-    [ValidateObjectMembers]
-    public CookieSettings CookieSettings { get; set; }
+    [ValidateEnumeratedItems]
+    public IList<CookieSetting> CookieSettings { get; set; }
 }

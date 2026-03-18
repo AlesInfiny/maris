@@ -1,4 +1,4 @@
-﻿using Dressca.Web.Consumer.Configuration;
+﻿using Dressca.Web.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 
@@ -21,38 +21,39 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
 {
     private const string DefaultBuyerIdCookieName = "Dressca-Bid";
     private readonly string buyerIdCookieName;
-    private readonly TimeProvider timeProvider;
-    private readonly WebServerOptions options;
+    private readonly ApplicationCookieBuilder applicationCookieBuilder;
+    private readonly CookiePolicyOptions cookiePolicyOptions;
 
     /// <summary>
     ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="options">構成オプションに設定された Cookie の設定。</param>
+    /// <param name="applicationCookieBuilder">アプリケーションの Cookie 設定を作成するビルダー。</param>
+    /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <param name="buyerIdCookieName">Cookie のキー名。未指定時は "Dressca-Bid" 。</param>
-    public BuyerIdFilterAttribute(IOptions<WebServerOptions> options, string buyerIdCookieName = DefaultBuyerIdCookieName)
-        : this(buyerIdCookieName, TimeProvider.System, options.Value)
+    public BuyerIdFilterAttribute(ApplicationCookieBuilder applicationCookieBuilder, IOptions<CookiePolicyOptions> cookiePolicyOptions, string buyerIdCookieName = DefaultBuyerIdCookieName)
+        : this(buyerIdCookieName, applicationCookieBuilder, cookiePolicyOptions.Value)
     {
     }
 
     /// <summary>
-    ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインタンスを初期化します。
-    ///  単体テスト用に<see cref="TimeProvider"/> を受け取ることができます。
+    ///  <see cref="BuyerIdFilterAttribute"/> クラスの新しいインスタンスを初期化します。
+    ///  単体テストなど内部利用向けのコンストラクターです。
     /// </summary>
     /// <param name="buyerIdCookieName">Cookie のキー名。</param>
-    /// <param name="timeProvider">日時のプロバイダ。通常はシステム日時。</param>
-    /// <param name="options">構成オプション。</param>
+    /// <param name="applicationCookieBuilder">アプリケーションの Cookie 設定を作成するビルダー。</param>
+    /// <param name="cookiePolicyOptions">Cookie ポリシー オプション。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
-    ///   <paramref name="buyerIdCookieName"/> が <see langword="null"/> です。
-    ///   <paramref name="timeProvider"/> が <see langword="null"/> です。
-    ///   <paramref name="options"/> が <see langword="null"/> です。
+    ///   <item><paramref name="buyerIdCookieName"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="applicationCookieBuilder"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="cookiePolicyOptions"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    internal BuyerIdFilterAttribute(string buyerIdCookieName, TimeProvider timeProvider, WebServerOptions options)
+    internal BuyerIdFilterAttribute(string buyerIdCookieName, ApplicationCookieBuilder applicationCookieBuilder, CookiePolicyOptions cookiePolicyOptions)
     {
         this.buyerIdCookieName = buyerIdCookieName ?? throw new ArgumentNullException(nameof(buyerIdCookieName));
-        this.timeProvider = timeProvider ?? throw new ArgumentNullException(nameof(timeProvider));
-        this.options = options ?? throw new ArgumentNullException(nameof(options));
+        this.applicationCookieBuilder = applicationCookieBuilder ?? throw new ArgumentNullException(nameof(applicationCookieBuilder));
+        this.cookiePolicyOptions = cookiePolicyOptions ?? throw new ArgumentNullException(nameof(cookiePolicyOptions));
     }
 
     /// <inheritdoc/>
@@ -81,7 +82,7 @@ public class BuyerIdFilterAttribute : ActionFilterAttribute
         context.HttpContext.Response.Cookies.Append(
             this.buyerIdCookieName,
             buyerId,
-            this.options.CookieSettings.CreateCookieOptions(this.timeProvider));
+            this.applicationCookieBuilder.CreateCookieOptions(this.buyerIdCookieName, this.cookiePolicyOptions, context.HttpContext));
 
         base.OnActionExecuted(context);
     }
