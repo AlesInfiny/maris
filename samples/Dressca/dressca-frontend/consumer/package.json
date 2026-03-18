@@ -2,10 +2,6 @@
   "name": "consumer",
   "version": "0.0.0",
   "type": "module",
-  "engines": {
-    "node": "^24.13.0",
-    "npm": "^11.6.2"
-  },
   "scripts": {
     "dev": "vite --mode dev",
     "mock": "vite --mode mock",
@@ -40,11 +36,6 @@
     "vue-i18n": "11.3.0",
     "vue-router": "5.0.3",
     "yup": "1.7.1"
-  },
-  "msw": {
-    "workerDirectory": [
-      "public"
-    ]
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "2.30.2",
@@ -82,5 +73,14 @@
     "vite-plugin-vue-devtools": "8.0.7",
     "vitest": "4.0.18",
     "vue-tsc": "3.2.5"
+  },
+  "engines": {
+    "node": "^24.14.0",
+    "npm": "^11.9.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
