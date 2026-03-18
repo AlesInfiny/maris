@@ -31,7 +31,7 @@ CI 時の Node.js や npm のバージョンを設定するために、ルート
 特別な理由がなければ、最新の LTS バージョンを指定します。
 Node.js の LTS バージョンの情報については、 [Node.js リリース :material-open-in-new:](https://nodejs.org/ja/about/previous-releases){ target=_blank } を参照してください。
 
-```json title="package.json（ルート）" hl_lines="8-11"
+```json title="package.json（ルート）" hl_lines="14-18"
 {
   "name": "project-name",
   "version": "1.0.0",
