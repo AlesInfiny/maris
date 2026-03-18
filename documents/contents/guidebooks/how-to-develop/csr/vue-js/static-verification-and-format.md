@@ -131,8 +131,100 @@ npm run lint
 [コーディング規約](../../../conventions/coding-conventions.md) に沿うように設定を追加・変更します。
 初期設定からの変更点をハイライトで示します。
 
-```typescript title="サンプルアプリケーションの eslint.config.ts" hl_lines="2 10-11 13-16 24-25 30 34 37-44 47-50 54-70 75 81-84 88-91"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/eslint.config.ts
+```typescript title="サンプルアプリケーションの eslint.config.ts" hl_lines="7-9 11-14 22-23 28 32 35-42 45-48 52-68 74-75 82 86-89"
+import { globalIgnores } from 'eslint/config'
+import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+import pluginVue from 'eslint-plugin-vue'
+import pluginCypress from 'eslint-plugin-cypress/flat'
+import pluginVitest from '@vitest/eslint-plugin'
+import skipFormatting from 'eslint-config-prettier/flat'
+import tseslint from 'typescript-eslint'
+import { configureVueProject } from '@vue/eslint-config-typescript'
+import jsdoc from 'eslint-plugin-jsdoc'
+
+configureVueProject({
+  // mono-repo 用に、 .vue ファイルを探すルートディレクトリをデフォルト値 `process.cwd()` から変更します。
+  rootDir: import.meta.dirname,
+})
+
+export default defineConfigWithVueTs(
+  // Lint 対象外とするファイルパスを列挙します。
+  globalIgnores([
+    '**/dist/**',
+    '**/dist-ssr/**',
+    '**/coverage/**',
+    '**/src/generated/**',
+    '**/mockServiceWorker.js',
+  ]),
+
+  // Vue.js 向けの推奨ルールを適用します。
+  // .vue ファイルを Lint の対象とします。
+  ...pluginVue.configs['flat/recommended'],
+
+  // TypeScript + Vue.js 向けの型情報を使用した推奨ルールを適用します。
+  // .vue .ts .mts .tsx ファイルを Lint の対象とします。
+  vueTsConfigs.recommendedTypeChecked,
+
+  // 型情報を使用した Lint を実行するために、 tsconfig ファイルを探すための設定をします。
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+
+  // JavaScript ファイルに対しては、 型情報を使用した Lint は無効化します。
+  {
+    files: ['**/*.js'],
+    extends: [tseslint.configs.disableTypeChecked],
+  },
+
+  // プロジェクトやワークスペースに固有のルールを適用します。
+  // 必要に応じて対象のファイルやルールを設定します。
+  {
+    name: 'dressca-frontend/additional-rules',
+    files: ['**/*.{vue,ts,mts,tsx}'],
+    rules: {
+      'no-console': 'warn',
+      'no-alert': 'warn',
+      '@typescript-eslint/no-floating-promises': [
+        'error',
+        {
+          // 戻り値の Promise を await 不要とみなすメソッドを例外登録します。
+          allowForKnownSafeCalls: [
+            { from: 'package', name: ['push', 'replace'], package: 'vue-router' },
+          ],
+        },
+      ],
+    },
+  },
+
+  // Cypress 用のテストスイートに対して、Cypress 推奨の Lint ルールを適用します。
+  {
+    ...pluginCypress.configs.recommended,
+    files: [
+      '**/cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
+      '**/cypress/support/**/*.{js,ts,jsx,tsx}',
+    ],
+  },
+
+  // Vitest 用のテストスイートに対して、 Vitest 推奨の Lint ルールを適用します。
+  {
+    ...pluginVitest.configs.recommended,
+    files: ['**/src/**/__tests__/**/*'],
+  },
+
+  // TypeScript ファイルに対して JSDoc 形式のドキュメンテーションを強制します。
+  {
+    ...jsdoc.configs['flat/recommended-typescript-error'],
+    files: ['**/*.ts'],
+  },
+
+  // コードのフォーマットは Prettier で実行するので、 ESLint のフォーマットルールは無効化します。
+  skipFormatting,
+)
 ```
 
 #### mono-repo 用の設定 {#mono-repo-config}
