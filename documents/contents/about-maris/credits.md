@@ -108,6 +108,6 @@ Copyright (c) 2015 - 2017 Maxime Thirouin, David Clark & Richard Hallows
 
 [MIT License :material-open-in-new:](https://github.com/vitest-dev/vitest/blob/main/LICENSE){ target=_blank }
 
-Copyright (c) 2021-Present Vitest Team
+Copyright (c) 2021-Present VoidZero Inc. and Vitest contributors
 
 <!-- textlint-enable @textlint-rule/require-header-id -->
