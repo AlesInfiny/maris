@@ -166,7 +166,7 @@ SSR アプリケーションでは、 OWASP が提唱する方法のうち、 CS
 
 SSR アプリケーションでは、 Blazor が提供する Antiforgery サービスを使用します。
 
-Blazor Web アプリでは `Program.cs` 上で `AppRazorComponent` が呼び出されると、自動的に Antiforgery サービスが追加されます。
+Blazor Web アプリでは `Program.cs` 上で `builder.AppRazorComponents()` が呼び出されると、自動的に Antiforgery サービスが追加されます。
 Antiforgery ミドルウェアを有効化するには、 [`UseAntiforgery` :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.aspnetcore.builder.antiforgeryapplicationbuilderextensions.useantiforgery){ target=_blank } を呼び出す必要があります。
 
 `UseAntiforgery` の呼び出しは、 Visual Studio のプロジェクトテンプレートを使用して Blazor Web アプリを作成した場合、既定で `Program.cs` に追加されます。

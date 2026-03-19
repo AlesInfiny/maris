@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="pqHN-eNIT80UOjsbcWv7" name="ページ1">
-        <mxGraphModel dx="656" dy="468" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1086" dy="528" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -28,7 +28,7 @@
                         <mxPoint x="530" y="160" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="7" value="&amp;nbsp;OPTIONS&lt;br&gt;&amp;nbsp;Origin : https://maia.example" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                <mxCell id="7" value="&amp;nbsp;OPTIONS&lt;br&gt;&amp;nbsp;Origin : https://maris.example.com" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="170" y="120" width="180" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="10" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
@@ -54,7 +54,7 @@
                 <mxCell id="13" value="&lt;b&gt;&lt;font style=&quot;color: rgb(0, 204, 0);&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;204 No Content&amp;nbsp;&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="400" y="217" width="130" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Access-Control-Allow-Origin : https://maia.example&amp;nbsp;&lt;br&gt;Access-Control-Allow-Methods : POST, GET, OPTIONS&amp;nbsp;&lt;br&gt;Access-Control-Allow-Headers : Content-Type&amp;nbsp;&lt;br&gt;Access-Control-Max-Age : 86400&amp;nbsp;&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                <mxCell id="15" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Access-Control-Allow-Origin : https://maris.example.com&amp;nbsp;&lt;br&gt;Access-Control-Allow-Methods : POST, GET, OPTIONS&amp;nbsp;&lt;br&gt;Access-Control-Allow-Headers : Content-Type&amp;nbsp;&lt;br&gt;Access-Control-Max-Age : 86400&amp;nbsp;&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="210" y="237" width="320" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="16" value="プリフライトリクエスト&amp;nbsp;" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
@@ -66,7 +66,7 @@
                         <mxPoint x="530" y="380" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="18" value="&amp;nbsp;POST&lt;br&gt;&amp;nbsp;Origin : http://maia.example&lt;br&gt;&amp;nbsp;Content-Type : application/json" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                <mxCell id="18" value="&amp;nbsp;POST&lt;br&gt;&amp;nbsp;Origin : https://maris.example.com&lt;br&gt;&amp;nbsp;Content-Type : application/json" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="170" y="320" width="190" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="19" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
@@ -78,7 +78,7 @@
                 <mxCell id="20" value="&lt;b&gt;&lt;font style=&quot;color: rgb(0, 204, 0);&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp;200 OK&amp;nbsp;&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="450" y="395" width="80" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="21" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Access-Control-Allow-Origin : https://maia.example&amp;nbsp;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                <mxCell id="21" value="&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;Access-Control-Allow-Origin : https://maris.example.com&amp;nbsp;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="230" y="415" width="300" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="22" value="メインリクエスト&amp;nbsp;" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
@@ -149,7 +149,7 @@
                 <mxCell id="44" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fontColor=#FF0000;fillColor=#FF0000;strokeColor=#FF0000;" parent="1" vertex="1">
                     <mxGeometry x="982" y="313" width="20" height="14" as="geometry"/>
                 </mxCell>
-                <mxCell id="47" value="&amp;nbsp;POST&lt;br&gt;&amp;nbsp;Origin : http://maia.example&lt;br&gt;&amp;nbsp;Content-Type : application/json" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                <mxCell id="47" value="&amp;nbsp;POST&lt;br&gt;&amp;nbsp;Origin : https://maris.example.com&lt;br&gt;&amp;nbsp;Content-Type : application/json" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="901" y="260" width="190" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="48" value="&lt;b&gt;&lt;font&gt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;悪意のある&lt;/font&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;&lt;font style=&quot;color: rgb(255, 0, 0);&quot;&gt;メインリクエストは送られない&lt;/font&gt;&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
