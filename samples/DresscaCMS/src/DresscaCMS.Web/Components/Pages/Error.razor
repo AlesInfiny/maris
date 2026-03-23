@@ -33,6 +33,6 @@
     [Inject]
     private IWebHostEnvironment Environment { get; set; } = default!;
 
-    [MemberNotNullWhen(true, nameof(this.Exception))]
+    [MemberNotNullWhen(true, nameof(Exception))]
     private bool ShowStackTrace => this.Environment.IsDevelopment() && this.Exception is not null;
 }
