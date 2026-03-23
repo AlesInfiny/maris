@@ -76,6 +76,7 @@
         "typeof",
         "typeparam",
         "typeparamref",
+        "ValidatableType",
         "Vetur",
         "viewmodel",
         "vite",
