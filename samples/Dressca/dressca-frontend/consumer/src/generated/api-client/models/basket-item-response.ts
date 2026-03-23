@@ -19,39 +19,24 @@ import type { CatalogItemSummaryResponse } from './catalog-item-summary-response
 
 /**
  * 買い物かごのアイテムのレスポンスデータを表します。             
- * @export
- * @interface BasketItemResponse
  */
 export interface BasketItemResponse {
     /**
      * カタログアイテム Id を取得または設定します。             
-     * @type {number}
-     * @memberof BasketItemResponse
      */
     'catalogItemId': number;
     /**
      * 単価を取得または設定します。             
-     * @type {number}
-     * @memberof BasketItemResponse
      */
     'unitPrice': number;
     /**
      * 数量を取得または設定します。             
-     * @type {number}
-     * @memberof BasketItemResponse
      */
     'quantity': number;
     /**
      * 小計額を取得します。             
-     * @type {number}
-     * @memberof BasketItemResponse
      */
     'subTotal': number;
-    /**
-     * 
-     * @type {CatalogItemSummaryResponse}
-     * @memberof BasketItemResponse
-     */
     'catalogItem'?: CatalogItemSummaryResponse | null;
 }
 

@@ -16,20 +16,14 @@
 
 /**
  * ユーザー情報のレスポンスを表します。             
- * @export
- * @interface GetLoginUserResponse
  */
 export interface GetLoginUserResponse {
     /**
      * ユーザー名を取得または設定します。             
-     * @type {string}
-     * @memberof GetLoginUserResponse
      */
     'userName': string;
     /**
      * ロールを取得または設定します。             
-     * @type {Array<string>}
-     * @memberof GetLoginUserResponse
      */
     'roles': Array<string>;
 }

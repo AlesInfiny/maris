@@ -19,50 +19,34 @@ import type { CatalogItemResponse } from './catalog-item-response';
 
 /**
  * ページネーションした結果のリストを管理します。             
- * @export
- * @interface PagedListOfCatalogItemResponse
  */
 export interface PagedListOfCatalogItemResponse {
     /**
      * 現在のページ番号を取得します。 最初のページは 1 です。             
-     * @type {number}
-     * @memberof PagedListOfCatalogItemResponse
      */
     'page'?: number;
     /**
      * ページの総数を取得します。             
-     * @type {number}
-     * @memberof PagedListOfCatalogItemResponse
      */
     'totalPages'?: number;
     /**
      * 1 ページあたりの件数を取得します。             
-     * @type {number}
-     * @memberof PagedListOfCatalogItemResponse
      */
     'pageSize'?: number;
     /**
      * アイテムの総数を取得します。             
-     * @type {number}
-     * @memberof PagedListOfCatalogItemResponse
      */
     'totalCount'?: number;
     /**
      * 前のページが存在するかどうか示す値を取得します。             
-     * @type {boolean}
-     * @memberof PagedListOfCatalogItemResponse
      */
     'hasPrevious'?: boolean;
     /**
      * 次のページが存在するかどうか示す値を取得します。             
-     * @type {boolean}
-     * @memberof PagedListOfCatalogItemResponse
      */
     'hasNext'?: boolean;
     /**
      * 検索結果のリストを取得します。             
-     * @type {Array<CatalogItemResponse>}
-     * @memberof PagedListOfCatalogItemResponse
      */
     'items'?: Array<CatalogItemResponse>;
 }

@@ -19,38 +19,23 @@ import type { CatalogItemSummaryResponse } from './catalog-item-summary-response
 
 /**
  * 注文アイテムのレスポンスデータを表します。             
- * @export
- * @interface OrderItemResponse
  */
 export interface OrderItemResponse {
     /**
      * 注文アイテム Id を取得します。             
-     * @type {number}
-     * @memberof OrderItemResponse
      */
     'id': number;
-    /**
-     * 
-     * @type {CatalogItemSummaryResponse}
-     * @memberof OrderItemResponse
-     */
     'itemOrdered'?: CatalogItemSummaryResponse | null;
     /**
      * 単価を取得または設定します。             
-     * @type {number}
-     * @memberof OrderItemResponse
      */
     'unitPrice': number;
     /**
      * 数量を取得または設定します。             
-     * @type {number}
-     * @memberof OrderItemResponse
      */
     'quantity': number;
     /**
      * 小計額を取得します。             
-     * @type {number}
-     * @memberof OrderItemResponse
      */
     'subTotal': number;
 }

@@ -16,44 +16,30 @@
 
 /**
  * カタログにアイテムを追加する処理のリクエストデータを表します。             
- * @export
- * @interface PostCatalogItemRequest
  */
 export interface PostCatalogItemRequest {
     /**
      * アイテム名を取得または設定します。             
-     * @type {string}
-     * @memberof PostCatalogItemRequest
      */
     'name': string;
     /**
      * 説明を取得または設定します。             
-     * @type {string}
-     * @memberof PostCatalogItemRequest
      */
     'description': string;
     /**
      * 単価を取得または設定します。             
-     * @type {number}
-     * @memberof PostCatalogItemRequest
      */
     'price': number;
     /**
      * 商品コードを取得または設定します。             
-     * @type {string}
-     * @memberof PostCatalogItemRequest
      */
     'productCode': string;
     /**
      * カタログカテゴリ ID を取得または設定します。             
-     * @type {number}
-     * @memberof PostCatalogItemRequest
      */
     'catalogCategoryId': number;
     /**
      * カタログブランド ID を取得または設定します。             
-     * @type {number}
-     * @memberof PostCatalogItemRequest
      */
     'catalogBrandId': number;
 }
