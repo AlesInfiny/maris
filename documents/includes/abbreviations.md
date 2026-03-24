@@ -22,6 +22,7 @@
 *[NET MAUI]: .NET Multi-Platform App UI.
 *[OS]: Operating System.
 *[OSS]: Open Source Software.
+*[OWASP]: Open Web Application Security Project.
 *[PKCE]: Proof Key for Code Exchange.
 *[RAM]: Random Access Memory：「メモリ」とも表現される。
 *[SaaS]: Software as a Service：ソフトウェアをネットワーク経由で利用できるサービス。

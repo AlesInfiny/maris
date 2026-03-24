@@ -16,32 +16,22 @@
 
 /**
  * カタログアイテムの概要のレスポンスデータを表します。             
- * @export
- * @interface CatalogItemSummaryResponse
  */
 export interface CatalogItemSummaryResponse {
     /**
      * カタログアイテム Id を取得または設定します。             
-     * @type {number}
-     * @memberof CatalogItemSummaryResponse
      */
     'id': number;
     /**
      * 商品名を取得または設定します。             
-     * @type {string}
-     * @memberof CatalogItemSummaryResponse
      */
     'name': string;
     /**
      * 商品コードを取得または設定します。             
-     * @type {string}
-     * @memberof CatalogItemSummaryResponse
      */
     'productCode': string;
     /**
      * アセットコードの一覧を取得または設定します。             
-     * @type {Array<string>}
-     * @memberof CatalogItemSummaryResponse
      */
     'assetCodes'?: Array<string>;
 }

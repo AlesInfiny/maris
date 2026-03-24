@@ -49,7 +49,7 @@ public class CommandAttribute : VerbAttribute
     {
         get => this.commandType;
 
-        [MemberNotNull(nameof(this.commandType))]
+        [MemberNotNull(nameof(commandType))]
         init
         {
             ArgumentNullException.ThrowIfNull(value);

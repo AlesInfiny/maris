@@ -16,20 +16,14 @@
 
 /**
  * カタログカテゴリのレスポンスデータを表します。             
- * @export
- * @interface GetCatalogCategoriesResponse
  */
 export interface GetCatalogCategoriesResponse {
     /**
      * カタログカテゴリ ID を取得または設定します。             
-     * @type {number}
-     * @memberof GetCatalogCategoriesResponse
      */
     'id': number;
     /**
      * カテゴリ名を取得または設定します。             
-     * @type {string}
-     * @memberof GetCatalogCategoriesResponse
      */
     'name': string;
 }
