@@ -427,7 +427,7 @@
     /// </summary>
     /// <param name="offsetMinutes">現在のタイムゾーンにおけるオフセット (分) 。</param>
     /// <returns>相関チェック結果。true: 成功、false: 失敗。</returns>
-    [MemberNotNull(nameof(this.announcementModel))]
+    [MemberNotNull(nameof(announcementModel))]
     private bool ValidateCorrelation(long offsetMinutes)
     {
         if (this.announcementModel is null)

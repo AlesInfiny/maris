@@ -16,56 +16,38 @@
 
 /**
  * カタログアイテムのレスポンスデータを表します。             
- * @export
- * @interface CatalogItemResponse
  */
 export interface CatalogItemResponse {
     /**
      * 説明を取得または設定します。             
-     * @type {string}
-     * @memberof CatalogItemResponse
      */
     'description': string;
     /**
      * 単価を取得または設定します。             
-     * @type {number}
-     * @memberof CatalogItemResponse
      */
     'price': number;
     /**
      * カタログカテゴリ Id を取得または設定します。             
-     * @type {number}
-     * @memberof CatalogItemResponse
      */
     'catalogCategoryId': number;
     /**
      * カタログブランド Id を取得または設定します。             
-     * @type {number}
-     * @memberof CatalogItemResponse
      */
     'catalogBrandId': number;
     /**
      * カタログアイテム Id を取得または設定します。             
-     * @type {number}
-     * @memberof CatalogItemResponse
      */
     'id': number;
     /**
      * 商品名を取得または設定します。             
-     * @type {string}
-     * @memberof CatalogItemResponse
      */
     'name': string;
     /**
      * 商品コードを取得または設定します。             
-     * @type {string}
-     * @memberof CatalogItemResponse
      */
     'productCode': string;
     /**
      * アセットコードの一覧を取得または設定します。             
-     * @type {Array<string>}
-     * @memberof CatalogItemResponse
      */
     'assetCodes'?: Array<string>;
 }

@@ -18,7 +18,7 @@ import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
 import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction, replaceWithSerializableTypeIfNeeded } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
@@ -33,7 +33,6 @@ import type { ProblemDetails } from '../models';
 import type { PutCatalogItemRequest } from '../models';
 /**
  * CatalogItemsApi - axios parameter creator
- * @export
  */
 export const CatalogItemsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -65,8 +64,8 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['rowVersion'] = rowVersion;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -115,8 +114,8 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
                 localVarQueryParameter['pageSize'] = pageSize;
             }
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -149,8 +148,8 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarHeaderParameter['Accept'] = 'application/json';
 
-    
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
@@ -182,9 +181,8 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -222,9 +220,8 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-
-    
             localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
@@ -241,7 +238,6 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
 
 /**
  * CatalogItemsApi - functional programming interface
- * @export
  */
 export const CatalogItemsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CatalogItemsApiAxiosParamCreator(configuration)
@@ -321,7 +317,6 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
 
 /**
  * CatalogItemsApi - factory interface
- * @export
  */
 export const CatalogItemsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = CatalogItemsApiFp(configuration)
@@ -386,9 +381,6 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
 
 /**
  * CatalogItemsApi - object-oriented interface
- * @export
- * @class CatalogItemsApi
- * @extends {BaseAPI}
  */
 export class CatalogItemsApi extends BaseAPI {
     /**
@@ -398,7 +390,6 @@ export class CatalogItemsApi extends BaseAPI {
      * @param {string} [rowVersion] 行バージョン
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CatalogItemsApi
      */
     public deleteCatalogItem(catalogItemId: number, rowVersion?: string, options?: RawAxiosRequestConfig) {
         return CatalogItemsApiFp(this.configuration).deleteCatalogItem(catalogItemId, rowVersion, options).then((request) => request(this.axios, this.basePath));
@@ -413,7 +404,6 @@ export class CatalogItemsApi extends BaseAPI {
      * @param {number} [pageSize] 1 ページに収めるアイテムの数です。 未設定の場合は 20 個です。 1 以上 50 以下の整数値を指定できます。             
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CatalogItemsApi
      */
     public getByQuery(brandId?: number | null, categoryId?: number | null, page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
         return CatalogItemsApiFp(this.configuration).getByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(this.axios, this.basePath));
@@ -425,7 +415,6 @@ export class CatalogItemsApi extends BaseAPI {
      * @param {number} catalogItemId ID。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CatalogItemsApi
      */
     public getCatalogItem(catalogItemId: number, options?: RawAxiosRequestConfig) {
         return CatalogItemsApiFp(this.configuration).getCatalogItem(catalogItemId, options).then((request) => request(this.axios, this.basePath));
@@ -437,7 +426,6 @@ export class CatalogItemsApi extends BaseAPI {
      * @param {PostCatalogItemRequest} postCatalogItemRequest 追加するアイテムの情報。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CatalogItemsApi
      */
     public postCatalogItem(postCatalogItemRequest: PostCatalogItemRequest, options?: RawAxiosRequestConfig) {
         return CatalogItemsApiFp(this.configuration).postCatalogItem(postCatalogItemRequest, options).then((request) => request(this.axios, this.basePath));
@@ -450,7 +438,6 @@ export class CatalogItemsApi extends BaseAPI {
      * @param {PutCatalogItemRequest} putCatalogItemRequest 更新するカタログアイテムの情報。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof CatalogItemsApi
      */
     public putCatalogItem(catalogItemId: number, putCatalogItemRequest: PutCatalogItemRequest, options?: RawAxiosRequestConfig) {
         return CatalogItemsApiFp(this.configuration).putCatalogItem(catalogItemId, putCatalogItemRequest, options).then((request) => request(this.axios, this.basePath));

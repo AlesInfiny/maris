@@ -22,32 +22,19 @@ import type { BasketItemResponse } from './basket-item-response';
 
 /**
  * 買い物かごのレスポンスデータを表します。             
- * @export
- * @interface BasketResponse
  */
 export interface BasketResponse {
     /**
      * 購入者 Id を取得または設定します。             
-     * @type {string}
-     * @memberof BasketResponse
      */
     'buyerId': string;
-    /**
-     * 
-     * @type {AccountResponse}
-     * @memberof BasketResponse
-     */
     'account'?: AccountResponse | null;
     /**
      * 買い物かごアイテムのリストを取得または設定します。             
-     * @type {Array<BasketItemResponse>}
-     * @memberof BasketResponse
      */
     'basketItems'?: Array<BasketItemResponse>;
     /**
      * 削除済みカタログアイテムの Id のリストを取得または設定します。             
-     * @type {Array<number>}
-     * @memberof BasketResponse
      */
     'deletedItemIds'?: Array<number>;
 }

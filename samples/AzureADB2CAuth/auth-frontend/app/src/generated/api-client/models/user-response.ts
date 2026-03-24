@@ -16,14 +16,10 @@
 
 /**
  * ユーザー情報のレスポンスデータを表します。             
- * @export
- * @interface UserResponse
  */
 export interface UserResponse {
     /**
      * ユーザー ID を取得または設定します。             
-     * @type {string}
-     * @memberof UserResponse
      */
     'userId': string;
 }
