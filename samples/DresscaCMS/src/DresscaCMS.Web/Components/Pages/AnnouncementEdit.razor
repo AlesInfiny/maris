@@ -51,6 +51,11 @@
         }
         else
         {
+            <!--
+                アーキテクチャの全体処理方式では OnValidationRequested で項目間チェックをすることになっていますが、サンプルでは登録処理の中で相関チェックを行う形にしています。
+                これは、 OnValidationRequested の戻り値が Task ではなく JS 側で完了を待てないため、非同期での相関チェックができないことによります。
+                将来 ASP.NET Core に非同期での検証機能が実装された場合は、そちらに相関チェックのロジックを移すことを検討してください。
+            -->
             <EditForm EditContext="this.editContext" OnSubmit="@OnSaveButtonClickAsync" FormName="AnnouncementEditForm">
                 <DataAnnotationsValidator />
                 <FluentStack Orientation="Orientation.Vertical">
