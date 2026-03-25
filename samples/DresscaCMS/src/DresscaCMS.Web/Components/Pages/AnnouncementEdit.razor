@@ -64,31 +64,32 @@
                         @* お知らせメッセージ編集・ヘッダー部 *@
                         <FluentStack Orientation="Orientation.Horizontal">
                             <FluentStack Orientation="Orientation.Vertical">
-                                <FluentInputLabel Label="@(Messages.PostDateTime + "（日付）")" Required="true" />
-                                <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
+                                <FluentInputLabel Label="@(Messages.PostDateTime + "（日付）")" Required="true" ForId="edit-post-date" />
+                                <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Id="edit-post-date" Placeholder="yyyy/MM/dd" />
                                 <FluentValidationMessage For="@(() => this.announcementModel.PostDate)" />
                             </FluentStack>
                             <FluentStack Orientation="Orientation.Vertical">
-                                <FluentInputLabel Label="@(Messages.PostDateTime + "（時刻）")" />
-                                <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" />
+                                <FluentInputLabel Label="@(Messages.PostDateTime + "（時刻）")" ForId="edit-post-time" />
+                                <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" Id="edit-post-time" />
                             </FluentStack>
                             <FluentStack Orientation="Orientation.Vertical">
-                                <FluentInputLabel Label="@(Messages.ExpireDateTime + "（日付）")" />
-                                <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
+                                <FluentInputLabel Label="@(Messages.ExpireDateTime + "（日付）")" ForId="edit-expire-date" />
+                                <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Id="edit-expire-date" Placeholder="yyyy/MM/dd" />
                                 <FluentValidationMessage For="@(() => this.announcementModel.ExpireDate)" />
                             </FluentStack>
                             <FluentStack Orientation="Orientation.Vertical">
-                                <FluentInputLabel Label="@(Messages.ExpireDateTime + "（時刻）")" />
-                                <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" />
+                                <FluentInputLabel Label="@(Messages.ExpireDateTime + "（時刻）")" ForId="edit-expire-time" />
+                                <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" Id="edit-expire-time" />
                             </FluentStack>
                             <FluentStack Orientation="Orientation.Vertical">
-                                <FluentInputLabel Label="@Messages.Category" />
-                                <FluentTextField @bind-Value="@this.announcementModel.Category" Maxlength="128" Style="width: 200px;" />
+                                <FluentInputLabel Label="@Messages.Category" ForId="edit-category" />
+                                <FluentTextField @bind-Value="@this.announcementModel.Category" Id="edit-category" Maxlength="128" Style="width: 200px;" />
                                 <FluentValidationMessage For="@(() => this.announcementModel.Category)" />
                             </FluentStack>
                             <FluentStack Orientation="Orientation.Vertical">
-                                <FluentInputLabel Label="@Messages.DisplayPriority" Required="true" />
+                                <FluentInputLabel Label="@Messages.DisplayPriority" Required="true" ForId="edit-display-priority" />
                                 <FluentSelect @bind-SelectedOption="@this.announcementModel.DisplayPriority"
+                                              Id="edit-display-priority"
                                               Items="@(Enum.GetValues<DisplayPriority>())"
                                               OptionValue="@(p => ((int)p).ToString())"
                                               OptionText="@(p => p.GetDisplayName())"

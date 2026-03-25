@@ -21,13 +21,13 @@
         <DataAnnotationsValidator />
         <FluentStack Orientation="Orientation.Vertical" VerticalGap="20">
             <FluentStack Orientation="Orientation.Vertical">
-                <FluentInputLabel Label="@Messages.Email" Required="true" />
-                <FluentTextField @bind-Value="this.Input.Email" Name="Input.Email" Autocomplete="username webauthn" Placeholder="name@example.com" Style="width: 300px;" />
+                <FluentInputLabel Label="@Messages.Email" Required="true" ForId="login-email" />
+                <FluentTextField @bind-Value="this.Input.Email" Id="login-email" Name="Input.Email" Autocomplete="username webauthn" Placeholder="name@example.com" Style="width: 300px;" />
                 <FluentValidationMessage For="() => this.Input.Email" />
             </FluentStack>
             <FluentStack Orientation="Orientation.Vertical">
-                <FluentInputLabel Label="@Messages.Password" Required="true" />
-                <FluentTextField TextFieldType="TextFieldType.Password" @bind-Value="this.Input.Password" Name="Input.Password" Style="width: 300px;" />
+                <FluentInputLabel Label="@Messages.Password" Required="true" ForId="login-password" />
+                <FluentTextField TextFieldType="TextFieldType.Password" @bind-Value="this.Input.Password" Id="login-password" Name="Input.Password" Style="width: 300px;" />
                 <FluentValidationMessage For="() => this.Input.Password" />
             </FluentStack>
             <FluentCheckbox @bind-Value="this.Input.RememberMe" Name="Input.RememberMe" Label="@Messages.RememberMe" />

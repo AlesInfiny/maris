@@ -52,30 +52,31 @@
                     @* お知らせメッセージ登録・ヘッダー部 *@
                     <FluentStack Orientation="Orientation.Horizontal">
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@(Messages.PostDateTime + "（日付）")" Required="true" />
-                            <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Placeholder="yyyy/MM/dd" />
+                            <FluentInputLabel Label="@(Messages.PostDateTime + "（日付）")" Required="true" ForId="create-post-date" />
+                            <FluentDatePicker @bind-Value="@this.announcementModel.PostDate" Id="create-post-date" Placeholder="yyyy/MM/dd" />
                             <FluentValidationMessage For="@(() => this.announcementModel.PostDate)" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@(Messages.PostDateTime + "（時刻）")" />
-                            <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" />
+                            <FluentInputLabel Label="@(Messages.PostDateTime + "（時刻）")" ForId="create-post-time" />
+                            <FluentTimePicker @bind-Value="@this.announcementModel.PostTime" Id="create-post-time" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（日付）")" />
-                            <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Placeholder="yyyy/MM/dd" />
+                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（日付）")" ForId="create-expire-date" />
+                            <FluentDatePicker @bind-Value="@this.announcementModel.ExpireDate" Id="create-expire-date" Placeholder="yyyy/MM/dd" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（時刻）")" />
-                            <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" />
+                            <FluentInputLabel Label="@(Messages.ExpireDateTime + "（時刻）")" ForId="create-expire-time" />
+                            <FluentTimePicker @bind-Value="@this.announcementModel.ExpireTime" Id="create-expire-time" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@Messages.Category" />
-                            <FluentTextField @bind-Value="@this.announcementModel.Category" Maxlength="128" Style="width: 200px;" />
+                            <FluentInputLabel Label="@Messages.Category" ForId="create-category" />
+                            <FluentTextField @bind-Value="@this.announcementModel.Category" Id="create-category" Maxlength="128" Style="width: 200px;" />
                             <FluentValidationMessage For="@(() => this.announcementModel.Category)" />
                         </FluentStack>
                         <FluentStack Orientation="Orientation.Vertical">
-                            <FluentInputLabel Label="@Messages.DisplayPriority" Required="true" />
+                            <FluentInputLabel Label="@Messages.DisplayPriority" Required="true" ForId="create-display-priority" />
                             <FluentSelect @bind-SelectedOption="@this.announcementModel.DisplayPriority"
+                                          Id="create-display-priority"
                                           Items="@(Enum.GetValues<DisplayPriority>())"
                                           OptionValue="@(p => ((int)p).ToString())"
                                           OptionText="@(p => p.GetDisplayName())"
