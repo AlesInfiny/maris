@@ -109,7 +109,7 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: ステージング環境へのデプロイ
-        uses: azure/webapps-deploy@84a80cfe7e9889f35148ed88c307e6e93bf02578  # v3.0.7
+        uses: azure/webapps-deploy@02a81bead70021f5284939794bcec79c271ab383  # v3.0.8
         with:
           app-name: ${{ env.APP_ALESINFINY_MARIS_WEBAPP_NAME }}
           slot-name: staging
