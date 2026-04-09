@@ -35,6 +35,8 @@ const [quantity] = defineField('quantity')
 const { toCurrencyJPY } = currencyHelper()
 const { getFirstAssetUrl } = assetHelper()
 
+// Keep an explicit range guard because meta.valid does not update early enough
+// for out-of-range numeric input in this component.
 const isQuantityValid = computed(
   () =>
     typeof quantity.value === 'number' &&
@@ -47,6 +49,7 @@ const isUpdateDisabled = computed(
   () => !(meta.value.valid && meta.value.dirty && isQuantityValid.value),
 )
 
+// v-model.number can yield NaN while editing, so revalidate immediately on change.
 watch(quantity, () => {
   void validate()
 })

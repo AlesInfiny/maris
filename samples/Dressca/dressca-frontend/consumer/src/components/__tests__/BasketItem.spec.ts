@@ -104,7 +104,9 @@ describe('BasketItem', () => {
       global: { plugins: [i18n] },
     })
 
-    await wrapper.find('input[type="number"]').setValue('3')
+    const quantityInput = wrapper.find('input[type="number"]')
+    await quantityInput.setValue('3')
+    await quantityInput.trigger('blur')
     await flushPromises()
 
     expect(wrapper.find('button').attributes('disabled')).toBeUndefined()

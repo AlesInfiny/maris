@@ -46,4 +46,21 @@ describe('validation-items', () => {
       '半角英数字で入力してください。',
     )
   })
+
+  it.each(['-1', '1.5', ' '])(
+    '不正な単価 %s を検証できる',
+    async (price) => {
+      const result = await catalogItemZodSchema.safeParseAsync({
+        itemName: 'テストアイテム',
+        itemDescription: 'テスト説明',
+        price,
+        productCode: 'ABC123',
+      })
+
+      expect(result.success).toBe(false)
+      expect(result.error?.flatten().fieldErrors.price).toContain(
+        '1以上の整数を半角数字で入力してください',
+      )
+    },
+  )
 })

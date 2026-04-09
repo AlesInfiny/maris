@@ -9,6 +9,7 @@ import { i18n } from '@/locales/i18n'
 import { ValidationItems } from '@/validation/validation-items'
 
 // フォーム固有のバリデーション定義
+// メッセージは setup 時点のロケールで確定するため、変更時は再生成が必要です。
 const { t } = i18n.global
 const { email: emailRule } = ValidationItems()
 const formSchema = toTypedSchema(
