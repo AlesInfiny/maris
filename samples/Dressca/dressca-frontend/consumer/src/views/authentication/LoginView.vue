@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { useField, useForm } from 'vee-validate'
-import * as yup from 'yup'
+import { toTypedSchema } from '@vee-validate/zod'
+import { z } from 'zod'
 import { authenticationService } from '@/services/authentication/authentication-service'
 import { EnvelopeIcon, KeyIcon } from '@heroicons/vue/24/solid'
-import { configureYup } from '@/config/yup.config'
+import { i18n } from '@/locales/i18n'
 import { ValidationItems } from '@/validation/validation-items'
 
-// yup設定の有効化
-configureYup()
-
 // フォーム固有のバリデーション定義
-const formSchema = yup.object({
-  email: ValidationItems().email.required(),
-  password: yup.string().required(),
-})
+const { t } = i18n.global
+const { email: emailRule } = ValidationItems()
+const formSchema = toTypedSchema(
+  z.object({
+    email: z.string().min(1, t('required')).pipe(emailRule),
+    password: z.string().min(1, t('required')),
+  }),
+)
 
 const router = useRouter()
 const route = useRoute()
