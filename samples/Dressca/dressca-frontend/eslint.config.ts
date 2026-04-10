@@ -43,7 +43,7 @@ export default defineConfigWithVueTs(
 
   // JavaScript ファイルに対しては、 型情報を使用した Lint は無効化します。
   {
-    files: ['**/*.js'],
+    files: ['**/*.{js,mjs,cjs}'],
     extends: [tseslint.configs.disableTypeChecked],
   },
 
