@@ -12,6 +12,7 @@ on:
       - 'samples/Dressca/dressca-frontend/*.*'
       - 'samples/Dressca/dressca-frontend/consumer/**'
       - '.github/workflows/samples-dressca-consumer-frontend.ci.yml'
+      - '.github/workflows/lighthouse-to-markdown/**'
   workflow_dispatch:
 
 defaults:
@@ -59,6 +60,23 @@ jobs:
           output_md: /var/tmp/coverage/consumer.md
           prefix: /home/runner/work/maris/maris/samples/Dressca/dressca-frontend/consumer
 
+      - id: application-build-lighthouse
+        name: Lighthouse 用アプリケーションのビルド
+        run: npm run build-only:mock:consumer >> /var/tmp/lighthouse-build-result.txt 2>&1
+
+      - id: run-lighthouse
+        name: Lighthouse CI の実行
+        run: npm run lighthouse:consumer >> /var/tmp/lighthouse-result.txt 2>&1
+
+      - id: format-lighthouse
+        name: Lighthouse レポート整形
+        if: ${{ success() || (failure() && steps.run-lighthouse.conclusion == 'failure') }}
+        uses: ./.github/workflows/lighthouse-to-markdown
+        with:
+          manifest_path: ./samples/Dressca/dressca-frontend/consumer/.lighthouseci/manifest.json
+          config_path: ./samples/Dressca/dressca-frontend/consumer/.lighthouserc.json
+          output_md: /var/tmp/lighthouse/consumer.md
+
       - name: lintの結果出力
         if: ${{ success() || (failure() && steps.run-lint.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
@@ -80,12 +98,20 @@ jobs:
           body: /var/tmp/build-result.txt
           header: 'ビルドの結果 :gear:'
 
+      - name: Lighthouse 用ビルドの結果出力
+        if: ${{ success() || (failure() && steps.application-build-lighthouse.conclusion == 'failure') }}
+        uses: ./.github/workflows/file-to-summary
+        with:
+          body: /var/tmp/lighthouse-build-result.txt
+          header: 'Lighthouse 用ビルドの結果 :flashlight:'
+
       - name: 単体テストの結果出力
         if: ${{ success() || (failure() && steps.run-unit-tests.conclusion == 'failure') }}
         uses: ./.github/workflows/file-to-summary
         with:
           body: /var/tmp/unit-test-result.txt
           header: '単体テストの結果 :memo:'
+
       - name: 単体テストのカバレッジ出力
         if: ${{ success() || (failure() && steps.format-coverage.conclusion == 'failure') }}
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
@@ -95,5 +121,24 @@ jobs:
             const body = await fs.readFile('${{ steps.format-coverage.outputs.markdown_path }}', 'utf8')
             await core.summary
               .addHeading('単体テストのカバレッジ :memo:', 2)
+              .addRaw(body)
+              .write()
+
+      - name: Lighthouse CI の結果出力
+        if: ${{ success() || (failure() && steps.run-lighthouse.conclusion == 'failure') }}
+        uses: ./.github/workflows/file-to-summary
+        with:
+          body: /var/tmp/lighthouse-result.txt
+          header: 'Lighthouse CI の結果 :flashlight:'
+
+      - name: Lighthouse CI レポート出力
+        if: ${{ success() || (failure() && steps.format-lighthouse.conclusion == 'failure') }}
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
+        with:
+          script: |
+            const fs = require('fs/promises')
+            const body = await fs.readFile('${{ steps.format-lighthouse.outputs.markdown_path }}', 'utf8')
+            await core.summary
+              .addHeading('Lighthouse CI レポート :flashlight:', 2)
               .addRaw(body)
               .write()

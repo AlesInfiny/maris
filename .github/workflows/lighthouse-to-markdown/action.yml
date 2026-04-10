@@ -1,0 +1,192 @@
+name: lighthouse-to-markdown
+description: Lighthouse CI の manifest.json と LHR JSON から GitHub Actions Summary 向け Markdown を生成します。
+
+inputs:
+  manifest_path:
+    description: ".lighthouseci/manifest.json のパス"
+    required: true
+  output_md:
+    description: "整形した Markdown を出力するファイルパス"
+    required: true
+  config_path:
+    description: "Lighthouse CI の設定ファイルパス"
+    required: false
+    default: ""
+
+outputs:
+  markdown_path:
+    description: "生成された Markdown ファイルのパス"
+    value: ${{ steps.set-outputs.outputs.markdown_path }}
+
+runs:
+  using: "composite"
+  steps:
+    - id: lighthouse-to-md
+      name: Markdown を生成
+      shell: bash
+      run: |
+        set -euo pipefail
+
+        MANIFEST_PATH="${{ inputs.manifest_path }}"
+        OUT_MD="${{ inputs.output_md }}"
+        CONFIG_PATH="${{ inputs.config_path }}"
+
+        mkdir -p "$(dirname "$OUT_MD")"
+
+        node <<'EOF'
+        const fs = require('fs')
+        const path = require('path')
+
+        const manifestPath = process.env.MANIFEST_PATH
+        const outputPath = process.env.OUT_MD
+        const configPath = process.env.CONFIG_PATH
+
+        const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+        const runs = Array.isArray(manifest)
+          ? manifest
+          : Array.isArray(manifest.items)
+            ? manifest.items
+            : []
+
+        if (runs.length === 0) {
+          throw new Error(`No Lighthouse runs found in ${manifestPath}`)
+        }
+
+        const representativeRun = runs.find((run) => run.isRepresentativeRun) ?? runs[0]
+
+        const resolveReportPath = (reportPath) => {
+          if (!reportPath) {
+            return undefined
+          }
+
+          return path.isAbsolute(reportPath)
+            ? reportPath
+            : path.resolve(path.dirname(manifestPath), reportPath)
+        }
+
+        const reportJsonPath = resolveReportPath(representativeRun.jsonPath)
+        const lhr = reportJsonPath
+          ? JSON.parse(fs.readFileSync(reportJsonPath, 'utf8'))
+          : undefined
+
+        const categories = [
+          ['performance', 'Performance'],
+          ['accessibility', 'Accessibility'],
+          ['best-practices', 'Best Practices'],
+          ['seo', 'SEO'],
+        ]
+
+        const getCategoryScore = (key) => {
+          const manifestSummary = representativeRun.summary?.[key]
+          if (typeof manifestSummary === 'number') {
+            return manifestSummary
+          }
+
+          const lhrScore = lhr?.categories?.[key]?.score
+          return typeof lhrScore === 'number' ? lhrScore : undefined
+        }
+
+        const formatScore = (score) => {
+          if (typeof score !== 'number') {
+            return '-'
+          }
+
+          return `${Math.round(score * 100)}`
+        }
+
+        const formatMetric = (auditId) => {
+          const numericValue = lhr?.audits?.[auditId]?.numericValue
+          const displayValue = lhr?.audits?.[auditId]?.displayValue
+
+          if (displayValue) {
+            return displayValue
+          }
+
+          if (typeof numericValue !== 'number') {
+            return '-'
+          }
+
+          if (auditId === 'cumulative-layout-shift') {
+            return numericValue.toFixed(3)
+          }
+
+          return `${(numericValue / 1000).toFixed(1)} s`
+        }
+
+        const thresholds = new Map()
+        if (configPath) {
+          const config = JSON.parse(fs.readFileSync(configPath, 'utf8'))
+          const assertions = config?.ci?.assert?.assertions ?? {}
+
+          for (const [assertionKey, assertionValue] of Object.entries(assertions)) {
+            const [, category] = assertionKey.split(':')
+            if (!category || !Array.isArray(assertionValue)) {
+              continue
+            }
+
+            const options = assertionValue.find(
+              (value) => value && typeof value === 'object' && !Array.isArray(value),
+            )
+
+            if (typeof options?.minScore === 'number') {
+              thresholds.set(category, options.minScore)
+            }
+          }
+        }
+
+        const failedAssertions = categories
+          .map(([key, label]) => {
+            const threshold = thresholds.get(key)
+            const actual = getCategoryScore(key)
+
+            if (typeof threshold !== 'number' || typeof actual !== 'number' || actual >= threshold) {
+              return undefined
+            }
+
+            return {
+              label,
+              actual: formatScore(actual),
+              expected: formatScore(threshold),
+            }
+          })
+          .filter(Boolean)
+
+        const lines = []
+        lines.push('')
+        lines.push('### サマリー')
+        lines.push('| URL | Performance | Accessibility | Best Practices | SEO |')
+        lines.push('|---|---:|---:|---:|---:|')
+        lines.push(`| ${representativeRun.url ?? '-'} | ${formatScore(getCategoryScore('performance'))} | ${formatScore(getCategoryScore('accessibility'))} | ${formatScore(getCategoryScore('best-practices'))} | ${formatScore(getCategoryScore('seo'))} |`)
+        lines.push('')
+        lines.push('### 主要指標')
+        lines.push('| 指標 | 値 |')
+        lines.push('|---|---:|')
+        lines.push(`| First Contentful Paint | ${formatMetric('first-contentful-paint')} |`)
+        lines.push(`| Largest Contentful Paint | ${formatMetric('largest-contentful-paint')} |`)
+        lines.push(`| Speed Index | ${formatMetric('speed-index')} |`)
+        lines.push(`| Total Blocking Time | ${formatMetric('total-blocking-time')} |`)
+        lines.push(`| Cumulative Layout Shift | ${formatMetric('cumulative-layout-shift')} |`)
+
+        if (failedAssertions.length > 0) {
+          lines.push('')
+          lines.push('### 閾値未達')
+          lines.push('| カテゴリ | 実測スコア | 閾値 |')
+          lines.push('|---|---:|---:|')
+
+          for (const assertion of failedAssertions) {
+            lines.push(`| ${assertion.label} | ${assertion.actual} | ${assertion.expected} |`)
+          }
+        }
+
+        fs.writeFileSync(outputPath, `${lines.join('\n')}\n`, 'utf8')
+        EOF
+      env:
+        MANIFEST_PATH: ${{ inputs.manifest_path }}
+        OUT_MD: ${{ inputs.output_md }}
+        CONFIG_PATH: ${{ inputs.config_path }}
+
+    - id: set-outputs
+      name: 出力変数名をセット
+      shell: bash
+      run: |
+        echo "markdown_path=${{ inputs.output_md }}" >> "$GITHUB_OUTPUT"

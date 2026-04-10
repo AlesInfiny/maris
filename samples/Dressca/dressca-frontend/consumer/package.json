@@ -7,7 +7,9 @@
     "mock": "vite --mode mock",
     "build:dev": "run-p type-check build-only:dev --print-label",
     "build:prod": "run-p type-check build-only:prod --print-label",
+    "build-only:mock": "vite build --mode mock",
     "preview": "vite preview",
+    "lighthouse:ci": "lhci autorun --config=.lighthouserc.json",
     "test:unit": "vitest",
     "prepare": "cypress install",
     "test:e2e": "start-server-and-test dev http://localhost:5173/ 'cypress open --e2e --browser chrome'",
@@ -39,6 +41,7 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "2.31.0",
+    "@lhci/cli": "0.15.1",
     "@pinia/testing": "1.0.3",
     "@tailwindcss/vite": "4.2.1",
     "@tsconfig/node24": "24.0.4",
