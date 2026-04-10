@@ -29,7 +29,8 @@ function excludeMsw(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  const plugins = [vue(), vueJsx(), vueDevTools(), tailwindcss()]
+  const isPlaywrightA11y = process.env.PLAYWRIGHT_A11Y === '1'
+  const plugins = [vue(), vueJsx(), ...(isPlaywrightA11y ? [] : [vueDevTools()]), tailwindcss()]
   const env = loadEnv(mode, process.cwd())
 
   return {

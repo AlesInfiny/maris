@@ -9,6 +9,8 @@
     "build:prod": "run-p type-check build-only:prod --print-label",
     "preview": "vite preview",
     "test:unit": "vitest",
+    "test:a11y": "node ./scripts/run-playwright-a11y.mjs",
+    "test:a11y:ci": "node ./scripts/run-playwright-a11y.mjs",
     "prepare": "cypress install",
     "test:e2e": "start-server-and-test dev http://localhost:5173/ 'cypress open --e2e --browser chrome'",
     "test:e2e:ci": "start-server-and-test dev http://localhost:5173/ 'cypress run'",
@@ -23,6 +25,7 @@
     "stylelint:ci": "stylelint **/*.{vue,css}",
     "format": "prettier --write .",
     "format:ci": "prettier --check .",
+    "format:a11y:summary": "node ./scripts/format-a11y-summary.mjs",
     "generate-client": "openapi-generator-cli batch ./openapisettings.json --clean",
     "coverage": "vitest run --coverage"
   },
@@ -38,8 +41,10 @@
     "yup": "1.7.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@openapitools/openapi-generator-cli": "2.31.0",
     "@pinia/testing": "1.0.3",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/vite": "4.2.1",
     "@tsconfig/node24": "24.0.4",
     "@types/jsdom": "28.0.0",
