@@ -8,7 +8,7 @@ export default defineConfig((configEnv) =>
     defineConfig({
       test: {
         environment: 'jsdom',
-        exclude: [...configDefaults.exclude, 'e2e/*'],
+        exclude: [...configDefaults.exclude, 'e2e/*', 'playwright/**'],
         root: fileURLToPath(new URL('./', import.meta.url)),
         setupFiles: ['./vitest.setup.ts'],
         coverage: {
