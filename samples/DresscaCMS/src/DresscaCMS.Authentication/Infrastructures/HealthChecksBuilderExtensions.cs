@@ -1,9 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using DresscaCMS.Authentication.Resources;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Logging;
 
 namespace DresscaCMS.Authentication.Infrastructures;
 
@@ -24,33 +21,13 @@ public static class HealthChecksBuilderExtensions
         /// <param name="name">ヘルスチェックの名称。</param>
         /// <param name="failureStatus">ヘルスチェックが失敗した場合の<see cref="HealthStatus"/> 。</param>
         /// <param name="tags">ヘルスチェックのタグ。</param>
-        /// <param name="logLevel">ログレベル。</param>
         /// <returns><see cref="AuthenticationDbContext"/> のヘルスチェックを実装した<see cref="IHealthChecksBuilder"/>。</returns>
-        public IHealthChecksBuilder AddAuthenticationDbContextCheck(string? name = null, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default, LogLevel logLevel = LogLevel.Warning)
+        public IHealthChecksBuilder AddAuthenticationDbContextCheck(string name, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default)
         {
-            return builder.AddDbContextCheck<AuthenticationDbContext>(
-            name,
-            failureStatus,
-            tags,
-            async (context, token) =>
-            {
-                try
-                {
-                    await context.Database.ExecuteSqlRawAsync("SELECT 1", token);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    var loggerFactory = builder.Services.BuildServiceProvider().GetRequiredService<ILoggerFactory>();
-                    var logger = loggerFactory.CreateLogger("DresscaCMS.Authentication.Infrastructures.HealthChecksBuilderExtensions");
-                    logger.Log(
-                        eventId: Events.FailedDatabaseHealthCheck,
-                        logLevel: logLevel,
-                        exception: ex,
-                        message: Messages.FailedDatabaseHealthCheck);
-                    return false;
-                }
-            });
+            return builder.AddCheck<AuthenticationDbContextHealthCheck>(
+                name,
+                failureStatus,
+                tags ?? []);
         }
     }
 }
