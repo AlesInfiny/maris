@@ -138,4 +138,7 @@
   <data name="ContainsInvalidLanguageCode" xml:space="preserve">
     <value>お知らせメッセージに不正な言語コードが含まれています。</value>
   </data>
+  <data name="FailedDatabaseHealthCheck" xml:space="preserve">
+    <value>データベースのヘルスチェックが失敗しました。</value>
+  </data>
 </root>
