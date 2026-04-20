@@ -43,7 +43,7 @@ internal class AnnouncementDbContextHealthCheck : IHealthCheck
                 logLevel: LogLevel.Warning,
                 exception: ex,
                 message: Messages.FailedDatabaseHealthCheck);
-            return new HealthCheckResult(context.Registration.FailureStatus, exception: ex);
+            return new HealthCheckResult(context.Registration.FailureStatus);
         }
     }
 }

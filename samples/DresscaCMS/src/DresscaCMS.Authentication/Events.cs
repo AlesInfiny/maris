@@ -5,7 +5,7 @@ namespace DresscaCMS.Authentication;
 /// <summary>
 /// イベントIDを管理するクラスです。
 /// </summary>
-internal class Events
+internal static class Events
 {
     /// <summary>
     /// データベースのヘルスチェックに失敗したことを示すイベントID
