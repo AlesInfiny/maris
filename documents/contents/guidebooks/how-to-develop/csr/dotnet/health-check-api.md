@@ -223,7 +223,9 @@ app.Run();
 ヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks){ target=_blank } を参照してください。
 
 !!! info "サンプルアプリケーションのヘルスチェック実装例"
+    <!-- textlint-disable ja-technical-writing/sentence-length -->
     サンプルアプリの Dressca 、 Dressca-CMS では Entity Framework Core を利用し、データベースのヘルスチェックを行っていますが、ヘルスチェックロジック内で `ILogger` のインスタンスを取得する都合上、`IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } を利用する形でヘルスチェックを実装しています。
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
 
 ## HealthStatus の使い分け {#health-status}
 
