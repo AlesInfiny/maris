@@ -5,6 +5,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Dressca.EfInfrastructure;
 
+/// <summary>
+///  <see cref="DresscaDbContext"/> のヘルスチェックを実装します。
+/// </summary>
 internal class DresscaDbContextHealthCheck : IHealthCheck
 {
     private readonly DresscaDbContext dbContext;

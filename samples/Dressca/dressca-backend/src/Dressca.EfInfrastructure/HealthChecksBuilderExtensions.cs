@@ -28,7 +28,7 @@ public static class HealthChecksBuilderExtensions
             return builder.AddCheck<DresscaDbContextHealthCheck>(
                 name,
                 failureStatus,
-                tags!);
+                tags ?? []);
         }
     }
 }

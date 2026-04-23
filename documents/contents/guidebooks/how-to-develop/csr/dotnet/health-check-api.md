@@ -73,7 +73,7 @@ app.Run();
         {
             extension(IHealthChecksBuilder builder)
             {
-                public static IHealthChecksBuilder AddSampleDbContextCheck(
+                public IHealthChecksBuilder AddSampleDbContextCheck(
                     string? name = null, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default)
                 {
                     // IHealthChecksBuilder.AddDbContextCheck メソッドにヘルスチェックロジックを渡す
@@ -115,7 +115,7 @@ app.Run();
         {
             extension(IHealthChecksBuilder builder)
             {
-                public static IHealthChecksBuilder AddSampleHealthCheck(
+                public IHealthChecksBuilder AddSampleHealthCheck(
                     string name, IEnumerable<string>? tags = default, TimeSpan? timeout = null)
                 {
                     // IHealthChecksBuilder.AddCheck メソッドにヘルスチェックロジックを渡す
