@@ -62,7 +62,7 @@ app.Run();
     1. Entity Framework Core を利用したアプリケーションにおいてデータベースのヘルスチェックを行う場合
         - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore ){ target=_blank } の参照を追加
 
-        ```csharp title="DbHealthChecksBuilderExtensions.cs" hl_lines="13 20-30"
+        ```csharp title="DbHealthChecksBuilderExtensions.cs" hl_lines="15 22-32"
         using Microsoft.EntityFrameworkCore;
         using Microsoft.Extensions.DependencyInjection;
         using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -71,29 +71,32 @@ app.Run();
 
         public static class DbHealthChecksBuilderExtensions
         {
-            public static IHealthChecksBuilder AddSampleDbContextCheck(
-                this IHealthChecksBuilder builder, string? name = null, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default)
+            extension(IHealthChecksBuilder builder)
             {
-                // IHealthChecksBuilder.AddDbContextCheck メソッドにヘルスチェックロジックを渡す
-                return builder.AddDbContextCheck<SampleDbContext>(
-                    name,
-                    failureStatus,
-                    tags,
-                    async (context, token) =>
-                    {
-                        // ヘルスチェックロジックを実装
-                        try
+                public static IHealthChecksBuilder AddSampleDbContextCheck(
+                    string? name = null, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default)
+                {
+                    // IHealthChecksBuilder.AddDbContextCheck メソッドにヘルスチェックロジックを渡す
+                    return builder.AddDbContextCheck<SampleDbContext>(
+                        name,
+                        failureStatus,
+                        tags,
+                        async (context, token) =>
                         {
-                            await context.Database.ExecuteSqlRawAsync("SELECT 1", token);
-                            return true;
-                        }
-                        catch (Exception ex)
-                        {
-                            // ヘルスチェック失敗時の処理
+                            // ヘルスチェックロジックを実装
+                            try
+                            {
+                                await context.Database.ExecuteSqlRawAsync("SELECT 1", token);
+                                return true;
+                            }
+                            catch (Exception ex)
+                            {
+                                // ヘルスチェック失敗時の処理
 
-                            return false;
-                        }
-                    });
+                                return false;
+                            }
+                        });
+                }
             }
         }
         ```
@@ -102,7 +105,7 @@ app.Run();
 
     1. その他の外部サービスについてヘルスチェックを行う場合
 
-        ```csharp title="SampleHealthChecksBuilderExtensions.cs" hl_lines="12 16-25"
+        ```csharp title="SampleHealthChecksBuilderExtensions.cs" hl_lines="14 18-27"
         using Microsoft.Extensions.DependencyInjection;
         using Microsoft.Extensions.Diagnostics.HealthChecks;
         
@@ -110,27 +113,30 @@ app.Run();
 
         public static class SampleHealthChecksBuilderExtensions
         {
-            public static IHealthChecksBuilder AddSampleHealthCheck(
-                this IHealthChecksBuilder builder, string name, IEnumerable<string>? tags = default, TimeSpan? timeout = null)
+            extension(IHealthChecksBuilder builder)
             {
-                // IHealthChecksBuilder.AddCheck メソッドにヘルスチェックロジックを渡す
-                return builder.AddCheck(
-                    name,
-                    () =>
-                    {
-                        var isHealthy = true;
-
-                        // ヘルスチェックロジックを実装
-
-                        if (isHealthy)
+                public static IHealthChecksBuilder AddSampleHealthCheck(
+                    string name, IEnumerable<string>? tags = default, TimeSpan? timeout = null)
+                {
+                    // IHealthChecksBuilder.AddCheck メソッドにヘルスチェックロジックを渡す
+                    return builder.AddCheck(
+                        name,
+                        () =>
                         {
-                            return HealthCheckResult.Healthy();
-                        }
+                            var isHealthy = true;
 
-                        return HealthCheckResult.Unhealthy();
-                    },
-                    tags,
-                    timeout);
+                            // ヘルスチェックロジックを実装
+
+                            if (isHealthy)
+                            {
+                                return HealthCheckResult.Healthy();
+                            }
+
+                            return HealthCheckResult.Unhealthy();
+                        },
+                        tags,
+                        timeout);
+                }
             }
         }
         ```
@@ -216,6 +222,9 @@ app.Run();
 また、`IHealthCheck` インターフェース実装クラスを複数作成して `Program.cs` で登録した場合、既定では `/health` にアクセスすることで登録されているヘルスチェックが全て実行されます。
 ヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks){ target=_blank } を参照してください。
 
+!!! info "サンプルアプリケーションのヘルスチェック実装例"
+    サンプルアプリの Dressca 、 Dressca-CMS では Entity Framework Core を利用し、データベースのヘルスチェックを行っていますが、ヘルスチェックロジック内で `ILogger` のインスタンスを取得する都合上、`IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } を利用する形でヘルスチェックを実装しています。
+
 ## HealthStatus の使い分け {#health-status}
 
 | HealthStatus           | ステータスコード | レスポンスボディ |
@@ -238,4 +247,27 @@ app.Run();
         .AddCheck<SampleHealthCheck>(
         "Sample",
         failureStatus: HealthStatus.Degraded);
+    ```
+
+## ヘルスチェック API の動作確認 {#confirmation}
+
+アプリケーションを起動し、[基本的な実装方法](#basic) で Program.cs に設定したヘルスチェック API のエンドポイントへアクセスします。
+アプリケーションおよびチェック対象のサービスが正常に動作していれば、ブラウザーに Healthy の文字列が表示されます。
+
+加えて、 Microsoft.Extensions.Diagnostics.HealthChecks カテゴリーから、ヘルスチェックの実行を示すログがコンソールに出力されていることを確認してください。
+
+!!! info "ヘルスチェック成功時のログ出力例"
+
+    下記の例は、 `DresscaDatabaseHealthCheck` という名前でヘルスチェックロジックを設定した際のログ出力です。
+    うまく出力されない場合、 appsettings.Development.json の `LogLevel` 要素に Microsoft.Extensions.Diagnostics.HealthChecks のキーが追加されているか確認してください。
+
+    ```shell linenums="0"
+    dbug: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[100]
+        Running health checks
+    dbug: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[102]
+        Running health check DresscaDatabaseHealthCheck
+    dbug: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[103]
+        Health check DresscaDatabaseHealthCheck with status Healthy completed after 2.6024ms with message '(null)'
+    dbug: Microsoft.Extensions.Diagnostics.HealthChecks.DefaultHealthCheckService[101]
+        Health check processing with combined status Healthy completed after 3.1703ms
     ```
