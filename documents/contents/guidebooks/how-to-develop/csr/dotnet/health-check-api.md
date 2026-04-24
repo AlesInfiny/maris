@@ -57,53 +57,7 @@ app.Run();
     `IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } や [`AddDbContextCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck){ target=_blank } にヘルスチェックロジックを渡すよう拡張メソッドを実装します。
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
-    <!-- textlint-disable ja-technical-writing/sentence-length -->
-
-    1. Entity Framework Core を利用したアプリケーションにおいてデータベースのヘルスチェックを行う場合
-        - NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore ){ target=_blank } の参照を追加
-
-        ```csharp title="DbHealthChecksBuilderExtensions.cs" hl_lines="15 22-32"
-        using Microsoft.EntityFrameworkCore;
-        using Microsoft.Extensions.DependencyInjection;
-        using Microsoft.Extensions.Diagnostics.HealthChecks;
-
-        namespace SampleSystem.Infrastructure;
-
-        public static class DbHealthChecksBuilderExtensions
-        {
-            extension(IHealthChecksBuilder builder)
-            {
-                public IHealthChecksBuilder AddSampleDbContextCheck(
-                    string? name = null, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default)
-                {
-                    // IHealthChecksBuilder.AddDbContextCheck メソッドにヘルスチェックロジックを渡す
-                    return builder.AddDbContextCheck<SampleDbContext>(
-                        name,
-                        failureStatus,
-                        tags,
-                        async (context, token) =>
-                        {
-                            // ヘルスチェックロジックを実装
-                            try
-                            {
-                                await context.Database.ExecuteSqlRawAsync("SELECT 1", token);
-                                return true;
-                            }
-                            catch (Exception ex)
-                            {
-                                // ヘルスチェック失敗時の処理
-
-                                return false;
-                            }
-                        });
-                }
-            }
-        }
-        ```
-
-    <!-- textlint-enable ja-technical-writing/sentence-length -->
-
-    1. その他の外部サービスについてヘルスチェックを行う場合
+    - `AddCheck` メソッドを使用した実装例
 
         ```csharp title="SampleHealthChecksBuilderExtensions.cs" hl_lines="14 18-27"
         using Microsoft.Extensions.DependencyInjection;
@@ -167,6 +121,51 @@ app.Run();
 また、既定では `/health` にアクセスすることで登録されているヘルスチェックが全て実行されます。
 アプリケーションと外部サービスのヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks){ target=_blank } を参照してください。
 
+??? info "`AddDbContextCheck` メソッドを使用したヘルスチェック実装例"
+    <!-- textlint-disable ja-technical-writing/sentence-length -->
+    サンプルアプリの Dressca および Dressca-CMS では、 DI された `ILogger` のインスタンスをヘルスチェックロジック内で取得する都合上、`IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } を利用する形でヘルスチェックを実装しています。
+    Entity Framework Core を使用するアプリケーションでデータベースのヘルスチェックを行う場合、ヘルスチェックロジック内で DI されたインスタンスを使用しないのであれば、 [`AddDbContextCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck){ target=_blank } を使用して以下のように実装することもできます。なお、事前に NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore){ target=_blank } の参照を追加する必要があります。
+    <!-- textlint-enable ja-technical-writing/sentence-length -->
+
+    ```csharp title="DbHealthChecksBuilderExtensions.cs" hl_lines="15 22-32"
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+    namespace SampleSystem.Infrastructure;
+
+    public static class DbHealthChecksBuilderExtensions
+    {
+        extension(IHealthChecksBuilder builder)
+        {
+            public IHealthChecksBuilder AddSampleDbContextCheck(
+                string? name = null, HealthStatus? failureStatus = default, IEnumerable<string>? tags = default)
+            {
+                // IHealthChecksBuilder.AddDbContextCheck メソッドにヘルスチェックロジックを渡す
+                return builder.AddDbContextCheck<SampleDbContext>(
+                    name,
+                    failureStatus,
+                    tags,
+                    async (context, token) =>
+                    {
+                        // ヘルスチェックロジックを実装
+                        try
+                        {
+                            await context.Database.ExecuteSqlRawAsync("SELECT 1", token);
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            // ヘルスチェック失敗時の処理
+
+                            return false;
+                        }
+                    });
+            }
+        }
+    }
+    ```
+
 ### `IHealthCheck` インターフェース実装クラスを作成する方法 {#using-interface}
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
@@ -221,11 +220,6 @@ app.Run();
 
 また、`IHealthCheck` インターフェース実装クラスを複数作成して `Program.cs` で登録した場合、既定では `/health` にアクセスすることで登録されているヘルスチェックが全て実行されます。
 ヘルスチェックを行うタイミングを分けたい場合は、[正常性チェックをフィルター処理する :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#filter-health-checks){ target=_blank } を参照してください。
-
-!!! info "サンプルアプリケーションのヘルスチェック実装例"
-    <!-- textlint-disable ja-technical-writing/sentence-length -->
-    サンプルアプリの Dressca 、 Dressca-CMS では Entity Framework Core を利用し、データベースのヘルスチェックを行っていますが、ヘルスチェックロジック内で `ILogger` のインスタンスを取得する都合上、`IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } を利用する形でヘルスチェックを実装しています。
-    <!-- textlint-enable ja-technical-writing/sentence-length -->
 
 ## HealthStatus の使い分け {#health-status}
 
