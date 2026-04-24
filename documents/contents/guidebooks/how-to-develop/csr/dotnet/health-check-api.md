@@ -124,7 +124,7 @@ app.Run();
 ??? info "`AddDbContextCheck` メソッドを使用したヘルスチェック実装例"
     <!-- textlint-disable ja-technical-writing/sentence-length -->
     サンプルアプリの Dressca および Dressca-CMS では、 DI された `ILogger` のインスタンスをヘルスチェックロジック内で取得する都合上、`IHealthChecksBuilder` の [`AddCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.healthchecksbuilderdelegateextensions.addcheck){ target=_blank } を利用する形でヘルスチェックを実装しています。
-    Entity Framework Core を使用するアプリケーションでデータベースのヘルスチェックを行う場合、ヘルスチェックロジック内で DI されたインスタンスを使用しないのであれば、 [`AddDbContextCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck){ target=_blank } を使用して以下のように実装することもできます。なお、事前に NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore){ target=_blank } の参照を追加する必要があります。
+    Entity Framework Core を使用するアプリケーションでデータベースのヘルスチェックを行う場合、ヘルスチェックロジック内で DI されたインスタンスを使用しないのであれば、 [`AddDbContextCheck` メソッド :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkcorehealthchecksbuilderextensions.adddbcontextcheck){ target=_blank } を使用して以下のように実装できます。なお、事前に NuGet パッケージ [Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore :material-open-in-new:](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore){ target=_blank } の参照を追加する必要があります。
     <!-- textlint-enable ja-technical-writing/sentence-length -->
 
     ```csharp title="DbHealthChecksBuilderExtensions.cs" hl_lines="15 22-32"
