@@ -15,9 +15,25 @@
 
 
 /**
- * カタログアイテムの概要のレスポンスデータを表します。             
+ * カタログアイテムのレスポンスデータを表します。             
  */
-export interface CatalogItemSummaryResponse {
+export interface CatalogItemApiModel {
+    /**
+     * 説明を取得または設定します。             
+     */
+    'description': string;
+    /**
+     * 単価を取得または設定します。             
+     */
+    'price': number;
+    /**
+     * カタログカテゴリ Id を取得または設定します。             
+     */
+    'catalogCategoryId': number;
+    /**
+     * カタログブランド Id を取得または設定します。             
+     */
+    'catalogBrandId': number;
     /**
      * カタログアイテム Id を取得または設定します。             
      */

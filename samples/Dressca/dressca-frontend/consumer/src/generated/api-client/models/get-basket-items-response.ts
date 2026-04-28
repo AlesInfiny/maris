@@ -18,12 +18,12 @@
 import type { AccountResponse } from './account-response';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BasketItemResponse } from './basket-item-response';
+import type { BasketItemApiModel } from './basket-item-api-model';
 
 /**
  * 買い物かごのレスポンスデータを表します。             
  */
-export interface BasketResponse {
+export interface GetBasketItemsResponse {
     /**
      * 購入者 Id を取得または設定します。             
      */
@@ -32,7 +32,7 @@ export interface BasketResponse {
     /**
      * 買い物かごアイテムのリストを取得または設定します。             
      */
-    'basketItems'?: Array<BasketItemResponse>;
+    'basketItems'?: Array<BasketItemApiModel>;
     /**
      * 削除済みカタログアイテムの Id のリストを取得または設定します。             
      */

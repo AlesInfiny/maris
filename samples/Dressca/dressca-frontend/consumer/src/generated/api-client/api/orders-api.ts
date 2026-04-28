@@ -22,7 +22,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { OrderResponse } from '../models';
+import type { GetOrderByIdResponse } from '../models';
 // @ts-ignore
 import type { PostOrderRequest } from '../models';
 // @ts-ignore
@@ -117,7 +117,7 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getById(orderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderResponse>> {
+        async getById(orderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetOrderByIdResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getById(orderId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrdersApi.getById']?.[localVarOperationServerIndex]?.url;
@@ -152,7 +152,7 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getById(orderId: number, options?: RawAxiosRequestConfig): AxiosPromise<OrderResponse> {
+        getById(orderId: number, options?: RawAxiosRequestConfig): AxiosPromise<GetOrderByIdResponse> {
             return localVarFp.getById(orderId, options).then((request) => request(axios, basePath));
         },
         /**

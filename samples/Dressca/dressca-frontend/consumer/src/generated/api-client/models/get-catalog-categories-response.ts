@@ -17,7 +17,7 @@
 /**
  * カタログカテゴリのレスポンスデータを表します。             
  */
-export interface CatalogCategoryResponse {
+export interface GetCatalogCategoriesResponse {
     /**
      * カタログカテゴリ Id を取得または設定します。             
      */

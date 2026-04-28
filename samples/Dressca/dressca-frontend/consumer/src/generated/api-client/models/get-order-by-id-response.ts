@@ -18,12 +18,12 @@
 import type { AccountResponse } from './account-response';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderItemResponse } from './order-item-response';
+import type { OrderItemApiModel } from './order-item-api-model';
 
 /**
  * 注文情報のレスポンスデータを表します。             
  */
-export interface OrderResponse {
+export interface GetOrderByIdResponse {
     /**
      * 注文 Id を取得または設定します。             
      */
@@ -60,6 +60,6 @@ export interface OrderResponse {
     /**
      * 注文アイテムのリストを取得または設定します。             
      */
-    'orderItems'?: Array<OrderItemResponse>;
+    'orderItems'?: Array<OrderItemApiModel>;
 }
 
