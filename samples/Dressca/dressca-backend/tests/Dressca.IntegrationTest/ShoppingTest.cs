@@ -62,10 +62,10 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         Assert.Contains("SameSite=None", setCookieHeader, StringComparison.OrdinalIgnoreCase);
     }
 
-    private static async Task<OrderResponse?> DeserializeOrderResponseAsync(HttpResponseMessage getOrderResponse)
+    private static async Task<GetOrderByIdResponse?> DeserializeOrderResponseAsync(HttpResponseMessage getOrderResponse)
     {
         var orderResponseJson = await getOrderResponse.Content.ReadAsStringAsync();
-        var orderResponse = JsonSerializer.Deserialize<OrderResponse>(orderResponseJson, JsonSerializerWebOptions);
+        var orderResponse = JsonSerializer.Deserialize<GetOrderByIdResponse>(orderResponseJson, JsonSerializerWebOptions);
         return orderResponse;
     }
 

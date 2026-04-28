@@ -25,13 +25,13 @@ public static class DtoMapperServicesExtension
     public static IServiceCollection AddDresscaDtoMapper(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
-        services.AddSingleton<IObjectMapper<CatalogCategory, CatalogCategoryResponse>, CatalogCategoryMapper>();
-        services.AddSingleton<IObjectMapper<CatalogBrand, CatalogBrandResponse>, CatalogBrandMapper>();
-        services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemResponse>, CatalogItemMapper>();
-        services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemSummaryResponse>, CatalogItemSummaryResponseMapper>();
-        services.AddSingleton<IObjectMapper<BasketItem, BasketItemResponse>, BasketItemMapper>();
-        services.AddSingleton<IObjectMapper<Basket, BasketResponse>, BasketMapper>();
-        services.AddSingleton<IObjectMapper<Order, OrderResponse>, OrderMapper>();
+        services.AddSingleton<IObjectMapper<CatalogCategory, GetCatalogCategoriesResponse>, CatalogCategoryMapper>();
+        services.AddSingleton<IObjectMapper<CatalogBrand, GetCatalogBrandsResponse>, CatalogBrandMapper>();
+        services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemApiModel>, CatalogItemMapper>();
+        services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemSummaryApiModel>, CatalogItemSummaryResponseMapper>();
+        services.AddSingleton<IObjectMapper<BasketItem, BasketItemApiModel>, BasketItemMapper>();
+        services.AddSingleton<IObjectMapper<Basket, GetBasketItemsResponse>, BasketMapper>();
+        services.AddSingleton<IObjectMapper<Order, GetOrderByIdResponse>, OrderMapper>();
         return services;
     }
 }

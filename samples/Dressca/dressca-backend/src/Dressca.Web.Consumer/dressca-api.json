@@ -62,7 +62,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BasketResponse"
+                  "$ref": "#/components/schemas/GetBasketItemsResponse"
                 }
               }
             }
@@ -220,7 +220,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogBrandResponse"
+                    "$ref": "#/components/schemas/GetCatalogBrandsResponse"
                   }
                 }
               }
@@ -244,7 +244,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogCategoryResponse"
+                    "$ref": "#/components/schemas/GetCatalogCategoriesResponse"
                   }
                 }
               }
@@ -314,7 +314,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedListOfCatalogItemResponse"
+                  "$ref": "#/components/schemas/GetCatalogItemsByQueryResponse"
                 }
               }
             }
@@ -358,7 +358,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrderResponse"
+                  "$ref": "#/components/schemas/GetOrderByIdResponse"
                 }
               }
             }
@@ -499,7 +499,7 @@
           }
         }
       },
-      "BasketResponse": {
+      "GetBasketItemsResponse": {
         "type": "object",
         "description": "買い物かごのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -525,7 +525,7 @@
             "type": "array",
             "description": "買い物かごアイテムのリストを取得または設定します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/BasketItemResponse"
+              "$ref": "#/components/schemas/BasketItemApiModel"
             }
           },
           "deletedItemIds": {
@@ -577,7 +577,7 @@
           }
         }
       },
-      "BasketItemResponse": {
+      "BasketItemApiModel": {
         "type": "object",
         "description": "買い物かごのアイテムのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -613,13 +613,13 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/CatalogItemSummaryResponse"
+                "$ref": "#/components/schemas/CatalogItemSummaryApiModel"
               }
             ]
           }
         }
       },
-      "CatalogItemSummaryResponse": {
+      "CatalogItemSummaryApiModel": {
         "type": "object",
         "description": "カタログアイテムの概要のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -701,7 +701,7 @@
           }
         }
       },
-      "CatalogBrandResponse": {
+      "GetCatalogBrandsResponse": {
         "type": "object",
         "description": "カタログブランドのレスポンスデータを表します。\nカタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
         "additionalProperties": false,
@@ -722,7 +722,7 @@
           }
         }
       },
-      "CatalogCategoryResponse": {
+      "GetCatalogCategoriesResponse": {
         "type": "object",
         "description": "カタログカテゴリのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -743,7 +743,22 @@
           }
         }
       },
-      "PagedListOfCatalogItemResponse": {
+      "GetCatalogItemsByQueryResponse": {
+        "type": "object",
+        "description": "カタログアイテムの検索クエリに対するレスポンスデータを表します。\n            ",
+        "additionalProperties": false,
+        "properties": {
+          "catalogItems": {
+            "description": "カタログアイテムのリストを取得または設定します。\n            ",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PagedListOfCatalogItemApiModel"
+              }
+            ]
+          }
+        }
+      },
+      "PagedListOfCatalogItemApiModel": {
         "type": "object",
         "description": "ページネーションした結果のリストを管理します。\n            ",
         "additionalProperties": false,
@@ -780,12 +795,12 @@
             "type": "array",
             "description": "検索結果のリストを取得します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/CatalogItemResponse"
+              "$ref": "#/components/schemas/CatalogItemApiModel"
             }
           }
         }
       },
-      "CatalogItemResponse": {
+      "CatalogItemApiModel": {
         "type": "object",
         "description": "カタログアイテムのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -843,7 +858,7 @@
           }
         }
       },
-      "OrderResponse": {
+      "GetOrderByIdResponse": {
         "type": "object",
         "description": "注文情報のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -912,12 +927,12 @@
             "type": "array",
             "description": "注文アイテムのリストを取得または設定します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/OrderItemResponse"
+              "$ref": "#/components/schemas/OrderItemApiModel"
             }
           }
         }
       },
-      "OrderItemResponse": {
+      "OrderItemApiModel": {
         "type": "object",
         "description": "注文アイテムのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -938,7 +953,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/CatalogItemSummaryResponse"
+                "$ref": "#/components/schemas/CatalogItemSummaryApiModel"
               }
             ]
           },

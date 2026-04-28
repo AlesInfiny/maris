@@ -6,7 +6,7 @@ namespace Dressca.Web.Consumer.Dto.Ordering;
 /// <summary>
 ///  注文情報のレスポンスデータを表します。
 /// </summary>
-public class OrderResponse
+public class GetOrderByIdResponse
 {
     /// <summary>
     ///  注文 Id を取得または設定します。
@@ -64,5 +64,5 @@ public class OrderResponse
     /// <summary>
     ///  注文アイテムのリストを取得または設定します。
     /// </summary>
-    public IList<OrderItemResponse> OrderItems { get; set; } = [];
+    public IList<OrderItemApiModel> OrderItems { get; set; } = [];
 }

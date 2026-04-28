@@ -7,13 +7,13 @@ using Dressca.Web.Consumer.Dto.Ordering;
 namespace Dressca.Web.Consumer.Mapper;
 
 /// <summary>
-///  <see cref="Order"/> と <see cref="OrderResponse"/> のマッパーです。
+///  <see cref="Order"/> と <see cref="GetOrderByIdResponse"/> のマッパーです。
 /// </summary>
-public class OrderMapper : IObjectMapper<Order, OrderResponse>
+public class OrderMapper : IObjectMapper<Order, GetOrderByIdResponse>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull(nameof(value))]
-    public OrderResponse? Convert(Order? value)
+    public GetOrderByIdResponse? Convert(Order? value)
     {
         if (value is null)
         {
@@ -41,15 +41,15 @@ public class OrderMapper : IObjectMapper<Order, OrderResponse>
             OrderItems = value.OrderItems.Select(item => ConvertToOrderItemDto(item)).ToList(),
         };
 
-        static OrderItemResponse ConvertToOrderItemDto(OrderItem orderItem)
+        static OrderItemApiModel ConvertToOrderItemDto(OrderItem orderItem)
         {
-            return new OrderItemResponse
+            return new OrderItemApiModel
             {
                 Id = orderItem.Id,
                 Quantity = orderItem.Quantity,
                 UnitPrice = orderItem.UnitPrice,
                 SubTotal = orderItem.GetSubTotal(),
-                ItemOrdered = new CatalogItemSummaryResponse
+                ItemOrdered = new CatalogItemSummaryApiModel
                 {
                     Id = orderItem.ItemOrdered.CatalogItemId,
                     Name = orderItem.ItemOrdered.ProductName,

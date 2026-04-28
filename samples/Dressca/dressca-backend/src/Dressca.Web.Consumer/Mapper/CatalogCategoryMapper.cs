@@ -6,13 +6,13 @@ using Dressca.Web.Consumer.Dto.Catalog;
 namespace Dressca.Web.Consumer.Mapper;
 
 /// <summary>
-///  <see cref="CatalogCategory"/> と <see cref="CatalogCategoryResponse"/> のマッパーです。
+///  <see cref="CatalogCategory"/> と <see cref="GetCatalogCategoriesResponse"/> のマッパーです。
 /// </summary>
-public class CatalogCategoryMapper : IObjectMapper<CatalogCategory, CatalogCategoryResponse>
+public class CatalogCategoryMapper : IObjectMapper<CatalogCategory, GetCatalogCategoriesResponse>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull(nameof(value))]
-    public CatalogCategoryResponse? Convert(CatalogCategory? value)
+    public GetCatalogCategoriesResponse? Convert(CatalogCategory? value)
     {
         if (value is null)
         {

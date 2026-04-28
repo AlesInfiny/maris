@@ -21,20 +21,20 @@ namespace Dressca.Web.Consumer.Controllers;
 public class BasketItemsController : ControllerBase
 {
     private readonly ShoppingApplicationService service;
-    private readonly IObjectMapper<Basket, BasketResponse> basketMapper;
-    private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
-    private readonly IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper;
-    private readonly IObjectMapper<CatalogItem, CatalogItemSummaryResponse> catalogItemSummaryResponseMapper;
+    private readonly IObjectMapper<Basket, GetBasketItemsResponse> basketMapper;
+    private readonly IObjectMapper<BasketItem, BasketItemApiModel> basketItemMapper;
+    private readonly IObjectMapper<CatalogItem, CatalogItemApiModel> catalogItemMapper;
+    private readonly IObjectMapper<CatalogItem, CatalogItemSummaryApiModel> catalogItemSummaryResponseMapper;
     private readonly ILogger<BasketItemsController> logger;
 
     /// <summary>
     ///  <see cref="BasketItemsController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="service">ショッピングアプリケーションサービス。</param>
-    /// <param name="basketMapper"><see cref="Basket"/> と <see cref="BasketResponse"/> のマッパー。</param>
-    /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemResponse"/> のマッパー。</param>
-    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemResponse"/> のマッパー。</param>
-    /// <param name="catalogItemSummaryResponseMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemSummaryResponse"/> のマッパー。</param>
+    /// <param name="basketMapper"><see cref="Basket"/> と <see cref="GetBasketItemsResponse"/> のマッパー。</param>
+    /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemApiModel"/> のマッパー。</param>
+    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemApiModel"/> のマッパー。</param>
+    /// <param name="catalogItemSummaryResponseMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemSummaryApiModel"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -47,10 +47,10 @@ public class BasketItemsController : ControllerBase
     /// </exception>
     public BasketItemsController(
         ShoppingApplicationService service,
-        IObjectMapper<Basket, BasketResponse> basketMapper,
-        IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper,
-        IObjectMapper<CatalogItem, CatalogItemResponse> catalogItemMapper,
-        IObjectMapper<CatalogItem, CatalogItemSummaryResponse> catalogItemSummaryResponseMapper,
+        IObjectMapper<Basket, GetBasketItemsResponse> basketMapper,
+        IObjectMapper<BasketItem, BasketItemApiModel> basketItemMapper,
+        IObjectMapper<CatalogItem, CatalogItemApiModel> catalogItemMapper,
+        IObjectMapper<CatalogItem, CatalogItemSummaryApiModel> catalogItemSummaryResponseMapper,
         ILogger<BasketItemsController> logger)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
@@ -67,7 +67,7 @@ public class BasketItemsController : ControllerBase
     /// <returns>買い物かごアイテムの一覧。</returns>
     /// <response code="200">成功。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(BasketResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(GetBasketItemsResponse), StatusCodes.Status200OK)]
     [OpenApiOperation("getBasketItems")]
     public async Task<IActionResult> GetBasketItemsAsync()
     {
@@ -204,7 +204,7 @@ public class BasketItemsController : ControllerBase
         return this.NoContent();
     }
 
-    private CatalogItemSummaryResponse? GetCatalogItemSummary(long catalogItemId, IEnumerable<CatalogItem> catalogItems)
+    private CatalogItemSummaryApiModel? GetCatalogItemSummary(long catalogItemId, IEnumerable<CatalogItem> catalogItems)
     {
         var catalogItem = catalogItems.FirstOrDefault(catalogItem => catalogItem.Id == catalogItemId);
         return this.catalogItemSummaryResponseMapper.Convert(catalogItem);
