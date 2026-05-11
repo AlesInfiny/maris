@@ -164,13 +164,13 @@
         <mxCell id="c6-5x_IzhyN4YmMmdY-5-62" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;startSize=23;" value="凡例" vertex="1">
           <mxGeometry height="420" width="190" x="-100" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="c6-5x_IzhyN4YmMmdY-5-72" parent="c6-5x_IzhyN4YmMmdY-5-62" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="&lt;font face=&quot;Noto Sans JP&quot;&gt;要素&lt;/font&gt;" vertex="1">
+        <mxCell id="c6-5x_IzhyN4YmMmdY-5-72" parent="c6-5x_IzhyN4YmMmdY-5-62" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" value="&lt;font face=&quot;Noto Sans JP&quot;&gt;構成要素&lt;/font&gt;" vertex="1">
           <mxGeometry height="60" width="120" x="35" y="40" as="geometry" />
         </mxCell>
         <mxCell id="c6-5x_IzhyN4YmMmdY-5-76" edge="1" parent="c6-5x_IzhyN4YmMmdY-5-62" style="endArrow=classic;html=1;rounded=0;" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
-            <mxPoint x="40" y="160" as="sourcePoint" />
-            <mxPoint x="150" y="160" as="targetPoint" />
+            <mxPoint x="40" y="209.5" as="sourcePoint" />
+            <mxPoint x="150" y="209.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="c6-5x_IzhyN4YmMmdY-5-77" connectable="0" parent="c6-5x_IzhyN4YmMmdY-5-76" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;font face=&quot;Noto Sans JP&quot; style=&quot;font-size: 12px;&quot;&gt;構成&lt;/font&gt;" vertex="1">
@@ -180,8 +180,8 @@
         </mxCell>
         <mxCell id="c6-5x_IzhyN4YmMmdY-5-78" edge="1" parent="c6-5x_IzhyN4YmMmdY-5-62" style="endArrow=none;html=1;rounded=0;strokeWidth=3;endFill=0;" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
-            <mxPoint x="40" y="220" as="sourcePoint" />
-            <mxPoint x="150" y="220" as="targetPoint" />
+            <mxPoint x="40" y="250" as="sourcePoint" />
+            <mxPoint x="150" y="250" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="c6-5x_IzhyN4YmMmdY-5-87" connectable="0" parent="c6-5x_IzhyN4YmMmdY-5-78" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="検証対象" vertex="1">
@@ -190,10 +190,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="c6-5x_IzhyN4YmMmdY-5-91" parent="c6-5x_IzhyN4YmMmdY-5-62" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcc99;strokeColor=#36393d;" value="&lt;font face=&quot;Noto Sans JP&quot;&gt;テストレベル&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Noto Sans JP&quot;&gt;（対象）&lt;/font&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="40" width="120" x="35" y="260" as="geometry" />
+          <mxGeometry height="40" width="120" x="35" y="280" as="geometry" />
         </mxCell>
         <mxCell id="xkOtlGoBzRUvYcqic4gI-2" parent="c6-5x_IzhyN4YmMmdY-5-62" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffff88;strokeColor=#36393d;" value="&lt;font face=&quot;Noto Sans JP&quot;&gt;テストレベル&lt;/font&gt;&lt;div&gt;&lt;font face=&quot;Noto Sans JP&quot;&gt;（対象外）&lt;/font&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="40" width="120" x="35" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="Sq-1xiTbuLH5wx9NoAvn-2" parent="c6-5x_IzhyN4YmMmdY-5-62" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;fontColor=#333333;strokeColor=#666666;dashed=1;dashPattern=8 8;" value="&lt;font face=&quot;Noto Sans JP&quot;&gt;組織境界&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="35" y="120" as="geometry" />
         </mxCell>
         <mxCell id="xkOtlGoBzRUvYcqic4gI-3" parent="1" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;fillColor=#ffff88;strokeColor=#36393d;fontFamily=Noto Sans JP;rounded=1;position2=0.83;" value="システムテスト" vertex="1">
           <mxGeometry height="60" width="120" x="-390" y="140" as="geometry" />
