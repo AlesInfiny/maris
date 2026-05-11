@@ -21,7 +21,7 @@ public class UsersController : ControllerBase
     /// <response code="200">成功。</response>
     /// <response code="401">認証されていない。</response>
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserResponse))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetUserResponse))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Authorize]
     [OpenApiOperation("getUser")]
@@ -35,6 +35,6 @@ public class UsersController : ControllerBase
             return this.Unauthorized();
         }
 
-        return this.Ok(new UserResponse { UserId = userId });
+        return this.Ok(new GetUserResponse { UserId = userId });
     }
 }
