@@ -50,7 +50,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(typeof(GetCatalogItemsByQueryResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getCatalogItemsByQuery")]
-    public async Task<IActionResult> GetCatalogItemsByQueryAsync([FromQuery]FindCatalogItemsQuery query)
+    public async Task<IActionResult> GetCatalogItemsByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
         var (catalogItems, totalCount) =
             await this.service.GetCatalogItemsAsync(

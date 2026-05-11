@@ -21,6 +21,6 @@ import type { PagedListOfCatalogItemApiModel } from './paged-list-of-catalog-ite
  * カタログアイテムの検索クエリに対するレスポンスデータを表します。             
  */
 export interface GetCatalogItemsByQueryResponse {
-    'catalogItems'?: PagedListOfCatalogItemApiModel;
+    'catalogItems': PagedListOfCatalogItemApiModel;
 }
 

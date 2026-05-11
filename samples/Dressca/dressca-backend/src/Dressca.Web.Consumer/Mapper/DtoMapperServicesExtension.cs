@@ -28,7 +28,7 @@ public static class DtoMapperServicesExtension
         services.AddSingleton<IObjectMapper<CatalogCategory, GetCatalogCategoriesResponse>, CatalogCategoryMapper>();
         services.AddSingleton<IObjectMapper<CatalogBrand, GetCatalogBrandsResponse>, CatalogBrandMapper>();
         services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemApiModel>, CatalogItemMapper>();
-        services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemSummaryApiModel>, CatalogItemSummaryResponseMapper>();
+        services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemSummaryApiModel>, CatalogItemSummaryApiModelMapper>();
         services.AddSingleton<IObjectMapper<BasketItem, BasketItemApiModel>, BasketItemMapper>();
         services.AddSingleton<IObjectMapper<Basket, GetBasketItemsResponse>, BasketMapper>();
         services.AddSingleton<IObjectMapper<Order, GetOrderByIdResponse>, OrderMapper>();

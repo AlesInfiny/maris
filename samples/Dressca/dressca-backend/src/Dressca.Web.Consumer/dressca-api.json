@@ -747,6 +747,9 @@
         "type": "object",
         "description": "カタログアイテムの検索クエリに対するレスポンスデータを表します。\n            ",
         "additionalProperties": false,
+        "required": [
+          "catalogItems"
+        ],
         "properties": {
           "catalogItems": {
             "description": "カタログアイテムのリストを取得または設定します。\n            ",

@@ -8,7 +8,7 @@ namespace Dressca.Web.Consumer.Mapper;
 /// <summary>
 ///  <see cref="CatalogItem"/> と <see cref="CatalogItemSummaryApiModel"/> のマッパーです。
 /// </summary>
-public class CatalogItemSummaryResponseMapper : IObjectMapper<CatalogItem, CatalogItemSummaryApiModel>
+public class CatalogItemSummaryApiModelMapper : IObjectMapper<CatalogItem, CatalogItemSummaryApiModel>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull(nameof(value))]
