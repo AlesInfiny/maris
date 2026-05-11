@@ -40,11 +40,11 @@ public class ServerTimeController : ControllerBase
     /// </summary>
     /// <returns>サーバー時間。</returns>
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ServerTimeResponse))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetServerTimeResponse))]
     [OpenApiOperation("getServerTime")]
-    public IActionResult Get()
+    public IActionResult GetServerTime()
     {
         var currentTime = this.timeProvider.GetLocalNow();
-        return this.Ok(new ServerTimeResponse { ServerTime = currentTime.ToString("G") });
+        return this.Ok(new GetServerTimeResponse { ServerTime = currentTime.ToString("G") });
     }
 }
