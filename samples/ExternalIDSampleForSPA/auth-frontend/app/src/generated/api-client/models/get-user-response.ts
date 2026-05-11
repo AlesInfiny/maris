@@ -17,7 +17,7 @@
 /**
  * ユーザー情報のレスポンスデータを表します。             
  */
-export interface UserResponse {
+export interface GetUserResponse {
     /**
      * ユーザー ID を取得または設定します。             
      */
