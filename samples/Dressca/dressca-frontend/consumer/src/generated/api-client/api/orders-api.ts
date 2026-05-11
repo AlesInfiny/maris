@@ -39,9 +39,9 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getById: async (orderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getOrderById: async (orderId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'orderId' is not null or undefined
-            assertParamExists('getById', 'orderId', orderId)
+            assertParamExists('getOrderById', 'orderId', orderId)
             const localVarPath = `/api/orders/{orderId}`
                 .replace(`{${"orderId"}}`, encodeURIComponent(String(orderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -117,10 +117,10 @@ export const OrdersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getById(orderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetOrderByIdResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getById(orderId, options);
+        async getOrderById(orderId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetOrderByIdResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrderById(orderId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrdersApi.getById']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrdersApi.getOrderById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -152,8 +152,8 @@ export const OrdersApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getById(orderId: number, options?: RawAxiosRequestConfig): AxiosPromise<GetOrderByIdResponse> {
-            return localVarFp.getById(orderId, options).then((request) => request(axios, basePath));
+        getOrderById(orderId: number, options?: RawAxiosRequestConfig): AxiosPromise<GetOrderByIdResponse> {
+            return localVarFp.getOrderById(orderId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -179,8 +179,8 @@ export class OrdersApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getById(orderId: number, options?: RawAxiosRequestConfig) {
-        return OrdersApiFp(this.configuration).getById(orderId, options).then((request) => request(this.axios, this.basePath));
+    public getOrderById(orderId: number, options?: RawAxiosRequestConfig) {
+        return OrdersApiFp(this.configuration).getOrderById(orderId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

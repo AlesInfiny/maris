@@ -59,7 +59,7 @@ public class OrdersController : ControllerBase
     [HttpGet("{orderId:long}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetOrderByIdResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [OpenApiOperation("getById")]
+    [OpenApiOperation("getOrderById")]
     public async Task<IActionResult> GetOrderByIdAsync(long orderId)
     {
         var buyerId = this.HttpContext.GetBuyerId();

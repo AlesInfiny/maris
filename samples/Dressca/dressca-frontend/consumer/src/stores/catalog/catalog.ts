@@ -10,10 +10,22 @@ import { catalogCategoriesApi, catalogBrandsApi, catalogItemsApi } from '@/api-c
  * カタログ情報（カテゴリ・ブランド・アイテム）を管理するストアです。
  */
 export const useCatalogStore = defineStore('catalog', {
-  state: () => ({
-    categories: [] as GetCatalogCategoriesResponse[],
-    brands: [] as GetCatalogBrandsResponse[],
-    catalogItemPage: {} as PagedListOfCatalogItemApiModel,
+  state: (): {
+    categories: GetCatalogCategoriesResponse[]
+    brands: GetCatalogBrandsResponse[]
+    catalogItemPage: PagedListOfCatalogItemApiModel
+  } => ({
+    categories: [],
+    brands: [],
+    catalogItemPage: {
+      page: 0,
+      totalPages: 0,
+      pageSize: 0,
+      totalCount: 0,
+      hasPrevious: false,
+      hasNext: false,
+      items: [],
+    },
   }),
   actions: {
     /**
@@ -39,7 +51,7 @@ export const useCatalogStore = defineStore('catalog', {
      * @param page ページ番号（任意）。
      */
     async fetchItems(categoryId: number, brandId: number, page?: number) {
-      const response = await catalogItemsApi().getByQuery(
+      const response = await catalogItemsApi().getCatalogItemsByQuery(
         brandId === 0 ? undefined : brandId,
         categoryId === 0 ? undefined : categoryId,
         page,

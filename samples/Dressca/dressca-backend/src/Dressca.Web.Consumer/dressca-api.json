@@ -259,7 +259,7 @@
           "CatalogItems"
         ],
         "summary": "カタログアイテムを検索して返します。",
-        "operationId": "getByQuery",
+        "operationId": "getCatalogItemsByQuery",
         "parameters": [
           {
             "name": "brandId",
@@ -338,7 +338,7 @@
           "Orders"
         ],
         "summary": "注文情報を取得します。",
-        "operationId": "getById",
+        "operationId": "getOrderById",
         "parameters": [
           {
             "name": "orderId",

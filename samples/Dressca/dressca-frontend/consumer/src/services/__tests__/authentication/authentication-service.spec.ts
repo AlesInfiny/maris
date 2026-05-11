@@ -57,9 +57,11 @@ describe('authenticationService_signOut', () => {
 
       // API が遅延して解決される Promise を用意
       let rejectApi!: (reason: unknown) => void
-      const delayedApiPromise = new Promise<{ data: GetBasketItemsResponse }>((_resolve, reject) => {
-        rejectApi = reject
-      })
+      const delayedApiPromise = new Promise<{ data: GetBasketItemsResponse }>(
+        (_resolve, reject) => {
+          rejectApi = reject
+        },
+      )
       getBasketItemsMock.mockReturnValue(delayedApiPromise)
 
       // abortAllRequests が呼ばれたら、ペンディング中の API を CanceledError で reject する
@@ -93,6 +95,7 @@ describe('authenticationService_signOut', () => {
       const authenticationStore = useAuthenticationStore()
       const basketStore = useBasketStore()
       const catalogStore = useCatalogStore()
+      const initialCatalogItemPage = catalogStore.catalogItemPage
       const notificationStore = useNotificationStore()
 
       // 各ストアにデータを設定
@@ -129,7 +132,7 @@ describe('authenticationService_signOut', () => {
 
       expect(catalogStore.categories).toEqual([])
       expect(catalogStore.brands).toEqual([])
-      expect(catalogStore.catalogItemPage).toEqual({})
+      expect(catalogStore.catalogItemPage).toEqual(initialCatalogItemPage)
 
       expect(notificationStore.message).toBe('')
       expect(notificationStore.id).toBe('')

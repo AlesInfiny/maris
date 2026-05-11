@@ -49,7 +49,7 @@ public class CatalogItemsController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(GetCatalogItemsByQueryResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
-    [OpenApiOperation("getByQuery")]
+    [OpenApiOperation("getCatalogItemsByQuery")]
     public async Task<IActionResult> GetCatalogItemsByQueryAsync([FromQuery]FindCatalogItemsQuery query)
     {
         var (catalogItems, totalCount) =
