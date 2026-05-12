@@ -517,7 +517,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/AccountResponse"
+                "$ref": "#/components/schemas/AccountApiModel"
               }
             ]
           },
@@ -538,7 +538,7 @@
           }
         }
       },
-      "AccountResponse": {
+      "AccountApiModel": {
         "type": "object",
         "description": "会計情報のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
@@ -922,7 +922,7 @@
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/AccountResponse"
+                "$ref": "#/components/schemas/AccountApiModel"
               }
             ]
           },

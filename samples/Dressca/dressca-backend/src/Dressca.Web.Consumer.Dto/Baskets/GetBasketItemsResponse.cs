@@ -17,7 +17,7 @@ public class GetBasketItemsResponse
     /// <summary>
     ///  会計情報を取得または設定します。
     /// </summary>
-    public AccountResponse? Account { get; set; }
+    public AccountApiModel? Account { get; set; }
 
     /// <summary>
     ///  買い物かごアイテムのリストを取得または設定します。

@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountResponse } from './account-response';
+import type { AccountApiModel } from './account-api-model';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { BasketItemApiModel } from './basket-item-api-model';
@@ -28,7 +28,7 @@ export interface GetBasketItemsResponse {
      * 購入者 Id を取得または設定します。             
      */
     'buyerId': string;
-    'account'?: AccountResponse | null;
+    'account'?: AccountApiModel | null;
     /**
      * 買い物かごアイテムのリストを取得または設定します。             
      */

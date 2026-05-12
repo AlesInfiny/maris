@@ -5,7 +5,7 @@ namespace Dressca.Web.Consumer.Dto.Accounting;
 /// <summary>
 ///  会計情報のレスポンスデータを表します。
 /// </summary>
-public class AccountResponse
+public class AccountApiModel
 {
     /// <summary>
     ///  消費税率を取得または設定します。
