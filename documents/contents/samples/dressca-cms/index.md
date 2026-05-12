@@ -20,6 +20,7 @@ Dressca-CMS は、 ASP.NET Core Blazor をベースとした CMS システムで
 1. 以下のリンクから、サンプルアプリケーションをダウンロードしてください。
 
     - 「[サンプルアプリケーションのダウンロード](../downloads/dressca-cms.zip)」
+    - 「[サンプルアプリケーションのダウンロード(BIPROGYグループ向け) :material-open-in-new:](https://forms.office.com/r/aBcYjJ5vsV){ target=_blank }」
 
 1. ダウンロードした zip ファイルのプロパティを開き、ファイルへのアクセスを許可 ( ブロックを解除 ) してから、任意のフォルダーに展開してください。
    以降の手順では、「dressca-cms」フォルダーに展開したものとして解説します。
