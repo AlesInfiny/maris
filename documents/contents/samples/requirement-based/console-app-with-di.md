@@ -60,3 +60,4 @@ Maris.Samples.Cli.exe get-by-unit-price-range --minimum 2000 --maximum 3000
 サンプルアプリケーションと詳細な解説は以下からダウンロードできます。
 
 - [サンプルアプリケーションのダウンロード](../downloads/console-app-with-di.zip)
+- [サンプルアプリケーションのダウンロード(BIPROGYグループ向け) :material-open-in-new:](https://forms.office.com/r/aBcYjJ5vsV){ target=_blank }
