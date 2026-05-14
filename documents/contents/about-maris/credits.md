@@ -82,9 +82,9 @@ Copyright (c) 2019-present Eduardo San Martin Morote
 
 ![Axios Logo](../images/about-maris/axios-logo.png){ align="left" width="96" }
 
-[MIT LICENSE :material-open-in-new:](https://github.com/axios/axios-docs/blob/master/LICENSE){ target=_blank }
+[MIT LICENSE :material-open-in-new:](https://github.com/axios/axios/blob/main/LICENSE){ target=_blank }
 
-Copyright 2014-present Matt Zabriskie & Collaborators
+Copyright (c) 2014-present Matt Zabriskie & Collaborators
 
 ## Prettier {#prettier style="clear:both;" }
 
