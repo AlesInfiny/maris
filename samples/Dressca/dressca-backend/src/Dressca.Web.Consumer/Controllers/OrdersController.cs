@@ -19,7 +19,7 @@ public class OrdersController : ControllerBase
 {
     private readonly ShoppingApplicationService shoppingApplicationService;
     private readonly OrderApplicationService orderApplicationService;
-    private readonly IObjectMapper<Order, OrderResponse> orderMapper;
+    private readonly IObjectMapper<Order, GetOrderByIdResponse> orderMapper;
     private readonly ILogger<OrdersController> logger;
 
     /// <summary>
@@ -27,7 +27,7 @@ public class OrdersController : ControllerBase
     /// </summary>
     /// <param name="shoppingApplicationService">ショッピングアプリケーションサービス。</param>
     /// <param name="orderApplicationService">注文アプリケーションサービス。</param>
-    /// <param name="orderMapper"><see cref="Order"/> と <see cref="OrderResponse"/> のマッパー。</param>
+    /// <param name="orderMapper"><see cref="Order"/> と <see cref="GetOrderByIdResponse"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
@@ -40,7 +40,7 @@ public class OrdersController : ControllerBase
     public OrdersController(
         ShoppingApplicationService shoppingApplicationService,
         OrderApplicationService orderApplicationService,
-        IObjectMapper<Order, OrderResponse> orderMapper,
+        IObjectMapper<Order, GetOrderByIdResponse> orderMapper,
         ILogger<OrdersController> logger)
     {
         this.shoppingApplicationService = shoppingApplicationService ?? throw new ArgumentNullException(nameof(shoppingApplicationService));
@@ -57,10 +57,10 @@ public class OrdersController : ControllerBase
     /// <response code="200">成功。</response>
     /// <response code="404">注文 Id が存在しない。</response>
     [HttpGet("{orderId:long}")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderResponse))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetOrderByIdResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
-    [OpenApiOperation("getById")]
-    public async Task<IActionResult> GetByIdAsync(long orderId)
+    [OpenApiOperation("getOrderById")]
+    public async Task<IActionResult> GetOrderByIdAsync(long orderId)
     {
         var buyerId = this.HttpContext.GetBuyerId();
         try
@@ -102,7 +102,7 @@ public class OrdersController : ControllerBase
 
         var order = await this.shoppingApplicationService.CheckoutAsync(buyerId, shipToAddress);
 
-        var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetByIdAsync));
+        var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetOrderByIdAsync));
         return this.CreatedAtAction(actionName, new { orderId = order.Id }, null);
     }
 }

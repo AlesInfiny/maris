@@ -17,7 +17,7 @@
 /**
  * カタログブランドのレスポンスデータを表します。 カタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。             
  */
-export interface CatalogBrandResponse {
+export interface GetCatalogBrandsResponse {
     /**
      * カタログブランド Id を取得または設定します。             
      */

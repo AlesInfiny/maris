@@ -6,7 +6,7 @@ namespace Dressca.Web.Consumer.Dto.Baskets;
 /// <summary>
 ///  買い物かごのアイテムのレスポンスデータを表します。
 /// </summary>
-public class BasketItemResponse
+public class BasketItemApiModel
 {
     /// <summary>
     ///  カタログアイテム Id を取得または設定します。
@@ -35,5 +35,5 @@ public class BasketItemResponse
     /// <summary>
     ///  カタログアイテムを取得または設定します。
     /// </summary>
-    public CatalogItemSummaryResponse? CatalogItem { get; set; }
+    public CatalogItemSummaryApiModel? CatalogItem { get; set; }
 }

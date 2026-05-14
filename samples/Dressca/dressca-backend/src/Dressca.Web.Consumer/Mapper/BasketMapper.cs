@@ -7,11 +7,11 @@ using Dressca.Web.Consumer.Dto.Baskets;
 namespace Dressca.Web.Consumer.Mapper;
 
 /// <summary>
-///  <see cref="Basket"/> と <see cref="BasketResponse"/> のマッパーです。
+///  <see cref="Basket"/> と <see cref="GetBasketItemsResponse"/> のマッパーです。
 /// </summary>
-public class BasketMapper : IObjectMapper<Basket, BasketResponse>
+public class BasketMapper : IObjectMapper<Basket, GetBasketItemsResponse>
 {
-    private readonly IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper;
+    private readonly IObjectMapper<BasketItem, BasketItemApiModel> basketItemMapper;
 
     /// <summary>
     ///  <see cref="BasketMapper"/> クラスの新しいインスタンスを初期化します。
@@ -20,12 +20,12 @@ public class BasketMapper : IObjectMapper<Basket, BasketResponse>
     /// <exception cref="ArgumentNullException">
     ///  <paramref name="basketItemMapper"/> が <see langword="null"/> です。
     /// </exception>
-    public BasketMapper(IObjectMapper<BasketItem, BasketItemResponse> basketItemMapper)
+    public BasketMapper(IObjectMapper<BasketItem, BasketItemApiModel> basketItemMapper)
         => this.basketItemMapper = basketItemMapper ?? throw new ArgumentNullException(nameof(basketItemMapper));
 
     /// <inheritdoc/>
     [return: NotNullIfNotNull(nameof(value))]
-    public BasketResponse? Convert(Basket? value)
+    public GetBasketItemsResponse? Convert(Basket? value)
     {
         if (value is null)
         {

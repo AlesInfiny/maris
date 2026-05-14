@@ -15,12 +15,12 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CatalogItemSummaryResponse } from './catalog-item-summary-response';
+import type { CatalogItemSummaryApiModel } from './catalog-item-summary-api-model';
 
 /**
  * 買い物かごのアイテムのレスポンスデータを表します。             
  */
-export interface BasketItemResponse {
+export interface BasketItemApiModel {
     /**
      * カタログアイテム Id を取得または設定します。             
      */
@@ -37,6 +37,6 @@ export interface BasketItemResponse {
      * 小計額を取得します。             
      */
     'subTotal': number;
-    'catalogItem'?: CatalogItemSummaryResponse | null;
+    'catalogItem'?: CatalogItemSummaryApiModel | null;
 }
 

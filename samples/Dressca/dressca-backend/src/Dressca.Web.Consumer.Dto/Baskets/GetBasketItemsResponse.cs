@@ -6,7 +6,7 @@ namespace Dressca.Web.Consumer.Dto.Baskets;
 /// <summary>
 ///  買い物かごのレスポンスデータを表します。
 /// </summary>
-public class BasketResponse
+public class GetBasketItemsResponse
 {
     /// <summary>
     ///  購入者 Id を取得または設定します。
@@ -17,12 +17,12 @@ public class BasketResponse
     /// <summary>
     ///  会計情報を取得または設定します。
     /// </summary>
-    public AccountResponse? Account { get; set; }
+    public AccountApiModel? Account { get; set; }
 
     /// <summary>
     ///  買い物かごアイテムのリストを取得または設定します。
     /// </summary>
-    public IList<BasketItemResponse> BasketItems { get; set; } = [];
+    public IList<BasketItemApiModel> BasketItems { get; set; } = [];
 
     /// <summary>
     ///  削除済みカタログアイテムの Id のリストを取得または設定します。

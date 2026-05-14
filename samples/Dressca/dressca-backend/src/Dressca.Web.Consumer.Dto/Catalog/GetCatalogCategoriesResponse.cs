@@ -5,7 +5,7 @@ namespace Dressca.Web.Consumer.Dto.Catalog;
 /// <summary>
 ///  カタログカテゴリのレスポンスデータを表します。
 /// </summary>
-public class CatalogCategoryResponse
+public class GetCatalogCategoriesResponse
 {
     /// <summary>
     ///  カタログカテゴリ Id を取得または設定します。

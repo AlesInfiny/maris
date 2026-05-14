@@ -1,2 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Dressca.SystemCommon\Dressca.SystemCommon.csproj" />
+  </ItemGroup>
 </Project>

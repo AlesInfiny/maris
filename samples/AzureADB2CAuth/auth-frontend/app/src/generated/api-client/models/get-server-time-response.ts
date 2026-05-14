@@ -15,12 +15,12 @@
 
 
 /**
- * ユーザー情報のレスポンスデータを表します。             
+ * サーバー時間のレスポンスデータを表します。             
  */
-export interface UserResponse {
+export interface GetServerTimeResponse {
     /**
-     * ユーザー ID を取得または設定します。             
+     * サーバー時間を取得または設定します。             
      */
-    'userId': string;
+    'serverTime': string;
 }
 

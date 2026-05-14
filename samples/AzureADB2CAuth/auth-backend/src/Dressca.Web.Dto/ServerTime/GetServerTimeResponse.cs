@@ -5,7 +5,7 @@ namespace Dressca.Web.Dto.ServerTime;
 /// <summary>
 ///  サーバー時間のレスポンスデータを表します。
 /// </summary>
-public class ServerTimeResponse
+public class GetServerTimeResponse
 {
     /// <summary>
     ///  サーバー時間を取得または設定します。

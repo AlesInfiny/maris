@@ -5,7 +5,7 @@ namespace Dressca.Web.Dto.Users;
 /// <summary>
 ///  ユーザー情報のレスポンスデータを表します。
 /// </summary>
-public class UserResponse
+public class GetUserResponse
 {
     /// <summary>
     ///  ユーザー ID を取得または設定します。

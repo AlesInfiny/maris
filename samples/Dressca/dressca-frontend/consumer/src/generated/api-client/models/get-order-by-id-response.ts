@@ -15,15 +15,15 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { AccountResponse } from './account-response';
+import type { AccountApiModel } from './account-api-model';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { OrderItemResponse } from './order-item-response';
+import type { OrderItemApiModel } from './order-item-api-model';
 
 /**
  * 注文情報のレスポンスデータを表します。             
  */
-export interface OrderResponse {
+export interface GetOrderByIdResponse {
     /**
      * 注文 Id を取得または設定します。             
      */
@@ -56,10 +56,10 @@ export interface OrderResponse {
      * お届け先字／番地／建物名／部屋番号を取得または設定します。             
      */
     'azanaAndOthers': string;
-    'account'?: AccountResponse | null;
+    'account'?: AccountApiModel | null;
     /**
      * 注文アイテムのリストを取得または設定します。             
      */
-    'orderItems'?: Array<OrderItemResponse>;
+    'orderItems'?: Array<OrderItemApiModel>;
 }
 

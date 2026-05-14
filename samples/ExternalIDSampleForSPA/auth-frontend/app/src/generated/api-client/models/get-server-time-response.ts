@@ -17,7 +17,7 @@
 /**
  * サーバー時間のレスポンスデータを表します。             
  */
-export interface ServerTimeResponse {
+export interface GetServerTimeResponse {
     /**
      * サーバー時間を取得または設定します。             
      */
