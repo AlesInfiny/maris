@@ -259,7 +259,7 @@
           "CatalogItems"
         ],
         "summary": "カタログアイテムを検索して返します。",
-        "operationId": "getCatalogItemsByQuery",
+        "operationId": "getByQuery",
         "parameters": [
           {
             "name": "brandId",
@@ -314,7 +314,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetCatalogItemsByQueryResponse"
+                  "$ref": "#/components/schemas/PagedListOfGetCatalogItemResponse"
                 }
               }
             }
@@ -743,25 +743,7 @@
           }
         }
       },
-      "GetCatalogItemsByQueryResponse": {
-        "type": "object",
-        "description": "カタログアイテムの検索クエリに対するレスポンスデータを表します。\n            ",
-        "additionalProperties": false,
-        "required": [
-          "catalogItems"
-        ],
-        "properties": {
-          "catalogItems": {
-            "description": "カタログアイテムのリストを取得または設定します。\n            ",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/PagedListOfCatalogItemApiModel"
-              }
-            ]
-          }
-        }
-      },
-      "PagedListOfCatalogItemApiModel": {
+      "PagedListOfGetCatalogItemResponse": {
         "type": "object",
         "description": "ページネーションした結果のリストを管理します。\n            ",
         "additionalProperties": false,
@@ -798,12 +780,12 @@
             "type": "array",
             "description": "検索結果のリストを取得します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/CatalogItemApiModel"
+              "$ref": "#/components/schemas/GetCatalogItemResponse"
             }
           }
         }
       },
-      "CatalogItemApiModel": {
+      "GetCatalogItemResponse": {
         "type": "object",
         "description": "カタログアイテムのレスポンスデータを表します。\n            ",
         "additionalProperties": false,

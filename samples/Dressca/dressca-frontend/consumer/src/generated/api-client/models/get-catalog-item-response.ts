@@ -17,7 +17,7 @@
 /**
  * カタログアイテムのレスポンスデータを表します。             
  */
-export interface CatalogItemApiModel {
+export interface GetCatalogItemResponse {
     /**
      * 説明を取得または設定します。             
      */

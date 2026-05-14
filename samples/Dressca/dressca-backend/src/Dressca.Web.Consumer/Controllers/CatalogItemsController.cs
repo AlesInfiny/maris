@@ -18,13 +18,13 @@ namespace Dressca.Web.Consumer.Controllers;
 public class CatalogItemsController : ControllerBase
 {
     private readonly CatalogApplicationService service;
-    private readonly IObjectMapper<CatalogItem, CatalogItemApiModel> mapper;
+    private readonly IObjectMapper<CatalogItem, GetCatalogItemResponse> mapper;
 
     /// <summary>
     ///  <see cref="CatalogItemsController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="service">カタログアプリケーションサービス。</param>
-    /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="CatalogItemApiModel"/> のマッパー。</param>
+    /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="GetCatalogItemResponse"/> のマッパー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
@@ -33,7 +33,7 @@ public class CatalogItemsController : ControllerBase
     /// </exception>
     public CatalogItemsController(
         CatalogApplicationService service,
-        IObjectMapper<CatalogItem, CatalogItemApiModel> mapper)
+        IObjectMapper<CatalogItem, GetCatalogItemResponse> mapper)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -47,10 +47,10 @@ public class CatalogItemsController : ControllerBase
     /// <response code="200">成功。</response>
     /// <response code="400">リクエストエラー。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(GetCatalogItemsByQueryResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(PagedList<GetCatalogItemResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
-    [OpenApiOperation("getCatalogItemsByQuery")]
-    public async Task<IActionResult> GetCatalogItemsByQueryAsync([FromQuery] FindCatalogItemsQuery query)
+    [OpenApiOperation("getByQuery")]
+    public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
     {
         var (catalogItems, totalCount) =
             await this.service.GetCatalogItemsAsync(
@@ -61,16 +61,11 @@ public class CatalogItemsController : ControllerBase
         var items = catalogItems
             .Select(catalogItem => this.mapper.Convert(catalogItem))
             .ToList();
-        var returnValue =
-            new GetCatalogItemsByQueryResponse
-            {
-                CatalogItems =
-                new PagedList<CatalogItemApiModel>(
-                    items: items,
-                    totalCount: totalCount,
-                    page: query.Page,
-                    pageSize: query.PageSize),
-            };
+        var returnValue = new PagedList<GetCatalogItemResponse>(
+            items: items,
+            totalCount: totalCount,
+            page: query.Page,
+            pageSize: query.PageSize);
         return this.Ok(returnValue);
     }
 }

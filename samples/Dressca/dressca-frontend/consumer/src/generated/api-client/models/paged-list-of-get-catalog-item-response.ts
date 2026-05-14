@@ -15,12 +15,12 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CatalogItemApiModel } from './catalog-item-api-model';
+import type { GetCatalogItemResponse } from './get-catalog-item-response';
 
 /**
  * ページネーションした結果のリストを管理します。             
  */
-export interface PagedListOfCatalogItemApiModel {
+export interface PagedListOfGetCatalogItemResponse {
     /**
      * 現在のページ番号を取得します。 最初のページは 1 です。             
      */
@@ -48,6 +48,6 @@ export interface PagedListOfCatalogItemApiModel {
     /**
      * 検索結果のリストを取得します。             
      */
-    'items'?: Array<CatalogItemApiModel>;
+    'items'?: Array<GetCatalogItemResponse>;
 }
 

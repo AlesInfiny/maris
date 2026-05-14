@@ -23,7 +23,7 @@ public class BasketItemsController : ControllerBase
     private readonly ShoppingApplicationService service;
     private readonly IObjectMapper<Basket, GetBasketItemsResponse> basketMapper;
     private readonly IObjectMapper<BasketItem, BasketItemApiModel> basketItemMapper;
-    private readonly IObjectMapper<CatalogItem, CatalogItemApiModel> catalogItemMapper;
+    private readonly IObjectMapper<CatalogItem, GetCatalogItemResponse> catalogItemMapper;
     private readonly IObjectMapper<CatalogItem, CatalogItemSummaryApiModel> catalogItemSummaryResponseMapper;
     private readonly ILogger<BasketItemsController> logger;
 
@@ -33,7 +33,7 @@ public class BasketItemsController : ControllerBase
     /// <param name="service">ショッピングアプリケーションサービス。</param>
     /// <param name="basketMapper"><see cref="Basket"/> と <see cref="GetBasketItemsResponse"/> のマッパー。</param>
     /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemApiModel"/> のマッパー。</param>
-    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemApiModel"/> のマッパー。</param>
+    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="GetCatalogItemResponse"/> のマッパー。</param>
     /// <param name="catalogItemSummaryResponseMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemSummaryApiModel"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
@@ -49,7 +49,7 @@ public class BasketItemsController : ControllerBase
         ShoppingApplicationService service,
         IObjectMapper<Basket, GetBasketItemsResponse> basketMapper,
         IObjectMapper<BasketItem, BasketItemApiModel> basketItemMapper,
-        IObjectMapper<CatalogItem, CatalogItemApiModel> catalogItemMapper,
+        IObjectMapper<CatalogItem, GetCatalogItemResponse> catalogItemMapper,
         IObjectMapper<CatalogItem, CatalogItemSummaryApiModel> catalogItemSummaryResponseMapper,
         ILogger<BasketItemsController> logger)
     {
