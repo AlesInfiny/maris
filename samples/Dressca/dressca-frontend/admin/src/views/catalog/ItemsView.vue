@@ -29,16 +29,16 @@ const pagedListOfCatalogItem = ref<PagedListOfGetCatalogItemResponse>({
   totalCount: 0,
   hasPrevious: false,
   hasNext: false,
-      items: [
-        {
-          description: '',
-          price: 0,
-          catalogCategoryId: '',
-          catalogBrandId: '',
-          id: '',
-          name: '',
-          productCode: '',
-          rowVersion: '',
+  items: [
+    {
+      description: '',
+      price: 0,
+      catalogCategoryId: '',
+      catalogBrandId: '',
+      id: '',
+      name: '',
+      productCode: '',
+      rowVersion: '',
       isDeleted: false,
     },
   ],
