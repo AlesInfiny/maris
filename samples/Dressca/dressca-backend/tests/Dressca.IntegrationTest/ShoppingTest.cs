@@ -71,7 +71,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
 
     private static PostBasketItemsRequest CreateBasketItemsRequest() => new()
     {
-        CatalogItemId = 1,
+        CatalogItemId = Guid.Parse("d0000000-0000-7000-8000-000000000001"),
         AddedQuantity = 2,
     };
 

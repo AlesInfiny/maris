@@ -5,10 +5,10 @@ namespace Dressca.UnitTests.ApplicationCore.Ordering;
 public class CatalogItemOrderedTest
 {
     [Fact]
-    public void Constructor_カタログアイテムIdが0以下_ArgumentOutOfRangeExceptionが発生する()
+    public void Constructor_カタログアイテムIdが空Guid_ArgumentExceptionが発生する()
     {
         // Arrange
-        long catalogItemId = 0L;
+        var catalogItemId = Guid.Empty;
         string productName = "製品1";
         string productCode = "A000000001";
 
@@ -16,9 +16,8 @@ public class CatalogItemOrderedTest
         var action = () => new CatalogItemOrdered(catalogItemId, productName, productCode);
 
         // Assert
-        var ex = Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        var ex = Assert.Throws<ArgumentException>("value", action);
         Assert.StartsWith("カタログアイテム ID は 0 以下にできません。", ex.Message);
-        Assert.Equal(catalogItemId, ex.ActualValue);
     }
 
     [Theory]
@@ -28,7 +27,7 @@ public class CatalogItemOrderedTest
     public void Constructor_製品名がnullまたは空の文字列_ArgumentExceptionが発生する(string? productName)
     {
         // Arrange
-        long catalogItemId = 1L;
+        var catalogItemId = new Guid("01971a00-0000-7000-d000-000000000001");
         string productCode = "A000000001";
 
         // Act
@@ -46,7 +45,7 @@ public class CatalogItemOrderedTest
     public void Constructor_製品コードがnullまたは空の文字列_ArgumentExceptionが発生する(string? productCode)
     {
         // Arrange
-        long catalogItemId = 1L;
+        var catalogItemId = new Guid("01971a00-0000-7000-d000-000000000001");
         string productname = "製品1";
 
         // Act

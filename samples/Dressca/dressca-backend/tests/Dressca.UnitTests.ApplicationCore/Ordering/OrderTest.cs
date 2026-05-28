@@ -15,7 +15,7 @@ public class OrderTest
     public void Constructor_正しくインスタンス化できる()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
 
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
@@ -49,7 +49,7 @@ public class OrderTest
     public void Constructor_注文アイテムがnullまたは空のリスト_ArgumentExceptionが発生する(List<OrderItem>? emptyOrderItems)
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipTo = CreateDefaultShipTo();
 
         // Act
@@ -64,7 +64,7 @@ public class OrderTest
     public void TotalItemsPrice_商品の税抜き合計金額が正しく計算できる()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
@@ -80,7 +80,7 @@ public class OrderTest
     public void DeliveryCharge_商品の送料が正しく計算できる()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
@@ -96,7 +96,7 @@ public class OrderTest
     public void ConsumptionTax_商品の消費税額が正しく計算できる()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
@@ -112,7 +112,7 @@ public class OrderTest
     public void TotalPrice_商品の税込み合計金額が正しく計算できる()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
@@ -128,7 +128,7 @@ public class OrderTest
     public void HasMatchingBuyerId_指定の購入者Idと一致_true()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
@@ -144,12 +144,12 @@ public class OrderTest
     public void HasMatchingBuyerId_指定の購入者Idと一致しない_false()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var order = new Order(items) { BuyerId = buyerId, ShipToAddress = shipTo };
 
-        var unmatchingBuyerId = Guid.NewGuid().ToString("D");
+        var unmatchingBuyerId = Guid.CreateVersion7().ToString("D");
 
         // Act
         var result = order.HasMatchingBuyerId(unmatchingBuyerId);
@@ -162,7 +162,7 @@ public class OrderTest
     public void Constructor_OrderDateが注文時のシステム時刻と等しい()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString("D");
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipTo = CreateDefaultShipTo();
         var items = CreateDefaultOrderItems();
         var fakeTimeProvider = new FakeTimeProvider();
@@ -196,6 +196,8 @@ public class OrderTest
     private static List<OrderItem> CreateDefaultOrderItems()
     {
         // Arrange
+        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
+        var item2 = new Guid("01971a00-0000-7000-d000-000000000002");
         const string productName1 = "ダミー商品1";
         const string productCode1 = "C000000001";
 
@@ -204,8 +206,8 @@ public class OrderTest
 
         var items = new List<OrderItem>()
         {
-            new() { ItemOrdered = new CatalogItemOrdered(1, productName1, productCode1), UnitPrice = 1000m, Quantity = 1 },
-            new() { ItemOrdered = new CatalogItemOrdered(2, productName2, productCode2), UnitPrice = 1500m, Quantity = 2 },
+            new() { ItemOrdered = new CatalogItemOrdered(item1, productName1, productCode1), UnitPrice = 1000m, Quantity = 1 },
+            new() { ItemOrdered = new CatalogItemOrdered(item2, productName2, productCode2), UnitPrice = 1500m, Quantity = 2 },
         };
 
         return items;

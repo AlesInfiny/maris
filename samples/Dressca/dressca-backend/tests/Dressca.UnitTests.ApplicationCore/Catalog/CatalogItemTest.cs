@@ -9,10 +9,12 @@ public class CatalogItemTest
     {
         // Arrange
         // Nothing to do.
+        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
+        var brand2 = new Guid("01971a00-0000-7000-b000-000000000002");
 
         // Act
         // コンストラクタのテストなので CreateDefaultCatalogItem は使わない
-        var catalogItem = new CatalogItem { CatalogCategoryId = 1L, CatalogBrandId = 2L, Description = "説明", Name = "商品名", Price = 100m, ProductCode = "C000000001" };
+        var catalogItem = new CatalogItem { CatalogCategoryId = category1, CatalogBrandId = brand2, Description = "説明", Name = "商品名", Price = 100m, ProductCode = "C000000001" };
 
         // Assert
         Assert.NotNull(catalogItem);
@@ -25,15 +27,17 @@ public class CatalogItemTest
     public void Constructor_Name_nullまたは空白文字_ArgumentExceptionが発生(string? name)
     {
         // Arrange & Act
+        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
+        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
         var action = () => new CatalogItem
         {
-            CatalogCategoryId = 1L,
-            CatalogBrandId = 1L,
+            CatalogCategoryId = category1,
+            CatalogBrandId = brand1,
             Description = "テスト用アイテムです。",
             Name = name!,
             Price = 23800m,
             ProductCode = "TEST001",
-            Id = 9999L,
+            Id = Guid.CreateVersion7(),
         };
 
         // Assert
@@ -48,15 +52,17 @@ public class CatalogItemTest
     public void Constructor_Description_nullまたは空白文字_ArgumentExceptionが発生(string? description)
     {
         // Arrange & Act
+        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
+        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
         var action = () => new CatalogItem
         {
-            CatalogCategoryId = 1L,
-            CatalogBrandId = 1L,
+            CatalogCategoryId = category1,
+            CatalogBrandId = brand1,
             Description = description!,
             Name = "テスト用アイテム",
             Price = 23800m,
             ProductCode = "TEST001",
-            Id = 9999L,
+            Id = Guid.CreateVersion7(),
         };
 
         // Assert
@@ -69,17 +75,19 @@ public class CatalogItemTest
     {
         // Arrange
         var price = -100m;
+        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
+        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
 
         // Act
         var action = () => new CatalogItem
         {
-            CatalogCategoryId = 1L,
-            CatalogBrandId = 1L,
+            CatalogCategoryId = category1,
+            CatalogBrandId = brand1,
             Description = "テスト用アイテムです。",
             Name = "テスト用アイテム",
             Price = price,
             ProductCode = "TEST001",
-            Id = 9999L,
+            Id = Guid.CreateVersion7(),
         };
 
         // Assert
@@ -92,17 +100,19 @@ public class CatalogItemTest
     {
         // Arrange
         var productCode = "商品コード";
+        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
+        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
 
         // Act
         var action = () => new CatalogItem
         {
-            CatalogCategoryId = 1L,
-            CatalogBrandId = 1L,
+            CatalogCategoryId = category1,
+            CatalogBrandId = brand1,
             Description = "テスト用アイテムです。",
             Name = "テスト用アイテム",
             Price = 23800m,
             ProductCode = productCode,
-            Id = 9999L,
+            Id = Guid.CreateVersion7(),
         };
 
         // Assert
@@ -111,48 +121,50 @@ public class CatalogItemTest
     }
 
     [Fact]
-    public void Constructor_CatalogCategoryId_負の数_ArgumentOutOfRangeExceptionが発生()
+    public void Constructor_CatalogCategoryId_空Guid_ArgumentExceptionが発生()
     {
         // Arrange
-        var catalogCategoryId = -99L;
+        var catalogCategoryId = Guid.Empty;
+        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
 
         // Act
         var action = () => new CatalogItem
         {
             CatalogCategoryId = catalogCategoryId,
-            CatalogBrandId = 1L,
+            CatalogBrandId = brand1,
             Description = "テスト用アイテムです。",
             Name = "テスト用アイテム",
             Price = 23800m,
             ProductCode = "TEST001",
-            Id = 9999L,
+            Id = Guid.CreateVersion7(),
         };
 
         // Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        var exception = Assert.Throws<ArgumentException>("value", action);
         Assert.StartsWith("カタログカテゴリ ID は 0 以下にできません。", exception.Message);
     }
 
     [Fact]
-    public void Constructor_CatalogBrandId_負の数_ArgumentOutOfRangeExceptionが発生()
+    public void Constructor_CatalogBrandId_空Guid_ArgumentExceptionが発生()
     {
         // Arrange
-        var catalogBrandId = -99L;
+        var catalogBrandId = Guid.Empty;
+        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
 
         // Act
         var action = () => new CatalogItem
         {
-            CatalogCategoryId = 1L,
+            CatalogCategoryId = category1,
             CatalogBrandId = catalogBrandId,
             Description = "テスト用アイテムです。",
             Name = "テスト用アイテム",
             Price = 23800m,
             ProductCode = "TEST001",
-            Id = 9999L,
+            Id = Guid.CreateVersion7(),
         };
 
         // Assert
-        var exception = Assert.Throws<ArgumentOutOfRangeException>("value", action);
+        var exception = Assert.Throws<ArgumentException>("value", action);
         Assert.StartsWith("カタログブランド ID は 0 以下にできません。", exception.Message);
     }
 }
