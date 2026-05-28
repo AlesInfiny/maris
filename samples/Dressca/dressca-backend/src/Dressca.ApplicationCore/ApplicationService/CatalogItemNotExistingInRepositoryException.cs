@@ -15,7 +15,7 @@ public class CatalogItemNotExistingInRepositoryException : BusinessException
     ///  <see cref="CatalogItemNotExistingInRepositoryException"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="catalogItemIds">見つからなかったカタログアイテム Id 。</param>
-    public CatalogItemNotExistingInRepositoryException(IEnumerable<long> catalogItemIds)
+    public CatalogItemNotExistingInRepositoryException(IEnumerable<Guid> catalogItemIds)
         : base(new BusinessError(ExceptionId, new ErrorMessage(Messages.CatalogItemIdDoesNotExistInRepository, string.Join(",", catalogItemIds))))
     {
     }

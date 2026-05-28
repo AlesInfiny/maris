@@ -12,7 +12,7 @@ public class GetCatalogBrandsResponse
     ///  カタログブランド Id を取得または設定します。
     /// </summary>
     [Required]
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 
     /// <summary>
     ///  ブランド名を取得または設定します。

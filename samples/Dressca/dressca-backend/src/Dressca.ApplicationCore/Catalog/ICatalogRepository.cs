@@ -47,7 +47,7 @@ public interface ICatalogRepository
     /// <param name="id">ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン 。</param>
     /// <returns>カタログアイテムを返す非同期処理を表すタスク。</returns>
-    Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default);
+    Task<CatalogItem?> GetAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  エンティティを更新します。
@@ -72,7 +72,7 @@ public interface ICatalogRepository
     /// <param name="rowVersion">行バージョン。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>削除されたアイテムの数を返す非同期処理を表すタスク。</returns>
-    Task<int> RemoveAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default);
+    Task<int> RemoveAsync(Guid id, byte[] rowVersion, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  指定した識別子を持つエンティティが存在するかどうかを示す真理値を取得します。
@@ -80,5 +80,5 @@ public interface ICatalogRepository
     /// <param name="id">エンティティの ID。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>指定した識別子を持つエンティティが存在するかどうか示す真理値を返す非同期処理を表すタスク。</returns>
-    Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default);
+    Task<bool> AnyAsync(Guid id, CancellationToken cancellationToken = default);
 }

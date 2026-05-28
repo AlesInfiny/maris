@@ -11,7 +11,7 @@ public class CatalogItemSummaryApiModel
     ///  カタログアイテム Id を取得または設定します。
     /// </summary>
     [Required]
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 
     /// <summary>
     ///  商品名を取得または設定します。

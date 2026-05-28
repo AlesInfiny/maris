@@ -33,14 +33,14 @@ export const CatalogItemsApiAxiosParamCreator = function (configuration?: Config
         /**
          * 
          * @summary カタログアイテムを検索して返します。
-         * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
-         * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
+         * @param {string | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
+         * @param {string | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
          * @param {number} [page] ページ番号です。 未設定の場合は 1 ページ目として扱います。 1 以上の整数値を指定できます。             
          * @param {number} [pageSize] 1 ページに収めるアイテムの数です。 未設定の場合は 20 個です。 1 以上 50 以下の整数値を指定できます。             
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getByQuery: async (brandId?: number | null, categoryId?: number | null, page?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getByQuery: async (brandId?: string | null, categoryId?: string | null, page?: number, pageSize?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/catalog-items`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -92,14 +92,14 @@ export const CatalogItemsApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @summary カタログアイテムを検索して返します。
-         * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
-         * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
+         * @param {string | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
+         * @param {string | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
          * @param {number} [page] ページ番号です。 未設定の場合は 1 ページ目として扱います。 1 以上の整数値を指定できます。             
          * @param {number} [pageSize] 1 ページに収めるアイテムの数です。 未設定の場合は 20 個です。 1 以上 50 以下の整数値を指定できます。             
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getByQuery(brandId?: number | null, categoryId?: number | null, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PagedListOfGetCatalogItemResponse>> {
+        async getByQuery(brandId?: string | null, categoryId?: string | null, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PagedListOfGetCatalogItemResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getByQuery(brandId, categoryId, page, pageSize, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CatalogItemsApi.getByQuery']?.[localVarOperationServerIndex]?.url;
@@ -117,14 +117,14 @@ export const CatalogItemsApiFactory = function (configuration?: Configuration, b
         /**
          * 
          * @summary カタログアイテムを検索して返します。
-         * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
-         * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
+         * @param {string | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
+         * @param {string | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
          * @param {number} [page] ページ番号です。 未設定の場合は 1 ページ目として扱います。 1 以上の整数値を指定できます。             
          * @param {number} [pageSize] 1 ページに収めるアイテムの数です。 未設定の場合は 20 個です。 1 以上 50 以下の整数値を指定できます。             
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getByQuery(brandId?: number | null, categoryId?: number | null, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<PagedListOfGetCatalogItemResponse> {
+        getByQuery(brandId?: string | null, categoryId?: string | null, page?: number, pageSize?: number, options?: RawAxiosRequestConfig): AxiosPromise<PagedListOfGetCatalogItemResponse> {
             return localVarFp.getByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(axios, basePath));
         },
     };
@@ -137,14 +137,14 @@ export class CatalogItemsApi extends BaseAPI {
     /**
      * 
      * @summary カタログアイテムを検索して返します。
-     * @param {number | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
-     * @param {number | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
+     * @param {string | null} [brandId] カタログブランド ID です。 未設定の場合は全カタログブランドを対象にします。             
+     * @param {string | null} [categoryId] カタログカテゴリ ID です。 未設定の場合は全カタログカテゴリを対象にします。             
      * @param {number} [page] ページ番号です。 未設定の場合は 1 ページ目として扱います。 1 以上の整数値を指定できます。             
      * @param {number} [pageSize] 1 ページに収めるアイテムの数です。 未設定の場合は 20 個です。 1 以上 50 以下の整数値を指定できます。             
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getByQuery(brandId?: number | null, categoryId?: number | null, page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
+    public getByQuery(brandId?: string | null, categoryId?: string | null, page?: number, pageSize?: number, options?: RawAxiosRequestConfig) {
         return CatalogItemsApiFp(this.configuration).getByQuery(brandId, categoryId, page, pageSize, options).then((request) => request(this.axios, this.basePath));
     }
 }

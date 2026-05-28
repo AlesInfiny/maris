@@ -21,7 +21,7 @@ export interface GetCatalogBrandsResponse {
     /**
      * カタログブランド Id を取得または設定します。             
      */
-    'id': number;
+    'id': string;
     /**
      * ブランド名を取得または設定します。             
      */

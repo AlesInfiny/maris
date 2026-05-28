@@ -21,7 +21,7 @@ public class BasketItem
     /// <summary>
     ///  買い物かごアイテム Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  買い物かご（ナビゲーションプロパティ）を取得します。
@@ -36,12 +36,12 @@ public class BasketItem
     /// <summary>
     ///  買い物かご Id を取得します。
     /// </summary>
-    public long BasketId { get; private set; }
+    public Guid BasketId { get; private set; }
 
     /// <summary>
     ///  カタログアイテム Id を取得します。
     /// </summary>
-    public required long CatalogItemId { get; init; }
+    public required Guid CatalogItemId { get; init; }
 
     /// <summary>
     ///  単価を取得します。

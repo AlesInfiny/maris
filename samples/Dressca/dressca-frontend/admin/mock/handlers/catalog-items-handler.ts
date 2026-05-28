@@ -14,7 +14,7 @@ export const catalogItemsHandlers = [
   }),
   http.get('/api/catalog-items/:catalogItemId', ({ params }) => {
     const { catalogItemId } = params
-    const item = catalogItems.find((items) => items.id === Number(catalogItemId))
+    const item = catalogItems.find((items) => items.id === catalogItemId)
     return HttpResponse.json(item, { status: HttpStatusCode.Ok })
   }),
   http.delete('/api/catalog-items/:catalogItemId', () => {

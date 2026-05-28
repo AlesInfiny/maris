@@ -21,7 +21,7 @@ public class CatalogItemAsset
     /// <summary>
     ///  カタログアイテムアセット Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  アセットコードを取得します。
@@ -46,7 +46,7 @@ public class CatalogItemAsset
     /// <summary>
     ///  カタログアイテム Id を取得します。
     /// </summary>
-    public required long CatalogItemId { get; init; }
+    public required Guid CatalogItemId { get; init; }
 
     /// <summary>
     ///  カタログアイテムを取得します。

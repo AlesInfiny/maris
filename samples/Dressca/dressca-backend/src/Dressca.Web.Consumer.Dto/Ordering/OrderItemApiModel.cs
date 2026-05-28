@@ -12,7 +12,7 @@ public class OrderItemApiModel
     ///  注文アイテム Id を取得します。
     /// </summary>
     [Required]
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  注文された商品（カタログアイテム）を取得または設定します。

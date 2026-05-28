@@ -14,6 +14,8 @@ internal class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         ArgumentNullException.ThrowIfNull(builder);
         builder.ToTable("Orders");
+        builder.Property(order => order.Id)
+            .ValueGeneratedNever();
         builder.Property(order => order.BuyerId)
             .HasMaxLength(64)
             .IsRequired();

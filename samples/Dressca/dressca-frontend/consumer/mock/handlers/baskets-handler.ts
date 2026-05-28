@@ -57,7 +57,7 @@ export const basketsHandlers = [
     const dto: PostBasketItemsRequest = await request.json()
 
     const target = basket.basketItems?.filter(
-      (item) => item.catalogItemId === Number(dto.catalogItemId),
+      (item) => item.catalogItemId === dto.catalogItemId,
     )
     if (target) {
       if (target.length === 0) {
@@ -107,14 +107,14 @@ export const basketsHandlers = [
   http.delete('/api/basket-items/:catalogItemId', ({ params }) => {
     const { catalogItemId } = params
     basket.basketItems = basket.basketItems?.filter(
-      (item) => item.catalogItemId !== Number(catalogItemId),
+      (item) => item.catalogItemId !== catalogItemId,
     )
     basket.basketItems = calcBasketItemsSubTotal(basket.basketItems ?? [])
     const subTotals = basket.basketItems.map((item) => item.subTotal)
     basket.account = calcBasketAccount(subTotals)
     // 削除したアイテムがカタログから削除済みのアイテムだった場合、
     // 買い物かごの削除済みアイテム ID リストを空にします。
-    if (Number(catalogItemId) === deletedItemId) {
+    if (catalogItemId === deletedItemId) {
       basket.deletedItemIds = []
     }
     return new HttpResponse(null, { status: HttpStatusCode.NoContent })

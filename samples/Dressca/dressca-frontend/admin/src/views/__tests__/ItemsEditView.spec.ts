@@ -30,7 +30,7 @@ function CreateLoginState(userRoles: string[]) {
  * @returns マウント済みの Vue Test Utils のラッパー
  */
 async function getWrapper(pinia: TestingPinia) {
-  router.push({ name: 'catalog/items/edit', params: { itemId: 1 } })
+  router.push({ name: 'catalog/items/edit', params: { itemId: '01971a00-0000-7000-8000-000000000001' } })
   await router.isReady()
   return mount(ItemsEditView, {
     global: { plugins: [pinia, router] },

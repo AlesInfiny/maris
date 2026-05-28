@@ -37,11 +37,11 @@ export interface PutCatalogItemRequest {
     /**
      * カタログカテゴリ ID を取得または設定します。             
      */
-    'catalogCategoryId': number;
+    'catalogCategoryId': string;
     /**
      * カタログブランド ID を取得または設定します。             
      */
-    'catalogBrandId': number;
+    'catalogBrandId': string;
     /**
      * 行バージョンを取得または設定します。             
      */

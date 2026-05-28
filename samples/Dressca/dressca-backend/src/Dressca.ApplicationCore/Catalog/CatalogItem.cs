@@ -16,8 +16,8 @@ public class CatalogItem
     private string description;
     private decimal price;
     private string productCode;
-    private long catalogCategoryId;
-    private long catalogBrandId;
+    private Guid catalogCategoryId;
+    private Guid catalogBrandId;
     private byte[] rowVersion = [];
 
     /// <summary>
@@ -30,7 +30,7 @@ public class CatalogItem
     /// <summary>
     ///  カタログアイテム Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  商品名を取得します。
@@ -120,18 +120,15 @@ public class CatalogItem
     /// <summary>
     ///  カタログカテゴリ Id を取得します。
     /// </summary>
-    /// <exception cref="ArgumentOutOfRangeException">カタログカテゴリ ID は 0 以下に設定できません。</exception>
-    public required long CatalogCategoryId
+    /// <exception cref="ArgumentException">カタログカテゴリ ID に空の Guid は設定できません。</exception>
+    public required Guid CatalogCategoryId
     {
         get => this.catalogCategoryId;
         init
         {
-            if (value <= 0)
+            if (value == Guid.Empty)
             {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(value),
-                    actualValue: value,
-                    message: Messages.CatalogCategoryIdMustBePositive);
+                throw new ArgumentException(Messages.CatalogCategoryIdMustBePositive, nameof(value));
             }
 
             this.catalogCategoryId = value;
@@ -151,18 +148,15 @@ public class CatalogItem
     /// <summary>
     ///  カタログブランド Id を取得します。
     /// </summary>
-    /// <exception cref="ArgumentOutOfRangeException">カタログブランド ID は 0 以下に設定できません。</exception>
-    public required long CatalogBrandId
+    /// <exception cref="ArgumentException">カタログブランド ID に空の Guid は設定できません。</exception>
+    public required Guid CatalogBrandId
     {
         get => this.catalogBrandId;
         init
         {
-            if (value <= 0)
+            if (value == Guid.Empty)
             {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(value),
-                    actualValue: value,
-                    message: Messages.CatalogBrandIdMustBePositive);
+                throw new ArgumentException(Messages.CatalogBrandIdMustBePositive, nameof(value));
             }
 
             this.catalogBrandId = value;

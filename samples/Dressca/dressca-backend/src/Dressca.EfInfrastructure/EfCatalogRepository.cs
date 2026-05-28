@@ -45,7 +45,7 @@ internal class EfCatalogRepository : ICatalogRepository
     }
 
     /// <inheritdoc/>
-    public async Task<CatalogItem?> GetAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<CatalogItem?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await this.dbContext.CatalogItems
             .Where(catalogItem => catalogItem.Id == id)
@@ -69,7 +69,7 @@ internal class EfCatalogRepository : ICatalogRepository
     }
 
     /// <inheritdoc/>
-    public async Task<int> RemoveAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default)
+    public async Task<int> RemoveAsync(Guid id, byte[] rowVersion, CancellationToken cancellationToken = default)
     {
         var deletedRows = await this.dbContext.CatalogItems
             .Where(i => (i.Id == id) && (i.RowVersion == rowVersion))
@@ -86,7 +86,7 @@ internal class EfCatalogRepository : ICatalogRepository
     }
 
     /// <inheritdoc/>
-    public async Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<bool> AnyAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await this.dbContext.CatalogItems.AnyAsync(catalogItem => (catalogItem.Id == id) && (!catalogItem.IsDeleted), cancellationToken);
     }

@@ -14,7 +14,7 @@ namespace Dressca.ApplicationCore.Ordering;
 /// </remarks>
 public record CatalogItemOrdered
 {
-    private long catalogItemId;
+    private Guid catalogItemId;
     private string productName;
     private string productCode;
 
@@ -24,8 +24,8 @@ public record CatalogItemOrdered
     /// <param name="catalogItemId">カタログアイテム Id 。</param>
     /// <param name="productName">商品名。</param>
     /// <param name="productCode">商品コード。</param>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///  <paramref name="catalogItemId"/> は 0 以下に設定できません。
+    /// <exception cref="ArgumentException">
+    ///  <paramref name="catalogItemId"/> に空の Guid は設定できません。
     /// </exception>
     /// <exception cref="ArgumentException">
     ///  <list type="bullet">
@@ -33,7 +33,7 @@ public record CatalogItemOrdered
     ///   <item><paramref name="productCode"/> が <see langword="null"/> または空の文字列です。</item>
     ///  </list>
     /// </exception>
-    public CatalogItemOrdered(long catalogItemId, string productName, string productCode)
+    public CatalogItemOrdered(Guid catalogItemId, string productName, string productCode)
     {
         this.CatalogItemId = catalogItemId;
         this.ProductName = productName;
@@ -43,18 +43,15 @@ public record CatalogItemOrdered
     /// <summary>
     ///  カタログアイテム Id を取得します。
     /// </summary>
-    /// <exception cref="ArgumentOutOfRangeException">0 以下に設定できません。</exception>
-    public long CatalogItemId
+    /// <exception cref="ArgumentException">空の Guid は設定できません。</exception>
+    public Guid CatalogItemId
     {
         get => this.catalogItemId;
         init
         {
-            if (value <= 0)
+            if (value == Guid.Empty)
             {
-                throw new ArgumentOutOfRangeException(
-                    paramName: nameof(value),
-                    actualValue: value,
-                    message: Messages.CatalogItemIdMustBePositive);
+                throw new ArgumentException(Messages.CatalogItemIdMustBePositive, nameof(value));
             }
 
             this.catalogItemId = value;

@@ -27,7 +27,7 @@ export interface GetOrderByIdResponse {
     /**
      * 注文 Id を取得または設定します。             
      */
-    'id': number;
+    'id': string;
     /**
      * 購入者 Id を取得または設定します。             
      */

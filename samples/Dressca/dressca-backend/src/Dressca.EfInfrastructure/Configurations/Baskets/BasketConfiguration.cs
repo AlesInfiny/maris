@@ -14,6 +14,8 @@ internal class BasketConfiguration : IEntityTypeConfiguration<Basket>
     {
         ArgumentNullException.ThrowIfNull(builder);
         builder.ToTable("Baskets");
+        builder.Property(basket => basket.Id)
+            .ValueGeneratedNever();
         builder.Property(basket => basket.BuyerId)
             .HasMaxLength(64)
             .IsRequired();
