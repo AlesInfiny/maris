@@ -13,7 +13,6 @@
     },
     "extensions": {
         "recommendations": [
-            "bierner.markdown-mermaid",
             "davidanson.vscode-markdownlint",
             "hediet.vscode-drawio",
             "shuworks.vscode-table-formatter",
