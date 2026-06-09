@@ -12,7 +12,7 @@ public class GetOrderByIdResponse
     ///  注文 Id を取得または設定します。
     /// </summary>
     [Required]
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 
     /// <summary>
     ///  購入者 Id を取得または設定します。

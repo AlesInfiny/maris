@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Catalog;
+using Dressca.EfInfrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,15 +15,17 @@ internal class CatalogCategoryConfiguration : IEntityTypeConfiguration<CatalogCa
     {
         ArgumentNullException.ThrowIfNull(builder);
         builder.ToTable("CatalogCategories");
+        builder.Property(catalogCategory => catalogCategory.Id)
+            .ValueGeneratedNever();
         builder.Property(catalogItem => catalogItem.Name)
             .HasMaxLength(128)
             .IsRequired();
 
         builder.HasData(
         [
-            new() { Name = "服", Id = 1L },
-            new() { Name = "バッグ", Id = 2L },
-            new() { Name = "シューズ", Id = 3L },
+            new() { Name = "服", Id = DresscaSeedIds.Category1 },
+            new() { Name = "バッグ", Id = DresscaSeedIds.Category2 },
+            new() { Name = "シューズ", Id = DresscaSeedIds.Category3 },
         ]);
     }
 }

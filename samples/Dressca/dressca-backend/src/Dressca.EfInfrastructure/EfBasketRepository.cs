@@ -30,14 +30,14 @@ internal class EfBasketRepository : IBasketRepository
     }
 
     /// <inheritdoc/>
-    public Task<Basket?> GetAsync(long id, CancellationToken cancellationToken = default)
+    public Task<Basket?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var keys = new object[] { id };
         return this.dbContext.Baskets.FindAsync(keys, cancellationToken).AsTask();
     }
 
     /// <inheritdoc/>
-    public Task<Basket?> GetWithBasketItemsAsync(long basketId, CancellationToken cancellationToken = default)
+    public Task<Basket?> GetWithBasketItemsAsync(Guid basketId, CancellationToken cancellationToken = default)
     {
         return this.dbContext.Baskets
             .Where(basket => basket.Id == basketId)

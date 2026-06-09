@@ -12,8 +12,7 @@ public class PostBasketItemsRequest
     ///  1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。
     /// </summary>
     [Required]
-    [Range(1L, long.MaxValue)]
-    public long? CatalogItemId { get; set; }
+    public Guid? CatalogItemId { get; set; }
 
     /// <summary>
     ///  数量を取得または設定します。

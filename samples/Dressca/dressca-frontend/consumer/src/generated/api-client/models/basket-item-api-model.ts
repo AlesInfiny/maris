@@ -24,7 +24,7 @@ export interface BasketItemApiModel {
     /**
      * カタログアイテム Id を取得または設定します。             
      */
-    'catalogItemId': number;
+    'catalogItemId': string;
     /**
      * 単価を取得または設定します。             
      */

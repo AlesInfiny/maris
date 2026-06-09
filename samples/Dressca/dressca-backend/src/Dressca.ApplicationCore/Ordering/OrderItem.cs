@@ -22,7 +22,7 @@ public class OrderItem
     /// <summary>
     ///  注文アイテム Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  注文された商品（カタログアイテム）を取得します。
@@ -45,7 +45,7 @@ public class OrderItem
     /// <summary>
     ///  注文 Id を取得します。
     /// </summary>
-    public long OrderId { get; private set; }
+    public Guid OrderId { get; private set; }
 
     /// <summary>
     ///  注文アイテムのアセットリストを取得します。

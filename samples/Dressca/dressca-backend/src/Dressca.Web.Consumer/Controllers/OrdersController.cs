@@ -56,11 +56,11 @@ public class OrdersController : ControllerBase
     /// <returns>注文情報。</returns>
     /// <response code="200">成功。</response>
     /// <response code="404">注文 Id が存在しない。</response>
-    [HttpGet("{orderId:long}")]
+    [HttpGet("{orderId:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetOrderByIdResponse))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getOrderById")]
-    public async Task<IActionResult> GetOrderByIdAsync(long orderId)
+    public async Task<IActionResult> GetOrderByIdAsync(Guid orderId)
     {
         var buyerId = this.HttpContext.GetBuyerId();
         try

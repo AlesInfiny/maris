@@ -25,11 +25,8 @@ namespace Dressca.EfInfrastructure.Migrations
 
             modelBuilder.Entity("Dressca.ApplicationCore.Assets.Asset", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AssetCode")
                         .IsRequired()
@@ -50,91 +47,91 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000001"),
                             AssetCode = "b52dc7f712d94ca5812dd995bf926c04",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 2L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000002"),
                             AssetCode = "80bc8e167ccb4543b2f9d51913073492",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 3L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000003"),
                             AssetCode = "05d38fad5693422c8a27dd5b14070ec8",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 4L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000004"),
                             AssetCode = "45c22ba3da064391baac91341067ffe9",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 5L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000005"),
                             AssetCode = "4aed07c4ed5d45a5b97f11acedfbb601",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 6L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000006"),
                             AssetCode = "082b37439ecc44919626ba00fc60ee85",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 7L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000007"),
                             AssetCode = "f5f89954281747fa878129c29e1e0f83",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 8L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000008"),
                             AssetCode = "a8291ef2e8e14869a7048e272915f33c",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 9L,
+                            Id = new Guid("a0000000-0000-7000-8000-000000000009"),
                             AssetCode = "66237018c769478a90037bd877f5fba1",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 10L,
+                            Id = new Guid("a0000000-0000-7000-8000-00000000000a"),
                             AssetCode = "d136d4c81b86478990984dcafbf08244",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 11L,
+                            Id = new Guid("a0000000-0000-7000-8000-00000000000b"),
                             AssetCode = "47183f32f6584d7fb661f9216e11318b",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 12L,
+                            Id = new Guid("a0000000-0000-7000-8000-00000000000c"),
                             AssetCode = "cf151206efd344e1b86854f4aa49fdef",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 13L,
+                            Id = new Guid("a0000000-0000-7000-8000-00000000000d"),
                             AssetCode = "ab2e78eb7fe3408aadbf1e17a9945a8c",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 14L,
+                            Id = new Guid("a0000000-0000-7000-8000-00000000000e"),
                             AssetCode = "0e557e96bc054f10bc91c27405a83e85",
                             AssetType = "png"
                         },
                         new
                         {
-                            Id = 15L,
+                            Id = new Guid("a0000000-0000-7000-8000-00000000000f"),
                             AssetCode = "e622b0098808492cb883831c05486b58",
                             AssetType = "png"
                         });
@@ -142,11 +139,8 @@ namespace Dressca.EfInfrastructure.Migrations
 
             modelBuilder.Entity("Dressca.ApplicationCore.Baskets.Basket", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BuyerId")
                         .IsRequired()
@@ -160,17 +154,14 @@ namespace Dressca.EfInfrastructure.Migrations
 
             modelBuilder.Entity("Dressca.ApplicationCore.Baskets.BasketItem", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("BasketId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("BasketId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("CatalogItemId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("CatalogItemId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -187,11 +178,8 @@ namespace Dressca.EfInfrastructure.Migrations
 
             modelBuilder.Entity("Dressca.ApplicationCore.Catalog.CatalogBrand", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -205,28 +193,25 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            Id = new Guid("b0000000-0000-7000-8000-000000000001"),
                             Name = "高級なブランド"
                         },
                         new
                         {
-                            Id = 2L,
+                            Id = new Guid("b0000000-0000-7000-8000-000000000002"),
                             Name = "カジュアルなブランド"
                         },
                         new
                         {
-                            Id = 3L,
+                            Id = new Guid("b0000000-0000-7000-8000-000000000003"),
                             Name = "ノーブランド"
                         });
                 });
 
             modelBuilder.Entity("Dressca.ApplicationCore.Catalog.CatalogCategory", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -240,34 +225,31 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            Id = new Guid("c0000000-0000-7000-8000-000000000001"),
                             Name = "服"
                         },
                         new
                         {
-                            Id = 2L,
+                            Id = new Guid("c0000000-0000-7000-8000-000000000002"),
                             Name = "バッグ"
                         },
                         new
                         {
-                            Id = 3L,
+                            Id = new Guid("c0000000-0000-7000-8000-000000000003"),
                             Name = "シューズ"
                         });
                 });
 
             modelBuilder.Entity("Dressca.ApplicationCore.Catalog.CatalogItem", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("CatalogBrandId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("CatalogBrandId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("CatalogCategoryId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("CatalogCategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -308,9 +290,9 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
-                            CatalogBrandId = 3L,
-                            CatalogCategoryId = 1L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000001"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000003"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000001"),
                             Description = "定番の無地ロングTシャツです。",
                             IsDeleted = false,
                             Name = "クルーネック Tシャツ - ブラック",
@@ -320,9 +302,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 2L,
-                            CatalogBrandId = 2L,
-                            CatalogCategoryId = 1L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000002"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000002"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000001"),
                             Description = "暖かいのに着膨れしない起毛デニムです。",
                             IsDeleted = false,
                             Name = "裏起毛 スキニーデニム",
@@ -332,9 +314,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 3L,
-                            CatalogBrandId = 1L,
-                            CatalogCategoryId = 1L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000003"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000001"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000001"),
                             Description = "あたたかく肌ざわりも良いウール100%のロングコートです。",
                             IsDeleted = false,
                             Name = "ウールコート",
@@ -344,9 +326,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 4L,
-                            CatalogBrandId = 2L,
-                            CatalogCategoryId = 1L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000004"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000002"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000001"),
                             Description = "コットン100%の柔らかい着心地で、春先から夏、秋口まで万能に使いやすいです。",
                             IsDeleted = false,
                             Name = "無地 ボタンダウンシャツ",
@@ -356,9 +338,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 5L,
-                            CatalogBrandId = 3L,
-                            CatalogCategoryId = 2L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000005"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000003"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000002"),
                             Description = "コンパクトサイズのバッグですが収納力は抜群です",
                             IsDeleted = false,
                             Name = "レザーハンドバッグ",
@@ -368,9 +350,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 6L,
-                            CatalogBrandId = 2L,
-                            CatalogCategoryId = 2L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000006"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000002"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000002"),
                             Description = "エイジング加工したレザーを使用しています。",
                             IsDeleted = false,
                             Name = "ショルダーバッグ",
@@ -380,9 +362,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 7L,
-                            CatalogBrandId = 3L,
-                            CatalogCategoryId = 2L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000007"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000003"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000002"),
                             Description = "春の季節にぴったりのトートバッグです。インナーポーチまたは単体でも使用可能なポーチ付。",
                             IsDeleted = false,
                             Name = "トートバッグ ポーチ付き",
@@ -392,9 +374,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 8L,
-                            CatalogBrandId = 1L,
-                            CatalogCategoryId = 2L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000008"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000001"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000002"),
                             Description = "さらりと気軽に纏える、キュートなミニサイズショルダー。",
                             IsDeleted = false,
                             Name = "ショルダーバッグ",
@@ -404,9 +386,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 9L,
-                            CatalogBrandId = 1L,
-                            CatalogCategoryId = 2L,
+                            Id = new Guid("d0000000-0000-7000-8000-000000000009"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000001"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000002"),
                             Description = "エレガントな雰囲気を放つキルティングデザインです。",
                             IsDeleted = false,
                             Name = "レザー チェーンショルダーバッグ",
@@ -416,9 +398,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 10L,
-                            CatalogBrandId = 2L,
-                            CatalogCategoryId = 3L,
+                            Id = new Guid("d0000000-0000-7000-8000-00000000000a"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000002"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000003"),
                             Description = "柔らかいソールは快適な履き心地で、ランニングに最適です。",
                             IsDeleted = false,
                             Name = "ランニングシューズ - ブルー",
@@ -428,9 +410,9 @@ namespace Dressca.EfInfrastructure.Migrations
                         },
                         new
                         {
-                            Id = 11L,
-                            CatalogBrandId = 1L,
-                            CatalogCategoryId = 3L,
+                            Id = new Guid("d0000000-0000-7000-8000-00000000000b"),
+                            CatalogBrandId = new Guid("b0000000-0000-7000-8000-000000000001"),
+                            CatalogCategoryId = new Guid("c0000000-0000-7000-8000-000000000003"),
                             Description = "イタリアの職人が丁寧に手作業で作り上げた一品です。",
                             IsDeleted = false,
                             Name = "メダリオン ストレートチップ ドレスシューズ",
@@ -442,19 +424,16 @@ namespace Dressca.EfInfrastructure.Migrations
 
             modelBuilder.Entity("Dressca.ApplicationCore.Catalog.CatalogItemAsset", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AssetCode")
                         .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("nvarchar(32)");
 
-                    b.Property<long>("CatalogItemId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("CatalogItemId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -465,79 +444,76 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000001"),
                             AssetCode = "45c22ba3da064391baac91341067ffe9",
-                            CatalogItemId = 1L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000001")
                         },
                         new
                         {
-                            Id = 2L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000002"),
                             AssetCode = "4aed07c4ed5d45a5b97f11acedfbb601",
-                            CatalogItemId = 2L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000002")
                         },
                         new
                         {
-                            Id = 3L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000003"),
                             AssetCode = "082b37439ecc44919626ba00fc60ee85",
-                            CatalogItemId = 3L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000003")
                         },
                         new
                         {
-                            Id = 4L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000004"),
                             AssetCode = "f5f89954281747fa878129c29e1e0f83",
-                            CatalogItemId = 4L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000004")
                         },
                         new
                         {
-                            Id = 5L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000005"),
                             AssetCode = "a8291ef2e8e14869a7048e272915f33c",
-                            CatalogItemId = 5L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000005")
                         },
                         new
                         {
-                            Id = 6L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000006"),
                             AssetCode = "66237018c769478a90037bd877f5fba1",
-                            CatalogItemId = 6L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000006")
                         },
                         new
                         {
-                            Id = 7L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000007"),
                             AssetCode = "d136d4c81b86478990984dcafbf08244",
-                            CatalogItemId = 7L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000007")
                         },
                         new
                         {
-                            Id = 8L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000008"),
                             AssetCode = "47183f32f6584d7fb661f9216e11318b",
-                            CatalogItemId = 8L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000008")
                         },
                         new
                         {
-                            Id = 9L,
+                            Id = new Guid("e0000000-0000-7000-8000-000000000009"),
                             AssetCode = "cf151206efd344e1b86854f4aa49fdef",
-                            CatalogItemId = 9L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-000000000009")
                         },
                         new
                         {
-                            Id = 10L,
+                            Id = new Guid("e0000000-0000-7000-8000-00000000000a"),
                             AssetCode = "ab2e78eb7fe3408aadbf1e17a9945a8c",
-                            CatalogItemId = 10L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-00000000000a")
                         },
                         new
                         {
-                            Id = 11L,
+                            Id = new Guid("e0000000-0000-7000-8000-00000000000b"),
                             AssetCode = "0e557e96bc054f10bc91c27405a83e85",
-                            CatalogItemId = 11L
+                            CatalogItemId = new Guid("d0000000-0000-7000-8000-00000000000b")
                         });
                 });
 
             modelBuilder.Entity("Dressca.ApplicationCore.Ordering.Order", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BuyerId")
                         .IsRequired()
@@ -609,14 +585,11 @@ namespace Dressca.EfInfrastructure.Migrations
 
             modelBuilder.Entity("Dressca.ApplicationCore.Ordering.OrderItem", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("OrderId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -628,8 +601,8 @@ namespace Dressca.EfInfrastructure.Migrations
                         {
                             b1.IsRequired();
 
-                            b1.Property<long>("CatalogItemId")
-                                .HasColumnType("bigint")
+                            b1.Property<Guid>("CatalogItemId")
+                                .HasColumnType("uniqueidentifier")
                                 .HasColumnName("OrderedCatalogItemId");
 
                             b1.Property<string>("ProductCode")
@@ -654,19 +627,16 @@ namespace Dressca.EfInfrastructure.Migrations
 
             modelBuilder.Entity("Dressca.ApplicationCore.Ordering.OrderItemAsset", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AssetCode")
                         .IsRequired()
                         .HasMaxLength(32)
                         .HasColumnType("nvarchar(32)");
 
-                    b.Property<long>("OrderItemId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("OrderItemId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

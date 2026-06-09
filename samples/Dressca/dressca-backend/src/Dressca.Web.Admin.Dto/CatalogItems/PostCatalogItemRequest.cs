@@ -40,13 +40,11 @@ public class PostCatalogItemRequest
     ///  カタログカテゴリ ID を取得または設定します。
     /// </summary>
     [Required]
-    [Range(1L, long.MaxValue)]
-    public required long CatalogCategoryId { get; set; }
+    public required Guid CatalogCategoryId { get; set; }
 
     /// <summary>
     ///  カタログブランド ID を取得または設定します。
     /// </summary>
     [Required]
-    [Range(1L, long.MaxValue)]
-    public required long CatalogBrandId { get; set; }
+    public required Guid CatalogBrandId { get; set; }
 }

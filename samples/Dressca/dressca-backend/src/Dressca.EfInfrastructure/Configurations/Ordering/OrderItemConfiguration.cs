@@ -14,6 +14,8 @@ internal class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
     {
         ArgumentNullException.ThrowIfNull(builder);
         builder.ToTable("OrderItems");
+        builder.Property(orderItem => orderItem.Id)
+            .ValueGeneratedNever();
         builder.Property(orderItem => orderItem.UnitPrice)
             .IsRequired()
             .HasColumnType("decimal(18,6)");

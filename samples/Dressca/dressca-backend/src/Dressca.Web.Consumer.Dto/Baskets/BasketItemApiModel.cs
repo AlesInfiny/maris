@@ -12,7 +12,7 @@ public class BasketItemApiModel
     ///  カタログアイテム Id を取得または設定します。
     /// </summary>
     [Required]
-    public long CatalogItemId { get; set; }
+    public Guid CatalogItemId { get; set; }
 
     /// <summary>
     ///  単価を取得または設定します。

@@ -67,7 +67,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getCatalogItem")]
     [Authorize(Policy = Policies.RequireAdminRole)]
-    public async Task<IActionResult> GetCatalogItemAsync(long catalogItemId)
+    public async Task<IActionResult> GetCatalogItemAsync(Guid catalogItemId)
     {
         CatalogItem? catalogItem;
 
@@ -202,7 +202,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteCatalogItem")]
     [Authorize(Policy = Policies.RequireAdminRole)]
-    public async Task<IActionResult> DeleteCatalogItemAsync(long catalogItemId, [FromQuery] byte[] rowVersion)
+    public async Task<IActionResult> DeleteCatalogItemAsync(Guid catalogItemId, [FromQuery] byte[] rowVersion)
     {
         try
         {
@@ -243,7 +243,7 @@ public class CatalogItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ProblemDetails))]
     [OpenApiOperation("putCatalogItem")]
     [Authorize(Policy = Policies.RequireAdminRole)]
-    public async Task<IActionResult> PutCatalogItemAsync(long catalogItemId, PutCatalogItemRequest putCatalogItemRequest)
+    public async Task<IActionResult> PutCatalogItemAsync(Guid catalogItemId, PutCatalogItemRequest putCatalogItemRequest)
     {
         try
         {

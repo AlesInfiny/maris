@@ -63,7 +63,7 @@ public class CatalogApplicationService
     /// <param name="categoryId">カタログカテゴリ Id 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
-    public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
+    public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsAsync(int skip, int take, Guid? brandId, Guid? categoryId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsAsyncStart, brandId, categoryId);
 
@@ -119,8 +119,8 @@ public class CatalogApplicationService
         string description,
         decimal price,
         string productCode,
-        long catalogBrandId,
-        long catalogCategoryId,
+        Guid catalogBrandId,
+        Guid catalogCategoryId,
         CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_AddItemToCatalogAsyncStart);
@@ -144,6 +144,7 @@ public class CatalogApplicationService
 
         var catalogItem = new CatalogItem()
         {
+            Id = Guid.CreateVersion7(),
             Name = name,
             Description = description,
             Price = price,
@@ -172,7 +173,7 @@ public class CatalogApplicationService
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     /// <exception cref="PermissionDeniedException">削除権限がない場合。</exception>
     /// <exception cref="CatalogItemNotExistingInRepositoryException">削除対象のカタログアイテムが存在しなかった場合。</exception>>
-    public async Task DeleteItemFromCatalogAsync(long id, byte[] rowVersion, CancellationToken cancellationToken = default)
+    public async Task DeleteItemFromCatalogAsync(Guid id, byte[] rowVersion, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_DeleteItemFromCatalogAsyncStart, id);
 
@@ -215,13 +216,13 @@ public class CatalogApplicationService
     /// <exception cref="CatalogBrandNotExistingInRepositoryException">更新対象のカタログブランドが存在しなかった場合。</exception>
     /// <exception cref="CatalogCategoryNotExistingInRepositoryException">更新対象のカタログカテゴリが存在しなかった場合。</exception>
     public async Task UpdateCatalogItemAsync(
-                long id,
+                Guid id,
                 string name,
                 string description,
                 decimal price,
                 string productCode,
-                long catalogBrandId,
-                long catalogCategoryId,
+                Guid catalogBrandId,
+                Guid catalogCategoryId,
                 byte[] rowVersion,
                 bool isDeleted,
                 CancellationToken cancellationToken = default)
@@ -282,7 +283,7 @@ public class CatalogApplicationService
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>カタログページと総アイテム数のタプルを返す非同期処理を表すタスク。</returns>
     /// <exception cref="PermissionDeniedException">取得権限がない場合。</exception>
-    public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsForAdminAsync(int skip, int take, long? brandId, long? categoryId, CancellationToken cancellationToken = default)
+    public async Task<(IReadOnlyList<CatalogItem> ItemsOnPage, int TotalItems)> GetCatalogItemsForAdminAsync(int skip, int take, Guid? brandId, Guid? categoryId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemsForAdminAsyncStart, brandId, categoryId);
 
@@ -315,7 +316,7 @@ public class CatalogApplicationService
     /// <returns>カタログアイテム。</returns>
     /// <exception cref="PermissionDeniedException">取得権限がない場合。</exception>
     /// <exception cref="CatalogItemNotExistingInRepositoryException">取得対象のカタログアイテムが存在しなかった場合。</exception>
-    public async Task<CatalogItem?> GetCatalogItemForAdminAsync(long catalogItemId, CancellationToken cancellationToken = default)
+    public async Task<CatalogItem?> GetCatalogItemForAdminAsync(Guid catalogItemId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.CatalogApplicationService_GetCatalogItemForAdminAsyncStart, catalogItemId);
 

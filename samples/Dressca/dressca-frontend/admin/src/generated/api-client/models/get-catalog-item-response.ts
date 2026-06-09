@@ -29,15 +29,15 @@ export interface GetCatalogItemResponse {
     /**
      * カタログカテゴリ ID を取得または設定します。             
      */
-    'catalogCategoryId': number;
+    'catalogCategoryId': string;
     /**
      * カタログブランド ID を取得または設定します。             
      */
-    'catalogBrandId': number;
+    'catalogBrandId': string;
     /**
      * カタログアイテム ID を取得または設定します。             
      */
-    'id': number;
+    'id': string;
     /**
      * 商品名を取得または設定します。             
      */

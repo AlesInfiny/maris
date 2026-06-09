@@ -17,8 +17,7 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "Assets",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AssetCode = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     AssetType = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
                 },
@@ -31,8 +30,7 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "Baskets",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BuyerId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false)
                 },
                 constraints: table =>
@@ -44,8 +42,7 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "CatalogBrands",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
                 },
                 constraints: table =>
@@ -57,8 +54,7 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "CatalogCategories",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
                 },
                 constraints: table =>
@@ -70,8 +66,7 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BuyerId = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     OrderDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     ConsumptionTaxRate = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
@@ -94,10 +89,9 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "BasketItems",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BasketId = table.Column<long>(type: "bigint", nullable: false),
-                    CatalogItemId = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BasketId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CatalogItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
@@ -116,14 +110,13 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "CatalogItems",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     ProductCode = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    CatalogCategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    CatalogBrandId = table.Column<long>(type: "bigint", nullable: false),
+                    CatalogCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CatalogBrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -148,12 +141,11 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "OrderItems",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<long>(type: "bigint", nullable: false),
-                    OrderedCatalogItemId = table.Column<long>(type: "bigint", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderedCatalogItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderedProductCode = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     OrderedProductName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false)
                 },
@@ -172,10 +164,9 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "CatalogItemAssets",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AssetCode = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
-                    CatalogItemId = table.Column<long>(type: "bigint", nullable: false)
+                    CatalogItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -192,10 +183,9 @@ namespace Dressca.EfInfrastructure.Migrations
                 name: "OrderItemAssets",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AssetCode = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
-                    OrderItemId = table.Column<long>(type: "bigint", nullable: false)
+                    OrderItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -213,21 +203,21 @@ namespace Dressca.EfInfrastructure.Migrations
                 columns: new[] { "Id", "AssetCode", "AssetType" },
                 values: new object[,]
                 {
-                    { 1L, "b52dc7f712d94ca5812dd995bf926c04", "png" },
-                    { 2L, "80bc8e167ccb4543b2f9d51913073492", "png" },
-                    { 3L, "05d38fad5693422c8a27dd5b14070ec8", "png" },
-                    { 4L, "45c22ba3da064391baac91341067ffe9", "png" },
-                    { 5L, "4aed07c4ed5d45a5b97f11acedfbb601", "png" },
-                    { 6L, "082b37439ecc44919626ba00fc60ee85", "png" },
-                    { 7L, "f5f89954281747fa878129c29e1e0f83", "png" },
-                    { 8L, "a8291ef2e8e14869a7048e272915f33c", "png" },
-                    { 9L, "66237018c769478a90037bd877f5fba1", "png" },
-                    { 10L, "d136d4c81b86478990984dcafbf08244", "png" },
-                    { 11L, "47183f32f6584d7fb661f9216e11318b", "png" },
-                    { 12L, "cf151206efd344e1b86854f4aa49fdef", "png" },
-                    { 13L, "ab2e78eb7fe3408aadbf1e17a9945a8c", "png" },
-                    { 14L, "0e557e96bc054f10bc91c27405a83e85", "png" },
-                    { 15L, "e622b0098808492cb883831c05486b58", "png" }
+                    { new Guid("a0000000-0000-7000-8000-000000000001"), "b52dc7f712d94ca5812dd995bf926c04", "png" },
+                    { new Guid("a0000000-0000-7000-8000-000000000002"), "80bc8e167ccb4543b2f9d51913073492", "png" },
+                    { new Guid("a0000000-0000-7000-8000-000000000003"), "05d38fad5693422c8a27dd5b14070ec8", "png" },
+                    { new Guid("a0000000-0000-7000-8000-000000000004"), "45c22ba3da064391baac91341067ffe9", "png" },
+                    { new Guid("a0000000-0000-7000-8000-000000000005"), "4aed07c4ed5d45a5b97f11acedfbb601", "png" },
+                    { new Guid("a0000000-0000-7000-8000-000000000006"), "082b37439ecc44919626ba00fc60ee85", "png" },
+                    { new Guid("a0000000-0000-7000-8000-000000000007"), "f5f89954281747fa878129c29e1e0f83", "png" },
+                    { new Guid("a0000000-0000-7000-8000-000000000008"), "a8291ef2e8e14869a7048e272915f33c", "png" },
+                    { new Guid("a0000000-0000-7000-8000-000000000009"), "66237018c769478a90037bd877f5fba1", "png" },
+                    { new Guid("a0000000-0000-7000-8000-00000000000a"), "d136d4c81b86478990984dcafbf08244", "png" },
+                    { new Guid("a0000000-0000-7000-8000-00000000000b"), "47183f32f6584d7fb661f9216e11318b", "png" },
+                    { new Guid("a0000000-0000-7000-8000-00000000000c"), "cf151206efd344e1b86854f4aa49fdef", "png" },
+                    { new Guid("a0000000-0000-7000-8000-00000000000d"), "ab2e78eb7fe3408aadbf1e17a9945a8c", "png" },
+                    { new Guid("a0000000-0000-7000-8000-00000000000e"), "0e557e96bc054f10bc91c27405a83e85", "png" },
+                    { new Guid("a0000000-0000-7000-8000-00000000000f"), "e622b0098808492cb883831c05486b58", "png" }
                 });
 
             migrationBuilder.InsertData(
@@ -235,9 +225,9 @@ namespace Dressca.EfInfrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1L, "高級なブランド" },
-                    { 2L, "カジュアルなブランド" },
-                    { 3L, "ノーブランド" }
+                    { new Guid("b0000000-0000-7000-8000-000000000001"), "高級なブランド" },
+                    { new Guid("b0000000-0000-7000-8000-000000000002"), "カジュアルなブランド" },
+                    { new Guid("b0000000-0000-7000-8000-000000000003"), "ノーブランド" }
                 });
 
             migrationBuilder.InsertData(
@@ -245,9 +235,9 @@ namespace Dressca.EfInfrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1L, "服" },
-                    { 2L, "バッグ" },
-                    { 3L, "シューズ" }
+                    { new Guid("c0000000-0000-7000-8000-000000000001"), "服" },
+                    { new Guid("c0000000-0000-7000-8000-000000000002"), "バッグ" },
+                    { new Guid("c0000000-0000-7000-8000-000000000003"), "シューズ" }
                 });
 
             migrationBuilder.InsertData(
@@ -255,17 +245,17 @@ namespace Dressca.EfInfrastructure.Migrations
                 columns: new[] { "Id", "CatalogBrandId", "CatalogCategoryId", "Description", "IsDeleted", "Name", "Price", "ProductCode" },
                 values: new object[,]
                 {
-                    { 1L, 3L, 1L, "定番の無地ロングTシャツです。", false, "クルーネック Tシャツ - ブラック", 1980m, "C000000001" },
-                    { 2L, 2L, 1L, "暖かいのに着膨れしない起毛デニムです。", false, "裏起毛 スキニーデニム", 4800m, "C000000002" },
-                    { 3L, 1L, 1L, "あたたかく肌ざわりも良いウール100%のロングコートです。", false, "ウールコート", 49800m, "C000000003" },
-                    { 4L, 2L, 1L, "コットン100%の柔らかい着心地で、春先から夏、秋口まで万能に使いやすいです。", false, "無地 ボタンダウンシャツ", 2800m, "C000000004" },
-                    { 5L, 3L, 2L, "コンパクトサイズのバッグですが収納力は抜群です", false, "レザーハンドバッグ", 18800m, "B000000001" },
-                    { 6L, 2L, 2L, "エイジング加工したレザーを使用しています。", false, "ショルダーバッグ", 38000m, "B000000002" },
-                    { 7L, 3L, 2L, "春の季節にぴったりのトートバッグです。インナーポーチまたは単体でも使用可能なポーチ付。", false, "トートバッグ ポーチ付き", 24800m, "B000000003" },
-                    { 8L, 1L, 2L, "さらりと気軽に纏える、キュートなミニサイズショルダー。", false, "ショルダーバッグ", 2800m, "B000000004" },
-                    { 9L, 1L, 2L, "エレガントな雰囲気を放つキルティングデザインです。", false, "レザー チェーンショルダーバッグ", 258000m, "B000000005" },
-                    { 10L, 2L, 3L, "柔らかいソールは快適な履き心地で、ランニングに最適です。", false, "ランニングシューズ - ブルー", 12800m, "S000000001" },
-                    { 11L, 1L, 3L, "イタリアの職人が丁寧に手作業で作り上げた一品です。", false, "メダリオン ストレートチップ ドレスシューズ", 23800m, "S000000002" }
+                    { new Guid("d0000000-0000-7000-8000-000000000001"), new Guid("b0000000-0000-7000-8000-000000000003"), new Guid("c0000000-0000-7000-8000-000000000001"), "定番の無地ロングTシャツです。", false, "クルーネック Tシャツ - ブラック", 1980m, "C000000001" },
+                    { new Guid("d0000000-0000-7000-8000-000000000002"), new Guid("b0000000-0000-7000-8000-000000000002"), new Guid("c0000000-0000-7000-8000-000000000001"), "暖かいのに着膨れしない起毛デニムです。", false, "裏起毛 スキニーデニム", 4800m, "C000000002" },
+                    { new Guid("d0000000-0000-7000-8000-000000000003"), new Guid("b0000000-0000-7000-8000-000000000001"), new Guid("c0000000-0000-7000-8000-000000000001"), "あたたかく肌ざわりも良いウール100%のロングコートです。", false, "ウールコート", 49800m, "C000000003" },
+                    { new Guid("d0000000-0000-7000-8000-000000000004"), new Guid("b0000000-0000-7000-8000-000000000002"), new Guid("c0000000-0000-7000-8000-000000000001"), "コットン100%の柔らかい着心地で、春先から夏、秋口まで万能に使いやすいです。", false, "無地 ボタンダウンシャツ", 2800m, "C000000004" },
+                    { new Guid("d0000000-0000-7000-8000-000000000005"), new Guid("b0000000-0000-7000-8000-000000000003"), new Guid("c0000000-0000-7000-8000-000000000002"), "コンパクトサイズのバッグですが収納力は抜群です", false, "レザーハンドバッグ", 18800m, "B000000001" },
+                    { new Guid("d0000000-0000-7000-8000-000000000006"), new Guid("b0000000-0000-7000-8000-000000000002"), new Guid("c0000000-0000-7000-8000-000000000002"), "エイジング加工したレザーを使用しています。", false, "ショルダーバッグ", 38000m, "B000000002" },
+                    { new Guid("d0000000-0000-7000-8000-000000000007"), new Guid("b0000000-0000-7000-8000-000000000003"), new Guid("c0000000-0000-7000-8000-000000000002"), "春の季節にぴったりのトートバッグです。インナーポーチまたは単体でも使用可能なポーチ付。", false, "トートバッグ ポーチ付き", 24800m, "B000000003" },
+                    { new Guid("d0000000-0000-7000-8000-000000000008"), new Guid("b0000000-0000-7000-8000-000000000001"), new Guid("c0000000-0000-7000-8000-000000000002"), "さらりと気軽に纏える、キュートなミニサイズショルダー。", false, "ショルダーバッグ", 2800m, "B000000004" },
+                    { new Guid("d0000000-0000-7000-8000-000000000009"), new Guid("b0000000-0000-7000-8000-000000000001"), new Guid("c0000000-0000-7000-8000-000000000002"), "エレガントな雰囲気を放つキルティングデザインです。", false, "レザー チェーンショルダーバッグ", 258000m, "B000000005" },
+                    { new Guid("d0000000-0000-7000-8000-00000000000a"), new Guid("b0000000-0000-7000-8000-000000000002"), new Guid("c0000000-0000-7000-8000-000000000003"), "柔らかいソールは快適な履き心地で、ランニングに最適です。", false, "ランニングシューズ - ブルー", 12800m, "S000000001" },
+                    { new Guid("d0000000-0000-7000-8000-00000000000b"), new Guid("b0000000-0000-7000-8000-000000000001"), new Guid("c0000000-0000-7000-8000-000000000003"), "イタリアの職人が丁寧に手作業で作り上げた一品です。", false, "メダリオン ストレートチップ ドレスシューズ", 23800m, "S000000002" }
                 });
 
             migrationBuilder.InsertData(
@@ -273,17 +263,17 @@ namespace Dressca.EfInfrastructure.Migrations
                 columns: new[] { "Id", "AssetCode", "CatalogItemId" },
                 values: new object[,]
                 {
-                    { 1L, "45c22ba3da064391baac91341067ffe9", 1L },
-                    { 2L, "4aed07c4ed5d45a5b97f11acedfbb601", 2L },
-                    { 3L, "082b37439ecc44919626ba00fc60ee85", 3L },
-                    { 4L, "f5f89954281747fa878129c29e1e0f83", 4L },
-                    { 5L, "a8291ef2e8e14869a7048e272915f33c", 5L },
-                    { 6L, "66237018c769478a90037bd877f5fba1", 6L },
-                    { 7L, "d136d4c81b86478990984dcafbf08244", 7L },
-                    { 8L, "47183f32f6584d7fb661f9216e11318b", 8L },
-                    { 9L, "cf151206efd344e1b86854f4aa49fdef", 9L },
-                    { 10L, "ab2e78eb7fe3408aadbf1e17a9945a8c", 10L },
-                    { 11L, "0e557e96bc054f10bc91c27405a83e85", 11L }
+                    { new Guid("e0000000-0000-7000-8000-000000000001"), "45c22ba3da064391baac91341067ffe9", new Guid("d0000000-0000-7000-8000-000000000001") },
+                    { new Guid("e0000000-0000-7000-8000-000000000002"), "4aed07c4ed5d45a5b97f11acedfbb601", new Guid("d0000000-0000-7000-8000-000000000002") },
+                    { new Guid("e0000000-0000-7000-8000-000000000003"), "082b37439ecc44919626ba00fc60ee85", new Guid("d0000000-0000-7000-8000-000000000003") },
+                    { new Guid("e0000000-0000-7000-8000-000000000004"), "f5f89954281747fa878129c29e1e0f83", new Guid("d0000000-0000-7000-8000-000000000004") },
+                    { new Guid("e0000000-0000-7000-8000-000000000005"), "a8291ef2e8e14869a7048e272915f33c", new Guid("d0000000-0000-7000-8000-000000000005") },
+                    { new Guid("e0000000-0000-7000-8000-000000000006"), "66237018c769478a90037bd877f5fba1", new Guid("d0000000-0000-7000-8000-000000000006") },
+                    { new Guid("e0000000-0000-7000-8000-000000000007"), "d136d4c81b86478990984dcafbf08244", new Guid("d0000000-0000-7000-8000-000000000007") },
+                    { new Guid("e0000000-0000-7000-8000-000000000008"), "47183f32f6584d7fb661f9216e11318b", new Guid("d0000000-0000-7000-8000-000000000008") },
+                    { new Guid("e0000000-0000-7000-8000-000000000009"), "cf151206efd344e1b86854f4aa49fdef", new Guid("d0000000-0000-7000-8000-000000000009") },
+                    { new Guid("e0000000-0000-7000-8000-00000000000a"), "ab2e78eb7fe3408aadbf1e17a9945a8c", new Guid("d0000000-0000-7000-8000-00000000000a") },
+                    { new Guid("e0000000-0000-7000-8000-00000000000b"), "0e557e96bc054f10bc91c27405a83e85", new Guid("d0000000-0000-7000-8000-00000000000b") }
                 });
 
             migrationBuilder.CreateIndex(

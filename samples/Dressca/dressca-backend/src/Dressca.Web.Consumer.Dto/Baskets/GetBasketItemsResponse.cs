@@ -27,5 +27,5 @@ public class GetBasketItemsResponse
     /// <summary>
     ///  削除済みカタログアイテムの Id のリストを取得または設定します。
     /// </summary>
-    public IList<long> DeletedItemIds { get; set; } = [];
+    public IList<Guid> DeletedItemIds { get; set; } = [];
 }

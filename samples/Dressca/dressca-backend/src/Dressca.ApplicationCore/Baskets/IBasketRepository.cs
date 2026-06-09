@@ -11,7 +11,7 @@ public interface IBasketRepository
     /// <param name="id">ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン 。</param>
     /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
-    Task<Basket?> GetAsync(long id, CancellationToken cancellationToken = default);
+    Task<Basket?> GetAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  エンティティを追加します。
@@ -43,7 +43,7 @@ public interface IBasketRepository
     /// <param name="basketId">買い物かご Id 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
-    Task<Basket?> GetWithBasketItemsAsync(long basketId, CancellationToken cancellationToken = default);
+    Task<Basket?> GetWithBasketItemsAsync(Guid basketId, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  購入者 Id が <paramref name="buyerId"/> に一致する買い物かご情報を、明細情報と共に取得します。

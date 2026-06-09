@@ -21,7 +21,7 @@ export interface PutBasketItemsRequest {
     /**
      * カタログアイテム Id を取得または設定します。 1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。             
      */
-    'catalogItemId': number;
+    'catalogItemId': string;
     /**
      * 数量を取得または設定します。 0 以上の値を設定してください。             
      */

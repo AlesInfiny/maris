@@ -15,7 +15,7 @@ public class CatalogBrandNotExistingInRepositoryException : BusinessException
     ///  <see cref="CatalogBrandNotExistingInRepositoryException"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="catalogBrandIds">見つからなかったカタログブランド ID 。</param>
-    public CatalogBrandNotExistingInRepositoryException(IEnumerable<long> catalogBrandIds)
+    public CatalogBrandNotExistingInRepositoryException(IEnumerable<Guid> catalogBrandIds)
         : base(new BusinessError(ExceptionId, new ErrorMessage(Messages.CatalogBrandIdDoesNotExist, string.Join(",", catalogBrandIds))))
     {
     }

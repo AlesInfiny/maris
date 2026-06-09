@@ -26,14 +26,14 @@ internal class EfCatalogBrandRepository : ICatalogBrandRepository
         => await this.dbContext.CatalogBrands.ToListAsync(cancellationToken);
 
     /// <inheritdoc/>
-    public async Task<CatalogBrand?> GetAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<CatalogBrand?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var keys = new object[] { id };
         return await this.dbContext.CatalogBrands.FindAsync(keys, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<bool> AnyAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await this.dbContext.CatalogBrands.AnyAsync(catalogBrand => catalogBrand.Id == id, cancellationToken);
     }

@@ -20,13 +20,13 @@ internal class OrderFactory : IOrderFactory
             {
                 var catalogItem = catalogItems.First(c => c.Id == basketItem.CatalogItemId);
                 var itemOrdered = new CatalogItemOrdered(catalogItem.Id, catalogItem.Name, catalogItem.ProductCode);
-                var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = basketItem.UnitPrice, Quantity = basketItem.Quantity };
+                var orderItem = new OrderItem { Id = Guid.CreateVersion7(), ItemOrdered = itemOrdered, UnitPrice = basketItem.UnitPrice, Quantity = basketItem.Quantity };
                 var orderItemAssets = catalogItem.Assets
-                    .Select(catalogItemAsset => new OrderItemAsset { AssetCode = catalogItemAsset.AssetCode, OrderItemId = orderItem.Id });
+                    .Select(catalogItemAsset => new OrderItemAsset { Id = Guid.CreateVersion7(), AssetCode = catalogItemAsset.AssetCode, OrderItemId = orderItem.Id });
                 orderItem.AddAssets(orderItemAssets);
                 return orderItem;
             }).ToList();
 
-        return new Order(orderItems) { BuyerId = basket.BuyerId, ShipToAddress = shipToAddress };
+        return new Order(orderItems) { Id = Guid.CreateVersion7(), BuyerId = basket.BuyerId, ShipToAddress = shipToAddress };
     }
 }

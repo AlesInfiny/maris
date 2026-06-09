@@ -23,19 +23,19 @@ public class GetCatalogItemResponse
     ///  カタログカテゴリ Id を取得または設定します。
     /// </summary>
     [Required]
-    public long CatalogCategoryId { get; set; }
+    public Guid CatalogCategoryId { get; set; }
 
     /// <summary>
     ///  カタログブランド Id を取得または設定します。
     /// </summary>
     [Required]
-    public long CatalogBrandId { get; set; }
+    public Guid CatalogBrandId { get; set; }
 
     /// <summary>
     ///  カタログアイテム Id を取得または設定します。
     /// </summary>
     [Required]
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 
     /// <summary>
     ///  商品名を取得または設定します。
