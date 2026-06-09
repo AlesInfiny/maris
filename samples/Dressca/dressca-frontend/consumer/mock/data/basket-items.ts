@@ -1,4 +1,4 @@
-import type { GetBasketItemsResponse, BasketItemApiModel } from '@/generated/api-client'
+import type { BasketItemApiModel, GetBasketItemsResponse } from '@/generated/api-client'
 import { deletedItemId } from './catalog-items'
 
 export const basket: GetBasketItemsResponse = {
