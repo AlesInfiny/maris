@@ -78,7 +78,7 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
         await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         // ID を生成
-        announcement.Id = Guid.NewGuid();
+        announcement.Id = Guid.CreateVersion7();
 
         // タイムスタンプを設定
         var now = DateTimeOffset.UtcNow;
@@ -105,7 +105,7 @@ internal class EfAnnouncementsRepository : IAnnouncementsRepository
         await using var dbContext = await this.dbContextFactory.CreateDbContextAsync(cancellationToken);
 
         // ID を生成
-        content.Id = Guid.NewGuid();
+        content.Id = Guid.CreateVersion7();
 
         dbContext.AnnouncementContents.Add(content);
         await dbContext.SaveChangesAsync(cancellationToken);
