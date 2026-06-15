@@ -60,7 +60,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000001"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -71,7 +71,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111112"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000002"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -82,7 +82,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111113"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000003"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -93,7 +93,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111114"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000004"),
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -104,7 +104,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111115"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000005"),
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -115,7 +115,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111116"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000006"),
                             Category = "更新",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -126,7 +126,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111117"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000007"),
                             Category = "更新",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -137,7 +137,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111118"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000008"),
                             Category = "重要",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -148,7 +148,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111119"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000009"),
                             Category = "重要",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -159,7 +159,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111120"),
+                            Id = new Guid("0193ae97-b800-7001-8001-00000000000a"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -170,7 +170,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111121"),
+                            Id = new Guid("0193ae97-b800-7001-8001-00000000000b"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -181,7 +181,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111122"),
+                            Id = new Guid("0193ae97-b800-7001-8001-00000000000c"),
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -192,7 +192,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111123"),
+                            Id = new Guid("0193ae97-b800-7001-8001-00000000000d"),
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -203,7 +203,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111124"),
+                            Id = new Guid("0193ae97-b800-7001-8001-00000000000e"),
                             Category = "更新",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -214,7 +214,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111125"),
+                            Id = new Guid("0193ae97-b800-7001-8001-00000000000f"),
                             Category = "更新",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -225,7 +225,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111126"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000010"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -236,7 +236,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111127"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000011"),
                             Category = "重要",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -247,7 +247,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111128"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000012"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -258,7 +258,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111129"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000013"),
                             Category = "イベント",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -269,7 +269,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111130"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000014"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -280,7 +280,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-1111-1111-1111-111111111131"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000015"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -291,7 +291,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("19999999-1111-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000016"),
                             Category = "一般",
                             ChangedAt = new DateTimeOffset(new DateTime(2011, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2010, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -302,7 +302,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-2222-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000017"),
                             Category = "テスト",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -313,7 +313,7 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("11111111-3333-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7001-8001-000000000018"),
                             Category = "テスト",
                             ChangedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -361,8 +361,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222201"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000001"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000001"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 1",
@@ -370,8 +370,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222202"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111112"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000002"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000002"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 2",
@@ -379,8 +379,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222203"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111113"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000003"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000003"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 3",
@@ -388,8 +388,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222204"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111114"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000004"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000004"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 4",
@@ -397,8 +397,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222205"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111115"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000005"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000005"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 5",
@@ -406,8 +406,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222206"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111116"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000006"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000006"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 6",
@@ -415,8 +415,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222207"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111117"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000007"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000007"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 7",
@@ -424,8 +424,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222208"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111118"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000008"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000008"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 8",
@@ -433,8 +433,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222209"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111119"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000009"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000009"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 9",
@@ -442,8 +442,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222210"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111120"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000000a"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000a"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 10",
@@ -451,8 +451,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222211"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111121"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000000b"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000b"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 11",
@@ -460,8 +460,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222212"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111122"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000000c"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000c"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 12",
@@ -469,8 +469,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222213"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111123"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000000d"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000d"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 13",
@@ -478,8 +478,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222214"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111124"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000000e"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000e"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 14",
@@ -487,8 +487,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222215"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111125"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000000f"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000f"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 15",
@@ -496,8 +496,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222216"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111126"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000010"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000010"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 16",
@@ -505,8 +505,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222217"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111127"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000011"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000011"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 17",
@@ -514,8 +514,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222218"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111128"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000012"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000012"),
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "Detalles 18",
@@ -523,8 +523,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222219"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111129"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000013"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000013"),
                             LanguageCode = "zh",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "详情 19",
@@ -532,8 +532,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222220"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111130"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000014"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000014"),
                             LanguageCode = "en",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "Details 20",
@@ -541,8 +541,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2222-2222-2222-222222222221"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111131"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000015"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000015"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 21",
@@ -550,8 +550,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("29999999-2222-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("19999999-1111-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000016"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000016"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 削除済み",
@@ -559,8 +559,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2111-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-2222-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000017"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000017"),
                             LanguageCode = "en",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -568,8 +568,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-2112-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-2222-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000018"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000017"),
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -577,8 +577,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-3111-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7002-8001-000000000019"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000018"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -586,8 +586,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-3112-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000001a"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000018"),
                             LanguageCode = "en",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -595,8 +595,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-3113-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000001b"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000018"),
                             LanguageCode = "zh",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -604,8 +604,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22222222-3114-2222-2222-222222222222"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7002-8001-00000000001c"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000018"),
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -650,8 +650,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444401"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333301"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000001"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000001"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 1",
@@ -659,8 +659,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444402"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333302"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000002"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000002"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 2",
@@ -668,8 +668,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444403"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333303"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000003"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000003"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 3",
@@ -677,8 +677,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444404"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333304"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000004"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000004"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 4",
@@ -686,8 +686,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444405"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333305"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000005"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000005"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 5",
@@ -695,8 +695,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444406"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333306"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000006"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000006"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 6",
@@ -704,8 +704,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444407"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333307"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000007"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000007"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 7",
@@ -713,8 +713,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444408"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333308"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000008"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000008"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 8",
@@ -722,8 +722,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444409"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333309"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000009"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000009"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 9",
@@ -731,8 +731,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444410"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333310"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000000a"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-00000000000a"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 10",
@@ -740,8 +740,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444411"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333311"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000000b"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-00000000000b"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 11",
@@ -749,8 +749,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444412"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333312"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000000c"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-00000000000c"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 12",
@@ -758,8 +758,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444413"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333313"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000000d"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-00000000000d"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 13",
@@ -767,8 +767,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444414"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333314"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000000e"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-00000000000e"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 14",
@@ -776,8 +776,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444415"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333315"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000000f"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-00000000000f"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 15",
@@ -785,8 +785,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444416"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333316"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000010"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000010"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 16",
@@ -794,8 +794,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444417"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333317"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000011"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000011"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 17",
@@ -803,8 +803,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444418"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333318"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000012"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000012"),
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "Detalles 18",
@@ -812,8 +812,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444419"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333319"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000013"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000013"),
                             LanguageCode = "zh",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "详情 19",
@@ -821,8 +821,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444420"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333320"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000014"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000014"),
                             LanguageCode = "en",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "Details 20",
@@ -830,8 +830,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444421"),
-                            AnnouncementHistoryId = new Guid("33333333-3333-3333-3333-333333333321"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000015"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000015"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 21",
@@ -839,8 +839,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444422"),
-                            AnnouncementHistoryId = new Guid("33333333-4444-3333-3333-333333333301"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000016"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000016"),
                             LanguageCode = "en",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -848,8 +848,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444423"),
-                            AnnouncementHistoryId = new Guid("33333333-4444-3333-3333-333333333301"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000017"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000016"),
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -857,8 +857,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444424"),
-                            AnnouncementHistoryId = new Guid("33333333-5555-3333-3333-333333333301"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000018"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000017"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -866,8 +866,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444425"),
-                            AnnouncementHistoryId = new Guid("33333333-5555-3333-3333-333333333301"),
+                            Id = new Guid("0193ae97-b800-7004-8001-000000000019"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000017"),
                             LanguageCode = "en",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -875,8 +875,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444426"),
-                            AnnouncementHistoryId = new Guid("33333333-5555-3333-3333-333333333301"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000001a"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000017"),
                             LanguageCode = "zh",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -884,8 +884,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("44444444-4444-4444-4444-444444444427"),
-                            AnnouncementHistoryId = new Guid("33333333-5555-3333-3333-333333333301"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000001b"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000017"),
                             LanguageCode = "es",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容",
@@ -893,8 +893,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("49999999-4444-4444-4444-444444444444"),
-                            AnnouncementHistoryId = new Guid("39999999-3333-3333-3333-333333333333"),
+                            Id = new Guid("0193ae97-b800-7004-8001-00000000001c"),
+                            AnnouncementHistoryId = new Guid("0193ae97-b800-7003-8001-000000000018"),
                             LanguageCode = "ja",
                             LinkedUrl = "https://maris.alesinfiny.org/",
                             Message = "内容 削除済み",
@@ -949,8 +949,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333301"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000001"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000001"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -961,8 +961,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333302"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111112"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000002"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000002"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -973,8 +973,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333303"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111113"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000003"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000003"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -985,8 +985,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333304"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111114"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000004"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000004"),
                             Category = "イベント",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -997,8 +997,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333305"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111115"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000005"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000005"),
                             Category = "イベント",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1009,8 +1009,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333306"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111116"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000006"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000006"),
                             Category = "更新",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1021,8 +1021,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333307"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111117"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000007"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000007"),
                             Category = "更新",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1033,8 +1033,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333308"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111118"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000008"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000008"),
                             Category = "重要",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1045,8 +1045,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333309"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111119"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000009"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000009"),
                             Category = "重要",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1057,8 +1057,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333310"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111120"),
+                            Id = new Guid("0193ae97-b800-7003-8001-00000000000a"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000a"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1069,8 +1069,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333311"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111121"),
+                            Id = new Guid("0193ae97-b800-7003-8001-00000000000b"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000b"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1081,8 +1081,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333312"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111122"),
+                            Id = new Guid("0193ae97-b800-7003-8001-00000000000c"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000c"),
                             Category = "イベント",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1093,8 +1093,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333313"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111123"),
+                            Id = new Guid("0193ae97-b800-7003-8001-00000000000d"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000d"),
                             Category = "イベント",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1105,8 +1105,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333314"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111124"),
+                            Id = new Guid("0193ae97-b800-7003-8001-00000000000e"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000e"),
                             Category = "更新",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1117,8 +1117,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333315"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111125"),
+                            Id = new Guid("0193ae97-b800-7003-8001-00000000000f"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-00000000000f"),
                             Category = "更新",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1129,8 +1129,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333316"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111126"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000010"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000010"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1141,8 +1141,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333317"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111127"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000011"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000011"),
                             Category = "重要",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1153,8 +1153,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333318"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111128"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000012"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000012"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1165,8 +1165,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333319"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111129"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000013"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000013"),
                             Category = "イベント",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1177,8 +1177,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333320"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111130"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000014"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000014"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1189,8 +1189,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-3333-3333-3333-333333333321"),
-                            AnnouncementId = new Guid("11111111-1111-1111-1111-111111111131"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000015"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000015"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1201,8 +1201,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-4444-3333-3333-333333333301"),
-                            AnnouncementId = new Guid("11111111-2222-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000016"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000017"),
                             Category = "テスト",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1213,8 +1213,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("33333333-5555-3333-3333-333333333301"),
-                            AnnouncementId = new Guid("11111111-3333-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000017"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000018"),
                             Category = "テスト",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2025, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1225,8 +1225,8 @@ namespace DresscaCMS.Announcement.Infrastructures.Migrations
                         },
                         new
                         {
-                            Id = new Guid("39999999-3333-3333-3333-333333333333"),
-                            AnnouncementId = new Guid("19999999-1111-1111-1111-111111111111"),
+                            Id = new Guid("0193ae97-b800-7003-8001-000000000018"),
+                            AnnouncementId = new Guid("0193ae97-b800-7001-8001-000000000016"),
                             Category = "一般",
                             ChangedBy = "system",
                             CreatedAt = new DateTimeOffset(new DateTime(2011, 1, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
