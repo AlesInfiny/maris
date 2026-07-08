@@ -199,7 +199,7 @@
     {
         var newContent = new AnnouncementContentCreateViewModel
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.CreateVersion7(),
             LanguageCode = language.Code,
             DisplayOrder = this.languagePriorities.GetDisplayOrder(language)
         };
@@ -245,7 +245,7 @@
             // ビューモデルからエンティティへの変換
             var announcement = new DresscaCMS.Announcement.Infrastructures.Entities.Announcement
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.CreateVersion7(),
                 Category = this.announcementModel.Category,
                 PostDateTime = this.announcementModel.GetPostDateTime(offsetMinutes),
                 ExpireDateTime = this.announcementModel.GetExpireDateTime(offsetMinutes),
@@ -257,7 +257,7 @@
 
             var contents = this.announcementModel.AnnouncementContents.Select(c => new DresscaCMS.Announcement.Infrastructures.Entities.AnnouncementContent
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.CreateVersion7(),
                 AnnouncementId = announcement.Id,
                 LanguageCode = c.LanguageCode,
                 Title = c.Title,

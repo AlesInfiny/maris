@@ -239,7 +239,7 @@ public class AnnouncementsApplicationService
         // お知らせメッセージ更新履歴を作成
         var history = new AnnouncementHistory
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.CreateVersion7(),
             AnnouncementId = announcementId,
             ChangedBy = userName,
             CreatedAt = DateTimeOffset.Now,
@@ -259,7 +259,7 @@ public class AnnouncementsApplicationService
             .Select(content
                 => new AnnouncementContentHistory
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.CreateVersion7(),
                     AnnouncementHistoryId = history.Id,
                     LanguageCode = content.LanguageCode,
                     Title = content.Title,
@@ -461,7 +461,7 @@ public class AnnouncementsApplicationService
         // お知らせメッセージ更新履歴を作成
         var history = new AnnouncementHistory
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.CreateVersion7(),
             AnnouncementId = announcement.Id,
             ChangedBy = userName,
             CreatedAt = DateTimeOffset.Now,
@@ -481,7 +481,7 @@ public class AnnouncementsApplicationService
             .Select(content
                 => new AnnouncementContentHistory
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.CreateVersion7(),
                     AnnouncementHistoryId = history.Id,
                     LanguageCode = content.LanguageCode,
                     Title = content.Title,
@@ -579,7 +579,7 @@ public class AnnouncementsApplicationService
         // お知らせメッセージ削除履歴を作成
         var history = new AnnouncementHistory
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.CreateVersion7(),
             AnnouncementId = announcementId,
             ChangedBy = userName,
             CreatedAt = DateTimeOffset.Now,
@@ -599,7 +599,7 @@ public class AnnouncementsApplicationService
             .Select(content
                 => new AnnouncementContentHistory
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.CreateVersion7(),
                     AnnouncementHistoryId = history.Id,
                     LanguageCode = content.LanguageCode,
                     Title = content.Title,

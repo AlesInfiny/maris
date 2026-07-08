@@ -108,10 +108,10 @@ public class AnnouncementsApplicationServiceTests
     {
         // Arrange
         var now = DateTimeOffset.Now;
-        var announcementId1 = Guid.NewGuid();
-        var announcementId2 = Guid.NewGuid();
-        var contentId1 = Guid.NewGuid();
-        var contentId2 = Guid.NewGuid();
+        var announcementId1 = Guid.CreateVersion7();
+        var announcementId2 = Guid.CreateVersion7();
+        var contentId1 = Guid.CreateVersion7();
+        var contentId2 = Guid.CreateVersion7();
 
         var announcements = new List<DresscaCMS.Announcement.Infrastructures.Entities.Announcement>
         {
@@ -214,7 +214,7 @@ public class AnnouncementsApplicationServiceTests
         {
             new()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.CreateVersion7(),
                 PostDateTime = now,
                 DisplayPriority = DisplayPriority.High,
                 IsDeleted = false,
@@ -224,24 +224,24 @@ public class AnnouncementsApplicationServiceTests
                 {
                     new()
                     {
-                        Id = Guid.NewGuid(),
-                        AnnouncementId = Guid.NewGuid(),
+                        Id = Guid.CreateVersion7(),
+                        AnnouncementId = Guid.CreateVersion7(),
                         LanguageCode = "es",
                         Title = "Spanish Title",
                         Message = "Spanish Body",
                     },
                     new()
                     {
-                        Id = Guid.NewGuid(),
-                        AnnouncementId = Guid.NewGuid(),
+                        Id = Guid.CreateVersion7(),
+                        AnnouncementId = Guid.CreateVersion7(),
                         LanguageCode = "ja",
                         Title = "日本語タイトル",
                         Message = "日本語本文",
                     },
                     new()
                     {
-                        Id = Guid.NewGuid(),
-                        AnnouncementId = Guid.NewGuid(),
+                        Id = Guid.CreateVersion7(),
+                        AnnouncementId = Guid.CreateVersion7(),
                         LanguageCode = "en",
                         Title = "English Title",
                         Message = "English Body",
@@ -273,7 +273,7 @@ public class AnnouncementsApplicationServiceTests
         {
             new()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.CreateVersion7(),
                 PostDateTime = now,
                 DisplayPriority = DisplayPriority.High,
                 IsDeleted = false,
