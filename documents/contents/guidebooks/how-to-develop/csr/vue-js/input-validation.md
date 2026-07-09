@@ -32,7 +32,7 @@ https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/c
 [アーキテクチャ定義](../../../../app-architecture/client-side-rendering/frontend-architecture.md#project-structure) では設定ファイルは `./src/config` フォルダーに集約されるため、ファイル `./src/config/yup.config.ts` を作成し、以下のように記述します。
 
 ```typescript title="yup.config.ts"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/src/config/yup.config.ts
+https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/src/validation/zod-settings.ts
 ```
 
 作成したファイルを読み込むため、 入力値を検証する Vue ファイルのスクリプト構文に以下を記述します。
