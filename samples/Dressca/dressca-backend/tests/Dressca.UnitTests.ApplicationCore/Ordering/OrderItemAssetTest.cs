@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Ordering;
+using Dressca.ApplicationCore.Ordering;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
@@ -11,7 +11,7 @@ public class OrderItemAssetTest
     public void Constructor_アセットコードがnullまたは空の文字列_ArgumentExceptionが発生する(string? assetCode)
     {
         // Arrange
-        var orderItemId = new Guid("01971a00-0000-7000-f100-000000000001");
+        var orderItemId = new Guid("019b76da-a800-7006-8001-000000000001");
 
         // Act
         var action = () => new OrderItemAsset { AssetCode = assetCode!, OrderItemId = orderItemId };
@@ -26,7 +26,7 @@ public class OrderItemAssetTest
     {
         // Arrange
         string assetCode = "Asset Code";
-        var orderItemId = new Guid("01971a00-0000-7000-f100-000000000001");
+        var orderItemId = new Guid("019b76da-a800-7006-8001-000000000001");
         var itemAsset = new OrderItemAsset { AssetCode = assetCode!, OrderItemId = orderItemId };
 
         // Act

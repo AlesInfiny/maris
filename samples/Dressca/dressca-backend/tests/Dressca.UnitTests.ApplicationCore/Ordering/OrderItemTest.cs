@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Ordering;
+using Dressca.ApplicationCore.Ordering;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
@@ -8,7 +8,7 @@ public class OrderItemTest
     public void Order_注文情報が初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
@@ -26,7 +26,7 @@ public class OrderItemTest
     public void AddAssets_注文アイテムアセットにnullを追加する_ArgumentNullExceptionが発生する()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
@@ -44,7 +44,7 @@ public class OrderItemTest
     public void AddAssets_注文アイテムアセットに追加した情報が取得できる()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
@@ -69,7 +69,7 @@ public class OrderItemTest
     public void GetSubTotal_注文アイテムの小計を取得できる()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 2;

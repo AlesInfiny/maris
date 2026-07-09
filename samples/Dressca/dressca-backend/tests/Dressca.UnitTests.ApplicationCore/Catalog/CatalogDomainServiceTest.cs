@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using Dressca.ApplicationCore.Catalog;
 using Microsoft.Extensions.Logging;
 
@@ -12,8 +12,8 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     public async Task ExistsAllAsync_カタログアイテムIdがすべて存在する_existsAllはfalse_itemsは見つかったカタログアイテムのリスト()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
-        var item2 = new Guid("01971a00-0000-7000-d000-000000000002");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
@@ -45,8 +45,8 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     public async Task ExistsAllAsync_カタログアイテムIdが一部だけ存在する_existsAllはfalse_itemsは見つかったカタログアイテムのリスト()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
-        var item2 = new Guid("01971a00-0000-7000-d000-000000000002");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
@@ -74,8 +74,8 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     public async Task ExistsAllAsync_カタログアイテムIdが一部だけ存在する_情報ログが1件出る()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
-        var item2 = new Guid("01971a00-0000-7000-d000-000000000002");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
@@ -106,7 +106,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     public async Task ExistsAllAsync_カタログアイテムIdが1件も存在しない_existsAllはfalse_itemsは空()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
@@ -131,7 +131,7 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
     public async Task ExistsAllAsync_カタログアイテムIdが1件も存在しない_情報ログが1件出る()
     {
         // Arrange
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         var catalogBrandRepositoryMock = Mock.Of<ICatalogBrandRepository>();
         var catalogCategoryRepositoryMock = Mock.Of<ICatalogCategoryRepository>();
@@ -295,8 +295,8 @@ public class CatalogDomainServiceTest(ITestOutputHelper testOutputHelper) : Test
 
     private static CatalogItem CreateCatalogItem(Guid id)
     {
-        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
-        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
+        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
+        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
         const string defaultDescription = "Description.";
         const string defaultName = "Name";
         const decimal defaultPrice = 100m;

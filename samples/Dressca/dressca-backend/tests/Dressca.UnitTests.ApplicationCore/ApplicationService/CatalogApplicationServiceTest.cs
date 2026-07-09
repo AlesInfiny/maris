@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
@@ -29,8 +29,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStore, catalogDomainServiceMock, logger);
         var skip = 1;
         var take = 10;
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -55,8 +55,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStore, catalogDomainServiceMock, logger);
         var skip = 1;
         var take = 10;
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -113,8 +113,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task AddItemToCatalogAsync_リポジトリのAddAsyncを一度だけ呼び出す()
     {
         // Arrange
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
         var targetPrice = 123456;
@@ -153,8 +153,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task AddItemToCatalogAsync_追加したアイテムの情報が返却される()
     {
         // Arrange
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
         var targetPrice = 123456;
@@ -202,8 +202,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task AddItemToCatalogAsync_権限なし_PermissionDeniedExceptionが発生()
     {
         // Arrange
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
         var targetPrice = 123456;
@@ -239,7 +239,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     {
         // Arrange
         var targetBrandId = Guid.CreateVersion7();
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
         var targetPrice = 123456;
@@ -272,7 +272,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task AddItemToCatalogAsync_存在しないカテゴリを指定_CatalogCategoryNotExistingInRepositoryExceptionが発生()
     {
         // Arrange
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
         var targetCategoryId = Guid.CreateVersion7();
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
@@ -308,7 +308,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     {
         // Arrange
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
-        var targetId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var targetId = new Guid("019b76da-a800-7004-8001-000000000001");
         byte[] targetRowVersion = [255];
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         catalogRepositoryMock
@@ -392,15 +392,15 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task UpdateCatalogItemAsync_対象のアイテムが存在_リポジトリのUpdateAsyncを1度だけ呼び出す()
     {
         // Arrange
-        var targetId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var targetId = new Guid("019b76da-a800-7004-8001-000000000001");
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
         var targetPrice = 123456;
         var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var targetCategory = CreateDefaultCategories().Where(category => category.Id == targetCategoryId).ToList().FirstOrDefault();
 
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -450,9 +450,9 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var targetPrice = 123456;
         var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var targetCategory = CreateDefaultCategories().Where(category => category.Id == targetCategoryId).ToList().FirstOrDefault();
 
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -494,7 +494,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task UpdateCatalogItemAsync_対象のブランドが存在しない_CatalogBrandNotExistingInRepositoryExceptionが発生()
     {
         // Arrange
-        var targetId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var targetId = new Guid("019b76da-a800-7004-8001-000000000001");
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
         var targetPrice = 123456;
@@ -502,7 +502,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var targetBrandId = Guid.CreateVersion7();
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var targetCategory = CreateDefaultCategories().Where(category => category.Id == targetCategoryId).ToList().FirstOrDefault();
 
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
@@ -544,13 +544,13 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task UpdateCatalogItemAsync_対象のカテゴリが存在しない_CatalogCategoryNotExistingInRepositoryExceptionが発生()
     {
         // Arrange
-        var targetId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var targetId = new Guid("019b76da-a800-7004-8001-000000000001");
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
         var targetPrice = 123456;
         var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
         var targetCategoryId = Guid.CreateVersion7();
         var targetCategory = CreateDefaultCategories().Where(category => category.Id == targetCategoryId).ToList().FirstOrDefault();
@@ -594,13 +594,13 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task UpdateCatalogItemAsync_権限なし_PermissionDeniedExceptionが発生()
     {
         // Arrange
-        var targetId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var targetId = new Guid("019b76da-a800-7004-8001-000000000001");
         var targetName = "テストアイテム";
         var targetDescription = "テスト用のアイテムです。";
         var targetPrice = 123456;
         var targetProductCode = "TEST001";
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
         var targetBrand = CreateDefaultBrands().Where(brand => brand.Id == targetBrandId).ToList().FirstOrDefault();
         var targetCategoryId = Guid.CreateVersion7();
         var targetCategory = CreateDefaultCategories().Where(category => category.Id == targetCategoryId).ToList().FirstOrDefault();
@@ -654,8 +654,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
         var skip = 0;
         var take = 10;
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -681,8 +681,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
         var skip = 0;
         var take = 10;
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -700,8 +700,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         // Arrange
         var skip = 0;
         var take = 10;
-        Guid? targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        Guid? targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        Guid? targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        Guid? targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
         var targetItems = CreateDefaultCatalog().Where(
             item => item.CatalogBrandId == targetBrandId && item.CatalogCategoryId == targetCategoryId).ToList();
         var targetTotalItems = targetItems.Count;
@@ -740,8 +740,8 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
         var service = new CatalogApplicationService(catalogRepositoryMock.Object, catalogBrandRepository, catalogCategoryRepository, userStoreMock.Object, catalogDomainServiceMock, logger);
         var skip = 0;
         var take = 10;
-        var targetBrandId = new Guid("01971a00-0000-7000-b000-000000000001");
-        var targetCategoryId = new Guid("01971a00-0000-7000-c000-000000000001");
+        var targetBrandId = new Guid("019b76da-a800-7002-8001-000000000001");
+        var targetCategoryId = new Guid("019b76da-a800-7003-8001-000000000001");
 
         // Act
         var action = () => service.GetCatalogItemsForAdminAsync(skip, take, targetBrandId, targetCategoryId);
@@ -754,7 +754,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task GetCatalogItemForAdminAsync_リポジトリのGetAsyncを一度だけ呼び出す()
     {
         // Arrange
-        var targetId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var targetId = new Guid("019b76da-a800-7004-8001-000000000001");
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         catalogRepositoryMock
@@ -780,7 +780,7 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
     public async Task GetCatalogItemForAdminAsync_権限なし_PermissionDeniedExceptionが発生()
     {
         // Arrange
-        var targetId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var targetId = new Guid("019b76da-a800-7004-8001-000000000001");
         var targetItem = CreateDefaultCatalog().Where(item => item.Id == targetId).ToList().FirstOrDefault();
         var catalogRepositoryMock = new Mock<ICatalogRepository>();
         catalogRepositoryMock
@@ -827,31 +827,31 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
 
     private static CatalogItem CreateTestItem()
     {
-        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
-        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
+        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
+        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
 
         return new() { CatalogCategoryId = category1, CatalogBrandId = brand1, Description = "テスト用アイテムです。", Name = "テスト用アイテム", Price = 23800m, ProductCode = "TEST001", Id = Guid.CreateVersion7() };
     }
 
     private static List<CatalogItem> CreateDefaultCatalog()
     {
-        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
-        var category2 = new Guid("01971a00-0000-7000-c000-000000000002");
-        var category3 = new Guid("01971a00-0000-7000-c000-000000000003");
-        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
-        var brand2 = new Guid("01971a00-0000-7000-b000-000000000002");
-        var brand3 = new Guid("01971a00-0000-7000-b000-000000000003");
-        var item1 = new Guid("01971a00-0000-7000-d000-000000000001");
-        var item2 = new Guid("01971a00-0000-7000-d000-000000000002");
-        var item3 = new Guid("01971a00-0000-7000-d000-000000000003");
-        var item4 = new Guid("01971a00-0000-7000-d000-000000000004");
-        var item5 = new Guid("01971a00-0000-7000-d000-000000000005");
-        var item6 = new Guid("01971a00-0000-7000-d000-000000000006");
-        var item7 = new Guid("01971a00-0000-7000-d000-000000000007");
-        var item8 = new Guid("01971a00-0000-7000-d000-000000000008");
-        var item9 = new Guid("01971a00-0000-7000-d000-000000000009");
-        var item10 = new Guid("01971a00-0000-7000-d000-00000000000a");
-        var item11 = new Guid("01971a00-0000-7000-d000-00000000000b");
+        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
+        var category2 = new Guid("019b76da-a800-7003-8001-000000000002");
+        var category3 = new Guid("019b76da-a800-7003-8001-000000000003");
+        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
+        var brand2 = new Guid("019b76da-a800-7002-8001-000000000002");
+        var brand3 = new Guid("019b76da-a800-7002-8001-000000000003");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item3 = new Guid("019b76da-a800-7004-8001-000000000003");
+        var item4 = new Guid("019b76da-a800-7004-8001-000000000004");
+        var item5 = new Guid("019b76da-a800-7004-8001-000000000005");
+        var item6 = new Guid("019b76da-a800-7004-8001-000000000006");
+        var item7 = new Guid("019b76da-a800-7004-8001-000000000007");
+        var item8 = new Guid("019b76da-a800-7004-8001-000000000008");
+        var item9 = new Guid("019b76da-a800-7004-8001-000000000009");
+        var item10 = new Guid("019b76da-a800-7004-8001-00000000000a");
+        var item11 = new Guid("019b76da-a800-7004-8001-00000000000b");
         var catalog = new List<CatalogItem>()
         {
             new() { CatalogCategoryId = category1, CatalogBrandId = brand3, Description = "定番の無地ロングTシャツです。", Name = "クルーネック Tシャツ - ブラック", Price = 1980m, ProductCode = "C000000001", Id = item1, RowVersion = [255] },
@@ -871,9 +871,9 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
 
     private static List<CatalogBrand> CreateDefaultBrands()
     {
-        var brand1 = new Guid("01971a00-0000-7000-b000-000000000001");
-        var brand2 = new Guid("01971a00-0000-7000-b000-000000000002");
-        var brand3 = new Guid("01971a00-0000-7000-b000-000000000003");
+        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
+        var brand2 = new Guid("019b76da-a800-7002-8001-000000000002");
+        var brand3 = new Guid("019b76da-a800-7002-8001-000000000003");
         var brands = new List<CatalogBrand>()
         {
             new() { Name = "高級なブランド", Id = brand1 },
@@ -885,9 +885,9 @@ public class CatalogApplicationServiceTest(ITestOutputHelper testOutputHelper) :
 
     private static List<CatalogCategory> CreateDefaultCategories()
     {
-        var category1 = new Guid("01971a00-0000-7000-c000-000000000001");
-        var category2 = new Guid("01971a00-0000-7000-c000-000000000002");
-        var category3 = new Guid("01971a00-0000-7000-c000-000000000003");
+        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
+        var category2 = new Guid("019b76da-a800-7003-8001-000000000002");
+        var category3 = new Guid("019b76da-a800-7003-8001-000000000003");
         var categories = new List<CatalogCategory>()
         {
             new() { Name = "服", Id = category1 },

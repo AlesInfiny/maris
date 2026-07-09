@@ -1,4 +1,4 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
@@ -40,7 +40,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBuyerId = "dummyId";
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -75,7 +75,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBuyerId = "dummyId";
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -108,7 +108,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBuyerId = "dummyId";
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -139,9 +139,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var deletedCatalogItem1 = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
-        var deletedCatalogItem2 = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000b"), "説明2", "ダミー商品2", "C000000002", true);
-        var existingCatalogItem = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000c"), "説明3", "ダミー商品3", "C000000003");
+        var deletedCatalogItem1 = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
+        var deletedCatalogItem2 = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002", true);
+        var existingCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000c"), "説明3", "ダミー商品3", "C000000003");
         var catalogItems = new List<CatalogItem>
          {
              deletedCatalogItem1, deletedCatalogItem2, existingCatalogItem,
@@ -178,8 +178,8 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var deletedCatalogItem = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
-        var existingCatalogItem = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000b"), "説明2", "ダミー商品2", "C000000002");
+        var deletedCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
+        var existingCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
         var catalogItems = new List<CatalogItem>
          {
              deletedCatalogItem, existingCatalogItem,
@@ -228,8 +228,8 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var deletedCatalogItem = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
-        var existingCatalogItem = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000b"), "説明2", "ダミー商品2", "C000000002");
+        var deletedCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
+        var existingCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
         var catalogItems = new List<CatalogItem>
          {
              deletedCatalogItem, existingCatalogItem,
@@ -276,8 +276,8 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var deletedCatalogItem = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
-        var existingCatalogItem = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000b"), "説明2", "ダミー商品2", "C000000002");
+        var deletedCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
+        var existingCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
         var catalogItems = new List<CatalogItem>
          {
              deletedCatalogItem, existingCatalogItem,
@@ -352,7 +352,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
 
         // Act
-        var action = () => service.SetBasketItemsQuantitiesAsync(nullOrEmptyBuyerId!, new() { { new Guid("01971a00-0000-7000-d000-000000000001"), 1 } });
+        var action = () => service.SetBasketItemsQuantitiesAsync(nullOrEmptyBuyerId!, new() { { new Guid("019b76da-a800-7004-8001-000000000001"), 1 } });
 
         // Assert
         var ex = await Assert.ThrowsAsync<ArgumentException>("buyerId", action);
@@ -365,7 +365,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 100);
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 100);
         var quantities = new Dictionary<Guid, int>() { { Guid.Empty, 1 } };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -392,8 +392,8 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000m);
-        var quantities = new Dictionary<Guid, int>() { { new Guid("01971a00-0000-7000-d000-00000000000a"), 5 } };
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000m);
+        var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 5 } };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -422,11 +422,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000m);
-        var quantities = new Dictionary<Guid, int>() { { new Guid("01971a00-0000-7000-d000-00000000000a"), 5 } };
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000m);
+        var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 5 } };
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -459,12 +459,12 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000m);
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000m);
         var newQuantity = 5;
-        var quantities = new Dictionary<Guid, int>() { { new Guid("01971a00-0000-7000-d000-00000000000a"), newQuantity } };
+        var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), newQuantity } };
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -497,11 +497,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000m);
-        var quantities = new Dictionary<Guid, int>() { { new Guid("01971a00-0000-7000-d000-00000000000a"), 0 } };
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000m);
+        var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 0 } };
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -544,7 +544,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
 
         // Act
-        var action = () => service.AddItemToBasketAsync(nullOrEmptyBuyerId!, new Guid("01971a00-0000-7000-d000-00000000000a"), 5);
+        var action = () => service.AddItemToBasketAsync(nullOrEmptyBuyerId!, new Guid("019b76da-a800-7004-8001-00000000000a"), 5);
 
         // Assert
         var ex = await Assert.ThrowsAsync<ArgumentException>("buyerId", action);
@@ -557,7 +557,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        var quantities = new Dictionary<Guid, int>() { { new Guid("01971a00-0000-7000-d000-00000000000a"), 5 } };
+        var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 5 } };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -574,7 +574,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
 
         // Act
-        var action = () => service.AddItemToBasketAsync(dummyBuyerId, new Guid("01971a00-0000-7000-d000-00000000000a"), 5);
+        var action = () => service.AddItemToBasketAsync(dummyBuyerId, new Guid("019b76da-a800-7004-8001-00000000000a"), 5);
 
         // Assert
         await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
@@ -586,10 +586,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        var quantities = new Dictionary<Guid, int>() { { new Guid("01971a00-0000-7000-d000-00000000000a"), 5 } };
+        var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 5 } };
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -608,7 +608,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.AddItemToBasketAsync(dummyBuyerId, new Guid("01971a00-0000-7000-d000-00000000000a"), 5, cancellationToken);
+        await service.AddItemToBasketAsync(dummyBuyerId, new Guid("019b76da-a800-7004-8001-00000000000a"), 5, cancellationToken);
 
         // Assert
         basketRepo.Verify(
@@ -622,8 +622,8 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        var quantities = new Dictionary<Guid, int>() { { new Guid("01971a00-0000-7000-d000-00000000000a"), 5 } };
-        var catalogItem = CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001");
+        var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 5 } };
+        var catalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001");
         var catalogItems = new List<CatalogItem> { catalogItem };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -642,7 +642,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        await service.AddItemToBasketAsync(dummyBuyerId, new Guid("01971a00-0000-7000-d000-00000000000a"), 5, cancellationToken);
+        await service.AddItemToBasketAsync(dummyBuyerId, new Guid("019b76da-a800-7004-8001-00000000000a"), 5, cancellationToken);
 
         // Assert
         basketRepo.Verify(
@@ -745,11 +745,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000);
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -792,11 +792,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000);
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -839,11 +839,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000);
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -886,11 +886,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000);
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -938,7 +938,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.ProductCode == "C000000001"), AnyToken),
             Times.Once);
         orderRepo.Verify(
-            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.CatalogItemId == new Guid("01971a00-0000-7000-d000-000000000001")), AnyToken),
+            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.CatalogItemId == new Guid("019b76da-a800-7004-8001-000000000001")), AnyToken),
             Times.Once);
     }
 
@@ -948,11 +948,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
-        dummyBasket.AddItem(new Guid("01971a00-0000-7000-d000-00000000000a"), 1000);
+        dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
         var catalogItems = new List<CatalogItem>
          {
-             CreateCatalogItem(new Guid("01971a00-0000-7000-d000-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -1013,7 +1013,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         var items = new List<OrderItem>()
         {
-            new() { ItemOrdered = new CatalogItemOrdered(new Guid("01971a00-0000-7000-d000-000000000001"), productName, productCode), UnitPrice = 1000m, Quantity = 1 },
+            new() { ItemOrdered = new CatalogItemOrdered(new Guid("019b76da-a800-7004-8001-000000000001"), productName, productCode), UnitPrice = 1000m, Quantity = 1 },
         };
 
         return items;
@@ -1023,8 +1023,8 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         return new CatalogItem
         {
-            CatalogCategoryId = new Guid("01971a00-0000-7000-c000-000000000001"),
-            CatalogBrandId = new Guid("01971a00-0000-7000-b000-000000000001"),
+            CatalogCategoryId = new Guid("019b76da-a800-7003-8001-000000000001"),
+            CatalogBrandId = new Guid("019b76da-a800-7002-8001-000000000001"),
             Description = description,
             Name = name,
             Price = 1000m,

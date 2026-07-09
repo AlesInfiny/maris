@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Ordering;
+using Dressca.ApplicationCore.Ordering;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
@@ -27,7 +27,7 @@ public class CatalogItemOrderedTest
     public void Constructor_製品名がnullまたは空の文字列_ArgumentExceptionが発生する(string? productName)
     {
         // Arrange
-        var catalogItemId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var catalogItemId = new Guid("019b76da-a800-7004-8001-000000000001");
         string productCode = "A000000001";
 
         // Act
@@ -45,7 +45,7 @@ public class CatalogItemOrderedTest
     public void Constructor_製品コードがnullまたは空の文字列_ArgumentExceptionが発生する(string? productCode)
     {
         // Arrange
-        var catalogItemId = new Guid("01971a00-0000-7000-d000-000000000001");
+        var catalogItemId = new Guid("019b76da-a800-7004-8001-000000000001");
         string productname = "製品1";
 
         // Act
