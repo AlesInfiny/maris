@@ -9,8 +9,8 @@ public class CatalogItemTest
     {
         // Arrange
         // Nothing to do.
-        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
-        var brand2 = new Guid("019b76da-a800-7002-8001-000000000002");
+        var category1 = Guid.CreateVersion7();
+        var brand2 = Guid.CreateVersion7();
 
         // Act
         // コンストラクタのテストなので CreateDefaultCatalogItem は使わない
@@ -27,8 +27,8 @@ public class CatalogItemTest
     public void Constructor_Name_nullまたは空白文字_ArgumentExceptionが発生(string? name)
     {
         // Arrange & Act
-        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
-        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
+        var category1 = Guid.CreateVersion7();
+        var brand1 = Guid.CreateVersion7();
         var action = () => new CatalogItem
         {
             CatalogCategoryId = category1,
@@ -52,8 +52,8 @@ public class CatalogItemTest
     public void Constructor_Description_nullまたは空白文字_ArgumentExceptionが発生(string? description)
     {
         // Arrange & Act
-        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
-        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
+        var category1 = Guid.CreateVersion7();
+        var brand1 = Guid.CreateVersion7();
         var action = () => new CatalogItem
         {
             CatalogCategoryId = category1,
@@ -75,8 +75,8 @@ public class CatalogItemTest
     {
         // Arrange
         var price = -100m;
-        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
-        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
+        var category1 = Guid.CreateVersion7();
+        var brand1 = Guid.CreateVersion7();
 
         // Act
         var action = () => new CatalogItem
@@ -100,8 +100,8 @@ public class CatalogItemTest
     {
         // Arrange
         var productCode = "商品コード";
-        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
-        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
+        var category1 = Guid.CreateVersion7();
+        var brand1 = Guid.CreateVersion7();
 
         // Act
         var action = () => new CatalogItem
@@ -125,7 +125,7 @@ public class CatalogItemTest
     {
         // Arrange
         var catalogCategoryId = Guid.Empty;
-        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
+        var brand1 = Guid.CreateVersion7();
 
         // Act
         var action = () => new CatalogItem
@@ -149,7 +149,7 @@ public class CatalogItemTest
     {
         // Arrange
         var catalogBrandId = Guid.Empty;
-        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
+        var category1 = Guid.CreateVersion7();
 
         // Act
         var action = () => new CatalogItem

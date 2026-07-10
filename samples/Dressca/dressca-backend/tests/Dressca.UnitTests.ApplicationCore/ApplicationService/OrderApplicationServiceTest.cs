@@ -13,7 +13,7 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが合致する_注文情報を取得できる()
     {
         // Arrange
-        var orderId = new Guid("019b76da-a800-7006-8001-000000000001");
+        var orderId = Guid.CreateVersion7();
         var buyerId = Guid.CreateVersion7().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
@@ -39,7 +39,7 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     public async Task GetOrderAsync_注文リポジトリのFindAsyncを1度だけ呼び出す()
     {
         // Arrange
-        var orderId = new Guid("019b76da-a800-7006-8001-000000000001");
+        var orderId = Guid.CreateVersion7();
         var buyerId = Guid.CreateVersion7().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
@@ -65,7 +65,7 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが異なる_OrderNotFoundExceptionが発生する()
     {
         // Arrange
-        var orderId = new Guid("019b76da-a800-7006-8001-000000000001");
+        var orderId = Guid.CreateVersion7();
         var buyerId = Guid.CreateVersion7().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
@@ -90,7 +90,7 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     public async Task GetOrderAsync_注文リポジトリから注文情報を取得できない_OrderNotFoundExceptionが発生する()
     {
         // Arrange
-        var orderId = new Guid("019b76da-a800-7006-8001-000000000001");
+        var orderId = Guid.CreateVersion7();
         var buyerId = Guid.CreateVersion7().ToString("D");
         var orderRepositoryMock = new Mock<IOrderRepository>();
         orderRepositoryMock
@@ -129,7 +129,7 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
         // Arrange
         const string productName = "ダミー商品1";
         const string productCode = "C000000001";
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
 
         var items = new List<OrderItem>()
         {

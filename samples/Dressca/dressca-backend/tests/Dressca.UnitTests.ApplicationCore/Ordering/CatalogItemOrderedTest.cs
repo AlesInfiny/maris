@@ -27,7 +27,7 @@ public class CatalogItemOrderedTest
     public void Constructor_製品名がnullまたは空の文字列_ArgumentExceptionが発生する(string? productName)
     {
         // Arrange
-        var catalogItemId = new Guid("019b76da-a800-7004-8001-000000000001");
+        var catalogItemId = Guid.CreateVersion7();
         string productCode = "A000000001";
 
         // Act
@@ -45,7 +45,7 @@ public class CatalogItemOrderedTest
     public void Constructor_製品コードがnullまたは空の文字列_ArgumentExceptionが発生する(string? productCode)
     {
         // Arrange
-        var catalogItemId = new Guid("019b76da-a800-7004-8001-000000000001");
+        var catalogItemId = Guid.CreateVersion7();
         string productname = "製品1";
 
         // Act

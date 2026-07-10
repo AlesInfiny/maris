@@ -11,7 +11,7 @@ public class BasketTest
     public void AddItem_商品を1つ追加できる(int quantity)
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
@@ -25,8 +25,8 @@ public class BasketTest
     public void AddItem_複数の商品を追加できる()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
-        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
@@ -52,7 +52,7 @@ public class BasketTest
     public void AddItem_買い物かご内の商品の数量を加算しても買い物かご内の商品の種類が変わらない()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
@@ -67,7 +67,7 @@ public class BasketTest
     public void AddItem_買い物かご内の商品の数量を加算できる()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
@@ -85,7 +85,7 @@ public class BasketTest
     public void AddItem_買い物かご内の商品の数量を減算しても商品が買い物かご内に残る(int firstQuantity, int additionalQuantity)
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
@@ -102,7 +102,7 @@ public class BasketTest
     public void AddItem_買い物かご内の商品の数量を減算できる(int firstQuantity, int additionalQuantity)
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
@@ -130,7 +130,7 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量1のアイテムが1件存在する_アイテムは変化しない()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 100, 1);
 
@@ -146,7 +146,7 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件存在する_数量0のアイテムを除去する()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 100, 0);
 
@@ -161,8 +161,8 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量0のアイテムが2件存在する_数量0のアイテムを除去する()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
-        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 100, 0);
         basket.AddItem(item2, 200, 0);
@@ -178,8 +178,8 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件_数量1のアイテムが1件存在する_数量0のアイテムを除去する()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
-        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 100, 0);
         basket.AddItem(item2, 200, 1);
@@ -196,8 +196,8 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量1のアイテムが2件存在する_アイテムは変化しない()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
-        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 100, 1);
         basket.AddItem(item2, 200, 1);
@@ -224,8 +224,8 @@ public class BasketTest
     public void RemoveEmptyItems_数量0の商品を買い物かごから削除しても数量0でない商品は残る()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
-        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 1000);
         basket.AddItem(item1, 1000, -1);
@@ -244,7 +244,7 @@ public class BasketTest
     public void AddItem_数量は0未満にする_ArgumentExceptionが発生する()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
@@ -261,7 +261,7 @@ public class BasketTest
     public void AddItem_商品の数量を加減算して0未満にする_ArgumentExceptionが発生する(int firstQuantity, int additionalQuantity)
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 1000, firstQuantity);
 
@@ -287,7 +287,7 @@ public class BasketTest
     public void IsInCatalogItem_買い物かご内に存在するカタログアイテムIdを渡す_true()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 1000m);
 
@@ -302,8 +302,8 @@ public class BasketTest
     public void IsInCatalogItem_買い物かご内に存在しないカタログアイテムIdを渡す_false()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
-        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 1000m);
 
@@ -318,8 +318,8 @@ public class BasketTest
     public void GetAccount_買い物かごアイテムの情報をもとにした会計情報を取得できる()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
-        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 1000m, 1);
         basket.AddItem(item2, 1500m, 2);
@@ -348,7 +348,7 @@ public class BasketTest
     public void IsEmpty_買い物かごにアイテムが存在する_false()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 1000m);
 
@@ -363,7 +363,7 @@ public class BasketTest
     public void SetItemsQuantity_買い物かご内に存在するアイテムの数量を指定_数量を設定できる()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         basket.AddItem(item1, 1000m);
         var itemId = item1;
@@ -382,7 +382,7 @@ public class BasketTest
     public void SetItemsQuantity_買い物かご内に存在しないアイテムの数量を指定_買い物かご内にアイテムが追加されない()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item1 = Guid.CreateVersion7();
         var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
         var itemId = item1;
         basket.AddItem(itemId, 1000m);

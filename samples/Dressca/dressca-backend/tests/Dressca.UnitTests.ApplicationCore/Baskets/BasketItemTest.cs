@@ -8,7 +8,7 @@ public class BasketItemTest
     public void GetSubTotal_買い物かごアイテムの小計額は単価と数量の積になる()
     {
         // Arrange
-        var catalogItemId = new Guid("019b76da-a800-7004-8001-000000000001");
+        var catalogItemId = Guid.CreateVersion7();
         decimal unitPrice = 1000m;
         int quantity = 2;
         var item = new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity };
@@ -24,7 +24,7 @@ public class BasketItemTest
     public void Basket_買い物かごのナビゲーションプロパティが初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
-        var catalogItemId = new Guid("019b76da-a800-7004-8001-000000000001");
+        var catalogItemId = Guid.CreateVersion7();
         decimal unitPrice = 1000m;
         int quantity = 2;
         var item = new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity };

@@ -11,7 +11,7 @@ public class CatalogItemAssetTest
     public void Constructor_アセットコードがnullまたは空の文字列_ArgumentExceptionが発生する(string? assetCode)
     {
         // Arrange
-        var catalogItemId = new Guid("019b76da-a800-7004-8001-000000000001");
+        var catalogItemId = Guid.CreateVersion7();
 
         // Act
         var action = () => new CatalogItemAsset { AssetCode = assetCode!, CatalogItemId = catalogItemId };
@@ -26,7 +26,7 @@ public class CatalogItemAssetTest
     {
         // Arrange
         string assetCode = "Asset Code";
-        var catalogItemId = new Guid("019b76da-a800-7004-8001-000000000001");
+        var catalogItemId = Guid.CreateVersion7();
         var itemAsset = new CatalogItemAsset { AssetCode = assetCode!, CatalogItemId = catalogItemId };
 
         // Act

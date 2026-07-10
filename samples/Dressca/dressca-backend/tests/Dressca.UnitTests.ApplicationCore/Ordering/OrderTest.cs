@@ -196,8 +196,8 @@ public class OrderTest
     private static List<OrderItem> CreateDefaultOrderItems()
     {
         // Arrange
-        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
-        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
         const string productName1 = "ダミー商品1";
         const string productCode1 = "C000000001";
 
