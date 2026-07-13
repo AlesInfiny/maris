@@ -26,14 +26,14 @@ internal class EfCatalogCategoryRepository : ICatalogCategoryRepository
         => await this.dbContext.CatalogCategories.ToListAsync(cancellationToken);
 
     /// <inheritdoc/>
-    public async Task<CatalogCategory?> GetAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<CatalogCategory?> GetAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var keys = new object[] { id };
         return await this.dbContext.CatalogCategories.FindAsync(keys, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default)
+    public async Task<bool> AnyAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await this.dbContext.CatalogCategories.AnyAsync(catalogCategory => catalogCategory.Id == id, cancellationToken);
     }

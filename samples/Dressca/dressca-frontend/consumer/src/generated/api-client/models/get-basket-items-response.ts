@@ -36,6 +36,6 @@ export interface GetBasketItemsResponse {
     /**
      * 削除済みカタログアイテムの Id のリストを取得または設定します。             
      */
-    'deletedItemIds'?: Array<number>;
+    'deletedItemIds'?: Array<string>;
 }
 

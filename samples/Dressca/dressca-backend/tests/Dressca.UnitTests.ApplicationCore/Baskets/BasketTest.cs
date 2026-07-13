@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Baskets;
+using Dressca.ApplicationCore.Baskets;
 
 namespace Dressca.UnitTests.ApplicationCore.Baskets;
 
@@ -11,10 +11,11 @@ public class BasketTest
     public void AddItem_商品を1つ追加できる(int quantity)
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
-        basket.AddItem(1L, 1000, quantity);
+        basket.AddItem(item1, 1000, quantity);
 
         // Assert
         Assert.Single(basket.Items);
@@ -24,23 +25,25 @@ public class BasketTest
     public void AddItem_複数の商品を追加できる()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
-        basket.AddItem(1L, 1000);
-        basket.AddItem(2L, 2000);
+        basket.AddItem(item1, 1000);
+        basket.AddItem(item2, 2000);
 
         // Assert
         Assert.Collection(
             basket.Items,
             item =>
             {
-                Assert.Equal(1L, item.CatalogItemId);
+                Assert.Equal(item1, item.CatalogItemId);
                 Assert.Equal(1, item.Quantity);
             },
             item =>
             {
-                Assert.Equal(2L, item.CatalogItemId);
+                Assert.Equal(item2, item.CatalogItemId);
                 Assert.Equal(1, item.Quantity);
             });
     }
@@ -49,28 +52,30 @@ public class BasketTest
     public void AddItem_買い物かご内の商品の数量を加算しても買い物かご内の商品の種類が変わらない()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
-        basket.AddItem(1L, 1000);
-        basket.AddItem(1L, 1000, 9);
+        basket.AddItem(item1, 1000);
+        basket.AddItem(item1, 1000, 9);
 
         // Assert
-        Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
+        Assert.Single(basket.Items, item => item.CatalogItemId == item1);
     }
 
     [Fact]
     public void AddItem_買い物かご内の商品の数量を加算できる()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
-        basket.AddItem(1L, 1000);
-        basket.AddItem(1L, 1000, 9);
+        basket.AddItem(item1, 1000);
+        basket.AddItem(item1, 1000, 9);
 
         // Assert
-        var item = Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
+        var item = Assert.Single(basket.Items, item => item.CatalogItemId == item1);
         Assert.Equal(10, item.Quantity);
     }
 
@@ -80,14 +85,15 @@ public class BasketTest
     public void AddItem_買い物かご内の商品の数量を減算しても商品が買い物かご内に残る(int firstQuantity, int additionalQuantity)
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
-        basket.AddItem(1L, 1000, firstQuantity);
-        basket.AddItem(1L, 1000, additionalQuantity);
+        basket.AddItem(item1, 1000, firstQuantity);
+        basket.AddItem(item1, 1000, additionalQuantity);
 
         // Assert
-        Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
+        Assert.Single(basket.Items, item => item.CatalogItemId == item1);
     }
 
     [Theory]
@@ -96,11 +102,12 @@ public class BasketTest
     public void AddItem_買い物かご内の商品の数量を減算できる(int firstQuantity, int additionalQuantity)
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
-        basket.AddItem(1L, 1000, firstQuantity);
-        basket.AddItem(1L, 1000, additionalQuantity);
+        basket.AddItem(item1, 1000, firstQuantity);
+        basket.AddItem(item1, 1000, additionalQuantity);
 
         // Assert
         Assert.Single(basket.Items, item => item.Quantity == firstQuantity + additionalQuantity);
@@ -110,7 +117,7 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごにアイテムが1件も存在しない_アイテムは0件のまま()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
         basket.RemoveEmptyItems();
@@ -123,14 +130,15 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量1のアイテムが1件存在する_アイテムは変化しない()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 100, 1);
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 100, 1);
 
         // Act
         basket.RemoveEmptyItems();
 
         // Assert
-        var item = Assert.Single(basket.Items, item => item.CatalogItemId == 1L);
+        var item = Assert.Single(basket.Items, item => item.CatalogItemId == item1);
         Assert.Equal(1, item.Quantity);
     }
 
@@ -138,8 +146,9 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件存在する_数量0のアイテムを除去する()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 100, 0);
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 100, 0);
 
         // Act
         basket.RemoveEmptyItems();
@@ -152,9 +161,11 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量0のアイテムが2件存在する_数量0のアイテムを除去する()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 100, 0);
-        basket.AddItem(2L, 200, 0);
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 100, 0);
+        basket.AddItem(item2, 200, 0);
 
         // Act
         basket.RemoveEmptyItems();
@@ -167,15 +178,17 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量0のアイテムが1件_数量1のアイテムが1件存在する_数量0のアイテムを除去する()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 100, 0);
-        basket.AddItem(2L, 200, 1);
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 100, 0);
+        basket.AddItem(item2, 200, 1);
 
         // Act
         basket.RemoveEmptyItems();
 
         // Assert
-        var item = Assert.Single(basket.Items, item => item.CatalogItemId == 2L);
+        var item = Assert.Single(basket.Items, item => item.CatalogItemId == item2);
         Assert.Equal(1, item.Quantity);
     }
 
@@ -183,9 +196,11 @@ public class BasketTest
     public void RemoveEmptyItems_買い物かごに数量1のアイテムが2件存在する_アイテムは変化しない()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 100, 1);
-        basket.AddItem(2L, 200, 1);
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 100, 1);
+        basket.AddItem(item2, 200, 1);
 
         // Act
         basket.RemoveEmptyItems();
@@ -195,12 +210,12 @@ public class BasketTest
             basket.Items,
             item =>
             {
-                Assert.Equal(1L, item.CatalogItemId);
+                Assert.Equal(item1, item.CatalogItemId);
                 Assert.Equal(1, item.Quantity);
             },
             item =>
             {
-                Assert.Equal(2L, item.CatalogItemId);
+                Assert.Equal(item2, item.CatalogItemId);
                 Assert.Equal(1, item.Quantity);
             });
     }
@@ -209,17 +224,19 @@ public class BasketTest
     public void RemoveEmptyItems_数量0の商品を買い物かごから削除しても数量0でない商品は残る()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 1000);
-        basket.AddItem(1L, 1000, -1);
-        basket.AddItem(2L, 1000, 2);
-        basket.AddItem(2L, 1000, -1);
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 1000);
+        basket.AddItem(item1, 1000, -1);
+        basket.AddItem(item2, 1000, 2);
+        basket.AddItem(item2, 1000, -1);
 
         // Act
         basket.RemoveEmptyItems();
 
         // Assert
-        var item = Assert.Single(basket.Items, item => item.CatalogItemId == 2L);
+        var item = Assert.Single(basket.Items, item => item.CatalogItemId == item2);
         Assert.Equal(1, item.Quantity);
     }
 
@@ -227,10 +244,11 @@ public class BasketTest
     public void AddItem_数量は0未満にする_ArgumentExceptionが発生する()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
-        var action = () => basket.AddItem(1L, 1000, -1);
+        var action = () => basket.AddItem(item1, 1000, -1);
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("quantity", action);
@@ -243,11 +261,12 @@ public class BasketTest
     public void AddItem_商品の数量を加減算して0未満にする_ArgumentExceptionが発生する(int firstQuantity, int additionalQuantity)
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 1000, firstQuantity);
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 1000, firstQuantity);
 
         // Act
-        var action = () => basket.AddItem(1L, 1000, additionalQuantity);
+        var action = () => basket.AddItem(item1, 1000, additionalQuantity);
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("quantity", action);
@@ -268,11 +287,12 @@ public class BasketTest
     public void IsInCatalogItem_買い物かご内に存在するカタログアイテムIdを渡す_true()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 1000m);
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 1000m);
 
         // Act
-        var result = basket.IsInCatalogItem(1L);
+        var result = basket.IsInCatalogItem(item1);
 
         // Assert
         Assert.True(result);
@@ -282,11 +302,13 @@ public class BasketTest
     public void IsInCatalogItem_買い物かご内に存在しないカタログアイテムIdを渡す_false()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 1000m);
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 1000m);
 
         // Act
-        var result = basket.IsInCatalogItem(2L);
+        var result = basket.IsInCatalogItem(item2);
 
         // Assert
         Assert.False(result);
@@ -296,9 +318,11 @@ public class BasketTest
     public void GetAccount_買い物かごアイテムの情報をもとにした会計情報を取得できる()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 1000m, 1);
-        basket.AddItem(2L, 1500m, 2);
+        var item1 = Guid.CreateVersion7();
+        var item2 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 1000m, 1);
+        basket.AddItem(item2, 1500m, 2);
 
         // Act
         var account = basket.GetAccount();
@@ -311,7 +335,7 @@ public class BasketTest
     public void IsEmpty_買い物かごアイテムが空_true()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
 
         // Act
         var result = basket.IsEmpty();
@@ -324,8 +348,9 @@ public class BasketTest
     public void IsEmpty_買い物かごにアイテムが存在する_false()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 1000m);
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 1000m);
 
         // Act
         var result = basket.IsEmpty();
@@ -338,11 +363,12 @@ public class BasketTest
     public void SetItemsQuantity_買い物かご内に存在するアイテムの数量を指定_数量を設定できる()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        basket.AddItem(1L, 1000m);
-        var itemId = 1L;
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        basket.AddItem(item1, 1000m);
+        var itemId = item1;
         var newQuantity = 5;
-        var quantities = new Dictionary<long, int>() { { itemId, newQuantity } };
+        var quantities = new Dictionary<Guid, int>() { { itemId, newQuantity } };
 
         // Act
         basket.SetItemsQuantity(quantities);
@@ -356,10 +382,11 @@ public class BasketTest
     public void SetItemsQuantity_買い物かご内に存在しないアイテムの数量を指定_買い物かご内にアイテムが追加されない()
     {
         // Arrange
-        var basket = new Basket { BuyerId = Guid.NewGuid().ToString() };
-        var itemId = 1L;
+        var item1 = Guid.CreateVersion7();
+        var basket = new Basket { BuyerId = Guid.CreateVersion7().ToString("D") };
+        var itemId = item1;
         basket.AddItem(itemId, 1000m);
-        var quantities = new Dictionary<long, int>() { { 100L, 5 } };
+        var quantities = new Dictionary<Guid, int>() { { Guid.CreateVersion7(), 5 } };
 
         // Act
         basket.SetItemsQuantity(quantities);

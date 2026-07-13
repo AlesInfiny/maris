@@ -11,7 +11,7 @@ public class GetCatalogCategoriesResponse
     ///  カタログカテゴリ ID を取得または設定します。
     /// </summary>
     [Required]
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
 
     /// <summary>
     ///  カテゴリ名を取得または設定します。

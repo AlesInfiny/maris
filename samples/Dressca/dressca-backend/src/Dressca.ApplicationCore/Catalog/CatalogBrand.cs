@@ -22,7 +22,7 @@ public class CatalogBrand
     /// <summary>
     ///  カタログブランド Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  ブランド名を取得します。

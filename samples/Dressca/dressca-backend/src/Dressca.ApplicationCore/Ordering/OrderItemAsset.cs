@@ -21,7 +21,7 @@ public class OrderItemAsset
     /// <summary>
     ///  注文アイテムアセット Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  アセットコードを取得します。
@@ -46,7 +46,7 @@ public class OrderItemAsset
     /// <summary>
     ///  注文アイテム Id を取得します。
     /// </summary>
-    public required long OrderItemId { get; init; }
+    public required Guid OrderItemId { get; init; }
 
     /// <summary>
     ///  注文アイテムを取得します。

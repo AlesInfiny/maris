@@ -1,4 +1,5 @@
 ﻿using Dressca.ApplicationCore.Catalog;
+using Dressca.EfInfrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,15 +15,17 @@ internal class CatalogBrandConfiguration : IEntityTypeConfiguration<CatalogBrand
     {
         ArgumentNullException.ThrowIfNull(builder);
         builder.ToTable("CatalogBrands");
+        builder.Property(catalogBrand => catalogBrand.Id)
+            .ValueGeneratedNever();
         builder.Property(catalogItem => catalogItem.Name)
             .HasMaxLength(128)
             .IsRequired();
 
         builder.HasData(
         [
-            new() { Name = "高級なブランド", Id = 1L },
-            new() { Name = "カジュアルなブランド", Id = 2L },
-            new() { Name = "ノーブランド", Id = 3L },
+            new() { Name = "高級なブランド", Id = DresscaSeedIds.Brand1 },
+            new() { Name = "カジュアルなブランド", Id = DresscaSeedIds.Brand2 },
+            new() { Name = "ノーブランド", Id = DresscaSeedIds.Brand3 },
         ]);
     }
 }

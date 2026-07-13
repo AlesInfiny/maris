@@ -170,10 +170,8 @@
             "required": true,
             "description": "カタログアイテム Id 。",
             "schema": {
-              "type": "integer",
-              "format": "int64",
-              "maximum": 9223372036854780000.0,
-              "minimum": 1.0
+              "type": "string",
+              "format": "guid"
             },
             "x-position": 1
           }
@@ -266,8 +264,8 @@
             "in": "query",
             "description": "カタログブランド ID です。\n未設定の場合は全カタログブランドを対象にします。\n            ",
             "schema": {
-              "type": "integer",
-              "format": "int64",
+              "type": "string",
+              "format": "guid",
               "nullable": true
             },
             "x-position": 1
@@ -277,8 +275,8 @@
             "in": "query",
             "description": "カタログカテゴリ ID です。\n未設定の場合は全カタログカテゴリを対象にします。\n            ",
             "schema": {
-              "type": "integer",
-              "format": "int64",
+              "type": "string",
+              "format": "guid",
               "nullable": true
             },
             "x-position": 2
@@ -346,8 +344,8 @@
             "required": true,
             "description": "注文 Id 。",
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "guid"
             },
             "x-position": 1
           }
@@ -532,8 +530,8 @@
             "type": "array",
             "description": "削除済みカタログアイテムの Id のリストを取得または設定します。\n            ",
             "items": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "guid"
             }
           }
         }
@@ -589,9 +587,10 @@
         ],
         "properties": {
           "catalogItemId": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログアイテム Id を取得または設定します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "unitPrice": {
             "type": "number",
@@ -630,9 +629,10 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログアイテム Id を取得または設定します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "name": {
             "type": "string",
@@ -663,11 +663,10 @@
         ],
         "properties": {
           "catalogItemId": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログアイテム Id を取得または設定します。\n1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。\n            ",
-            "format": "int64",
-            "maximum": 9223372036854780000.0,
-            "minimum": 1.0
+            "format": "guid",
+            "minLength": 1
           },
           "quantity": {
             "type": "integer",
@@ -687,11 +686,10 @@
         ],
         "properties": {
           "catalogItemId": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログアイテム Id を取得または設定します。\n1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。\n            ",
-            "format": "int64",
-            "maximum": 9223372036854780000.0,
-            "minimum": 1.0
+            "format": "guid",
+            "minLength": 1
           },
           "addedQuantity": {
             "type": "integer",
@@ -711,9 +709,10 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログブランド Id を取得または設定します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "name": {
             "type": "string",
@@ -732,9 +731,10 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログカテゴリ Id を取得または設定します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "name": {
             "type": "string",
@@ -810,19 +810,22 @@
             "format": "decimal"
           },
           "catalogCategoryId": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログカテゴリ Id を取得または設定します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "catalogBrandId": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログブランド Id を取得または設定します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "カタログアイテム Id を取得または設定します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "name": {
             "type": "string",
@@ -859,9 +862,10 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "注文 Id を取得または設定します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "buyerId": {
             "type": "string",
@@ -929,9 +933,10 @@
         ],
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "description": "注文アイテム Id を取得します。\n            ",
-            "format": "int64"
+            "format": "guid",
+            "minLength": 1
           },
           "itemOrdered": {
             "description": "注文された商品（カタログアイテム）を取得または設定します。\n            ",

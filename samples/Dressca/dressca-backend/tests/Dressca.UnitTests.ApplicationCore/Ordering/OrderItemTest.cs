@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Ordering;
+using Dressca.ApplicationCore.Ordering;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
 
@@ -8,7 +8,8 @@ public class OrderItemTest
     public void Order_注文情報が初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
-        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
+        var item1 = Guid.CreateVersion7();
+        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
         var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
@@ -25,7 +26,8 @@ public class OrderItemTest
     public void AddAssets_注文アイテムアセットにnullを追加する_ArgumentNullExceptionが発生する()
     {
         // Arrange
-        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
+        var item1 = Guid.CreateVersion7();
+        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
         var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
@@ -42,7 +44,8 @@ public class OrderItemTest
     public void AddAssets_注文アイテムアセットに追加した情報が取得できる()
     {
         // Arrange
-        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
+        var item1 = Guid.CreateVersion7();
+        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
         var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
@@ -66,7 +69,8 @@ public class OrderItemTest
     public void GetSubTotal_注文アイテムの小計を取得できる()
     {
         // Arrange
-        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(1L, "製品1", "A00000001");
+        var item1 = Guid.CreateVersion7();
+        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 2;
         var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };

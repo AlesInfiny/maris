@@ -188,7 +188,7 @@ public class BasketItemsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteBasketItem")]
-    public async Task<IActionResult> DeleteBasketItemAsync([Range(1L, long.MaxValue)] long catalogItemId)
+    public async Task<IActionResult> DeleteBasketItemAsync(Guid catalogItemId)
     {
         var buyerId = this.HttpContext.GetBuyerId();
         try
@@ -204,7 +204,7 @@ public class BasketItemsController : ControllerBase
         return this.NoContent();
     }
 
-    private CatalogItemSummaryApiModel? GetCatalogItemSummary(long catalogItemId, IEnumerable<CatalogItem> catalogItems)
+    private CatalogItemSummaryApiModel? GetCatalogItemSummary(Guid catalogItemId, IEnumerable<CatalogItem> catalogItems)
     {
         var catalogItem = catalogItems.FirstOrDefault(catalogItem => catalogItem.Id == catalogItemId);
         return this.catalogItemSummaryResponseMapper.Convert(catalogItem);

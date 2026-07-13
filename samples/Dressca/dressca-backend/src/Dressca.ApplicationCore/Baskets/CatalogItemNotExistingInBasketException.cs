@@ -15,7 +15,7 @@ public class CatalogItemNotExistingInBasketException : BusinessException
     ///  <see cref="CatalogItemNotExistingInBasketException"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
     /// <param name="catalogItemIds">見つからなかったカタログアイテム Id 。</param>
-    public CatalogItemNotExistingInBasketException(IEnumerable<long> catalogItemIds)
+    public CatalogItemNotExistingInBasketException(IEnumerable<Guid> catalogItemIds)
         : base(new BusinessError(ExceptionId, new ErrorMessage(Messages.CatalogItemIdDoesNotExistInBasket, string.Join(",", catalogItemIds))))
     {
     }

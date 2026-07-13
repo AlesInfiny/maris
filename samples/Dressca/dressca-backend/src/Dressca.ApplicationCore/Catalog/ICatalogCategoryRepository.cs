@@ -18,7 +18,7 @@ public interface ICatalogCategoryRepository
     /// <param name="id">ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン 。</param>
     /// <returns>買い物かご情報を返す非同期処理を表すタスク。</returns>
-    Task<CatalogCategory?> GetAsync(long id, CancellationToken cancellationToken = default);
+    Task<CatalogCategory?> GetAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  指定した識別子のエンティティが存在するかどうかを示す真理値を取得します。
@@ -26,5 +26,5 @@ public interface ICatalogCategoryRepository
     /// <param name="id">ID。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>指定した識別子を持つエンティティが存在するかどうか示す真理値を返す非同期処理を表すタスク。</returns>
-    Task<bool> AnyAsync(long id, CancellationToken cancellationToken = default);
+    Task<bool> AnyAsync(Guid id, CancellationToken cancellationToken = default);
 }

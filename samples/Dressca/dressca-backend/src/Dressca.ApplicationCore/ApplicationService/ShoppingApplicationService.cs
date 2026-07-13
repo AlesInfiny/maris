@@ -62,7 +62,7 @@ public class ShoppingApplicationService
     ///  CatalogItems : 買い物かごアイテムの一覧。
     ///  DeletedItemIds : 削除済みのカタログアイテム Id のリスト。
     /// </returns>
-    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems, IReadOnlyList<long> DeletedItemIds)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
+    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems, IReadOnlyList<Guid> DeletedItemIds)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_GetBasketItemsAsyncStart, buyerId);
 
@@ -89,7 +89,7 @@ public class ShoppingApplicationService
     /// <param name="quantities">各カタログアイテムの数量。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
-    public async Task SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<long, int> quantities, CancellationToken cancellationToken = default)
+    public async Task SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<Guid, int> quantities, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_SetBasketItemsQuantitiesAsyncStart, buyerId);
 
@@ -133,7 +133,7 @@ public class ShoppingApplicationService
     /// <param name="addedQuantity">数量。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
-    public async Task AddItemToBasketAsync(string buyerId, long catalogItemId, int addedQuantity, CancellationToken cancellationToken = default)
+    public async Task AddItemToBasketAsync(string buyerId, Guid catalogItemId, int addedQuantity, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_AddItemToBasketAsyncStart, buyerId, catalogItemId, addedQuantity);
 
@@ -145,7 +145,7 @@ public class ShoppingApplicationService
             var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync([catalogItemId], cancellationToken);
             if (!existsAll)
             {
-                List<long> notExistingInRepositoryCatalogIds = [catalogItemId];
+                List<Guid> notExistingInRepositoryCatalogIds = [catalogItemId];
                 throw new CatalogItemNotExistingInRepositoryException(notExistingInRepositoryCatalogIds);
             }
 
@@ -221,7 +221,7 @@ public class ShoppingApplicationService
         if (basket is null)
         {
             this.logger.LogDebug(Events.DebugEvent, LogMessages.CreateNewBasket_UserBasketNotFound, buyerId);
-            basket = new Basket { BuyerId = buyerId };
+            basket = new Basket { Id = Guid.CreateVersion7(), BuyerId = buyerId };
             return await this.basketRepository.AddAsync(basket, cancellationToken);
         }
 

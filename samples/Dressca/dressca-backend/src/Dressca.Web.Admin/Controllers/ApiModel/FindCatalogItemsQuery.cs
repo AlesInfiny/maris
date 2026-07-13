@@ -13,14 +13,14 @@ public class FindCatalogItemsQuery
     ///  未設定の場合は全カタログブランドを対象にします。
     /// </summary>
     [FromQuery(Name = "brandId")]
-    public long? BrandId { get; set; }
+    public Guid? BrandId { get; set; }
 
     /// <summary>
     ///  カタログカテゴリ ID です。
     ///  未設定の場合は全カタログカテゴリを対象にします。
     /// </summary>
     [FromQuery(Name = "categoryId")]
-    public long? CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
 
     /// <summary>
     ///  ページ番号です。

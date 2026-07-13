@@ -30,7 +30,7 @@ internal class EfOrderRepository : IOrderRepository
     }
 
     /// <inheritdoc/>
-    public Task<Order?> FindAsync(long id, CancellationToken cancellationToken = default)
+    public Task<Order?> FindAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return this.dbContext.Orders
             .Where(order => order.Id == id)

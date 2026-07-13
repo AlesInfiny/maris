@@ -37,11 +37,11 @@ export const BasketItemsApiAxiosParamCreator = function (configuration?: Configu
         /**
          * catalogItemId には買い物かご内に存在するカタログアイテム Id を指定してください。 カタログアイテム Id は 1 以上の整数です。 0 以下の値を指定したり、整数値ではない値を指定した場合 HTTP 400 を返却します。 買い物かご内に指定したカタログアイテムの商品が存在しない場合、 HTTP 404 を返却します。
          * @summary 買い物かごから指定したカタログアイテム Id の商品を削除します。
-         * @param {number} catalogItemId カタログアイテム Id 。
+         * @param {string} catalogItemId カタログアイテム Id 。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteBasketItem: async (catalogItemId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteBasketItem: async (catalogItemId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'catalogItemId' is not null or undefined
             assertParamExists('deleteBasketItem', 'catalogItemId', catalogItemId)
             const localVarPath = `/api/basket-items/{catalogItemId}`
@@ -180,11 +180,11 @@ export const BasketItemsApiFp = function(configuration?: Configuration) {
         /**
          * catalogItemId には買い物かご内に存在するカタログアイテム Id を指定してください。 カタログアイテム Id は 1 以上の整数です。 0 以下の値を指定したり、整数値ではない値を指定した場合 HTTP 400 を返却します。 買い物かご内に指定したカタログアイテムの商品が存在しない場合、 HTTP 404 を返却します。
          * @summary 買い物かごから指定したカタログアイテム Id の商品を削除します。
-         * @param {number} catalogItemId カタログアイテム Id 。
+         * @param {string} catalogItemId カタログアイテム Id 。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteBasketItem(catalogItemId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteBasketItem(catalogItemId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteBasketItem(catalogItemId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['BasketItemsApi.deleteBasketItem']?.[localVarOperationServerIndex]?.url;
@@ -240,11 +240,11 @@ export const BasketItemsApiFactory = function (configuration?: Configuration, ba
         /**
          * catalogItemId には買い物かご内に存在するカタログアイテム Id を指定してください。 カタログアイテム Id は 1 以上の整数です。 0 以下の値を指定したり、整数値ではない値を指定した場合 HTTP 400 を返却します。 買い物かご内に指定したカタログアイテムの商品が存在しない場合、 HTTP 404 を返却します。
          * @summary 買い物かごから指定したカタログアイテム Id の商品を削除します。
-         * @param {number} catalogItemId カタログアイテム Id 。
+         * @param {string} catalogItemId カタログアイテム Id 。
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteBasketItem(catalogItemId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        deleteBasketItem(catalogItemId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.deleteBasketItem(catalogItemId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -286,11 +286,11 @@ export class BasketItemsApi extends BaseAPI {
     /**
      * catalogItemId には買い物かご内に存在するカタログアイテム Id を指定してください。 カタログアイテム Id は 1 以上の整数です。 0 以下の値を指定したり、整数値ではない値を指定した場合 HTTP 400 を返却します。 買い物かご内に指定したカタログアイテムの商品が存在しない場合、 HTTP 404 を返却します。
      * @summary 買い物かごから指定したカタログアイテム Id の商品を削除します。
-     * @param {number} catalogItemId カタログアイテム Id 。
+     * @param {string} catalogItemId カタログアイテム Id 。
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public deleteBasketItem(catalogItemId: number, options?: RawAxiosRequestConfig) {
+    public deleteBasketItem(catalogItemId: string, options?: RawAxiosRequestConfig) {
         return BasketItemsApiFp(this.configuration).deleteBasketItem(catalogItemId, options).then((request) => request(this.axios, this.basePath));
     }
 
