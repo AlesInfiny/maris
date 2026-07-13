@@ -141,7 +141,7 @@ public class CatalogItemTest
 
         // Assert
         var exception = Assert.Throws<ArgumentException>("value", action);
-        Assert.StartsWith("カタログカテゴリ ID は 0 以下にできません。", exception.Message);
+        Assert.StartsWith("カタログカテゴリ ID に空の Guid は設定できません。", exception.Message);
     }
 
     [Fact]
@@ -165,6 +165,6 @@ public class CatalogItemTest
 
         // Assert
         var exception = Assert.Throws<ArgumentException>("value", action);
-        Assert.StartsWith("カタログブランド ID は 0 以下にできません。", exception.Message);
+        Assert.StartsWith("カタログブランド ID に空の Guid は設定できません。", exception.Message);
     }
 }

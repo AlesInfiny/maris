@@ -17,7 +17,7 @@ public class CatalogItemOrderedTest
 
         // Assert
         var ex = Assert.Throws<ArgumentException>("value", action);
-        Assert.StartsWith("カタログアイテム ID は 0 以下にできません。", ex.Message);
+        Assert.StartsWith("カタログアイテム ID に空の Guid は設定できません。", ex.Message);
     }
 
     [Theory]

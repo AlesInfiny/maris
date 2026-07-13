@@ -128,7 +128,7 @@ public class CatalogItem
         {
             if (value == Guid.Empty)
             {
-                throw new ArgumentException(Messages.CatalogCategoryIdMustBePositive, nameof(value));
+                throw new ArgumentException(Messages.CatalogCategoryIdMustNotBeEmpty, nameof(value));
             }
 
             this.catalogCategoryId = value;
@@ -156,7 +156,7 @@ public class CatalogItem
         {
             if (value == Guid.Empty)
             {
-                throw new ArgumentException(Messages.CatalogBrandIdMustBePositive, nameof(value));
+                throw new ArgumentException(Messages.CatalogBrandIdMustNotBeEmpty, nameof(value));
             }
 
             this.catalogBrandId = value;

@@ -51,7 +51,7 @@ public record CatalogItemOrdered
         {
             if (value == Guid.Empty)
             {
-                throw new ArgumentException(Messages.CatalogItemIdMustBePositive, nameof(value));
+                throw new ArgumentException(Messages.CatalogItemIdMustNotBeEmpty, nameof(value));
             }
 
             this.catalogItemId = value;
