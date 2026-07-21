@@ -21,7 +21,7 @@ public class CatalogCategory
     /// <summary>
     ///  カタログカテゴリ Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  カテゴリ名を取得します。

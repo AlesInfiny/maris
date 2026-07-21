@@ -21,7 +21,7 @@ export interface CatalogItemSummaryApiModel {
     /**
      * カタログアイテム Id を取得または設定します。             
      */
-    'id': number;
+    'id': string;
     /**
      * 商品名を取得または設定します。             
      */

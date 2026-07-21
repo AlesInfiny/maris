@@ -144,14 +144,14 @@
   <data name="CatalogBrandIdDoesNotExist" xml:space="preserve">
     <value>指定されたカタログブランド ID: {0} のカタログブランドは存在しません。</value>
   </data>
-  <data name="CatalogBrandIdMustBePositive" xml:space="preserve">
-    <value>カタログブランド ID は 0 以下にできません。</value>
+  <data name="CatalogBrandIdMustNotBeEmpty" xml:space="preserve">
+    <value>カタログブランド ID に空の Guid は設定できません。</value>
   </data>
   <data name="CatalogCategoryIdDoesNotExist" xml:space="preserve">
     <value>指定されたカタログカテゴリ ID: {0} のカタログカテゴリは存在しません。</value>
   </data>
-  <data name="CatalogCategoryIdMustBePositive" xml:space="preserve">
-    <value>カタログカテゴリ ID は 0 以下にできません。</value>
+  <data name="CatalogCategoryIdMustNotBeEmpty" xml:space="preserve">
+    <value>カタログカテゴリ ID に空の Guid は設定できません。</value>
   </data>
   <data name="CatalogItemIdDoesNotExistInRepository" xml:space="preserve">
     <value>カタログアイテム ID:{0} のカタログアイテムがリポジトリに存在しません。</value>
@@ -159,8 +159,8 @@
   <data name="CatalogItemIdDoesNotExistInBasket" xml:space="preserve">
     <value>カタログアイテム ID :{0} のカタログアイテムが買い物かごに存在しません。</value>
   </data>
-  <data name="CatalogItemIdMustBePositive" xml:space="preserve">
-    <value>カタログアイテム ID は 0 以下にできません。</value>
+  <data name="CatalogItemIdMustNotBeEmpty" xml:space="preserve">
+    <value>カタログアイテム ID に空の Guid は設定できません。</value>
   </data>
   <data name="InvalidAssetType" xml:space="preserve">
     <value>アセットタイプ: {0} はサポートされていません。</value>

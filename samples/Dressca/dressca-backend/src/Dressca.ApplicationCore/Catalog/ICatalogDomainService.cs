@@ -15,7 +15,7 @@ public interface ICatalogDomainService
     ///  ExistsAll : すべて存在する場合は <see langword="true"/> 、一部でも不在の場合は <see langword="false"/> 。
     ///  CatalogItems : 存在したカタログアイテムの一覧。
     /// </returns>
-    Task<(bool ExistsAll, IReadOnlyList<CatalogItem> CatalogItems)> ExistsAllAsync(IEnumerable<long> catalogItemIds, CancellationToken cancellationToken = default);
+    Task<(bool ExistsAll, IReadOnlyList<CatalogItem> CatalogItems)> ExistsAllAsync(IEnumerable<Guid> catalogItemIds, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  指定した ID のカタログアイテムがリポジトリ内に存在するかどうかを示す真理値を取得します。
@@ -23,7 +23,7 @@ public interface ICatalogDomainService
     /// <param name="catalogItemId">カタログアイテム ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>指定したアイテムがリポジトリ内に存在する場合は <see langword="true"/>、存在しない場合は <see langword="false"/>。</returns>
-    Task<bool> ItemExistsAsync(long catalogItemId, CancellationToken cancellationToken = default);
+    Task<bool> ItemExistsAsync(Guid catalogItemId, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  指定した ID のカタログブランドがリポジトリ内に存在するかどうかを示す真理値を取得します。
@@ -31,7 +31,7 @@ public interface ICatalogDomainService
     /// <param name="catalogBrandId">カタログブランド ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>指定したカタログブランドがリポジトリ内に存在する場合は <see langword="true"/>、存在しない場合は <see langword="false"/>。</returns>
-    Task<bool> BrandExistsAsync(long catalogBrandId, CancellationToken cancellationToken = default);
+    Task<bool> BrandExistsAsync(Guid catalogBrandId, CancellationToken cancellationToken = default);
 
     /// <summary>
     ///  指定した ID のカタログカテゴリがリポジトリ内に存在するかどうかを示す真理値を取得します。
@@ -39,5 +39,5 @@ public interface ICatalogDomainService
     /// <param name="catalogCategoryId">カタログカテゴリ ID 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>指定したカタログカテゴリがリポジトリ内に存在する場合は <see langword="true"/>、存在しない場合は <see langword="false"/>。</returns>
-    Task<bool> CategoryExistsAsync(long catalogCategoryId, CancellationToken cancellationToken = default);
+    Task<bool> CategoryExistsAsync(Guid catalogCategoryId, CancellationToken cancellationToken = default);
 }

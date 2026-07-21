@@ -58,7 +58,7 @@ public class Order
     /// <summary>
     ///  注文 Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  購入者 Id を取得します。

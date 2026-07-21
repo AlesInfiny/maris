@@ -21,7 +21,7 @@ public class Asset
     /// <summary>
     ///  アセット Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  アセットコードを取得します。

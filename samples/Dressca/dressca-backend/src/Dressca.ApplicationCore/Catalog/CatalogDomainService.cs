@@ -41,7 +41,7 @@ internal class CatalogDomainService : ICatalogDomainService
     }
 
     /// <inheritdoc/>
-    public async Task<(bool ExistsAll, IReadOnlyList<CatalogItem> CatalogItems)> ExistsAllAsync(IEnumerable<long> catalogItemIds, CancellationToken cancellationToken = default)
+    public async Task<(bool ExistsAll, IReadOnlyList<CatalogItem> CatalogItems)> ExistsAllAsync(IEnumerable<Guid> catalogItemIds, CancellationToken cancellationToken = default)
     {
         var items =
             await this.catalogRepository.FindAsync(
@@ -65,19 +65,19 @@ internal class CatalogDomainService : ICatalogDomainService
     }
 
     /// <inheritdoc/>
-    public async Task<bool> ItemExistsAsync(long catalogItemId, CancellationToken cancellationToken = default)
+    public async Task<bool> ItemExistsAsync(Guid catalogItemId, CancellationToken cancellationToken = default)
     {
         return await this.catalogRepository.AnyAsync(catalogItemId, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<bool> BrandExistsAsync(long catalogBrandId, CancellationToken cancellationToken = default)
+    public async Task<bool> BrandExistsAsync(Guid catalogBrandId, CancellationToken cancellationToken = default)
     {
         return await this.catalogBrandRepository.AnyAsync(catalogBrandId, cancellationToken);
     }
 
     /// <inheritdoc/>
-    public async Task<bool> CategoryExistsAsync(long catalogCategoryId, CancellationToken cancellationToken = default)
+    public async Task<bool> CategoryExistsAsync(Guid catalogCategoryId, CancellationToken cancellationToken = default)
     {
         return await this.catalogCategoryRepository.AnyAsync(catalogCategoryId, cancellationToken);
     }

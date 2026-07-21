@@ -18,7 +18,8 @@ public class HttpContextExtensionsTest
         var buyerId = HttpContextExtensions.GetBuyerId(httpContextMock.Object);
 
         // Assert
-        Assert.True(Guid.TryParse(buyerId, out _));
+        Assert.True(Guid.TryParse(buyerId, out var parsedBuyerId));
+        Assert.Equal(7, parsedBuyerId.Version);
     }
 
     [Fact]
@@ -37,7 +38,8 @@ public class HttpContextExtensionsTest
         var buyerId = HttpContextExtensions.GetBuyerId(httpContextMock.Object);
 
         // Assert
-        Assert.True(Guid.TryParse(buyerId, out _));
+        Assert.True(Guid.TryParse(buyerId, out var parsedBuyerId));
+        Assert.Equal(7, parsedBuyerId.Version);
     }
 
     [Theory]
@@ -58,14 +60,15 @@ public class HttpContextExtensionsTest
         var buyerId = HttpContextExtensions.GetBuyerId(httpContextMock.Object);
 
         // Assert
-        Assert.True(Guid.TryParse(buyerId, out _));
+        Assert.True(Guid.TryParse(buyerId, out var parsedBuyerId));
+        Assert.Equal(7, parsedBuyerId.Version);
     }
 
     [Fact]
     public void GetBuyerId_購入者IdがGuidの文字列_設定されている値を取得できる()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString();
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var items = new Dictionary<object, object?>
         {
             { "Dressca-BuyerId", buyerId },
@@ -84,7 +87,7 @@ public class HttpContextExtensionsTest
     public void SetBuyerId_購入者Idを新たに追加できる()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString();
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var items = new Dictionary<object, object?>();
         var httpContextMock = new Mock<HttpContext>();
         httpContextMock.SetupProperty(httpContext => httpContext.Items, items);
@@ -101,7 +104,7 @@ public class HttpContextExtensionsTest
     public void SetBuyerId_購入者Idを上書きできる()
     {
         // Arrange
-        var buyerId = Guid.NewGuid().ToString();
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var items = new Dictionary<object, object?>
         {
             { "Dressca-BuyerId", "dummy" },

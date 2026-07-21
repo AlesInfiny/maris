@@ -21,7 +21,7 @@ export interface GetCatalogCategoriesResponse {
     /**
      * カタログカテゴリ ID を取得または設定します。             
      */
-    'id': number;
+    'id': string;
     /**
      * カテゴリ名を取得または設定します。             
      */

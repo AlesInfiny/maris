@@ -24,7 +24,7 @@ export interface OrderItemApiModel {
     /**
      * 注文アイテム Id を取得します。             
      */
-    'id': number;
+    'id': string;
     'itemOrdered'?: CatalogItemSummaryApiModel | null;
     /**
      * 単価を取得または設定します。             

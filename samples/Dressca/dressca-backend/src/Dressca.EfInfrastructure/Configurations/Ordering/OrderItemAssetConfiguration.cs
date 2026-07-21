@@ -14,6 +14,8 @@ internal class OrderItemAssetConfiguration : IEntityTypeConfiguration<OrderItemA
     {
         ArgumentNullException.ThrowIfNull(builder);
         builder.ToTable("OrderItemAssets");
+        builder.Property(orderItemAsset => orderItemAsset.Id)
+            .ValueGeneratedNever();
         builder.Property(orderItemAsset => orderItemAsset.AssetCode)
             .HasMaxLength(32)
             .IsRequired();

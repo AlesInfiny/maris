@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.ApplicationService;
+using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
@@ -13,8 +13,8 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが合致する_注文情報を取得できる()
     {
         // Arrange
-        var orderId = 10L;
-        var buyerId = Guid.NewGuid().ToString("D");
+        var orderId = Guid.CreateVersion7();
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
         var order = new Order(orderItems) { BuyerId = buyerId, ShipToAddress = shipToAddress };
@@ -39,8 +39,8 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     public async Task GetOrderAsync_注文リポジトリのFindAsyncを1度だけ呼び出す()
     {
         // Arrange
-        var orderId = 10L;
-        var buyerId = Guid.NewGuid().ToString("D");
+        var orderId = Guid.CreateVersion7();
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
         var order = new Order(orderItems) { BuyerId = buyerId, ShipToAddress = shipToAddress };
@@ -65,8 +65,8 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     public async Task GetOrderAsync_注文リポジトリから取得した情報と指定した購入者IDが異なる_OrderNotFoundExceptionが発生する()
     {
         // Arrange
-        var orderId = 10L;
-        var buyerId = Guid.NewGuid().ToString("D");
+        var orderId = Guid.CreateVersion7();
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var shipToAddress = CreateDefaultShipTo();
         var orderItems = CreateDefaultOrderItems();
         var order = new Order(orderItems) { BuyerId = buyerId, ShipToAddress = shipToAddress };
@@ -90,8 +90,8 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
     public async Task GetOrderAsync_注文リポジトリから注文情報を取得できない_OrderNotFoundExceptionが発生する()
     {
         // Arrange
-        var orderId = 10L;
-        var buyerId = Guid.NewGuid().ToString("D");
+        var orderId = Guid.CreateVersion7();
+        var buyerId = Guid.CreateVersion7().ToString("D");
         var orderRepositoryMock = new Mock<IOrderRepository>();
         orderRepositoryMock
             .Setup(r => r.FindAsync(orderId, AnyToken))
@@ -129,10 +129,11 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
         // Arrange
         const string productName = "ダミー商品1";
         const string productCode = "C000000001";
+        var item1 = Guid.CreateVersion7();
 
         var items = new List<OrderItem>()
         {
-            new() { ItemOrdered = new CatalogItemOrdered(1, productName, productCode), UnitPrice = 1000m, Quantity = 1 },
+            new() { ItemOrdered = new CatalogItemOrdered(item1, productName, productCode), UnitPrice = 1000m, Quantity = 1 },
         };
 
         return items;

@@ -32,7 +32,7 @@ public static class HttpContextExtensions
             }
         }
 
-        return Guid.NewGuid().ToString("D");
+        return Guid.CreateVersion7().ToString("D");
     }
 
     /// <summary>

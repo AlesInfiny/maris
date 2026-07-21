@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using Dressca.Web.Consumer.Dto.Baskets;
@@ -71,7 +71,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
 
     private static PostBasketItemsRequest CreateBasketItemsRequest() => new()
     {
-        CatalogItemId = 1,
+        CatalogItemId = Guid.Parse("019b76da-a800-7004-8001-000000000001"),
         AddedQuantity = 2,
     };
 

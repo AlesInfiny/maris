@@ -38,7 +38,7 @@ public class OrderApplicationService
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>注文情報。</returns>
     /// <exception cref="OrderNotFoundException">注文情報が見つからない場合。</exception>
-    public async Task<Order> GetOrderAsync(long orderId, string buyerId, CancellationToken cancellationToken = default)
+    public async Task<Order> GetOrderAsync(Guid orderId, string buyerId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.OrderApplicationService_GetOrderAsyncStart, orderId);
 

@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Baskets;
+using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
 
@@ -10,9 +10,11 @@ public class OrderFactoryTest
     public void CreateOrder_正しくインスタンスが生成される_basketItemに対応したorderItemが登録される()
     {
         // Arrange
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
         var basket = new Basket() { BuyerId = "dummyId" };
-        var basketItem1 = new BasketItem() { CatalogItemId = 1L, UnitPrice = 1000m, Quantity = 1 };
-        var basketItem2 = new BasketItem() { CatalogItemId = 2L, UnitPrice = 2000m, Quantity = 2 };
+        var basketItem1 = new BasketItem() { CatalogItemId = item1, UnitPrice = 1000m, Quantity = 1 };
+        var basketItem2 = new BasketItem() { CatalogItemId = item2, UnitPrice = 2000m, Quantity = 2 };
         basket.AddItem(basketItem1.CatalogItemId, basketItem1.UnitPrice, basketItem1.Quantity);
         basket.AddItem(basketItem2.CatalogItemId, basketItem2.UnitPrice, basketItem2.Quantity);
 
@@ -67,8 +69,9 @@ public class OrderFactoryTest
     public void CreateOrder_catalogItemsがnullの場合_ArgumentNullExceptionが発生する()
     {
         // Arrange
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         var basket = new Basket() { BuyerId = "dummyId" };
-        basket.AddItem(1L, 1000m, 2);
+        basket.AddItem(item1, 1000m, 2);
         var shipTo = CreateDefaultShipTo();
         var factory = new OrderFactory();
 
@@ -83,8 +86,9 @@ public class OrderFactoryTest
     public void CreateOrder_shipToAddressがnullの場合_ArgumentNullExceptionが発生する()
     {
         // Arrange
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         var basket = new Basket() { BuyerId = "dummyId" };
-        basket.AddItem(1L, 1000m, 2);
+        basket.AddItem(item1, 1000m, 2);
         var catalogItems = CreateDefaultCatalogItems();
         var factory = new OrderFactory();
 
@@ -114,11 +118,18 @@ public class OrderFactoryTest
 
     private static IReadOnlyList<CatalogItem> CreateDefaultCatalogItems()
     {
+        var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
+        var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
+        var brand2 = new Guid("019b76da-a800-7002-8001-000000000002");
+        var brand3 = new Guid("019b76da-a800-7002-8001-000000000003");
+        var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
+        var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
+        var item3 = new Guid("019b76da-a800-7004-8001-000000000003");
         var catalog = new List<CatalogItem>()
         {
-            new() { CatalogCategoryId = 1L, CatalogBrandId = 3L, Description = "定番の無地ロングTシャツです。", Name = "クルーネック Tシャツ - ブラック", Price = 1980m, ProductCode = "C000000001", Id = 1L, RowVersion = [255] },
-            new() { CatalogCategoryId = 1L, CatalogBrandId = 2L, Description = "暖かいのに着膨れしない起毛デニムです。", Name = "裏起毛 スキニーデニム", Price = 4800m, ProductCode = "C000000002", Id = 2L, RowVersion = [255] },
-            new() { CatalogCategoryId = 1L, CatalogBrandId = 1L, Description = "あたたかく肌ざわりも良いウール100%のロングコートです。", Name = "ウールコート", Price = 49800m, ProductCode = "C000000003", Id = 3L, RowVersion = [255] },
+            new() { CatalogCategoryId = category1, CatalogBrandId = brand3, Description = "定番の無地ロングTシャツです。", Name = "クルーネック Tシャツ - ブラック", Price = 1980m, ProductCode = "C000000001", Id = item1, RowVersion = [255] },
+            new() { CatalogCategoryId = category1, CatalogBrandId = brand2, Description = "暖かいのに着膨れしない起毛デニムです。", Name = "裏起毛 スキニーデニム", Price = 4800m, ProductCode = "C000000002", Id = item2, RowVersion = [255] },
+            new() { CatalogCategoryId = category1, CatalogBrandId = brand1, Description = "あたたかく肌ざわりも良いウール100%のロングコートです。", Name = "ウールコート", Price = 49800m, ProductCode = "C000000003", Id = item3, RowVersion = [255] },
         };
         return catalog;
     }

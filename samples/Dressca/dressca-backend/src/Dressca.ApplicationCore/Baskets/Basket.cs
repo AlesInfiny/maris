@@ -21,7 +21,7 @@ public class Basket
     /// <summary>
     ///  買い物かご Id を取得します。
     /// </summary>
-    public long Id { get; init; }
+    public Guid Id { get; init; }
 
     /// <summary>
     ///  購入者 Id を取得します。
@@ -52,11 +52,11 @@ public class Basket
     /// <param name="unitPrice">単価。</param>
     /// <param name="quantity">数量。</param>
     /// <exception cref="InvalidOperationException">アイテムの数量が負値になる場合。</exception>
-    public void AddItem(long catalogItemId, decimal unitPrice, int quantity = 1)
+    public void AddItem(Guid catalogItemId, decimal unitPrice, int quantity = 1)
     {
         if (!this.items.Any(i => i.CatalogItemId == catalogItemId))
         {
-            this.items.Add(new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity });
+            this.items.Add(new BasketItem { Id = Guid.CreateVersion7(), CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity });
             return;
         }
 
@@ -68,7 +68,7 @@ public class Basket
     ///  買い物かご内のアイテムの数量を一括で設定します。
     /// </summary>
     /// <param name="quantities">各アイテムの数量。</param>
-    public void SetItemsQuantity(Dictionary<long, int> quantities)
+    public void SetItemsQuantity(Dictionary<Guid, int> quantities)
     {
         foreach (var item in this.Items)
         {
@@ -89,7 +89,7 @@ public class Basket
     /// </summary>
     /// <param name="catalogItemId">検査するカタログアイテム Id 。</param>
     /// <returns>含まれている場合は <see langword="true"/> 、そうでない場合は <see langword="false"/> 。</returns>
-    public bool IsInCatalogItem(long catalogItemId)
+    public bool IsInCatalogItem(Guid catalogItemId)
         => this.items.Any(item => item.CatalogItemId == catalogItemId);
 
     /// <summary>

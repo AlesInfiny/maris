@@ -142,11 +142,11 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   カタログブランド ID は 0 以下にできません。 に類似しているローカライズされた文字列を検索します。
+        ///   カタログブランド ID に空の Guid は設定できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogBrandIdMustBePositive {
+        internal static string CatalogBrandIdMustNotBeEmpty {
             get {
-                return ResourceManager.GetString("CatalogBrandIdMustBePositive", resourceCulture);
+                return ResourceManager.GetString("CatalogBrandIdMustNotBeEmpty", resourceCulture);
             }
         }
         
@@ -160,11 +160,11 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   カタログカテゴリ ID は 0 以下にできません。 に類似しているローカライズされた文字列を検索します。
+        ///   カタログカテゴリ ID に空の Guid は設定できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogCategoryIdMustBePositive {
+        internal static string CatalogCategoryIdMustNotBeEmpty {
             get {
-                return ResourceManager.GetString("CatalogCategoryIdMustBePositive", resourceCulture);
+                return ResourceManager.GetString("CatalogCategoryIdMustNotBeEmpty", resourceCulture);
             }
         }
         
@@ -187,11 +187,11 @@ namespace Dressca.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   カタログアイテム ID は 0 以下にできません。 に類似しているローカライズされた文字列を検索します。
+        ///   カタログアイテム ID に空の Guid は設定できません。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string CatalogItemIdMustBePositive {
+        internal static string CatalogItemIdMustNotBeEmpty {
             get {
-                return ResourceManager.GetString("CatalogItemIdMustBePositive", resourceCulture);
+                return ResourceManager.GetString("CatalogItemIdMustNotBeEmpty", resourceCulture);
             }
         }
         

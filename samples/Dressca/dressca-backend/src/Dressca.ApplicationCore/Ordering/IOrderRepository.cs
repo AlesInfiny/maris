@@ -20,5 +20,5 @@ public interface IOrderRepository
     /// <param name="id">Id 。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>注文情報を返す非同期処理を表すタスク。</returns>
-    Task<Order?> FindAsync(long id, CancellationToken cancellationToken = default);
+    Task<Order?> FindAsync(Guid id, CancellationToken cancellationToken = default);
 }

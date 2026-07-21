@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Baskets;
+using Dressca.ApplicationCore.Baskets;
 
 namespace Dressca.UnitTests.ApplicationCore.Baskets;
 
@@ -8,7 +8,7 @@ public class BasketItemTest
     public void GetSubTotal_買い物かごアイテムの小計額は単価と数量の積になる()
     {
         // Arrange
-        long catalogItemId = 1L;
+        var catalogItemId = Guid.CreateVersion7();
         decimal unitPrice = 1000m;
         int quantity = 2;
         var item = new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity };
@@ -24,7 +24,7 @@ public class BasketItemTest
     public void Basket_買い物かごのナビゲーションプロパティが初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
-        long catalogItemId = 1L;
+        var catalogItemId = Guid.CreateVersion7();
         decimal unitPrice = 1000m;
         int quantity = 2;
         var item = new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity };
