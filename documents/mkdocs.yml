@@ -167,6 +167,7 @@ nav:
       - 利用規約: about-maris/terms.md
       - 商標: about-maris/trademarks.md
       - クレジット表記: about-maris/credits.md
+      - プライバシーポリシー: about-maris/privacy-policy.md
 # yamllint enable rule:comments-indentation
 
 theme:
@@ -238,9 +239,13 @@ extra:
     terms: about-maris/terms/
     trademarks: about-maris/trademarks/
     credits: about-maris/credits/
+    privacy_policy: about-maris/privacy-policy/
     rss_created: feed_rss_created.xml
     rss_updated: feed_rss_updated.xml
   version: !ENV [VERSION, "Local Version"]
+  analytics:
+    provider: !ENV [GOOGLE_ANALYTICS_PROVIDER, ""]
+    property: !ENV [GOOGLE_ANALYTICS_PROPERTY, ""]
 
 extra_css:
   - stylesheets/overrides.css
