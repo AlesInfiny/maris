@@ -46,9 +46,9 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ） の CSR アプリ
 
           Vue.js 用のリアルタイムバリデーションコンポーネントライブラリです。
           
-    - [yup :material-open-in-new:](https://github.com/jquense/yup){ target=_blank }
+    - [Zod :material-open-in-new:](https://github.com/colinhacks/zod){ target=_blank }
 
-          JavaScript でフォームのバリデーションルールを宣言的に記述できるライブラリです。
+          TypeScript でバリデーションルールを宣言的に記述し、スキーマから型を推論できるライブラリです。
 
     - [Tailwind CSS :material-open-in-new:](https://tailwindcss.com/){ target=_blank }
 
