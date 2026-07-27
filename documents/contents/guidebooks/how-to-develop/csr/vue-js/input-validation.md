@@ -252,7 +252,7 @@ VeeValidate v4 と Zod をつなぐための @vee-validate/zod が Zod 4 系と�
         type="text"
         placeholder="email"
         autocomplete="username"
-        class="w-full border-b px-4 py-2 placeholder-gray-500/50 focus:border-b-2 focus:border-indigo-500   focus:outline-hidden"
+        class="w-full border-b px-4 py-2 placeholder-gray-500/50 focus:border-b-2 focus:border-indigo-500 focus:outline-hidden"
       />
       <p id="email-error" class="px-8 py-2 text-sm text-red-500">{{ emailError }}</p>
       <!-- ... -->
