@@ -299,7 +299,7 @@ const schema = z
   })
 ```
 
-公式ドキュメントでの実装例は [こちら :material-open-in-new:](https://v3.zod.dev/?id=customize-error-path) です。
+公式ドキュメントでの実装例は [こちら :material-open-in-new:](https://v3.zod.dev/?id=customize-error-path){ target=_blank } です。
 
 項目間チェックには [superRefine() :material-open-in-new:](https://v3.zod.dev/?id=superrefine){ target=_blank } も使用できます。
 複数エラーを同時に出したい場合や、項目ごとに異なるエラーを出したい場合など、細かなカスタマイズが必要なときは `superRefine()` が適しています。
