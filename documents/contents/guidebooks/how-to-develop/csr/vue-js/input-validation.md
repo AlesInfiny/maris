@@ -38,6 +38,7 @@ https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/c
 作成したファイルを読み込むため、 入力値を検証する Vue ファイルのスクリプト構文に以下を記述します。
 
 ```vue title="example.vue"
+<script setup lang="ts">
 import { toTypedSchema } from '@vee-validate/zod'
 import { z } from 'zod'
 import { ValidationItems } from '@/validation/validation-items'
