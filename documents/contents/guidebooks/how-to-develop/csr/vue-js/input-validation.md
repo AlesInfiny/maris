@@ -434,6 +434,4 @@ Zod は内部的にデフォルトのエラーマップを使ってエラーメ�
 
         ```
 
-<!-- textlint-disable @textlint-ja/no-synonyms -->
 各フィールドにエラーメッセージを個別に指定している場合は、`ZodErrorMap` で定義した内容よりも優先されます。
-<!-- textlint-enable @textlint-ja/no-synonyms -->
