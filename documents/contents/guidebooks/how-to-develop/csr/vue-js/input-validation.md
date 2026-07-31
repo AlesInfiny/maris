@@ -22,7 +22,7 @@ npm install vee-validate zod@^3 @vee-validate/zod vue-i18n
 入力値検証失敗時のメッセージを定義するため、`./src/locales` フォルダーに JSON ファイルを作成し、以下のように記述します。
 メッセージを多言語対応する場合には、それぞれの言語の JSON ファイルを作成し、各言語のメッセージをフォルダーで分割して管理します。
 
-```json title="validationTextList_jp.json"
+```json title="validationTextList_ja.json"
 https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/src/locales/ja/validationTextList_ja.json
 ```
 
@@ -62,7 +62,7 @@ VeeValidate v4 と Zod をつなぐための @vee-validate/zod が Zod 4 系と�
 入力値検証の実装は、以下の流れで行います。
 
 1. Zod 組み込みのルールを組み合わせたり、独自にロジックを実装したりしてバリデーションルールを定義する。
-1. VeeValidate の API (`useField()`, `useForm()` 等)を使用して入力値のフィールドとバリデーションルールを対応させる。
+1. VeeValidate の API (`useField()`, `useForm()` 等) を使用して入力値のフィールドとバリデーションルールを対応させる。
 
 VeeValidate の API については [公式ドキュメント :material-open-in-new:](https://vee-validate.logaretm.com/v4/guide/components/validation/){ target=_blank } を参照してください。
 
@@ -109,7 +109,7 @@ VeeValidate の API については [公式ドキュメント :material-open-in-
 
     const { meta } = useForm({
       validationSchema: formSchema,
-      initialValues: { email: '', password: '', passwordConfirm: '', birthdate: ''},
+      initialValues: { email: '', password: '', passwordConfirm: '', birthdate: '' },
     })
     const { value: email, errorMessage: emailError } = useField<string>('email')
     const { value: password, errorMessage: passwordError } = useField('password')
@@ -287,7 +287,7 @@ const birthdateSchema = z.string().refine((val) => {
 
 `refine()` を使用して複数の項目の入力値に関わる検証を実装できます。
 単項目チェックでは `z.string()` のような単独のフィールドにチェーンする形で `refine()` を使用していましたが、
-項目間チェックで`refine()` を使用する際は `z.object()` にチェーンする形で実装します。
+項目間チェックで `refine()` を使用する際は `z.object()` にチェーンする形で実装します。
 
 以下はパスワードと確認用パスワードの入力値が一致するか確認する例です。
 
@@ -415,7 +415,7 @@ Zod は内部的にデフォルトのエラーマップを使ってエラーメ�
 
           // デフォルトのメッセージを返す
           return { message: ctx.defaultError }
-        }        
+        }
         ```
 
 1. `setErrorMap()` を呼び出し、定義した `ZodErrorMap` をグローバルに適用します。
@@ -428,7 +428,7 @@ Zod は内部的にデフォルトのエラーマップを使ってエラーメ�
 
         // createApp() の前に呼び出す
         z.setErrorMap(customErrorMap)
-       
+
         const app = createApp(App)
         // ...
 
