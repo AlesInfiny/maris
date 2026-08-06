@@ -24,7 +24,9 @@
     "format": "prettier --write .",
     "format:ci": "prettier --check .",
     "generate-client": "openapi-generator-cli batch ./openapisettings.json --clean",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "playwright:ci": "npm run build-only:dev && playwright test",
+    "playwright": "playwright test"
   },
   "dependencies": {
     "@heroicons/vue": "2.2.0",
