@@ -1,0 +1,10 @@
+{
+  "include": ["./pages/**/*", "./specs/**/*"],
+  "exclude": [],
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.playwright.tsbuildinfo",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["node", "@playwright/test"],
+    "noEmit": true
+  }
+}

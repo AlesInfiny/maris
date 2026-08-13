@@ -9,6 +9,9 @@
     },
     {
       "path": "./tsconfig.vitest.json"
+    },
+    {
+      "path": "./tests/tsconfig.json"
     }
   ],
   "compilerOptions": {
