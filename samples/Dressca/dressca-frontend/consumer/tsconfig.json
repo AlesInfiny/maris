@@ -11,7 +11,7 @@
       "path": "./tsconfig.vitest.json"
     },
     {
-      "path": "./tests/tsconfig.json"
+      "path": "./e2e/tsconfig.json"
     }
   ],
   "compilerOptions": {

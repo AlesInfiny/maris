@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { LoginPage } from '../pages/LoginPage'
+import { LoginPage } from '../pages/authentication/LoginPage'
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/')

@@ -70,7 +70,7 @@ export default defineConfigWithVueTs(
   // Playwright 用のテストスイートに対して、Playwright 推奨の Lint ルールを適用します。
   {
     ...pluginPlaywright.configs['flat/recommended'],
-    files: ['**/tests/**/*.{spec,test}.{js,ts,jsx,tsx}'],
+    files: ['**/e2e/**/*.{spec,test}.{js,ts,jsx,tsx}'],
   },
 
   // Vitest 用のテストスイートに対して、 Vitest 推奨の Lint ルールを適用します。

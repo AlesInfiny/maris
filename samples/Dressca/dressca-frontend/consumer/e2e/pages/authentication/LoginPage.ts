@@ -1,4 +1,4 @@
-import { BasePage } from './base/BasePage'
+import { BasePage } from '../base/BasePage'
 
 export class LoginPage extends BasePage {
   readonly usernameInput = this.page.locator('#email')
@@ -6,7 +6,7 @@ export class LoginPage extends BasePage {
   readonly loginButton = this.page.getByRole('button')
 
   async navigate() {
-    await this.goto('authentication/login')
+    await this.goto('/authentication/login')
   }
 
   async login(user: string, pass: string) {
