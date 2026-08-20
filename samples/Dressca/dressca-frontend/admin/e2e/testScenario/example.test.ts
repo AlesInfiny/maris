@@ -18,20 +18,20 @@ test('get started link', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible()
 })
 
-test('access login page', async ({ page }) => {
+test('ログインページにアクセスする', async ({ page }) => {
   const loginPage = new LoginPage(page)
   await loginPage.navigate()
   await expect(page).toHaveURL(/.*authentication\/login/)
 })
 
-test('login', async ({ page }) => {
+test('ログイン成功', async ({ page }) => {
   const loginPage = new LoginPage(page)
   await loginPage.navigate()
   await loginPage.login('test@example.com', 'testpassword')
   await expect(page).toHaveTitle(/Dressca/)
 })
 
-test('access root page', async ({ page }) => {
+test('ホーム画面にアクセスする', async ({ page }) => {
   await page.goto('http://localhost:6173/')
   await expect(page).toHaveTitle(/Dressca/)
 })

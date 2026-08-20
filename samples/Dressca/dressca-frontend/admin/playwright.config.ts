@@ -9,30 +9,30 @@ process.env.NO_PROXY = process.env.NO_PROXY
   : 'localhost,127.0.0.1'
 
 /**
- * See https://playwright.dev/docs/test-configuration.
+ * 各設定値の詳細： https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './e2e',
-  /* Run tests in files in parallel */
+  /* 個々のテスト単位でワーカーに割り当てる。 */
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  /* 誤って test.only をソースコードに残してしまった場合、CI 上でビルドを失敗させる。 */
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
+  /* CI 環境のみリトライする。 */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
+  /* CI 環境では、テストを並列実行せず、1 ワーカーで実行する。*/
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  /* リポーターの種類。 https://playwright.dev/docs/test-reporters */
+  reporter: 'github',
+  /* 全ての project に適用される共通設定。 https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
+    /* `await page.goto('')` などのアクションで使用する ベース URL。 */
     baseURL: 'http://localhost:6173',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    locale: 'ja-JP',
+    /* 失敗したテストをリトライする際にトレースを収集する。 https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
 
-  /* Configure projects for major browsers */
+  /* テスト実行時の構成。 */
   projects: [
     {
       name: 'chromium',
@@ -40,7 +40,7 @@ export default defineConfig({
     },
   ],
 
-  /* Run your local dev server before starting the tests */
+  /* テスト実行前にローカル開発サーバーを起動する。 */
   webServer: [
     {
       command: 'npm run dev',
