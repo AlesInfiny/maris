@@ -1,37 +1,33 @@
 import { test, expect } from '@playwright/test'
 import { LoginPage } from '../pages/authentication/LoginPage'
+import { ItemsPage } from '../pages/catalog/ItemsPage'
+import { HomePage } from '../pages/home/HomePage'
+import { ItemsAddPage } from '../pages/catalog/ItemsAddPage'
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/')
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/)
-})
-
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/')
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click()
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible()
-})
-
-test('ログインページにアクセスする', async ({ page }) => {
+test('カタログアイテムを追加する', async ({ page }) => {
   const loginPage = new LoginPage(page)
   await loginPage.navigate()
-  await expect(page).toHaveURL(/.*authentication\/login/)
-})
+  await loginPage.login('test@example.com', 'password')
+  await expect(page).toHaveTitle(/Dressca 管理/)
 
-test('ログイン成功', async ({ page }) => {
-  const loginPage = new LoginPage(page)
-  await loginPage.navigate()
-  await loginPage.login('test@example.com', 'testpassword')
-  await expect(page).toHaveTitle(/Dressca/)
-})
+  const homePage = new HomePage(page)
+  await homePage.goToCatalogItems()
+  await expect(page).toHaveURL(/\/catalog\/items/)
 
-test('ホーム画面にアクセスする', async ({ page }) => {
-  await page.goto('http://localhost:6173/')
-  await expect(page).toHaveTitle(/Dressca/)
+  const itemsPage = new ItemsPage(page)
+  await itemsPage.clickAddItemButton()
+  await expect(page).toHaveURL(/\/catalog\/items\/add/)
+
+  const itemsAddPage = new ItemsAddPage(page)
+  const testItemName = 'テスト用アイテム' + crypto.randomUUID()
+  await itemsAddPage.enterItemName(testItemName)
+  await itemsAddPage.clickAddButton()
+
+  await expect(itemsAddPage.modalTitle).toBeVisible()
+  await itemsAddPage.clickModalCloseButton()
+
+  await expect(page).toHaveURL(/\/catalog\/items/)
+  const itemsPage2 = new ItemsPage(page)
+  // 追加したテスト用アイテムが存在していることを確認
+  await expect(itemsPage2.getItemRowsByItemName(testItemName)).toHaveCount(1)
 })
