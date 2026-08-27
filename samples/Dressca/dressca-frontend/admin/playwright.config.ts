@@ -29,7 +29,7 @@ export default defineConfig({
     baseURL: 'http://localhost:6173',
     locale: 'ja-JP',
     /* 失敗したテストをリトライする際にトレースを収集する。 https://playwright.dev/docs/trace-viewer */
-    trace: 'on',
+    trace: 'on-first-retry',
   },
 
   /* テスト実行時の構成。 */
