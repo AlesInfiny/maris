@@ -1,6 +1,12 @@
 import { test, expect } from '../fixture/shoppingTestFixture'
 
-test('1つのアイテムの購入を完了できる', async ({ page, catalogPage, basketPage, checkoutPage, loginPage }) => {
+test('1つのアイテムの購入を完了できる', async ({
+  page,
+  catalogPage,
+  basketPage,
+  checkoutPage,
+  loginPage,
+}) => {
   await catalogPage.navigate()
   await expect(page).toHaveTitle(/Dressca/)
 

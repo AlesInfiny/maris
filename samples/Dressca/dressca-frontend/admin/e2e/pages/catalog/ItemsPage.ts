@@ -1,5 +1,5 @@
 import { BasePage } from '../base/BasePage'
-import { expect, type Locator } from '@playwright/test'
+import { type Locator } from '@playwright/test'
 
 export class ItemsPage extends BasePage {
   readonly addItemButton = this.page.getByRole('button', { name: 'アイテム追加' })
