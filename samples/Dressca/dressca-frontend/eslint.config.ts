@@ -21,6 +21,7 @@ export default defineConfigWithVueTs(
     '**/coverage/**',
     '**/src/generated/**',
     '**/mockServiceWorker.js',
+    '**/playwright-report/**'
   ]),
 
   // Vue.js 向けの推奨ルールを適用します。
