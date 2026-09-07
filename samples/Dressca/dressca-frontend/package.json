@@ -10,6 +10,7 @@
     "type-check:consumer": "npm run type-check -w consumer",
     "build-only:dev:consumer": "npm run build-only:dev -w consumer",
     "build:prod:consumer": "npm run build:prod -w consumer",
+    "build-only:ci:consumer": "npm run build-only:ci -w consumer",
     "test:unit:consumer": "npm run test:unit -w consumer",
     "dev:consumer": "npm run dev -w consumer",
     "mock:consumer": "npm run mock -w consumer",
@@ -17,11 +18,14 @@
     "type-check:admin": "npm run type-check -w admin",
     "build-only:dev:admin": "npm run build-only:dev -w admin",
     "build:prod:admin": "npm run build:prod -w admin",
+    "build-only:ci:admin": "npm run build-only:ci -w admin",
     "test:unit:admin": "npm run test:unit -w admin",
     "dev:admin": "npm run dev -w admin",
     "mock:admin": "npm run mock -w admin",
     "test:coverage:consumer": "npm run coverage -w consumer",
-    "test:coverage:admin": "npm run coverage -w admin"
+    "test:coverage:admin": "npm run coverage -w admin",
+    "test:e2e:consumer": "npm run test:e2e -w consumer",
+    "test:e2e:admin": "npm run test:e2e -w admin"
   },
   "workspaces": [
     "consumer",
