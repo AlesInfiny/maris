@@ -1,8 +1,8 @@
 import { defineConfig, devices } from '@playwright/test'
 
 /**
- * ローカルでプロキシ設定をしている場合、
- * Playwright のテスト実行時にプロキシを無効化するために、NO_PROXY 環境変数に localhost と 127.0.0.1 を追加します。
+ * プロキシを設定している環境では、 localhost へアクセスがプロキシ経由となりローカル開発サーバーへの接続に失敗することがあります。
+ * そのため Playwright のテスト実行時にプロキシを無効化するために、NO_PROXY 環境変数に localhost と 127.0.0.1 を追加します。
  */
 process.env.NO_PROXY = process.env.NO_PROXY
   ? `${process.env.NO_PROXY},localhost,127.0.0.1`
