@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -91,7 +91,7 @@ namespace Dressca.EfInfrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BasketId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CatalogItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DisplayItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
@@ -145,7 +145,7 @@ namespace Dressca.EfInfrastructure.Migrations
                     UnitPrice = table.Column<decimal>(type: "decimal(18,6)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderedCatalogItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderedDisplayItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderedProductCode = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     OrderedProductName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false)
                 },
@@ -173,6 +173,24 @@ namespace Dressca.EfInfrastructure.Migrations
                     table.PrimaryKey("PK_CatalogItemAssets", x => x.Id);
                     table.ForeignKey(
                         name: "FK_CatalogItemAssets_CatalogItems",
+                        column: x => x.CatalogItemId,
+                        principalTable: "CatalogItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DisplayItems",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CatalogItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DisplayItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DisplayItems_CatalogItems",
                         column: x => x.CatalogItemId,
                         principalTable: "CatalogItems",
                         principalColumn: "Id",
@@ -276,6 +294,24 @@ namespace Dressca.EfInfrastructure.Migrations
                     { new Guid("019b76da-a800-7005-8001-00000000000b"), "0e557e96bc054f10bc91c27405a83e85", new Guid("019b76da-a800-7004-8001-00000000000b") }
                 });
 
+            migrationBuilder.InsertData(
+                table: "DisplayItems",
+                columns: new[] { "Id", "CatalogItemId" },
+                values: new object[,]
+                {
+                    { new Guid("019b76da-a800-7006-8001-000000000001"), new Guid("019b76da-a800-7004-8001-000000000001") },
+                    { new Guid("019b76da-a800-7006-8001-000000000002"), new Guid("019b76da-a800-7004-8001-000000000002") },
+                    { new Guid("019b76da-a800-7006-8001-000000000003"), new Guid("019b76da-a800-7004-8001-000000000003") },
+                    { new Guid("019b76da-a800-7006-8001-000000000004"), new Guid("019b76da-a800-7004-8001-000000000004") },
+                    { new Guid("019b76da-a800-7006-8001-000000000005"), new Guid("019b76da-a800-7004-8001-000000000005") },
+                    { new Guid("019b76da-a800-7006-8001-000000000006"), new Guid("019b76da-a800-7004-8001-000000000006") },
+                    { new Guid("019b76da-a800-7006-8001-000000000007"), new Guid("019b76da-a800-7004-8001-000000000007") },
+                    { new Guid("019b76da-a800-7006-8001-000000000008"), new Guid("019b76da-a800-7004-8001-000000000008") },
+                    { new Guid("019b76da-a800-7006-8001-000000000009"), new Guid("019b76da-a800-7004-8001-000000000009") },
+                    { new Guid("019b76da-a800-7006-8001-00000000000a"), new Guid("019b76da-a800-7004-8001-00000000000a") },
+                    { new Guid("019b76da-a800-7006-8001-00000000000b"), new Guid("019b76da-a800-7004-8001-00000000000b") }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Assets_AssetCode",
                 table: "Assets",
@@ -307,6 +343,11 @@ namespace Dressca.EfInfrastructure.Migrations
                 column: "ProductCode");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DisplayItems_CatalogItemId",
+                table: "DisplayItems",
+                column: "CatalogItemId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderItemAssets_OrderItemId",
                 table: "OrderItemAssets",
                 column: "OrderItemId");
@@ -328,6 +369,9 @@ namespace Dressca.EfInfrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "CatalogItemAssets");
+
+            migrationBuilder.DropTable(
+                name: "DisplayItems");
 
             migrationBuilder.DropTable(
                 name: "OrderItemAssets");

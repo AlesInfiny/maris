@@ -160,7 +160,7 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.Property<Guid>("BasketId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CatalogItemId")
+                    b.Property<Guid>("DisplayItemId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
@@ -597,13 +597,13 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,6)");
 
-                    b.ComplexProperty(typeof(Dictionary<string, object>), "ItemOrdered", "Dressca.ApplicationCore.Ordering.OrderItem.ItemOrdered#CatalogItemOrdered", b1 =>
+                    b.ComplexProperty(typeof(Dictionary<string, object>), "ItemOrdered", "Dressca.ApplicationCore.Ordering.OrderItem.ItemOrdered#DisplayItemOrdered", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<Guid>("CatalogItemId")
+                            b1.Property<Guid>("DisplayItemId")
                                 .HasColumnType("uniqueidentifier")
-                                .HasColumnName("OrderedCatalogItemId");
+                                .HasColumnName("OrderedDisplayItemId");
 
                             b1.Property<string>("ProductCode")
                                 .IsRequired()
@@ -643,6 +643,78 @@ namespace Dressca.EfInfrastructure.Migrations
                     b.HasIndex("OrderItemId");
 
                     b.ToTable("OrderItemAssets", (string)null);
+                });
+
+            modelBuilder.Entity("Dressca.EfInfrastructure.DisplayItemEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CatalogItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CatalogItemId");
+
+                    b.ToTable("DisplayItems", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000001"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000001")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000002"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000002")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000003"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000004"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000004")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000005"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000005")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000006"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000006")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000007"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000007")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000008"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000008")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-000000000009"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-000000000009")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-00000000000a"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-00000000000a")
+                        },
+                        new
+                        {
+                            Id = new Guid("019b76da-a800-7006-8001-00000000000b"),
+                            CatalogItemId = new Guid("019b76da-a800-7004-8001-00000000000b")
+                        });
                 });
 
             modelBuilder.Entity("Dressca.ApplicationCore.Baskets.BasketItem", b =>
@@ -712,6 +784,18 @@ namespace Dressca.EfInfrastructure.Migrations
                         .HasConstraintName("FK_OrderItemAssets_OrderItems");
 
                     b.Navigation("OrderItem");
+                });
+
+            modelBuilder.Entity("Dressca.EfInfrastructure.DisplayItemEntity", b =>
+                {
+                    b.HasOne("Dressca.ApplicationCore.Catalog.CatalogItem", "CatalogItem")
+                        .WithMany()
+                        .HasForeignKey("CatalogItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_DisplayItems_CatalogItems");
+
+                    b.Navigation("CatalogItem");
                 });
 
             modelBuilder.Entity("Dressca.ApplicationCore.Baskets.Basket", b =>

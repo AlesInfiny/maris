@@ -1,18 +1,18 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Dressca.ApplicationCore.Catalog;
+using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.SystemCommon.Mapper;
-using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Consumer.Dto.DisplayItem;
 
 namespace Dressca.Web.Consumer.Mapper;
 
 /// <summary>
-///  <see cref="CatalogItem"/> と <see cref="GetCatalogItemResponse"/> のマッパーです。
+///  <see cref="DisplayItem"/> と <see cref="GetDisplayItemResponse"/> のマッパーです。
 /// </summary>
-public class CatalogItemMapper : IObjectMapper<CatalogItem, GetCatalogItemResponse>
+public class DisplayItemMapper : IObjectMapper<DisplayItem, GetDisplayItemResponse>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull(nameof(value))]
-    public GetCatalogItemResponse? Convert(CatalogItem? value)
+    public GetDisplayItemResponse? Convert(DisplayItem? value)
     {
         if (value is null)
         {
@@ -21,8 +21,8 @@ public class CatalogItemMapper : IObjectMapper<CatalogItem, GetCatalogItemRespon
 
         return new()
         {
-            CatalogBrandId = value.CatalogBrandId,
-            CatalogCategoryId = value.CatalogCategoryId,
+            DisplayItemBrandId = value.DisplayItemBrandId,
+            DisplayItemCategoryId = value.DisplayItemCategoryId,
             Description = value.Description,
             Id = value.Id,
             Name = value.Name,

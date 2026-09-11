@@ -3,16 +3,16 @@
 namespace Dressca.Web.Consumer.Dto.Baskets;
 
 /// <summary>
-///  買い物かごのカタログアイテム数量を変更する処理のリクエストデータを表します。
+///  買い物かごの陳列品数量を変更する処理のリクエストデータを表します。
 /// </summary>
 public class PutBasketItemsRequest
 {
     /// <summary>
-    ///  カタログアイテム Id を取得または設定します。
-    ///  1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。
+    ///  陳列品 Id を取得または設定します。
+    ///  1 以上の買い物かご、およびシステムに存在する陳列品 Id を指定してください。
     /// </summary>
     [Required]
-    public Guid? CatalogItemId { get; set; }
+    public Guid? DisplayItemId { get; set; }
 
     /// <summary>
     ///  数量を取得または設定します。

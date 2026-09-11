@@ -1,31 +1,31 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Dressca.ApplicationCore.Resources;
 
 namespace Dressca.ApplicationCore.Ordering;
 
 /// <summary>
-///  注文されたカタログアイテムを管理する値オブジェクトです。
+///  注文された陳列品を管理する値オブジェクトです。
 /// </summary>
 /// <remarks>
 ///  <para>
-///   この値オブジェクトは、注文時点でのカタログアイテムエンティティのスナップショットです。
-///   これは、注文確定後にカタログ情報が変更されたとしても、注文情報は変更されるべきではないためです。
+///   この値オブジェクトは、注文時点での陳列品エンティティのスナップショットです。
+///   これは、注文確定後に陳列品情報が変更されたとしても、注文情報は変更されるべきではないためです。
 ///  </para>
 /// </remarks>
-public record CatalogItemOrdered
+public record DisplayItemOrdered
 {
-    private Guid catalogItemId;
+    private Guid displayItemId;
     private string productName;
     private string productCode;
 
     /// <summary>
-    ///  <see cref="CatalogItemOrdered"/> クラスの新しいインスタンスを初期化します。
+    ///  <see cref="DisplayItemOrdered"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="catalogItemId">カタログアイテム Id 。</param>
+    /// <param name="displayItemId">陳列品 Id 。</param>
     /// <param name="productName">商品名。</param>
     /// <param name="productCode">商品コード。</param>
     /// <exception cref="ArgumentException">
-    ///  <paramref name="catalogItemId"/> に空の Guid は設定できません。
+    ///  <paramref name="displayItemId"/> に空の Guid は設定できません。
     /// </exception>
     /// <exception cref="ArgumentException">
     ///  <list type="bullet">
@@ -33,28 +33,28 @@ public record CatalogItemOrdered
     ///   <item><paramref name="productCode"/> が <see langword="null"/> または空の文字列です。</item>
     ///  </list>
     /// </exception>
-    public CatalogItemOrdered(Guid catalogItemId, string productName, string productCode)
+    public DisplayItemOrdered(Guid displayItemId, string productName, string productCode)
     {
-        this.CatalogItemId = catalogItemId;
+        this.DisplayItemId = displayItemId;
         this.ProductName = productName;
         this.ProductCode = productCode;
     }
 
     /// <summary>
-    ///  カタログアイテム Id を取得します。
+    ///  陳列品 Id を取得します。
     /// </summary>
     /// <exception cref="ArgumentException">空の Guid は設定できません。</exception>
-    public Guid CatalogItemId
+    public Guid DisplayItemId
     {
-        get => this.catalogItemId;
+        get => this.displayItemId;
         init
         {
             if (value == Guid.Empty)
             {
-                throw new ArgumentException(Messages.CatalogItemIdMustNotBeEmpty, nameof(value));
+                throw new ArgumentException(Messages.DisplayItemIdMustNotBeEmpty, nameof(value));
             }
 
-            this.catalogItemId = value;
+            this.displayItemId = value;
         }
     }
 

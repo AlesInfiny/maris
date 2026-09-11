@@ -1,5 +1,5 @@
 ﻿using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.ApplicationCore.Resources;
 using Microsoft.Extensions.Logging;
@@ -14,8 +14,8 @@ public class ShoppingApplicationService
     private readonly IBasketRepository basketRepository;
     private readonly IOrderRepository orderRepository;
     private readonly IOrderFactory orderFactory;
-    private readonly ICatalogRepository catalogRepository;
-    private readonly ICatalogDomainService catalogDomainService;
+    private readonly IDisplayItemRepository displayItemRepository;
+    private readonly IDisplayItemDomainService displayItemDomainService;
     private readonly ILogger<ShoppingApplicationService> logger;
 
     /// <summary>
@@ -24,31 +24,31 @@ public class ShoppingApplicationService
     /// <param name="basketRepository">買い物かごリポジトリ。</param>
     /// <param name="orderRepository">注文リポジトリ。</param>
     /// <param name="orderFactory">注文エンティティファクトリー。</param>
-    /// <param name="catalogRepository">カタログリポジトリ。</param>
-    /// <param name="catalogDomainService">カタログドメインサービス。</param>
+    /// <param name="displayItemRepository">陳列品リポジトリ。</param>
+    /// <param name="displayItemDomainService">陳列品ドメインサービス。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="basketRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="orderRepository"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="orderFactory"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="catalogRepository"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="catalogDomainService"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="displayItemRepository"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="displayItemDomainService"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>/// </exception>
     public ShoppingApplicationService(
         IBasketRepository basketRepository,
         IOrderRepository orderRepository,
         IOrderFactory orderFactory,
-        ICatalogRepository catalogRepository,
-        ICatalogDomainService catalogDomainService,
+        IDisplayItemRepository displayItemRepository,
+        IDisplayItemDomainService displayItemDomainService,
         ILogger<ShoppingApplicationService> logger)
     {
         this.basketRepository = basketRepository ?? throw new ArgumentNullException(nameof(basketRepository));
         this.orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
         this.orderFactory = orderFactory ?? throw new ArgumentNullException(nameof(orderFactory));
-        this.catalogRepository = catalogRepository ?? throw new ArgumentNullException(nameof(catalogRepository));
-        this.catalogDomainService = catalogDomainService ?? throw new ArgumentNullException(nameof(catalogDomainService));
+        this.displayItemRepository = displayItemRepository ?? throw new ArgumentNullException(nameof(displayItemRepository));
+        this.displayItemDomainService = displayItemDomainService ?? throw new ArgumentNullException(nameof(displayItemDomainService));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -59,34 +59,34 @@ public class ShoppingApplicationService
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>
     ///  BasketResult : <paramref name="buyerId"/> に対応する買い物かご。
-    ///  CatalogItems : 買い物かごアイテムの一覧。
-    ///  DeletedItemIds : 削除済みのカタログアイテム Id のリスト。
+    ///  DisplayItems : 買い物かごアイテムの一覧。
+    ///  DeletedItemIds : 削除済みの陳列品 Id のリスト。
     /// </returns>
-    public async Task<(Basket BasketResult, IReadOnlyList<CatalogItem> CatalogItems, IReadOnlyList<Guid> DeletedItemIds)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
+    public async Task<(Basket BasketResult, IReadOnlyList<DisplayItem> DisplayItems, IReadOnlyList<Guid> DeletedItemIds)> GetBasketItemsAsync(string buyerId, CancellationToken cancellationToken = default)
     {
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_GetBasketItemsAsyncStart, buyerId);
 
         Basket basket;
-        IReadOnlyList<CatalogItem> catalogItems;
+        IReadOnlyList<DisplayItem> displayItems;
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
-            var catalogItemIds = basket.Items.Select(basketItem => basketItem.CatalogItemId).ToList();
-            catalogItems = await this.catalogRepository.FindAsync(catalogItem => catalogItemIds.Contains(catalogItem.Id), cancellationToken);
+            var displayItemIds = basket.Items.Select(basketItem => basketItem.DisplayItemId).ToList();
+            displayItems = await this.displayItemRepository.FindAsync(displayItem => displayItemIds.Contains(displayItem.Id), cancellationToken);
             scope.Complete();
         }
 
-        var deletedCatalogItemIds = catalogItems.Where(item => item.IsDeleted == true).Select(item => item.Id).ToList();
+        var deletedDisplayItemIds = displayItems.Where(item => item.IsDeleted == true).Select(item => item.Id).ToList();
 
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_GetBasketItemsAsyncEnd, buyerId);
-        return (BasketResult: basket, CatalogItems: catalogItems, DeletedItemIds: deletedCatalogItemIds);
+        return (BasketResult: basket, DisplayItems: displayItems, DeletedItemIds: deletedDisplayItemIds);
     }
 
     /// <summary>
     ///  買い物かごの各アイテムの数量を一括で設定します。
     /// </summary>
     /// <param name="buyerId">購入者 Id 。</param>
-    /// <param name="quantities">各カタログアイテムの数量。</param>
+    /// <param name="quantities">各陳列品の数量。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
     public async Task SetBasketItemsQuantitiesAsync(string buyerId, Dictionary<Guid, int> quantities, CancellationToken cancellationToken = default)
@@ -97,25 +97,25 @@ public class ShoppingApplicationService
         {
             var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
 
-            // 買い物かごに入っていないカタログアイテムが指定されていないか確認
-            var notExistsInBasketCatalogIds = quantities.Keys.Where(catalogItemId => !basket.IsInCatalogItem(catalogItemId));
-            if (notExistsInBasketCatalogIds.Any())
+            // 買い物かごに入っていない陳列品が指定されていないか確認
+            var notExistsInBasketDisplayItemIds = quantities.Keys.Where(displayItemId => !basket.IsInDisplayItem(displayItemId));
+            if (notExistsInBasketDisplayItemIds.Any())
             {
-                throw new CatalogItemNotExistingInBasketException(notExistsInBasketCatalogIds);
+                throw new DisplayItemNotExistingInBasketException(notExistsInBasketDisplayItemIds);
             }
 
-            // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
-            var (existsAll, existingCatalogItems) = await this.catalogDomainService.ExistsAllAsync(quantities.Keys, cancellationToken);
+            // 陳列品リポジトリに存在しない陳列品が指定されていないか確認
+            var (existsAll, existingDisplayItems) = await this.displayItemDomainService.ExistsAllAsync(quantities.Keys, cancellationToken);
             if (!existsAll)
             {
-                var notExistingInRepositoryCatalogIds =
+                var notExistingInRepositoryDisplayItemIds =
                     quantities.Keys
-                       .Where(catalogItemId => existingCatalogItems.Select(item => item.Id).Any(id => id != catalogItemId));
-                throw new CatalogItemNotExistingInRepositoryException(notExistingInRepositoryCatalogIds);
+                       .Where(displayItemId => !existingDisplayItems.Any(item => item.Id == displayItemId));
+                throw new DisplayItemNotExistingInRepositoryException(notExistingInRepositoryDisplayItemIds);
             }
 
             basket.SetItemsQuantity(quantities);
-            var currentBasketItems = basket.Items.Select(i => string.Format(Messages.Basket_ItemQuantity, i.CatalogItemId, i.Quantity));
+            var currentBasketItems = basket.Items.Select(i => string.Format(Messages.Basket_ItemQuantity, i.DisplayItemId, i.Quantity));
             this.logger.LogDebug(Events.DebugEvent, LogMessages.Basket_AfterSettingQuantity, string.Join(";", currentBasketItems));
             basket.RemoveEmptyItems();
             await this.basketRepository.UpdateAsync(basket, cancellationToken);
@@ -129,34 +129,34 @@ public class ShoppingApplicationService
     ///  買い物かごにアイテムを追加します。
     /// </summary>
     /// <param name="buyerId">購入者 Id 。</param>
-    /// <param name="catalogItemId">カタログアイテム Id 。</param>
+    /// <param name="displayItemId">陳列品 Id 。</param>
     /// <param name="addedQuantity">数量。</param>
     /// <param name="cancellationToken">キャンセルトークン。</param>
     /// <returns>処理結果を返す非同期処理を表すタスク。</returns>
-    public async Task AddItemToBasketAsync(string buyerId, Guid catalogItemId, int addedQuantity, CancellationToken cancellationToken = default)
+    public async Task AddItemToBasketAsync(string buyerId, Guid displayItemId, int addedQuantity, CancellationToken cancellationToken = default)
     {
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_AddItemToBasketAsyncStart, buyerId, catalogItemId, addedQuantity);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_AddItemToBasketAsyncStart, buyerId, displayItemId, addedQuantity);
 
         using (var scope = TransactionScopeManager.CreateTransactionScope())
         {
             var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
 
-            // カタログリポジトリに存在しないカタログアイテムが指定されていないか確認
-            var (existsAll, catalogItems) = await this.catalogDomainService.ExistsAllAsync([catalogItemId], cancellationToken);
+            // 陳列品リポジトリに存在しない陳列品が指定されていないか確認
+            var (existsAll, displayItems) = await this.displayItemDomainService.ExistsAllAsync([displayItemId], cancellationToken);
             if (!existsAll)
             {
-                List<Guid> notExistingInRepositoryCatalogIds = [catalogItemId];
-                throw new CatalogItemNotExistingInRepositoryException(notExistingInRepositoryCatalogIds);
+                List<Guid> notExistingInRepositoryDisplayItemIds = [displayItemId];
+                throw new DisplayItemNotExistingInRepositoryException(notExistingInRepositoryDisplayItemIds);
             }
 
-            var catalogItem = catalogItems[0];
-            basket.AddItem(catalogItemId, catalogItem.Price, addedQuantity);
+            var displayItem = displayItems[0];
+            basket.AddItem(displayItemId, displayItem.Price, addedQuantity);
             basket.RemoveEmptyItems();
             await this.basketRepository.UpdateAsync(basket, cancellationToken);
             scope.Complete();
         }
 
-        this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_AddItemToBasketAsyncEnd, buyerId, catalogItemId, addedQuantity);
+        this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_AddItemToBasketAsyncEnd, buyerId, displayItemId, addedQuantity);
     }
 
     /// <summary>
@@ -193,10 +193,16 @@ public class ShoppingApplicationService
                 throw new EmptyBasketOnCheckoutException();
             }
 
-            var catalogItemIds = checkoutBasket.Items.Select(item => item.CatalogItemId).ToArray();
-            var catalogItems =
-                await this.catalogRepository.FindAsync(item => catalogItemIds.Contains(item.Id), cancellationToken);
-            var order = this.orderFactory.CreateOrder(checkoutBasket, catalogItems, shipToAddress);
+            var displayItemIds = checkoutBasket.Items.Select(item => item.DisplayItemId).ToArray();
+            var displayItems =
+                await this.displayItemRepository.FindAsync(item => displayItemIds.Contains(item.Id) && !item.IsDeleted, cancellationToken);
+            var missingIds = displayItemIds.Except(displayItems.Select(item => item.Id)).ToArray();
+            if (missingIds.Length != 0)
+            {
+                throw new DisplayItemNotExistingInRepositoryException(missingIds);
+            }
+
+            var order = this.orderFactory.CreateOrder(checkoutBasket, displayItems, shipToAddress);
             ordered = await this.orderRepository.AddAsync(order, cancellationToken);
 
             // 買い物かごを削除
@@ -206,6 +212,32 @@ public class ShoppingApplicationService
 
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_CheckoutAsyncEnd, checkoutBasket.Id, ordered.Id);
         return ordered;
+    }
+
+    /// <summary>削除済みの陳列品を含め、指定した商品を買い物かごから削除します。</summary>
+    /// <param name="buyerId">購入者 ID。</param>
+    /// <param name="displayItemId">陳列品 ID。</param>
+    /// <param name="cancellationToken">キャンセルトークン。</param>
+    /// <returns>削除処理を表すタスク。</returns>
+    public async Task RemoveItemFromBasketAsync(string buyerId, Guid displayItemId, CancellationToken cancellationToken = default)
+    {
+        using var scope = TransactionScopeManager.CreateTransactionScope();
+        var basket = await this.GetOrCreateBasketForUserAsync(buyerId, cancellationToken);
+        var items = await this.displayItemRepository.FindAsync(item => item.Id == displayItemId, cancellationToken);
+        if (items.Count == 0)
+        {
+            throw new DisplayItemNotExistingInRepositoryException([displayItemId]);
+        }
+
+        if (!basket.IsInDisplayItem(displayItemId))
+        {
+            throw new DisplayItemNotExistingInBasketException([displayItemId]);
+        }
+
+        basket.SetItemsQuantity(new() { [displayItemId] = 0 });
+        basket.RemoveEmptyItems();
+        await this.basketRepository.UpdateAsync(basket, cancellationToken);
+        scope.Complete();
     }
 
     private async Task<Basket> GetOrCreateBasketForUserAsync(string buyerId, CancellationToken cancellationToken)

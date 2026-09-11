@@ -1,18 +1,18 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Dressca.ApplicationCore.Catalog;
+using System.Diagnostics.CodeAnalysis;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.SystemCommon.Mapper;
-using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Consumer.Dto.DisplayItem;
 
 namespace Dressca.Web.Consumer.Mapper;
 
 /// <summary>
-///  <see cref="CatalogItem"/> と <see cref="CatalogItemSummaryApiModel"/> のマッパーです。
+///  <see cref="DisplayItem"/> と <see cref="DisplayItemSummaryApiModel"/> のマッパーです。
 /// </summary>
-public class CatalogItemSummaryApiModelMapper : IObjectMapper<CatalogItem, CatalogItemSummaryApiModel>
+public class DisplayItemSummaryApiModelMapper : IObjectMapper<DisplayItem, DisplayItemSummaryApiModel>
 {
     /// <inheritdoc/>
     [return: NotNullIfNotNull(nameof(value))]
-    public CatalogItemSummaryApiModel? Convert(CatalogItem? value)
+    public DisplayItemSummaryApiModel? Convert(DisplayItem? value)
     {
         if (value is null)
         {

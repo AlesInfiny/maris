@@ -133,7 +133,7 @@ public class OrderApplicationServiceTest(ITestOutputHelper testOutputHelper) : T
 
         var items = new List<OrderItem>()
         {
-            new() { ItemOrdered = new CatalogItemOrdered(item1, productName, productCode), UnitPrice = 1000m, Quantity = 1 },
+            new() { ItemOrdered = new DisplayItemOrdered(item1, productName, productCode), UnitPrice = 1000m, Quantity = 1 },
         };
 
         return items;
