@@ -1,67 +1,67 @@
-﻿using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.ApplicationService;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.SystemCommon;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Controllers.ApiModel;
-using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Consumer.Dto.DisplayItem;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 
 namespace Dressca.Web.Consumer.Controllers;
 
 /// <summary>
-///  <see cref="CatalogItem"/> の情報にアクセスする API コントローラーです。
+///  <see cref="DisplayItem"/> の情報にアクセスする API コントローラーです。
 /// </summary>
-[Route("api/catalog-items")]
+[Route("api/display-items")]
 [ApiController]
 [Produces("application/json")]
-public class CatalogItemsController : ControllerBase
+public class DisplayItemsController : ControllerBase
 {
-    private readonly CatalogApplicationService service;
-    private readonly IObjectMapper<CatalogItem, GetCatalogItemResponse> mapper;
+    private readonly DisplayItemApplicationService service;
+    private readonly IObjectMapper<DisplayItem, GetDisplayItemResponse> mapper;
 
     /// <summary>
-    ///  <see cref="CatalogItemsController"/> クラスの新しいインスタンスを初期化します。
+    ///  <see cref="DisplayItemsController"/> クラスの新しいインスタンスを初期化します。
     /// </summary>
-    /// <param name="service">カタログアプリケーションサービス。</param>
-    /// <param name="mapper"><see cref="CatalogItem"/> と <see cref="GetCatalogItemResponse"/> のマッパー。</param>
+    /// <param name="service">陳列品アプリケーションサービス。</param>
+    /// <param name="mapper"><see cref="DisplayItem"/> と <see cref="GetDisplayItemResponse"/> のマッパー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="service"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="mapper"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
-    public CatalogItemsController(
-        CatalogApplicationService service,
-        IObjectMapper<CatalogItem, GetCatalogItemResponse> mapper)
+    public DisplayItemsController(
+        DisplayItemApplicationService service,
+        IObjectMapper<DisplayItem, GetDisplayItemResponse> mapper)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
     /// <summary>
-    ///  カタログアイテムを検索して返します。
+    ///  陳列品を検索して返します。
     /// </summary>
-    /// <returns>カタログアイテムの一覧。</returns>
+    /// <returns>陳列品の一覧。</returns>
     /// <param name="query">検索クエリ。</param>
     /// <response code="200">成功。</response>
     /// <response code="400">リクエストエラー。</response>
     [HttpGet]
-    [ProducesResponseType(typeof(PagedList<GetCatalogItemResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(PagedList<GetDisplayItemResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [OpenApiOperation("getByQuery")]
-    public async Task<IActionResult> GetByQueryAsync([FromQuery] FindCatalogItemsQuery query)
+    public async Task<IActionResult> GetByQueryAsync([FromQuery] FindDisplayItemsQuery query)
     {
-        var (catalogItems, totalCount) =
-            await this.service.GetCatalogItemsAsync(
+        var (displayItems, totalCount) =
+            await this.service.GetDisplayItemsAsync(
                 skip: query.GetSkipCount(),
                 take: query.PageSize,
                 brandId: query.BrandId,
                 categoryId: query.CategoryId);
-        var items = catalogItems
-            .Select(catalogItem => this.mapper.Convert(catalogItem))
+        var items = displayItems
+            .Select(displayItem => this.mapper.Convert(displayItem))
             .ToList();
-        var returnValue = new PagedList<GetCatalogItemResponse>(
+        var returnValue = new PagedList<GetDisplayItemResponse>(
             items: items,
             totalCount: totalCount,
             page: query.Page,

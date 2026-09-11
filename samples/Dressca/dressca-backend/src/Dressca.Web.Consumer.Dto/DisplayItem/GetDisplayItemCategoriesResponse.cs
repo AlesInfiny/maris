@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace Dressca.Web.Consumer.Dto.Catalog;
+namespace Dressca.Web.Consumer.Dto.DisplayItem;
 
 /// <summary>
-///  カタログカテゴリのレスポンスデータを表します。
+///  陳列品カテゴリのレスポンスデータを表します。
 /// </summary>
-public class GetCatalogCategoriesResponse
+public class GetDisplayItemCategoriesResponse
 {
     /// <summary>
-    ///  カタログカテゴリ Id を取得または設定します。
+    ///  陳列品カテゴリ Id を取得または設定します。
     /// </summary>
     [Required]
     public Guid Id { get; set; }

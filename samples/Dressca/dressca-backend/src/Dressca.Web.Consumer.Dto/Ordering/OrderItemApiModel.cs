@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Consumer.Dto.DisplayItem;
 
 namespace Dressca.Web.Consumer.Dto.Ordering;
 
@@ -15,9 +15,9 @@ public class OrderItemApiModel
     public Guid Id { get; init; }
 
     /// <summary>
-    ///  注文された商品（カタログアイテム）を取得または設定します。
+    ///  注文された商品（陳列品）を取得または設定します。
     /// </summary>
-    public CatalogItemSummaryApiModel? ItemOrdered { get; set; }
+    public DisplayItemSummaryApiModel? ItemOrdered { get; set; }
 
     /// <summary>
     ///  単価を取得または設定します。

@@ -1,23 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dressca.Web.Consumer.Controllers.ApiModel;
 
 /// <summary>
-///  カタログアイテムの検索クエリを表します。
+///  陳列品の検索クエリを表します。
 /// </summary>
-public class FindCatalogItemsQuery
+public class FindDisplayItemsQuery
 {
     /// <summary>
-    ///  カタログブランド ID です。
-    ///  未設定の場合は全カタログブランドを対象にします。
+    ///  陳列品ブランド ID です。
+    ///  未設定の場合は全陳列品ブランドを対象にします。
     /// </summary>
     [FromQuery(Name = "brandId")]
     public Guid? BrandId { get; set; }
 
     /// <summary>
-    ///  カタログカテゴリ ID です。
-    ///  未設定の場合は全カタログカテゴリを対象にします。
+    ///  陳列品カテゴリ ID です。
+    ///  未設定の場合は全陳列品カテゴリを対象にします。
     /// </summary>
     [FromQuery(Name = "categoryId")]
     public Guid? CategoryId { get; set; }

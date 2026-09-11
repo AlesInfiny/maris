@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace Dressca.Web.Consumer.Dto.Catalog;
+namespace Dressca.Web.Consumer.Dto.DisplayItem;
 
 /// <summary>
-///  カタログアイテムのレスポンスデータを表します。
+///  陳列品のレスポンスデータを表します。
 /// </summary>
-public class GetCatalogItemResponse
+public class GetDisplayItemResponse
 {
     /// <summary>
     ///  説明を取得または設定します。
@@ -20,19 +20,19 @@ public class GetCatalogItemResponse
     public decimal Price { get; set; }
 
     /// <summary>
-    ///  カタログカテゴリ Id を取得または設定します。
+    ///  陳列品カテゴリ Id を取得または設定します。
     /// </summary>
     [Required]
-    public Guid CatalogCategoryId { get; set; }
+    public Guid DisplayItemCategoryId { get; set; }
 
     /// <summary>
-    ///  カタログブランド Id を取得または設定します。
+    ///  陳列品ブランド Id を取得または設定します。
     /// </summary>
     [Required]
-    public Guid CatalogBrandId { get; set; }
+    public Guid DisplayItemBrandId { get; set; }
 
     /// <summary>
-    ///  カタログアイテム Id を取得または設定します。
+    ///  陳列品 Id を取得または設定します。
     /// </summary>
     [Required]
     public Guid Id { get; set; }

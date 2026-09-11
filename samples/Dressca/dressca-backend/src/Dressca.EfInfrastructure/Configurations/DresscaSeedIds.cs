@@ -133,4 +133,37 @@ internal static class DresscaSeedIds
 
     /// <summary>メダリオン ストレートチップ ドレスシューズ商品画像関連の固定 ID。</summary>
     internal static readonly Guid ItemAsset11 = new("019b76da-a800-7005-8001-00000000000b");
+
+    /// <summary>陳列品 1 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem1 = new("019b76da-a800-7006-8001-000000000001");
+
+    /// <summary>陳列品 2 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem2 = new("019b76da-a800-7006-8001-000000000002");
+
+    /// <summary>陳列品 3 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem3 = new("019b76da-a800-7006-8001-000000000003");
+
+    /// <summary>陳列品 4 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem4 = new("019b76da-a800-7006-8001-000000000004");
+
+    /// <summary>陳列品 5 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem5 = new("019b76da-a800-7006-8001-000000000005");
+
+    /// <summary>陳列品 6 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem6 = new("019b76da-a800-7006-8001-000000000006");
+
+    /// <summary>陳列品 7 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem7 = new("019b76da-a800-7006-8001-000000000007");
+
+    /// <summary>陳列品 8 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem8 = new("019b76da-a800-7006-8001-000000000008");
+
+    /// <summary>陳列品 9 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem9 = new("019b76da-a800-7006-8001-000000000009");
+
+    /// <summary>陳列品 10 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem10 = new("019b76da-a800-7006-8001-00000000000a");
+
+    /// <summary>陳列品 11 の固定 ID。</summary>
+    internal static readonly Guid DisplayItem11 = new("019b76da-a800-7006-8001-00000000000b");
 }

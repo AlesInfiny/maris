@@ -239,5 +239,41 @@ namespace Dressca.ApplicationCore.Resources {
                 return ResourceManager.GetString("PropertyNotInitialized", resourceCulture);
             }
         }
+
+        /// <summary>陳列品に関するリソースを取得します。</summary>
+        public static string DisplayItemBrandIdMustNotBeEmpty {
+            get {
+                return ResourceManager.GetString("DisplayItemBrandIdMustNotBeEmpty", resourceCulture);
+            }
+        }
+
+
+        /// <summary>陳列品に関するリソースを取得します。</summary>
+        public static string DisplayItemCategoryIdMustNotBeEmpty {
+            get {
+                return ResourceManager.GetString("DisplayItemCategoryIdMustNotBeEmpty", resourceCulture);
+            }
+        }
+
+        /// <summary>陳列品に関するリソースを取得します。</summary>
+        public static string DisplayItemIdDoesNotExistInRepository {
+            get {
+                return ResourceManager.GetString("DisplayItemIdDoesNotExistInRepository", resourceCulture);
+            }
+        }
+
+        /// <summary>陳列品に関するリソースを取得します。</summary>
+        public static string DisplayItemIdDoesNotExistInBasket {
+            get {
+                return ResourceManager.GetString("DisplayItemIdDoesNotExistInBasket", resourceCulture);
+            }
+        }
+
+        /// <summary>陳列品に関するリソースを取得します。</summary>
+        public static string DisplayItemIdMustNotBeEmpty {
+            get {
+                return ResourceManager.GetString("DisplayItemIdMustNotBeEmpty", resourceCulture);
+            }
+        }
     }
 }

@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
-namespace Dressca.Web.Consumer.Dto.Catalog;
+namespace Dressca.Web.Consumer.Dto.DisplayItem;
 
 /// <summary>
-///  カタログアイテムの概要のレスポンスデータを表します。
+///  陳列品の概要のレスポンスデータを表します。
 /// </summary>
-public class CatalogItemSummaryApiModel
+public class DisplayItemSummaryApiModel
 {
     /// <summary>
-    ///  カタログアイテム Id を取得または設定します。
+    ///  陳列品 Id を取得または設定します。
     /// </summary>
     [Required]
     public Guid Id { get; set; }

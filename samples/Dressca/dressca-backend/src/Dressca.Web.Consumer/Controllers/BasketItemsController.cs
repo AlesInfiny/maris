@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Baskets;
 using Dressca.Web.Consumer.Dto.Baskets;
-using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Consumer.Dto.DisplayItem;
 using Dressca.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
@@ -23,8 +23,8 @@ public class BasketItemsController : ControllerBase
     private readonly ShoppingApplicationService service;
     private readonly IObjectMapper<Basket, GetBasketItemsResponse> basketMapper;
     private readonly IObjectMapper<BasketItem, BasketItemApiModel> basketItemMapper;
-    private readonly IObjectMapper<CatalogItem, GetCatalogItemResponse> catalogItemMapper;
-    private readonly IObjectMapper<CatalogItem, CatalogItemSummaryApiModel> catalogItemSummaryResponseMapper;
+    private readonly IObjectMapper<DisplayItem, GetDisplayItemResponse> displayItemMapper;
+    private readonly IObjectMapper<DisplayItem, DisplayItemSummaryApiModel> displayItemSummaryResponseMapper;
     private readonly ILogger<BasketItemsController> logger;
 
     /// <summary>
@@ -33,15 +33,15 @@ public class BasketItemsController : ControllerBase
     /// <param name="service">ショッピングアプリケーションサービス。</param>
     /// <param name="basketMapper"><see cref="Basket"/> と <see cref="GetBasketItemsResponse"/> のマッパー。</param>
     /// <param name="basketItemMapper"><see cref="BasketItem"/> と <see cref="BasketItemApiModel"/> のマッパー。</param>
-    /// <param name="catalogItemMapper"><see cref="CatalogItem"/> と <see cref="GetCatalogItemResponse"/> のマッパー。</param>
-    /// <param name="catalogItemSummaryResponseMapper"><see cref="CatalogItem"/> と <see cref="CatalogItemSummaryApiModel"/> のマッパー。</param>
+    /// <param name="displayItemMapper"><see cref="DisplayItem"/> と <see cref="GetDisplayItemResponse"/> のマッパー。</param>
+    /// <param name="displayItemSummaryResponseMapper"><see cref="DisplayItem"/> と <see cref="DisplayItemSummaryApiModel"/> のマッパー。</param>
     /// <param name="logger">ロガー。</param>
     /// <exception cref="ArgumentNullException">
     ///  <list type="bullet">
     ///   <item><paramref name="basketMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="basketItemMapper"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="catalogItemMapper"/> が <see langword="null"/> です。</item>
-    ///   <item><paramref name="catalogItemSummaryResponseMapper"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="displayItemMapper"/> が <see langword="null"/> です。</item>
+    ///   <item><paramref name="displayItemSummaryResponseMapper"/> が <see langword="null"/> です。</item>
     ///   <item><paramref name="logger"/> が <see langword="null"/> です。</item>
     ///  </list>
     /// </exception>
@@ -49,15 +49,15 @@ public class BasketItemsController : ControllerBase
         ShoppingApplicationService service,
         IObjectMapper<Basket, GetBasketItemsResponse> basketMapper,
         IObjectMapper<BasketItem, BasketItemApiModel> basketItemMapper,
-        IObjectMapper<CatalogItem, GetCatalogItemResponse> catalogItemMapper,
-        IObjectMapper<CatalogItem, CatalogItemSummaryApiModel> catalogItemSummaryResponseMapper,
+        IObjectMapper<DisplayItem, GetDisplayItemResponse> displayItemMapper,
+        IObjectMapper<DisplayItem, DisplayItemSummaryApiModel> displayItemSummaryResponseMapper,
         ILogger<BasketItemsController> logger)
     {
         this.service = service ?? throw new ArgumentNullException(nameof(service));
         this.basketMapper = basketMapper ?? throw new ArgumentNullException(nameof(basketMapper));
         this.basketItemMapper = basketItemMapper ?? throw new ArgumentNullException(nameof(basketItemMapper));
-        this.catalogItemMapper = catalogItemMapper ?? throw new ArgumentNullException(nameof(catalogItemMapper));
-        this.catalogItemSummaryResponseMapper = catalogItemSummaryResponseMapper ?? throw new ArgumentNullException(nameof(catalogItemSummaryResponseMapper));
+        this.displayItemMapper = displayItemMapper ?? throw new ArgumentNullException(nameof(displayItemMapper));
+        this.displayItemSummaryResponseMapper = displayItemSummaryResponseMapper ?? throw new ArgumentNullException(nameof(displayItemSummaryResponseMapper));
         this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -73,30 +73,30 @@ public class BasketItemsController : ControllerBase
     {
         var buyerId = this.HttpContext.GetBuyerId();
 
-        var (basket, catalogItems, deletedCatalogItemIds) = await this.service.GetBasketItemsAsync(buyerId);
+        var (basket, displayItems, deletedDisplayItemIds) = await this.service.GetBasketItemsAsync(buyerId);
 
         var basketResponse = this.basketMapper.Convert(basket);
         foreach (var basketItem in basketResponse.BasketItems)
         {
-            basketItem.CatalogItem = this.GetCatalogItemSummary(basketItem.CatalogItemId, catalogItems);
+            basketItem.DisplayItem = this.GetDisplayItemSummary(basketItem.DisplayItemId, displayItems);
         }
 
-        basketResponse.DeletedItemIds = deletedCatalogItemIds.ToList();
+        basketResponse.DeletedItemIds = deletedDisplayItemIds.ToList();
 
         return this.Ok(basketResponse);
     }
 
     /// <summary>
     ///  買い物かごアイテム内の数量を変更します。
-    ///  買い物かご内に存在しないカタログアイテム ID は指定できません。
+    ///  買い物かご内に存在しない陳列品 ID は指定できません。
     /// </summary>
     /// <param name="putBasketItems">変更する買い物かごアイテムのデータリスト。</param>
     /// <returns>なし。</returns>
     /// <remarks>
     ///  <para>
     ///   この API では、買い物かご内に存在する商品の数量を変更できます。
-    ///   買い物かご内に存在しないカタログアイテム Id を指定すると HTTP 400 を返却します。
-    ///   またシステムに登録されていないカタログアイテム Id を指定した場合も HTTP 400 を返却します。
+    ///   買い物かご内に存在しない陳列品 Id を指定すると HTTP 400 を返却します。
+    ///   またシステムに登録されていない陳列品 Id を指定した場合も HTTP 400 を返却します。
     ///  </para>
     /// </remarks>
     /// <response code="204">成功。</response>
@@ -115,8 +115,8 @@ public class BasketItemsController : ControllerBase
         var quantities = putBasketItems.ToDictionary(
             putBasketItem =>
             {
-                putBasketItem.CatalogItemId.ThrowIfNull();
-                return putBasketItem.CatalogItemId.Value;
+                putBasketItem.DisplayItemId.ThrowIfNull();
+                return putBasketItem.DisplayItemId.Value;
             },
             putBasketItem =>
             {
@@ -137,12 +137,12 @@ public class BasketItemsController : ControllerBase
     /// <returns>なし。</returns>
     /// <remarks>
     ///  <para>
-    ///   この API では、システムに登録されていないカタログアイテム Id を指定した場合 HTTP 400 を返却します。
-    ///   また買い物かごに追加していないカタログアイテムを指定した場合、その商品を買い物かごに追加します。
-    ///   すでに買い物かごに追加されているカタログアイテムを指定した場合、指定した数量、買い物かご内の数量を追加します。
+    ///   この API では、システムに登録されていない陳列品 Id を指定した場合 HTTP 400 を返却します。
+    ///   また買い物かごに追加していない陳列品を指定した場合、その商品を買い物かごに追加します。
+    ///   すでに買い物かごに追加されている陳列品を指定した場合、指定した数量、買い物かご内の数量を追加します。
     ///  </para>
     ///  <para>
-    ///   買い物かご内のカタログアイテムの数量が 0 未満になるように減じることはできません。
+    ///   買い物かご内の陳列品の数量が 0 未満になるように減じることはできません。
     ///   計算の結果数量が 0 未満になる場合 HTTP 500 を返却します。
     ///  </para>
     /// </remarks>
@@ -156,57 +156,57 @@ public class BasketItemsController : ControllerBase
     [OpenApiOperation("postBasketItem")]
     public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsRequest postBasketItem)
     {
-        postBasketItem.CatalogItemId.ThrowIfNull();
+        postBasketItem.DisplayItemId.ThrowIfNull();
         postBasketItem.AddedQuantity.ThrowIfNull();
 
         var buyerId = this.HttpContext.GetBuyerId();
 
-        await this.service.AddItemToBasketAsync(buyerId, postBasketItem.CatalogItemId.Value, postBasketItem.AddedQuantity.Value);
+        await this.service.AddItemToBasketAsync(buyerId, postBasketItem.DisplayItemId.Value, postBasketItem.AddedQuantity.Value);
 
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetBasketItemsAsync));
         return this.CreatedAtAction(actionName, null);
     }
 
     /// <summary>
-    ///  買い物かごから指定したカタログアイテム Id の商品を削除します。
+    ///  買い物かごから指定した陳列品 Id の商品を削除します。
     /// </summary>
-    /// <param name="catalogItemId">カタログアイテム Id 。</param>
+    /// <param name="displayItemId">陳列品 Id 。</param>
     /// <returns>なし。</returns>
     /// <remarks>
     ///  <para>
-    ///   catalogItemId には買い物かご内に存在するカタログアイテム Id を指定してください。
-    ///   カタログアイテム Id は 1 以上の整数です。
-    ///   0 以下の値を指定したり、整数値ではない値を指定した場合 HTTP 400 を返却します。
-    ///   買い物かご内に指定したカタログアイテムの商品が存在しない場合、 HTTP 404 を返却します。
+    ///   displayItemId には買い物かご内に存在する陳列品 Id を指定してください。
+    ///   陳列品 Id には UUID を指定してください。
+    ///   UUID ではない値を指定した場合 HTTP 400 を返却します。
+    ///   買い物かご内に指定した陳列品の商品が存在しない場合、 HTTP 404 を返却します。
     ///  </para>
     /// </remarks>
     /// <response code="204">成功。</response>
     /// <response code="400">リクエストエラー。</response>
-    /// <response code="404">買い物かご内に指定したカタログアイテム Id がない。</response>
-    [HttpDelete("{catalogItemId}")]
+    /// <response code="404">買い物かご内に指定した陳列品 Id がない。</response>
+    [HttpDelete("{displayItemId}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ProblemDetails))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ProblemDetails))]
     [OpenApiOperation("deleteBasketItem")]
-    public async Task<IActionResult> DeleteBasketItemAsync(Guid catalogItemId)
+    public async Task<IActionResult> DeleteBasketItemAsync(Guid displayItemId)
     {
         var buyerId = this.HttpContext.GetBuyerId();
         try
         {
-            await this.service.SetBasketItemsQuantitiesAsync(buyerId, new() { { catalogItemId, 0 } });
+            await this.service.RemoveItemFromBasketAsync(buyerId, displayItemId);
         }
-        catch (CatalogItemNotExistingInBasketException ex)
+        catch (DisplayItemNotExistingInBasketException ex)
         {
-            this.logger.LogWarning(Events.CatalogItemIdDoesNotExistInBasket, ex, ex.Message);
+            this.logger.LogWarning(Events.DisplayItemIdDoesNotExistInBasket, ex, ex.Message);
             return this.NotFound();
         }
 
         return this.NoContent();
     }
 
-    private CatalogItemSummaryApiModel? GetCatalogItemSummary(Guid catalogItemId, IEnumerable<CatalogItem> catalogItems)
+    private DisplayItemSummaryApiModel? GetDisplayItemSummary(Guid displayItemId, IEnumerable<DisplayItem> displayItems)
     {
-        var catalogItem = catalogItems.FirstOrDefault(catalogItem => catalogItem.Id == catalogItemId);
-        return this.catalogItemSummaryResponseMapper.Convert(catalogItem);
+        var displayItem = displayItems.FirstOrDefault(displayItem => displayItem.Id == displayItemId);
+        return this.displayItemSummaryResponseMapper.Convert(displayItem);
     }
 }

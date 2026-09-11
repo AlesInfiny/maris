@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.ApplicationCore.Ordering;
 
 namespace Dressca.UnitTests.ApplicationCore.ApplicationService;
@@ -20,10 +20,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var basketRepo = Mock.Of<IBasketRepository>();
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, displayItemRepo, displayItemDomainService, logger);
 
         // Act
         var action = () => service.GetBasketItemsAsync(nullOrEmptyBuyerId!);
@@ -34,13 +34,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task GetBasketItemsAsync_購入者Idがnullまたは空白ではない_カタログリポジトリのFindAsyncを1度だけ呼び出す()
+    public async Task GetBasketItemsAsync_購入者Idがnullまたは空白ではない_陳列品リポジトリのFindAsyncを1度だけ呼び出す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -50,21 +50,21 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
         await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
-        catalogRepo.Verify(
-            r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken),
+        displayItemRepo.Verify(
+            r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken),
             Times.Once);
     }
 
@@ -73,9 +73,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -85,13 +85,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -106,9 +106,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -118,13 +118,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -135,16 +135,16 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task GetBasketItemsAsync_買い物かごアイテムに対応するカタログアイテムが削除されている_削除済みアイテムのIDが返却される()
+    public async Task GetBasketItemsAsync_買い物かごアイテムに対応する陳列品が削除されている_削除済みアイテムのIDが返却される()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var deletedCatalogItem1 = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
-        var deletedCatalogItem2 = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002", true);
-        var existingCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000c"), "説明3", "ダミー商品3", "C000000003");
-        var catalogItems = new List<CatalogItem>
+        var deletedDisplayItem1 = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
+        var deletedDisplayItem2 = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002", true);
+        var existingDisplayItem = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000c"), "説明3", "ダミー商品3", "C000000003");
+        var displayItems = new List<DisplayItem>
          {
-             deletedCatalogItem1, deletedCatalogItem2, existingCatalogItem,
+             deletedDisplayItem1, deletedDisplayItem2, existingDisplayItem,
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -154,23 +154,23 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (basketResult, catalogItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
+        var (basketResult, displayItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
         Assert.Collection(
             deletedItemIds,
-            id => Assert.Equal(deletedCatalogItem1.Id, id),
-            id => Assert.Equal(deletedCatalogItem2.Id, id));
+            id => Assert.Equal(deletedDisplayItem1.Id, id),
+            id => Assert.Equal(deletedDisplayItem2.Id, id));
     }
 
     [Fact]
@@ -178,15 +178,15 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var deletedCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
-        var existingCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
-        var catalogItems = new List<CatalogItem>
+        var deletedDisplayItem = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
+        var existingDisplayItem = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
+        var displayItems = new List<DisplayItem>
          {
-             deletedCatalogItem, existingCatalogItem,
+             deletedDisplayItem, existingDisplayItem,
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
-        basket.AddItem(deletedCatalogItem.Id, deletedCatalogItem.Price, 1);
-        basket.AddItem(existingCatalogItem.Id, existingCatalogItem.Price, 1);
+        basket.AddItem(deletedDisplayItem.Id, deletedDisplayItem.Price, 1);
+        basket.AddItem(existingDisplayItem.Id, existingDisplayItem.Price, 1);
         var basketItemList = basket.Items.ToList();
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -195,17 +195,17 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (basketResult, catalogItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
+        var (basketResult, displayItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
         Assert.Equal(basket.BuyerId, basketResult.BuyerId);
@@ -213,30 +213,30 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             basketResult.Items,
             basketItem =>
             {
-                Assert.Equal(basketItemList[0].CatalogItemId, basketItem.CatalogItemId);
+                Assert.Equal(basketItemList[0].DisplayItemId, basketItem.DisplayItemId);
                 Assert.Equal(basketItemList[0].Quantity, basketItem.Quantity);
             },
             basketItem =>
             {
-                Assert.Equal(basketItemList[1].CatalogItemId, basketItem.CatalogItemId);
+                Assert.Equal(basketItemList[1].DisplayItemId, basketItem.DisplayItemId);
                 Assert.Equal(basketItemList[1].Quantity, basketItem.Quantity);
             });
     }
 
     [Fact]
-    public async Task GetBasketItemsAsync_既存の買い物かごの一覧を取得_正しくカタログアイテムの一覧が取得できる()
+    public async Task GetBasketItemsAsync_既存の買い物かごの一覧を取得_正しく陳列品の一覧が取得できる()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var deletedCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
-        var existingCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
-        var catalogItems = new List<CatalogItem>
+        var deletedDisplayItem = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
+        var existingDisplayItem = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
+        var displayItems = new List<DisplayItem>
          {
-             deletedCatalogItem, existingCatalogItem,
+             deletedDisplayItem, existingDisplayItem,
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
-        basket.AddItem(deletedCatalogItem.Id, deletedCatalogItem.Price, 1);
-        basket.AddItem(existingCatalogItem.Id, existingCatalogItem.Price, 1);
+        basket.AddItem(deletedDisplayItem.Id, deletedDisplayItem.Price, 1);
+        basket.AddItem(existingDisplayItem.Id, existingDisplayItem.Price, 1);
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -244,30 +244,30 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (basketResult, catalogItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
+        var (basketResult, displayItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
         Assert.Collection(
-            catalogItemList,
-            catalogItem =>
+            displayItemList,
+            displayItem =>
             {
-                Assert.Equal(deletedCatalogItem.Id, catalogItem.Id);
-                Assert.Equal(deletedCatalogItem.IsDeleted, catalogItem.IsDeleted);
+                Assert.Equal(deletedDisplayItem.Id, displayItem.Id);
+                Assert.Equal(deletedDisplayItem.IsDeleted, displayItem.IsDeleted);
             },
-            catalogItem =>
+            displayItem =>
             {
-                Assert.Equal(existingCatalogItem.Id, catalogItem.Id);
-                Assert.Equal(existingCatalogItem.IsDeleted, catalogItem.IsDeleted);
+                Assert.Equal(existingDisplayItem.Id, displayItem.Id);
+                Assert.Equal(existingDisplayItem.IsDeleted, displayItem.IsDeleted);
             });
     }
 
@@ -276,11 +276,11 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var deletedCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
-        var existingCatalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
-        var catalogItems = new List<CatalogItem>
+        var deletedDisplayItem = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001", true);
+        var existingDisplayItem = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000b"), "説明2", "ダミー商品2", "C000000002");
+        var displayItems = new List<DisplayItem>
          {
-             deletedCatalogItem, existingCatalogItem,
+             deletedDisplayItem, existingDisplayItem,
          };
         var basket = new Basket { BuyerId = dummyBuyerId };
 
@@ -290,17 +290,17 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (basketResult, catalogItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
+        var (basketResult, displayItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
         Assert.Equal(basket.BuyerId, basketResult.BuyerId);
@@ -308,7 +308,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task GetBasketItemsAsync_既存の買い物かごの一覧を取得_カタログアイテムの一覧が空のリストになる()
+    public async Task GetBasketItemsAsync_既存の買い物かごの一覧を取得_陳列品の一覧が空のリストになる()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
@@ -320,20 +320,20 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(basket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(new List<CatalogItem>());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(new List<DisplayItem>());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
-        var (basketResult, catalogItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
+        var (basketResult, displayItemList, deletedItemIds) = await service.GetBasketItemsAsync(dummyBuyerId, cancellationToken);
 
         // Assert
-        Assert.Empty(catalogItemList);
+        Assert.Empty(displayItemList);
     }
 
     [Theory]
@@ -346,10 +346,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var basketRepo = Mock.Of<IBasketRepository>();
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, displayItemRepo, displayItemDomainService, logger);
 
         // Act
         var action = () => service.SetBasketItemsQuantitiesAsync(nullOrEmptyBuyerId!, new() { { new Guid("019b76da-a800-7004-8001-000000000001"), 1 } });
@@ -360,7 +360,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task SetBasketItemsQuantitiesAsync_買い物かご内に存在しないカタログアイテムが数量設定対象_CatalogItemNotExistingInBasketExceptionを返す()
+    public async Task SetBasketItemsQuantitiesAsync_買い物かご内に存在しない陳列品が数量設定対象_DisplayItemNotExistingInBasketExceptionを返す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
@@ -374,20 +374,20 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService, logger);
 
         // Act
         var action = () => service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
-        await Assert.ThrowsAsync<CatalogItemNotExistingInBasketException>(action);
+        await Assert.ThrowsAsync<DisplayItemNotExistingInBasketException>(action);
     }
 
     [Fact]
-    public async Task SetBasketItemsQuantitiesAsync_カタログリポジトリに存在しないカタログアイテムが数量設定対象_CatalogItemNotExistingInRepositoryExceptionを返す()
+    public async Task SetBasketItemsQuantitiesAsync_陳列品リポジトリに存在しない陳列品が数量設定対象_DisplayItemNotExistingInRepositoryExceptionを返す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
@@ -401,32 +401,32 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = new Mock<ICatalogDomainService>();
-        catalogDomainService
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = new Mock<IDisplayItemDomainService>();
+        displayItemDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((false, new List<CatalogItem>().AsReadOnly()));
+            .ReturnsAsync((false, new List<DisplayItem>().AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService.Object, logger);
 
         // Act
         var action = () => service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
-        await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
+        await Assert.ThrowsAsync<DisplayItemNotExistingInRepositoryException>(action);
     }
 
     [Fact]
-    public async Task SetBasketItemsQuantitiesAsync_買い物かご内とカタログリポジトリに存在するカタログアイテムが数量設定対象_買い物かごリポジトリのUpdateAsyncを1度だけ呼び出す()
+    public async Task SetBasketItemsQuantitiesAsync_買い物かご内と陳列品リポジトリに存在する陳列品が数量設定対象_買い物かごリポジトリのUpdateAsyncを1度だけ呼び出す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000m);
         var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 5 } };
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -435,13 +435,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = new Mock<ICatalogDomainService>();
-        catalogDomainService
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = new Mock<IDisplayItemDomainService>();
+        displayItemDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((true, catalogItems.AsReadOnly()));
+            .ReturnsAsync((true, displayItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService.Object, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -454,7 +454,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task SetBasketItemsQuantitiesAsync_買い物かご内とカタログリポジトリに存在するカタログアイテムが数量設定対象_買い物かごの商品数が更新される()
+    public async Task SetBasketItemsQuantitiesAsync_買い物かご内と陳列品リポジトリに存在する陳列品が数量設定対象_買い物かごの商品数が更新される()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
@@ -462,9 +462,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000m);
         var newQuantity = 5;
         var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), newQuantity } };
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -473,13 +473,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = new Mock<ICatalogDomainService>();
-        catalogDomainService
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = new Mock<IDisplayItemDomainService>();
+        displayItemDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((true, catalogItems.AsReadOnly()));
+            .ReturnsAsync((true, displayItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService.Object, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -499,9 +499,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000m);
         var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 0 } };
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -510,13 +510,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = new Mock<ICatalogDomainService>();
-        catalogDomainService
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = new Mock<IDisplayItemDomainService>();
+        displayItemDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((true, catalogItems.AsReadOnly()));
+            .ReturnsAsync((true, displayItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService.Object, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -538,10 +538,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var basketRepo = Mock.Of<IBasketRepository>();
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, displayItemRepo, displayItemDomainService, logger);
 
         // Act
         var action = () => service.AddItemToBasketAsync(nullOrEmptyBuyerId!, new Guid("019b76da-a800-7004-8001-00000000000a"), 5);
@@ -552,7 +552,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task AddItemToBasketAsync_カタログリポジトリに存在しないカタログアイテムが追加対象_CatalogItemNotExistingInRepositoryExceptionを返す()
+    public async Task AddItemToBasketAsync_陳列品リポジトリに存在しない陳列品が追加対象_DisplayItemNotExistingInRepositoryExceptionを返す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
@@ -565,31 +565,31 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = new Mock<ICatalogDomainService>();
-        catalogDomainService
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = new Mock<IDisplayItemDomainService>();
+        displayItemDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((false, new List<CatalogItem>().AsReadOnly()));
+            .ReturnsAsync((false, new List<DisplayItem>().AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService.Object, logger);
 
         // Act
         var action = () => service.AddItemToBasketAsync(dummyBuyerId, new Guid("019b76da-a800-7004-8001-00000000000a"), 5);
 
         // Assert
-        await Assert.ThrowsAsync<CatalogItemNotExistingInRepositoryException>(action);
+        await Assert.ThrowsAsync<DisplayItemNotExistingInRepositoryException>(action);
     }
 
     [Fact]
-    public async Task AddItemToBasketAsync_カタログリポジトリに存在するカタログアイテムが追加対象_買い物かごリポジトリのUpdateAsyncを1度だけ呼び出す()
+    public async Task AddItemToBasketAsync_陳列品リポジトリに存在する陳列品が追加対象_買い物かごリポジトリのUpdateAsyncを1度だけ呼び出す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 5 } };
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
 
         var basketRepo = new Mock<IBasketRepository>();
@@ -598,13 +598,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = new Mock<ICatalogDomainService>();
-        catalogDomainService
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = new Mock<IDisplayItemDomainService>();
+        displayItemDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((true, catalogItems.AsReadOnly()));
+            .ReturnsAsync((true, displayItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService.Object, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -617,14 +617,14 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task AddItemToBasketAsync_カタログリポジトリに存在するカタログアイテムが追加対象_買い物かごに追加対象の商品が追加される()
+    public async Task AddItemToBasketAsync_陳列品リポジトリに存在する陳列品が追加対象_買い物かごに追加対象の商品が追加される()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         var quantities = new Dictionary<Guid, int>() { { new Guid("019b76da-a800-7004-8001-00000000000a"), 5 } };
-        var catalogItem = CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001");
-        var catalogItems = new List<CatalogItem> { catalogItem };
+        var displayItem = CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001");
+        var displayItems = new List<DisplayItem> { displayItem };
 
         var basketRepo = new Mock<IBasketRepository>();
         basketRepo
@@ -632,13 +632,13 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = new Mock<ICatalogDomainService>();
-        catalogDomainService
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = new Mock<IDisplayItemDomainService>();
+        displayItemDomainService
             .Setup(d => d.ExistsAllAsync(quantities.Keys, AnyToken))
-            .ReturnsAsync((true, catalogItems.AsReadOnly()));
+            .ReturnsAsync((true, displayItems.AsReadOnly()));
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService.Object, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService.Object, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -651,7 +651,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             Times.Once);
         basketRepo.Verify(
            r => r.UpdateAsync(
-           It.Is<Basket>(b => b.Items.First().CatalogItemId == catalogItem.Id), AnyToken),
+           It.Is<Basket>(b => b.Items.First().DisplayItemId == displayItem.Id), AnyToken),
            Times.Once);
         basketRepo.Verify(
            r => r.UpdateAsync(
@@ -659,7 +659,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
            Times.Once);
         basketRepo.Verify(
            r => r.UpdateAsync(
-           It.Is<Basket>(b => b.Items.First().UnitPrice == catalogItem.Price), AnyToken),
+           It.Is<Basket>(b => b.Items.First().UnitPrice == displayItem.Price), AnyToken),
            Times.Once);
     }
 
@@ -674,10 +674,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var basketRepo = Mock.Of<IBasketRepository>();
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo, orderRepo, orderFactory, displayItemRepo, displayItemDomainService, logger);
 
         // Act
         var action = () => service.CheckoutAsync(nullOrEmptyBuyerId!, shipTo);
@@ -701,10 +701,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync((Basket?)null);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService, logger);
 
         // Act
         var action = () => service.CheckoutAsync(dummyBuyerId, shipTo);
@@ -727,10 +727,10 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(dummyBasket);
         var orderRepo = Mock.Of<IOrderRepository>();
         var orderFactory = Mock.Of<IOrderFactory>();
-        var catalogRepo = Mock.Of<ICatalogRepository>();
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = Mock.Of<IDisplayItemRepository>();
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, catalogRepo, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo, orderFactory, displayItemRepo, displayItemDomainService, logger);
 
         // Act
         var action = () => service.CheckoutAsync(dummyBuyerId, shipTo);
@@ -740,16 +740,16 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     }
 
     [Fact]
-    public async Task CheckoutAsync_買い物かごにアイテムが存在する_カタログリポジトリのFindAsyncを1度だけ呼び出す()
+    public async Task CheckoutAsync_買い物かごにアイテムが存在する_陳列品リポジトリのFindAsyncを1度だけ呼び出す()
     {
         // Arrange
         var dummyBuyerId = "dummyId";
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -766,23 +766,23 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(order);
         var orderFactory = new Mock<IOrderFactory>();
         orderFactory
-            .Setup(f => f.CreateOrder(dummyBasket, catalogItems, shipTo))
+            .Setup(f => f.CreateOrder(dummyBasket, displayItems, shipTo))
             .Returns(order);
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
         await service.CheckoutAsync(dummyBuyerId, shipTo, cancellationToken);
 
         // Assert
-        catalogRepo.Verify(
-            r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken),
+        displayItemRepo.Verify(
+            r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken),
             Times.Once);
     }
 
@@ -794,9 +794,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -813,15 +813,15 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(order);
         var orderFactory = new Mock<IOrderFactory>();
         orderFactory
-            .Setup(f => f.CreateOrder(dummyBasket, catalogItems, shipTo))
+            .Setup(f => f.CreateOrder(dummyBasket, displayItems, shipTo))
             .Returns(order);
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -841,9 +841,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -860,15 +860,15 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(order);
         var orderFactory = new Mock<IOrderFactory>();
         orderFactory
-            .Setup(f => f.CreateOrder(dummyBasket, catalogItems, shipTo))
+            .Setup(f => f.CreateOrder(dummyBasket, displayItems, shipTo))
             .Returns(order);
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -888,9 +888,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -907,15 +907,15 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(order);
         var orderFactory = new Mock<IOrderFactory>();
         orderFactory
-            .Setup(f => f.CreateOrder(dummyBasket, catalogItems, shipTo))
+            .Setup(f => f.CreateOrder(dummyBasket, displayItems, shipTo))
             .Returns(order);
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -938,7 +938,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.ProductCode == "C000000001"), AnyToken),
             Times.Once);
         orderRepo.Verify(
-            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.CatalogItemId == new Guid("019b76da-a800-7004-8001-000000000001")), AnyToken),
+            r => r.AddAsync(It.Is<Order>(o => o.OrderItems.First().ItemOrdered.DisplayItemId == new Guid("019b76da-a800-7004-8001-000000000001")), AnyToken),
             Times.Once);
     }
 
@@ -950,9 +950,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var dummyBasket = new Basket { BuyerId = dummyBuyerId };
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 1000);
         var shipTo = CreateDefaultShipTo();
-        var catalogItems = new List<CatalogItem>
+        var displayItems = new List<DisplayItem>
          {
-             CreateCatalogItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
+             CreateDisplayItem(new Guid("019b76da-a800-7004-8001-00000000000a"), "説明1", "ダミー商品1", "C000000001"),
          };
         var order = new Order(CreateDefaultOrderItems()) { BuyerId = dummyBuyerId, ShipToAddress = shipTo };
 
@@ -969,15 +969,15 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
             .ReturnsAsync(order);
         var orderFactory = new Mock<IOrderFactory>();
         orderFactory
-            .Setup(f => f.CreateOrder(dummyBasket, catalogItems, shipTo))
+            .Setup(f => f.CreateOrder(dummyBasket, displayItems, shipTo))
             .Returns(order);
-        var catalogRepo = new Mock<ICatalogRepository>();
-        catalogRepo
-            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<CatalogItem, bool>>>(), AnyToken))
-            .ReturnsAsync(catalogItems.AsReadOnly());
-        var catalogDomainService = Mock.Of<ICatalogDomainService>();
+        var displayItemRepo = new Mock<IDisplayItemRepository>();
+        displayItemRepo
+            .Setup(r => r.FindAsync(It.IsAny<Expression<Func<DisplayItem, bool>>>(), AnyToken))
+            .ReturnsAsync(displayItems.AsReadOnly());
+        var displayItemDomainService = Mock.Of<IDisplayItemDomainService>();
         var logger = this.CreateTestLogger<ShoppingApplicationService>();
-        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, catalogRepo.Object, catalogDomainService, logger);
+        var service = new ShoppingApplicationService(basketRepo.Object, orderRepo.Object, orderFactory.Object, displayItemRepo.Object, displayItemDomainService, logger);
         var cancellationToken = TestContext.Current.CancellationToken;
 
         // Act
@@ -1013,18 +1013,18 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
 
         var items = new List<OrderItem>()
         {
-            new() { ItemOrdered = new CatalogItemOrdered(new Guid("019b76da-a800-7004-8001-000000000001"), productName, productCode), UnitPrice = 1000m, Quantity = 1 },
+            new() { ItemOrdered = new DisplayItemOrdered(new Guid("019b76da-a800-7004-8001-000000000001"), productName, productCode), UnitPrice = 1000m, Quantity = 1 },
         };
 
         return items;
     }
 
-    private static CatalogItem CreateCatalogItem(Guid id, string description, string name, string productCode, bool isDeleted = false)
+    private static DisplayItem CreateDisplayItem(Guid id, string description, string name, string productCode, bool isDeleted = false)
     {
-        return new CatalogItem
+        return new DisplayItem
         {
-            CatalogCategoryId = new Guid("019b76da-a800-7003-8001-000000000001"),
-            CatalogBrandId = new Guid("019b76da-a800-7002-8001-000000000001"),
+            DisplayItemCategoryId = new Guid("019b76da-a800-7003-8001-000000000001"),
+            DisplayItemBrandId = new Guid("019b76da-a800-7002-8001-000000000001"),
             Description = description,
             Name = name,
             Price = 1000m,

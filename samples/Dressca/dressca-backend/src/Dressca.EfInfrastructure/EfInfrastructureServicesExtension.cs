@@ -1,6 +1,7 @@
 ﻿using Dressca.ApplicationCore.Assets;
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.EfInfrastructure.Resources;
 using Microsoft.EntityFrameworkCore;
@@ -68,6 +69,9 @@ public static class EfInfrastructureServicesExtension
         });
 
         // Repositories
+        services.AddTransient<IDisplayItemRepository, EfDisplayItemRepository>();
+        services.AddTransient<IDisplayItemBrandRepository, EfDisplayItemBrandRepository>();
+        services.AddTransient<IDisplayItemCategoryRepository, EfDisplayItemCategoryRepository>();
         services.AddTransient<IBasketRepository, EfBasketRepository>();
         services.AddTransient<ICatalogBrandRepository, EfCatalogBrandRepository>();
         services.AddTransient<ICatalogCategoryRepository, EfCatalogCategoryRepository>();
