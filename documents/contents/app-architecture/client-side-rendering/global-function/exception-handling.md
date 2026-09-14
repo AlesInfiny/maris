@@ -204,11 +204,11 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json; charset=utf-8
 
 {
-    "type": "https://hoge.com/error/catalogItemIdDoesNotExistInBasket",
+    "type": "https://hoge.com/error/displayItemIdDoesNotExistInBasket",
     "title": "業務エラーが発生しました。",
     "status": 400,
     "detail": "dressca.applicationcore.baskets.CatalogItemInBasketNotFoundException: 業務エラーが発生しました。 ###以下スタックトレースは省略###",
-    "exceptionId": "catalogItemIdDoesNotExistInBasket",
+    "exceptionId": "displayItemIdDoesNotExistInBasket",
     "exceptionValues": ["1 ###買い物かごID###", "10 ###商品ID###"]
 }
 ```
@@ -218,10 +218,10 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/problem+json; charset=utf-8
 
 {
-    "type": "https://hoge.com/error/catalogItemIdDoesNotExistInBasket",
+    "type": "https://hoge.com/error/displayItemIdDoesNotExistInBasket",
     "title": "業務エラーが発生しました。",
     "status": 400,
-    "exceptionId": "catalogItemIdDoesNotExistInBasket",
+    "exceptionId": "displayItemIdDoesNotExistInBasket",
     "exceptionValues": ["1 ###買い物かごID###", "10 ###商品ID###"]
 }
 ```
