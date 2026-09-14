@@ -62,7 +62,7 @@ public class DisplayItemApplicationService
             Expression<Func<DisplayItem, bool>> specification = item =>
                 (!brandId.HasValue || item.DisplayItemBrandId == brandId) &&
                 (!categoryId.HasValue || item.DisplayItemCategoryId == categoryId) &&
-                (item.IsDeleted == false);
+                !item.IsDeleted;
             itemsOnPage = await this.displayItemRepository.FindAsync(specification, skip, take, cancellationToken);
             totalItems = await this.displayItemRepository.CountAsync(specification, cancellationToken);
             scope.Complete();

@@ -76,7 +76,7 @@ public class ShoppingApplicationService
             scope.Complete();
         }
 
-        var deletedDisplayItemIds = displayItems.Where(item => item.IsDeleted == true).Select(item => item.Id).ToList();
+        var deletedDisplayItemIds = displayItems.Where(item => item.IsDeleted).Select(item => item.Id).ToList();
 
         this.logger.LogDebug(Events.DebugEvent, LogMessages.ShoppingApplicationService_GetBasketItemsAsyncEnd, buyerId);
         return (BasketResult: basket, DisplayItems: displayItems, DeletedItemIds: deletedDisplayItemIds);
