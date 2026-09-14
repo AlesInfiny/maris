@@ -101,7 +101,7 @@ public class ShoppingApplicationService
             var notExistsInBasketDisplayItemIds = quantities.Keys.Where(displayItemId => !basket.IsInDisplayItem(displayItemId));
             if (notExistsInBasketDisplayItemIds.Any())
             {
-                throw new DisplayItemNotExistingInBasketException(notExistsInBasketDisplayItemIds);
+                throw new DisplayItemNotExistingInBasketException(basket.Id, notExistsInBasketDisplayItemIds);
             }
 
             // 陳列品リポジトリに存在しない陳列品が指定されていないか確認
@@ -231,7 +231,7 @@ public class ShoppingApplicationService
 
         if (!basket.IsInDisplayItem(displayItemId))
         {
-            throw new DisplayItemNotExistingInBasketException([displayItemId]);
+            throw new DisplayItemNotExistingInBasketException(basket.Id, [displayItemId]);
         }
 
         basket.SetItemsQuantity(new() { [displayItemId] = 0 });

@@ -364,7 +364,7 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
     {
         // Arrange
         var dummyBuyerId = "dummyId";
-        var dummyBasket = new Basket { BuyerId = dummyBuyerId };
+        var dummyBasket = new Basket { Id = Guid.CreateVersion7(), BuyerId = dummyBuyerId };
         dummyBasket.AddItem(new Guid("019b76da-a800-7004-8001-00000000000a"), 100);
         var quantities = new Dictionary<Guid, int>() { { Guid.Empty, 1 } };
 
@@ -383,7 +383,9 @@ public class ShoppingApplicationServiceTest(ITestOutputHelper testOutputHelper) 
         var action = () => service.SetBasketItemsQuantitiesAsync(dummyBuyerId, quantities);
 
         // Assert
-        await Assert.ThrowsAsync<DisplayItemNotExistingInBasketException>(action);
+        var exception = await Assert.ThrowsAsync<DisplayItemNotExistingInBasketException>(action);
+        var message = Assert.Single(Assert.Single(exception.BusinessErrors).ErrorMessages);
+        Assert.Equal([dummyBasket.Id.ToString(), Guid.Empty.ToString()], message.ErrorMessageValues);
     }
 
     [Fact]

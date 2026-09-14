@@ -187,7 +187,7 @@
     <value>陳列品 ID:{0} の陳列品がリポジトリに存在しません。</value>
   </data>
   <data name="DisplayItemIdDoesNotExistInBasket" xml:space="preserve">
-    <value>陳列品 ID :{0} の陳列品が買い物かごに存在しません。</value>
+    <value>買い物かごID: {0} に陳列品ID: {1} の陳列品が存在しません。</value>
   </data>
   <data name="DisplayItemIdMustNotBeEmpty" xml:space="preserve">
     <value>陳列品 ID に空の Guid は設定できません。</value>
