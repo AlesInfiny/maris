@@ -6,7 +6,7 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 # ブランクプロジェクトの作成 {#top}
 
 下記の手順では、 Node.js のルートプロジェクトとワークスペースを作成し、作成したワークスペースに Vue.js のブランクプロジェクトを作成します。
-本ページに記載しているターミナルの出力例は、 Node.js v24 系 、 npm v11 系 、 create-vue v3.19.0 を使用してプロジェクトを作成した際のものです。バージョンが異なる場合、出力内容は異なる可能性があります。
+本ページに記載しているターミナルの出力例は、 Node.js v24 系 、 npm v11 系 、 create-vue v3.22.4 を使用してプロジェクトを作成した際のものです。バージョンが異なる場合、出力内容は異なる可能性があります。
 
 ## プロジェクトの全体像 {#project-overview}
 
@@ -82,32 +82,32 @@ T  Vue.js - The Progressive JavaScript Framework
 インストールオプションを確認されるのでそれぞれインストールするかどうかを選択します。フロントエンドアプリケーションのアーキテクチャに基づき、使用するものを選択すると、以下のようになります。
 
 ```text
-*  Select features to include in your project: (↑/↓ to navigate, space to select, a to toggle all, enter to confirm)
-|  [+] TypeScript
+o  Use TypeScript?
+|  Yes
+|
+o  Select features to include in your project: (↑/↓ to navigate, space to select, a to toggle all, enter to
+|  confirm)
 |  [+] JSX Support
 |  [+] Router (SPA development)
 |  [+] Pinia (state management)
 |  [+] Vitest (unit testing)
 |  [+] End-to-End Testing
-|  [+] ESLint (error prevention)
+|  [+] Linter (error prevention)
 |  [+] Prettier (code formatting)
-—
+o  Select an End-to-End testing framework: (↑/↓ to navigate, enter to confirm)
+|  > Playwright (https://playwright.dev/)
+|    Cypress
 
-*  Select an End-to-End testing framework: (↑/↓ to navigate, enter to confirm)
-|    Playwright
-|  > Cypress (https://www.cypress.io/)
-|    Nightwatch
 —
 ```
 
 以下の実験的機能は、インストールが必須ではありません。
 
 ```text
-*  Select experimental features to include in your project: (↑/↓ to navigate, space to select, a to toggle all, enter to
-confirm)
-|  [ ] Oxlint
-|  [ ] Replace Prettier with Oxfmt
-|  [ ] Vite 8 (beta)
+*  Select experimental features to include in your project: (↑/↓ to navigate, space to select, a to toggle
+|  all, enter to confirm)
+|  [•] Replace Prettier with Oxfmt
+|  [ ] Vue 3.6 (beta)
 —
 ```
 
@@ -144,7 +144,7 @@ npm run dev -w <workspace-name>
 > vite
 
 
-  VITE v7.x.x  ready in xxxx ms
+  VITE v8.x.x  ready in xxxx ms
 
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose
