@@ -207,9 +207,9 @@ Content-Type: application/problem+json; charset=utf-8
     "type": "https://hoge.com/error/displayItemIdDoesNotExistInBasket",
     "title": "業務エラーが発生しました。",
     "status": 400,
-    "detail": "dressca.applicationcore.baskets.CatalogItemInBasketNotFoundException: 業務エラーが発生しました。 ###以下スタックトレースは省略###",
+    "detail": "Dressca.ApplicationCore.Baskets.DisplayItemNotExistingInBasketException: 業務エラーが発生しました。 ###以下スタックトレースは省略###",
     "exceptionId": "displayItemIdDoesNotExistInBasket",
-    "exceptionValues": ["1 ###買い物かごID###", "10 ###商品ID###"]
+    "exceptionValues": ["3fa85f64-5717-4562-b3fc-2c963f66afa6 ###買い物かごID###", "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d ###陳列品ID###"]
 }
 ```
 
@@ -222,6 +222,6 @@ Content-Type: application/problem+json; charset=utf-8
     "title": "業務エラーが発生しました。",
     "status": 400,
     "exceptionId": "displayItemIdDoesNotExistInBasket",
-    "exceptionValues": ["1 ###買い物かごID###", "10 ###商品ID###"]
+    "exceptionValues": ["3fa85f64-5717-4562-b3fc-2c963f66afa6 ###買い物かごID###", "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d ###陳列品ID###"]
 }
 ```
