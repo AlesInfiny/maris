@@ -68,7 +68,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 ??? example "tsconfig.node.json の設定例"
 
-    E2E テストには Playwright を使用するので、 `include` キーから playwright.config.\* を削除しています。
+    E2E テストには Playwright を使用するので、 `include` キーから nightwatch.conf.\* および cypress.config.\* を削除しています。
 
     ```json title="サンプルアプリケーション の tsconfig.node.json" hl_lines="3"
     https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/tsconfig.node.json
@@ -110,7 +110,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 - `compilerOptions.module`
   
     トランスパイルしたファイルのモジュールシステムを設定するプロパティです。
-    tsconfig.node.json で `preserve` が `create-vue` した際にデフォルトで設定されます。
+    tsconfig.node.json で `ESNext` 、 tsconfig.json で `NodeNext` が `create-vue` した際にデフォルトで設定されます。
     `compilerOptions.module` の設定値については [The module output format :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/modules/theory.html#the-module-output-format){ target=_blank } を参照してください。
 
 - `compilerOptions.moduleResolution`
