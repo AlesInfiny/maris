@@ -1,4 +1,47 @@
 samples/** -linguist-documentation
 documents/** linguist-documentation
 
-* text=auto eol=lf
+# Text files
+*.ci text eol=lf
+*.code-workspace text eol=lf
+*.config text eol=lf
+*.cs text eol=lf
+*.cshtml text eol=lf
+*.csproj text eol=lf
+*.css text eol=lf
+*.dev text eol=lf
+*.drawio text eol=lf
+*.editorconfig text eol=lf
+*.gitattributes text eol=lf
+*.gitignore text eol=lf
+*.gitkeep text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.mock text eol=lf
+*.npmignore text eol=lf
+*.openapi-generator-ignore text eol=lf
+*.prettierignore text eol=lf
+*.prod text eol=lf
+*.props text eol=lf
+*.py text eol=lf
+*.razor text eol=lf
+*.resx text eol=lf
+*.sh text eol=lf
+*.slnf text eol=lf
+*.slnx text eol=lf
+*.svg text eol=lf
+*.textlintignore text eol=lf
+*.textlintrc text eol=lf
+*.ts text eol=lf
+*.txt text eol=lf
+*.vue text eol=lf
+*.yaml text eol=lf
+*.yamlignore text eol=lf
+*.yml text eol=lf
+
+# Binary files
+*.ico binary
+*.png binary
+*.zip binary
