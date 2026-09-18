@@ -18,7 +18,7 @@ internal static class Events
     /// <summary>
     ///  指定された商品が買い物かご内に存在しなかったことを示すイベント ID です。
     /// </summary>
-    internal static readonly EventId CatalogItemIdDoesNotExistInBasket = new(1201, nameof(CatalogItemIdDoesNotExistInBasket));
+    internal static readonly EventId DisplayItemIdDoesNotExistInBasket = new(1201, nameof(DisplayItemIdDoesNotExistInBasket));
 
     /// <summary>
     ///  注文情報が見つからなかったことを示すイベント ID です。

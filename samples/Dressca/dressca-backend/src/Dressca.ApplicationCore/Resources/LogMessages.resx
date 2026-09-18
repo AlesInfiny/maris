@@ -181,10 +181,10 @@
     <value>注文 ID: {OrderId} の注文情報を取得します。</value>
   </data>
   <data name="ShoppingApplicationService_AddItemToBasketAsyncEnd" xml:space="preserve">
-    <value>ID: {BasketId} の買い物かごにカタログアイテム ID: {CatalogItemId} を {Quantity} 個追加しました。</value>
+    <value>ID: {BasketId} の買い物かごに陳列品 ID: {DisplayItemId} を {Quantity} 個追加しました。</value>
   </data>
   <data name="ShoppingApplicationService_AddItemToBasketAsyncStart" xml:space="preserve">
-    <value>ID: {BasketId} の買い物かごにカタログアイテム ID: {CatalogItemId} を {Quantity} 個追加します。</value>
+    <value>ID: {BasketId} の買い物かごに陳列品 ID: {DisplayItemId} を {Quantity} 個追加します。</value>
   </data>
   <data name="ShoppingApplicationService_CheckoutAsyncEnd" xml:space="preserve">
     <value>買い物かご ID: {BasketId} の情報をもとに注文 ID: {OrderId} を作成しました。</value>
@@ -209,5 +209,14 @@
   </data>
   <data name="ShoppingApplicationService_SetBasketItemsQuantitiesAsyncStart" xml:space="preserve">
     <value>ID: {BasketId} の買い物かごの数量を一括で設定します。</value>
+  </data>
+  <data name="DisplayItemApplicationService_GetDisplayItemsAsyncEnd" xml:space="preserve">
+    <value>陳列品ブランド ID: {DisplayItemBrandId} 、陳列品カテゴリ ID: {DisplayItemCategoryId} のカテゴリ情報を取得しました。</value>
+  </data>
+  <data name="DisplayItemApplicationService_GetDisplayItemsAsyncStart" xml:space="preserve">
+    <value>陳列品ブランド ID: {DisplayItemBrandId} 、陳列品カテゴリ ID: {DisplayItemCategoryId} のカテゴリ情報を取得します。</value>
+  </data>
+  <data name="DisplayItemIdDoesNotExistInRepository" xml:space="preserve">
+    <value>指定された陳列品 ID: [{DisplayItemId}] の陳列品がリポジトリに存在しません。</value>
   </data>
 </root>

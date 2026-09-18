@@ -22,6 +22,9 @@ internal class Events
     /// </summary>
     internal static readonly EventId CatalogCategoryIdDoesNotExistInRepository = new(1003, nameof(CatalogCategoryIdDoesNotExistInRepository));
 
+    /// <summary>陳列品 ID がリポジトリ内に存在しないことを示すイベント ID。</summary>
+    internal static readonly EventId DisplayItemIdDoesNotExistInRepository = new(1004, nameof(DisplayItemIdDoesNotExistInRepository));
+
     /// <summary>
     /// デバッグ用のイベント ID
     /// </summary>

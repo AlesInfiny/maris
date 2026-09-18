@@ -1,5 +1,5 @@
 using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.ApplicationCore.Ordering;
 
 namespace Dressca.UnitTests.ApplicationCore.Ordering;
@@ -13,17 +13,17 @@ public class OrderFactoryTest
         var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
         var basket = new Basket() { BuyerId = "dummyId" };
-        var basketItem1 = new BasketItem() { CatalogItemId = item1, UnitPrice = 1000m, Quantity = 1 };
-        var basketItem2 = new BasketItem() { CatalogItemId = item2, UnitPrice = 2000m, Quantity = 2 };
-        basket.AddItem(basketItem1.CatalogItemId, basketItem1.UnitPrice, basketItem1.Quantity);
-        basket.AddItem(basketItem2.CatalogItemId, basketItem2.UnitPrice, basketItem2.Quantity);
+        var basketItem1 = new BasketItem() { DisplayItemId = item1, UnitPrice = 1000m, Quantity = 1 };
+        var basketItem2 = new BasketItem() { DisplayItemId = item2, UnitPrice = 2000m, Quantity = 2 };
+        basket.AddItem(basketItem1.DisplayItemId, basketItem1.UnitPrice, basketItem1.Quantity);
+        basket.AddItem(basketItem2.DisplayItemId, basketItem2.UnitPrice, basketItem2.Quantity);
 
-        var catalogItems = CreateDefaultCatalogItems();
+        var displayItems = CreateDefaultDisplayItems();
         var shipTo = CreateDefaultShipTo();
         var factory = new OrderFactory();
 
         // Act
-        var result = factory.CreateOrder(basket, catalogItems, shipTo);
+        var result = factory.CreateOrder(basket, displayItems, shipTo);
 
         // Assert
         Assert.Collection(
@@ -33,20 +33,20 @@ public class OrderFactoryTest
                 Assert.Equal(basketItem1.Quantity, orderItem.Quantity);
                 Assert.Equal(basketItem1.UnitPrice, orderItem.UnitPrice);
 
-                var catalogItem = catalogItems.First(c => c.Id == basketItem1.CatalogItemId);
-                Assert.Equal(catalogItem.ProductCode, orderItem.ItemOrdered.ProductCode);
-                Assert.Equal(catalogItem.Name, orderItem.ItemOrdered.ProductName);
-                Assert.Equal(catalogItem.Id, orderItem.ItemOrdered.CatalogItemId);
+                var displayItem = displayItems.First(c => c.Id == basketItem1.DisplayItemId);
+                Assert.Equal(displayItem.ProductCode, orderItem.ItemOrdered.ProductCode);
+                Assert.Equal(displayItem.Name, orderItem.ItemOrdered.ProductName);
+                Assert.Equal(displayItem.Id, orderItem.ItemOrdered.DisplayItemId);
             },
             orderItem =>
             {
                 Assert.Equal(basketItem2.Quantity, orderItem.Quantity);
                 Assert.Equal(basketItem2.UnitPrice, orderItem.UnitPrice);
 
-                var catalogItem = catalogItems.First(c => c.Id == basketItem2.CatalogItemId);
-                Assert.Equal(catalogItem.ProductCode, orderItem.ItemOrdered.ProductCode);
-                Assert.Equal(catalogItem.Name, orderItem.ItemOrdered.ProductName);
-                Assert.Equal(catalogItem.Id, orderItem.ItemOrdered.CatalogItemId);
+                var displayItem = displayItems.First(c => c.Id == basketItem2.DisplayItemId);
+                Assert.Equal(displayItem.ProductCode, orderItem.ItemOrdered.ProductCode);
+                Assert.Equal(displayItem.Name, orderItem.ItemOrdered.ProductName);
+                Assert.Equal(displayItem.Id, orderItem.ItemOrdered.DisplayItemId);
             });
     }
 
@@ -54,19 +54,19 @@ public class OrderFactoryTest
     public void CreateOrder_basketがnullの場合_ArgumentNullExceptionが発生する()
     {
         // Arrange
-        var catalogItems = CreateDefaultCatalogItems();
+        var displayItems = CreateDefaultDisplayItems();
         var shipTo = CreateDefaultShipTo();
         var factory = new OrderFactory();
 
         // Act
-        var action = () => factory.CreateOrder(null!, catalogItems, shipTo);
+        var action = () => factory.CreateOrder(null!, displayItems, shipTo);
 
         // Assert
         Assert.Throws<ArgumentNullException>("basket", action);
     }
 
     [Fact]
-    public void CreateOrder_catalogItemsがnullの場合_ArgumentNullExceptionが発生する()
+    public void CreateOrder_displayItemsがnullの場合_ArgumentNullExceptionが発生する()
     {
         // Arrange
         var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
@@ -79,7 +79,7 @@ public class OrderFactoryTest
         var action = () => factory.CreateOrder(basket, null!, shipTo);
 
         // Assert
-        Assert.Throws<ArgumentNullException>("catalogItems", action);
+        Assert.Throws<ArgumentNullException>("displayItems", action);
     }
 
     [Fact]
@@ -89,11 +89,11 @@ public class OrderFactoryTest
         var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         var basket = new Basket() { BuyerId = "dummyId" };
         basket.AddItem(item1, 1000m, 2);
-        var catalogItems = CreateDefaultCatalogItems();
+        var displayItems = CreateDefaultDisplayItems();
         var factory = new OrderFactory();
 
         // Act
-        var action = () => factory.CreateOrder(basket, catalogItems, null!);
+        var action = () => factory.CreateOrder(basket, displayItems, null!);
 
         // Assert
         Assert.Throws<ArgumentNullException>("shipToAddress", action);
@@ -116,7 +116,7 @@ public class OrderFactoryTest
         return new ShipTo(defaultFullName, address);
     }
 
-    private static IReadOnlyList<CatalogItem> CreateDefaultCatalogItems()
+    private static IReadOnlyList<DisplayItem> CreateDefaultDisplayItems()
     {
         var category1 = new Guid("019b76da-a800-7003-8001-000000000001");
         var brand1 = new Guid("019b76da-a800-7002-8001-000000000001");
@@ -125,12 +125,12 @@ public class OrderFactoryTest
         var item1 = new Guid("019b76da-a800-7004-8001-000000000001");
         var item2 = new Guid("019b76da-a800-7004-8001-000000000002");
         var item3 = new Guid("019b76da-a800-7004-8001-000000000003");
-        var catalog = new List<CatalogItem>()
+        var displayItem = new List<DisplayItem>()
         {
-            new() { CatalogCategoryId = category1, CatalogBrandId = brand3, Description = "定番の無地ロングTシャツです。", Name = "クルーネック Tシャツ - ブラック", Price = 1980m, ProductCode = "C000000001", Id = item1, RowVersion = [255] },
-            new() { CatalogCategoryId = category1, CatalogBrandId = brand2, Description = "暖かいのに着膨れしない起毛デニムです。", Name = "裏起毛 スキニーデニム", Price = 4800m, ProductCode = "C000000002", Id = item2, RowVersion = [255] },
-            new() { CatalogCategoryId = category1, CatalogBrandId = brand1, Description = "あたたかく肌ざわりも良いウール100%のロングコートです。", Name = "ウールコート", Price = 49800m, ProductCode = "C000000003", Id = item3, RowVersion = [255] },
+            new() { DisplayItemCategoryId = category1, DisplayItemBrandId = brand3, Description = "定番の無地ロングTシャツです。", Name = "クルーネック Tシャツ - ブラック", Price = 1980m, ProductCode = "C000000001", Id = item1 },
+            new() { DisplayItemCategoryId = category1, DisplayItemBrandId = brand2, Description = "暖かいのに着膨れしない起毛デニムです。", Name = "裏起毛 スキニーデニム", Price = 4800m, ProductCode = "C000000002", Id = item2 },
+            new() { DisplayItemCategoryId = category1, DisplayItemBrandId = brand1, Description = "あたたかく肌ざわりも良いウール100%のロングコートです。", Name = "ウールコート", Price = 49800m, ProductCode = "C000000003", Id = item3 },
         };
-        return catalog;
+        return displayItem;
     }
 }

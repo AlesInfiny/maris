@@ -16,9 +16,9 @@
 
 export * from './api/assets-api';
 export * from './api/basket-items-api';
-export * from './api/catalog-brands-api';
-export * from './api/catalog-categories-api';
-export * from './api/catalog-items-api';
+export * from './api/display-item-brands-api';
+export * from './api/display-item-categories-api';
+export * from './api/display-items-api';
 export * from './api/health-checks-api';
 export * from './api/orders-api';
 

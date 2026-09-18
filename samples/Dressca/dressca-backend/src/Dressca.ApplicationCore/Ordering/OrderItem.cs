@@ -25,9 +25,9 @@ public class OrderItem
     public Guid Id { get; init; }
 
     /// <summary>
-    ///  注文された商品（カタログアイテム）を取得します。
+    ///  注文された商品（陳列品）を取得します。
     /// </summary>
-    public required CatalogItemOrdered ItemOrdered { get; init; }
+    public required DisplayItemOrdered ItemOrdered { get; init; }
 
     /// <summary>
     ///  単価を取得します。
@@ -37,7 +37,7 @@ public class OrderItem
 
     /// <summary>
     ///  数量を取得します。
-    ///  カタログアイテムごとに取り扱い単位が異なる可能性があります。
+    ///  陳列品ごとに取り扱い単位が異なる可能性があります。
     ///  例えば、1 ダース単位に販売する商品の場合、この数量の単位は"ダース"です。
     /// </summary>
     public required int Quantity { get; init; }

@@ -2,9 +2,11 @@
 using Dressca.ApplicationCore.Baskets;
 using Dressca.ApplicationCore.Catalog;
 using Dressca.ApplicationCore.Ordering;
+using Dressca.EfInfrastructure.Configurations;
 using Dressca.EfInfrastructure.Configurations.Assets;
 using Dressca.EfInfrastructure.Configurations.Baskets;
 using Dressca.EfInfrastructure.Configurations.Catalog;
+using Dressca.EfInfrastructure.Configurations.DisplayItems;
 using Dressca.EfInfrastructure.Configurations.Ordering;
 using Microsoft.EntityFrameworkCore;
 
@@ -82,6 +84,9 @@ internal class DresscaDbContext : DbContext
     /// </summary>
     public DbSet<Asset> Assets { get; set; }
 
+    /// <summary>陳列品とカタログの対応を取得します。</summary>
+    public DbSet<DisplayItemEntity> DisplayItems { get; set; }
+
     /// <inheritdoc/>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -101,6 +106,9 @@ internal class DresscaDbContext : DbContext
         // 買い物かご
         modelBuilder.ApplyConfiguration(new BasketConfiguration());
         modelBuilder.ApplyConfiguration(new BasketItemConfiguration());
+
+        // 陳列品
+        modelBuilder.ApplyConfiguration(new DisplayItemConfiguration());
 
         // カタログ
         modelBuilder.ApplyConfiguration(new CatalogBrandConfiguration());

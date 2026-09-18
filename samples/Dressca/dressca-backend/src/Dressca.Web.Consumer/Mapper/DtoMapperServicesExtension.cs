@@ -1,9 +1,9 @@
 ﻿using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Dto.Baskets;
-using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Consumer.Dto.DisplayItem;
 using Dressca.Web.Consumer.Dto.Ordering;
 
 namespace Dressca.Web.Consumer.Mapper;
@@ -25,10 +25,10 @@ public static class DtoMapperServicesExtension
     public static IServiceCollection AddDresscaDtoMapper(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
-        services.AddSingleton<IObjectMapper<CatalogCategory, GetCatalogCategoriesResponse>, CatalogCategoryMapper>();
-        services.AddSingleton<IObjectMapper<CatalogBrand, GetCatalogBrandsResponse>, CatalogBrandMapper>();
-        services.AddSingleton<IObjectMapper<CatalogItem, GetCatalogItemResponse>, CatalogItemMapper>();
-        services.AddSingleton<IObjectMapper<CatalogItem, CatalogItemSummaryApiModel>, CatalogItemSummaryApiModelMapper>();
+        services.AddSingleton<IObjectMapper<DisplayItemCategory, GetDisplayItemCategoriesResponse>, DisplayItemCategoryMapper>();
+        services.AddSingleton<IObjectMapper<DisplayItemBrand, GetDisplayItemBrandsResponse>, DisplayItemBrandMapper>();
+        services.AddSingleton<IObjectMapper<DisplayItem, GetDisplayItemResponse>, DisplayItemMapper>();
+        services.AddSingleton<IObjectMapper<DisplayItem, DisplayItemSummaryApiModel>, DisplayItemSummaryApiModelMapper>();
         services.AddSingleton<IObjectMapper<BasketItem, BasketItemApiModel>, BasketItemMapper>();
         services.AddSingleton<IObjectMapper<Basket, GetBasketItemsResponse>, BasketMapper>();
         services.AddSingleton<IObjectMapper<Order, GetOrderByIdResponse>, OrderMapper>();

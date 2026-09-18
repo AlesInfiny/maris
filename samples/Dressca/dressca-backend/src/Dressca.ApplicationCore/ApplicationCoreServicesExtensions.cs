@@ -1,6 +1,7 @@
 ﻿using Dressca.ApplicationCore.ApplicationService;
 using Dressca.ApplicationCore.Authorization;
 using Dressca.ApplicationCore.Catalog;
+using Dressca.ApplicationCore.DisplayItems;
 using Dressca.ApplicationCore.Ordering;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -29,6 +30,9 @@ public static class ApplicationCoreServicesExtensions
 
         // Domain Services
         services.AddTransient<ICatalogDomainService, CatalogDomainService>();
+
+        services.AddTransient<IDisplayItemDomainService, DisplayItemDomainService>();
+        services.AddTransient<DisplayItemApplicationService>();
 
         // Factory
         services.AddTransient<IOrderFactory, OrderFactory>();

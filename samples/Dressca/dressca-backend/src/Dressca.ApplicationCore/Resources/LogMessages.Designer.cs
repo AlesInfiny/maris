@@ -338,5 +338,37 @@ namespace Dressca.ApplicationCore.Resources {
                 return ResourceManager.GetString("ShoppingApplicationService_SetBasketItemsQuantitiesAsyncStart", resourceCulture);
             }
         }
+
+
+
+
+
+
+        /// <summary>陳列品に関するリソースを取得します。</summary>
+        public static string DisplayItemApplicationService_GetDisplayItemsAsyncEnd {
+            get {
+                return ResourceManager.GetString("DisplayItemApplicationService_GetDisplayItemsAsyncEnd", resourceCulture);
+            }
+        }
+
+        /// <summary>陳列品に関するリソースを取得します。</summary>
+        public static string DisplayItemApplicationService_GetDisplayItemsAsyncStart {
+            get {
+                return ResourceManager.GetString("DisplayItemApplicationService_GetDisplayItemsAsyncStart", resourceCulture);
+            }
+        }
+
+
+
+
+
+
+
+        /// <summary>陳列品に関するリソースを取得します。</summary>
+        public static string DisplayItemIdDoesNotExistInRepository {
+            get {
+                return ResourceManager.GetString("DisplayItemIdDoesNotExistInRepository", resourceCulture);
+            }
+        }
     }
 }

@@ -39,9 +39,9 @@ public class BasketItem
     public Guid BasketId { get; private set; }
 
     /// <summary>
-    ///  カタログアイテム Id を取得します。
+    ///  陳列品 Id を取得します。
     /// </summary>
-    public required Guid CatalogItemId { get; init; }
+    public required Guid DisplayItemId { get; init; }
 
     /// <summary>
     ///  単価を取得します。

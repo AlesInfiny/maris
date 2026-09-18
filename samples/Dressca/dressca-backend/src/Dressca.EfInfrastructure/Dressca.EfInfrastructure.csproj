@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dressca.ApplicationCore\Dressca.ApplicationCore.csproj" />
+    <InternalsVisibleTo Include="Dressca.IntegrationTest" />
   </ItemGroup>
 
   <ItemGroup>

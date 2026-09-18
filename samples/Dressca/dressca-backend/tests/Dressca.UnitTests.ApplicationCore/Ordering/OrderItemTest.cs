@@ -9,7 +9,7 @@ public class OrderItemTest
     {
         // Arrange
         var item1 = Guid.CreateVersion7();
-        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
+        DisplayItemOrdered itemOrdered = new DisplayItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
         var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
@@ -27,7 +27,7 @@ public class OrderItemTest
     {
         // Arrange
         var item1 = Guid.CreateVersion7();
-        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
+        DisplayItemOrdered itemOrdered = new DisplayItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
         var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
@@ -45,7 +45,7 @@ public class OrderItemTest
     {
         // Arrange
         var item1 = Guid.CreateVersion7();
-        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
+        DisplayItemOrdered itemOrdered = new DisplayItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 1;
         var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };
@@ -70,7 +70,7 @@ public class OrderItemTest
     {
         // Arrange
         var item1 = Guid.CreateVersion7();
-        CatalogItemOrdered itemOrdered = new CatalogItemOrdered(item1, "製品1", "A00000001");
+        DisplayItemOrdered itemOrdered = new DisplayItemOrdered(item1, "製品1", "A00000001");
         decimal unitPrice = 1000m;
         int quantity = 2;
         var orderItem = new OrderItem { ItemOrdered = itemOrdered, UnitPrice = unitPrice, Quantity = quantity };

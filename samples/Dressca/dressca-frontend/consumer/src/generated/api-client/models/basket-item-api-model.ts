@@ -15,16 +15,16 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CatalogItemSummaryApiModel } from './catalog-item-summary-api-model';
+import type { DisplayItemSummaryApiModel } from './display-item-summary-api-model';
 
 /**
  * 買い物かごのアイテムのレスポンスデータを表します。             
  */
 export interface BasketItemApiModel {
     /**
-     * カタログアイテム Id を取得または設定します。             
+     * 陳列品 Id を取得または設定します。             
      */
-    'catalogItemId': string;
+    'displayItemId': string;
     /**
      * 単価を取得または設定します。             
      */
@@ -37,6 +37,6 @@ export interface BasketItemApiModel {
      * 小計額を取得します。             
      */
     'subTotal': number;
-    'catalogItem'?: CatalogItemSummaryApiModel | null;
+    'displayItem'?: DisplayItemSummaryApiModel | null;
 }
 

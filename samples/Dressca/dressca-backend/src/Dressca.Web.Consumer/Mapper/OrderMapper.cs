@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Dressca.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
-using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Consumer.Dto.DisplayItem;
 using Dressca.Web.Consumer.Dto.Ordering;
 
 namespace Dressca.Web.Consumer.Mapper;
@@ -49,9 +49,9 @@ public class OrderMapper : IObjectMapper<Order, GetOrderByIdResponse>
                 Quantity = orderItem.Quantity,
                 UnitPrice = orderItem.UnitPrice,
                 SubTotal = orderItem.GetSubTotal(),
-                ItemOrdered = new CatalogItemSummaryApiModel
+                ItemOrdered = new DisplayItemSummaryApiModel
                 {
-                    Id = orderItem.ItemOrdered.CatalogItemId,
+                    Id = orderItem.ItemOrdered.DisplayItemId,
                     Name = orderItem.ItemOrdered.ProductName,
                     ProductCode = orderItem.ItemOrdered.ProductCode,
                     AssetCodes = orderItem.Assets.Select(asset => asset.AssetCode).ToList(),

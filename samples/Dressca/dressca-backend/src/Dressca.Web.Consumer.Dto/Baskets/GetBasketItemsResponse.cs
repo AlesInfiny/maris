@@ -25,7 +25,7 @@ public class GetBasketItemsResponse
     public IList<BasketItemApiModel> BasketItems { get; set; } = [];
 
     /// <summary>
-    ///  削除済みカタログアイテムの Id のリストを取得または設定します。
+    ///  削除済み陳列品の Id のリストを取得または設定します。
     /// </summary>
     public IList<Guid> DeletedItemIds { get; set; } = [];
 }

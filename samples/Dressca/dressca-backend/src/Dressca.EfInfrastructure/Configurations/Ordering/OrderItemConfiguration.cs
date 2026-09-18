@@ -23,16 +23,16 @@ internal class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
             .IsRequired();
         builder.ComplexProperty(
             orderItem => orderItem.ItemOrdered,
-            catalogItemOrderedBuider =>
+            displayItemOrderedBuider =>
             {
-                catalogItemOrderedBuider.Property(orderedItem => orderedItem.CatalogItemId)
+                displayItemOrderedBuider.Property(orderedItem => orderedItem.DisplayItemId)
                     .IsRequired()
-                    .HasColumnName("OrderedCatalogItemId");
-                catalogItemOrderedBuider.Property(orderedItem => orderedItem.ProductName)
+                    .HasColumnName("OrderedDisplayItemId");
+                displayItemOrderedBuider.Property(orderedItem => orderedItem.ProductName)
                     .HasMaxLength(512)
                     .IsRequired()
                     .HasColumnName("OrderedProductName");
-                catalogItemOrderedBuider.Property(orderedItem => orderedItem.ProductCode)
+                displayItemOrderedBuider.Property(orderedItem => orderedItem.ProductCode)
                     .HasMaxLength(128)
                     .IsRequired()
                     .HasColumnName("OrderedProductCode");

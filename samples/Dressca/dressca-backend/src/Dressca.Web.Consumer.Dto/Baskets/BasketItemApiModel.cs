@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Dressca.Web.Consumer.Dto.Catalog;
+using Dressca.Web.Consumer.Dto.DisplayItem;
 
 namespace Dressca.Web.Consumer.Dto.Baskets;
 
@@ -9,10 +9,10 @@ namespace Dressca.Web.Consumer.Dto.Baskets;
 public class BasketItemApiModel
 {
     /// <summary>
-    ///  カタログアイテム Id を取得または設定します。
+    ///  陳列品 Id を取得または設定します。
     /// </summary>
     [Required]
-    public Guid CatalogItemId { get; set; }
+    public Guid DisplayItemId { get; set; }
 
     /// <summary>
     ///  単価を取得または設定します。
@@ -33,7 +33,7 @@ public class BasketItemApiModel
     public decimal SubTotal { get; set; }
 
     /// <summary>
-    ///  カタログアイテムを取得または設定します。
+    ///  陳列品を取得または設定します。
     /// </summary>
-    public CatalogItemSummaryApiModel? CatalogItem { get; set; }
+    public DisplayItemSummaryApiModel? DisplayItem { get; set; }
 }

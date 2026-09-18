@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { CatalogItemSummaryApiModel } from './catalog-item-summary-api-model';
+import type { DisplayItemSummaryApiModel } from './display-item-summary-api-model';
 
 /**
  * 注文アイテムのレスポンスデータを表します。             
@@ -25,7 +25,7 @@ export interface OrderItemApiModel {
      * 注文アイテム Id を取得します。             
      */
     'id': string;
-    'itemOrdered'?: CatalogItemSummaryApiModel | null;
+    'itemOrdered'?: DisplayItemSummaryApiModel | null;
     /**
      * 単価を取得または設定します。             
      */

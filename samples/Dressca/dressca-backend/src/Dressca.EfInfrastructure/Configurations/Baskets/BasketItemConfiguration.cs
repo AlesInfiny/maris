@@ -16,7 +16,7 @@ internal class BasketItemConfiguration : IEntityTypeConfiguration<BasketItem>
         builder.ToTable("BasketItems");
         builder.Property(basketItem => basketItem.Id)
             .ValueGeneratedNever();
-        builder.Property(basketItem => basketItem.CatalogItemId)
+        builder.Property(basketItem => basketItem.DisplayItemId)
             .IsRequired();
         builder.Property(basketItem => basketItem.UnitPrice)
             .IsRequired()

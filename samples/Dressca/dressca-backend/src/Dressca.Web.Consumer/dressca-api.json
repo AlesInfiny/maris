@@ -73,8 +73,8 @@
         "tags": [
           "BasketItems"
         ],
-        "summary": "買い物かごアイテム内の数量を変更します。\n買い物かご内に存在しないカタログアイテム ID は指定できません。",
-        "description": "この API では、買い物かご内に存在する商品の数量を変更できます。\n買い物かご内に存在しないカタログアイテム Id を指定すると HTTP 400 を返却します。\nまたシステムに登録されていないカタログアイテム Id を指定した場合も HTTP 400 を返却します。",
+        "summary": "買い物かごアイテム内の数量を変更します。\n買い物かご内に存在しない陳列品 ID は指定できません。",
+        "description": "この API では、買い物かご内に存在する商品の数量を変更できます。\n買い物かご内に存在しない陳列品 Id を指定すると HTTP 400 を返却します。\nまたシステムに登録されていない陳列品 Id を指定した場合も HTTP 400 を返却します。",
         "operationId": "putBasketItems",
         "requestBody": {
           "x-name": "putBasketItems",
@@ -113,7 +113,7 @@
           "BasketItems"
         ],
         "summary": "買い物かごに商品を追加します。",
-        "description": "この API では、システムに登録されていないカタログアイテム Id を指定した場合 HTTP 400 を返却します。\nまた買い物かごに追加していないカタログアイテムを指定した場合、その商品を買い物かごに追加します。\nすでに買い物かごに追加されているカタログアイテムを指定した場合、指定した数量、買い物かご内の数量を追加します。\n買い物かご内のカタログアイテムの数量が 0 未満になるように減じることはできません。\n計算の結果数量が 0 未満になる場合 HTTP 500 を返却します。",
+        "description": "この API では、システムに登録されていない陳列品 Id を指定した場合 HTTP 400 を返却します。\nまた買い物かごに追加していない陳列品を指定した場合、その商品を買い物かごに追加します。\nすでに買い物かごに追加されている陳列品を指定した場合、指定した数量、買い物かご内の数量を追加します。\n買い物かご内の陳列品の数量が 0 未満になるように減じることはできません。\n計算の結果数量が 0 未満になる場合 HTTP 500 を返却します。",
         "operationId": "postBasketItem",
         "requestBody": {
           "x-name": "postBasketItem",
@@ -155,20 +155,20 @@
         }
       }
     },
-    "/api/basket-items/{catalogItemId}": {
+    "/api/basket-items/{displayItemId}": {
       "delete": {
         "tags": [
           "BasketItems"
         ],
-        "summary": "買い物かごから指定したカタログアイテム Id の商品を削除します。",
-        "description": "catalogItemId には買い物かご内に存在するカタログアイテム Id を指定してください。\nカタログアイテム Id は 1 以上の整数です。\n0 以下の値を指定したり、整数値ではない値を指定した場合 HTTP 400 を返却します。\n買い物かご内に指定したカタログアイテムの商品が存在しない場合、 HTTP 404 を返却します。",
+        "summary": "買い物かごから指定した陳列品 Id の商品を削除します。",
+        "description": "displayItemId には買い物かご内に存在する陳列品 Id を指定してください。\n陳列品 Id には UUID を指定してください。\nUUID ではない値を指定した場合 HTTP 400 を返却します。\n買い物かご内に指定した陳列品の商品が存在しない場合、 HTTP 404 を返却します。",
         "operationId": "deleteBasketItem",
         "parameters": [
           {
-            "name": "catalogItemId",
+            "name": "displayItemId",
             "in": "path",
             "required": true,
-            "description": "カタログアイテム Id 。",
+            "description": "陳列品 Id 。",
             "schema": {
               "type": "string",
               "format": "guid"
@@ -191,7 +191,7 @@
             }
           },
           "404": {
-            "description": "買い物かご内に指定したカタログアイテム Id がない。",
+            "description": "買い物かご内に指定した陳列品 Id がない。",
             "content": {
               "application/json": {
                 "schema": {
@@ -203,13 +203,13 @@
         }
       }
     },
-    "/api/catalog-brands": {
+    "/api/display-item-brands": {
       "get": {
         "tags": [
-          "CatalogBrands"
+          "DisplayItemBrands"
         ],
-        "summary": "カタログブランドの一覧を取得します。",
-        "operationId": "getCatalogBrands",
+        "summary": "陳列品ブランドの一覧を取得します。",
+        "operationId": "getDisplayItemBrands",
         "responses": {
           "200": {
             "description": "成功。",
@@ -218,7 +218,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/GetCatalogBrandsResponse"
+                    "$ref": "#/components/schemas/GetDisplayItemBrandsResponse"
                   }
                 }
               }
@@ -227,13 +227,13 @@
         }
       }
     },
-    "/api/catalog-categories": {
+    "/api/display-item-categories": {
       "get": {
         "tags": [
-          "CatalogCategories"
+          "DisplayItemCategories"
         ],
-        "summary": "カタログカテゴリの一覧を取得します。",
-        "operationId": "getCatalogCategories",
+        "summary": "陳列品カテゴリの一覧を取得します。",
+        "operationId": "getDisplayItemCategories",
         "responses": {
           "200": {
             "description": "成功。",
@@ -242,7 +242,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/GetCatalogCategoriesResponse"
+                    "$ref": "#/components/schemas/GetDisplayItemCategoriesResponse"
                   }
                 }
               }
@@ -251,18 +251,18 @@
         }
       }
     },
-    "/api/catalog-items": {
+    "/api/display-items": {
       "get": {
         "tags": [
-          "CatalogItems"
+          "DisplayItems"
         ],
-        "summary": "カタログアイテムを検索して返します。",
+        "summary": "陳列品を検索して返します。",
         "operationId": "getByQuery",
         "parameters": [
           {
             "name": "brandId",
             "in": "query",
-            "description": "カタログブランド ID です。\n未設定の場合は全カタログブランドを対象にします。\n            ",
+            "description": "陳列品ブランド ID です。\n未設定の場合は全陳列品ブランドを対象にします。\n            ",
             "schema": {
               "type": "string",
               "format": "guid",
@@ -273,7 +273,7 @@
           {
             "name": "categoryId",
             "in": "query",
-            "description": "カタログカテゴリ ID です。\n未設定の場合は全カタログカテゴリを対象にします。\n            ",
+            "description": "陳列品カテゴリ ID です。\n未設定の場合は全陳列品カテゴリを対象にします。\n            ",
             "schema": {
               "type": "string",
               "format": "guid",
@@ -312,7 +312,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedListOfGetCatalogItemResponse"
+                  "$ref": "#/components/schemas/PagedListOfGetDisplayItemResponse"
                 }
               }
             }
@@ -528,7 +528,7 @@
           },
           "deletedItemIds": {
             "type": "array",
-            "description": "削除済みカタログアイテムの Id のリストを取得または設定します。\n            ",
+            "description": "削除済み陳列品の Id のリストを取得または設定します。\n            ",
             "items": {
               "type": "string",
               "format": "guid"
@@ -580,15 +580,15 @@
         "description": "買い物かごのアイテムのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
-          "catalogItemId",
+          "displayItemId",
           "unitPrice",
           "quantity",
           "subTotal"
         ],
         "properties": {
-          "catalogItemId": {
+          "displayItemId": {
             "type": "string",
-            "description": "カタログアイテム Id を取得または設定します。\n            ",
+            "description": "陳列品 Id を取得または設定します。\n            ",
             "format": "guid",
             "minLength": 1
           },
@@ -607,20 +607,20 @@
             "description": "小計額を取得します。\n            ",
             "format": "decimal"
           },
-          "catalogItem": {
-            "description": "カタログアイテムを取得または設定します。\n            ",
+          "displayItem": {
+            "description": "陳列品を取得または設定します。\n            ",
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/CatalogItemSummaryApiModel"
+                "$ref": "#/components/schemas/DisplayItemSummaryApiModel"
               }
             ]
           }
         }
       },
-      "CatalogItemSummaryApiModel": {
+      "DisplayItemSummaryApiModel": {
         "type": "object",
-        "description": "カタログアイテムの概要のレスポンスデータを表します。\n            ",
+        "description": "陳列品の概要のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "id",
@@ -630,7 +630,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "カタログアイテム Id を取得または設定します。\n            ",
+            "description": "陳列品 Id を取得または設定します。\n            ",
             "format": "guid",
             "minLength": 1
           },
@@ -655,16 +655,16 @@
       },
       "PutBasketItemsRequest": {
         "type": "object",
-        "description": "買い物かごのカタログアイテム数量を変更する処理のリクエストデータを表します。\n            ",
+        "description": "買い物かごの陳列品数量を変更する処理のリクエストデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
-          "catalogItemId",
+          "displayItemId",
           "quantity"
         ],
         "properties": {
-          "catalogItemId": {
+          "displayItemId": {
             "type": "string",
-            "description": "カタログアイテム Id を取得または設定します。\n1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。\n            ",
+            "description": "陳列品 Id を取得または設定します。\n1 以上の買い物かご、およびシステムに存在する陳列品 Id を指定してください。\n            ",
             "format": "guid",
             "minLength": 1
           },
@@ -679,29 +679,29 @@
       },
       "PostBasketItemsRequest": {
         "type": "object",
-        "description": "買い物かごにカタログアイテムを追加する処理のリクエストデータを表します。\n            ",
+        "description": "買い物かごに陳列品を追加する処理のリクエストデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
-          "catalogItemId"
+          "displayItemId"
         ],
         "properties": {
-          "catalogItemId": {
+          "displayItemId": {
             "type": "string",
-            "description": "カタログアイテム Id を取得または設定します。\n1 以上の買い物かご、およびシステムに存在するカタログアイテム Id を指定してください。\n            ",
+            "description": "陳列品 Id を取得または設定します。\n1 以上の買い物かご、およびシステムに存在する陳列品 Id を指定してください。\n            ",
             "format": "guid",
             "minLength": 1
           },
           "addedQuantity": {
             "type": "integer",
-            "description": "数量を取得または設定します。\nカタログアイテム Id に指定した商品が買い物かごに含まれている場合、負の値を指定すると買い物かごから指定した数だけ取り出します。\n未指定の場合は 1 です。\n            ",
+            "description": "数量を取得または設定します。\n陳列品 Id に指定した商品が買い物かごに含まれている場合、負の値を指定すると買い物かごから指定した数だけ取り出します。\n未指定の場合は 1 です。\n            ",
             "format": "int32",
             "nullable": true
           }
         }
       },
-      "GetCatalogBrandsResponse": {
+      "GetDisplayItemBrandsResponse": {
         "type": "object",
-        "description": "カタログブランドのレスポンスデータを表します。\nカタログアイテムの製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
+        "description": "陳列品ブランドのレスポンスデータを表します。\n陳列品の製造元や企画元に基づいて定義されるブランドを表現します。\n            ",
         "additionalProperties": false,
         "required": [
           "id",
@@ -710,7 +710,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "カタログブランド Id を取得または設定します。\n            ",
+            "description": "陳列品ブランド Id を取得または設定します。\n            ",
             "format": "guid",
             "minLength": 1
           },
@@ -721,9 +721,9 @@
           }
         }
       },
-      "GetCatalogCategoriesResponse": {
+      "GetDisplayItemCategoriesResponse": {
         "type": "object",
-        "description": "カタログカテゴリのレスポンスデータを表します。\n            ",
+        "description": "陳列品カテゴリのレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "id",
@@ -732,7 +732,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "カタログカテゴリ Id を取得または設定します。\n            ",
+            "description": "陳列品カテゴリ Id を取得または設定します。\n            ",
             "format": "guid",
             "minLength": 1
           },
@@ -743,7 +743,7 @@
           }
         }
       },
-      "PagedListOfGetCatalogItemResponse": {
+      "PagedListOfGetDisplayItemResponse": {
         "type": "object",
         "description": "ページネーションした結果のリストを管理します。\n            ",
         "additionalProperties": false,
@@ -780,20 +780,20 @@
             "type": "array",
             "description": "検索結果のリストを取得します。\n            ",
             "items": {
-              "$ref": "#/components/schemas/GetCatalogItemResponse"
+              "$ref": "#/components/schemas/GetDisplayItemResponse"
             }
           }
         }
       },
-      "GetCatalogItemResponse": {
+      "GetDisplayItemResponse": {
         "type": "object",
-        "description": "カタログアイテムのレスポンスデータを表します。\n            ",
+        "description": "陳列品のレスポンスデータを表します。\n            ",
         "additionalProperties": false,
         "required": [
           "description",
           "price",
-          "catalogCategoryId",
-          "catalogBrandId",
+          "displayItemCategoryId",
+          "displayItemBrandId",
           "id",
           "name",
           "productCode"
@@ -809,21 +809,21 @@
             "description": "単価を取得または設定します。\n            ",
             "format": "decimal"
           },
-          "catalogCategoryId": {
+          "displayItemCategoryId": {
             "type": "string",
-            "description": "カタログカテゴリ Id を取得または設定します。\n            ",
+            "description": "陳列品カテゴリ Id を取得または設定します。\n            ",
             "format": "guid",
             "minLength": 1
           },
-          "catalogBrandId": {
+          "displayItemBrandId": {
             "type": "string",
-            "description": "カタログブランド Id を取得または設定します。\n            ",
+            "description": "陳列品ブランド Id を取得または設定します。\n            ",
             "format": "guid",
             "minLength": 1
           },
           "id": {
             "type": "string",
-            "description": "カタログアイテム Id を取得または設定します。\n            ",
+            "description": "陳列品 Id を取得または設定します。\n            ",
             "format": "guid",
             "minLength": 1
           },
@@ -939,11 +939,11 @@
             "minLength": 1
           },
           "itemOrdered": {
-            "description": "注文された商品（カタログアイテム）を取得または設定します。\n            ",
+            "description": "注文された商品（陳列品）を取得または設定します。\n            ",
             "nullable": true,
             "oneOf": [
               {
-                "$ref": "#/components/schemas/CatalogItemSummaryApiModel"
+                "$ref": "#/components/schemas/DisplayItemSummaryApiModel"
               }
             ]
           },

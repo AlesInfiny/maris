@@ -6,6 +6,7 @@ using Dressca.Web.Consumer.Dto.Ordering;
 
 namespace Dressca.IntegrationTest;
 
+[Collection("Shopping")]
 public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
     : IClassFixture<IntegrationTestWebApplicationFactory<Program>>
 {
@@ -37,7 +38,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
         var orderItemResponse = Assert.Single(orderResponse.OrderItems);
         Assert.NotNull(orderItemResponse.ItemOrdered);
         Assert.Equal(postBasketItemsRequest.AddedQuantity, orderItemResponse.Quantity);
-        Assert.Equal(postBasketItemsRequest.CatalogItemId, orderItemResponse.ItemOrdered.Id);
+        Assert.Equal(postBasketItemsRequest.DisplayItemId, orderItemResponse.ItemOrdered.Id);
     }
 
     [Fact]
@@ -71,7 +72,7 @@ public class ShoppingTest(IntegrationTestWebApplicationFactory<Program> factory)
 
     private static PostBasketItemsRequest CreateBasketItemsRequest() => new()
     {
-        CatalogItemId = Guid.Parse("019b76da-a800-7004-8001-000000000001"),
+        DisplayItemId = Guid.Parse("019b76da-a800-7006-8001-000000000001"),
         AddedQuantity = 2,
     };
 

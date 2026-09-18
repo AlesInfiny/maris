@@ -21,7 +21,7 @@ public class BasketItemMapper : IObjectMapper<BasketItem, BasketItemApiModel>
 
         return new BasketItemApiModel
         {
-            CatalogItemId = value.CatalogItemId,
+            DisplayItemId = value.DisplayItemId,
             Quantity = value.Quantity,
             UnitPrice = value.UnitPrice,
             SubTotal = value.GetSubTotal(),

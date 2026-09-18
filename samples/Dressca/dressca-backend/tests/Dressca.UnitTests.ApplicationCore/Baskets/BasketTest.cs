@@ -38,12 +38,12 @@ public class BasketTest
             basket.Items,
             item =>
             {
-                Assert.Equal(item1, item.CatalogItemId);
+                Assert.Equal(item1, item.DisplayItemId);
                 Assert.Equal(1, item.Quantity);
             },
             item =>
             {
-                Assert.Equal(item2, item.CatalogItemId);
+                Assert.Equal(item2, item.DisplayItemId);
                 Assert.Equal(1, item.Quantity);
             });
     }
@@ -60,7 +60,7 @@ public class BasketTest
         basket.AddItem(item1, 1000, 9);
 
         // Assert
-        Assert.Single(basket.Items, item => item.CatalogItemId == item1);
+        Assert.Single(basket.Items, item => item.DisplayItemId == item1);
     }
 
     [Fact]
@@ -75,7 +75,7 @@ public class BasketTest
         basket.AddItem(item1, 1000, 9);
 
         // Assert
-        var item = Assert.Single(basket.Items, item => item.CatalogItemId == item1);
+        var item = Assert.Single(basket.Items, item => item.DisplayItemId == item1);
         Assert.Equal(10, item.Quantity);
     }
 
@@ -93,7 +93,7 @@ public class BasketTest
         basket.AddItem(item1, 1000, additionalQuantity);
 
         // Assert
-        Assert.Single(basket.Items, item => item.CatalogItemId == item1);
+        Assert.Single(basket.Items, item => item.DisplayItemId == item1);
     }
 
     [Theory]
@@ -138,7 +138,7 @@ public class BasketTest
         basket.RemoveEmptyItems();
 
         // Assert
-        var item = Assert.Single(basket.Items, item => item.CatalogItemId == item1);
+        var item = Assert.Single(basket.Items, item => item.DisplayItemId == item1);
         Assert.Equal(1, item.Quantity);
     }
 
@@ -188,7 +188,7 @@ public class BasketTest
         basket.RemoveEmptyItems();
 
         // Assert
-        var item = Assert.Single(basket.Items, item => item.CatalogItemId == item2);
+        var item = Assert.Single(basket.Items, item => item.DisplayItemId == item2);
         Assert.Equal(1, item.Quantity);
     }
 
@@ -210,12 +210,12 @@ public class BasketTest
             basket.Items,
             item =>
             {
-                Assert.Equal(item1, item.CatalogItemId);
+                Assert.Equal(item1, item.DisplayItemId);
                 Assert.Equal(1, item.Quantity);
             },
             item =>
             {
-                Assert.Equal(item2, item.CatalogItemId);
+                Assert.Equal(item2, item.DisplayItemId);
                 Assert.Equal(1, item.Quantity);
             });
     }
@@ -236,7 +236,7 @@ public class BasketTest
         basket.RemoveEmptyItems();
 
         // Assert
-        var item = Assert.Single(basket.Items, item => item.CatalogItemId == item2);
+        var item = Assert.Single(basket.Items, item => item.DisplayItemId == item2);
         Assert.Equal(1, item.Quantity);
     }
 
@@ -284,7 +284,7 @@ public class BasketTest
     }
 
     [Fact]
-    public void IsInCatalogItem_買い物かご内に存在するカタログアイテムIdを渡す_true()
+    public void IsInDisplayItem_買い物かご内に存在する陳列品Idを渡す_true()
     {
         // Arrange
         var item1 = Guid.CreateVersion7();
@@ -292,14 +292,14 @@ public class BasketTest
         basket.AddItem(item1, 1000m);
 
         // Act
-        var result = basket.IsInCatalogItem(item1);
+        var result = basket.IsInDisplayItem(item1);
 
         // Assert
         Assert.True(result);
     }
 
     [Fact]
-    public void IsInCatalogItem_買い物かご内に存在しないカタログアイテムIdを渡す_false()
+    public void IsInDisplayItem_買い物かご内に存在しない陳列品Idを渡す_false()
     {
         // Arrange
         var item1 = Guid.CreateVersion7();
@@ -308,7 +308,7 @@ public class BasketTest
         basket.AddItem(item1, 1000m);
 
         // Act
-        var result = basket.IsInCatalogItem(item2);
+        var result = basket.IsInDisplayItem(item2);
 
         // Assert
         Assert.False(result);
@@ -393,6 +393,6 @@ public class BasketTest
 
         // Assert
         var basketItem = Assert.Single(basket.Items);
-        Assert.Equal(itemId, basketItem.CatalogItemId);
+        Assert.Equal(itemId, basketItem.DisplayItemId);
     }
 }

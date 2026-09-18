@@ -8,10 +8,10 @@ public class BasketItemTest
     public void GetSubTotal_買い物かごアイテムの小計額は単価と数量の積になる()
     {
         // Arrange
-        var catalogItemId = Guid.CreateVersion7();
+        var displayItemId = Guid.CreateVersion7();
         decimal unitPrice = 1000m;
         int quantity = 2;
-        var item = new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity };
+        var item = new BasketItem { DisplayItemId = displayItemId, UnitPrice = unitPrice, Quantity = quantity };
 
         // Act
         var subTotal = item.GetSubTotal();
@@ -24,10 +24,10 @@ public class BasketItemTest
     public void Basket_買い物かごのナビゲーションプロパティが初期化されていない_InvalidOperationExceptionが発生する()
     {
         // Arrange
-        var catalogItemId = Guid.CreateVersion7();
+        var displayItemId = Guid.CreateVersion7();
         decimal unitPrice = 1000m;
         int quantity = 2;
-        var item = new BasketItem { CatalogItemId = catalogItemId, UnitPrice = unitPrice, Quantity = quantity };
+        var item = new BasketItem { DisplayItemId = displayItemId, UnitPrice = unitPrice, Quantity = quantity };
 
         // Act
         var action = () => _ = item.Basket;
