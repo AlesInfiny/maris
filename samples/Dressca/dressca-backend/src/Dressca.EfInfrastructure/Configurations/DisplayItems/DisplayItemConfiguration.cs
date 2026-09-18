@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Dressca.EfInfrastructure.Configurations;
+namespace Dressca.EfInfrastructure.Configurations.DisplayItems;
 
 /// <summary>陳列品の永続化と初期データを構成します。</summary>
 internal class DisplayItemConfiguration : IEntityTypeConfiguration<DisplayItemEntity>

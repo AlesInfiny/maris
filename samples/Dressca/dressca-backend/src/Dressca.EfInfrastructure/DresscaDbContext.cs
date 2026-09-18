@@ -6,6 +6,7 @@ using Dressca.EfInfrastructure.Configurations;
 using Dressca.EfInfrastructure.Configurations.Assets;
 using Dressca.EfInfrastructure.Configurations.Baskets;
 using Dressca.EfInfrastructure.Configurations.Catalog;
+using Dressca.EfInfrastructure.Configurations.DisplayItems;
 using Dressca.EfInfrastructure.Configurations.Ordering;
 using Microsoft.EntityFrameworkCore;
 
@@ -106,6 +107,7 @@ internal class DresscaDbContext : DbContext
         modelBuilder.ApplyConfiguration(new BasketConfiguration());
         modelBuilder.ApplyConfiguration(new BasketItemConfiguration());
 
+        // 陳列品
         modelBuilder.ApplyConfiguration(new DisplayItemConfiguration());
 
         // カタログ
