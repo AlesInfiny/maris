@@ -110,7 +110,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 - `compilerOptions.module`
   
     トランスパイルしたファイルのモジュールシステムを設定するプロパティです。
-    tsconfig.node.json で `ESNext` 、 tsconfig.json で `NodeNext` が `create-vue` した際にデフォルトで設定されます。
+    tsconfig.node.json で `ESNext` が `create-vue` した際にデフォルトで設定されます。
     `compilerOptions.module` の設定値については [The module output format :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/modules/theory.html#the-module-output-format){ target=_blank } を参照してください。
 
 - `compilerOptions.moduleResolution`
