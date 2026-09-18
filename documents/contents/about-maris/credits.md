@@ -110,4 +110,12 @@ Copyright (c) 2015 - 2017 Maxime Thirouin, David Clark & Richard Hallows
 
 Copyright (c) 2021-Present VoidZero Inc. and Vitest contributors
 
+## Playwright {#playwright}
+
+![Playwright Logo](../images/about-maris/playwright-logo.svg){ align="left" width="96" }
+
+[Apache License 2.0 :material-open-in-new:](https://github.com/microsoft/playwright/blob/main/LICENSE){ target=_blank }
+
+Copyright (c) Microsoft Corporation
+
 <!-- textlint-enable @textlint-rule/require-header-id -->
