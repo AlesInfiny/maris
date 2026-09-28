@@ -92,7 +92,7 @@ Error.razor の実装例を下記に示します。
 開発環境かつ例外の情報がある場合にのみ、スタックトレースを表示します。
 
 ```csharp title="サンプルアプリケーションの Error.razor"
-https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Components/Pages/Error.razor
+--8<-- "samples/DresscaCMS/src/DresscaCMS.Web/Components/Pages/Error.razor"
 ```
 
 ## エラーページの実装 {#server-error-page-implementation}

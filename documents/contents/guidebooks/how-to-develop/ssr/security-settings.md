@@ -15,11 +15,11 @@ description: AlesInfiny Maris OSS Edition で開発可能な SSR アプリケー
 ??? example "セキュリティ設定を HTTP レスポンスヘッダーに設定するミドルウェア"
 
     ```csharp title="HttpSecurityHeadersMiddleware.cs"
-    https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddleware.cs
+    --8<-- "samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddleware.cs"
     ```
 
     ```csharp title="HttpSecurityHeadersMiddlewareExtensions.cs"
-    https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddlewareExtensions.cs
+    --8<-- "samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddlewareExtensions.cs"
     ```
 
 作成したミドルウェアを `Program.cs` から呼び出します。また、モダンブラウザー向けのクリックジャッキング対策はミドルウェア経由ではなく `Program.cs` 上で直接呼び出します。

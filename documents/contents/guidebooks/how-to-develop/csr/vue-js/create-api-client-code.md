@@ -57,7 +57,7 @@ package.json の scripts セクションにタスクを追加します。
 ワークスペースの直下に、設定ファイルを作成します。
 
 ```json title="openapisettings.json"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/openapisettings.json
+--8<-- "samples/Dressca/dressca-frontend/consumer/openapisettings.json"
 ```
 
 <!-- cspell:enable -->
@@ -145,7 +145,7 @@ export { defaultApi }
     [^1]: ベースパスは `https://www.example.com` のようなリンク先の基準となる URL です。
 
     ```typescript title="base.ts"
-      https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/src/generated/api-client/base.ts#L50-L59
+    --8<-- "samples/Dressca/dressca-frontend/consumer/src/generated/api-client/base.ts:50:59"
     ```
 
 [^2]: ジェネレーターに `"typescript-axios"` を使用する場合に設定可能な値は [こちら :material-open-in-new:](https://openapi-generator.tech/docs/generators/typescript-axios){ target=_blank }を参照ください。

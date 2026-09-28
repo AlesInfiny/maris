@@ -25,13 +25,13 @@ DI を利用するためには、汎用ホストを用いてコンソールア�
 ??? example "サンプルアプリケーションにおけるパラメータークラスの実装例"
 
     ```csharp title="Parameter.cs"
-    https://github.com/AlesInfiny/maris/blob/main/samples/ConsoleAppWithDI/solution/src/Maris.Samples.Cli/Commands/GetProductsByUnitPriceRange/Parameter.cs
+    --8<-- "samples/ConsoleAppWithDI/solution/src/Maris.Samples.Cli/Commands/GetProductsByUnitPriceRange/Parameter.cs"
     ```
 
 ??? example "サンプルアプリケーションにおけるコマンドクラスの実装例"
 
     ```csharp title="Command.cs"
-    https://github.com/AlesInfiny/maris/blob/main/samples/ConsoleAppWithDI/solution/src/Maris.Samples.Cli/Commands/GetProductsByUnitPriceRange/Command.cs
+    --8<-- "samples/ConsoleAppWithDI/solution/src/Maris.Samples.Cli/Commands/GetProductsByUnitPriceRange/Command.cs"
     ```
 
 ```shell title="コマンドラインからの実行例"

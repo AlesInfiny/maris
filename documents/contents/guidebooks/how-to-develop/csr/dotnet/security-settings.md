@@ -15,11 +15,11 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 ??? example "セキュリティ設定を HTTP レスポンスヘッダーに設定するミドルウェア"
 
     ```csharp title="HttpSecurityHeadersMiddleware.cs"
-    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddleware.cs
+    --8<-- "samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddleware.cs"
     ```
 
     ```csharp title="HttpSecurityHeadersMiddlewareExtensions.cs"
-    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddlewareExtensions.cs
+    --8<-- "samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddlewareExtensions.cs"
     ```
 
 作成したミドルウェアを `Program.cs` から呼び出します。
