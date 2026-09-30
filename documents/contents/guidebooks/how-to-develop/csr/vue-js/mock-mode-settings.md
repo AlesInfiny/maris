@@ -90,7 +90,7 @@ npx msw init ./public --save
 ワークスペース直下に`mock`フォルダーを作成し、`mock`フォルダーの配下に`browser.ts`を作成します。
 
 ```typescript title="browser.ts"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/mock/browser.ts
+--8<-- "samples/Dressca/dressca-frontend/consumer/mock/browser.ts"
 ```
 
 `mock`フォルダーの配下に、`handlers`フォルダーを作成し、さらにその配下に`index.ts`を作成します。

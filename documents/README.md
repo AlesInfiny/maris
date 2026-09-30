@@ -159,36 +159,41 @@ Markdown ファイルを追加したら、ほとんどの場合 mkdocs.yml の n
     [License Link](https://license-link){ target=_blank }
     ```
 
-### GitHub コードの記載ルール
+### コードブロックの記載ルール
 
-AlesInfiny Maris の GitHub コードをドキュメントで参照する場合、コンテンツタブとコードブロックを利用します。
+AlesInfiny Maris のリポジトリ内のコードをドキュメントで参照する場合、コンテンツタブとコードブロックに加えて `--8<--` 記法を利用します。
+`--8<--` は、 [pymdown-extensions の Snippets 拡張 :material-open-in-new:](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/){ target=_blank } が提供する記法です。
+この記法を用いると、 GitHub 上の main ブランチへのマージを待たなくても、作業中のブランチのファイルをそのままドキュメントに埋め込めます。
 具体的には、以下のように記載します。
 
 - コード全体をドキュメントに表示する場合
 
-    コード全体をドキュメントに表示する場合、コードブロック内に GitHub の URL を直接記載します。
+    コード全体をドキュメントに表示する場合、コードブロック内で `--8<--` に続けてリポジトリルートからの相対パスを記載します。
     コンテンツタブの設定は、コードの行数に応じて `!!!` と `???` を使い分けてください。
 
     ```markdown
     ??? example "App.vue の設定例"
 
         ```vue title="サンプルアプリケーションの App.vue" hl_lines="1 3-4"
-        https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/src/App.vue
+        --8<-- "samples/Dressca/dressca-frontend/consumer/src/App.vue"
         ```
     ```
 
 - コードの一部を切り取って表示する場合
 
-    コードの一部を切り取って表示する場合、 URL の末尾に `#L1-L8` のように切り取る行数を追記します。
+    コードの一部を切り取って表示する場合、パスの末尾に `:1:8` のように切り取る開始行と終了行を追記します。
     コンテンツタブの設定は、コードの行数に応じて `!!!` と `???` を使い分けてください。
 
     ```markdown
     !!! example "App.vue の設定例"
 
         ```vue title="サンプルアプリケーションの App.vue" hl_lines="1 3-4"
-        https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-frontend/consumer/src/App.vue#L1-L8
+        --8<-- "samples/Dressca/dressca-frontend/consumer/src/App.vue:1:8"
         ```
     ```
+
+参照できるファイルは、 `mkdocs.yml` の `pymdownx.snippets.base_path` で指定したフォルダー（ `documents` フォルダーとリポジトリルート）の配下にあるものだけです。
+参照したいファイルが対象外の場合は、 `base_path` の設定を見直してください。
 
 コードブロックのシンタックスハイライトが利用可能な言語の一覧は、[Pygments - Languages](https://pygments.org/languages/) を参照してください。
 また、複数の表記方法が可能な場合、略称よりも正式名称に近いものを優先してください。（例： ts ではなく typescript を使用）

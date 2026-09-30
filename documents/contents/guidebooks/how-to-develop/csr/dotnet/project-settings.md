@@ -20,7 +20,7 @@ global.json ファイルには以下を設定します。
 - `runner` : テストを検出・実行するテストランナー
 
 ```json title="global.json ファイル設定例"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/global.json
+--8<-- "samples/Dressca/dressca-backend/global.json"
 ```
 
 設定値の詳細は、 [global.json の概要 :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/tools/global-json){ target=_blank } を参照してください。
@@ -92,7 +92,7 @@ Directory.Build.props ファイルを用いたプロジェクト設定は、ア�
 上記設定を有効にしたプロジェクトファイルの設定例を示します。
 
 ```xml title="プロダクションコード用の Directory.Build.props ファイル設定例"
-https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Directory.Build.props
+--8<-- "samples/Dressca/dressca-backend/src/Directory.Build.props"
 ```
 
 ### テストコード用のプロジェクト設定 {#project-settings-for-test}
@@ -103,7 +103,7 @@ https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/sr
 !!! example "テストコード用の Directory.Build.props の設定例"
 
     ```xml title="Directory.Build.props"
-    https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/tests/Directory.Build.props
+    --8<-- "samples/Dressca/dressca-backend/tests/Directory.Build.props"
     ```
 
 設定例のプロパティの詳細については以下を参照してください。

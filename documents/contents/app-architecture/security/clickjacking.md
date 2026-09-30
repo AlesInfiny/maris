@@ -110,11 +110,11 @@ AlesInfiny Maris では、`frame-ancestors` および `X-Frame-Options` を以�
     ??? example "`Program.cs` での HTTP レスポンスヘッダー設定例"
 
         ```C# title="HttpSecurityHeadersMiddleware.cs" hl_lines="33-34 36-37"
-        https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddleware.cs
+        --8<-- "samples/Dressca/dressca-backend/src/Dressca.Web/Extensions/HttpSecurityHeadersMiddleware.cs"
         ```
 
         ```C# title="Program.cs (Dressca.Web.Consumer)" hl_lines="134"
-        https://github.com/AlesInfiny/maris/blob/main/samples/Dressca/dressca-backend/src/Dressca.Web.Consumer/Program.cs
+        --8<-- "samples/Dressca/dressca-backend/src/Dressca.Web.Consumer/Program.cs"
         ```
 
 - **SSR アプリケーション**
@@ -124,12 +124,12 @@ AlesInfiny Maris では、`frame-ancestors` および `X-Frame-Options` を以�
 
     ??? example "`Program.cs` での HTTP レスポンスヘッダー設定例"
 
-        ```C# title="Program.cs" hl_lines="98-103"
-        https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Program.cs
+        ```C# title="Program.cs" hl_lines="104-109"
+        --8<-- "samples/DresscaCMS/src/DresscaCMS.Web/Program.cs"
         ```
 
         ```C# title="HttpSecurityHeadersMiddleware.cs" hl_lines="31-32"
-        https://github.com/AlesInfiny/maris/blob/main/samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddleware.cs
+        --8<-- "samples/DresscaCMS/src/DresscaCMS.Web/Extensions/HttpSecurityHeadersMiddleware.cs"
         ```
 
 ## 制限変更の方法 {#how-to-change-restrictions}
