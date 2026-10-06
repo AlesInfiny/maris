@@ -29,7 +29,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 #### ASP.NET Web Forms ( 廃止 ) {#aspnet-web-forms}
 
-- 移行先候補： ASP.NET Core MVC や Blazor , SPA ( Vue.js など )
+- 移行先候補: ASP.NET Core MVC や Blazor , SPA ( Vue.js など )
 
 !!! warning "画面設計の見直しも検討すべし"
 
@@ -38,15 +38,15 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 #### ASMX Web Services ( 廃止 ) {#asmx-web-services}
 
-- 移行先候補： ASP.NET Core Web API, Core WCF, ASP.NET Core gRPC サービスなど
+- 移行先候補: ASP.NET Core Web API, Core WCF, ASP.NET Core gRPC サービスなど
 
 #### Windows Communication Foundation (WCF) (廃止) {#wcf}
 
-- 移行先候補： Core WCF や ASP.NET Core gRPC サービス
+- 移行先候補: Core WCF や ASP.NET Core gRPC サービス
 
 #### DataSet / TableAdapter ( 廃止ではないが使いづらい ) {#dataset-table-adapter}
 
-- 移行先候補： Entity Framework Core
+- 移行先候補: Entity Framework Core
 
 ??? note "その他、廃止された機能 ( クリックで展開 )"
 

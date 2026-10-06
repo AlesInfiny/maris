@@ -109,8 +109,8 @@ app.MapFallbackToFile("/index.html");
 app.Run();
 ```
 
-- `app.UseStaticFiles()` : 静的ファイルの提供を有効にします。
-- `app.MapFallbackToFile("/index.html")` : ドメイン名へのリクエストに対して `index.html` を返します。リクエストパイプラインの最後に記述する必要があります。
+- `app.UseStaticFiles()`: 静的ファイルの提供を有効にします。
+- `app.MapFallbackToFile("/index.html")`: ドメイン名へのリクエストに対して `index.html` を返します。リクエストパイプラインの最後に記述する必要があります。
 
 ### プロジェクトファイルの設定 {#project-file-settings}
 

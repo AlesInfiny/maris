@@ -11,8 +11,8 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 
 ヘルスチェックでは以下の 2 つの状態を区別してアプリケーションの正常性を確認する場合があります。
 
-- 活動性：アプリケーションが正常に起動していること
-- 対応性：アプリケーションが正常に起動しており、かつリクエスト受付可能であること
+- 活動性: アプリケーションが正常に起動していること
+- 対応性: アプリケーションが正常に起動しており、かつリクエスト受付可能であること
 
 活動性と対応性については [こちら :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/host-and-deploy/health-checks#separate-readiness-and-liveness-probes){ target=_blank }を参照してください。
 

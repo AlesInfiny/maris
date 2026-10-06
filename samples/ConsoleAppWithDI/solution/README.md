@@ -51,7 +51,7 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
     - （Maris.Samples.ApplicationCore）※
     - （Maris.Samples.InMemoryInfrastructure）※
 
-※：サンプルアプリケーションを実行するために、 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）の定義するアーキテクチャを簡略化して実装したサンプルです。
+※: サンプルアプリケーションを実行するために、 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）の定義するアーキテクチャを簡略化して実装したサンプルです。
 コンソールアプリケーションの実行フレームワークと、本質的な関連はありません。
 
 コンソールアプリケーションの実行フレームワークは、プロジェクトごとご自身のソリューションに取り込んで利用します。
@@ -396,15 +396,15 @@ internal class Parameter
 
 検証に使用できる `System.ComponentModel.DataAnnotations` 名前空間の検証属性は、以下のものがあります。
 
-- [CreditCardAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.creditcardattribute)：クレジットカード形式の文字列であることを検証する。
-- [CustomValidationAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.customvalidationattribute)：カスタムの単項目入力検証メソッドを用いて検証する。
-- [EmailAddressAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.emailaddressattribute)：メールアドレス形式の文字列であることを検証する。
-- [MaxLengthAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.maxlengthattribute)：配列または文字列データの最大長以内であることを検証する。
-- [MinLengthAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.minlengthattribute)：配列または文字列データの最小長以上であることを検証する。
-- [PhoneAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.phoneattribute)：電話番号形式の文字列であることを検証する。
-- [RangeAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.rangeattribute)：数値が指定した値の範囲内であることを検証する。
-- [RegularExpressionAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute)：指定した正規表現の形式にマッチすることを検証する。
-- [StringLengthAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute)：文字列長が指定した長さの範囲内であることを検証する。
+- [CreditCardAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.creditcardattribute): クレジットカード形式の文字列であることを検証する。
+- [CustomValidationAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.customvalidationattribute): カスタムの単項目入力検証メソッドを用いて検証する。
+- [EmailAddressAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.emailaddressattribute): メールアドレス形式の文字列であることを検証する。
+- [MaxLengthAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.maxlengthattribute): 配列または文字列データの最大長以内であることを検証する。
+- [MinLengthAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.minlengthattribute): 配列または文字列データの最小長以上であることを検証する。
+- [PhoneAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.phoneattribute): 電話番号形式の文字列であることを検証する。
+- [RangeAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.rangeattribute): 数値が指定した値の範囲内であることを検証する。
+- [RegularExpressionAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute): 指定した正規表現の形式にマッチすることを検証する。
+- [StringLengthAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute): 文字列長が指定した長さの範囲内であることを検証する。
 
 [RequiredAttribute](https://learn.microsoft.com/ja-jp/dotnet/api/system.componentmodel.dataannotations.requiredattribute) 検証属性を用いた必須検証は行わないでください。
 入力が必須のパラメーターを作成したい場合は、 `OptionAttribute` の `Required` プロパティを `true` に設定します。

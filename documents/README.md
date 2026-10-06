@@ -68,7 +68,7 @@ documents フォルダー配下のフォルダー、ファイルの配置は以�
 | mkdocs.yml    |                  |                       |                    |                     | mkdocs の設定ファイル                         |
 | README.md     |                  |                       |                    |                     | このドキュメント                              |
 
-\*：詳細は [Mkdocs Materialの解説](https://squidfunk.github.io/mkdocs-material/customization/?h=theme#extending-the-theme) と [GitHub リポジトリ](https://github.com/squidfunk/mkdocs-material/tree/master/src/overrides) を参照。
+\*: 詳細は [MkDocs Material の解説](https://squidfunk.github.io/mkdocs-material/customization/?h=theme#extending-the-theme) と [GitHub リポジトリ](https://github.com/squidfunk/mkdocs-material/tree/master/src/overrides) を参照。
 
 ## ドキュメント作成手順
 
@@ -196,7 +196,7 @@ AlesInfiny Maris のリポジトリ内のコードをドキュメントで参照
 参照したいファイルが対象外の場合は、 `base_path` の設定を見直してください。
 
 コードブロックのシンタックスハイライトが利用可能な言語の一覧は、[Pygments - Languages](https://pygments.org/languages/) を参照してください。
-また、複数の表記方法が可能な場合、略称よりも正式名称に近いものを優先してください。（例： ts ではなく typescript を使用）
+また、複数の表記方法が可能な場合、略称よりも正式名称に近いものを優先してください。（例: ts ではなく typescript を使用）
 
 本ドキュメントのコードブロックで使用する言語名の例は以下の通りです。
 
@@ -216,6 +216,25 @@ AlesInfiny Maris のリポジトリ内のコードをドキュメントで参照
 | TypeScript     | typescript      |
 | Vue            | vue             |
 | XML            | xml             |
+
+### コロンの記載ルール
+
+用語とその説明を区切るコロンは、半角コロンに続けて半角スペースを 1 つ入れて記載します。
+コロンの前にはスペースを入れません。
+
+```markdown
+- 業務例外: 業務フローで想定されるエラーを表す例外です。
+- `version`: .NET CLI を実行する .NET SDK のバージョン
+```
+
+ただし、以下のように原文や表示文言をそのまま記載する箇所では、全角コロンを使用してもかまいません。
+
+- ライセンス条文など、引用した原文をそのまま記載する場合
+- メッセージ定義ファイルの内容など、アプリケーションが表示する文言をそのまま記載する場合
+
+このルールは textlint で自動的に検査します。
+コードブロックとインラインコードは検査の対象外です。
+引用のように検査から除外したい箇所がある場合は、「[textlint](#textlint)」を参照して、該当箇所のルールを無効化してください。
 
 ### 体裁の修正
 
@@ -239,7 +258,7 @@ CSpell の拡張機能をインストールしていると、 [問題] ウィン
 #### textlint
 
 textlint (VS Code 拡張機能) の拡張機能をインストールしていると、 [問題] ウィンドウに校正に関するコメントが出ます。
-この拡張機能は、技術ドキュメントを書く際の冗長な表現を排除したり、表記ゆれの検出したりする自動校正ツールです。
+この拡張機能は、技術ドキュメントを書く際の冗長な表現を排除したり、表記ゆれを検出したりする自動校正ツールです。
 多くの場合、文章の見直しによってエラーを回避できます。
 必ず対応するようにしてください。
 
@@ -304,12 +323,12 @@ description: クライアントサイドレンダリングを行う Web アプ�
 ( `description` を省略すると、 mkdocs.yml の `site_description` の値が設定されます。)
 
 - カード上に表示できる文字数
-    - `title`：全角 9 文字 × 3 行まで
+    - `title`: 全角 9 文字 × 3 行まで
     - `description`: 半角 59 文字 ( 全角だと 30 文字目が半分途切れる ) × 2 行まで
 
 ※スペースを空けないと 1 単語とみなされ、同じ行に詰め込もうとして文章が途切れるので適宜スペースで区切ってください。
 
-- 例：
+- 例:
     - `title: .NETアプリケーションの処理方式` の場合
     ![ソーシャルカード失敗例](readme-images/social-card-example-error.png)
     - `title: .NET アプリケーションの 処理方式` の場合
