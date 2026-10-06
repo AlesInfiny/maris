@@ -31,7 +31,7 @@ AlesInfiny Maris OSS Edition は、以下の Web サイトを通じて最新バ�
 
 開発環境の構築手順は以下を参照してください。
 
-- [AlesInfiny Maris OSS Edition | ローカル開発環境の構築](https://maris.alesinfiny.org/guidebooks/how-to-develop/local-environment/)
+- [AlesInfiny Maris OSS Edition | ローカル開発環境の構築](https://maris.alesinfiny.org/guidebooks/how-to-develop/csr/local-environment/)
 
 ## サンプルアプリケーションのテスト
 
@@ -78,7 +78,7 @@ npm run test:unit:consumer
 
 ### サンプルアプリケーション(Dressca)
 
-サンプルアプリケーション (Dressca) の実行手順は [AlesInfiny Maris OSS Edition | クイックスタート](https://maris.alesinfiny.org/#quick-start) を参照してください。
+サンプルアプリケーション (Dressca) の実行手順は [AlesInfiny Maris OSS Edition | Dressca](https://maris.alesinfiny.org/samples/dressca/) を参照してください。
 
 ### 要件別サンプル
 
