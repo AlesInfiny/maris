@@ -72,11 +72,11 @@ VeeValidate の API については [公式ドキュメント :material-open-in-
 
 1. 作成する画面のイメージ: エラーがない状態
 
-    ![作成する画面のイメージ：エラーがない状態](../../../../images/guidebooks/how-to-develop/csr/vue-js/without-input-validation-error.png){ loading=lazy }
+    ![作成する画面のイメージ: エラーがない状態](../../../../images/guidebooks/how-to-develop/csr/vue-js/without-input-validation-error.png){ loading=lazy }
 
 1. 作成する画面のイメージ: 入力エラーがある状態
 
-    ![作成する画面のイメージ：入力エラーがある状態](../../../../images/guidebooks/how-to-develop/csr/vue-js/with-input-validation-error.png){ loading=lazy }
+    ![作成する画面のイメージ: 入力エラーがある状態](../../../../images/guidebooks/how-to-develop/csr/vue-js/with-input-validation-error.png){ loading=lazy }
 
 ??? example "コードの全体像"
 
