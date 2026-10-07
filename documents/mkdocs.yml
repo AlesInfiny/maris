@@ -206,6 +206,10 @@ theme:
       primary: blue
       accent: cyan
 
+validation:
+  # ページ内アンカーのリンク切れを警告として扱い、 --strict ビルドで検出する。
+  anchors: warn
+
 markdown_extensions:
   - abbr
   - admonition
