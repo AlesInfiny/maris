@@ -3,7 +3,7 @@ title: .NET 編（CSR 編）
 description: CSR アプリケーションの サーバーサイドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
 
-<!-- cSpell:ignore webapi -->
+<!-- cspell:ignore webapi -->
 
 # プロジェクトの作成 {#top}
 

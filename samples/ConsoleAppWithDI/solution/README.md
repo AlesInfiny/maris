@@ -1,6 +1,6 @@
 ﻿<!-- textlint-disable @textlint-rule/require-header-id -->
 <!-- markdownlint-disable-file CMD001 -->
-<!-- cSpell:ignore Validatable -->
+<!-- cspell:ignore Validatable Integ -->
 
 # コンソールアプリケーションサンプル
 
