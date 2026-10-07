@@ -58,7 +58,7 @@ jobs:
         uses: UmbrellaDocs/action-linkspector@568ec8d29fa92b31fd9ea5381e155c51e922af83  # v1.5.5
         with:
           config_file: .linkspector.yml
-          reporter: github-pr-annotations
+          reporter: github-annotations
           filter_mode: nofilter
           fail_level: error
 
