@@ -8,20 +8,20 @@ description: SSR アプリケーション開発における 入力値検査の�
 ここでは、アプリケーションアーキテクチャで定義している入力値検査の実装方法を説明します。
 入力値検査方針については [こちら](../../../app-architecture/server-side-rendering/global-function/validation-policy.md) を参照してください。
 
-## 前提：本章で説明に使用する画面の概要 {#assumption}
+## 前提: 本章で説明に使用する画面の概要 {#assumption}
 
 本章では、例として以下のような画面を作成します。
 なお、以下のイメージは Blazor Web アプリの「サンプルページを含める」にチェックを入れた状態でプロジェクトを作成した場合の例です。
 
-1. 作成する画面のイメージ：エラーがない状態
+1. 作成する画面のイメージ: エラーがない状態
 
-    ![作成する画面のイメージ：エラーがない状態](../../../images/guidebooks/how-to-develop/ssr/input-validation-screen-image.png){ loading=lazy }
+    ![作成する画面のイメージ: エラーがない状態](../../../images/guidebooks/how-to-develop/ssr/input-validation-screen-image.png){ loading=lazy }
 
-1. 作成する画面のイメージ：入力エラーがある状態
+1. 作成する画面のイメージ: 入力エラーがある状態
 
     入力チェックの結果（エラー）は、入力項目の直下の他、「登録」ボタン下部にまとめて表示します（ [ValidationSummary :material-open-in-new:](https://learn.microsoft.com/ja-jp/aspnet/core/blazor/forms/validation#validation-summary-and-validation-message-components){ target=_blank } を使用）。
 
-    ![作成する画面のイメージ：入力エラーがある状態](../../../images/guidebooks/how-to-develop/ssr/input-validation-screen-image-04.png){ loading=lazy }
+    ![作成する画面のイメージ: 入力エラーがある状態](../../../images/guidebooks/how-to-develop/ssr/input-validation-screen-image-04.png){ loading=lazy }
 
 本章で示す手順に従うと、以下のファイルが作成されます。これらは動作を確認後、削除してください。
 

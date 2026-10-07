@@ -10,7 +10,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 - .NET Framework
     - Windows 上でのみ動作する
     - Windows OS のコンポーネントとしてプリインストールされている
-- .NET  ( 旧称： .NET Core )
+- .NET  ( 旧称: .NET Core )
     - 様々な OS 上で動作する OSS
     - 大幅な軽量化により動作性能が大きく向上
     - .NET 6 で GUI の開発に強みを持つ Mono / Xamarin を統合完了

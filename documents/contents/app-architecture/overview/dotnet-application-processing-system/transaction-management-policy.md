@@ -31,9 +31,9 @@ description: AlesInfiny Maris OSS Edition で構築する .NET アプリケー�
 
 TransactionScope を利用してトランザクションの範囲を定めます。以下のように設定します。
 
-- [TransactionOptions.IsolationLevel :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionoptions.isolationlevel){ target=_blank } : ReadCommitted
-- [TransactionScopeOption :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscopeoption){ target=_blank } : Required/RequiresNew
-- [TransactionScopeAsyncFlowOption :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscopeasyncflowoption){ target=_blank } : Enabled
+- [TransactionOptions.IsolationLevel :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionoptions.isolationlevel){ target=_blank }: ReadCommitted
+- [TransactionScopeOption :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscopeoption){ target=_blank }: Required/RequiresNew
+- [TransactionScopeAsyncFlowOption :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/api/system.transactions.transactionscopeasyncflowoption){ target=_blank }: Enabled
 
 ## トランザクションのコミットとロールバック方針 {#commit-and-rollback}
 
