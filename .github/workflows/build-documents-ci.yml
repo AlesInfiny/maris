@@ -56,6 +56,7 @@ jobs:
         uses: ./.github/workflows/lint-documents
 
       # Maris の PR は main 向けのみのため、PR では変更ファイル、手動実行では全ファイルを検査する。
+      # 全ファイルの検査はリリース時（タグのプッシュ時）に「ドキュメントのビルドとリリース」ワークフローでも実行する。
       - id: check-links
         name: ドキュメントのリンクチェック
         continue-on-error: true

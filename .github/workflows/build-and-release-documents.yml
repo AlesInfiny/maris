@@ -1,5 +1,5 @@
 ---
-# cspell:ignore endgroup fjogeleit markdownlint pymdown softprops textlintignore textlintrc
+# cspell:ignore endgroup fjogeleit markdownlint nofilter pymdown softprops textlintignore textlintrc
 
 name: ドキュメントのビルドとリリース
 
@@ -49,6 +49,28 @@ jobs:
         name: ドキュメントの Lint
         continue-on-error: true
         uses: ./.github/workflows/lint-documents
+
+      # リリース時は全ファイルのリンク切れを検査する。
+      # 外部サイトの一時的な障害でリリースが止まらないよう、結果はサマリーへの表示のみとし、成否判定には含めない。
+      - id: check-links
+        name: ドキュメントのリンクチェック
+        continue-on-error: true
+        uses: UmbrellaDocs/action-linkspector@568ec8d29fa92b31fd9ea5381e155c51e922af83  # v1.5.5
+        with:
+          config_file: .linkspector.yml
+          reporter: github-pr-annotations
+          filter_mode: nofilter
+          fail_level: error
+
+      - name: リンクチェック結果の表示
+        shell: bash
+        run: |
+          echo '# Link Check Result :link:' >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.check-links.outcome }}" == "failure" ]; then
+            echo ':x: リンク切れを検出しました。詳細はアノテーション、または「ドキュメントのリンクチェック」ステップのログを確認してください。' >> $GITHUB_STEP_SUMMARY
+          else
+            echo ':heavy_check_mark: リンクチェックに成功しました。' >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: サンプルアプリケーションのソースコード圧縮
         uses: ./.github/workflows/compress-sample-source
