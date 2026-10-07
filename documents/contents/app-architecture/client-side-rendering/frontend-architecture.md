@@ -140,7 +140,7 @@ Axios: [github :material-open-in-new:](https://github.com/axios/axios){ target=_
 !!! note "OpenAPI Generator の自動生成コード"
       OpenAPI Generator はサーバー、クライアント双方の様々なコードの自動生成に対応しています。生成可能なコードについては公式ドキュメントを参照してください。
 
-      - [OpenAPI Generator : Generators List :material-open-in-new:](https://openapi-generator.tech/docs/generators){ target=_blank }
+      - [OpenAPI Generator: Generators List :material-open-in-new:](https://openapi-generator.tech/docs/generators){ target=_blank }
 
 <!-- バックエンド編のAPIドキュメントへリンク -->
 
