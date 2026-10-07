@@ -3,6 +3,8 @@ title: .NET 編（CSR 編）
 description: CSR アプリケーションの サーバーサイドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
 
+<!-- cspell:ignore dbug -->
+
 # ヘルスチェック API の実装 {#top}
 
 アプリケーションやデータベースの死活確認のため、 ASP.NET Core の機能を利用してヘルスチェック API を実装できます。

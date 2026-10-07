@@ -3,9 +3,9 @@ title: 開発に使用する パッケージ （SSR 編）
 description: SSR アプリケーション開発で使用する パッケージの一覧を解説します。
 ---
 
-# 開発に使用するパッケージ {#top}
+<!-- cspell:ignore bunit -->
 
-<!-- cSpell:ignore bunit -->
+# 開発に使用するパッケージ {#top}
 
 ## ブランクプロジェクト作成時にインストールされるパッケージ {#packages-installed-on-blank-project}
 

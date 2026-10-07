@@ -5,8 +5,6 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 # .NET への移行 {#top}
 
-<!-- cSpell:ignore dotnetfw aspnet -->
-
 前章では、 .NET Framework に留まり続けることのリスクについて説明しました。
 この章では、 .NET Framework から .NET へ移行することになったときの方針やハードルについて説明します。
 

@@ -5,8 +5,6 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 # .NET ランタイムの最新動向 {#top}
 
-<!-- cSpell:ignore dotnetfw -->
-
 2024 年 11 月現在、 .NET ランタイムには以下があります。
 
 - .NET Framework

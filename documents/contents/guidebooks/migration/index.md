@@ -5,8 +5,6 @@ description: 最新アーキテクチャへの移行に関するガイドライ�
 
 # マイグレーション {#top}
 
-<!-- cSpell:ignore dotnetfw -->
-
 最新アーキテクチャへの移行に関するガイドラインです。
 
 - [.NET Framework にとどまることのリスク](./dotnetfw-risk/index.md)

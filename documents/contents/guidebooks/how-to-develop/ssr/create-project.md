@@ -3,9 +3,9 @@ title: プロジェクトの作成 （SSR 編）
 description: SSR アプリケーション開発における プロジェクトの作成方法を解説します。
 ---
 
-# プロジェクトの作成 {#top}
+<!-- cspell:ignore fluentblazor -->
 
-<!-- cSpell:ignore fluentblazor -->
+# プロジェクトの作成 {#top}
 
 ## プロジェクトテンプレートの選択 {#select-project-template}
 

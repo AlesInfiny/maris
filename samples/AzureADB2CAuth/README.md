@@ -1,6 +1,6 @@
 <!-- textlint-disable @textlint-rule/require-header-id -->
 <!-- markdownlint-disable-file CMD001 -->
-<!-- cSpell:ignore Validatable signupsignin onmicrosoft b2clogin -->
+<!-- cspell:ignore Validatable signupsignin onmicrosoft b2clogin -->
 
 # Azure Active Directory B2C による認証サンプル
 
