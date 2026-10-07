@@ -3,6 +3,8 @@ title: アプリケーション セキュリティ編
 description: アプリケーションセキュリティを 担保するための方針を説明します。
 ---
 
+<!-- cspell:ignore SAMEORIGIN -->
+
 # クリックジャッキング {#top}
 
 ## クリックジャッキングとは {#what-is-clickjacking}
@@ -29,7 +31,7 @@ AlesInfiny Maris では、クリックジャッキング対策としてフレー
 これにより、 AlesInfiny Maris ではデフォルトで一切の埋め込み表示を許可しないセキュアな構成を実現します。
 以降、各設定項目について説明します。
 
-### Content-Security-Policy : frame-ancestors {#content-security-policy}
+### Content-Security-Policy: frame-ancestors {#content-security-policy}
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 HTTP レスポンスヘッダーに対して [`Content-Security-Policy` ヘッダーフィールド :material-open-in-new:](https://www.ietf.org/rfc/rfc7762.txt){ target=_blank } の [`frame-ancestors` ディレクティブ :material-open-in-new:](https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors){ target=_blank } を出力します。

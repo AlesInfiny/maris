@@ -117,7 +117,7 @@ Blazor Web アプリにおいて、 XSS 対策として以下の方針をとり�
 - JS Interop の引数にユーザー入力値を直接渡さない
 
     <!-- textlint-disable ja-technical-writing/sentence-length -->
-    JS Interop（ JavaScript Interoperability ： JS 相互運用呼び出し） とは、 Blazor (C#) から JavaScript を呼び出したり、 JavaScript から C# を呼び返したりする仕組みです。
+    JS Interop（ JavaScript Interoperability: JS 相互運用呼び出し） とは、 Blazor (C#) から JavaScript を呼び出したり、 JavaScript から C# を呼び返したりする仕組みです。
     <!-- textlint-enable ja-technical-writing/sentence-length -->
     <!-- textlint-disable @textlint-ja/no-synonyms -->
     C# 上に `JS.InvokeVoidAsync("functionName", parameters);` のようにコードを書くことで、 `functionName` に指定した関数を HTML 上で非同期に実行できます。

@@ -3,6 +3,8 @@ title: アプリケーション セキュリティ編
 description: アプリケーションセキュリティを 担保するための方針を説明します。
 ---
 
+<!-- cspell:ignore formname -->
+
 # CSRF （クロスサイトリクエストフォージェリ） {#top}
 
 ## CSRF とは {#what-is-csrf}

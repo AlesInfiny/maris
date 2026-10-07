@@ -3,9 +3,9 @@ title: .NET 編（CSR 編）
 description: CSR アプリケーションの サーバーサイドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
 
-# プロジェクトの作成 {#top}
+<!-- cspell:ignore webapi -->
 
-<!-- cSpell:ignore classlib webapi -->
+# プロジェクトの作成 {#top}
 
 ## プロジェクトテンプレートの選択 {#select-project-template}
 
@@ -119,8 +119,8 @@ description: CSR アプリケーションの サーバーサイドで動作す�
     このように命名することで、各プロジェクト内に様々な実装テクノロジーが混在することを避け、適切な機能配置を実現できます。
     以下に例を示します。
     
-    - AaaSubSystem.EFInfrastructure : Entity Framework Coreを使った Repository の実装 ( 別案 : AaaSubSystem.Infrastructure.EFCore )
-    - AaaSubSystem.Store.StaticFiles : 静的ファイルを用いたストアの実装
+    - AaaSubSystem.EFInfrastructure: Entity Framework Coreを使った Repository の実装 ( 別案: AaaSubSystem.Infrastructure.EFCore )
+    - AaaSubSystem.Store.StaticFiles: 静的ファイルを用いたストアの実装
 
     ASP.NET Core Web API のプロジェクトを作成する場合は、 Web API の入出力インターフェースを管理する DTO を集めたプロジェクトを作りましょう。
     今後 Web API の呼び出し側を .NET のテクノロジーで開発する場合、 DTO を抜き出しておくことでコード共有できるようになり、開発が便利に進められます。

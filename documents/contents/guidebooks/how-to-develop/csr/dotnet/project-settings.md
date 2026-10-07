@@ -2,7 +2,6 @@
 title: .NET 編（CSR 編）
 description: CSR アプリケーションの サーバーサイドで動作する .NET アプリケーションの 開発手順を解説します。
 ---
-<!-- cSpell:ignore contentfiles buildtransitive -->
 
 # プロジェクトの共通設定 {#top}
 
@@ -14,10 +13,10 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では、 global.j
 
 global.json ファイルには以下を設定します。
 
-- `version` : .NET CLI を実行する .NET SDK のバージョン
-- `allowPrerelease` : プレリリースバージョン（プレビューリリースなど）の利用を許容するか
-- `rollForward` : 指定された .NET SDK バージョンが存在しない場合のロールフォワードポリシー
-- `runner` : テストを検出・実行するテストランナー
+- `version`: .NET CLI を実行する .NET SDK のバージョン
+- `allowPrerelease`: プレリリースバージョン（プレビューリリースなど）の利用を許容するか
+- `rollForward`: 指定された .NET SDK バージョンが存在しない場合のロールフォワードポリシー
+- `runner`: テストを検出・実行するテストランナー
 
 ```json title="global.json ファイル設定例"
 --8<-- "samples/Dressca/dressca-backend/global.json"
