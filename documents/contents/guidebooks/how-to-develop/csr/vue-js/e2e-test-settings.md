@@ -8,9 +8,11 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 E2E テストの利用により、フロントエンド・バックエンドアプリケーションからデータベースまで一気通貫での動作確認を効率的に行うことができます。
 また、実行ブラウザーの指定やテスト証跡取得等の設定も可能です。
 
-E2E テストの実行ツールとして [Playwright :material-open-in-new:](https://playwright.dev/) を使用します。
+E2E テストの実行ツールとして [Playwright :material-open-in-new:](https://playwright.dev/){ target=_blank } を使用します。
 [ブランクプロジェクトの作成](./create-vuejs-blank-project.md) の手順に沿って `create-vue` でプロジェクトを作成することで Playwright 自体のインストールは完了しています。
 Playwright の設定方法について以下で説明します。
+
+なお、本ページではバックエンドアプリが正常に起動することを前提としているため、 [.NET 編](../dotnet/index.md) の手順に従ってバックエンドアプリの動作確認を事前に行ってください。
 
 ## フォルダー構成 {#folder-structure}
 
@@ -57,12 +59,12 @@ Playwright 自体は TypeScript の型チェックを行わないため、`tscon
 
 `create-vue` でプロジェクト作成時に追加される `e2e/tsconfig.json` を以下のように設定します。
 
-```ts title="e2e/tsconfig.json"
+```json title="e2e/tsconfig.json"
 --8<-- "samples/Dressca/dressca-frontend/consumer/e2e/tsconfig.json"
 ```
 
 - `extends`
-    - 初期設定の `@tsconfig/node24/tsconfig.json` から `@vue/tsconfig/tsconfig.dom.json` に変更し、ベースとなる設定をアプリケーションコードと合わせます。
+    - 初期設定の `@tsconfig/node24/tsconfig.json` から `@vue/tsconfig/tsconfig.dom.json` に変更し、ベースとなる設定をアプリケーションコードと合わせます。初期設定の状態ではコンパイル後の JavaScript ファイルの出力要否やモジュール解決の方針に差分があるため、実装時の負担軽減のためにアプリケーションコードと合わせた設定にしています。
 - `include`
     - 型チェックの対象とするフォルダーを指定します。
 - `compilerOptions.tsBuildInfoFile`
@@ -84,7 +86,7 @@ npm run type-check
 
 ### テストの設計 {#test-architecture}
 
-Page Object Model（POM）に従ってテストコードを作成します。
+Playwright 公式サイトで取り上げられている [Page Object Model（POM） :material-open-in-new:](https://playwright.dev/docs/pom){ target=_blank } に従ってテストコードを作成します。
 POM は、 Web アプリケーションの画面をオブジェクトとして表現し、画面の詳細な操作をテストシナリオから分離して保守性を高める設計パターンです。
 ページオブジェクトには、テストで使用するセレクターや画面操作を定義します。
 
@@ -114,7 +116,7 @@ POM は、 Web アプリケーションの画面をオブジェクトとして�
 
 ??? info "ページオブジェクトの実装例"
 
-    テスト対象となる画面のセレクターやセレクターに対する操作を定義します。
+    テスト対象となる画面のセレクターに対する操作を定義します。
 
     ```ts title="display-item-page.ts"
     --8<-- "samples/Dressca/dressca-frontend/consumer/e2e/pages/shopping/display-item-page.ts"
@@ -176,33 +178,29 @@ Playwright では `playwright.config.ts` での設定内容に応じてテスト
 npm run test:e2e
 ```
 
-なお、ヘッドレスモードで実行した場合であっても、トレースを取得した場合は HTML 実行レポートからテスト実行時のスクリーンショットを確認できます。
+テスト実行に成功すると以下のように表示されます。
+
+```text
+Running 1 test using 1 worker
+  1 passed (41.6s)
+
+To open last HTML report run:
+
+  npx playwright show-report
+```
+
+なお、ヘッドレスモードで実行した場合であっても、トレースを取得した場合は以下のコマンドを実行して HTML 実行レポートからテスト実行時のスクリーンショットを確認できます。
 
 ```shell
 npx playwright show-report
 ```
 
+[テスト実行時の設定](#test-config-settings) の `playwright.config.ts` では `use.trace` に `'on-first-retry'` を設定しているため、失敗したテストの最初のリトライ時にトレースを取得します。
+トレースに関する設定については [Recording a trace :material-open-in-new:](https://playwright.dev/docs/trace-viewer#recording-a-trace){ target=_blank } を参照してください。
+
 #### ブラウザーを起動して動作確認 {#headed}
 
-以下のいずれかの方法でテスト実行時にブラウザーが起動されます。
-
-- `playwright.config.ts` の `use.headless` を `false` に設定する
-
-`playwright.config.ts` で以下のように設定の上、テストを実行します。
-
-```ts title="playwright.config.ts"
-// ...
-export default defineConfig({
-// ...
-  use: {
-    // ...
-    headless: false
-  },
-// ...
-})
-```
-
-- テスト実行コマンドに `--headed` オプションを指定する
+テスト実行コマンドに `--headed` オプションを指定することで、テスト実行時にブラウザーが起動されます。
 
 `package.json` に以下のようにスクリプトを追加し、テストを実行します。
 
@@ -212,4 +210,15 @@ export default defineConfig({
 
 ```shell
 npm run test:e2e:headed
+```
+
+正常に実行されるとブラウザーが起動し、以下のように結果が表示されます。
+
+```text
+Running 1 test using 1 worker
+  1 passed (29.3s)
+
+To open last HTML report run:
+
+  npx playwright show-report
 ```
