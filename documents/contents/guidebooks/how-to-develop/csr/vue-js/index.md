@@ -21,6 +21,7 @@ Vue.js を用いてフロントエンドアプリケーションを開発する�
 1. [カスタムエラーの設定](custom-error-settings.md)
 1. [イベントハンドリングの設定](event-handling-settings.md)
 1. [モックモードの設定](mock-mode-settings.md)
+1. [E2E テストの設定](e2e-test-settings.md)
 1. [CSS の設定と CSS フレームワークの適用](css.md)
 
 フロントエンドアプリケーションを公開するオリジンと、呼び出し先の Web API を公開するオリジンが異なる場合（クロスオリジン）の設定は、[こちら](../cors/index.md) を参照してください。
