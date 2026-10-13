@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Assets;
+﻿using Dressca.AssetsManagement.ApplicationCore;
 using Dressca.Web.Consumer.Resources;
 
 namespace Dressca.Web.Consumer.Assets;

@@ -1,0 +1,46 @@
+﻿using Dressca.Shopping.ApplicationCore.Ordering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Dressca.Shopping.Infrastructures.Configurations;
+
+/// <summary>
+///  <see cref="OrderItem" /> エンティティの構成を提供します。
+/// </summary>
+internal class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
+{
+    /// <inheritdoc/>
+    public void Configure(EntityTypeBuilder<OrderItem> builder)
+    {
+        ArgumentNullException.ThrowIfNull(builder);
+        builder.ToTable("OrderItems");
+        builder.Property(orderItem => orderItem.Id)
+            .ValueGeneratedNever();
+        builder.Property(orderItem => orderItem.UnitPrice)
+            .IsRequired()
+            .HasColumnType("decimal(18,6)");
+        builder.Property(orderItem => orderItem.Quantity)
+            .IsRequired();
+        builder.ComplexProperty(
+            orderItem => orderItem.ItemOrdered,
+            displayItemOrderedBuider =>
+            {
+                displayItemOrderedBuider.Property(orderedItem => orderedItem.DisplayItemId)
+                    .IsRequired()
+                    .HasColumnName("OrderedDisplayItemId");
+                displayItemOrderedBuider.Property(orderedItem => orderedItem.ProductName)
+                    .HasMaxLength(512)
+                    .IsRequired()
+                    .HasColumnName("OrderedProductName");
+                displayItemOrderedBuider.Property(orderedItem => orderedItem.ProductCode)
+                    .HasMaxLength(128)
+                    .IsRequired()
+                    .HasColumnName("OrderedProductCode");
+            });
+        builder.HasOne(orderItem => orderItem.Order)
+            .WithMany(order => order.OrderItems)
+            .HasForeignKey(orderItem => orderItem.OrderId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .HasConstraintName("FK_OrderItems_Orders");
+    }
+}

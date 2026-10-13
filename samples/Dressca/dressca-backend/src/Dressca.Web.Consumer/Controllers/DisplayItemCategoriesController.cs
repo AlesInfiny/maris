@@ -1,5 +1,5 @@
-using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.DisplayItems;
+﻿using Dressca.Shopping.ApplicationCore.ApplicationServices;
+using Dressca.Shopping.ApplicationCore.DisplayItems;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Dto.DisplayItem;
 using Microsoft.AspNetCore.Mvc;

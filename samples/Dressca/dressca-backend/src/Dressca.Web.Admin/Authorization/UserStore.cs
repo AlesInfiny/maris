@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using Dressca.ApplicationCore.Authorization;
+using Dressca.Authorization;
 
 namespace Dressca.Web.Admin.Authorization;
 

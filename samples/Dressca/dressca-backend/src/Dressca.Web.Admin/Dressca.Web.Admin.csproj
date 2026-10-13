@@ -23,9 +23,10 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Dressca.ApplicationCore\Dressca.ApplicationCore.csproj" />
-    <ProjectReference Include="..\Dressca.EfInfrastructure\Dressca.EfInfrastructure.csproj" />
-    <ProjectReference Include="..\Dressca.Store.Assets.StaticFiles\Dressca.Store.Assets.StaticFiles.csproj" />
+    <ProjectReference Include="..\Dressca.AssetsManagement\Dressca.AssetsManagement.csproj" />
+    <ProjectReference Include="..\Dressca.Authorization\Dressca.Authorization.csproj" />
+    <ProjectReference Include="..\Dressca.CatalogManagement\Dressca.CatalogManagement.csproj" />
+    <ProjectReference Include="..\Dressca.Shopping\Dressca.Shopping.csproj" />
     <ProjectReference Include="..\Dressca.SystemCommon\Dressca.SystemCommon.csproj" />
     <ProjectReference Include="..\Dressca.Web.Admin.Dto\Dressca.Web.Admin.Dto.csproj" />
     <ProjectReference Include="..\Dressca.Web\Dressca.Web.csproj" />

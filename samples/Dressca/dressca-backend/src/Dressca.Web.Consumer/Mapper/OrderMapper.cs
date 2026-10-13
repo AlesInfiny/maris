@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Dressca.ApplicationCore.Ordering;
+using Dressca.Shopping.ApplicationCore.Accounting;
+using Dressca.Shopping.ApplicationCore.DisplayItems;
+using Dressca.Shopping.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Dto.DisplayItem;
 using Dressca.Web.Consumer.Dto.Ordering;

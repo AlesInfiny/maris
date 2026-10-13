@@ -1,0 +1,22 @@
+﻿using Dressca.CatalogManagement.Resources;
+using Maris.Core;
+
+namespace Dressca.CatalogManagement.ApplicationCore.ApplicationServices;
+
+/// <summary>
+///  リポジトリ内に指定のカタログカテゴリが存在しないことを表す業務例外クラスです。
+/// </summary>
+public class CatalogCategoryNotExistingInRepositoryException : BusinessException
+{
+    private const string ExceptionId = "catalogCategoryNotFound";
+
+    /// <summary>
+    ///  見つからなかったカタログカテゴリ ID を指定して
+    ///  <see cref="CatalogCategoryNotExistingInRepositoryException"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="catalogCategoryIds">見つからなかったカタログカテゴリ Id 。</param>
+    public CatalogCategoryNotExistingInRepositoryException(IEnumerable<Guid> catalogCategoryIds)
+        : base(new BusinessError(ExceptionId, new ErrorMessage(Messages.CatalogCategoryIdDoesNotExist, string.Join(",", catalogCategoryIds))))
+    {
+    }
+}

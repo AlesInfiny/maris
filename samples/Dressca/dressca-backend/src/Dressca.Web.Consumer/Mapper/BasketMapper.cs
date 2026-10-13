@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Dressca.ApplicationCore.Accounting;
-using Dressca.ApplicationCore.Baskets;
+using Dressca.Shopping.ApplicationCore.Accounting;
+using Dressca.Shopping.ApplicationCore.Baskets;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Dto.Baskets;
 
