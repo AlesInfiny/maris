@@ -4,7 +4,7 @@
   "exclude": [],
   "compilerOptions": {
     "module": "ESNext",
-    "moduleResolution":"Bundler",
+    "moduleResolution": "Bundler",
     "noEmit": true,
     "tsBuildInfoFile": "../node_modules/.tmp/tsconfig.playwright.tsbuildinfo",
     "types": ["@playwright/test"]
