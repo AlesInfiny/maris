@@ -110,7 +110,7 @@ Copyright (c) 2015 - 2017 Maxime Thirouin, David Clark & Richard Hallows
 
 Copyright (c) 2021-Present VoidZero Inc. and Vitest contributors
 
-## Playwright {#playwright}
+## Playwright {#playwright style="clear:both;" }
 
 ![Playwright Logo](../images/about-maris/playwright-logo.svg){ align="left" width="96" }
 
