@@ -58,15 +58,18 @@ npm run test:e2e
 Playwright 自体は TypeScript の型チェックを行わないため、`tsconfig.json` の設定が必要となります。
 
 `create-vue` でプロジェクト作成時に追加される `e2e/tsconfig.json` を以下のように設定します。
+初期設定からの変更点をハイライトで示します。
 
-```json title="e2e/tsconfig.json"
+```json title="e2e/tsconfig.json" hl_lines="3 5-11"
 --8<-- "samples/Dressca/dressca-frontend/consumer/e2e/tsconfig.json"
 ```
 
-- `extends`
-    - 初期設定の `@tsconfig/node24/tsconfig.json` から `@vue/tsconfig/tsconfig.dom.json` に変更し、ベースとなる設定をアプリケーションコードと合わせます。初期設定の状態ではコンパイル後の JavaScript ファイルの出力要否やモジュール解決の方針に差分があるため、実装時の負担軽減のためにアプリケーションコードと合わせた設定にしています。
 - `include`
     - 型チェックの対象とするフォルダーを指定します。
+- `compilerOptions.module`, `compilerOptions.moduleResolution`
+    - 初期設定の状態ではモジュール解決の方針に差分があるため、実装時の負担軽減のためにアプリケーションコード側の設定と合わせています。
+- `compilerOptions.noEmit`
+    - コンパイル後に JavaScript ファイルを出力しないよう `true` を設定します。
 - `compilerOptions.tsBuildInfoFile`
     - .tsbuildinfo ファイルの出力先を一時フォルダーに設定します。
 - `compilerOptions.types`
@@ -196,6 +199,12 @@ npx playwright show-report
 ```
 
 [テスト実行時の設定](#test-config-settings) の `playwright.config.ts` では `use.trace` に `'on-first-retry'` を設定しているため、失敗したテストの最初のリトライ時にトレースを取得します。
+ヘッドレスモードで成功時のレポートを取得したい場合、一時的に下記のコマンドを実行してください。
+
+```shell
+npm run test:e2e -- --trace on
+```
+
 トレースに関する設定については [Recording a trace :material-open-in-new:](https://playwright.dev/docs/trace-viewer#recording-a-trace){ target=_blank } を参照してください。
 
 #### ブラウザーを起動して動作確認 {#headed}
