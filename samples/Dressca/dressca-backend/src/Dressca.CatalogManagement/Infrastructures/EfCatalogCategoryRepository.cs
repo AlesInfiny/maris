@@ -1,0 +1,41 @@
+﻿using Dressca.CatalogManagement.ApplicationCore;
+using Dressca.CatalogManagement.ApplicationCore.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace Dressca.CatalogManagement.Infrastructures;
+
+/// <summary>
+///  Entity Framework Core を利用したカタログカテゴリリポジトリの実装です。
+/// </summary>
+internal class EfCatalogCategoryRepository : ICatalogCategoryRepository
+{
+    private readonly CatalogManagementDbContext dbContext;
+
+    /// <summary>
+    ///  データアクセスに使用する <see cref="CatalogManagementDbContext"/> を指定して
+    ///  <see cref="EfCatalogCategoryRepository"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="dbContext">データアクセスに使用する <see cref="CatalogManagementDbContext"/> オブジェクト。</param>
+    /// <exception cref="ArgumentNullException">
+    ///  <paramref name="dbContext"/> が <see langword="null"/> です。
+    /// </exception>
+    public EfCatalogCategoryRepository(CatalogManagementDbContext dbContext)
+        => this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+
+    /// <inheritdoc/>
+    public async Task<IReadOnlyList<CatalogCategory>> GetAllAsync(CancellationToken cancellationToken = default)
+        => await this.dbContext.CatalogCategories.ToListAsync(cancellationToken);
+
+    /// <inheritdoc/>
+    public async Task<CatalogCategory?> GetAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var keys = new object[] { id };
+        return await this.dbContext.CatalogCategories.FindAsync(keys, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<bool> AnyAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.CatalogCategories.AnyAsync(catalogCategory => catalogCategory.Id == id, cancellationToken);
+    }
+}

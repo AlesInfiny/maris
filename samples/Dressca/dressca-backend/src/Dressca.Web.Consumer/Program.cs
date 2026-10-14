@@ -1,7 +1,10 @@
 ﻿using System.Text.Json;
-using Dressca.ApplicationCore;
-using Dressca.EfInfrastructure;
-using Dressca.Store.Assets.StaticFiles;
+using Dressca.AssetsManagement;
+using Dressca.AssetsManagement.Infrastructures;
+using Dressca.CatalogManagement;
+using Dressca.CatalogManagement.Infrastructures;
+using Dressca.Shopping;
+using Dressca.Shopping.Infrastructures;
 using Dressca.Web.Configuration;
 using Dressca.Web.Consumer;
 using Dressca.Web.Consumer.Baskets;
@@ -92,11 +95,11 @@ builder.Services.AddOpenApiDocument(config =>
     };
 });
 
-builder.Services.AddDresscaEfInfrastructure(builder.Configuration, builder.Environment);
+builder.Services.AddDresscaAssetsManagement(builder.Configuration, builder.Environment);
 
-builder.Services.AddStaticFileAssetStore();
+builder.Services.AddDresscaCatalogManagement(builder.Configuration, builder.Environment);
 
-builder.Services.AddDresscaApplicationCore();
+builder.Services.AddDresscaShopping(builder.Configuration, builder.Environment);
 
 builder.Services.AddDresscaDtoMapper();
 
@@ -113,7 +116,9 @@ if (builder.Environment.IsDevelopment())
 builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, HealthCheckDescriptionProvider>());
 
 builder.Services.AddHealthChecks()
-    .AddDresscaDbContextCheck("DresscaDatabaseHealthCheck");
+    .AddAssetsManagementDbContextCheck("AssetsManagementDatabaseHealthCheck")
+    .AddCatalogManagementDbContextCheck("CatalogManagementDatabaseHealthCheck")
+    .AddShoppingDbContextCheck("ShoppingDatabaseHealthCheck");
 
 var app = builder.Build();
 

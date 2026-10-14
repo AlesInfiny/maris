@@ -1,5 +1,5 @@
-﻿using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Assets;
+﻿using Dressca.AssetsManagement.ApplicationCore;
+using Dressca.AssetsManagement.ApplicationCore.ApplicationServices;
 using Dressca.Web.Admin.Assets;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

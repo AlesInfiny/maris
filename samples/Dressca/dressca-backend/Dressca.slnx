@@ -8,9 +8,10 @@
   </Folder>
   <Folder Name="/src/">
     <File Path="src/Directory.Build.props" />
-    <Project Path="src/Dressca.ApplicationCore/Dressca.ApplicationCore.csproj" />
-    <Project Path="src/Dressca.EfInfrastructure/Dressca.EfInfrastructure.csproj" />
-    <Project Path="src/Dressca.Store.Assets.StaticFiles/Dressca.Store.Assets.StaticFiles.csproj" />
+    <Project Path="src/Dressca.AssetsManagement/Dressca.AssetsManagement.csproj" />
+    <Project Path="src/Dressca.Authorization/Dressca.Authorization.csproj" />
+    <Project Path="src/Dressca.CatalogManagement/Dressca.CatalogManagement.csproj" />
+    <Project Path="src/Dressca.Shopping/Dressca.Shopping.csproj" />
     <Project Path="src/Dressca.SystemCommon/Dressca.SystemCommon.csproj" />
     <Project Path="src/Dressca.Web.Admin.Dto/Dressca.Web.Admin.Dto.csproj" />
     <Project Path="src/Dressca.Web.Admin/Dressca.Web.Admin.csproj" />
@@ -21,7 +22,9 @@
   <Folder Name="/tests/">
     <File Path="tests/Directory.Build.props" />
     <Project Path="tests/Dressca.IntegrationTest/Dressca.IntegrationTest.csproj" />
-    <Project Path="tests/Dressca.UnitTests.ApplicationCore/Dressca.UnitTests.ApplicationCore.csproj" />
+    <Project Path="tests/Dressca.UnitTests.AssetsManagement/Dressca.UnitTests.AssetsManagement.csproj" />
+    <Project Path="tests/Dressca.UnitTests.CatalogManagement/Dressca.UnitTests.CatalogManagement.csproj" />
+    <Project Path="tests/Dressca.UnitTests.Shopping/Dressca.UnitTests.Shopping.csproj" />
     <Project Path="tests/Dressca.UnitTests.SystemCommon/Dressca.UnitTests.SystemCommon.csproj" />
     <Project Path="tests/Dressca.UnitTests.Web.Admin/Dressca.UnitTests.Web.Admin.csproj" />
     <Project Path="tests/Dressca.UnitTests.Web.Consumer/Dressca.UnitTests.Web.Consumer.csproj" />

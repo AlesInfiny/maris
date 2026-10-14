@@ -71,29 +71,20 @@ jobs:
           --hostname sql1 \
           -d mcr.microsoft.com/mssql/server:2022-latest
 
-      - name: データベース接続文字列を取得(結合テスト用)
-        id: get-connection-string
-        env:
-          APPSETTINGS_FILEPATH: tests/Dressca.Web.Admin.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
-        run: |
-          connectionString=$(cat ${{env.APPSETTINGS_FILEPATH}} | jq '.ConnectionStrings.DresscaDbContext')
-          echo "CONNECTION_STRING=${connectionString}" >> "$GITHUB_OUTPUT"
-
       - name: EF Core ツールのインストール(結合テスト用)
         shell: bash
         run: dotnet tool install --global dotnet-ef --version 10.*
 
       - name: マイグレーション適用(結合テスト用)
-        working-directory: ${{ env.WORKING_DIRECTORY }}/src/Dressca.EfInfrastructure
-        shell: bash
-        run: dotnet ef database update --connection ${{ steps.get-connection-string.outputs.CONNECTION_STRING }}
+        shell: pwsh
+        run: ./scripts/Update-Database.ps1 -AppSettingsPath tests/Dressca.Web.Admin.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json -Configuration ${{ env.BUILD_CONFIGURATION }}
 
       - id: run-tests
         name: テストの実行
         continue-on-error: true
         run: |
           export TEST_ENVIRONMENT=${{ env.TEST_ENVIRONMENT }}
-          dotnet test --solution ${{ env.SOLUTION_FILE_NAME }} --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --report-xunit-trx
+          dotnet test --solution ${{ env.SOLUTION_FILE_NAME }} --no-build --verbosity normal --configuration ${{ env.BUILD_CONFIGURATION }} --coverage --coverage-output-format cobertura --coverage-output coverage.cobertura.xml --coverage-settings coverage.config --report-xunit-trx
 
       - id: create-test-result-report
         name: テスト結果ページの作成

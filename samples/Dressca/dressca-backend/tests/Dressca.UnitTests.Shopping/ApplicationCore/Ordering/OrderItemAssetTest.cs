@@ -1,0 +1,39 @@
+﻿using Dressca.Shopping.ApplicationCore.Ordering;
+
+namespace Dressca.UnitTests.Shopping.ApplicationCore.Ordering;
+
+public class OrderItemAssetTest
+{
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void Constructor_アセットコードがnullまたは空の文字列_ArgumentExceptionが発生する(string? assetCode)
+    {
+        // Arrange
+        var orderItemId = Guid.CreateVersion7();
+
+        // Act
+        var action = () => new OrderItemAsset { AssetCode = assetCode!, OrderItemId = orderItemId };
+
+        // Assert
+        var ex = Assert.Throws<ArgumentException>("value", action);
+        Assert.StartsWith("null または空の文字列を設定できません。", ex.Message);
+    }
+
+    [Fact]
+    public void OrderItem_注文アイテムが初期化されていない_InvalidOperationExceptionが発生する()
+    {
+        // Arrange
+        string assetCode = "Asset Code";
+        var orderItemId = Guid.CreateVersion7();
+        var itemAsset = new OrderItemAsset { AssetCode = assetCode!, OrderItemId = orderItemId };
+
+        // Act
+        var action = () => _ = itemAsset.OrderItem;
+
+        // Assert
+        var ex = Assert.Throws<InvalidOperationException>(action);
+        Assert.StartsWith("OrderItem プロパティが初期化されていません。", ex.Message);
+    }
+}

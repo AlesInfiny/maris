@@ -1,0 +1,41 @@
+﻿using Dressca.CatalogManagement.ApplicationCore;
+using Dressca.CatalogManagement.ApplicationCore.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace Dressca.CatalogManagement.Infrastructures;
+
+/// <summary>
+///  Entity Framework Core を利用したカタログブランドリポジトリの実装です。
+/// </summary>
+internal class EfCatalogBrandRepository : ICatalogBrandRepository
+{
+    private readonly CatalogManagementDbContext dbContext;
+
+    /// <summary>
+    ///  データアクセスに使用する <see cref="CatalogManagementDbContext"/> を指定して
+    ///  <see cref="EfCatalogBrandRepository"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    /// <param name="dbContext">データアクセスに使用する <see cref="CatalogManagementDbContext"/> オブジェクト。</param>
+    /// <exception cref="ArgumentNullException">
+    ///  <paramref name="dbContext"/> が <see langword="null"/> です。
+    /// </exception>
+    public EfCatalogBrandRepository(CatalogManagementDbContext dbContext)
+        => this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+
+    /// <inheritdoc/>
+    public async Task<IReadOnlyList<CatalogBrand>> GetAllAsync(CancellationToken cancellationToken = default)
+        => await this.dbContext.CatalogBrands.ToListAsync(cancellationToken);
+
+    /// <inheritdoc/>
+    public async Task<CatalogBrand?> GetAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var keys = new object[] { id };
+        return await this.dbContext.CatalogBrands.FindAsync(keys, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<bool> AnyAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await this.dbContext.CatalogBrands.AnyAsync(catalogBrand => catalogBrand.Id == id, cancellationToken);
+    }
+}

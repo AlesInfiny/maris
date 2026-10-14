@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.DisplayItems;
+using Dressca.Shopping.ApplicationCore.ApplicationServices;
+using Dressca.Shopping.ApplicationCore.Baskets;
+using Dressca.Shopping.ApplicationCore.DisplayItems;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Baskets;
 using Dressca.Web.Consumer.Dto.Baskets;
