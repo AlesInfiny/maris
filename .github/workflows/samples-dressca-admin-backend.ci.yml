@@ -77,7 +77,7 @@ jobs:
 
       - name: マイグレーション適用(結合テスト用)
         shell: pwsh
-        run: ./scripts/Update-Database.ps1 -AppSettingsPath tests/Dressca.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json -Configuration ${{ env.BUILD_CONFIGURATION }}
+        run: ./scripts/Update-Database.ps1 -AppSettingsPath tests/Dressca.Web.Admin.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json -Context AssetsManagement, CatalogManagement -Configuration ${{ env.BUILD_CONFIGURATION }}
 
       - id: run-tests
         name: テストの実行
