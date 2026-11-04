@@ -4,8 +4,6 @@ using Dressca.AssetsManagement.Infrastructures;
 using Dressca.Authorization;
 using Dressca.CatalogManagement;
 using Dressca.CatalogManagement.Infrastructures;
-using Dressca.Shopping;
-using Dressca.Shopping.Infrastructures;
 using Dressca.Web.Admin;
 using Dressca.Web.Admin.Authorization;
 using Dressca.Web.Admin.Mapper;
@@ -104,7 +102,6 @@ builder.Services.AddOpenApiDocument(config =>
 builder.Services.AddTransient<IUserStore, UserStore>();
 builder.Services.AddDresscaAssetsManagement(builder.Configuration, builder.Environment);
 builder.Services.AddDresscaCatalogManagement(builder.Configuration, builder.Environment);
-builder.Services.AddDresscaShopping(builder.Configuration, builder.Environment);
 builder.Services.AddDresscaDtoMapper();
 
 if (builder.Environment.IsDevelopment())
@@ -135,8 +132,7 @@ builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionPro
 
 builder.Services.AddHealthChecks()
     .AddAssetsManagementDbContextCheck("AssetsManagementDatabaseHealthCheck")
-    .AddCatalogManagementDbContextCheck("CatalogManagementDatabaseHealthCheck")
-    .AddShoppingDbContextCheck("ShoppingDatabaseHealthCheck");
+    .AddCatalogManagementDbContextCheck("CatalogManagementDatabaseHealthCheck");
 
 var app = builder.Build();
 

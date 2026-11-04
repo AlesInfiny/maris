@@ -26,7 +26,6 @@
     <ProjectReference Include="..\Dressca.AssetsManagement\Dressca.AssetsManagement.csproj" />
     <ProjectReference Include="..\Dressca.Authorization\Dressca.Authorization.csproj" />
     <ProjectReference Include="..\Dressca.CatalogManagement\Dressca.CatalogManagement.csproj" />
-    <ProjectReference Include="..\Dressca.Shopping\Dressca.Shopping.csproj" />
     <ProjectReference Include="..\Dressca.SystemCommon\Dressca.SystemCommon.csproj" />
     <ProjectReference Include="..\Dressca.Web.Admin.Dto\Dressca.Web.Admin.Dto.csproj" />
     <ProjectReference Include="..\Dressca.Web\Dressca.Web.csproj" />

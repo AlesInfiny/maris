@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Dressca バックエンドの全コンテキストのマイグレーションを、依存関係の順にデータベースへ適用します。
 
@@ -12,6 +12,9 @@
   接続文字列を定義した appsettings ファイルのパス。
   省略した場合は、結合テスト専用のローカルデータベースを定義したファイルを使用します。
 
+.PARAMETER Connection
+  全コンテキストで共通に使用する接続文字列。指定した場合は AppSettingsPath より優先します。
+
 .PARAMETER Configuration
   ビルド構成。
 
@@ -19,11 +22,12 @@
   ./scripts/Update-Database.ps1
 
 .EXAMPLE
-  ./scripts/Update-Database.ps1 -AppSettingsPath ./src/Dressca.Web.Consumer/appsettings.Development.json
+  ./scripts/Update-Database.ps1 -Connection 'Data Source=(localdb)\mssqllocaldb;Database=Dressca.Eshop;Integrated Security=True'
 #>
 [CmdletBinding()]
 param(
     [string] $AppSettingsPath = (Join-Path $PSScriptRoot '../tests/Dressca.IntegrationTest/appsettings.LocalIntegrationTest.json'),
+    [string] $Connection,
     [string] $Configuration = 'Debug'
 )
 
@@ -37,7 +41,7 @@ $settings = Get-Content -Raw -Path $AppSettingsPath | ConvertFrom-Json
 
 foreach ($context in $contexts) {
     $dbContextName = "${context}DbContext"
-    $connectionString = $settings.ConnectionStrings.$dbContextName
+    $connectionString = if ($Connection) { $Connection } else { $settings.ConnectionStrings.$dbContextName }
     if ([string]::IsNullOrWhiteSpace($connectionString)) {
         throw "$AppSettingsPath に接続文字列 $dbContextName が定義されていません。"
     }

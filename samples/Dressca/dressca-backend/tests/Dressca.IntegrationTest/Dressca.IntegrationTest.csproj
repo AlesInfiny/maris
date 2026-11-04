@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Dressca.CatalogManagement\Dressca.CatalogManagement.csproj" />
     <ProjectReference Include="..\..\src\Dressca.Web.Consumer\Dressca.Web.Consumer.csproj" />
   </ItemGroup>
 
