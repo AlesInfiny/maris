@@ -12,8 +12,8 @@
   接続文字列を定義した appsettings ファイルのパス。
   省略した場合は、結合テスト専用のローカルデータベースを定義したファイルを使用します。
 
-.PARAMETER Connection
-  全コンテキストで共通に使用する接続文字列。指定した場合は AppSettingsPath より優先します。
+.PARAMETER ConnectionString
+  全コンテキストで共通に使用する接続文字列。指定した場合は AppSettingsPath を読み込みません。
 
 .PARAMETER Configuration
   ビルド構成。
@@ -22,12 +22,12 @@
   ./scripts/Update-Database.ps1
 
 .EXAMPLE
-  ./scripts/Update-Database.ps1 -Connection 'Data Source=(localdb)\mssqllocaldb;Database=Dressca.Eshop;Integrated Security=True'
+  ./scripts/Update-Database.ps1 -ConnectionString 'Data Source=(localdb)\mssqllocaldb;Database=Dressca.Eshop;Integrated Security=True'
 #>
 [CmdletBinding()]
 param(
     [string] $AppSettingsPath = (Join-Path $PSScriptRoot '../tests/Dressca.IntegrationTest/appsettings.LocalIntegrationTest.json'),
-    [string] $Connection,
+    [string] $ConnectionString,
     [string] $Configuration = 'Debug'
 )
 
@@ -37,18 +37,20 @@ $ErrorActionPreference = 'Stop'
 # アセット管理、カタログ管理、買い物の順に適用します。
 $contexts = @('AssetsManagement', 'CatalogManagement', 'Shopping')
 
-$settings = Get-Content -Raw -Path $AppSettingsPath | ConvertFrom-Json
+if (-not $ConnectionString) {
+    $settings = Get-Content -Raw -Path $AppSettingsPath | ConvertFrom-Json
+}
 
 foreach ($context in $contexts) {
     $dbContextName = "${context}DbContext"
-    $connectionString = if ($Connection) { $Connection } else { $settings.ConnectionStrings.$dbContextName }
-    if ([string]::IsNullOrWhiteSpace($connectionString)) {
+    $contextConnectionString = if ($ConnectionString) { $ConnectionString } else { $settings.ConnectionStrings.$dbContextName }
+    if ([string]::IsNullOrWhiteSpace($contextConnectionString)) {
         throw "$AppSettingsPath に接続文字列 $dbContextName が定義されていません。"
     }
 
     $project = Join-Path $PSScriptRoot "../src/Dressca.$context"
     Write-Host "$dbContextName のマイグレーションを適用します。"
-    dotnet ef database update --project $project --context $dbContextName --configuration $Configuration --connection $connectionString
+    dotnet ef database update --project $project --context $dbContextName --configuration $Configuration --connection $contextConnectionString
     if ($LASTEXITCODE -ne 0) {
         throw "$dbContextName のマイグレーションの適用に失敗しました。"
     }
