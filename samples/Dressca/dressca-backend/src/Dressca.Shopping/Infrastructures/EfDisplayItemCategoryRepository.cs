@@ -16,7 +16,7 @@ internal class EfDisplayItemCategoryRepository : IDisplayItemCategoryRepository
 
     /// <inheritdoc/>
     public async Task<IReadOnlyList<DisplayItemCategory>> GetAllAsync(CancellationToken cancellationToken = default)
-        => await this.dbContext.CatalogCategories.AsNoTracking().OrderBy(item => item.Id)
+        => await this.dbContext.CatalogCategories.OrderBy(item => item.Id)
             .Select(item => new DisplayItemCategory { Id = item.Id, Name = item.Name })
             .ToListAsync(cancellationToken);
 }

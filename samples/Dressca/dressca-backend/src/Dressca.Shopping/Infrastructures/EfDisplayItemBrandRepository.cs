@@ -16,7 +16,7 @@ internal class EfDisplayItemBrandRepository : IDisplayItemBrandRepository
 
     /// <inheritdoc/>
     public async Task<IReadOnlyList<DisplayItemBrand>> GetAllAsync(CancellationToken cancellationToken = default)
-        => await this.dbContext.CatalogBrands.AsNoTracking().OrderBy(item => item.Id)
+        => await this.dbContext.CatalogBrands.OrderBy(item => item.Id)
             .Select(item => new DisplayItemBrand { Id = item.Id, Name = item.Name })
             .ToListAsync(cancellationToken);
 }

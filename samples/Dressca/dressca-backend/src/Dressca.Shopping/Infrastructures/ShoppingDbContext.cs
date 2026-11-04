@@ -60,19 +60,19 @@ internal class ShoppingDbContext : DbContext
     ///  陳列品の情報源となるカタログアイテムを取得します。
     ///  カタログ管理コンテキストが所有するテーブルのため、読み取り専用で使用します。
     /// </summary>
-    public DbSet<CatalogItemEntity> CatalogItems { get; set; }
+    public IQueryable<CatalogItemEntity> CatalogItems => this.Set<CatalogItemEntity>().AsNoTracking();
 
     /// <summary>
     ///  陳列品の情報源となる商品ブランドを取得します。
     ///  カタログ管理コンテキストが所有するテーブルのため、読み取り専用で使用します。
     /// </summary>
-    public DbSet<CatalogBrandEntity> CatalogBrands { get; set; }
+    public IQueryable<CatalogBrandEntity> CatalogBrands => this.Set<CatalogBrandEntity>().AsNoTracking();
 
     /// <summary>
     ///  陳列品の情報源となる商品カテゴリを取得します。
     ///  カタログ管理コンテキストが所有するテーブルのため、読み取り専用で使用します。
     /// </summary>
-    public DbSet<CatalogCategoryEntity> CatalogCategories { get; set; }
+    public IQueryable<CatalogCategoryEntity> CatalogCategories => this.Set<CatalogCategoryEntity>().AsNoTracking();
 
     /// <inheritdoc/>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
