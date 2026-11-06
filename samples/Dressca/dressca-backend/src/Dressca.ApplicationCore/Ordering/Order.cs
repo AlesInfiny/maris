@@ -66,7 +66,10 @@ public class Order
     /// <exception cref="ArgumentException"><see langword="null"/> または空の文字列を設定できません。</exception>
     public required string BuyerId
     {
-        get => this.buyerId;
+        get
+        {
+            return this.buyerId;
+        }
 
         [MemberNotNull(nameof(buyerId))]
         init

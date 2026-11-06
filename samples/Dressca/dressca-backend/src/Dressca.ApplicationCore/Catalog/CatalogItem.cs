@@ -38,7 +38,10 @@ public class CatalogItem
     /// <exception cref="ArgumentException">商品名が <see langword="null"/> または空の文字列です。</exception>
     public required string Name
     {
-        get => this.name;
+        get
+        {
+            return this.name;
+        }
 
         [MemberNotNull(nameof(name))]
         init
@@ -58,7 +61,10 @@ public class CatalogItem
     /// <exception cref="ArgumentException">説明が <see langword="null"/> または空の文字列です。</exception>
     public required string Description
     {
-        get => this.description;
+        get
+        {
+            return this.description;
+        }
 
         [MemberNotNull(nameof(description))]
         init
@@ -78,7 +84,11 @@ public class CatalogItem
     /// <exception cref="ArgumentOutOfRangeException">単価は負の値に設定できません。</exception>
     public required decimal Price
     {
-        get => this.price;
+        get
+        {
+            return this.price;
+        }
+
         init
         {
             if (value < 0)
@@ -103,7 +113,10 @@ public class CatalogItem
     /// <exception cref="ArgumentException">商品コードには半角英数字を設定してください。</exception>
     public required string ProductCode
     {
-        get => this.productCode;
+        get
+        {
+            return this.productCode;
+        }
 
         [MemberNotNull(nameof(productCode))]
         init
@@ -123,7 +136,11 @@ public class CatalogItem
     /// <exception cref="ArgumentException">カタログカテゴリ ID に空の Guid は設定できません。</exception>
     public required Guid CatalogCategoryId
     {
-        get => this.catalogCategoryId;
+        get
+        {
+            return this.catalogCategoryId;
+        }
+
         init
         {
             if (value == Guid.Empty)
@@ -151,7 +168,11 @@ public class CatalogItem
     /// <exception cref="ArgumentException">カタログブランド ID に空の Guid は設定できません。</exception>
     public required Guid CatalogBrandId
     {
-        get => this.catalogBrandId;
+        get
+        {
+            return this.catalogBrandId;
+        }
+
         init
         {
             if (value == Guid.Empty)
@@ -184,7 +205,11 @@ public class CatalogItem
     /// <exception cref="InvalidOperationException"><see cref="RowVersion"/> が設定されていません。</exception>
     public byte[] RowVersion
     {
-        get => this.rowVersion ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.RowVersion)));
+        get
+        {
+            return this.rowVersion ?? throw new InvalidOperationException(string.Format(Messages.PropertyNotInitialized, nameof(this.RowVersion)));
+        }
+
         init
         {
             this.rowVersion = value;

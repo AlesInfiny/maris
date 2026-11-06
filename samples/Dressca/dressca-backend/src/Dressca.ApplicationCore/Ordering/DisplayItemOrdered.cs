@@ -46,7 +46,11 @@ public record DisplayItemOrdered
     /// <exception cref="ArgumentException">空の Guid は設定できません。</exception>
     public Guid DisplayItemId
     {
-        get => this.displayItemId;
+        get
+        {
+            return this.displayItemId;
+        }
+
         init
         {
             if (value == Guid.Empty)
@@ -64,7 +68,10 @@ public record DisplayItemOrdered
     /// <exception cref="ArgumentException"><see langword="null"/> または空の文字列を設定できません。</exception>
     public string ProductName
     {
-        get => this.productName;
+        get
+        {
+            return this.productName;
+        }
 
         [MemberNotNull(nameof(productName))]
         init
@@ -84,7 +91,10 @@ public record DisplayItemOrdered
     /// <exception cref="ArgumentException"><see langword="null"/> または空の文字列を設定できません。</exception>
     public string ProductCode
     {
-        get => this.productCode;
+        get
+        {
+            return this.productCode;
+        }
 
         [MemberNotNull(nameof(productCode))]
         init

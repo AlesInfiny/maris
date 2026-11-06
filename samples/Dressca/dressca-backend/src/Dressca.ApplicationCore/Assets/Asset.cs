@@ -29,7 +29,10 @@ public class Asset
     /// <exception cref="ArgumentException">null または空の文字列を設定できません。</exception>
     public required string AssetCode
     {
-        get => this.assetCode;
+        get
+        {
+            return this.assetCode;
+        }
 
         [MemberNotNull(nameof(assetCode))]
         init
@@ -49,7 +52,10 @@ public class Asset
     /// <exception cref="NotSupportedException">サポートされていないアセットタイプが指定されました。</exception>
     public required string AssetType
     {
-        get => this.assetType;
+        get
+        {
+            return this.assetType;
+        }
 
         [MemberNotNull(nameof(assetType))]
         init

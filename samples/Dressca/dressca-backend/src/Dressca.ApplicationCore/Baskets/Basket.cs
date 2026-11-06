@@ -29,7 +29,10 @@ public class Basket
     /// <exception cref="ArgumentNullException"><see langword="null"/> を設定できません。</exception>
     public required string BuyerId
     {
-        get => this.buyerId;
+        get
+        {
+            return this.buyerId;
+        }
 
         [MemberNotNull(nameof(buyerId))]
         init
