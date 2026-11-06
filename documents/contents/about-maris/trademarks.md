@@ -3,6 +3,8 @@ title: 商標
 description: AlesInfiny Maris OSS Edition の商標について説明します。
 ---
 
+<!-- cspell:ignore AISBL -->
+
 # 商標 {#top}
 
 ## 商標の利用について {#trademarks}
@@ -33,17 +35,22 @@ BIPROGY 株式会社からの許可がない場合、以下のように使用し
 
 本サイトに記載の商品名、製品名、社名などは、各社が商標として使用している場合があります。
 
-<!-- textlint-disable ja-technical-writing/sentence-length -->
-- 「Microsoft」「Windows」「Windows Server」「Visual Studio」「Visual Studio Code」「VS Code」「Xamarin」「Win32」「IntelliSense」「SQL Server」「Microsoft Edge」「Active Directory」「Azure」「Azure Cosmos DB」は米国 Microsoft Corporation の米国およびその他の国における登録商標または商標です。
+<!-- textlint-disable ja-technical-writing/max-ten,ja-technical-writing/max-comma,ja-technical-writing/sentence-length,@textlint-ja/no-synonyms -->
+- Eclipse and Temurin are trademarks of Eclipse Foundation AISBL.
+- Google 、 Google Analytics は、 Google LLC の商標または登録商標です。
+- Microsoft 、 Active Directory 、 Azure 、 Azure Cosmos DB 、 Microsoft Entra 、 SQL Server 、 Visual Studio 、 Visual Studio Code 、 VS Code 、 Windows 、 Xamarin は、マイクロソフト グループの企業の商標です。
+- Java は、 Oracle 、その子会社及び関連会社の米国及びその他の国における登録商標です。
 - Git and the Git logo are either registered trademarks or trademarks of Software Freedom Conservancy, Inc., corporate home of the Git Project, in the United States and/or other countries.
+- GitHub and the GitHub logo design are trademarks of GitHub, Inc., registered in the United States and other countries.
 - Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
-- 「macOS」は、米国およびその他の国で登録された Apple Inc. の商標です。
+- macOS は、米国およびその他の国で登録された Apple Inc. の商標です。
   AlesInfiny Maris OSS Edition は、独立したドキュメントであり、 Apple Inc.が認定、後援、その他承認したものではありません。
+- npm is a registered trademark of npm, Inc.
 - The Tailwind name and logos are trademarks of Tailwind Labs Inc.
-- 「ESLint」およびそのロゴは OpenJS Foundation の商標または登録商標です。
+- ESLint 、 Node.js およびそのロゴは、 OpenJS Foundation の商標または登録商標です。
 - その他記載されている会社名・商品名などは、各社の商標および登録商標です。
 - 本サイトに記載の商品名、製品名、社名などには、必ずしも商標表示 ( (R) 、 TM ) を付記していません。
 
-<!-- textlint-enable ja-technical-writing/sentence-length -->
+<!-- textlint-enable ja-technical-writing/max-ten,ja-technical-writing/max-comma,ja-technical-writing/sentence-length,@textlint-ja/no-synonyms -->
 
 本サイトに記載されている内容の著作権や肖像権等は、各権利所有者に帰属します。
