@@ -34,7 +34,10 @@ public class DisplayItem
     /// <exception cref="ArgumentException">商品名が <see langword="null"/> または空の文字列です。</exception>
     public required string Name
     {
-        get => this.name;
+        get
+        {
+            return this.name;
+        }
 
         [MemberNotNull(nameof(name))]
         init
@@ -54,7 +57,10 @@ public class DisplayItem
     /// <exception cref="ArgumentException">説明が <see langword="null"/> または空の文字列です。</exception>
     public required string Description
     {
-        get => this.description;
+        get
+        {
+            return this.description;
+        }
 
         [MemberNotNull(nameof(description))]
         init
@@ -74,7 +80,11 @@ public class DisplayItem
     /// <exception cref="ArgumentOutOfRangeException">単価は負の値に設定できません。</exception>
     public required decimal Price
     {
-        get => this.price;
+        get
+        {
+            return this.price;
+        }
+
         init
         {
             if (value < 0)
@@ -99,7 +109,10 @@ public class DisplayItem
     /// <exception cref="ArgumentException">商品コードには半角英数字を設定してください。</exception>
     public required string ProductCode
     {
-        get => this.productCode;
+        get
+        {
+            return this.productCode;
+        }
 
         [MemberNotNull(nameof(productCode))]
         init
@@ -119,7 +132,11 @@ public class DisplayItem
     /// <exception cref="ArgumentException">陳列品カテゴリ ID に空の Guid は設定できません。</exception>
     public required Guid DisplayItemCategoryId
     {
-        get => this.displayItemCategoryId;
+        get
+        {
+            return this.displayItemCategoryId;
+        }
+
         init
         {
             if (value == Guid.Empty)
@@ -137,7 +154,11 @@ public class DisplayItem
     /// <exception cref="ArgumentException">陳列品ブランド ID に空の Guid は設定できません。</exception>
     public required Guid DisplayItemBrandId
     {
-        get => this.displayItemBrandId;
+        get
+        {
+            return this.displayItemBrandId;
+        }
+
         init
         {
             if (value == Guid.Empty)

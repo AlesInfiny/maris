@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Dressca.EfInfrastructure;
@@ -7,15 +6,10 @@ namespace Dressca.EfInfrastructure;
 /// <summary>
 ///  <see cref="IHealthChecksBuilder"/> の拡張メソッドを提供します。
 /// </summary>
-[SuppressMessage(
-    category: "StyleCop.CSharp.ReadabilityRules",
-    checkId: "SA1101:PrefixLocalCallsWithThis",
-    Justification = "StyleCop bug. see: https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3954")]
 public static class HealthChecksBuilderExtensions
 {
     extension(IHealthChecksBuilder builder)
     {
-
         /// <summary>
         ///  <see cref="DresscaDbContext"/> のヘルスチェックを追加します。
         /// </summary>

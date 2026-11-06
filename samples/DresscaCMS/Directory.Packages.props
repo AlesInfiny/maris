@@ -24,6 +24,6 @@
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="8.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
+    <GlobalPackageReference Include="StyleCop.Analyzers" Version="1.3.171-beta" />
   </ItemGroup>
 </Project>
