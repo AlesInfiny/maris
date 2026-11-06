@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- コードカバレッジの収集設定です。dotnet test の coverage-settings オプションで指定します。 -->
+<Configuration>
+  <CodeCoverage>
+    <Sources>
+      <Exclude>
+        <!-- EF Core が自動生成するマイグレーションのコードは、カバレッジの集計対象外とします。 -->
+        <Source>.*[\\/]Migrations[\\/].*</Source>
+      </Exclude>
+    </Sources>
+  </CodeCoverage>
+</Configuration>

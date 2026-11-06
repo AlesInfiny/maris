@@ -1,5 +1,5 @@
-using System.Diagnostics.CodeAnalysis;
-using Dressca.ApplicationCore.DisplayItems;
+﻿using System.Diagnostics.CodeAnalysis;
+using Dressca.Shopping.ApplicationCore.DisplayItems;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Dto.DisplayItem;
 

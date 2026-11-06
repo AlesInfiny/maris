@@ -1,11 +1,15 @@
-using System.Net;
+﻿using System.Net;
 using System.Net.Http.Json;
-using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Catalog;
-using Dressca.ApplicationCore.DisplayItems;
-using Dressca.ApplicationCore.Ordering;
-using Dressca.EfInfrastructure;
-using Dressca.EfInfrastructure.Configurations;
+using Dressca.CatalogManagement.ApplicationCore;
+using Dressca.CatalogManagement.ApplicationCore.RepositoryInterfaces;
+using Dressca.CatalogManagement.Infrastructures;
+using Dressca.CatalogManagement.Infrastructures.Configurations;
+using Dressca.Shopping.ApplicationCore.ApplicationServices;
+using Dressca.Shopping.ApplicationCore.Ordering;
+using Dressca.Shopping.ApplicationCore.RepositoryInterfaces;
+using Dressca.Shopping.Infrastructures;
+using Dressca.Shopping.Infrastructures.Configurations;
+using Dressca.Shopping.Infrastructures.Entities;
 using Dressca.Web.Consumer.Dto.Baskets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,22 +25,22 @@ public class DisplayItemTest(IntegrationTestWebApplicationFactory<Program> facto
     {
         using var client = factory.CreateClient();
         using var scope = factory.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<DresscaDbContext>();
+        var db = scope.ServiceProvider.GetRequiredService<ShoppingDbContext>();
         var cancellationToken = TestContext.Current.CancellationToken;
         var rows = await db.DisplayItems.AsNoTracking().ToListAsync(cancellationToken);
         Assert.Equal(11, rows.Count);
         Assert.All(rows, row => Assert.NotEqual(row.CatalogItemId, row.Id));
-        Assert.Contains(rows, row => row.Id == DresscaSeedIds.DisplayItem1 && row.CatalogItemId == DresscaSeedIds.Item1);
+        Assert.Contains(rows, row => row.Id == ShoppingSeedIds.DisplayItem1 && row.CatalogItemId == ShoppingSeedIds.Item1);
 
         var repository = scope.ServiceProvider.GetRequiredService<IDisplayItemRepository>();
-        Assert.Empty(await repository.FindAsync(item => item.Id == DresscaSeedIds.Item1, cancellationToken));
+        Assert.Empty(await repository.FindAsync(item => item.Id == ShoppingSeedIds.Item1, cancellationToken));
         Assert.Empty(await repository.FindAsync(item => Array.Empty<Guid>().Contains(item.Id), cancellationToken));
 
         using var response = await client.PostAsJsonAsync(
             "api/basket-items",
             new PostBasketItemsRequest
             {
-                DisplayItemId = DresscaSeedIds.Item1,
+                DisplayItemId = ShoppingSeedIds.Item1,
                 AddedQuantity = 1,
             },
             cancellationToken);
@@ -55,15 +59,16 @@ public class DisplayItemTest(IntegrationTestWebApplicationFactory<Program> facto
     {
         using var client = factory.CreateClient();
         using var scope = factory.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<DresscaDbContext>();
+        var catalogDb = scope.ServiceProvider.GetRequiredService<CatalogManagementDbContext>();
+        var shoppingDb = scope.ServiceProvider.GetRequiredService<ShoppingDbContext>();
         var cancellationToken = TestContext.Current.CancellationToken;
-        var (firstId, secondId, brandId) = await AddItemsAsync(db, cancellationToken);
+        var (firstId, secondId, brandId) = await AddItemsAsync(catalogDb, shoppingDb, cancellationToken);
         try
         {
             var service = scope.ServiceProvider.GetRequiredService<DisplayItemApplicationService>();
 
-            var (firstPage, total) = await service.GetDisplayItemsAsync(0, 1, brandId, DresscaSeedIds.Category1, cancellationToken);
-            var (secondPage, secondTotal) = await service.GetDisplayItemsAsync(1, 1, brandId, DresscaSeedIds.Category1, cancellationToken);
+            var (firstPage, total) = await service.GetDisplayItemsAsync(0, 1, brandId, CatalogManagementSeedIds.Category1, cancellationToken);
+            var (secondPage, secondTotal) = await service.GetDisplayItemsAsync(1, 1, brandId, CatalogManagementSeedIds.Category1, cancellationToken);
             Assert.Equal(2, total);
             Assert.Equal(total, secondTotal);
             Assert.Single(firstPage);
@@ -73,12 +78,12 @@ public class DisplayItemTest(IntegrationTestWebApplicationFactory<Program> facto
             Assert.Equal(2, Assert.Single(items, item => item.Id == firstId).Assets.Count);
             Assert.Empty(Assert.Single(items, item => item.Id == secondId).Assets);
             Assert.All(items.SelectMany(item => item.Assets), asset => Assert.Equal(firstId, asset.DisplayItemId));
-            Assert.Empty((await service.GetDisplayItemsAsync(0, 20, brandId, DresscaSeedIds.Category2, cancellationToken)).ItemsOnPage);
+            Assert.Empty((await service.GetDisplayItemsAsync(0, 20, brandId, CatalogManagementSeedIds.Category2, cancellationToken)).ItemsOnPage);
         }
         finally
         {
-            db.ChangeTracker.Clear();
-            await db.CatalogBrands.Where(brand => brand.Id == brandId).ExecuteDeleteAsync(CancellationToken.None);
+            catalogDb.ChangeTracker.Clear();
+            await catalogDb.CatalogBrands.Where(brand => brand.Id == brandId).ExecuteDeleteAsync(CancellationToken.None);
         }
     }
 
@@ -87,11 +92,13 @@ public class DisplayItemTest(IntegrationTestWebApplicationFactory<Program> facto
     {
         using var client = factory.CreateClient();
         using var scope = factory.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<DresscaDbContext>();
+        var catalogDb = scope.ServiceProvider.GetRequiredService<CatalogManagementDbContext>();
+        var shoppingDb = scope.ServiceProvider.GetRequiredService<ShoppingDbContext>();
         var cancellationToken = TestContext.Current.CancellationToken;
-        var (displayId, _, brandId) = await AddItemsAsync(db, cancellationToken);
-        var catalogId = await db.DisplayItems.Where(item => item.Id == displayId).Select(item => item.CatalogItemId).SingleAsync(cancellationToken);
-        db.ChangeTracker.Clear();
+        var (displayId, _, brandId) = await AddItemsAsync(catalogDb, shoppingDb, cancellationToken);
+        var catalogId = await shoppingDb.DisplayItems.Where(item => item.Id == displayId).Select(item => item.CatalogItemId).SingleAsync(cancellationToken);
+        catalogDb.ChangeTracker.Clear();
+        shoppingDb.ChangeTracker.Clear();
         var shopping = scope.ServiceProvider.GetRequiredService<ShoppingApplicationService>();
         var buyerId = Guid.CreateVersion7().ToString();
         try
@@ -100,7 +107,7 @@ public class DisplayItemTest(IntegrationTestWebApplicationFactory<Program> facto
             await shopping.AddItemToBasketAsync(buyerId, displayId, 2, cancellationToken);
 
             // カタログの更新後も、かごに追加した時点の単価を注文に使用する。
-            await db.CatalogItems.Where(item => item.Id == catalogId).ExecuteUpdateAsync(
+            await catalogDb.CatalogItems.Where(item => item.Id == catalogId).ExecuteUpdateAsync(
                 setters => setters.SetProperty(item => item.Name, "更新後の商品名").SetProperty(item => item.Price, 2000m), cancellationToken);
             var repository = scope.ServiceProvider.GetRequiredService<IDisplayItemRepository>();
             var updated = Assert.Single(await repository.FindAsync(item => item.Id == displayId, cancellationToken));
@@ -114,11 +121,11 @@ public class DisplayItemTest(IntegrationTestWebApplicationFactory<Program> facto
             Assert.Equal(2, orderItem.Assets.Count);
 
             await shopping.AddItemToBasketAsync(buyerId, displayId, 1, cancellationToken);
-            db.ChangeTracker.Clear();
+            catalogDb.ChangeTracker.Clear();
             var catalogRepository = scope.ServiceProvider.GetRequiredService<ICatalogRepository>();
             var catalog = (await catalogRepository.GetAsync(catalogId, cancellationToken))!;
             var rowVersion = catalog.RowVersion.ToArray();
-            db.ChangeTracker.Clear();
+            catalogDb.ChangeTracker.Clear();
             await catalogRepository.RemoveAsync(catalogId, rowVersion, cancellationToken);
             await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() => catalogRepository.RemoveAsync(catalogId, rowVersion, cancellationToken));
 
@@ -134,7 +141,7 @@ public class DisplayItemTest(IntegrationTestWebApplicationFactory<Program> facto
             await shopping.RemoveItemFromBasketAsync(buyerId, displayId, cancellationToken);
             Assert.Empty((await shopping.GetBasketItemsAsync(buyerId, cancellationToken)).BasketResult.Items);
 
-            db.ChangeTracker.Clear();
+            shoppingDb.ChangeTracker.Clear();
             var persisted = await scope.ServiceProvider.GetRequiredService<OrderApplicationService>().GetOrderAsync(order.Id, buyerId, cancellationToken);
             var persistedItem = Assert.Single(persisted.OrderItems);
             Assert.Equal("更新後の商品名", persistedItem.ItemOrdered.ProductName);
@@ -143,32 +150,38 @@ public class DisplayItemTest(IntegrationTestWebApplicationFactory<Program> facto
         }
         finally
         {
-            db.ChangeTracker.Clear();
-            await db.Baskets.Where(basket => basket.BuyerId == buyerId).ExecuteDeleteAsync(CancellationToken.None);
-            await db.Orders.Where(order => order.BuyerId == buyerId).ExecuteDeleteAsync(CancellationToken.None);
-            await db.CatalogBrands.Where(brand => brand.Id == brandId).ExecuteDeleteAsync(CancellationToken.None);
+            catalogDb.ChangeTracker.Clear();
+            shoppingDb.ChangeTracker.Clear();
+            await shoppingDb.Baskets.Where(basket => basket.BuyerId == buyerId).ExecuteDeleteAsync(CancellationToken.None);
+            await shoppingDb.Orders.Where(order => order.BuyerId == buyerId).ExecuteDeleteAsync(CancellationToken.None);
+            await catalogDb.CatalogBrands.Where(brand => brand.Id == brandId).ExecuteDeleteAsync(CancellationToken.None);
         }
     }
 
-    private static async Task<(Guid FirstId, Guid SecondId, Guid BrandId)> AddItemsAsync(DresscaDbContext db, CancellationToken cancellationToken)
+    private static async Task<(Guid FirstId, Guid SecondId, Guid BrandId)> AddItemsAsync(
+        CatalogManagementDbContext catalogDb,
+        ShoppingDbContext shoppingDb,
+        CancellationToken cancellationToken)
     {
         var brandId = Guid.CreateVersion7();
-        db.CatalogBrands.Add(new CatalogBrand { Id = brandId, Name = "検証用ブランド" });
+        catalogDb.CatalogBrands.Add(new CatalogBrand { Id = brandId, Name = "検証用ブランド" });
         var catalogs = Enumerable.Range(0, 3).Select(index => new CatalogItem
         {
             Id = Guid.CreateVersion7(), Name = $"商品{index}", Description = "説明", ProductCode = $"TEST{index}",
-            Price = 1000m, CatalogBrandId = brandId, CatalogCategoryId = DresscaSeedIds.Category1,
+            Price = 1000m, CatalogBrandId = brandId, CatalogCategoryId = CatalogManagementSeedIds.Category1,
         }).ToArray();
-        db.CatalogItems.AddRange(catalogs);
-        var firstId = Guid.CreateVersion7();
-        var secondId = Guid.CreateVersion7();
-        db.DisplayItems.AddRange(
-            new DisplayItemEntity { Id = firstId, CatalogItemId = catalogs[0].Id },
-            new DisplayItemEntity { Id = secondId, CatalogItemId = catalogs[1].Id });
-        db.CatalogItemAssets.AddRange(
+        catalogDb.CatalogItems.AddRange(catalogs);
+        catalogDb.CatalogItemAssets.AddRange(
             new CatalogItemAsset { Id = Guid.CreateVersion7(), CatalogItemId = catalogs[0].Id, AssetCode = "image1" },
             new CatalogItemAsset { Id = Guid.CreateVersion7(), CatalogItemId = catalogs[0].Id, AssetCode = "image2" });
-        await db.SaveChangesAsync(cancellationToken);
+        await catalogDb.SaveChangesAsync(cancellationToken);
+
+        var firstId = Guid.CreateVersion7();
+        var secondId = Guid.CreateVersion7();
+        shoppingDb.DisplayItems.AddRange(
+            new DisplayItemEntity { Id = firstId, CatalogItemId = catalogs[0].Id },
+            new DisplayItemEntity { Id = secondId, CatalogItemId = catalogs[1].Id });
+        await shoppingDb.SaveChangesAsync(cancellationToken);
         return (FirstId: firstId, SecondId: secondId, BrandId: brandId);
     }
 }

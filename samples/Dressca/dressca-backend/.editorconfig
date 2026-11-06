@@ -20,6 +20,12 @@ indent_size = 2
 indent_size = 4
 insert_final_newline = true
 charset = utf-8-bom
+
+# PowerShell script files
+# Windows PowerShell 5.1 は BOM のない UTF-8 を正しく読み込めないため、BOM を付けます。
+[*.ps1]
+charset = utf-8-bom
+
 ###############################
 # .NET Coding Conventions     #
 ###############################

@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <Content Include="appsettings.IntegrationTest.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="appsettings.LocalIntegrationTest.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

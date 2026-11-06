@@ -1,6 +1,6 @@
-﻿using Dressca.ApplicationCore.Baskets;
-using Dressca.ApplicationCore.DisplayItems;
-using Dressca.ApplicationCore.Ordering;
+﻿using Dressca.Shopping.ApplicationCore.Baskets;
+using Dressca.Shopping.ApplicationCore.DisplayItems;
+using Dressca.Shopping.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Dto.Baskets;
 using Dressca.Web.Consumer.Dto.DisplayItem;

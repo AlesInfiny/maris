@@ -1,5 +1,5 @@
-﻿using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Catalog;
+﻿using Dressca.CatalogManagement.ApplicationCore;
+using Dressca.CatalogManagement.ApplicationCore.ApplicationServices;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Dto.CatalogBrands;
 using Microsoft.AspNetCore.Authorization;

@@ -1,0 +1,20 @@
+﻿using Dressca.Shopping.Resources;
+using Maris.Core;
+
+namespace Dressca.Shopping.ApplicationCore.Ordering;
+
+/// <summary>
+///  注文のチェックアウト処理開始時に買い物かごが存在しないことを表す業務例外クラスです。
+/// </summary>
+public class NullBasketOnCheckoutException : BusinessException
+{
+    private const string ExceptionId = "basketIsNullOnCheckout";
+
+    /// <summary>
+    ///  <see cref="NullBasketOnCheckoutException"/> クラスの新しいインスタンスを初期化します。
+    /// </summary>
+    public NullBasketOnCheckoutException()
+        : base(new BusinessError(ExceptionId, new ErrorMessage(Messages.BasketIsNullOnCheckout)))
+    {
+    }
+}

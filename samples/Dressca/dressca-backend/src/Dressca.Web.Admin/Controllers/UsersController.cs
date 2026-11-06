@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Authorization;
+﻿using Dressca.Authorization;
 using Dressca.Web.Admin.Dto.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

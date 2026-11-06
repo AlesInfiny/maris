@@ -1,0 +1,67 @@
+﻿<#
+.SYNOPSIS
+  Dressca バックエンドの全コンテキストのマイグレーションを、依存関係の順にデータベースへ適用します。
+
+.DESCRIPTION
+  各コンテキストのプロジェクトをビルドしてから dotnet ef database update を実行します。
+  接続文字列は、指定した appsettings ファイルの ConnectionStrings セクションから
+  "<コンテキスト名>DbContext" の名前で取得します。
+  実行には dotnet-ef ツールが必要です。
+
+.PARAMETER AppSettingsPath
+  接続文字列を定義した appsettings ファイルのパス。
+  省略した場合は、結合テスト専用のローカルデータベースを定義したファイルを使用します。
+
+.PARAMETER ConnectionString
+  全コンテキストで共通に使用する接続文字列。指定した場合は AppSettingsPath を読み込みません。
+
+.PARAMETER Context
+  マイグレーションを適用するコンテキスト。省略した場合は全コンテキストに適用します。
+  指定した順序にかかわらず、依存関係の順に適用します。
+
+.PARAMETER Configuration
+  ビルド構成。
+
+.EXAMPLE
+  ./scripts/Update-Database.ps1
+
+.EXAMPLE
+  ./scripts/Update-Database.ps1 -ConnectionString 'Data Source=(localdb)\mssqllocaldb;Database=Dressca.Eshop;Integrated Security=True'
+
+.EXAMPLE
+  ./scripts/Update-Database.ps1 -AppSettingsPath ./tests/Dressca.Web.Admin.IntegrationTest/appsettings.LocalIntegrationTest.json -Context AssetsManagement, CatalogManagement
+#>
+[CmdletBinding()]
+param(
+    [string] $AppSettingsPath = (Join-Path $PSScriptRoot '../tests/Dressca.IntegrationTest/appsettings.LocalIntegrationTest.json'),
+    [string] $ConnectionString,
+    [ValidateSet('AssetsManagement', 'CatalogManagement', 'Shopping')]
+    [string[]] $Context = @('AssetsManagement', 'CatalogManagement', 'Shopping'),
+    [string] $Configuration = 'Debug'
+)
+
+$ErrorActionPreference = 'Stop'
+
+# 買い物コンテキストの DisplayItems テーブルがカタログ管理コンテキストの CatalogItems テーブルを参照するため、
+# アセット管理、カタログ管理、買い物の順に適用します。
+$orderedContexts = @('AssetsManagement', 'CatalogManagement', 'Shopping')
+$targetContexts = $orderedContexts | Where-Object { $Context -contains $_ }
+
+if (-not $ConnectionString) {
+    $settings = Get-Content -Raw -Path $AppSettingsPath | ConvertFrom-Json
+}
+
+foreach ($target in $targetContexts) {
+    $dbContextName = "${target}DbContext"
+    $contextConnectionString = if ($ConnectionString) { $ConnectionString } else { $settings.ConnectionStrings.$dbContextName }
+    if ([string]::IsNullOrWhiteSpace($contextConnectionString)) {
+        throw "$AppSettingsPath に接続文字列 $dbContextName が定義されていません。"
+    }
+
+    $project = Join-Path $PSScriptRoot "../src/Dressca.$target"
+    Write-Host "$dbContextName のマイグレーションを適用します。"
+    dotnet ef database update --project $project --context $dbContextName --configuration $Configuration --connection $contextConnectionString
+    if ($LASTEXITCODE -ne 0) {
+        throw "$dbContextName のマイグレーションの適用に失敗しました。"
+    }
+}

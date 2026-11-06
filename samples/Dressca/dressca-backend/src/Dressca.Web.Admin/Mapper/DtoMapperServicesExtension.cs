@@ -1,4 +1,4 @@
-﻿using Dressca.ApplicationCore.Catalog;
+﻿using Dressca.CatalogManagement.ApplicationCore;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Admin.Dto.CatalogBrands;
 using Dressca.Web.Admin.Dto.CatalogCategories;

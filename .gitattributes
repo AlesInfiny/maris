@@ -45,3 +45,5 @@ documents/** linguist-documentation
 *.ico binary
 *.png binary
 *.zip binary
+# 拡張子のない画像ファイル
+samples/Dressca/dressca-backend/src/Dressca.AssetsManagement/Images/* binary

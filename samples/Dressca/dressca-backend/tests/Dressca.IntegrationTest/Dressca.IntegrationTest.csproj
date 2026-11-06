@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <Content Include="appsettings.IntegrationTest.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="appsettings.LocalIntegrationTest.json" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
@@ -18,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Dressca.CatalogManagement\Dressca.CatalogManagement.csproj" />
     <ProjectReference Include="..\..\src\Dressca.Web.Consumer\Dressca.Web.Consumer.csproj" />
   </ItemGroup>
 

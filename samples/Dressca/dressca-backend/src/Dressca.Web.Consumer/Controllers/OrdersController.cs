@@ -1,5 +1,5 @@
-﻿using Dressca.ApplicationCore.ApplicationService;
-using Dressca.ApplicationCore.Ordering;
+﻿using Dressca.Shopping.ApplicationCore.ApplicationServices;
+using Dressca.Shopping.ApplicationCore.Ordering;
 using Dressca.SystemCommon.Mapper;
 using Dressca.Web.Consumer.Baskets;
 using Dressca.Web.Consumer.Dto.Ordering;
