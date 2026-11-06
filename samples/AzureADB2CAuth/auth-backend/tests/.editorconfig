@@ -1,4 +1,6 @@
 [*.cs]
 # Wrapping preferences
 dotnet_diagnostic.SA0001.severity=none
+# テストメソッド名に日本語を使用するため、ラテン文字以外を含む識別子を許可する
+dotnet_diagnostic.SA1317.severity=none
 dotnet_diagnostic.SA1600.severity=none
