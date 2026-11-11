@@ -47,7 +47,10 @@ public class CommandAttribute : VerbAttribute
     /// </exception>
     public Type CommandType
     {
-        get => this.commandType;
+        get
+        {
+            return this.commandType;
+        }
 
         [MemberNotNull(nameof(commandType))]
         init

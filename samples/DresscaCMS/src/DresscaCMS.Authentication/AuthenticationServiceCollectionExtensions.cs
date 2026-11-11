@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using DresscaCMS.Authentication.Infrastructures;
+﻿using DresscaCMS.Authentication.Infrastructures;
 using DresscaCMS.Authentication.Infrastructures.Entities;
 using DresscaCMS.Authentication.Resources;
 using Microsoft.AspNetCore.Identity;
@@ -13,10 +12,6 @@ namespace DresscaCMS.Authentication;
 /// <summary>
 ///  認証に関連するサービスを追加する拡張メソッドを提供します。
 /// </summary>
-[SuppressMessage(
-    category: "StyleCop.CSharp.ReadabilityRules",
-    checkId: "SA1101:PrefixLocalCallsWithThis",
-    Justification = "StyleCop bug. see: https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3954")]
 public static class AuthenticationServiceCollectionExtensions
 {
     private const string ConnectionStringName = nameof(AuthenticationDbContext);

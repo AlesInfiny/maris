@@ -30,7 +30,10 @@ public class CatalogBrand
     /// <exception cref="ArgumentException">null または空の文字列を設定できません。</exception>
     public required string Name
     {
-        get => this.name;
+        get
+        {
+            return this.name;
+        }
 
         [MemberNotNull(nameof(name))]
         init

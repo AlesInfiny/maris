@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
+﻿using DresscaCMS.Announcement.ApplicationCore.ApplicationServices;
 using DresscaCMS.Announcement.ApplicationCore.RepositoryInterfaces;
 using DresscaCMS.Announcement.Infrastructures;
 using DresscaCMS.Announcement.Resources;
@@ -13,17 +12,12 @@ namespace DresscaCMS.Announcement;
 /// <summary>
 ///  お知らせメッセージに関連するサービスを追加する拡張メソッドを提供します。
 /// </summary>
-[SuppressMessage(
-    category: "StyleCop.CSharp.ReadabilityRules",
-    checkId: "SA1101:PrefixLocalCallsWithThis",
-    Justification = "StyleCop bug. see: https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3954")]
 public static class AnnouncementServiceCollectionExtensions
 {
     private const string ConnectionStringName = nameof(AnnouncementDbContext);
 
     extension(IServiceCollection services)
     {
-
         /// <summary>
         ///  お知らせメッセージに関連するサービス一式を構成します。
         /// </summary>

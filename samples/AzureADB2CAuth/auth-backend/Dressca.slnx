@@ -12,6 +12,7 @@
     <Project Path="src/Dressca.Web/Dressca.Web.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <File Path="tests/.editorconfig" />
     <File Path="tests/Directory.Build.props" />
     <Project Path="tests/Dressca.IntegrationTest/Dressca.IntegrationTest.csproj" />
   </Folder>

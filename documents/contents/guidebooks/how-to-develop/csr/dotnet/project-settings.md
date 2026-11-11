@@ -231,6 +231,8 @@ tests フォルダーに配置するテストコード専用の設定は、原�
 # Wrapping preferences
 dotnet_diagnostic.SA0001.severity=none
 dotnet_diagnostic.SA1123.severity=none
+# テストメソッド名に日本語を使用するため、ラテン文字以外を含む識別子を許可する
+dotnet_diagnostic.SA1317.severity=none
 dotnet_diagnostic.SA1600.severity=none
 ```
 
@@ -242,6 +244,7 @@ dotnet_diagnostic.SA1600.severity=none
     | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
     | [SA0001 :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md){ target=_blank } | テストプロジェクトの XML ドキュメントは不要なため。                    |
     | [SA1123 :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1123.md){ target=_blank } | テストコード内で `#!csharp #region` を使ったコード整理を多用するため。 |
+    | [SA1317 :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1317.md){ target=_blank } | テストメソッド名に日本語を使用するため。                               |
     | [SA1600 :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md){ target=_blank } | テストプロジェクトの XML ドキュメントは不要なため。                    |
 
 !!! tip "自動生成コードの静的コード解析"
@@ -279,8 +282,10 @@ Directory.Package.props ファイルで StyleCop Analyzers のグローバルパ
 
 !!! warning "StyleCop Analyzers のバージョンに注意"
 
-    .NET 6 以降利用できるようになった[ファイルスコープ名前空間 :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/keywords/namespace){ target=_blank }を利用する場合、 StyleCop Analyzers 1.2.0 以降を使用してください。
-    1.1.118 では正常に解析が行われません。
+    StyleCop Analyzers は、バージョンごとに解析できる C# の言語バージョンが異なります。
+    C# 9.0 以降を利用する場合、 StyleCop Analyzers 1.3.0-beta 以降を使用してください。
+    1.2.0-beta 以前のバージョンでは、 C# 9.0 以降で追加された構文が正常に解析されません。
+    C# の言語バージョンと StyleCop Analyzers のバージョンの対応は、 [StyleCop Analyzers の README :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers#c-language-versions){ target=_blank }を参照してください。
 
 #### stylecop.json ファイルの配置 {#stylecop-json-placement}
 
@@ -290,7 +295,7 @@ stylecop.json ファイルはソリューション内にひとつだけ作成し
 stylecop.json の設定方法については [公式ドキュメント :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/Configuration.md){ target=_blank }を参照してください。
 
 ??? example "stylecop.json の設定例"
-    StyleCop Analyzers 1.2.0-beta.435 に対応した stylecop.json の設定例を以下に示します。
+    StyleCop Analyzers 1.3.171-beta に対応した stylecop.json の設定例を以下に示します。
     特にこだわりがなければ、コピーしてそのまま利用可能です。
 
     ```json title="stylecop.json"

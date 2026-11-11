@@ -29,7 +29,10 @@ public class CatalogItemAsset
     /// <exception cref="ArgumentException">アセットコードが <see langword="null"/> または空の文字列です。</exception>
     public required string AssetCode
     {
-        get => this.assetCode;
+        get
+        {
+            return this.assetCode;
+        }
 
         [MemberNotNull(nameof(assetCode))]
         init
