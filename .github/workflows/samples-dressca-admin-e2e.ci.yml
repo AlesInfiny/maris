@@ -46,6 +46,10 @@ jobs:
         with:
           dotnet-version: '10.*'
 
+      - name: NuGet パッケージの復元
+        working-directory: samples/Dressca/dressca-backend
+        run: dotnet restore Dressca.Web.Admin.slnf
+
       - name: node パッケージのインストール
         run: npm ci --ignore-scripts
 
