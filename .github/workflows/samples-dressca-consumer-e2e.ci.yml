@@ -1,0 +1,133 @@
+---
+# cspell:ignore NOLOGO OPTOUT ENOENT
+
+name: dressca-consumer E2E
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'samples/Dressca/dressca-frontend/*'
+      - 'samples/Dressca/dressca-frontend/consumer/**'
+      - 'samples/Dressca/dressca-backend/**'
+      - '.github/workflows/samples-dressca-consumer-e2e.ci.yml'
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: samples/Dressca/dressca-frontend
+
+jobs:
+  e2e:
+    name: Dressca Consumer の E2E テスト
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      TEST_ENVIRONMENT: IntegrationTest
+      SKIP_SPA_NODE_RESTORE: true
+      MSSQL_SA_PASSWORD: P@ssw0rd
+      PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/consumer-e2e-results.json
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+      - name: Use Node.js LTS
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f  # v6.3.0
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: samples/Dressca/dressca-frontend/package-lock.json
+
+      - name: .NET SDK のセットアップ
+        uses: actions/setup-dotnet@c2fa09f4bde5ebb9d1777cf28262a3eb3db3ced7  # v5.2.0
+        with:
+          dotnet-version: '10.*'
+
+      - name: node パッケージのインストール
+        run: npm ci --ignore-scripts
+
+      - name: Playwright のブラウザーインストール
+        run: npm run test:e2e:prepare:consumer
+
+      - name: SQL ServerのDockerイメージをプル
+        run: sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: SQL Serverのコンテナを起動
+        run: |
+          sudo docker run -e "ACCEPT_EULA=Y" \
+          -e "MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}" \
+          -p 1433:1433 --name sql1 \
+          --hostname sql1 \
+          -d mcr.microsoft.com/mssql/server:2022-latest
+
+      - name: SQL Serverの起動待機
+        timeout-minutes: 2
+        run: |
+          until sudo docker exec sql1 /opt/mssql-tools18/bin/sqlcmd \
+            -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -Q 'SELECT 1' > /dev/null 2>&1; do
+            echo 'SQL Server の起動を待機しています...'
+            sleep 2
+          done
+
+      - name: データベース接続文字列を取得(結合テスト用)
+        working-directory: samples/Dressca/dressca-backend
+        env:
+          APPSETTINGS_FILEPATH: tests/Dressca.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json
+        run: |
+          connectionString=$(jq -r '.ConnectionStrings.DresscaDbContext' "$APPSETTINGS_FILEPATH")
+          echo "ConnectionStrings__DresscaDbContext=${connectionString}" >> "$GITHUB_ENV"
+
+      - name: EF Core ツールのインストール
+        working-directory: samples/Dressca/dressca-backend
+        run: dotnet tool install --global dotnet-ef --version 10.*
+
+      - name: マイグレーション適用
+        working-directory: samples/Dressca/dressca-backend/src/Dressca.EfInfrastructure
+        run: dotnet ef database update --connection "$ConnectionStrings__DresscaDbContext"
+
+      - name: HTTPS 開発証明書の作成
+        run: dotnet dev-certs https
+
+      - id: run-e2e
+        name: E2Eテストの実行
+        run: npm run test:e2e:consumer
+
+      - name: E2Eテスト結果のGitHub Summary出力
+        if: always()
+        env:
+          E2E_STATUS: ${{ steps.run-e2e.outcome }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFile, readFile } from 'node:fs/promises'
+
+          const reportPath = process.env.PLAYWRIGHT_JSON_OUTPUT_NAME
+          let summary = `## Playwright E2E テスト結果\n\n実行結果: **${process.env.E2E_STATUS}**\n\n`
+
+          try {
+            const { stats } = JSON.parse(await readFile(reportPath, 'utf8'))
+            summary += '| 結果 | 件数 |\n'
+            summary += '| --- | ---: |\n'
+            summary += `| 成功 | ${stats.expected} |\n`
+            summary += `| 失敗 | ${stats.unexpected} |\n`
+            summary += `| flaky | ${stats.flaky} |\n`
+            summary += `| skip | ${stats.skipped} |\n`
+          } catch (error) {
+            if (error.code !== 'ENOENT') throw error
+            summary += 'JSONレポートがありません。テスト実行ログを確認してください。\n'
+          }
+
+          await appendFile(process.env.GITHUB_STEP_SUMMARY, summary)
+          NODE
+
+      - name: E2Eテスト成果物のアップロード
+        if: failure()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
+        with:
+          name: consumer-e2e-results
+          path: |
+            samples/Dressca/dressca-frontend/consumer/test-results/
+            ${{ runner.temp }}/consumer-e2e-results.json
+          if-no-files-found: ignore

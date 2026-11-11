@@ -22,8 +22,11 @@
     "mock:admin": "npm run mock -w admin",
     "test:coverage:consumer": "npm run coverage -w consumer",
     "test:coverage:admin": "npm run coverage -w admin",
+    "test:e2e:prepare:consumer": "npm run prepare -w consumer",
+    "test:e2e:prepare:admin": "npm run prepare -w admin",
     "test:e2e:consumer": "npm run test:e2e -w consumer",
-    "test:e2e:admin": "npm run test:e2e -w admin"
+    "test:e2e:admin": "npm run test:e2e -w admin",
+    "test:e2e": "run-s test:e2e:consumer test:e2e:admin"
   },
   "workspaces": [
     "consumer",
