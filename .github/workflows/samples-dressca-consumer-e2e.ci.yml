@@ -30,7 +30,7 @@ jobs:
       TEST_ENVIRONMENT: IntegrationTest
       SKIP_SPA_NODE_RESTORE: true
       MSSQL_SA_PASSWORD: P@ssw0rd
-      PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ runner.temp }}/consumer-e2e-results.json
+      PLAYWRIGHT_JSON_OUTPUT_NAME: ${{ github.workspace }}/consumer-e2e-results.json
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
@@ -129,5 +129,5 @@ jobs:
           name: consumer-e2e-results
           path: |
             samples/Dressca/dressca-frontend/consumer/test-results/
-            ${{ runner.temp }}/consumer-e2e-results.json
+            ${{ env.PLAYWRIGHT_JSON_OUTPUT_NAME }}
           if-no-files-found: ignore
