@@ -14,6 +14,7 @@ on:
       - 'samples/Dressca/dressca-frontend/consumer/**'
       - 'samples/Dressca/dressca-backend/**'
       - '.github/workflows/samples-dressca-consumer-e2e.ci.yml'
+      - '.github/workflows/playwright-summary/**'
   workflow_dispatch:
 
 defaults:
