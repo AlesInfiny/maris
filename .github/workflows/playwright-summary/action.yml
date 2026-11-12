@@ -57,7 +57,19 @@ runs:
                     ((.tests[-1].results[-1].error.message // "(エラー詳細なし)") | gsub("\u001b\\[[0-9;]*m"; "")),
                     "```"
                   )
-                end)
+                end),
+
+            # ビルドエラーや webServer の起動失敗などのグローバルエラーを出力します。
+            (.errors // [] | if length == 0 then empty else
+                "",
+                "### :rotating_light: テスト実行時のエラー",
+                (.[] |
+                  "",
+                  "```text",
+                  ((.message // "(エラー詳細なし)") | gsub("\u001b\\[[0-9;]*m"; "")),
+                  "```"
+                )
+              end)
           ' "$REPORT_JSON" ||
             echo ":warning: テスト結果の解析に失敗しました。JSONレポートの有無とテスト実行ログを確認してください。"
         } >> "$GITHUB_STEP_SUMMARY"
