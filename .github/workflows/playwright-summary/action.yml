@@ -1,8 +1,6 @@
 ---
-# cspell:ignore pipefail esac gsub
-
 name: playwright-summary
-description: Playwright の JSON レポートを jq で加工し、GitHub Step Summary にテスト結果を出力します。
+description: Playwright の JSON レポートを解析し、GitHub Step Summary にテスト結果を出力します。
 
 inputs:
   report_json:
@@ -15,61 +13,64 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: jq で Step Summary を生成
-      shell: bash
-      run: |
-        set -euo pipefail # エラーが出たら即終了、未定義変数の参照禁止、パイプライン中のエラー検知を設定します。
+    - name: Step Summary の生成
+      uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
+      env:
+        REPORT_JSON: ${{ inputs.report_json }}
+        E2E_STATUS: ${{ inputs.e2e_status }}
+      with:
+        script: |
+          const fs = require('node:fs')
 
-        REPORT_JSON="${{ inputs.report_json }}"
-        E2E_STATUS="${{ inputs.e2e_status }}"
+          const stripAnsi = (text) => text.replace(/\u001b\[[0-9;]*m/g, '')
+          const statusIcon = { success: '✅', failure: '❌' }[process.env.E2E_STATUS] ?? '❔'
 
-        # 実行結果に応じたアイコンを選択します。
-        case "$E2E_STATUS" in
-          success) STATUS_ICON=":white_check_mark:" ;;
-          failure) STATUS_ICON=":x:" ;;
-          *)       STATUS_ICON=":grey_question:" ;;
-        esac
+          core.summary
+            .addHeading('Playwright E2E テスト結果 🎭', 2)
+            .addRaw(`実行結果: ${statusIcon} **${process.env.E2E_STATUS}**`, true)
 
-        {
-          echo "## Playwright E2E テスト結果 :performing_arts:"
-          echo ""
-          echo "実行結果: $STATUS_ICON **${E2E_STATUS}**"
-          echo ""
-          jq -r '
-            "| 結果 | 件数 |",
-            "| --- | ---: |",
-            "| :white_check_mark: 成功 | \(.stats.expected) |",
-            "| :x: 失敗 | \(.stats.unexpected) |",
-            "| :repeat: flaky | \(.stats.flaky) |",
-            "| :fast_forward: skip | \(.stats.skipped) |",
+          try {
+            // 失敗した spec を収集します。
+            const failedSpecs = []
+            const report = JSON.parse(
+              fs.readFileSync(process.env.REPORT_JSON, 'utf8'),
+              (key, value) => {
+                if (key === 'specs') failedSpecs.push(...value.filter((spec) => !spec.ok))
+                return value
+              },
+            )
 
-            # ネストした suite も含めて、失敗した spec を再帰的に抽出します。
-            ([.. | objects | .specs? // empty | .[] | select(.ok | not)]
-              | if length == 0 then empty else
-                  "",
-                  "### :boom: 失敗したテスト",
-                  (.[] |
-                    "",
-                    "#### \(.title) :point_right: `\(.file):\(.line)`",
-                    "",
-                    "```text",
-                    # 最終リトライのエラーを採用し、ANSI エスケープコードを除去します。
-                    ((.tests[-1].results[-1].error.message // "(エラー詳細なし)") | gsub("\u001b\\[[0-9;]*m"; "")),
-                    "```"
-                  )
-                end),
+            core.summary.addTable([
+              [{ data: '結果', header: true }, { data: '件数', header: true }],
+              ['✅ 成功', String(report.stats.expected)],
+              ['❌ 失敗', String(report.stats.unexpected)],
+              ['🔁 flaky', String(report.stats.flaky)],
+              ['⏩ skip', String(report.stats.skipped)],
+            ])
 
-            # ビルドエラーや webServer の起動失敗などのグローバルエラーを出力します。
-            (.errors // [] | if length == 0 then empty else
-                "",
-                "### :rotating_light: テスト実行時のエラー",
-                (.[] |
-                  "",
-                  "```text",
-                  ((.message // "(エラー詳細なし)") | gsub("\u001b\\[[0-9;]*m"; "")),
-                  "```"
-                )
-              end)
-          ' "$REPORT_JSON" ||
-            echo ":warning: テスト結果の解析に失敗しました。JSONレポートの有無とテスト実行ログを確認してください。"
-        } >> "$GITHUB_STEP_SUMMARY"
+            if (failedSpecs.length > 0) core.summary.addHeading('💥 失敗したテスト', 3)
+            for (const spec of failedSpecs) {
+              // 最終リトライのエラーを採用します。
+              const message = spec.tests.at(-1)?.results.at(-1)?.error?.message ?? '(エラー詳細なし)'
+              core.summary
+                .addHeading(`${spec.title} 👉 ${spec.file}:${spec.line}`, 4)
+                .addCodeBlock(stripAnsi(message))
+            }
+
+            // ビルドエラーや webServer の起動失敗などのグローバルエラーを出力します。
+            const errors = report.errors ?? []
+            if (errors.length > 0) core.summary.addHeading('🚨 テスト実行時のエラー', 3)
+            for (const error of errors) {
+              core.summary.addCodeBlock(stripAnsi(error.message ?? '(エラー詳細なし)'))
+            }
+          } catch (error) {
+            // サマリー生成の失敗でジョブ全体を失敗させないため、エラー内容をサマリーに出力します。
+            core.summary.addRaw(
+              error.code === 'ENOENT'
+                ? '⚠️ JSONレポートがありません。テスト実行ログを確認してください。'
+                : `⚠️ テスト結果の解析に失敗しました: ${error.message}`,
+              true,
+            )
+          }
+
+          await core.summary.write()
