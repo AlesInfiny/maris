@@ -76,7 +76,7 @@ jobs:
             sleep 2
           done
 
-      - name: データベース接続文字列を取得(結合テスト用)
+      - name: データベース接続文字列を取得
         working-directory: samples/Dressca/dressca-backend
         env:
           APPSETTINGS_FILEPATH: tests/Dressca.Web.Admin.IntegrationTest/appsettings.${{ env.TEST_ENVIRONMENT }}.json

@@ -1,3 +1,6 @@
+---
+# cspell:ignore pipefail esac gsub
+
 name: playwright-summary
 description: Playwright の JSON レポートを jq で加工し、GitHub Step Summary にテスト結果を出力します。
 
