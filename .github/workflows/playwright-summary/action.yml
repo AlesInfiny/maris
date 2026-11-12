@@ -1,0 +1,60 @@
+name: playwright-summary
+description: Playwright の JSON レポートを jq で加工し、GitHub Step Summary にテスト結果を出力します。
+
+inputs:
+  report_json:
+    description: "入力となる Playwright の JSON レポートのパス"
+    required: true
+  e2e_status:
+    description: "E2E テスト実行ステップの outcome"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: jq で Step Summary を生成
+      shell: bash
+      run: |
+        set -euo pipefail # エラーが出たら即終了、未定義変数の参照禁止、パイプライン中のエラー検知を設定します。
+
+        REPORT_JSON="${{ inputs.report_json }}"
+        E2E_STATUS="${{ inputs.e2e_status }}"
+
+        # 実行結果に応じたアイコンを選択します。
+        case "$E2E_STATUS" in
+          success) STATUS_ICON=":white_check_mark:" ;;
+          failure) STATUS_ICON=":x:" ;;
+          *)       STATUS_ICON=":grey_question:" ;;
+        esac
+
+        {
+          echo "## Playwright E2E テスト結果 :performing_arts:"
+          echo ""
+          echo "実行結果: $STATUS_ICON **${E2E_STATUS}**"
+          echo ""
+          jq -r '
+            "| 結果 | 件数 |",
+            "| --- | ---: |",
+            "| :white_check_mark: 成功 | \(.stats.expected) |",
+            "| :x: 失敗 | \(.stats.unexpected) |",
+            "| :repeat: flaky | \(.stats.flaky) |",
+            "| :fast_forward: skip | \(.stats.skipped) |",
+
+            # ネストした suite も含めて、失敗した spec を再帰的に抽出します。
+            ([.. | objects | .specs? // empty | .[] | select(.ok | not)]
+              | if length == 0 then empty else
+                  "",
+                  "### :boom: 失敗したテスト",
+                  (.[] |
+                    "",
+                    "#### \(.title) :point_right: `\(.file):\(.line)`",
+                    "",
+                    "```text",
+                    # 最終リトライのエラーを採用し、ANSI エスケープコードを除去します。
+                    ((.tests[-1].results[-1].error.message // "(エラー詳細なし)") | gsub("\u001b\\[[0-9;]*m"; "")),
+                    "```"
+                  )
+                end)
+          ' "$REPORT_JSON" ||
+            echo ":warning: テスト結果の解析に失敗しました。JSONレポートの有無とテスト実行ログを確認してください。"
+        } >> "$GITHUB_STEP_SUMMARY"

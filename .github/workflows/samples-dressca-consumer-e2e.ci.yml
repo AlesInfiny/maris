@@ -1,5 +1,5 @@
 ---
-# cspell:ignore NOLOGO OPTOUT ENOENT
+# cspell:ignore NOLOGO OPTOUT
 
 name: dressca-consumer E2E
 
@@ -101,30 +101,10 @@ jobs:
 
       - name: E2Eテスト結果のGitHub Summary出力
         if: always()
-        env:
-          E2E_STATUS: ${{ steps.run-e2e.outcome }}
-        run: |
-          node --input-type=module <<'NODE'
-          import { appendFile, readFile } from 'node:fs/promises'
-
-          const reportPath = process.env.PLAYWRIGHT_JSON_OUTPUT_NAME
-          let summary = `## Playwright E2E テスト結果\n\n実行結果: **${process.env.E2E_STATUS}**\n\n`
-
-          try {
-            const { stats } = JSON.parse(await readFile(reportPath, 'utf8'))
-            summary += '| 結果 | 件数 |\n'
-            summary += '| --- | ---: |\n'
-            summary += `| 成功 | ${stats.expected} |\n`
-            summary += `| 失敗 | ${stats.unexpected} |\n`
-            summary += `| flaky | ${stats.flaky} |\n`
-            summary += `| skip | ${stats.skipped} |\n`
-          } catch (error) {
-            if (error.code !== 'ENOENT') throw error
-            summary += 'JSONレポートがありません。テスト実行ログを確認してください。\n'
-          }
-
-          await appendFile(process.env.GITHUB_STEP_SUMMARY, summary)
-          NODE
+        uses: ./.github/workflows/playwright-summary
+        with:
+          report_json: ${{ env.PLAYWRIGHT_JSON_OUTPUT_NAME }}
+          e2e_status: ${{ steps.run-e2e.outcome }}
 
       - name: E2Eテスト成果物のアップロード
         if: failure()
