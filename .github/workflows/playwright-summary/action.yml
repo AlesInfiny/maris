@@ -27,7 +27,7 @@ runs:
 
           core.summary
             .addHeading('Playwright E2E テスト結果 🎭', 2)
-            .addRaw(`実行結果: ${statusIcon} **${process.env.E2E_STATUS}**`, true)
+            .addRaw(`<p>実行結果: ${statusIcon} <strong>${process.env.E2E_STATUS}</strong></p>`, true)
 
           try {
             // 失敗した spec を収集します。
