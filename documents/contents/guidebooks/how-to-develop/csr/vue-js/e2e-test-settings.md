@@ -148,7 +148,7 @@ Playwright では `playwright.config.ts` での設定内容に応じてテスト
 サンプルアプリケーション Dressca の Consumer アプリでは、以下のように設定します。
 初期設定からの変更点をハイライトで示します。
 
-```ts title="playwright.config.ts" hl_lines="12 16 17 24-27 32-45"
+```ts title="playwright.config.ts" hl_lines="13 17 18 25-28 33-46"
 --8<-- "samples/Dressca/dressca-frontend/consumer/playwright.config.ts:14:61"
 ```
 
