@@ -1,0 +1,78 @@
+---
+name: playwright-summary
+description: Playwright の JSON レポートを解析し、GitHub Step Summary にテスト結果を出力します。
+
+inputs:
+  report_json:
+    description: "入力となる Playwright の JSON レポートのパス"
+    required: true
+  e2e_status:
+    description: "E2E テスト実行ステップの outcome"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Step Summary の生成
+      uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd  # v8.0.0
+      env:
+        REPORT_JSON: ${{ inputs.report_json }}
+        E2E_STATUS: ${{ inputs.e2e_status }}
+      with:
+        script: |
+          const fs = require('node:fs')
+
+          const stripAnsi = (text) => text.replace(/\u001b\[[0-9;]*m/g, '')
+          const escapeHtml = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          const clean = (text) => escapeHtml(stripAnsi(text))
+          const statusIcon = { success: '✅', failure: '❌' }[process.env.E2E_STATUS] ?? '❔'
+
+          core.summary
+            .addHeading('Playwright E2E テスト結果 🎭', 2)
+            .addRaw(`<p>実行結果: ${statusIcon} <strong>${process.env.E2E_STATUS}</strong></p>`, true)
+
+          try {
+            // 失敗した spec を収集します。
+            const failedSpecs = []
+            const report = JSON.parse(
+              fs.readFileSync(process.env.REPORT_JSON, 'utf8'),
+              (key, value) => {
+                if (key === 'specs') failedSpecs.push(...value.filter((spec) => !spec.ok))
+                return value
+              },
+            )
+
+            core.summary.addTable([
+              [{ data: '結果', header: true }, { data: '件数', header: true }],
+              ['✅ 成功', String(report.stats.expected)],
+              ['❌ 失敗', String(report.stats.unexpected)],
+              ['🔁 flaky', String(report.stats.flaky)],
+              ['⏩ skip', String(report.stats.skipped)],
+            ])
+
+            if (failedSpecs.length > 0) core.summary.addHeading('💥 失敗したテスト', 3)
+            for (const spec of failedSpecs) {
+              // 最終リトライのエラーを採用します。
+              const message = spec.tests.at(-1)?.results.at(-1)?.error?.message ?? '(エラー詳細なし)'
+              core.summary
+                .addHeading(`${escapeHtml(spec.title)} 👉 ${spec.file}:${spec.line}`, 4)
+                .addCodeBlock(clean(message))
+            }
+
+            // ビルドエラーや webServer の起動失敗などのグローバルエラーを出力します。
+            const errors = report.errors ?? []
+            if (errors.length > 0) core.summary.addHeading('🚨 テスト実行時のエラー', 3)
+            for (const error of errors) {
+              core.summary.addCodeBlock(clean(error.message ?? '(エラー詳細なし)'))
+            }
+          } catch (error) {
+            // サマリー生成の失敗でジョブ全体を失敗させないため、エラー内容をサマリーに出力します。
+            core.summary.addRaw(
+              error.code === 'ENOENT'
+                ? '⚠️ JSONレポートがありません。テスト実行ログを確認してください。'
+                : `⚠️ テスト結果の解析に失敗しました: ${error.message}`,
+              true,
+            )
+          }
+
+          await core.summary.write()

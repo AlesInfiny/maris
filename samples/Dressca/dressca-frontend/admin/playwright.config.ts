@@ -22,7 +22,8 @@ export default defineConfig({
   /* CI 環境では、テストを並列実行せず、1 ワーカーで実行する。*/
   workers: process.env.CI ? 1 : undefined,
   /* リポーターの種類。 https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  /* 環境変数 PLAYWRIGHT_JSON_OUTPUT_FILE を設定している場合、 outputFile より優先される。 */
+  reporter: process.env.CI ? [['json', { outputFile: 'test-results.json' }], ['github']] : 'html',
   /* 全ての project に適用される共通設定。 https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* `await page.goto('')` などのアクションで使用する ベース URL。 */
