@@ -96,8 +96,8 @@ jobs:
       - name: HTTPS 開発証明書の作成
         run: dotnet dev-certs https
 
-      - id: run-e2e
-        name: E2Eテストの実行
+      - name: E2Eテストの実行
+        id: run-e2e
         run: npm run test:e2e:consumer
 
       - name: E2Eテスト結果のGitHub Summary出力

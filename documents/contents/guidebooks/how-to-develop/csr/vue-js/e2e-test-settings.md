@@ -148,10 +148,12 @@ Playwright では `playwright.config.ts` での設定内容に応じてテスト
 サンプルアプリケーション Dressca の Consumer アプリでは、以下のように設定します。
 初期設定からの変更点をハイライトで示します。
 
-```ts title="playwright.config.ts" hl_lines="16 17 24-27 32-45"
+```ts title="playwright.config.ts" hl_lines="12 16 17 24-27 32-45"
 --8<-- "samples/Dressca/dressca-frontend/consumer/playwright.config.ts:14:61"
 ```
 
+- `reporter`: テスト結果を出力するレポーターを指定します。
+    - ローカルでの実行時は HTML レポーター、 CI 環境では JSON レポーターと github レポーターを指定します。設定可能なレポーターについては [Reporters :material-open-in-new:](https://playwright.dev/docs/test-reporters){ target=_blank } を参照してください。
 - `use.baseURL`: テスト実行時のベース URL を指定します。
 - `use.locale`: テスト実行時のロケールを指定します。
 - `projects`: ブラウザー、デバイスなどの組み合わせを定義し、同じテスト群を異なる設定でテストするための実行設定です。
@@ -231,3 +233,64 @@ To open last HTML report run:
 
   npx playwright show-report
 ```
+
+## CI 環境での実行 {#run-on-ci}
+
+Playwright は GitHub Actions などの CI 環境で実行できます。
+CI 環境のランナーには、ブラウザーやデータベースなどテストに必要な環境が存在しないため、ワークフロー内で準備する必要があります。
+
+サンプルアプリケーション Dressca の Consumer アプリでは、以下の流れで E2E テストを CI 環境で実行しています。
+
+1. Playwright が使用するブラウザーのインストール
+1. データベースの準備
+1. HTTPS 開発証明書の作成
+1. E2E テストの実行
+1. テスト結果の出力
+
+以降の設定内容は GitHub Actions を前提としています。
+
+??? info "CI パイプラインの設定例"
+
+    ```yml title=".github/workflows/samples-dressca-consumer-e2e.ci.yml"
+    --8<-- ".github/workflows/samples-dressca-consumer-e2e.ci.yml:4:120"
+    ```
+
+### ブラウザーのインストール {#ci-install-browser}
+
+CI 環境のランナーには Playwright が使用するブラウザーがインストールされていないため、テストの実行前にインストールします。
+サンプルアプリケーションでは、 `package.json` に以下のスクリプトを定義して実行しています。
+
+```json title="package.json"
+"prepare": "playwright install --with-deps chromium",
+```
+
+### データベースの準備 {#ci-prepare-database}
+
+CI 環境ではローカル開発用のデータベースを使用できないため、ワークフロー内で SQL Server のコンテナを起動し、マイグレーションを適用してテスト用のデータベースを準備します。
+
+[テスト実行時の設定](#test-config-settings) の `webServer` で起動するバックエンドアプリは、既定では開発環境の設定で起動するため、ローカル開発用の接続文字列でデータベースへ接続しようとします。
+そのため、環境変数 `ConnectionStrings__DresscaDbContext` に SQL Server のコンテナを指定して接続先を上書きします。
+.NET の構成プロバイダーは環境変数の値を `appsettings.{環境名}.json` より優先するため、アプリケーションの設定ファイルを変更することなく、コンテナ上の SQL Server へ接続できます。
+
+```yml title=".github/workflows/samples-dressca-consumer-e2e.ci.yml"
+--8<-- ".github/workflows/samples-dressca-consumer-e2e.ci.yml:60:94"
+```
+
+### HTTPS 開発証明書の作成 {#ci-create-dev-certs}
+
+`webServer` で起動するバックエンドアプリは HTTPS で待ち受けるため、サーバー証明書が必要です。
+CI 環境のランナーに証明書が存在しない場合に備え、ワークフロー内で以下のコマンドを実行して HTTPS 開発証明書を作成します。
+
+```shell
+dotnet dev-certs https
+```
+
+なお、 [テスト実行時の設定](#test-config-settings) の `ignoreHTTPSErrors` は、開発証明書が OS に信頼されていないことによるエラーを無視する設定です。
+サーバー証明書そのものの代わりにはならないため、開発証明書の作成とあわせて設定します。
+
+### テスト結果の確認 {#ci-check-test-results}
+
+CI 環境では JSON レポーターで出力されたレポートファイルを解析し、テスト件数の集計や失敗したテストのエラー内容を GitHub Actions の Summary へ出力しています。
+テストの失敗時には、トレースなどを含む `test-results` フォルダーとレポートファイルをアーティファクトとしてアップロードします。
+
+また、 github レポーターにより、テスト失敗時にはテストコードにアノテーションが追加されます。
