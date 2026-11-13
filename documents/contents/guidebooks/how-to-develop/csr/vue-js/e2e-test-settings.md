@@ -255,6 +255,8 @@ CI 環境のランナーには、ブラウザーやデータベースなどテ�
     --8<-- ".github/workflows/samples-dressca-consumer-e2e.ci.yml:4:120"
     ```
 
+なお、「データベースの準備」等のバックエンド側の設定については [CI 環境でのバックエンド設定](../dotnet/e2e-test-backend-settings.md#backend-settings-on-ci) を参照してください。
+
 ### ブラウザーのインストール {#ci-install-browser}
 
 CI 環境のランナーには Playwright が使用するブラウザーがインストールされていないため、テストの実行前にインストールします。
@@ -263,30 +265,6 @@ CI 環境のランナーには Playwright が使用するブラウザーがイ�
 ```json title="package.json"
 "prepare": "playwright install --with-deps chromium",
 ```
-
-### データベースの準備 {#ci-prepare-database}
-
-CI 環境ではローカル開発用のデータベースを使用できないため、ワークフロー内で SQL Server のコンテナを起動し、マイグレーションを適用してテスト用のデータベースを準備します。
-
-[テスト実行時の設定](#test-config-settings) の `webServer` で起動するバックエンドアプリは、既定では開発環境の設定で起動するため、ローカル開発用の接続文字列でデータベースへ接続しようとします。
-そのため、環境変数 `ConnectionStrings__DresscaDbContext` に SQL Server のコンテナを指定して接続先を上書きします。
-.NET の構成プロバイダーは環境変数の値を `appsettings.{環境名}.json` より優先するため、アプリケーションの設定ファイルを変更することなく、コンテナ上の SQL Server へ接続できます。
-
-```yml title=".github/workflows/samples-dressca-consumer-e2e.ci.yml"
---8<-- ".github/workflows/samples-dressca-consumer-e2e.ci.yml:60:94"
-```
-
-### HTTPS 開発証明書の作成 {#ci-create-dev-certs}
-
-`webServer` で起動するバックエンドアプリは HTTPS で待ち受けるため、サーバー証明書が必要です。
-CI 環境のランナーに証明書が存在しない場合に備え、ワークフロー内で以下のコマンドを実行して HTTPS 開発証明書を作成します。
-
-```shell
-dotnet dev-certs https
-```
-
-なお、 [テスト実行時の設定](#test-config-settings) の `ignoreHTTPSErrors` は、開発証明書が OS に信頼されていないことによるエラーを無視する設定です。
-サーバー証明書そのものの代わりにはならないため、開発証明書の作成とあわせて設定します。
 
 ### テスト結果の確認 {#ci-check-test-results}
 

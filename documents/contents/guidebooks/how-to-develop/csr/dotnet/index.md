@@ -54,3 +54,7 @@ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）として推奨す
 1. [ヘルスチェック API の実装](./health-check-api.md)
 
     ヘルスチェック API を実装する方法について解説します。
+
+1. [E2E テストのバックエンド設定](./e2e-test-backend-settings.md)
+
+    E2E テストのバックエンド関連の設定について解説します。
