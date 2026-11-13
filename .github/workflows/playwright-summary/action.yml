@@ -23,6 +23,8 @@ runs:
           const fs = require('node:fs')
 
           const stripAnsi = (text) => text.replace(/\u001b\[[0-9;]*m/g, '')
+          const escapeHtml = (text) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          const clean = (text) => escapeHtml(stripAnsi(text))
           const statusIcon = { success: '✅', failure: '❌' }[process.env.E2E_STATUS] ?? '❔'
 
           core.summary
@@ -53,15 +55,15 @@ runs:
               // 最終リトライのエラーを採用します。
               const message = spec.tests.at(-1)?.results.at(-1)?.error?.message ?? '(エラー詳細なし)'
               core.summary
-                .addHeading(`${spec.title} 👉 ${spec.file}:${spec.line}`, 4)
-                .addCodeBlock(stripAnsi(message))
+                .addHeading(`${escapeHtml(spec.title)} 👉 ${spec.file}:${spec.line}`, 4)
+                .addCodeBlock(clean(message))
             }
 
             // ビルドエラーや webServer の起動失敗などのグローバルエラーを出力します。
             const errors = report.errors ?? []
             if (errors.length > 0) core.summary.addHeading('🚨 テスト実行時のエラー', 3)
             for (const error of errors) {
-              core.summary.addCodeBlock(stripAnsi(error.message ?? '(エラー詳細なし)'))
+              core.summary.addCodeBlock(clean(error.message ?? '(エラー詳細なし)'))
             }
           } catch (error) {
             // サマリー生成の失敗でジョブ全体を失敗させないため、エラー内容をサマリーに出力します。
