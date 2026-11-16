@@ -77,7 +77,7 @@ export default defineConfigWithVueTs(
           selector:
             'CallExpression[callee.property.name=/^(innerText|textContent|allInnerTexts|allTextContents|isVisible|isEnabled)$/]',
           message:
-            'Page Object 内で innerText(), textContent(), isVisible(), isEnabled() は使用しないでください。Locator を返し、テストコード側で expect(locator).toHaveText() などを使ってください。',
+            'Page Object 内で innerText(), isVisible() 等の値を取得するメソッドは使用しないでください。Locator を返し、テストコード側で expect(locator).toHaveXxx() / toBeXxx() を使ってください。',
         },
       ],
     },
