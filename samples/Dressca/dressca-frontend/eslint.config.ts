@@ -7,6 +7,7 @@ import skipFormatting from 'eslint-config-prettier/flat'
 import tseslint from 'typescript-eslint'
 import { configureVueProject } from '@vue/eslint-config-typescript'
 import jsdoc from 'eslint-plugin-jsdoc'
+import { playwrightCodingConventionRules } from './eslint.playwright-rules'
 
 configureVueProject({
   // mono-repo 用に、 .vue ファイルを探すルートディレクトリをデフォルト値 `process.cwd()` から変更します。
@@ -68,10 +69,13 @@ export default defineConfigWithVueTs(
     },
   },
 
-  // Playwright 用のテストスイートに対して、Playwright 推奨の Lint ルールを適用します。
+  // Playwright 用のページオブジェクトに対して、追加ルールを適用します。
+  ...playwrightCodingConventionRules,
+
+  // Playwright 用のテストスイートとページオブジェクトに対して、Playwright 推奨の Lint ルールを適用します。
   {
     ...pluginPlaywright.configs['flat/recommended'],
-    files: ['**/e2e/**/*.{spec,test}.{js,ts,jsx,tsx}'],
+    files: ['**/e2e/**/*.{js,ts,jsx,tsx}'],
   },
 
   // Vitest 用のテストスイートに対して、 Vitest 推奨の Lint ルールを適用します。

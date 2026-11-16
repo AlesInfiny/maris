@@ -45,7 +45,7 @@ export class DonePage extends BasePage {
    * 表示されている合計金額を取得します。
    * @returns 合計金額の表示文字列。
    */
-  async getTotalPrice(): Promise<string> {
-    return (await this.totalPriceCell.innerText()).trim()
+  getTotalPrice(): Locator {
+    return this.totalPriceCell
   }
 }
