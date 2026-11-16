@@ -369,51 +369,51 @@ const updateItemAsync = async () => {
           <div class="mb-6">
             <label for="item-id" class="mb-2 block font-bold">アイテムID</label>
             <input
-              id="item-id"
+              id="current-item-id"
               v-model="currentItemState.id"
               type="text"
-              name="item-id"
+              name="current-item-id"
               class="w-full border border-gray-300 px-4 py-2"
               disabled
             />
           </div>
           <div class="mb-6">
-            <label for="item-name" class="mb-2 block font-bold">アイテム名</label>
+            <label for="current-item-name" class="mb-2 block font-bold">アイテム名</label>
             <input
-              id="item-name"
+              id="current-item-name"
               v-model="currentItemState.name"
               type="text"
-              name="item-name"
+              name="current-item-name"
               class="w-full border border-gray-300 px-4 py-2"
               disabled
             />
           </div>
           <div class="mb-6">
-            <label for="description" class="mb-2 block font-bold">説明</label>
+            <label for="current-description" class="mb-2 block font-bold">説明</label>
             <textarea
-              id="description"
+              id="current-description"
               v-model="currentItemState.description"
-              name="description"
+              name="current-description"
               class="w-full border border-gray-300 px-4 py-2"
               disabled
             ></textarea>
           </div>
           <div class="mb-6">
-            <label for="unit-price" class="mb-2 block font-bold">単価</label>
+            <label for="current-unit-price" class="mb-2 block font-bold">単価</label>
             <input
-              id="unit-price"
+              id="current-unit-price"
               v-model="currentItemState.price"
-              name="unit-price"
+              name="current-unit-price"
               class="w-full border border-gray-300 px-4 py-2"
               disabled
             />
           </div>
           <div class="mb-6">
-            <label for="product-code" class="mb-2 block font-bold">商品コード</label>
+            <label for="current-product-code" class="mb-2 block font-bold">商品コード</label>
             <input
-              id="product-code"
+              id="current-product-code"
               v-model="currentItemState.productCode"
-              name="product-code"
+              name="current-product-code"
               class="w-full border border-gray-300 px-4 py-2"
               disabled
             />

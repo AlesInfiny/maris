@@ -3,6 +3,7 @@ import { ItemsAddPage } from '../pages/catalog-management/items-add-page'
 import { ItemsPage } from '../pages/catalog-management/items-page'
 import { LoginPage } from '../pages/security/login-page'
 import { HomePage } from '../pages/system-common/home-page'
+import { ItemsEditPage } from '../pages/catalog-management/items-edit-page'
 
 /**
  * カタログ管理のテストシナリオで使用するページオブジェクトです。
@@ -16,6 +17,8 @@ type CatalogManagementPages = {
   itemsPage: ItemsPage
   /** カタログアイテム追加画面。 */
   itemsAddPage: ItemsAddPage
+  /** カタログアイテム編集画面。 */
+  itemsEditPage: ItemsEditPage
 }
 
 /**
@@ -34,6 +37,9 @@ export const test = base.extend<CatalogManagementPages>({
   },
   itemsAddPage: async ({ page }, use) => {
     await use(new ItemsAddPage(page))
+  },
+  itemsEditPage: async ({ page }, use) => {
+    await use(new ItemsEditPage(page))
   },
 })
 
