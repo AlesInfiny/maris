@@ -7,6 +7,7 @@ import skipFormatting from 'eslint-config-prettier/flat'
 import tseslint from 'typescript-eslint'
 import { configureVueProject } from '@vue/eslint-config-typescript'
 import jsdoc from 'eslint-plugin-jsdoc'
+import { playwrightCodingConventionRules } from './eslint.playwright-rules'
 
 configureVueProject({
   // mono-repo 用に、 .vue ファイルを探すルートディレクトリをデフォルト値 `process.cwd()` から変更します。
@@ -67,23 +68,11 @@ export default defineConfigWithVueTs(
       ],
     },
   },
-  {
-    name: 'e2e/pages/additional-rules',
-    files: ['**/e2e/pages/**/*.ts'],
-    rules: {
-      'no-restricted-syntax': [
-        'error',
-        {
-          selector:
-            'CallExpression[callee.property.name=/^(innerText|textContent|allInnerTexts|allTextContents|isVisible|isEnabled)$/]',
-          message:
-            'Page Object 内で innerText(), isVisible() 等の値を取得するメソッドは使用しないでください。Locator を返し、テストコード側で expect(locator).toHaveXxx() / toBeXxx() を使ってください。',
-        },
-      ],
-    },
-  },
 
-  // Playwright 用のテストスイートに対して、Playwright 推奨の Lint ルールを適用します。
+  // Playwright 用のページオブジェクトに対して、追加ルールを適用します。
+  ...playwrightCodingConventionRules,
+
+  // Playwright 用のテストスイートとページオブジェクトに対して、Playwright 推奨の Lint ルールを適用します。
   {
     ...pluginPlaywright.configs['flat/recommended'],
     files: ['**/e2e/**/*.{js,ts,jsx,tsx}'],

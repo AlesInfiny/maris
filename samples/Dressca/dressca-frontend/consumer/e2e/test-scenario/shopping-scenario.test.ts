@@ -39,7 +39,7 @@ test.describe('買い物', () => {
 
     await test.step('注文を確定する', async () => {
       // 合計が表示されるまで待機
-      await expect(checkoutPage.getTotalPrice()).toHaveText(/\d/);
+      await expect(checkoutPage.getTotalPrice()).toHaveText(/\d/)
 
       totalPriceOnCheckout = (await checkoutPage.getTotalPrice().innerText()).trim()
       await checkoutPage.confirmOrder()
