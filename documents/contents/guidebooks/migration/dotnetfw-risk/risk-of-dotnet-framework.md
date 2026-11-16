@@ -46,7 +46,7 @@ RESTful API の OpenAPI 仕様書を生成する Swagger のライブラリ「 [
 
 ### 新しい開発環境が使えない {#cannot-use-new-ide}
 
-2024 年 11 月現在、最新 Visual Studio 2022 では、 .NET Framework 4.6.2 より古いバージョンでの開発がサポートされません。
+2026 年 11 月現在、最新 Visual Studio 2022 では、 .NET Framework 4.6.2 より古いバージョンでの開発がサポートされません。
 よってこれらのバージョンを対象としたアプリケーションをビルドできません。
 今後、 Visual Studio でビルドできる .NET Framework のバージョンは減っていくことが考えられます。
 
@@ -62,7 +62,7 @@ C# 8.0 以降追加された便利で生産性を上げてくれる記法は使�
 
 <!-- textlint-disable ja-technical-writing/sentence-length -->
 
-2024 年 11 月現在、 [Azure Web Apps :material-open-in-new:](https://learn.microsoft.com/ja-JP/azure/app-service/){ target=_blank } では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
+2026 年 11 月現在、 [Azure Web Apps :material-open-in-new:](https://learn.microsoft.com/ja-JP/azure/app-service/){ target=_blank } では、 .NET Framework アプリケーションの稼働環境として .NET Framework 3.5 または 4.8 のみ選択可能です[^1]。
 また、 Microsoft の公式 docker イメージである [.NET Framework Runtime :material-open-in-new:](https://hub.docker.com/_/microsoft-dotnet-framework-runtime/){ target=_blank } も、バージョンとして選択できるのは .NET Framework 3.5, 4.8, 4.8.1 のみです。
 .NET Framework は、クラウド環境やコンテナー環境から徐々に締め出されつつあります。
 将来的に、クラウド環境やコンテナー環境で .NET Framework が使用できなくなる可能性は高いです。

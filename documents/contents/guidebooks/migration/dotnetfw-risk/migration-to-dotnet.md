@@ -10,24 +10,36 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 ## 基本的な方針 {#basic-policy}
 
-.NET Framework と .NET の間には単純互換性がないため、原則手作業でコードを書き直す必要があります。
+.NET Framework と .NET の間には単純な互換性がないため、移行にあたっては、プロジェクトファイルや依存ライブラリの変更、 API の置き換え、アプリケーションの構成変更などが必要になります。
 
-!!! warning ".NET Upgrade Assistant （非推奨）について"
+こうした移行作業には、 Microsoft が提供する [GitHub Copilot アップグレード :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/porting/github-copilot-upgrade/overview){ target=_blank } を活用できます。
 
-    .NET Framework → .NET への変換ツールとして、以前は Microsoft が提供する .NET Upgrade Assistant がありました。
-    しかし、このツールは [正式に非推奨となってしまった :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/porting/upgrade-assistant-overview){ target=_blank } ため、
-    2025 年 11 月現在、 .NET Framework からの移行ツールは存在しません。
+GitHub Copilot アップグレードは、 AI エージェントによって既存のプロジェクトや依存関係を分析し、アップグレード計画の作成からコードの変更、ビルドやテストによる検証までを支援するツールです。 .NET Framework から .NET への移行にも対応しており、従来のプロジェクト形式から SDK スタイルへの変換や、ライブラリの置き換え、アプリケーションアーキテクチャの移行などを支援します。
+
+ただし、 GitHub Copilot アップグレードによって、すべての移行作業が自動的に完了するわけではありません。生成された変更内容や移行計画を開発者が確認し、必要に応じて修正するとともに、移行後のアプリケーションが正常に動作することを十分に検証する必要があります。
+
+具体的な利用方法や対応する移行シナリオについては、 Microsoft の公式ドキュメントを参照してください。
+
+- [GitHub Copilot アップグレードの概要](https://learn.microsoft.com/ja-jp/dotnet/core/porting/github-copilot-upgrade/overview)
+- [GitHub Copilot アップグレードを使用して .NET アプリをアップグレードする方法](https://learn.microsoft.com/ja-jp/dotnet/core/porting/github-copilot-upgrade/dotnet-how-to-upgrade-with-github-copilot)
 
 ## 移行のハードル {#obstacles-to-migration}
 
 ### 書き換えが必要な .NET Framework の機能 {#dotnetfw-function-to-rewrite}
 
-以下の .NET Framework 機能は、.NET では廃止または非常に使用しづらいため、.NET の機能へ書き換える必要があります。
-なお、前述のとおり、どの機能においても移行方法は手作業でのソースコード書き換えとなります。
+以下の .NET Framework の機能は、 .NET では廃止されている、または同等の機能を利用することが難しいため、 .NET で利用可能な技術や機能への置き換えが必要になります。
+
+これらの機能の移行にあたっては、 GitHub Copilot アップグレードを活用することで、既存コードの分析や移行先の技術への置き換えを支援できます。ただし、移行先の技術選定や設計の見直しが必要になる場合もあるため、生成されたコードをそのまま利用できるとは限りません。
+
+各機能の具体的な移行方法については、 Microsoft の公式ドキュメントも参照してください。
 
 #### ASP.NET Web Forms ( 廃止 ) {#aspnet-web-forms}
 
-- 移行先候補: ASP.NET Core MVC や Blazor , SPA ( Vue.js など )
+- 移行先候補: Blazor (Microsoft 推奨 ) , SPA ( Vue.js など )
+
+!!! info "GitHub Copilot 向けのスキル"
+
+    Microsoft は GitHub Copilot 向けに ASP.NET Web Forms から Blazor へのアップグレード用スキルを公開しています。
 
 !!! warning "画面設計の見直しも検討すべし"
 
@@ -60,6 +72,7 @@ description: .NET Framework にとどまり続けることで起こりうる リ
 
 ### 短い製品ライフサイクルへの追従 {#adapt-to-short-product-life-cycles}
 
+<!-- textlint-disable @textlint-ja/no-synonyms -->
 .NET は、 .NET Framework に対して製品ライフサイクルが短期化されています。
 LTS 版であっても 3 年間のサポートしか提供されません。
 つまり、 .NET の場合、これまでの「納品までが仕事」というビジネスモデルは通用しません。
@@ -68,6 +81,7 @@ LTS 版であっても 3 年間のサポートしか提供されません。
 ## 結論 {#conclusion}
 
 .NET 関連技術は、大きな変革の時期を迎えています。
+<!-- textlint-enable @textlint-ja/no-synonyms -->
 
 - .NET Framework の開発停止
 - ASP.NET Web Forms など過去の主要技術の終焉
