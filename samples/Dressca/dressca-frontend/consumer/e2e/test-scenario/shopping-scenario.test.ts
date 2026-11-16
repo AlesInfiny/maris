@@ -38,14 +38,14 @@ test.describe('買い物', () => {
     })
 
     await test.step('注文を確定する', async () => {
-      totalPriceOnCheckout = await checkoutPage.getTotalPrice()
+      totalPriceOnCheckout = await checkoutPage.getTotalPrice().innerText()
       await checkoutPage.confirmOrder()
     })
 
     await test.step('注文完了を確認する', async () => {
       await expect(donePage.getOrderingCompletedMessage()).toBeVisible()
       await expect(page).toHaveURL(/\/ordering\/done\/.+/)
-      expect(await donePage.getTotalPrice()).toBe(totalPriceOnCheckout)
+      await expect(donePage.getTotalPrice()).toHaveText(totalPriceOnCheckout)
     })
   })
 })

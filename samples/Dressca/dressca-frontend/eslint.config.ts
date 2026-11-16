@@ -67,11 +67,26 @@ export default defineConfigWithVueTs(
       ],
     },
   },
+  {
+    name: 'e2e/pages/additional-rules',
+    files: ['**/e2e/pages/**/*.ts'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            'CallExpression[callee.property.name=/^(innerText|textContent|allInnerTexts|allTextContents|isVisible|isEnabled)$/]',
+          message:
+            'Page Object 内で innerText(), textContent(), isVisible(), isEnabled() は使用しないでください。Locator を返し、テストコード側で expect(locator).toHaveText() などを使ってください。',
+        },
+      ],
+    },
+  },
 
   // Playwright 用のテストスイートに対して、Playwright 推奨の Lint ルールを適用します。
   {
     ...pluginPlaywright.configs['flat/recommended'],
-    files: ['**/e2e/**/*.{spec,test}.{js,ts,jsx,tsx}'],
+    files: ['**/e2e/**/*.{js,ts,jsx,tsx}'],
   },
 
   // Vitest 用のテストスイートに対して、 Vitest 推奨の Lint ルールを適用します。
