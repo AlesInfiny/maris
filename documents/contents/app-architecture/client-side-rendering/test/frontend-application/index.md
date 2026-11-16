@@ -226,4 +226,6 @@ EC サイトであれば、「会員が商品を購入する」といったユ�
 - Playwright
 - Mock Service Worker
 
+Playwright を用いた E2E テストの設定方法や実装方法については、 [E2E テストの設定](../../../../guidebooks/how-to-develop/csr/vue-js/e2e-test-settings.md) を参照してください。
+
 [^1]:[Test paths: Typical kinds of test cases :material-open-in-new:](https://web.dev/articles/ta-test-cases#test_paths_typical_kinds_of_test_cases){ target_blank }
