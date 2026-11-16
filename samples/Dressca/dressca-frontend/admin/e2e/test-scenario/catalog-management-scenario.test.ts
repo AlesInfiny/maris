@@ -59,8 +59,8 @@ test.describe('カタログ管理', () => {
     const uniqueSuffix = Date.now().toString()
     const itemName = `E2E テスト用アイテム ${uniqueSuffix}`
     const productCode = `E2E${uniqueSuffix}`
-    const unitPrice = '1980'
-    const description = 'E2E テストで編集したカタログアイテムです。'
+    const unitPrice = String(1000 + (Date.now() % 9000))
+    const description = `E2E テストで編集したカタログアイテムです。${uniqueSuffix}`
 
     await test.step('ログインする', async () => {
       // ホーム画面は認証が必要なため、ログイン画面にリダイレクトされます。

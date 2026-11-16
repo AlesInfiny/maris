@@ -367,7 +367,7 @@ const updateItemAsync = async () => {
         <div class="m-8 text-4xl">変更前</div>
         <form class="text-xl">
           <div class="mb-6">
-            <label for="item-id" class="mb-2 block font-bold">アイテムID</label>
+            <label for="current-item-id" class="mb-2 block font-bold">アイテムID</label>
             <input
               id="current-item-id"
               v-model="currentItemState.id"
@@ -489,7 +489,7 @@ const updateItemAsync = async () => {
             </p>
           </div>
           <div class="mb-4">
-            <label for="description" class="mb-2 block font-bold">説明</label>
+            <label for="item-description" class="mb-2 block font-bold">説明</label>
             <textarea
               id="item-description"
               v-model="itemDescription"
