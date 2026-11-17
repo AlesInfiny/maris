@@ -14,7 +14,6 @@ description: CSR アプリケーションの サーバーサイドで動作す�
 - テスト対象プロジェクトを参照
 - 結合テストプロジェクト実行に必要な NuGet パッケージのインストール
     - [xunit.v3 :material-open-in-new:](https://www.nuget.org/packages/xunit.v3){ target=_blank }
-    - [xunit.runner.visualstudio :material-open-in-new:](https://www.nuget.org/packages/xunit.runner.visualstudio){ target=_blank }
     - [Microsoft.AspNetCore.Mvc.Testing :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing){ target=_blank }
 
 ## テストコード作成 {#writing-test-codes}

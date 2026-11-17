@@ -19,10 +19,6 @@ description: SSR アプリケーション開発で使用する パッケージ�
 
     Fluent UI で利用できるアイコン画像のパッケージです。[プロジェクトの作成 - Fluent Blazor Web アプリ](./create-project.md#fluent-blazor-web-app) でプロジェクトを作成すると、自動でインストールされます。
 
-- [Microsoft.NET.Test.Sdk :material-open-in-new:](https://www.nuget.org/packages/Microsoft.NET.Test.Sdk){ target=_blank }
-
-    .NET のテストプロジェクトをビルドするためのパッケージです。[プロジェクトの作成 - xUnit v3 テストプロジェクト](../csr/dotnet/create-project.md#xunit) でプロジェクトを作成すると、自動でインストールされます。
-
 - [xunit.v3 :material-open-in-new:](https://www.nuget.org/packages/xunit.v3/){ target=_blank }
 
     .NET で利用できるテストフレームワークです。[プロジェクトの作成 - xUnit v3 テストプロジェクト](../csr/dotnet/create-project.md#xunit) でプロジェクトを作成すると、自動でインストールされます。
