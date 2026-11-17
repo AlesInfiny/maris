@@ -14,6 +14,7 @@
   </Folder>
   <Folder Name="/ソリューション項目/">
     <File Path=".editorconfig" />
+    <File Path="coverage.settings.xml" />
     <File Path="Directory.Build.props" />
     <File Path="Directory.Packages.props" />
     <File Path="global.json" />
