@@ -114,6 +114,7 @@ jobs:
         shell: bash
         if: ${{ success() || (failure() && steps.run-tests.conclusion == 'failure') }}
         run: |
+          echo '# ${{ github.workflow }}' >> ${{ env.BUILD_SUMMARY_FILE }}
           echo '## Test Result :memo:' >> ${{ env.BUILD_SUMMARY_FILE }}
           echo 'Test was a **${{ steps.create-test-result-report.outputs.conclusion }}**.' >> ${{ env.BUILD_SUMMARY_FILE }}
           echo 'Completed in ${{ steps.create-test-result-report.outputs.time }}ms with **${{ steps.create-test-result-report.outputs.passed }}** passed, **${{ steps.create-test-result-report.outputs.failed }}** failed and ${{ steps.create-test-result-report.outputs.skipped }} skipped.' >> ${{ env.BUILD_SUMMARY_FILE }}
@@ -141,5 +142,6 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@70d2764d1a7d5d9560b100cbea0077fc8f633987  # v3.0.2
         if: ${{ github.event_name == 'pull_request' && (success() || (failure() && steps.run-tests.conclusion == 'failure')) }}
         with:
+          header: ${{ github.workflow }}
           recreate: true
           path: '${{ env.WORKING_DIRECTORY }}/${{ env.BUILD_SUMMARY_FILE }}'
