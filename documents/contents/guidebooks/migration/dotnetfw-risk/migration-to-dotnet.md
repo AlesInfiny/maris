@@ -20,8 +20,8 @@ GitHub Copilot アップグレードは、 AI エージェントによって既�
 
 具体的な利用方法や対応する移行シナリオについては、 Microsoft の公式ドキュメントを参照してください。
 
-- [GitHub Copilot アップグレードの概要](https://learn.microsoft.com/ja-jp/dotnet/core/porting/github-copilot-upgrade/overview)
-- [GitHub Copilot アップグレードを使用して .NET アプリをアップグレードする方法](https://learn.microsoft.com/ja-jp/dotnet/core/porting/github-copilot-upgrade/dotnet-how-to-upgrade-with-github-copilot)
+- [GitHub Copilot アップグレードの概要 :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/porting/github-copilot-upgrade/overview){ target=_blank }
+- [GitHub Copilot アップグレードを使用して .NET アプリをアップグレードする方法 :material-open-in-new:](https://learn.microsoft.com/ja-jp/dotnet/core/porting/github-copilot-upgrade/dotnet-how-to-upgrade-with-github-copilot){ target=_blank }
 
 ## 移行のハードル {#obstacles-to-migration}
 
