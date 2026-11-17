@@ -419,9 +419,9 @@ const updateItemAsync = async () => {
             />
           </div>
           <div class="mb-4">
-            <label for="category" class="mb-2 block font-bold">カテゴリ</label>
+            <label for="current-category" class="mb-2 block font-bold">カテゴリ</label>
             <select
-              id="category"
+              id="current-category"
               v-model="currentItemState.categoryId"
               name="category"
               class="w-full border border-gray-300 bg-gray-100 px-4 py-2"
@@ -437,11 +437,11 @@ const updateItemAsync = async () => {
             </select>
           </div>
           <div class="mb-4">
-            <label for="brand" class="mb-2 block font-bold">ブランド</label>
+            <label for="current-brand" class="mb-2 block font-bold">ブランド</label>
             <select
-              id="brand"
+              id="current-brand"
               v-model="currentItemState.brandId"
-              name="brand"
+              name="current-brand"
               class="w-full border border-gray-300 bg-gray-100 px-4 py-2"
               disabled
             >
