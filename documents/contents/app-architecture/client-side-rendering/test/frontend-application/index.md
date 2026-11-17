@@ -57,7 +57,7 @@ AlesInfiny Maris では、継続的インテグレーションを目的として
 | 単体テストフェーズ | UT0          | 静的テスト           | 自動       | 不具合の原因となる記述や規約違反を検出                                                       |
 | 単体テストフェーズ | UT0          | 単体テスト           | 自動       | モジュール単位で UI ・ロジックの動作を検証                                                   |
 | 単体テストフェーズ | UT0          | コンポーネントテスト | 自動       | UI ・ロジック・コンポーネント間の結合によるコンポーネントの成立を検証                        |
-| 単体テストフェーズ | UT0          | 画面内結合テスト     | 自動       | UI とロジックを結合した Page の成立を検証                                                    |
+| 単体テストフェーズ | UT0          | ページ単体テスト     | 自動       | UI とロジックを結合したページの成立を検証                                                    |
 | 単体テストフェーズ | UT1          | ユースケーステスト   | 自動       | 機能間の結合によるユースケースの実現を検証                                                   |
 | 結合テストフェーズ | ITa          | 自動 E2E テスト      | 自動       | 重要なユースケースについて、フロントエンド・バックエンドアプリケーション間の結合を自動で検証 |
 | 結合テストフェーズ | ITb          | E2E テスト           | 手動       | フロントエンド・バックエンドアプリケーション間の結合を手動で検証（本章では扱いません）       |
@@ -70,7 +70,7 @@ AlesInfiny Maris では、継続的インテグレーションを目的として
 テストピラミッドは単体テストを厚くし、結合テストや E2E テストを少数に絞るモデルであり、各テストの量を種類別に積み上げると、下図のようにピラミッド状の三角形を形成します。
 
  一方で、フロントエンドアプリケーションのテストの文脈でよく挙げられるモデルが、[テスティングトロフィー :material-open-in-new:](https://web.dev/articles/ta-strategies?hl=ja#testing_trophy){ target=_blank }です。
-テスティングトロフィーは、[React Testing Library :material-open-in-new:](https://github.com/testing-library/react-testing-library){ target_blank }の開発者として知られる [Kent C. Dodds :material-open-in-new:](https://kentcdodds.com/){ target_blank }により提唱された、単体テストよりも結合テストを重視するモデルです。上述の表に当てはめると、画面内結合テストやユースケーステストが単体テストよりも重視されます。このことにより、同様に積み上げた場合に下図のように中腹部が膨らんだトロフィー状の形を形成します。
+テスティングトロフィーは、[React Testing Library :material-open-in-new:](https://github.com/testing-library/react-testing-library){ target_blank }の開発者として知られる [Kent C. Dodds :material-open-in-new:](https://kentcdodds.com/){ target_blank }により提唱された、単体テストよりも結合テストを重視するモデルです。上述の表に当てはめると、複数の部品を結合して検証するページ単体テストやユースケーステストが、単体テストよりも重視されます。このことにより、同様に積み上げた場合に下図のように中腹部が膨らんだトロフィー状の形を形成します。
 
 <!-- textlint-enable ja-technical-writing/sentence-length -->
 
@@ -174,13 +174,13 @@ API 経由のデータ取得や、グローバルな状態など、コンポー�
 !!! info "コンポーネントテスト"
     コンポーネントには、単独ではあまり機能的な意味をなさないため、テストの効果が薄いものもあります。
 
-## 画面内結合テスト {#intra-page-integration-testing}
+## ページ単体テスト {#page-unit-testing}
 
-画面単位で UI とロジックを結合し、 Page が設計通り成立していることを確認します。
-Page は、ルーティングによって遷移する画面単位のコンポーネントです（[フロントエンドアーキテクチャ](../../frontend-architecture.md) における View に相当します）。
+ページ単位で UI とロジックを結合し、ページが設計通り成立していることを確認します。
+ページは、ルーティングによって遷移する画面単位のコンポーネントです（[フロントエンドアーキテクチャ](../../frontend-architecture.md) における View に相当します）。
 画面のレイアウトも確認します。
 
-### 使用ツール {#intra-page-integration-testing-tools}
+### 使用ツール {#page-unit-testing-tools}
 
 - Vitest
 - Vitest Browser Mode
