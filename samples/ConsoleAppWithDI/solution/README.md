@@ -29,12 +29,10 @@ DI コンテナーを用いた一般的な .NET の実装を、コンソール�
 
 またテストプロジェクトでは、以下の OSS ライブラリを利用します。
 
-- [coverlet.collector](https://www.nuget.org/packages/coverlet.collector/)
 - [Maris.Logging.Testing](https://www.nuget.org/packages/Maris.Logging.Testing)
 - [Microsoft.Extensions.Logging](https://www.nuget.org/packages/Microsoft.Extensions.Logging/)
 - [Moq](https://www.nuget.org/packages/Moq/)
 - [xunit.v3](https://www.nuget.org/packages/xunit.v3)
-- [xunit.runner.visualstudio](https://www.nuget.org/packages/xunit.runner.visualstudio/)
 
 ## サンプルの構成
 
