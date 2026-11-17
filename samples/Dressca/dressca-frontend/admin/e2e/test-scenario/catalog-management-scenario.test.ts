@@ -54,4 +54,50 @@ test.describe('カタログ管理', () => {
       await expect(itemsPage.getHeading()).toBeVisible()
     })
   })
+
+  test('カタログアイテムを編集する', async ({ loginPage, homePage, itemsPage, itemsEditPage }) => {
+    const uniqueSuffix = Date.now().toString()
+    const itemName = `E2E テスト用アイテム ${uniqueSuffix}`
+    const productCode = `E2E${uniqueSuffix}`
+    const unitPrice = String(1000 + (Date.now() % 9000))
+    const description = `E2E テストで編集したカタログアイテムです。${uniqueSuffix}`
+
+    await test.step('ログインする', async () => {
+      // ホーム画面は認証が必要なため、ログイン画面にリダイレクトされます。
+      await homePage.open()
+      await expect(loginPage.getLoginButton()).toBeVisible()
+      await loginPage.login('test@example.com', 'password')
+      await expect(homePage.getHeading()).toBeVisible()
+    })
+
+    await test.step('カタログアイテム一覧を表示する', async () => {
+      await homePage.goToCatalogManagement()
+      await expect(itemsPage.getHeading()).toBeVisible()
+    })
+
+    await test.step('カタログアイテム編集画面を表示する', async () => {
+      await itemsPage.getFirstEditItemButton().click()
+      await expect(itemsEditPage.getHeading()).toBeVisible()
+    })
+
+    await test.step('カタログアイテムを編集する', async () => {
+      await itemsEditPage.editCatalogItem(itemName, description, unitPrice, productCode)
+      await itemsEditPage.updateCatalogItem()
+      await expect(itemsEditPage.getUpdateConfirmationModal()).toContainText(
+        'カタログアイテムを更新しますか？',
+      )
+      await itemsEditPage.confirmUpdate()
+      await expect(itemsEditPage.getUpdateNoticeModal()).toContainText(
+        'カタログアイテムを更新しました。',
+      )
+    })
+
+    await test.step('カタログアイテムの情報が更新されていることを確認する', async () => {
+      await itemsEditPage.closeUpdateNotice()
+      await expect(itemsEditPage.getCurrentItemName()).toHaveValue(itemName)
+      await expect(itemsEditPage.getCurrentDescription()).toHaveValue(description)
+      await expect(itemsEditPage.getCurrentUnitPrice()).toHaveValue(unitPrice)
+      await expect(itemsEditPage.getCurrentProductCode()).toHaveValue(productCode)
+    })
+  })
 })
