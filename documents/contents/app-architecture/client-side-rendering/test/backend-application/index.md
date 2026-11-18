@@ -16,7 +16,7 @@ description: バックエンドアプリケーションのテスト方針につ�
     - StyleCopAnalyzers を用いた、ソースコード内の潜在的な不具合を検出する静的テスト
     - xUnit v3 や Moq を用いた、クラスやメソッド単位で機能性を確認する単体テスト
 
-1. [機能テスト ( UT1 )](feature-test.md)
+1. [機能内結合テスト ( UT1 )](feature-test.md)
 
     主に以下のテストを実施します。
 
