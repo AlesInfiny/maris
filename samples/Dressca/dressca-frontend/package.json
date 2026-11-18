@@ -6,6 +6,8 @@
   "scripts": {
     "format:root": "prettier --write ./*.{js,ts,json,yaml}",
     "format:ci:root": "prettier --check ./*.{js,ts,json,yaml}",
+    "type-check:root": "tsc -p tsconfig.json",
+    "test:root": "node --test eslint.project-rules.test.ts",
     "lint:ci:consumer": "npm run lint:ci -w consumer",
     "type-check:consumer": "npm run type-check -w consumer",
     "build-only:dev:consumer": "npm run build-only:dev -w consumer",
@@ -33,8 +35,8 @@
     "admin"
   ],
   "engines": {
-    "node": "^24.14.0",
-    "npm": "^11.9.0"
+    "node": "^24.21.0",
+    "npm": "^11.19.0"
   },
-  "packageManager": "npm@11.9.0"
+  "packageManager": "npm@11.19.0"
 }

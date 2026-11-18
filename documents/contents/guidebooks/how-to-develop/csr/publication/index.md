@@ -16,9 +16,9 @@ description: .NET + Vue.js で構成されたアプリケーションの 発行�
 
 ### API エンドポイントの設定 {#api-endpoint-settings}
 
-API エンドポイントの設定は Axios のインスタンス生成時に行います。エンドポイントは一般的にハードコーディングせず、 env ファイルから取得した値を利用します。 AlesInfiny Maris OSS Edition サンプルアプリでは、 API アクセスコードに関する設定を `src/api-client/index.ts` に記述しています。
+API エンドポイントの設定は Axios のインスタンス生成時に行います。エンドポイントは一般的にハードコーディングせず、 env ファイルから取得した値を利用します。 AlesInfiny Maris OSS Edition サンプルアプリでは、 API アクセスコードに関する設定を `src/system-common/api-client/index.ts` に記述しています。
 
-```typescript title="src/api-client/index.ts"
+```typescript title="src/system-common/api-client/index.ts"
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_ENDPOINT,
 });
