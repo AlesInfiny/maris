@@ -48,8 +48,9 @@ jobs:
         run: npm run build-only:dev:admin >> /var/tmp/build-result.txt 2>&1
 
       # Chromium の実行に必要なライブラリは GitHub ホストランナーに導入済みのため、--with-deps は付けません（付けると多言語フォントの apt 取得に数分かかることがあります）。
+      # テストはヘッドレスで実行するため、Chrome Headless Shell だけをインストールします。
       - name: Vitest ブラウザーモードで使用するブラウザーのインストール
-        run: npm exec -w admin -- playwright install chromium
+        run: npm exec -w admin -- playwright install --only-shell chromium
 
       - id: run-unit-tests
         name: 単体テストの実行
