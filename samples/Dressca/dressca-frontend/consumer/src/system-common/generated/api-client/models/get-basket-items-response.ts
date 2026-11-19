@@ -31,7 +31,7 @@ export interface GetBasketItemsResponse {
     /**
      * 会計情報を取得または設定します。             
      */
-    'account'?: AccountApiModel | null;
+    'account'?: AccountApiModel;
     /**
      * 買い物かごアイテムのリストを取得または設定します。             
      */

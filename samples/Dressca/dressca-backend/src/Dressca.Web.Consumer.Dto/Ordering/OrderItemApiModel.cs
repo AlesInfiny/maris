@@ -17,7 +17,7 @@ public class OrderItemApiModel
     /// <summary>
     ///  注文された商品（陳列品）を取得または設定します。
     /// </summary>
-    public DisplayItemSummaryApiModel? ItemOrdered { get; set; }
+    public DisplayItemSummaryApiModel ItemOrdered { get; set; } = new();
 
     /// <summary>
     ///  単価を取得または設定します。

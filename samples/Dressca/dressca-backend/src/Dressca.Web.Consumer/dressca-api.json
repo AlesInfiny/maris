@@ -512,7 +512,6 @@
           },
           "account": {
             "description": "会計情報を取得または設定します。\n            ",
-            "nullable": true,
             "oneOf": [
               {
                 "$ref": "#/components/schemas/AccountApiModel"
@@ -694,8 +693,7 @@
           "addedQuantity": {
             "type": "integer",
             "description": "数量を取得または設定します。\n陳列品 Id に指定した商品が買い物かごに含まれている場合、負の値を指定すると買い物かごから指定した数だけ取り出します。\n未指定の場合は 1 です。\n            ",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           }
         }
       },
@@ -905,7 +903,6 @@
           },
           "account": {
             "description": "会計情報を取得または設定します。\n            ",
-            "nullable": true,
             "oneOf": [
               {
                 "$ref": "#/components/schemas/AccountApiModel"
@@ -940,7 +937,6 @@
           },
           "itemOrdered": {
             "description": "注文された商品（陳列品）を取得または設定します。\n            ",
-            "nullable": true,
             "oneOf": [
               {
                 "$ref": "#/components/schemas/DisplayItemSummaryApiModel"

@@ -25,6 +25,6 @@ export interface PostBasketItemsRequest {
     /**
      * 数量を取得または設定します。 陳列品 Id に指定した商品が買い物かごに含まれている場合、負の値を指定すると買い物かごから指定した数だけ取り出します。 未指定の場合は 1 です。             
      */
-    'addedQuantity'?: number | null;
+    'addedQuantity'?: number;
 }
 

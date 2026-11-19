@@ -45,14 +45,12 @@ function toOrderResult(response: GetOrderByIdResponse): OrderResult {
   const { fullName, postalCode, todofuken, shikuchoson, azanaAndOthers, account } = response
   return {
     address: { fullName, postalCode, todofuken, shikuchoson, azanaAndOthers },
-    account: account
-      ? {
-          totalItemsPrice: account.totalItemsPrice,
-          deliveryCharge: account.deliveryCharge,
-          consumptionTax: account.consumptionTax,
-          totalPrice: account.totalPrice,
-        }
-      : undefined,
+    account: account && {
+      totalItemsPrice: account.totalItemsPrice,
+      deliveryCharge: account.deliveryCharge,
+      consumptionTax: account.consumptionTax,
+      totalPrice: account.totalPrice,
+    },
     items: (response.orderItems ?? []).map((item) => ({
       id: item.id,
       name: item.itemOrdered?.name ?? '',

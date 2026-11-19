@@ -59,7 +59,7 @@ export interface GetOrderByIdResponse {
     /**
      * 会計情報を取得または設定します。             
      */
-    'account'?: AccountApiModel | null;
+    'account'?: AccountApiModel;
     /**
      * 注文アイテムのリストを取得または設定します。             
      */

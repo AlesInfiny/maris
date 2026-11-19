@@ -28,7 +28,7 @@ export interface OrderItemApiModel {
     /**
      * 注文された商品（陳列品）を取得または設定します。             
      */
-    'itemOrdered'?: DisplayItemSummaryApiModel | null;
+    'itemOrdered'?: DisplayItemSummaryApiModel;
     /**
      * 単価を取得または設定します。             
      */
