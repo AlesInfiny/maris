@@ -30,7 +30,8 @@ function excludeMsw(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  const plugins = [vue(), vueJsx(), vueDevTools(), tailwindcss()]
+  // Vitest ブラウザーモードで Vue DevTools が有効だと、Vue Test Utils の emitted() がマウントのたびに重複して記録されるため、テスト時は除外します。
+  const plugins = [vue(), vueJsx(), ...(mode === 'test' ? [] : [vueDevTools()]), tailwindcss()]
   const env = loadEnv(mode, process.cwd())
 
   return {

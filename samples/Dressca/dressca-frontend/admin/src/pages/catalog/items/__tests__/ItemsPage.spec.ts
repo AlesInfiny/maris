@@ -1,12 +1,12 @@
 import { describe, it, expect, beforeAll } from 'vitest'
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
+import { mount, VueWrapper } from '@vue/test-utils'
 import { createStubRouter } from '@/pages/__tests__/helpers/stub-router'
 import { createPinia, setActivePinia } from 'pinia'
 import { http, HttpResponse } from 'msw'
 import { HttpStatusCode } from 'axios'
 import ItemsPage from '@/pages/catalog/items/ItemsPage.vue'
 import { useNotificationStore } from '@/business-common/stores/notification'
-import { server } from '@/../mock/node'
+import { worker } from '@/../mock/browser'
 
 /**
  * コンポーネントをテスト用にマウントするヘルパー関数です。
@@ -31,9 +31,8 @@ describe('アイテム一覧が表示できる', () => {
   it('アイテム一覧画面に遷移できる', async () => {
     // Arrange
     // Act
-    await flushPromises()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテム一覧')
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム一覧')
   })
 
   it('アイテムが取得した個数分表示される', () => {
@@ -49,7 +48,7 @@ describe('アイテム一覧が表示できる', () => {
 describe('結果の通知', () => {
   it('アイテムを取得できない_トーストを表示しアイテム追加ボタンは表示する', async () => {
     // Arrange
-    server.use(
+    worker.use(
       http.get(
         '/api/catalog-items',
         () => new HttpResponse(null, { status: HttpStatusCode.InternalServerError }),
@@ -57,9 +56,10 @@ describe('結果の通知', () => {
     )
     // Act
     const wrapper = getWrapper()
-    await flushPromises()
     // Assert
-    expect(useNotificationStore().message).toBe('カタログアイテムの取得に失敗しました。')
+    await expect
+      .poll(() => useNotificationStore().message)
+      .toBe('カタログアイテムの取得に失敗しました。')
     expect(wrapper.find('tbody').findAll('tr').length).toBe(0)
     expect(wrapper.find('button').text()).toBe('アイテム追加')
   })

@@ -87,7 +87,8 @@ const { getBasketItemsMock } = vi.hoisted(() => {
   }
 })
 
-vi.mock('@/system-common/api-client', () => ({
+vi.mock('@/system-common/api-client', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/system-common/api-client')>()),
   // basketItemsApi() を呼ぶと { getBasketItems: getBasketItemsMock } が返る
   basketItemsApi: () => ({
     getBasketItems: getBasketItemsMock,
@@ -107,7 +108,7 @@ function getWrapper(stubRouter: Router = createStubRouter()) {
     createSpy: vi.fn, // 明示的に設定する必要があります。
     stubActions: false, // 結合テストなので、アクションはモック化しないように設定します。
   })
-  i18n.global.locale.value = 'ja' // デフォルトの jsdom 環境では英語（en）に設定されるので、日本語に変更します。
+  i18n.global.locale.value = 'ja' // テストを実行するブラウザーの言語設定に依存しないよう、日本語に固定します。
   return mount(BasketPage, {
     global: { plugins: [pinia, router, i18n] },
   })

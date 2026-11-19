@@ -10,7 +10,7 @@ import { createTestingPinia, type TestingPinia } from '@pinia/testing'
 import { http, HttpResponse } from 'msw'
 import { HttpStatusCode } from 'axios'
 import { useNotificationStore } from '@/business-common/stores/notification'
-import { server } from '@/../mock/node'
+import { worker } from '@/../mock/browser'
 
 let router: Router
 
@@ -136,14 +136,13 @@ describe('ログインの結果の通知と遷移', () => {
     const filled = await getFilledWrapper(pinia)
     // Act
     await filled.get('button').trigger('click')
-    await flushPromises()
     // Assert
-    expect(router.currentRoute.value.fullPath).toBe('/catalog/items')
+    await expect.poll(() => router.currentRoute.value.fullPath).toBe('/catalog/items')
   })
 
   it('ログインできない_トーストを表示しログイン画面にとどまる', async () => {
     // Arrange
-    server.use(
+    worker.use(
       http.get(
         '/api/users',
         () => new HttpResponse(null, { status: HttpStatusCode.InternalServerError }),
@@ -153,9 +152,8 @@ describe('ログインの結果の通知と遷移', () => {
     const filled = await getFilledWrapper(pinia)
     // Act
     await filled.get('button').trigger('click')
-    await flushPromises()
     // Assert
-    expect(useNotificationStore(pinia).message).toBe('ログインに失敗しました。')
+    await expect.poll(() => useNotificationStore(pinia).message).toBe('ログインに失敗しました。')
     expect(router.currentRoute.value.name).toBe(routeNames.login)
   })
 })

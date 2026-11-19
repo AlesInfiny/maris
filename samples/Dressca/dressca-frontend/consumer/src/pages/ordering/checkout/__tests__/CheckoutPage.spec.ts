@@ -15,7 +15,8 @@ const { getBasketItemsMock, postOrderMock } = vi.hoisted(() => ({
   postOrderMock: vi.fn(),
 }))
 
-vi.mock('@/system-common/api-client', () => ({
+vi.mock('@/system-common/api-client', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/system-common/api-client')>()),
   basketItemsApi: () => ({
     getBasketItems: getBasketItemsMock,
   }),

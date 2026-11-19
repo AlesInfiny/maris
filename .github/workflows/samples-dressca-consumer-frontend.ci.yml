@@ -47,6 +47,9 @@ jobs:
         name: アプリケーションのビルド
         run: npm run build-only:dev:consumer >> /var/tmp/build-result.txt 2>&1
 
+      - name: Vitest ブラウザーモードで使用するブラウザーのインストール
+        run: npm run test:e2e:prepare:consumer
+
       - id: run-unit-tests
         name: 単体テストの実行
         run: npm run test:coverage:consumer >> /var/tmp/unit-test-result.txt 2>&1

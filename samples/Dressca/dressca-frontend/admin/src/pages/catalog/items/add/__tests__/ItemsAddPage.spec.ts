@@ -6,7 +6,7 @@ import { http, HttpResponse } from 'msw'
 import { HttpStatusCode } from 'axios'
 import ItemsAddPage from '@/pages/catalog/items/add/ItemsAddPage.vue'
 import { useNotificationStore } from '@/business-common/stores/notification'
-import { server } from '@/../mock/node'
+import { worker } from '@/../mock/browser'
 
 const adminRole = 'ROLE_ADMIN'
 
@@ -52,9 +52,8 @@ describe('管理者ロール_アイテムを追加できる', () => {
   it('追加画面に遷移できる', async () => {
     // Arrange
     // Act
-    await flushPromises()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテム追加')
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム追加')
   })
 
   it('追加ボタンを押下_追加成功_通知モーダルが開く', async () => {
@@ -82,9 +81,8 @@ describe('ゲストロール_アイテム追加ボタンが非活性', () => {
   it('追加画面に遷移できる', async () => {
     // Arrange
     // Act
-    await flushPromises()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテム追加')
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム追加')
   })
 
   it('追加ボタンが非活性', () => {
@@ -99,7 +97,7 @@ describe('ゲストロール_アイテム追加ボタンが非活性', () => {
 describe('結果の通知', () => {
   it('カテゴリとブランドを取得できない_トーストを表示し入力フォームを表示しない', async () => {
     // Arrange
-    server.use(
+    worker.use(
       http.get(
         '/api/catalog-categories',
         () => new HttpResponse(null, { status: HttpStatusCode.InternalServerError }),
@@ -108,11 +106,10 @@ describe('結果の通知', () => {
     const loginState = CreateLoginState([adminRole])
     // Act
     const wrapper = getWrapper(loginState)
-    await flushPromises()
     // Assert
-    expect(useNotificationStore(loginState).message).toBe(
-      'カテゴリとブランド情報の取得に失敗しました。',
-    )
+    await expect
+      .poll(() => useNotificationStore(loginState).message)
+      .toBe('カテゴリとブランド情報の取得に失敗しました。')
     expect(wrapper.find('form').exists()).toBe(false)
   })
 
@@ -120,8 +117,8 @@ describe('結果の通知', () => {
     // Arrange
     const loginState = CreateLoginState([adminRole])
     const wrapper = getWrapper(loginState)
-    await flushPromises()
-    server.use(
+    await expect.poll(() => wrapper.find('form').exists()).toBe(true)
+    worker.use(
       http.post(
         '/api/catalog-items',
         () => new HttpResponse(null, { status: HttpStatusCode.InternalServerError }),
@@ -129,9 +126,10 @@ describe('結果の通知', () => {
     )
     // Act
     await wrapper.find('button').trigger('click')
-    await flushPromises()
     // Assert
-    expect(useNotificationStore(loginState).message).toBe('カタログアイテムの追加に失敗しました。')
+    await expect
+      .poll(() => useNotificationStore(loginState).message)
+      .toBe('カタログアイテムの追加に失敗しました。')
     expect(wrapper.findAllComponents({ name: 'NotificationModal' })[0]!.isVisible()).toBe(false)
   })
 })

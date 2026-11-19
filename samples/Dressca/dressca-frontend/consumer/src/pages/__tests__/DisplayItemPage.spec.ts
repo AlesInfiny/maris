@@ -27,7 +27,8 @@ const {
   getBasketItemsMock: vi.fn(),
 }))
 
-vi.mock('@/system-common/api-client', () => ({
+vi.mock('@/system-common/api-client', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/system-common/api-client')>()),
   displayItemCategoriesApi: () => ({
     getDisplayItemCategories: getDisplayItemCategoriesMock,
   }),

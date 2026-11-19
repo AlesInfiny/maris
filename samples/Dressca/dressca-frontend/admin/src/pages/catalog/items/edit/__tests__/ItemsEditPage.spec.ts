@@ -8,7 +8,7 @@ import type { Router } from 'vue-router'
 import ItemsEditPage from '@/pages/catalog/items/edit/ItemsEditPage.vue'
 import { createStubRouter } from '@/pages/__tests__/helpers/stub-router'
 import { useNotificationStore } from '@/business-common/stores/notification'
-import { server } from '@/../mock/node'
+import { worker } from '@/../mock/browser'
 import { catalogItems } from '@/../mock/data/catalog-items'
 
 const itemUrl = '/api/catalog-items/:catalogItemId'
@@ -60,9 +60,8 @@ describe('管理者ロール_アイテムが削除できる', () => {
   it('編集画面に遷移できる', async () => {
     // Arrange
     // Act
-    await flushPromises()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテム編集')
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム編集')
   })
 
   it('削除ボタンを押下_確認モーダルが開く', async () => {
@@ -80,9 +79,10 @@ describe('管理者ロール_アイテムが削除できる', () => {
       .findAllComponents({ name: 'ConfirmationModal' })[0]!
       .findAll('button')[0]!
       .trigger('click')
-    await flushPromises()
     // Assert
-    expect(wrapper.findAllComponents({ name: 'ConfirmationModal' })[0]!.isVisible()).toBeFalsy()
+    await expect
+      .poll(() => wrapper.findAllComponents({ name: 'ConfirmationModal' })[0]!.isVisible())
+      .toBeFalsy()
   })
 
   it('削除成功_通知モーダルが開く', async () => {
@@ -118,9 +118,8 @@ describe('ゲストロール_アイテム削除ボタンが非活性', () => {
   it('編集画面に遷移できる', async () => {
     // Arrange
     // Act
-    await flushPromises()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテム編集')
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム編集')
   })
 
   it('削除ボタンが非活性', () => {
@@ -144,9 +143,8 @@ describe('管理者ロール_アイテムが更新できる', () => {
   it('編集画面に遷移できる', async () => {
     // Arrange
     // Act
-    await flushPromises()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテム編集')
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム編集')
   })
 
   it('更新ボタンを押下__確認モーダルが開く', async () => {
@@ -197,9 +195,8 @@ describe('ゲストロール_アイテム更新ボタンが非活性', () => {
   it('編集画面に遷移できる', async () => {
     // Arrange
     // Act
-    await flushPromises()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテム編集')
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム編集')
   })
 
   it('更新ボタンが非活性', () => {
@@ -214,33 +211,33 @@ describe('ゲストロール_アイテム更新ボタンが非活性', () => {
 describe('結果の通知と遷移', () => {
   it('アイテムが存在しない_トーストを表示しアイテム一覧画面へ遷移する', async () => {
     // Arrange
-    server.use(http.get(itemUrl, () => new HttpResponse(null, { status: HttpStatusCode.NotFound })))
+    worker.use(http.get(itemUrl, () => new HttpResponse(null, { status: HttpStatusCode.NotFound })))
     const loginState = CreateLoginState([adminRole])
     // Act
     await getWrapper(loginState)
-    await flushPromises()
     // Assert
-    expect(useNotificationStore(loginState).message).toBe('対象のアイテムが見つかりませんでした。')
-    expect(router.currentRoute.value.name).toBe(routeNames.catalogItems)
+    await expect
+      .poll(() => useNotificationStore(loginState).message)
+      .toBe('対象のアイテムが見つかりませんでした。')
+    await expect.poll(() => router.currentRoute.value.name).toBe(routeNames.catalogItems)
   })
 
   it('更新が競合した_トーストを表示し編集画面にとどまる', async () => {
     // Arrange
     const loginState = CreateLoginState([adminRole])
     const wrapper = await getWrapper(loginState)
-    await flushPromises()
-    server.use(http.put(itemUrl, () => new HttpResponse(null, { status: HttpStatusCode.Conflict })))
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム編集')
+    worker.use(http.put(itemUrl, () => new HttpResponse(null, { status: HttpStatusCode.Conflict })))
     // Act
     await wrapper.findAll('button')[1]!.trigger('click')
     await wrapper
       .findAllComponents({ name: 'ConfirmationModal' })[1]!
       .findAll('button')[0]!
       .trigger('click')
-    await flushPromises()
     // Assert
-    expect(useNotificationStore(loginState).message).toBe(
-      'カタログアイテムの更新が競合しました。もう一度更新してください。',
-    )
+    await expect
+      .poll(() => useNotificationStore(loginState).message)
+      .toBe('カタログアイテムの更新が競合しました。もう一度更新してください。')
     expect(router.currentRoute.value.name).toBe(routeNames.catalogItemsEdit)
   })
 
@@ -248,8 +245,8 @@ describe('結果の通知と遷移', () => {
     // Arrange
     const loginState = CreateLoginState([adminRole])
     const wrapper = await getWrapper(loginState)
-    await flushPromises()
-    server.use(
+    await expect.poll(() => wrapper.html()).toContain('カタログアイテム編集')
+    worker.use(
       http.delete(itemUrl, () => new HttpResponse(null, { status: HttpStatusCode.NotFound })),
     )
     // Act
@@ -258,11 +255,10 @@ describe('結果の通知と遷移', () => {
       .findAllComponents({ name: 'ConfirmationModal' })[0]!
       .findAll('button')[0]!
       .trigger('click')
-    await flushPromises()
     // Assert
-    expect(useNotificationStore(loginState).message).toBe(
-      '削除対象のカタログアイテムが見つかりませんでした。',
-    )
-    expect(router.currentRoute.value.name).toBe(routeNames.catalogItems)
+    await expect
+      .poll(() => useNotificationStore(loginState).message)
+      .toBe('削除対象のカタログアイテムが見つかりませんでした。')
+    await expect.poll(() => router.currentRoute.value.name).toBe(routeNames.catalogItems)
   })
 })
