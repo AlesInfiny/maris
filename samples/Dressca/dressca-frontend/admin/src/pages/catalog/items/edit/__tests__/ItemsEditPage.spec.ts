@@ -44,6 +44,7 @@ async function getWrapper(pinia: TestingPinia) {
   router = createStubRouter()
   await router.push({ name: routeNames.catalogItemsEdit, params: { itemId: catalogItems[0]!.id } })
   return mount(ItemsEditPage, {
+    attachTo: document.body,
     global: { plugins: [pinia, router] },
   })
 }

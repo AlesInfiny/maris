@@ -110,6 +110,7 @@ function getWrapper(stubRouter: Router = createStubRouter()) {
   })
   i18n.global.locale.value = 'ja' // テストを実行するブラウザーの言語設定に依存しないよう、日本語に固定します。
   return mount(BasketPage, {
+    attachTo: document.body,
     global: { plugins: [pinia, router, i18n] },
   })
 }

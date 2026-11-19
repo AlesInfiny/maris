@@ -19,7 +19,6 @@ export default defineConfig((configEnv) =>
       test: {
         exclude: [...configDefaults.exclude, 'e2e/*'],
         root: fileURLToPath(new URL('./', import.meta.url)),
-        setupFiles: ['./vitest.setup.ts'],
         coverage: {
           provider: 'v8',
           reporter: ['json-summary', 'html'],
@@ -33,6 +32,7 @@ export default defineConfig((configEnv) =>
               name: 'unit',
               environment: 'jsdom',
               exclude: [...configDefaults.exclude, 'e2e/*', ...browserTestFiles],
+              setupFiles: ['./vitest.setup.ts'],
             },
           },
           {
@@ -40,6 +40,7 @@ export default defineConfig((configEnv) =>
             test: {
               name: 'browser',
               include: browserTestFiles,
+              setupFiles: ['./vitest.setup.ts', './vitest.browser.setup.ts'],
               browser: {
                 enabled: true,
                 provider: playwright(),

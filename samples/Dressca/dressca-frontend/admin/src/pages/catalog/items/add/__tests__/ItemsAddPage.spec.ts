@@ -36,6 +36,7 @@ function CreateLoginState(userRoles: string[]) {
  */
 function getWrapper(pinia: TestingPinia) {
   return mount(ItemsAddPage, {
+    attachTo: document.body,
     global: { plugins: [pinia, createStubRouter()] },
   })
 }
