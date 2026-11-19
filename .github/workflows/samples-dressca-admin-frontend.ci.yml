@@ -47,7 +47,7 @@ jobs:
         name: アプリケーションのビルド
         run: npm run build-only:dev:admin >> /var/tmp/build-result.txt 2>&1
 
-      # 依存ライブラリは GitHub ホストランナーに含まれており、--with-deps で追加されるフォントの apt 取得に時間がかかるため、ブラウザーだけをインストールします。
+      # Chromium の実行に必要なライブラリは GitHub ホストランナーに導入済みのため、--with-deps は付けません（付けると多言語フォントの apt 取得に数分かかることがあります）。
       - name: Vitest ブラウザーモードで使用するブラウザーのインストール
         run: npm exec -w admin -- playwright install chromium
 
