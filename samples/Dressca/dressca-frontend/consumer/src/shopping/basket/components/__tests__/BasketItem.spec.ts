@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { flushPromises, mount } from '@vue/test-utils'
+import { render } from 'vitest-browser-vue'
 import { i18n } from '@/system-common/locales/i18n'
 import type { BasketLine } from '../../models/basket-line'
 import BasketItem from '../BasketItem.vue'
@@ -20,97 +20,100 @@ function createBasketLine(): BasketLine {
   }
 }
 
+/**
+ * 買い物かごの行をテスト用に描画するヘルパー関数です。
+ * @param available 陳列品を購入できるかどうか。
+ * @returns 描画結果。
+ */
+function renderBasketItem(available: boolean) {
+  return render(BasketItem, {
+    props: { item: createBasketLine(), available },
+    global: { plugins: [i18n] },
+  })
+}
+
 describe('BasketItem', () => {
   beforeEach(() => {
     i18n.global.locale.value = 'ja'
   })
 
-  it('小計が日本円形式で表示できる', () => {
+  it('小計が日本円形式で表示できる', async () => {
     // Arrange
-    const basketLine = createBasketLine()
     const available = true
 
     // Act
-    const wrapper = mount(BasketItem, {
-      props: { item: basketLine, available },
-      global: { plugins: [i18n] },
-    })
+    const screen = await renderBasketItem(available)
 
     // Assert
-    expect(wrapper.text()).toContain('￥100,000')
+    await expect.element(screen.getByText('￥100,000')).toBeVisible()
   })
 
-  it('単価が日本円形式で表示できる', () => {
+  it('単価が日本円形式で表示できる', async () => {
     // Arrange
-    const basketLine = createBasketLine()
     const available = true
 
     // Act
-    const wrapper = mount(BasketItem, {
-      props: { item: basketLine, available },
-      global: { plugins: [i18n] },
-    })
+    const screen = await renderBasketItem(available)
 
     // Assert
-    expect(wrapper.text()).toContain('￥50,000')
+    await expect.element(screen.getByText('￥50,000')).toBeVisible()
   })
 
-  it('販売中止中のメッセージが表示できる', () => {
+  it('販売中止中のメッセージが表示できる', async () => {
     // Arrange
-    const basketLine = createBasketLine()
     const available = false
 
     // Act
-    const wrapper = mount(BasketItem, {
-      props: { item: basketLine, available },
-      global: { plugins: [i18n] },
-    })
+    const screen = await renderBasketItem(available)
 
     // Assert
-    expect(wrapper.text()).toContain(
-      'こちらの商品は現在販売しておりません。買い物かごから削除してください。',
-    )
+    await expect
+      .element(
+        screen.getByText('こちらの商品は現在販売しておりません。買い物かごから削除してください。'),
+      )
+      .toBeVisible()
   })
 
   it('数量が 0 のとき更新ボタンが非活性になる', async () => {
-    const wrapper = mount(BasketItem, {
-      props: { item: createBasketLine(), available: true },
-      global: { plugins: [i18n] },
-    })
+    // Arrange
+    const screen = await renderBasketItem(true)
+    const quantityInput = screen.getByRole('spinbutton')
+    const updateButton = screen.getByRole('button', { name: '更新' })
+    // 初期表示でも非活性なので、一度活性にしてから非活性に変わることを確かめます。
+    await quantityInput.fill('3')
+    await expect.element(updateButton).toBeEnabled()
 
-    const quantityInput = wrapper.find('input[type="number"]')
-    await quantityInput.setValue('0')
-    await quantityInput.trigger('blur')
-    await flushPromises()
+    // Act
+    await quantityInput.fill('0')
 
-    expect(wrapper.find('button').attributes('disabled')).toBeDefined()
+    // Assert
+    await expect.element(updateButton).toBeDisabled()
   })
 
   it('数量が 1000 のとき更新ボタンが非活性になる', async () => {
-    const wrapper = mount(BasketItem, {
-      props: { item: createBasketLine(), available: true },
-      global: { plugins: [i18n] },
-    })
+    // Arrange
+    const screen = await renderBasketItem(true)
+    const quantityInput = screen.getByRole('spinbutton')
+    const updateButton = screen.getByRole('button', { name: '更新' })
+    // 初期表示でも非活性なので、一度活性にしてから非活性に変わることを確かめます。
+    await quantityInput.fill('3')
+    await expect.element(updateButton).toBeEnabled()
 
-    const quantityInput = wrapper.find('input[type="number"]')
-    await quantityInput.setValue('1000')
-    await quantityInput.trigger('blur')
-    await flushPromises()
+    // Act
+    await quantityInput.fill('1000')
 
-    expect(wrapper.find('button').attributes('disabled')).toBeDefined()
+    // Assert
+    await expect.element(updateButton).toBeDisabled()
   })
 
   it('数量が有効な値に変更されたとき更新ボタンが活性になる', async () => {
-    const wrapper = mount(BasketItem, {
-      props: { item: createBasketLine(), available: true },
-      global: { plugins: [i18n] },
-    })
+    // Arrange
+    const screen = await renderBasketItem(true)
 
-    const quantityInput = wrapper.find('input[type="number"]')
-    await quantityInput.setValue('3')
-    await quantityInput.trigger('blur')
-    await flushPromises()
+    // Act
+    await screen.getByRole('spinbutton').fill('3')
 
-    expect(wrapper.find('button').attributes('disabled')).toBeUndefined()
+    // Assert
+    await expect.element(screen.getByRole('button', { name: '更新' })).toBeEnabled()
   })
 })

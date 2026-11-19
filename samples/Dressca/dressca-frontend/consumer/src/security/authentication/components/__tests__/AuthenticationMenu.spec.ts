@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { mount, RouterLinkStub } from '@vue/test-utils'
+import { render } from 'vitest-browser-vue'
 import { createPinia, setActivePinia, type Pinia } from 'pinia'
+import { defineComponent, h } from 'vue'
 import { useAuthenticationStore } from '../../stores/authentication'
 import AuthenticationMenu from '../AuthenticationMenu.vue'
 
@@ -13,47 +14,58 @@ beforeEach(() => {
 })
 
 /**
- * メニューをマウントします。
- * @returns マウント済みのラッパー。
+ * 遷移先を href に描画するだけの RouterLink のスタブです。
+ * 認証のコンテキストは vue-router を参照できないため、ルーターの代わりに使用します。
  */
-function mountMenu() {
-  return mount(AuthenticationMenu, {
+const RouterLinkStub = defineComponent({
+  props: { to: { type: String, required: true } },
+  setup(props, { slots }) {
+    return () => h('a', { href: props.to }, slots.default?.())
+  },
+})
+
+/**
+ * メニューをテスト用に描画するヘルパー関数です。
+ * @returns 描画結果。
+ */
+function renderMenu() {
+  return render(AuthenticationMenu, {
     props: { loginLocation: '/authentication/login' },
     global: { plugins: [pinia], stubs: { RouterLink: RouterLinkStub } },
   })
 }
 
 describe('AuthenticationMenu', () => {
-  it('未認証_ログインのリンクを指定した遷移先で表示する', () => {
+  it('未認証_ログインのリンクを指定した遷移先で表示する', async () => {
     // Arrange
     // Act
-    const wrapper = mountMenu()
+    const screen = await renderMenu()
     // Assert
-    const link = wrapper.getComponent(RouterLinkStub)
-    expect(link.text()).toBe('ログイン')
-    expect(link.props('to')).toBe('/authentication/login')
+    await expect
+      .element(screen.getByRole('link', { name: 'ログイン' }))
+      .toHaveAttribute('href', '/authentication/login')
   })
 
-  it('認証済み_ログアウトのボタンを表示する', () => {
+  it('認証済み_ログアウトのボタンを表示する', async () => {
     // Arrange
     useAuthenticationStore(pinia).signIn()
     // Act
-    const wrapper = mountMenu()
+    const screen = await renderMenu()
     // Assert
-    expect(wrapper.get('button').text()).toBe('ログアウト')
-    expect(wrapper.findComponent(RouterLinkStub).exists()).toBe(false)
+    await expect.element(screen.getByRole('button', { name: 'ログアウト' })).toBeVisible()
+    await expect.element(screen.getByRole('link')).not.toBeInTheDocument()
   })
 
   it('認証済みでログアウトする_未認証になりloggedOutを発行してログインのリンクに切り替わる', async () => {
     // Arrange
     useAuthenticationStore(pinia).signIn()
-    const wrapper = mountMenu()
+    const screen = await renderMenu()
     // Act
-    await wrapper.get('button').trigger('click')
+    await screen.getByRole('button', { name: 'ログアウト' }).click()
     // Assert
+    await expect.element(screen.getByRole('link', { name: 'ログイン' })).toBeVisible()
+    await expect.element(screen.getByRole('button')).not.toBeInTheDocument()
     expect(useAuthenticationStore(pinia).isAuthenticated).toBe(false)
-    expect(wrapper.emitted('loggedOut')).toHaveLength(1)
-    expect(wrapper.find('button').exists()).toBe(false)
-    expect(wrapper.getComponent(RouterLinkStub).text()).toBe('ログイン')
+    expect(screen.emitted('loggedOut')).toHaveLength(1)
   })
 })

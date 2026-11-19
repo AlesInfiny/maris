@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeAll, assert } from 'vitest'
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
+import { describe, it, expect, vi } from 'vitest'
+import { render } from 'vitest-browser-vue'
 import type { Router } from 'vue-router'
 import { routeNames, type BasketRouteState } from '@/core/router/route-names'
 import { createStubRouter } from '@/pages/__tests__/helpers/stub-router'
@@ -9,7 +9,6 @@ import BasketPage from '@/pages/basket/BasketPage.vue'
 import type { GetBasketItemsResponse } from '@/system-common/generated/api-client'
 import { ServerError } from '@/system-common/error-handler/custom-error'
 import { useNotificationStore } from '@/business-common/stores/notification'
-import { BasketItem } from '@/shopping/public-api'
 import { createAxiosError, createProblemDetails } from './helpers'
 
 /**
@@ -98,91 +97,79 @@ vi.mock('@/system-common/api-client', async (importOriginal) => ({
 let router: Router
 
 /**
- * コンポーネントをテスト用にマウントするヘルパー関数です。
+ * 買い物かご画面をテスト用に描画するヘルパー関数です。
  * @param stubRouter テストに使用するルーター。
- * @returns マウント済みの Vue Test Utils ラッパー
+ * @returns 描画結果。
  */
-function getWrapper(stubRouter: Router = createStubRouter()) {
+function renderBasketPage(stubRouter: Router = createStubRouter()) {
   router = stubRouter
   const pinia = createTestingPinia({
     createSpy: vi.fn, // 明示的に設定する必要があります。
     stubActions: false, // 結合テストなので、アクションはモック化しないように設定します。
   })
   i18n.global.locale.value = 'ja' // テストを実行するブラウザーの言語設定に依存しないよう、日本語に固定します。
-  return mount(BasketPage, {
-    attachTo: document.body,
+  return render(BasketPage, {
     global: { plugins: [pinia, router, i18n] },
   })
 }
 
 describe('買い物かごのアイテムを表示する_アイテムが入っている', () => {
-  let wrapper: VueWrapper
-
-  beforeAll(() => {
-    // onMounted のタイミングで API コールを行っているので、wrapper の作成よりも先にモックする必要があります。
-    getBasketItemsMock.mockResolvedValue({ data: createGetBasketItemsResponse() })
-    wrapper = getWrapper()
-  })
-
   it('取得したアイテムの情報が表示される', async () => {
     // Arrange
-    const expectCount = createGetBasketItemsResponse().basketItems!.length
+    getBasketItemsMock.mockResolvedValue({ data: createGetBasketItemsResponse() })
     // Act
-    await flushPromises()
+    const screen = await renderBasketPage()
     // Assert
-    const basketItem = wrapper.findAllComponents(BasketItem)
-    expect(wrapper.html()).toContain('クルーネック Tシャツ - ブラック')
-    expect(wrapper.html()).toContain('裏起毛 スキニーデニム')
-    expect(basketItem).toHaveLength(expectCount)
+    await expect.element(screen.getByText('クルーネック Tシャツ - ブラック')).toBeVisible()
+    await expect.element(screen.getByText('裏起毛 スキニーデニム')).toBeVisible()
   })
 
-  it('「買い物を続ける」ボタンが表示されている', () => {
+  it('「買い物を続ける」ボタンが表示されている', async () => {
     // Arrange
+    getBasketItemsMock.mockResolvedValue({ data: createGetBasketItemsResponse() })
     // Act
+    const screen = await renderBasketPage()
     // Assert
-    const button = wrapper.findAll('button')[0]!
-    expect(button.isVisible()).toBe(true)
+    await expect.element(screen.getByRole('button', { name: '買い物を続ける' })).toBeVisible()
   })
 
-  it('「レジに進む」ボタンが表示されている', () => {
+  it('「レジに進む」ボタンが表示されている', async () => {
     // Arrange
+    getBasketItemsMock.mockResolvedValue({ data: createGetBasketItemsResponse() })
     // Act
+    const screen = await renderBasketPage()
     // Assert
-    const button = wrapper.findAll('button')[1]!
-    expect(button.isVisible()).toBe(true)
+    await expect.element(screen.getByRole('button', { name: 'レジに進む' })).toBeVisible()
   })
 })
 
 describe('買い物かごのアイテムを表示する_アイテムが0件', () => {
-  let wrapper: VueWrapper
-
-  beforeAll(() => {
-    getBasketItemsMock.mockResolvedValue({ data: createEmptyGetBasketItemsResponse() })
-    wrapper = getWrapper()
-  })
-
   it('0件を示すメッセージが表示される', async () => {
     // Arrange
+    getBasketItemsMock.mockResolvedValue({ data: createEmptyGetBasketItemsResponse() })
     // Act
-    await flushPromises()
+    const screen = await renderBasketPage()
     // Assert
-    expect(wrapper.html()).toContain('買い物かごに商品がありません。')
+    await expect.element(screen.getByText('買い物かごに商品がありません。')).toBeVisible()
   })
 
-  it('「買い物を続ける」ボタンが表示されている', () => {
+  it('「買い物を続ける」ボタンが表示されている', async () => {
     // Arrange
+    getBasketItemsMock.mockResolvedValue({ data: createEmptyGetBasketItemsResponse() })
     // Act
+    const screen = await renderBasketPage()
     // Assert
-    const button = wrapper.findAll('button')[0]!
-    expect(button.isVisible()).toBe(true)
+    await expect.element(screen.getByRole('button', { name: '買い物を続ける' })).toBeVisible()
   })
 
-  it('「レジに進む」ボタンが表示されていない', () => {
+  it('「レジに進む」ボタンが表示されていない', async () => {
     // Arrange
+    getBasketItemsMock.mockResolvedValue({ data: createEmptyGetBasketItemsResponse() })
     // Act
+    const screen = await renderBasketPage()
     // Assert
-    const button = wrapper.find('[data-testId="orderButton"]')
-    expect(button.exists()).toBe(false)
+    await expect.element(screen.getByText('買い物かごに商品がありません。')).toBeVisible()
+    await expect.element(screen.getByRole('button', { name: 'レジに進む' })).not.toBeInTheDocument()
   })
 })
 
@@ -202,18 +189,17 @@ describe('買い物かごのアイテムを表示する_サーバーエラー', 
     const error = createAxiosError(problem)
     getBasketItemsMock.mockRejectedValue(new ServerError('', error))
     const expectMessage = 'サーバーエラーが発生しました。'
-    getWrapper()
-    const notificationStore = useNotificationStore()
 
     // Act
-    await flushPromises()
+    await renderBasketPage()
+    const notificationStore = useNotificationStore()
 
     // Assert
-    assert.equal(notificationStore.message, expectMessage)
-    assert.equal(notificationStore.id, expectExceptionId)
-    assert.equal(notificationStore.title, expectTitle)
-    assert.equal(notificationStore.detail, expectDetail)
-    assert.equal(notificationStore.status, expectStatus)
+    await expect.poll(() => notificationStore.message).toBe(expectMessage)
+    expect(notificationStore.id).toBe(expectExceptionId)
+    expect(notificationStore.title).toBe(expectTitle)
+    expect(notificationStore.detail).toBe(expectDetail)
+    expect(notificationStore.status).toBe(expectStatus)
   })
 })
 
@@ -224,23 +210,20 @@ describe('結果の通知と遷移', () => {
     response.deletedItemIds = [response.basketItems![0]!.displayItemId]
     getBasketItemsMock.mockResolvedValue({ data: response })
     // Act
-    const wrapper = getWrapper()
-    await flushPromises()
+    const screen = await renderBasketPage()
     // Assert
+    await expect.element(screen.getByRole('button', { name: 'レジに進む' })).toBeDisabled()
     expect(useNotificationStore().message).toBe(i18n.global.t('basketContainsUnavailableItem'))
-    expect(wrapper.find('[data-testId="orderButton"]').attributes('disabled')).toBeDefined()
   })
 
   it('レジに進む_注文確認画面へ遷移する', async () => {
     // Arrange
     getBasketItemsMock.mockResolvedValue({ data: createGetBasketItemsResponse() })
-    const wrapper = getWrapper()
-    await flushPromises()
+    const screen = await renderBasketPage()
     // Act
-    await wrapper.find('[data-testId="orderButton"]').trigger('click')
-    await flushPromises()
+    await screen.getByRole('button', { name: 'レジに進む' }).click()
     // Assert
-    expect(router.currentRoute.value.name).toBe(routeNames.checkout)
+    await expect.poll(() => router.currentRoute.value.name).toBe(routeNames.checkout)
   })
 })
 
@@ -253,19 +236,20 @@ describe('直前に買い物かごに入れた陳列品', () => {
     const state: BasketRouteState = { addedItemId: response.basketItems![0]!.displayItemId }
     await stubRouter.push({ name: routeNames.basket, state })
     // Act
-    const wrapper = getWrapper(stubRouter)
-    await flushPromises()
+    const screen = await renderBasketPage(stubRouter)
     // Assert
-    expect(wrapper.text()).toContain(i18n.global.t('addedItemsToBasket'))
+    await expect.element(screen.getByText(i18n.global.t('addedItemsToBasket'))).toBeVisible()
   })
 
   it('履歴エントリーの state に陳列品の ID がない_表示しない', async () => {
     // Arrange
     getBasketItemsMock.mockResolvedValue({ data: createGetBasketItemsResponse() })
     // Act
-    const wrapper = getWrapper()
-    await flushPromises()
+    const screen = await renderBasketPage()
     // Assert
-    expect(wrapper.text()).not.toContain(i18n.global.t('addedItemsToBasket'))
+    await expect.element(screen.getByText('クルーネック Tシャツ - ブラック')).toBeVisible()
+    await expect
+      .element(screen.getByText(i18n.global.t('addedItemsToBasket')))
+      .not.toBeInTheDocument()
   })
 })

@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { flushPromises, mount } from '@vue/test-utils'
+import { render } from 'vitest-browser-vue'
 import { createTestingPinia, type TestingPinia } from '@pinia/testing'
+import { useEventBus } from '@vueuse/core'
 import type { GetBasketItemsResponse } from '@/system-common/generated/api-client'
 import type { Router } from 'vue-router'
 import CheckoutPage from '@/pages/ordering/checkout/CheckoutPage.vue'
@@ -8,6 +9,7 @@ import { routeNames } from '@/core/router/route-names'
 import { createStubRouter } from '@/pages/__tests__/helpers/stub-router'
 import { i18n } from '@/system-common/locales/i18n'
 import { ServerError, UnauthorizedError } from '@/system-common/error-handler/custom-error'
+import { unauthorizedErrorEventKey } from '@/system-common/events'
 import { useNotificationStore } from '@/business-common/stores/notification'
 
 const { getBasketItemsMock, postOrderMock } = vi.hoisted(() => ({
@@ -52,24 +54,15 @@ function useBasketResponse(itemCount: number) {
 }
 
 /**
- * 注文確認画面を表示し、読み込みの完了を待ちます。
- * @returns マウント済みの Vue Test Utils のラッパーと TestingPinia インスタンス
+ * 注文確認画面をテスト用に描画するヘルパー関数です。
+ * @returns 描画結果と TestingPinia インスタンス
  */
-async function getWrapper() {
+async function renderCheckoutPage() {
   const pinia: TestingPinia = createTestingPinia({ createSpy: vi.fn, stubActions: false })
   router = createStubRouter()
   await router.push({ name: routeNames.checkout })
-  const wrapper = mount(CheckoutPage, { global: { plugins: [pinia, router] } })
-  await flushPromises()
-  return { wrapper, pinia }
-}
-
-/**
- * 注文を確定するボタンを押下します。
- * @param wrapper 注文確認画面のラッパー。
- */
-async function clickPlaceOrder(wrapper: Awaited<ReturnType<typeof getWrapper>>['wrapper']) {
-  await wrapper.findAll('button')[0]!.trigger('click')
+  const screen = await render(CheckoutPage, { global: { plugins: [pinia, router] } })
+  return { screen, pinia }
 }
 
 describe('注文を確定するボタン', () => {
@@ -77,18 +70,18 @@ describe('注文を確定するボタン', () => {
     // Arrange
     getBasketItemsMock.mockReturnValue(new Promise(() => {}))
     // Act
-    const { wrapper } = await getWrapper()
+    const { screen } = await renderCheckoutPage()
     // Assert
-    expect(wrapper.findAll('button')[0]!.attributes('disabled')).toBeDefined()
+    await expect.element(screen.getByRole('button', { name: '注文を確定する' })).toBeDisabled()
   })
 
   it('買い物かごの読み込みが完了した_押せる', async () => {
     // Arrange
     useBasketResponse(1)
     // Act
-    const { wrapper } = await getWrapper()
+    const { screen } = await renderCheckoutPage()
     // Assert
-    expect(wrapper.findAll('button')[0]!.attributes('disabled')).toBeUndefined()
+    await expect.element(screen.getByRole('button', { name: '注文を確定する' })).toBeEnabled()
   })
 })
 
@@ -97,10 +90,9 @@ describe('結果の通知と遷移', () => {
     // Arrange
     useBasketResponse(0)
     // Act
-    await getWrapper()
-    await flushPromises()
+    await renderCheckoutPage()
     // Assert
-    expect(router.currentRoute.value.name).toBe(routeNames.displayItem)
+    await expect.poll(() => router.currentRoute.value.name).toBe(routeNames.displayItem)
   })
 
   it('注文を確定できる_注文完了画面へ遷移する', async () => {
@@ -109,12 +101,11 @@ describe('結果の通知と遷移', () => {
     postOrderMock.mockResolvedValue({
       headers: { location: 'http://localhost/api/orders/order-id' },
     })
-    const { wrapper } = await getWrapper()
+    const { screen } = await renderCheckoutPage()
     // Act
-    await clickPlaceOrder(wrapper)
-    await flushPromises()
+    await screen.getByRole('button', { name: '注文を確定する' }).click()
     // Assert
-    expect(router.currentRoute.value.name).toBe(routeNames.done)
+    await expect.poll(() => router.currentRoute.value.name).toBe(routeNames.done)
     expect(router.currentRoute.value.params).toEqual({ orderId: 'order-id' })
   })
 
@@ -122,25 +113,27 @@ describe('結果の通知と遷移', () => {
     // Arrange
     useBasketResponse(1)
     postOrderMock.mockRejectedValue(new ServerError(''))
-    const { wrapper, pinia } = await getWrapper()
+    const { screen, pinia } = await renderCheckoutPage()
     // Act
-    await clickPlaceOrder(wrapper)
-    await flushPromises()
+    await screen.getByRole('button', { name: '注文を確定する' }).click()
     // Assert
+    await expect.poll(() => router.currentRoute.value.name).toBe(routeNames.error)
     expect(useNotificationStore(pinia).message).toBe(t('failedToOrderItems'))
-    expect(router.currentRoute.value.name).toBe(routeNames.error)
   })
 
   it('認証が切れている_画面はトーストも遷移もしない', async () => {
     // Arrange
     useBasketResponse(1)
     postOrderMock.mockRejectedValue(new UnauthorizedError(''))
-    const { wrapper, pinia } = await getWrapper()
+    const unauthorizedListener = vi.fn()
+    const off = useEventBus(unauthorizedErrorEventKey).on(unauthorizedListener)
+    const { screen, pinia } = await renderCheckoutPage()
     // Act
-    await clickPlaceOrder(wrapper)
-    await flushPromises()
+    await screen.getByRole('button', { name: '注文を確定する' }).click()
     // Assert
     // ログイン画面への遷移は、共通のエラー処理が発行する認証エラーのイベントを受けて App.vue が行う
+    await expect.poll(() => unauthorizedListener).toHaveBeenCalledOnce()
+    off()
     expect(useNotificationStore(pinia).message).not.toBe(t('failedToOrderItems'))
     expect(router.currentRoute.value.name).toBe(routeNames.checkout)
   })

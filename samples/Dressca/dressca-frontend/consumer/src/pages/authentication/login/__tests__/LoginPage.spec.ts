@@ -1,13 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { render } from 'vitest-browser-vue'
+import type { Locator } from 'vitest/browser'
 import { i18n } from '@/system-common/locales/i18n'
 import LoginPage from '@/pages/authentication/login/LoginPage.vue'
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import type { Router } from 'vue-router'
 import { routeNames } from '@/core/router/route-names'
 import { createStubRouter } from '@/pages/__tests__/helpers/stub-router'
 import { createTestingPinia } from '@pinia/testing'
-import { FormContextKey, type FormContext } from 'vee-validate'
-import type { ComponentInternalInstance } from 'vue'
 
 let router: Router
 
@@ -16,130 +15,97 @@ beforeEach(() => {
 })
 
 /**
- * 日本語ロケールでのテスト用のラッパーを生成します。
- * @returns マウント済みのラッパー。
+ * ログイン画面を指定したロケールでテスト用に描画するヘルパー関数です。
+ * @param locale 表示に使用するロケール。
+ * @returns 描画結果。
  */
-function getWrapperJa() {
+function renderLoginPage(locale: 'ja' | 'en') {
   const pinia = createTestingPinia({
     createSpy: vi.fn,
   })
-  i18n.global.locale.value = 'ja'
-  return mount(LoginPage, {
+  i18n.global.locale.value = locale
+  return render(LoginPage, {
     global: { plugins: [pinia, router, i18n] },
   })
 }
 
 /**
- * 英語ロケールでのテスト用のラッパーを生成します。
- * @returns マウント済みのラッパー。
+ * 入力欄に値を入力します。
+ * @param input 入力欄。
+ * @param value 入力する値。
  */
-function getWrapperEn() {
-  const pinia = createTestingPinia({
-    createSpy: vi.fn,
-  })
-  i18n.global.locale.value = 'en'
-  return mount(LoginPage, {
-    global: { plugins: [pinia, router, i18n] },
-  })
-}
-
-type ComponentInternalInstanceWithProvides = ComponentInternalInstance & {
-  provides: Record<symbol, unknown>
+async function fillInput(input: Locator, value: string) {
+  if (value === '') {
+    // 入力欄の初期値も空なので、一度入力してから消さないと値が変わらず検証されません。
+    await input.fill('x')
+  }
+  await input.fill(value)
 }
 
 /**
- * FormContext を取得するユーティリティ関数
- * @param wrapper VueWrapper インスタンス
- * @returns FormContext
- */
-function getFormContext(wrapper: VueWrapper): FormContext {
-  const instance = wrapper.getCurrentComponent() as ComponentInternalInstanceWithProvides
-  return instance.provides[FormContextKey] as FormContext
-}
-
-/**
- * 入力値を設定してバリデーションを実行します。
- * @param wrapper VueWrapper インスタンス
+ * メールアドレスとパスワードを入力します。
+ * @param screen ログイン画面の描画結果。
  * @param email メールアドレス
  * @param password パスワード
  */
-async function setValuesAndValidate(wrapper: VueWrapper, email?: string, password?: string) {
-  const formCtx = getFormContext(wrapper)
-  const emailInput = wrapper.get('input#email')
-  const passwordInput = wrapper.get('input#password')
-
-  if (email === undefined) {
-    formCtx.setFieldValue('email', undefined)
-  } else {
-    await emailInput.setValue(email)
-    await emailInput.trigger('blur')
-  }
-
-  if (password === undefined) {
-    formCtx.setFieldValue('password', undefined)
-  } else {
-    await passwordInput.setValue(password)
-    await passwordInput.trigger('blur')
-  }
-
-  // 明示的にvalidateを呼び出す
-  await formCtx.validate()
-  await flushPromises()
+async function enterCredentials(
+  screen: Awaited<ReturnType<typeof renderLoginPage>>,
+  email: string,
+  password: string,
+) {
+  await fillInput(screen.getByPlaceholder('email'), email)
+  await fillInput(screen.getByPlaceholder('password'), password)
 }
 
 describe('Authentication validation', () => {
   it('入力値が空の場合、日本語で必須メッセージを返す', async () => {
-    const wrapper = getWrapperJa()
-    await setValuesAndValidate(wrapper, '', '')
+    const screen = await renderLoginPage('ja')
+    await enterCredentials(screen, '', '')
 
-    const emailErr = wrapper.find('#email-error').text()
-    expect(emailErr).toBe('値を入力してください')
-    const passwordErr = wrapper.find('#password-error').text()
-    expect(passwordErr).toBe('値を入力してください')
+    const requiredMessages = screen.getByText('値を入力してください')
+    await expect.element(requiredMessages.nth(0)).toBeVisible()
+    await expect.element(requiredMessages.nth(1)).toBeVisible()
   })
 
   it('入力値が空白の場合、日本語で必須メッセージを返す', async () => {
-    const wrapper = getWrapperJa()
-    await setValuesAndValidate(wrapper, ' ', ' ')
-    const emailErr = wrapper.find('#email-error').text()
-    expect(emailErr).toBe('値を入力してください')
-    const passwordErr = wrapper.find('#password-error').text()
-    expect(passwordErr).toBe('値を入力してください')
+    const screen = await renderLoginPage('ja')
+    await enterCredentials(screen, ' ', ' ')
+
+    const requiredMessages = screen.getByText('値を入力してください')
+    await expect.element(requiredMessages.nth(0)).toBeVisible()
+    await expect.element(requiredMessages.nth(1)).toBeVisible()
   })
 
   it('日本語でメール形式メッセージを返す', async () => {
-    const wrapper = getWrapperJa()
-    await setValuesAndValidate(wrapper, 'invalid-email', 'aaa')
-    const emailErr = wrapper.find('#email-error').text()
-    expect(emailErr).toBe('メールアドレスの形式で入力してください')
+    const screen = await renderLoginPage('ja')
+    await enterCredentials(screen, 'invalid-email', 'aaa')
+
+    await expect.element(screen.getByText('メールアドレスの形式で入力してください')).toBeVisible()
   })
 
   it('入力値が空の場合、英語で必須メッセージを返す', async () => {
-    const wrapper = getWrapperEn()
-    await setValuesAndValidate(wrapper, '', '')
+    const screen = await renderLoginPage('en')
+    await enterCredentials(screen, '', '')
 
-    const emailErr = wrapper.find('#email-error').text()
-    expect(emailErr).toBe('this field is required')
-    const passwordErr = wrapper.find('#password-error').text()
-    expect(passwordErr).toBe('this field is required')
+    const requiredMessages = screen.getByText('this field is required')
+    await expect.element(requiredMessages.nth(0)).toBeVisible()
+    await expect.element(requiredMessages.nth(1)).toBeVisible()
   })
 
   it('入力値が空白の場合、英語で必須メッセージを返す', async () => {
-    const wrapper = getWrapperEn()
-    await setValuesAndValidate(wrapper, ' ', ' ')
+    const screen = await renderLoginPage('en')
+    await enterCredentials(screen, ' ', ' ')
 
-    const emailErr = wrapper.find('#email-error').text()
-    expect(emailErr).toBe('this field is required')
-    const passwordErr = wrapper.find('#password-error').text()
-    expect(passwordErr).toBe('this field is required')
+    const requiredMessages = screen.getByText('this field is required')
+    await expect.element(requiredMessages.nth(0)).toBeVisible()
+    await expect.element(requiredMessages.nth(1)).toBeVisible()
   })
 
   it('英語でメール形式メッセージを返す', async () => {
-    const wrapper = getWrapperEn()
-    await setValuesAndValidate(wrapper, 'invalid-email', 'aaa')
+    const screen = await renderLoginPage('en')
+    await enterCredentials(screen, 'invalid-email', 'aaa')
 
-    const emailErr = wrapper.find('#email-error').text()
-    expect(emailErr).toBe('invalid email format')
+    await expect.element(screen.getByText('invalid email format')).toBeVisible()
   })
 })
 
@@ -147,24 +113,22 @@ describe('ログイン後の遷移', () => {
   it('戻り先がある_戻り先の画面へ遷移する', async () => {
     // Arrange
     await router.push({ name: routeNames.login, query: { redirect: '/basket' } })
-    const wrapper = getWrapperJa()
-    await setValuesAndValidate(wrapper, 'user@example.com', 'password')
+    const screen = await renderLoginPage('ja')
+    await enterCredentials(screen, 'user@example.com', 'password')
     // Act
-    await wrapper.get('button').trigger('click')
-    await flushPromises()
+    await screen.getByRole('button', { name: 'ログイン' }).click()
     // Assert
-    expect(router.currentRoute.value.fullPath).toBe('/basket')
+    await expect.poll(() => router.currentRoute.value.fullPath).toBe('/basket')
   })
 
   it('戻り先がアプリケーション外を指す_陳列品画面へ遷移する', async () => {
     // Arrange
     await router.push({ name: routeNames.login, query: { redirect: '//example.com' } })
-    const wrapper = getWrapperJa()
-    await setValuesAndValidate(wrapper, 'user@example.com', 'password')
+    const screen = await renderLoginPage('ja')
+    await enterCredentials(screen, 'user@example.com', 'password')
     // Act
-    await wrapper.get('button').trigger('click')
-    await flushPromises()
+    await screen.getByRole('button', { name: 'ログイン' }).click()
     // Assert
-    expect(router.currentRoute.value.fullPath).toBe('/')
+    await expect.poll(() => router.currentRoute.value.fullPath).toBe('/')
   })
 })

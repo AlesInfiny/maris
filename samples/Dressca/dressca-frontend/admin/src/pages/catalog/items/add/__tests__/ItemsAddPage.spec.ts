@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeAll } from 'vitest'
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
+import { describe, it, expect, vi } from 'vitest'
+import { render } from 'vitest-browser-vue'
 import { createStubRouter } from '@/pages/__tests__/helpers/stub-router'
 import { createTestingPinia, type TestingPinia } from '@pinia/testing'
 import { http, HttpResponse } from 'msw'
@@ -29,69 +29,53 @@ function CreateLoginState(userRoles: string[]) {
 }
 
 /**
- * 指定された Pinia ストアを利用してコンポーネントをマウントします。
+ * 指定された Pinia ストアを利用して、アイテム追加画面をテスト用に描画します。
  * グローバルプラグインとして `pinia` と `router` を注入します。
  * @param pinia - テストに使用する TestingPinia インスタンス
- * @returns マウント済みの Vue Test Utils のラッパー
+ * @returns 描画結果
  */
-function getWrapper(pinia: TestingPinia) {
-  return mount(ItemsAddPage, {
-    attachTo: document.body,
+function renderItemsAddPage(pinia: TestingPinia) {
+  return render(ItemsAddPage, {
     global: { plugins: [pinia, createStubRouter()] },
   })
 }
 
 describe('管理者ロール_アイテムを追加できる', () => {
-  let loginState: TestingPinia
-  let wrapper: VueWrapper
-
-  beforeAll(() => {
-    loginState = CreateLoginState([adminRole])
-    wrapper = getWrapper(loginState)
-  })
-
   it('追加画面に遷移できる', async () => {
     // Arrange
     // Act
+    const screen = await renderItemsAddPage(CreateLoginState([adminRole]))
     // Assert
-    await expect.poll(() => wrapper.html()).toContain('カタログアイテム追加')
+    await expect.element(screen.getByText('カタログアイテム追加')).toBeVisible()
   })
 
   it('追加ボタンを押下_追加成功_通知モーダルが開く', async () => {
     // Arrange
+    const screen = await renderItemsAddPage(CreateLoginState([adminRole]))
     // Act
-    await wrapper.find('button').trigger('click')
-    await flushPromises()
-    await vi.waitUntil(() =>
-      wrapper.findAllComponents({ name: 'NotificationModal' })[0]!.isVisible(),
-    )
+    await screen.getByRole('button', { name: '追加' }).click()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテムを追加しました。')
+    await expect
+      .element(screen.getByRole('dialog').getByText('カタログアイテムを追加しました。'))
+      .toBeVisible()
   })
 })
 
 describe('ゲストロール_アイテム追加ボタンが非活性', () => {
-  let loginState: TestingPinia
-  let wrapper: VueWrapper
-
-  beforeAll(() => {
-    loginState = CreateLoginState(['ROLE_GUEST'])
-    wrapper = getWrapper(loginState)
-  })
-
   it('追加画面に遷移できる', async () => {
     // Arrange
     // Act
+    const screen = await renderItemsAddPage(CreateLoginState(['ROLE_GUEST']))
     // Assert
-    await expect.poll(() => wrapper.html()).toContain('カタログアイテム追加')
+    await expect.element(screen.getByText('カタログアイテム追加')).toBeVisible()
   })
 
-  it('追加ボタンが非活性', () => {
+  it('追加ボタンが非活性', async () => {
     // Arrange
     // Act
-    const button = wrapper.find('button')
+    const screen = await renderItemsAddPage(CreateLoginState(['ROLE_GUEST']))
     // Assert
-    expect(button.attributes('disabled')).toBeDefined()
+    await expect.element(screen.getByRole('button', { name: '追加' })).toBeDisabled()
   })
 })
 
@@ -106,19 +90,20 @@ describe('結果の通知', () => {
     )
     const loginState = CreateLoginState([adminRole])
     // Act
-    const wrapper = getWrapper(loginState)
+    const screen = await renderItemsAddPage(loginState)
     // Assert
     await expect
       .poll(() => useNotificationStore(loginState).message)
       .toBe('カテゴリとブランド情報の取得に失敗しました。')
-    expect(wrapper.find('form').exists()).toBe(false)
+    await expect.element(screen.getByLabelText('アイテム名')).not.toBeInTheDocument()
+    await expect.element(screen.getByRole('button', { name: '追加' })).not.toBeInTheDocument()
   })
 
   it('追加に失敗した_トーストを表示する', async () => {
     // Arrange
     const loginState = CreateLoginState([adminRole])
-    const wrapper = getWrapper(loginState)
-    await expect.poll(() => wrapper.find('form').exists()).toBe(true)
+    const screen = await renderItemsAddPage(loginState)
+    await expect.element(screen.getByRole('button', { name: '追加' })).toBeEnabled()
     worker.use(
       http.post(
         '/api/catalog-items',
@@ -126,11 +111,11 @@ describe('結果の通知', () => {
       ),
     )
     // Act
-    await wrapper.find('button').trigger('click')
+    await screen.getByRole('button', { name: '追加' }).click()
     // Assert
     await expect
       .poll(() => useNotificationStore(loginState).message)
       .toBe('カタログアイテムの追加に失敗しました。')
-    expect(wrapper.findAllComponents({ name: 'NotificationModal' })[0]!.isVisible()).toBe(false)
+    await expect.element(screen.getByRole('dialog')).not.toBeInTheDocument()
   })
 })
