@@ -68,7 +68,7 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 ??? example "tsconfig.node.json の設定例"
 
-    E2E テストには Playwright を使用するので、 `include` キーから nightwatch.conf.\* および cypress.config.\* を削除しています。
+    E2E テストには Playwright を使用するので、 `include` キーから cypress.config.\* を削除しています。
     また、 eslint.config.\* は [静的コード分析とフォーマット](./static-verification-and-format.md#mono-repo-config) の手順でルートプロジェクトに移動するため、 `include` キーから削除しています。
 
     ```json title="サンプルアプリケーション の tsconfig.node.json" hl_lines="3"
