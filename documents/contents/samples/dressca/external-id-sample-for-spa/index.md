@@ -13,6 +13,11 @@ Microsoft Entra External ID （以降、 Entra External ID ）を利用したユ
 また、 SPA アプリケーション（ AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）のアーキテクチャに準拠したアプリケーション）に本サンプルのファイルやコードをコピーしてください。
 これにより、 SPA アプリケーションに Entra External ID を利用したユーザー認証機能を組み込めます。
 
+!!! warning "フォルダー構成について"
+
+    本サンプルは認証機能に焦点を当てた小規模のサンプルなので、システムの関心事のフォルダーを最上位に置くフォルダー構成にしています。
+    [アーキテクチャ解説 - フォルダー構成](../../../app-architecture/client-side-rendering/frontend-architecture.md#project-structure) で定めた構成とは異なります。
+
 ## 本サンプルを利用するための前提 {#prerequisites}
 
 本サンプルを動作させるためには、以下が必要です。
