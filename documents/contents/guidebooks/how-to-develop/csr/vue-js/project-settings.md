@@ -40,7 +40,7 @@ TypeScript で作成されたファイルは、 `tsconfig.json` の設定値を�
 
 Project Reference 機能については [Project References :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/project-references.html){ target=_blank } を参照してください。
 
-なお、 `tsconfig.app.json` `tsconfig.node.json` には npm パッケージで提供されている `tsconfig` を継承するように設定されているため、継承元の設定値が存在します。
+なお、 `tsconfig.app.json` と `tsconfig.node.json` には npm パッケージで提供されている `tsconfig` を継承するように設定されているため、継承元の設定値が存在します。
 `extends` に定義されている継承元ファイルを参照して実際の設定値を確認できます。
 
 ![tsconfigの継承関係](../../../../images/guidebooks/how-to-develop/csr/vue-js/vue-tsconfig-light.png#only-light){ loading=lazy }
@@ -50,9 +50,9 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 ??? example "tsconfig.json の設定例"
 
-    デフォルトの設定から変更の必要はありません。
+    E2E テストのコードを型チェックの対象にするため、`references` キーに E2E テスト用の e2e/tsconfig.json を追加しています。
 
-    ```json title="サンプルアプリケーション の tsconfig.json"
+    ```json title="サンプルアプリケーション の tsconfig.json" hl_lines="13-15"
     --8<-- "samples/Dressca/dressca-frontend/consumer/tsconfig.json"
     ```
 
@@ -68,7 +68,8 @@ Project Reference 機能については [Project References :material-open-in-ne
 
 ??? example "tsconfig.node.json の設定例"
 
-    E2E テストには Playwright を使用するので、 `include` キーから nightwatch.conf.\* および cypress.config.\* を削除しています。
+    E2E テストには Playwright を使用するので、 `include` キーから cypress.config.\* を削除しています。
+    また、 eslint.config.\* は [静的コード分析とフォーマット](./static-verification-and-format.md#mono-repo-config) の手順でルートプロジェクトに移動するため、 `include` キーから削除しています。
 
     ```json title="サンプルアプリケーション の tsconfig.node.json" hl_lines="3"
     --8<-- "samples/Dressca/dressca-frontend/consumer/tsconfig.node.json"
@@ -110,13 +111,22 @@ Project Reference 機能については [Project References :material-open-in-ne
 - `compilerOptions.module`
   
     トランスパイルしたファイルのモジュールシステムを設定するプロパティです。
-    tsconfig.node.json で `ESNext` が `create-vue` した際にデフォルトで設定されます。
+    tsconfig.node.json では `create-vue` した際のデフォルト値として `preserve` が設定されています。
+    `preserve` は import 文や require 文を記述したまま維持する設定で、トランスパイルをバンドラーなどのツールに任せる場合に適しています。
     `compilerOptions.module` の設定値については [The module output format :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/modules/theory.html#the-module-output-format){ target=_blank } を参照してください。
 
 - `compilerOptions.moduleResolution`
   
     モジュール解決の方針を設定するプロパティです。
-    tsconfig.node.json では `create-vue` した際のデフォルト値として Vite での利用が推奨されている `Bundler` が設定されています。 `Bundler` についての詳細は [--moduleResolution bundler :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#--moduleresolution-bundler){ target=_blank } を参照してください。
+    tsconfig.node.json では `create-vue` した際のデフォルト値として Vite での利用が推奨されている `bundler` が設定されています。 `bundler` についての詳細は [--moduleResolution bundler :material-open-in-new:](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#--moduleresolution-bundler){ target=_blank } を参照してください。
+
+- `compilerOptions.allowImportingTsExtensions`
+
+    `.ts` などの TypeScript の拡張子を付けたパスでの import を許可するプロパティです。
+    tsconfig.node.json では `create-vue` した際のデフォルト値として `true` が設定されています。
+    これは、 vitest.config.ts が `./vite.config.ts` を拡張子付きのパスで import しているためです。
+    このプロパティは、 `noEmit` が `true` の場合など、トランスパイルの結果を出力しない設定でのみ使用できます。
+    詳細は [Compiler Options - Allow Importing TS Extensions :material-open-in-new:](https://www.typescriptlang.org/tsconfig/#allowImportingTsExtensions){ target=_blank } を参照してください。
 
 - `compilerOptions.types`
 
@@ -124,6 +134,13 @@ Project Reference 機能については [Project References :material-open-in-ne
     既定値は空配列であるため、必要な型定義パッケージは明示的に指定する必要があります。
     たとえば Vitest を用いたテストでは、`node` や `jsdom` の型定義を使用するので、 tsconfig.vitest.json にこれらを設定します。
     詳細は [Compiler Options - Types :material-open-in-new:](https://www.typescriptlang.org/tsconfig/#types){ target=_blank }を参照してください。
+
+- `compilerOptions.noUncheckedIndexedAccess`
+
+    配列やオブジェクトにインデックスでアクセスした結果の型に `undefined` を含めるプロパティです。
+    tsconfig.app.json では `create-vue` した際のデフォルト値として `true` が設定されています。
+    存在しない要素へのアクセスによる実行時エラーを型チェックで検出できるため、デフォルト値のまま使用します。
+    詳細は [Compiler Options - noUncheckedIndexedAccess :material-open-in-new:](https://www.typescriptlang.org/tsconfig/#noUncheckedIndexedAccess){ target=_blank } を参照してください。
 
 ### 型チェックの実行 {#type-check-execution}
 
@@ -143,7 +160,7 @@ npm run type-check
 ### ビルドの実行 {#build-execution}
 
 ワークスペース直下で以下のコマンドを実行し、ビルドが実行できることを確認してください。
-dist フォルダーの配下に html ファイル、 css ファイル、 Javascript ファイル一式が生成されます。
+dist フォルダーの配下に html ファイル、 css ファイル、 JavaScript ファイル一式が生成されます。
 
 ```shell linenums="0"
 npm run build
@@ -179,7 +196,7 @@ npm run build
         設定例では prod モードでビルド[^3]した際に、 Mock Service Worker のワーカースクリプトを削除するプラグインを読み込んでいます。
 
         ```typescript title="サンプルアプリケーションの vite.config.ts (抜粋)" hl_lines="6"
-        --8<-- "samples/Dressca/dressca-frontend/consumer/vite.config.ts:31:36"
+        --8<-- "samples/Dressca/dressca-frontend/consumer/vite.config.ts:32:37"
         ```
 
     なお、条件付き設定のために関数を export する際は `vitest.config.ts` の実装も変更が必要です。
@@ -232,10 +249,10 @@ npm run build
 
     ??? info "API エンドポイントを設定する際の注意点"
 
-        AlesInfiny Maris サンプルアプリでは、 バックエンドアプリとの API 通信のための OpenAPI や Axios の共通設定は `src/api-client/index.ts` で実装しています。以下の部分で `baseURL` を設定すると、 `dev` モードでビルドした際に `vite.config.ts` の `server.proxy` で設定した通りにパスの書換えができなくなります。そのため、 `dev` モードでは環境変数に空文字を設定して `basePath` `baseURL` に値を設定しないようにする、といった工夫が必要です。
+        AlesInfiny Maris サンプルアプリでは、 バックエンドアプリとの API 通信のための OpenAPI や Axios の共通設定は `src/system-common/api-client/index.ts` で実装しています。以下の部分で `baseURL` を設定すると、 `dev` モードでビルドした際に `vite.config.ts` の `server.proxy` で設定した通りにパスの書換えができなくなります。そのため、 `dev` モードでは環境変数に空文字を設定して `basePath` `baseURL` に値を設定しないようにする、といった工夫が必要です。
 
-        ```typescript title="サンプルアプリケーションの src/api-client/index.ts (抜粋)" hl_lines="2"
-        --8<-- "samples/Dressca/dressca-frontend/consumer/src/api-client/index.ts:23:24"
+        ```typescript title="サンプルアプリケーションの src/system-common/api-client/index.ts (抜粋)" hl_lines="3"
+        --8<-- "samples/Dressca/dressca-frontend/consumer/src/system-common/api-client/index.ts:22:24"
         ```
 
 [^1]: 本ページでは、 TypeScript から JavaScript への変換を指します。

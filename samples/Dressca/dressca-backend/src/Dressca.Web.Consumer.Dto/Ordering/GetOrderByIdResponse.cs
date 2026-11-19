@@ -59,7 +59,7 @@ public class GetOrderByIdResponse
     /// <summary>
     ///  会計情報を取得または設定します。
     /// </summary>
-    public AccountApiModel? Account { get; set; }
+    public AccountApiModel Account { get; set; } = new();
 
     /// <summary>
     ///  注文アイテムのリストを取得または設定します。

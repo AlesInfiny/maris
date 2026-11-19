@@ -31,7 +31,7 @@ Web API テストでは、プレゼンテーション層からデータベース
 ## Web API テストの実行方法 {#testing-method}
 
 AlesInfiny Maris の CSR 方式のバックエンドアプリケーションは、 .NET を用いた Web API のアプリケーションです。
-Web API テストでは、 Web API のリクエストを疑似的に再現し、アプリケーションの実行とレスポンスの検証します。
+Web API テストでは、 Web API のリクエストを疑似的に再現し、アプリケーションを実行し、レスポンスを検証します。
 Web API のリクエスト送信には、 Microsoft.AspNetCore.Mvc.Testing を活用します。
 テストフレームワークは xUnit v3 を利用します。
 

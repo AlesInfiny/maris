@@ -11,6 +11,9 @@ export class ItemsPage extends BasePage {
   /** アイテム追加画面へ遷移するボタンです。 */
   private readonly addItemButton: Locator
 
+  /** アイテム編集画面へ遷移するボタンです。画面にはカタログアイテムの数だけ存在します。 */
+  private readonly editItemButtons: Locator
+
   /**
    * {@link ItemsPage} クラスの新しいインスタンスを初期化します。
    * @param page 操作対象のページ。
@@ -19,6 +22,7 @@ export class ItemsPage extends BasePage {
     super(page)
     this.heading = page.getByText('カタログアイテム一覧')
     this.addItemButton = page.getByRole('button', { name: 'アイテム追加' })
+    this.editItemButtons = page.getByRole('button', { name: '編集' })
   }
 
   /**
@@ -41,5 +45,13 @@ export class ItemsPage extends BasePage {
    */
   async goToAddItem(): Promise<void> {
     await this.addItemButton.click()
+  }
+
+  /**
+   * カタログアイテム一覧の最初のアイテムの編集画面へ遷移します。
+   * @returns 最初のアイテムの編集ボタン。
+   */
+  getFirstEditItemButton(): Locator {
+    return this.editItemButtons.first()
   }
 }

@@ -30,6 +30,8 @@ description: Vue.js を用いた フロントエンドアプリケーション�
 CI 時の Node.js や npm のバージョンを設定するために、ルートプロジェクトの package.json に `"engines"` と `packageManager` を追加し、適切なバージョンを設定してください。
 特別な理由がなければ、最新の LTS バージョンを指定します。
 Node.js の LTS バージョンの情報については、 [Node.js リリース :material-open-in-new:](https://nodejs.org/ja/about/previous-releases){ target=_blank } を参照してください。
+npm のバージョンには、指定した Node.js のバージョンに同梱されている npm のバージョンを指定します。
+以下は、 Node.js v24.21.0 と、同梱されている npm v11.19.0 を指定する例です。
 
 ```json title="package.json（ルート）" hl_lines="14-18"
 {
@@ -46,10 +48,10 @@ Node.js の LTS バージョンの情報については、 [Node.js リリース
   "author": "",
   "license": "ISC",
   "engines": {
-    "node": "^x.x.x",
-    "npm": "^y.y.y"
+    "node": "^24.21.0",
+    "npm": "^11.19.0"
   },
-  "packageManager": "npm@y.y.y"
+  "packageManager": "npm@11.19.0"
 }
 ```
 
@@ -59,8 +61,8 @@ Node.js の LTS バージョンの情報については、 [Node.js リリース
 {
   "name": "workspace-name",
   "engines": {
-    "node": "^x.x.x",
-    "npm": "^y.y.y"
+    "node": "^24.21.0",
+    "npm": "^11.19.0"
   },
 }
 ```
@@ -98,7 +100,7 @@ Node.js の LTS バージョンの情報については、 [Node.js リリース
 
 [ブランクプロジェクトの作成](./create-vuejs-blank-project.md) 時に、各ワークスペースの直下に .vscode フォルダーと設定ファイルが自動的に作成されます。
 加えて、 VS Code で mono-repo 構成を扱う場合には、[マルチルートワークスペース :material-open-in-new:](https://code.visualstudio.com/docs/editing/workspaces/multi-root-workspaces){ target=_blank } 機能が役立ちます。
-追加でルートプロジェクトの直下に .code-workspaces ファイルを作成し、 npm workspaces のワークスペースの単位と、 VS Code のワークスペースの単位が対応するように設定します。
+追加でルートプロジェクトの直下に .code-workspace ファイルを作成し、 npm workspaces のワークスペースの単位と、 VS Code のワークスペースの単位が対応するように設定します。
 設定例を下記に示します。
 
 ```json title="サンプルアプリケーションの .code-workspace"

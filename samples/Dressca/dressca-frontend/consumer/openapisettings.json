@@ -1,7 +1,7 @@
 {
   "inputSpec": "./../../dressca-backend/src/Dressca.Web.Consumer/dressca-api.json",
   "generatorName": "typescript-axios",
-  "outputDir": "./src/generated/api-client",
+  "outputDir": "./src/system-common/generated/api-client",
   "additionalProperties": {
     "withSeparateModelsAndApi": "true",
     "modelPackage": "models",

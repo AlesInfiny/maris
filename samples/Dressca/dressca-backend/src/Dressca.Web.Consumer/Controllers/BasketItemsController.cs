@@ -157,11 +157,10 @@ public class BasketItemsController : ControllerBase
     public async Task<IActionResult> PostBasketItemAsync(PostBasketItemsRequest postBasketItem)
     {
         postBasketItem.DisplayItemId.ThrowIfNull();
-        postBasketItem.AddedQuantity.ThrowIfNull();
 
         var buyerId = this.HttpContext.GetBuyerId();
 
-        await this.service.AddItemToBasketAsync(buyerId, postBasketItem.DisplayItemId.Value, postBasketItem.AddedQuantity.Value);
+        await this.service.AddItemToBasketAsync(buyerId, postBasketItem.DisplayItemId.Value, postBasketItem.AddedQuantity);
 
         var actionName = ActionNameHelper.GetAsyncActionName(nameof(this.GetBasketItemsAsync));
         return this.CreatedAtAction(actionName, null);
