@@ -29,6 +29,8 @@ function renderLoginPage(locale: 'ja' | 'en') {
   })
 }
 
+type LoginScreen = Awaited<ReturnType<typeof renderLoginPage>>
+
 /**
  * 入力欄に値を入力します。
  * @param input 入力欄。
@@ -48,11 +50,7 @@ async function fillInput(input: Locator, value: string) {
  * @param email メールアドレス
  * @param password パスワード
  */
-async function enterCredentials(
-  screen: Awaited<ReturnType<typeof renderLoginPage>>,
-  email: string,
-  password: string,
-) {
+async function enterCredentials(screen: LoginScreen, email: string, password: string) {
   await fillInput(getEmailInput(screen), email)
   await fillInput(getPasswordInput(screen), password)
 }
@@ -62,7 +60,7 @@ async function enterCredentials(
  * @param screen ログイン画面の描画結果。
  * @returns メールアドレスの入力欄。
  */
-function getEmailInput(screen: Awaited<ReturnType<typeof renderLoginPage>>) {
+function getEmailInput(screen: LoginScreen) {
   return screen.getByRole('textbox', { name: 'メールアドレス' })
 }
 
@@ -72,7 +70,7 @@ function getEmailInput(screen: Awaited<ReturnType<typeof renderLoginPage>>) {
  * @param screen ログイン画面の描画結果。
  * @returns パスワードの入力欄。
  */
-function getPasswordInput(screen: Awaited<ReturnType<typeof renderLoginPage>>) {
+function getPasswordInput(screen: LoginScreen) {
   return screen.getByLabelText('パスワード')
 }
 
@@ -104,6 +102,7 @@ describe('Authentication validation', () => {
     await expect
       .element(getEmailInput(screen))
       .toHaveAccessibleDescription('メールアドレスの形式で入力してください')
+    await expect.element(screen.getByText('メールアドレスの形式で入力してください')).toBeVisible()
   })
 
   it('入力値が空の場合、英語で必須メッセージを返す', async () => {
@@ -135,6 +134,7 @@ describe('Authentication validation', () => {
     await enterCredentials(screen, 'invalid-email', 'aaa')
 
     await expect.element(getEmailInput(screen)).toHaveAccessibleDescription('invalid email format')
+    await expect.element(screen.getByText('invalid email format')).toBeVisible()
   })
 
   it('エラーがある入力欄だけを不正な状態として示す', async () => {
@@ -143,6 +143,14 @@ describe('Authentication validation', () => {
 
     await expect.element(getEmailInput(screen)).toBeInvalid()
     await expect.element(getPasswordInput(screen)).toBeValid()
+  })
+
+  it('入力値が空の場合、両方の入力欄を不正な状態として示す', async () => {
+    const screen = await renderLoginPage('ja')
+    await enterCredentials(screen, '', '')
+
+    await expect.element(getEmailInput(screen)).toBeInvalid()
+    await expect.element(getPasswordInput(screen)).toBeInvalid()
   })
 })
 
