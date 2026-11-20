@@ -25,20 +25,6 @@ function renderCarousel(slotItems: typeof items = items) {
   })
 }
 
-/**
- * 矢印とページインジケーターを、画面上の並び順で取得します。
- * どれもアイコンだけで、ロールや名前を持たないためです。
- * @param container カルーセルを描画した要素。
- * @returns 左右の矢印と、要素ごとのページインジケーターのロケーター。
- */
-function getControls(container: HTMLElement) {
-  const [leftArrow, rightArrow, ...pageIndicators] = Array.from(
-    container.querySelectorAll('svg'),
-    (element) => page.elementLocator(element),
-  )
-  return { leftArrow: leftArrow!, rightArrow: rightArrow!, pageIndicators }
-}
-
 describe('CarouselSlider', () => {
   it('slotにコンテンツが挿入できる', async () => {
     const screen = await render(CarouselSlider, {
@@ -68,7 +54,7 @@ describe('CarouselSlider', () => {
   it('右矢印をクリックすると表示要素が進む', async () => {
     const screen = await renderCarousel()
 
-    await getControls(screen.container).rightArrow.click()
+    await screen.getByRole('button', { name: '次のスライド' }).click()
 
     await expect.element(screen.getByText('test2')).toBeVisible()
     await expect.element(screen.getByText('test1')).not.toBeInTheDocument()
@@ -77,7 +63,7 @@ describe('CarouselSlider', () => {
   it('左矢印をクリックすると表示要素が戻る', async () => {
     const screen = await renderCarousel()
 
-    await getControls(screen.container).leftArrow.click()
+    await screen.getByRole('button', { name: '前のスライド' }).click()
 
     await expect.element(screen.getByText('test3')).toBeVisible()
     await expect.element(screen.getByText('test1')).not.toBeInTheDocument()
@@ -112,7 +98,44 @@ describe('CarouselSlider', () => {
   it('ページインジケーターをクリックするとそれが示す要素を表示する', async () => {
     const screen = await renderCarousel()
 
-    await getControls(screen.container).pageIndicators[2]!.click()
+    await screen.getByRole('button', { name: '3 枚目のスライドを表示' }).click()
+
+    await expect.element(screen.getByText('test3')).toBeVisible()
+    await expect.element(screen.getByText('test1')).not.toBeInTheDocument()
+  })
+
+  it('表示中の要素を示すページインジケーターだけが現在位置として示される', async () => {
+    const screen = await renderCarousel()
+
+    await screen.getByRole('button', { name: '2 枚目のスライドを表示' }).click()
+
+    await expect
+      .element(screen.getByRole('button', { name: '2 枚目のスライドを表示' }))
+      .toHaveAttribute('aria-current', 'true')
+    await expect
+      .element(screen.getByRole('button', { name: '1 枚目のスライドを表示' }))
+      .toHaveAttribute('aria-current', 'false')
+  })
+
+  it('キーボードで矢印を操作すると表示要素が進む', async () => {
+    const screen = await renderCarousel()
+
+    await userEvent.keyboard('{Tab}{Tab}')
+    await expect.element(screen.getByRole('button', { name: '次のスライド' })).toHaveFocus()
+    await userEvent.keyboard('{Enter}')
+
+    await expect.element(screen.getByText('test2')).toBeVisible()
+    await expect.element(screen.getByText('test1')).not.toBeInTheDocument()
+  })
+
+  it('キーボードでページインジケーターを操作するとそれが示す要素を表示する', async () => {
+    const screen = await renderCarousel()
+
+    await userEvent.keyboard('{Tab}{Tab}{Tab}{Tab}{Tab}')
+    await expect
+      .element(screen.getByRole('button', { name: '3 枚目のスライドを表示' }))
+      .toHaveFocus()
+    await userEvent.keyboard(' ')
 
     await expect.element(screen.getByText('test3')).toBeVisible()
     await expect.element(screen.getByText('test1')).not.toBeInTheDocument()
