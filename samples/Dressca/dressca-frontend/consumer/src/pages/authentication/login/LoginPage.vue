@@ -21,13 +21,18 @@ const signInOnClick = async () => {
     <form class="mt-8">
       <div class="form-group">
         <div class="flex justify-between">
-          <EnvelopeIcon class="h-8 w-8 text-blue-500/50" />
+          <label for="email">
+            <EnvelopeIcon class="h-8 w-8 text-blue-500/50" />
+            <span class="sr-only">メールアドレス</span>
+          </label>
           <input
             id="email"
             v-model="form.email"
             type="text"
             placeholder="email"
             autocomplete="username"
+            aria-describedby="email-error"
+            :aria-invalid="!!form.errors.email"
             class="w-full border-b px-4 py-2 placeholder-gray-500/50 focus:border-b-2 focus:border-indigo-500 focus:outline-hidden"
           />
         </div>
@@ -35,13 +40,18 @@ const signInOnClick = async () => {
       </div>
       <div class="form-group mt-4">
         <div class="flex justify-between">
-          <KeyIcon class="h-8 w-8 text-blue-500/50" />
+          <label for="password">
+            <KeyIcon class="h-8 w-8 text-blue-500/50" />
+            <span class="sr-only">パスワード</span>
+          </label>
           <input
             id="password"
             v-model="form.password"
             type="password"
             placeholder="password"
             autocomplete="current-password"
+            aria-describedby="password-error"
+            :aria-invalid="!!form.errors.password"
             class="w-full border-b px-4 py-2 placeholder-gray-500/50 focus:border-b-2 focus:border-indigo-500 focus:outline-hidden"
           />
         </div>

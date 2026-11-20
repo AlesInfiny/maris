@@ -37,13 +37,18 @@ const loginAsync = async () => {
     <form class="mt-8 text-xl">
       <div class="form-group">
         <div class="flex justify-between">
-          <EnvelopeIcon class="h-8 w-8 text-gray-900/50" />
+          <label for="userName">
+            <EnvelopeIcon class="h-8 w-8 text-gray-900/50" />
+            <span class="sr-only">ユーザー名</span>
+          </label>
           <input
             id="userName"
             v-model="form.userName"
             type="text"
             placeholder="ユーザー名"
             autocomplete="username"
+            aria-describedby="username-error"
+            :aria-invalid="!!form.errors.userName"
             class="border-b px-4 py-2 placeholder-gray-500/50 focus:border-b-2 focus:border-gray-500 focus:outline-hidden"
           />
         </div>
@@ -51,13 +56,18 @@ const loginAsync = async () => {
       </div>
       <div class="form-group mt-4">
         <div class="flex justify-between">
-          <KeyIcon class="h-8 w-8 text-gray-900/50" />
+          <label for="password">
+            <KeyIcon class="h-8 w-8 text-gray-900/50" />
+            <span class="sr-only">パスワード</span>
+          </label>
           <input
             id="password"
             v-model="form.password"
             type="password"
             placeholder="パスワード"
             autocomplete="current-password"
+            aria-describedby="password-error"
+            :aria-invalid="!!form.errors.password"
             class="border-b px-4 py-2 placeholder-gray-500/50 focus:border-b-2 focus:border-gray-500 focus:outline-hidden"
           />
         </div>
