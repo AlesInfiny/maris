@@ -26,6 +26,10 @@ const selectSlide = (index: number) => {
   currentIndex.value = index
 }
 
+const isCurrentSlide = (slideNumber: number) => {
+  return slideNumber === currentIndex.value + 1
+}
+
 const getItem = (index: number) => {
   return props.items[(index + props.items.length) % props.items.length]
 }
@@ -85,13 +89,16 @@ onBeforeUnmount(() => {
         @touchstart.passive="onTouchStart"
         @mousedown="onTouchStart"
       >
-        <ChevronLeftIcon
-          class="h-10 w-10 text-gray-300 hover:text-gray-500"
-          data-test="left-arrow"
+        <button
+          type="button"
+          aria-label="前のスライド"
+          class="text-gray-300 hover:text-gray-500"
           @click="prevSlide"
-        />
+        >
+          <ChevronLeftIcon class="h-10 w-10" />
+        </button>
         <template v-for="index in props.items.length">
-          <template v-if="index === currentIndex + 1">
+          <template v-if="isCurrentSlide(index)">
             <div
               :key="index"
               data-test="slider"
@@ -103,25 +110,27 @@ onBeforeUnmount(() => {
             </div>
           </template>
         </template>
-        <ChevronRightIcon
-          class="h-10 w-10 text-gray-300 hover:text-gray-500"
-          data-test="right-arrow"
+        <button
+          type="button"
+          aria-label="次のスライド"
+          class="text-gray-300 hover:text-gray-500"
           @click="nextSlide"
-        />
+        >
+          <ChevronRightIcon class="h-10 w-10" />
+        </button>
       </div>
       <div class="flex justify-center">
-        <template v-for="index in props.items.length" :key="index">
-          <template v-if="index === currentIndex + 1">
-            <MinusSmallIcon class="h-10 w-10 text-gray-500"></MinusSmallIcon>
-          </template>
-          <template v-if="index !== currentIndex + 1">
-            <MinusSmallIcon
-              class="h-10 w-10 text-gray-300"
-              data-test="page-indicator"
-              @click="selectSlide(index - 1)"
-            ></MinusSmallIcon>
-          </template>
-        </template>
+        <button
+          v-for="index in props.items.length"
+          :key="index"
+          type="button"
+          :aria-label="`${index} 枚目のスライドを表示`"
+          :aria-current="isCurrentSlide(index)"
+          :class="isCurrentSlide(index) ? 'text-gray-500' : 'text-gray-300'"
+          @click="selectSlide(index - 1)"
+        >
+          <MinusSmallIcon class="h-10 w-10" />
+        </button>
       </div>
     </div>
   </template>
