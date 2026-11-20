@@ -53,8 +53,27 @@ async function enterCredentials(
   email: string,
   password: string,
 ) {
-  await fillInput(screen.getByPlaceholder('email'), email)
-  await fillInput(screen.getByPlaceholder('password'), password)
+  await fillInput(getEmailInput(screen), email)
+  await fillInput(getPasswordInput(screen), password)
+}
+
+/**
+ * メールアドレスの入力欄を取得します。
+ * @param screen ログイン画面の描画結果。
+ * @returns メールアドレスの入力欄。
+ */
+function getEmailInput(screen: Awaited<ReturnType<typeof renderLoginPage>>) {
+  return screen.getByRole('textbox', { name: 'メールアドレス' })
+}
+
+/**
+ * パスワードの入力欄を取得します。
+ * パスワードの入力欄には ARIA ロールがないため、ラベルから取得します。
+ * @param screen ログイン画面の描画結果。
+ * @returns パスワードの入力欄。
+ */
+function getPasswordInput(screen: Awaited<ReturnType<typeof renderLoginPage>>) {
+  return screen.getByLabelText('パスワード')
 }
 
 describe('Authentication validation', () => {
@@ -62,50 +81,68 @@ describe('Authentication validation', () => {
     const screen = await renderLoginPage('ja')
     await enterCredentials(screen, '', '')
 
-    const requiredMessages = screen.getByText('値を入力してください')
-    await expect.element(requiredMessages.nth(0)).toBeVisible()
-    await expect.element(requiredMessages.nth(1)).toBeVisible()
+    await expect.element(getEmailInput(screen)).toHaveAccessibleDescription('値を入力してください')
+    await expect
+      .element(getPasswordInput(screen))
+      .toHaveAccessibleDescription('値を入力してください')
   })
 
   it('入力値が空白の場合、日本語で必須メッセージを返す', async () => {
     const screen = await renderLoginPage('ja')
     await enterCredentials(screen, ' ', ' ')
 
-    const requiredMessages = screen.getByText('値を入力してください')
-    await expect.element(requiredMessages.nth(0)).toBeVisible()
-    await expect.element(requiredMessages.nth(1)).toBeVisible()
+    await expect.element(getEmailInput(screen)).toHaveAccessibleDescription('値を入力してください')
+    await expect
+      .element(getPasswordInput(screen))
+      .toHaveAccessibleDescription('値を入力してください')
   })
 
   it('日本語でメール形式メッセージを返す', async () => {
     const screen = await renderLoginPage('ja')
     await enterCredentials(screen, 'invalid-email', 'aaa')
 
-    await expect.element(screen.getByText('メールアドレスの形式で入力してください')).toBeVisible()
+    await expect
+      .element(getEmailInput(screen))
+      .toHaveAccessibleDescription('メールアドレスの形式で入力してください')
   })
 
   it('入力値が空の場合、英語で必須メッセージを返す', async () => {
     const screen = await renderLoginPage('en')
     await enterCredentials(screen, '', '')
 
-    const requiredMessages = screen.getByText('this field is required')
-    await expect.element(requiredMessages.nth(0)).toBeVisible()
-    await expect.element(requiredMessages.nth(1)).toBeVisible()
+    await expect
+      .element(getEmailInput(screen))
+      .toHaveAccessibleDescription('this field is required')
+    await expect
+      .element(getPasswordInput(screen))
+      .toHaveAccessibleDescription('this field is required')
   })
 
   it('入力値が空白の場合、英語で必須メッセージを返す', async () => {
     const screen = await renderLoginPage('en')
     await enterCredentials(screen, ' ', ' ')
 
-    const requiredMessages = screen.getByText('this field is required')
-    await expect.element(requiredMessages.nth(0)).toBeVisible()
-    await expect.element(requiredMessages.nth(1)).toBeVisible()
+    await expect
+      .element(getEmailInput(screen))
+      .toHaveAccessibleDescription('this field is required')
+    await expect
+      .element(getPasswordInput(screen))
+      .toHaveAccessibleDescription('this field is required')
   })
 
   it('英語でメール形式メッセージを返す', async () => {
     const screen = await renderLoginPage('en')
     await enterCredentials(screen, 'invalid-email', 'aaa')
 
-    await expect.element(screen.getByText('invalid email format')).toBeVisible()
+    await expect.element(getEmailInput(screen)).toHaveAccessibleDescription('invalid email format')
+  })
+
+  it('エラーがある入力欄だけを不正な状態として示す', async () => {
+    const screen = await renderLoginPage('ja')
+    await enterCredentials(screen, 'invalid-email', 'aaa')
+
+    await expect.element(getEmailInput(screen)).toBeInvalid()
+    await expect.element(getPasswordInput(screen)).toBeValid()
   })
 })
 
