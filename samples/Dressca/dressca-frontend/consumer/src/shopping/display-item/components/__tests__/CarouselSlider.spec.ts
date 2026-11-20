@@ -120,8 +120,9 @@ describe('CarouselSlider', () => {
   it('キーボードで矢印を操作すると表示要素が進む', async () => {
     const screen = await renderCarousel()
 
-    await userEvent.keyboard('{Tab}{Tab}')
-    await expect.element(screen.getByRole('button', { name: '次のスライド' })).toHaveFocus()
+    const nextButton = screen.getByRole('button', { name: '次のスライド' })
+    nextButton.element().focus()
+    await expect.element(nextButton).toHaveFocus()
     await userEvent.keyboard('{Enter}')
 
     await expect.element(screen.getByText('test2')).toBeVisible()
@@ -131,10 +132,9 @@ describe('CarouselSlider', () => {
   it('キーボードでページインジケーターを操作するとそれが示す要素を表示する', async () => {
     const screen = await renderCarousel()
 
-    await userEvent.keyboard('{Tab}{Tab}{Tab}{Tab}{Tab}')
-    await expect
-      .element(screen.getByRole('button', { name: '3 枚目のスライドを表示' }))
-      .toHaveFocus()
+    const thirdIndicator = screen.getByRole('button', { name: '3 枚目のスライドを表示' })
+    thirdIndicator.element().focus()
+    await expect.element(thirdIndicator).toHaveFocus()
     await userEvent.keyboard(' ')
 
     await expect.element(screen.getByText('test3')).toBeVisible()

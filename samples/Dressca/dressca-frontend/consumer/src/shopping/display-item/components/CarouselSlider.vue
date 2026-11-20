@@ -26,6 +26,10 @@ const selectSlide = (index: number) => {
   currentIndex.value = index
 }
 
+const isCurrentSlide = (slideNumber: number) => {
+  return slideNumber === currentIndex.value + 1
+}
+
 const getItem = (index: number) => {
   return props.items[(index + props.items.length) % props.items.length]
 }
@@ -94,7 +98,7 @@ onBeforeUnmount(() => {
           <ChevronLeftIcon class="h-10 w-10" />
         </button>
         <template v-for="index in props.items.length">
-          <template v-if="index === currentIndex + 1">
+          <template v-if="isCurrentSlide(index)">
             <div
               :key="index"
               data-test="slider"
@@ -121,8 +125,8 @@ onBeforeUnmount(() => {
           :key="index"
           type="button"
           :aria-label="`${index} 枚目のスライドを表示`"
-          :aria-current="index === currentIndex + 1"
-          :class="index === currentIndex + 1 ? 'text-gray-500' : 'text-gray-300'"
+          :aria-current="isCurrentSlide(index)"
+          :class="isCurrentSlide(index) ? 'text-gray-500' : 'text-gray-300'"
           @click="selectSlide(index - 1)"
         >
           <MinusSmallIcon class="h-10 w-10" />
