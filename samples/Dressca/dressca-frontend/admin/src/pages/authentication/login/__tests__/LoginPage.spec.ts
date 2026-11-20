@@ -50,8 +50,27 @@ async function enter(input: Locator, value: string) {
  * @param password パスワード。
  */
 async function fillForm(screen: LocatorSelectors, userName: string, password: string) {
-  await enter(screen.getByPlaceholder('ユーザー名'), userName)
-  await enter(screen.getByPlaceholder('パスワード'), password)
+  await enter(getUserNameInput(screen), userName)
+  await enter(getPasswordInput(screen), password)
+}
+
+/**
+ * ユーザー名の入力欄を取得します。
+ * @param screen ログイン画面の描画結果。
+ * @returns ユーザー名の入力欄。
+ */
+function getUserNameInput(screen: LocatorSelectors) {
+  return screen.getByRole('textbox', { name: 'ユーザー名' })
+}
+
+/**
+ * パスワードの入力欄を取得します。
+ * パスワードの入力欄には ARIA ロールがないため、ラベルから取得します。
+ * @param screen ログイン画面の描画結果。
+ * @returns パスワードの入力欄。
+ */
+function getPasswordInput(screen: LocatorSelectors) {
+  return screen.getByLabelText('パスワード')
 }
 
 describe('LoginPage', () => {
@@ -60,8 +79,8 @@ describe('LoginPage', () => {
     // Act
     const screen = await renderLoginPage()
     // Assert
-    await expect.element(screen.getByPlaceholder('ユーザー名')).toBeVisible()
-    await expect.element(screen.getByPlaceholder('パスワード')).toBeVisible()
+    await expect.element(getUserNameInput(screen)).toBeVisible()
+    await expect.element(getPasswordInput(screen)).toBeVisible()
     await expect.element(screen.getByRole('button', { name: 'ログイン' })).toBeVisible()
   })
 
@@ -71,6 +90,9 @@ describe('LoginPage', () => {
     // Act
     await fillForm(screen, '', 'password123')
     // Assert
+    await expect
+      .element(getUserNameInput(screen))
+      .toHaveAccessibleDescription('ユーザー名は必須です。')
     await expect.element(screen.getByText('ユーザー名は必須です。')).toBeVisible()
   })
 
@@ -80,6 +102,9 @@ describe('LoginPage', () => {
     // Act
     await fillForm(screen, ' ', 'password123')
     // Assert
+    await expect
+      .element(getUserNameInput(screen))
+      .toHaveAccessibleDescription('ユーザー名は必須です。')
     await expect.element(screen.getByText('ユーザー名は必須です。')).toBeVisible()
   })
 
@@ -89,6 +114,9 @@ describe('LoginPage', () => {
     // Act
     await fillForm(screen, 'invalid-email', 'password123')
     // Assert
+    await expect
+      .element(getUserNameInput(screen))
+      .toHaveAccessibleDescription('メールアドレスの形式で入力してください。')
     await expect.element(screen.getByText('メールアドレスの形式で入力してください。')).toBeVisible()
   })
 
@@ -98,6 +126,9 @@ describe('LoginPage', () => {
     // Act
     await fillForm(screen, 'aaa@example.com', '')
     // Assert
+    await expect
+      .element(getPasswordInput(screen))
+      .toHaveAccessibleDescription('パスワードは必須です。')
     await expect.element(screen.getByText('パスワードは必須です。')).toBeVisible()
   })
 
@@ -107,7 +138,30 @@ describe('LoginPage', () => {
     // Act
     await fillForm(screen, 'aaa@example.com', ' ')
     // Assert
+    await expect
+      .element(getPasswordInput(screen))
+      .toHaveAccessibleDescription('パスワードは必須です。')
     await expect.element(screen.getByText('パスワードは必須です。')).toBeVisible()
+  })
+
+  it('エラーがある入力欄だけを不正な状態として示す', async () => {
+    // Arrange
+    const screen = await renderLoginPage()
+    // Act
+    await fillForm(screen, 'invalid-email', 'password123')
+    // Assert
+    await expect.element(getUserNameInput(screen)).toBeInvalid()
+    await expect.element(getPasswordInput(screen)).toBeValid()
+  })
+
+  it('入力値が空のとき両方の入力欄を不正な状態として示す', async () => {
+    // Arrange
+    const screen = await renderLoginPage()
+    // Act
+    await fillForm(screen, '', '')
+    // Assert
+    await expect.element(getUserNameInput(screen)).toBeInvalid()
+    await expect.element(getPasswordInput(screen)).toBeInvalid()
   })
 })
 
