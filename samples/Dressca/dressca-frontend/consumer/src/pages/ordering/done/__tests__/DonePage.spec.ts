@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { flushPromises, mount } from '@vue/test-utils'
+import { render } from 'vitest-browser-vue'
 import { createTestingPinia } from '@pinia/testing'
 import DonePage from '@/pages/ordering/done/DonePage.vue'
 import { routeNames } from '@/core/router/route-names'
@@ -12,7 +12,8 @@ const { getOrderByIdMock } = vi.hoisted(() => ({
   getOrderByIdMock: vi.fn(),
 }))
 
-vi.mock('@/system-common/api-client', () => ({
+vi.mock('@/system-common/api-client', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('@/system-common/api-client')>()),
   ordersApi: () => ({
     getOrderById: getOrderByIdMock,
   }),
@@ -28,10 +29,9 @@ describe('結果の通知と遷移', () => {
     const router = createStubRouter()
     await router.push({ name: routeNames.done, params: { orderId: 'order-id' } })
     // Act
-    mount(DonePage, { global: { plugins: [pinia, router] } })
-    await flushPromises()
+    await render(DonePage, { global: { plugins: [pinia, router] } })
     // Assert
+    await expect.poll(() => router.currentRoute.value.name).toBe(routeNames.displayItem)
     expect(useNotificationStore(pinia).message).toBe(t('failedToGetOrderInformation'))
-    expect(router.currentRoute.value.name).toBe(routeNames.displayItem)
   })
 })

@@ -1,66 +1,64 @@
-import { describe, it, expect, beforeAll } from 'vitest'
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
+import { describe, it, expect } from 'vitest'
+import { render } from 'vitest-browser-vue'
 import { createStubRouter } from '@/pages/__tests__/helpers/stub-router'
 import { createPinia, setActivePinia } from 'pinia'
 import { http, HttpResponse } from 'msw'
 import { HttpStatusCode } from 'axios'
 import ItemsPage from '@/pages/catalog/items/ItemsPage.vue'
 import { useNotificationStore } from '@/business-common/stores/notification'
-import { server } from '@/../mock/node'
+import { worker } from '@/../mock/browser'
 
 /**
- * コンポーネントをテスト用にマウントするヘルパー関数です。
+ * アイテム一覧画面をテスト用に描画します。
  * 新しい Pinia インスタンスを作成してアクティブ化し、
  * グローバルプラグインとして `pinia` と `router` を注入します。
- * @returns マウント済みの Vue Test Utils ラッパー
+ * @returns 描画結果。
  */
-function getWrapper() {
+function renderItemsPage() {
   const pinia = createPinia()
   setActivePinia(pinia)
-  return mount(ItemsPage, {
+  return render(ItemsPage, {
     global: { plugins: [pinia, createStubRouter()] },
   })
 }
+
 describe('アイテム一覧が表示できる', () => {
-  let wrapper: VueWrapper
-
-  beforeAll(() => {
-    wrapper = getWrapper()
-  })
-
   it('アイテム一覧画面に遷移できる', async () => {
     // Arrange
     // Act
-    await flushPromises()
+    const screen = await renderItemsPage()
     // Assert
-    expect(wrapper.html()).toContain('カタログアイテム一覧')
+    await expect.element(screen.getByText('カタログアイテム一覧')).toBeVisible()
   })
 
-  it('アイテムが取得した個数分表示される', () => {
+  it('アイテムが取得した個数分表示される', async () => {
     // Arrange
     const expectedItemCount = 11
     // Act
-    const tableRows = wrapper.find('tbody').findAll('tr')
+    const screen = await renderItemsPage()
     // Assert
-    expect(tableRows.length).toBe(expectedItemCount)
+    await expect
+      .poll(() => screen.getByRole('button', { name: '編集' }).elements())
+      .toHaveLength(expectedItemCount)
   })
 })
 
 describe('結果の通知', () => {
   it('アイテムを取得できない_トーストを表示しアイテム追加ボタンは表示する', async () => {
     // Arrange
-    server.use(
+    worker.use(
       http.get(
         '/api/catalog-items',
         () => new HttpResponse(null, { status: HttpStatusCode.InternalServerError }),
       ),
     )
     // Act
-    const wrapper = getWrapper()
-    await flushPromises()
+    const screen = await renderItemsPage()
     // Assert
-    expect(useNotificationStore().message).toBe('カタログアイテムの取得に失敗しました。')
-    expect(wrapper.find('tbody').findAll('tr').length).toBe(0)
-    expect(wrapper.find('button').text()).toBe('アイテム追加')
+    await expect
+      .poll(() => useNotificationStore().message)
+      .toBe('カタログアイテムの取得に失敗しました。')
+    await expect.element(screen.getByRole('button', { name: 'アイテム追加' })).toBeVisible()
+    await expect.element(screen.getByRole('button', { name: '編集' })).not.toBeInTheDocument()
   })
 })

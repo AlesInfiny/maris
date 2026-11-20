@@ -1,161 +1,143 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
+import { render } from 'vitest-browser-vue'
+import type { Locator, LocatorSelectors } from 'vitest/browser'
 import { routeNames } from '@/core/router/route-names'
-import { flushPromises, mount, VueWrapper } from '@vue/test-utils'
 import type { Router } from 'vue-router'
 import { createStubRouter } from '@/pages/__tests__/helpers/stub-router'
 import LoginPage from '@/pages/authentication/login/LoginPage.vue'
-import { FormContextKey, type FormContext } from 'vee-validate'
-import type { ComponentInternalInstance } from 'vue'
 import { createTestingPinia, type TestingPinia } from '@pinia/testing'
 import { http, HttpResponse } from 'msw'
 import { HttpStatusCode } from 'axios'
 import { useNotificationStore } from '@/business-common/stores/notification'
-import { server } from '@/../mock/node'
+import { worker } from '@/../mock/browser'
 
 let router: Router
 
 /**
- * ログイン画面のラッパーを生成します。
- * @returns マウント済みのラッパー。
+ * ログイン画面をテスト用に描画します。
+ * @param pinia テストに使用する TestingPinia インスタンス。
+ * @param redirect ログイン後の戻り先のパス。
+ * @returns 描画結果。
  */
-async function getWrapper() {
+async function renderLoginPage(
+  pinia: TestingPinia = createTestingPinia({ createSpy: vi.fn }),
+  redirect?: string,
+) {
   router = createStubRouter()
-  router.push({ name: routeNames.login })
-  await router.isReady()
-  return mount(LoginPage, {
-    global: {
-      plugins: [createTestingPinia({ createSpy: vi.fn }), router],
-    },
-  })
-}
-
-type ComponentInternalInstanceWithProvides = ComponentInternalInstance & {
-  provides: Record<symbol, unknown>
+  await router.push({ name: routeNames.login, query: redirect ? { redirect } : {} })
+  return render(LoginPage, { global: { plugins: [pinia, router] } })
 }
 
 /**
- * FormContext を取得するユーティリティ関数
- * @param wrapper VueWrapper インスタンス
- * @returns FormContext
+ * 入力欄に値を入力します。
+ * 入力欄は初めから空なので、空文字は一度入力してから消し、入力値の変更として検証させます。
+ * @param input 入力欄。
+ * @param value 入力する値。
  */
-function getFormContext(wrapper: VueWrapper): FormContext {
-  const instance = wrapper.getCurrentComponent() as ComponentInternalInstanceWithProvides
-  return instance.provides[FormContextKey] as FormContext
+async function enter(input: Locator, value: string) {
+  if (value === '') {
+    await input.fill('x')
+    await input.clear()
+  } else {
+    await input.fill(value)
+  }
 }
 
 /**
- *入力値を設定してバリデーションを実行します。
- * @param wrapper VueWrapper インスタンス
- * @param userName ユーザー名
- * @param password パスワード
+ * ユーザー名とパスワードを入力します。
+ * @param screen ログイン画面の描画結果。
+ * @param userName ユーザー名。
+ * @param password パスワード。
  */
-async function setValuesAndValidate(wrapper: VueWrapper, userName?: string, password?: string) {
-  const formCtx = getFormContext(wrapper)
-  const userNameInput = wrapper.get('input#userName')
-  const passwordInput = wrapper.get('input#password')
-
-  if (userName === undefined) {
-    formCtx.setFieldValue('userName', undefined)
-  } else {
-    await userNameInput.setValue(userName)
-    await userNameInput.trigger('blur')
-  }
-
-  if (password === undefined) {
-    formCtx.setFieldValue('password', undefined)
-  } else {
-    await passwordInput.setValue(password)
-    await passwordInput.trigger('blur')
-  }
-
-  // 明示的にvalidateを呼び出す
-  await formCtx.validate()
-  await flushPromises()
+async function fillForm(screen: LocatorSelectors, userName: string, password: string) {
+  await enter(screen.getByPlaceholder('ユーザー名'), userName)
+  await enter(screen.getByPlaceholder('パスワード'), password)
 }
 
 describe('LoginPage', () => {
-  let wrapper: VueWrapper
-
-  beforeEach(async () => {
-    wrapper = await getWrapper()
-    await flushPromises()
-  })
-
-  it('ログイン画面を表示できる', () => {
-    expect(wrapper.text()).toContain('ログイン')
+  it('ログイン画面を表示できる', async () => {
+    // Arrange
+    // Act
+    const screen = await renderLoginPage()
+    // Assert
+    await expect.element(screen.getByPlaceholder('ユーザー名')).toBeVisible()
+    await expect.element(screen.getByPlaceholder('パスワード')).toBeVisible()
+    await expect.element(screen.getByRole('button', { name: 'ログイン' })).toBeVisible()
   })
 
   it('ユーザー名が空文字のときエラーメッセージが表示される', async () => {
-    await setValuesAndValidate(wrapper, '', 'password123')
-    const emailErr = wrapper.find('#username-error').text()
-    expect(emailErr).toBe('ユーザー名は必須です。')
+    // Arrange
+    const screen = await renderLoginPage()
+    // Act
+    await fillForm(screen, '', 'password123')
+    // Assert
+    await expect.element(screen.getByText('ユーザー名は必須です。')).toBeVisible()
   })
 
   it('ユーザー名が空白のときエラーメッセージが表示される', async () => {
-    await setValuesAndValidate(wrapper, ' ', 'password123')
-    const emailErr = wrapper.find('#username-error').text()
-    expect(emailErr).toBe('ユーザー名は必須です。')
+    // Arrange
+    const screen = await renderLoginPage()
+    // Act
+    await fillForm(screen, ' ', 'password123')
+    // Assert
+    await expect.element(screen.getByText('ユーザー名は必須です。')).toBeVisible()
   })
 
   it('ユーザー名の形式が正しくないときエラーメッセージが表示される', async () => {
-    await setValuesAndValidate(wrapper, 'invalid-email', 'password123')
-    const emailErr = wrapper.find('#username-error').text()
-    expect(emailErr).toBe('メールアドレスの形式で入力してください。')
+    // Arrange
+    const screen = await renderLoginPage()
+    // Act
+    await fillForm(screen, 'invalid-email', 'password123')
+    // Assert
+    await expect.element(screen.getByText('メールアドレスの形式で入力してください。')).toBeVisible()
   })
 
   it('パスワードが空文字のときエラーメッセージが表示される', async () => {
-    await setValuesAndValidate(wrapper, 'aaa@example.com', '')
-    const passwordErr = wrapper.find('#password-error').text()
-    expect(passwordErr).toBe('パスワードは必須です。')
+    // Arrange
+    const screen = await renderLoginPage()
+    // Act
+    await fillForm(screen, 'aaa@example.com', '')
+    // Assert
+    await expect.element(screen.getByText('パスワードは必須です。')).toBeVisible()
   })
 
   it('パスワードが空白のときエラーメッセージが表示される', async () => {
-    await setValuesAndValidate(wrapper, 'aaa@example.com', ' ')
-    const passwordErr = wrapper.find('#password-error').text()
-    expect(passwordErr).toBe('パスワードは必須です。')
+    // Arrange
+    const screen = await renderLoginPage()
+    // Act
+    await fillForm(screen, 'aaa@example.com', ' ')
+    // Assert
+    await expect.element(screen.getByText('パスワードは必須です。')).toBeVisible()
   })
 })
 
 describe('ログインの結果の通知と遷移', () => {
-  /**
-   * 戻り先を指定してログイン画面を表示し、有効な値を入力します。
-   * @param pinia テストに使用する TestingPinia インスタンス。
-   * @returns マウント済みのラッパー。
-   */
-  async function getFilledWrapper(pinia: TestingPinia) {
-    router = createStubRouter()
-    await router.push({ name: routeNames.login, query: { redirect: '/catalog/items' } })
-    const filled = mount(LoginPage, { global: { plugins: [pinia, router] } })
-    await setValuesAndValidate(filled, 'user@example.com', 'password')
-    return filled
-  }
-
   it('ログインできる_戻り先の画面へ遷移する', async () => {
     // Arrange
     const pinia = createTestingPinia({ createSpy: vi.fn, stubActions: false })
-    const filled = await getFilledWrapper(pinia)
+    const screen = await renderLoginPage(pinia, '/catalog/items')
+    await fillForm(screen, 'user@example.com', 'password')
     // Act
-    await filled.get('button').trigger('click')
-    await flushPromises()
+    await screen.getByRole('button', { name: 'ログイン' }).click()
     // Assert
-    expect(router.currentRoute.value.fullPath).toBe('/catalog/items')
+    await expect.poll(() => router.currentRoute.value.fullPath).toBe('/catalog/items')
   })
 
   it('ログインできない_トーストを表示しログイン画面にとどまる', async () => {
     // Arrange
-    server.use(
+    worker.use(
       http.get(
         '/api/users',
         () => new HttpResponse(null, { status: HttpStatusCode.InternalServerError }),
       ),
     )
     const pinia = createTestingPinia({ createSpy: vi.fn, stubActions: false })
-    const filled = await getFilledWrapper(pinia)
+    const screen = await renderLoginPage(pinia, '/catalog/items')
+    await fillForm(screen, 'user@example.com', 'password')
     // Act
-    await filled.get('button').trigger('click')
-    await flushPromises()
+    await screen.getByRole('button', { name: 'ログイン' }).click()
     // Assert
-    expect(useNotificationStore(pinia).message).toBe('ログインに失敗しました。')
+    await expect.poll(() => useNotificationStore(pinia).message).toBe('ログインに失敗しました。')
     expect(router.currentRoute.value.name).toBe(routeNames.login)
   })
 })

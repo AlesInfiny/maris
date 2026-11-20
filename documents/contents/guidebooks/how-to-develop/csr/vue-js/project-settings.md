@@ -61,8 +61,9 @@ Project Reference 機能については [Project References :material-open-in-ne
     `include` キーにパターンを追加しています。この段階では実際にこれらのファイルを追加で作成する必要はありません。
     mock フォルダーと配下のファイルは、[モックモードの設定 - Mock Service Worker の設定](./mock-mode-settings.md#msw-settings) で作成します。
     vitest.setup.ts は、 Vitest での自動テスト実行前後の共通処理を定義するファイルです。
+    vitest.browser.setup.ts は、 Vitest ブラウザーモードでの自動テスト実行前の共通処理を定義するファイルです。
 
-    ```json title="サンプルアプリケーション の tsconfig.app.json" hl_lines="3"
+    ```json title="サンプルアプリケーション の tsconfig.app.json" hl_lines="3-10"
     --8<-- "samples/Dressca/dressca-frontend/consumer/tsconfig.app.json"
     ```
 
@@ -195,8 +196,8 @@ npm run build
     ??? example "条件付き設定の実装例"
         設定例では prod モードでビルド[^3]した際に、 Mock Service Worker のワーカースクリプトを削除するプラグインを読み込んでいます。
 
-        ```typescript title="サンプルアプリケーションの vite.config.ts (抜粋)" hl_lines="6"
-        --8<-- "samples/Dressca/dressca-frontend/consumer/vite.config.ts:32:37"
+        ```typescript title="サンプルアプリケーションの vite.config.ts (抜粋)" hl_lines="7"
+        --8<-- "samples/Dressca/dressca-frontend/consumer/vite.config.ts:32:38"
         ```
 
     なお、条件付き設定のために関数を export する際は `vitest.config.ts` の実装も変更が必要です。
