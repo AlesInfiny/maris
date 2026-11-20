@@ -1,0 +1,41 @@
+---
+title: CSR 編 - テスト
+description: バックエンドアプリケーションのテスト方針について解説します。
+---
+
+# UT1（機能内結合テスト） {#top}
+
+バックエンドアプリケーションでは、 UT1（機能内結合テスト）として Web API テストを行います。
+Web API テストでは、プレゼンテーション層からデータベースまでを一気通貫にテストします。
+ただし、 CI/CD パイプライン上で繰り返し実行するため、外部サービスに依存する箇所はモック化します。
+
+## Web API テストの目的 {#purpose}
+
+- UT0 でテストしたクラスやメソッドを組み合わせて、単一の業務機能が仕様通りに動作することを確認します
+- プレゼンテーション層からデータベースまでを結合し、 Web API ごとの動作を検証します。
+
+## Web API テストで利用するツール {#testing-tools}
+
+上記の目的を達成するため、 AlesInfiny Maris OSS Edition （以降、 AlesInfiny Maris ）では以下のテストフレームワークを用いて Web API テストを行います。
+
+- [xunit.v3 :material-open-in-new:](https://www.nuget.org/packages/xunit.v3){ target=_blank }
+    - .NET のテストフレームワークです。
+- [Microsoft.AspNetCore.Mvc.Testing :material-open-in-new:](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing){ target=_blank }
+    - MVC アプリケーションの結合テスト用の機能を提供するパッケージです。
+
+## Web API テストのテスト対象 {#testing-targets}
+
+Web API テストでは、プレゼンテーション層からデータベースまで、すべての層を対象とした機能性を確認します。
+ただし、メールサービスや帳票の紙出力など、繰り返し何度も実行することがコスト上・運用上の問題となる箇所は、 外部への依存関係がなくてもモック化することを検討してください。
+
+## Web API テストの実行方法 {#testing-method}
+
+AlesInfiny Maris の CSR 方式のバックエンドアプリケーションは、 .NET を用いた Web API のアプリケーションです。
+Web API テストでは、 Web API のリクエストを疑似的に再現し、アプリケーションを実行し、レスポンスを検証します。
+Web API のリクエスト送信には、 Microsoft.AspNetCore.Mvc.Testing を活用します。
+テストフレームワークは xUnit v3 を利用します。
+
+データベースはテスト実行環境上の SQL Server を使用します。各テストケースの処理開始時に、そのテストで利用するデータベースを構築します。
+
+UT0 で確認済みの仕様は、 Web API テストで改めて確認しません。
+層の間で結合をしたときのアプリケーションの動作を重点的に確認するようにします。

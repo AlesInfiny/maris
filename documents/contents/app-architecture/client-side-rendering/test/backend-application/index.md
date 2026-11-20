@@ -7,15 +7,17 @@ description: バックエンドアプリケーションのテスト方針につ�
 
 バックエンドアプリケーションのテスト方針について解説します。
 
-1. 単体テスト ( UT0 )
+バックエンドアプリケーションのテストは、いずれも単体テストフェーズで実施します。
+
+1. UT0
 
     主に以下のテストを実施します。
 
-    - StyleCopAnalyzers を用いた、ソースコード内の潜在的な不具合を検出する静的テスト
-    - xUnit v3 や Moq を用いた、クラスやメソッド単位で機能性を確認する動的テスト
+    - StyleCopAnalyzers を用いた静的解析やレビューにより、ソースコード内の潜在的な不具合を検出する静的テスト
+    - xUnit v3 や Moq を用いた、クラスやメソッド単位で機能性を確認する単体テスト
 
-1. [結合テスト ( ITa )](integration-test.md)
+1. [UT1（機能内結合テスト）](feature-test.md)
 
     主に以下のテストを実施します。
 
-    - xUnit v3 や Microsoft.AspNetCore.Mvc.Testing を用いた、 Web API のコントローラーからデータベースまで一気通貫で機能性を確認する動的テスト
+    - xUnit v3 や Microsoft.AspNetCore.Mvc.Testing を用いた、 Web API のコントローラーからデータベースまで一気通貫で機能性を確認する Web API テスト
