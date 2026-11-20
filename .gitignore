@@ -1,3 +1,4 @@
 node_modules/
 /.vs
 /samples/Dressca/dressca-backend/src/Dressca.Web/.config
+/.claude/worktrees/
