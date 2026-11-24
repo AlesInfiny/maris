@@ -3,7 +3,10 @@
 // 代替として即時実行関数式 ( IIFE ) で記述を許可するよう ESLint の設定を変更します。
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await#browser_compatibility
 import { useAuthenticationStore } from '@/stores/authentication/authentication'
-import { InteractionRequiredAuthError } from '@azure/msal-browser'
+import {
+  InteractionRequiredAuthError,
+  InteractionRequiredAuthErrorCodes,
+} from '@azure/msal-browser'
 import { useLogger } from '@/composables/use-logger'
 
 const logger = useLogger()
@@ -32,7 +35,11 @@ export function authenticationService() {
       const accessToken = await authenticationStore.getTokenSilent()
 
       if (!accessToken || accessToken === '') {
-        throw new InteractionRequiredAuthError('accessToken is null or empty.')
+        throw new InteractionRequiredAuthError(
+          InteractionRequiredAuthErrorCodes.noTokensFound,
+          '',
+          'accessToken is null or empty.',
+        )
       }
       return accessToken
     } catch (error) {
