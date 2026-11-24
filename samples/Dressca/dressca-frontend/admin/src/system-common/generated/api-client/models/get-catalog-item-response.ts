@@ -49,7 +49,7 @@ export interface GetCatalogItemResponse {
     /**
      * アセットコードの一覧を取得または設定します。             
      */
-    'assetCodes'?: Array<string>;
+    'assetCodes': Array<string>;
     /**
      * 行バージョンを取得または設定します。             
      */
