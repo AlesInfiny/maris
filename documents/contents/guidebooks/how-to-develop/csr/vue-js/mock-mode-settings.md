@@ -41,13 +41,13 @@ MSW は、 API リクエストをインターセプトすることで、ネッ�
 
 ## Vite の設定 {#vite-settings}
 
-ワークスペース直下の`package.json` にモックモードの起動スクリプトを定義します。
+ワークスペース直下の `package.json` にモックモードの起動スクリプトを定義します。
 
 ```json title="package.json"
 "mock": "vite --mode mock",
 ```
 
-モックモード用の環境設定ファイルとして、`vite.config.ts`と同じ階層に`.env.mock` を作成します。必要に応じて環境変数を定義してください。
+モックモード用の環境設定ファイルとして、`vite.config.ts` と同じ階層に `.env.mock` を作成します。必要に応じて環境変数を定義してください。
 モックモードを動作させるためだけであれば、追加の定義は不要です。
 
 ```properties title=".env.mock"
@@ -88,13 +88,13 @@ npx msw init ./public --save
 },
 ```
 
-ワークスペース直下に`mock`フォルダーを作成し、`mock`フォルダーの配下に`browser.ts`を作成します。
+ワークスペース直下に `mock` フォルダーを作成し、`mock` フォルダーの配下に `browser.ts` を作成します。
 
 ```typescript title="browser.ts"
 --8<-- "samples/Dressca/dressca-frontend/consumer/mock/browser.ts"
 ```
 
-`mock`フォルダーの配下に、`handlers`フォルダーを作成し、さらにその配下に`index.ts`を作成します。
+`mock` フォルダーの配下に、`handlers` フォルダーを作成し、さらにその配下に `index.ts` を作成します。
 ハンドラーの実装は別途行うため、現時点では空で構いません。
 
 ```typescript title="index.ts"
@@ -103,7 +103,7 @@ export const handlers = [] // 後で実装します。
 
 アプリケーションのエントリーポイントで、
 モックモードで起動した場合にワーカーを立ち上げるように設定します。
-`main.ts`に以下のように設定してください。
+`main.ts` に以下のように設定してください。
 
 ```typescript title="main.ts"
 async function enableMocking(): Promise<ServiceWorkerRegistration | undefined> {
