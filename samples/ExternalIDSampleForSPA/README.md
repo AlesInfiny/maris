@@ -218,7 +218,7 @@ auth-frontend
 1. 以下のように設定情報を記入します（以下の例では Entra External ID の設定以外は省略しています）。
 
 ```properties
-VITE_EXTERNAL_ID_AUTHORITY_DOMAIN=https://[テナントサブドメイン].ciamlogin.com/
+VITE_EXTERNAL_ID_AUTHORITY_DOMAIN=https://[テナントサブドメイン].ciamlogin.com/[テナントID]
 VITE_EXTERNAL_ID_SCOPE=[SampleWebAPI のアプリケーション ID の URI]/[Web APIに追加したスコープの名前]
 VITE_EXTERNAL_ID_APP_CLIENT_ID=[SampleSPA のクライアント ID]
 VITE_EXTERNAL_ID_REDIRECT_URI=[クライアントアプリケーションのリダイレクトURI。サンプルの既定では http://localhost:5173/redirect.html]
