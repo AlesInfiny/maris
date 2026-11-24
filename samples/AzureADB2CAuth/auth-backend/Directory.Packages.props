@@ -6,8 +6,8 @@
     <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="10.0.15" />
     <PackageVersion Include="Microsoft.Identity.Web" Version="4.18.0" />
     <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.12.0" />
-    <PackageVersion Include="NSwag.AspNetCore" Version="14.6.3" />
-    <PackageVersion Include="NSwag.MSBuild" Version="14.6.3" />
+    <PackageVersion Include="NSwag.AspNetCore" Version="14.8.0" />
+    <PackageVersion Include="NSwag.MSBuild" Version="14.8.0" />
     <PackageVersion Include="xunit.v3" Version="4.0.3" />
   </ItemGroup>
   <ItemGroup>
