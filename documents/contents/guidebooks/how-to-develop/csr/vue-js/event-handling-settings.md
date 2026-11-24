@@ -141,7 +141,7 @@ import { unhandledErrorEventKey } from '@/system-common/events'
 ## イベントの購読 {#subscribe-events}
 
 イベントを購読するコンポーネントでは、`useEventBus()` を用いてイベントバスを取得し、`on` 関数を用いてイベントを購読します。
-イベントの発火時に実行したい処理は`on` 関数の引数で渡します。
+イベントの発火時に実行したい処理は `on` 関数の引数で渡します。
 
 下記の例では、 `unhandledErrorEvent` が発生したらトースト通知をしています。
 トーストに表示する内容はペイロードから取得できます。

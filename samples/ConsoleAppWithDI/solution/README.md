@@ -1,4 +1,4 @@
-﻿<!-- textlint-disable @textlint-rule/require-header-id -->
+<!-- textlint-disable @textlint-rule/require-header-id -->
 <!-- markdownlint-disable-file CMD001 -->
 <!-- cspell:ignore Validatable Integ -->
 
