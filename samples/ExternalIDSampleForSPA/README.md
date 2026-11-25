@@ -214,7 +214,7 @@ auth-frontend
 
 #### フロントエンドアプリケーションの設定
 
-1. `auth-frontend\.env.dev` を開きます。
+1. `auth-frontend\app\.env.dev` を開きます。
 1. 以下のように設定情報を記入します（以下の例では Entra External ID の設定以外は省略しています）。
 
 ```properties

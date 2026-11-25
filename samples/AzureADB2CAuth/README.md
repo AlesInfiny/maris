@@ -219,7 +219,7 @@ auth-frontend
 
 #### フロントエンドアプリケーションの設定
 
-1. `auth-frontend\.env.dev` を開きます。
+1. `auth-frontend\app\.env.dev` を開きます。
 1. 以下のように設定情報を記入します（以下の例では Azure AD B2C の設定以外は省略しています）。
 
     ```properties
@@ -233,7 +233,7 @@ auth-frontend
 
 ### 動作確認
 
-1. ターミナルで `auth-frontend` のフォルダーへ移動し、 `npm install` を実行します。
+1. ターミナルで `auth-frontend` のフォルダーへ移動し、 `npm ci` を実行します。
 1. Visual Studio で `auth-backend\Dressca.sln` を開きます。
 1. `Dressca.Web` を右クリックし「スタートアッププロジェクトに設定」を選択します。
 1. ソリューションをデバッグなしで開始します。ブラウザーが起動し、しばらく待つと SPA の初期画面が表示されます。
