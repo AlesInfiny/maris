@@ -16,9 +16,7 @@ import { specialContents, type SpecialContent } from '../models/special-content'
 
 /** `failed` の `problem` は、 API が問題の詳細を返した場合にだけ設定されます。 */
 export type DisplayItemListStatus =
-  | { kind: 'loading' }
-  | { kind: 'ready' }
-  | { kind: 'failed'; problem?: ApiProblem }
+  { kind: 'loading' } | { kind: 'ready' } | { kind: 'failed'; problem?: ApiProblem }
 
 export interface DisplayItemFilterOption {
   /** 「すべて」の選択肢は undefined です。 */

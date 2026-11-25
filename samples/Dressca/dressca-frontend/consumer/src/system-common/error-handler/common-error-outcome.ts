@@ -18,9 +18,7 @@ export interface ApiProblem {
  * `canceled` と `unauthorized` のとき、画面は通知も遷移もしません。
  */
 export type CommonErrorOutcome =
-  | { kind: 'failed'; problem?: ApiProblem }
-  | { kind: 'canceled' }
-  | { kind: 'unauthorized' }
+  { kind: 'failed'; problem?: ApiProblem } | { kind: 'canceled' } | { kind: 'unauthorized' }
 
 /**
  * ユースケースが個別の結果に分類しないエラーを共通のエラー処理に渡し、操作の結果に変換する関数を取得します。

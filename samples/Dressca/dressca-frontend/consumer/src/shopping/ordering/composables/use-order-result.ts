@@ -11,9 +11,7 @@ import type { Address } from '../models/address'
 
 /** `failed` の `problem` は、 API が問題の詳細を返した場合にだけ設定されます。 */
 export type OrderResultStatus =
-  | { kind: 'loading' }
-  | { kind: 'ready' }
-  | { kind: 'failed'; problem?: ApiProblem }
+  { kind: 'loading' } | { kind: 'ready' } | { kind: 'failed'; problem?: ApiProblem }
 
 export interface OrderedItem {
   id: string

@@ -30,17 +30,11 @@ export interface CatalogItemSnapshot {
 
 /** `canceled` は、ログアウトなどの利用者の操作で通信が中断されたことを表します。 */
 export type UpdateOutcome =
-  | { kind: 'updated' }
-  | { kind: 'conflict' }
-  | { kind: 'notFound' }
-  | CommonErrorOutcome
+  { kind: 'updated' } | { kind: 'conflict' } | { kind: 'notFound' } | CommonErrorOutcome
 
 /** `canceled` は、ログアウトなどの利用者の操作で通信が中断されたことを表します。 */
 export type RemoveOutcome =
-  | { kind: 'removed' }
-  | { kind: 'conflict' }
-  | { kind: 'notFound' }
-  | CommonErrorOutcome
+  { kind: 'removed' } | { kind: 'conflict' } | { kind: 'notFound' } | CommonErrorOutcome
 
 export interface CatalogItemEditor {
   status: ComputedRef<CatalogItemEditorStatus>
