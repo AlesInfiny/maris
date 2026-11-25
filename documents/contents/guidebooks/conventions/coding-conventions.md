@@ -27,7 +27,7 @@ AlesInfiny Maris OSS Edition （以下 AlesInfiny Maris ）では、一般に広
 
     - StyleCopAnalyzers
 
-        [StyleCopAnalyzers 既定で適用されるルール :material-open-in-new:](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md){ target=_blank }
+        [StyleCopAnalyzers 既定で適用されるルール :material-open-in-new:](https://dotnetanalyzers.github.io/StyleCopAnalyzers/RuleStatus.html){ target=_blank }
 
 - Vue.js アプリケーション
     - [Vue.js スタイルガイド :material-open-in-new:](https://ja.vuejs.org/style-guide/){ target=_blank }
