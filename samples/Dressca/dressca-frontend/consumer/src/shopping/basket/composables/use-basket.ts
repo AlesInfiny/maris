@@ -11,9 +11,7 @@ import { useBasketContents } from './use-basket-contents'
 
 /** `failed` の `problem` は、 API が問題の詳細を返した場合にだけ設定されます。 */
 export type BasketStatus =
-  | { kind: 'loading' }
-  | { kind: 'ready' }
-  | { kind: 'failed'; problem?: ApiProblem }
+  { kind: 'loading' } | { kind: 'ready' } | { kind: 'failed'; problem?: ApiProblem }
 
 export interface AddedBasketItem {
   name: string
@@ -30,9 +28,7 @@ export type ChangeQuantityOutcome = { kind: 'changed' } | CommonErrorOutcome
 export type RemoveFromBasketOutcome = { kind: 'removed' } | CommonErrorOutcome
 
 export type ProceedToCheckoutOutcome =
-  | { kind: 'ready' }
-  | { kind: 'containsUnavailableItems' }
-  | CommonErrorOutcome
+  { kind: 'ready' } | { kind: 'containsUnavailableItems' } | CommonErrorOutcome
 
 export interface Basket {
   status: ComputedRef<BasketStatus>
